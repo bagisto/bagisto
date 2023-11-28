@@ -14,7 +14,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-booking-information-template">
-        <x-admin::form
+        <x-booking::form
             {{-- :action="route('admin.catalog.attributes.update', $attribute->id)" --}}
             enctype="multipart/form-data"
             method="PUT"
@@ -25,7 +25,7 @@
                     <div class="flex gap-[20px] justify-between p-[16px]">
                         <div class="flex flex-col gap-[8px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                @lang('Booking Information')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.title')
                             </p>
                         </div>
                     </div>
@@ -33,9 +33,9 @@
                     <!-- Panel Content -->
                     <div class="gap-[20px] justify-between p-[16px]">
                         <!-- Booking Type -->
-                        <x-admin::form.control-group class="w-full mb-[10px]">
+                        <x-booking::form.control-group class="w-full mb-[10px]">
                             <x-booking::form.control-group.label class="required">
-                                @lang('Booking Type')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.booking_type')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
@@ -43,13 +43,13 @@
                                 name="booking[type]"
                                 rules="required"
                                 ::value="booking_type"
-                                :label="trans('Booking Type')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
                                 v-model="booking_type"
                                 @change="bookingSwatch=true, slots=[]"
                             >
                                 @foreach (['default', 'appointment', 'event', 'rental', 'table'] as $item)
                                     <option value={{ $item }}>
-                                        @lang($item)
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.' . $item)
                                     </option>
                                 @endforeach
                             </x-booking::form.control-group.control>
@@ -61,27 +61,27 @@
                         </x-booking::form.control-group>
 
                         <!-- Location -->
-                        <x-admin::form.control-group class="w-full mb-[10px]">
+                        <x-booking::form.control-group class="w-full mb-[10px]">
                             <x-booking::form.control-group.label>
-                                @lang('Location')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.location')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
-                                name="loaction"
-                                :label="trans('loaction')"
-                                :placeholder="trans('loaction')"
+                                name="booking[location]"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.location')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.location')"
                             >
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
-                                control-name="loaction"
+                                control-name="booking[location]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
                         <!-- Quantity -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             class="w-full mb-[10px]"
                             v-if="(
                                 booking_type == 'default'
@@ -90,26 +90,26 @@
                             )"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Qty')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.qty')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
-                                name="qty"
+                                name="booking[qty]"
                                 rules="required"
-                                :label="trans('qty')"
-                                :placeholder="trans('qty')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.qty')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.qty')"
                             >
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
-                                control-name="qty"
+                                control-name="booking[qty]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
                         <!-- Available Every Week  -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="bookingSwatch && (
                                 booking_type == 'appointment' 
                                 || booking_type == 'rental'
@@ -118,15 +118,15 @@
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Available Every Week')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.available-every-week')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="datetime"
                                 name="booking[available_every_week]"
                                 rules="required"
-                                :label="trans('Available Every Week')"
-                                :placeholder="trans('Available Every Week')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.available-every-week')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.available-every-week')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -137,17 +137,17 @@
                         </x-booking::form.control-group>
 
                         <!-- Available From  -->
-                        <x-admin::form.control-group class="w-full mb-[10px]">
+                        <x-booking::form.control-group class="w-full mb-[10px]">
                             <x-booking::form.control-group.label class="required">
-                                @lang('Available From')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.available-from')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="datetime"
                                 name="booking[available_from]"
                                 rules="required"
-                                :label="trans('Available From')"
-                                :placeholder="trans('Available From')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.available-from')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.available-from')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -158,17 +158,17 @@
                         </x-booking::form.control-group>
 
                         <!-- Available To -->
-                        <x-admin::form.control-group class="w-full mb-[10px]">
+                        <x-booking::form.control-group class="w-full mb-[10px]">
                             <x-booking::form.control-group.label class="required">
-                                @lang('Available To')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.available-to')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="datetime"
                                 name="booking[available_to]"
                                 rules="required"
-                                :label="trans('Available To')"
-                                :placeholder="trans('Available To')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.available-to')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.available-to')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -179,12 +179,12 @@
                         </x-booking::form.control-group>
 
                         <!-- Charged Per -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="bookingSwatch && booking_type == 'table'"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Charged Per')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
@@ -192,8 +192,8 @@
                                 name="booking[price_type]"
                                 rules="required"
                                 :value="'guest'"
-                                :label="trans('Charged Per')"
-                                :placeholder="trans('Charged Per')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per')"
                                 v-model="charged_per"
                                 @change="chargedSwatch=true"
                             >
@@ -202,18 +202,18 @@
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
-                                control-name="booking[booking_type]"
+                                control-name="booking[price_type]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
                         <!-- Guest Limit Per Table -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="chargedSwatch && charged_per == 'table'"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Guest Limit Per Table')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.guest-limit-per-table')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
@@ -221,8 +221,8 @@
                                 name="booking[guest_limit]"
                                 rules="required"
                                 :value="2"
-                                :label="trans('Guest Limit Per Table')"
-                                :placeholder="trans('Guest Limit Per Table')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit-per-table')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit-per-table')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -233,20 +233,20 @@
                         </x-booking::form.control-group>
 
                         <!-- Guest Capacity -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="bookingSwatch && booking_type == 'table'"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Guest Capacity')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
                                 name="booking[qty]"
                                 rules="required"
-                                :label="trans('Guest Capacity')"
-                                :placeholder="trans('Guest Capacity')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -257,12 +257,12 @@
                         </x-booking::form.control-group>
 
                         <!-- Renting Type -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="bookingSwatch && booking_type == 'rental'"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Renting Type')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
@@ -270,14 +270,14 @@
                                 name="booking[renting_type]"
                                 rules="required"
                                 :value="'renting_type'"
-                                :label="trans('Renting Type')"
-                                :placeholder="trans('Renting Type')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
                                 v-model="renting_type"
                                 @change="rentingSwatch=true, slots=[]"
                             >
-                                <option value="daily" selected>@lang('Daily Basis')</option>
-                                <option value="hourly">@lang('Hourly Basis')</option>
-                                <option value="daily_hourly">@lang('Both (Daily and Hourly Basis)')</option>
+                                <option value="daily">@lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily')</option>
+                                <option value="hourly">@lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly')</option>
+                                <option value="daily_hourly">@lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-hourly')</option>
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
@@ -287,22 +287,22 @@
                         </x-booking::form.control-group>
 
                         <!-- Daily Price -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="bookingSwatch && (
                                 renting_type != 'hourly'
                             )"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Daily Price')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
                                 name="booking[daily_price]"
                                 rules="required"
-                                :label="trans('Daily Price')"
-                                :placeholder="trans('Daily Price')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -313,20 +313,20 @@
                         </x-booking::form.control-group>
 
                         <!-- Hourly Price -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="rentingSwatch && renting_type != 'daily'"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Hourly Price')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
                                 name="booking[hourly_price]"
                                 rules="required"
-                                :label="trans('Hourly Price')"
-                                :placeholder="trans('Hourly Price')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -337,12 +337,12 @@
                         </x-booking::form.control-group>
 
                         <!-- Type -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             class="w-full mb-[10px]"
                             v-if="booking_type == 'default'"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Type')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
@@ -350,13 +350,16 @@
                                 name="booking[booking_type]"
                                 rules="required"
                                 :value="'one'"
-                                :label="trans('Type')"
-                                :placeholder="trans('Type')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.type.title')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.type.title')"
                                 v-model="bookingSubType"
                                 @change="bookingSwatchType=true"
                             >
-                                <option value="many" selected>{{ __('Many Bookings for one day') }}</option>
-                                <option value="one">{{ __('One Booking for many days') }}</option>
+                                @foreach (['many', 'one'] as $item)
+                                    <option value="{{ $item }}">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.' . $item)
+                                    </option>
+                                @endforeach
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
@@ -366,21 +369,29 @@
                         </x-booking::form.control-group>
 
                         <!-- Slot Duration -->
-                        <x-admin::form.control-group
-                            v-if="(bookingSwatchType && bookingSubType == 'many') || 
-                                (bookingSwatch && (booking_type == 'appointment' || booking_type == 'table'))"
+                        <x-booking::form.control-group
+                            v-if="(
+                                bookingSwatchType 
+                                && bookingSubType == 'many'
+                            ) || (
+                                bookingSwatch 
+                                && (
+                                    booking_type == 'appointment' 
+                                    || booking_type == 'table'
+                                )
+                            )"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Slot Duration')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
                                 name="booking[duration]"
                                 rules="required"
-                                :label="trans('Slot Duration')"
-                                :placeholder="trans('Slot Duration')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -391,45 +402,45 @@
                         </x-booking::form.control-group>
 
                         <!-- Break Duration -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="(bookingSwatchType && bookingSubType == 'many') || 
                                 (bookingSwatch && (booking_type == 'appointment' || booking_type == 'table'))"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Break Duration')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
-                                name="booking[duration]"
+                                name="booking[break_time]"
                                 rules="required"
-                                :label="trans('Break Duration')"
-                                :placeholder="trans('Break Duration')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
                             >
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
-                                control-name="booking[duration]"
+                                control-name="booking[break_time]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
 
                         <!-- Prevent Scheduling Before -->
-                        <x-admin::form.control-group
+                        <x-booking::form.control-group
                             v-if="bookingSwatch && booking_type == 'table'"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Prevent Scheduling Before')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
                                 type="text"
                                 name="booking[prevent_scheduling_before]"
                                 rules="required"
-                                :label="trans('Prevent Scheduling Before')"
-                                :placeholder="trans('Prevent Scheduling Before')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')"
                             >
                             </x-booking::form.control-group.control>
 
@@ -440,15 +451,16 @@
                         </x-booking::form.control-group>
 
                         <!-- Same Slot For All days -->
-                        <x-admin::form.control-group
-                            v-if="bookingSwatch && (
+                        <x-booking::form.control-group
+                            v-if="(bookingSwatch || rentingSwatch) && (
                                 booking_type == 'appointment'
                                 || booking_type == 'table'
+                                || renting_type != 'daily'
                             )"
                             class="w-full mb-[10px]"
                         >
                             <x-booking::form.control-group.label class="required">
-                                @lang('Same Slot For All days')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
                             </x-booking::form.control-group.label>
 
                             <x-booking::form.control-group.control
@@ -456,17 +468,22 @@
                                 name="booking[same_slot_all_days]"
                                 rules="required"
                                 :value="'same_slot'"
-                                :label="trans('Same Slot For All days')"
-                                :placeholder="trans('Same Slot For All days')"
+                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
+                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                                 v-model="same_slot"
                                 @change="sameSlotSwatch=true"
                             >
-                                <option value="1" selected>{{ __('Yes') }}</option>
-                                <option value="0">{{ __('No') }}</option>
+                                <option value="1">
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
+                                </option>
+
+                                <option value="0">
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
+                                </option>
                             </x-booking::form.control-group.control>
 
                             <x-booking::form.control-group.error 
-                                control-name="booking[booking_type]"
+                                control-name="booking[same_slot_all_days]"
                             >
                             </x-booking::form.control-group.error>
                         </x-booking::form.control-group>
@@ -489,7 +506,9 @@
                         <div class="flex flex-col gap-[8px]">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
-                                v-text="booking_type != 'event' ? '@lang('Slots')' : '@lang('Tickets')'"
+                                v-text="booking_type != 'event' 
+                                    ? '@lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')' 
+                                    : '@lang('booking::app.admin.catalog.products.edit.type.booking.tickets.title')'"
                             >
                             </p>
                         </div>
@@ -497,7 +516,9 @@
                         <!-- Add Slot Button -->
                         <div class="flex gap-x-[4px] items-center">
                             <div
-                                v-text="booking_type != 'event' ? 'Add Slot' : 'Add Tickets'"
+                                v-text="booking_type != 'event' 
+                                    ? '@lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')' 
+                                    : '@lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')'"
                                 class="secondary-button"
                                 @click="$refs.addOptionsRow.open()"
                             >
@@ -673,13 +694,17 @@
                             <div class="flex flex-col gap-[5px] items-center">
                                 <p
                                     class="text-[16px] text-gray-400 font-semibold"
-                                    v-text="booking_type != 'event' ? 'Add Slot' : 'Add Tickets'"
+                                    v-text="booking_type != 'event' 
+                                        ? '@lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')' 
+                                        : '@lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')'"
                                 >
                                 </p>
                                 
                                 <p
                                     class="text-gray-400 text-red"
-                                    v-text="booking_type != 'event' ? '@lang('Add booking slot on the go.')' : '@lang('Add booking Tickets on the go.')'"
+                                    v-text="booking_type != 'event' 
+                                        ? '@lang('booking::app.admin.catalog.products.edit.type.booking.slots.add-desc')' 
+                                        : '@lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add-desc')'"
                                 >
                                 </p>
                             </div>
@@ -704,62 +729,199 @@
                     <x-slot:header>
                         <p
                             class="text-[18px] text-gray-800 dark:text-white font-bold"
-                            v-text="booking_type != 'event' ? 'Add Slot' : 'Add Tickets'"
+                            v-text="booking_type != 'event' 
+                                ? '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.title')' 
+                                : '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.title')'"
                         >
                         </p>
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div v-if="booking_type != 'event'">
-                            <div v-if="same_slot == 1">
-                                <div
-                                    v-for="day in slots_available"
-                                    :key="day.id"
-                                    class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800"
-                                >
-                                    <div class="w-full" v-text="day.text"></div>
+                        <div v-if="booking_type != 'event' || booking_type != 'rental'">
+                            <div v-if="sameSlotSwatch && same_slot == 1">
+                                @php $count = 0; @endphp
 
-                                    <!-- From -->
-                                    <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label class="hidden">
-                                            @lang('From')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            :type="'date'"
-                                            :name="'from_day[][0]'"
-                                            {{-- :name="'from_day[' + day.id + '][0]'" --}}
-                                            :label="trans('admin::app.catalog.attributes.create.admin')"
-                                            placeholder="From"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="from_day"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <!-- To -->
-                                    <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label class="hidden">
-                                            @lang('To')
-                                        </x-admin::form.control-group.label>
-    
-                                        <x-admin::form.control-group.control
-                                            type="date"
-                                            name="to_day"
-                                            :label="trans('admin::app.catalog.attributes.create.admin')"
-                                            placeholder="To"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.error
-                                            control-name="to_day"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                <!-- Heading -->
+                                <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    @foreach (['day', 'from', 'to'] as $item)
+                                        <p class="w-full text-[16px] font-medium">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
+                                        </p>
+                                    @endforeach
                                 </div>
+
+                                <!-- Content -->
+                                @foreach ($weeks as $item)
+                                    <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                        <!-- Day -->
+                                        <div class="w-full">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
+                                        </div>
+
+                                        <!-- From Time -->
+                                        <x-admin::form.control-group class="w-full mb-[10px]">
+                                            <x-admin::form.control-group.label class="hidden">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="booking[slots][{{ $count }}][0][from]"
+                                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error
+                                                control-name="booking[slots][{{ $count }}][0][from]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <!-- To Time -->
+                                        <x-admin::form.control-group class="w-full mb-[10px]">
+                                            <x-admin::form.control-group.label class="hidden">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="booking[slots][{{ $count }}][0][to]"
+                                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="booking[slots][{{ $count }}][0][to]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <!-- Status -->
+                                        <x-admin::form.control-group
+                                            class="w-full mb-[10px]"
+                                            v-if="bookingSubType == 'many'"
+                                        >
+                                            <x-admin::form.control-group.label class="hidden">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="from_day"
+                                                :value="'1'"
+                                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
+                                            >
+                                                <option value="1">
+                                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.open')
+                                                </option>
+
+                                                <option value="0">
+                                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.close')
+                                                </option>
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="from_day"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::from.control-group>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div v-else-if="bookingSwatchType && bookingSubType == 'many'">
+                                @php $count = 0; @endphp
+
+                                <!-- Heading -->
+                                <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    @foreach (['day', 'from', 'to', 'status'] as $item)
+                                        <p class="w-full text-[16px] font-medium">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
+                                        </p>
+                                    @endforeach
+                                </div>
+
+                                <!-- Content -->
+                                @foreach ($weeks as $item)
+                                    <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                        <!-- Day -->
+                                        <x-admin::form.control-group.label class="w-full">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
+                                        </x-admin::form.control-group.label>
+        
+                                        <!-- From -->
+                                        <x-admin::form.control-group class="w-full">
+                                            <x-admin::form.control-group.label class="hidden">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="booking[slots][{{ $count }}][from]"
+                                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="booking[slots][{{ $count }}][from]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::from.control-group>
+        
+                                        <!-- To -->
+                                        <x-admin::form.control-group class="w-full">
+                                            <x-admin::form.control-group.label class="hidden">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="booking[slots][{{ $count }}][to]"
+                                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="booking[slots][{{ $count }}][to]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::from.control-group>
+        
+                                        <!-- Status -->
+                                        <x-admin::form.control-group class="w-full">
+                                            <x-admin::form.control-group.label class="hidden">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="booking[slots][{{ $count }}][status]"
+                                                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
+                                                :value="'0'"
+                                                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
+                                            >
+                                                <option value="1">
+                                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.open')
+                                                </option>
+
+                                                <option value="0">
+                                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.close')
+                                                </option>
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="booking[slots][{{ $count }}][status]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::from.control-group>
+    
+                                        @php $count++; @endphp
+                                    </div>
+                                @endforeach
                             </div>
 
                             <div v-else>
@@ -770,18 +932,18 @@
                                         v-if="booking_type == 'default'"
                                     >
                                         <x-admin::form.control-group.label>
-                                            @lang('From')
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                         </x-admin::form.control-group.label>
     
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="from_day"
                                             :value="'sunday'"
-                                            :label="trans('admin::app.catalog.attributes.create.admin')"
+                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                         >
                                             @foreach ($weeks as $week)
                                                 <option value="{{ $week }}" selected>
-                                                    @lang($week)
+                                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $week)
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>
@@ -817,18 +979,18 @@
                                         v-if="booking_type == 'default'"
                                     >
                                         <x-admin::form.control-group.label>
-                                            @lang('To')
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                         </x-admin::form.control-group.label>
     
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="to_day"
                                             :value="'sunday'"
-                                            :label="trans('admin::app.catalog.attributes.create.admin')"
+                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                         >
                                             @foreach ($weeks as $week)
-                                                <option value="{{ $week }}" selected>
-                                                    @lang($week)
+                                                <option value="{{ $week }}">
+                                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $week)
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>
@@ -841,7 +1003,7 @@
     
                                     <x-admin::form.control-group class="w-full mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('To')
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                         </x-admin::form.control-group.label>
     
                                         <x-admin::form.control-group.control
@@ -859,97 +1021,19 @@
                             </div>
                         </div>
 
-                        <div v-else-if="bookingSubType == 'many'">
-                            <div class="grid grid-cols-4 gap-[10px] px-[16px] py-[10px]">
-                                @php $count = 0; @endphp
-
-                                @foreach ($weeks as $item)
-                                    <!-- Day -->
-                                    <x-admin::form.control-group.label>
-                                        {{ $item }}
-                                    </x-admin::form.control-group.label>
-    
-                                    <!-- From -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="hidden">
-                                            @lang('From')
-                                        </x-admin::form.control-group.label>
-    
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="booking[slots][{{ $count }}][from]"
-                                            :label="trans('From')"
-                                            :placeholder="trans('From')"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.error
-                                            control-name="booking[slots][{{ $count }}][from]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::from.control-group>
-    
-                                    <!-- To -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="hidden">
-                                            @lang('To')
-                                        </x-admin::form.control-group.label>
-    
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="booking[slots][{{ $count }}][to]"
-                                            :label="trans('To')"
-                                            :placeholder="trans('To')"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.error
-                                            control-name="booking[slots][{{ $count }}][to]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::from.control-group>
-    
-                                    <!-- Status -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="hidden">
-                                            @lang('Status')
-                                        </x-admin::form.control-group.label>
-    
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="booking[slots][{{ $count }}][status]"
-                                            :label="trans('Status')"
-                                            :value="'0'"
-                                            :placeholder="trans('Status')"
-                                        >
-                                            <option value="1">Open</option>
-                                            <option value="0">Close</option>
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.error
-                                            control-name="booking[slots][{{ $count }}][status]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::from.control-group>
-
-                                    @php $count++; @endphp
-                                @endforeach
-                            </div>
-                        </div>
-
                         <div v-else>
                             <div class="grid grid-cols-3 gap-[10px] px-[16px] py-[10px]">
                                 <!-- Name -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Name')
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="booking[tickets][ticket_0][en][name]"
-                                        :label="trans('Name')"
-                                        :placeholder="trans('Name')"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.name')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -962,14 +1046,14 @@
                                 <!-- Price -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Price')
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.price')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="booking[tickets][ticket_0][en][price]"
-                                        :label="trans('Price')"
-                                        :placeholder="trans('Price')"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.price')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.price')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -982,14 +1066,14 @@
                                 <!-- Quantity -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Quantity')
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="booking[tickets][ticket_0][en][quantity]"
-                                        :label="trans('Quantity')"
-                                        :placeholder="trans('Quantity')"
+                                        name="booking[tickets][ticket_0][en][booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty]"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -1002,14 +1086,14 @@
                                 <!-- Special Price -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Special Price')
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.special-price')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="booking[tickets][ticket_0][en][special_price]"
-                                        :label="trans('Special Price')"
-                                        :placeholder="trans('Special Price')"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.special-price')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.special-price')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -1022,63 +1106,63 @@
                                 <!-- Valid From -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Valid From')
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.valid-from')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
+                                    <x-booking::form.control-group.control
                                         type="datetime"
                                         name="booking[tickets][ticket_0][en][valid_from]"
-                                        :label="trans('Valid From')"
-                                        :placeholder="trans('Valid From')"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.valid-from')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.valid-from')"
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </x-booking::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
+                                    <x-booking::form.control-group.error
                                         control-name="booking[tickets][ticket_0][en][valid_from]"
                                     >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::from.control-group>
+                                    </x-booking::form.control-group.error>
+                                </x-booking::from.control-group>
 
                                 <!-- Valid Until -->
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('Valid Until')
-                                    </x-admin::form.control-group.label>
+                                <x-booking::form.control-group>
+                                    <x-booking::form.control-group.label>
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.valid-until')
+                                    </x-booking::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
+                                    <x-booking::form.control-group.control
                                         type="datetime"
                                         name="booking[tickets][ticket_0][en][valid_until]"
-                                        :label="trans('Valid Until')"
-                                        :placeholder="trans('Valid Until')"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.valid-until')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.valid-until')"
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </x-booking::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
+                                    <x-booking::form.control-group.error
                                         control-name="booking[tickets][ticket_0][en][valid_until]"
                                     >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::from.control-group>
+                                    </x-booking::form.control-group.error>
+                                </x-booking::from.control-group>
 
                                 <!-- Valid Until -->
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('Description')
-                                    </x-admin::form.control-group.label>
+                                <x-booking::form.control-group>
+                                    <x-booking::form.control-group.label>
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.description')
+                                    </x-booking::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
+                                    <x-booking::form.control-group.control
                                         type="textarea"
                                         class="w-full"
                                         name="booking[tickets][ticket_0][en][description]"
-                                        :label="trans('Description')"
-                                        :placeholder="trans('Description')"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.description')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.description')"
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </x-booking::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
+                                    <x-booking::form.control-group.error
                                         control-name="booking[tickets][ticket_0][en][description]"
                                     >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::from.control-group>
+                                    </x-booking::form.control-group.error>
+                                </x-booking::from.control-group>
                             </div>
                         </div>
                     </x-slot:content>
@@ -1088,13 +1172,15 @@
                         <button
                             type="submit"
                             class="primary-button"
-                            v-text="booking_type != 'event' ? '@lang('Save Slot')' : '@lang('Save Tickets')'"
+                            v-text="booking_type != 'event' 
+                                ? '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.save')' 
+                                : '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.save')'"
                         >
                         </button>
                     </x-slot:footer>
-                </x-admin::modal>
+                </x-booking::modal>
             </form>
-        </x-admin::form>
+        </x-booking::form>
     </script>
 
     <script type="module">
@@ -1114,16 +1200,6 @@
                         available_to: '',
                     },
 
-                    slots_available: [
-                        { id:0, text:'sunday'},
-                        { id:1, text:'monaday'},
-                        { id:2, text:'tuesday'},
-                        { id:3, text:'wednesday'},
-                        { id:4, text:'thursday'},
-                        { id:5, text:'friday'},
-                        { id:6, text:'saturday'},
-                    ],
-
                     booking_type: 'default',
 
                     charged_per: 'guest',
@@ -1142,7 +1218,7 @@
                     
                     rentingSwatch: false,
 
-                    sameSlot: false,
+                    sameSlotSwatch: false,
 
                     slotRowCount: 1,
 
