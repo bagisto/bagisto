@@ -12,7 +12,7 @@ class Address implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (! preg_match('/^[a-zA-Z0-9 ,()-]+$/', $value)) {
+        if (! preg_match("/^[a-zA-Z0-9\s'\p{Arabic}\-,\(\)]{1,60}$/iu", $value)) {
             $fail('core::validation.address')->translate();
         }
     }

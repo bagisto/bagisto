@@ -48,8 +48,8 @@ defineRule("address", (value) => {
     if (! value || ! value.length) {
         return true;
     }
-    
-    if (!/^[a-zA-Z0-9 ,()-]+$/i.test(value)) {
+
+    if (! /^[a-zA-Z0-9\s'\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF,\(\)-]{1,60}$/iu.test(value)) {
         return false;
     }
 
