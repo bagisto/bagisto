@@ -111,7 +111,9 @@ class RegistrationController extends Controller
                 'is_verified' => 1,
                 'token'       => null,
             ], $customer->id);
+
             Event::dispatch('customer.verify_account.after', $customer);
+
             $this->customerRepository->syncNewRegisteredCustomerInformation($customer);
 
             session()->flash('success', trans('shop::app.customers.signup-form.verified'));
