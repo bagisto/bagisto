@@ -67,7 +67,12 @@ return [
                 'edit' => [
                     'type' => [
                         'booking' => [
-                            'available-every-week'  => 'Available Every Week',
+                            'available-every-week'  => [
+                                'no'    => 'No',
+                                'title' => 'Available Every Week',
+                                'yes'   => 'Yes',
+                            ],
+
                             'available-from'        => 'Available From',
                             'available-to'          => 'Available To',
                             'booking_type'          => 'Booking Type',
@@ -81,7 +86,7 @@ return [
                                 'slot' => [
                                     'close'     => 'Close',
                                     'day'       => 'Day',
-                                    'form'      => 'From',
+                                    'from'      => 'From',
                                     'friday'    => 'Friday',
                                     'monday'    => 'Monday',
                                     'open'      => 'Open',
