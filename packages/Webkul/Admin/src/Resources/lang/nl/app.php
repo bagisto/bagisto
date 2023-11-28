@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Terug',
             'delete'                       => 'Verwijderen',
             'enable-at-least-one-shipping' => 'Schakel ten minste één verzendmethode in.',
             'enable-at-least-one-payment'  => 'Schakel ten minste één betaalmethode in.',

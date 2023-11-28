@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => '返回',
             'delete'                       => '删除',
             'enable-at-least-one-shipping' => '至少启用一种配送方式。',
             'enable-at-least-one-payment'  => '至少启用一种支付方式。',

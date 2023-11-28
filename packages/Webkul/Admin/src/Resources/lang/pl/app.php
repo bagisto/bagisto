@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Powrót',
             'delete'                       => 'Usuń',
             'enable-at-least-one-shipping' => 'Włącz co najmniej jeden sposób dostawy.',
             'enable-at-least-one-payment'  => 'Włącz co najmniej jedną metodę płatności.',

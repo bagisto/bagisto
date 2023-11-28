@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'পিছনে',
             'delete'                       => 'মুছে ফেলুন',
             'enable-at-least-one-shipping' => 'অন্তত একটি শিপিং মেথড সক্রিয় করুন।',
             'enable-at-least-one-payment'  => 'অন্তত একটি পেমেন্ট মেথড সক্রিয় করুন।',

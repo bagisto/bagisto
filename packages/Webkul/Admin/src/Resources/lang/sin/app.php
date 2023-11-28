@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'ආපසු',
             'delete'                       => 'මකනවා',
             'enable-at-least-one-shipping' => 'අවශ්‍යයින් එකක් ප්‍රවේශ කරන්න.',
             'enable-at-least-one-payment'  => 'අවශ්‍යයින් එකක් ගෙවා කරන්න.',

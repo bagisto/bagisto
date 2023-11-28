@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'بازگشت',
             'delete'                       => 'حذف',
             'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
             'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
