@@ -36,10 +36,10 @@
                             <span class="icon-magic text-[24px] text-blue-600"></span>
 
                             <p class="grid text-[14px] text-blue-600 font-semibold text-center">
-                                Magic AI
+                                @lang('admin::app.components.media.images.ai-add-image-btn')
                                 
                                 <span class="text-[12px]">
-                                    Generate Image
+                                    @lang('admin::app.components.media.images.ai-btn-info')
                                 </span>
                             </p>
                         </div>
@@ -123,7 +123,7 @@
                                     <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
                                         <span class="icon-magic text-[24px] text-gray-800"></span>
 
-                                        AI Image Generation
+                                        @lang('admin::app.components.media.images.ai-generation.title')
                                     </p>
                                 </template>
 
@@ -148,7 +148,7 @@
                                         <!-- Prompt -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
-                                                Prompt
+                                                @lang('admin::app.components.media.images.ai-generation.prompt')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
@@ -156,7 +156,7 @@
                                                 name="prompt"
                                                 v-model="ai.prompt"
                                                 rules="required"
-                                                label="Prompt"
+                                                :label="trans('admin::app.components.media.images.ai-generation.prompt')"
                                             >
                                             </x-admin::form.control-group.control>
 
@@ -165,7 +165,7 @@
 
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
-                                                Model
+                                                @lang('admin::app.components.media.images.ai-generation.model')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
@@ -173,10 +173,14 @@
                                                 name="model"
                                                 v-model="ai.model"
                                                 rules="required"
-                                                label="Model"
+                                                :label="trans('admin::app.components.media.images.ai-generation.model')"
                                             >
-                                                <option value="dall-e-2">DALL·E 2</option>
-                                                <option value="dall-e-3">DALL·E 3</option>
+                                                <option value="dall-e-2">
+                                                    @lang('admin::app.components.media.images.ai-generation.dall-e-2')
+                                                </option>
+                                                <option value="dall-e-3">
+                                                    @lang('admin::app.components.media.images.ai-generation.dall-e-3')
+                                                </option>
                                             </x-admin::form.control-group.control>
 
                                             <x-admin::form.control-group.error control-name="model"></x-admin::form.control-group.error>
@@ -184,7 +188,7 @@
 
                                         <x-admin::form.control-group v-if="ai.model == 'dall-e-2'">
                                             <x-admin::form.control-group.label class="required">
-                                                Number Of Images
+                                                @lang('admin::app.components.media.images.ai-generation.number-of-images')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
@@ -192,7 +196,7 @@
                                                 name="n"
                                                 v-model="ai.n"
                                                 rules="required"
-                                                label="Number Of Images"
+                                                :label="trans('admin::app.components.media.images.ai-generation.number-of-images')"
                                             >
                                             </x-admin::form.control-group.control>
 
@@ -201,7 +205,7 @@
 
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
-                                                Size
+                                                @lang('admin::app.components.media.images.ai-generation.size')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
@@ -209,11 +213,19 @@
                                                 name="size"
                                                 v-model="ai.size"
                                                 rules="required"
-                                                label="Size"
+                                                :label="trans('admin::app.components.media.images.ai-generation.size')"
                                             >
-                                                <option value="1024x1024">1024x1024</option>
-                                                <option value="1024x1792">1024x1792</option>
-                                                <option value="1792x1024">1792x1024</option>
+                                                <option value="1024x1024">
+                                                    @lang('admin::app.components.media.images.ai-generation.1024x1024')
+                                                </option>
+
+                                                <option value="1024x1792">
+                                                    @lang('admin::app.components.media.images.ai-generation.1024x1792')
+                                                </option>
+
+                                                <option value="1792x1024">
+                                                    @lang('admin::app.components.media.images.ai-generation.1792x1024')
+                                                </option>
                                             </x-admin::form.control-group.control>
 
                                             <x-admin::form.control-group.error control-name="size"></x-admin::form.control-group.error>
@@ -221,7 +233,7 @@
 
                                         <x-admin::form.control-group v-if="ai.model == 'dall-e-3'">
                                             <x-admin::form.control-group.label class="required">
-                                                Quality
+                                                @lang('admin::app.components.media.images.ai-generation.quality')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
@@ -229,10 +241,15 @@
                                                 name="quality"
                                                 v-model="ai.quality"
                                                 rules="required"
-                                                label="Quality"
+                                                :label="trans('admin::app.components.media.images.ai-generation.quality')"
                                             >
-                                                <option value="standard">Standard</option>
-                                                <option value="hd">HD</option>
+                                                <option value="standard">
+                                                    @lang('admin::app.components.media.images.ai-generation.standard')
+                                                </option>
+
+                                                <option value="hd">
+                                                    @lang('admin::app.components.media.images.ai-generation.hd')
+                                                </option>
                                             </x-admin::form.control-group.control>
 
                                             <x-admin::form.control-group.error control-name="quality"></x-admin::form.control-group.error>
@@ -270,13 +287,13 @@
                                                     src="{{ bagisto_asset('images/spinner.svg') }}"
                                                 />
 
-                                                Generating...
+                                                @lang('admin::app.components.media.images.ai-generation.generating')
                                             </template>
 
                                             <template v-else>
                                                 <span class="icon-magic text-[24px] text-blue-600"></span>
-
-                                                Generate
+                                                
+                                                @lang('admin::app.components.media.images.ai-generation.generate')
                                             </template>
                                         </button>
                                     </template>
@@ -290,13 +307,13 @@
                                                     src="{{ bagisto_asset('images/spinner.svg') }}"
                                                 />
 
-                                                Regenerating...
+                                                @lang('admin::app.components.media.images.ai-generation.regenerating')
                                             </template>
 
                                             <template v-else>
                                                 <span class="icon-magic text-[24px] text-blue-600"></span>
-
-                                                Regenerate
+                                                
+                                                @lang('admin::app.components.media.images.ai-generation.regenerate')
                                             </template>
                                         </button>
 
@@ -306,7 +323,7 @@
                                             :disabled="! selectedAIImages.length"
                                             @click="apply"
                                         >
-                                            Apply
+                                            @lang('admin::app.components.media.images.ai-generation.apply')
                                         </button>
                                     </template>
                                 </div>
