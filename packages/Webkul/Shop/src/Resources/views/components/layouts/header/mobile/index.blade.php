@@ -142,7 +142,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex  items-center gap-x-[20px]">
+            <div class="flex items-center gap-x-[20px]">
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
