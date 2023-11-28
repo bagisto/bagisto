@@ -56,7 +56,7 @@
                     required
                 >
 
-                <button type="submit" class="hidden" aria-lebel="Submit"></button
+                <button type="submit" class="hidden" aria-lebel="Submit"></button>
 
                 @if (core()->getConfigData('general.content.shop.image_search'))
                     @include('shop::search.images.index')
