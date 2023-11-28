@@ -3597,6 +3597,20 @@ return [
                 'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
             ],
         ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magic AI',
+
+            'ai-generation' => [
+                'title'                  => 'AI Assistance',
+                'prompt'                 => 'Prompt',
+                'generating'             => 'Generating...',
+                'generate'               => 'Generate',
+                'generated-content'      => 'Generated Content',
+                'generated-content-info' => 'AI content can be misleading. Please review the generated content before applying it.',
+                'apply'                  => 'Apply',
+            ],
+        ],
     ],
 
     'acl' => [

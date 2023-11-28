@@ -3555,6 +3555,20 @@ return [
                 'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => 'Magia AI',
+    
+            'ai-generation' => [
+                'title'                  => 'Wsparcie AI',
+                'prompt'                 => 'Zachęta',
+                'generating'             => 'Generowanie...',
+                'generate'               => 'Generuj',
+                'generated-content'      => 'Wygenerowana Zawartość',
+                'generated-content-info' => 'Zawartość AI może być myląca. Przed zastosowaniem sprawdź wygenerowaną zawartość.',
+                'apply'                  => 'Zastosuj',
+            ],
+        ],
     ],
 
     'acl' => [

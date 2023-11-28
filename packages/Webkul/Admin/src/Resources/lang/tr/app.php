@@ -3555,6 +3555,20 @@ return [
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => 'Sihirli AI',
+    
+            'ai-generation' => [
+                'title'                  => 'AI Yardımı',
+                'prompt'                 => 'İpucu',
+                'generating'             => 'Oluşturuluyor...',
+                'generate'               => 'Oluştur',
+                'generated-content'      => 'Oluşturulan İçerik',
+                'generated-content-info' => 'AI içeriği yanıltıcı olabilir. Lütfen uygulamadan önce oluşturulan içeriği gözden geçirin.',
+                'apply'                  => 'Uygula',
+            ],
+        ],
     ],
 
     'acl' => [

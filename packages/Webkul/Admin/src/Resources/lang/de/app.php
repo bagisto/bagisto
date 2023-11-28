@@ -3555,6 +3555,20 @@ return [
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => 'Magie KI',
+    
+            'ai-generation' => [
+                'title'                  => 'KI-Unterstützung',
+                'prompt'                 => 'Aufforderung',
+                'generating'             => 'Wird generiert...',
+                'generate'               => 'Generieren',
+                'generated-content'      => 'Generierter Inhalt',
+                'generated-content-info' => 'KI-Inhalte können irreführend sein. Bitte überprüfen Sie den generierten Inhalt, bevor Sie ihn anwenden.',
+                'apply'                  => 'Anwenden',
+            ],
+        ],
     ],
 
     'acl' => [

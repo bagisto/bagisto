@@ -24,7 +24,7 @@
                         <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
                             <span class="icon-magic text-[24px] text-gray-800"></span>
 
-                            AI Assistant
+                            @lang('admin::app.components.tinymce.ai-generation.title')
                         </p>
                     </x-slot:header>
 
@@ -34,7 +34,7 @@
                             <!-- Prompt -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
-                                    Prompt
+                                    @lang('admin::app.components.tinymce.ai-generation.prompt')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -43,7 +43,7 @@
                                     class="h-[180px]"
                                     rules="required"
                                     v-model="ai.prompt"
-                                    label="Prompt"
+                                    :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -63,13 +63,13 @@
                                             src="{{ bagisto_asset('images/spinner.svg') }}"
                                         />
 
-                                        Generating...
+                                        @lang('admin::app.components.tinymce.ai-generation.generating')
                                     </template>
 
                                     <template v-else>
                                         <span class="icon-magic text-[24px] text-blue-600"></span>
 
-                                        Generate
+                                        @lang('admin::app.components.tinymce.ai-generation.generate')
                                     </template>
                                 </button>
                             </div>
@@ -77,7 +77,7 @@
                             <!-- Generated Content -->
                             <x-admin::form.control-group class="mt-[20px]">
                                 <x-admin::form.control-group.label>
-                                    Generated Content
+                                    @lang('admin::app.components.tinymce.ai-generation.generated-content')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
@@ -89,7 +89,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <span class="text-[12px] text-gray-500">
-                                    AI content can be misleading. Please review the generated content before applying it.
+                                    @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
                                 </span>
                             </x-admin::form.control-group>
                         </div>
@@ -104,7 +104,7 @@
                                 :disabled="!ai.content"
                                 @click="apply"
                             >
-                                Apply
+                                @lang('admin::app.components.tinymce.ai-generation.apply')
                             </button>
                         </div>
                     </x-slot:footer>
@@ -269,7 +269,7 @@
                             editor.ui.registry.addIcon('magic', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"> <g clip-path="url(#clip0_3148_2242)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1484 9.31989L9.31995 12.1483L19.9265 22.7549L22.755 19.9265L12.1484 9.31989ZM12.1484 10.7341L10.7342 12.1483L13.5626 14.9767L14.9768 13.5625L12.1484 10.7341Z" fill="#2563EB"/> <path d="M11.0877 3.30949L13.5625 4.44748L16.0374 3.30949L14.8994 5.78436L16.0374 8.25924L13.5625 7.12124L11.0877 8.25924L12.2257 5.78436L11.0877 3.30949Z" fill="#2563EB"/> <path d="M2.39219 2.39217L5.78438 3.95197L9.17656 2.39217L7.61677 5.78436L9.17656 9.17655L5.78438 7.61676L2.39219 9.17655L3.95198 5.78436L2.39219 2.39217Z" fill="#2563EB"/> <path d="M3.30947 11.0877L5.78434 12.2257L8.25922 11.0877L7.12122 13.5626L8.25922 16.0374L5.78434 14.8994L3.30947 16.0374L4.44746 13.5626L3.30947 11.0877Z" fill="#2563EB"/> </g> <defs> <clipPath id="clip0_3148_2242"> <rect width="24" height="24" fill="white"/> </clipPath> </defs> </svg>');
 
                             editor.ui.registry.addButton('aibutton', {
-                                text: 'Magic AI',
+                                text: "@lang('admin::app.components.tinymce.ai-btn-tile')",
                                 icon: 'magic',
                                 enabled: self.ai.enabled,
 

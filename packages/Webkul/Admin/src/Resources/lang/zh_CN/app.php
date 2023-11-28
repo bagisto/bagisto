@@ -3555,6 +3555,20 @@ return [
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => '魔法 AI',
+    
+            'ai-generation' => [
+                'title'                  => 'AI辅助',
+                'prompt'                 => '提示',
+                'generating'             => '生成中...',
+                'generate'               => '生成',
+                'generated-content'      => '生成的内容',
+                'generated-content-info' => 'AI内容可能具有误导性。请在应用之前审查生成的内容。',
+                'apply'                  => '应用',
+            ],
+        ],
     ],
 
     'acl' => [

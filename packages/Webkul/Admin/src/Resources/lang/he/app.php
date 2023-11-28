@@ -3547,6 +3547,20 @@ return [
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => 'אומץ המגן',
+    
+            'ai-generation' => [
+                'title'                  => 'עזרת AI',
+                'prompt'                 => 'בקשה',
+                'generating'             => 'יוצר...',
+                'generate'               => 'יצירה',
+                'generated-content'      => 'תוכן שנוצר',
+                'generated-content-info' => 'תוכן ה- AI יכול להביא לטעות. יש לבדוק את תוכן הנוצר לפני החלטה על החיבור שלו.',
+                'apply'                  => 'החל',
+            ],
+        ],
     ],
 
     'acl' => [

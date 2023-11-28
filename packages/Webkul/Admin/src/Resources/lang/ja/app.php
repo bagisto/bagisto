@@ -3555,6 +3555,20 @@ return [
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => 'マジックAI',
+    
+            'ai-generation' => [
+                'title'                  => 'AIアシスタンス',
+                'prompt'                 => 'プロンプト',
+                'generating'             => '生成中...',
+                'generate'               => '生成',
+                'generated-content'      => '生成されたコンテンツ',
+                'generated-content-info' => 'AIコンテンツは誤解を招く可能性があります。適用する前に生成されたコンテンツを確認してください。',
+                'apply'                  => '適用',
+            ],
+        ],
     ],
 
     'acl' => [

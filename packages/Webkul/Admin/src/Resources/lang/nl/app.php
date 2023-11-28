@@ -3555,6 +3555,20 @@ return [
                 'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
             ],
         ],
+        
+        'tinymce' => [
+            'ai-btn-tile' => 'Magie AI',
+    
+            'ai-generation' => [
+                'title'                  => 'AI-ondersteuning',
+                'prompt'                 => 'Prompt',
+                'generating'             => 'Aan het genereren...',
+                'generate'               => 'Genereren',
+                'generated-content'      => 'Gegenereerde Inhoud',
+                'generated-content-info' => 'AI-inhoud kan misleidend zijn. Controleer de gegenereerde inhoud voordat u deze toepast.',
+                'apply'                  => 'Toepassen',
+            ],
+        ],
     ],
 
     'acl' => [
