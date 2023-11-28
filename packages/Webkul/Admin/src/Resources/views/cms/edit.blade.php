@@ -135,7 +135,7 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Componnet -->
-                    <x-admin::seo/>
+                    <x-admin::seo slug="page"/>
 
                     <div class="mt-[30px]">
                         <x-admin::form.control-group class="mb-[30px]">

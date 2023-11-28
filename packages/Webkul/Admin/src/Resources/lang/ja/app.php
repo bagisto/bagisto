@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => '税カテゴリ',
                 'tax-rates'                => '税率',
                 'transactions'             => '取引',
+                'themes'                   => 'テーマ',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
             ],

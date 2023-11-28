@@ -49,22 +49,20 @@
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.after', ['attributeFamily' => $attributeFamily]) !!}
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.before', ['attributeFamily' => $attributeFamily]) !!}
-
+    
             <!-- Right Container -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+            <div class="flex flex-col gap-[8px] w-[360px] max-w-full select-none">
                 <!-- General Pannel -->
-                <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <x-admin::accordion>
                     <!-- Panel Header -->
-                    <div class="flex items-center justify-between p-[6px]">
+                    <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
-                            @lang('General')
+                            @lang('admin::app.catalog.families.edit.general')
                         </p>
-
-                        <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 "></span>
-                    </div>
-
+                    </x-slot:header>
+                
                     <!-- Panel Content -->
-                    <div class="px-[16px] pb-[16px]">
+                    <x-slot:content>
                         <x-admin::form.control-group class="mb-4">
                             <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.edit.code')
@@ -109,8 +107,8 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-                    </div>
-                </div>
+                    </x-slot:content>
+                </x-admin::accordion>
             </div>
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.after', ['attributeFamily' => $attributeFamily]) !!}

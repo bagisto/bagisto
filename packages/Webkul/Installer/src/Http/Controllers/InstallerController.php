@@ -50,6 +50,10 @@ class InstallerController extends Controller
 
         $requirements = $this->serverRequirements->validate();
 
+        if (request()->has('locale')) {
+            return redirect()->route('installer.index');
+        }
+
         return view('installer::installer.index', compact('requirements', 'phpVersion'));
     }
 

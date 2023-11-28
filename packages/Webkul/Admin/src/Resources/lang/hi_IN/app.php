@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'कर श्रेणियाँ',
                 'tax-rates'                => 'कर दरें',
                 'transactions'             => 'लेन-देन',
+                'themes'                   => 'थीम्स',
                 'url-rewrites'             => 'URL पुनर्लेखन',
                 'users'                    => 'उपयोगकर्ता',
             ],
