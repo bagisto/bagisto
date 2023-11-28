@@ -2971,6 +2971,12 @@ return [
                         'cms-page-content-prompt'          => 'CMS Page Content Prompt',
                     ],
 
+                    'image-generation' => [
+                        'title'      => 'Image Generation',
+                        'title-info' => 'This feature will enable the Magic AI for every image upload, where you want to generate images using DALL-E.<br/><br/>When Enable, go to any image upload to generate image.',
+                        'enabled'    => 'Enabled',
+                    ],
+
                     'review-translation' => [
                         'title'      => 'Review Translation',
                         'title-info' => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',

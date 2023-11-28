@@ -123,7 +123,7 @@ return [
         'key'  => 'general.magic_ai',
         'name' => 'admin::app.configuration.index.general.magic-ai.title',
         'info' => 'admin::app.configuration.index.general.magic-ai.info',
-        'icon' => 'settings/theme.svg',
+        'icon' => 'settings/magic-ai.svg',
         'sort' => 3,
     ], [
         'key'    => 'general.magic_ai.settings',
@@ -178,6 +178,19 @@ return [
                 'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
                 'type'         => 'textarea',
                 'locale_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.image_generation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.image-generation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.image-generation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
             ],
         ],
     ], [

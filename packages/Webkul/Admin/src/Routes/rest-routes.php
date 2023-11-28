@@ -35,7 +35,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      * AI Routes
      */
     Route::controller(MagicAIController::class)->prefix('magic-ai')->group(function () {
-        Route::post('generate', 'generate')->name('admin.magic_ai.generate');
+        Route::post('content', 'content')->name('admin.magic_ai.content');
+
+        Route::post('image', 'image')->name('admin.magic_ai.image');
     });
 
     /**

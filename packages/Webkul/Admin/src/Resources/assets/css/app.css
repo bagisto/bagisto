@@ -62,6 +62,14 @@
         @apply shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)] border-[1px] dark:border-gray-800;
     }
 
+    .icon-magic:before {
+        content: "\e94b";
+    }
+
+    .icon-zoom:before {
+        content: "\e94c";
+    }
+
     .icon-ar:before {
         content: "\e94a";
     }

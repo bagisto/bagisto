@@ -21,7 +21,9 @@
                 <x-admin::modal ref="magicAIModal">
                     <x-slot:header>
                         <!-- Modal Header -->
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
+                            <span class="icon-magic text-[24px] text-gray-800"></span>
+
                             AI Assistant
                         </p>
                     </x-slot:header>
@@ -65,6 +67,8 @@
                                     </template>
 
                                     <template v-else>
+                                        <span class="icon-magic text-[24px] text-blue-600"></span>
+
                                         Generate
                                     </template>
                                 </button>
@@ -290,7 +294,7 @@
                 generate(params, { resetForm, resetField, setErrors }) {
                     this.isLoading = true;
 
-                    this.$axios.post("{{ route('admin.magic_ai.generate') }}", { prompt: params['prompt'] })
+                    this.$axios.post("{{ route('admin.magic_ai.content') }}", { prompt: params['prompt'] })
                         .then(response => {
                             this.isLoading = false;
 

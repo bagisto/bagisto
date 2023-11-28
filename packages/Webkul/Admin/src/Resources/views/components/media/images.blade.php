@@ -25,34 +25,55 @@
         <div class="grid">
             <div class="flex flex-wrap gap-[4px]">
                 <!-- Upload Image Button -->
-                <label
-                    class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
-                    :style="{'max-width': this.width, 'max-height': this.height}"
-                    :for="$.uid + '_imageInput'"
-                    v-if="allowMultiple || images.length == 0"
-                >
-                    <div class="flex flex-col items-center">
-                        <span class="icon-image text-[24px]"></span>
+                <template v-if="allowMultiple || images.length == 0">
+                    <!-- AI Image Generation Button -->
+                    <label
+                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-blue-300 rounded-[4px] cursor-pointer transition-all hover:border-blue-600 dark:invert dark:mix-blend-exclusion"
+                        :style="{'max-width': this.width, 'max-height': this.height}"
+                        @click="resetAIModal(); $refs.magicAIImageModal.open()"
+                    >
+                        <div class="flex flex-col items-center">
+                            <span class="icon-magic text-[24px] text-blue-600"></span>
 
-                        <p class="grid text-[14px] text-gray-600 dark:text-gray-300 font-semibold text-center">
-                            @lang('admin::app.components.media.images.add-image-btn')
-                            
-                            <span class="text-[12px]">
-                                @lang('admin::app.components.media.images.allowed-types')
-                            </span>
-                        </p>
+                            <p class="grid text-[14px] text-blue-600 font-semibold text-center">
+                                Magic AI
+                                
+                                <span class="text-[12px]">
+                                    Generate Image
+                                </span>
+                            </p>
+                        </div>
+                    </label>
 
-                        <input
-                            type="file"
-                            class="hidden"
-                            :id="$.uid + '_imageInput'"
-                            accept="image/*"
-                            :multiple="allowMultiple"
-                            :ref="$.uid + '_imageInput'"
-                            @change="add"
-                        />
-                    </div>
-                </label>
+                    <!-- Upload Image Button -->
+                    <label
+                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
+                        :style="{'max-width': this.width, 'max-height': this.height}"
+                        :for="$.uid + '_imageInput'"
+                    >
+                        <div class="flex flex-col items-center">
+                            <span class="icon-image text-[24px]"></span>
+
+                            <p class="grid text-[14px] text-gray-600 dark:text-gray-300 font-semibold text-center">
+                                @lang('admin::app.components.media.images.add-image-btn')
+                                
+                                <span class="text-[12px]">
+                                    @lang('admin::app.components.media.images.allowed-types')
+                                </span>
+                            </p>
+
+                            <input
+                                type="file"
+                                class="hidden"
+                                :id="$.uid + '_imageInput'"
+                                accept="image/*"
+                                :multiple="allowMultiple"
+                                :ref="$.uid + '_imageInput'"
+                                @change="add"
+                            />
+                        </div>
+                    </label>
+                </template>
 
                 <!-- Uploaded Images -->
                 <draggable
@@ -88,6 +109,211 @@
                         </p>
                     </div>
                 </template>
+
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form @submit="handleSubmit($event, generate)">
+                        <!-- AI Content Generation Modal -->
+                        <x-admin::modal ref="magicAIImageModal">
+                            <!-- Modal Header -->
+                            <x-slot:header>
+                                <template v-if="! ai.images.length">
+                                    <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
+                                        <span class="icon-magic text-[24px] text-gray-800"></span>
+
+                                        AI Image Generation
+                                    </p>
+                                </template>
+
+                                <template v-else>
+                                    <p class="text-[18px] text-gray-800 truncate dark:text-white font-bold">
+                                        <span
+                                            class="align-middle mr-[5px] icon-arrow-right text-[24px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
+                                            @click="ai.images = []"
+                                        ></span>
+
+                                        <span class="align-middle">
+                                            @{{ ai.prompt }}
+                                        </span>
+                                    </p>
+                                </template>
+                            </x-slot:header>
+
+                            <!-- Modal Content -->
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                                    <div v-show="! ai.images.length">
+                                        <!-- Prompt -->
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                Prompt
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="textarea"
+                                                name="prompt"
+                                                v-model="ai.prompt"
+                                                rules="required"
+                                                label="Prompt"
+                                            >
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                Model
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="model"
+                                                v-model="ai.model"
+                                                rules="required"
+                                                label="Model"
+                                            >
+                                                <option value="dall-e-2">DALL·E 2</option>
+                                                <option value="dall-e-3">DALL·E 3</option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="model"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group v-if="ai.model == 'dall-e-2'">
+                                            <x-admin::form.control-group.label class="required">
+                                                Number Of Images
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="n"
+                                                v-model="ai.n"
+                                                rules="required"
+                                                label="Number Of Images"
+                                            >
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="n"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                Size
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="size"
+                                                v-model="ai.size"
+                                                rules="required"
+                                                label="Size"
+                                            >
+                                                <option value="1024x1024">1024x1024</option>
+                                                <option value="1024x1792">1024x1792</option>
+                                                <option value="1792x1024">1792x1024</option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="size"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group v-if="ai.model == 'dall-e-3'">
+                                            <x-admin::form.control-group.label class="required">
+                                                Quality
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="quality"
+                                                v-model="ai.quality"
+                                                rules="required"
+                                                label="Quality"
+                                            >
+                                                <option value="standard">Standard</option>
+                                                <option value="hd">HD</option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="quality"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    </div>
+
+                                    <div v-show="ai.images.length">
+                                        <div class="grid grid-cols-4 gap-[20px]">
+                                            <div
+                                                class="grid justify-items-center min-w-[120px] max-h-[120px] relative border-[3px] border-transparent rounded-[4px] overflow-hidden transition-all hover:opacity-80 cursor-pointer"
+                                                :class="{'!border-blue-600': image.selected}"
+                                                v-for="image in ai.images"
+                                                @click="image.selected = ! image.selected"
+                                            >
+                                                <!-- Image Preview -->
+                                                <img
+                                                    class="w-[120px] h-[120px]"
+                                                    :src="image.url"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </x-slot:content>
+
+                            <!-- Modal Submission -->
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <template v-if="! ai.images.length">
+                                        <button class="secondary-button">
+                                            <!-- Spinner -->
+                                            <template v-if="isLoading">
+                                                <img
+                                                    class="animate-spin h-5 w-5 text-blue-600"
+                                                    src="{{ bagisto_asset('images/spinner.svg') }}"
+                                                />
+
+                                                Generating...
+                                            </template>
+
+                                            <template v-else>
+                                                <span class="icon-magic text-[24px] text-blue-600"></span>
+
+                                                Generate
+                                            </template>
+                                        </button>
+                                    </template>
+
+                                    <template v-else>
+                                        <button class="secondary-button">
+                                            <!-- Spinner -->
+                                            <template v-if="isLoading">
+                                                <img
+                                                    class="animate-spin h-5 w-5 text-blue-600"
+                                                    src="{{ bagisto_asset('images/spinner.svg') }}"
+                                                />
+
+                                                Regenerating...
+                                            </template>
+
+                                            <template v-else>
+                                                <span class="icon-magic text-[24px] text-blue-600"></span>
+
+                                                Regenerate
+                                            </template>
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="primary-button"
+                                            :disabled="! selectedAIImages.length"
+                                            @click="apply"
+                                        >
+                                            Apply
+                                        </button>
+                                    </template>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
             </div>
         </div>  
     </script>
@@ -197,7 +423,31 @@
                             label: "@lang('admin::app.components.media.images.placeholders.size')",
                             image: "{{ bagisto_asset('images/product-placeholders/size.svg') }}"
                         }
-                    ]
+                    ],
+
+                    isLoading: false,
+
+                    ai: {
+                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+
+                        prompt: null,
+
+                        model: 'dall-e-2',
+
+                        n: 1,
+
+                        size: '1024x1024',
+
+                        quality: 'standard',
+
+                        images: [],
+                    },
+                }
+            },
+
+            computed: {
+                selectedAIImages() {
+                    return this.ai.images.filter(image => image.selected);
                 }
             },
 
@@ -237,6 +487,72 @@
                     let index = this.images.indexOf(image);
 
                     this.images.splice(index, 1);
+                },
+
+                generate(params, { setErrors }) {
+                    this.isLoading = true;
+
+                    let self = this;
+
+                    this.$axios.post("{{ route('admin.magic_ai.image') }}", params)
+                        .then(response => {
+                            this.isLoading = false;
+
+                            self.ai.images = response.data.images;
+                        })
+                        .catch(error => {
+                            this.isLoading = false;
+
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            }
+                        });
+                },
+
+                apply() {
+                    this.selectedAIImages.forEach((image, index) => {
+                        this.images.push({
+                            id: 'image_' + this.images.length,
+                            url: '',
+                            file: this.getBase64ToFile(image.url, 'temp.png')
+                        });
+                    });
+
+                    this.$refs.magicAIImageModal.close();
+                },
+
+                getBase64ToFile(base64, filename) {
+                    var arr = base64.split(','),
+                        mime = arr[0].match(/:(.*?);/)[1],
+                        bstr = atob(arr[arr.length - 1]), 
+                        n = bstr.length, 
+                        u8arr = new Uint8Array(n);
+
+                    while (n--) {
+                        u8arr[n] = bstr.charCodeAt(n);
+                    }
+
+                    return new File([u8arr], filename, {type:mime});
+                },
+
+                resetAIModal() {
+                    this.ai = {
+                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+
+                        prompt: null,
+
+                        model: 'dall-e-2',
+
+                        n: 1,
+
+                        size: '1024x1024',
+
+                        quality: 'standard',
+
+                        images: [],
+                    };
                 }
             }
         });
@@ -300,7 +616,7 @@
                     }
 
                     reader.readAsDataURL(file);
-                }
+                },
             }
         });
     </script>
