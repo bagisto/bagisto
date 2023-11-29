@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => '返回',
             'delete'                       => '删除',
             'enable-at-least-one-shipping' => '至少启用一种配送方式。',
             'enable-at-least-one-payment'  => '至少启用一种支付方式。',
@@ -3516,6 +3517,29 @@ return [
                 'add-image-btn'     => '添加图片',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
+                'ai-add-image-btn'  => '魔法 AI',
+                'ai-btn-info'       => '生成图像',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => '应用',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => '生成',
+                    'generating'       => '生成中...',
+                    'hd'               => '高清',
+                    'model'            => '模型',
+                    'number-of-images' => '图片数量',
+                    'prompt'           => '提示',
+                    'quality'          => '质量',
+                    'regenerate'       => '重新生成',
+                    'regenerating'     => '重新生成中...',
+                    'size'             => '大小',
+                    'standard'         => '标准',
+                    'title'            => 'AI 图像生成',
+                ],
 
                 'placeholders'  => [
                     'front'     => '正面',
@@ -3530,6 +3554,20 @@ return [
                 'add-video-btn'     => '添加视频',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => '魔法 AI',
+
+            'ai-generation' => [
+                'title'                  => 'AI辅助',
+                'prompt'                 => '提示',
+                'generating'             => '生成中...',
+                'generate'               => '生成',
+                'generated-content'      => '生成的内容',
+                'generated-content-info' => 'AI内容可能具有误导性。请在应用之前审查生成的内容。',
+                'apply'                  => '应用',
             ],
         ],
     ],

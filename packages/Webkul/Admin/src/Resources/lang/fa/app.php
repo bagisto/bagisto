@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'بازگشت',
             'delete'                       => 'حذف',
             'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
             'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
@@ -3516,6 +3517,29 @@ return [
                 'add-image-btn'     => 'افزودن تصویر',
                 'allowed-types'     => 'png، jpeg، jpg',
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
+                'ai-add-image-btn'  => 'هوش مصنوعی',
+                'ai-btn-info'       => 'تولید تصویر',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'اعمال',
+                    'dall-e-2'         => 'دال.إ 2',
+                    'dall-e-3'         => 'دال.إ 3',
+                    'generate'         => 'تولید',
+                    'generating'       => 'در حال تولید...',
+                    'hd'               => 'بالا (HD)',
+                    'model'            => 'مدل',
+                    'number-of-images' => 'تعداد تصاویر',
+                    'prompt'           => 'ترغیب',
+                    'quality'          => 'کیفیت',
+                    'regenerate'       => 'تولید مجدد',
+                    'regenerating'     => 'در حال تولید مجدد...',
+                    'size'             => 'اندازه',
+                    'standard'         => 'استاندارد',
+                    'title'            => 'تولید تصویر با هوش مصنوعی',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'جلو',
@@ -3530,6 +3554,20 @@ return [
                 'add-video-btn'     => 'افزودن ویدیو',
                 'allowed-types'     => 'mp4، webm، mkv',
                 'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'هوش مصنوعی',
+
+            'ai-generation' => [
+                'title'                  => 'کمک هوش مصنوعی',
+                'prompt'                 => 'پرسش',
+                'generating'             => 'در حال تولید...',
+                'generate'               => 'تولید',
+                'generated-content'      => 'محتوای تولید شده',
+                'generated-content-info' => 'محتوای هوش مصنوعی ممکن است گمراه‌کننده باشد. لطفاً محتوای تولید شده را قبل از اعمال آن بررسی کنید.',
+                'apply'                  => 'اعمال',
             ],
         ],
     ],

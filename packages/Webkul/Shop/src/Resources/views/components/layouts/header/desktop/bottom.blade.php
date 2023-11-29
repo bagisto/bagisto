@@ -4,10 +4,9 @@
         additional levels are required, users can customize them according to their needs.
     -->
     <!-- Left Nagivation Section -->
-    <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
+    <div class="flex items-center gap-x-[40px] max-[1180px]:gap-x-[20px]">
         <a
             href="{{ route('shop.home.index') }}"
-            class="place-self-start -mt-[4px]"
             aria-label="@lang('shop::app.components.layouts.header.bagisto')"
         >
             <img
@@ -19,7 +18,7 @@
         </a>
 
         <v-desktop-category>
-            <div class="flex gap-[20px] items-center pb-[21px]">
+            <div class="flex gap-[20px] items-center">
                 <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
                 <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
                 <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
@@ -194,7 +193,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-desktop-category-template">
         <div
-            class="flex gap-[20px] items-center pb-[21px]"
+            class="flex gap-[20px] items-center"
             v-if="isLoading"
         >
             <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
@@ -207,20 +206,20 @@
             v-else
         >
             <div
-                class="relative group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue"
+                class="flex items-center relative h-[77px] group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue"
                 v-for="category in categories"
             >
                 <span>
                     <a
                         :href="category.url"
-                        class="inline-block pb-[21px] px-[20px] uppercase"
+                        class="inline-block px-[20px] uppercase"
                         v-text="category.name"
                     >
                     </a>
                 </span>
 
                 <div
-                    class="w-max absolute top-[49px] max-h-[580px] max-w-[1260px] p-[35px] z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
+                    class="w-max absolute top-[78px] max-h-[580px] max-w-[1260px] p-[35px] z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
                     v-if="category.children.length"
                 >
                     <div class="flex aigns gap-x-[70px] justify-between">

@@ -2886,6 +2886,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'חזרה',
             'delete'                       => 'מחק',
             'enable-at-least-one-shipping' => 'הפעל לפחות אחת משיטות המשלוח.',
             'enable-at-least-one-payment'  => 'הפעל לפחות אחת משיטות התשלום.',
@@ -3508,6 +3509,29 @@ return [
                 'add-image-btn'     => 'הוסף תמונה',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
+                'ai-add-image-btn'  => 'בינה מלאכותית',
+                'ai-btn-info'       => 'יצירת תמונה',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'החל',
+                    'dall-e-2'         => 'דאל.ה 2',
+                    'dall-e-3'         => 'דאל.ה 3',
+                    'generate'         => 'יצירה',
+                    'generating'       => 'יוצר...',
+                    'hd'               => 'HD',
+                    'model'            => 'מודל',
+                    'number-of-images' => 'מספר התמונות',
+                    'prompt'           => 'פרומט',
+                    'quality'          => 'איכות',
+                    'regenerate'       => 'יצירה מחדש',
+                    'regenerating'     => 'יוצר מחדש...',
+                    'size'             => 'גודל',
+                    'standard'         => 'תקן',
+                    'title'            => 'יצירת תמונה עם בינה מלאכותית',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'קדמית',
@@ -3522,6 +3546,20 @@ return [
                 'add-video-btn'     => 'הוסף וידאו',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'אומץ המגן',
+
+            'ai-generation' => [
+                'title'                  => 'עזרת AI',
+                'prompt'                 => 'בקשה',
+                'generating'             => 'יוצר...',
+                'generate'               => 'יצירה',
+                'generated-content'      => 'תוכן שנוצר',
+                'generated-content-info' => 'תוכן ה- AI יכול להביא לטעות. יש לבדוק את תוכן הנוצר לפני החלטה על החיבור שלו.',
+                'apply'                  => 'החל',
             ],
         ],
     ],

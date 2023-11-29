@@ -2893,6 +2893,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Indietro',
             'delete'                       => 'Elimina',
             'enable-at-least-one-shipping' => 'Abilita almeno un metodo di spedizione.',
             'enable-at-least-one-payment'  => 'Abilita almeno un metodo di pagamento.',
@@ -3515,6 +3516,29 @@ return [
                 'add-image-btn'     => 'Aggiungi Immagine',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
+                'ai-add-image-btn'  => 'Intelligenza Artificiale',
+                'ai-btn-info'       => 'Genera Immagine',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Applica',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Genera',
+                    'generating'       => 'Generazione in corso...',
+                    'hd'               => 'HD',
+                    'model'            => 'Modello',
+                    'number-of-images' => 'Numero di Immagini',
+                    'prompt'           => 'Prompt',
+                    'quality'          => 'Qualità',
+                    'regenerate'       => 'Rigenera',
+                    'regenerating'     => 'Rigenerazione in corso...',
+                    'size'             => 'Dimensione',
+                    'standard'         => 'Standard',
+                    'title'            => 'Generazione Immagini con AI',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Fronte',
@@ -3529,6 +3553,20 @@ return [
                 'add-video-btn'     => 'Aggiungi Video',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magia AI',
+
+            'ai-generation' => [
+                'title'                  => 'Assistenza AI',
+                'prompt'                 => 'Suggerimento',
+                'generating'             => 'Generazione...',
+                'generate'               => 'Genera',
+                'generated-content'      => 'Contenuto Generato',
+                'generated-content-info' => 'Il contenuto AI può essere ingannevole. Si prega di rivedere il contenuto generato prima di applicarlo.',
+                'apply'                  => 'Applica',
             ],
         ],
     ],

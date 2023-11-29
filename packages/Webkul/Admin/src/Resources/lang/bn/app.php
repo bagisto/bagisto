@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'পিছনে',
             'delete'                       => 'মুছে ফেলুন',
             'enable-at-least-one-shipping' => 'অন্তত একটি শিপিং মেথড সক্রিয় করুন।',
             'enable-at-least-one-payment'  => 'অন্তত একটি পেমেন্ট মেথড সক্রিয় করুন।',
@@ -3515,6 +3516,29 @@ return [
                 'add-image-btn'     => 'চিত্র যোগ করুন',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
+                'ai-add-image-btn'  => 'ম্যাজিক এআই',
+                'ai-btn-info'       => 'ছবি তৈরি করুন',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'প্রয়োগ করুন',
+                    'dall-e-2'         => 'ডাল.ই 2',
+                    'dall-e-3'         => 'ডাল.ই 3',
+                    'generate'         => 'তৈরি করুন',
+                    'generating'       => 'তৈরি হচ্ছে...',
+                    'hd'               => 'এইচডি',
+                    'model'            => 'মডেল',
+                    'number-of-images' => 'চিত্রের সংখ্যা',
+                    'prompt'           => 'প্রম্পট',
+                    'quality'          => 'মান',
+                    'regenerate'       => 'পুনরায় তৈরি করুন',
+                    'regenerating'     => 'পুনরায় তৈরি হচ্ছে...',
+                    'size'             => 'আকার',
+                    'standard'         => 'মানসম্মত',
+                    'title'            => 'এআই চিত্র তৈরি',
+                ],
 
                 'placeholders' => [
                     'front'     => 'আগে',
@@ -3529,6 +3553,20 @@ return [
                 'add-video-btn'     => 'ভিডিও যোগ করুন',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'জাদুকরি এ.আই.',
+
+            'ai-generation' => [
+                'title'                  => 'এ.আই. সহায়',
+                'prompt'                 => 'প্রম্পট',
+                'generating'             => 'তৈরি হচ্ছে...',
+                'generate'               => 'তৈরি করুন',
+                'generated-content'      => 'তৈরি করা সামগ্রী',
+                'generated-content-info' => 'এ.আই. সামগ্রী ভ্রান্ত হতে পারে। এটি প্রয়োজনে প্রয়োজনে তৈরি করা সামগ্রী পর্যালোচনা করুন।',
+                'apply'                  => 'প্রয়োগ করুন',
             ],
         ],
     ],

@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Zurück',
             'delete'                       => 'Löschen',
             'enable-at-least-one-shipping' => 'Mindestens eine Versandmethode aktivieren.',
             'enable-at-least-one-payment'  => 'Mindestens eine Zahlungsmethode aktivieren.',
@@ -3516,6 +3517,29 @@ return [
                 'add-image-btn'     => 'Bild hinzufügen',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
+                'ai-add-image-btn'  => 'Magie KI',
+                'ai-btn-info'       => 'Bild generieren',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Anwenden',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Generieren',
+                    'generating'       => 'Generiere...',
+                    'hd'               => 'HD',
+                    'model'            => 'Modell',
+                    'number-of-images' => 'Anzahl der Bilder',
+                    'prompt'           => 'Aufforderung',
+                    'quality'          => 'Qualität',
+                    'regenerate'       => 'Neu generieren',
+                    'regenerating'     => 'Regeneriere...',
+                    'size'             => 'Größe',
+                    'standard'         => 'Standard',
+                    'title'            => 'KI-Bildgenerierung',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Vorderseite',
@@ -3530,6 +3554,20 @@ return [
                 'add-video-btn'     => 'Video hinzufügen',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magie KI',
+
+            'ai-generation' => [
+                'title'                  => 'KI-Unterstützung',
+                'prompt'                 => 'Aufforderung',
+                'generating'             => 'Wird generiert...',
+                'generate'               => 'Generieren',
+                'generated-content'      => 'Generierter Inhalt',
+                'generated-content-info' => 'KI-Inhalte können irreführend sein. Bitte überprüfen Sie den generierten Inhalt, bevor Sie ihn anwenden.',
+                'apply'                  => 'Anwenden',
             ],
         ],
     ],

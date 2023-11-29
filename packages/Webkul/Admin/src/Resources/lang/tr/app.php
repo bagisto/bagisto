@@ -2895,6 +2895,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Geri',
             'delete'                       => 'Sil',
             'enable-at-least-one-shipping' => 'En az bir nakliye yöntemi etkinleştirin.',
             'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',
@@ -3516,6 +3517,29 @@ return [
                 'add-image-btn'     => 'Resim Ekle',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
+                'ai-add-image-btn'  => 'Sihirli AI',
+                'ai-btn-info'       => 'Resim Oluştur',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Uygula',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Oluştur',
+                    'generating'       => 'Oluşturuluyor...',
+                    'hd'               => 'HD',
+                    'model'            => 'Model',
+                    'number-of-images' => 'Resim Sayısı',
+                    'prompt'           => 'İpucu',
+                    'quality'          => 'Kalite',
+                    'regenerate'       => 'Yeniden Oluştur',
+                    'regenerating'     => 'Yeniden Oluşturuluyor...',
+                    'size'             => 'Boyut',
+                    'standard'         => 'Standart',
+                    'title'            => 'AI İmaj Oluşturma',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Ön',
@@ -3530,6 +3554,20 @@ return [
                 'add-video-btn'     => 'Video Ekle',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Sihirli AI',
+
+            'ai-generation' => [
+                'title'                  => 'AI Yardımı',
+                'prompt'                 => 'İpucu',
+                'generating'             => 'Oluşturuluyor...',
+                'generate'               => 'Oluştur',
+                'generated-content'      => 'Oluşturulan İçerik',
+                'generated-content-info' => 'AI içeriği yanıltıcı olabilir. Lütfen uygulamadan önce oluşturulan içeriği gözden geçirin.',
+                'apply'                  => 'Uygula',
             ],
         ],
     ],

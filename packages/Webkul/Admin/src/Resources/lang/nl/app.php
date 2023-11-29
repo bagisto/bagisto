@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Terug',
             'delete'                       => 'Verwijderen',
             'enable-at-least-one-shipping' => 'Schakel ten minste één verzendmethode in.',
             'enable-at-least-one-payment'  => 'Schakel ten minste één betaalmethode in.',
@@ -3516,6 +3517,29 @@ return [
                 'add-image-btn'     => 'Afbeelding Toevoegen',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
+                'ai-add-image-btn'  => 'Magische AI',
+                'ai-btn-info'       => 'Afbeelding genereren',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Toepassen',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Genereren',
+                    'generating'       => 'Genereren...',
+                    'hd'               => 'HD',
+                    'model'            => 'Model',
+                    'number-of-images' => 'Aantal afbeeldingen',
+                    'prompt'           => 'Prompt',
+                    'quality'          => 'Kwaliteit',
+                    'regenerate'       => 'Regenereren',
+                    'regenerating'     => 'Regenereren...',
+                    'size'             => 'Formaat',
+                    'standard'         => 'Standaard',
+                    'title'            => 'AI Afbeelding Generatie',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Voorkant',
@@ -3530,6 +3554,20 @@ return [
                 'add-video-btn'     => 'Video Toevoegen',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magie AI',
+
+            'ai-generation' => [
+                'title'                  => 'AI-ondersteuning',
+                'prompt'                 => 'Prompt',
+                'generating'             => 'Aan het genereren...',
+                'generate'               => 'Genereren',
+                'generated-content'      => 'Gegenereerde Inhoud',
+                'generated-content-info' => 'AI-inhoud kan misleidend zijn. Controleer de gegenereerde inhoud voordat u deze toepast.',
+                'apply'                  => 'Toepassen',
             ],
         ],
     ],

@@ -514,18 +514,21 @@ return [
 
             'reviews' => [
                 'attachments'       => 'Ekler',
+                'cancel'            => 'İptal',
                 'comment'           => 'Yorum',
                 'customer-review'   => 'Müşteri Yorumları',
-                'cancel'            => 'İptal',
                 'empty-review'      => 'Henüz yorum bulunamadı, ilk yorumu siz yapın',
                 'failed-to-upload'  => 'Resim yüklemesi başarısız oldu',
                 'load-more'         => 'Daha Fazla Yükle',
                 'name'              => 'Adı',
                 'rating'            => 'Derecelendirme',
-                'success'           => 'Yorum başarıyla gönderildi.',
                 'submit-review'     => 'Yorumu Gönder',
+                'success'           => 'Yorum başarıyla gönderildi.',
                 'title'             => 'Başlık',
+                'translate'         => 'Çevir',
+                'translating'       => 'Çevriliyor...',
                 'write-a-review'    => 'Yorum Yazın',
+
             ],
 
             'add-to-cart'            => 'Sepete Ekle',

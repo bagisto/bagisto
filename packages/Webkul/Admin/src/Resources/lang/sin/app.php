@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'ආපසු',
             'delete'                       => 'මකනවා',
             'enable-at-least-one-shipping' => 'අවශ්‍යයින් එකක් ප්‍රවේශ කරන්න.',
             'enable-at-least-one-payment'  => 'අවශ්‍යයින් එකක් ගෙවා කරන්න.',
@@ -3516,6 +3517,29 @@ return [
                 'add-image-btn'     => 'රූපය එකතු කරන්න',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+                'ai-add-image-btn'  => 'මැජික් ඒ.ඉ.',
+                'ai-btn-info'       => 'පින්තුර සහිතව කියවන්න',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'අයැදීම',
+                    'dall-e-2'         => 'ඩොල්.ඊ 2',
+                    'dall-e-3'         => 'ඩොල්.ඊ 3',
+                    'generate'         => 'උදාහරින්න',
+                    'generating'       => 'උදාහරින්නෙම...',
+                    'hd'               => 'HD',
+                    'model'            => 'ආකාරය',
+                    'number-of-images' => 'රූපවාහින් ගන්නවාද?',
+                    'prompt'           => 'උපාංග',
+                    'quality'          => 'වර්ගය',
+                    'regenerate'       => 'නැවතුම් කරන්න',
+                    'regenerating'     => 'නැවතුම් කරමු...',
+                    'size'             => 'ප්‍රමාණය',
+                    'standard'         => 'සම්මත',
+                    'title'            => 'මැජික් පින්තුර සහිතව කියවන්න',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'මුර',
@@ -3530,6 +3554,20 @@ return [
                 'add-video-btn'     => 'වීඩියෝ එකතු කරන්න',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'මැජික් ඒ.ඉ.',
+
+            'ai-generation' => [
+                'title'                  => 'මාසිකවේදීම් AI',
+                'prompt'                 => 'උපාංග',
+                'generating'             => 'උදාහරින්නෙම...',
+                'generate'               => 'උදාහරින්න',
+                'generated-content'      => 'උදාහරින්නා අන්තරය',
+                'generated-content-info' => 'AI අන්තරය පෙළෙහි ගැලපේ හෝඩියේ යුතු වෙනස් සහිත වෙනස් කළ හැක. කරුණාවක් අන්තරය ඉදිරිපත් කරන්නේ නම් එය ඉදිරිපත් කිරීමට වෙනස් කරන්න.',
+                'apply'                  => 'ඉදිරිපත් කරන්න',
             ],
         ],
     ],
