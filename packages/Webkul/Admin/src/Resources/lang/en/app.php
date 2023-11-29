@@ -2948,6 +2948,48 @@ return [
                         'title-info'      => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
                     ],
                 ],
+
+                'magic-ai' => [
+                    'info'  => 'Set Magic AI options.',
+                    'title' => 'Magic AI',
+
+                    'settings' => [
+                        'title'        => 'General Settings',
+                        'title-info'   => 'Enhance your experience with the Magic AI feature by entering your exclusive API Key and indicating the pertinent Organization for effortless integration. Seize command over your OpenAI credentials and customize the settings according to your specific needs.',
+                        'enabled'      => 'Enabled',
+                        'api-key'      => 'API Key',
+                        'organization' => 'Organization',
+                    ],
+
+                    'content-generation' => [
+                        'title'                            => 'Content Generation',
+                        'title-info'                       => 'This feature will enable the Magic AI for every WYSIWYG editor, where you want to mange content using AI.<br/><br/>When Enable, go to any editor to generate content.',
+                        'enabled'                          => 'Enabled',
+                        'product-short-description-prompt' => 'Product Short Description Prompt',
+                        'product-description-prompt'       => 'Product Description Prompt',
+                        'category-description-prompt'      => 'Category Description Prompt',
+                        'cms-page-content-prompt'          => 'CMS Page Content Prompt',
+                    ],
+
+                    'image-generation' => [
+                        'title'      => 'Image Generation',
+                        'title-info' => 'This feature will enable the Magic AI for every image upload, where you want to generate images using DALL-E.<br/><br/>When Enable, go to any image upload to generate image.',
+                        'enabled'    => 'Enabled',
+                    ],
+
+                    'review-translation' => [
+                        'title'      => 'Review Translation',
+                        'title-info' => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
+                        'enabled'    => 'Enabled',
+                    ],
+
+                    'checkout-message' => [
+                        'title'      => 'Personalized Checkout Message',
+                        'title-info' => 'Craft a personalized checkout message for customers on the Thank-You page, tailoring the content to resonate with individual preferences and enhancing the overall post-purchase experience.',
+                        'enabled'    => 'Enabled',
+                        'prompt'     => 'Prompt',
+                    ],
+                ],
             ],
 
             'catalog' => [
@@ -3516,6 +3558,29 @@ return [
                 'add-image-btn'     => 'Add Image',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
+                'ai-add-image-btn'  => 'Magic AI',
+                'ai-btn-info'       => 'Generate Image',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Apply',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Generate',
+                    'generating'       => 'Generating...',
+                    'hd'               => 'HD',
+                    'model'            => 'Model',
+                    'number-of-images' => 'Number of Images',
+                    'prompt'           => 'Prompt',
+                    'quality'          => 'Quality',
+                    'regenerate'       => 'Regenerate',
+                    'regenerating'     => 'Regenerating...',
+                    'size'             => 'Size',
+                    'standard'         => 'Standard',
+                    'title'            => 'AI Image Generation',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Front',
@@ -3530,6 +3595,20 @@ return [
                 'add-video-btn'     => 'Add Video',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magic AI',
+
+            'ai-generation' => [
+                'title'                  => 'AI Assistance',
+                'prompt'                 => 'Prompt',
+                'generating'             => 'Generating...',
+                'generate'               => 'Generate',
+                'generated-content'      => 'Generated Content',
+                'generated-content-info' => 'AI content can be misleading. Please review the generated content before applying it.',
+                'apply'                  => 'Apply',
             ],
         ],
     ],

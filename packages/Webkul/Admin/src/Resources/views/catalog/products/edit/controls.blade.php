@@ -51,6 +51,7 @@
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             :tinymce="(bool) $attribute->enable_wysiwyg"
+            :prompt="core()->getConfigData('general.magic_ai.content_generation.product_' . $attribute->code . '_prompt')"
         >
         </x-admin::form.control-group.control>
 
