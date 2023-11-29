@@ -15,6 +15,14 @@
         @apply bg-gray-50;
     }
 
+    button:disabled {
+        @apply cursor-not-allowed opacity-50;
+    }
+
+    button:disabled:hover {
+        @apply cursor-not-allowed opacity-50;
+    }
+
     .direction-ltr {
         direction: ltr;
     }
@@ -52,6 +60,14 @@
     
     .box-shadow {
         @apply shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)] border-[1px] dark:border-gray-800;
+    }
+
+    .icon-magic:before {
+        content: "\e94b";
+    }
+
+    .icon-zoom:before {
+        content: "\e94c";
     }
 
     .icon-ar:before {
@@ -475,15 +491,13 @@
         background-size: 1250px 100%;
     }
 
-    .dark .shimmer{
+    .dark .shimmer {
         background: linear-gradient(
             to right,
             #1f2937 8%,
             #1a2232 18%,
             #1f2937 33%
         );
-        background-size: 1250px 100%;
-
     }
 
     @keyframes skeleton {
@@ -503,4 +517,25 @@
     .CodeMirror {
         @apply !h-[calc(100vh-367px)]
     }
+}
+
+
+.tox .tox-toolbar__group:last-child {
+    position: absolute;
+    right: 0;
+}
+
+.tox .tox-toolbar__group:last-child button {
+    padding: 6px 8px;
+    background: #eff6ff;
+    color: #2563EB;
+}
+
+.tox .tox-toolbar__group:last-child button:hover {
+    background: #dbeafe;
+}
+
+
+.tox .tox-toolbar__group:last-child button[aria-disabled="true"] {
+    @apply cursor-not-allowed opacity-50;
 }

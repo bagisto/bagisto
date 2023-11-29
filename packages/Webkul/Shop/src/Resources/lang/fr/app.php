@@ -266,7 +266,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'Vous n\'avez pas encore examiné de produit',
                 'title'        => 'Avis',
             ],
@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Pièces jointes',
+                'cancel'           => 'Annuler',
                 'comment'          => 'Commentaire',
                 'customer-review'  => 'Avis clients',
-                'cancel'           => 'Annuler',
                 'empty-review'     => 'Aucun avis trouvé, soyez le premier à évaluer ce produit.',
                 'failed-to-upload' => 'Échec du téléchargement de l\'image',
                 'load-more'        => 'Charger plus',
                 'name'             => 'Nom',
                 'rating'           => 'Évaluation',
-                'success'          => 'Avis soumis avec succès.',
                 'submit-review'    => 'Envoyer un avis',
+                'success'          => 'Avis soumis avec succès.',
                 'title'            => 'Titre',
+                'translate'        => 'Traduire',
+                'translating'      => 'En cours de traduction...',
                 'write-a-review'   => 'Rédiger un avis',
             ],
 
