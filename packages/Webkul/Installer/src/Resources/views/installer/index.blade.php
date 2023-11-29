@@ -872,8 +872,15 @@
                                         @foreach ($locales as $key => $locale)
                                             <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == config('app.locale')) ?: 0;
+                                                    $selectedOption = ($key == config('app.locale')) ? 1: 0;
                                                 @endphp
+
+                                                <x-installer::form.control-group.control
+                                                    type="hidden"
+                                                    name="{{ $key }}"
+                                                    :value="$selectedOption"
+                                                >
+                                                </x-installer::form.control-group.control>
 
                                                 <x-installer::form.control-group.control
                                                     type="checkbox"
@@ -906,8 +913,15 @@
                                         @foreach ($currencies as $key => $currency)
                                             <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == config('app.currency')) ?: 0;
+                                                    $selectedOption = ($key == config('app.currency')) ? 1 : 0;
                                                 @endphp
+
+                                                <x-installer::form.control-group.control
+                                                    type="hidden"
+                                                    name="{{ $key }}"
+                                                    :value="$selectedOption"
+                                                >
+                                                </x-installer::form.control-group.control>
 
                                                 <x-installer::form.control-group.control
                                                     type="checkbox"

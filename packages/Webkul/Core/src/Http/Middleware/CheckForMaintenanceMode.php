@@ -35,15 +35,17 @@ class CheckForMaintenanceMode extends Original
     /**
      * Constructor.
      */
-    public function __construct(Application $app)
-    {
+    public function __construct(
+        protected DatabaseManager $databaseManager,
+        Application $app
+    ) {
         /* application */
         $this->app = $app;
 
         /* adding exception for admin routes */
         $this->except[] = env('APP_ADMIN_URL', 'admin') . '*';
 
-        if (app(DatabaseManager::class)->isInstalled()) {
+        if ($this->databaseManager->isInstalled()) {
             /* exclude ips */
             $this->setAllowedIps();
         }
@@ -59,7 +61,7 @@ class CheckForMaintenanceMode extends Original
      */
     public function handle($request, Closure $next)
     {
-        if (app(DatabaseManager::class)->isInstalled() && $this->app->isDownForMaintenance()) {
+        if ($this->databaseManager->isInstalled() && $this->app->isDownForMaintenance()) {
             $response = $next($request);
 
             if (
