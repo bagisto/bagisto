@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => '添付ファイル',
+                'cancel'           => 'キャンセル',
                 'comment'          => 'コメント',
                 'customer-review'  => 'カスタマーレビュー',
-                'cancel'           => 'キャンセル',
                 'empty-review'     => 'レビューが見つかりません。最初のレビューを投稿してください',
                 'failed-to-upload' => '画像のアップロードに失敗しました',
                 'load-more'        => 'さらに読み込む',
                 'name'             => '名前',
                 'rating'           => '評価',
-                'success'          => 'レビューが正常に送信されました。',
                 'submit-review'    => 'レビューを送信',
+                'success'          => 'レビューが正常に送信されました。',
                 'title'            => 'タイトル',
+                'translate'        => '翻訳',
+                'translating'      => '翻訳中...',
                 'write-a-review'   => 'レビューを書く',
             ],
 

@@ -2948,6 +2948,48 @@ return [
                         'title-info'    => 'Il logo admin è l\'immagine o l\'emblema distintivo che rappresenta l\'interfaccia di amministrazione di un sistema o di un sito web, spesso personalizzabile.',
                     ],
                 ],
+
+                'magic-ai' => [
+                    'info'  => 'Imposta le opzioni di Magic AI.',
+                    'title' => 'Magic AI',
+
+                    'settings' => [
+                        'title'        => 'Impostazioni generali',
+                        'title-info'   => 'Migliora la tua esperienza con la funzione Magic AI inserendo la tua esclusiva chiave API e indicando l\'organizzazione pertinente per un\'integrazione senza sforzi. Prendi il controllo delle tue credenziali OpenAI e personalizza le impostazioni secondo le tue esigenze specifiche.',
+                        'enabled'      => 'Abilitato',
+                        'api-key'      => 'Chiave API',
+                        'organization' => 'Organizzazione',
+                    ],
+
+                    'content-generation' => [
+                        'title'                            => 'Generazione di contenuti',
+                        'title-info'                       => 'Questa funzione abiliterà Magic AI per ogni editor WYSIWYG, dove desideri gestire i contenuti usando l\'intelligenza artificiale.<br/><br/>Quando è abilitato, vai in qualsiasi editor per generare contenuti.',
+                        'enabled'                          => 'Abilitato',
+                        'product-short-description-prompt' => 'Prompt breve descrizione prodotto',
+                        'product-description-prompt'       => 'Prompt descrizione prodotto',
+                        'category-description-prompt'      => 'Prompt descrizione categoria',
+                        'cms-page-content-prompt'          => 'Prompt contenuto pagina CMS',
+                    ],
+
+                    'image-generation' => [
+                        'title'      => 'Generazione di immagini',
+                        'title-info' => 'Questa funzione abiliterà Magic AI per ogni upload di immagini, dove desideri generare immagini usando DALL-E.<br/><br/>Quando è abilitato, vai in qualsiasi upload di immagini per generare un\'immagine.',
+                        'enabled'    => 'Abilitato',
+                    ],
+
+                    'review-translation' => [
+                        'title'      => 'Traduzione recensioni',
+                        'title-info' => 'Fornisce all\'utente la possibilità di tradurre la recensione del cliente in inglese.<br/><br/>Quando abilitato, vai alla recensione e troverai il pulsante "Traduci in inglese" se la recensione è in una lingua diversa dall\'inglese.',
+                        'enabled'    => 'Abilitato',
+                    ],
+
+                    'checkout-message' => [
+                        'title'      => 'Messaggio di checkout personalizzato',
+                        'title-info' => 'Crea un messaggio di checkout personalizzato per i clienti sulla pagina di ringraziamento, adattando il contenuto per risuonare con le preferenze individuali e migliorando l\'esperienza complessiva post-acquisto.',
+                        'enabled'    => 'Abilitato',
+                        'prompt'     => 'Prompt',
+                    ],
+                ],
             ],
 
             'catalogo' => [
@@ -3515,7 +3557,30 @@ return [
             'images' => [
                 'add-image-btn'     => 'Aggiungi Immagine',
                 'allowed-types'     => 'png, jpeg, jpg',
-                'not-allowed-error' => 'Sono consentiti solo file di immagine (.jpeg, .jpg, .png, ..).',
+                'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
+                'ai-add-image-btn'  => 'Intelligenza Artificiale',
+                'ai-btn-info'       => 'Genera Immagine',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Applica',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Genera',
+                    'generating'       => 'Generazione in corso...',
+                    'hd'               => 'HD',
+                    'model'            => 'Modello',
+                    'number-of-images' => 'Numero di Immagini',
+                    'prompt'           => 'Prompt',
+                    'quality'          => 'Qualità',
+                    'regenerate'       => 'Rigenera',
+                    'regenerating'     => 'Rigenerazione in corso...',
+                    'size'             => 'Dimensione',
+                    'standard'         => 'Standard',
+                    'title'            => 'Generazione Immagini con AI',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Frontale',
@@ -3530,6 +3595,20 @@ return [
                 'add-video-btn'     => 'Aggiungi Video',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magia AI',
+
+            'ai-generation' => [
+                'title'                  => 'Assistenza AI',
+                'prompt'                 => 'Suggerimento',
+                'generating'             => 'Generazione...',
+                'generate'               => 'Genera',
+                'generated-content'      => 'Contenuto Generato',
+                'generated-content-info' => 'Il contenuto AI può essere ingannevole. Si prega di rivedere il contenuto generato prima di applicarlo.',
+                'apply'                  => 'Applica',
             ],
         ],
     ],

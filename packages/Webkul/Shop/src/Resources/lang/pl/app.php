@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Załączniki',
+                'cancel'           => 'Anuluj',
                 'comment'          => 'Komentarz',
                 'customer-review'  => 'Recenzje klientów',
-                'cancel'           => 'Anuluj',
                 'empty-review'     => 'Nie znaleziono recenzji, bądź pierwszym, który oceni ten produkt',
                 'failed-to-upload' => 'Nie udało się przesłać obrazka',
                 'load-more'        => 'Wczytaj więcej',
                 'name'             => 'Imię',
                 'rating'           => 'Ocena',
-                'success'          => 'Recenzja została pomyślnie przesłana.',
                 'submit-review'    => 'Prześlij recenzję',
+                'success'          => 'Recenzja została pomyślnie przesłana.',
                 'title'            => 'Tytuł',
+                'translate'        => 'Tłumaczyć',
+                'translating'      => 'Tłumaczenie...',
                 'write-a-review'   => 'Napisz recenzję',
             ],
 
