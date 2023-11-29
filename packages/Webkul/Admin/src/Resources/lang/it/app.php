@@ -533,7 +533,7 @@ return [
                     'virtual'                 => 'Virtuale',
                 ],
 
-                'datagrid' => [
+                'datagrid'   => [
                     'attribute-family'              => 'Famiglia di Attributi',
                     'attribute-family-value'        => 'Famiglia di Attributi - :attribute_family',
                     'active'                        => 'Attivo',
@@ -558,7 +558,7 @@ return [
                     'status'                        => 'Stato',
                     'type'                          => 'Tipo',
                     'update-status'                 => 'Aggiorna Stato',
-                    'variant-already-exist-message' => 'Variante con le stesse opzioni di attributo già esiste.',
+                    'variant-already-exist-message' => 'La variante con le stesse opzioni degli attributi esiste già.',
                 ],
             ],
 
@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'Ordini (:order_count)',
                 'order-id'                    => 'ID Ordine',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'di',
+                'per-page'                    => 'per pagina',
                 'processing'                  => 'In Elaborazione',
                 'pending'                     => 'In Sospeso',
                 'completed'                   => 'Completato',

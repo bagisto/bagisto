@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'Orders (:order_count)',
                 'order-id'                    => 'Order ID',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'of',
+                'per-page'                    => 'per Page',
                 'processing'                  => 'Processing',
                 'pending'                     => 'Pending',
                 'completed'                   => 'Completed',
@@ -3068,10 +3070,10 @@ return [
                     ],
 
                     'large-image' => [
-                        'width'      => 'Width',
                         'height'     => 'Height',
                         'title'      => 'Large image',
                         'title-info' => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
+                        'width'      => 'Width',
                     ],
 
                     'review' => [
