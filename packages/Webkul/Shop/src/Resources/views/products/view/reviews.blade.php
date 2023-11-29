@@ -202,9 +202,9 @@
 
                         <!-- Ratings By Individual Stars -->
                         <div class="flex gap-x-[20px] items-center">
-                            <div class="flex gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
+                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
                                 @for ($i = 5; $i >= 1; $i--)
-                                    <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
+                                    <div class="row grid grid-cols-[1fr_2fr] gap-[10px] items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
 
                                         <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
