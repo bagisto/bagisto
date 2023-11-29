@@ -37,16 +37,17 @@ class CanInstall
      */
     public function isAlreadyInstalled()
     {
-        if (file_exists(storage_path('installed'))) {
-            return true;
-        }
-
+        $installedPath = storage_path('installed');
         if (app(DatabaseManager::class)->isInstalled()) {
-            touch(storage_path('installed'));
+            touch($installedPath);
 
             Event::dispatch('bagisto.installed');
 
             return true;
+        } elseif (file_exists($installedPath)) {
+            unlink($installedPath);
+
+            return file_exists($installedPath);
         }
 
         return false;

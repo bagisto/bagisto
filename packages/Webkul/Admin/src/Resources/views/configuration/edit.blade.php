@@ -31,6 +31,14 @@
 
             <!-- Save Inventory -->
             <div class="flex gap-x-[10px] items-center">
+                <!-- Back Button -->
+                <a
+                    href="{{ route('admin.configuration.index') }}"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                >
+                    @lang('admin::app.configuration.index.back-btn')
+                </a>
+
                 <button 
                     type="submit"
                     class="primary-button"

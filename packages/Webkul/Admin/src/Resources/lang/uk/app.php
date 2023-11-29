@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Назад',
             'delete'                       => 'Видалити',
             'enable-at-least-one-shipping' => 'Включіть принаймні один метод доставки.',
             'enable-at-least-one-payment'  => 'Включіть принаймні один метод оплати.',
