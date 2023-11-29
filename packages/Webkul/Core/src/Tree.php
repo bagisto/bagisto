@@ -106,4 +106,32 @@ class Tree
             return true;
         }
     }
+
+    /**
+     * Remove unauthorized urls.
+     */
+    public function removeUnauthorizedUrls(): array
+    {
+        return collect($this->items)->map(function ($item) {
+            $this->removeChildrenUnauthorizedUrls($item);
+
+            return $item;
+        })->toArray();
+    }
+
+    /**
+     * Remove all children unauthorized urls. This will handle all levels.
+     */
+    private function removeChildrenUnauthorizedUrls(array &$item): void
+    {
+        if (! empty($item['children'])) {
+            $firstChildrenItem = collect($item['children'])->first();
+
+            $item['route'] = $firstChildrenItem['route'];
+
+            $item['url'] = route($firstChildrenItem['route'], $firstChildrenItem['params'] ?? []);
+
+            $this->removeChildrenUnauthorizedUrls($firstChildrenItem);
+        }
+    }
 }
