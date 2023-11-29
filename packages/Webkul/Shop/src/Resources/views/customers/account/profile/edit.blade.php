@@ -258,6 +258,7 @@
                 name="subscribed_to_news_letter"
                 id="is-subscribed"
                 class="hidden peer"
+                @checked($customer->subscribed_to_news_letter)
             />
 
             <label
