@@ -2748,20 +2748,19 @@ return [
                 'services-content'              => [
                     'add-btn'            => 'Добавить услуги',
                     'channels'           => 'Каналы',
-                    'description'        => 'Описание',
                     'delete'             => 'Удалить',
+                    'description'        => 'Описание',
                     'general'            => 'Общее',
                     'name'               => 'Имя',
+                    'save-btn'           => 'Сохранить',
+                    'service-icon'       => 'Значок услуги',
+                    'service-icon-class' => 'Класс значка услуги',
+                    'service-info'       => 'Настройка темы, связанной с услугами.',
+                    'services'           => 'Услуги',
                     'sort-order'         => 'Порядок сортировки',
                     'status'             => 'Статус',
-                    'services'           => 'Услуги',
-                    'service-info'       => 'Настройка темы, связанной с услугами.',
-                    'save-btn'           => 'Сохранить',
-                    'service-icon-class' => 'Класс значка услуги',
-                    'service-icon'       => 'Значок услуги',
-                    'update-service'     => 'Обновить услуги',
                     'title'              => 'Заголовок',
-
+                    'update-service'     => 'Обновить услуги',
                 ],
             ],
 
@@ -3499,7 +3498,20 @@ return [
             ],
 
             'filters' => [
+                'select' => 'Выбрать',
                 'title' => 'Применить фильтры',
+
+                'dropdown' => [
+                    'searchable' => [
+                        'atleast-two-chars' => 'Введите как минимум 2 символа...',
+                        'no-results'        => 'Результатов не найдено...',
+                    ],
+                ],
+
+                'boolean-options' => [
+                    'false' => 'Ложь',
+                    'true'  => 'Истина',
+                ],
 
                 'custom-filters' => [
                     'clear-all' => 'Очистить все',
