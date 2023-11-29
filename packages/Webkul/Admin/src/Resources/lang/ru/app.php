@@ -3499,7 +3499,7 @@ return [
 
             'filters' => [
                 'select' => 'Выбрать',
-                'title' => 'Применить фильтры',
+                'title'  => 'Применить фильтры',
 
                 'dropdown' => [
                     'searchable' => [
