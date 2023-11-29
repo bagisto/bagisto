@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'वापस',
             'delete'                       => 'हटाएं',
             'enable-at-least-one-shipping' => 'कम से कम एक शिपिंग मेथड सक्षम करें।',
             'enable-at-least-one-payment'  => 'कम से कम एक भुगतान मेथड सक्षम करें।',

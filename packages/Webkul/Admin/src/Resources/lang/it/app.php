@@ -2893,6 +2893,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Indietro',
             'delete'                       => 'Elimina',
             'enable-at-least-one-shipping' => 'Abilita almeno un metodo di spedizione.',
             'enable-at-least-one-payment'  => 'Abilita almeno un metodo di pagamento.',
