@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Retour',
             'delete'                       => 'Supprimer',
             'enable-at-least-one-shipping' => 'Activer au moins une méthode d\'expédition.',
             'enable-at-least-one-payment'  => 'Activer au moins une méthode de paiement.',

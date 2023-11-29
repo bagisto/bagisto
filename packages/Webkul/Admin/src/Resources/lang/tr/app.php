@@ -2895,6 +2895,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'Geri',
             'delete'                       => 'Sil',
             'enable-at-least-one-shipping' => 'En az bir nakliye yöntemi etkinleştirin.',
             'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',

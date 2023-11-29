@@ -2887,6 +2887,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'חזרה',
             'delete'                       => 'מחק',
             'enable-at-least-one-shipping' => 'הפעל לפחות אחת משיטות המשלוח.',
             'enable-at-least-one-payment'  => 'הפעל לפחות אחת משיטות התשלום.',

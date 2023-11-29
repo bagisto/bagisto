@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'العودة',
             'delete'                       => 'حذف',
             'enable-at-least-one-shipping' => 'تمكين طريقة شحن واحدة على الأقل.',
             'enable-at-least-one-payment'  => 'تمكين طريقة دفع واحدة على الأقل.',

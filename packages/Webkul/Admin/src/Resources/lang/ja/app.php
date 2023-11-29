@@ -2894,6 +2894,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => '戻る',
             'delete'                       => '削除',
             'enable-at-least-one-shipping' => '少なくとも1つの配送方法を有効にしてください。',
             'enable-at-least-one-payment'  => '少なくとも1つの支払い方法を有効にしてください。',
