@@ -3067,10 +3067,10 @@ return [
                     ],
 
                     'large-image' => [
-                        'width'      => 'Width',
                         'height'     => 'Height',
                         'title'      => 'Large image',
                         'title-info' => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
+                        'width'      => 'Width',
                     ],
 
                     'review' => [
