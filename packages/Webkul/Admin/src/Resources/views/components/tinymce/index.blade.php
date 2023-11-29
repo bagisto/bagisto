@@ -142,7 +142,7 @@
 
                 this.$emitter.on('change-theme', (theme) => {
                     tinymce.activeEditor.destroy();
-                  
+
                     this.currentSkin = (theme === 'dark') ? 'oxide-dark' : 'oxide';
                     this.currentContentCSS = (theme === 'dark') ? 'dark' : 'default';
 
@@ -157,8 +157,6 @@
                     // TODO (@devansh-webkul): Need to refactor this full method.
                     let tinyMCEHelper = {
                         initTinyMCE: function(extraConfiguration) {
-                            let self = this;
-
                             let config = {
                                 relative_urls: false,
                                 menubar: false,
