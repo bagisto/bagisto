@@ -76,7 +76,7 @@
 
                             <!-- Generated Content -->
                             <x-admin::form.control-group class="mt-[20px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="text-left">
                                     @lang('admin::app.components.tinymce.ai-generation.generated-content')
                                 </x-admin::form.control-group.label>
 
