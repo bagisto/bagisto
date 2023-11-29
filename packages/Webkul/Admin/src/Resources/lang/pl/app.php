@@ -1262,6 +1262,8 @@ return [
                 'orders'                      => 'Zamówienia (:order_count)',
                 'order-id'                    => 'Nr Zamówienia',
                 'order-id-prefix'             => 'Nr :order_id',
+                'of'                          => 'z',
+                'per-page'                    => 'na stronę',
                 'processing'                  => 'Przetwarzanie',
                 'pending'                     => 'Oczekujące',
                 'completed'                   => 'Zakończone',

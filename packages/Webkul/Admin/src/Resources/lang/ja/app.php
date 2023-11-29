@@ -1262,6 +1262,8 @@ return [
                 'orders'                      => '注文 (:order_count)',
                 'order-id'                    => '注文 ID',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'の',
+                'per-page'                    => 'ページごと',
                 'processing'                  => '処理中',
                 'pending'                     => '保留中',
                 'completed'                   => '完了',

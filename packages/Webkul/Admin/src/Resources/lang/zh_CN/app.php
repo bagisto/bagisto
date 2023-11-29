@@ -1261,6 +1261,8 @@ return [
                 'orders'                      => '订单 (:order_count)',
                 'order-id'                    => '订单ID',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => '的',
+                'per-page'                    => '每页',
                 'processing'                  => '处理中',
                 'pending'                     => '待处理',
                 'completed'                   => '已完成',
