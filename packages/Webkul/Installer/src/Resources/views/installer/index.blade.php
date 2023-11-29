@@ -27,7 +27,7 @@
 
         <link
             type="image/x-icon"
-            href="{{ asset('images/installer/bagisto-logo.svg') }}"
+            href="{{ bagisto_asset('images/installer/favicon.ico', 'installer') }}"
             rel="shortcut icon"
             sizes="16x16"
         />
@@ -800,8 +800,8 @@
                                     </x-installer::form.control-group.error>
                                 </x-installer::form.control-group>
 
-                                <div class="p-[6px] border border-amber-400 bg-amber-100">
-                                    <i class="icon-error text-black"></i>
+                                <div class="p-[6px]" :style="warning['container'], warning['message']">
+                                    <i class="icon-error text-black" :style="warning['icon']"></i>
 
                                     @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
@@ -870,29 +870,37 @@
 
                                         <!-- Allowed Locales -->
                                         @foreach ($locales as $key => $locale)
-                                            <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == app()->getLocale()) ? 0 : 1;
+                                                    $selectedOption = ($key == config('app.locale')) ? 1: 0;
                                                 @endphp
 
-                                                <x-admin::form.control-group.control
+                                                <x-installer::form.control-group.control
+                                                    type="hidden"
+                                                    name="{{ $key }}"
+                                                    :value="$selectedOption"
+                                                >
+                                                </x-installer::form.control-group.control>
+
+                                                <x-installer::form.control-group.control
                                                     type="checkbox"
                                                     name="{{ $key }}"
                                                     id="allowed_locale[{{ $key }}]"
                                                     for="allowed_locale[{{ $key }}]"
-                                                    :value="(boolean) $selectedOption"
-                                                    :disabled="(boolean) ! $selectedOption"
+                                                    value="1"
+                                                    :checked="(boolean) $selectedOption"
+                                                    :disabled="(boolean) $selectedOption"
                                                     @change="pushAllowedLocales"
                                                 >
-                                                </x-admin::form.control-group.control>
+                                                </x-installer::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
+                                                <x-installer::form.control-group.label
                                                     for="allowed_locale[{{ $key }}]"
                                                     class="!text-[14px] !font-semibold cursor-pointer"
                                                 >
                                                     @lang("installer::app.installer.index.$locale")
-                                                </x-admin::form.control-group.label>
-                                            </x-admin::form.control-group>
+                                                </x-installer::form.control-group.label>
+                                            </x-installer::form.control-group>
                                         @endforeach
                                     </x-installer::form.control-group>
 
@@ -903,29 +911,37 @@
     
                                         <!-- Allowed Currencies -->
                                         @foreach ($currencies as $key => $currency)
-                                            <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == 'USD') ? 0 : 1;
+                                                    $selectedOption = ($key == config('app.currency')) ? 1 : 0;
                                                 @endphp
 
-                                                <x-admin::form.control-group.control
+                                                <x-installer::form.control-group.control
+                                                    type="hidden"
+                                                    name="{{ $key }}"
+                                                    :value="$selectedOption"
+                                                >
+                                                </x-installer::form.control-group.control>
+
+                                                <x-installer::form.control-group.control
                                                     type="checkbox"
                                                     name="{{ $key }}"
                                                     id="currency[{{ $key }}]"
                                                     for="currency[{{ $key }}]"
-                                                    :value="(boolean) $selectedOption"
-                                                    :disabled="(boolean) ! $selectedOption"
+                                                    value="1"
+                                                    :checked="(boolean) $selectedOption"
+                                                    :disabled="(boolean) $selectedOption"
                                                     @change="pushAllowedCurrency"
                                                 >
-                                                </x-admin::form.control-group.control>
+                                                </x-installer::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
+                                                <x-installer::form.control-group.label
                                                     for="currency[{{ $key }}]"
                                                     class="!text-[14px] !font-semibold cursor-pointer"
                                                 >
                                                     @lang("installer::app.installer.index.environment-configuration.$currency")
-                                                </x-admin::form.control-group.label>
-                                            </x-admin::form.control-group>
+                                                </x-installer::form.control-group.label>
+                                            </x-installer::form.control-group>
                                         @endforeach
                                     </x-installer::form.control-group>
                                 </div>
@@ -1180,6 +1196,14 @@
                                 'createAdmin',
                                 'installationCompleted',
                             ],
+
+                            warning: {
+                                container: 'background: #FACC15',
+
+                                message: 'color: #1F2937',
+
+                                icon: 'color: #FACC15'
+                            },
                         }
                     },
 
@@ -1232,15 +1256,9 @@
                                     this.envData = { ...params };
 
                                     let data = {
-                                        parameter: {
-                                            default_locales: this.envData.app_locale,
-                                            allowed_locales: this.locales.allowed,
-                                            default_currency: this.envData.app_currency,
-                                            allowed_currencies: this.currencies.allowed,
-                                        },
+                                        allowed_locales: this.locales.allowed,
+                                        allowed_currencies: this.currencies.allowed,
                                     };
-
-                                    console.log(data);
 
                                     this.startSeeding(data, this.envData);
                                 },
