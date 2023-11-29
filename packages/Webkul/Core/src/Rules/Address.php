@@ -15,5 +15,5 @@ class Address implements ValidationRule
         if (! preg_match("/^[a-zA-Z0-9\s'\p{Arabic}\p{Bengali}\p{Hebrew}\p{Latin}\p{Sinhala}\p{Cyrillic}\p{Devanagari}p{Hiragana}\p{Katakana}\p{Han}\-,\(\)]{1,60}$/iu", $value)) {
             $fail('core::validation.address')->translate();
         }
-    }    
+    }
 }
