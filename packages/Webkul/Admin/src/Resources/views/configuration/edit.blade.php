@@ -107,14 +107,14 @@
         </div>
 
         @if ($groups)
-            <div class="grid grid-cols-[1fr_2fr] gap-[10px] mt-[25px] max-xl:flex-wrap">
+            <div class="grid grid-cols-[1fr_2fr] gap-[40px] mt-[25px] max-xl:flex-wrap">
                 @foreach ($groups as $key => $item)
-                    <div>
+                    <div class="grid gap-[10px] content-start">
                         <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                             @lang($item['name'])
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300 mt-[4px]">
+                        <p class="text-gray-600 dark:text-gray-300 leading-[140%]">
                             @lang($item['info'] ?? '')
                         </p>
                     </div>

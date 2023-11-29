@@ -3516,6 +3516,29 @@ return [
                 'add-image-btn'     => 'Adicionar Imagem',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Apenas arquivos de imagem (.jpeg, .jpg, .png, ..) são permitidos.',
+                'ai-add-image-btn'  => 'Magia IA',
+                'ai-btn-info'       => 'Gerar Imagem',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Aplicar',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Gerar',
+                    'generating'       => 'Gerando...',
+                    'hd'               => 'HD',
+                    'model'            => 'Modelo',
+                    'number-of-images' => 'Número de Imagens',
+                    'prompt'           => 'Prompt',
+                    'quality'          => 'Qualidade',
+                    'regenerate'       => 'Regenerar',
+                    'regenerating'     => 'Regenerando...',
+                    'size'             => 'Tamanho',
+                    'standard'         => 'Padrão',
+                    'title'            => 'Geração de Imagem com IA',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Frente',
@@ -3530,6 +3553,20 @@ return [
                 'add-video-btn'     => 'Adicionar Vídeo',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Apenas arquivos de vídeo (.mp4, .mov, .ogg ..) são permitidos.',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magia IA',
+
+            'ai-generation' => [
+                'title'                  => 'Assistência de IA',
+                'prompt'                 => 'Prompt',
+                'generating'             => 'Gerando...',
+                'generate'               => 'Gerar',
+                'generated-content'      => 'Conteúdo Gerado',
+                'generated-content-info' => 'O conteúdo de IA pode ser enganoso. Por favor, revise o conteúdo gerado antes de aplicá-lo.',
+                'apply'                  => 'Aplicar',
             ],
         ],
     ],
