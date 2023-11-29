@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'Категорії податків',
                 'tax-rates'                => 'Податкові ставки',
                 'transactions'             => 'Транзакції',
+                'themes'                   => 'Теми',
                 'url-rewrites'             => 'Переписування URL-адрес',
                 'users'                    => 'Користувачі',
             ],
@@ -3515,6 +3516,29 @@ return [
                 'add-image-btn'     => 'Додати зображення',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
+                'ai-add-image-btn'  => 'Магія ШІ',
+                'ai-btn-info'       => 'Створити Зображення',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Застосувати',
+                    'dall-e-2'         => 'Далл.Е 2',
+                    'dall-e-3'         => 'Далл.Е 3',
+                    'generate'         => 'Створити',
+                    'generating'       => 'Створюється...',
+                    'hd'               => 'HD',
+                    'model'            => 'Модель',
+                    'number-of-images' => 'Кількість Зображень',
+                    'prompt'           => 'Підказка',
+                    'quality'          => 'Якість',
+                    'regenerate'       => 'Перестворити',
+                    'regenerating'     => 'Перестворюється...',
+                    'size'             => 'Розмір',
+                    'standard'         => 'Стандарт',
+                    'title'            => 'Генерація Зображень з Використанням ШІ',
+                ],
 
                 'placeholders' => [
                     'front'     => 'Зверху',
@@ -3529,6 +3553,20 @@ return [
                 'add-video-btn'     => 'Додати відео',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Магія ШІ',
+
+            'ai-generation' => [
+                'title'                  => 'Підтримка ШІ',
+                'prompt'                 => 'Підказка',
+                'generating'             => 'Генерація...',
+                'generate'               => 'Генерувати',
+                'generated-content'      => 'Згенерований Вміст',
+                'generated-content-info' => 'Зміст ШІ може бути неправильним. Будь ласка, перегляньте згенерований зміст перед застосуванням.',
+                'apply'                  => 'Застосувати',
             ],
         ],
     ],

@@ -266,7 +266,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'Sie haben bisher kein Produkt bewertet',
                 'title'        => 'Bewertungen',
             ],
@@ -514,18 +514,20 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Anhänge',
+                'cancel'           => 'Abbrechen',
                 'comment'          => 'Kommentar',
                 'customer-review'  => 'Kundenbewertungen',
-                'cancel'           => 'Abbrechen',
                 'empty-review'     => 'Keine Bewertungen gefunden, sei der erste, der dieses Produkt bewertet',
                 'failed-to-upload' => 'Das Bild konnte nicht hochgeladen werden',
                 'load-more'        => 'Mehr laden',
-                'rating'           => 'Bewertung',
-                'success'          => 'Bewertung erfolgreich übermittelt.',
-                'submit-review'    => 'Bewertung absenden',
-                'title'            => 'Titel',
-                'write-a-review'   => 'Eine Bewertung schreiben',
                 'name'             => 'Name',
+                'rating'           => 'Bewertung',
+                'submit-review'    => 'Bewertung absenden',
+                'success'          => 'Bewertung erfolgreich übermittelt.',
+                'title'            => 'Titel',
+                'translate'        => 'Übersetzen',
+                'translating'      => 'Übersetzung läuft...',
+                'write-a-review'   => 'Eine Bewertung schreiben',
             ],
 
             'add-to-cart'            => 'In den Warenkorb legen',

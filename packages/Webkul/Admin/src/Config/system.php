@@ -25,6 +25,7 @@ return [
                 'name'          => 'weight_unit',
                 'title'         => 'admin::app.configuration.index.general.general.unit-options.weight-unit',
                 'type'          => 'select',
+                'default'       => 'kgs',
                 'options'       => [
                     [
                         'title' => 'lbs',
@@ -116,6 +117,112 @@ return [
                 'type'          => 'image',
                 'channel_based' => true,
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ],
+        ],
+    ], [
+        'key'  => 'general.magic_ai',
+        'name' => 'admin::app.configuration.index.general.magic-ai.title',
+        'info' => 'admin::app.configuration.index.general.magic-ai.info',
+        'icon' => 'settings/magic-ai.svg',
+        'sort' => 3,
+    ], [
+        'key'    => 'general.magic_ai.settings',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.settings.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.settings.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'          => 'api_key',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'type'          => 'password',
+                'channel_based' => true,
+            ], [
+                'name'          => 'organization',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.organization',
+                'type'          => 'text',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.content_generation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.content-generation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.content-generation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'  => 'enabled',
+                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
+                'type'  => 'boolean',
+            ], [
+                'name'         => 'product_short_description_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name'         => 'product_description_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.product-description-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name'         => 'category_description_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.category-description-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name'         => 'cms_page_content_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.image_generation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.image-generation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.image-generation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.review_translation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.checkout_message',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'          => 'prompt',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ],

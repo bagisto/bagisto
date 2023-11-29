@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => '税カテゴリ',
                 'tax-rates'                => '税率',
                 'transactions'             => '取引',
+                'themes'                   => 'テーマ',
                 'url-rewrites'             => 'URL書き換え',
                 'users'                    => 'ユーザー',
             ],
@@ -3515,6 +3516,29 @@ return [
                 'add-image-btn'     => '画像を追加',
                 'allowed-types'     => 'png、jpeg、jpg',
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
+                'ai-add-image-btn'  => 'マジックAI',
+                'ai-btn-info'       => '画像生成',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => '適用',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => '生成',
+                    'generating'       => '生成中...',
+                    'hd'               => 'HD',
+                    'model'            => 'モデル',
+                    'number-of-images' => '画像の数',
+                    'prompt'           => 'プロンプト',
+                    'quality'          => '品質',
+                    'regenerate'       => '再生成',
+                    'regenerating'     => '再生成中...',
+                    'size'             => 'サイズ',
+                    'standard'         => '標準',
+                    'title'            => 'AI画像生成',
+                ],
 
                 'placeholders'  => [
                     'front'     => '前面',
@@ -3529,6 +3553,20 @@ return [
                 'add-video-btn'     => 'ビデオを追加',
                 'allowed-types'     => 'mp4、webm、mkv',
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'マジックAI',
+
+            'ai-generation' => [
+                'title'                  => 'AIアシスタンス',
+                'prompt'                 => 'プロンプト',
+                'generating'             => '生成中...',
+                'generate'               => '生成',
+                'generated-content'      => '生成されたコンテンツ',
+                'generated-content-info' => 'AIコンテンツは誤解を招く可能性があります。適用する前に生成されたコンテンツを確認してください。',
+                'apply'                  => '適用',
             ],
         ],
     ],

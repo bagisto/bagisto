@@ -41,64 +41,61 @@
             </div>
 
             <!-- Right Container -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+            <div class="flex flex-col gap-[8px] w-[360px] max-w-full select-none">
                 <!-- General Pannel -->
-                <div class="bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
-                    <!-- Settings -->
-                    <x-admin::accordion>
-                        <!-- Panel Header -->
-                        <x-slot:header>
-                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
-                                @lang('admin::app.catalog.families.create.general')
-                            </p>
-                        </x-slot:header>
-                    
-                        <!-- Panel Content -->
-                        <x-slot:content>
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
-                                    @lang('admin::app.catalog.families.create.code')
-                                </x-admin::form.control-group.label>
+                <x-admin::accordion>
+                    <!-- Panel Header -->
+                    <x-slot:header>
+                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            @lang('admin::app.catalog.families.create.general')
+                        </p>
+                    </x-slot:header>
+                
+                    <!-- Panel Content -->
+                    <x-slot:content>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
+                                @lang('admin::app.catalog.families.create.code')
+                            </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="code"
-                                    value="{{ old('code') }}"
-                                    rules="required"
-                                    :label="trans('admin::app.catalog.families.create.code')"
-                                    :placeholder="trans('admin::app.catalog.families.create.enter-code')"
-                                >
-                                </x-admin::form.control-group.control>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="code"
+                                value="{{ old('code') }}"
+                                rules="required"
+                                :label="trans('admin::app.catalog.families.create.code')"
+                                :placeholder="trans('admin::app.catalog.families.create.enter-code')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="code"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                            <x-admin::form.control-group.error
+                                control-name="code"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
-                                    @lang('admin::app.catalog.families.create.name')
-                                </x-admin::form.control-group.label>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
+                                @lang('admin::app.catalog.families.create.name')
+                            </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="name"
-                                    value="{{ old('name') }}"
-                                    rules="required"
-                                    :label="trans('admin::app.catalog.families.create.name')"
-                                    :placeholder="trans('admin::app.catalog.families.create.enter-name')"
-                                >
-                                </x-admin::form.control-group.control>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                rules="required"
+                                :label="trans('admin::app.catalog.families.create.name')"
+                                :placeholder="trans('admin::app.catalog.families.create.enter-name')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                        </x-slot:content>
-                    </x-admin::accordion>
-                </div>
+                            <x-admin::form.control-group.error
+                                control-name="name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </x-slot:content>
+                </x-admin::accordion>
             </div>
         </div>
 

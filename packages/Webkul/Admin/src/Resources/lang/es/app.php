@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'Categorías de Impuestos',
                 'tax-rates'                => 'Tasas de Impuestos',
                 'transactions'             => 'Transacciones',
+                'themes'                   => 'Temas',
                 'url-rewrites'             => 'Reescrituras de URL',
                 'users'                    => 'Usuarios',
             ],
@@ -3515,6 +3516,29 @@ return [
                 'add-image-btn'     => 'Agregar Imagen',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
+                'ai-add-image-btn'  => 'Magia IA',
+                'ai-btn-info'       => 'Generar Imagen',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'Aplicar',
+                    'dall-e-2'         => 'Dall.E 2',
+                    'dall-e-3'         => 'Dall.E 3',
+                    'generate'         => 'Generar',
+                    'generating'       => 'Generando...',
+                    'hd'               => 'HD',
+                    'model'            => 'Modelo',
+                    'number-of-images' => 'Número de Imágenes',
+                    'prompt'           => 'Indicación',
+                    'quality'          => 'Calidad',
+                    'regenerate'       => 'Regenerar',
+                    'regenerating'     => 'Regenerando...',
+                    'size'             => 'Tamaño',
+                    'standard'         => 'Estándar',
+                    'title'            => 'Generación de Imágenes con IA',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'Frontal',
@@ -3529,6 +3553,20 @@ return [
                 'add-video-btn'     => 'Agregar Video',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Solo se permiten archivos de video (.mp4, .mov, .ogg ..).',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'Magia IA',
+
+            'ai-generation' => [
+                'title'                  => 'Asistencia de IA',
+                'prompt'                 => 'Indicación',
+                'generating'             => 'Generando...',
+                'generate'               => 'Generar',
+                'generated-content'      => 'Contenido Generado',
+                'generated-content-info' => 'El contenido de IA puede ser engañoso. Revise el contenido generado antes de aplicarlo.',
+                'apply'                  => 'Aplicar',
             ],
         ],
     ],

@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Bijlagen',
+                'cancel'           => 'Annuleren',
                 'comment'          => 'Opmerking',
                 'customer-review'  => 'Klantbeoordelingen',
-                'cancel'           => 'Annuleren',
                 'empty-review'     => 'Geen beoordeling gevonden, wees de eerste om dit product te beoordelen',
                 'failed-to-upload' => 'Het uploaden van de afbeelding is mislukt',
                 'load-more'        => 'Meer laden',
                 'name'             => 'Naam',
                 'rating'           => 'Beoordeling',
-                'success'          => 'Beoordeling succesvol ingediend.',
                 'submit-review'    => 'Beoordeling indienen',
+                'success'          => 'Beoordeling succesvol ingediend.',
                 'title'            => 'Titel',
+                'translate'        => 'Vertalen',
+                'translating'      => 'Vertalen...',
                 'write-a-review'   => 'Schrijf een beoordeling',
             ],
 

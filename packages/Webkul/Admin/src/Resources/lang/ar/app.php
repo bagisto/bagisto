@@ -3421,6 +3421,7 @@ return [
                 'tax-categories'           => 'فئات الضرائب',
                 'tax-rates'                => 'معدلات الضرائب',
                 'transactions'             => 'المعاملات',
+                'themes'                   => 'السمات',
                 'url-rewrites'             => 'إعادة كتابة عناوين URL',
                 'users'                    => 'المستخدمين',
             ],
@@ -3513,6 +3514,29 @@ return [
                 'add-image-btn'     => 'إضافة صورة',
                 'allowed-types'     => 'png، jpeg، jpg',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
+                'ai-add-image-btn'  => 'الذكاء الاصطناعي',
+                'ai-btn-info'       => 'إنشاء صورة',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'تطبيق',
+                    'dall-e-2'         => 'دال.إ 2',
+                    'dall-e-3'         => 'دال.إ 3',
+                    'generate'         => 'إنشاء',
+                    'generating'       => 'جاري الإنشاء...',
+                    'hd'               => 'عالي الجودة',
+                    'model'            => 'النموذج',
+                    'number-of-images' => 'عدد الصور',
+                    'prompt'           => 'محفز',
+                    'quality'          => 'الجودة',
+                    'regenerate'       => 'إعادة إنشاء',
+                    'regenerating'     => 'جاري إعادة الإنشاء...',
+                    'size'             => 'الحجم',
+                    'standard'         => 'قياسي',
+                    'title'            => 'إنشاء صورة بالذكاء الاصطناعي',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'الواجهة الأمامية',
@@ -3527,6 +3551,20 @@ return [
                 'add-video-btn'     => 'إضافة فيديو',
                 'allowed-types'     => 'mp4، webm، mkv',
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'سحر الذكاء الاصطناعي',
+
+            'ai-generation' => [
+                'title'                  => 'مساعدة الذكاء الاصطناعي',
+                'prompt'                 => 'مبادرة',
+                'generating'             => 'جاري الإنشاء...',
+                'generate'               => 'إنشاء',
+                'generated-content'      => 'المحتوى المُنشأ',
+                'generated-content-info' => 'قد يكون محتوى الذكاء الاصطناعي مُضلّلًا. يُرجى مراجعة المحتوى المُنشأ قبل تطبيقه.',
+                'apply'                  => 'تطبيق',
             ],
         ],
     ],

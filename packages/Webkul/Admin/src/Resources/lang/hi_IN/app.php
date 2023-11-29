@@ -3423,6 +3423,7 @@ return [
                 'tax-categories'           => 'कर श्रेणियाँ',
                 'tax-rates'                => 'कर दरें',
                 'transactions'             => 'लेन-देन',
+                'themes'                   => 'थीम्स',
                 'url-rewrites'             => 'URL पुनर्लेखन',
                 'users'                    => 'उपयोगकर्ता',
             ],
@@ -3515,6 +3516,29 @@ return [
                 'add-image-btn'     => 'छवि जोड़ें',
                 'allowed-types'     => 'png, jpeg, jpg',
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
+                'ai-add-image-btn'  => 'मैजिक ए.आई.',
+                'ai-btn-info'       => 'इमेज उत्पन्न करें',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'लागू करें',
+                    'dall-e-2'         => 'डाल.ई 2',
+                    'dall-e-3'         => 'डाल.ई 3',
+                    'generate'         => 'उत्पन्न करें',
+                    'generating'       => 'उत्पन्न हो रहा है...',
+                    'hd'               => 'एचडी',
+                    'model'            => 'मॉडल',
+                    'number-of-images' => 'छवियों की संख्या',
+                    'prompt'           => 'प्रम्पट',
+                    'quality'          => 'गुणवत्ता',
+                    'regenerate'       => 'पुनर्जन्म',
+                    'regenerating'     => 'पुनर्जन्म हो रहा है...',
+                    'size'             => 'आकार',
+                    'standard'         => 'मानक',
+                    'title'            => 'ए.आई. इमेज उत्पन्न',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'सामना',
@@ -3529,6 +3553,20 @@ return [
                 'add-video-btn'     => 'वीडियो जोड़ें',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'मैजिक ए.आई.',
+
+            'ai-generation' => [
+                'title'                  => 'ए.आई. सहायता',
+                'prompt'                 => 'पूर्वाभास',
+                'generating'             => 'निर्मित हो रहा है...',
+                'generate'               => 'उत्पन्न करें',
+                'generated-content'      => 'उत्पन्न किया गया सामग्री',
+                'generated-content-info' => 'ए.आई. सामग्री भ्रांतिपूर्ण हो सकती है। कृपया इसे लागू करने से पहले उत्पन्न किए गए सामग्री की समीक्षा करें।',
+                'apply'                  => 'लागू करें',
             ],
         ],
     ],
