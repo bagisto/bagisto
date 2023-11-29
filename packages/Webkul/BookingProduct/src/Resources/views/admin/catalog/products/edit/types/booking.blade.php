@@ -369,7 +369,7 @@
                                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.type.title')"
                                 :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.type.title')"
                                 v-model="bookingSubType"
-                                @change="bookingSwatchType=true"
+                                @change="bookingSwatchType=true,slots=[]"
                             >
                                 @foreach (['many', 'one'] as $item)
                                     <option value="{{ $item }}">
@@ -753,7 +753,7 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div v-if="booking_type != 'event' || booking_type != 'rental'">
+                        <div v-if="booking_type != 'event' && booking_type != 'rental'">
                             <div v-if="sameSlotSwatch && same_slot == 1">
                                 <!-- Heading -->
                                 <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -765,6 +765,13 @@
                                 </div>
 
                                 @php $count = 0; @endphp
+
+                                <x-booking::form.control-group.control
+                                    type="hidden"
+                                    name="type"
+                                    :value="'slot_with_status'"
+                                >
+                                </x-booking::form.control-group.control>
 
                                 <!-- Content -->
                                 @foreach ($weeks as $item)
@@ -862,6 +869,13 @@
 
                                 @php $count = 0; @endphp
 
+                                <x-booking::form.control-group.control
+                                    type="hidden"
+                                    name="type"
+                                    :value="'slot_with_time'"
+                                >
+                                </x-booking::form.control-group.control>
+
                                 <!-- Content -->
                                 @foreach ($weeks as $item)
                                     <div class="flex gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
@@ -875,34 +889,34 @@
                                             <x-admin::form.control-group.label class="hidden">
                                                 @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                             </x-admin::form.control-group.label>
-        
-                                            <x-admin::form.control-group.control
-                                                type="text"
+
+                                            <x-booking::form.control-group.control
+                                                type="time"
                                                 name="booking[slots][{{ $count }}][from]"
                                                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                                 :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                             >
-                                            </x-admin::form.control-group.control>
+                                            </x-booking::form.control-group.control>
         
-                                            <x-admin::form.control-group.error
+                                            <x-booking::form.control-group.error
                                                 control-name="booking[slots][{{ $count }}][from]"
                                             >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::from.control-group>
+                                            </x-booking::form.control-group.error>
+                                        </x-booking::from.control-group>
         
                                         <!-- To -->
-                                        <x-admin::form.control-group class="w-full">
-                                            <x-admin::form.control-group.label class="hidden">
+                                        <x-booking::form.control-group class="w-full">
+                                            <x-booking::form.control-group.label class="hidden">
                                                 @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
-                                            </x-admin::form.control-group.label>
+                                            </x-booking::form.control-group.label>
         
-                                            <x-admin::form.control-group.control
-                                                type="text"
+                                            <x-booking::form.control-group.control
+                                                type="time"
                                                 name="booking[slots][{{ $count }}][to]"
                                                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                                 :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                             >
-                                            </x-admin::form.control-group.control>
+                                            </x-booking::form.control-group.control>
         
                                             <x-admin::form.control-group.error
                                                 control-name="booking[slots][{{ $count }}][to]"
@@ -955,6 +969,13 @@
                                         </x-admin::form.control-group.label>
     
                                         <x-admin::form.control-group.control
+                                            type="hidden"
+                                            name="type"
+                                            ::value="booking_type == 'default' ? 'slot_time' : 'time'"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.control
                                             type="select"
                                             name="from_day"
                                             :value="'sunday'"
@@ -982,8 +1003,8 @@
                                             type="time"
                                             name="from_time"
                                             rules="required"
-                                            :label="trans('Time')"
-                                            :placeholder="trans('Time')"
+                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.time')"
+                                            :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.time')"
                                         >
                                         </x-booking::form.control-group.control>
     
@@ -1025,11 +1046,11 @@
     
                                     <x-booking::form.control-group class="w-full mb-[10px]">
                                         <x-booking::form.control-group.label>
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.time')
                                         </x-booking::form.control-group.label>
     
                                         <x-booking::form.control-group.control
-                                            type="text"
+                                            type="time"
                                             name="to_time"
                                             rules="required"
                                             :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
@@ -1053,6 +1074,13 @@
                                     <x-admin::form.control-group.label>
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.name')
                                     </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="type"
+                                        :value="'tickets'"
+                                    >
+                                    </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.control
                                         type="text"
@@ -1096,7 +1124,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="booking[tickets][ticket_0][en][booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty]"
+                                        name="booking[tickets][ticket_0][en][quantity]"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty')"
                                         :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty')"
                                     >
@@ -1168,7 +1196,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::from.control-group>
 
-                                <!-- Valid Until -->
+                                <!-- Description -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.description')
@@ -1262,19 +1290,27 @@
 
             methods: {
                 storeSlots(params, { resetForm }) {
-                    this.slots.push({
-                        id: this.slotRowCount,
-                        from_day: params?.from_day,
-                        from_time: params.from_time,
-                        to_day: params?.to_day,
-                        to_time: params.to_time,
-                    });
+                console.log();
+                if (params.type == 'tickets') {
+                    console.log(params);
+                } else if (params.type == 'slot_time') {
+                    console.log(params);
+                } else {
+                    console.log(params);
+                }
+                    // this.slots.push({
+                    //     id: this.slotRowCount,
+                    //     from_day: params?.from_day,
+                    //     from_time: params.from_time,
+                    //     to_day: params?.to_day,
+                    //     to_time: params.to_time,
+                    // });
                     
-                    this.slotRowCount++
+                    // this.slotRowCount++
 
-                    this.$refs.addOptionsRow.toggle();
+                    // this.$refs.addOptionsRow.toggle();
 
-                    resetForm();
+                    // resetForm();
                 }
             },
         });

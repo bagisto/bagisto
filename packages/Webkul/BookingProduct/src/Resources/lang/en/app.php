@@ -95,8 +95,9 @@ return [
                                     'saturday'  => 'Saturday',
                                     'save'      => 'Save Slot',
                                     'tuesday'   => 'Tuesday',
+                                    'time'      => 'Time',
                                     'to'        => 'To',
-                                    'title'     => 'Add Slot',
+                                    'title'     => 'Add Slots',
                                     'thursday'  => 'Thursday',
                                     'wednesday' => 'Wednesday',
                                 ],
@@ -108,7 +109,7 @@ return [
                                     'qty'           => 'Quantity',
                                     'special-price' => 'Special Price',
                                     'save'          => 'Save Tickets',
-                                    'title'         => 'Add Ticket',
+                                    'title'         => 'Add Tickets',
                                     'valid-from'    => 'Valid From',
                                     'valid-until'   => 'Valid Until',
                                 ],
@@ -161,6 +162,16 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+
+        'sales' => [
+            'bookings' => [
+                'index' => [
+                    'title' => 'Bookings Product',
+                ],
+
+                'title' => 'Bookings Product',
             ],
         ],
     ],
