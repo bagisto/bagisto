@@ -525,10 +525,10 @@ return [
                 'submit-review'     => 'Yorumu Gönder',
                 'success'           => 'Yorum başarıyla gönderildi.',
                 'title'             => 'Başlık',
-                'translate'        => 'Çevir',
-                'translating'      => 'Çevriliyor...',
+                'translate'         => 'Çevir',
+                'translating'       => 'Çevriliyor...',
                 'write-a-review'    => 'Yorum Yazın',
-            
+
             ],
 
             'add-to-cart'            => 'Sepete Ekle',

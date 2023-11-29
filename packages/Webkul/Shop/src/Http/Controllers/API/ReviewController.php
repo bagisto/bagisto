@@ -2,13 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
+use OpenAI\Laravel\Facades\OpenAI;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
-use OpenAI\Laravel\Facades\OpenAI;
 
 class ReviewController extends APIController
 {
