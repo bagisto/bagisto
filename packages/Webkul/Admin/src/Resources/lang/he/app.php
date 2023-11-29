@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'הזמנות (:order_count)',
                 'order-id'                    => 'מזהה הזמנה',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'של',
+                'per-page'                    => 'לעמוד',
                 'processing'                  => 'מעבד',
                 'pending'                     => 'ממתין',
                 'completed'                   => 'הושלם',

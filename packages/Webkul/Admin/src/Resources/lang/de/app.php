@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'Bestellungen (:order_count)',
                 'order-id'                    => 'Bestell-ID',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'von',
+                'per-page'                    => 'pro Seite',
                 'processing'                  => 'In Bearbeitung',
                 'pending'                     => 'Ausstehend',
                 'completed'                   => 'Abgeschlossen',

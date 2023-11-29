@@ -947,17 +947,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
-                                <div
-                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
-                                    role="button"
-                                    aria-label="@lang('installer::app.installer.index.back')"
-                                    tabindex="0"
-                                    @click="back"
-                                >
-                                    @lang('installer::app.installer.index.back')
-                                </div>
-
+                            <div class="flex px-[16px] py-[10px] justify-end items-center">
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"

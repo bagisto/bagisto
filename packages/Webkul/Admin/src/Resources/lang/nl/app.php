@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'Bestellingen (:order_count)',
                 'order-id'                    => 'Bestel-ID',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'van',
+                'per-page'                    => 'per pagina',
                 'processing'                  => 'Verwerking',
                 'pending'                     => 'In Afwachting',
                 'completed'                   => 'Voltooid',

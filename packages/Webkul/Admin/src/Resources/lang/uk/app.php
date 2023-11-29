@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'Замовлення (:order_count)',
                 'order-id'                    => 'ID замовлення',
                 'order-id-prefix'             => ' :order_id',
+                'of'                          => 'з',
+                'per-page'                    => 'на сторінку',
                 'processing'                  => 'В обробці',
                 'pending'                     => 'На очікуванні',
                 'completed'                   => 'Завершено',

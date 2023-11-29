@@ -36,8 +36,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
             Route::post('mass-update', 'massUpdate')->name('admin.customers.customers.mass_update');
 
             Route::post('/{id}', 'destroy')->name('admin.customers.customers.delete');
-
-            Route::get('{id}/orders', 'orders')->name('admin.customers.customers.orders.data');
         });
 
         /**

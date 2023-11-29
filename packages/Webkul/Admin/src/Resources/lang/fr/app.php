@@ -1263,6 +1263,8 @@ return [
                 'orders'                      => 'Commandes (:order_count)',
                 'order-id'                    => 'ID de la commande',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'de',
+                'per-page'                    => 'par page',
                 'processing'                  => 'En cours de traitement',
                 'pending'                     => 'En attente',
                 'completed'                   => 'Terminée',
