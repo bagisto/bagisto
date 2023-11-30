@@ -620,21 +620,25 @@
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">
-                                <input 
-                                    type="date"
-                                    :name="['conditions[' + index + '][value]']"
-                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
-                                    v-model="condition.value"
-                                />
+                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                    <input 
+                                        type="date"
+                                        :name="['conditions[' + index + '][value]']"
+                                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        v-model="condition.value"
+                                    />
+                                </x-admin::flat-picker.date>
                             </div>
-
+gi
                             <div v-if="matchedAttribute.type == 'datetime'">
-                                <input 
-                                    type="datetime"
-                                    :name="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
-                                    v-model="condition.value"
-                                />
+                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                    <input 
+                                        type="datetime"
+                                        :name="['conditions[' + index + '][value]']"
+                                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        v-model="condition.value"
+                                    />
+                                </x-admin::flat-picker.date>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'boolean'">
