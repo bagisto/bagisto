@@ -153,11 +153,14 @@
             methods: {
                 init() {
                     let self = this;
+                    let self2 = undefined;
 
                     // TODO (@devansh-webkul): Need to refactor this full method.
                     let tinyMCEHelper = {
                         initTinyMCE: function(extraConfiguration) {
-                            let config = {
+                            self2 = this;
+
+                            let config = {  
                                 relative_urls: false,
                                 menubar: false,
                                 remove_script_host: false,
@@ -169,16 +172,18 @@
                                 content_css: self.currentContentCSS,
                             };
 
+                            const image_upload_handler = (blobInfo, progress) => new Promise((resolve, reject) => {
+                                self2.uploadImageHandler(config, blobInfo, resolve, reject, progress);
+                            });
+
                             tinymce.init({
                                 ...config,
 
                                 file_picker_callback: function(cb, value, meta) {
-                                    self.filePickerCallback(config, cb, value, meta);
+                                    self2.filePickerCallback(config, cb, value, meta);
                                 },
 
-                                images_upload_handler: function(blobInfo, success, failure, progress) {
-                                    self.uploadImageHandler(config, blobInfo, success, failure, progress);
-                                },
+                                images_upload_handler: image_upload_handler,
                             });
                         },
 
@@ -194,7 +199,7 @@
                                 reader.readAsDataURL(file);
                                 reader.onload = function() {
                                     let id = 'blobid' + new Date().getTime();
-                                    let blobCache = tinymce.get().editorUpload.blobCache;
+                                    let blobCache = tinymce.get().editorUpload?.blobCache;
                                     let base64 = reader.result.split(',')[1];
                                     let blobInfo = blobCache.create(id, file, base64);
                                     blobCache.add(blobInfo);
@@ -203,10 +208,11 @@
                                     });
                                 };
                             };
+
                             input.click();
                         },
 
-                        uploadImageHandler: function(config, blobInfo, success, failure, progress) {
+                        uploadImageHandler: function(config, blobInfo, resolve, reject, progress) {
                             let xhr, formData;
 
                             xhr = new XMLHttpRequest();
@@ -215,38 +221,37 @@
 
                             xhr.open('POST', config.uploadRoute);
 
-                            xhr.upload.onprogress = function(e) {
-                                progress((e.loaded / e.total) * 100);
-                            };
+                            xhr.upload.onprogress = ((e) => progress((e.loaded / e.total) * 100));
 
                             xhr.onload = function() {
                                 let json;
 
                                 if (xhr.status === 403) {
-                                    failure("@lang('admin::app.error.tinymce.http-error')", {
+                                    reject("@lang('admin::app.error.tinymce.http-error')", {
                                         remove: true
                                     });
+
                                     return;
                                 }
 
                                 if (xhr.status < 200 || xhr.status >= 300) {
-                                    failure("@lang('admin::app.error.tinymce.http-error')");
+                                    reject("@lang('admin::app.error.tinymce.http-error')");
+
                                     return;
                                 }
 
                                 json = JSON.parse(xhr.responseText);
 
-                                if (!json || typeof json.location != 'string') {
-                                    failure("@lang('admin::app.error.tinymce.invalid-json')" + xhr.responseText);
+                                if (! json || typeof json.location != 'string') {
+                                    reject("@lang('admin::app.error.tinymce.invalid-json')" + xhr.responseText);
+
                                     return;
                                 }
 
-                                success(json.location);
+                                resolve(json.location);
                             };
 
-                            xhr.onerror = function() {
-                                failure("@lang('admin::app.error.tinymce.upload-failed')");
-                            };
+                            xhr.onerror = (()=>reject("@lang('admin::app.error.tinymce.upload-failed')"));
 
                             formData = new FormData();
                             formData.append('_token', config.csrfToken);
