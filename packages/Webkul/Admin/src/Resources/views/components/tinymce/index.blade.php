@@ -153,12 +153,10 @@
             methods: {
                 init() {
                     let self = this;
-                    let self2 = undefined;
 
-                    // TODO (@devansh-webkul): Need to refactor this full method.
                     let tinyMCEHelper = {
                         initTinyMCE: function(extraConfiguration) {
-                            self2 = this;
+                            let self2 = this;
 
                             let config = {  
                                 relative_urls: false,
