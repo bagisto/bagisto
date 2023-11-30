@@ -432,14 +432,18 @@
                 },
 
                 remove(service_details) {
-                    this.deletedServices.push(service_details);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.deletedServices.push(service_details);
                     
-                    this.servicesContent.services = this.servicesContent.services.filter(item => {
-                        return (
-                            item.title !== service_details.title || 
-                            item.description !== service_details.description || 
-                            item.service_icon !== service_details.service_icon
-                        );
+                            this.servicesContent.services = this.servicesContent.services.filter(item => {
+                                return (
+                                    item.title !== service_details.title || 
+                                    item.description !== service_details.description || 
+                                    item.service_icon !== service_details.service_icon
+                                );
+                            });
+                        }
                     });
                 },
 
