@@ -442,11 +442,15 @@
                 },
 
                 remove(footerLink, key) {
-                    this.footerLinks[footerLink.column].splice(key, 1);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.footerLinks[footerLink.column].splice(key, 1);
 
-                    if (this.isFooterLinksEmpty) {
-                        this.isShowIllustrator = true;
-                    }
+                            if (this.isFooterLinksEmpty) {
+                                this.isShowIllustrator = true;
+                            }
+                        }
+                    });
                 },
 
                 edit(footerLink, key) {
