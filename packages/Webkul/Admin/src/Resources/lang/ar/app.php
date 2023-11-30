@@ -534,30 +534,31 @@ return [
                 ],
 
                 'datagrid'   => [
-                    'attribute-family'       => 'عائلة السمة',
-                    'attribute-family-value' => 'عائلة السمة - :attribute_family',
-                    'active'                 => 'نشط',
-                    'category'               => 'الفئة',
-                    'copy-of'                => 'نسخة من :value',
-                    'copy-of-slug'           => 'نسخة-من-:value',
-                    'disable'                => 'تعطيل',
-                    'delete'                 => 'حذف',
-                    'image'                  => 'صورة',
-                    'id'                     => 'المعرف',
-                    'id-value'               => 'المعرف - :id',
-                    'mass-update-success'    => 'تم تحديث المنتجات المحددة بنجاح',
-                    'mass-delete-success'    => 'تم حذف المنتجات المحددة بنجاح',
-                    'name'                   => 'الاسم',
-                    'out-of-stock'           => 'نفدت الكمية',
-                    'price'                  => 'السعر',
-                    'product-image'          => 'صورة المنتج',
-                    'qty'                    => 'الكمية',
-                    'qty-value'              => ':qty متوفرة',
-                    'sku-value'              => 'SKU - :sku',
-                    'sku'                    => 'SKU',
-                    'status'                 => 'الحالة',
-                    'type'                   => 'النوع',
-                    'update-status'          => 'تحديث الحالة',
+                    'attribute-family'              => 'عائلة السمة',
+                    'attribute-family-value'        => 'عائلة السمة - :attribute_family',
+                    'active'                        => 'نشط',
+                    'category'                      => 'الفئة',
+                    'copy-of'                       => 'نسخة من :value',
+                    'copy-of-slug'                  => 'نسخة-من-:value',
+                    'disable'                       => 'تعطيل',
+                    'delete'                        => 'حذف',
+                    'image'                         => 'صورة',
+                    'id'                            => 'المعرف',
+                    'id-value'                      => 'المعرف - :id',
+                    'mass-update-success'           => 'تم تحديث المنتجات المحددة بنجاح',
+                    'mass-delete-success'           => 'تم حذف المنتجات المحددة بنجاح',
+                    'name'                          => 'الاسم',
+                    'out-of-stock'                  => 'نفدت الكمية',
+                    'price'                         => 'السعر',
+                    'product-image'                 => 'صورة المنتج',
+                    'qty'                           => 'الكمية',
+                    'qty-value'                     => ':qty متوفرة',
+                    'sku-value'                     => 'SKU - :sku',
+                    'sku'                           => 'SKU',
+                    'status'                        => 'الحالة',
+                    'type'                          => 'النوع',
+                    'update-status'                 => 'تحديث الحالة',
+                    'variant-already-exist-message' => 'المتغير بنفس خيارات السمات موجود بالفعل.',
                 ],
             ],
 
@@ -571,7 +572,8 @@ return [
                         'add-group-price'           => 'إضافة سعر المجموعة',
                         'all-groups'                => 'جميع المجموعات',
                         'create-btn'                => 'إضافة جديدة',
-                        'discount-group-price-info' => 'لـ :qty كمية بخصم قدره :price',                        'edit-btn'                  => 'تعديل',
+                        'discount-group-price-info' => 'لـ :qty كمية بخصم قدره :price',
+                        'edit-btn'                  => 'تعديل',
                         'empty-info'                => 'تسعير خاص للعملاء الذين ينتمون إلى مجموعة معينة.',
                         'fixed-group-price-info'    => 'لـ :qty كمية بسعر ثابت قدره :price',
                         'title'                     => 'أسعار مجموعة العملاء',
@@ -1261,6 +1263,8 @@ return [
                 'orders'                      => 'الطلبات (:order_count)',
                 'order-id'                    => 'رقم الطلب',
                 'order-id-prefix'             => '# :order_id',
+                'of'                          => 'من',
+                'per-page'                    => 'لكل صفحة',
                 'processing'                  => 'قيد التنفيذ',
                 'pending'                     => 'معلق',
                 'completed'                   => 'مكتمل',
@@ -2870,7 +2874,6 @@ return [
                 'uses'                             => 'استخدامات',
                 'view-details'                     => 'عرض التفاصيل',
                 'visits'                           => 'الزيارات',
-                'visits'                           => 'زيارات',
             ],
         ],
 
@@ -2893,6 +2896,7 @@ return [
 
     'configuration' => [
         'index' => [
+            'back-btn'                     => 'العودة',
             'delete'                       => 'حذف',
             'enable-at-least-one-shipping' => 'تمكين طريقة شحن واحدة على الأقل.',
             'enable-at-least-one-payment'  => 'تمكين طريقة دفع واحدة على الأقل.',
@@ -2945,6 +2949,48 @@ return [
                         'logo-image' => 'صورة الشعار',
                         'title'      => 'شعار المشرف',
                         'title-info' => 'شعار المشرف هو الصورة أو الشعار المميز الذي يمثل واجهة الإدارة لنظام أو موقع ويب، وعادةً قابل للتخصيص.',
+                    ],
+                ],
+
+                'magic-ai' => [
+                    'info'  => 'تعيين خيارات Magic AI.',
+                    'title' => 'Magic AI',
+
+                    'settings' => [
+                        'title'        => 'الإعدادات العامة',
+                        'title-info'   => 'قم بتحسين تجربتك مع ميزة Magic AI عن طريق إدخال مفتاح API الحصري الخاص بك وتحديد المنظمة ذات الصلة للدمج بسهولة. استول على التحكم في بيانات اعتماد OpenAI الخاصة بك وقم بتخصيص الإعدادات وفقًا لاحتياجاتك الخاصة.',
+                        'enabled'      => 'تمكين',
+                        'api-key'      => 'مفتاح API',
+                        'organization' => 'المنظمة',
+                    ],
+
+                    'content-generation' => [
+                        'title'                            => 'إنشاء المحتوى',
+                        'title-info'                       => 'ستمكن هذه الميزة Magic AI لكل محرر WYSIWYG ، حيث ترغب في إدارة المحتوى باستخدام الذكاء الاصطناعي. <br/> <br/> عند التمكين ، انتقل إلى أي محرر لإنشاء المحتوى.',
+                        'enabled'                          => 'تمكين',
+                        'product-short-description-prompt' => 'تعليمة وصف المنتج المختصرة',
+                        'product-description-prompt'       => 'تعليمة وصف المنتج',
+                        'category-description-prompt'      => 'تعليمة وصف الفئة',
+                        'cms-page-content-prompt'          => 'تعليمة محتوى صفحة CMS',
+                    ],
+
+                    'image-generation' => [
+                        'title'      => 'إنشاء الصورة',
+                        'title-info' => 'ستمكن هذه الميزة Magic AI لكل تحميل صورة ، حيث ترغب في إنشاء صور باستخدام DALL-E. <br/> <br/> عند التمكين ، انتقل إلى أي تحميل صورة لإنشاء صورة.',
+                        'enabled'    => 'تمكين',
+                    ],
+
+                    'review-translation' => [
+                        'title'      => 'ترجمة المراجعة',
+                        'title-info' => 'توفير خيار للعميل أو الزائر لترجمة مراجعة العميل إلى الإنجليزية. <br/> <br/> عند التمكين ، انتقل إلى المراجعة وستجد زر "ترجمة إلى الإنجليزية" إذا كنت تراجع بلغة أخرى غير الإنجليزية.',
+                        'enabled'    => 'تمكين',
+                    ],
+
+                    'checkout-message' => [
+                        'title'      => 'رسالة الدفع الشخصية',
+                        'title-info' => 'صياغة رسالة دفع شخصية للعملاء على صفحة الشكر ، مع تكييف المحتوى لي resonaten مع تفضيلات الأفراد وتعزيز تجربة الشراء العامة.',
+                        'enabled'    => 'تمكين',
+                        'prompt'     => 'تعليمة',
                     ],
                 ],
             ],
@@ -3129,6 +3175,7 @@ return [
                 'settings' => [
                     'title'          => 'الإعدادات',
                     'settings-info'  => 'تعيين اشتراكات النشرة الإخبارية، التحقق من البريد الإلكتروني، وتسجيل الدخول الاجتماعي.',
+
                     'newsletter'     => [
                         'subscription' => 'السماح بالاشتراك في النشرة الإخبارية',
                         'title'        => 'اشتراك في النشرة الإخبارية',
@@ -3514,6 +3561,29 @@ return [
                 'add-image-btn'     => 'إضافة صورة',
                 'allowed-types'     => 'png، jpeg، jpg',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
+                'ai-add-image-btn'  => 'الذكاء الاصطناعي',
+                'ai-btn-info'       => 'إنشاء صورة',
+
+                'ai-generation' => [
+                    '1024x1024'        => '1024x1024',
+                    '1024x1792'        => '1024x1792',
+                    '1792x1024'        => '1792x1024',
+                    'apply'            => 'تطبيق',
+                    'dall-e-2'         => 'دال.إ 2',
+                    'dall-e-3'         => 'دال.إ 3',
+                    'generate'         => 'إنشاء',
+                    'generating'       => 'جاري الإنشاء...',
+                    'hd'               => 'عالي الجودة',
+                    'model'            => 'النموذج',
+                    'number-of-images' => 'عدد الصور',
+                    'prompt'           => 'محفز',
+                    'quality'          => 'الجودة',
+                    'regenerate'       => 'إعادة إنشاء',
+                    'regenerating'     => 'جاري إعادة الإنشاء...',
+                    'size'             => 'الحجم',
+                    'standard'         => 'قياسي',
+                    'title'            => 'إنشاء صورة بالذكاء الاصطناعي',
+                ],
 
                 'placeholders'  => [
                     'front'     => 'الواجهة الأمامية',
@@ -3528,6 +3598,20 @@ return [
                 'add-video-btn'     => 'إضافة فيديو',
                 'allowed-types'     => 'mp4، webm، mkv',
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
+            ],
+        ],
+
+        'tinymce' => [
+            'ai-btn-tile' => 'سحر الذكاء الاصطناعي',
+
+            'ai-generation' => [
+                'title'                  => 'مساعدة الذكاء الاصطناعي',
+                'prompt'                 => 'مبادرة',
+                'generating'             => 'جاري الإنشاء...',
+                'generate'               => 'إنشاء',
+                'generated-content'      => 'المحتوى المُنشأ',
+                'generated-content-info' => 'قد يكون محتوى الذكاء الاصطناعي مُضلّلًا. يُرجى مراجعة المحتوى المُنشأ قبل تطبيقه.',
+                'apply'                  => 'تطبيق',
             ],
         ],
     ],

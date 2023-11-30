@@ -266,7 +266,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'Todavía no has revisado ningún producto',
                 'title'        => 'Opiniones',
             ],
@@ -501,19 +501,21 @@ return [
             ],
 
             'reviews' => [
-                'attachments'            => 'Adjuntos',
-                'comment'                => 'Comentario',
-                'customer-review'        => 'Opiniones de clientes',
-                'cancel'                 => 'Cancelar',
-                'empty-review'           => 'No se encontraron reseñas, sé el primero en calificar este producto.',
-                'failed-to-upload'       => 'La imagen no se pudo cargar',
-                'load-more'              => 'Cargar más',
-                'rating'                 => 'Calificación',
-                'success'                => 'Revisión enviada con éxito.',
-                'submit-review'          => 'Enviar reseña',
-                'title'                  => 'Título',
-                'write-a-review'         => 'Escribir una reseña',
-                'name'                   => 'Nombre',
+                'attachments'      => 'Adjuntos',
+                'cancel'           => 'Cancelar',
+                'comment'          => 'Comentario',
+                'customer-review'  => 'Opiniones de clientes',
+                'empty-review'     => 'No se encontraron reseñas, sé el primero en calificar este producto.',
+                'failed-to-upload' => 'La imagen no se pudo cargar',
+                'load-more'        => 'Cargar más',
+                'name'             => 'Nombre',
+                'rating'           => 'Calificación',
+                'submit-review'    => 'Enviar reseña',
+                'success'          => 'Revisión enviada con éxito.',
+                'title'            => 'Título',
+                'translate'        => 'Traducir',
+                'translating'      => 'Traduciendo...',
+                'write-a-review'   => 'Escribir una reseña',
             ],
 
             'add-to-cart'            => 'Agregar al carrito',
