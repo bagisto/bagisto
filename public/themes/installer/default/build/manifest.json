@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-e05ecd10.css",
+    "file": "assets/app-0e4a875f.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -11,6 +11,10 @@
   "src/Resources/assets/images/installer/bagisto-logo.svg": {
     "file": "assets/bagisto-logo-f02a1643.svg",
     "src": "src/Resources/assets/images/installer/bagisto-logo.svg"
+  },
+  "src/Resources/assets/images/installer/favicon.ico": {
+    "file": "assets/favicon-a4003609.ico",
+    "src": "src/Resources/assets/images/installer/favicon.ico"
   },
   "src/Resources/assets/images/installer/spinner.svg": {
     "file": "assets/spinner-51c5cf50.svg",
