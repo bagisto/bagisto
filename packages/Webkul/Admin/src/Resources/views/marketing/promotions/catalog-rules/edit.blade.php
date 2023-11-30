@@ -635,7 +635,7 @@
                                 <input 
                                     type="date"
                                     :name="['conditions[' + index + '][value]']"
-                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] dark:bg-gray-900 dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
@@ -644,7 +644,7 @@
                                 <input 
                                     type="datetime"
                                     :name="['conditions[' + index + '][value]']"
-                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] dark:bg-gray-900 dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
