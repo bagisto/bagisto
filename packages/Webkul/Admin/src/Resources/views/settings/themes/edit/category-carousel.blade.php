@@ -402,9 +402,13 @@
                 },
 
                 remove(filter) {
-                    let index = this.options.filters.indexOf(filter);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            let index = this.options.filters.indexOf(filter);
 
-                    this.options.filters.splice(index, 1);
+                            this.options.filters.splice(index, 1);
+                        }
+                    });
                 },
             },
         });
