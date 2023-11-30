@@ -142,7 +142,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex  items-center gap-x-[20px]">
+            <div class="flex items-center gap-x-[20px]">
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
@@ -280,12 +280,9 @@
                 required
             >
 
-            <button
-                type="button"
-                class="icon-camera flex items-center absolute top-[12px] ltr:right-[12px] rtl:left-[12px] ltr:pl-3 rtl:pr-3 text-[22px]"
-                aria-label="@lang('shop::app.components.layouts.header.search')"
-            >
-            </button>
+            @if (core()->getConfigData('general.content.shop.image_search'))
+                @include('shop::search.images.index')
+            @endif
         </div>
     </form>
 </div>

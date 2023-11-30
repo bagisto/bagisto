@@ -139,6 +139,7 @@
                                 ::rules="{ 'required' : isDescriptionRequired}"
                                 :label="trans('admin::app.catalog.categories.create.description')"
                                 :tinymce="true"
+                                :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
                             >
                             </x-admin::form.control-group.control>
 

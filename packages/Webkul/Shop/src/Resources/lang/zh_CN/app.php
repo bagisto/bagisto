@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => '附件',
+                'cancel'           => '取消',
                 'comment'          => '评论',
                 'customer-review'  => '客户评论',
-                'cancel'           => '取消',
                 'empty-review'     => '未找到评论，成为第一个评论此产品的人',
                 'failed-to-upload' => '图片上传失败',
                 'load-more'        => '加载更多',
                 'name'             => '名称',
                 'rating'           => '评分',
-                'success'          => '评论成功提交。',
                 'submit-review'    => '提交评论',
+                'success'          => '评论成功提交。',
                 'title'            => '标题',
+                'translate'        => '翻译',
+                'translating'      => '翻译中...',
                 'write-a-review'   => '写评论',
             ],
 

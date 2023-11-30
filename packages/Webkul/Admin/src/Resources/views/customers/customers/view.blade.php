@@ -82,13 +82,15 @@
     <!-- Content -->
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
         <!-- Left Component -->
-        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
 
+            @php $orders = $customer->orders; @endphp
+
             <!-- Orders -->
-            <div class=" bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                @if ($totalOrderCount = count($customer->orders))
+            <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                @if ($totalOrderCount = count($orders))
                     <div class=" p-[16px] flex justify-between">
                         <!-- Total Order Count -->
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -96,7 +98,7 @@
                         </p>    
 
                         @php
-                            $revenue = core()->currency($customer->orders
+                            $revenue = core()->currency($orders
                                 ->whereNotIn('status', ['canceled', 'closed'])
                                 ->sum('grand_total'));
                         @endphp
@@ -108,7 +110,7 @@
 
                     <!-- Order Details -->
                     <div class="table-responsive grid w-full">
-                        @foreach ($customer->orders as $order)
+                        @foreach ($orders as $order)
                             <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
@@ -169,8 +171,8 @@
 
                                         <!-- Channel Code -->
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            {{ $order->channel->code }}
-                                        </p>
+                                            {{ optional($order)->channel_name }}
+                                        </p>                                        
                                     </div>
 
                                     <!-- Order Address Details -->
@@ -184,18 +186,12 @@
                                         </p>
 
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            @if($order->billingAddress->address1)
-                                                {{ $order->billingAddress->address1 }},
-                                            @endif
+                                            {{ optional($order->billingAddress)->address1 }},
 
-                                            @if($order->billingAddress->city)
-                                                {{ $order->billingAddress->city }},
-                                            @endif
+                                            {{ optional($order->billingAddress)->city }},
 
-                                            @if($order->billingAddress->state)
-                                                {{ $order->billingAddress->state  }}
-                                            @endif
-                                        </p>
+                                            {{ optional($order->billingAddress)->state }}
+                                        </p>                                        
                                     </div>
                                 </div>
 
@@ -208,6 +204,50 @@
 
                             <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                         @endforeach
+                    </div>
+
+                    @php $pagination = $customer->orders()->paginate(10)->toArray(); @endphp
+
+                    <!-- Pagination -->
+                    <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] dark:border-gray-800">
+                        <div
+                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
+                        >
+                            {{ $pagination['per_page'] }}
+                        </div>
+
+                        <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                            @lang('admin::app.customers.customers.view.per-page')
+                        </span>
+
+                        <p
+                            class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
+                        >
+                            {{ $pagination['current_page'] }}
+                        </p>
+
+                        <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                            @lang('admin::app.customers.customers.view.of')
+                        </span>
+
+                        <span class="text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                            {{ $pagination['last_page'] }}
+                        </span>
+
+                        <!-- Prev & Next Page Button -->
+                        <div class="flex gap-[4px] items-center">
+                            <a href="{{ $pagination['first_page_url'] }}">
+                                <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <span class="icon-sort-left text-[24px]"></span>
+                                </div>
+                            </a>
+
+                            <a href="{{ $pagination['next_page_url'] }}">
+                                <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <span class="icon-sort-right text-[24px]"></span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 @else
                     <!-- Empty Container --> 
@@ -317,9 +357,9 @@
 
             <!-- Reviews -->
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-                @if($totalReviewsCount = count($customer->reviews) )
+                @if($totalReviewsCount = count($customer->reviews))
                     <!-- Reviews Count -->
-                    <p class=" p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                     </p>
 
@@ -403,7 +443,7 @@
                         </div>
 
                         <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
-                    @endforeach    
+                    @endforeach
                 @else
                     <!-- Empty Invoice Container -->
                     <div class="flex justify-between p-[16px]">
