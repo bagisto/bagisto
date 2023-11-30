@@ -79,43 +79,15 @@ class AdminServiceProvider extends ServiceProvider
         ], function ($view) {
             $tree = Tree::create();
 
-            $permissionType = auth()->guard('admin')->user()->role->permission_type;
-
-            $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
-
             foreach (config('menu.admin') as $index => $item) {
                 if (! bouncer()->hasPermission($item['key'])) {
                     continue;
                 }
 
-                if (
-                    $index + 1 < count(config('menu.admin'))
-                    && $permissionType != 'all'
-                ) {
-                    $permission = config('menu.admin')[$index + 1];
-
-                    if (
-                        substr_count($permission['key'], '.') == 2
-                        && substr_count($item['key'], '.') == 1
-                    ) {
-                        foreach ($allowedPermissions as $key => $value) {
-                            if ($item['key'] != $value) {
-                                continue;
-                            }
-
-                            $neededItem = $allowedPermissions[$key + 1];
-
-                            foreach (config('menu.admin') as $key1 => $menu) {
-                                if ($menu['key'] == $neededItem) {
-                                    $item['route'] = $menu['route'];
-                                }
-                            }
-                        }
-                    }
-                }
-
                 $tree->add($item, 'menu');
             }
+
+            $tree->items = $tree->removeUnauthorizedUrls();
 
             $tree->items = core()->sortItems($tree->items);
 

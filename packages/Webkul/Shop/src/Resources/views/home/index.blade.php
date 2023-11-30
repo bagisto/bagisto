@@ -57,7 +57,6 @@
             @case ($customization::PRODUCT_CAROUSEL)
                 {{-- Product Carousel --}}
                 <x-shop::products.carousel
-                    {{-- title="Men's Collections" --}}
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.search.index', $data['filters'] ?? [])"

@@ -295,11 +295,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customers.customers.review.delete',
         'sort'  => 2,
-    ], [
-        'key'   => 'customers.orders',
-        'name'  => 'admin::app.acl.orders',
-        'route' => 'admin.customers.customers.orders.data',
-        'sort'  => 7,
     ],
 
     /*
