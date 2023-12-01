@@ -49,7 +49,7 @@ class DownloadableProductController extends Controller
         }
 
         $totalInvoiceQty = 0;
-        
+
         if (isset($downloadableLinkPurchased->order->invoices)) {
             foreach ($downloadableLinkPurchased->order->invoices as $invoice) {
                 $totalInvoiceQty = $totalInvoiceQty + $invoice->total_qty;
