@@ -4,6 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.0.1 (1st of December 2023)** - *Release*
 
+
 ## New Feature: AI Integration
 
 We're excited to unveil a groundbreaking enhancement to your Bagisto e-commerce experience - AI Integration. This powerful addition introduces advanced capabilities that leverage artificial intelligence for various aspects of your online store.
@@ -21,7 +22,6 @@ Key Features:
 
 4. **Personalized Checkout Messages:**
    - Enhance the checkout experience with personalized messages tailored to individual customers, creating a more intimate and customer-centric interaction.
-
 
 ##  New Feature: Search & SEO Enhancements
 
