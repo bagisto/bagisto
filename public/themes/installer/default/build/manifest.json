@@ -1,20 +1,8 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-1d1bd8f2.css",
+    "file": "assets/app-1d1937c3.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
-  },
-  "src/Resources/assets/fonts/bagisto-installer.eot": {
-    "file": "assets/bagisto-installer-4fc435b9.eot",
-    "src": "src/Resources/assets/fonts/bagisto-installer.eot"
-  },
-  "src/Resources/assets/fonts/bagisto-installer.svg": {
-    "file": "assets/bagisto-installer-bcb0fb50.svg",
-    "src": "src/Resources/assets/fonts/bagisto-installer.svg"
-  },
-  "src/Resources/assets/fonts/bagisto-installer.ttf": {
-    "file": "assets/bagisto-installer-1c5cba75.ttf",
-    "src": "src/Resources/assets/fonts/bagisto-installer.ttf"
   },
   "src/Resources/assets/fonts/bagisto-installer.woff": {
     "file": "assets/bagisto-installer-974e4842.woff",
