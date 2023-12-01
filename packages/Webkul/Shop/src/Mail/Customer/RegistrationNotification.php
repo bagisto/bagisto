@@ -36,9 +36,16 @@ class RegistrationNotification extends Mailable
     }
 
     /**
-     * Build the message.
+     * Build the registration notification message.
+     *
+     * This method is responsible for building the registration notification message.
+     * It determines whether to send the notification to the admin or the customer based on the $notify value.
+     * If the $notify value is 'admin', it calls the sendToAdmin() method; if it's 'customer', it calls the sendToCustomer() method.
+     * If $notify value doesn't match 'admin' or 'customer', it logs an error.
      *
      * @return $this
+     *
+     * @throws \Exception
      */
     public function build()
     {
@@ -52,6 +59,13 @@ class RegistrationNotification extends Mailable
         Log::error('Invalid notification target: ' . $this->notify);
     }
 
+    /**
+     * Build and send the registration notification to the admin.
+     *
+     * This method constructs the email message to notify the admin about a customer registration.
+     *
+     * @return $this
+     */
     protected function sendToAdmin()
     {
         return $this->from($this->senderEmail, $this->senderName)
@@ -60,6 +74,13 @@ class RegistrationNotification extends Mailable
             ->view('shop::emails.customers.notify-admin-about-registration');
     }
 
+    /**
+     * Build and send the registration notification to the customer.
+     *
+     * This method constructs the email message to notify the customer about a successful registration.
+     *
+     * @return $this
+     */
     protected function sendToCustomer()
     {
         return $this->from($this->senderEmail, $this->senderName)
