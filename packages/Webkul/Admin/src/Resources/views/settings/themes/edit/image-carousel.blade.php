@@ -436,14 +436,18 @@
                 },
 
                 remove(image) {
-                    this.deletedSliders.push(image);
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.deletedSliders.push(image);
                     
-                    this.sliders.images = this.sliders.images.filter(item => {
-                        return (
-                            item.title !== image.title || 
-                            item.link !== image.link || 
-                            item.image !== image.image
-                        );
+                            this.sliders.images = this.sliders.images.filter(item => {
+                                return (
+                                    item.title !== image.title || 
+                                    item.link !== image.link || 
+                                    item.image !== image.image
+                                );
+                            });
+                        }
                     });
                 },
             },
