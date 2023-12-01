@@ -663,7 +663,7 @@ return [
                 'remove'          => 'クーポンを削除',
                 'success-apply'   => 'クーポンコードが正常に適用されました。',
                 'subtotal'        => '小計',
-    
+
                 'cross-sell' => [
                     'title' => 'さらなる選択肢',
                 ],

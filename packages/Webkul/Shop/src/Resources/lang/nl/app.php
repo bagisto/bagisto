@@ -647,7 +647,7 @@ return [
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
                 'view-cart'                => 'Bekijk winkelwagen',
-    
+
                 'cross-sell' => [
                     'title' => 'Meer keuzes',
                 ],

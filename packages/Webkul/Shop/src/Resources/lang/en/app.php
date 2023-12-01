@@ -647,7 +647,7 @@ return [
                 'total'                    => 'Total',
                 'update-cart'              => 'Update Cart',
                 'view-cart'                => 'View Cart',
-                
+
                 'cross-sell' => [
                     'title' => 'More choices',
                 ],
