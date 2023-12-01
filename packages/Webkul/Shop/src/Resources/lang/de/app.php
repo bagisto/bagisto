@@ -647,10 +647,10 @@ return [
                 'total'                    => 'Gesamt',
                 'update-cart'              => 'Warenkorb aktualisieren',
                 'view-cart'                => 'Warenkorb anzeigen',
-            ],
 
-            'cross-sell' => [
-                'title' => 'Mehr Auswahlmöglichkeiten',
+                'cross-sell' => [
+                    'title' => 'Mehr Auswahlmöglichkeiten',
+                ],
             ],
 
             'coupon'   => [

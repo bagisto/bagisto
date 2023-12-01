@@ -663,10 +663,10 @@ return [
                 'remove'          => 'Eliminar Cupón',
                 'success-apply'   => 'Código de cupón aplicado con éxito.',
                 'subtotal'        => 'Subtotal',
-            ],
-
-            'cross-sell' => [
-                'title' => 'Más opciones',
+            
+                'cross-sell' => [
+                    'title' => 'Más opciones',
+                ],
             ],
 
             'mini-cart' => [

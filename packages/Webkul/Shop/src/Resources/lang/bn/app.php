@@ -647,10 +647,10 @@ return [
                 'total'                    => 'মোট',
                 'update-cart'              => 'কার্ট আপডেট করুন',
                 'view-cart'                => 'কার্ট দেখুন',
-            ],
 
-            'cross-sell' => [
-                'title' => 'আরও বিকল্প',
+                'cross-sell' => [
+                    'title' => 'আরও বিকল্প',
+                ],
             ],
 
             'coupon'   => [

@@ -647,10 +647,10 @@ return [
                 'total'                    => '总计',
                 'update-cart'              => '更新购物车',
                 'view-cart'                => '查看购物车',
-            ],
-
-            'cross-sell' => [
-                'title' => '更多选择',
+    
+                'cross-sell' => [
+                    'title' => '更多选择',
+                ],
             ],
 
             'coupon' => [

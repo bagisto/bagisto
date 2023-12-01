@@ -647,10 +647,10 @@ return [
                 'total'                    => 'कुल',
                 'update-cart'              => 'कार्ट अपडेट करें',
                 'view-cart'                => 'कार्ट देखें',
-            ],
 
-            'cross-sell' => [
-                'title' => 'और विकल्प',
+                'cross-sell' => [
+                    'title' => 'और विकल्प',
+                ],
             ],
 
             'coupon'   => [
