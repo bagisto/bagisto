@@ -1,11 +1,43 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-0e4a875f.css",
+    "file": "assets/app-1d1bd8f2.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
+  "src/Resources/assets/fonts/bagisto-installer-old-1.woff": {
+    "file": "assets/bagisto-installer-old-1-99add0e3.woff",
+    "src": "src/Resources/assets/fonts/bagisto-installer-old-1.woff"
+  },
+  "src/Resources/assets/fonts/bagisto-installer-old.eot": {
+    "file": "assets/bagisto-installer-old-c1b5ce1d.eot",
+    "src": "src/Resources/assets/fonts/bagisto-installer-old.eot"
+  },
+  "src/Resources/assets/fonts/bagisto-installer-old.svg": {
+    "file": "assets/bagisto-installer-old-aacb2b1e.svg",
+    "src": "src/Resources/assets/fonts/bagisto-installer-old.svg"
+  },
+  "src/Resources/assets/fonts/bagisto-installer-old.ttf": {
+    "file": "assets/bagisto-installer-old-32961a60.ttf",
+    "src": "src/Resources/assets/fonts/bagisto-installer-old.ttf"
+  },
+  "src/Resources/assets/fonts/bagisto-installer-old.woff": {
+    "file": "assets/bagisto-installer-old-9853d847.woff",
+    "src": "src/Resources/assets/fonts/bagisto-installer-old.woff"
+  },
+  "src/Resources/assets/fonts/bagisto-installer.eot": {
+    "file": "assets/bagisto-installer-4fc435b9.eot",
+    "src": "src/Resources/assets/fonts/bagisto-installer.eot"
+  },
+  "src/Resources/assets/fonts/bagisto-installer.svg": {
+    "file": "assets/bagisto-installer-bcb0fb50.svg",
+    "src": "src/Resources/assets/fonts/bagisto-installer.svg"
+  },
+  "src/Resources/assets/fonts/bagisto-installer.ttf": {
+    "file": "assets/bagisto-installer-1c5cba75.ttf",
+    "src": "src/Resources/assets/fonts/bagisto-installer.ttf"
+  },
   "src/Resources/assets/fonts/bagisto-installer.woff": {
-    "file": "assets/bagisto-installer-9853d847.woff",
+    "file": "assets/bagisto-installer-974e4842.woff",
     "src": "src/Resources/assets/fonts/bagisto-installer.woff"
   },
   "src/Resources/assets/images/installer/bagisto-logo.svg": {
