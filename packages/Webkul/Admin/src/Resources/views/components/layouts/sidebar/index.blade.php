@@ -5,7 +5,7 @@
             @foreach ($menu->items as $menuItem)
                 <div
                     class="relative px-[16px] group/item"
-                    onmouseenter="adjustSubmenuPosition(event)"
+                    onmouseenter="adjustSubMenuPosition(event)"
                 >
                     <a
                         href="{{ $menuItem['url'] }}"
@@ -96,22 +96,16 @@
     </script>
 
     <script>
-        const adjustSubmenuPosition = (event) => {
-            let submenuContainer = event.currentTarget;
+        const adjustSubMenuPosition = (event) => {
+            let subMenuContainer = event?.currentTarget?.lastElementChild;
 
-            submenuContainer = submenuContainer.children[submenuContainer.children.length - 1];
+            if (subMenuContainer) {
+                subMenuContainer.style.top = '0px';
 
-            submenuContainer.style.top = '0px';
+                const subMenuHeight = subMenuContainer.offsetHeight;
+                const availableHeight = window.innerHeight - subMenuContainer.getBoundingClientRect().top;
 
-            if (submenuContainer) {
-                const submenuHeight = submenuContainer.offsetHeight;
-                const availableHeight = window.innerHeight - submenuContainer.getBoundingClientRect().top;
-
-                if (submenuHeight > availableHeight) {
-                    submenuContainer.style.top = `-${submenuHeight - availableHeight}px`;
-                } else {
-                    submenuContainer.style.top = '0px';
-                }
+                subMenuContainer.style.top = subMenuHeight > availableHeight ? `-${subMenuHeight - availableHeight}px` : `0px`;
             }
         };
     </script>
