@@ -64,7 +64,7 @@
             'EUR' => 'euro',
             'INR' => 'rupee',
             'IRR' => 'iranian',
-            'ILS' => 'israeli',
+            'AFN' => 'israeli',
             'JPY' => 'japanese-yen',
             'GBP' => 'pound',
             'RUB' => 'russian-ruble',
@@ -1188,11 +1188,9 @@
                             ],
 
                             warning: {
-                                container: 'background: #FACC15',
+                                container: 'background: #fde68a',
 
                                 message: 'color: #1F2937',
-
-                                icon: 'color: #FACC15'
                             },
                         }
                     },

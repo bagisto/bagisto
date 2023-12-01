@@ -388,7 +388,7 @@ class Installer extends Command
             'Euro (EUR)',
             'Indian Rupee (INR)',
             'Iranian Rial (IRR)',
-            'Israeli Shekel (ILS)',
+            'Israeli Shekel (AFN)',
             'Japanese Yen (JPY)',
             'Pound Sterling (GBP)',
             'Russian Ruble (RUB)',
