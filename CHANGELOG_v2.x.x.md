@@ -4,6 +4,60 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.0.1 (1st of December 2023)** - *Release*
 
+## New Feature: AI Integration
+
+We're excited to unveil a groundbreaking enhancement to your Bagisto e-commerce experience - AI Integration. This powerful addition introduces advanced capabilities that leverage artificial intelligence for various aspects of your online store.
+
+Key Features:
+
+1. **Content Generation:**
+   - Harness the power of AI to intelligently generate compelling and relevant content for your product descriptions, ensuring an engaging shopping experience.
+
+2. **Image Generation:**
+   - Seamlessly generate visually stunning images using AI, enhancing your product visuals and overall aesthetics.
+
+3. **Review Translation:**
+   - Break language barriers by employing AI to translate customer reviews, allowing your products to reach a global audience.
+
+4. **Personalized Checkout Messages:**
+   - Enhance the checkout experience with personalized messages tailored to individual customers, creating a more intimate and customer-centric interaction.
+
+
+##  New Feature: Search & SEO Enhancements
+
+**URL Rewrite**
+
+* The URL rewrite feature in a Bagisto e-commerce store allows developers to dynamically modify the URL structure of their e-commerce store. This functionality is particularly useful for creating more user-friendly and SEO-friendly URLs, as well as for managing redirects.
+
+Key Benefits:
+
+  1. URL Redirects:
+      Set up redirects from old URLs to new ones for seamless transitions.
+
+  2. SEO Optimization:
+      Create meaningful and keyword-rich URLs to improve search engine optimization.
+
+
+**Search Term Tracking for SEO and Marketing Insights**
+
+* This feature aims to gather and record search terms used by visitors within your e-commerce store. This collected data serves multiple purposes. This functionality is valuable for several reasons, primarily for SEO enhancement and marketing insights.
+
+Key Benefits:
+
+  1. SEO Optimization: Now, your store can dynamically adapt to popular search queries. By analyzing and leveraging the collected search terms, we enhance content, metadata, and keyword targeting, potentially boosting your store's visibility on search engines.
+
+  2. User Behavior Insights: Gain a deeper understanding of user search patterns. This invaluable information provides insights into user preferences, trends, and behavior, allowing you to refine your marketing strategies and optimize content accordingly.
+
+**Search Synonyms**
+
+* you have the option to include search synonyms, which can drive traffic to your e-commerce store's products.
+
+Key Benefits:
+
+1. Improved Search Relevance: Link synonyms to primary search terms for more comprehensive and relevant results.
+
+2. Enhanced User Experience: Offer expanded search results through synonyms, ensuring users find relevant content easily.
+
 * #8811 [feature] - While clicking on the view all it should be opened the separate page for new/feature products
 
 * #8900 [feature] - data-grid start and end date filter
