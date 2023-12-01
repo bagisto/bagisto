@@ -105,11 +105,7 @@
                 const subMenuHeight = subMenuContainer.offsetHeight;
                 const availableHeight = window.innerHeight - subMenuContainer.getBoundingClientRect().top;
 
-                if (subMenuHeight > availableHeight) {
-                    subMenuContainer.style.top = `-${subMenuHeight - availableHeight}px`;
-                } else {
-                    subMenuContainer.style.top = '0px';
-                }
+                subMenuContainer.style.top = subMenuHeight > availableHeight ? `-${subMenuHeight - availableHeight}px` : `0px`;
             }
         };
     </script>
