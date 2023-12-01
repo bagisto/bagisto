@@ -43,7 +43,7 @@
 		text-transform: none;
 		line-height: 1;
 		color: #6B7280;
-  
+
 		/* Better Font Rendering =========== */
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
@@ -63,7 +63,7 @@
 
 	.icon-right:before {
 		content: "\e903";
-	  }
+	}
 
 	.icon-checkbox-active:before {
 		content: "\e904";
