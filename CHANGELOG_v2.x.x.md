@@ -2,6 +2,177 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.0.1 (1st of December 2023)** - *Release*
+
+* #8811 [feature] - While clicking on the view all it should be opened the separate page for new/feature products
+
+* #8900 [feature] - data-grid start and end date filter
+
+* #8444 [improvements] - In the theme customization, In the image carousel there should be shown image preview.
+
+* #8826 [improvements] - It should be a loader while clicking load more button on the category page.
+
+* #8934 [improvements] - Add to Cart button should be disable when the product is Out of Stock and we have disabled the Backorder functionality.
+
+* #8908 [improvements] - In the channel page setting should be Maintenance mode.
+
+* #8945 [improvements] - Condition type check in rule validator
+
+* #8955 [improvements] - There should be a product redirection on the mini/main cart page.
+
+* #8971 [improvements] - Shrink the white space so the listing will be viewed properly.
+
+* #8978 [improvements] - In RTL View, Arabic Translation, Checkout page, Price and QTY details UI need to be improved.
+
+* #9008 [improvements] - In Shop Front -> Customer/Guest User -> Review attachment should not be a mandatory field.
+
+* #9018 [improvements] - In Dark Theme -> Calender box should be in Dark Theme.
+
+* #9021 [improvements] - In Configure section -> General Settings -> There we should show by default Kg as weight.
+
+* #9032 [improvements] - Created a new user with selected newsletter subscription, In User profile again we can see that we are able to see the checkbox to subscribe for newsletter.
+
+* #8288 [fixed] - Getting an exception while using duplicate SKU in the variant product.
+
+* #8393 [fixed] - Last option is not visible in the setting in the sidebar of admin panel.
+
+* #8516 [fixed] - While trying to create/edit a select type attribute with image swatches. it is showing only broken images.
+
+* #8592 [fixed] - Getting a few issues with the boolean filters.
+
+* #8636 [fixed] - The Calendar should be shown dark in the dark theme.
+
+* #8673 [fixed] - Select File button should be in the Dark in the Dark theme.
+
+* #8689 [fixed] - HTML/CSS theme editor should be shown dark in the Dark theme.
+
+* #8733 [fixed] - It continues Purchase Funnel loading and showing the errors in the console.
+
+* #8737 [fixed] - No data found default message is missing in the report listing page.
+
+* #8756 [fixed] - Incorrect translations used for Money Transfer payment method.
+
+* #8776 [fixed] - Getting shimmer issue on the purchase funnel in the sales reporting.
+
+* #8777 [fixed] - The refund section is moving right on refresh in the sales reports. 
+
+* #8779 [fixed] - Social login appears twice on the login page.
+
+* #8793 [fixed] - Getting an error while running migrate command.
+
+* #8800 [fixed] - Not able to remove the attribute's option while editing the related attribute from the admin panel. 
+
+* #8801 [fixed] - Not able to create a Catalog rule. it shows an exception in the console and shows a blank page for the same.
+
+* #8809 [fixed] - Draggable functionality is not working for Attribute Options at Admin end.
+
+* #8816 [fixed] - The remove product flash message should appear up on the mini cart drawer.
+
+* #8821 [fixed] - First Name and Last Name, We are able to fill any data in Registration form.
+
+* #8822 [fixed] - Category description is not working based on locales.
+
+* #8824 [fixed] - The category visible on menu toggle button is not working.
+
+* #8832 [fixed] - On admin panel, design option inside configure menu, checkbox not clickable
+
+* #8835 [fixed] - Translation missing in Settings -> Roles menu -> Create roles page
+
+* #8838 [fixed] - On the shop, in additional information options value should be shown accordingly.
+
+* #8851 [fixed] - Warning Messages are overlapping in Home Page Header contents.
+
+* #8852 [fixed] - Product Reviews -> Customer Profile Image is not visible if customer has applied a profile picture.
+
+* #8862 [fixed] - The customer is receiving the refund confirmation email twice, and the invoice confirmation email is not being sent to the admin.
+
+* #8866 [fixed] - Invoice section at the Admin end, after selecting Transaction check box responsive issue is appearing.
+
+* #8867 [fixed] - The visitor graph should be blank if there are zero visits inside the sales/reporting.
+
+* #8868 [fixed] - Required field section in Address are un-selected from admin end, still in Customer Address, it is processing with Mandatory Fields.
+
+* #8870 [fixed] - Tax applied but categories are not visible.
+
+* #8873 [fixed] - The order cancellation emails are not being sent correctly. The emails are not being sent to the intended recipients.
+
+* #8874 [fixed] - Email Verification -> Mail is not showing User Name.
+
+* #8877 [fixed] - After sending duplicate invoice to User, User Name is not appearing properly.
+
+* #8882 [fixed] - the Date option Effect should be affected on mouse hover it is visible permanently.
+
+* #8883 [fixed] - The hover effect is missing on the total sale interval option in the Dark theme.
+
+* #8885 [fixed] - Responsive issue on Top Selling Products By Revenue Graph inside the Reporting/Products.
+
+* #8886 [fixed] - In Customer Group pricing, Change the text "qty" to "Minimum QTY" 
+
+* #8888 [fixed] - The canceled order quantity is still visible in the pending order on product edit page.
+
+* #8889 [fixed] - On the notification page, No record found message should be shown in Grey color in the Dark theme
+
+* #8890 [fixed] - On the notification page, in the Dark theme selected tab underline is not visible.
+
+* #8892 [fixed] - Today's total order and order count are not appearing on the Admin dashboard.
+
+* #8921 [fixed] - Admin end -> Configure -> Shipping Methods and Payment Methods, Shipping and Payment Method Status and Mandatory field response is not appropriate. 
+
+* #8927 [fixed] - Duplicate Invoice mail is not sent to the customer or guest user even mail details are added.
+
+* #8931 [fixed] - On the checkout page, without adding an address and clicking on the confirm button so get the error in the console.
+
+* #8932 [fixed] - Channel setting section are not working.
+
+* #8935 [fixed] - Inventory is not reducing after purchasing the downloadable product. 
+
+* #8937 [fixed] - On the Admin dashboard, in today's details, it shows two icons for negative values. it should be shown only one down arrow. 
+
+* #8940 [fixed] - On the listing page, select mode as list and change the sorting so the product image is not updating.
+
+* #8942 [fixed] - Update the warning message in Update Exchange rate in Settings -> Exchange rates.
+
+* #8947 [fixed] - On the cart/catalog rule create/edit page, condition fields show a validate message after entering the correct value. 
+
+* #8951 [fixed] - After selecting the shipping method change the condition. so input fields are not reset on the cart rule create/edit page.
+
+* #8963 [fixed] - On the admin panel, the Category page is not loading. 
+
+* #8969 [fixed] - In the Cart rule there should be a date & time calendar. currently it shows only date.
+
+* #8970 [fixed] - After adding the date in the cart rule, while editing the cart rule it shows the date fields as Text fields.
+
+* #8980 [fixed] - Creating a customer from admin, login temporary password details are not received on the mail.
+
+* #8981 [fixed] - Adding Future Dates in Reportings Total Sales, there in calender filter when we add future date, in console we can see 500 Internal Server Error.
+
+* #8982 [fixed] - Translation missing in when Paypal Standard Payment Order is cancelled.
+
+* #8986 [fixed] - Creating Cart rule with Condition on Product price in cart, the price field is showing unnecessary validation.
+
+* #8981 [fixed] - Adding Future Dates in Reportings Total Sales, there in calender filter when we add future date, in console we can see 500 Internal Server Error. 
+
+* #8982 [fixed] - Translation missing in when Paypal Standard Payment Order is cancelled.
+
+* #8986 [fixed] - Creating Cart rule with Condition on Product price in cart, the price field is showing unnecessary validation.
+
+* #9005 [fixed] - unable to see submenu on users with limited roles.
+
+* #9007 [fixed] - Refund Tab in shop front Customer Orders section is having translation issue.
+
+* #9020 [fixed] - Edit any CMS page and then click on the SEO URL, it is showing 404 error.
+
+* #9022 [fixed] - Bundle Product -> Multiselect Option -> Selected product is not highlighted in the store front product page. 
+
+* #9030 [fixed] - In Bundle Product -> Required Field is not working properly in Radio Type
+
+* #9031 [fixed] - In Bundle Product -> Checkbox Is required is selected "NO" still validation is appearing.
+
+* #9049 [fixed] - Italian translation is mixed with Spanish in Admin panel
+
+* #9064 [fixed] - Calender in cart rule and Catalog rule on Special Price From/To should be as per core and dark theme calender should be dark.
+
+
 ## **v2.0.0 (21st of October 2023)** - *Release*
 
 ### Features:
