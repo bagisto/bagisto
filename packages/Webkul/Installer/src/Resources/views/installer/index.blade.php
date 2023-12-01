@@ -76,7 +76,7 @@
     @endphp
 
     <body>
-        <div id="app" class="container">
+        <div id="app" class="container fixed">
             <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
                 <!-- Vue Component -->
                 <v-server-requirements></v-server-requirements>
@@ -231,7 +231,7 @@
 
                         <p class="place-self-end w-full text-left mb-[24px]">
                             <a
-                                class="bg-white underline text-blue-500"
+                                class="bg-white underline text-blue-600"
                                 href="https://bagisto.com/en/"
                             >
                                 @lang('installer::app.installer.index.bagisto')
@@ -240,7 +240,7 @@
                             <span>@lang('installer::app.installer.index.bagisto-info')</span>
 
                             <a
-                                class="bg-white underline text-blue-500"
+                                class="bg-white underline text-blue-600"
                                 href="https://webkul.com/"
                             >
                                 @lang('installer::app.installer.index.webkul')
@@ -780,6 +780,7 @@
                                         name="app_timezone"
                                         ::value="envData.app_timezone ?? $current"
                                         rules="required"
+                                        :aria-label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                     >
                                         <option value="" disabled>Select Timezone</option>
@@ -818,6 +819,7 @@
                                             name="app_locale"
                                             value="{{ app()->getLocale() }}"
                                             rules="required"
+                                            :aria-label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                             :label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                         >
                                             @foreach ($locales as $value => $label)
@@ -843,6 +845,7 @@
                                             type="select"
                                             name="app_currency"
                                             ::value="envData.app_currency ?? 'USD'"
+                                            :aria-label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                             rules="required"
                                             :label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                         >
