@@ -101,10 +101,13 @@
                         </a>
                     </p>
 
-                    {!! view_render_event('bagisto.shop.customers.forget_password.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.after') !!}
 
                 </x-shop::form>
             </div>
+
+            {!! view_render_event('bagisto.shop.customers.forget_password.after') !!}
+
         </div>
 
         <p class="mt-[30px] mb-[15px] text-[#6E6E6E] text-xs text-center">
