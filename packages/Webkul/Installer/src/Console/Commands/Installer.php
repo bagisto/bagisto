@@ -125,6 +125,16 @@ class Installer extends Command
             // Updating Database Configuration
             $this->askForDatabaseDetails();
 
+            $allowedLocales = array_unique(array_merge(
+                [$defaultLocale ?? 'en'],
+                $allowedLocales
+            ));
+
+            $allowedCurrencies = array_unique(array_merge(
+                [$defaultCurrency ?? 'USD'],
+                $allowedCurrencies
+            ));
+
             return [
                 'defaultLocale'     => $defaultLocale,
                 'allowedLocales'    => $allowedLocales,
