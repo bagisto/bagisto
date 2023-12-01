@@ -3,7 +3,10 @@
         <nav class="grid gap-[7px] w-full">
             <!-- Navigation Menu -->
             @foreach ($menu->items as $menuItem)
-                <div class="relative px-[16px] group/item">
+                <div
+                    class="relative px-[16px] group/item"
+                    onmouseenter="adjustSubmenuPosition(event)"
+                >
                     <a
                         href="{{ $menuItem['url'] }}"
                         class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
@@ -90,5 +93,26 @@
                 },
             },
         });
+    </script>
+
+    <script>
+        const adjustSubmenuPosition = (event) => {
+            let submenuContainer = event.currentTarget;
+
+            submenuContainer = submenuContainer.children[submenuContainer.children.length - 1];
+
+            submenuContainer.style.top = '0px';
+
+            if (submenuContainer) {
+                const submenuHeight = submenuContainer.offsetHeight;
+                const availableHeight = window.innerHeight - submenuContainer.getBoundingClientRect().top;
+
+                if (submenuHeight > availableHeight) {
+                    submenuContainer.style.top = `-${submenuHeight - availableHeight}px`;
+                } else {
+                    submenuContainer.style.top = '0px';
+                }
+            }
+        };
     </script>
 @endpushOnce
