@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'आर्डर आईडी',
-                'order'      => 'आर्डर',
-                'order-date' => 'आर्डर तिथि',
-                'title'      => 'आर्डर',
-                'total'      => 'कुल',
+                'order-id'    => 'आदेश आईडी',
+                'order'       => 'आदेश',
+                'order-date'  => 'आदेश की तारीख',
+                'title'       => 'आदेश',
+                'total'       => 'कुल',
+                'action-view' => 'देखें',
+                'action'      => 'कार्रवाई',
+                'empty-order' => 'आपने अभी तक कोई उत्पाद नहीं ऑर्डर किया है',
 
                 'status'        => [
                     'title' => 'स्थिति',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'अपूर्ण भुगतान',
                     ],
                 ],
-
-                'action'        => 'क्रिया',
-                'empty-order'   => 'आपने अब तक कोई उत्पाद नहीं आर्डर किया है',
 
                 'view' => [
                     'billing-address'    => 'बिलिंग पता',

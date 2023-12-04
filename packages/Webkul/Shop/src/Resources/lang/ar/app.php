@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'رقم الطلب',
-                'order'      => 'الطلب',
-                'order-date' => 'تاريخ الطلب',
-                'title'      => 'الطلبات',
-                'total'      => 'الإجمالي',
+                'order-id'    => 'معرف الطلب',
+                'order'       => 'طلب',
+                'order-date'  => 'تاريخ الطلب',
+                'title'       => 'الطلبات',
+                'total'       => 'الإجمالي',
+                'action-view' => 'عرض',
+                'action'      => 'إجراء',
+                'empty-order' => 'لم تقم بطلب أي منتج حتى الآن',
 
                 'status'        => [
                     'title' => 'الحالة',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'معلق على الدفع',
                     ],
                 ],
-
-                'action'        => 'الإجراء',
-                'empty-order'   => 'لم تقم بطلب أي منتج بعد',
 
                 'view' => [
                     'billing-address'    => 'عنوان الفواتير',

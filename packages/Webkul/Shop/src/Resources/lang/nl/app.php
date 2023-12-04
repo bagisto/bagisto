@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Bestelnummer',
-                'order'      => 'Bestelling',
-                'order-date' => 'Besteldatum',
-                'title'      => 'Bestellingen',
-                'total'      => 'Totaal',
+                'order-id'    => 'Bestel-ID',
+                'order'       => 'Bestelling',
+                'order-date'  => 'Besteldatum',
+                'title'       => 'Bestellingen',
+                'total'       => 'Totaal',
+                'action-view' => 'Bekijken',
+                'action'      => 'Actie',
+                'empty-order' => 'U heeft nog geen product besteld',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'In Afwachting van Betaling',
                     ],
                 ],
-
-                'action'      => 'Actie',
-                'empty-order' => 'U heeft nog geen product besteld',
 
                 'view' => [
                     'billing-address'    => 'Factuuradres',
