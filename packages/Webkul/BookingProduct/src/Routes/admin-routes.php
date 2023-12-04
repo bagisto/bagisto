@@ -12,8 +12,6 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         Route::get('', 'index')->name('admin.sales.bookings.index');
 
         Route::get('get', 'get')->name('admin.sales.bookings.get');
-
-        Route::put('edit/{id}', 'update')->name('admin.catalog.products.update');
     });
 
 });

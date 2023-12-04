@@ -205,8 +205,9 @@ class Booking extends Virtual
     /**
      * @param  array  $options1
      * @param  array  $options2
+     * @return bool
      */
-    public function compareOptions($options1, $options2): bool
+    public function compareOptions($options1, $options2)
     {
         if ($this->product->id !== (int) $options2['product_id']) {
             return false;

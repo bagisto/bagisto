@@ -11,7 +11,7 @@
 
         <div class="flex gap-x-[10px] items-center">
             <!-- Export Modal -->
-            {{-- <x-admin::datagrid.export src="{{ route('admin.sales.bookings.index') }}"></x-admin::datagrid.export> --}}
+            <x-admin::datagrid.export src="{{ route('admin.sales.bookings.index') }}"></x-admin::datagrid.export>
         </div>
     </div>
 
