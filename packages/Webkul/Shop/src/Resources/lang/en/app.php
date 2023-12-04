@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Order ID',
-                'order'      => 'Order',
-                'order-date' => 'Order Date',
-                'title'      => 'Orders',
-                'total'      => 'Total',
+                'order-id'    => 'Order ID',
+                'order'       => 'Order',
+                'order-date'  => 'Order Date',
+                'title'       => 'Orders',
+                'total'       => 'Total',
+                'action-view' => 'View',
+                'action'      => 'Action',
+                'empty-order' => 'You have not ordered any product yet',
 
                 'status'        => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Pending Payment',
                     ],
                 ],
-
-                'action'      => 'Action',
-                'empty-order' => 'You have not ordered any product yet',
 
                 'view' => [
                     'billing-address'    => 'Billing Address',
@@ -649,6 +649,10 @@ return [
                 'total'                    => 'Total',
                 'update-cart'              => 'Update Cart',
                 'view-cart'                => 'View Cart',
+
+                'cross-sell' => [
+                    'title' => 'More choices',
+                ],
             ],
 
             'coupon'   => [

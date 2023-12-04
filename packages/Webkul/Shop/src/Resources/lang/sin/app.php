@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'ඇණවුමේ අංකය',
-                'order'      => 'ඇණවුම',
-                'order-date' => 'ඇණවුමේ දිනය',
-                'title'      => 'ඇණවුම්',
-                'total'      => 'මුළු',
+                'order-id'    => 'ඇණවුම් හරහා හඳුනා ගත් හැඳුනුම්පත',
+                'order'       => 'ඇණවුම',
+                'order-date'  => 'ඇණවුම් දිනය',
+                'title'       => 'ඇණවුම්',
+                'total'       => 'මාතික්',
+                'action-view' => 'දදන්',
+                'action'      => 'කาර්වාස',
+                'empty-order' => 'ඔබට තවත් නිශ්චල කර නොමැත',
 
                 'status' => [
                     'title' => 'තත්ත්වය',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'අපහසු ගෙවීම',
                     ],
                 ],
-
-                'action'      => 'ක්‍රියාව',
-                'empty-order' => 'ඔබට තවත් නිශ්චල කර නොමැත',
 
                 'view' => [
                     'billing-address'    => 'ගෙවීමේ ලිපිනය',
@@ -649,6 +649,10 @@ return [
                 'total'                    => 'එකතු',
                 'update-cart'              => 'කර්තෘ යළි කරන්න',
                 'view-cart'                => 'කර්තෘ බලන්න',
+
+                'cross-sell' => [
+                    'title' => 'තවත් තෝරාගැනීමේ',
+                ],
             ],
 
             'coupon'   => [

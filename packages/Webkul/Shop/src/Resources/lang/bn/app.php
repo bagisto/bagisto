@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'অর্ডার আইডি',
-                'order'      => 'অর্ডার',
-                'order-date' => 'অর্ডারের তারিখ',
-                'title'      => 'আদেশ',
-                'total'      => 'মোট',
+                'order-id'    => 'অর্ডার আইডি',
+                'order'       => 'অর্ডার',
+                'order-date'  => 'অর্ডারের তারিখ',
+                'title'       => 'অর্ডারগুলি',
+                'total'       => 'মোট',
+                'action-view' => 'দেখা',
+                'action'      => 'কর্ম',
+                'empty-order' => 'আপনি এখনও কোনও পণ্য অর্ডার করেন নি',
 
                 'status'        => [
                     'title' => 'অবস্থা',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'মুলতুলি পেমেন্ট',
                     ],
                 ],
-
-                'action'        => 'অ্যাকশন',
-                'empty-order'   => 'আপনি এখনো কোনও পণ্য অর্ডার করেননি',
 
                 'view' => [
                     'billing-address'    => 'বিলিং ঠিকানা',
@@ -649,6 +649,10 @@ return [
                 'total'                    => 'মোট',
                 'update-cart'              => 'কার্ট আপডেট করুন',
                 'view-cart'                => 'কার্ট দেখুন',
+
+                'cross-sell' => [
+                    'title' => 'আরও বিকল্প',
+                ],
             ],
 
             'coupon'   => [

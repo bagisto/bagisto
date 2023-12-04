@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'ID Ordine',
-                'order'      => 'Ordine',
-                'order-date' => 'Data Ordine',
-                'title'      => 'Ordini',
-                'total'      => 'Totale',
+                'order-id'    => 'ID ordine',
+                'order'       => 'Ordine',
+                'order-date'  => 'Data dell\'ordine',
+                'title'       => 'Ordini',
+                'total'       => 'Totale',
+                'action-view' => 'Visualizza',
+                'action'      => 'Azione',
+                'empty-order' => 'Non hai ancora ordinato alcun prodotto',
 
                 'status' => [
                     'title' => 'Stato',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Pagamento in Sospeso',
                     ],
                 ],
-
-                'action'      => 'Azione',
-                'empty-order' => 'Non hai ancora ordinato alcun prodotto',
 
                 'view' => [
                     'billing-address'    => 'Indirizzo di Fatturazione',
@@ -649,6 +649,10 @@ return [
                 'total'                    => 'Totale',
                 'update-cart'              => 'Aggiorna carrello',
                 'view-cart'                => 'Vedi carrello',
+
+                'cross-sell' => [
+                    'title' => 'Maggiori scelte',
+                ],
             ],
 
             'coupon'   => [
