@@ -35,7 +35,6 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",
-        "league/fractal": "^0.20.1",
         "maatwebsite/excel": "^3.1.46",
         "openai-php/laravel": "^0.7.8",
         "paypal/paypal-checkout-sdk": "1.0.1",
