@@ -36,12 +36,7 @@ class RegistrationNotification extends Mailable
     }
 
     /**
-     * Build the registration notification message.
-     *
-     * This method is responsible for building the registration notification message.
-     * It determines whether to send the notification to the admin or the customer based on the $notify value.
-     * If the $notify value is 'admin', it calls the sendToAdmin() method; if it's 'customer', it calls the sendToCustomer() method.
-     * If $notify value doesn't match 'admin' or 'customer', it logs an error.
+     * Build & send registration notification.
      *
      * @return $this
      *
@@ -60,9 +55,7 @@ class RegistrationNotification extends Mailable
     }
 
     /**
-     * Build and send the registration notification to the admin.
-     *
-     * This method constructs the email message to notify the admin about a customer registration.
+     * Notify admin with email.
      *
      * @return $this
      */
@@ -75,9 +68,7 @@ class RegistrationNotification extends Mailable
     }
 
     /**
-     * Build and send the registration notification to the customer.
-     *
-     * This method constructs the email message to notify the customer about a successful registration.
+     * Notify customer with email.
      *
      * @return $this
      */
