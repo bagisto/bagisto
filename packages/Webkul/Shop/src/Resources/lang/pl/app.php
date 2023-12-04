@@ -649,6 +649,10 @@ return [
                 'total'                    => 'Suma',
                 'update-cart'              => 'Aktualizuj koszyk',
                 'view-cart'                => 'Zobacz koszyk',
+
+                'cross-sell' => [
+                    'title' => 'Więcej opcji',
+                ],
             ],
 
             'coupon'   => [

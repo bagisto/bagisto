@@ -650,6 +650,10 @@ return [
                 'total'                    => 'Toplam',
                 'update-cart'              => 'Sepeti Güncelle',
                 'view-cart'                => 'Sepeti Görüntüle',
+
+                'cross-sell' => [
+                    'title' => 'Daha fazla seçenek',
+                ],
             ],
 
             'coupon'   => [

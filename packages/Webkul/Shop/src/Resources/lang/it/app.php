@@ -649,6 +649,10 @@ return [
                 'total'                    => 'Totale',
                 'update-cart'              => 'Aggiorna carrello',
                 'view-cart'                => 'Vedi carrello',
+
+                'cross-sell' => [
+                    'title' => 'Maggiori scelte',
+                ],
             ],
 
             'coupon'   => [

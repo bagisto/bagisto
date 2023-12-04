@@ -649,6 +649,10 @@ return [
                 'total'                    => 'එකතු',
                 'update-cart'              => 'කර්තෘ යළි කරන්න',
                 'view-cart'                => 'කර්තෘ බලන්න',
+
+                'cross-sell' => [
+                    'title' => 'තවත් තෝරාගැනීමේ',
+                ],
             ],
 
             'coupon'   => [
