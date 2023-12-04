@@ -14,6 +14,8 @@
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
+<input type="hidden" name="keys[]" value="{{ json_encode($item) }}">
+
 <x-admin::form.control-group>
     @if ($field['type'] == 'depends')
         @include('admin::configuration.dependent-field-type')

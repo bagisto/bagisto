@@ -1010,6 +1010,14 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => true,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
                 'name'          => 'instructions',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.instructions',
                 'type'          => 'textarea',
@@ -1106,6 +1114,14 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
                 'name'          => 'generate_invoice',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.generate-invoice',
                 'type'          => 'boolean',
@@ -1200,7 +1216,15 @@ return [
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
-            ],  [
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
                 'name'          => 'business_account',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.business-account',
                 'type'          => 'depends',
@@ -1261,6 +1285,14 @@ return [
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name'          => 'client_id',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
