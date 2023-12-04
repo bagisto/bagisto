@@ -23,15 +23,25 @@
         <!-- Title of the input field -->
         <div class="flex justify-between">
             <x-admin::form.control-group.label
-                :for="$name" :class="$isRequired"
-            >
-                @lang($field['title'])
-            </x-admin::form.control-group.label>
-
-            <x-admin::form.control-group.label
+                :class="$isRequired"
                 :for="$name"
             >
-                <span class="flex">{{ $channelLocaleInfo }}</span>
+                @lang($field['title'])
+
+                @if (
+                    ! empty($field['channel_based'])
+                    && $channels->count() > 1
+                )
+                    <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                        {{ $currentChannel->name }}
+                    </span>
+                @endif
+
+                @if (! empty($field['locale_based']))
+                    <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                        {{ $currentLocale->name }}
+                    </span>
+                @endif
             </x-admin::form.control-group.label>
         </div>
 
