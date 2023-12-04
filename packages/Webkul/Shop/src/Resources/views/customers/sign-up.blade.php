@@ -210,7 +210,7 @@
                         </div>
                     @endif
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.newsletter_subscription.after') !!}
 
                     <div class="flex gap-[36px] flex-wrap items-center mt-[30px]">
                         <button
