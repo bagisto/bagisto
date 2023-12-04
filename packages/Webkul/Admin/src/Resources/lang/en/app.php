@@ -3296,6 +3296,8 @@ return [
                     'generate-invoice-applicable'    => 'Applicable if automatic generate invoice is enabled',
                     'info'                           => 'Set payment methods information',
                     'instructions'                   => 'Instructions',
+                    'logo'                           => 'Logo',
+                    'logo-information'               => 'Image resolution should be like 55px X 45px',
                     'mailing-address'                => 'Send Check to',
                     'money-transfer'                 => 'Money Transfer',
                     'money-transfer-info'            => 'Transfer of funds from one person or account to another, often electronically, for various purposes such as transactions or remittances.',

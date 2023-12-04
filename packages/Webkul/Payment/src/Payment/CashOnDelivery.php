@@ -2,6 +2,8 @@
 
 namespace Webkul\Payment\Payment;
 
+use Illuminate\Support\Facades\Storage;
+
 class CashOnDelivery extends Payment
 {
     /**
@@ -14,5 +16,17 @@ class CashOnDelivery extends Payment
     public function getRedirectUrl()
     {
 
+    }
+
+    /**
+     * Returns payment method image
+     *
+     * @return array
+     */
+    public function getImage()
+    {
+        $url = $this->getConfigData('image');
+
+        return $url ? Storage::url($url) : bagisto_asset('images/cash-on-delivery.png');
     }
 }

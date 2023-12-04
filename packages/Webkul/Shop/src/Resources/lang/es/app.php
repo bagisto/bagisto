@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'ID de Pedido',
-                'order'      => 'Pedido',
-                'order-date' => 'Fecha del Pedido',
-                'title'      => 'Pedidos',
-                'total'      => 'Total',
+                'order-id'    => 'ID de pedido',
+                'order'       => 'Pedido',
+                'order-date'  => 'Fecha del pedido',
+                'title'       => 'Pedidos',
+                'total'       => 'Total',
+                'action-view' => 'Ver',
+                'action'      => 'Acción',
+                'empty-order' => 'Aún no ha realizado ningún pedido',
 
                 'status'        => [
                     'title' => 'Estado',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Pago Pendiente',
                     ],
                 ],
-
-                'action'      => 'Acción',
-                'empty-order' => 'Aún no has ordenado ningún producto',
 
                 'view' => [
                     'billing-address'    => 'Dirección de Facturación',
@@ -413,6 +413,18 @@ return [
             ],
         ],
 
+        'modal' => [
+            'default-content' => 'Contenido predeterminado',
+            'default-header'  => 'Encabezado predeterminado',
+
+            'confirm' => [
+                'agree-btn'    => 'Aceptar',
+                'disagree-btn' => 'No estar de acuerdo',
+                'message'      => '¿Estás seguro de que quieres realizar esta acción?',
+                'title'        => '¿Estás seguro?',
+            ],
+        ],
+
         'products' => [
             'card' => [
                 'add-to-compare-success'      => 'Elemento añadido correctamente a la lista de comparación.',
@@ -653,6 +665,10 @@ return [
                 'remove'          => 'Eliminar Cupón',
                 'success-apply'   => 'Código de cupón aplicado con éxito.',
                 'subtotal'        => 'Subtotal',
+
+                'cross-sell' => [
+                    'title' => 'Más opciones',
+                ],
             ],
 
             'mini-cart' => [

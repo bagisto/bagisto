@@ -355,11 +355,12 @@
                                     @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
                                 </p>
                             </div>
-                            <div class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal">
-                                <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
-                                        @lang('shop::app.customers.account.orders.view.invoices.print')
-                                </a>
-                            </div>
+                            
+                            <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                <div class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal">
+                                    @lang('shop::app.customers.account.orders.view.invoices.print')
+                                </div>
+                            </a>
                         </div>
 
                         <div class="relative overflow-x-auto mt-[30px] border rounded-[12px]">
