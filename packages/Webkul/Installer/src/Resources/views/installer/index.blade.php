@@ -64,7 +64,7 @@
             'EUR' => 'euro',
             'INR' => 'rupee',
             'IRR' => 'iranian',
-            'ILS' => 'israeli',
+            'AFN' => 'israeli',
             'JPY' => 'japanese-yen',
             'GBP' => 'pound',
             'RUB' => 'russian-ruble',
@@ -76,7 +76,7 @@
     @endphp
 
     <body>
-        <div id="app" class="container">
+        <div id="app" class="container fixed">
             <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
                 <!-- Vue Component -->
                 <v-server-requirements></v-server-requirements>
@@ -112,7 +112,7 @@
                                     <span v-if="stepStates.start !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.start === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.start === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -127,12 +127,12 @@
                                 <!-- Server Environment -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.serverRequirements == 'active' ? 'font-bold' : '', 'text-gray-600']"
+                                    :class="[stepStates.systemRequirements == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.serverRequirements !== 'complete'">
+                                    <span v-if="stepStates.systemRequirements !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.serverRequirements === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.systemRequirements === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -152,7 +152,7 @@
                                     <span v-if="stepStates.envDatabase !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.envDatabase === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.envDatabase === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -174,7 +174,7 @@
                                     <span v-if="stepStates.readyForInstallation !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.readyForInstallation === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.readyForInstallation === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -194,7 +194,7 @@
                                     <span v-if="stepStates.createAdmin !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.createAdmin === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.createAdmin === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -214,7 +214,7 @@
                                     <span v-if="stepStates.installationCompleted !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.installationCompleted === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.installationCompleted === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -231,7 +231,7 @@
 
                         <p class="place-self-end w-full text-left mb-[24px]">
                             <a
-                                class="bg-white underline text-blue-500"
+                                class="bg-white underline text-blue-600"
                                 href="https://bagisto.com/en/"
                             >
                                 @lang('installer::app.installer.index.bagisto')
@@ -240,7 +240,7 @@
                             <span>@lang('installer::app.installer.index.bagisto-info')</span>
 
                             <a
-                                class="bg-white underline text-blue-500"
+                                class="bg-white underline text-blue-600"
                                 href="https://webkul.com/"
                             >
                                 @lang('installer::app.installer.index.webkul')
@@ -324,8 +324,8 @@
                     </x-installer::form>
                 </div>
 
-                <!-- Server Requirements -->
-                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'serverRequirements'">
+                <!-- Systme Requirements -->
+                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'systemRequirements'">
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
                             @lang('installer::app.installer.index.server-requirements.title')
@@ -626,13 +626,13 @@
 
                                         <div class="grid gap-[12px]">
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                                <span class="icon-processing text-[20px]"></span>
+                                                <span class="icon-right text-[20px]"></span>
 
                                                 <p>@lang('installer::app.installer.index.ready-for-installation.create-databsae-table')</p>
                                             </div>
 
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                                <span class="icon-processing text-[20px]"></span>
+                                                <span class="icon-right text-[20px]"></span>
 
                                                 <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-table')</p>
                                             </div>
@@ -780,6 +780,7 @@
                                         name="app_timezone"
                                         ::value="envData.app_timezone ?? $current"
                                         rules="required"
+                                        :aria-label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                     >
                                         <option value="" disabled>Select Timezone</option>
@@ -801,7 +802,7 @@
                                 </x-installer::form.control-group>
 
                                 <div class="p-[6px]" :style="warning['container'], warning['message']">
-                                    <i class="icon-error text-black" :style="warning['icon']"></i>
+                                    <i class="icon-limited !text-black"></i>
 
                                     @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
@@ -818,6 +819,7 @@
                                             name="app_locale"
                                             value="{{ app()->getLocale() }}"
                                             rules="required"
+                                            :aria-label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                             :label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                         >
                                             @foreach ($locales as $value => $label)
@@ -843,6 +845,7 @@
                                             type="select"
                                             name="app_currency"
                                             ::value="envData.app_currency ?? 'USD'"
+                                            :aria-label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                             rules="required"
                                             :label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                         >
@@ -1168,7 +1171,7 @@
 
                             stepStates: {
                                 start: 'active',
-                                serverRequirements: 'pending',
+                                systemRequirements: 'pending',
                                 envDatabase: 'pending',
                                 readyForInstallation: 'pending',
                                 envConfiguration: 'pending',
@@ -1178,7 +1181,7 @@
 
                             steps: [
                                 'start',
-                                'serverRequirements',
+                                'systemRequirements',
                                 'envDatabase',
                                 'readyForInstallation',
                                 'installProgress',
@@ -1188,11 +1191,9 @@
                             ],
 
                             warning: {
-                                container: 'background: #FACC15',
+                                container: 'background: #fde68a',
 
                                 message: 'color: #1F2937',
-
-                                icon: 'color: #FACC15'
                             },
                         }
                     },
@@ -1233,11 +1234,11 @@
                         nextForm(params) {
                             const stepActions = {
                                 start: () => {
-                                    this.completeStep('start', 'serverRequirements', 'active', 'complete');
+                                    this.completeStep('start', 'systemRequirements', 'active', 'complete');
                                 },
 
-                                serverRequirements: () => {
-                                    this.completeStep('serverRequirements', 'envDatabase', 'active', 'complete');
+                                systemRequirements: () => {
+                                    this.completeStep('systemRequirements', 'envDatabase', 'active', 'complete');
                                     
                                     this.currentStep = 'envDatabase';
                                 },
