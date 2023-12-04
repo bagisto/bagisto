@@ -15,7 +15,6 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-booking-information-template">
         <x-admin::form
-            {{-- :action="route('admin.catalog.attributes.update', $attribute->id)" --}}
             enctype="multipart/form-data"
             method="PUT"
         >

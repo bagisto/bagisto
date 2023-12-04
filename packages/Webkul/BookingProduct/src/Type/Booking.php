@@ -18,7 +18,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Product\Type\Virtual;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Booking extends Virtual
 {
@@ -43,7 +42,6 @@ class Booking extends Virtual
         ProductImageRepository $productImageRepository,
         ProductVideoRepository $productVideoRepository,
         ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
-        TaxCategoryRepository $taxCategoryRepository,
         protected BookingProductRepository $bookingProductRepository,
         protected BookingHelper $bookingHelper
     ) {
@@ -56,7 +54,6 @@ class Booking extends Virtual
             $productImageRepository,
             $productVideoRepository,
             $productCustomerGroupPriceRepository,
-            $taxCategoryRepository
         );
     }
 
@@ -208,9 +205,8 @@ class Booking extends Virtual
     /**
      * @param  array  $options1
      * @param  array  $options2
-     * @return bool
      */
-    public function compareOptions($options1, $options2)
+    public function compareOptions($options1, $options2): bool
     {
         if ($this->product->id !== (int) $options2['product_id']) {
             return false;
