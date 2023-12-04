@@ -6,28 +6,54 @@
     <script type="text/x-template" id="v-product-gallery-template">
         <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
             <!-- Product Image Slider -->
-            <div class="flex-24 place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
-                <img 
-                    :class="`min-w-[100px] max-h-[100px] rounded-[12px] ${ hover ? 'cursor-pointer' : '' }`" 
-                    v-for="image in media.images"
-                    :src="image.small_image_url"
-                    alt="{{ $product->name }}"
-                    width="100"
-                    height="100"
-                    @mouseover="change(image)"
-                />
-
-                <!-- Need to Set Play Button  -->
-                <video 
-                    class="min-w-[100px] rounded-[12px]"
-                    v-for="video in media.videos"
-                    @mouseover="change(video)"
+            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
+                <span
+                    class="icon-arrow-up text-[24px] cursor-pointer"
+                    role="button"
+                    aria-label="@lang('shop::app.components.products.carousel.previous')"
+                    tabindex="0"
+                    @click="swipeDown"
+                    v-if= "lengthOfMedia"
                 >
-                    <source 
-                        :src="video.video_url" 
-                        type="video/mp4"
+                </span>
+
+                <div
+                    ref="swiperContainer"
+                    class="flex flex-col max-h-[509px] gap-[30px] [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
+                >
+
+                    <img 
+                        :class="`min-w-[100px] max-h-[100px] rounded-[12px] border transparent cursor-pointer ${activeIndex === index ? 'border border-navyBlue' : 'border-white'}`"
+                        v-for="(image, index) in media.images"
+                        :src="image.small_image_url"
+                        alt="{{ $product->name }}"
+                        width="100"
+                        height="100"
+                        @click="change(image, index)"
                     />
-                </video>
+
+                    <!-- Need to Set Play Button  -->
+                    <video 
+                        class="min-w-[100px] rounded-[12px]"
+                        v-for="(video, index) in media.videos"
+                        @click="change(video, index)"
+                    >
+                        <source 
+                            :src="video.video_url"
+                            type="video/mp4"
+                        />
+                    </video>
+                </div>
+
+                <span
+                    class="icon-arrow-down text-[24px] cursor-pointer"
+                    role="button"
+                    aria-label="@lang('shop::app.components.products.carousel.previous')"
+                    tabindex="0"
+                    @click="swipeTop"
+                    v-if= "lengthOfMedia"
+                >
+                </span>
             </div>
             
             <!-- Media shimmer Effect -->
@@ -85,67 +111,83 @@
     <script type="module">
         app.component('v-product-gallery', {
             template: '#v-product-gallery-template',
-
+    
             data() {
                 return {
                     isMediaLoading: true,
-
+    
                     media: {
                         images: @json(product_image()->getGalleryImages($product)),
 
                         videos: @json(product_video()->getVideos($product)),
                     },
-
+    
                     baseFile: {
                         type: '',
 
                         path: ''
                     },
+    
+                    activeIndex: 0, 
 
-                    hover: false,
+                    containerOffset: 150,
                 }
             },
-
+    
             watch: {
                 'media.images': {
                     deep: true,
-
+                    
                     handler(newImages, oldImages) {
                         if (JSON.stringify(newImages) !== JSON.stringify(oldImages)) {
-                            this.baseFile.path = newImages[0].large_image_url; 
+                            this.baseFile.path = newImages[this.activeIndex].large_image_url;
                         }
                     },
                 },
             },
-
+    
             mounted() {
                 if (this.media.images.length) {
                     this.baseFile.type = 'image';
                     this.baseFile.path = this.media.images[0].large_image_url;
-                } else {
+                } else if (this.media.videos.length) {
                     this.baseFile.type = 'video';
                     this.baseFile.path = this.media.videos[0].video_url;
                 }
             },
 
+            computed: {
+                lengthOfMedia() {
+                    return [...this.media.images, ...this.media.videos].length > 4;
+                }
+            },
+    
             methods: {
                 onMediaLoad() {
                     this.isMediaLoading = false;
                 },
 
-                change(file) {
+                change(file, index) {
                     if (file.type == 'videos') {
                         this.baseFile.type = 'video';
-
                         this.baseFile.path = file.video_url;
                     } else {
                         this.baseFile.type = 'image';
-
                         this.baseFile.path = file.large_image_url;
                     }
-                    
-                    this.hover = true;
-                }
+
+                    this.activeIndex = index;
+                },
+
+                swipeTop() {
+                    const container = this.$refs.swiperContainer;
+                    container.scrollTop -= this.containerOffset;
+                },
+
+                swipeDown() {
+                    const container = this.$refs.swiperContainer;
+                    container.scrollTop += this.containerOffset;
+                },
             }
         })
     </script>
