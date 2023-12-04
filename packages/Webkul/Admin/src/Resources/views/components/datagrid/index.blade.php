@@ -380,10 +380,10 @@
                      * activated. In this case, we will search for `all` indices and update the
                      * value accordingly.
                      */
-                    if (!column) {
+                    if (! column) {
                         let appliedColumn = this.findAppliedColumn('all');
 
-                        if (!requestedValue) {
+                        if (! requestedValue) {
                             this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== 'all');
 
                             return;
@@ -514,7 +514,7 @@
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
-                    if (!this.available.records.length) {
+                    if (! this.available.records.length) {
                         return;
                     }
 

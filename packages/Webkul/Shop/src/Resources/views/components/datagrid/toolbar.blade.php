@@ -107,7 +107,7 @@
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute right-[10px] top-[8px] flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute rtl:left-[10px] ltr:right-[10px] top-[8px] flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>
