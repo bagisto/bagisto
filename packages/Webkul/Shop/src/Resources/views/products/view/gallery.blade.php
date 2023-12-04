@@ -176,6 +176,12 @@
                         this.baseFile.path = file.large_image_url;
                     }
 
+                    if (index > this.activeIndex) {
+                        this.swipeDown();
+                    } else if (index < this.activeIndex) {
+                        this.swipeTop(); 
+                    }
+
                     this.activeIndex = index;
                 },
 
