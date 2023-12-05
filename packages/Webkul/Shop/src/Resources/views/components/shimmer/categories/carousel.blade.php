@@ -14,8 +14,14 @@
             @endfor
         </div>
 
-        <span class="shimmer flex absolute top-[37px] -left-[41px] w-[50px] h-[50px] rounded-full"></span>
+        <span
+            class="shimmer flex absolute top-[37px] -left-[41px] w-[50px] h-[50px] rounded-full"
+            role="presentation"
+        ></span>
 
-        <span class="shimmer flex absolute top-[37px] -right-[22px] w-[50px] h-[50px] rounded-full"></span>
+        <span
+            class="shimmer flex absolute top-[37px] -right-[22px] w-[50px] h-[50px] rounded-full"
+            role="presentation"
+        ></span>
     </div>
 </div>

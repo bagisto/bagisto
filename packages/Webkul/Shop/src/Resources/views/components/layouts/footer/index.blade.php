@@ -48,8 +48,8 @@
                 <div class="grid gap-[10px]">
                     <p
                         class="max-w-[288px] leading-[45px] text-[30px] italic text-navyBlue"
-                        aria-labelledby="newsletter-heading"
-                        role="region"
+                        role="heading"
+                        aria-level="2"
                     >
                         @lang('shop::app.components.layouts.footer.newsletter-text')
                     </p>
