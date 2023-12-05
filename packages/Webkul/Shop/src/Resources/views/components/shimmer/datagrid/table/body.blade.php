@@ -13,7 +13,7 @@
 
             <div class="shimmer w-[100px] h-[24px]"></div>
 
-            <div class="flex gap-[10px] col-start-[none]">
+            <div class="flex gap-[10px] place-self-end">
                 <div class="shimmer w-[24px] h-[24px] p-[6px]"></div>
                 
                 <div class="shimmer w-[24px] h-[24px] p-[6px]"></div>
