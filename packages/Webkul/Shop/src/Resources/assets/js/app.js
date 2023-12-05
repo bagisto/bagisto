@@ -93,31 +93,59 @@ window.app = createApp({
     },
 
     mounted() {
-        var lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+        this.lazyImages();
 
-        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    let lazyImage = entry.target;
-
-                    lazyImage.src = lazyImage.dataset.src;
-                    
-                    lazyImage.classList.remove("lazy");
-
-                    lazyImageObserver.unobserve(lazyImage);
-                }
-            });
-        });
-
-        lazyImages.forEach(function(lazyImage) {
-            lazyImageObserver.observe(lazyImage);
-        });
+        this.animateBoxes();
     },
 
     methods: {
         onSubmit() {},
 
         onInvalidSubmit() {},
+
+        lazyImages() {
+            var lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+    
+                        lazyImage.src = lazyImage.dataset.src;
+                        
+                        lazyImage.classList.remove('lazy');
+    
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+    
+            lazyImages.forEach(function(lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+        },
+
+        animateBoxes() {
+            let animateBoxes = document.querySelectorAll('.scroll-trigger');
+
+            if (! animateBoxes.length) {
+                return;
+            }
+
+            animateBoxes.forEach((animateBox) => {
+                let animateBoxObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            animateBox.classList.remove('scroll-trigger--offscreen');
+
+                            animateBoxObserver.unobserve(animateBox);
+                        }
+                    });
+                });
+        
+                animateBoxObserver.observe(animateBox);
+            });
+        }
     },
 });
 

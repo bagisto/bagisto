@@ -61,7 +61,7 @@
                             </p>
 
                             <!-- Actions -->
-                            <p class="col-start-[none]">
+                            <p class="place-self-end">
                                 @lang('shop::app.components.datagrid.table.actions')
                             </p>
                         </div>
@@ -119,7 +119,7 @@
                                     <!-- Actions -->
                                     <p
                                         v-if="$parent.available.actions.length"
-                                        class="col-start-[none]"
+                                        class="place-self-end"
                                     >
                                         <span
                                             class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
