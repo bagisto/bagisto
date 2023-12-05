@@ -519,12 +519,6 @@
     }
 }
 
-
-.tox .tox-toolbar__group:last-child {
-    position: absolute;
-    right: 0;
-}
-
 .tox .tox-toolbar__group:last-child button {
     padding: 6px 8px;
     background: #eff6ff;
