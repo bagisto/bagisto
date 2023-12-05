@@ -44,12 +44,12 @@
                 @lang('shop::app.customers.login-form.form-login-text')
             </p>
 
-            {!! view_render_event('bagisto.shop.customers.login.before') !!}
+            {{-- {!! view_render_event('bagisto.shop.customers.login.before') !!} --}}
 
             <div class="mt-[60px] rounded max-sm:mt-[30px]">
                 <x-shop::form :action="route('shop.customer.session.create')">
 
-                    {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
+                    {{-- {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!} --}}
 
                     <!-- Email -->
                     <x-shop::form.control-group class="mb-4">
@@ -154,8 +154,6 @@
 
                         {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                     </div>
-
-                    {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                 </x-shop::form>
             </div>
 
