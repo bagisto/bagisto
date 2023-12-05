@@ -68,14 +68,10 @@
                             >
                             </span>
 
-                            <div
-                                class="grid"
-                                :class="notification.read ? 'opacity-70' : ''"
-                            >
+                            <div class="grid">
                                 <p  
                                     class="text-gray-800 dark:text-white"
                                     :class="notification.read ? 'font-normal' : 'font-semibold'"
-
                                 >
                                     #@{{ notification.order.id }}
                                     @{{ orderType[notification.order.status].message }}
