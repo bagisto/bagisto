@@ -19,9 +19,18 @@
 
         <v-desktop-category>
             <div class="flex gap-[20px] items-center">
-                <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
-                <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
-                <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+                <span
+                    class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                    role="presentation"
+                ></span>
+                <span
+                    class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                    role="presentation"
+                ></span>
+                <span
+                    class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                    role="presentation"
+                ></span>
             </div>
         </v-desktop-category>
     </div>
@@ -196,9 +205,18 @@
             class="flex gap-[20px] items-center"
             v-if="isLoading"
         >
-            <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
-            <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
-            <span class="shimmer w-[80px] h-[24px] rounded-[4px]"></span>
+            <span
+                class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                role="presentation"
+            ></span>
+            <span
+                class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                role="presentation"
+            ></span>
+            <span
+                class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                role="presentation"
+            ></span>
         </div>
 
         <div

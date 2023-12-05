@@ -50,7 +50,7 @@
         <div>
             <div class="flex justify-between">
                 <label
-                    class="text-[12px] text-gray-800 dark:text-white font-medium"
+                    class="flex gap-[5px] items-center text-[12px] text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >

@@ -207,6 +207,7 @@
                             this.uploadedFiles.push({
                                 name: file.name,
                                 url: reader.result,
+                                file: new File([file], file.name),
                             });
                         };
 
