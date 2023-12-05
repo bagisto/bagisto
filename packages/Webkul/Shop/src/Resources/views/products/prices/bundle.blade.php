@@ -1,7 +1,10 @@
 <div class="grid gap-[5px]">
     @if ($prices['from']['regular']['price'] != $prices['from']['final']['price'])
         <p class="flex gap-[15px] items-center max-sm:text-[18px]">
-            <span class="text-[#6E6E6E] line-through max-sm:text-[15px]">
+            <span
+                class="text-[#6E6E6E] line-through max-sm:text-[15px]"
+                araia-label="{{ $prices['from']['regular']['formatted_price'] }}"
+            >
                 {{ $prices['from']['regular']['formatted_price'] }}
             </span>
             
@@ -21,7 +24,10 @@
         
         @if ($prices['to']['regular']['price'] != $prices['to']['final']['price'])
             <p class="flex gap-[15px] items-center max-sm:text-[18px]">
-                <span class="text-[#6E6E6E] line-through max-sm:text-[15px]">
+                <span
+                    class="text-[#6E6E6E] line-through max-sm:text-[15px]"
+                    araia-label="{{ $prices['to']['regular']['formatted_price'] }}"
+                >
                     {{ $prices['to']['regular']['formatted_price'] }}
                 </span>
                 
