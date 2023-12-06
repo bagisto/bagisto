@@ -475,11 +475,11 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.weight"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('Weight')"
+                                                v-model="variant.weight"
                                             >
                                             </v-field>
                                         </div>
@@ -573,6 +573,7 @@
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('Variants Sku')"
+                                                v-slugify
                                             >
                                             </v-field>
                                         </div>
