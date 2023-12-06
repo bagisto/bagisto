@@ -29,6 +29,20 @@
                         @lang('admin::app.account.edit.back-btn')
                     </a>
 
+                    <!-- Preview Button -->
+                    @if (
+                        $product->status
+                        && $product->visible_individually
+                    )
+                        <a
+                            href="{{ route('shop.product_or_category.index', $product->url_key) }}"
+                            class="secondary-button"
+                            target="_blank"
+                        >
+                            @lang('admin::app.catalog.products.edit.preview')
+                        </a>
+                    @endif
+
                     <!-- Save Button -->
                     <button class="primary-button">
                         @lang('admin::app.catalog.products.edit.save-btn')

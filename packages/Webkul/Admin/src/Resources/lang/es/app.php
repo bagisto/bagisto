@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => 'Vista previa',
                 'remove'   => 'Eliminar',
                 'save-btn' => 'Guardar producto',
                 'title'    => 'Editar producto',
