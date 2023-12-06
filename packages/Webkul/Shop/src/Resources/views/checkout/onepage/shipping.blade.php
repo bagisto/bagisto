@@ -26,7 +26,7 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex flex-wrap gap-[30px] mt-[30px]">
+                        <div class="flex flex-wrap gap-[30px] mt-[15px]">
                             <div
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"

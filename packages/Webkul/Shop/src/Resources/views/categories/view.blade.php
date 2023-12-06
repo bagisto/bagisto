@@ -19,7 +19,7 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+        <div class="container mt-[30px] px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
             <div>
                 <img
                     class="rounded-[12px]"
@@ -34,7 +34,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+            <div class="container mt-[30px] px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 {!! $category->description !!}
             </div>
         @endif

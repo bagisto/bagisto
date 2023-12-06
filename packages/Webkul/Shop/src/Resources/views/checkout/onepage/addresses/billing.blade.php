@@ -14,7 +14,7 @@
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid gap-[20px] grid-cols-2 mt-[30px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                    <div class="grid gap-[20px] grid-cols-2 mt-[15px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                         <div 
                             class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses"
