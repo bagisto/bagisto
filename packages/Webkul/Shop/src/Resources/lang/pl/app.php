@@ -845,6 +845,17 @@ return [
                 'password'                => 'Senha',
             ],
 
+            'admin' => [
+                'registration' => [
+                    'dear'         => 'Szanowny Administratorze',
+                    'description'  => 'Nowy klient zarejestrował się w systemie.',
+                    'name'         => 'Imię klienta: :customerName',
+                    'subject'      => 'Nowa Rejestracja Klienta',
+                    'thanks'       => 'Dziękujemy.',
+                ],
+
+            ],
+
             'forgot-password' => [
                 'description'    => 'Otrzymujesz ten e-mail, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta.',
                 'greeting'       => 'Zapomniałeś hasła!',

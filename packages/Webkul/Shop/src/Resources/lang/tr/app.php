@@ -845,6 +845,17 @@ return [
                 'password'                => 'Şifre',
             ],
 
+            'admin' => [
+                'registration' => [
+                    'dear'         => 'Sayın Yönetici',
+                    'description'  => 'Sistemimize yeni bir müşteri kaydoldu.',
+                    'name'         => 'Müşteri Adı: :customerName',
+                    'subject'      => 'Yeni Müşteri Kaydı',
+                    'thanks'       => 'Teşekkür ederiz.',
+                ],
+
+            ],
+
             'forgot-password' => [
                 'description'    => 'Bu e-postayı şifre sıfırlama isteği aldığımız için alıyorsunuz.',
                 'greeting'       => 'Şifremi Unuttum!',

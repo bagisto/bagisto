@@ -831,6 +831,17 @@ return [
                 'password'                => 'パスワード',
             ],
 
+            'admin' => [
+                'registration' => [
+                    'dear'         => '親愛なる管理者',
+                    'description'  => '新しいお客様がシステムに登録されました。',
+                    'name'         => 'お客様の名前： :customerName',
+                    'subject'      => '新規お客様登録',
+                    'thanks'       => 'ありがとうございます。',
+                ],
+
+            ],
+
             'forgot-password' => [
                 'description'    => 'このメールは、アカウントのパスワードリセットリクエストを受けたためです。',
                 'greeting'       => 'パスワードをお忘れですか？',

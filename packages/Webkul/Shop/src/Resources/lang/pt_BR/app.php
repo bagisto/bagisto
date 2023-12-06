@@ -845,6 +845,17 @@ return [
                 'password'                => 'Senha',
             ],
 
+            'admin' => [
+                'registration' => [
+                    'dear'         => 'Caro Administrador',
+                    'description'  => 'Um novo cliente se registrou no sistema.',
+                    'name'         => 'Nome do Cliente: :customerName',
+                    'subject'      => 'Novo Registro de Cliente',
+                    'thanks'       => 'Obrigado.',
+                ],
+
+            ],
+
             'forgot-password' => [
                 'description'    => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para a sua conta.',
                 'greeting'       => 'Esqueceu a Senha!',

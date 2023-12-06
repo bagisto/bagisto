@@ -845,6 +845,17 @@ return [
                 'password'                => 'Password',
             ],
 
+            'admin' => [
+                'registration' => [
+                    'dear'         => 'Gentile Amministratore',
+                    'description'  => 'Un nuovo cliente si è registrato nel sistema.',
+                    'name'         => 'Nome del cliente: :customerName',
+                    'subject'      => 'Nuova Registrazione Cliente',
+                    'thanks'       => 'Grazie.',
+                ],
+
+            ],
+
             'forgot-password' => [
                 'description'    => 'Stai ricevendo questa email perché abbiamo ricevuto una richiesta di reset password per il tuo account.',
                 'greeting'       => 'Password dimenticata!',
