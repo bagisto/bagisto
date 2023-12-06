@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-f243afba.css",
+    "file": "assets/app-27dce206.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-f12b0c7d.woff",
+    "file": "assets/bagisto-admin-37c2feba.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/average-orders.svg": {
@@ -104,6 +104,10 @@
     "file": "assets/invoice-bbc6d6a8.svg",
     "src": "src/Resources/assets/images/settings/invoice.svg"
   },
+  "src/Resources/assets/images/settings/magic-ai.svg": {
+    "file": "assets/magic-ai-2b88cb86.svg",
+    "src": "src/Resources/assets/images/settings/magic-ai.svg"
+  },
   "src/Resources/assets/images/settings/order.svg": {
     "file": "assets/order-c8714dda.svg",
     "src": "src/Resources/assets/images/settings/order.svg"
@@ -144,6 +148,10 @@
     "file": "assets/theme-f4d870b8.svg",
     "src": "src/Resources/assets/images/settings/theme.svg"
   },
+  "src/Resources/assets/images/spinner.svg": {
+    "file": "assets/spinner-08c27ad5.svg",
+    "src": "src/Resources/assets/images/spinner.svg"
+  },
   "src/Resources/assets/images/total-orders.svg": {
     "file": "assets/total-orders-f1b2017e.svg",
     "src": "src/Resources/assets/images/total-orders.svg"
@@ -164,7 +172,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-73ef8e9b.js",
+    "file": "assets/app-d6e62d71.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

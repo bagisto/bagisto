@@ -40,6 +40,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::get('reviews', 'index')->name('shop.api.products.reviews.index');
 
         Route::post('review', 'store')->name('shop.api.products.reviews.store');
+
+        Route::get('reviews/{review_id}/translate', 'translate')->name('shop.api.products.reviews.translate');
     });
 
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
@@ -68,6 +70,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('coupon', 'storeCoupon')->name('shop.api.checkout.cart.coupon.apply');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
+
+        Route::get('cross-sell', 'crossSellProducts')->name('shop.api.checkout.cart.cross-sell.index');
     });
 
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {

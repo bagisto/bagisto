@@ -42,4 +42,31 @@
         </v-field>
 
         @break
+
+    @case('checkbox')
+        <v-field
+            v-slot="{ field }"
+            name="{{ $name }}"
+            type="checkbox"
+            class="hidden"
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+            <input
+                type="checkbox"
+                name="{{ $name }}"
+                v-bind="field"
+                class="sr-only peer"
+                {{ $attributes->except(['rules', 'label', ':label']) }}
+            />
+
+            <v-checkbox-handler :field="field" checked="{{ $attributes->get('checked') }}"></v-checkbox-handler>
+        </v-field>
+
+        <label
+            class="icon-checkbox-normal text-[24px] peer-checked:icon-checkbox-active peer-checked:text-blue-600  cursor-pointer"
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+        </label>
+
+        @break
 @endswitch

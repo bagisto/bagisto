@@ -16,6 +16,6 @@
 
     <!-- Page Content -->
     <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
-        {!! Blade::render($page->html_content) !!}
+        {!! $page->html_content !!}
     </div>
 </x-shop::layouts>

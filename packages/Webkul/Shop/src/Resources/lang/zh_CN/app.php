@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'title'      => '订单',
-                'order-id'   => '订单号',
-                'order'      => '订单',
-                'order-date' => '订单日期',
-                'total'      => '总计',
+                'order-id'    => '订单ID',
+                'order'       => '订单',
+                'order-date'  => '订单日期',
+                'title'       => '订单',
+                'total'       => '总计',
+                'action-view' => '查看',
+                'action'      => '操作',
+                'empty-order' => '您还没有订购任何产品',
 
                 'status'        => [
                     'title' => '状态',
@@ -151,9 +154,6 @@ return [
                         'fraud'           => '欺诈',
                     ],
                 ],
-
-                'action'      => '操作',
-                'empty-order' => '您尚未订购任何产品',
 
                 'view' => [
                     'title'              => '查看',
@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => '附件',
+                'cancel'           => '取消',
                 'comment'          => '评论',
                 'customer-review'  => '客户评论',
-                'cancel'           => '取消',
                 'empty-review'     => '未找到评论，成为第一个评论此产品的人',
                 'failed-to-upload' => '图片上传失败',
                 'load-more'        => '加载更多',
                 'name'             => '名称',
                 'rating'           => '评分',
-                'success'          => '评论成功提交。',
                 'submit-review'    => '提交评论',
+                'success'          => '评论成功提交。',
                 'title'            => '标题',
+                'translate'        => '翻译',
+                'translating'      => '翻译中...',
                 'write-a-review'   => '写评论',
             ],
 
@@ -647,6 +649,10 @@ return [
                 'total'                    => '总计',
                 'update-cart'              => '更新购物车',
                 'view-cart'                => '查看购物车',
+
+                'cross-sell' => [
+                    'title' => '更多选择',
+                ],
             ],
 
             'coupon' => [

@@ -31,6 +31,14 @@
 
             <!-- Save Inventory -->
             <div class="flex gap-x-[10px] items-center">
+                <!-- Back Button -->
+                <a
+                    href="{{ route('admin.configuration.index') }}"
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                >
+                    @lang('admin::app.configuration.index.back-btn')
+                </a>
+
                 <button 
                     type="submit"
                     class="primary-button"
@@ -107,14 +115,14 @@
         </div>
 
         @if ($groups)
-            <div class="grid grid-cols-[1fr_2fr] gap-[10px] mt-[25px] max-xl:flex-wrap">
+            <div class="grid grid-cols-[1fr_2fr] gap-[40px] mt-[25px] max-xl:flex-wrap">
                 @foreach ($groups as $key => $item)
-                    <div>
+                    <div class="grid gap-[10px] content-start">
                         <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
                             @lang($item['name'])
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300 mt-[4px]">
+                        <p class="text-gray-600 dark:text-gray-300 leading-[140%]">
                             @lang($item['info'] ?? '')
                         </p>
                     </div>

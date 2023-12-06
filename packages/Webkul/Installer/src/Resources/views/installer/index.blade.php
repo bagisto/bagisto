@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html
+    lang="{{ app()->getLocale() }}"
+    dir="{{ in_array(app()->getLocale(), ['ar', 'fa', 'he']) ? 'rtl' : 'ltr' }}"
+>
     <head>
         <title>@lang('installer::app.installer.index.title')</title>
 
@@ -24,7 +27,7 @@
 
         <link
             type="image/x-icon"
-            href="{{ asset('images/installer/bagisto-logo.svg') }}"
+            href="{{ bagisto_asset('images/installer/favicon.ico', 'installer') }}"
             rel="shortcut icon"
             sizes="16x16"
         />
@@ -32,9 +35,50 @@
         @stack('styles')
     </head>
 
+    @php
+        $locales = [
+            'ar'    => 'arabic',
+            'bn'    => 'bengali',
+            'pt_BR' => 'portuguese',
+            'zh_CN' => 'chinese',
+            'nl'    => 'dutch',
+            'en'    => 'english',
+            'fr'    => 'french',
+            'de'    => 'german',
+            'he'    => 'hebrew',
+            'hi_IN' => 'hindi',
+            'it'    => 'italian',
+            'ja'    => 'japanese',
+            'fa'    => 'persian',
+            'pl'    => 'polish',
+            'ru'    => 'russian',
+            'sin'   => 'sinhala',
+            'es'    => 'spanish',
+            'tr'    => 'turkish',
+            'uk'    => 'ukrainian',
+        ];
+
+        $currencies = [
+            'CNY' => 'chinese-yuan',
+            'AED' => 'dirham',
+            'EUR' => 'euro',
+            'INR' => 'rupee',
+            'IRR' => 'iranian',
+            'AFN' => 'israeli',
+            'JPY' => 'japanese-yen',
+            'GBP' => 'pound',
+            'RUB' => 'russian-ruble',
+            'SAR' => 'saudi',
+            'TRY' => 'turkish-lira',
+            'USD' => 'usd',
+            'UAH' => 'ukrainian-hryvnia',
+        ];
+    @endphp
+
     <body>
-        <div id="app" class="container">
-            <div class="flex [&amp;>*]:w-[50%] justify-center items-center">
+        <div id="app" class="container fixed">
+            <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
+                <!-- Vue Component -->
                 <v-server-requirements></v-server-requirements>
             </div>
         </div>
@@ -68,7 +112,7 @@
                                     <span v-if="stepStates.start !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.start === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.start === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -83,12 +127,12 @@
                                 <!-- Server Environment -->
                                 <div
                                     class="flex gap-[4px] text-[14px] text-gray-600"
-                                    :class="[stepStates.serverRequirements == 'active' ? 'font-bold' : '', 'text-gray-600']"
+                                    :class="[stepStates.systemRequirements == 'active' ? 'font-bold' : '', 'text-gray-600']"
                                 >
-                                    <span v-if="stepStates.serverRequirements !== 'complete'">
+                                    <span v-if="stepStates.systemRequirements !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.serverRequirements === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.systemRequirements === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -108,7 +152,7 @@
                                     <span v-if="stepStates.envDatabase !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.envDatabase === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.envDatabase === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -130,7 +174,7 @@
                                     <span v-if="stepStates.readyForInstallation !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.readyForInstallation === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.readyForInstallation === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -150,7 +194,7 @@
                                     <span v-if="stepStates.createAdmin !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.createAdmin === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.createAdmin === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -170,7 +214,7 @@
                                     <span v-if="stepStates.installationCompleted !== 'complete'">
                                         <span
                                             class="text-[20px]"
-                                            :class="stepStates.installationCompleted === 'pending' ? 'icon-checkbox' : 'icon-processing'"
+                                            :class="stepStates.installationCompleted === 'pending' ? 'icon-checkbox-normal' : 'icon-right'"
                                         >
                                         </span>
                                     </span>
@@ -187,16 +231,16 @@
 
                         <p class="place-self-end w-full text-left mb-[24px]">
                             <a
-                                class="bg-white underline text-blue-500"
+                                class="bg-white underline text-blue-600"
                                 href="https://bagisto.com/en/"
                             >
                                 @lang('installer::app.installer.index.bagisto')
                             </a>
 
-                            @lang('installer::app.installer.index.bagisto-info')
+                            <span>@lang('installer::app.installer.index.bagisto-info')</span>
 
                             <a
-                                class="bg-white underline text-blue-500"
+                                class="bg-white underline text-blue-600"
                                 href="https://webkul.com/"
                             >
                                 @lang('installer::app.installer.index.webkul')
@@ -205,47 +249,7 @@
                     </div>
                 </div>
 
-                @php
-                    $locales = [
-                        'ar'    => 'arabic',
-                        'bn'    => 'bengali',
-                        'pt_BR' => 'portuguese',
-                        'zh_CN' => 'chinese',
-                        'nl'    => 'dutch',
-                        'en'    => 'english',
-                        'fr'    => 'french',
-                        'de'    => 'german',
-                        'he'    => 'hebrew',
-                        'hi_IN' => 'hindi',
-                        'it'    => 'italian',
-                        'ja'    => 'japanese',
-                        'fa'    => 'persian',
-                        'pl'    => 'polish',
-                        'ru'    => 'russian',
-                        'sin'   => 'sinhala',
-                        'es'    => 'spanish',
-                        'tr'    => 'turkish',
-                        'uk'    => 'ukrainian',
-                    ];
-
-                    $currencies = [
-                        'CNY' => 'chinese-yuan',
-                        'AED' => 'dirham',
-                        'EUR' => 'euro',
-                        'INR' => 'rupee',
-                        'IRR' => 'iranian',
-                        'ILS' => 'israeli',
-                        'JPY' => 'japanese-yen',
-                        'GBP' => 'pound',
-                        'RUB' => 'russian-ruble',
-                        'SAR' => 'saudi',
-                        'TRY' => 'turkish-lira',
-                        'USD' => 'usd',
-                        'UAH' => 'ukrainian-hryvnia',
-                    ];
-                @endphp
                 <!-- Right Side Components -->
-
                 <!-- Start -->
                 <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'start'">
                     <x-installer::form
@@ -265,12 +269,14 @@
                             </div>
 
                             <div class="flex flex-col gap-[12px] items-center h-[384px] px-[30px] py-[16px] overflow-y-auto">
-                                <p class="text-gray-600 text-[14px] text-center">
-                                    @lang('installer::app.installer.index.installation-description')
-                                </p>
-
                                 <div class="container overflow-hidden">
-                                    <div class="flex flex-col gap-[12px] justify-center h-[284px]  px-[30px] py-[16px] overflow-y-auto">
+                                    <div class="flex flex-col gap-[12px] justify-end h-[100px]">
+                                        <p class="text-gray-600 text-[14px] text-center">
+                                            @lang('installer::app.installer.index.installation-description')
+                                        </p>
+                                    </div>
+
+                                    <div class="flex flex-col gap-[12px] justify-center h-[284px] px-[30px] py-[16px] overflow-y-auto">
                                         <!-- Application Name -->
                                         <x-installer::form.control-group class="mb-[10px]">
                                             <x-installer::form.control-group.label>
@@ -281,6 +287,7 @@
                                                 type="select"
                                                 name="locale"
                                                 rules="required"
+                                                :value="app()->getLocale()"
                                                 :label="trans('installer::app.installer.index.start.locale')"
                                                 value="{{ app()->getLocale() }}"
                                                 @change="$refs.multiLocaleForm.submit();"
@@ -305,9 +312,10 @@
                         
                             <div class="flex px-[16px] py-[10px] justify-end items-center">
                                 <button
-                                    type="submit"
+                                    type="button"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
                                     tabindex="0"
+                                    @click="nextForm"
                                 >
                                     @lang('installer::app.installer.index.continue')
                                 </button>
@@ -316,8 +324,8 @@
                     </x-installer::form>
                 </div>
 
-                <!-- Server Requirements -->
-                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'serverRequirements'">
+                <!-- Systme Requirements -->
+                <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'systemRequirements'">
                     <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
                             @lang('installer::app.installer.index.server-requirements.title')
@@ -618,13 +626,13 @@
 
                                         <div class="grid gap-[12px]">
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                                <span class="icon-processing text-[20px]"></span>
+                                                <span class="icon-right text-[20px]"></span>
 
                                                 <p>@lang('installer::app.installer.index.ready-for-installation.create-databsae-table')</p>
                                             </div>
 
                                             <div class="flex gap-[4px] text-[14px] text-gray-600">
-                                                <span class="icon-processing text-[20px]"></span>
+                                                <span class="icon-right text-[20px]"></span>
 
                                                 <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-table')</p>
                                             </div>
@@ -772,6 +780,7 @@
                                         name="app_timezone"
                                         ::value="envData.app_timezone ?? $current"
                                         rules="required"
+                                        :aria-label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                     >
                                         <option value="" disabled>Select Timezone</option>
@@ -792,10 +801,10 @@
                                     </x-installer::form.control-group.error>
                                 </x-installer::form.control-group>
 
-                                <div class="p-[6px] border border-amber-400 bg-amber-100">
-                                    <i class="icon-error text-black"></i>
+                                <div class="p-[6px]" :style="warning['container'], warning['message']">
+                                    <i class="icon-limited !text-black"></i>
 
-                                    @lang('installer.app.installer.index.environment-configuration.warning-message')
+                                    @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
 
                                 <div class="flex gap-[10px]">
@@ -810,6 +819,7 @@
                                             name="app_locale"
                                             value="{{ app()->getLocale() }}"
                                             rules="required"
+                                            :aria-label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                             :label="trans('installer::app.installer.index.environment-configuration.default-locale')"
                                         >
                                             @foreach ($locales as $value => $label)
@@ -835,6 +845,7 @@
                                             type="select"
                                             name="app_currency"
                                             ::value="envData.app_currency ?? 'USD'"
+                                            :aria-label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                             rules="required"
                                             :label="trans('installer::app.installer.index.environment-configuration.default-currency')"
                                         >
@@ -862,29 +873,37 @@
 
                                         <!-- Allowed Locales -->
                                         @foreach ($locales as $key => $locale)
-                                            <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == app()->getLocale()) ? 0 : 1;
+                                                    $selectedOption = ($key == config('app.locale')) ? 1: 0;
                                                 @endphp
 
-                                                <x-admin::form.control-group.control
+                                                <x-installer::form.control-group.control
+                                                    type="hidden"
+                                                    name="{{ $key }}"
+                                                    :value="$selectedOption"
+                                                >
+                                                </x-installer::form.control-group.control>
+
+                                                <x-installer::form.control-group.control
                                                     type="checkbox"
                                                     name="{{ $key }}"
                                                     id="allowed_locale[{{ $key }}]"
                                                     for="allowed_locale[{{ $key }}]"
-                                                    :value="(boolean) $selectedOption"
-                                                    :disabled="(boolean) ! $selectedOption"
+                                                    value="1"
+                                                    :checked="(boolean) $selectedOption"
+                                                    :disabled="(boolean) $selectedOption"
                                                     @change="pushAllowedLocales"
                                                 >
-                                                </x-admin::form.control-group.control>
+                                                </x-installer::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
+                                                <x-installer::form.control-group.label
                                                     for="allowed_locale[{{ $key }}]"
                                                     class="!text-[14px] !font-semibold cursor-pointer"
                                                 >
                                                     @lang("installer::app.installer.index.$locale")
-                                                </x-admin::form.control-group.label>
-                                            </x-admin::form.control-group>
+                                                </x-installer::form.control-group.label>
+                                            </x-installer::form.control-group>
                                         @endforeach
                                     </x-installer::form.control-group>
 
@@ -895,45 +914,43 @@
     
                                         <!-- Allowed Currencies -->
                                         @foreach ($currencies as $key => $currency)
-                                            <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == 'USD') ? 0 : 1;
+                                                    $selectedOption = ($key == config('app.currency')) ? 1 : 0;
                                                 @endphp
 
-                                                <x-admin::form.control-group.control
+                                                <x-installer::form.control-group.control
+                                                    type="hidden"
+                                                    name="{{ $key }}"
+                                                    :value="$selectedOption"
+                                                >
+                                                </x-installer::form.control-group.control>
+
+                                                <x-installer::form.control-group.control
                                                     type="checkbox"
                                                     name="{{ $key }}"
                                                     id="currency[{{ $key }}]"
                                                     for="currency[{{ $key }}]"
-                                                    :value="(boolean) $selectedOption"
-                                                    :disabled="(boolean) ! $selectedOption"
+                                                    value="1"
+                                                    :checked="(boolean) $selectedOption"
+                                                    :disabled="(boolean) $selectedOption"
                                                     @change="pushAllowedCurrency"
                                                 >
-                                                </x-admin::form.control-group.control>
+                                                </x-installer::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
+                                                <x-installer::form.control-group.label
                                                     for="currency[{{ $key }}]"
                                                     class="!text-[14px] !font-semibold cursor-pointer"
                                                 >
                                                     @lang("installer::app.installer.index.environment-configuration.$currency")
-                                                </x-admin::form.control-group.label>
-                                            </x-admin::form.control-group>
+                                                </x-installer::form.control-group.label>
+                                            </x-installer::form.control-group>
                                         @endforeach
                                     </x-installer::form.control-group>
                                 </div>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
-                                <div
-                                    class="text-[12px] text-blue-600 font-semibold cursor-pointer"
-                                    role="button"
-                                    aria-label="@lang('installer::app.installer.index.back')"
-                                    tabindex="0"
-                                    @click="back"
-                                >
-                                    @lang('installer::app.installer.index.back')
-                                </div>
-
+                            <div class="flex px-[16px] py-[10px] justify-end items-center">
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
@@ -946,7 +963,6 @@
                         </form>
                     </x-installer::form>
                 </div>
-
 
                 <!-- Create Administrator -->
                 <div
@@ -1155,7 +1171,7 @@
 
                             stepStates: {
                                 start: 'active',
-                                serverRequirements: 'pending',
+                                systemRequirements: 'pending',
                                 envDatabase: 'pending',
                                 readyForInstallation: 'pending',
                                 envConfiguration: 'pending',
@@ -1165,7 +1181,7 @@
 
                             steps: [
                                 'start',
-                                'serverRequirements',
+                                'systemRequirements',
                                 'envDatabase',
                                 'readyForInstallation',
                                 'installProgress',
@@ -1173,14 +1189,12 @@
                                 'createAdmin',
                                 'installationCompleted',
                             ],
-                        }
-                    },
 
-                    mounted() {
-                        const url = new URL(window.location.href);
+                            warning: {
+                                container: 'background: #fde68a',
 
-                        if (url.searchParams.has('locale')) {
-                            this.nextForm();
+                                message: 'color: #1F2937',
+                            },
                         }
                     },
 
@@ -1220,11 +1234,11 @@
                         nextForm(params) {
                             const stepActions = {
                                 start: () => {
-                                    this.completeStep('start', 'serverRequirements', 'active', 'complete');
+                                    this.completeStep('start', 'systemRequirements', 'active', 'complete');
                                 },
 
-                                serverRequirements: () => {
-                                    this.completeStep('serverRequirements', 'envDatabase', 'active', 'complete');
+                                systemRequirements: () => {
+                                    this.completeStep('systemRequirements', 'envDatabase', 'active', 'complete');
                                     
                                     this.currentStep = 'envDatabase';
                                 },
@@ -1233,12 +1247,8 @@
                                     this.envData = { ...params };
 
                                     let data = {
-                                        parameter: {
-                                            default_locales: this.envData.app_locale,
-                                            allowed_locales: this.locales.allowed,
-                                            default_currency: this.envData.app_currency,
-                                            allowed_currency: this.currencies.allowed,
-                                        },
+                                        allowed_locales: this.locales.allowed,
+                                        allowed_currencies: this.currencies.allowed,
                                     };
 
                                     this.startSeeding(data, this.envData);
@@ -1357,16 +1367,7 @@
 
                             let index = this.steps.indexOf(this.currentStep);
 
-                            console.log(this.currentStep, index);
                             if (index > 0) {
-                                if (this.currentStep === 'serverRequirements') {
-                                    const url = new URL(window.location.href);
-
-                                    url.searchParams.delete('locale');
-
-                                    window.location.href = url.toString();
-                                }
-
                                 this.currentStep = this.steps[index - 1];
                             }
                         }

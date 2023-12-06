@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Bestelnummer',
-                'order'      => 'Bestelling',
-                'order-date' => 'Besteldatum',
-                'title'      => 'Bestellingen',
-                'total'      => 'Totaal',
+                'order-id'    => 'Bestel-ID',
+                'order'       => 'Bestelling',
+                'order-date'  => 'Besteldatum',
+                'title'       => 'Bestellingen',
+                'total'       => 'Totaal',
+                'action-view' => 'Bekijken',
+                'action'      => 'Actie',
+                'empty-order' => 'U heeft nog geen product besteld',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'In Afwachting van Betaling',
                     ],
                 ],
-
-                'action'      => 'Actie',
-                'empty-order' => 'U heeft nog geen product besteld',
 
                 'view' => [
                     'billing-address'    => 'Factuuradres',
@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Bijlagen',
+                'cancel'           => 'Annuleren',
                 'comment'          => 'Opmerking',
                 'customer-review'  => 'Klantbeoordelingen',
-                'cancel'           => 'Annuleren',
                 'empty-review'     => 'Geen beoordeling gevonden, wees de eerste om dit product te beoordelen',
                 'failed-to-upload' => 'Het uploaden van de afbeelding is mislukt',
                 'load-more'        => 'Meer laden',
                 'name'             => 'Naam',
                 'rating'           => 'Beoordeling',
-                'success'          => 'Beoordeling succesvol ingediend.',
                 'submit-review'    => 'Beoordeling indienen',
+                'success'          => 'Beoordeling succesvol ingediend.',
                 'title'            => 'Titel',
+                'translate'        => 'Vertalen',
+                'translating'      => 'Vertalen...',
                 'write-a-review'   => 'Schrijf een beoordeling',
             ],
 
@@ -588,10 +590,11 @@ return [
     ],
 
     'compare'  => [
-        'product-compare'    => 'Producten Vergelijken',
+        'already-added'      => 'Item is al toegevoegd aan de vergelijkingslijst',
         'delete-all'         => 'Alles Verwijderen',
         'empty-text'         => 'Je hebt geen items in je vergelijkingslijst',
         'item-add-success'   => 'Item succesvol toegevoegd aan de vergelijkingslijst',
+        'product-compare'    => 'Producten Vergelijken',
         'remove-success'     => 'Item succesvol verwijderd.',
         'remove-all-success' => 'Alle items succesvol verwijderd.',
         'remove-error'       => 'Er is iets misgegaan, probeer het later opnieuw.',
@@ -646,6 +649,10 @@ return [
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
                 'view-cart'                => 'Bekijk winkelwagen',
+
+                'cross-sell' => [
+                    'title' => 'Meer keuzes',
+                ],
             ],
 
             'coupon'   => [

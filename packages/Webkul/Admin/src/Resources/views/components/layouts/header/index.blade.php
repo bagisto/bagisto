@@ -34,11 +34,11 @@
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
             <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-[10px] rtl:mr-[10px]">
-                <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[6px]"></i>
+                <i class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] text-[22px] top-[6px]"></i>
 
                 <input 
                     type="text" 
-                    class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full px-[40px] py-[5px] block bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                     placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
                 >
             </div>
@@ -581,7 +581,7 @@
 
                         <div class="grid">
                             <!-- Order Id & Status -->
-                            <p class="text-gray-800 dark:text-white">
+                            <p class="font-semibold text-gray-800 dark:text-white">
                                 #@{{ notification.order.id }}
                                 @{{ orderTypeMessages[notification.order.status] }}
                             </p>
@@ -595,7 +595,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex gap-[10px] justify-between p-[12px] border-t-[1px] dark:border-gray-800">
+                <div class="flex gap-[5px] justify-between h-[47px] py-[16px] px-[24px] border-t-[1px] dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
                         class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -631,27 +631,32 @@
                         ordertype: {
                             pending: {
                                 icon: 'icon-information',
-                                message: 'Order Pending',
+                                message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
                             },
+
                             processing: {
                                 icon: 'icon-processing',
-                                message: 'Order Processing'
+                                message: "@lang('admin::app.notifications.order-status-messages.processing')",
                             },
+
                             canceled: {
                                 icon: 'icon-cancel-1',
-                                message: 'Order Canceled'
+                                message: "@lang('admin::app.notifications.order-status-messages.canceled')"
                             },
+
                             completed: {
                                 icon: 'icon-done',
-                                message: 'Order Completed'
+                                message: "@lang('admin::app.notifications.order-status-messages.completed')"
                             },
+
                             closed: {
                                 icon: 'icon-cancel-1',
-                                message: 'Order Closed'
+                                message: "@lang('admin::app.notifications.order-status-messages.closed')"
                             },
+
                             pending_payment: {
-                                icon: 'icon-information',
-                                message: 'Payment Pending'
+                                icon: "icon-information",
+                                message: "@lang('admin::app.notifications.order-status-messages.pending-payment')"
                             },
                         },
 

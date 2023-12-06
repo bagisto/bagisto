@@ -1,16 +1,16 @@
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
-<v-product-review :product-id="{{ $product->id }}">
+<v-product-reviews :product-id="{{ $product->id }}">
     <div class="container max-1180:px-[20px]">
         <x-shop::shimmer.products.reviews/>
     </div>
-</v-product-review>
+</v-product-reviews>
 
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
     <!-- Product Review Template -->
-    <script type="text/x-template" id="v-product-review-template">
+    <script type="text/x-template" id="v-product-reviews-template">
         <div class="container max-1180:px-[20px]">
             <!-- Create Review Form Container -->
             <div 
@@ -33,7 +33,6 @@
                                     type="image"
                                     name="attachments"
                                     class="!p-0 !mb-0"
-                                    rules="required"
                                     ref="reviewImages"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
@@ -203,10 +202,11 @@
 
                         <!-- Ratings By Individual Stars -->
                         <div class="flex gap-x-[20px] items-center">
-                            <div class="flex gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
+                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
                                 @for ($i = 5; $i >= 1; $i--)
-                                    <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
+                                    <div class="row grid grid-cols-[1fr_2fr] gap-[10px] items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
+
                                         <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
                                             <div class="h-[16px] bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
@@ -307,7 +307,32 @@
                 >
                 </p>
 
-                <div class="flex gap-2 flex-wrap mt-2">
+                <button
+                    class="secondary-button min-h-[34px] mt-[10px] px-[8px] py-[4px] rounded-[8px] text-[14px]"
+                    @click="translate"
+                >
+                    <!-- Spinner -->
+                    <template v-if="isLoading">
+                        <img
+                            class="animate-spin h-5 w-5 text-blue-600"
+                            src="{{ bagisto_asset('images/spinner.svg') }}"
+                        />
+
+                        @lang('shop::app.products.view.reviews.translating')
+                    </template>
+
+                    <template v-else>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" role="presentation"> <g clip-path="url(#clip0_3148_2242)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1484 9.31989L9.31995 12.1483L19.9265 22.7549L22.755 19.9265L12.1484 9.31989ZM12.1484 10.7341L10.7342 12.1483L13.5626 14.9767L14.9768 13.5625L12.1484 10.7341Z" fill="#060C3B"/> <path d="M11.0877 3.30949L13.5625 4.44748L16.0374 3.30949L14.8994 5.78436L16.0374 8.25924L13.5625 7.12124L11.0877 8.25924L12.2257 5.78436L11.0877 3.30949Z" fill="#060C3B"/> <path d="M2.39219 2.39217L5.78438 3.95197L9.17656 2.39217L7.61677 5.78436L9.17656 9.17655L5.78438 7.61676L2.39219 9.17655L3.95198 5.78436L2.39219 2.39217Z" fill="#060C3B"/> <path d="M3.30947 11.0877L5.78434 12.2257L8.25922 11.0877L7.12122 13.5626L8.25922 16.0374L5.78434 14.8994L3.30947 16.0374L4.44746 13.5626L3.30947 11.0877Z" fill="#060C3B"/> </g> <defs> <clipPath id="clip0_3148_2242"> <rect width="24" height="24" fill="white"/> </clipPath> </defs> </svg>
+                        
+                        @lang('shop::app.products.view.reviews.translate')
+                    </template>
+                </button>
+
+                <!-- Review Attachments -->
+                <div
+                    class="flex gap-2 flex-wrap mt-3"
+                    v-if="review.images.length"
+                >
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
@@ -344,8 +369,8 @@
     </script>
 
     <script type="module">
-        app.component('v-product-review', {
-            template: '#v-product-review-template',
+        app.component('v-product-reviews', {
+            template: '#v-product-reviews-template',
 
             props: ['productId'],
 
@@ -387,6 +412,10 @@
                 },
 
                 store(params, { resetForm, setErrors }) {
+                    let selectedFiles = this.$refs.reviewImages.uploadedFiles.filter(obj => obj.file instanceof File).map(obj => obj.file);
+
+                    params.attachments = { ...params.attachments, ...selectedFiles };
+                    
                     this.$axios.post('{{ route('shop.api.products.reviews.store', $product->id) }}', params, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
@@ -420,6 +449,30 @@
             template: '#v-product-review-item-template',
 
             props: ['review'],
+
+            data() {
+                return {
+                    isLoading: false,
+                }
+            },
+
+            methods: {
+                translate() {
+                    this.isLoading = true;
+
+                    this.$axios.get("{{ route('shop.api.products.reviews.translate', ['id' => $product->id, 'review_id' => ':reviewId']) }}".replace(':reviewId', this.review.id))
+                        .then(response => {
+                            this.isLoading = false;
+
+                            this.review.comment = response.data.content;
+                        })
+                        .catch(error => {
+                            this.isLoading = false;
+
+                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                        });
+                },
+            },
         });
     </script>
 @endPushOnce

@@ -157,6 +157,8 @@
                 </x-shop::form>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.login.after') !!}
+
             <p class="mt-[20px] text-[#6E6E6E] font-medium">
                 @lang('shop::app.customers.login-form.new-customer')
 

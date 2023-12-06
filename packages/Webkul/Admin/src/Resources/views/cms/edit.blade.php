@@ -114,6 +114,7 @@
                             :label="trans('admin::app.cms.edit.content')"
                             :placeholder="trans('admin::app.cms.edit.content')"
                             :tinymce="true"
+                            :prompt="core()->getConfigData('general.magic_ai.content_generation.cms_page_content_prompt')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -135,7 +136,7 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Componnet -->
-                    <x-admin::seo/>
+                    <x-admin::seo slug="page"/>
 
                     <div class="mt-[30px]">
                         <x-admin::form.control-group class="mb-[30px]">

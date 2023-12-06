@@ -13,7 +13,7 @@
             <label
                 class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px] cursor-pointer"
                 aria-label="@lang('shop::app.search.images.index.search')"
-                for="v-image-search"
+                :for="'v-image-search-' + $.uid"
                 v-if="! isSearching"
             >
             </label>
@@ -52,7 +52,7 @@
                 type="file"
                 class="hidden"
                 ref="imageSearchInput"
-                id="v-image-search"
+                :id="'v-image-search-' + $.uid"
                 @change="loadLibrary()"
             />
 
@@ -166,16 +166,22 @@
                                     })
                                     .catch((error) => {
                                         this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.something-went-wrong')'});
+
+                                        this.isSearching = false;
                                     });
                             } else {
                                 imageInput.value = '';
 
                                 this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.size-limit-error')'});
+
+                                this.isSearching = false;
                             }
                         } else {
                             imageInput.value = '';
 
                             this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.only-images-allowed')'});
+
+                            this.isSearching = false;
                         }
                     }
                 },

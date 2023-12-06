@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Sipariş ID',
-                'order'      => 'Sipariş',
-                'order-date' => 'Sipariş Tarihi',
-                'title'      => 'Siparişler',
-                'total'      => 'Toplam',
+                'order-id'    => 'Pedido ID',
+                'order'       => 'Pedido',
+                'order-date'  => 'Pedido Tarihi',
+                'title'       => 'Pedidos',
+                'total'       => 'Toplam',
+                'action-view' => 'Görüntüle',
+                'action'      => 'İşlem',
+                'empty-order' => 'Son bir ürümüyü pedido yapmadınız',
 
                 'status' => [
                     'title' => 'Durum',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Ödeme Bekliyor',
                     ],
                 ],
-
-                'action'      => 'Eylem',
-                'empty-order' => 'Henüz hiçbir ürün sipariş etmediniz',
 
                 'view' => [
                     'billing-address'    => 'Fatura Adresi',
@@ -514,18 +514,21 @@ return [
 
             'reviews' => [
                 'attachments'       => 'Ekler',
+                'cancel'            => 'İptal',
                 'comment'           => 'Yorum',
                 'customer-review'   => 'Müşteri Yorumları',
-                'cancel'            => 'İptal',
                 'empty-review'      => 'Henüz yorum bulunamadı, ilk yorumu siz yapın',
                 'failed-to-upload'  => 'Resim yüklemesi başarısız oldu',
                 'load-more'         => 'Daha Fazla Yükle',
                 'name'              => 'Adı',
                 'rating'            => 'Derecelendirme',
-                'success'           => 'Yorum başarıyla gönderildi.',
                 'submit-review'     => 'Yorumu Gönder',
+                'success'           => 'Yorum başarıyla gönderildi.',
                 'title'             => 'Başlık',
+                'translate'         => 'Çevir',
+                'translating'       => 'Çevriliyor...',
                 'write-a-review'    => 'Yorum Yazın',
+
             ],
 
             'add-to-cart'            => 'Sepete Ekle',
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'Toplam',
                 'update-cart'              => 'Sepeti Güncelle',
                 'view-cart'                => 'Sepeti Görüntüle',
+
+                'cross-sell' => [
+                    'title' => 'Daha fazla seçenek',
+                ],
             ],
 
             'coupon'   => [

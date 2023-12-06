@@ -48,8 +48,8 @@ defineRule("address", (value) => {
     if (! value || ! value.length) {
         return true;
     }
-    
-    if (!/^[a-zA-Z0-9 ,()-]+$/i.test(value)) {
+
+    if (! /^[a-zA-Z0-9\s'\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u0590-\u05FF\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u0D80-\u0DFF\u3400-\u4DBF\u2000-\u2A6D\u00C0-\u017F\u0980-\u09FF\u0900-\u097F\u4E00-\u9FFF,\(\)-]{1,60}$/iu.test(value)) {
         return false;
     }
 
@@ -93,31 +93,59 @@ window.app = createApp({
     },
 
     mounted() {
-        var lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+        this.lazyImages();
 
-        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    let lazyImage = entry.target;
-
-                    lazyImage.src = lazyImage.dataset.src;
-                    
-                    lazyImage.classList.remove("lazy");
-
-                    lazyImageObserver.unobserve(lazyImage);
-                }
-            });
-        });
-
-        lazyImages.forEach(function(lazyImage) {
-            lazyImageObserver.observe(lazyImage);
-        });
+        this.animateBoxes();
     },
 
     methods: {
         onSubmit() {},
 
         onInvalidSubmit() {},
+
+        lazyImages() {
+            var lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+    
+                        lazyImage.src = lazyImage.dataset.src;
+                        
+                        lazyImage.classList.remove('lazy');
+    
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+    
+            lazyImages.forEach(function(lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+        },
+
+        animateBoxes() {
+            let animateBoxes = document.querySelectorAll('.scroll-trigger');
+
+            if (! animateBoxes.length) {
+                return;
+            }
+
+            animateBoxes.forEach((animateBox) => {
+                let animateBoxObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            animateBox.classList.remove('scroll-trigger--offscreen');
+
+                            animateBoxObserver.unobserve(animateBox);
+                        }
+                    });
+                });
+        
+                animateBoxObserver.observe(animateBox);
+            });
+        }
     },
 });
 

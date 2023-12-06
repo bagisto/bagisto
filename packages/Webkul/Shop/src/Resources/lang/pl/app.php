@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Numer zamówienia',
-                'order'      => 'Zamówienie',
-                'order-date' => 'Data zamówienia',
-                'title'      => 'Zamówienia',
-                'total'      => 'Suma',
+                'order-id'    => 'ID zamówienia',
+                'order'       => 'Zamówienie',
+                'order-date'  => 'Data zamówienia',
+                'title'       => 'Zamówienia',
+                'total'       => 'Razem',
+                'action-view' => 'Zobacz',
+                'action'      => 'Akcja',
+                'empty-order' => 'Nie zamówiłeś jeszcze żadnego produktu',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Oczekuje na płatność',
                     ],
                 ],
-
-                'action'      => 'Działanie',
-                'empty-order' => 'Nie zamówiłeś jeszcze żadnego produktu',
 
                 'view' => [
                     'billing-address'    => 'Adres rozliczeniowy',
@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Załączniki',
+                'cancel'           => 'Anuluj',
                 'comment'          => 'Komentarz',
                 'customer-review'  => 'Recenzje klientów',
-                'cancel'           => 'Anuluj',
                 'empty-review'     => 'Nie znaleziono recenzji, bądź pierwszym, który oceni ten produkt',
                 'failed-to-upload' => 'Nie udało się przesłać obrazka',
                 'load-more'        => 'Wczytaj więcej',
                 'name'             => 'Imię',
                 'rating'           => 'Ocena',
-                'success'          => 'Recenzja została pomyślnie przesłana.',
                 'submit-review'    => 'Prześlij recenzję',
+                'success'          => 'Recenzja została pomyślnie przesłana.',
                 'title'            => 'Tytuł',
+                'translate'        => 'Tłumaczyć',
+                'translating'      => 'Tłumaczenie...',
                 'write-a-review'   => 'Napisz recenzję',
             ],
 
@@ -647,6 +649,10 @@ return [
                 'total'                    => 'Suma',
                 'update-cart'              => 'Aktualizuj koszyk',
                 'view-cart'                => 'Zobacz koszyk',
+
+                'cross-sell' => [
+                    'title' => 'Więcej opcji',
+                ],
             ],
 
             'coupon'   => [

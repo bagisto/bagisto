@@ -561,7 +561,7 @@
                             
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="maintenance_mode_text"
+                                name="{{ $locale->code }}[maintenance_mode_text]"
                                 :value="old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? $channel->maintenance_mode_text)"
                                 id="maintenance-mode-text"
                                 :label="trans('admin::app.settings.channels.edit.maintenance-mode-text')"

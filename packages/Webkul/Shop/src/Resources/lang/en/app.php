@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Order ID',
-                'order'      => 'Order',
-                'order-date' => 'Order Date',
-                'title'      => 'Orders',
-                'total'      => 'Total',
+                'order-id'    => 'Order ID',
+                'order'       => 'Order',
+                'order-date'  => 'Order Date',
+                'title'       => 'Orders',
+                'total'       => 'Total',
+                'action-view' => 'View',
+                'action'      => 'Action',
+                'empty-order' => 'You have not ordered any product yet',
 
                 'status'        => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Pending Payment',
                     ],
                 ],
-
-                'action'      => 'Action',
-                'empty-order' => 'You have not ordered any product yet',
 
                 'view' => [
                     'billing-address'    => 'Billing Address',
@@ -514,18 +514,20 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Attachments',
+                'cancel'           => 'Cancel',
                 'comment'          => 'Comment',
                 'customer-review'  => 'Customer Reviews',
-                'cancel'           => 'Cancel',
                 'empty-review'     => 'No Review found, be the first to review this product',
                 'failed-to-upload' => 'The image failed to upload',
                 'load-more'        => 'Load More',
-                'rating'           => 'Rating',
-                'success'          => 'Review submitted successfully.',
-                'submit-review'    => 'Submit Review',
-                'title'            => 'Title',
-                'write-a-review'   => 'Write a Review',
                 'name'             => 'Name',
+                'rating'           => 'Rating',
+                'submit-review'    => 'Submit Review',
+                'success'          => 'Review submitted successfully.',
+                'title'            => 'Title',
+                'translate'        => 'Translate',
+                'translating'      => 'Translating...',
+                'write-a-review'   => 'Write a Review',
             ],
 
             'add-to-cart'            => 'Add To Cart',
@@ -647,6 +649,10 @@ return [
                 'total'                    => 'Total',
                 'update-cart'              => 'Update Cart',
                 'view-cart'                => 'View Cart',
+
+                'cross-sell' => [
+                    'title' => 'More choices',
+                ],
             ],
 
             'coupon'   => [

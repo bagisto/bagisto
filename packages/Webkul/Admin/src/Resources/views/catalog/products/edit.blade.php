@@ -146,6 +146,21 @@
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             {{ $attribute->admin_name . ($attribute->is_required ? '*' : '') }}
+
+                                            @if (
+                                                $attribute->value_per_channel
+                                                && $channels->count() > 1
+                                            )
+                                                <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                    {{ $currentChannel->name }}
+                                                </span>
+                                            @endif
+
+                                            @if ($attribute->value_per_locale)
+                                                <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                    {{ $currentLocale->name }}
+                                                </span>
+                                            @endif
                                         </x-admin::form.control-group.label>
 
                                         @include ('admin::catalog.products.edit.controls', [

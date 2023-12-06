@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'رقم الطلب',
-                'order'      => 'الطلب',
-                'order-date' => 'تاريخ الطلب',
-                'title'      => 'الطلبات',
-                'total'      => 'الإجمالي',
+                'order-id'    => 'معرف الطلب',
+                'order'       => 'طلب',
+                'order-date'  => 'تاريخ الطلب',
+                'title'       => 'الطلبات',
+                'total'       => 'الإجمالي',
+                'action-view' => 'عرض',
+                'action'      => 'إجراء',
+                'empty-order' => 'لم تقم بطلب أي منتج حتى الآن',
 
                 'status'        => [
                     'title' => 'الحالة',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'معلق على الدفع',
                     ],
                 ],
-
-                'action'        => 'الإجراء',
-                'empty-order'   => 'لم تقم بطلب أي منتج بعد',
 
                 'view' => [
                     'billing-address'    => 'عنوان الفواتير',
@@ -514,18 +514,20 @@ return [
 
             'reviews' => [
                 'attachments'      => 'المرفقات',
+                'cancel'           => 'إلغاء',
                 'comment'          => 'التعليق',
                 'customer-review'  => 'آراء العملاء',
-                'cancel'           => 'إلغاء',
                 'empty-review'     => 'لم يتم العثور على مراجعات، كن أول من يراجع هذا المنتج',
                 'failed-to-upload' => 'فشل تحميل الصورة',
                 'load-more'        => 'تحميل المزيد',
-                'rating'           => 'التقييم',
-                'success'          => 'تم إرسال المراجعة بنجاح.',
-                'submit-review'    => 'إرسال المراجعة',
-                'title'            => 'العنوان',
-                'write-a-review'   => 'كتابة مراجعة',
                 'name'             => 'الاسم',
+                'rating'           => 'التقييم',
+                'submit-review'    => 'إرسال المراجعة',
+                'success'          => 'تم إرسال المراجعة بنجاح.',
+                'title'            => 'العنوان',
+                'translate'        => 'ترجمة',
+                'translating'      => 'جار الترجمة...',
+                'write-a-review'   => 'كتابة مراجعة',
             ],
 
             'add-to-cart'            => 'أضف إلى السلة',
@@ -647,6 +649,10 @@ return [
                 'total'                    => 'المجموع',
                 'update-cart'              => 'تحديث عربة التسوق',
                 'view-cart'                => 'عرض عربة التسوق',
+
+                'cross-sell' => [
+                    'title' => 'المزيد من الخيارات',
+                ],
             ],
 
             'coupon'   => [

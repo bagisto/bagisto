@@ -1,12 +1,3 @@
-<!--Flash message -->
-<x-flash-group></x-flash-group>
-
-<x-panel>
-    <x-slot:header>Panel Title</x-slot:header>
-
-    <x-slot:body>Panel Body</x-slot:body>
-</x-panel>
-
 <!-- Form Control Group -->
 
 <!-- Type Text -->

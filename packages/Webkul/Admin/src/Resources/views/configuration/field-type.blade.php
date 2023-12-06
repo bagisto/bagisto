@@ -14,6 +14,8 @@
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
+<input type="hidden" name="keys[]" value="{{ json_encode($item) }}">
+
 <x-admin::form.control-group>
     @if ($field['type'] == 'depends')
         @include('admin::configuration.dependent-field-type')
@@ -21,15 +23,25 @@
         <!-- Title of the input field -->
         <div class="flex justify-between">
             <x-admin::form.control-group.label
-                :for="$name" :class="$isRequired"
-            >
-                @lang($field['title'])
-            </x-admin::form.control-group.label>
-
-            <x-admin::form.control-group.label
+                :class="$isRequired"
                 :for="$name"
             >
-                <span class="flex">{{ $channelLocaleInfo }}</span>
+                @lang($field['title'])
+
+                @if (
+                    ! empty($field['channel_based'])
+                    && $channels->count() > 1
+                )
+                    <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                        {{ $currentChannel->name }}
+                    </span>
+                @endif
+
+                @if (! empty($field['locale_based']))
+                    <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                        {{ $currentLocale->name }}
+                    </span>
+                @endif
             </x-admin::form.control-group.label>
         </div>
 
@@ -184,24 +196,20 @@
                 $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? '');
             @endphp
 
-            <!-- Hidden Fild for unseleted Switch button -->
-            <x-admin::form.control-group.control
-                type="hidden"
-                :name="$name"
-                value="0"
-            >
-            </x-admin::form.control-group.control>
+            <input type="hidden" name="{{ $name }}" value="0" />
 
-            <x-admin::form.control-group.control
-                type="switch"
-                :name="$name"
-                :value="(bool) $selectedOption"
-                :id="$name"
-                :rules="$validations"
-                :label="trans($field['title'])"
-                :checked="(bool) $selectedOption"
-            >
-            </x-admin::form.control-group.control>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input  
+                    type="checkbox"
+                    name="{{ $name }}"
+                    value="1"
+                    id="{{ $name }}"
+                    class="sr-only peer"
+                    {{ $selectedOption ? 'checked' : '' }}
+                >
+
+                <div class="w-[36px] h-[20px] bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-[16px] after:w-[16px] after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
 
         @elseif ($field['type'] == 'image')
 

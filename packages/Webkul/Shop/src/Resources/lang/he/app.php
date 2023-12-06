@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'מספר הזמנה',
-                'order'      => 'הזמנה',
-                'order-date' => 'תאריך הזמנה',
-                'title'      => 'הזמנות',
-                'total'      => 'סכום כולל',
+                'order-id'    => 'מספר הזמנה',
+                'order'       => 'הזמנה',
+                'order-date'  => 'תאריך הזמנה',
+                'title'       => 'הזמנות',
+                'total'       => 'סך הכל',
+                'action-view' => 'צפה',
+                'action'      => 'פעולה',
+                'empty-order' => 'עדיין לא הזמנת מוצר כלשהו',
 
                 'status' => [
                     'title' => 'סטטוס',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'ממתין לתשלום',
                     ],
                 ],
-
-                'action'      => 'פעולה',
-                'empty-order' => 'טרם ביצעת הזמנה',
 
                 'view' => [
                     'billing-address'    => 'כתובת לחיוב',
@@ -514,17 +514,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'קבצים מצורפים',
+                'cancel'           => 'ביטול',
                 'comment'          => 'תגובה',
                 'customer-review'  => 'ביקורות לקוחות',
-                'cancel'           => 'ביטול',
                 'empty-review'     => 'לא נמצאו ביקורות, היה הראשון לכתוב ביקורת על מוצר זה',
                 'failed-to-upload' => 'התמונה נכשלה בהעלאה',
                 'load-more'        => 'טען עוד',
                 'name'             => 'שם',
                 'rating'           => 'דירוג',
-                'success'          => 'ביקורת נשלחה בהצלחה.',
                 'submit-review'    => 'שלח ביקורת',
+                'success'          => 'ביקורת נשלחה בהצלחה.',
                 'title'            => 'כותרת',
+                'translate'        => 'תרגום',
+                'translating'      => 'מתרגם...',
                 'write-a-review'   => 'כתוב ביקורת',
             ],
 
@@ -647,6 +649,10 @@ return [
                 'total'                    => 'סה"כ',
                 'update-cart'              => 'עדכון עגלת הקניות',
                 'view-cart'                => 'צפה בעגלת הקניות',
+
+                'cross-sell' => [
+                    'title' => 'אפשרויות נוספות',
+                ],
             ],
 
             'coupon'   => [

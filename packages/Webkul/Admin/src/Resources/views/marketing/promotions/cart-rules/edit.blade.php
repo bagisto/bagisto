@@ -736,14 +736,13 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="flex gap-[16px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.from')
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
-                                                type="text"
+                                                type="datetime"
                                                 name="starts_from"
                                                 :value="old('starts_from') ?? $cartRule->starts_from"
                                                 id="starts_from"
@@ -764,7 +763,7 @@
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
-                                                type="text"
+                                                type="datetime"
                                                 name="ends_till"
                                                 :value="old('ends_till') ?? $cartRule->ends_till"
                                                 id="ends_till"
@@ -778,7 +777,6 @@
                                             >
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
-                                    </div>
                                 </x-slot:content>
                             </x-admin::accordion>
 
@@ -926,21 +924,25 @@
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">
-                                <input 
-                                    type="date"
-                                    :name="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
-                                    v-model="condition.value"
-                                />
+                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                    <input 
+                                        type="date"
+                                        :name="['conditions[' + index + '][value]']"
+                                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        v-model="condition.value"
+                                    />
+                                </x-admin::flat-picker.date>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'datetime'">
-                                <input 
-                                    type="datetime"
-                                    :name="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
-                                    v-model="condition.value"
-                                />
+                                <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                                    <input 
+                                        type="datetime"
+                                        :name="['conditions[' + index + '][value]']"
+                                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        v-model="condition.value"
+                                    />
+                                </x-admin::flat-picker.date>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'boolean'">

@@ -50,18 +50,26 @@
         <div>
             <div class="flex justify-between">
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
+                    class="flex gap-[5px] items-center text-[12px] text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
                     @{{ label }}
-                </label>
 
-                <label
-                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
-                    :for="name"
-                >
-                    @{{ channel_locale }}
+                    @if (
+                        ! empty($field['channel_based'])
+                        && $channels->count() > 1
+                    )
+                        <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                            {{ $currentChannel->name }}
+                        </span>
+                    @endif
+
+                    @if (! empty($field['locale_based']))
+                        <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                            {{ $currentLocale->name }}
+                        </span>
+                    @endif
                 </label>
             </div>
             

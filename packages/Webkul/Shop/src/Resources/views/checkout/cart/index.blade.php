@@ -47,6 +47,13 @@
         </div>
     </div>
 
+    <!-- Cross-sell Product Carousal -->
+    <x-shop::products.carousel
+        :title="trans('shop::app.checkout.cart.index.cross-sell.title')"
+        :src="route('shop.api.checkout.cart.cross-sell.index')"
+    >
+    </x-shop::products.carousel>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-cart-template">
             <div>
@@ -341,7 +348,7 @@
                                     this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
                                 }
                             })
-                            .catch(error => {});     
+                            .catch(error => {});
                     },
 
                     selectAll() {
