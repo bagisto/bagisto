@@ -143,7 +143,7 @@ class CustomerRepository extends Repository
     /**
      * Get customers count by date.
      */
-    public function getCustomersCountByDate(Carbon $from = null, Carbon $to = null): ?int
+    public function getCustomersCountByDate(?Carbon $from = null, ?Carbon $to = null): ?int
     {
         if ($from && $to) {
             return $this->count([['created_at', '>=', $from], ['created_at', '<=', $to]]);
