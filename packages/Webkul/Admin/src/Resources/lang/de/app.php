@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => 'Vorschau',
                 'remove'   => 'Entfernen',
                 'save-btn' => 'Produkt speichern',
                 'title'    => 'Produkt bearbeiten',
@@ -3797,11 +3798,11 @@ return [
             'payment'           => 'Zahlung',
             'price'             => 'Preis',
             'qty'               => 'Menge',
-            'shipping-address'  => 'Lieferadresse',
             'shipping'          => 'Versand',
+            'shipping-address'  => 'Lieferadresse',
+            'shipping-handling' => 'Versand und Bearbeitung',
             'sku'               => 'SKU',
             'subtotal'          => 'Zwischensumme',
-            'shipping-handling' => 'Versand und Bearbeitung',
             'tax'               => 'Steuer',
         ],
     ],

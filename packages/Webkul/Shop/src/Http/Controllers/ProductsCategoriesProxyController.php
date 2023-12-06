@@ -120,7 +120,7 @@ class ProductsCategoriesProxyController extends Controller
         ]);
 
         if ($productURLRewrite) {
-            return redirect()->to($productURLRewrite->target_path, $categoryURLRewrite->redirect_type);
+            return redirect()->to($productURLRewrite->target_path, $productURLRewrite->redirect_type);
         }
 
         abort(404);

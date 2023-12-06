@@ -105,15 +105,17 @@
                     
                                 <!-- State -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.rates.edit.state')
-                                    </x-admin::form.control-group.label>
-                                    
+                                    <!-- Country Have States -->
                                     <template v-if="haveStates()">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.taxes.rates.edit.state')
+                                        </x-admin::form.control-group.label>
+
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="state"
                                             value="{{ old('state') }}"
+                                            rules="required"
                                             :label="trans('admin::app.settings.taxes.rates.edit.state')"
                                             :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
                                             v-model="state"
@@ -122,29 +124,39 @@
                                                 @lang('admin::app.settings.taxes.rates.edit.select-state')
                                             </option>
                         
-                                            <option v-for='(state, index) in countryStates[country]' :value="state.code">
-                                                @{{ state.default_name }}
+                                            <option 
+                                                v-for='(state, index) in countryStates[country]' 
+                                                :value="state.code"
+                                                v-text="state.default_name"
+                                            >
                                             </option>
                                         </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="state"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </template>
 
+                                    <!-- Country Have not States -->
                                     <template v-else>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.taxes.rates.edit.state')
+                                        </x-admin::form.control-group.label>
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="state"
                                             value="{{ old('state') }}"
                                             :label="trans('admin::app.settings.taxes.rates.edit.state')"
                                             :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
-                                            v-model="state"
                                         >
-                                            <option value="">
-                                                @lang('admin::app.settings.taxes.rates.edit.select-state')
-                                            </option>
-                        
-                                            <option v-for='(state, index) in countryStates[country]' :value="state.code">
-                                                @{{ state.default_name }}
-                                            </option>
                                         </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="state"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </template>
                                 </x-admin::form.control-group>
     
@@ -302,7 +314,6 @@
                         * true if the array has a length greater than 0, and otherwise false.
                         */
                         return !!this.countryStates[this.country]?.length;
-
                     },
                 }
             });

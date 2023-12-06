@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => 'প্রিভিউ',
                 'remove'   => 'সরান',
                 'save-btn' => 'পণ্য সংরক্ষণ করুন',
                 'title'    => 'পণ্য সম্পাদনা',
@@ -3797,11 +3798,11 @@ return [
             'payment'           => 'পেমেন্ট',
             'price'             => 'মূল্য',
             'qty'               => 'পরিমাণ',
-            'shipping-address'  => 'প্রেরণের ঠিকানা',
             'shipping'          => 'প্রেরণ',
+            'shipping-address'  => 'প্রেরণের ঠিকানা',
+            'shipping-handling' => 'প্রেরণ হ্যান্ডলিং',
             'sku'               => 'SKU',
             'subtotal'          => 'সাবটোটাল',
-            'shipping-handling' => 'প্রেরণ হ্যান্ডলিং',
             'tax'               => 'ট্যাক্স',
         ],
     ],
