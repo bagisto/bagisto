@@ -7,13 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class ConfigurationForm extends FormRequest
 {
     /**
-     * Rules of the configuration
-     *
-     * @var array
-     */
-    public $rules = [];
-
-    /**
      * Determine if the Configuration is authorized to make this request.
      *
      * @return bool
@@ -30,9 +23,7 @@ class ConfigurationForm extends FormRequest
      */
     public function rules()
     {
-        $keys = request()->input('keys');
-
-        return collect($keys)->mapWithKeys(function ($item) {
+        return collect(request()->input('keys', []))->mapWithKeys(function ($item) {
             $data = json_decode($item, true);
 
             return collect($data['fields'])->mapWithKeys(function ($field) use ($data) {
