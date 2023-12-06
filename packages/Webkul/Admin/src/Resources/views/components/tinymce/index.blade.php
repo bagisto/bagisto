@@ -197,10 +197,12 @@
                                 reader.readAsDataURL(file);
                                 reader.onload = function() {
                                     let id = 'blobid' + new Date().getTime();
-                                    let blobCache = tinymce.get().editorUpload?.blobCache;
+                                    let blobCache = tinymce.activeEditor.editorUpload.blobCache;
                                     let base64 = reader.result.split(',')[1];
                                     let blobInfo = blobCache.create(id, file, base64);
+                                    
                                     blobCache.add(blobInfo);
+
                                     cb(blobInfo.blobUri(), {
                                         title: file.name
                                     });
