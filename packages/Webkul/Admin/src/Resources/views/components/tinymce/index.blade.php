@@ -200,7 +200,7 @@
                                     let blobCache = tinymce.activeEditor.editorUpload.blobCache;
                                     let base64 = reader.result.split(',')[1];
                                     let blobInfo = blobCache.create(id, file, base64);
-                                    
+
                                     blobCache.add(blobInfo);
 
                                     cb(blobInfo.blobUri(), {
@@ -264,7 +264,7 @@
                     tinyMCEHelper.initTinyMCE({
                         selector: this.selector,
                         plugins: 'image media wordcount save fullscreen code table lists link',
-                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton | image',
+                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
                         image_advtab: true,
                         directionality : "{{ core()->getCurrentLocale()->direction }}",
 
