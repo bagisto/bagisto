@@ -106,9 +106,9 @@
     <style>
         .fade {
             -webkit-animation-name: fade;
-            -webkit-animation-duration: 1.5s;
+            -webkit-animation-duration: 2.5s;
             animation-name: fade;
-            animation-duration: 1.5s;
+            animation-duration: 2.5s;
         }
 
         @-webkit-keyframes fade {
