@@ -82,10 +82,10 @@
                     </div>
 
                     <div class="section-content">
-                        {{-- <slot-list
+                        <slot-list
                             booking-type="appointment_slot"
                             :same-slot-all-days="appointment_booking.same_slot_all_days">
-                        </slot-list> --}}
+                        </slot-list>
                     </div>
                 </div>
             </div>

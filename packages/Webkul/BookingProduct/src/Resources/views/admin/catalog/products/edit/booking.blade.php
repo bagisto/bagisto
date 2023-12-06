@@ -181,13 +181,6 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
                 </div>
-
-                <div
-                    class="default-booking-section"
-                    v-if="booking.type == 'default'"
-                >
-                    @include ('booking::admin.catalog.products.edit.booking.default', ['bookingProduct' => $bookingProduct])
-                </div>
             </div>
         </x-admin::form>
         

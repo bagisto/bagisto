@@ -115,10 +115,10 @@
                         </div>
 
                         <div class="section-content">
-                            {{-- <slot-list
+                            <slot-list
                                 booking-type="rental_slot"
                                 :same-slot-all-days="rental_booking.same_slot_all_days">
-                            </slot-list> --}}
+                            </slot-list>
                         </div>
                     </div>
                 </div>

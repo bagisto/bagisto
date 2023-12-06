@@ -175,10 +175,10 @@
                 </div>
 
                 <div class="section-content">
-                    {{-- <slot-list
+                    <slot-list
                         booking-type="table_slot"
                         :same-slot-all-days="table_booking.same_slot_all_days">
-                    </slot-list> --}}
+                    </slot-list>
                 </div>
             </div>
         </x-admin::form>
