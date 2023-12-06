@@ -425,7 +425,7 @@
 
                             <div
                                 class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
-                                :class="{'flex gap-[10px] justify-between items-center': ['editPrices', 'editName'].includes(selectedType) }"
+                                :class="{'flex gap-[10px] justify-between items-center': ['editPrices', 'editName', 'editSku'].includes(selectedType) }"
                                 v-for="variant in selectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
@@ -559,6 +559,34 @@
                                                 </v-error-message>
                                             </x-admin::form.control-group>
                                         </div>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                <template v-if="selectedType == 'editSku'">
+                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                        <div class="relative">
+                                            <v-field
+                                                type="text"
+                                                :name="'variants[' + variant.id + ']'"
+                                                v-model="variant.sku"
+                                                class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                label="@lang('Variants Sku')"
+                                            >
+                                            </v-field>
+                                        </div>
+
+                                        <v-error-message
+                                            :name="'variants[' + variant.id + ']'"
+                                            v-slot="{ message }"
+                                        >
+                                            <p
+                                                class="mt-1 text-red-600 text-xs italic"
+                                                v-text="message"
+                                            >
+                                            </p>
+                                        </v-error-message>
                                     </x-admin::form.control-group>
                                 </template>
                                 
@@ -1175,7 +1203,7 @@
                 },
 
                 editSku(params) {
-                    console.log(params);
+                    this.selectedVariants.forEach(variant => variant.sku = params.sku ?? params.variants[variant.id]);
                 },
                 
                 addImages(params) {
