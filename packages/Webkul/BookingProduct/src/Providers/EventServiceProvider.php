@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
 
         Event::listen('bagisto.admin.catalog.product.edit.form.videos.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             if (View::exists('booking::admin.catalog.products.edit.types.booking')) {
-                $viewRenderEventManager->addTemplate('booking::admin.catalog.products.edit.types.booking');
+                $viewRenderEventManager->addTemplate('booking::admin.catalog.products.edit.booking');
             }
         });
     }

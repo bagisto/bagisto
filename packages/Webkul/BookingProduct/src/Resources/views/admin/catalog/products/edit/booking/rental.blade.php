@@ -1,81 +1,140 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.rental.before', ['product' => $product]) !!}
 
-<rental-booking></rental-booking>
+<v-rental-booking></v-rental-booking>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.rental.after', ['product' => $product]) !!}
 
 @push('scripts')
-    <script type="text/x-template" id="rental-booking-template">
-        <div>
-            <div class="control-group" :class="[errors.has('booking[renting_type]') ? 'has-error' : '']">
-                <label class="required">{{ __('bookingproduct::app.admin.catalog.products.renting-type') }}</label>
+    <script type="text/x-template" id="v-rental-booking-template">
+        <x-admin::form
+            enctype="multipart/form-data"
+            method="PUT"
+        >
+            <div>
+                <!-- Renting Type -->
+                <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group.label class="required">
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
+                    </x-admin::form.control-group.label>
 
-                <select v-validate="'required'" name="booking[renting_type]" v-model="rental_booking.renting_type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.renting-type') }}&quot;">
-                    <option value="daily">{{ __('bookingproduct::app.admin.catalog.products.daily') }}</option>
-                    <option value="hourly">{{ __('bookingproduct::app.admin.catalog.products.hourly') }}</option>
-                    <option value="daily_hourly">{{ __('bookingproduct::app.admin.catalog.products.daily-hourly') }}</option>
-                </select>
+                    <x-admin::form.control-group.control
+                        type="select"
+                        name="booking[renting_type]"
+                        rules="required"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        v-model="rental_booking.renting_type"
+                    >
+                        @foreach (['daily', 'hourly', 'daily_hourly'] as $item)
+                            <option value="{{ $item }}">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.type.' . $item)
+                            </option>
+                        @endforeach
+                    </x-admin::form.control-group.control>
 
-                <span class="control-error" v-if="errors.has('booking[renting_type]')">@{{ errors.first('booking[renting_type]') }}</span>
-            </div>
+                    <x-admin::form.control-group.error 
+                        control-name="booking[renting_type]"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
 
-            <div v-if="rental_booking.renting_type == 'daily' || rental_booking.renting_type == 'daily_hourly'">
-                <div class="control-group" :class="[errors.has('booking[daily_price]') ? 'has-error' : '']">
-                    <label class="required">{{ __('bookingproduct::app.admin.catalog.products.daily-price') }}</label>
+                <!-- Daily Price -->
+                <x-admin::form.control-group
+                    class="w-full mb-[10px]"
+                    v-if="rental_booking.renting_type == 'daily' || rental_booking.renting_type == 'daily_hourly'"
+                >
+                    <x-admin::form.control-group.label class="required">
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
+                    </x-admin::form.control-group.label>
 
-                    <input type="text" v-validate="'required'" name="booking[daily_price]" v-model="rental_booking.daily_price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.daily-price') }}&quot;"/>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="booking[daily_price]"
+                        rules="required"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        v-model="rental_booking.daily_price"
+                    >
+                    </x-admin::form.control-group.control>
 
-                    <span class="control-error" v-if="errors.has('booking[daily_price]')">@{{ errors.first('booking[daily_price]') }}</span>
-                </div>
-            </div>
+                    <x-admin::form.control-group.error 
+                        control-name="booking[renting_type]"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
 
-            <div v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'">
-                <div class="control-group" :class="[errors.has('booking[hourly_price]') ? 'has-error' : '']">
-                    <label class="required">{{ __('bookingproduct::app.admin.catalog.products.hourly-price') }}</label>
+                <!-- Hourly Price -->
+                <x-admin::form.control-group
+                    class="w-full mb-[10px]"
+                    v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'"
+                >
+                    <x-admin::form.control-group.label class="required">
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
+                    </x-admin::form.control-group.label>
 
-                    <input type="text" v-validate="'required'" name="booking[hourly_price]" v-model="rental_booking.hourly_price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.hourly-price') }}&quot;"/>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="booking[hourly_price]"
+                        rules="required"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        v-model="rental_booking.hourly_price"
+                    >
+                    </x-admin::form.control-group.control>
 
-                    <span class="control-error" v-if="errors.has('booking[hourly_price]')">@{{ errors.first('booking[hourly_price]') }}</span>
-                </div>
-            </div>
+                    <x-admin::form.control-group.error 
+                        control-name="booking[hourly_price]"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
 
-            <div v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'">
-                <div class="control-group" :class="[errors.has('booking[same_slot_all_days]') ? 'has-error' : '']">
-                    <label class="required">{{ __('bookingproduct::app.admin.catalog.products.same-slot-all-days') }}</label>
+                <div v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'">
+                    <!-- Same Slot For All -->
+                    <x-admin::form.control-group class="w-full mb-[10px]" >
+                        <x-admin::form.control-group.label class="required">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
+                        </x-admin::form.control-group.label>
 
-                    <select v-validate="'required'" name="booking[same_slot_all_days]" v-model="rental_booking.same_slot_all_days" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.same-slot-all-days') }}&quot;">
-                        <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
-                        <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
-                    </select>
+                        <x-admin::form.control-group.control
+                            type="select"
+                            name="booking[same_slot_all_days]"
+                            rules="required"
+                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                            v-model="rental_booking.same_slot_all_days"
+                        >
+                            <option value="1">@lang('bookingproduct::app.admin.catalog.products.yes')</option>
+                            <option value="0">@lang('bookingproduct::app.admin.catalog.products.no')</option>
+                        </x-admin::form.control-group.control>
 
-                    <span class="control-error" v-if="errors.has('booking[same_slot_all_days]')">@{{ errors.first('booking[same_slot_all_days]') }}</span>
-                </div>
+                        <x-admin::form.control-group.error 
+                            control-name="booking[hourly_price]"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
 
-                <div class="section">
-                    <div class="secton-title">
-                        <span>{{ __('bookingproduct::app.admin.catalog.products.slots') }}</span>
+                    <div class="section">
+                        <div class="secton-title">
+                            <span>{{ __('bookingproduct::app.admin.catalog.products.slots') }}</span>
+                        </div>
+
+                        <div class="section-content">
+                            {{-- <slot-list
+                                booking-type="rental_slot"
+                                :same-slot-all-days="rental_booking.same_slot_all_days">
+                            </slot-list> --}}
+                        </div>
                     </div>
-
-                    <div class="section-content">
-                        <slot-list
-                            booking-type="rental_slot"
-                            :same-slot-all-days="rental_booking.same_slot_all_days">
-                        </slot-list>
-                    </div>
                 </div>
             </div>
-        </div>
+        </x-admin::form>
     </script>
 
-    <script>
-        Vue.component('rental-booking', {
-            template: '#rental-booking-template',
+    <script type="module">
+        app.component('v-rental-booking', {
+            template: '#v-rental-booking-template',
 
-            inject: ['$validator'],
+            props: ['bookingProduct'],
 
-            data: function() {
+            data() {
                 return {
-                    rental_booking: bookingProduct && bookingProduct.rental_slot ? bookingProduct.rental_slot : {
+                    rental_booking: this.bookingProduct && this.bookingProduct.rental_slot ? this.bookingProduct.rental_slot : {
                         renting_type: 'daily',
 
                         daily_price: '',

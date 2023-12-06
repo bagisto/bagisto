@@ -1,11 +1,11 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.event.before', ['product' => $product]) !!}
 
-<v-event-booking></v-event-booking>
+<event-booking></event-booking>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.event.after', ['product' => $product]) !!}
 
 @push('scripts')
-    <script type="text/x-template" id="v-event-booking-template">
+    <script type="text/x-template" id="event-booking-template">
         <div>
             <div class="section">
                 <div class="secton-title">
@@ -13,13 +13,13 @@
                 </div>
 
                 <div class="section-content">
-                    <v-ticket-list :tickets="tickets"></v-ticket-list>
+                    <ticket-list :tickets="tickets"></ticket-list>
                 </div>
             </div>
         </div>
     </script>
 
-    <script type="text/x-template" id="v-ticket-list-template">
+    <script type="text/x-template" id="ticket-list-template">
         <div class="ticket-list table">
             <div class="table-responsive">
                 <table>
@@ -48,13 +48,13 @@
                         <th></th>
                     </thead>
                     <tbody>
-                        <v-ticket-item
+                        <ticket-item
                             v-for="(ticket, index) in tickets"
                             :key="index"
                             :index="index"
                             :ticket-item="ticket"
                             @onRemoveTicket="removeTicket($event)"
-                        ></v-ticket-item>
+                        ></ticket-item>
                     </tbody>
                 </table>
             </div>
@@ -65,8 +65,8 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-ticket-item-template">
-        {{-- <tr>
+    <script type="text/x-template" id="ticket-item-template">
+        <tr>
             <td>
                 <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][name]') ? 'has-error' : '']">
                     <input type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][name]'" v-model="ticketItem.name" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.name') }}&quot;">
@@ -140,27 +140,31 @@
             <td>
                 <i class="icon remove-icon" @click="removeTicket()"></i>
             </td>
-        </tr> --}}
+        </tr>
     </script>
 
-    <script type="module">
-        app.component('v-event-booking', {
-            template: '#v-event-booking-template',
+    <script>
+        Vue.component('event-booking', {
+            template: '#event-booking-template',
 
-            data() {
+            inject: ['$validator'],
+
+            data: function() {
                 return {
                     tickets: @json($bookingProduct ? $bookingProduct->event_tickets()->get() : [])
                 }
             }
         });
 
-        app.component('v-ticket-list', {
-            template: '#v-ticket-list-template',
+        Vue.component('ticket-list', {
+            template: '#ticket-list-template',
 
             props: ['tickets'],
 
+            inject: ['$validator'],
+
             methods: {
-                addTicket(dayIndex = null) {
+                addTicket: function (dayIndex = null) {
                     this.tickets.push({
                         'name': '',
                         'price': '',
@@ -172,7 +176,7 @@
                     });
                 },
 
-                removeTicket(ticket) {
+                removeTicket: function(ticket) {
                     let index = this.tickets.indexOf(ticket)
 
                     this.tickets.splice(index, 1)
@@ -180,13 +184,15 @@
             }
         });
 
-        app.component('v-ticket-item', {
-            template: '#v-ticket-item-template',
+        Vue.component('ticket-item', {
+            template: '#ticket-item-template',
 
             props: ['index', 'ticketItem'],
 
+            inject: ['$validator'],
+
             computed: {
-                controlName() {
+                controlName: function () {
                     if (this.ticketItem.id) {
                         return 'booking[tickets][' + this.ticketItem.id + ']';
                     }
@@ -196,10 +202,17 @@
             },
 
             methods: {
-                removeTicket(){
+                removeTicket: function() {
                     this.$emit('onRemoveTicket', this.ticketItem)
                 },
             }
         });
     </script>
+
+    <style>
+        .ticket-label {
+            font-weight: 700;
+            margin: 20px 0 10px 0;
+        }
+    </style>
 @endpush
