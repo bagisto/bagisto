@@ -265,7 +265,11 @@
                                     @{{ updateTypes[selectedType].title }}
                                 </p>
 
-                                <button class="mr-[45px] primary-button">
+                                <button
+                                    class="mr-[45px] primary-button"
+                                    type="button"
+                                    @click="$refs.updateVariantsDrawer.close();unselectAll();"
+                                >
                                     @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
                                 </button>
                             </div>
@@ -274,157 +278,150 @@
                         <!-- Drawer Content -->
                         <x-slot:content class="p-[16px]">
                             <!-- Mass Update -->
-                            <x-admin::form
-                                v-slot="{ meta, errors, handleSubmit }"
-                                as="div"
-                            >
-                                <form @submit="handleSubmit($event, update)">
-                                    <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
-                                                    <x-admin::form.control-group.label>
-                                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
-                                                    </x-admin::form.control-group.label>
-                        
+                            <template v-if="selectedType == 'editPrices'">
+                                <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                    <div class="flex gap-[10px] items-center">
+                                        <x-admin::form.control-group class="flex-1 mb-0">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
+                                            </x-admin::form.control-group.label>
+                
 
-                                                    <div class="relative">
-                                                        <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500">
-                                                            {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
-                                                        </span>
+                                            <div class="relative">
+                                                <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500">
+                                                    {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
+                                                </span>
 
-                                                        <x-admin::form.control-group.control
-                                                            type="text"
-                                                            name="price"
-                                                            class="ltr:pl-[30px] rtl:pr-[30px]"
-                                                            ::rules="{required: true, decimal: true, min_value: 0}"
-                                                            :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
-                                                        >
-                                                        </x-admin::form.control-group.control>
-                                                    </div>
-                                                </x-admin::form.control-group>
-
-                                                <button class="secondary-button mt-[15px]">
-                                                    @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
-                                                </button>
-                                            </div>
-                    
-                                            <x-admin::form.control-group.error control-name="price"></x-admin::form.control-group.error>
-                                        </div>
-                                    </template>
-
-                                    <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
-                                                <x-admin::form.control-group
-                                                    class="mb-[0px]"
-                                                    v-for='inventorySource in inventorySources'
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="price"
+                                                    class="ltr:pl-[30px] rtl:pr-[30px]"
+                                                    ::rules="{required: true, decimal: true, min_value: 0}"
+                                                    :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
                                                 >
-                                                    <x-admin::form.control-group.label>
-                                                        @{{ inventorySource.name }}
-                                                    </x-admin::form.control-group.label>
-
-                                                    <v-field
-                                                        type="text"
-                                                        :name="'inventories[' + inventorySource.id + ']'"
-                                                        class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                        :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
-                                                        rules="required|numeric|min:0"
-                                                        :label="inventorySource.name"
-                                                    >
-                                                    </v-field>
-
-                                                    <v-error-message
-                                                        :name="'inventories[' + inventorySource.id + ']'"
-                                                        v-slot="{ message }"
-                                                    >
-                                                        <p
-                                                            class="mt-1 text-red-600 text-xs italic"
-                                                            v-text="message"
-                                                        >
-                                                        </p>
-                                                    </v-error-message>
-                                                </x-admin::form.control-group>
+                                                </x-admin::form.control-group.control>
                                             </div>
+                                        </x-admin::form.control-group>
 
-                                            <button class="secondary-button">
-                                                @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
-                                            </button>
-                                        </div>
-                                    </template>
+                                        <button class="secondary-button mt-[15px]">
+                                            @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                        </button>
+                                    </div>
+            
+                                    <x-admin::form.control-group.error control-name="price"></x-admin::form.control-group.error>
+                                </div>
+                            </template>
 
-                                    <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <v-media-images
-                                                name="images"
-                                                class="mb-[10px]"
-                                                v-bind:allow-multiple="true"
-                                                :uploaded-images="updateTypes[selectedType].images"
-                                            ></v-media-images>
+                            <template v-if="selectedType == 'editInventories'">
+                                <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                    <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
+                                        <x-admin::form.control-group
+                                            class="mb-[0px]"
+                                            v-for='inventorySource in inventorySources'
+                                        >
+                                            <x-admin::form.control-group.label>
+                                                @{{ inventorySource.name }}
+                                            </x-admin::form.control-group.label>
 
-                                            <button class="secondary-button">
-                                                @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
-                                            </button>
-                                        </div>
-                                    </template>
+                                            <v-field
+                                                type="text"
+                                                :name="'inventories[' + inventorySource.id + ']'"
+                                                class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                rules="required|numeric|min:0"
+                                                :label="inventorySource.name"
+                                            >
+                                            </v-field>
 
-                                    <template v-if="selectedType == 'editWeight'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
-                                                    <x-admin::form.control-group.label>
-                                                        @lang('Apply a weight to all SKU.')
-                                                    </x-admin::form.control-group.label>
-                        
-                                                    <div class="relative">
-                                                        <x-admin::form.control-group.control
-                                                            type="text"
-                                                            name="weight"
-                                                            value="0"
-                                                            ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
-                                                            :label="trans('Weight')"
-                                                        >
-                                                        </x-admin::form.control-group.control>
-                                                    </div>
-                                                </x-admin::form.control-group>
+                                            <v-error-message
+                                                :name="'inventories[' + inventorySource.id + ']'"
+                                                v-slot="{ message }"
+                                            >
+                                                <p
+                                                    class="mt-1 text-red-600 text-xs italic"
+                                                    v-text="message"
+                                                >
+                                                </p>
+                                            </v-error-message>
+                                        </x-admin::form.control-group>
+                                    </div>
 
-                                                <button class="secondary-button mt-[15px]">
-                                                    @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
-                                                </button>
+                                    <button class="secondary-button">
+                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                    </button>
+                                </div>
+                            </template>
+
+                            <template v-if="selectedType == 'addImages'">
+                                <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                    <v-media-images
+                                        name="images"
+                                        class="mb-[10px]"
+                                        v-bind:allow-multiple="true"
+                                        :uploaded-images="updateTypes[selectedType].images"
+                                    ></v-media-images>
+
+                                    <button class="secondary-button">
+                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                    </button>
+                                </div>
+                            </template>
+
+                            <template v-if="selectedType == 'editWeight'">
+                                <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                    <div class="flex gap-[10px] items-center">
+                                        <x-admin::form.control-group class="flex-1 mb-0">
+                                            <x-admin::form.control-group.label>
+                                                @lang('Apply a weight to all SKU.')
+                                            </x-admin::form.control-group.label>
+                
+                                            <div class="relative">
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="weight"
+                                                    value="0"
+                                                    ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                    :label="trans('Weight')"
+                                                >
+                                                </x-admin::form.control-group.control>
                                             </div>
-                    
-                                            <x-admin::form.control-group.error control-name="weight"></x-admin::form.control-group.error>
-                                        </div>
-                                    </template>
+                                        </x-admin::form.control-group>
 
-                                    <template v-if="selectedType == 'editName'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
-                                                    <x-admin::form.control-group.label>
-                                                        @lang('Apply a name to all variants.')
-                                                    </x-admin::form.control-group.label>
+                                        <button class="secondary-button mt-[15px]">
+                                            @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                        </button>
+                                    </div>
+            
+                                    <x-admin::form.control-group.error control-name="weight"></x-admin::form.control-group.error>
+                                </div>
+                            </template>
 
-                                                    <div class="relative">
-                                                        <x-admin::form.control-group.control
-                                                            type="text"
-                                                            name="name"
-                                                            ::rules="{ required: true }"
-                                                            :label="trans('Name')"
-                                                        ></x-admin::form.control-group.control>
-                                                    </div>
-                                                </x-admin::form.control-group>
+                            <template v-if="selectedType == 'editName'">
+                                <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                    <div class="flex gap-[10px] items-center">
+                                        <x-admin::form.control-group class="flex-1 mb-0">
+                                            <x-admin::form.control-group.label>
+                                                @lang('Apply a name to all variants.')
+                                            </x-admin::form.control-group.label>
 
-                                                <button class="secondary-button mt-[15px]">
-                                                    @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
-                                                </button>
+                                            <div class="relative">
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="name"
+                                                    ::rules="{ required: true }"
+                                                    :label="trans('Name')"
+                                                ></x-admin::form.control-group.control>
                                             </div>
-                    
-                                            <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
-                                        </div>
-                                    </template>
-                                </form>
-                            </x-admin::form>
+                                        </x-admin::form.control-group>
+
+                                        <button class="secondary-button mt-[15px]">
+                                            @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                        </button>
+                                    </div>
+            
+                                    <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                </div>
+                            </template>
 
                             <div
                                 class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
@@ -450,7 +447,7 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.price"
+                                                v-model="variant.price"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
@@ -506,7 +503,7 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.name"
+                                                v-model="variant.name"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -1097,9 +1094,11 @@
                 selectAll() {
                     let isSelected = this.selectedVariants.length <= 0;
 
-                    this.variants.forEach(function (variant) {
-                        variant.selected = isSelected;
-                    });
+                    this.variants.forEach(variant => variant.selected = isSelected);
+                },
+
+                unselectAll() {
+                    this.selectedVariants.forEach(variant => variant.selected = false);
                 },
 
                 selectVariantsByAttributeOption(attribute, option) {
@@ -1157,40 +1156,22 @@
 
                 update(params) {
                     this[this.selectedType](params);
-
-                    this.$refs.updateVariantsDrawer.close();
                 },
 
                 editPrices(params) {
-                    this.selectedVariants.forEach(function (variant) {
-                        variant.price = params?.price ?? params.variants[variant.id];
-
-                        variant.selected = false;
-                    });
+                    this.selectedVariants.forEach(variant => variant.price = params?.price ?? params.variants[variant.id]);
                 },
 
                 editInventories(params) {
-                    this.selectedVariants.forEach(function (variant) {
-                        variant.inventories = params?.inventories ?? params.variants[variant.id];
-
-                        variant.selected = false;
-                    });
+                    this.selectedVariants.forEach(variant => variant.inventories = params?.inventories ?? params.variants[variant.id]);
                 },
 
                 editWeight(params) {
-                    this.selectedVariants.forEach(function (variant) {
-                        variant.weight = params?.weight ?? params.variants[variant.id];
-
-                        variant.selected = false;
-                    });
+                    this.selectedVariants.forEach(variant => variant.weight = params?.weight ?? params.variants[variant.id]);
                 },
 
                 editName(params) {
-                    this.selectedVariants.forEach(function (variant) {
-                        variant.name = params?.name ?? params.variants[variant.id];
-
-                        variant.selected = false;
-                    });
+                    this.selectedVariants.forEach(variant => variant.name = params.name ?? params.variants[variant.id]);
                 },
 
                 editSku(params) {
@@ -1208,8 +1189,6 @@
 
                             variant.temp_images = [];
                         }
-
-                        variant.selected = false;
                     });
 
                     this.updateTypes.addImages.images = [];
@@ -1218,8 +1197,6 @@
                 removeImages() {
                     this.selectedVariants.forEach(function (variant) {
                         variant.images = [];
-
-                        variant.selected = false;
                     });
                 },
 
