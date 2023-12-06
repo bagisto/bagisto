@@ -86,9 +86,11 @@
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
 
+            @php $orders = $customer->orders(); @endphp
+
             <!-- Orders -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                @if ($totalOrderCount = count($customer->orders))
+                @if ($totalOrderCount = $orders->count())
                     <div class=" p-[16px] flex justify-between">
                         <!-- Total Order Count -->
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -96,23 +98,19 @@
                         </p>    
 
                         @php
-                            $revenue = core()->currency($customer->orders
+                            $revenue = core()->formatBasePrice($orders->get()
                                 ->whereNotIn('status', ['canceled', 'closed'])
-                                ->sum('grand_total'));
+                                ->sum('base_grand_total_invoiced'));
                         @endphp
 
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.total-revenue', ['revenue' => $revenue])
                         </p>
                     </div>
-                    
-                    @php
-                        $orders = $customer->orders()->paginate(10)
-                    @endphp
 
                     <!-- Order Details -->
                     <div class="table-responsive grid w-full">
-                        @foreach ($orders as $order)
+                        @foreach ($orders->paginate(10) as $order)
                             <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
@@ -163,7 +161,7 @@
                                     <div class="flex flex-col gap-[6px]">
                                         <!-- Grand Total -->
                                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
-                                            {{ core()->currency($order->grand_total ) }}
+                                            {{ core()->formatBasePrice($order->base_grand_total ) }}
                                         </p>
 
                                         <!-- Payment methods -->   
@@ -208,7 +206,7 @@
                         @endforeach
                     </div>
 
-                    @php $pagination = $orders->toArray(); @endphp
+                    @php $pagination = $orders->paginate(10)->toArray(); @endphp
 
                     <!-- Pagination -->
                     @if ($totalOrderCount > 10)
@@ -318,11 +316,20 @@
                                         </td>
 
                                         <td scope="row" class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
-                                            {{ core()->currency($invoice->grand_total) }}
+                                            {{ core()->formatBasePrice($invoice->base_grand_total) }}
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
+                                        </td>
+
+                                        <td class="text-center">
+                                            <a 
+                                                href="{{ route('admin.sales.invoices.view', $invoice->id) }}" 
+                                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                role="presentation"
+                                            >
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
