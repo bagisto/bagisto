@@ -24,7 +24,7 @@ class ElasticSearch
      *
      * @return \Elasticsearch\Client
      */
-    protected function makeConnection(string $name = null): Client
+    protected function makeConnection(?string $name = null): Client
     {
         $connection = $name ?: $this->getDefaultConnection();
 
