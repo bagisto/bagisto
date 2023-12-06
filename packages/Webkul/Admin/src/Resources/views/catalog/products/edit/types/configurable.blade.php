@@ -1074,6 +1074,11 @@
                             title: "@lang('Edit Weight')"
                         },
 
+                        editStatus: {
+                            key: 'editStatus',
+                            title: "@lang('Edit Status')"
+                        },
+
                         addImages: {
                             key: 'addImages',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.add-images')",
@@ -1205,6 +1210,10 @@
 
                 editSku(params) {
                     this.selectedVariants.forEach(variant => variant.sku = params.sku ?? params.variants[variant.id]);
+                },
+
+                editStatus(params) {
+                    this.selectedVariants.forEach(variant => variant.status = params.sku ?? params.variants[variant.id]);
                 },
                 
                 addImages(params) {
