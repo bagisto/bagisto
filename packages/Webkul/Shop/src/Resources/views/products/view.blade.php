@@ -146,32 +146,28 @@
     </div>
 
     <!-- Information Section -->
-    <div class="container mt-[40px] max-1180:px-[20px] 1180:hidden">
+    <div class="container mt-[40px] !p-0 max-1180:px-[20px] 1180:hidden">
         <!-- Description Accordion -->
         <x-shop::accordion :is-active="true">
-            <x-slot:header>
-                <div class="flex justify-between mb-[20px] mt-[20px]">
-                    <p class="text-[16px] font-medium 1180:hidden">
-                        @lang('shop::app.products.view.description')
-                    </p>
-                </div>
+            <x-slot:header class="bg-gray-100">
+                <p class="text-[16px] font-medium 1180:hidden">
+                    @lang('shop::app.products.view.description')
+                </p>
             </x-slot:header>
 
             <x-slot:content>
-                <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px] mb-[20px]">
+                <div class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-[20px]">
                     {!! $product->description !!}
-                </p>
+                </div>
             </x-slot:content>
         </x-shop::accordion>
 
         <!-- Additional Information Accordion -->
         <x-shop::accordion :is-active="false">
             <x-slot:header>
-                <div class="flex justify-between mb-[20px] mt-[20px]">
-                    <p class="text-[16px] font-medium 1180:hidden">
-                        @lang('shop::app.products.view.additional-information')
-                    </p>
-                </div>
+                <p class="text-[16px] font-medium 1180:hidden">
+                    @lang('shop::app.products.view.additional-information')
+                </p>
             </x-slot:header>
 
             <x-slot:content>
@@ -212,11 +208,9 @@
         <!-- Reviews Accordion -->
         <x-shop::accordion :is-active="false">
             <x-slot:header>
-                <div class="flex justify-between mb-[20px] mt-[20px]">
-                    <p class="text-[16px] font-medium 1180:hidden">
-                        @lang('shop::app.products.view.review')
-                    </p>
-                </div>
+                <p class="text-[16px] font-medium 1180:hidden">
+                    @lang('shop::app.products.view.review')
+                </p>
             </x-slot:header>
 
             <x-slot:content>

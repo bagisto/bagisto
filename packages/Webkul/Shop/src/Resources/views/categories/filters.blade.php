@@ -189,16 +189,19 @@
 
                                 <label
                                     class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    role="button"
+                                    role="checkbox"
+                                    aria-checked="false"
                                     :aria-label="option.name"
+                                    :aria-labelledby="'label_option_' + option.id"
                                     tabindex="0"
                                     :for="'option_' + option.id"
                                 >
                                 </label>
 
                                 <label
-                                    :for="'option_' + option.id"
                                     class="w-full p-2 pl-0 text-[16px] text-gray-900 cursor-pointer"
+                                    :id="'label_option_' + option.id"
+                                    :for="'option_' + option.id"
                                     role="button"
                                     tabindex="0"
                                     v-text="option.name"
@@ -280,7 +283,7 @@
                         /**
                          * Removed all toolbar filters in order to prevent key duplication.
                          */
-                        if (! ['sort', 'limit'].includes(filter)) {
+                        if (! ['sort', 'limit', 'mode'].includes(filter)) {
                             this.filters.applied[filter] = value.split(',');
                         }
                     });

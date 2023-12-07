@@ -53,6 +53,8 @@
 
             data() {
                 return {
+                    autoPlayInterval: null,
+
                     currentIndex: 1,
 
                     images: @json($options['images'] ?? []),
@@ -86,15 +88,17 @@
                     }
 
                     slides[this.currentIndex - 1].style.display = 'block';
+
+                    this.play();
                 },
 
                 play() {
-                    let self = this;
+                    clearInterval(this.autoPlayInterval);
 
-                    setInterval(() => {
+                    this.autoPlayInterval = setInterval(() => {
                         this.navigate(this.currentIndex += 1);
                     }, 5000);
-                }
+                },
             }
         });
     </script>
@@ -102,9 +106,9 @@
     <style>
         .fade {
             -webkit-animation-name: fade;
-            -webkit-animation-duration: 1.5s;
+            -webkit-animation-duration: 2.5s;
             animation-name: fade;
-            animation-duration: 1.5s;
+            animation-duration: 2.5s;
         }
 
         @-webkit-keyframes fade {

@@ -121,19 +121,27 @@
                             mode: @json($toolbar->getAvailableModes()),
                         },
 
+                        default: {
+                            sort: '{{ $toolbar->getOrder([])['value'] }}',
+
+                            limit: '{{ $toolbar->getLimit([]) }}',
+
+                            mode: '{{ $toolbar->getMode([]) }}',
+                        },
+
                         applied: {
-                            sort: '{{ $toolbar->getOrder(isset($params) ? $params : [])['value'] }}',
+                            sort: '{{ $toolbar->getOrder($params ?? [])['value'] }}',
 
-                            limit: '{{ $toolbar->getLimit(isset($params) ? $params : [] ) }}',
+                            limit: '{{ $toolbar->getLimit($params ?? []) }}',
 
-                            mode: '{{ $toolbar->getMode(isset($params) ? $params : [] ) }}',
+                            mode: '{{ $toolbar->getMode($params ?? []) }}',
                         }
                     }
                 };
             },
 
             mounted() {
-                this.$emit('filter-applied', this.filters.applied);
+                this.setFilters();
             },
 
             computed: {
@@ -146,14 +154,26 @@
                 apply(type, value) {
                     this.filters.applied[type] = value;
 
-                    this.$emit('filter-applied', this.filters.applied);
+                    this.setFilters();
                 },
 
                 changeMode(value = 'grid') {
                     this.filters.applied['mode'] = value;
 
-                    this.$emit('filter-applied', this.filters.applied);
+                    this.setFilters();
                 },
+
+                setFilters() {
+                    let filters = {};
+
+                    for (let key in this.filters.applied) {
+                        if (this.filters.applied[key] != this.filters.default[key]) {
+                            filters[key] = this.filters.applied[key];
+                        }
+                    }
+
+                    this.$emit('filter-applied', filters);
+                }
             },
         });
     </script>

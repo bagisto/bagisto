@@ -89,7 +89,7 @@ class ProductImage
      * @param  array
      * @return array
      */
-    public function getProductBaseImage($product, array $galleryImages = null)
+    public function getProductBaseImage($product, ?array $galleryImages = null)
     {
         if (! $product) {
             return;

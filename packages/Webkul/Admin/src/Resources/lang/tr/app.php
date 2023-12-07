@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => 'Önizleme',
                 'save-btn' => 'Ürünü Kaydet',
                 'title'    => 'Ürünü Düzenle',
                 'remove'   => 'Kaldır',

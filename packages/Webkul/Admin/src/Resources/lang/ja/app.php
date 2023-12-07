@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => 'プレビュー',
                 'save-btn' => '製品を保存',
                 'title'    => '製品を編集',
                 'remove'   => '削除',

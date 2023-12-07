@@ -26,23 +26,23 @@
         <div {{ $attributes->merge(['class' => 'border-b-[1px] border-[#E9E9E9]']) }}>
             <div
                 role="button"
-                :class="`flex justify-between items-center py-[10px] cursor-pointer select-none ${isOpen ? 'active' : ''}`"
+                :class="`flex justify-between items-center p-[15px] cursor-pointer select-none ${isOpen ? 'active' : ''}`"
                 tabindex="0"
                 @click="toggle"
             >
                 <slot name="header">
                     @lang('admin::app.components.accordion.default-content')
-
                 </slot>
 
                 <span
                     :class="`text-[24px] ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
                     role="button"
+                    aria-label="Toggle accordion"
                     tabindex="0"
                 ></span>
             </div>
 
-            <div class="z-10 bg-white rounded-lg" v-show="isOpen">
+            <div class="p-[15px] z-10 bg-white rounded-lg" v-show="isOpen">
                 <slot name="content">
                     @lang('admin::app.components.accordion.default-content')
                 </slot>
