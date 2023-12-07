@@ -603,11 +603,6 @@
                                                     @{{ inventorySource.name }}
                                                 </x-admin::form.control-group.label>
 
-                                                <span class="dark:text-white">
-                                                    @{{ variant.inventories }} <br />
-                                                    @{{ inventorySource.id }} <br />
-                                                </span>
-
                                                 <v-field
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
