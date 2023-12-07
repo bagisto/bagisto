@@ -168,6 +168,8 @@
                 },
 
                 change(file, index) {
+                    this.isMediaLoading = true;
+
                     if (file.type == 'videos') {
                         this.baseFile.type = 'video';
                         this.baseFile.path = file.video_url;
