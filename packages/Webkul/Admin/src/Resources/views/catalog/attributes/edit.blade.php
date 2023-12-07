@@ -231,6 +231,7 @@
                                         <draggable
                                             tag="tbody"
                                             ghost-class="draggable-ghost"
+                                            handle=".icon-drag"
                                             v-bind="{animation: 200}"
                                             :list="optionsData"
                                             item-key="id"
@@ -254,7 +255,7 @@
 
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0">
-                                                        <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
+                                                        <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
                                                             type="hidden"
