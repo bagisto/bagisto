@@ -11,7 +11,7 @@ class ShopTestCase extends TestCase
     /**
      * Login as customer.
      */
-    public function loginAsCustomer(CustomerContract $customer = null): CustomerContract
+    public function loginAsCustomer(?CustomerContract $customer = null): CustomerContract
     {
         $customer = $customer ?? (new CustomerFaker())->factory()->create();
 
