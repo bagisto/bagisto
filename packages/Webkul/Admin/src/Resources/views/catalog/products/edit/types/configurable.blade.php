@@ -290,7 +290,6 @@
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
                                                     </x-admin::form.control-group.label>
                         
-
                                                     <div class="relative">
                                                         <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500">
                                                             {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
@@ -426,12 +425,42 @@
                                             <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
                                         </div>
                                     </template>
+
+                                    <template v-if="selectedType == 'editStatus'">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-[10px] items-center">
+                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                                    <x-admin::form.control-group.label>
+                                                        @lang('Apply a status to all variants.')
+                                                    </x-admin::form.control-group.label>
+
+                                                    <div class="relative">
+                                                        <x-admin::form.control-group.control
+                                                            type="select"
+                                                            name="status"
+                                                            ::rules="{ required: true }"
+                                                            :label="trans('Status')"
+                                                        >
+                                                            <option value="1">@lang('Enable')</option>
+                                                            <option value="0">@lang('Disabled')</option>g
+                                                        </x-admin::form.control-group.control>
+                                                    </div>
+                                                </x-admin::form.control-group>
+
+                                                <button class="secondary-button mt-[15px]">
+                                                    @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
+                                                </button>
+                                            </div>
+                    
+                                            <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                        </div>
+                                    </template>
                                 </form>
                             </x-admin::form>
 
                             <div
                                 class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
-                                :class="{'flex gap-[10px] justify-between items-center': ['editPrices', 'editName', 'editSku'].includes(selectedType) }"
+                                :class="{'flex gap-[10px] justify-between items-center': ['editPrices', 'editName', 'editSku', 'editStatus'].includes(selectedType) }"
                                 v-for="variant in selectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
@@ -487,6 +516,36 @@
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('Weight')"
                                             >
+                                            </v-field>
+                                        </div>
+
+                                        <v-error-message
+                                            :name="'variants[' + variant.id + ']'"
+                                            v-slot="{ message }"
+                                        >
+                                            <p
+                                                class="mt-1 text-red-600 text-xs italic"
+                                                v-text="message"
+                                            >
+                                            </p>
+                                        </v-error-message>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                <template v-if="selectedType == 'editStatus'">
+                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                        <div class="relative">
+                                            <v-field
+                                                as="select"
+                                                :name="'variants[' + variant.id + ']'"
+                                                :value="variant.status"
+                                                class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                label="@lang('Status')"
+                                            >
+                                                <option value="1">@lang('Enable')</option>
+                                                <option value="0">@lang('Disabled')</option>
                                             </v-field>
                                         </div>
 
@@ -787,7 +846,6 @@
                                     </x-slot:header>
 
                                     <!-- Drawer Content -->
-
                                     <x-slot:content>
                                         <x-admin::form.control-group.control
                                             type="hidden"
@@ -1180,7 +1238,8 @@
                                 'addImages',
                                 'editWeight',
                                 'editName',
-                                'editSku'
+                                'editSku',
+                                'editStatus',
                             ].includes(type)) {
                                 this.$refs.updateVariantsDrawer.open();
                             } else {
