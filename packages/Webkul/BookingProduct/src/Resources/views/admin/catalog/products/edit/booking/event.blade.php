@@ -1,52 +1,69 @@
-{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.event.before', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
 <v-event-booking></v-event-booking>
 
-{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.event.after', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
-@push('scripts')
-    <script type="text/x-template" id="v-event-booking-template">
+@php
+    $currentLocale = core()->getCurrentLocale();
+@endphp
+
+@pushOnce('scripts')
+    <script
+        type="text/x-template"
+        id="v-event-booking-template"
+    >
         <div>
             <div class="section">
                 <div class="secton-title">
-                    <span>{{ __('bookingproduct::app.admin.catalog.products.tickets') }}</span>
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.title')
                 </div>
 
-                <div class="section-content">
-                    <v-ticket-list :tickets="tickets"></v-ticket-list>
-                </div>
+                <!-- Ticket List Vue Component -->
+                <v-ticket-list :tickets="tickets"></v-ticket-list>
             </div>
         </div>
     </script>
 
-    <script type="text/x-template" id="v-ticket-list-template">
+    <script
+        type="text/x-template"
+        id="v-ticket-list-template"
+    >
         <div class="ticket-list table">
             <div class="table-responsive">
                 <table>
                     <thead>
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.name') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.name')
                         </th>
+
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.price') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.price')
                         </th>
+
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.quantity') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.qty')
                         </th>
+
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.special-price') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.special-price')
                         </th>
+
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.special-price-from')
                         </th>
+
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.special-price-to')
                         </th>
+
                         <th>
-                        {{ __('bookingproduct::app.admin.catalog.products.description') }}
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.description')
                         </th>
+
                         <th></th>
                     </thead>
+
                     <tbody>
                         <v-ticket-item
                             v-for="(ticket, index) in tickets"
@@ -59,88 +76,188 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px" @click="addTicket()">
-                {{ __('bookingproduct::app.admin.catalog.products.add-ticket') }}
+            <button
+                type="button"
+                class="mt-[20px]"
+                @click="addTicket()"
+            >
+                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
             </button>
         </div>
     </script>
 
-    <script type="text/x-template" id="v-ticket-item-template">
-        {{-- <tr>
+    <script
+        type="text/x-template"
+        id="v-ticket-item-template"
+    >
+        <tr>
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][name]') ? 'has-error' : '']">
-                    <input type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][name]'" v-model="ticketItem.name" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.name') }}&quot;">
+                <!-- Name -->
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.name')
+                    </x-admin::form.control-group.label>
 
-                    <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][name]')">
-                        @{{ errors.first(controlName + '[{!!$locale!!}][name]') }}
-                    </span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="{{ $currentLocale->code }}[name]"
+                        v-model="ticketItem.name"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.name')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.name')"
+                    >
+                    </x-admin::form.control-group.control>
+                    <x-admin::form.control-group.error 
+                        control-name="{{ $currentLocale->code }}[name]"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[price]') ? 'has-error' : '']">
-                        <input type="text" v-validate="'required|decimal|min_value:0'" :name="controlName + '[price]'" v-model="ticketItem.price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
+                <!-- Price -->
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.price')
+                    </x-admin::form.control-group.label>
 
-                        <span class="control-error" v-if="errors.has(controlName + '[price]')">
-                            @{{ errors.first(controlName + '[price]') }}
-                        </span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="price"
+                        v-model="ticketItem.price"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.price')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.price')"
+                    >
+                    </x-admin::form.control-group.control>
+                    <x-admin::form.control-group.error 
+                        control-name="price"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[qty]') ? 'has-error' : '']">
-                        <input type="text" v-validate="'required|min_value:0'" :name="controlName + '[qty]'" v-model="ticketItem.qty" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.qty') }}&quot;">
+                <!-- Quantity -->
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.qty')
+                    </x-admin::form.control-group.label>
 
-                        <span class="control-error" v-if="errors.has(controlName + '[qty]')">
-                            @{{ errors.first(controlName + '[qty]') }}
-                        </span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="qty"
+                        required="required|min_value:0"
+                        v-model="ticketItem.qty"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.qty')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.qty')"
+                    >
+                    </x-admin::form.control-group.control>
+
+                    <x-admin::form.control-group.error 
+                        control-name="qty"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
+            <!-- Special Price -->
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[special_price]') ? 'has-error' : '']">
-                        <input type="text" v-validate="{decimal: true, min_value:0, ...(ticketItem.price ? {max_value: ticketItem.price} : {})}" :name="controlName + '[special_price]'" v-model="ticketItem.special_price" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.price') }}&quot;">
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.special-price')
+                    </x-admin::form.control-group.label>
 
-                        <span class="control-error" v-if="errors.has(controlName + '[special_price]')">
-                            @{{ errors.first(controlName + '[special_price]') }}
-                        </span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="special_price"
+                        required="{decimal: true, min_value:0, ...(ticketItem.price ? {max_value: ticketItem.price} : {})}"
+                        v-model="ticketItem.special_price"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.special-price')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.special-price')"
+                    >
+                    </x-admin::form.control-group.control>
+                    <x-admin::form.control-group.error 
+                        control-name="special_price"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
+            <!-- Special Price From -->
             <td>
-                <div class="control-group date" :class="[errors.has(controlName + '[special_price_from]') ? 'has-error' : '']">
-                    <datetime>
-                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}'" :name="controlName + '[special_price_from]'" v-model="ticketItem.special_price_from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-from') }}&quot;" ref="special_price_from" style="width:100%"/>
-                    </datetime>
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.special-price-from')
+                    </x-admin::form.control-group.label>
 
-                    <span class="control-error" v-if="errors.has(controlName + '[special_price_from]')">@{{ errors.first(controlName + '[special_price_from]') }}</span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="special_price_from"
+                        required="date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}"
+                        v-model="ticketItem.special_price_from"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.special-price-from')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.special-price-from')"
+                        ref="special_price_from"
+                    >
+                    </x-admin::form.control-group.control>
+                    <x-admin::form.control-group.error 
+                        control-name="special_price_from"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
+            <!-- Special Price To -->
             <td>
-                <div class="control-group date" :class="[errors.has(controlName + '[special_price_to]') ? 'has-error' : '']">
-                    <datetime>
-                        <input type="text" v-validate="'date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from'" :name="controlName + '[special_price_to]'" v-model="ticketItem.special_price_to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.special-price-to') }}&quot;" ref="special_price_to" style="width:100%"/>
-                    </datetime>
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.special-price-to')
+                    </x-admin::form.control-group.label>
 
-                    <span class="control-error" v-if="errors.has(controlName + '[special_price_to]')">@{{ errors.first(controlName + '[special_price_to]') }}</span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="text"
+                        name="special_price_to"
+                        required="date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from"
+                        v-model="ticketItem.special_price_to"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.special-price-to')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.special-price-to')"
+                        ref="special_price_to"
+                    >
+                    </x-admin::form.control-group.control>
+
+                    <x-admin::form.control-group.error 
+                        control-name="special_price_to"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
+            <!-- Description -->
             <td>
-                <div class="control-group" :class="[errors.has(controlName + '[{{$locale}}][description]') ? 'has-error' : '']">
-                    <textarea type="text" v-validate="'required'" :name="controlName + '[{{$locale}}][description]'" v-model="ticketItem.description" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.description') }}&quot;"></textarea>
+                <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group.label>
+                        @lang('booking::app.catalog.products.edit.type.booking.event.description')
+                    </x-admin::form.control-group.label>
 
-                    <span class="control-error" v-if="errors.has(controlName + '[{{$locale}}][description]')">
-                        @{{ errors.first(controlName + '[{!!$locale!!}][description]') }}
-                    </span>
-                </div>
+                    <x-admin::form.control-group.control
+                        type="textarea"
+                        name="{{ $currentLocale->code }}[description]"
+                        rules="required"
+                        v-model="ticketItem.description"
+                        :label="trans('booking::app.catalog.products.edit.type.booking.event.description')"
+                        :placeholder="trans('booking::app.catalog.products.edit.type.booking.event.description')"
+                    >
+                    </x-admin::form.control-group.control>
+                    <x-admin::form.control-group.error 
+                        control-name="{{ $currentLocale->code }}[description]"
+                    >
+                    </x-admin::form.control-group.error>
+                </x-admin::form.control-group>
             </td>
 
             <td>
                 <i class="icon remove-icon" @click="removeTicket()"></i>
             </td>
-        </tr> --}}
+        </tr> 
     </script>
 
     <script type="module">
@@ -185,21 +302,19 @@
 
             props: ['index', 'ticketItem'],
 
-            computed: {
-                controlName() {
-                    if (this.ticketItem.id) {
-                        return 'booking[tickets][' + this.ticketItem.id + ']';
-                    }
-
-                    return 'booking[tickets][ticket_' + this.index + ']';
+            computed() {
+                if (this.ticketItem.id) {
+                    return 'booking[tickets][' + this.ticketItem.id + ']';
                 }
+
+                return 'booking[tickets][ticket_' + this.index + ']';
             },
 
             methods: {
-                removeTicket(){
-                    this.$emit('onRemoveTicket', this.ticketItem)
+                removeTicket() {
+                    this.$emit('onRemoveTicket', this.ticketItem);
                 },
             }
         });
     </script>
-@endpush
+@endpushOnce

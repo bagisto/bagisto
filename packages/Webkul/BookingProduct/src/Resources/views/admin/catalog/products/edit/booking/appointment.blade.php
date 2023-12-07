@@ -1,11 +1,15 @@
-{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.appointment.before', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
 <v-appointment-booking></v-appointment-booking>
 
-{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.appointment.after', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
+
 
 @push('scripts')
-    <script type="text/x-template" id="v-appointment-booking-template">
+    <script
+        type="text/x-template"
+        id="v-appointment-booking-template"
+    >
         <x-admin::form
             enctype="multipart/form-data"
             method="PUT"
@@ -35,13 +39,13 @@
                 <!-- Break Time -->
                 <x-admin::form.control-group class="w-full mb-[10px]">
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="text"
                         name="booking[break_time]"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
                         required="required|min_value:1"
                         v-model="appointment_booking.break_time"
                     >
@@ -56,18 +60,23 @@
                  <!-- Same slot for all days -->
                  <x-admin::form.control-group class="w-full mb-[10px]">
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="select"
                         name="booking[same_slot_all_days]"
                         rules="required"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                         v-model="appointment_booking.same_slot_all_days"
                     >
-                        <option value="1">{{ __('bookingproduct::app.admin.catalog.products.yes') }}</option>
-                        <option value="0">{{ __('bookingproduct::app.admin.catalog.products.no') }}</option>
+                        <option value="1">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
+                        </option>
+
+                        <option value="0">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
+                        </option>
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group.error 

@@ -21,7 +21,7 @@
             },
 
             methods: {
-                setOptions: function() {
+                setOptions() {
                     let self = this;
 
                     return {
@@ -37,7 +37,7 @@
                     };
                 },
 
-                activate: function(options) {
+                activate(options) {
                     let element = this.$el.getElementsByTagName("input")[0];
                     this.timepicker = flatpickr(element, options);
                 }

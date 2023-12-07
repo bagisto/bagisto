@@ -77,8 +77,25 @@ return [
                             'available-to'          => 'Available To',
                             'booking_type'          => 'Booking Type',
                             'break-duration'        => 'Break Duration',
-                            'charged-per'           => 'Charged Per',
-                            'guest-limit-per-table' => 'Guest Limit Per Table',
+
+                            'charged-per'           => [
+                                'guest'  => 'Guest',
+                                'title'  => 'Charged Per',
+                                'table'  => 'Table',
+                            ],
+
+                            'default'  => [
+                                'many'  => 'Many',
+                                'one'   => 'One',
+                                'title' => 'Default',
+                            ],
+
+                            'event' => [
+                                'name'  => 'Name',
+                                'Price'  => 'Price',
+                            ],
+
+                            'guest-limit'           => 'Guest Limit Per Table',
                             'guest-capacity'        => 'Guest Capacity',
                             'location'              => 'Location',
 
@@ -108,6 +125,8 @@ return [
                                     'price'         => 'Price',
                                     'qty'           => 'Quantity',
                                     'special-price' => 'Special Price',
+                                    'special-price-from' => 'Special Price From',
+                                    'special-price-to' => 'Special Price To',
                                     'save'          => 'Save Tickets',
                                     'title'         => 'Add Tickets',
                                     'valid-from'    => 'Valid From',
