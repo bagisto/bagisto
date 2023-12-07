@@ -254,20 +254,22 @@
                     },
 
                     loadMoreProducts() {
-                        if (this.links.next) {
-                            this.loader = true;
-
-                            this.$axios.get(this.links.next)
-                                .then(response => {
-                                    this.loader = false;
-
-                                    this.products = [...this.products, ...response.data.data];
-
-                                    this.links = response.data.links;
-                                }).catch(error => {
-                                    console.log(error);
-                                });
+                        if (! this.links.next) {
+                            return;
                         }
+
+                        this.loader = true;
+
+                        this.$axios.get(this.links.next)
+                            .then(response => {
+                                this.loader = false;
+
+                                this.products = [...this.products, ...response.data.data];
+
+                                this.links = response.data.links;
+                            }).catch(error => {
+                                console.log(error);
+                            });
                     },
 
                     removeJsonEmptyValues(params) {

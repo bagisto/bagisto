@@ -40,12 +40,13 @@
                 <!-- Draggable Products -->
                 <draggable
                     ghost-class="draggable-ghost"
+                    handle=".icon-drag"
                     v-bind="{animation: 200}"
                     :list="links"
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer">
+                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
                             <!-- Hidden Input -->
                             <input type="hidden" :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'" :value="element.title"/>
 
@@ -86,7 +87,7 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
+                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
@@ -521,12 +522,13 @@
                 <!-- Draggable Products -->
                 <draggable
                     ghost-class="draggable-ghost"
+                    handle=".icon-drag"
                     v-bind="{animation: 200}"
                     :list="samples"
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer">
+                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
                             <!-- Hidden Input -->
                             <input type="hidden" :name="'downloadable_samples[' + element.id + '][title]'" :value="element.title"/>
 
@@ -549,7 +551,7 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
+                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">

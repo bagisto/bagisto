@@ -283,7 +283,7 @@
                         /**
                          * Removed all toolbar filters in order to prevent key duplication.
                          */
-                        if (! ['sort', 'limit'].includes(filter)) {
+                        if (! ['sort', 'limit', 'mode'].includes(filter)) {
                             this.filters.applied[filter] = value.split(',');
                         }
                     });
