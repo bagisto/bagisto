@@ -1304,11 +1304,9 @@
                 },
                 
                 addImages(params) {
-                    let self = this;
-
-                    this.selectedVariants.forEach(function (variant) {
-                        if (self.updateTypes.addImages.images.length) {
-                            variant.images = variant.images.concat(self.updateTypes.addImages.images);
+                    this.selectedVariants.forEach((variant) => {
+                        if (this.updateTypes.addImages.images.length) {
+                            variant.images = variant.images.concat(this.updateTypes.addImages.images);
                         } else {
                             variant.images = variant.images.concat(variant.temp_images);
 
@@ -1326,18 +1324,16 @@
                 },
 
                 removeVariants() {
-                    let self = this;
-
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         if (variant.selected) {
-                            let index = self.variants.indexOf(variant);
+                            let index = this.variants.indexOf(variant);
 
-                            self.variants.splice(index, 1);
+                            this.variants.splice(index, 1);
                         }
                     });
                 },
 
-                optionName: function (attribute, optionId) {
+                optionName(attribute, optionId) {
                     return attribute.options.find(function (option) {
                         return option.id == optionId;
                     })?.admin_name;
