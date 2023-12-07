@@ -390,36 +390,25 @@
                                     </div>
 
                                     <!-- Status -->
-                                    <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 dark:text-white font-medium">
-                                            @lang('admin::app.marketing.promotions.catalog-rules.create.status')
-                                        </p>
-    
-                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                            <x-admin::form.control-group.control
-                                                type="checkbox"
-                                                name="status"
-                                                :value="$catalogRule->status"
-                                                id="status"
-                                                for="status"
-                                                label="status"
-                                                :checked="(boolean) $catalogRule->status"
-                                            >
-                                            </x-admin::form.control-group.control>
-                            
-                                            <x-admin::form.control-group.label
-                                                for="status"
-                                                class="!text-[14px] !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
-                                            >
-                                                @lang('admin::app.marketing.promotions.catalog-rules.create.status')
-                                            </x-admin::form.control-group.label>
-    
-                                            <x-admin::form.control-group.error
-                                                control-name="status"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>  
-                                    </div>
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.status')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="status"
+                                            :value="$catalogRule->status"
+                                            :label="trans('admin::app.marketing.promotions.catalog-rules.edit.status')"
+                                            :checked="(boolean) $catalogRule->status"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>  
                                 </x-slot:content>
                             </x-admin::accordion>
 

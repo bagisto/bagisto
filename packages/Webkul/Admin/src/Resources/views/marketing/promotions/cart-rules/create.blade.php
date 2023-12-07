@@ -654,16 +654,16 @@
                                     </div>
 
                                     <!-- Status -->
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.marketing.promotions.cart-rules.create.status')
-                                    </x-admin::form.control-group.label>
-
                                     <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.marketing.promotions.cart-rules.create.status')
+                                        </x-admin::form.control-group.label>
+
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="status"
                                             value="1"
-                                            label="status"
+                                            :label="trans('admin::app.marketing.promotions.cart-rules.create.status')"
                                             :checked="(boolean) old('status')"
                                         >
                                         </x-admin::form.control-group.control>

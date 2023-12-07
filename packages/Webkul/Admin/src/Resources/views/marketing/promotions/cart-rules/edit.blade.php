@@ -697,7 +697,7 @@
                                             type="switch"
                                             name="status"
                                             :value="$cartRule->status"
-                                            label="status"
+                                            :label="trans('admin::app.marketing.promotions.cart-rules.edit.status')"
                                             :checked="(boolean) $cartRule->status"
                                         >
                                         </x-admin::form.control-group.control>
