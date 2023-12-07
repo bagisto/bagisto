@@ -106,8 +106,8 @@ abstract class Paypal extends Payment
      */
     public function getImage()
     {
-        $url = $this->getConfigData('image');
+        $imageUrl = $this->getConfigData('image');
 
-        return $url ? Storage::url($url) : bagisto_asset('images/paypal.png');
+        return $imageUrl ? Storage::url($imageUrl) : bagisto_asset('images/paypal.png');
     }
 }

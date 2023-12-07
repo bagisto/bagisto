@@ -42,8 +42,8 @@ class MoneyTransfer extends Payment
      */
     public function getImage()
     {
-        $url = $this->getConfigData('image');
+        $imageUrl = $this->getConfigData('image');
 
-        return $url ? Storage::url($url) : bagisto_asset('images/money-transfer.png');
+        return $imageUrl ? Storage::url($imageUrl) : bagisto_asset('images/money-transfer.png');
     }
 }
