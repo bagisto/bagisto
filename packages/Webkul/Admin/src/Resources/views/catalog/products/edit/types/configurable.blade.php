@@ -252,7 +252,7 @@
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
-                <form @submit="handleSubmit($event, update)">
+                <form @submit="handleSubmit($event, updateAll)">
                     <!-- Edit Drawer -->
                     <x-admin::drawer
                         ref="updateVariantsDrawer"
@@ -460,7 +460,9 @@
 
                             <div
                                 class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
-                                :class="{'flex gap-[10px] justify-between items-center': ['editPrices', 'editName', 'editSku', 'editStatus'].includes(selectedType) }"
+                                :class="{'flex gap-[10px] justify-between items-center': [
+                                    'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
+                                ].includes(selectedType) }"
                                 v-for="variant in selectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
@@ -482,7 +484,7 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.price"
+                                                v-model="variant.price"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
@@ -510,7 +512,7 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.weight"
+                                                v-model="variant.weight"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -538,7 +540,7 @@
                                             <v-field
                                                 as="select"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.status"
+                                                v-model="variant.status"
                                                 class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -568,7 +570,7 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.name"
+                                                v-model="variant.name"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -600,6 +602,11 @@
                                                 <x-admin::form.control-group.label>
                                                     @{{ inventorySource.name }}
                                                 </x-admin::form.control-group.label>
+
+                                                <span class="dark:text-white">
+                                                    @{{ variant.inventories }} <br />
+                                                    @{{ inventorySource.id }} <br />
+                                                </span>
 
                                                 <v-field
                                                     type="text"
@@ -633,7 +640,7 @@
                                             <v-field
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
-                                                :value="variant.sku"
+                                                v-model="variant.sku"
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
@@ -1233,13 +1240,13 @@
                             this.selectedType = type;
 
                             if ([
-                                'editPrices',
-                                'editInventories',
-                                'addImages',
-                                'editWeight',
                                 'editName',
                                 'editSku',
+                                'editPrices',
+                                'editInventories',
+                                'editWeight',
                                 'editStatus',
+                                'addImages',
                             ].includes(type)) {
                                 this.$refs.updateVariantsDrawer.open();
                             } else {
@@ -1251,6 +1258,10 @@
 
                 update(params) {
                     this[this.selectedType](params);
+                },
+
+                updateAll(params) {
+                    this[this.selectedType](params);
 
                     this.$refs.updateVariantsDrawer.close();
                 },
@@ -1258,48 +1269,36 @@
                 editPrices(params) {
                     this.selectedVariants.forEach(function (variant) {
                         variant.price = params?.price ?? params.variants[variant.id];
-
-                        variant.selected = false;
                     });
                 },
 
                 editInventories(params) {
                     this.selectedVariants.forEach(function (variant) {
-                        variant.inventories = params?.inventories ?? params.variants[variant.id];
-
-                        variant.selected = false;
+                        variant.inventories = params?.inventories ?? params.inventories[variant.id];
                     });
                 },
 
                 editWeight(params) {
                     this.selectedVariants.forEach(function (variant) {
                         variant.weight = params?.weight ?? params.variants[variant.id];
-
-                        variant.selected = false;
                     });
                 },
 
                 editName(params) {
                     this.selectedVariants.forEach(function (variant) {
                         variant.name = params?.name ?? params.variants[variant.id];
-
-                        variant.selected = false;
                     });
                 },
 
                 editSku(params) {
                     this.selectedVariants.forEach(function (variant) {
                         variant.sku = params?.sku ?? params.variants[variant.id];
-
-                        variant.selected = false;
                     });
                 },
 
                 editStatus(params) {
                     this.selectedVariants.forEach(function (variant) {
                         variant.status = params?.status ?? params.variants[variant.id];
-
-                        variant.selected = false;
                     });
                 },
                 
