@@ -85,18 +85,19 @@
                     </x-admin::form.control-group.error>
                 </x-admin::form.control-group>
 
-                <div class="section">
-                    <div class="secton-title">
-                        <span>{{ __('bookingproduct::app.admin.catalog.products.slots') }}</span>
-                    </div>
-
-                    <div class="section-content">
-                        <slot-list
-                            booking-type="appointment_slot"
-                            :same-slot-all-days="appointment_booking.same_slot_all_days">
-                        </slot-list>
+                 <!-- Slots Component -->
+                 <div class="flex gap-[20px] justify-between p-[16px]">
+                    <div class="flex flex-col gap-[8px]">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
+                        </p>
                     </div>
                 </div>
+
+                <slot-list
+                    booking-type="appointment_slot"
+                    :same-slot-all-days="appointment_booking.same_slot_all_days">
+                </slot-list>
             </div>
         </x-admin::form>
     </script>

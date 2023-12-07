@@ -55,13 +55,13 @@
                 <!-- Location -->
                 <x-admin::form.control-group class="w-full mb-[10px]">
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.booking_type')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.location')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="text"
                         name="booking[location]"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.location')"
                         v-model="booking.location"
                     >
                     </x-admin::form.control-group.control>
@@ -78,13 +78,13 @@
                    v-if="booking.type == 'default' || booking.type == 'appointment' || booking.type == 'rental'"
                 >
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.booking_type')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.qty')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="text"
                         name="booking[qty]"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.qty')"
                         required="required|numeric|min:0"
                         v-model="booking.qty"
                     >
@@ -102,18 +102,24 @@
                     v-if="booking.type != 'event' && booking.type != 'default'"
                 >
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.booking_type')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.available-every-week.title')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="select"
                         name="booking[available_every_week]"
                         rules="required"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.booking_type')"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.available-every-week.title')"
                         v-model="booking.available_every_week"
+                        @change="availableEveryWeekSwatch=false"
                     >
-                        <option value="1">@lang('booking::app.admin.catalog.products.edit.type.booking.yes')</option>
-                        <option value="0">@lang('booking::app.admin.catalog.products.edit.type.booking.no')</option>
+                        <option value="1">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.available-every-week.yes')
+                        </option>
+
+                        <option value="0">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.available-every-week.no')
+                        </option>
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group.error 
@@ -232,17 +238,15 @@
 
                         qty: 0,
 
-                        available_every_week: '',
+                        available_every_week: 0,
+
+                        availableEveryWeekSwatch: true,
 
                         available_from: '',
 
                         available_to: ''
                     }
                 }
-            },
-
-            mounted() {
-                console.log(this.booking);
             },
 
             created() {
