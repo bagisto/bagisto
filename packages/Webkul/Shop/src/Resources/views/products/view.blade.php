@@ -163,7 +163,7 @@
         </x-shop::accordion>
 
         <!-- Additional Information Accordion -->
-        <x-shop::accordion :is-active="false">
+        <x-shop::accordion class="bg-gray-100" :is-active="false">
             <x-slot:header>
                 <p class="text-[16px] font-medium 1180:hidden">
                     @lang('shop::app.products.view.additional-information')
@@ -206,7 +206,7 @@
         </x-shop::accordion>
 
         <!-- Reviews Accordion -->
-        <x-shop::accordion :is-active="false">
+        <x-shop::accordion class="bg-gray-100" :is-active="false">
             <x-slot:header>
                 <p class="text-[16px] font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
