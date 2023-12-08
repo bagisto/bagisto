@@ -852,7 +852,6 @@ return [
                     'subject'      => 'Nieuwe Klantregistratie',
                     'thanks'       => 'Dank je wel.',
                 ],
-
             ],
 
             'forgot-password' => [

@@ -839,7 +839,6 @@ return [
                     'subject'      => '新規お客様登録',
                     'thanks'       => 'ありがとうございます。',
                 ],
-
             ],
 
             'forgot-password' => [

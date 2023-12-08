@@ -853,7 +853,6 @@ return [
                     'subject'      => 'تسجيل عميل جديد',
                     'thanks'       => 'شكرًا لك.',
                 ],
-
             ],
 
             'forgot-password' => [

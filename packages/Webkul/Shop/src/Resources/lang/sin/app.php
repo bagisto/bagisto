@@ -853,7 +853,6 @@ return [
                     'subject'      => 'නව පරිශීලක ලියාපදිංචිය',
                     'thanks'       => 'ඔබට ස්තුතියි.',
                 ],
-
             ],
 
             'forgot-password' => [

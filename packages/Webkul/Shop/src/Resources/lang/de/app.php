@@ -853,7 +853,6 @@ return [
                     'subject'      => 'Neue Kundenanmeldung',
                     'thanks'       => 'Vielen Dank.',
                 ],
-
             ],
 
             'forgot-password' => [

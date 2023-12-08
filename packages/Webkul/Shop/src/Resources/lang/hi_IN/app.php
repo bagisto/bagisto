@@ -853,7 +853,6 @@ return [
                     'subject'      => 'नया ग्राहक पंजीकरण',
                     'thanks'       => 'धन्यवाद।',
                 ],
-
             ],
 
             'forgot-password' => [
