@@ -375,13 +375,16 @@
                                     <!-- Add To Cart Button -->
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
 
-                                    <button
+                                    <x-shop::button
                                         type="submit"
-                                        class="secondary-button w-full max-w-full"
-                                        {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
+                                        :loading="false"
+                                        :title="trans('shop::app.products.view.add-to-cart')"
+                                        class="secondary-button w-full max-w-full min-w-full"
+                                        :disabled="!$product->isSaleable(1)"
+                                        ref="add_to_cart"
+                                        button-type="secondary-button"
                                     >
-                                        @lang('shop::app.products.view.add-to-cart')
-                                    </button>
+                                    </x-shop::button>
 
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
                                 </div>
@@ -449,6 +452,8 @@
 
                 methods: {
                     addToCart(params) {
+                        this.$refs.add_to_cart.isLoading = true;
+
                         let formData = new FormData(this.$refs.formData);
 
                         this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
@@ -468,8 +473,12 @@
                                 } else {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                                 }
+
+                                this.$refs.add_to_cart.isLoading = false;
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                this.$refs.add_to_cart.isLoading=false;
+                            });
                     },
 
                     addToWishlist() {
