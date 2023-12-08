@@ -229,15 +229,21 @@ class CartController extends APIController
      */
     public function crossSellProducts()
     {
-        $productIds = Cart::getCart()->items->pluck('product_id')->toArray();
+        try {
+            $productIds = Cart::getCart()->items->pluck('product_id')->toArray();
 
-        $products = $this->productRepository
-            ->select('products.*', 'product_cross_sells.child_id')
-            ->join('product_cross_sells', 'products.id', '=', 'product_cross_sells.child_id')
-            ->whereIn('product_cross_sells.parent_id', $productIds)
-            ->groupBy('product_cross_sells.child_id')
-            ->paginate();
+            $products = $this->productRepository
+                ->select('products.*', 'product_cross_sells.child_id')
+                ->join('product_cross_sells', 'products.id', '=', 'product_cross_sells.child_id')
+                ->whereIn('product_cross_sells.parent_id', $productIds)
+                ->groupBy('product_cross_sells.child_id')
+                ->paginate();
 
-        return ProductResource::collection($products);
+            return ProductResource::collection($products);
+        } catch (\Exception $exception) {
+            return new JsonResource([
+                'data' => $exception->getMessage(),
+            ]);
+        }
     }
 }
