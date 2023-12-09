@@ -242,7 +242,7 @@ class CartController extends APIController
             return ProductResource::collection($products);
         } catch (\Exception $exception) {
             return new JsonResource([
-                'data' => $exception->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }
