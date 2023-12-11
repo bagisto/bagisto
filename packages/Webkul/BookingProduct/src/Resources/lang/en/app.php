@@ -91,8 +91,13 @@ return [
                             ],
 
                             'event' => [
-                                'name'  => 'Name',
-                                'Price'  => 'Price',
+                                'description'        => 'Description',
+                                'name'               => 'Name',
+                                'price'              => 'Price',
+                                'qty'                => 'QTY',
+                                'special-price'      => 'Special Price',
+                                'special-price-from' => 'Special Price From',
+                                'special-price-to'   => 'Special Price To',
                             ],
 
                             'guest-limit'           => 'Guest Limit Per Table',
@@ -120,17 +125,17 @@ return [
                                 ],
 
                                 'ticket' => [
-                                    'description'   => 'Description',
-                                    'name'          => 'Name',
-                                    'price'         => 'Price',
-                                    'qty'           => 'Quantity',
-                                    'special-price' => 'Special Price',
+                                    'description'        => 'Description',
+                                    'name'               => 'Name',
+                                    'price'              => 'Price',
+                                    'qty'                => 'Quantity',
+                                    'special-price'      => 'Special Price',
                                     'special-price-from' => 'Special Price From',
-                                    'special-price-to' => 'Special Price To',
-                                    'save'          => 'Save Tickets',
-                                    'title'         => 'Add Tickets',
-                                    'valid-from'    => 'Valid From',
-                                    'valid-until'   => 'Valid Until',
+                                    'special-price-to'   => 'Special Price To',
+                                    'save'               => 'Save Tickets',
+                                    'title'              => 'Add Tickets',
+                                    'valid-from'         => 'Valid From',
+                                    'valid-until'        => 'Valid Until',
                                 ],
                             ],
 
@@ -143,7 +148,7 @@ return [
                                 'daily-price'  => 'Daily Price',
                                 'hourly'       => 'Hourly Basis',
                                 'hourly-price' => 'Hourly Price',
-                                'daily-hourly' => 'Both (Daily and Hourly Basis)',
+                                'daily_hourly' => 'Both (Daily and Hourly Basis)',
                             ],
 
                             'slot-duration' => 'Slot Duration',

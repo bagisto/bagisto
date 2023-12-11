@@ -24,9 +24,9 @@
                     <x-admin::form.control-group.control
                         type="text"
                         name="booking[duration]"
+                        v-model="appointment_booking.duration"
                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
                         required="required|min_value:1"
-                        v-model="appointment_booking.duration"
                     >
                     </x-admin::form.control-group.control>
 
@@ -45,9 +45,9 @@
                     <x-admin::form.control-group.control
                         type="text"
                         name="booking[break_time]"
+                        v-model="appointment_booking.break_time"
                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
                         required="required|min_value:1"
-                        v-model="appointment_booking.break_time"
                     >
                     </x-admin::form.control-group.control>
 
@@ -67,8 +67,8 @@
                         type="select"
                         name="booking[same_slot_all_days]"
                         rules="required"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                         v-model="appointment_booking.same_slot_all_days"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                     >
                         <option value="1">
                             @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')

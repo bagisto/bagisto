@@ -151,22 +151,22 @@
                 <!-- Same slot all days -->
                 <x-admin::form.control-group class="w-full mb-[10px]">
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-all-days.title')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="select"
                         name="booking[same_slot_all_days]`"
                         v-model="table_booking.same_slot_all_days"
-                        rules="required|min_value:1"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-all-days.title')"
+                        rules="required"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                     >
                         <option value="1">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-all-days.yes')
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
                         </option>
 
                         <option value="0">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-all-days.no')
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
                         </option>
                     </x-admin::form.control-group.control>
 
@@ -185,7 +185,7 @@
                 <div class="section-content">
                     <slot-list
                         booking-type="table_slot"
-                        :same-slot-all-days="table_booking.same_slot_all_days">
+                        :same-slot-for-all-days="table_booking.same_slot_all_days">
                     </slot-list>
                 </div>
             </div>

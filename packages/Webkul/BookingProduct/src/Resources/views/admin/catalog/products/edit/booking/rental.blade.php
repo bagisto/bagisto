@@ -107,7 +107,7 @@
                             </option>
 
                             <option value="0">
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title.no')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
                             </option>
                         </x-admin::form.control-group.control>
 

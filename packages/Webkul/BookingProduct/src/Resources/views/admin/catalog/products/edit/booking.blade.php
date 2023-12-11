@@ -132,7 +132,7 @@
                     <!-- Available From  -->
                     <x-admin::form.control-group
                         class="w-full mb-[10px]"
-                        v-if="availableEveryWeekSwatch && available_every_week"
+                        v-if="booking.availableEveryWeekSwatch && booking.available_every_week == 0"
                     >
                         <x-admin::form.control-group.label class="required">
                             @lang('booking::app.admin.catalog.products.edit.type.booking.available-from')
@@ -159,11 +159,10 @@
                     <x-admin::form.control-group
                         class="w-full mb-[10px]"
                         v-if="(
-                            availableEveryWeekSwatch 
-                            && available_every_week == 0
+                            booking.availableEveryWeekSwatch 
+                            && booking.available_every_week == 0
                         ) && (
-                            bookingSwatch 
-                            && booking_type != 'event'
+                            booking_type != 'event'
                         )"
                     >
                         <x-admin::form.control-group.label class="required">
@@ -175,9 +174,9 @@
                             name="booking[available_to]"
                             rules="required|date_format:yyyy-MM-dd HH:mm:ss|after:available_from"
                             v-model="booking.available_to"
+                            ref="available_to"
                             :label="trans('booking::app.admin.catalog.products.edit.type.booking.available-to')"
                             :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.available-to')"
-                            ref="available_to"
                         >
                         </x-admin::form.control-group.control>
 
@@ -190,36 +189,14 @@
             </div>
         </x-admin::form>
         
-        <div>
+        @foreach (['default', 'appointment', 'event', 'rental', 'table'] as $item)
             <div
-                class="default-booking-section"
-                v-if="booking.type == 'default'"
+                class="{{ $item }}-booking-section"
+                v-if="booking.type === '{{ $item }}'"
             >
-                @include ('booking::admin.catalog.products.edit.booking.default', ['bookingProduct' => $bookingProduct])
+                @include ('booking::admin.catalog.products.edit.booking.' . $item, ['bookingProduct' => $bookingProduct])
             </div>
-
-            <div
-                class="appointment-booking-section"
-                v-if="booking.type == 'appointment'"
-            >
-                @include ('booking::admin.catalog.products.edit.booking.appointment', ['bookingProduct' => $bookingProduct])
-            </div>
-
-            <div
-                class="event-booking-section"
-                v-if="booking.type == 'event'"
-            >
-                @include ('booking::admin.catalog.products.edit.booking.event', ['bookingProduct' => $bookingProduct])
-            </div>
-
-            <div class="rental-booking-section" v-if="booking.type == 'rental'">
-                @include ('booking::admin.catalog.products.edit.booking.rental', ['bookingProduct' => $bookingProduct])
-            </div>
-
-            <div class="table-booking-section" v-if="booking.type == 'table'">
-                @include ('booking::admin.catalog.products.edit.booking.table', ['bookingProduct' => $bookingProduct])
-            </div>
-        </div>
+        @endforeach
     </script>
 
     <script type="module">

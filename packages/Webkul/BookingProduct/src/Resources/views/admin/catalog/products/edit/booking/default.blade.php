@@ -17,14 +17,14 @@
                 <!-- Type -->
                 <x-admin::form.control-group class="w-full mb-[10px]">
                     <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.default.title')
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
                     </x-admin::form.control-group.label>
 
                     <x-admin::form.control-group.control
                         type="select"
                         name="booking[booking_type]"
                         rules="required"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.default.title')"
+                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.type.title')"
                         v-model="default_booking.booking_type"
                     >
                         @foreach (['many', 'one'] as $item)
