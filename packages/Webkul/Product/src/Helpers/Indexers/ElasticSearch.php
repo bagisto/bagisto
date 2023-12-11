@@ -268,6 +268,7 @@ class ElasticSearch extends AbstractIndexer
                     }
 
                     $priceIndex = $this->product->price_indices
+                        ->where('channel_id', $this->channel->id)
                         ->where('customer_group_id', $customerGroup->id)
                         ->first();
 
