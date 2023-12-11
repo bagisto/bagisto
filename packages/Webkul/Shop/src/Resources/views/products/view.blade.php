@@ -381,7 +381,7 @@
                                         button-type="secondary-button"
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
-                                        :disabled="!$product->isSaleable(1)"
+                                        :disabled="! $product->isSaleable(1)"
                                         ref="addToCartButton"
                                     >
                                     </x-shop::button>
@@ -398,7 +398,7 @@
                                         class="primary-button w-full max-w-[470px] mt-[20px]"
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
-                                        :disabled="!$product->isSaleable(1)"
+                                        :disabled="! $product->isSaleable(1)"
                                         :loading="false"
                                         ref="buyNowButton"
                                         @click="is_buy_now=1;"
