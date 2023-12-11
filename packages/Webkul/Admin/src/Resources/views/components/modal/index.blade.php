@@ -41,7 +41,6 @@
             </div>
         </template>
     @endisset
-
 </v-modal>
 
 @pushOnce('scripts')
