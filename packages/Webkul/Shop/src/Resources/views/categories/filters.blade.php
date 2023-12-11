@@ -147,7 +147,7 @@
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion>
                 <!-- Filter Item Header -->
-                <x-slot:header>
+                <x-slot:header class="px-0 py-[10px]">
                     <div class="flex justify-between items-center">
                         <p
                             class="text-[18px] font-semibold"
@@ -158,7 +158,7 @@
                 </x-slot:header>
 
                 <!-- Filter Item Content -->
-                <x-slot:content>
+                <x-slot:content class="!p-0">
                     <!-- Price Range Filter -->
                     <ul v-if="filter.type === 'price'">
                         <li>
@@ -283,7 +283,7 @@
                         /**
                          * Removed all toolbar filters in order to prevent key duplication.
                          */
-                        if (! ['sort', 'limit'].includes(filter)) {
+                        if (! ['sort', 'limit', 'mode'].includes(filter)) {
                             this.filters.applied[filter] = value.split(',');
                         }
                     });

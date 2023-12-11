@@ -26,7 +26,7 @@
                         </x-slot:header>
         
                         <x-slot:content>
-                            <div class="flex flex-wrap gap-[29px] mt-[30px]">
+                            <div class="flex flex-wrap gap-[29px] mt-[15px]">
                                 <div 
                                     class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
                                     v-for="(payment, index) in payment_methods"

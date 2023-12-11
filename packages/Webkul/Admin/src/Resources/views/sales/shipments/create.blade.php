@@ -130,124 +130,129 @@
                                 <div class="grid">
                                     <!-- Item Listing -->
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px]">
-                                            <div class="flex gap-[10px]">
-                                                @if ($item->product?->base_image_url)
-                                                    <img
-                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
-                                                        src="{{ $item->product?->base_image_url }}"
-                                                    >
-                                                @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
-                                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                                        
-                                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
-                                                            @lang('admin::app.sales.invoices.view.product-image') 
-                                                        </p>
-                                                    </div>
-                                                @endif
-                
-                                                <div class="grid gap-[6px] place-content-start">
-                                                    <!-- Item Name -->
-                                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
-                                                        {{ $item->name }}
-                                                    </p>
-                
-                                                    <div class="flex flex-col gap-[6px] place-items-start">
-                                                        <p class="text-gray-600 dark:text-gray-300">
-                                                            @lang('admin::app.sales.shipments.create.amount-per-unit', [
-                                                                'amount' => core()->formatBasePrice($item->base_price),
-                                                                'qty'    => $item->qty_ordered,
-                                                            ])
-                                                        </p>
-                
-                                                        <!--Additional Attributes -->
-                                                        @if (isset($item->additional['attributes']))
-                                                            <p class="text-gray-600 dark:text-gray-300">
-                                                                @foreach ($item->additional['attributes'] as $attribute)
-                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                                @endforeach
+                                        @if (
+                                            $item->qty_to_ship > 0
+                                            && $item->product
+                                        )
+                                            <div class="flex gap-[10px] justify-between py-[16px]">
+                                                <div class="flex gap-[10px]">
+                                                    @if ($item->product?->base_image_url)
+                                                        <img
+                                                            class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                            src="{{ $item->product?->base_image_url }}"
+                                                        >
+                                                    @else
+                                                        <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                                            
+                                                            <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                                @lang('admin::app.sales.invoices.view.product-image') 
                                                             </p>
-                                                        @endif
-
-                                                        <!-- Item SKU -->
-                                                        <p class="text-gray-600 dark:text-gray-300">
-                                                            @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
+                                                        </div>
+                                                    @endif
+                    
+                                                    <div class="grid gap-[6px] place-content-start">
+                                                        <!-- Item Name -->
+                                                        <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                            {{ $item->name }}
                                                         </p>
+                    
+                                                        <div class="flex flex-col gap-[6px] place-items-start">
+                                                            <p class="text-gray-600 dark:text-gray-300">
+                                                                @lang('admin::app.sales.shipments.create.amount-per-unit', [
+                                                                    'amount' => core()->formatBasePrice($item->base_price),
+                                                                    'qty'    => $item->qty_ordered,
+                                                                ])
+                                                            </p>
+                    
+                                                            <!--Additional Attributes -->
+                                                            @if (isset($item->additional['attributes']))
+                                                                <p class="text-gray-600 dark:text-gray-300">
+                                                                    @foreach ($item->additional['attributes'] as $attribute)
+                                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                    @endforeach
+                                                                </p>
+                                                            @endif
 
-                                                        <!--Item Status -->
-                                                        <p class="text-gray-600 dark:text-gray-300">
-                                                            {{ $item->qty_ordered ? trans('admin::app.sales.shipments.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
+                                                            <!-- Item SKU -->
+                                                            <p class="text-gray-600 dark:text-gray-300">
+                                                                @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
+                                                            </p>
 
-                                                            {{ $item->qty_invoiced ? trans('admin::app.sales.shipments.create.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                                            <!--Item Status -->
+                                                            <p class="text-gray-600 dark:text-gray-300">
+                                                                {{ $item->qty_ordered ? trans('admin::app.sales.shipments.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
 
-                                                            {{ $item->qty_shipped ? trans('admin::app.sales.shipments.create.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+                                                                {{ $item->qty_invoiced ? trans('admin::app.sales.shipments.create.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
 
-                                                            {{ $item->qty_refunded ? trans('admin::app.sales.shipments.create.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+                                                                {{ $item->qty_shipped ? trans('admin::app.sales.shipments.create.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
 
-                                                            {{ $item->qty_canceled ? trans('admin::app.sales.shipments.create.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
-                                                        </p>
+                                                                {{ $item->qty_refunded ? trans('admin::app.sales.shipments.create.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+
+                                                                {{ $item->qty_canceled ? trans('admin::app.sales.shipments.create.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Information -->
-                                        @foreach ($order->channel->inventory_sources as $inventorySource)
-                                            <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300 dark:border-gray-800">
-                                                <div class="grid gap-[10px]">
-                                                    <!--Inventory Source -->
-                                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
-                                                        {{ $inventorySource->name }}
-                                                    </p>
+                                            <!-- Information -->
+                                            @foreach ($order->channel->inventory_sources as $inventorySource)
+                                                <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                                    <div class="grid gap-[10px]">
+                                                        <!--Inventory Source -->
+                                                        <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                            {{ $inventorySource->name }}
+                                                        </p>
 
-                                                    <!-- Available Quantity -->
-                                                    <p class="text-gray-600 dark:text-gray-300">
-                                                        @lang('admin::app.sales.shipments.create.qty-available') :                  
+                                                        <!-- Available Quantity -->
+                                                        <p class="text-gray-600 dark:text-gray-300">
+                                                            @lang('admin::app.sales.shipments.create.qty-available') :                  
 
+                                                            @php
+                                                                $product = $item->getTypeInstance()->getOrderedItem($item)->product;
+
+                                                                $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
+                                                            @endphp
+
+                                                            {{ $sourceQty }}
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="flex gap-[10px] items-center">
                                                         @php
-                                                            $product = $item->getTypeInstance()->getOrderedItem($item)->product;
-
-                                                            $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
+                                                            $inputName = "shipment[items][$item->id][$inventorySource->id]";
                                                         @endphp
 
-                                                        {{ $sourceQty }}
-                                                    </p>
+                                                        <!-- Quantity  To Ship -->
+                                                        <x-admin::form.control-group.label class="required">
+                                                            @lang('admin::app.sales.shipments.create.qty-to-ship')
+                                                        </x-admin::form.control-group.label>
+
+                                                        <x-admin::form.control-group class="!mb-0">
+                                                            <x-admin::form.control-group.control
+                                                                type="text"
+                                                                :name="$inputName" 
+                                                                :id="$inputName" 
+                                                                :value="$item->qty_to_ship"
+                                                                :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
+                                                                class="!w-[100px]"
+                                                                :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
+                                                                data-original-quantity="{{ $item->qty_to_ship }}"
+                                                                ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
+                                                                :ref="$inputName"
+                                                            >
+                                                            </x-admin::form.control-group.control>
+                                
+                                                            <x-admin::form.control-group.error
+                                                                :control-name="$inputName"
+                                                            >
+                                                            </x-admin::form.control-group.error>
+                                                        </x-admin::form.control-group>
+                                                    </div>
                                                 </div>
-
-                                                <div class="flex gap-[10px] items-center">
-                                                    @php
-                                                        $inputName = "shipment[items][$item->id][$inventorySource->id]";
-                                                    @endphp
-
-                                                    <!-- Quantity  To Ship -->
-                                                    <x-admin::form.control-group.label class="required">
-                                                        @lang('admin::app.sales.shipments.create.qty-to-ship')
-                                                    </x-admin::form.control-group.label>
-
-                                                    <x-admin::form.control-group class="!mb-0">
-                                                        <x-admin::form.control-group.control
-                                                            type="text"
-                                                            :name="$inputName" 
-                                                            :id="$inputName" 
-                                                            :value="$item->qty_to_ship"
-                                                            :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
-                                                            class="!w-[100px]"
-                                                            :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
-                                                            data-original-quantity="{{ $item->qty_to_ship }}"
-                                                            ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
-                                                            :ref="$inputName"
-                                                        >
-                                                        </x-admin::form.control-group.control>
-                            
-                                                        <x-admin::form.control-group.error
-                                                            :control-name="$inputName"
-                                                        >
-                                                        </x-admin::form.control-group.error>
-                                                    </x-admin::form.control-group>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif    
                                     @endforeach
                                 </div>
                             </div>

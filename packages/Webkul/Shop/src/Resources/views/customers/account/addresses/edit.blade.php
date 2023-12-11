@@ -163,7 +163,7 @@
             <x-shop::form.control-group.control
                 type="select"
                 name="country"
-                :value="old('gender') ?? $address->country"
+                :value="old('country') ?? $address->country"
                 class="mb-4"
                 rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                 :aria-label="trans('shop::app.customers.account.addresses.country')"

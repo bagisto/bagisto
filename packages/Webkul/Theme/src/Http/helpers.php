@@ -20,7 +20,7 @@ if (! function_exists('bagisto_asset')) {
      *
      * @return string
      */
-    function bagisto_asset(string $path, string $namespace = null)
+    function bagisto_asset(string $path, ?string $namespace = null)
     {
         return themes()->url($path, $namespace);
     }
