@@ -13,23 +13,34 @@
     @endisset
 
     @isset($header)
-        <template v-slot:header>
-            {{ $header }}
+        <template v-slot:header="{ toggle, isOpen }">
+            <div {{ $header->attributes->merge(['class' => 'flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] dark:border-gray-800']) }}>
+                {{ $header }}
+
+                <span
+                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
+                    @click="toggle"
+                >
+                </span>
+            </div>
         </template>
     @endisset
 
     @isset($content)
         <template v-slot:content>
-            {{ $content }}
+            <div {{ $content->attributes->merge(['class' => 'px-[16px] py-[10px] border-b-[1px] dark:border-gray-800']) }}>
+                {{ $content }}
+            </div>
         </template>
     @endisset
 
     @isset($footer)
         <template v-slot:footer>
-            {{ $footer }}
+            <div {{ $content->attributes->merge(['class' => 'flex justify-end px-[16px] py-[10px]']) }}>
+                {{ $footer }}
+            </div>
         </template>
     @endisset
-
 </v-modal>
 
 @pushOnce('scripts')
@@ -72,27 +83,21 @@
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
                         <div class="w-full max-w-[568px] z-[999] absolute ltr:left-[50%] rtl:right-[50%] top-[50%] rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] ltr:-translate-x-[50%] rtl:translate-x-[50%] -translate-y-[50%]">
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] dark:border-gray-800">
-                                <slot name="header">
-                                    Default Header
-                                </slot>
-
-                                <span
-                                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
-                                    @click="toggle"
-                                >
-                                </span>
-                            </div>
+                            <slot
+                                name="header"
+                                :toggle="toggle"
+                                :isOpen="isOpen"
+                            >
+                                Default Header
+                            </slot>
 
                             <slot name="content">
                                 Default Content
                             </slot>
                             
-                            <div class="flex justify-end px-[16px] py-[10px]">
-                                <slot name="footer">
-                                    Default footer
-                                </slot>
-                            </div>
+                            <slot name="footer">
+                                Default footer
+                            </slot>
                         </div>
                     </div>
                 </div>

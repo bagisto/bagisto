@@ -158,60 +158,58 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <!-- Id -->
+                            <!-- Id -->
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <!-- Name -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.marketing.search-seo.search-synonyms.index.create.name')
+                                </x-admin::form.control-group.label>
+
                                 <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="id"
+                                    type="text"
+                                    name="name"
+                                    rules="required"
+                                    :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
+                                    :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.name')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Terms -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="terms"
+                                    rules="required"
+                                    :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
+                                    :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Terms -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms')
-                                    </x-admin::form.control-group.label>
+                                <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                    @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
+                                </p>
 
-                                    <x-admin::form.control-group.control
-                                        type="textarea"
-                                        name="terms"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
-                                    </p>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="terms"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </div>
+                                <x-admin::form.control-group.error
+                                    control-name="terms"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </x-slot:content>
 
                         <x-slot:footer>

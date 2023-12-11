@@ -17,8 +17,18 @@
     @endisset
 
     @isset($header)
-        <template v-slot:header>
-            {{ $header }}
+        <template v-slot:header="{ close }">
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-[10px] p-[25px] pb-[20px] max-sm:px-[15px]']) }}>
+                {{ $header }}
+
+                <div class="absolute top-5 ltr:right-5 rtl:left-5">
+                    <span
+                        class="icon-cancel text-[30px] cursor-pointer"
+                        @click="close"
+                    >
+                    </span>
+                </div>
+            </div>
         </template>
     @endisset
 
@@ -92,18 +102,12 @@
                         <div class="flex flex-col h-full w-full">
                             <div class="flex-1 min-h-0 min-w-0 overflow-auto">
                                 <div class="flex flex-col h-full">
-                                    <div class="grid gap-y-[10px] p-[25px] pb-[20px] max-sm:px-[15px]">
-                                        <!-- Content Slot -->
-                                        <slot name="header"></slot>
-
-                                        <div class="absolute top-5 ltr:right-5 rtl:left-5">
-                                            <span
-                                                class="icon-cancel text-[30px] cursor-pointer"
-                                                @click="close"
-                                            >
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <slot
+                                        name="header"
+                                        :close="close"
+                                    >
+                                        Default Header
+                                    </slot>
 
                                     <!-- Content Slot -->
                                     <slot name="content"></slot>

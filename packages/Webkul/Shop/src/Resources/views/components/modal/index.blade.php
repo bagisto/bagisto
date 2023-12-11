@@ -13,14 +13,32 @@
     @endisset
 
     @isset($header)
-        <template v-slot:header>
-            {{ $header }}
+        <template v-slot:header="{ toggle, isOpen }">
+            <div {{ $header->attributes->merge(['class' => 'flex gap-[20px] justify-between items-center p-[30px] bg-white border-b-[1px] border-[#E9E9E9]']) }}>
+                {{ $header }}
+
+                <span
+                    class="icon-cancel text-[30px] cursor-pointer"
+                    @click="toggle"
+                >
+                </span>
+            </div>
         </template>
     @endisset
 
     @isset($content)
         <template v-slot:content>
-            {{ $content }}
+            <div {{ $content->attributes->merge(['class' => 'p-[30px] bg-white']) }}>
+                {{ $content }}
+            </div>
+        </template>
+    @endisset
+
+    @isset($footer)
+        <template v-slot:footer>
+            <div {{ $content->attributes->merge(['class' => 'p-[30px] bg-white mt-[20px]']) }}>
+                {{ $footer }}
+            </div>
         </template>
     @endisset
 </v-modal>
@@ -64,25 +82,21 @@
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div class="w-full max-w-[595px] z-[999] absolute left-[50%] top-[50%] bg-[#F5F5F5] max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
-                            <div>
-                                <div class="flex gap-[20px] justify-between items-center p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
-                                    <slot name="header">
-                                        @lang('admin::app.components.modal.default-header')
-                                    </slot>
+                            <slot
+                                name="header"
+                                :toggle="toggle"
+                                :isOpen="isOpen"
+                            >
+                                @lang('admin::app.components.modal.default-header')
+                            </slot>
 
-                                    <span
-                                        class="icon-cancel text-[30px] cursor-pointer"
-                                        @click="toggle"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
+                            <slot name="content">
+                                Default Content
+                            </slot>
 
-                            <div>
-                                <slot name="content">
-                                    @lang('admin::app.components.modal.default-content')
-                                </slot>
-                            </div>
+                            <slot name="footer">
+                                Default Content
+                            </slot>
                         </div>
                     </div>
                 </div>

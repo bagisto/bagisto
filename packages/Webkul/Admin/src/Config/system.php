@@ -1405,7 +1405,7 @@ return [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type'          => 'number',
-                'validation'    => 'regex:^-?\d+(\.\d+)?$',
+                'validation'    => 'numeric',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
