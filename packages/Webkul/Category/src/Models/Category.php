@@ -135,7 +135,7 @@ class Category extends TranslatableModel implements CategoryContract
     /**
      * Get fallback locale for category.
      */
-    protected function getFallbackLocale(?string $locale = null): ?string
+    protected function getFallbackLocale(string $locale = null): ?string
     {
         if ($fallback = core()->getDefaultLocaleCodeFromDefaultChannel()) {
             return $fallback;

@@ -140,7 +140,7 @@ class Core
      *
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function getCurrentChannel(?string $hostname = null)
+    public function getCurrentChannel(string $hostname = null)
     {
         if (! $hostname) {
             $hostname = request()->getHttpHost();

@@ -237,7 +237,7 @@ class Themes
      *
      * @return string
      */
-    public function url(string $filename, ?string $namespace = null)
+    public function url(string $filename, string $namespace = null)
     {
         $url = trim($filename, '/');
 
@@ -272,7 +272,7 @@ class Themes
      * @param  mixed  $entryPoints
      * @return mixed
      */
-    public function setBagistoVite($entryPoints, ?string $namespace = null)
+    public function setBagistoVite($entryPoints, string $namespace = null)
     {
         /**
          * If the namespace is null, it means the theming system is activated. We use the request URI to

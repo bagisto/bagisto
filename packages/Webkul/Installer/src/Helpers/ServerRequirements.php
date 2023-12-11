@@ -61,7 +61,7 @@ class ServerRequirements
      *
      * @return array
      */
-    public function checkPHPversion(?string $minPhpVersion = null)
+    public function checkPHPversion(string $minPhpVersion = null)
     {
         $minVersionPhp = $minPhpVersion ?? $this->minPhpVersion;
 
