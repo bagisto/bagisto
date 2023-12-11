@@ -377,12 +377,12 @@
 
                                     <x-shop::button
                                         type="submit"
+                                        class="secondary-button w-full max-w-full"
+                                        button-type="secondary-button"
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
-                                        class="secondary-button w-full max-w-full min-w-full"
                                         :disabled="!$product->isSaleable(1)"
-                                        ref="add_to_cart"
-                                        button-type="secondary-button"
+                                        ref="addToCartButton"
                                     >
                                     </x-shop::button>
 
@@ -393,14 +393,17 @@
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
 
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
-                                    <button
+                                    <x-shop::button
                                         type="submit"
                                         class="primary-button w-full max-w-[470px] mt-[20px]"
+                                        button-type="secondary-button"
+                                        :title="trans('shop::app.products.view.buy-now')"
+                                        :disabled="!$product->isSaleable(1)"
+                                        :loading="false"
+                                        ref="buyNowButton"
                                         @click="is_buy_now=1;"
-                                        {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >
-                                        @lang('shop::app.products.view.buy-now')
-                                    </button>
+                                    </x-shop::button>
                                 @endif
 
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
@@ -452,7 +455,9 @@
 
                 methods: {
                     addToCart(params) {
-                        this.$refs.add_to_cart.isLoading = true;
+                        const operation = this.is_buy_now ? 'buyNowButton' : 'addToCartButton';
+
+                        this.$refs[operation].isLoading = true;
 
                         let formData = new FormData(this.$refs.formData);
 
@@ -474,10 +479,10 @@
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                                 }
 
-                                this.$refs.add_to_cart.isLoading = false;
+                                this.$refs[operation].isLoading = false;
                             })
                             .catch(error => {
-                                this.$refs.add_to_cart.isLoading=false;
+                                this.$refs[operation].isLoading=false;
                             });
                     },
 

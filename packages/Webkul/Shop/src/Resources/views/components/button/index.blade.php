@@ -2,20 +2,19 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-button-template">
-        <div>
-            <button
-                v-if="! isLoading"
-                {{ $attributes->merge(['class' => 'aria-diabled']) }}
-            >
-                @{{ title }}
-            </button>
+        <button
+            v-if="! isLoading"
+            :class="[buttonClass, '']"
+        >
+            @{{ title }}
+        </button>
 
-            <button
-                v-else
-                {{ $attributes->merge(['class' => '']) }}
-            >
+        <button
+            v-else
+            :class="[buttonClass, '']"
+        >
                 <!-- Spinner -->
-                <svg class="animate-spin h-5 w-5 text-blue" xmlns="http://www.w3.org/2000/svg" fill="none"  aria-hidden="true" viewBox="0 0 24 24">
+                <svg class="absolute animate-spin h-5 w-5 text-blue" xmlns="http://www.w3.org/2000/svg" fill="none"  aria-hidden="true" viewBox="0 0 24 24">
                     <circle
                         class="opacity-25"
                         cx="12"
@@ -34,9 +33,8 @@
                     </path>
                 </svg>
 
-                <span class="" v-text="title"></span>
-            </button>
-        </div>
+                <span class="opacity-0 realative h-full w-full" v-text="title"></span>
+        </button>
     </script>
 
     <script type="module">
@@ -47,13 +45,13 @@
                 loading: Boolean,
                 buttonType: String,
                 title: String,
-                class: String,
+                buttonClass: String, // Added prop for dynamic class
             },
 
             data() {
                 return {
                     isLoading: this.loading,
-                }
+                };
             },
         });
     </script>
