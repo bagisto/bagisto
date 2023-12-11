@@ -339,72 +339,70 @@
 
                             <!--Model Content -->
                             <x-slot:content>
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                    <!-- Group Code -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.families.create.code')
-                                        </x-admin::form.control-group.label>
+                                <!-- Group Code -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.families.create.code')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="code"
-                                            rules="required"
-                                            :label="trans('admin::app.catalog.families.create.code')"
-                                            :placeholder="trans('admin::app.catalog.families.create.code')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        rules="required"
+                                        :label="trans('admin::app.catalog.families.create.code')"
+                                        :placeholder="trans('admin::app.catalog.families.create.code')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                    <!-- Group Name -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.families.create.name')
-                                        </x-admin::form.control-group.label>
+                                <!-- Group Name -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.families.create.name')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            rules="required"
-                                            :label="trans('admin::app.catalog.families.create.name')"
-                                            :placeholder="trans('admin::app.catalog.families.create.name')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        rules="required"
+                                        :label="trans('admin::app.catalog.families.create.name')"
+                                        :placeholder="trans('admin::app.catalog.families.create.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                    <!-- Select Group Type -->
-                                    <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
-                                            @lang('admin::app.catalog.families.create.column')
-                                        </x-admin::form.control-group.label>
+                                <!-- Select Group Type -->
+                                <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
+                                        @lang('admin::app.catalog.families.create.column')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="column"
-                                            rules="required"
-                                            :label="trans('admin::app.catalog.families.create.column')"
-                                        >
-                                            <!-- Default Option -->
-                                            <option value="">
-                                                @lang('admin::app.catalog.families.create.select-group')
-                                            </option>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="column"
+                                        rules="required"
+                                        :label="trans('admin::app.catalog.families.create.column')"
+                                    >
+                                        <!-- Default Option -->
+                                        <option value="">
+                                            @lang('admin::app.catalog.families.create.select-group')
+                                        </option>
 
-                                            <option value="1">
-                                                @lang('admin::app.catalog.families.create.main-column')
-                                            </option>
+                                        <option value="1">
+                                            @lang('admin::app.catalog.families.create.main-column')
+                                        </option>
 
-                                            <option value="2">
-                                                @lang('admin::app.catalog.families.create.right-column')
-                                            </option>
-                                        </x-admin::form.control-group.control>
+                                        <option value="2">
+                                            @lang('admin::app.catalog.families.create.right-column')
+                                        </option>
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="column"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
+                                    <x-admin::form.control-group.error control-name="column"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </x-slot:content>
 
                             <!-- Model Footer -->

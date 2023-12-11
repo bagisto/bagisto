@@ -81,87 +81,85 @@
                     >
                         <!-- Create Group Modal -->
                         <x-admin::modal ref="groupCreateModal">
+                            <!-- Modal Header -->
                             <x-slot:header>
-                                <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.marketing.communications.subscribers.index.edit.title')
                                 </p>
                             </x-slot:header>
 
+                            <!-- Modal Content -->
                             <x-slot:content>
-                                <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                    <!-- Id -->
+                                <!-- Id -->
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <!-- Email -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.communications.subscribers.index.edit.email')
+                                    </x-admin::form.control-group.label>
+
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="id"
+                                        v-model="selectedSubscriber.id"
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <!-- Email -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.communications.subscribers.index.edit.email')
-                                        </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="email"
+                                        :value="old('email')"
+                                        rules="required"
+                                        class="mb-1 cursor-not-allowed"
+                                        v-model="selectedSubscriber.email"
+                                        :label="trans('admin::app.marketing.communications.subscribers.index.edit.email')"
+                                        disabled
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            name="id"
-                                            v-model="selectedSubscriber.id"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.error
+                                        control-name="email"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="email"
-                                            :value="old('email')"
-                                            rules="required"
-                                            class="mb-1 cursor-not-allowed"
-                                            v-model="selectedSubscriber.email"
-                                            :label="trans('admin::app.marketing.communications.subscribers.index.edit.email')"
-                                            disabled
-                                        >
-                                        </x-admin::form.control-group.control>
+                                <!-- Subscribed -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="email"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    @php
+                                        $selectedOption = old('status');
+                                    @endphp
 
-                                    <!-- Subscribed -->
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
-                                        </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="is_subscribed"
+                                        class="cursor-pointer mb-1"
+                                        rules="required"
+                                        v-model="selectedSubscriber.is_subscribed"
+                                        :label="trans('admin::app.marketing.communications.subscribers.index.edit.subscribed')"
+                                    >
+                                        @foreach (['true', 'false'] as $state)
+                                            <option
+                                                value="{{ $state == 'true' ? 1 : 0 }}"
+                                            >
+                                                @lang('admin::app.marketing.communications.subscribers.index.edit.' . $state)
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
 
-                                        @php
-                                            $selectedOption = old('status');
-                                        @endphp
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="is_subscribed"
-                                            class="cursor-pointer mb-1"
-                                            rules="required"
-                                            v-model="selectedSubscriber.is_subscribed"
-                                            :label="trans('admin::app.marketing.communications.subscribers.index.edit.subscribed')"
-                                        >
-                                            @foreach (['true', 'false'] as $state)
-                                                <option
-                                                    value="{{ $state == 'true' ? 1 : 0 }}"
-                                                >
-                                                    @lang('admin::app.marketing.communications.subscribers.index.edit.' . $state)
-                                                </option>
-                                            @endforeach
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="is_subscribed"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
+                                    <x-admin::form.control-group.error
+                                        control-name="is_subscribed"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </x-slot:content>
 
                             <x-slot:footer>

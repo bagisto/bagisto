@@ -19,8 +19,8 @@
             <form @submit="handleSubmit($event, generate)">
                 <!-- AI Content Generation Modal -->
                 <x-admin::modal ref="magicAIModal">
+                    <!-- Modal Header -->
                     <x-slot:header>
-                        <!-- Modal Header -->
                         <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
                             <span class="icon-magic text-[24px] text-gray-800"></span>
 
@@ -28,71 +28,69 @@
                         </p>
                     </x-slot:header>
 
+                    <!-- Modal Content -->
                     <x-slot:content>
-                        <!-- Modal Content -->
-                        <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                            <!-- Prompt -->
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.components.tinymce.ai-generation.prompt')
-                                </x-admin::form.control-group.label>
+                        <!-- Prompt -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.components.tinymce.ai-generation.prompt')
+                            </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="textarea"
-                                    name="prompt"
-                                    class="h-[180px]"
-                                    rules="required"
-                                    v-model="ai.prompt"
-                                    :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
-                                >
-                                </x-admin::form.control-group.control>
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="prompt"
+                                class="h-[180px]"
+                                rules="required"
+                                v-model="ai.prompt"
+                                :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                            <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                            <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
-                                <button
-                                    type="submit"
-                                    class="secondary-button"
-                                >
-                                    <!-- Spinner -->
-                                    <template v-if="isLoading">
-                                        <img
-                                            class="animate-spin h-5 w-5 text-blue-600"
-                                            src="{{ bagisto_asset('images/spinner.svg') }}"
-                                        />
+                        <!-- Modal Submission -->
+                        <div class="flex gap-x-[10px] items-center">
+                            <button
+                                type="submit"
+                                class="secondary-button"
+                            >
+                                <!-- Spinner -->
+                                <template v-if="isLoading">
+                                    <img
+                                        class="animate-spin h-5 w-5 text-blue-600"
+                                        src="{{ bagisto_asset('images/spinner.svg') }}"
+                                    />
 
-                                        @lang('admin::app.components.tinymce.ai-generation.generating')
-                                    </template>
+                                    @lang('admin::app.components.tinymce.ai-generation.generating')
+                                </template>
 
-                                    <template v-else>
-                                        <span class="icon-magic text-[24px] text-blue-600"></span>
+                                <template v-else>
+                                    <span class="icon-magic text-[24px] text-blue-600"></span>
 
-                                        @lang('admin::app.components.tinymce.ai-generation.generate')
-                                    </template>
-                                </button>
-                            </div>
-
-                            <!-- Generated Content -->
-                            <x-admin::form.control-group class="mt-[20px]">
-                                <x-admin::form.control-group.label class="text-left">
-                                    @lang('admin::app.components.tinymce.ai-generation.generated-content')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="textarea"
-                                    name="content"
-                                    class="h-[180px]"
-                                    v-model="ai.content"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <span class="text-[12px] text-gray-500">
-                                    @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
-                                </span>
-                            </x-admin::form.control-group>
+                                    @lang('admin::app.components.tinymce.ai-generation.generate')
+                                </template>
+                            </button>
                         </div>
+
+                        <!-- Generated Content -->
+                        <x-admin::form.control-group class="mt-[20px]">
+                            <x-admin::form.control-group.label class="text-left">
+                                @lang('admin::app.components.tinymce.ai-generation.generated-content')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="content"
+                                class="h-[180px]"
+                                v-model="ai.content"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <span class="text-[12px] text-gray-500">
+                                @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
+                            </span>
+                        </x-admin::form.control-group>
                     </x-slot:content>
 
                     <x-slot:footer>
