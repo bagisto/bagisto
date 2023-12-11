@@ -287,69 +287,69 @@
                     ref="createSliderForm"
                 >
                     <x-admin::modal ref="addSliderModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.update-slider')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.image-title')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.image-title')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="{{ $currentLocale->code }}[title]"
-                                        rules="required"
-                                        :placeholder="trans('admin::app.settings.themes.edit.title')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="{{ $currentLocale->code }}[title]"
+                                    rules="required"
+                                    :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="{{ $currentLocale->code }}[title]"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="{{ $currentLocale->code }}[title]"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.link')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.link')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="{{ $currentLocale->code }}[link]"
-                                        :placeholder="trans('admin::app.settings.themes.edit.link')"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="{{ $currentLocale->code }}[link]"
+                                    :placeholder="trans('admin::app.settings.themes.edit.link')"
+                                >
+                                </x-admin::form.control-group.control>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.slider-image')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.slider-image')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
-                                        name="slider_image"
-                                        rules="required"
-                                        :is-multiple="false"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="image"
+                                    name="slider_image"
+                                    rules="required"
+                                    :is-multiple="false"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="slider_image"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="slider_image"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.settings.themes.edit.image-size')
-                                </p>
-                            </div>
+                            <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.settings.themes.edit.image-size')
+                            </p>
                         </x-slot:content>
 
                         <x-slot:footer>

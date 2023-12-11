@@ -143,67 +143,65 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <!-- Id -->
+                            <!-- Id -->
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <!-- File Name -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name')
+                                </x-admin::form.control-group.label>
+
                                 <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="id"
+                                    type="text"
+                                    name="file_name"
+                                    :value="old('file_name')"
+                                    rules="required"
+                                    :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
+                                    :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- File Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="file_name"
+                                >
+                                </x-admin::form.control-group.error>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="file_name"
-                                        :value="old('file_name')"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                    @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
+                                </p>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="file_name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
-                                    </p>
+                            <!-- File Path -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.marketing.search-seo.sitemaps.index.create.path')
+                                </x-admin::form.control-group.label>
 
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="path"
+                                    :value="old('path')"
+                                    rules="required"
+                                    :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
+                                    :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- File Path -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.path')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="path"
+                                >
+                                </x-admin::form.control-group.error>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="path"
-                                        :value="old('path')"
-                                        rules="required"
-                                        :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
-                                        :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="path"
-                                    >
-                                    </x-admin::form.control-group.error>
-
-                                    <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
-                                        @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
-                                    </p>
-                                </x-admin::form.control-group>
-                            </div>
+                                <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                    @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
+                                </p>
+                            </x-admin::form.control-group>
                         </x-slot:content>
 
                         <x-slot:footer>

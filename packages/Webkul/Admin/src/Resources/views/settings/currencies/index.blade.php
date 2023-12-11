@@ -116,6 +116,7 @@
                     ref="currencyCreateForm"
                 >
                     <x-admin::modal ref="currencyUpdateOrCreateModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
@@ -132,109 +133,108 @@
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+                            {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                                v-model="selectedCurrency.id"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <!-- Code -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.currencies.index.create.code')
+                                </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="id"
-                                    v-model="selectedCurrency.id"
+                                    type="text"
+                                    name="code"
+                                    :value="old('code')"
+                                    rules="required"
+                                    v-model="selectedCurrency.code"
+                                    :label="trans('admin::app.settings.currencies.index.create.code')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.code')"
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- Code -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.currencies.index.create.code')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="code"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="code"
-                                        :value="old('code')"
-                                        rules="required"
-                                        v-model="selectedCurrency.code"
-                                        :label="trans('admin::app.settings.currencies.index.create.code')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Name -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.currencies.index.create.name')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="name"
+                                    :value="old('name')"
+                                    rules="required"
+                                    v-model="selectedCurrency.name"
+                                    :label="trans('admin::app.settings.currencies.index.create.name')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.name')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.currencies.index.create.name')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        :value="old('name')"
-                                        rules="required"
-                                        v-model="selectedCurrency.name"
-                                        :label="trans('admin::app.settings.currencies.index.create.name')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Symbol -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.symbol')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="symbol"
+                                    :value="old('symbol')"
+                                    v-model="selectedCurrency.symbol"
+                                    :label="trans('admin::app.settings.currencies.index.create.symbol')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.symbol')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Symbol -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.currencies.index.create.symbol')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="symbol"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="symbol"
-                                        :value="old('symbol')"
-                                        v-model="selectedCurrency.symbol"
-                                        :label="trans('admin::app.settings.currencies.index.create.symbol')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.symbol')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Decimal -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.decimal')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="symbol"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="decimal"
+                                    :value="old('decimal')"
+                                    v-model="selectedCurrency.decimal"
+                                    :label="trans('admin::app.settings.currencies.index.create.decimal')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Decimal -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.currencies.index.create.decimal')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="decimal"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="decimal"
-                                        :value="old('decimal')"
-                                        v-model="selectedCurrency.decimal"
-                                        :label="trans('admin::app.settings.currencies.index.create.decimal')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="decimal"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
-                            </div>
+                            {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                         </x-slot:content>
 
                         <x-slot:footer>
