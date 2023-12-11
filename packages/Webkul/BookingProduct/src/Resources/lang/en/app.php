@@ -109,6 +109,7 @@ return [
                                     'close'     => 'Close',
                                     'day'       => 'Day',
                                     'from'      => 'From',
+                                    'from-day'  => 'From Day',
                                     'friday'    => 'Friday',
                                     'monday'    => 'Monday',
                                     'open'      => 'Open',
