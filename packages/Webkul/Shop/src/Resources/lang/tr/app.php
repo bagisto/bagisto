@@ -743,20 +743,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'Kupon Uygulandı',
-                'applied-coupon'  => 'Uygulanan Kupon',
-                'apply'           => 'Kuponu Uygula',
-                'apply-issue'     => 'Kupon kodu uygulanamıyor.',
-                'button-title'    => 'Uygula',
-                'code'            => 'Kupon Kodu',
-                'discount'        => 'Kupon İndirimi',
-                'enter-your-code' => 'Kodunuzu girin',
-                'remove'          => 'Kuponu Kaldır',
-                'sub-total'       => 'Ara Toplam',
-                'subtotal'        => 'Ara Toplam',
-            ],
-
             'index' => [
                 'checkout' => 'Ödeme',
                 'home'     => 'Anasayfa',

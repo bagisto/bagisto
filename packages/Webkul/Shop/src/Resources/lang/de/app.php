@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'Gutschein angewendet',
-                'applied-coupon'  => 'Angewendeter Gutschein',
-                'apply'           => 'Gutschein anwenden',
-                'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
-                'button-title'    => 'Anwenden',
-                'code'            => 'Gutscheincode',
-                'discount'        => 'Gutscheinrabatt',
-                'enter-your-code' => 'Geben Sie Ihren Code ein',
-                'remove'          => 'Gutschein entfernen',
-                'sub-total'       => 'Zwischensumme',
-                'subtotal'        => 'Zwischensumme',
-            ],
-
             'index' => [
                 'checkout' => 'Zur Kasse',
                 'home'     => 'Startseite',

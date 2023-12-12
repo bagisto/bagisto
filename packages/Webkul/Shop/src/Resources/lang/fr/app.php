@@ -745,20 +745,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'Coupon appliqué',
-                'applied-coupon'  => 'Coupon appliqué',
-                'apply'           => 'Appliquer le coupon',
-                'apply-issue'     => 'Le code de coupon ne peut pas être appliqué.',
-                'button-title'    => 'Appliquer',
-                'code'            => 'Code du coupon',
-                'discount'        => 'Remise du coupon',
-                'enter-your-code' => 'Entrez votre code',
-                'remove'          => 'Supprimer le coupon',
-                'sub-total'       => 'Sous-total',
-                'subtotal'        => 'Sous-total',
-            ],
-
             'index' => [
                 'checkout' => 'Caisse',
                 'home'     => 'Accueil',

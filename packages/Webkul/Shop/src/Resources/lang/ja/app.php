@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'クーポンが適用されました',
-                'applied-coupon'  => '適用されたクーポン',
-                'apply'           => 'クーポンを適用',
-                'apply-issue'     => 'クーポンコードは適用できません。',
-                'button-title'    => '適用',
-                'code'            => 'クーポンコード',
-                'discount'        => 'クーポン割引',
-                'enter-your-code' => 'コードを入力してください',
-                'remove'          => 'クーポンを削除',
-                'sub-total'       => '小計',
-                'subtotal'        => '小計',
-            ],
-
             'index' => [
                 'checkout' => 'チェックアウト',
                 'home'     => 'ホーム',

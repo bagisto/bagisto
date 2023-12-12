@@ -121,6 +121,8 @@
 
             data() {
                 return {
+                    isCartPage: Boolean("{{ request()->route()->getName() === 'shop.checkout.cart.index' }}"),
+
                     coupons: [],
 
                     code: '',
@@ -128,10 +130,14 @@
             },
 
             methods: {
-                applyCoupon(params, { resetForm}) {
+                applyCoupon(params, { resetForm }) {
                     this.$axios.post("{{ route('shop.api.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
-                            this.$parent.$parent.$refs.vCart.get();
+                            if (this.isCartPage) {
+                                this.$parent.$parent.$refs.vCart.get();
+                            } else {
+                                this.$parent.$parent.getOrderSummary();
+                            }
                   
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -161,7 +167,11 @@
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {
-                            this.$parent.$parent.$refs.vCart.get();
+                            if (this.isCartPage) {
+                                this.$parent.$parent.$refs.vCart.get();
+                            } else {
+                                this.$parent.$parent.getOrderSummary();
+                            }
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
