@@ -228,8 +228,6 @@
                                         multiple
                                         v-model="selectedTaxRates.tax_rates"
                                     >
-                                        <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
-
                                         <option
                                             v-for="taxRate in taxRates"
                                             :value="taxRate.id"
