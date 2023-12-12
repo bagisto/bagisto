@@ -584,8 +584,6 @@
 
                     this.readFile(this.image.file);
                 }
-
-                console.log(this);
             },
 
             methods: {
