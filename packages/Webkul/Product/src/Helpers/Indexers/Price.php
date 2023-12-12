@@ -15,6 +15,13 @@ class Price extends AbstractIndexer
     private $batchSize;
 
     /**
+     * Channels
+     *
+     * @var array
+     */
+    protected $channels;
+
+    /**
      * Customer Groups
      *
      * @var array
@@ -128,29 +135,35 @@ class Price extends AbstractIndexer
             $indexer = $this->getTypeIndexer($product)
                 ->setProduct($product);
 
-            foreach ($this->getCustomerGroups() as $customerGroup) {
-                $customerGroupIndex = $product->price_indices
-                    ->where('customer_group_id', $customerGroup->id)
-                    ->where('product_id', $product->id)
-                    ->first();
+            foreach ($this->getChannels() as $channel) {
+                foreach ($this->getCustomerGroups() as $customerGroup) {
+                    $customerGroupIndex = $product->price_indices
+                        ->where('channel_id', $channel->id)
+                        ->where('customer_group_id', $customerGroup->id)
+                        ->where('product_id', $product->id)
+                        ->first();
 
-                $newIndex = $indexer->setCustomerGroup($customerGroup)->getIndices();
+                    $newIndex = $indexer
+                        ->setChannel($channel)
+                        ->setCustomerGroup($customerGroup)
+                        ->getIndices();
 
-                if ($customerGroupIndex) {
-                    $oldIndex = collect($customerGroupIndex->toArray())
-                        ->except('id', 'created_at', 'updated_at')
-                        ->toArray();
+                    if ($customerGroupIndex) {
+                        $oldIndex = collect($customerGroupIndex->toArray())
+                            ->except('id', 'created_at', 'updated_at')
+                            ->toArray();
 
-                    $isIndexChanged = $this->isIndexChanged(
-                        $oldIndex,
-                        $newIndex
-                    );
+                        $isIndexChanged = $this->isIndexChanged(
+                            $oldIndex,
+                            $newIndex
+                        );
 
-                    if ($isIndexChanged) {
-                        $this->productPriceIndexRepository->update($newIndex, $customerGroupIndex->id);
+                        if ($isIndexChanged) {
+                            $this->productPriceIndexRepository->update($newIndex, $customerGroupIndex->id);
+                        }
+                    } else {
+                        $newIndices[] = $newIndex;
                     }
-                } else {
-                    $newIndices[] = $newIndex;
                 }
             }
         }
@@ -182,6 +195,20 @@ class Price extends AbstractIndexer
         }
 
         return $typeIndexers[$product->type] = $product->getTypeInstance()->getPriceIndexer();
+    }
+
+    /**
+     * Returns all customer groups
+     *
+     * @return Collection
+     */
+    public function getChannels()
+    {
+        if ($this->channels) {
+            return $this->channels;
+        }
+
+        return $this->channels = core()->getAllChannels();
     }
 
     /**

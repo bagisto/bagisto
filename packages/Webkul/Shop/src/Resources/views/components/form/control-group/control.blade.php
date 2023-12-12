@@ -18,7 +18,7 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500 hover:border-red-500' : '']"
+                :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
         </v-field>
@@ -34,7 +34,7 @@
             <input
                 type="{{ $type }}"
                 name="{{ $name }}"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500 hover:border-red-500' : '']"
+                :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
         </v-field>
@@ -49,7 +49,7 @@
         >
             <input
                 type="{{ $type }}"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                :class="[errors.length ? 'border !border-red-500' : '']"
                 v-bind="field"
                 {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
@@ -66,7 +66,7 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500 hover:border-red-500' : '']"
+                :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
             </textarea>
@@ -88,7 +88,7 @@
                 <input
                     name="{{ $name }}"
                     v-bind="field"
-                    :class="[errors['{{ $name }}'] ? 'border border-red-500 hover:border-red-500' : '']"
+                    :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                     {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
                     autocomplete="off"
                 >
@@ -107,7 +107,7 @@
                 <input
                     name="{{ $name }}"
                     v-bind="field"
-                    :class="[errors['{{ $name }}'] ? 'border border-red-500 hover:border-red-500' : '']"
+                    :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
                     {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
                     autocomplete="off"
                 >
@@ -124,7 +124,7 @@
             <select
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                :class="[errors.length ? 'border !border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select block w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-[16px] transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
                 <option value="" selected disabled>Select</option>
@@ -137,8 +137,9 @@
     @case('multiselect')
         <v-field
             as="select"
+            v-slot="{ errors }"
             name="{{ $name }}"
-            :class="[errors && errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            :class="[errors.length ? 'border !border-red-500' : '']"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-2 px-3 bg-white border border-[#E9E9E9] rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             multiple
         >
@@ -152,7 +153,7 @@
             type="checkbox"
             name="{{ $name }}"
             class="hidden"
-            v-slot="{ field, errors }"
+            v-slot="{ field }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
@@ -177,7 +178,7 @@
             type="radio"
             name="{{ $name }}"
             class="hidden"
-            v-slot="{ field, errors }"
+            v-slot="{ field }"
             {{ $attributes->only(['value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
@@ -203,7 +204,7 @@
                 type="checkbox"
                 name="{{ $name }}"
                 class="hidden"
-                v-slot="{ field, errors }"
+                v-slot="{ field }"
                 {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             >
                 <input
@@ -227,7 +228,7 @@
     @case('image')
         <x-shop::media
             name="{{ $name }}"
-            ::class="[errors && errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            ::class="[errors && errors['{{ $name }}'] ? 'border !border-red-500' : '']"
             {{ $attributes }}
         >
         </x-shop::media>
