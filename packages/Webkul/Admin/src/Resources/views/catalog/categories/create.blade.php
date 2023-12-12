@@ -102,9 +102,8 @@
                             <x-admin::tree.view
                                 input-type="radio"
                                 name-field="parent_id"
-                                value-field="key"
-                                id-field="key"
-                                model-value="json_encode($categories)"
+                                value-field="id"
+                                id-field="id"
                                 :items="json_encode($categories)"
                                 :fallback-locale="config('app.fallback_locale')"
                             >

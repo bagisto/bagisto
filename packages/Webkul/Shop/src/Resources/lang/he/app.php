@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'discount'        => 'הנחת קופון',
-                'code'            => 'קוד קופון',
-                'applied'         => 'הקופון הוחל',
-                'applied-coupon'  => 'הקופון הוחל',
-                'apply'           => 'החל קופון',
-                'remove'          => 'הסר קופון',
-                'apply-issue'     => 'לא ניתן להחיל את קוד הקופון.',
-                'sub-total'       => 'תת סך הכל',
-                'button-title'    => 'החל',
-                'enter-your-code' => 'הזן את קוד הקופון שלך',
-                'subtotal'        => 'תת סך הכל',
-            ],
-
             'index' => [
                 'checkout' => 'תשלום',
                 'home'     => 'דף הבית',

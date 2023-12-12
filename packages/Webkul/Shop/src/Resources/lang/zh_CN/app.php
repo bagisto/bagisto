@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => '优惠券已应用',
-                'applied-coupon'  => '应用的优惠券',
-                'apply'           => '应用优惠券',
-                'apply-issue'     => '无法应用优惠券码。',
-                'button-title'    => '应用',
-                'code'            => '优惠券代码',
-                'discount'        => '优惠券折扣',
-                'enter-your-code' => '输入您的代码',
-                'remove'          => '删除优惠券',
-                'sub-total'       => '小计',
-                'subtotal'        => '小计',
-            ],
-
             'index' => [
                 'checkout' => '结帐',
                 'home'     => '主页',

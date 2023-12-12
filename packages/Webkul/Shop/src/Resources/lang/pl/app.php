@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'Zastosowano kod kuponu',
-                'applied-coupon'  => 'Zastosowany kod kuponu',
-                'apply'           => 'Zastosuj kod kuponu',
-                'apply-issue'     => 'Kod kuponu nie może być zastosowany',
-                'button-title'    => 'Zastosuj',
-                'code'            => 'Kod kuponu',
-                'discount'        => 'Rabat z kodu kuponu',
-                'enter-your-code' => 'Wprowadź swój kod',
-                'remove'          => 'Usuń kupon',
-                'sub-total'       => 'Suma częściowa',
-                'subtotal'        => 'Suma częściowa',
-            ],
-
             'index' => [
                 'checkout' => 'Zamówienie',
                 'home'     => 'Strona główna',
