@@ -28,7 +28,7 @@
             <div class="grid">
                 <!-- Card -->
                 <div
-                    class="flex flex-col gap-[8px] py-2.5"
+                    class="flex flex-col gap-2 py-2.5"
                     v-for="(item, index) in prices"
                 >
                     <!-- Hidden Inputs -->
@@ -70,7 +70,7 @@
 
                 <!-- Empty Container -->
                 <div
-                    class="flex gap-[20px] items-center py-2.5"
+                    class="flex gap-5 items-center py-2.5"
                     v-if="! prices.length"
                 >
                     <img

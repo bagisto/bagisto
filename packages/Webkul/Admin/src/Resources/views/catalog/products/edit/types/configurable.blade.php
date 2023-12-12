@@ -9,8 +9,8 @@
     <script type="text/x-template" id="v-product-variations-template">
         <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex flex-wrap gap-[10px] justify-between mb-2.5 p-[16px]">
-                <div class="flex flex-col gap-[8px]">
+            <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-[16px]">
+                <div class="flex flex-col gap-2">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
                     </p>
@@ -55,7 +55,7 @@
 
             <!-- For Empty Variations -->
             <template v-else>
-                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
@@ -188,7 +188,7 @@
                 <x-slot:content class="px-[0px] py-[15px]">
                     <template v-for="attribute in superAttributes">
                         <label
-                            class="flex gap-[10px] items-center px-5 py-2 text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
+                            class="flex gap-2.5 items-center px-5 py-2 text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
                             :for="'attribute_' + attribute.id + '_option_' + option.id"
                             v-for="option in usedAttributeOptions(attribute)"
                         >
@@ -283,8 +283,8 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <!-- Mass Update -->
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
@@ -316,7 +316,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
                                             <div class="grid grid-cols-3 gap-[16px] mb-2.5">
                                                 <x-admin::form.control-group
                                                     class="mb-[0px]"
@@ -356,7 +356,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
                                             <v-media-images
                                                 name="images"
                                                 class="mb-2.5"
@@ -371,8 +371,8 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editWeight'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-weight')
@@ -400,8 +400,8 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editName'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-name')
@@ -427,8 +427,8 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editStatus'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="flex gap-[10px] items-center">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-status')
@@ -460,7 +460,7 @@
 
                             <div
                                 class="py-[16px] border-b-[1px] dark:border-gray-800   last:border-b-0"
-                                :class="{'flex gap-[10px] justify-between items-center': [
+                                :class="{'flex gap-2.5 justify-between items-center': [
                                     'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
                                 ].includes(selectedType) }"
                                 v-for="variant in selectedVariants"
@@ -676,10 +676,10 @@
 
     <!-- Variation Item Template -->
     <script type="text/x-template" id="v-product-variation-item-template"> 
-        <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
+        <div class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
 
             <!-- Information -->
-            <div class="flex gap-[10px]">
+            <div class="flex gap-2.5">
                 <!-- Form Hidden Fields -->
                 <input type="hidden" :name="'variants[' + variant.id + '][sku]'" :value="variant.sku"/>
 
@@ -805,7 +805,7 @@
                     @{{ "@lang('admin::app.catalog.products.edit.types.configurable.qty')".replace(':qty', totalQty) }}
                 </p>
 
-                <div class="flex gap-[10px]">
+                <div class="flex gap-2.5">
                     <!-- Remove -->
                     <p
                         class="text-red-600 cursor-pointer transition-all hover:underline"

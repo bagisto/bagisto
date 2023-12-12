@@ -70,7 +70,7 @@
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -81,9 +81,9 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Section -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
 
@@ -188,7 +188,7 @@
 
                     <div class="flex gap-[50px]">
                         <!-- Add Logo -->
-                        <div class="flex flex-col gap-[8px] w-[40%] mt-5">
+                        <div class="flex flex-col gap-2 w-[40%] mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.logo')
                             </p>
@@ -205,7 +205,7 @@
                         </div>
 
                         <!-- Add Banner -->
-                        <div class="flex flex-col gap-[8px] w-[40%] mt-5">
+                        <div class="flex flex-col gap-2 w-[40%] mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.banner')
                             </p>
@@ -326,7 +326,7 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full">
                 <!-- Settings -->
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.before', ['category' => $category]) !!}
@@ -446,7 +446,7 @@
                     <x-slot:content class="pointer-events-none">
                         @foreach ($attributes as $attribute)
                             <label
-                                class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
+                                class="flex gap-2.5 w-max items-center p-[6px] cursor-pointer select-none"
                                 for="{{ $attribute->name ?? $attribute->admin_name }}"
                             >
                                 <x-admin::form.control-group.control

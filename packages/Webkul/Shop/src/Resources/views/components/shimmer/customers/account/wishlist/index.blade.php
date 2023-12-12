@@ -22,26 +22,26 @@
                         <div class="grid gap-y-[10px]">
                             <div class="shimmer w-[200px] h-[21px]"></div>
                             <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
-                                <div class="grid gap-[8px]">
+                                <div class="grid gap-2">
                                 </div>
                             </div>
 
                             <div class="shimmer w-[100px] h-[21px]"></div>
                             
-                            <div class="hidden gap-[10px] place-content-start max-sm:grid">
+                            <div class="hidden gap-2.5 place-content-start max-sm:grid">
                                 <div class="shimmer w-[100px] h-[27px]"></div>
 
                                 <div class="shimmer w-[100px] h-[24px]"></div>
                             </div>
 
-                            <div class="flex gap-[20px] flex-wrap">
+                            <div class="flex gap-5 flex-wrap">
                                 <div class="shimmer w-[110px] h-[40px] rounded-[54px]"></div>
                                 <div class="shimmer w-[158px] h-[40px] rounded-[18px]"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid gap-[10px] place-content-start max-sm:hidden">
+                    <div class="grid gap-2.5 place-content-start max-sm:hidden">
                         <div class="shimmer w-[100px] h-[27px]"></div>
                         
                         <div class="shimmer w-[100px] h-[24px]"></div>

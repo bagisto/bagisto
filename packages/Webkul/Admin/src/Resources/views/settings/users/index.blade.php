@@ -58,9 +58,9 @@
                 @endphp
                 <!-- DataGrid Header -->
                 <template #header="{columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-[10px] items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
-                            class="flex gap-[10px] cursor-pointer"
+                            class="flex gap-2.5 cursor-pointer"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
                         >
                             <p class="text-gray-600 dark:text-gray-300">
@@ -90,7 +90,7 @@
 
                         <!-- Actions -->
                         @if ($hasPermission)
-                            <p class="flex gap-[10px] justify-end">
+                            <p class="flex gap-2.5 justify-end">
                                 @lang('admin::app.components.datagrid.table.actions')
                             </p>
                         @endif
@@ -101,7 +101,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
@@ -109,7 +109,7 @@
 
                         <!-- User Profile -->
                         <p>
-                            <div class="flex gap-[10px] items-center">
+                            <div class="flex gap-2.5 items-center">
                                 <div
                                     class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
                                     v-if="record.user_img"
@@ -348,7 +348,7 @@
                                             @lang('admin::app.settings.users.index.create.status')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="gap-[10px] w-full mt-2.5">
+                                        <div class="gap-2.5 w-full mt-2.5">
                                             <x-admin::form.control-group.control
                                                 type="switch"
                                                 name="status"

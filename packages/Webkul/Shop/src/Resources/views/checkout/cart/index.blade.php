@@ -70,7 +70,7 @@
                     >
                         <div class="grid gap-[25px] flex-1">
                             <!-- Cart Mass Action Container -->
-                            <div class="flex justify-between items-center pb-[10px] border-b-[1px] border-[#E9E9E9] max-sm:block">
+                            <div class="flex justify-between items-center pb-2.5 border-b-[1px] border-[#E9E9E9] max-sm:block">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -195,7 +195,7 @@
                                                 </div>
 
                                                 <!-- Option Details -->
-                                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                                <div class="grid gap-2" v-show="item.option_show">
                                                     <div class="" v-for="option in item.options">
                                                         <p class="text-[14px] font-medium">
                                                             @{{ option.attribute_name + ':' }}

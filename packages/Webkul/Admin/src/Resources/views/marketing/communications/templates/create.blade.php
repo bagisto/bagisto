@@ -35,9 +35,9 @@
         </div>
 
         <!-- body content -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left sub-component -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.content.before') !!}
 
@@ -75,7 +75,7 @@
             </div>
 
             <!-- Right sub-component -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <!-- General -->
                 <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
 

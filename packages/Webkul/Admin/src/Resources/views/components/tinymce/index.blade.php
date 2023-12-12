@@ -21,7 +21,7 @@
                 <x-admin::modal ref="magicAIModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="flex gap-2.5 items-center text-[18px] text-gray-800 dark:text-white font-bold">
                             <span class="icon-magic text-[24px] text-gray-800"></span>
 
                             @lang('admin::app.components.tinymce.ai-generation.title')

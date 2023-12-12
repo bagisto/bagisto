@@ -12,8 +12,8 @@
     <script type="text/x-template" id="v-bundle-options-template">
         <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-2.5 p-[16px]">
-                <div class="flex flex-col gap-[8px]">
+            <div class="flex gap-5 justify-between mb-2.5 p-[16px]">
+                <div class="flex flex-col gap-2">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
@@ -53,7 +53,7 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
                 v-else
             >
                 <!-- Placeholder Image -->
@@ -206,8 +206,8 @@
             <input type="hidden" :name="'bundle_options[' + option.id + '][sort_order]'" :value="index"/>
 
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-2.5 p-[16px]">
-                <div class="flex flex-col gap-[8px]">
+            <div class="flex gap-5 justify-between mb-2.5 p-[16px]">
+                <div class="flex flex-col gap-2">
                     <p
                         class="text-[16px] text-gray-800 dark:text-white font-semibold"
                         :class="{'required': option.is_required}"
@@ -259,9 +259,9 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
                             <!-- Information -->
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
                                 <div>
                                     <i class="icon-drag text-[20px] dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
@@ -365,7 +365,7 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
                 v-else
             >
                 <!-- Placeholder Image -->

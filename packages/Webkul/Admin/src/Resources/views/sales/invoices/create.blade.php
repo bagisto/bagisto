@@ -55,8 +55,8 @@
                             <div class="p-[16px] !pt-0">
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
-                                            <div class="flex gap-[10px]">
+                                        <div class="flex gap-2.5 justify-between py-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                            <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
                                                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
@@ -127,7 +127,7 @@
                                     @endforeach
 
                                     <!-- Create Transaction Button -->
-                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             name="can_create_transaction"

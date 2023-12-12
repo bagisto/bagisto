@@ -35,9 +35,9 @@
         </div>
 
         <!-- body content -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left sub-component -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.general.before') !!}
 
@@ -122,7 +122,7 @@
                         </p>
 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="inventory_sources[]"
@@ -377,7 +377,7 @@
 
             </div>
             <!-- Right sub-component -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.currencies_and_locales.before') !!}
 
@@ -399,7 +399,7 @@
                             </p>
                         
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="locales[]"
@@ -466,7 +466,7 @@
                             </p>
                         
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="currencies[]" 

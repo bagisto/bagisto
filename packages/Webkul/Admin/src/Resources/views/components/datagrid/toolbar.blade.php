@@ -105,7 +105,7 @@
                             type="text"
                             name="search"
                             :value="getAppliedColumnValues('all')"
-                            class="block w-full rounded-lg border dark:border-gray-800 bg-white dark:bg-gray-900 py-[6px] ltr:pl-3	 rtl:pr-3	 ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400  dark:focus:border-gray-400"
+                            class="block w-full rounded-lg border dark:border-gray-800 bg-white dark:bg-gray-900 py-[6px] ltr:pl-3 rtl:pr-3	ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400  dark:focus:border-gray-400"
                             placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                             autocomplete="off"
                             @keyup.enter="filterPage"
@@ -133,7 +133,7 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="relative inline-flex w-full max-w-max ltr:pl-3	 rtl:pr-3	 ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[4px] py-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:ring-2"
+                            class="relative inline-flex w-full max-w-max ltr:pl-3 rtl:pr-3 ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[4px] py-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:ring-2"
                             :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': applied.filters.columns.length > 1}"
                         >
                             <span class="icon-filter text-[22px]"></span>

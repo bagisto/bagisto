@@ -217,7 +217,7 @@
 
                 <div class="flex gap-[16px] max-sm:flex-wrap">
                     <!-- Customer Status -->
-                    <x-admin::form.control-group class="flex gap-[10px] w-full mb-2.5">
+                    <x-admin::form.control-group class="flex gap-2.5 w-full mb-2.5">
                         <x-admin::form.control-group.control
                             type="checkbox"
                             name="status"
@@ -242,7 +242,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Customer Suspended Status -->
-                    <x-admin::form.control-group class="flex gap-[10px] w-full mb-2.5">
+                    <x-admin::form.control-group class="flex gap-2.5 w-full mb-2.5">
                         <x-admin::form.control-group.control
                             type="checkbox"
                             name="is_suspended"

@@ -36,9 +36,9 @@
             </div>
         </div>
         <!-- Informations -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Section -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.general.before') !!}
 
@@ -168,7 +168,7 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.accordion.setting.before') !!}
 

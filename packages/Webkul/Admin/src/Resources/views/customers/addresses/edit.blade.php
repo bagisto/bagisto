@@ -353,7 +353,7 @@
                                     </x-admin::form.control-group>
 
                                     <!-- Default Address -->
-                                    <x-admin::form.control-group class="flex gap-[10px] w-full mt-5">
+                                    <x-admin::form.control-group class="flex gap-2.5 w-full mt-5">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             name="default_address"

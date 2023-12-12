@@ -8,7 +8,7 @@
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
-            <div class="flex gap-[10px] items-center">
+            <div class="flex gap-2.5 items-center">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                     @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
                 </p>
@@ -91,9 +91,9 @@
         </div>
 
         <!-- Order details -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Component -->
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
@@ -108,8 +108,8 @@
                     <!-- Order items -->
                     <div class="grid">
                         @foreach ($order->items as $item)
-                            <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
-                                <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                <div class="flex gap-2.5">
                                     @if($item?->product?->base_image_url)
                                         <img
                                             class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
@@ -197,7 +197,7 @@
                         @endforeach
                     </div>
 
-                    <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
+                    <div class="flex w-full gap-2.5 justify-end mt-[16px] p-[16px]">
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                 @lang('admin::app.sales.orders.view.summary-sub-total')
@@ -364,7 +364,7 @@
             {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
 
             <!-- Right Component -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <!-- Customer and address information -->
                 <x-admin::accordion>
                     <x-slot:header>
@@ -440,7 +440,7 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex w-full gap-[20px] justify-start">
+                        <div class="flex w-full gap-5 justify-start">
                             <div class="flex flex-col gap-y-[6px]">
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.order-date')
@@ -575,7 +575,7 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.invoices.view', $invoice->id) }}"
                                         class="text-[14px] text-blue-600 transition-all hover:underline"
@@ -626,7 +626,7 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.shipments.view', $shipment->id) }}"
                                         class="text-[14px] text-blue-600 transition-all hover:underline"
@@ -684,7 +684,7 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.refunds.view', $refund->id) }}"
                                         class="text-[14px] text-blue-600 transition-all hover:underline"

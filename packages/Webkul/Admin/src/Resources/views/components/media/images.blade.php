@@ -121,7 +121,7 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <template v-if="! ai.images.length">
-                                    <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
+                                    <p class="flex gap-2.5 items-center text-[18px] text-gray-800 dark:text-white font-bold">
                                         <span class="icon-magic text-[24px] text-gray-800"></span>
 
                                         @lang('admin::app.components.media.images.ai-generation.title')
@@ -257,7 +257,7 @@
                                 </div>
 
                                 <div v-show="ai.images.length">
-                                    <div class="grid grid-cols-4 gap-[20px]">
+                                    <div class="grid grid-cols-4 gap-5">
                                         <div
                                             class="grid justify-items-center min-w-[120px] max-h-[120px] relative border-[3px] border-transparent rounded-[4px] overflow-hidden transition-all hover:opacity-80 cursor-pointer"
                                             :class="{'!border-blue-600': image.selected}"

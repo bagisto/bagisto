@@ -9,7 +9,7 @@
                 >
                     <a
                         href="{{ $menuItem['url'] }}"
-                        class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
+                        class="flex gap-2.5 p-[6px] items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
                     >
                         <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         
@@ -46,7 +46,7 @@
             :class="{'max-w-[70px]': isCollapsed}"
             @click="toggle"
         >
-            <div class="flex gap-[10px] p-[6px] items-center">
+            <div class="flex gap-2.5 p-[6px] items-center">
                 <span
                     class="icon-collapse transition-all text-[24px]"
                     :class="[isCollapsed ? 'ltr:rotate-[180deg] rtl:rotate-[0]' : 'ltr:rotate-[0] rtl:rotate-[180deg]']"

@@ -2,8 +2,8 @@
 
 <div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
     <!-- Panel Header -->
-    <div class="flex gap-[20px] justify-between mb-[16px]">
-        <div class="flex flex-col gap-[8px]">
+    <div class="flex gap-5 justify-between mb-[16px]">
+        <div class="flex flex-col gap-2">
             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                 @lang('admin::app.catalog.products.edit.images.title')
             </p>

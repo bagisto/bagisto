@@ -134,8 +134,8 @@
                                             $item->qty_to_ship > 0
                                             && $item->product
                                         )
-                                            <div class="flex gap-[10px] justify-between py-[16px]">
-                                                <div class="flex gap-[10px]">
+                                            <div class="flex gap-2.5 justify-between py-[16px]">
+                                                <div class="flex gap-2.5">
                                                     @if ($item->product?->base_image_url)
                                                         <img
                                                             class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
@@ -198,8 +198,8 @@
 
                                             <!-- Information -->
                                             @foreach ($order->channel->inventory_sources as $inventorySource)
-                                                <div class="flex gap-[10px] justify-between pb-[10px] mt-2.5 border-b-[1px] border-slate-300 dark:border-gray-800">
-                                                    <div class="grid gap-[10px]">
+                                                <div class="flex gap-2.5 justify-between pb-2.5 mt-2.5 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                                    <div class="grid gap-2.5">
                                                         <!--Inventory Source -->
                                                         <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                             {{ $inventorySource->name }}
@@ -219,7 +219,7 @@
                                                         </p>
                                                     </div>
 
-                                                    <div class="flex gap-[10px] items-center">
+                                                    <div class="flex gap-2.5 items-center">
                                                         @php
                                                             $inputName = "shipment[items][$item->id][$inventorySource->id]";
                                                         @endphp

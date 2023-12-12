@@ -61,7 +61,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
@@ -212,7 +212,7 @@
                             </p>
 
                             <x-admin::form.control-group
-                                class="flex gap-[10px] !mb-0 p-[6px]"
+                                class="flex gap-2.5 !mb-0 p-[6px]"
                             >
                                 <v-field
                                     name="taxrates[]"

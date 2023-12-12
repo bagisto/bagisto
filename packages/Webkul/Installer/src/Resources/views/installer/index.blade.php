@@ -262,7 +262,7 @@
                             enctype="multipart/form-data"
                             ref="multiLocaleForm"
                         >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                            <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
                                     @lang('installer::app.installer.index.start.welcome-title')
                                 </p>
@@ -326,7 +326,7 @@
 
                 <!-- Systme Requirements -->
                 <div class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'systemRequirements'">
-                    <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                    <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
                             @lang('installer::app.installer.index.server-requirements.title')
                         </p>
@@ -400,7 +400,7 @@
                             @submit.prevent="handleSubmit($event, FormSubmit)"
                             enctype="multipart/form-data"
                         >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                            <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
                                     @lang('installer::app.installer.index.environment-configuration.title')
                                 </p>
@@ -607,7 +607,7 @@
                             @submit.prevent="handleSubmit($event, FormSubmit)"
                             enctype="multipart/form-data"
                         >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                            <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
                                     @lang('installer::app.installer.index.ready-for-installation.install')
                                 </p>
@@ -619,7 +619,7 @@
                                         @lang('installer::app.installer.index.ready-for-installation.install-info')
                                     </p>
 
-                                    <div class="grid gap-[10px]">
+                                    <div class="grid gap-2.5">
                                         <label class="text-[14px] text-gray-600">
                                             @lang('installer::app.installer.index.ready-for-installation.install-info-button')
                                         </label>
@@ -668,7 +668,7 @@
                     class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
                     v-if="currentStep == 'installProgress'"
                 >
-                    <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                    <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
                             @lang('installer::app.installer.index.installation-processing.title')
                         </p>
@@ -680,7 +680,7 @@
                                 @lang('installer::app.installer.index.installation-processing.bagisto')
                             </p>
 
-                            <div class="grid gap-[10px]">
+                            <div class="grid gap-2.5">
                                 <!-- Spinner -->
                                 <img
                                     class="animate-spin h-5 w-5 text-navyBlue"
@@ -710,7 +710,7 @@
                             @submit.prevent="handleSubmit($event, nextForm)"
                             enctype="multipart/form-data"
                         >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                            <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
                                     @lang('installer::app.installer.index.environment-configuration.title')
                                 </p>
@@ -807,7 +807,7 @@
                                     @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <!-- Application Default Locale -->
                                     <x-installer::form.control-group class="w-full">
                                         <x-installer::form.control-group.label class="required">
@@ -865,7 +865,7 @@
                                     </x-installer::form.control-group>
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <x-installer::form.control-group class="w-full">
                                         <x-installer::form.control-group.label class="required">
                                             @lang('installer::app.installer.index.environment-configuration.allowed-locales')
@@ -873,7 +873,7 @@
 
                                         <!-- Allowed Locales -->
                                         @foreach ($locales as $key => $locale)
-                                            <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
                                                     $selectedOption = ($key == config('app.locale')) ? 1: 0;
                                                 @endphp
@@ -914,7 +914,7 @@
     
                                         <!-- Allowed Currencies -->
                                         @foreach ($currencies as $key => $currency)
-                                            <x-installer::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                                 @php
                                                     $selectedOption = ($key == config('app.currency')) ? 1 : 0;
                                                 @endphp
@@ -978,7 +978,7 @@
                             @submit.prevent="handleSubmit($event, FormSubmit)"
                             enctype="multipart/form-data"
                         >
-                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                            <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <p class="text-[20px] text-gray-800 font-bold">
                                     @lang('installer::app.installer.index.create-administrator.title')
                                 </p>
@@ -1091,7 +1091,7 @@
                     class="w-full max-w-[568px] bg-white rounded-[8px] shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
                     v-if="currentStep == 'installationCompleted'"
                 >
-                    <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
+                    <div class="flex justify-between items-center gap-2.5 px-[16px] py-[11px] border-b-[1px] border-gray-300">
                         <p class="text-[20px] text-gray-800 font-bold">
                             @lang('installer::app.installer.index.installation-completed.title')
                         </p>
@@ -1103,7 +1103,7 @@
                                 <span class="icon-tick text-[20px] text-green-500 font-semibold"></span>
                             </div>
 
-                            <div class="grid gap-[10px]">
+                            <div class="grid gap-2.5">
                                 <p class="text-[18px] text-gray-800 font-semibold">
                                     @lang('installer::app.installer.index.installation-completed.title')
                                 </p>

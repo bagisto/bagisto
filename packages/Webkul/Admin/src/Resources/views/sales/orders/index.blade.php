@@ -21,7 +21,7 @@
              <template v-if="! isLoading">
                 <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800">
                     <div
-                        class="flex gap-[10px] items-center select-none"
+                        class="flex gap-2.5 items-center select-none"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
@@ -66,7 +66,7 @@
                 >
                     <!-- Order Id, Created, Status Section -->
                     <div class="">
-                        <div class="flex gap-[10px]">
+                        <div class="flex gap-2.5">
                             <div class="flex flex-col gap-[6px]">
                                 <p
                                     class="text-[16px] text-gray-800 dark:text-white font-semibold"

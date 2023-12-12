@@ -6,7 +6,7 @@
 
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <div class="flex gap-[10px] items-center">
+            <div class="flex gap-2.5 items-center">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                     {{ $customer->first_name . " " . $customer->last_name }}
                 </p>
@@ -80,9 +80,9 @@
     {!! view_render_event('bagisto.admin.customers.customers.view.filters.after') !!}
 
     <!-- Content -->
-    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
         <!-- Left Component -->
-        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+        <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.orders.before') !!}
 
@@ -113,7 +113,7 @@
                         @foreach ($orders->paginate(10) as $order)
                             <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <div class="row grid grid-cols-3 w-full">
-                                    <div class="flex gap-[10px]">
+                                    <div class="flex gap-2.5">
                                         <div class="flex flex-col gap-[6px]">
                                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.customers.customers.view.increment-id', ['increment_id' => $order->increment_id])
@@ -261,7 +261,7 @@
 
                     <!-- Order Details -->
                     <div class="table-responsive grid w-full">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
@@ -345,7 +345,7 @@
                     </div>
 
                     <div class="table-responsive grid w-full">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
@@ -464,7 +464,7 @@
                     </div>
 
                     <div class="table-responsive grid w-full">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
@@ -577,7 +577,7 @@
         </div>
 
         <!-- Right Component -->
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+        <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
 
@@ -671,7 +671,7 @@
                                     @lang('admin::app.customers.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
                                 </p>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <!-- Edit Address -->
                                     @include('admin::customers.addresses.edit')
 
@@ -733,7 +733,7 @@
                         @endforeach
                     @else    
                         <!-- Empty Address Container -->
-                        <div class="flex gap-[20px] items-center py-2.5">
+                        <div class="flex gap-5 items-center py-2.5">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"

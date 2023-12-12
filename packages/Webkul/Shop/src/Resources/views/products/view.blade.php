@@ -407,7 +407,7 @@
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div
-                                        class="flex gap-[10px] justify-center items-center cursor-pointer"
+                                        class="flex gap-2.5 justify-center items-center cursor-pointer"
                                         role="button"
                                         tabindex="0"
                                         @click="is_buy_now=0; addToCompare({{ $product->id }})"

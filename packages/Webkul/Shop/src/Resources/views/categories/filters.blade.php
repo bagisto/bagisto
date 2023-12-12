@@ -37,7 +37,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
+            <div class="flex justify-between items-center pb-5 border-b-[1px] border-[#E9E9E9]">
                 <p class="text-[18px] font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
+            <div class="flex justify-between items-center pb-5 border-b-[1px] border-[#E9E9E9]">
                 <p class="text-[18px] font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -115,7 +115,7 @@
         <template v-else>
             <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-[26px]">
                 <!-- Filters Header Container -->
-                <div class="flex justify-between items-center h-[50px] pb-[10px] border-b-[1px] border-[#E9E9E9] max-md:hidden">
+                <div class="flex justify-between items-center h-[50px] pb-2.5 border-b-[1px] border-[#E9E9E9] max-md:hidden">
                     <p class="text-[18px] font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>

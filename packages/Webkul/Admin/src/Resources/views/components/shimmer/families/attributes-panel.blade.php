@@ -1,8 +1,8 @@
 <div class="">
     <!-- Panel Header -->
-    <div class="flex gap-[10px] justify-between flex-wrap mb-2.5 p-[16px]">
+    <div class="flex gap-2.5 justify-between flex-wrap mb-2.5 p-[16px]">
         <!-- Panel Header -->
-        <div class="flex flex-col gap-[8px]">
+        <div class="flex flex-col gap-2">
             <div class="shimmer w-[54px] h-[17px]"></div>
 
             <div class="shimmer w-[177px] h-[17px]"></div>
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Panel Content -->
-    <div class="flex [&amp;>*]:flex-1 gap-[20px] justify-between px-[16px]">
+    <div class="flex [&amp;>*]:flex-1 gap-5 justify-between px-[16px]">
         @for ($i = 0; $i < 2; $i++)
             <!-- Attributes Groups Container -->
             <div>

@@ -38,10 +38,10 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
 
             <!-- Left Section -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.general.before') !!}
 
@@ -151,7 +151,7 @@
 
                     <div class="flex gap-[50px]">
                         <!-- Add Logo -->
-                        <div class="flex flex-col gap-[8px] w-[40%] mt-5">
+                        <div class="flex flex-col gap-2 w-[40%] mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.logo')
                             </p>
@@ -164,7 +164,7 @@
                         </div>
 
                         <!-- Add Banner -->
-                        <div class="flex flex-col gap-[8px] w-[40%] mt-5">
+                        <div class="flex flex-col gap-2 w-[40%] mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.banner')
                             </p>
@@ -285,7 +285,7 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full">
                 <!-- Settings -->
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.settings.before') !!}
@@ -390,7 +390,7 @@
                     <x-slot:content class="pointer-events-none">
                         @foreach ($attributes as $attribute)
                             <label
-                                class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
+                                class="flex gap-2.5 w-max items-center p-[6px] cursor-pointer select-none"
                                 for="{{ $attribute->name ?? $attribute->admin_name }}"
                             >
                                 <x-admin::form.control-group.control

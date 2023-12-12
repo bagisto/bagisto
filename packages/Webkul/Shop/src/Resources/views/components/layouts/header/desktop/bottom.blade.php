@@ -18,7 +18,7 @@
         </a>
 
         <v-desktop-category>
-            <div class="flex gap-[20px] items-center">
+            <div class="flex gap-5 items-center">
                 <span
                     class="shimmer w-[80px] h-[24px] rounded-[4px]"
                     role="presentation"
@@ -104,7 +104,7 @@
                 <!-- Guest Dropdown -->
                 @guest('customer')
                     <x-slot:content>
-                        <div class="grid gap-[10px]">
+                        <div class="grid gap-2.5">
                             <p class="text-[20px] font-dmserif">
                                 @lang('shop::app.components.layouts.header.welcome-guest')
                             </p>
@@ -137,7 +137,7 @@
                 <!-- Customers Dropdown -->
                 @auth('customer')
                     <x-slot:content class="!p-[0px]">
-                        <div class="grid gap-[10px] p-[20px] pb-0">
+                        <div class="grid gap-2.5 p-[20px] pb-0">
                             <p class="text-[20px] font-dmserif">
                                 @lang('shop::app.components.layouts.header.welcome')’
                                 {{ auth()->guard('customer')->user()->first_name }}
@@ -150,7 +150,7 @@
 
                         <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                        <div class="grid gap-[4px] mt-2.5 pb-[10px]">
+                        <div class="grid gap-[4px] mt-2.5 pb-2.5">
                             <a
                                 class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                 href="{{ route('shop.customers.account.profile.index') }}"
@@ -202,7 +202,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-desktop-category-template">
         <div
-            class="flex gap-[20px] items-center"
+            class="flex gap-5 items-center"
             v-if="isLoading"
         >
             <span
@@ -242,7 +242,7 @@
                 >
                     <div class="flex aigns gap-x-[70px] justify-between">
                         <div
-                            class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]"
+                            class="grid grid-cols-[1fr] gap-5 content-start w-full flex-auto min-w-max max-w-[150px]"
                             v-for="pairCategoryChildren in pairCategoryChildren(category)"
                         >
                             <template v-for="secondLevelCategory in pairCategoryChildren">

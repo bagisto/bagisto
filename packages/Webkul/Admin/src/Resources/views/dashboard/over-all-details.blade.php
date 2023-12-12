@@ -16,7 +16,7 @@
             <div class="p-[16px] rounded-[4px] bg-white dark:bg-gray-900 box-shadow">
                 <div class="flex gap-[16px] flex-wrap ">
                     <!-- Total Sales -->
-                    <div class="flex gap-[10px] flex-1 min-w-[200px]">
+                    <div class="flex gap-2.5 flex-1 min-w-[200px]">
                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                             <img
                                 src="{{ bagisto_asset('images/total-sales.svg')}}"
@@ -52,7 +52,7 @@
                     </div>
 
                     <!-- Total Orders -->
-                    <div class="flex gap-[10px] flex-1 min-w-[200px]">
+                    <div class="flex gap-2.5 flex-1 min-w-[200px]">
                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                             <img
                                 src="{{ bagisto_asset('images/total-orders.svg')}}"
@@ -88,7 +88,7 @@
                     </div>
 
                     <!-- Total Customers -->
-                    <div class="flex gap-[10px] flex-1 min-w-[200px]">
+                    <div class="flex gap-2.5 flex-1 min-w-[200px]">
                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                             <img
                                 src="{{ bagisto_asset('images/customers.svg')}}"
@@ -124,7 +124,7 @@
                     </div>
 
                     <!-- Average sales -->
-                    <div class="flex gap-[10px] flex-1 min-w-[200px]">
+                    <div class="flex gap-2.5 flex-1 min-w-[200px]">
                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                             <img
                                 src="{{ bagisto_asset('images/average-orders.svg')}}"
@@ -161,7 +161,7 @@
                     </div>
 
                     <!-- Unpaid Invoices -->
-                    <div class="flex gap-[10px] flex-1 min-w-[200px]">
+                    <div class="flex gap-2.5 flex-1 min-w-[200px]">
                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">
                             <img
                                 src="{{ bagisto_asset('images/unpaid-invoices.svg')}}"

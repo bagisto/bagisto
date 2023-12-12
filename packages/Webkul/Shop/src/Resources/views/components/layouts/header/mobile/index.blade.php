@@ -55,7 +55,7 @@
                         @endguest
 
                         @auth('customer')
-                            <div class="flex flex-col gap-[10px] justify-between">
+                            <div class="flex flex-col gap-2.5 justify-between">
                                 <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
 
                                 <p class="text-[#6E6E6E] ">{{ auth()->user()?->email }}</p>
@@ -71,7 +71,7 @@
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
+                                <div class="w-full flex gap-2.5 justify-between items-center cursor-pointer" role="button">
                                     <span>
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
@@ -92,7 +92,7 @@
                         <x-shop::dropdown position="top-right">
                             <x-slot:toggle>
                                 <!-- Dropdown Toggler -->
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
+                                <div class="w-full flex gap-2.5 justify-between items-center cursor-pointer" role="button">
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)
                                                 ? core()->getCurrentLocale()->logo_url
@@ -162,7 +162,7 @@
                     <!-- Guest Dropdown -->
                     @guest('customer')
                         <x-slot:content>
-                            <div class="grid gap-[10px]">
+                            <div class="grid gap-2.5">
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome-guest')
                                 </p>
@@ -195,7 +195,7 @@
                     <!-- Customers Dropdown -->
                     @auth('customer')
                         <x-slot:content class="!p-[0px]">
-                            <div class="grid gap-[10px] p-[20px] pb-0">
+                            <div class="grid gap-2.5 p-[20px] pb-0">
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome')’
                                     {{ auth()->guard('customer')->user()->first_name }}
@@ -208,7 +208,7 @@
 
                             <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                            <div class="grid gap-[4px] mt-2.5 pb-[10px]">
+                            <div class="grid gap-[4px] mt-2.5 pb-2.5">
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.profile.index') }}"
@@ -294,7 +294,7 @@
                 <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                     <a
                         :href="category.url"
-                        class="flex items-center justify-between pb-[20px] mt-5"
+                        class="flex items-center justify-between pb-5 mt-5"
                         v-text="category.name"
                     >
                     </a>
@@ -308,7 +308,7 @@
                 </div>
 
                 <div
-                    class="grid gap-[8px]"
+                    class="grid gap-2"
                     v-if="category.isOpen"
                 >
                     <ul v-if="category.children.length">
@@ -316,7 +316,7 @@
                             <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                 <a
                                     :href="secondLevelCategory.url"
-                                    class="flex items-center justify-between pb-[20px] mt-5"
+                                    class="flex items-center justify-between pb-5 mt-5"
                                     v-text="secondLevelCategory.name"
                                 >
                                 </a>
@@ -338,7 +338,7 @@
                                         <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                             <a
                                                 :href="thirdLevelCategory.url"
-                                                class="flex items-center justify-between mt-5 ml-3 pb-[20px]"
+                                                class="flex items-center justify-between mt-5 ml-3 pb-5"
                                                 v-text="thirdLevelCategory.name"
                                             >
                                             </a>

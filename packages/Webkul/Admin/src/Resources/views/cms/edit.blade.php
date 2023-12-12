@@ -77,7 +77,7 @@
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -88,9 +88,9 @@
         </div>
 
           <!-- body content -->
-          <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+          <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left sub-component -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before') !!}
 
@@ -233,7 +233,7 @@
             </div>
 
             <!-- Right sub-component -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <!-- General -->
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.before') !!}
@@ -277,7 +277,7 @@
                             </p>
 
                             @foreach(core()->getAllChannels() as $channel)
-                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="channels[]"

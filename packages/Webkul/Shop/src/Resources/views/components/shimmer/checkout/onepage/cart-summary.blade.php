@@ -3,7 +3,7 @@
     <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px] max-sm:mt-5">
 
         <!-- single card -->
-        <div class="flex gap-x-[15px] pb-[20px]">
+        <div class="flex gap-x-[15px] pb-5">
             <div class="shimmer w-[90px] h-[90px] rounded-md"></div>
 
             <div>
@@ -13,7 +13,7 @@
         </div>
 
         <!-- single card -->
-        <div class="flex gap-x-[15px] pb-[20px]">
+        <div class="flex gap-x-[15px] pb-5">
             <div class="shimmer w-[90px] h-[90px] rounded-md"></div>
 
             <div>
@@ -23,7 +23,7 @@
         </div>
 
         <!-- single card -->
-        <div class="flex gap-x-[15px] pb-[20px]">
+        <div class="flex gap-x-[15px] pb-5">
             <div class="shimmer w-[90px] h-[90px] rounded-md"></div>
 
             <div>

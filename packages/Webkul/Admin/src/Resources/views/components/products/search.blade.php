@@ -26,7 +26,7 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3	 rtl:pr-3	 ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
@@ -44,11 +44,11 @@
                     v-if="filteredSearchedProducts.length"
                 >
                     <div
-                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800"
+                        class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800"
                         v-for="product in filteredSearchedProducts"
                     >
                         <!-- Information -->
-                        <div class="flex gap-[10px]">
+                        <div class="flex gap-2.5">
                             <!-- Checkbox -->
                             <div class="">
                                 <input
@@ -108,7 +108,7 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                    class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
                     v-else
                 >
                     <!-- Placeholder Image -->

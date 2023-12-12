@@ -32,16 +32,16 @@
         </div>
 
         <!-- Container -->
-        <div class="flex gap-[10px] mt-[14px]">
+        <div class="flex gap-2.5 mt-3.5">
             <!-- Left Container -->
-            <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex flex-col gap-2 flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
             </div>
 
             <!-- Right Container -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full select-none">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full select-none">
                 <!-- General Pannel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
@@ -110,9 +110,9 @@
         >
             <div>
                 <!-- Panel Header -->
-                <div class="flex flex-wrap gap-[10px] justify-between mb-2.5 p-[16px]">
+                <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-[16px]">
                     <!-- Panel Header -->
-                    <div class="flex flex-col gap-[8px]">
+                    <div class="flex flex-col gap-2">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.families.create.groups')
                         </p>
@@ -143,7 +143,7 @@
                 </div>
 
                 <!-- Panel Content -->
-                <div class="flex [&>*]:flex-1 gap-[20px] justify-between px-[16px]">
+                <div class="flex [&>*]:flex-1 gap-5 justify-between px-[16px]">
                     <!-- Attributes Groups Container -->
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->

@@ -75,7 +75,7 @@
                                                 class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
                                                 v-if="item.options.length"
                                             >
-                                                <div class="grid gap-[8px]">
+                                                <div class="grid gap-2">
                                                     <div class="">
                                                         <p
                                                             class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
@@ -92,7 +92,7 @@
                                                     </div>
         
                                                     <div 
-                                                        class="grid gap-[8px]" 
+                                                        class="grid gap-2" 
                                                         v-show="item.option_show"
                                                     >
                                                         <div v-for="option in item.options">
@@ -124,7 +124,7 @@
                                                 </a>
                                             </div>
 
-                                            <div class="flex gap-[20px] flex-wrap">
+                                            <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
                                                     class="flex gap-x-[10px] items-center max-h-[40px] py-[5px] px-[14px] border border-navyBlue  rounded-[54px]"

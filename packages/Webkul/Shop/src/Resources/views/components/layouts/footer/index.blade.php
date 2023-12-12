@@ -23,7 +23,7 @@
         <div class="flex gap-[85px] items-start flex-wrap max-1180:gap-[25px] max-1060:justify-between">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-[20px] text-[14px]">
+                    <ul class="grid gap-5 text-[14px]">
                         @php
                             usort($footerLinkSection, function ($a, $b) {
                                 return $a['sort_order'] - $b['sort_order'];
@@ -44,7 +44,7 @@
         
         <!-- News Letter subscription -->
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-[10px]">
+            <div class="grid gap-2.5">
                 <p
                     class="max-w-[288px] leading-[45px] text-[30px] italic text-navyBlue"
                     role="heading"

@@ -66,7 +66,7 @@
                     </x-shop::dropdown>
 
                     <!-- Listing Mode Switcher -->
-                    <div class="flex gap-[20px] items-center">
+                    <div class="flex gap-5 items-center">
                         <span
                             class="text-[24px] cursor-pointer"
                             role="button"

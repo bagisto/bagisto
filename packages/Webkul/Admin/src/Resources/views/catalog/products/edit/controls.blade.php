@@ -143,7 +143,7 @@
         @endphp
 
         @foreach ($attribute->options as $option)
-            <div class="flex gap-[10px] py-[6px] items-center">
+            <div class="flex gap-2.5 py-[6px] items-center">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[]'"
@@ -181,7 +181,7 @@
 
     @case('image')
     @case('file')
-        <div class="flex gap-[10px]">
+        <div class="flex gap-2.5">
             @if ($product[$attribute->code])
                 <a
                     href="{{ route('admin.catalog.products.file.download', [$product->id, $attribute->id] )}}"
@@ -224,7 +224,7 @@
         </div>
 
         @if ($product[$attribute->code])
-            <div class="flex gap-[10px] items-center mt-2.5">
+            <div class="flex gap-2.5 items-center mt-2.5">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[delete]'"

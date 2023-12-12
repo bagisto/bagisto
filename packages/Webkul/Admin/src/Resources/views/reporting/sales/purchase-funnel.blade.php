@@ -122,7 +122,7 @@
                 </div>
 
                 <!-- Date Range Section -->
-                <div class="flex gap-[20px] justify-end mt-[24px]">
+                <div class="flex gap-5 justify-end mt-[24px]">
                     <div class="flex gap-[4px] items-center">
                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
 

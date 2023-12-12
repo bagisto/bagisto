@@ -45,7 +45,7 @@
             <template v-if="! isLoading">
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800">
                     <div
-                        class="flex gap-[10px] items-center select-none"
+                        class="flex gap-2.5 items-center select-none"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['revenue', 'order_count', 'address_count']]"
                     >
                         @if ($hasPermission)
@@ -116,7 +116,7 @@
                     class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
-                    <div class="flex gap-[10px]">
+                    <div class="flex gap-2.5">
                         @if ($hasPermission)
                             <input
                                 type="checkbox"

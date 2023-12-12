@@ -3,7 +3,7 @@
 <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
     <div class="grid gap-y-[25px] flex-1">
         <!-- Cart Action -->
-        <div class="flex justify-between items-center pb-[10px] border-b-[1px] border-[#E9E9E9] max-sm:block">
+        <div class="flex justify-between items-center pb-2.5 border-b-[1px] border-[#E9E9E9] max-sm:block">
             <div class="flex select-none items-center">
                 <div class="shimmer w-[24px] h-[25px] rounded-[4px]"></div>
 
@@ -30,7 +30,7 @@
 
                         <div class="shimmer w-[100px] h-[24px]"></div>
 
-                        <div class="hidden gap-[10px] place-content-start max-sm:grid">
+                        <div class="hidden gap-2.5 place-content-start max-sm:grid">
                             <div class="shimmer w-[100px] h-[27px]"></div>
 
                             <div class="shimmer w-[100px] h-[23px]"></div>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="grid gap-[10px] place-content-start max-sm:hidden">
+                <div class="grid gap-2.5 place-content-start max-sm:hidden">
                     <div class="shimmer w-[100px] h-[21px]"></div>
 
                     <div class="shimmer w-[100px] h-[21px]"></div>

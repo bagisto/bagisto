@@ -31,7 +31,7 @@
                     <!-- Menus cards -->
                     @foreach ($item['children'] as $childKey =>  $child)
                         <a 
-                            class="flex items-center gap-[8px] max-w-[360px] p-[8px] rounded-[8px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                            class="flex items-center gap-2 max-w-[360px] p-[8px] rounded-[8px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                             href="{{ route('admin.configuration.index', ($itemKey . '/' . $childKey)) }}"
                         >
                             @if (isset($child['icon']))

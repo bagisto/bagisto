@@ -16,7 +16,7 @@
             <div class="rounded-[4px] box-shadow">
                 <div class="flex gap-[16px] flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800">
                     <!-- Today's Sales -->
-                    <div class="flex gap-[10px] flex-1">
+                    <div class="flex gap-2.5 flex-1">
                         <img
                             class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                             src="{{ bagisto_asset('images/total-sales.svg')}}"
@@ -51,7 +51,7 @@
                     </div>
 
                     <!-- Today's Orders -->
-                    <div class="flex gap-[10px] flex-1">
+                    <div class="flex gap-2.5 flex-1">
                         <img
                             class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                             src="{{ bagisto_asset('images/total-orders.svg')}}"
@@ -86,7 +86,7 @@
                     </div>
 
                     <!-- Today's Customers -->
-                    <div class="flex gap-[10px] flex-1">
+                    <div class="flex gap-2.5 flex-1">
                         <img
                             class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion"
                             src="{{ bagisto_asset('images/customers.svg')}}"
@@ -127,7 +127,7 @@
                     v-for="order in report.statistics.orders"
                 >
                     <!-- Order ID, Status, Created -->
-                    <div class="flex gap-[10px]">
+                    <div class="flex gap-2.5">
                         <div class="flex flex-col gap-[6px]">
                             <!-- Order Id -->
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">

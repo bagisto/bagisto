@@ -23,7 +23,7 @@
 
             <p class="shimmer w-[35%] h-[36px] mt-[25px]"></p>
 
-            <div class="grid gap-[10px] mt-[25px] max-sm:my-[20px] max-sm:justify-between max-sm:flex">
+            <div class="grid gap-2.5 mt-[25px] max-sm:my-[20px] max-sm:justify-between max-sm:flex">
                 <p class="shimmer w-[100%] h-[27px] max-sm:w-[100px] max-sm:h-[21px]"></p>
                 <p class="shimmer h-[27px] max-sm:hidden w-[90%]"></p>
                 <p class="shimmer w-[80%] h-[27px] max-sm:w-[60px] max-sm:h-[21px]"></p>

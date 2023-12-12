@@ -24,7 +24,7 @@
                     v-for="product in report.statistics"
                 >
                     <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
-                        <div class="flex gap-[10px]">
+                        <div class="flex gap-2.5">
                             <template v-if="product.image">
                                 <div class="">
                                     <img
@@ -84,7 +84,7 @@
                 class="rounded-[4px] box-shadow"
                 v-else
             >
-                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] ">
+                <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px] ">
                     <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
                     
                     <div class="flex flex-col items-center">

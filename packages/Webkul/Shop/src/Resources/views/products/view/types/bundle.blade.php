@@ -26,7 +26,7 @@
                     </p>
                 </div>
 
-                <ul class="grid gap-[10px] text-[16px]">
+                <ul class="grid gap-2.5 text-[16px]">
                     <li v-for="option in options">
                         <span class="inline-block mb-[5px]">
                             @{{ option.label }}
@@ -80,7 +80,7 @@
                     </div>
 
                     <div v-if="option.type == 'radio'">
-                        <div class="grid gap-[10px]">
+                        <div class="grid gap-2.5">
                             <span
                                 class="flex gap-x-[15px]"
                                 v-if="! option.is_required"
@@ -149,7 +149,7 @@
                     </div>
 
                     <div v-if="option.type == 'checkbox'">
-                        <div class="grid gap-[10px]">
+                        <div class="grid gap-2.5">
                             <div
                                 class="flex gap-x-[15px] select-none"
                                 v-for="(product, index) in option.products"

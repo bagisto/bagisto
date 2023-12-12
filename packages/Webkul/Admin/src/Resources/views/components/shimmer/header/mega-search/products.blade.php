@@ -1,7 +1,7 @@
 @for ($i = 0; $i < 3; $i++)
-    <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300">
+    <div class="flex gap-2.5 justify-between p-[16px] border-b-[1px] border-slate-300">
         <!-- Left Information -->
-        <div class="flex gap-[10px]">
+        <div class="flex gap-2.5">
             <!-- Image -->
             <div class="shimmer w-[46px] h-[46px] rounded-[4px]">
             </div>

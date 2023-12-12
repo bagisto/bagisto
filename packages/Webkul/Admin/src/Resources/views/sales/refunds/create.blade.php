@@ -66,8 +66,8 @@
                                 <div class="grid">
                                     <!-- Item Listing -->
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px]">
-                                            <div class="flex gap-[10px]">
+                                        <div class="flex gap-2.5 justify-between py-[16px]">
+                                            <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
                                                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="gap-2.5 justify-between pb-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->
@@ -156,7 +156,7 @@
                                                 </div>
 
                                                 <!-- Item Order Summary -->
-                                                <div class="flex w-full gap-[20px] justify-end item">
+                                                <div class="flex w-full gap-5 justify-end item">
                                                     <div class="flex flex-col gap-y-[6px]">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.price')
@@ -282,7 +282,7 @@
                                 </div>
 
                                 <!-- Order Summary -->
-                                <div class="flex w-full gap-[20px] justify-end">
+                                <div class="flex w-full gap-5 justify-end">
                                     <div class="flex flex-col gap-y-[6px]">
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.refunds.create.subtotal')

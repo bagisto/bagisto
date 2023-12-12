@@ -34,7 +34,7 @@
                     <template v-if="! isLoading">
                         <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800">
                             <div
-                                class="flex gap-[10px] items-center"
+                                class="flex gap-2.5 items-center"
                                 v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
                             >
                                 @if ($hasPermission)
@@ -106,7 +106,7 @@
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 @if ($hasPermission)
                                     <input 
                                         type="checkbox" 
@@ -210,7 +210,7 @@
             {!! view_render_event('admin.customers.reviews.list.after') !!}
 
             <!-- Drawer content -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"

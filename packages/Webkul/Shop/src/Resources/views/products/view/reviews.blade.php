@@ -204,7 +204,7 @@
                         <div class="flex gap-x-[20px] items-center">
                             <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
-                                    <div class="row grid grid-cols-[1fr_2fr] gap-[10px] items-center max-sm:flex-wrap">
+                                    <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
 
                                         <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
@@ -215,7 +215,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-[1fr_1fr] gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
+                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
                             <!-- Product Review Item Vue Component -->
                             <v-product-review-item
                                 v-for='review in reviews'
@@ -249,7 +249,7 @@
 
     <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-5">
+        <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img
                     v-if="review.profile"

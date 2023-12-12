@@ -102,7 +102,7 @@
                                 </div>
 
                                 <!-- Option Details -->
-                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                <div class="grid gap-2" v-show="item.option_show">
                                     <div class="" v-for="option in item.options">
                                         <p class="text-[14px] font-medium">
                                             @{{ option.attribute_name + ':' }}
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex gap-[20px] items-center flex-wrap">
+                            <div class="flex gap-5 items-center flex-wrap">
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
@@ -171,7 +171,7 @@
                     </div>
 
                     <!-- Cart Action Container -->
-                    <div class="grid gap-[10px] px-[25px]">
+                    <div class="grid gap-2.5 px-[25px]">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
                             class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-[20px]"

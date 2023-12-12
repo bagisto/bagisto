@@ -6,7 +6,7 @@
     <div class="flex gap-[40px] items-center max-md:hidden">
         <div class="shimmer w-[84px] h-[54px] rounded-lg"></div>
 
-        <div class="flex gap-[20px] items-center">
+        <div class="flex gap-5 items-center">
             <span class="shimmer h-[24px] w-[24px]"></span>
             <span class="shimmer h-[24px] w-[24px]"></span>
         </div>

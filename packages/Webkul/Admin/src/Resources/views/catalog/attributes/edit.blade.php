@@ -50,9 +50,9 @@
                 </div>
 
                 <!-- body content -->
-                <div class="flex gap-[10px] mt-[14px]">
+                <div class="flex gap-2.5 mt-3.5">
                     <!-- Left sub Component -->
-                    <div class="flex flex-col flex-1 gap-[8px] overflow-auto">
+                    <div class="flex flex-col flex-1 gap-2 overflow-auto">
 
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
@@ -171,7 +171,7 @@
                                             @lang('admin::app.catalog.attributes.edit.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                        <div class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
@@ -350,7 +350,7 @@
                             @else
                                 <!-- For Empty Attribute Options -->
                                 <template>
-                                    <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
+                                    <div class="grid gap-[14px] justify-items-center py-10 px-[10px]">
                                         <!-- Attribute Option Image -->
                                         <img
                                             class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px]"
@@ -383,7 +383,7 @@
                     </div>
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+                    <div class="flex flex-col gap-2 w-[360px] max-w-full">
 
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
@@ -584,7 +584,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] select-none">
                                     @php
                                         $selectedOption = old('is_required') ?? $attribute->is_required
                                     @endphp
@@ -615,7 +615,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] opacity-70 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_unique"
@@ -655,7 +655,7 @@
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
                                     @endphp
@@ -682,7 +682,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
@@ -709,7 +709,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
                                         $selectedOption = $attribute->is_filterable ?? old('is_filterable')
                                     @endphp
@@ -740,7 +740,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
                                         $selectedOption = $attribute->is_configurable ?? old('is_configurable')
                                     @endphp
@@ -771,7 +771,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
                                         $selectedOption = $attribute->is_visible_on_front ?? old('is_visible_on_front');
                                     @endphp
@@ -802,7 +802,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
-                                <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
                                     @php
                                         $selectedOption = old('is_comparable') ?? $attribute->is_comparable
                                     @endphp

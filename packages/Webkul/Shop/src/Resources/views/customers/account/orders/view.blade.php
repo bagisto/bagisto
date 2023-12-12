@@ -213,10 +213,10 @@
                     </table>
                 </div>
 
-                <div class="flex gap-[40px] items-start mt-[30px] max-lg:gap-[20px] max-md:grid">
+                <div class="flex gap-[40px] items-start mt-[30px] max-lg:gap-5 max-md:grid">
                     <div class="flex-auto max-md:mt-[30px]">
                         <div class="flex justify-end">
-                            <div class="grid gap-[8px] max-w-max">
+                            <div class="grid gap-2 max-w-max">
                                 <div class="flex gap-x-[20px] justify-between w-full">
                                     <p class="text-[14px]">
                                         @lang('shop::app.customers.account.orders.view.information.subtotal')
@@ -475,10 +475,10 @@
                             </table>
                         </div>
 
-                        <div class="flex gap-[40px] items-start mt-[30px] max-lg:gap-[20px] max-md:grid">
+                        <div class="flex gap-[40px] items-start mt-[30px] max-lg:gap-5 max-md:grid">
                             <div class="flex-auto max-md:mt-[30px]">
                                 <div class="flex justify-end">
-                                    <div class="grid gap-[8px] max-w-max">
+                                    <div class="grid gap-2 max-w-max">
                                         <div class="flex gap-x-[20px] justify-between w-full">
                                             <p class="text-[14px]">
                                                 @lang('shop::app.customers.account.orders.view.invoices.subtotal')
@@ -767,10 +767,10 @@
                             </table>
                         </div>
 
-                        <div class="flex gap-[40px] items-start mt-[30px] max-lg:gap-[20px] max-md:grid">
+                        <div class="flex gap-[40px] items-start mt-[30px] max-lg:gap-5 max-md:grid">
                             <div class="flex-auto max-md:mt-[30px]">
                                 <div class="flex justify-end">
-                                    <div class="grid gap-[8px] max-w-max">
+                                    <div class="grid gap-2 max-w-max">
                                         <div class="flex gap-x-[20px] justify-between w-full">
                                             <p class="text-[14px]">
                                                 @lang('shop::app.customers.account.orders.view.refunds.subtotal')
@@ -890,7 +890,7 @@
                         @lang('shop::app.customers.account.orders.view.billing-address')
                     </p>
 
-                    <div class="grid gap-[10px]">
+                    <div class="grid gap-2.5">
                         <p class="text-[14px]">
                             @include ('admin::sales.address', ['address' => $order->billing_address])
                         </p>
@@ -907,7 +907,7 @@
                         @lang('shop::app.customers.account.orders.view.shipping-address')
                     </p>
 
-                    <div class="grid gap-[10px]">
+                    <div class="grid gap-2.5">
                         <p class="text-[14px]">
                             @include ('admin::sales.address', ['address' => $order->shipping_address])
 

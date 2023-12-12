@@ -3,8 +3,8 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-static-content-template">
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            <div class="flex flex-col gap-[8px] flex-1 min-w-[931px] max-xl:flex-auto">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+            <div class="flex flex-col gap-2 flex-1 min-w-[931px] max-xl:flex-auto">
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex gap-x-[10px] justify-between items-center mb-2.5">
                         <div class="flex flex-col gap-[4px]">
@@ -18,7 +18,7 @@
                         </div>
 
                         <div
-                            class="flex gap-[10px]"
+                            class="flex gap-2.5"
                             v-if="isHtmlEditorActive"
                         >
                             <!-- Hidden Input Filed for upload images -->
@@ -102,7 +102,7 @@
             </div>
 
             <!-- General -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">

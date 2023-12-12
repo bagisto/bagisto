@@ -39,7 +39,7 @@
         <div class="max-md:border max-md:border-t-0 max-md:border-r-[1px] max-md:border-l-[1px] max-md:border-b-[1px] max-md:border-[#E9E9E9]   max-md:rounded-[6px]">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
-                <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-[20px] max-md:bg-gray-100 max-md:px-[25px] max-md:py-[20px] max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
+                <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-[25px] max-md:py-[20px] max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
                     <p class="text-[20px] md:font-medium">@lang($menuItem['name'])</p>
 
                     <span class="icon-arrow-right text-[24px] md:hidden"></span>

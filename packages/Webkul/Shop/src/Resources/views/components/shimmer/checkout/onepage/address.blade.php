@@ -7,10 +7,10 @@
 
     <div>
         <div
-            class="grid gap-[20px] grid-cols-2 mt-[30px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+            class="grid gap-5 grid-cols-2 mt-[30px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
             <!-- Single card addredd -->
             <div class="max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
-                <div class="flex gap-[10px] justify-between items-center">
+                <div class="flex gap-2.5 justify-between items-center">
                     <p class="shimmer w-[150px] h-[24px]"></p>
 
                     <div class="flex gap-[25px] items-center">

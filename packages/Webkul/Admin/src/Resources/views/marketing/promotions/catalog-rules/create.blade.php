@@ -46,8 +46,8 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                        <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.card.general.before') !!}
 
@@ -273,7 +273,7 @@
                         </div>
 
                         <!-- Right sub-components -->
-                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                        <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.card.accordion.settings.before') !!}
 
@@ -316,7 +316,7 @@
                                         </p>
 
                                         @foreach(core()->getAllChannels() as $channel)
-                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="channels[]"
@@ -351,7 +351,7 @@
                                         </p>
 
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="customer_groups[]"

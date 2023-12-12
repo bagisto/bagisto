@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
+<div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-5 max-1060:grid-cols-[1fr]">
     <!-- Review Card Shimmer -->
     <x-shop::shimmer.products.reviews.card count="12"></x-shop::shimmer.products.reviews.card>
 </div>

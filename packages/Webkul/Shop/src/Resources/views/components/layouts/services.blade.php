@@ -19,7 +19,7 @@
     <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
         <div class="flex gap-[25px] justify-center max-lg:flex-wrap">
             @foreach ($customization->options['services'] as $service)
-                <div class="flex items-center gap-[20px] bg-white">
+                <div class="flex items-center gap-5 bg-white">
                     <span
                         class="{{$service['service_icon']}} flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"
                         role="presentation"

@@ -36,9 +36,9 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
              <!-- Left sub Component -->
-             <div class="flex flex-col gap-[8px] flex-1">
+             <div class="flex flex-col gap-2 flex-1">
                  <!-- General -->
                  <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -105,7 +105,7 @@
              </div>
 
              <!-- Right sub-component -->
-             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
+             <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">

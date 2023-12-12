@@ -14,7 +14,7 @@
         <!-- Total Sales Section -->
         <template v-else>
             <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800">
-                <div class="flex gap-[8px] justify-between">
+                <div class="flex gap-2 justify-between">
                     <div class="flex flex-col gap-[4px] justify-between">
                         <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.dashboard.index.total-sales')

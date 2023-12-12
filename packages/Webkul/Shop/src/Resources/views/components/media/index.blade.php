@@ -69,7 +69,7 @@
                 class="flex items-center"
                 v-if="isMultiple"
             >
-                <ul class="flex gap-[10px] flex-wrap justify-left mt-2">
+                <ul class="flex gap-2.5 flex-wrap justify-left mt-2">
                     <li 
                         v-for="(file, index) in uploadedFiles"
                         :key="index"

@@ -131,7 +131,7 @@
                             >
                                 <p class="dark:text-white">@{{ product.name }}</p>
 
-                                <div class="flex gap-[20px] items-center">
+                                <div class="flex gap-5 items-center">
                                     <div class="w-full h-[8px] relative bg-slate-100">
                                         <div
                                             class="h-[8px] absolute left-0 bg-blue-500"
@@ -153,7 +153,7 @@
                     </template>
 
                     <!-- Date Range -->
-                    <div class="flex gap-[20px] justify-end">
+                    <div class="flex gap-5 justify-end">
                         <div class="flex gap-[4px] items-center">
                             <span class="w-[14px] h-[14px] rounded-[3px] bg-blue-500"></span>
 

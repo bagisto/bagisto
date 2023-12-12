@@ -1,5 +1,5 @@
 <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-    <div class="flex gap-[40px] md:mt-[40px] items-start max-lg:gap-[20px]">
+    <div class="flex gap-[40px] md:mt-[40px] items-start max-lg:gap-5">
         <!-- Desktop Filter Shimmer Effect -->
         <div class="max-md:hidden">
             <x-shop::shimmer.categories.filters/>

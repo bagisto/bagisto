@@ -287,7 +287,7 @@
             </x-admin::form.control-group.control>
 
             @if ($result)
-                <div class="flex gap-[10px] cursor-pointer">
+                <div class="flex gap-2.5 cursor-pointer">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"

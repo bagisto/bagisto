@@ -6,7 +6,7 @@
 
     <!-- Error page Information -->
 	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900 ">
-        <div class="flex gap-[20px] items-center max-w-[745px]">
+        <div class="flex gap-5 items-center max-w-[745px]">
             <div class="w-full">
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
@@ -22,7 +22,7 @@
                 </p>
 
                 <div class="mb-[25px]">
-                    <div class="flex gap-[10px] items-center">
+                    <div class="flex gap-2.5 items-center">
                         <a
                             onclick="history.back()"
                             class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"

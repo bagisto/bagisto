@@ -25,9 +25,9 @@
     </div>
 
     <!-- body content -->
-    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
         <!-- Left sub-component -->
-        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+        <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
@@ -37,8 +37,8 @@
                 <div class="grid">
                     <!-- Shipment Items -->
                     @foreach ($shipment->items as $index => $item)
-                        <div class="flex gap-[10px] justify-between px-[16px] py-[24px]">
-                            <div class="flex gap-[10px]">
+                        <div class="flex gap-2.5 justify-between px-[16px] py-[24px]">
+                            <div class="flex gap-2.5">
                                 <!-- Image -->
                                 @if ($item->product?->base_image_url)
                                     <img
@@ -90,7 +90,7 @@
         </div>
 
         <!-- Right sub-component -->
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+        <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
@@ -153,7 +153,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="flex w-full gap-[20px] justify-start">
+                    <div class="flex w-full gap-5 justify-start">
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.order-id')     

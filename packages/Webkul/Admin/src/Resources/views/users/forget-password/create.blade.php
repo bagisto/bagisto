@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex justify-center items-center h-[100vh]">
-        <div class="flex flex-col gap-[20px] items-center">
+        <div class="flex flex-col gap-5 items-center">
             <!-- Logo -->
             <img 
                 class="w-max" 

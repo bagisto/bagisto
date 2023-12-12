@@ -43,9 +43,9 @@
                 </div>
 
                 <!-- Tax Rates Informations -->
-                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                     <!-- Left Component -->
-                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
                         <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                                 @lang('admin::app.settings.taxes.rates.create.general')
@@ -190,7 +190,7 @@
                     </div>
 
                     <!-- Right Component -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
+                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">

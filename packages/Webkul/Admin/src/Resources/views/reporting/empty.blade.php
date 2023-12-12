@@ -1,4 +1,4 @@
-<div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+<div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
     <img
         class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
         src="{{ bagisto_asset('images/empty-placeholders/report-empty.svg') }}"

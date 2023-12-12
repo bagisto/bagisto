@@ -44,9 +44,9 @@
             </div>
         </div>
 
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Component -->
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.general.before') !!}
 
@@ -131,7 +131,7 @@
                         </p>
                 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="flex gap-[10px] mb-2.5">
+                            <x-admin::form.control-group class="flex gap-2.5 mb-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="inventory_sources[]"
@@ -389,7 +389,7 @@
             </div>
 
             <!-- Right Compoenent -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.before') !!}
 
@@ -413,7 +413,7 @@
                             @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
                             
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="flex gap-[10px] mb-2.5">
+                                <x-admin::form.control-group class="flex gap-2.5 mb-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="locales[]"
@@ -479,7 +479,7 @@
                             @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
 
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="flex gap-[10px] mb-2.5">
+                                <x-admin::form.control-group class="flex gap-2.5 mb-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="currencies[]"

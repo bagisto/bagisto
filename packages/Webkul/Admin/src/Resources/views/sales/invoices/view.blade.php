@@ -116,9 +116,9 @@
     </div>
 
     <!-- body content -->
-    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
         <!-- Left sub-component -->
-        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+        <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- Invoice Item Section -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
@@ -128,8 +128,8 @@
                 <div class="grid">
                     <!-- Invoice Item Details-->
                     @foreach($invoice->items as $item)
-                        <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
-                            <div class="flex gap-[10px]">
+                        <div class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                            <div class="flex gap-2.5">
                                 <!-- Product Image -->
                                 @if ($item->product?->base_image_url)
                                     <img
@@ -217,7 +217,7 @@
                 </div>
 
                 <!--Sale Summary -->
-                <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
+                <div class="flex w-full gap-2.5 justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total-summary')
@@ -275,7 +275,7 @@
         </div>
 
         <!-- Right sub-component -->
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+        <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
@@ -344,7 +344,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="flex w-full gap-[20px] justify-start">
+                    <div class="flex w-full gap-5 justify-start">
                         <div class="flex flex-col gap-y-[6px]">
                             @foreach (['order-id', 'order-date', 'order-status', 'invoice-status', 'channel'] as $item)
                                 <p class="text-gray-600 dark:text-gray-300">
