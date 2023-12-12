@@ -689,6 +689,7 @@ abstract class AbstractType
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
         $indexer = $this->getPriceIndexer()
+            ->setChannel(core()->getCurrentChannel())
             ->setCustomerGroup($customerGroup)
             ->setProduct($this->product);
 
@@ -706,6 +707,7 @@ abstract class AbstractType
 
         $indices = $this->product
             ->price_indices
+            ->where('channel_id', core()->getCurrentChannel()->id)
             ->where('customer_group_id', $customerGroup->id)
             ->first();
 
