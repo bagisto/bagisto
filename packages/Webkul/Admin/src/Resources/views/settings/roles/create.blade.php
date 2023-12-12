@@ -3,7 +3,7 @@
     <x-slot:title>
         @lang('admin::app.settings.roles.create.title')
     </x-slot:title>
-    
+
     {!! view_render_event('bagisto.admin.settings.roles.create.before') !!}
 
     <!-- Create Role for -->
@@ -32,8 +32,8 @@
                             </a>
 
                             <!-- Save Button -->
-                            <button 
-                                type="submit" 
+                            <button
+                                type="submit"
                                 class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
                                 @lang('admin::app.settings.roles.create.save-btn')
@@ -62,7 +62,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="permission_type" 
+                                        name="permission_type"
                                         id="permission_type"
                                         :label="trans('admin::app.settings.roles.create.permissions')"
                                         :placeholder="trans('admin::app.settings.roles.create.permissions')"
@@ -78,7 +78,8 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div 
+                                <!-- Tree Structure -->
+                                <div
                                     class="mb-[10px]"
                                     v-if="permission_type == 'custom'"
                                 >
@@ -109,7 +110,7 @@
                                         </p>
                                     </div>
                                 </x-slot:header>
-                        
+
                                 <x-slot:content>
                                     <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
