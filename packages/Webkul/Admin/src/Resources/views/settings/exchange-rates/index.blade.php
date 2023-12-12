@@ -156,7 +156,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- Currency Code -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.exchange-rates.index.create.source-currency')
                                 </x-admin::form.control-group.label>
@@ -171,7 +171,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Target Currency -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.exchange-rates.index.create.target-currency')
                                 </x-admin::form.control-group.label>
@@ -205,7 +205,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Rate -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.exchange-rates.index.create.rate')
                                 </x-admin::form.control-group.label>

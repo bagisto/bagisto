@@ -64,7 +64,7 @@
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.general')
                                 </p>
 
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.name')
                                     </x-admin::form.control-group.label>
@@ -86,7 +86,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.description')
                                     </x-admin::form.control-group.label>
@@ -108,7 +108,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-type')
                                     </x-admin::form.control-group.label>
@@ -144,7 +144,7 @@
                                 </x-admin::form.control-group>
 
                                 <template v-if="parseInt(couponType)">
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.auto-generate-coupon')
                                         </x-admin::form.control-group.label>
@@ -180,7 +180,7 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group
-                                        class="mb-[10px]"
+                                        class="mb-2.5"
                                         v-if="! parseInt(useAutoGeneration)"
                                     >
                                         <x-admin::form.control-group.label class="required">
@@ -203,8 +203,8 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.uses-per-coupon')
                                         </x-admin::form.control-group.label>
@@ -226,7 +226,7 @@
                                     </x-admin::form.control-group>
                                 </template>
 
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.uses-per-customer')
                                     </x-admin::form.control-group.label>
@@ -266,7 +266,7 @@
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.conditions')
                                     </p>
 
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.condition-type')
                                         </x-admin::form.control-group.label>
@@ -592,7 +592,7 @@
                                 </x-slot:header>
 
                                 <x-slot:content>
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.priority')
                                         </x-admin::form.control-group.label>
@@ -614,8 +614,8 @@
                                     </x-admin::form.control-group>
 
                                     @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
-                                    <!--Channel-->
-                                    <div class="mb-[10px]">
+                                    <!--Channel--> 
+                                    <div class="mb-2.5">
                                         <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.channels')
                                         </p>
@@ -650,7 +650,7 @@
                                     </div>
 
                                     <!--Customer Groups -->
-                                    <div class="mb-[10px]">
+                                    <div class="mb-2.5">
                                         <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.customer-groups')
                                         </p>
@@ -725,7 +725,7 @@
                                 </x-slot:header>
 
                                 <x-slot:content>
-                                        <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group class="mb-2.5">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.from')
                                             </x-admin::form.control-group.label>
@@ -746,7 +746,7 @@
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group class="mb-2.5">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.cart-rules.edit.to')
                                             </x-admin::form.control-group.label>
@@ -839,7 +839,7 @@
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
+                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	 rtl:pr-3	 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.marketing.promotions.cart-rules.edit.choose-condition-to-add')</option>
@@ -859,7 +859,7 @@
 
                     <select
                         :name="['conditions[' + index + '][operator]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	 rtl:pr-3	 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -937,7 +937,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	 rtl:pr-3	 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -953,7 +953,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	 rtl:pr-3	 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -988,7 +988,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-3	 rtl:pr-3	 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                     multiple
                                 >
@@ -1229,7 +1229,7 @@
                     >
                         <form @submit="handleSubmit($event, store)">
                             <div class="flex gap-[16px]  max-sm:flex-wrap">
-                                <div class="w-full mb-[10px]">
+                                <div class="w-full mb-2.5">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-qty')
@@ -1253,7 +1253,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="w-full mb-[10px]">
+                                <div class="w-full mb-2.5">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-length')
@@ -1279,7 +1279,7 @@
                             </div>
 
                             <div class="flex gap-[16px] max-sm:flex-wrap">
-                                <div class="w-full mb-[10px]">
+                                <div class="w-full mb-2.5">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-format')
@@ -1342,7 +1342,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="w-full mb-[10px]">
+                                <div class="w-full mb-2.5">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.code-suffix')

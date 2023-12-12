@@ -91,7 +91,7 @@
                         </button>
                     </div>
 
-                    <p class="mt-[20px] text-[#6E6E6E] font-medium">
+                    <p class="mt-5 text-[#6E6E6E] font-medium">
                         @lang('shop::app.customers.forgot-password.back')
 
                         <a class="text-navyBlue"

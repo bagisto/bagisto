@@ -224,7 +224,7 @@
         </div>
 
         @if ($product[$attribute->code])
-            <div class="flex gap-[10px] items-center mt-[10px]">
+            <div class="flex gap-[10px] items-center mt-2.5">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[delete]'"

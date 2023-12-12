@@ -82,7 +82,7 @@
                     </x-slot:menu>
                 </x-shop::dropdown>
 
-                <div class="pl-[10px]">
+                <div class="pl-2.5">
                     <p class="text-[14px] font-light text-gray-800">
                         <!-- Need to manage this translation. -->
                         @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
@@ -120,7 +120,7 @@
             <x-shop::dropdown position="bottom-left">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[15px] pr-[12px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[15px] pr-3	 py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                         <span v-text="applied.pagination.perPage"></span>
 
                         <span class="icon-arrow-down text-[24px]"></span>
@@ -142,7 +142,7 @@
             <x-shop::drawer width="350px">
                 <x-slot:toggle>
                     <button 
-                        class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[12px] pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer"
+                        class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-3	 pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer"
                         :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
                     >
                         <span class="flex justify-between items-center gap-[5px]">

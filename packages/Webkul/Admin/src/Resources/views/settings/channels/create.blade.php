@@ -48,7 +48,7 @@
                     </p>
 
                     <!-- Code -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.code')
                         </x-admin::form.control-group.label>
@@ -71,7 +71,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.name')
                         </x-admin::form.control-group.label>
@@ -94,7 +94,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Description -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.description')
                         </x-admin::form.control-group.label>
@@ -116,7 +116,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Invertory Sources -->
-                    <div class="mb-[10px]">
+                    <div class="mb-2.5">
                         <p class="required block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium">
                             @lang('admin::app.settings.channels.create.inventory-sources')
                         </p>
@@ -151,7 +151,7 @@
                     </div>
 
                     <!-- Root Catgegory -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.root-category')
                         </x-admin::form.control-group.label>
@@ -183,7 +183,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Host Name -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.hostname')
                         </x-admin::form.control-group.label>
@@ -216,7 +216,7 @@
                     </p>
 
                     <!-- Theme Selector -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.theme')
                         </x-admin::form.control-group.label>
@@ -304,7 +304,7 @@
                     <x-admin::seo/>
 
                     <!-- SEO Title -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-title')
                         </x-admin::form.control-group.label>
@@ -327,7 +327,7 @@
                     </x-admin::form.control-group>
 
                     <!-- SEO Keywords -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-keywords')
                         </x-admin::form.control-group.label>
@@ -350,7 +350,7 @@
                     </x-admin::form.control-group>
 
                     <!-- SEO Description -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-description')
                         </x-admin::form.control-group.label>
@@ -393,7 +393,7 @@
             
                     <x-slot:content>
                         <!-- Locale Checkboxes  -->
-                        <div class="mb-[10px]">
+                        <div class="mb-2.5">
                             <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.settings.channels.create.locales')
                             </p>
@@ -428,7 +428,7 @@
                         </div>
 
                         <!-- Default Locale Selector -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.default-locale')
                             </x-admin::form.control-group.label>
@@ -460,7 +460,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Currencies Checkboxes -->
-                        <div class="mb-[10px]">
+                        <div class="mb-2.5">
                             <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.settings.channels.create.currencies')
                             </p>
@@ -496,7 +496,7 @@
                         </div>
 
                         <!-- Default Currency Selector -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.default-currency')
                             </x-admin::form.control-group.label>
@@ -545,7 +545,7 @@
             
                     <x-slot:content>
                         <!-- Maintenance Mode Text  -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.create.maintenance-mode-text')
                             </x-admin::form.control-group.label>
@@ -567,7 +567,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Allowed API's  -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.settings.channels.create.allowed-ips')
                             </x-admin::form.control-group.label>
@@ -589,7 +589,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Maintenance Mode Switcher -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.create.status')
                             </x-admin::form.control-group.label>

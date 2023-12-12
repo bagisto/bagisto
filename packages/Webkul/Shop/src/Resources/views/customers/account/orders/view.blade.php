@@ -26,7 +26,7 @@
             </form>
 
             <a
-                class="secondary-button flex items-center gap-x-[10px] py-[12px] px-[20px] border-[#E9E9E9] font-normal"
+                class="secondary-button flex items-center gap-x-[10px] py-3 px-[20px] border-[#E9E9E9] font-normal"
                 href="javascript:void(0);"
                 @click="$emitter.emit('open-confirm-modal', {
                     message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
@@ -357,7 +357,7 @@
                             </div>
                             
                             <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
-                                <div class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal">
+                                <div class="secondary-button flex gap-x-[10px] items-center py-3 px-[20px] border-[#E9E9E9] font-normal">
                                     @lang('shop::app.customers.account.orders.view.invoices.print')
                                 </div>
                             </a>

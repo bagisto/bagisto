@@ -62,11 +62,11 @@
                                                         </div>
                                                     </div>
                 
-                                                    <p class="mt-[10px] text-[14px] font-medium max-sm:text-[12px]">
+                                                    <p class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]">
                                                         {{ $review->created_at }}
                                                     </p>
                 
-                                                    <p class="mt-[20px] text-[16px] text-[#6E6E6E] max-sm:text-[12px]">
+                                                    <p class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]">
                                                         {{ $review->comment }}
                                                     </p>
                                                 </div>

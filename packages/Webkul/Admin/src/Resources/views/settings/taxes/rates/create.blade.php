@@ -51,9 +51,9 @@
                                 @lang('admin::app.settings.taxes.rates.create.general')
                             </p>
 
-                            <div class="mb-[10px]">
+                            <div class="mb-2.5">
                                 <!-- Identifier -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.create.identifier')
                                     </x-admin::form.control-group.label>
@@ -75,7 +75,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Country -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.create.country')
                                     </x-admin::form.control-group.label>
@@ -108,7 +108,7 @@
                                 </x-admin::form.control-group>
                     
                                 <!-- State -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <!-- Country Have States -->
                                     <template v-if="haveStates()">
                                         <x-admin::form.control-group.label class="required">
@@ -165,7 +165,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Tax Rate -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.create.tax-rate')
                                     </x-admin::form.control-group.label>
@@ -200,7 +200,7 @@
                         
                             <x-slot:content>
                                 <!-- Enable Zip Range -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.rates.create.is-zip')
                                     </x-admin::form.control-group.label>
@@ -224,7 +224,7 @@
                                 <!-- Zip Code -->
                                 <x-admin::form.control-group 
                                     v-if="! is_zip"
-                                    class="mb-[10px]" 
+                                    class="mb-2.5" 
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.rates.create.zip-code')
@@ -247,7 +247,7 @@
 
                                 <div v-if="is_zip">
                                     <!-- Zip From -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.rates.create.zip-from')
                                         </x-admin::form.control-group.label>
@@ -269,7 +269,7 @@
                                     </x-admin::form.control-group>
 
                                     <!-- Zip To -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.rates.create.zip-to')
                                         </x-admin::form.control-group.label>

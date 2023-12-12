@@ -3,7 +3,7 @@
 <div class="flex justify-between items-center overflow-auto journal-scroll">
     <h2 class="shimmer w-[110px] h-[39px]"></h2>
 
-    <div class="shimmer flex items-center gap-x-[10px] py-[12px] px-[20px] rounded-[12px]">
+    <div class="shimmer flex items-center gap-x-[10px] py-3 px-[20px] rounded-[12px]">
         <span class="w-[108px] h-[24px]"></span>
     </div>
 </div>

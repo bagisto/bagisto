@@ -28,7 +28,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'px-[16px] py-[10px] border-b-[1px] dark:border-gray-800']) }}>
+            <div {{ $content->attributes->merge(['class' => 'px-[16px] py-2.5 border-b-[1px] dark:border-gray-800']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -36,7 +36,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $content->attributes->merge(['class' => 'flex justify-end px-[16px] py-[10px]']) }}>
+            <div {{ $content->attributes->merge(['class' => 'flex justify-end px-[16px] py-2.5']) }}>
                 {{ $footer }}
             </div>
         </template>

@@ -496,7 +496,7 @@
                 >
                     <div class="p-[16px]">
                         <!-- Note -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 name="note" 
@@ -733,7 +733,7 @@
                         @endforeach
                     @else    
                         <!-- Empty Address Container -->
-                        <div class="flex gap-[20px] items-center py-[10px]">
+                        <div class="flex gap-[20px] items-center py-2.5">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"

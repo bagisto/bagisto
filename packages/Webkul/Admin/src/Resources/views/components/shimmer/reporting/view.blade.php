@@ -1,5 +1,5 @@
 <!-- Page Header -->
-<div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
+<div class="flex gap-[16px] justify-between items-center mb-5 max-sm:flex-wrap">
     <!-- Title -->
     <div class="grid gap-[6px]">
         <div class="shimmer w-[150px] h-[24px]"></div>

@@ -53,7 +53,7 @@
                 
                     <!-- Panel Content -->
                     <x-slot:content>
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.create.code')
                             </x-admin::form.control-group.label>
@@ -74,7 +74,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.create.name')
                             </x-admin::form.control-group.label>
@@ -110,7 +110,7 @@
         >
             <div>
                 <!-- Panel Header -->
-                <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
+                <div class="flex flex-wrap gap-[10px] justify-between mb-2.5 p-[16px]">
                     <!-- Panel Header -->
                     <div class="flex flex-col gap-[8px]">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
@@ -184,7 +184,7 @@
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group cursor-pointer transition-all group-hover:text-gray-800"
+                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group cursor-pointer transition-all group-hover:text-gray-800"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
@@ -245,7 +245,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                 <i
@@ -307,7 +307,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                     <i class="text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -340,7 +340,7 @@
                             <!--Model Content -->
                             <x-slot:content>
                                 <!-- Group Code -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.families.create.code')
                                     </x-admin::form.control-group.label>
@@ -358,7 +358,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Group Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.families.create.name')
                                     </x-admin::form.control-group.label>

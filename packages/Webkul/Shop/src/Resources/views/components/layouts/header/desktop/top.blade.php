@@ -68,7 +68,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-currency-switcher-template">
-        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+        <div class="grid gap-[4px] mt-2.5 pb-[10px]">
             <span
                 class="px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
                 v-for="currency in currencies"
@@ -81,7 +81,7 @@
     </script>
 
     <script type="text/x-template" id="v-locale-switcher-template">
-        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+        <div class="grid gap-[4px] mt-2.5 pb-[10px]">
             <span
                 class="flex items-center gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
                 v-for="locale in locales"

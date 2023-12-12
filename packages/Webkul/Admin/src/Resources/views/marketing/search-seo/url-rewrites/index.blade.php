@@ -203,7 +203,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Request Path -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.url-rewrites.index.create.request-path')
                                 </x-admin::form.control-group.label>
@@ -224,7 +224,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Target Path -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.url-rewrites.index.create.target-path')
                                 </x-admin::form.control-group.label>

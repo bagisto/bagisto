@@ -198,7 +198,7 @@
 
                                             <!-- Information -->
                                             @foreach ($order->channel->inventory_sources as $inventorySource)
-                                                <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                                <div class="flex gap-[10px] justify-between pb-[10px] mt-2.5 border-b-[1px] border-slate-300 dark:border-gray-800">
                                                     <div class="grid gap-[10px]">
                                                         <!--Inventory Source -->
                                                         <p class="text-[16x] text-gray-800 dark:text-white font-semibold">

@@ -33,7 +33,7 @@
                         </h2>
 
                         <div
-                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9]"
+                            class="secondary-button flex gap-x-[10px] items-center py-3 px-[20px] border-[#E9E9E9]"
                             @click="removeAll"
                             v-if="wishlist.length"
                         >

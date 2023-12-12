@@ -17,7 +17,7 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal"
+            class="secondary-button flex gap-x-[10px] items-center py-3 px-[20px] border-[#E9E9E9] font-normal"
         >
             <span class="icon-location text-[24px]"></span>
 

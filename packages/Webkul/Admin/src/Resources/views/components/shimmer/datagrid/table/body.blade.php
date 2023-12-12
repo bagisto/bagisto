@@ -19,7 +19,7 @@
             </div>
         </div>
     @else
-        <div class="row grid grid-cols-[2fr_1fr_1fr] gap-[10px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300">
+        <div class="row grid grid-cols-[2fr_1fr_1fr] gap-[10px] px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300">
             <div class="flex gap-[10px]">
                 <div class="shimmer w-[24px] h-[24px]"></div>
 

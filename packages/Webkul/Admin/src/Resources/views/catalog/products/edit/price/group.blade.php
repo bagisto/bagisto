@@ -12,7 +12,7 @@
         <div>
             <!-- Header -->
             <div class="flex items-center justify-between mt-[6px] py-[15px]">
-                <p class="text-gray-800 text-[16px] py-[10px] font-semibold dark:text-white">
+                <p class="text-gray-800 text-[16px] py-2.5 font-semibold dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>
 
@@ -28,7 +28,7 @@
             <div class="grid">
                 <!-- Card -->
                 <div
-                    class="flex flex-col gap-[8px] py-[10px]"
+                    class="flex flex-col gap-[8px] py-2.5"
                     v-for="(item, index) in prices"
                 >
                     <!-- Hidden Inputs -->
@@ -70,7 +70,7 @@
 
                 <!-- Empty Container -->
                 <div
-                    class="flex gap-[20px] items-center py-[10px]"
+                    class="flex gap-[20px] items-center py-2.5"
                     v-if="! prices.length"
                 >
                     <img

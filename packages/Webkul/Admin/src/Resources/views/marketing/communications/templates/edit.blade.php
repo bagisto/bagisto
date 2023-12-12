@@ -95,7 +95,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="w-full mb-[10px]">
+                            <div class="w-full mb-2.5">
                                 <!-- Template Name -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">

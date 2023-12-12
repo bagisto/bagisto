@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-[16px] py-[10px] bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800 sticky top-0 z-[10001]">
+<header class="flex justify-between items-center px-[16px] py-2.5 bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800 sticky top-0 z-[10001]">
     <div class="flex gap-[6px] items-center">
         <!-- Hamburger Menu -->
         <i
@@ -33,7 +33,7 @@
 
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
-            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-[10px] rtl:mr-[10px]">
+            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
                 <i class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] text-[22px] top-[6px]"></i>
 
                 <input 
@@ -97,7 +97,7 @@
 
             <!-- Admin Dropdown -->
             <x-slot:content class="!p-[0px]">
-                <div class="flex gap-[5px] items-center px-[20px] py-[10px] border border-b-gray-300 dark:border-gray-800">
+                <div class="flex gap-[5px] items-center px-[20px] py-2.5 border border-b-gray-300 dark:border-gray-800">
                     <img
                         src="{{ url('cache/logo/bagisto.png') }}"
                         width="24"
@@ -203,7 +203,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
-        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-[10px] rtl:mr-[10px]">
+        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
             <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[6px]"></i>
 
             <input 

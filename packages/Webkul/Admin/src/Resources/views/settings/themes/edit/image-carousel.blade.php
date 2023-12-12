@@ -173,7 +173,7 @@
                                 value="image_carousel"
                             />
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
@@ -195,7 +195,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
                                 </x-admin::form.control-group.label>
@@ -296,7 +296,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.image-title')
                                 </x-admin::form.control-group.label>
@@ -315,7 +315,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.themes.edit.link')
                                 </x-admin::form.control-group.label>

@@ -212,7 +212,7 @@
 
                                 <div
                                     v-if="refund.summary"
-                                    class="grid grid-cols-3 gap-x-[20px] mt-[10px]"
+                                    class="grid grid-cols-3 gap-x-[20px] mt-2.5"
                                 >
                                     <!-- Refund Shipping -->
                                     <x-admin::form.control-group>

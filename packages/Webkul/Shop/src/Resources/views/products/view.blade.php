@@ -156,7 +156,7 @@
             </x-slot:header>
 
             <x-slot:content>
-                <div class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-[20px]">
+                <div class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-5">
                     {!! $product->description !!}
                 </div>
             </x-slot:content>
@@ -171,7 +171,7 @@
             </x-slot:header>
 
             <x-slot:content>
-                <div class="container mt-[20px] mb-[20px] max-1180:px-[20px]">
+                <div class="container mt-5 mb-5 max-1180:px-[20px]">
                     <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
@@ -328,7 +328,7 @@
                                 </p>
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
-                                    <div class="grid gap-[5px] mt-[10px]">
+                                    <div class="grid gap-[5px] mt-2.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
                                             <p class="text-[#6E6E6E] [&>*]:text-black">
                                                 {!! $offer !!}
@@ -392,7 +392,7 @@
                                 @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
                                     <button
                                         type="submit"
-                                        class="primary-button w-full max-w-[470px] mt-[20px]"
+                                        class="primary-button w-full max-w-[470px] mt-5"
                                         @click="is_buy_now=1;"
                                         {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                                     >

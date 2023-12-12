@@ -27,11 +27,11 @@
                     </div>
                 </div>
 
-                <p class="shimmer h-[20px] w-[110px] mt-[10px]"></p>
+                <p class="shimmer h-[20px] w-[110px] mt-2.5"></p>
 
-                <p class="shimmer h-[20px] w-full mt-[20px]"></p>
+                <p class="shimmer h-[20px] w-full mt-5"></p>
 
-                <p class="shimmer h-[20px] w-full mt-[10px]"></p>
+                <p class="shimmer h-[20px] w-full mt-2.5"></p>
             </div>
         </div>
     @endfor

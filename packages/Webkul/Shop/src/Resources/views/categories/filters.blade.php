@@ -147,7 +147,7 @@
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion>
                 <!-- Filter Item Header -->
-                <x-slot:header class="px-0 py-[10px]">
+                <x-slot:header class="px-0 py-2.5">
                     <div class="flex justify-between items-center">
                         <p
                             class="text-[18px] font-semibold"

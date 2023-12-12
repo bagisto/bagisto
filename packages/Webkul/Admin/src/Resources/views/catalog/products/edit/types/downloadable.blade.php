@@ -10,7 +10,7 @@
     <script type="text/x-template" id="v-downloadable-links-template">
         <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
+            <div class="flex gap-[20px] justify-between mb-2.5 p-[16px]">
                 <div class="flex flex-col gap-[8px]">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.title')
@@ -241,7 +241,7 @@
                         <!-- Drawer Content -->
                         <x-slot:content class="!p-0">
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px]">
+                            <div class="px-[16px] py-2.5">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.name')
@@ -492,7 +492,7 @@
     <script type="text/x-template" id="v-downloadable-samples-template">
         <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
+            <div class="flex gap-[20px] justify-between mb-2.5 p-[16px]">
                 <div class="flex flex-col gap-[8px]">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.title')
@@ -671,7 +671,7 @@
                         <!-- Drawer Content -->
                         <x-slot:content class="!p-0">
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px]">
+                            <div class="px-[16px] py-2.5">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.name')

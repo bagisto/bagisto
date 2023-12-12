@@ -138,7 +138,7 @@
 
                     <!-- Captcha -->
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
-                        <div class="flex mt-[20px]">
+                        <div class="flex mt-5">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
@@ -159,7 +159,7 @@
 
             {!! view_render_event('bagisto.shop.customers.login.after') !!}
 
-            <p class="mt-[20px] text-[#6E6E6E] font-medium">
+            <p class="mt-5 text-[#6E6E6E] font-medium">
                 @lang('shop::app.customers.login-form.new-customer')
 
                 <a

@@ -60,7 +60,7 @@
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         
-                                        <p class="text-[12px] mt-[10px] font-medium">
+                                        <p class="text-[12px] mt-2.5 font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                         </p>
                                     </label>

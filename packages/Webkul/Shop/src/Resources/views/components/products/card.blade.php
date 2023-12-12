@@ -190,7 +190,7 @@
                 </p>
             
                 <div 
-                    class="primary-button px-[30px] py-[10px] whitespace-nowrap"
+                    class="primary-button px-[30px] py-2.5 whitespace-nowrap"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.card.add-to-cart')

@@ -13,7 +13,7 @@
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
                     <p class="shimmer w-[100%] h-[21px] mt-[5px]"></p>
-                    <p class="shimmer w-[70%] h-[18px] mt-[10px]"></p>
+                    <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
 
@@ -24,7 +24,7 @@
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
                     <p class="shimmer w-[100%] h-[21px] mt-[5px]"></p>
-                    <p class="shimmer w-[70%] h-[18px] mt-[10px]"></p>
+                    <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
 
@@ -35,7 +35,7 @@
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
                     <p class="shimmer w-[100%] h-[21px] mt-[5px]"></p>
-                    <p class="shimmer w-[70%] h-[18px] mt-[10px]"></p>
+                    <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
 
@@ -46,7 +46,7 @@
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
                     <p class="shimmer w-[100%] h-[21px] mt-[5px]"></p>
-                    <p class="shimmer w-[70%] h-[18px] mt-[10px]"></p>
+                    <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
         </div>

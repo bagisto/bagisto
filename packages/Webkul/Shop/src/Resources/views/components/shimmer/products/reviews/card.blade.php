@@ -19,14 +19,14 @@
                 </div>
             </div>
 
-            <p class="shimmer mt-[10px] w-[130px] h-[21px]"></p>
+            <p class="shimmer mt-2.5 w-[130px] h-[21px]"></p>
 
-            <div class="grid gap-[6px] mt-[20px] ">
+            <div class="grid gap-[6px] mt-5 ">
                 <p class="shimmer w-[130px] h-[21px]"></p>
                 <p class="shimmer w-[130px] h-[21px]"></p>
             </div>
 
-            <div class="flex gap-2 flex-wrap mt-[10px]">
+            <div class="flex gap-2 flex-wrap mt-2.5">
                 <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
                 <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
                 <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>

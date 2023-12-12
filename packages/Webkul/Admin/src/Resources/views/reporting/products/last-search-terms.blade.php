@@ -32,7 +32,7 @@
                     <div class="table-responsive grid w-full rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
                         <!-- Table Header -->
                         <div
-                            class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                            class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
                             style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                         >
                             <div class="flex gap-[10px]">

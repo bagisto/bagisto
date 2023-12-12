@@ -59,7 +59,7 @@
                     </p>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.account.edit.name')
                         </x-admin::form.control-group.label>
@@ -81,7 +81,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Email -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.account.edit.email')
                         </x-admin::form.control-group.label>
@@ -116,7 +116,7 @@
                      <!-- Change Account Password -->
                     <x-slot:content>
                         <!-- Current Password -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.account.edit.current-password')
                             </x-admin::form.control-group.label>
@@ -137,7 +137,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Password -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.account.edit.password')
                             </x-admin::form.control-group.label>
@@ -158,7 +158,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Confirm Password -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.account.edit.confirm-password')
                             </x-admin::form.control-group.label>

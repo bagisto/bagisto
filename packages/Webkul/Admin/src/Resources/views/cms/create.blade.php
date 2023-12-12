@@ -50,7 +50,7 @@
                         @lang('admin::app.cms.create.description')
                     </p>
 
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.create.content')
                         </x-admin::form.control-group.label>
@@ -89,7 +89,7 @@
                     <x-admin::seo/>
 
                     <div class="mb-[30px]">
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.cms.create.meta-title')
                             </x-admin::form.control-group.label>
@@ -110,7 +110,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.cms.create.url-key')
                             </x-admin::form.control-group.label>
@@ -132,7 +132,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.cms.create.meta-keywords')
                             </x-admin::form.control-group.label>
@@ -195,8 +195,8 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="mb-[10px]">
-                            <x-admin::form.control-group class="mb-[10px]">
+                        <div class="mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.cms.create.page-title')
                                 </x-admin::form.control-group.label>

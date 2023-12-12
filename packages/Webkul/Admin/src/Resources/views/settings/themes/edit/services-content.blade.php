@@ -171,7 +171,7 @@
                             />
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.name')
                                 </x-admin::form.control-group.label>
@@ -194,7 +194,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Short Order -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.sort-order')
                                 </x-admin::form.control-group.label>
@@ -297,7 +297,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Title -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.title')
                                 </x-admin::form.control-group.label>
@@ -319,7 +319,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Description -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.themes.edit.services-content.description')
                                 </x-admin::form.control-group.label>

@@ -95,7 +95,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#6E6E6E] select-none">
+                    <div class="flex gap-x-[15px] mt-5 text-[14px] text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"

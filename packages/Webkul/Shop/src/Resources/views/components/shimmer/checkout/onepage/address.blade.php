@@ -33,5 +33,5 @@
         </div>
     </div>
 
-    <p class="shimmer w-[40%] h-[21px] mt-[20px]"></p>
+    <p class="shimmer w-[40%] h-[21px] mt-5"></p>
 </div>

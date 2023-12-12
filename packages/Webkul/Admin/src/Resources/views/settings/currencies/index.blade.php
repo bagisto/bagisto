@@ -145,7 +145,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- Code -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.currencies.index.create.code')
                                 </x-admin::form.control-group.label>
@@ -168,7 +168,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.currencies.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -191,7 +191,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Symbol -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.currencies.index.create.symbol')
                                 </x-admin::form.control-group.label>
@@ -213,7 +213,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Decimal -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.currencies.index.create.decimal')
                                 </x-admin::form.control-group.label>

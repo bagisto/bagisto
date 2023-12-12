@@ -17,12 +17,12 @@
         </template>
 
         <template v-else>
-            <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
+            <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
                 <h1 class="text-[26px] font-medium max-sm:text-[20px]">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>
                 
-                <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-[20px]">
+                <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-5">
                     <div 
                         class="flex gap-x-[15px] pb-[20px]"
                         v-for="item in cart.items"
@@ -42,7 +42,7 @@
                             >
                             </p>
 
-                            <p class="mt-[10px] text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
+                            <p class="mt-2.5 text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
                                 @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price }}', 'qty' => '@{{ item.quantity }}'])
                             </p>
                         </div>

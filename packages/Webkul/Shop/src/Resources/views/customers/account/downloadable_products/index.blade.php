@@ -127,7 +127,7 @@
                     </table>
                 </div>
 
-                <p class="text-[14px] text-right font-medium mt-[20px]"> 
+                <p class="text-[14px] text-right font-medium mt-5"> 
                     {{ $downloadableLinkPurchased->count() }}
                     
                     @lang('shop::app.customers.account.downloadable-products.records-found')

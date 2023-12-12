@@ -16,7 +16,7 @@
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done text-[24px] ltr:mr-[10px] rtl:ml-[10px] bg-white dark:bg-gray-900 rounded-full"
+                    class="icon-toast-done text-[24px] ltr:mr-[10px] rtl:ml-2.5 bg-white dark:bg-gray-900 rounded-full"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>

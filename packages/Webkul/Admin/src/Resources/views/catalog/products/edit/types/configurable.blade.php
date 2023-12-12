@@ -9,7 +9,7 @@
     <script type="text/x-template" id="v-product-variations-template">
         <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
+            <div class="flex flex-wrap gap-[10px] justify-between mb-2.5 p-[16px]">
                 <div class="flex flex-col gap-[8px]">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
@@ -100,7 +100,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-[16px] py-2.5 border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group
                                     v-for='(attribute, index) in superAttributes'
                                 >
@@ -317,7 +317,7 @@
 
                                     <template v-if="selectedType == 'editInventories'">
                                         <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
-                                            <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
+                                            <div class="grid grid-cols-3 gap-[16px] mb-2.5">
                                                 <x-admin::form.control-group
                                                     class="mb-[0px]"
                                                     v-for='inventorySource in inventorySources'
@@ -359,7 +359,7 @@
                                         <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
                                             <v-media-images
                                                 name="images"
-                                                class="mb-[10px]"
+                                                class="mb-2.5"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="updateTypes[selectedType].images"
                                             ></v-media-images>
@@ -593,8 +593,8 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editInventories'">
-                                    <x-admin::form.control-group class="mt-[10px] mb-0">
-                                        <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
+                                    <x-admin::form.control-group class="mt-2.5 mb-0">
+                                        <div class="grid grid-cols-3 gap-[16px] mb-2.5">
                                             <x-admin::form.control-group
                                                 class="mb-[0px]"
                                                 v-for='inventorySource in inventorySources'
@@ -661,7 +661,7 @@
                                 <template v-if="selectedType == 'addImages'">
                                     <v-media-images
                                         name="images"
-                                        class="mt-[10px]"
+                                        class="mt-2.5"
                                         v-bind:allow-multiple="true"
                                         :uploaded-images="variant.temp_images"
                                     ></v-media-images>
@@ -891,7 +891,7 @@
                                             <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
-                                        <div class="flex gap-[16px] mb-[10px]">
+                                        <div class="flex gap-[16px] mb-2.5">
                                             <x-admin::form.control-group class="flex-1">
                                                 <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.edit.price')
@@ -952,12 +952,12 @@
                                         </x-admin::form.control-group>
 
                                         <!-- Inventories -->
-                                        <div class="grid mt-[20px]">
-                                            <p class="mb-[10px] text-gray-800 dark:text-white font-semibold">
+                                        <div class="grid mt-5">
+                                            <p class="mb-2.5 text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.quantities')
                                             </p>
 
-                                            <div class="grid grid-cols-3 gap-[16px] mb-[10px]">
+                                            <div class="grid grid-cols-3 gap-[16px] mb-2.5">
                                                 <x-admin::form.control-group
                                                     class="mb-[0px]"
                                                     v-for='inventorySource in inventorySources'
@@ -992,8 +992,8 @@
                                         </div>
 
                                         <!-- Images -->
-                                        <div class="mb-[10px]">
-                                            <p class="mb-[10px] text-gray-800 dark:text-white font-semibold">
+                                        <div class="mb-2.5">
+                                            <p class="mb-2.5 text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.images')
                                             </p>
 
@@ -1006,7 +1006,7 @@
 
                                         <!-- Actions -->
                                         <div
-                                            class="mt-[10px] text-[14px] text-gray-800 dark:text-white font-semibold"
+                                            class="mt-2.5 text-[14px] text-gray-800 dark:text-white font-semibold"
                                             v-if="typeof variant.id !== 'string'"
                                         >
                                             @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-info')

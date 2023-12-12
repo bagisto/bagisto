@@ -31,7 +31,7 @@
 
                     <div class="p-[16px] border-t-[1px] border-b-[1px] dark:border-gray-800">
                         <!-- Email -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.reset-password.email')
                             </x-admin::form.control-group.label>
@@ -54,7 +54,7 @@
                         </x-admin::form.control-group>
                         
                         <!-- Password -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.reset-password.password')
                             </x-admin::form.control-group.label>
@@ -78,7 +78,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Confirm Password -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.reset-password.confirm-password')
                             </x-admin::form.control-group.label>

@@ -166,7 +166,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -187,7 +187,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Terms -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms')
                                 </x-admin::form.control-group.label>

@@ -244,7 +244,7 @@
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
                         ::value="productQty"
-                        class="gap-x-[16px] w-max rounded-[12px] py-[10px] px-[17px] mt-5 !border-[#E9E9E9]"
+                        class="gap-x-[16px] w-max rounded-[12px] py-2.5 px-[17px] mt-5 !border-[#E9E9E9]"
                         @change="qtyUpdated($event)"
                     >
                     </x-shop::quantity-changer>

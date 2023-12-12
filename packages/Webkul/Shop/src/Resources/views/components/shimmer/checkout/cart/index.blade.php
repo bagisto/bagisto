@@ -7,10 +7,10 @@
             <div class="flex select-none items-center">
                 <div class="shimmer w-[24px] h-[25px] rounded-[4px]"></div>
 
-                <div class="shimmer ml-[10px] w-[165px] h-[30px]"></div>
+                <div class="shimmer ml-2.5 w-[165px] h-[30px]"></div>
             </div>
 
-            <div class="shimmer w-[222px] h-[23px] max-sm:ml-[35px] max-sm:mt-[10px]"></div>
+            <div class="shimmer w-[222px] h-[23px] max-sm:ml-[35px] max-sm:mt-2.5"></div>
         </div>
 
         <!-- Cart Items -->

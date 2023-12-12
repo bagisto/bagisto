@@ -6,7 +6,7 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
-                    <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
+                    <div class="flex gap-x-[10px] justify-between items-center mb-2.5">
                         <div class="flex flex-col gap-[4px]">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.category-carousel')
@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.sort')
                         </x-admin::form.control-group.label>
@@ -56,7 +56,7 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.limit')
                         </x-admin::form.control-group.label>
@@ -186,7 +186,7 @@
                     <x-slot:content>
                         <input type="hidden" name="type" value="category_carousel">
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
                             </x-admin::form.control-group.label>
@@ -209,7 +209,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
                             </x-admin::form.control-group.label>
@@ -306,7 +306,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Key -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.key-input')
                                 </x-admin::form.control-group.label>
@@ -327,7 +327,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Value -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.value-input')
                                 </x-admin::form.control-group.label>

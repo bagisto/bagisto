@@ -66,7 +66,7 @@
                             </p>
 
                             <!-- Admin name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.create.admin')
                                 </x-admin::form.control-group.label>
@@ -89,7 +89,7 @@
 
                             <!-- Locales Inputs -->
                             @foreach ($allLocales as $locale)
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label>
                                         {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
                                     </x-admin::form.control-group.label>
@@ -137,7 +137,7 @@
                             <!-- For Attribute Options If Data Exist -->
                             <template v-if="this.options?.length">
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
-                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
@@ -164,7 +164,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <div class="w-full mb-[10px]">
+                                    <div class="w-full mb-2.5">
                                         <!-- checkbox -->
                                         <x-admin::form.control-group.label class="invisible">
                                             @lang('admin::app.catalog.attributes.create.input-options')
@@ -381,7 +381,7 @@
 
                             <div class="px-[16px] pb-[16px]">
                                 <!-- Attribute Code -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.create.code')
                                     </x-admin::form.control-group.label>
@@ -413,7 +413,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute Type -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.create.type')
                                     </x-admin::form.control-group.label>
@@ -489,7 +489,7 @@
                                 <!-- Input Validation -->
                                 <x-admin::form.control-group
                                     v-if="swatchAttribute && (attributeType == 'text')"
-                                    class="mb-[10px]"
+                                    class="mb-2.5"
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.input-validation')
@@ -522,7 +522,7 @@
 
                                 <!-- REGEX -->
                                 <x-admin::form.control-group
-                                    class="mb-[10px]"
+                                    class="mb-2.5"
                                     v-show="inputValidation && (validationType == 'regex')"
                                 >
                                     <x-admin::form.control-group.label>
@@ -743,7 +743,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="grid grid-cols-3 px-[16px] py-[10px]">
+                            <div class="grid grid-cols-3 px-[16px] py-2.5">
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
@@ -789,7 +789,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px]">
+                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-2.5">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -798,7 +798,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <!-- Admin Input -->
-                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                <x-admin::form.control-group class="w-full mb-2.5">
                                     <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.admin')
                                     </x-admin::form.control-group.label>
@@ -820,7 +820,7 @@
 
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
-                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>

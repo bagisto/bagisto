@@ -94,7 +94,7 @@
                     </p>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.edit.name')
                         </x-admin::form.control-group.label>
@@ -126,9 +126,9 @@
                     </x-admin::form.control-group>
 
                     @if ($categories->count())
-                        <div class="mb-[10px]">
+                        <div class="mb-2.5">
                             <!-- Parent category -->
-                            <label class="block mb-[10px] text-[12px] text-gray-800 dark:text-white font-medium leading-[24px]">
+                            <label class="block mb-2.5 text-[12px] text-gray-800 dark:text-white font-medium leading-[24px]">
                                 @lang('admin::app.catalog.categories.edit.select-parent-category')
                             </label>
 
@@ -161,7 +161,7 @@
 
                     <!-- Description -->
                     <v-description v-slot="{ isDescriptionRequired }">
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label ::class="{ 'required' : isDescriptionRequired}">
                                 @lang('admin::app.catalog.categories.edit.description')
                             </x-admin::form.control-group.label>
@@ -239,7 +239,7 @@
 
                     <div class="mt-[30px]">
                         <!-- Meta Title -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-title')
                             </x-admin::form.control-group.label>
@@ -256,7 +256,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Slug -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.categories.edit.slug')
                             </x-admin::form.control-group.label>
@@ -288,7 +288,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-keywords')
                             </x-admin::form.control-group.label>
@@ -304,7 +304,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Meta Description -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-description')
                             </x-admin::form.control-group.label>
@@ -340,8 +340,8 @@
 
                     <x-slot:content>
                         <!-- Position -->
-                        <div class="mb-[10px]">
-                            <x-admin::form.control-group class="mb-[10px]">
+                        <div class="mb-2.5">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.categories.edit.position')
                                 </x-admin::form.control-group.label>
@@ -364,7 +364,7 @@
                         </div>
 
                         <!-- Display Mode  -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="text-gray-800 dark:text-white font-medium required">
                                 @lang('admin::app.catalog.categories.edit.display-mode')
                             </x-admin::form.control-group.label>

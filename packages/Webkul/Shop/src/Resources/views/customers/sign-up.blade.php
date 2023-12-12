@@ -181,7 +181,7 @@
 
 
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
-                        <div class="flex mb-[20px]">
+                        <div class="flex mb-5">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
@@ -230,7 +230,7 @@
                 </x-shop::form>
             </div>
 
-			<p class="mt-[20px] text-[#6E6E6E] font-medium">
+			<p class="mt-5 text-[#6E6E6E] font-medium">
                 @lang('shop::app.customers.signup-form.account-exists')
 
                 <a class="text-navyBlue"

@@ -138,7 +138,7 @@
                             >
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.locales.index.create.code')
                                 </x-admin::form.control-group.label>
@@ -160,7 +160,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.locales.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -182,7 +182,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.locales.index.create.direction')
                                 </x-admin::form.control-group.label>
@@ -211,7 +211,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.locales.index.create.locale-logo')
                                 </x-admin::form.control-group.label>

@@ -58,7 +58,7 @@
                 @endphp
                 <!-- DataGrid Header -->
                 <template #header="{columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-[10px] items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
@@ -204,7 +204,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.users.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -234,7 +234,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Email -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.users.index.create.email')
                                 </x-admin::form.control-group.label>
@@ -258,7 +258,7 @@
 
                             <div class="flex gap-[16px]">
                                 <!-- Password -->
-                                <x-admin::form.control-group class="flex-1 mb-[10px]">
+                                <x-admin::form.control-group class="flex-1 mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.password')
                                     </x-admin::form.control-group.label>
@@ -282,7 +282,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Confirm Password -->
-                                <x-admin::form.control-group class="flex-1 mb-[10px]">
+                                <x-admin::form.control-group class="flex-1 mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.confirm-password')
                                     </x-admin::form.control-group.label>
@@ -308,7 +308,7 @@
                             <div class="flex gap-[16px]">
 
                                 <!-- Role -->
-                                <x-admin::form.control-group class="flex-1 w-full mb-[10px]">
+                                <x-admin::form.control-group class="flex-1 w-full mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.users.index.create.role')
                                     </x-admin::form.control-group.label>
@@ -348,7 +348,7 @@
                                             @lang('admin::app.settings.users.index.create.status')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="gap-[10px] w-full mt-[10px]">
+                                        <div class="gap-[10px] w-full mt-2.5">
                                             <x-admin::form.control-group.control
                                                 type="switch"
                                                 name="status"
@@ -429,7 +429,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Password -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('Enter Current Password')
                                 </x-admin::form.control-group.label>

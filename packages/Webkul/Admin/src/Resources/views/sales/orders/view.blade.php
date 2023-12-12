@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[20px]">
+    <div class="justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-5">
         <div class="flex gap-[5px]">
             {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
@@ -277,7 +277,7 @@
 
                     <x-admin::form action="{{ route('admin.sales.orders.comment', $order->id) }}">
                         <div class="p-[16px]">
-                            <div class="mb-[10px]">
+                            <div class="mb-2.5">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.control
                                         type="textarea"

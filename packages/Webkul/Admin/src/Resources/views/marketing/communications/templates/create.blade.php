@@ -43,7 +43,7 @@
 
                 <!--Content -->
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <div class="mb-[10px]">
+                    <div class="mb-2.5">
                         <!-- Template Textarea -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -91,7 +91,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="w-full mb-[10px]">
+                            <div class="w-full mb-2.5">
                                 <!-- Template Name -->
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">

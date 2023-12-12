@@ -13,7 +13,7 @@
                     <span class="shimmer block w-[60px] h-[60px]"></span>
                     
                     <p class="shimmer w-[60%] h-[37.5px] mt-[8px]"></p>
-                    <p class="shimmer w-[180px] h-[18px] mt-[10px]"></p>
+                    <p class="shimmer w-[180px] h-[18px] mt-2.5"></p>
                 </label>
             </div>
 
@@ -24,7 +24,7 @@
                     <span class="shimmer block w-[60px] h-[60px]"></span>
 
                     <p class="shimmer w-[60%] h-[37.5px] mt-[8px]"></p>
-                    <p class="shimmer w-[180px] h-[18px] mt-[10px]"></p>
+                    <p class="shimmer w-[180px] h-[18px] mt-2.5"></p>
                 </label>
             </div>
         </div>

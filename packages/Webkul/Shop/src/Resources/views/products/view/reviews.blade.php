@@ -138,7 +138,7 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
+                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
                                 <button
                                     class="primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
@@ -148,7 +148,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center px-[30px] py-2.5 rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -178,7 +178,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
+                                class="flex gap-x-[15px] items-center px-[15px] py-2.5 border border-navyBlue rounded-[12px] cursor-pointer"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-[24px]"></span>
@@ -202,7 +202,7 @@
 
                         <!-- Ratings By Individual Stars -->
                         <div class="flex gap-x-[20px] items-center">
-                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
+                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
                                     <div class="row grid grid-cols-[1fr_2fr] gap-[10px] items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
@@ -249,7 +249,7 @@
 
     <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-[20px]">
+        <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img
                     v-if="review.profile"
@@ -290,25 +290,25 @@
                 </div>
 
                 <p
-                    class="mt-[10px] text-[14px] font-medium max-sm:text-[12px]"
+                    class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]"
                     v-text="review.created_at"
                 >
                 </p>
 
                 <p
-                    class="mt-[20px] text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
+                    class="mt-5 text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
                     v-text="review.title"
                 >
                 </p>
 
                 <p
-                    class="mt-[20px] text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
+                    class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
                     v-text="review.comment"
                 >
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-[10px] px-[8px] py-[4px] rounded-[8px] text-[14px]"
+                    class="secondary-button min-h-[34px] mt-2.5 px-[8px] py-[4px] rounded-[8px] text-[14px]"
                     @click="translate"
                 >
                     <!-- Spinner -->

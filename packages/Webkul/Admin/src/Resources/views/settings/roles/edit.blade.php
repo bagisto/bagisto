@@ -60,7 +60,7 @@
                             </p>
 
                             <!-- Permission Type -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.roles.edit.permissions')
                                 </x-admin::form.control-group.label>
@@ -81,10 +81,10 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-
-                            <!-- Tree Structure -->
-                            <div
-                                class="mb-[10px]"
+                            
+                            <!-- Tree structure -->
+                            <div 
+                                class="mb-2.5"
                                 v-if="permission_type == 'custom'"
                             >
                                 <x-admin::tree.view
@@ -119,7 +119,7 @@
 
                             <x-slot:content>
                                 <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.edit.name')
                                     </x-admin::form.control-group.label>
@@ -142,7 +142,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Description -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.edit.description')
                                     </x-admin::form.control-group.label>

@@ -12,7 +12,7 @@
     </x-slot:title>
 
     <!-- Breadcrumb -->
-    <div class="flex justify-center mt-[20px] max-lg:hidden">
+    <div class="flex justify-center mt-5 max-lg:hidden">
 		<div class="flex gap-x-[10px] items-center">
             <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
@@ -42,7 +42,7 @@
                         </h1>
 
                         <div
-                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
+                            class="secondary-button flex gap-x-[10px] items-center py-3 px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >

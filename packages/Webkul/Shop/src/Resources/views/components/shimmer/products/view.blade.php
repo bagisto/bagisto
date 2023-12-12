@@ -30,7 +30,7 @@
             </div>
 
             <!-- Colors -->
-            <div class="mt-[20px]">
+            <div class="mt-5">
                 <h3 class="shimmer w-[20%] h-[36px] mb-[15px]"></h3>
 
                 <div class="flex items-center space-x-3">
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Size -->
-            <div class="mt-[20px]">
+            <div class="mt-5">
                 <h3 class="shimmer w-[20%] h-[36px] mb-[15px]"></h3>
 
                 <div class="flex flex-wrap gap-[12px]">
@@ -65,7 +65,7 @@
             </div>
 
             <!-- Buy Now Button -->
-            <button class="shimmer w-full h-[56px] mt-[20px] rounded-[12px]"></button>
+            <button class="shimmer w-full h-[56px] mt-5 rounded-[12px]"></button>
 
             <div class="flex gap-[35px] items-center mt-[40px] max-sm:flex-wrap">
                 <div class="shimmer w-[80px] h-[24px]"></div>

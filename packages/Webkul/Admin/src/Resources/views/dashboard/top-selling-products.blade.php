@@ -82,7 +82,7 @@
                     class="flex flex-col gap-[32px] p-[16px]"
                     v-else
                 >
-                    <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
+                    <div class="grid gap-[14px] justify-center justify-items-center py-2.5">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"

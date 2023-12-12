@@ -278,7 +278,7 @@
 
                                     <div class="flex flex-col gap-[12px] justify-center h-[284px] px-[30px] py-[16px] overflow-y-auto">
                                         <!-- Application Name -->
-                                        <x-installer::form.control-group class="mb-[10px]">
+                                        <x-installer::form.control-group class="mb-2.5">
                                             <x-installer::form.control-group.label>
                                                 @lang('Installation Wizard language')
                                             </x-installer::form.control-group.label>
@@ -310,7 +310,7 @@
                                 </div>
                             </div>
                         
-                            <div class="flex px-[16px] py-[10px] justify-end items-center">
+                            <div class="flex px-[16px] py-2.5 justify-end items-center">
                                 <button
                                     type="button"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
@@ -365,7 +365,7 @@
                         }
                     @endphp
 
-                    <div class="flex px-[16px] py-[10px] justify-between items-center">
+                    <div class="flex px-[16px] py-2.5 justify-between items-center">
                         <div
                             class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                             role="button"
@@ -408,7 +408,7 @@
 
                             <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
                                 <!-- Database Connection-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-connection')
                                     </x-installer::form.control-group.label>
@@ -439,7 +439,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Database Hostname-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-hostname')
                                     </x-installer::form.control-group.label>
@@ -461,7 +461,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Database Port-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-port')
                                     </x-installer::form.control-group.label>
@@ -483,7 +483,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Database name-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-name')
                                     </x-installer::form.control-group.label>
@@ -505,7 +505,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Database Prefix-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label>
                                         @lang('installer::app.installer.index.environment-configuration.database-prefix')
                                     </x-installer::form.control-group.label>
@@ -526,7 +526,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Database Username-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-username')
                                     </x-installer::form.control-group.label>
@@ -548,7 +548,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Database Password-->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.database-password')
                                     </x-installer::form.control-group.label>
@@ -570,7 +570,7 @@
                                 </x-installer::form.control-group>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
+                            <div class="flex px-[16px] py-2.5 justify-between items-center">
                                 <div
                                     class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                                     role="button"
@@ -641,7 +641,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-between items-center">
+                            <div class="flex px-[16px] py-2.5 justify-between items-center">
                                 <div
                                     class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                                     role="button"
@@ -718,7 +718,7 @@
 
                             <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
                                 <!-- Application Name -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.application-name')
                                     </x-installer::form.control-group.label>
@@ -740,7 +740,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Application Default URL -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.default-url')
                                     </x-installer::form.control-group.label>
@@ -762,7 +762,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Application Default Timezone -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.environment-configuration.default-timezone')
                                     </x-installer::form.control-group.label>
@@ -950,7 +950,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-end items-center">
+                            <div class="flex px-[16px] py-2.5 justify-end items-center">
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
@@ -986,7 +986,7 @@
 
                             <div class="flex flex-col gap-[12px] px-[30px] py-[16px] border-b-[1px] border-gray-300 h-[484px] overflow-y-auto">
                                 <!-- Admin -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.create-administrator.admin')
                                     </x-installer::form.control-group.label>
@@ -1008,7 +1008,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Email -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.create-administrator.email')
                                     </x-installer::form.control-group.label>
@@ -1030,7 +1030,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Password -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.create-administrator.password')
                                     </x-installer::form.control-group.label>
@@ -1051,7 +1051,7 @@
                                 </x-installer::form.control-group>
 
                                 <!-- Confirm Password -->
-                                <x-installer::form.control-group class="mb-[10px]">
+                                <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
                                         @lang('installer::app.installer.index.create-administrator.confirm-password')
                                     </x-installer::form.control-group.label>
@@ -1072,7 +1072,7 @@
                                 </x-installer::form.control-group>
                             </div>
 
-                            <div class="flex px-[16px] py-[10px] justify-end items-center">
+                            <div class="flex px-[16px] py-2.5 justify-end items-center">
                                 <button
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer hover:opacity-90"
@@ -1131,7 +1131,7 @@
                         </div>
                     </div>
 
-                    <div class="flex px-[16px] py-[10px] justify-between items-center">
+                    <div class="flex px-[16px] py-2.5 justify-between items-center">
                         <a
                             href="https://forums.bagisto.com"
                             class="text-[12px] text-blue-600 font-semibold cursor-pointer"

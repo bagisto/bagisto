@@ -12,7 +12,7 @@
                 class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow"
                 v-for="type in types"
             >
-                <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
+                <div class="flex gap-[20px] justify-between mb-2.5 p-[16px]">
                     <div class="flex flex-col gap-[8px]">
                         <p
                             class="text-[16px] text-gray-800 dark:text-white font-semibold"

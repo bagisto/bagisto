@@ -17,7 +17,7 @@
                 >
 
                 <div
-                    class="mt-[20px]"
+                    class="mt-5"
                     v-for='(attribute, index) in childAttributes'
                 >
                     <!-- Dropdown Options Container -->

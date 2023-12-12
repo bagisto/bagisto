@@ -150,7 +150,7 @@
 
                         <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+                        <div class="grid gap-[4px] mt-2.5 pb-[10px]">
                             <a
                                 class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                 href="{{ route('shop.customers.account.profile.index') }}"

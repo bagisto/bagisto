@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <!-- Page Header -->
-    <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
+    <div class="flex gap-[16px] justify-between items-center mb-5 max-sm:flex-wrap">
         <!-- Title -->
         <div class="flex gap-[6px]">
             <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">

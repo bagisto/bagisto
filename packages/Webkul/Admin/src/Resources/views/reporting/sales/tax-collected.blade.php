@@ -80,7 +80,7 @@
                     </div>
 
                     <!-- Tax Categories -->
-                    <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold">
+                    <p class="py-2.5 text-[16px] text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.sales.index.top-tax-categories')
                     </p>
 

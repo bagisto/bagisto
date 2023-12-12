@@ -182,7 +182,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- Search Term -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.search-terms.index.create.search-query')
                                 </x-admin::form.control-group.label>
@@ -204,7 +204,7 @@
 
                             <template v-if="selectedSitemap">
                                 <!-- Results -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.search-seo.search-terms.index.create.results')
                                     </x-admin::form.control-group.label>
@@ -225,7 +225,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Uses -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.search-seo.search-terms.index.create.uses')
                                     </x-admin::form.control-group.label>
@@ -247,7 +247,7 @@
                             </template>
 
                             <!-- Uses -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')
                                 </x-admin::form.control-group.label>

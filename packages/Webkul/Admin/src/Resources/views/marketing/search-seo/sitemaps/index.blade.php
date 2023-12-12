@@ -151,7 +151,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- File Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name')
                                 </x-admin::form.control-group.label>
@@ -178,7 +178,7 @@
                             </x-admin::form.control-group>
 
                             <!-- File Path -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.path')
                                 </x-admin::form.control-group.label>

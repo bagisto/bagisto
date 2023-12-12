@@ -6,7 +6,7 @@
             <div class="shimmer w-[16px] h-[16px] mr-[4px]"></div>
 
             <!-- Group Name -->
-            <div class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px]">
+            <div class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5">
                 <div class="shimmer w-[20px] h-[21px]"></div>
 
                 <div class="shimmer w-[20px] h-[21px]"></div>
@@ -18,7 +18,7 @@
         <!-- Group Attributes -->
         <div class="ltr:ml-[43px] rtl:mr-[43px]">
             @for ($k = 0; $k < 5; $k++)
-                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px]">
+                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5">
                     <div class="shimmer w-[20px] h-[21px]"></div>
 
                     <div class="shimmer w-[20px] h-[21px]"></div>

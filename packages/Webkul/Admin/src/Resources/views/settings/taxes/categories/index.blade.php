@@ -131,7 +131,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Code -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.categories.index.create.code')
                                 </x-admin::form.control-group.label>
@@ -161,7 +161,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.categories.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -184,7 +184,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Description -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.categories.index.create.description')
                                 </x-admin::form.control-group.label>

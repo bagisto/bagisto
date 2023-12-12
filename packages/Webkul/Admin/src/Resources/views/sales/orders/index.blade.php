@@ -19,7 +19,7 @@
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
              <template v-if="! isLoading">
-                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800">
                     <div
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
@@ -61,7 +61,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-4 px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
                     <!-- Order Id, Created, Status Section -->

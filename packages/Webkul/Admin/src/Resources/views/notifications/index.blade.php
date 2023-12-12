@@ -15,7 +15,7 @@
             type="text/x-template"
             id="v-notification-list-template"
         >
-            <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
+            <div class="flex gap-[16px] justify-between items-center mb-5 max-sm:flex-wrap">
                 <div class="grid gap-[6px]">
                     <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                         @lang('admin::app.notifications.title')
@@ -86,7 +86,7 @@
 
                     <!-- For Empty Data -->
                     <div
-                        class="px-[24px] py-[12px] text-gray-600 dark:text-gray-300 max-h-[calc(100vh-330px)]"
+                        class="px-[24px] py-3 text-gray-600 dark:text-gray-300 max-h-[calc(100vh-330px)]"
                         v-else
                     >
                         @lang('admin::app.notifications.no-record')

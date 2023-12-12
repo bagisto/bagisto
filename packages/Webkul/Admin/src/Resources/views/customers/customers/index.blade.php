@@ -43,7 +43,7 @@
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800">
                     <div
                         class="flex gap-[10px] items-center select-none"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['revenue', 'order_count', 'address_count']]"
@@ -113,7 +113,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
                     <div class="flex gap-[10px]">
@@ -267,7 +267,7 @@
 
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <!-- First Name -->
-                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.customers.index.create.first-name')
                                         </x-admin::form.control-group.label>
@@ -289,7 +289,7 @@
                                     </x-admin::form.control-group>
 
                                     <!-- Last Name -->
-                                    <x-admin::form.control-group class="w-full mb-[10px]">
+                                    <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.customers.index.create.last-name')
                                         </x-admin::form.control-group.label>
@@ -312,7 +312,7 @@
                                 </div>
 
                                 <!-- Email -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.customers.index.create.email')
                                     </x-admin::form.control-group.label>
@@ -334,7 +334,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Number -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.customers.index.create.contact-number')
                                     </x-admin::form.control-group.label>
@@ -355,7 +355,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.customers.index.create.date-of-birth')
                                     </x-admin::form.control-group.label>

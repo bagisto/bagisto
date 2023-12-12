@@ -43,7 +43,7 @@
                                 @{{ message }}
                             </div>
                             
-                            <div class="flex gap-[10px] justify-end px-[16px] py-[10px]">
+                            <div class="flex gap-[10px] justify-end px-[16px] py-2.5">
                                 <button type="button" class="transparent-button" @click="disagree">
                                     @{{ options.btnDisagree }}
                                 </button>

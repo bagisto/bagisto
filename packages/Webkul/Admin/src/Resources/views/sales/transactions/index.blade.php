@@ -108,7 +108,7 @@
                 <x-admin::drawer ref="transaction">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-y-[10px] py-[12px] dark:border-gray-800 max-sm:px-[15px]">
+                        <div class="grid gap-y-[10px] py-3 dark:border-gray-800 max-sm:px-[15px]">
                             <p class="text-[20px] font-medium dark:text-white">
                                 @lang('admin::app.sales.transactions.index.view.title')
                             </p>
@@ -117,7 +117,7 @@
 
                     <!-- Drawer Content -->
                     <x-slot:content>
-                        <div class="flex flex-col gap-[16px] px-[5px] py-[10px]">
+                        <div class="flex flex-col gap-[16px] px-[5px] py-2.5">
                             <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.sales.transactions.index.view.transaction-data')
                             </p>

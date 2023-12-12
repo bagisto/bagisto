@@ -59,7 +59,7 @@
 
                 <x-shop::form
                     :action="route('shop.subscription.store')"
-                    class="mt-[10px] rounded max-sm:mt-[30px]"
+                    class="mt-2.5 rounded max-sm:mt-[30px]"
                 >
                     <label for="organic-search" class="sr-only">Search</label>
 

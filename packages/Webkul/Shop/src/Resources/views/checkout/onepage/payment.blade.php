@@ -67,7 +67,7 @@
                                             @{{ payment.method_title }}
                                         </p>
                                         
-                                        <p class="text-[12px] font-medium mt-[10px]">
+                                        <p class="text-[12px] font-medium mt-2.5">
                                             @{{ payment.description }}
                                         </p> 
                                     </label>
