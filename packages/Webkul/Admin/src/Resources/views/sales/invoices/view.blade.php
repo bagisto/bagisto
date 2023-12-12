@@ -64,37 +64,35 @@
                 <x-admin::form :action="route('admin.sales.invoices.send_duplicate', $invoice->id)">
                     <!-- Create Group Modal -->
                     <x-admin::modal ref="groupCreateModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.sales.invoices.view.email')
-                                    </x-admin::form.control-group.label>
-        
-                                    <x-admin::form.control-group.control
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        rules="required|email"
-                                        :value="$invoice->order->customer_email"
-                                        :label="trans('admin::app.sales.invoices.view.email')"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="email"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </div>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.sales.invoices.view.email')
+                                </x-admin::form.control-group.label>
+    
+                                <x-admin::form.control-group.control
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    rules="required|email"
+                                    :value="$invoice->order->customer_email"
+                                    :label="trans('admin::app.sales.invoices.view.email')"
+                                >
+                                </x-admin::form.control-group.control>
+    
+                                <x-admin::form.control-group.error
+                                    control-name="email"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </x-slot:content>
         
                         <x-slot:footer>

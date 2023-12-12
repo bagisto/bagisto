@@ -12,7 +12,7 @@ trait PDFHandler
      *
      * @return \Illuminate\Http\Response
      */
-    protected function downloadPDF(string $html, string $fileName = null)
+    protected function downloadPDF(string $html, ?string $fileName = null)
     {
         if (is_null($fileName)) {
             $fileName = Str::random(32);

@@ -7,13 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class ConfigurationForm extends FormRequest
 {
     /**
-     * Rules of the configuration
-     *
-     * @var array
-     */
-    public $rules = [];
-
-    /**
      * Determine if the Configuration is authorized to make this request.
      *
      * @return bool
@@ -30,27 +23,21 @@ class ConfigurationForm extends FormRequest
      */
     public function rules()
     {
-        $keys = request()->input('keys');
-
-        $this->rules = collect($keys)->mapWithKeys(function ($item) {
+        return collect(request()->input('keys', []))->mapWithKeys(function ($item) {
             $data = json_decode($item, true);
 
-            $validationRules = collect($data['fields'])->mapWithKeys(function ($field) use ($data) {
+            return collect($data['fields'])->mapWithKeys(function ($field) use ($data) {
                 $key = $data['key'] . '.' . $field['name'];
 
                 // Check delete key exist in the request
                 if (! $this->has($key . '.delete')) {
-                    $validation = isset($field['validation']) ? $field['validation'] : '';
+                    $validation = isset($field['validation']) && $field['validation'] ? $field['validation'] : 'nullable';
 
                     return [$key => $validation];
                 }
 
                 return [];
             })->toArray();
-
-            return $validationRules;
         })->toArray();
-
-        return $this->rules;
     }
 }

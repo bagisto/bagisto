@@ -54,7 +54,7 @@ abstract class AbstractReporting
      * @param  \Carbon\Carbon|null  $startDate
      * @return void
      */
-    public function setStartDate(Carbon $startDate = null): self
+    public function setStartDate(?Carbon $startDate = null): self
     {
         $this->startDate = $startDate ? $startDate->startOfDay() : now()->subDays(30)->startOfDay();
 
@@ -70,7 +70,7 @@ abstract class AbstractReporting
      * @param  \Carbon\Carbon|null  $endDate
      * @return void
      */
-    public function setEndDate(Carbon $endDate = null): self
+    public function setEndDate(?Carbon $endDate = null): self
     {
         $this->endDate = ($endDate && $endDate->endOfDay() <= now()) ? $endDate->endOfDay() : now();
 

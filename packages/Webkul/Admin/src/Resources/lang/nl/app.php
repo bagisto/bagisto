@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => 'Voorbeeld',
                 'save-btn' => 'Product Opslaan',
                 'title'    => 'Bewerk Product',
                 'remove'   => 'Verwijderen',

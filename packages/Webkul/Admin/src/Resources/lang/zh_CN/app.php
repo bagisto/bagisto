@@ -563,6 +563,7 @@ return [
             ],
 
             'edit' => [
+                'preview'  => '预览',
                 'save-btn' => '保存产品',
                 'title'    => '编辑产品',
                 'remove'   => '删除',

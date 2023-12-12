@@ -155,7 +155,7 @@ class CustomerDataGrid extends DataGrid
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
                     return $q->whereNotIn('status', ['canceled', 'closed'])
                         ->where('customer_id', $row->customer_id);
-                })->sum('grand_total_invoiced');
+                })->sum('base_grand_total_invoiced');
             },
         ]);
 

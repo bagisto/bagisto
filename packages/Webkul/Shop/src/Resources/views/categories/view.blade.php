@@ -19,7 +19,7 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+        <div class="container mt-[30px] px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
             <div>
                 <img
                     class="rounded-[12px]"
@@ -34,7 +34,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+            <div class="container mt-[30px] px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 {!! $category->description !!}
             </div>
         @endif
@@ -237,6 +237,8 @@
                             filter: false,
                         };
 
+                        document.body.style.overflow ='scroll';
+
                         this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
                             params: this.queryParams 
                         })
@@ -252,20 +254,22 @@
                     },
 
                     loadMoreProducts() {
-                        if (this.links.next) {
-                            this.loader = true;
-
-                            this.$axios.get(this.links.next)
-                                .then(response => {
-                                    this.loader = false;
-
-                                    this.products = [...this.products, ...response.data.data];
-
-                                    this.links = response.data.links;
-                                }).catch(error => {
-                                    console.log(error);
-                                });
+                        if (! this.links.next) {
+                            return;
                         }
+
+                        this.loader = true;
+
+                        this.$axios.get(this.links.next)
+                            .then(response => {
+                                this.loader = false;
+
+                                this.products = [...this.products, ...response.data.data];
+
+                                this.links = response.data.links;
+                            }).catch(error => {
+                                console.log(error);
+                            });
                     },
 
                     removeJsonEmptyValues(params) {

@@ -11,7 +11,7 @@
     @case('number')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
@@ -28,7 +28,7 @@
     @case('file')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', ':rules', 'label', ':label']) }}
         >
             <input
@@ -44,7 +44,7 @@
     @case('color')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->except('class') }}
         >
             <input
@@ -59,7 +59,7 @@
     @case('textarea')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <textarea
@@ -86,7 +86,7 @@
     @case('date')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <x-admin::flat-picker.date>
@@ -105,7 +105,7 @@
     @case('datetime')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <x-admin::flat-picker.datetime>
@@ -123,7 +123,7 @@
     @case('select')
         <v-field
             name="{{ $name }}"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <select
@@ -142,7 +142,7 @@
         <v-field
             as="select"
             name="{{ $name }}"
-            :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            :class="[errors && errors['{{ $name }}'] ? 'border border-red-500' : '']"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400']) }}
             multiple
         >
@@ -153,7 +153,7 @@
 
     @case('checkbox')
         <v-field
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             name="{{ $name }}"
             type="checkbox"
             class="hidden"
@@ -183,7 +183,7 @@
             type="radio"
             name="{{ $name }}"
             class="hidden"
-            v-slot="{ field }"
+            v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
@@ -209,7 +209,7 @@
                 type="checkbox"
                 name="{{ $name }}"
                 class="hidden"
-                v-slot="{ field }"
+                v-slot="{ field, errors }"
                 {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             >
                 <input
@@ -235,7 +235,7 @@
     @case('image')
         <x-admin::media.images
             name="{{ $name }}"
-            ::class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+            ::class="[errors && errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
             {{ $attributes }}
         >
         </x-admin::media.images>
