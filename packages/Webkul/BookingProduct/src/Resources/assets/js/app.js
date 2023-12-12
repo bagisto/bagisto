@@ -3,3 +3,12 @@
  */
 import.meta.glob(["../images/**", "../fonts/**"]);
 
+
+/**
+ * Global plugins registration.
+ */
+import Flatpickr from "./plugins/flatpickr";
+
+[
+    Flatpickr,
+].forEach((plugin) => app.use(plugin));

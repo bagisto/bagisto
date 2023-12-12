@@ -121,8 +121,8 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div v-if="default_booking.booking_type == 'one'">
-                            <div class="flex gap-4 px-4 py-2.5 border-b dark:border-gray-800">
+                        <div v-if="default_booking.booking_type == 'one'" class="mb-2.5">
+                            <div class="flex gap-4 mb-[10px] px-4 py-2.5 border-b dark:border-gray-800">
                                 <!-- From Day -->
                                 <x-admin::form.control-group class="w-full mb-2.5">
                                     <x-admin::form.control-group.label class="required">
@@ -245,7 +245,7 @@
                                         ::name="'booking[slots][' + index + '][from]'"
                                         {{-- rules="slots.many[index].status ? 'required': ''" --}}
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
-                                        v-model="slots.many[index].from"
+                                        {{-- v-model="slots.many[index].from" --}}
                                     >
                                     </x-booking::form.control-group.control>
 
@@ -265,7 +265,7 @@
                                         ::name="'booking[slots][' + index + '][to]'"
                                         {{-- rules="{ slots.many[index].status ? {required: true, time_min: slots.many[index].from } : '' }" --}}
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
-                                        v-model="slots.many[index].to"
+                                        {{-- v-model="slots.many[index].to" --}}
                                     >
                                     </x-booking::form.control-group.control>
 
@@ -286,7 +286,7 @@
                                         ::name="'booking[slots][' + index + '][status]'"
                                         rules="required"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
-                                        v-model="slots.many[index].status"
+                                        {{-- v-model="slots.many[index].status" --}}
                                     >
 
                                         <option value="1">
@@ -377,7 +377,8 @@
 
             methods: {
                 storeSlots(params) {
-                    console.log(params);
+                    this.slots.one.push(params);
+                    console.log(this.slots);
                 },
             }
         });

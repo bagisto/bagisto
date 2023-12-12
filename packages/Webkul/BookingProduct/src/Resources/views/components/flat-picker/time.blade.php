@@ -15,6 +15,12 @@
         app.component('v-time-picker', {
             template: '#v-time-picker-template',
 
+            data() {
+                return {
+                    timepicker: null
+                };
+            },
+
             mounted() {
                 let options = this.setOptions();
 
@@ -32,9 +38,9 @@
                         dateFormat: "H:i",
                         time_24hr: true,
 
-                        onChange: function(selectedDates, dateStr, instance) {
-                            self.$emit("onChange", dateStr);
-                        }
+                        onChange(selectedTimes, timeStr, instance) {
+                            self.$emit("onChange", timeStr);
+                        },
                     };
                 },
 
