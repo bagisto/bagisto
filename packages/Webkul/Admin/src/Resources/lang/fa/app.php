@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'اعمال یک نام برای تمامی نوع‌ها.',
                             'apply-to-all-sku'    => 'اعمال یک قیمت به تمامی SKU.',
                             'apply-to-all-status' => 'اعمال یک وضعیت به تمامی نوع‌ها.',
+                            'apply-to-all-weight' => 'اعمال وزن بر روی تمامی واریانت‌ها.',
                             'edit-inventories'    => 'ویرایش موجودی‌ها',
                             'edit-names'          => 'ویرایش نام‌ها',
                             'edit-prices'         => 'ویرایش قیمت‌ها',

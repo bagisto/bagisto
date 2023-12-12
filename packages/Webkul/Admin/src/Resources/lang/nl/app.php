@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'Pas een naam toe op alle varianten.',
                             'apply-to-all-sku'    => 'Pas een prijs toe op alle SKU\'s.',
                             'apply-to-all-status' => 'Pas een status toe op alle varianten.',
+                            'apply-to-all-weight' => 'Gewicht toepassen op alle varianten.',
                             'edit-inventories'    => 'Voorraden Bewerken',
                             'edit-names'          => 'Namen Bewerken',
                             'edit-prices'         => 'Prijzen Bewerken',

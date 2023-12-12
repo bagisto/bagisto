@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'すべてのバリアントに名前を適用',
                             'apply-to-all-sku'    => 'すべてのSKUに価格を適用',
                             'apply-to-all-status' => 'すべてのバリアントにステータスを適用',
+                            'apply-to-all-weight' => 'すべてのバリエーションに重みを適用する。',
                             'edit-inventories'    => '在庫を編集',
                             'edit-names'          => '名前を編集',
                             'edit-prices'         => '価格を編集',

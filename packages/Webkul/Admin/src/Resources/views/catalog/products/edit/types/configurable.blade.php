@@ -375,7 +375,7 @@
                                             <div class="flex gap-[10px] items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
-                                                        @lang('Apply a weight to all SKU.')
+                                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-weight')
                                                     </x-admin::form.control-group.label>
                         
                                                     <div class="relative">
@@ -384,7 +384,7 @@
                                                             name="weight"
                                                             value="0"
                                                             ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
-                                                            :label="trans('Weight')"
+                                                            :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
                                                         >
                                                         </x-admin::form.control-group.control>
                                                     </div>
@@ -412,7 +412,7 @@
                                                             type="text"
                                                             name="name"
                                                             ::rules="{ required: true }"
-                                                            :label="trans('Name')"
+                                                            :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.name')"
                                                         ></x-admin::form.control-group.control>
                                                     </div>
                                                 </x-admin::form.control-group>
@@ -544,7 +544,7 @@
                                                 class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
-                                                label="@lang('Status')"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')"
                                             >
                                                 <option value="1">@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')</option>
                                                 <option value="0">@lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')</option>
@@ -603,13 +603,10 @@
                                                     @{{ inventorySource.name }}
                                                 </x-admin::form.control-group.label>
 
-                                                @{{ variant.inventories }}
-                                                @{{ inventorySource.id }}
-
                                                 <v-field
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
-                                                    {{-- v-model="variant.inventories[inventorySource.id]" --}}
+                                                    v-model="variant.inventories[inventorySource.id]"
                                                     class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"

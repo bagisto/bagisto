@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'החל שם לכל ההבחרות.',
                             'apply-to-all-sku'    => 'החל מחיר לכל SKU.',
                             'apply-to-all-status' => 'החל סטטוס לכל ההבחרות.',
+                            'apply-to-all-weight' => 'להחיל משקל לכל ההפעלות.',
                             'edit-inventories'    => 'ערוך מלאי',
                             'edit-names'          => 'ערוך שמות',
                             'edit-prices'         => 'ערוך מחירים',

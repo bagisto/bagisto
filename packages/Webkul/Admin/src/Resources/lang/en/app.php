@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'Apply a name to all variants.',
                             'apply-to-all-sku'    => 'Apply a price to all SKU.',
                             'apply-to-all-status' => 'Apply a status to all variants.',
+                            'apply-to-all-weight' => 'Apply a weight to all variants.',
                             'edit-inventories'    => 'Edit Inventories',
                             'edit-names'          => 'Edit Names',
                             'edit-prices'         => 'Edit Prices',

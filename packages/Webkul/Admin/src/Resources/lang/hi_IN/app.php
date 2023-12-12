@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'सभी प्रकारों पर एक नाम लागू करें।',
                             'apply-to-all-sku'    => 'सभी SKU पर मूल्य लागू करें।',
                             'apply-to-all-status' => 'सभी प्रकारों पर एक स्थिति लागू करें।',
+                            'apply-to-all-weight' => 'सभी वेरिएंट्स पर एक वजन लागू करें।',
                             'edit-inventories'    => 'सूची संपादित करें',
                             'edit-names'          => 'नाम संपादित करें',
                             'edit-prices'         => 'मूल्य संपादित करें',

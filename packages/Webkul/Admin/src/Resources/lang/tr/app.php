@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'Adı tüm varyantlara uygula.',
                             'apply-to-all-sku'    => 'Fiyatı tüm SKU\'lara uygula.',
                             'apply-to-all-status' => 'Durumu tüm varyantlara uygula.',
+                            'apply-to-all-weight' => 'Tüm varyantlara ağırlık uygula.',
                             'edit-inventories'    => 'Envanterleri Düzenle',
                             'edit-names'          => 'İsimleri Düzenle',
                             'edit-prices'         => 'Fiyatları Düzenle',

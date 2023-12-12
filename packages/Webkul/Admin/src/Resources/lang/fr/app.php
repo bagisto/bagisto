@@ -685,6 +685,7 @@ return [
                             'apply-to-all-name'   => 'Appliquer un nom à toutes les variantes.',
                             'apply-to-all-sku'    => 'Appliquer un prix à toutes les références.',
                             'apply-to-all-status' => 'Appliquer un statut à toutes les variantes.',
+                            'apply-to-all-weight' => 'Appliquer un poids à toutes les variantes.',
                             'edit-inventories'    => 'Modifier les inventaires',
                             'edit-names'          => 'Modifier les noms',
                             'edit-prices'         => 'Modifier les prix',
