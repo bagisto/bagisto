@@ -18,7 +18,7 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800']) }}
             >
         </v-field>
@@ -34,7 +34,7 @@
             <input
                 type="{{ $type }}"
                 name="{{ $name }}"
-                :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:file:bg-gray-800 dark:file:dark:text-white dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800']) }}
             >
         </v-field>
@@ -49,7 +49,7 @@
         >
             <input
                 type="{{ $type }}"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                :class="[errors.length ? 'border border-red-500' : '']"
                 v-bind="field"
                 {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400']) }}
             >
@@ -66,7 +66,7 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800']) }}
             >
             </textarea>
@@ -93,7 +93,7 @@
                 <input
                     name="{{ $name }}"
                     v-bind="field"
-                    :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
                     {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800']) }}
                     autocomplete="off"
                 >
@@ -112,7 +112,7 @@
                 <input
                     name="{{ $name }}"
                     v-bind="field"
-                    :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
                     {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800']) }}
                     autocomplete="off"
                 >
@@ -129,7 +129,7 @@
             <select
                 name="{{ $name }}"
                 v-bind="field"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                :class="[errors.length ? 'border border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400']) }}
             >
                 {{ $slot }}
@@ -142,7 +142,8 @@
         <v-field
             as="select"
             name="{{ $name }}"
-            :class="[errors && errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            v-slot="{ errors }"
+            :class="[errors.length ? 'border border-red-500' : '']"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400']) }}
             multiple
         >
@@ -153,7 +154,7 @@
 
     @case('checkbox')
         <v-field
-            v-slot="{ field, errors }"
+            v-slot="{ field }"
             name="{{ $name }}"
             type="checkbox"
             class="hidden"
@@ -183,7 +184,7 @@
             type="radio"
             name="{{ $name }}"
             class="hidden"
-            v-slot="{ field, errors }"
+            v-slot="{ field }"
             {{ $attributes->only(['value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
@@ -209,7 +210,7 @@
                 type="checkbox"
                 name="{{ $name }}"
                 class="hidden"
-                v-slot="{ field, errors }"
+                v-slot="{ field }"
                 {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             >
                 <input
@@ -235,7 +236,7 @@
     @case('image')
         <x-admin::media.images
             name="{{ $name }}"
-            ::class="[errors && errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+            ::class="[errors && errors['{{ $name }}'] ? 'border !border-red-600 hover:border-red-600' : '']"
             {{ $attributes }}
         >
         </x-admin::media.images>

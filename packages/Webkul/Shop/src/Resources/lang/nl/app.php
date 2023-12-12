@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'Coupon toegepast',
-                'applied-coupon'  => 'Toegepaste coupon',
-                'apply'           => 'Coupon toepassen',
-                'apply-issue'     => 'Couponcode kan niet worden toegepast.',
-                'button-title'    => 'Toepassen',
-                'code'            => 'Couponcode',
-                'discount'        => 'Kortingsbon',
-                'enter-your-code' => 'Voer uw code in',
-                'remove'          => 'Coupon verwijderen',
-                'sub-total'       => 'Subtotaal',
-                'subtotal'        => 'Subtotaal',
-            ],
-
             'index' => [
                 'checkout' => 'Afrekenen',
                 'home'     => 'Home',

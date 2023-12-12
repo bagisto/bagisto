@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'कूपन लागू हो गया',
-                'applied-coupon'  => 'लागू किया गया कूपन',
-                'apply'           => 'कूपन लागू करें',
-                'apply-issue'     => 'कूपन कोड लागू नहीं किया जा सकता है।',
-                'button-title'    => 'लागू करें',
-                'code'            => 'कूपन कोड',
-                'discount'        => 'कूपन छूट',
-                'enter-your-code' => 'अपना कोड दर्ज करें',
-                'remove'          => 'कूपन हटाएं',
-                'sub-total'       => 'उप-कुल',
-                'subtotal'        => 'उप-कुल',
-            ],
-
             'index' => [
                 'checkout' => 'चेकआउट',
                 'home'     => 'होम',
