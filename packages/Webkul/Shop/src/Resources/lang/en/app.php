@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'Coupon Applied',
-                'applied-coupon'  => 'Applied Coupon',
-                'apply'           => 'Apply Coupon',
-                'apply-issue'     => 'Coupon code can\'t be applied.',
-                'button-title'    => 'Apply',
-                'code'            => 'Coupon Code',
-                'discount'        => 'Coupon Discount',
-                'enter-your-code' => 'Enter your code',
-                'remove'          => 'Remove Coupon',
-                'sub-total'       => 'Subtotal',
-                'subtotal'        => 'Subtotal',
-            ],
-
             'index' => [
                 'checkout' => 'Checkout',
                 'home'     => 'Home',

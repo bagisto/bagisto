@@ -108,7 +108,7 @@
                         </p>
                     </div>
 
-                    @include('shop::checkout.onepage.coupon')
+                    @include('shop::checkout.cart.coupon')
 
                     <div class="flex text-right justify-between">
                         <p class="text-[18px] font-semibold">

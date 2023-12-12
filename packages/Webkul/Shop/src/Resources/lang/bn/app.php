@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'কুপন প্রয়োগ হয়েছে',
-                'applied-coupon'  => 'প্রয়োগ কুপন',
-                'apply'           => 'কুপন প্রয়োগ করুন',
-                'apply-issue'     => 'কুপন কোড প্রয়োগ করা যায় না।',
-                'button-title'    => 'প্রয়োগ করুন',
-                'code'            => 'কুপন কোড',
-                'discount'        => 'কুপন ছাড়',
-                'enter-your-code' => 'আপনার কোড লিখুন',
-                'remove'          => 'কুপন সরান',
-                'sub-total'       => 'সাবটোটাল',
-                'subtotal'        => 'সাবটোটাল',
-            ],
-
             'index' => [
                 'checkout' => 'চেকআউট',
                 'home'     => 'হোম',

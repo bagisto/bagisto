@@ -742,20 +742,6 @@ return [
                 ],
             ],
 
-            'coupon' => [
-                'applied'         => 'කෝපනය සාර්ථකව අදිනය',
-                'applied-coupon'  => 'අදින කෝපනය',
-                'apply'           => 'කෝපනය කරන්න',
-                'apply-issue'     => 'කෝපන කේතය අදින නැත.',
-                'button-title'    => 'යොමුවන්',
-                'code'            => 'කෝපන කේතය',
-                'discount'        => 'කෝපන වටාන',
-                'enter-your-code' => 'කේතය ඇතුල් කරන්න',
-                'remove'          => 'කෝපනය ඉවත් කරන්න',
-                'sub-total'       => 'උපකරණය',
-                'subtotal'        => 'උපකරණය',
-            ],
-
             'index' => [
                 'checkout' => 'පරියේෂය',
                 'home'     => 'මුල් පිටවර',
