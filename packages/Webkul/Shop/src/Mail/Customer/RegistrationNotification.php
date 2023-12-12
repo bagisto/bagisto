@@ -26,8 +26,10 @@ class RegistrationNotification extends Mailable
      * @param  string  $notify
      * @return void
      */
-    public function __construct(public $customer, public $notify)
-    {
+    public function __construct(
+        public $customer,
+        public $notify
+    ) {
         $this->senderDetails = core()->getSenderEmailDetails();
         $this->adminDetails = core()->getAdminEmailDetails();
 
