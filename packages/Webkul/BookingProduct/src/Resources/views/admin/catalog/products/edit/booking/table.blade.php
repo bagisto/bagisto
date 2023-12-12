@@ -15,7 +15,7 @@
         >
             <div>
                 <!-- Charged Per -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')
                     </x-admin::form.control-group.label>
@@ -42,7 +42,7 @@
 
                 <!-- Guest Limit -->
                 <x-admin::form.control-group
-                    class="w-full mb-[10px]"
+                    class="w-full mb-2.5"
                     v-if="table_booking.price_type == 'table'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -65,7 +65,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Guest Capacity -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')
                     </x-admin::form.control-group.label>
@@ -86,7 +86,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Slot Duration -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
                     </x-admin::form.control-group.label>
@@ -107,7 +107,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Break Time -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
                     </x-admin::form.control-group.label>
@@ -128,7 +128,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Prevent Scheduling Before -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')
                     </x-admin::form.control-group.label>
@@ -149,7 +149,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Same slot all days -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
                     </x-admin::form.control-group.label>
@@ -183,10 +183,10 @@
                 </div>
 
                 <div class="section-content">
-                    <slot-list
+                    <v-slot-list
                         booking-type="table_slot"
                         :same-slot-for-all-days="table_booking.same_slot_all_days">
-                    </slot-list>
+                    </v-slot-list>
                 </div>
             </div>
         </x-admin::form>

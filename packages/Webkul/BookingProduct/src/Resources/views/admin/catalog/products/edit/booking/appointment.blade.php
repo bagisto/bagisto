@@ -16,7 +16,7 @@
         >
             <div>
                  <!-- Slot Duration -->
-                 <x-admin::form.control-group class="w-full mb-[10px]">
+                 <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
                     </x-admin::form.control-group.label>
@@ -37,7 +37,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Break Time -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
                     </x-admin::form.control-group.label>
@@ -58,7 +58,7 @@
                 </x-admin::form.control-group>
 
                  <!-- Same slot for all days -->
-                 <x-admin::form.control-group class="w-full mb-[10px]">
+                 <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
                     </x-admin::form.control-group.label>
@@ -85,19 +85,19 @@
                     </x-admin::form.control-group.error>
                 </x-admin::form.control-group>
 
-                 <!-- Slots Component -->
-                 <div class="flex gap-[20px] justify-between p-[16px]">
-                    <div class="flex flex-col gap-[8px]">
+                <!-- Slots Component -->
+                <div class="flex gap-5 justify-between p-4">
+                    <div class="flex flex-col gap-2">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
                         </p>
                     </div>
                 </div>
 
-                <slot-list
+                <v-slot-list
                     booking-type="appointment_slot"
                     :same-slot-all-days="appointment_booking.same_slot_all_days">
-                </slot-list>
+                </v-slot-list>
             </div>
         </x-admin::form>
     </script>

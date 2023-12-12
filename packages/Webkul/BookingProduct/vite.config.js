@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv } from "vite";
 import laravel from "laravel-vite-plugin";
-import vue from "@vitejs/plugin-vue";
 import path from "path";
 
 export default defineConfig(({ mode }) => {
@@ -17,12 +16,10 @@ export default defineConfig(({ mode }) => {
 
         server: {
             host: process.env.VITE_HOST || "localhost",
-            port: process.env.VITE_PORT || 5173,
+            port: process.env.VITE_PORT || 5174,
         },
 
         plugins: [
-            vue(),
-
             laravel({
                 hotFile: "../../../public/booking-default-vite.hot",
                 publicDirectory: "../../../public",

@@ -4,7 +4,7 @@
 
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.before', ['product' => $product]) !!}
 
-<div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+<div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
     <v-booking-information></v-booking-information>
 </div>
 
@@ -18,7 +18,7 @@
         >
             <div>
                 <!-- Booking Type -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.booking_type')
                     </x-admin::form.control-group.label>
@@ -53,7 +53,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Location -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.location')
                     </x-admin::form.control-group.label>
@@ -74,7 +74,7 @@
 
                 <!-- QTY -->
                 <x-admin::form.control-group
-                   class="w-full mb-[10px]"
+                   class="w-full mb-2.5"
                    v-if="booking.type == 'default' || booking.type == 'appointment' || booking.type == 'rental'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -98,7 +98,7 @@
 
                 <!-- Available Every Week -->
                 <x-admin::form.control-group
-                    class="w-full mb-[10px]"
+                    class="w-full mb-2.5"
                     v-if="booking.type != 'event' && booking.type != 'default'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -131,7 +131,7 @@
                 <div v-if="! parseInt(booking.available_every_week)">
                     <!-- Available From  -->
                     <x-admin::form.control-group
-                        class="w-full mb-[10px]"
+                        class="w-full mb-2.5"
                         v-if="booking.availableEveryWeekSwatch && booking.available_every_week == 0"
                     >
                         <x-admin::form.control-group.label class="required">
@@ -157,7 +157,7 @@
 
                     <!-- Available To -->
                     <x-admin::form.control-group
-                        class="w-full mb-[10px]"
+                        class="w-full mb-2.5"
                         v-if="(
                             booking.availableEveryWeekSwatch 
                             && booking.available_every_week == 0

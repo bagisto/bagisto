@@ -15,8 +15,9 @@
         app.component('v-time-picker', {
             template: '#v-time-picker-template',
 
-            mounted: function() {
+            mounted() {
                 let options = this.setOptions();
+
                 this.activate(options);
             },
 
@@ -39,7 +40,8 @@
 
                 activate(options) {
                     let element = this.$el.getElementsByTagName("input")[0];
-                    this.timepicker = flatpickr(element, options);
+
+                    this.timepicker = new Flatpickr(element, options);
                 }
             }
         });

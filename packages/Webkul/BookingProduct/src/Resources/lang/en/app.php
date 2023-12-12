@@ -98,6 +98,8 @@ return [
                                 'special-price'      => 'Special Price',
                                 'special-price-from' => 'Special Price From',
                                 'special-price-to'   => 'Special Price To',
+                                'valid-from'         => 'Valid From',
+                                'valid-until'        => 'Valid Until',
                             ],
 
                             'guest-limit'           => 'Guest Limit Per Table',

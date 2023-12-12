@@ -15,7 +15,7 @@
         >
             <div>
                 <!-- Renting Type -->
-                <x-admin::form.control-group class="w-full mb-[10px]">
+                <x-admin::form.control-group class="w-full mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')
                     </x-admin::form.control-group.label>
@@ -42,7 +42,7 @@
 
                 <!-- Daily Price -->
                 <x-admin::form.control-group
-                    class="w-full mb-[10px]"
+                    class="w-full mb-2.5"
                     v-if="rental_booking.renting_type == 'daily' || rental_booking.renting_type == 'daily_hourly'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -66,7 +66,7 @@
 
                 <!-- Hourly Price -->
                 <x-admin::form.control-group
-                    class="w-full mb-[10px]"
+                    class="w-full mb-2.5"
                     v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -90,7 +90,7 @@
 
                 <div v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'">
                     <!-- Same Slot For All -->
-                    <x-admin::form.control-group class="w-full mb-[10px]" >
+                    <x-admin::form.control-group class="w-full mb-2.5" >
                         <x-admin::form.control-group.label class="required">
                             @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
                         </x-admin::form.control-group.label>

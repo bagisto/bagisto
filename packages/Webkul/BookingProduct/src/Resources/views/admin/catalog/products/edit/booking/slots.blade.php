@@ -1,117 +1,87 @@
-<script type="text/x-template" id="slot-list-template">
-    <div>
-        <div class="slot-list table" v-if="parseInt(sameSlotAllDays)">
-            <table>
-                <thead>
-                    <tr>
-                        <th>{{ __('bookingproduct::app.admin.catalog.products.from') }}</th>
-                        <th>{{ __('bookingproduct::app.admin.catalog.products.to') }}</th>
-                        <th class="actions"></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <slot-item
-                        v-for="(slot, index) in slots['same_for_week']"
-                        :key="index"
-                        :slot-item="slot"
-                        :control-name="'booking[slots][' + index + ']'"
-                        @onRemoveSlot="removeSlot($event)">
-                    </slot-item>
-                </tbody>
-            </table>
-
-            <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px" @click="addSlot()">
-                {{ __('bookingproduct::app.admin.catalog.products.add-slot') }}
-            </button>
+<script type="text/x-template" id="v-slot-list-template">
+    <div class="slot-list table" v-if="parseInt(sameSlotAllDays)">
+        <div class="flex gap-4 px-4 py-2.5 border-b dark:border-gray-800">
+            <v-slot-item
+                {{-- v-for="(slot, index) in slots['same_for_week']" --}}
+                {{-- :key="index" --}}
+                {{-- :slot-item="slot" --}}
+                {{-- :control-name="'booking[slots][' + index + ']'" --}}
+                {{-- @onRemoveSlot="removeSlot($event)" --}}
+            >
+            </v-slot-item>
         </div>
 
         <div class="slot-list table" v-else>
-            <accordian
-                v-for="(day, dayIndex) in week_days"
-                :key="dayIndex"
-                :title="day"
-                :active="false">
-
-                <div slot="header">
-                    <i class="icon expand-icon left"></i>
-                    <h1>@{{ day }}</h1>
-                </div>
-
-                <div slot="body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{{ __('bookingproduct::app.admin.catalog.products.from') }}</th>
-                                <th>{{ __('bookingproduct::app.admin.catalog.products.to') }}</th>
-                                <th class="actions"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody v-if="slots['different_for_week'][dayIndex] && slots['different_for_week'][dayIndex].length">
-                            <slot-item
-                                v-for="(slot, slotIndex) in slots['different_for_week'][dayIndex]"
-                                :key="dayIndex + '_' + slotIndex"
-                                :slot-item="slot"
-                                :control-name="'booking[slots][' + dayIndex + '][' + slotIndex + ']'"
-                                @onRemoveSlot="removeSlot($event, dayIndex)"
-                            ></slot-item>
-                        </tbody>
-                    </table>
-
-                    <button type="button" class="btn btn-lg btn-primary" style="margin-top: 20px" @click="addSlot(dayIndex)">
-                        {{ __('bookingproduct::app.admin.catalog.products.add-slot') }}
-                    </button>
-                </div>
-            </accordian>
+            <v-slot-item
+                v-if="slots['different_for_week'][dayIndex] && slots['different_for_week'][dayIndex].length"
+                {{-- v-for="(slot, slotIndex) in slots['different_for_week'][dayIndex]" --}}
+                {{-- :key="dayIndex + '_' + slotIndex" --}}
+                {{-- :slot-item="slot" --}}
+                {{-- :control-name="'booking[slots][' + dayIndex + '][' + slotIndex + ']'" --}}
+                {{-- @onRemoveSlot="removeSlot($event, dayIndex)" --}}
+            ></v-slot-item>
         </div>
     </div>
 </script>
 
-<script type="text/x-template" id="slot-item-template">
-    <tr>
-        <td>
-            <div class="control-group date" :class="[errors.has(controlName + '[from]') ? 'has-error' : '']">
-            
-                <time-component>
-                    <input type="text" v-validate="'required'" :name="controlName + '[from]'" v-model="slotItem.from" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.from') }}&quot;">
-                </time-component>
+<script type="text/x-template" id="v-slot-item-template">
+    <div>
+        <!-- From Day -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')
+            </x-admin::form.control-group.label>
 
-                <span class="control-error" v-if="errors.has(controlName + '[from]')">
-                    @{{ errors.first(controlName + '[from]') }}
-                </span>
-            </div>
-        </td>
+            <x-admin::form.control-group.control
+                type="select"
+                name="from_day"
+                rules="required"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-all-days.title')"
+            >
+                <option
+                    v-for="(day, index) in days"
+                    :value="index"
+                    v-text="day"
+                >
+                </option>
+            </x-admin::form.control-group.control>
 
-        <td>
-            <div class="control-group date" :class="[errors.has(controlName + '[to]') ? 'has-error' : '']">
-                
-                <time-component>
-                    <input type="text" v-validate="{required: true, time_min: slotItem.from }" :name="controlName + '[to]'" v-model="slotItem.to" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.to') }}&quot;">
-                </time-component>
+            <x-admin::form.control-group.error 
+                control-name="from_day"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                <span class="control-error" v-if="errors.has(controlName + '[to]')">
-                    @{{ errors.first(controlName + '[to]') }}
-                </span>
-            </div>
-        </td>
+        <!-- From -->
+        <x-booking::form.control-group class="w-full mb-2.5">
+            <x-booking::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
+            </x-booking::form.control-group.label>
 
-        <td>
-            <i class="icon remove-icon" @click="removeSlot()"></i>
-        </td>
-    </tr>
+            <x-booking::form.control-group.control
+                type="time"
+                name="from"
+                rules="required"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+            >
+            </x-booking::form.control-group.control>
+
+            <x-booking::form.control-group.error 
+                control-name="from"
+            >
+            </x-booking::form.control-group.error>
+        </x-booking::form.control-group>
+    </div>
 </script>
 
-<script>
-    Vue.component('slot-list', {
+<script typr="module">
+    app.component('v-slot-list', {
 
-        template: '#slot-list-template',
+        template: '#v-slot-list-template',
 
         props: ['bookingType', 'sameSlotAllDays'],
 
-        inject: ['$validator'],
-
-        data: function() {
+        data() {
             return {
                 slots: {
                     'same_for_week': [],
@@ -120,18 +90,18 @@
                 },
 
                 week_days: [
-                    "{{ __('bookingproduct::app.admin.catalog.products.sunday') }}",
-                    "{{ __('bookingproduct::app.admin.catalog.products.monday') }}",
-                    "{{ __('bookingproduct::app.admin.catalog.products.tuesday') }}",
-                    "{{ __('bookingproduct::app.admin.catalog.products.wednesday') }}",
-                    "{{ __('bookingproduct::app.admin.catalog.products.thursday') }}",
-                    "{{ __('bookingproduct::app.admin.catalog.products.friday') }}",
-                    "{{ __('bookingproduct::app.admin.catalog.products.saturday') }}"
+                    "@lang('bookingproduct::app.admin.catalog.products.sunday')",
+                    "@lang('bookingproduct::app.admin.catalog.products.monday')",
+                    "@lang('bookingproduct::app.admin.catalog.products.tuesday')",
+                    "@lang('bookingproduct::app.admin.catalog.products.wednesday')",
+                    "@lang('bookingproduct::app.admin.catalog.products.thursday')",
+                    "@lang('bookingproduct::app.admin.catalog.products.friday')",
+                    "@lang('bookingproduct::app.admin.catalog.products.saturday')"
                 ]
             }
         },
 
-        created: function() {
+        created() {
             if (! bookingProduct || ! bookingProduct[this.bookingType].slots || ! bookingProduct[this.bookingType].slots) {
                 return;
             }
@@ -144,31 +114,7 @@
         },
 
         methods: {
-            addSlot: function (dayIndex = null) {
-                if (dayIndex !== null) {
-                    if (this.slots['different_for_week'][dayIndex] == undefined) {
-                        this.slots['different_for_week'][dayIndex] = [];
-                    }
-
-                    var slot = {
-                        'from': '',
-                        'to': ''
-                    };
-
-                    this.slots['different_for_week'][dayIndex].push(slot)
-
-                    Vue.set(this.slots['different_for_week'], dayIndex, this.slots['different_for_week'][dayIndex])
-                } else {
-                    var slot = {
-                        'from': '',
-                        'to': ''
-                    };
-
-                    this.slots['same_for_week'].push(slot);
-                }
-            },
-
-            removeSlot: function(slot, dayIndex = null) {
+            removeSlot(slot, dayIndex = null) {
                 if (dayIndex != null) {
                     let index = this.slots['different_for_week'][dayIndex].indexOf(slot)
 
@@ -182,16 +128,14 @@
         }
     });
 
-    Vue.component('slot-item', {
+    app.component('v-slot-item', {
 
-        template: '#slot-item-template',
+        template: '#v-slot-item-template',
 
         props: ['slotItem', 'controlName'],
 
-        inject: ['$validator'],
-
         methods: {
-            removeSlot: function() {
+            removeSlot() {
                 this.$emit('onRemoveSlot', this.slotItem)
             },
         }
