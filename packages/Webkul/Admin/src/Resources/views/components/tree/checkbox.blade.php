@@ -1,5 +1,4 @@
 @pushOnce('scripts')
-    <!-- v-tree-checkbox template-->
     <script type="text/x-template" id="v-tree-checkbox-template">
         <label
             :for="id"
@@ -7,15 +6,15 @@
         >
             <input
                 type="checkbox"
-                :name="[nameField + '[]']"
-                :value="modelValue"
+                :name="[name + '[]']"
+                :value="value"
                 :id="id"
                 class="hidden peer"
-                @change="inputChanged()"
                 :checked="isActive"
+                @change="inputChanged()"
             >
 
-            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 ">
+            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600">
             </span>
 
             <div
@@ -26,89 +25,30 @@
         </label>
     </script>
 
-    <!-- v-tree-checkbox component -->
     <script type="module">
         app.component('v-tree-checkbox', {
             template: '#v-tree-checkbox-template',
 
             name: 'v-tree-checkbox',
 
-            props: ['id', 'label', 'nameField', 'modelValue', 'inputValue', 'value'],
+            props: ['id', 'label', 'name', 'value'],
 
             computed: {
-                isMultiple () {
-                    return Array.isArray(this.internalValue);
+                isActive() {
+                    return this.$parent.has(this.value);
                 },
-
-                isActive () {
-                    let value = this.value;
-                    let input = this.internalValue;
-
-                    if (this.isMultiple) {
-                        return input.some(item => this.valueComparator(item, value));
-                    }
-
-                    return value ? this.valueComparator(value, input) : Boolean(input);
-                },
-
-                internalValue: {
-                    get () {
-                        return this.lazyValue;
-                    },
-
-                    set (val) {
-                        this.lazyValue = val;
-                    }
-                }
-            },
-
-            data: vm => ({
-                lazyValue: vm.inputValue,
-            }),
-
-            watch: {
-                inputValue (val) {
-                    this.internalValue = val;
-                }
             },
 
             methods: {
-                inputChanged () {
-                    let value = this.value;
-                    let input = this.internalValue;
-
-                    if (this.isMultiple) {
-                        let length = input.length;
-
-                        input = input.filter(item => !this.valueComparator(item, value));
-
-                        if (input.length === length) {
-                            input.push(value);
-                        }
-                    } else {
-                        input = !input;
-                    }
-
-                    this.$emit('input-change', input);
+                inputChanged() {
+                    this.$emit('change-input', {
+                        id: this.id,
+                        label: this.label,
+                        name: this.name,
+                        value: this.value,
+                    });
                 },
-
-                valueComparator (a, b) {
-                    if (a === b) 
-                        return true;
-
-                    if (a !== Object(a) || b !== Object(b)) {
-                        return false;
-                    }
-
-                    let props = Object.keys(a);
-
-                    if (props.length !== Object.keys(b).length) {
-                        return false;
-                    }
-
-                    return props.every(p => this.valueComparator(a[p], b[p]));
-                }
-            }
+            },
         });
     </script>
 @endPushOnce

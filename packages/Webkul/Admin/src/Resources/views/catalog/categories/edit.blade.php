@@ -58,7 +58,7 @@
                             <span class="icon-language text-[24px] "></span>
 
                             {{ $currentLocale->name }}
-                            
+
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
                             <span class="icon-sort-down text-[24px]"></span>
@@ -137,10 +137,10 @@
                                 <x-admin::tree.view
                                     input-type="radio"
                                     name-field="parent_id"
-                                    :value="json_encode($category->parent_id)"
-                                    :value-field="json_encode($category->parent_id)"
-                                    :model-value="json_encode($categories)"
+                                    value-field="id"
+                                    id-field="id"
                                     :items="json_encode($categories)"
+                                    :value="json_encode($category->parent_id)"
                                     :fallback-locale="config('app.fallback_locale')"
                                 >
                                 </x-admin::tree.view>
@@ -165,7 +165,7 @@
                             <x-admin::form.control-group.label ::class="{ 'required' : isDescriptionRequired}">
                                 @lang('admin::app.catalog.categories.edit.description')
                             </x-admin::form.control-group.label>
-        
+
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 name="{{ $currentLocale->code }}[description]"
@@ -178,7 +178,7 @@
                                 :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
                             >
                             </x-admin::form.control-group.control>
-        
+
                             <x-admin::form.control-group.error
                                 control-name="description"
                             >
@@ -233,7 +233,7 @@
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
-                    
+
                     <!-- SEO Title & Description Blade Componnet -->
                     <x-admin::seo/>
 
@@ -370,7 +370,7 @@
                             </x-admin::form.control-group.label>
 
                             @php $selectedValue = old('display_mode') ?? $category->display_mode @endphp
-                            
+
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="display_mode"
@@ -381,7 +381,7 @@
                                 :label="trans('admin::app.catalog.categories.edit.display-mode')"
                             >
                                 <option value="products_and_description" {{ $selectedValue == 'products_and_description' ? 'selected' : '' }}>
-                                    @lang('admin::app.catalog.categories.edit.products-and-description') 
+                                    @lang('admin::app.catalog.categories.edit.products-and-description')
                                 </option>
 
                                 <option value="products_only" {{ $selectedValue == 'products_only' ? 'selected' : '' }}>

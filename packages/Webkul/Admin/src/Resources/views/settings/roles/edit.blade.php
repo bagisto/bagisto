@@ -4,7 +4,7 @@
     <x-slot:title>
         @lang('admin::app.settings.roles.edit.title')
     </x-slot:title>
-    
+
     {!! view_render_event('bagisto.admin.settings.roles.edit.before') !!}
 
     <!-- Edit Role for  -->
@@ -15,8 +15,8 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-edit-user-role-template">
             <div>
-                <x-admin::form 
-                    method="PUT" 
+                <x-admin::form
+                    method="PUT"
                     :action="route('admin.settings.roles.update', $role->id)"
                 >
 
@@ -37,8 +37,8 @@
                         </a>
 
                         <!-- Save Button -->
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                         >
                             @lang('admin::app.settings.roles.edit.save-btn')
@@ -52,7 +52,7 @@
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
 
                         {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.before') !!}
-    
+
                         <!-- Access Control Input Fields -->
                         <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
@@ -66,7 +66,7 @@
                                 </x-admin::form.control-group.label>
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    name="permission_type" 
+                                    name="permission_type"
                                     id="permission_type"
                                     :label="trans('admin::app.settings.roles.edit.permissions')"
                                     :placeholder="trans('admin::app.settings.roles.edit.permissions')"
@@ -81,17 +81,18 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                            
-                            <!-- Tree structure -->
-                            <div 
+
+                            <!-- Tree Structure -->
+                            <div
                                 class="mb-[10px]"
                                 v-if="permission_type == 'custom'"
                             >
                                 <x-admin::tree.view
+                                    input-type="checkbox"
                                     value-field="key"
                                     id-field="key"
                                     :items="json_encode($acl->items)"
-                                    :value="json_encode($role->permissions)" 
+                                    :value="json_encode($role->permissions)"
                                     :fallback-locale="config('app.fallback_locale')"
                                 >
                                 </x-admin::tree.view>
@@ -115,7 +116,7 @@
                                     </p>
                                 </div>
                             </x-slot:header>
-                    
+
                             <x-slot:content>
                                 <!-- Name -->
                                 <x-admin::form.control-group class="mb-[10px]">

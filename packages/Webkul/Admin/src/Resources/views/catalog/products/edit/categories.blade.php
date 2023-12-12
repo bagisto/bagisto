@@ -33,12 +33,12 @@
             <template v-else>
                 <x-admin::tree.view
                     input-type="checkbox"
+                    selection-type="individual"
                     name-field="categories"
                     id-field="id"
                     value-field="id"
                     ::items="categories"
                     :value="json_encode($product->categories->pluck('id'))"
-                    behavior="no"
                     :fallback-locale="config('app.fallback_locale')"
                 >
                 </x-admin::tree.view>
