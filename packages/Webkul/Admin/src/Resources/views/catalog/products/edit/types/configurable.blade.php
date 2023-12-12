@@ -404,7 +404,7 @@
                                             <div class="flex gap-[10px] items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
-                                                        @lang('Apply a name to all variants.')
+                                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-name')
                                                     </x-admin::form.control-group.label>
 
                                                     <div class="relative">
@@ -431,7 +431,7 @@
                                             <div class="flex gap-[10px] items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
-                                                        @lang('Apply a status to all variants.')
+                                                        @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-status')
                                                     </x-admin::form.control-group.label>
 
                                                     <div class="relative">
@@ -439,10 +439,10 @@
                                                             type="select"
                                                             name="status"
                                                             ::rules="{ required: true }"
-                                                            :label="trans('Status')"
+                                                            :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.status')"
                                                         >
-                                                            <option value="1">@lang('Enable')</option>
-                                                            <option value="0">@lang('Disabled')</option>g
+                                                            <option value="1">@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')</option>
+                                                            <option value="0">@lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')</option>g
                                                         </x-admin::form.control-group.control>
                                                     </div>
                                                 </x-admin::form.control-group>
@@ -516,7 +516,7 @@
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
-                                                label="@lang('Weight')"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
                                             >
                                             </v-field>
                                         </div>
@@ -546,8 +546,8 @@
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('Status')"
                                             >
-                                                <option value="1">@lang('Enable')</option>
-                                                <option value="0">@lang('Disabled')</option>
+                                                <option value="1">@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')</option>
+                                                <option value="0">@lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')</option>
                                             </v-field>
                                         </div>
 
@@ -574,7 +574,7 @@
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
-                                                label="@lang('Variants Name')"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-name')"
                                             >
                                             </v-field>
                                         </div>
@@ -639,7 +639,7 @@
                                                 class="flex w-full min-h-[39px] py-[6px] ltr:pl-[10px] rtl:pr-[10px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
-                                                label="@lang('Variants Sku')"
+                                                label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-sku')"
                                                 v-slugify
                                             >
                                             </v-field>
@@ -1118,12 +1118,12 @@
                     updateTypes: {
                         editName: {
                             key: 'editName',
-                            title: "@lang('Edit Name')",
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-names')"
                         },
 
                         editSku: {
                             key: 'editSku',
-                            title: "@lang('Edit SKU')",
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-sku')"
                         },
 
                         editPrices: {
@@ -1138,12 +1138,12 @@
 
                         editWeight: {
                             key: 'editWeight',
-                            title: "@lang('Edit Weight')"
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-weight')",
                         },
 
                         editStatus: {
                             key: 'editStatus',
-                            title: "@lang('Edit Status')"
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-status')",
                         },
 
                         addImages: {
@@ -1260,6 +1260,8 @@
                     this[this.selectedType](params);
 
                     this.$refs.updateVariantsDrawer.close();
+
+                    this.selectedVariants.forEach((variant) => variant.selected = false);
                 },
 
                 editPrices(params) {
