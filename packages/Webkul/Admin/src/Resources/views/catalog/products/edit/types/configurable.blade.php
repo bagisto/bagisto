@@ -603,10 +603,13 @@
                                                     @{{ inventorySource.name }}
                                                 </x-admin::form.control-group.label>
 
+                                                @{{ variant.inventories }}
+                                                @{{ inventorySource.id }}
+
                                                 <v-field
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
-                                                    v-model="variant.inventories[inventorySource.id]"
+                                                    {{-- v-model="variant.inventories[inventorySource.id]" --}}
                                                     class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"
@@ -1272,7 +1275,10 @@
 
                 editInventories(params) {
                     this.selectedVariants.forEach(function (variant) {
-                        variant.inventories = params?.inventories ?? params.variants[variant.id];
+                        variant.inventories = {
+                            ...variant?.inventories,
+                            ...(params?.inventories ?? params.variants[variant.id]),
+                        };
                     });
                 },
 
