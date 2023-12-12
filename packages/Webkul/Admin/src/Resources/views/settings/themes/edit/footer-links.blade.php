@@ -272,104 +272,104 @@
             >
                 <form @submit="handleSubmit($event, updateOrCreate)">
                     <x-admin::modal ref="addLinksModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.footer-link-form-title')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="key"
+                            >
+                            </x-admin::form.control-group.control>
+                            
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.column')
+                                </x-admin::form.control-group.label>
+
                                 <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="key"
+                                    type="select"
+                                    name="column"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.column')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.column')"
+                                    ::disabled="isUpdating"
+                                >
+                                    <option value="column_1">1</option>
+                                    <option value="column_2">2</option>
+                                    <option value="column_3">3</option>
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="column"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.footer-title')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="title"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.footer-title')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
                                 >
                                 </x-admin::form.control-group.control>
-                                
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.column')
-                                    </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="column"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.column')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.column')"
-                                        ::disabled="isUpdating"
-                                    >
-                                        <option value="column_1">1</option>
-                                        <option value="column_2">2</option>
-                                        <option value="column_3">3</option>
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.error
+                                    control-name="title"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="column"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.url')
+                                </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.footer-title')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="url"
+                                    rules="required|url"
+                                    :label="trans('admin::app.settings.themes.edit.url')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.url')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="title"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.footer-title')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.error
+                                    control-name="url"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="title"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.sort-order')
+                                </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.url')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="sort_order"
+                                    rules="required|numeric"
+                                    :label="trans('admin::app.settings.themes.edit.sort-order')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="url"
-                                        rules="required|url"
-                                        :label="trans('admin::app.settings.themes.edit.url')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.url')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="url"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.sort-order')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="sort_order"
-                                        rules="required|numeric"
-                                        :label="trans('admin::app.settings.themes.edit.sort-order')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </div>
+                                <x-admin::form.control-group.error
+                                    control-name="sort_order"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </x-slot:content>
 
                         <x-slot:footer>

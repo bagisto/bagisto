@@ -296,56 +296,56 @@
             >
                 <form @submit="handleSubmit($event, addFilter)">
                     <x-admin::modal ref="categoryFilterModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.create-filter')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <!-- Key -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.key-input')
-                                    </x-admin::form.control-group.label>
+                            <!-- Key -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.key-input')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="key"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.key-input')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.key-input')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="key"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.key-input')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.key-input')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="key"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="key"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <!-- Value -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.value-input')
-                                    </x-admin::form.control-group.label>
+                            <!-- Value -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.value-input')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="value"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.value-input')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.value-input')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="value"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.value-input')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="value"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </div>
+                                <x-admin::form.control-group.error
+                                    control-name="value"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </x-slot:content>
 
                         <x-slot:footer>

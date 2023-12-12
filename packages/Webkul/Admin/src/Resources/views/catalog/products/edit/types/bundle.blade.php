@@ -254,6 +254,7 @@
                 <draggable
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
+                    handle=".icon-drag"
                     :list="option.bundle_option_products"
                     item-key="id"
                 >
@@ -262,7 +263,9 @@
                             <!-- Information -->
                             <div class="flex gap-[10px]">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
+                                <div>
+                                    <i class="icon-drag text-[20px] dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
+                                </div>
 
                                 <!-- Is Default Option -->
                                 <div>

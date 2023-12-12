@@ -23,7 +23,7 @@
                 >
 
                     <img 
-                        :class="`min-w-[100px] max-h-[100px] rounded-[12px] border transparent cursor-pointer ${activeIndex === index ? 'border border-navyBlue' : 'border-white'}`"
+                        :class="`min-w-[100px] max-h-[100px] rounded-[12px] border transparent cursor-pointer ${activeIndex === index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(image, index) in media.images"
                         :src="image.small_image_url"
                         alt="{{ $product->name }}"
@@ -168,6 +168,8 @@
                 },
 
                 change(file, index) {
+                    this.isMediaLoading = true;
+
                     if (file.type == 'videos') {
                         this.baseFile.type = 'video';
                         this.baseFile.path = file.video_url;

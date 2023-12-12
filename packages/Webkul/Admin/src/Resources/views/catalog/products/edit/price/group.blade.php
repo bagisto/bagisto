@@ -98,8 +98,8 @@
                 <form @submit="handleSubmit($event, create)">
                     <!-- Customer Create Modal -->
                     <x-admin::modal ref="groupPriceCreateModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Modal Header -->
                             <p
                                 class="text-[18px] text-gray-800 dark:text-white font-bold"
                                 v-if="! selectedPrice.id"
@@ -115,97 +115,95 @@
                             </p>    
                         </x-slot:header>
         
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
+                            {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.catalog.products.edit.price.group.create.customer-group')
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.catalog.products.edit.price.group.create.customer-group')
+                                </x-admin::form.control-group.label>
+    
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="customer_group_id"
+                                    v-model="selectedPrice.customer_group_id"
+                                    :label="trans('admin::app.catalog.products.edit.price.group.create.customer-group')"
+                                >
+                                    <option value="">
+                                        @lang('admin::app.catalog.products.edit.price.group.create.all-groups')
+                                    </option>
+
+                                    <option
+                                        v-for="group in groups"
+                                        :value="group.id"
+                                    >
+                                        @{{ group.name }}
+                                    </option>
+                                </x-admin::form.control-group.control>
+                            </x-admin::form.control-group>
+
+                            <div class="flex gap-[16px]">
+                                <x-admin::form.control-group class="flex-1">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.products.edit.price.group.create.qty')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="qty"
+                                        v-model="selectedPrice.qty"
+                                        rules="required|numeric|min_value:1"
+                                        :label="trans('admin::app.catalog.products.edit.price.group.create.qty')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error control-name="qty"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="flex-1">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.products.edit.price.group.create.price-type')
                                     </x-admin::form.control-group.label>
         
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="customer_group_id"
-                                        v-model="selectedPrice.customer_group_id"
-                                        :label="trans('admin::app.catalog.products.edit.price.group.create.customer-group')"
+                                        name="value_type"
+                                        v-model="selectedPrice.value_type"
+                                        rules="required"
+                                        :label="trans('admin::app.catalog.products.edit.price.group.create.price-type')"
                                     >
-                                        <option value="">
-                                            @lang('admin::app.catalog.products.edit.price.group.create.all-groups')
+                                        <option value="fixed">
+                                            @lang('admin::app.catalog.products.edit.price.group.create.fixed')
                                         </option>
 
-                                        <option
-                                            v-for="group in groups"
-                                            :value="group.id"
-                                        >
-                                            @{{ group.name }}
+                                        <option value="discount">
+                                            @lang('admin::app.catalog.products.edit.price.group.create.discount')
                                         </option>
                                     </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error control-name="value_type"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px]">
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.price.group.create.qty')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="qty"
-                                            v-model="selectedPrice.qty"
-                                            rules="required|numeric|min_value:1"
-                                            :label="trans('admin::app.catalog.products.edit.price.group.create.qty')"
-                                        >
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="qty"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.price.group.create.price-type')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="value_type"
-                                            v-model="selectedPrice.value_type"
-                                            rules="required"
-                                            :label="trans('admin::app.catalog.products.edit.price.group.create.price-type')"
-                                        >
-                                            <option value="fixed">
-                                                @lang('admin::app.catalog.products.edit.price.group.create.fixed')
-                                            </option>
-
-                                            <option value="discount">
-                                                @lang('admin::app.catalog.products.edit.price.group.create.discount')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="value_type"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.price.group.create.price')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="value"
-                                            v-model="selectedPrice.value"
-                                            ::rules="{required: true, decimal: true, min_value: 0, ...(selectedPrice.value_type === 'discount' ? {max_value: 100} : {})}"
-                                            :label="trans('admin::app.catalog.products.edit.price.group.create.price')"
-                                        >
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="value"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-
-                                {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
+                                <x-admin::form.control-group class="flex-1">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.products.edit.price.group.create.price')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="value"
+                                        v-model="selectedPrice.value"
+                                        ::rules="{required: true, decimal: true, min_value: 0, ...(selectedPrice.value_type === 'discount' ? {max_value: 100} : {})}"
+                                        :label="trans('admin::app.catalog.products.edit.price.group.create.price')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error control-name="value"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
                         </x-slot:content>
         
                         <x-slot:footer>

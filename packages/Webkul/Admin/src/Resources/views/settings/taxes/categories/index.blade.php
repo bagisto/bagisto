@@ -115,6 +115,7 @@
                     ref="taxCategoryCreateForm"
                 >
                     <x-admin::modal ref="taxCategory">
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 dark:text-white font-bold">
                                 <span v-if="selectedTaxCategories">
@@ -127,127 +128,126 @@
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <!-- Code -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.categories.index.create.code')
-                                    </x-admin::form.control-group.label>
+                            <!-- Code -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.taxes.categories.index.create.code')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="id"
-                                        v-model="selectedTaxRates.id"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="code"
-                                        id="code"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.taxes.categories.index.create.code')"
-                                        :placeholder="trans('admin::app.settings.taxes.categories.index.create.code')"
-                                        v-model="selectedTaxRates.code"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.categories.index.create.name')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.taxes.categories.index.create.name')"
-                                        :placeholder="trans('admin::app.settings.taxes.categories.index.create.name')"
-                                        v-model="selectedTaxRates.name"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <!-- Description -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.categories.index.create.description')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="textarea"
-                                        name="description"
-                                        id="description"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.taxes.categories.index.create.description')"
-                                        :placeholder="trans('admin::app.settings.taxes.categories.index.create.description')"
-                                        v-model="selectedTaxRates.description"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="description"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <!-- Select Tax Rates -->
-                                <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
-                                    @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
-                                </p>
-
-                                <x-admin::form.control-group
-                                    class="flex gap-[10px] !mb-0 p-[6px]"
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                    v-model="selectedTaxRates.id"
                                 >
-                                    <v-field
-                                        name="taxrates[]"
-                                        rules="required"
-                                        label="@lang('admin::app.settings.taxes.categories.index.create.tax-rates')"
-                                        v-model="selectedTaxRates.tax_rates"
-                                        multiple
-                                    >
-                                        <select
-                                            name="taxrates[]"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
-                                            :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                            multiple
-                                            v-model="selectedTaxRates.tax_rates"
-                                        >
-                                            <option
-                                                v-for="taxRate in taxRates"
-                                                :value="taxRate.id"
-                                                :text="taxRate.identifier"
-                                            >
-                                            </option>
-                                        </select>
-                                    </v-field>
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
-                                        class="!text-[14px] !text-gray-600 cursor-pointer"
-                                    >
-                                    </x-admin::form.control-group.label>
-
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="code"
+                                    id="code"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.taxes.categories.index.create.code')"
+                                    :placeholder="trans('admin::app.settings.taxes.categories.index.create.code')"
+                                    v-model="selectedTaxRates.code"
+                                >
+                                </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="taxrates[]"
+                                    control-name="code"
                                 >
                                 </x-admin::form.control-group.error>
-                            </div>
+                            </x-admin::form.control-group>
+
+                            <!-- Name -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.taxes.categories.index.create.name')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.taxes.categories.index.create.name')"
+                                    :placeholder="trans('admin::app.settings.taxes.categories.index.create.name')"
+                                    v-model="selectedTaxRates.name"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Description -->
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.taxes.categories.index.create.description')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="description"
+                                    id="description"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.taxes.categories.index.create.description')"
+                                    :placeholder="trans('admin::app.settings.taxes.categories.index.create.description')"
+                                    v-model="selectedTaxRates.description"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="description"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <!-- Select Tax Rates -->
+                            <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
+                                @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
+                            </p>
+
+                            <x-admin::form.control-group
+                                class="flex gap-[10px] !mb-0 p-[6px]"
+                            >
+                                <v-field
+                                    name="taxrates[]"
+                                    rules="required"
+                                    label="@lang('admin::app.settings.taxes.categories.index.create.tax-rates')"
+                                    v-model="selectedTaxRates.tax_rates"
+                                    multiple
+                                >
+                                    <select
+                                        name="taxrates[]"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                        multiple
+                                        v-model="selectedTaxRates.tax_rates"
+                                    >
+                                        <option
+                                            v-for="taxRate in taxRates"
+                                            :value="taxRate.id"
+                                            :text="taxRate.identifier"
+                                        >
+                                        </option>
+                                    </select>
+                                </v-field>
+
+                                <x-admin::form.control-group.label
+                                    class="!text-[14px] !text-gray-600 cursor-pointer"
+                                >
+                                </x-admin::form.control-group.label>
+
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group.error
+                                control-name="taxrates[]"
+                            >
+                            </x-admin::form.control-group.error>
                         </x-slot:content>
 
                         <x-slot:footer>

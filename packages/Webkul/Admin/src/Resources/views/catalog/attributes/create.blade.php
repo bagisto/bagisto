@@ -230,6 +230,7 @@
                                         <draggable
                                             tag="tbody"
                                             ghost-class="draggable-ghost"
+                                            handle=".icon-drag"
                                             v-bind="{animation: 200}"
                                             :list="options"
                                             item-key="id"
@@ -238,7 +239,7 @@
                                                 <x-admin::table.thead.tr class="hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0">
-                                                        <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
+                                                        <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
                                                             type="hidden"
@@ -788,7 +789,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-[10px]">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"

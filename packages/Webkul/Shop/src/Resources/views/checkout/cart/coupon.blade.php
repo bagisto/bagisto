@@ -13,83 +13,82 @@
             </p>
 
             <p class="text-[16px] font-medium max-sm:text-[14px]">
-                <!-- Apply coupon modal -->
-                <x-shop::modal ref="couponModel">
-                    <!-- Modal Toggler -->
-                    <x-slot:toggle>
-                        <span 
-                            class="text-[#0A49A7] cursor-pointer"
-                            role="button"
-                            tabindex="0"
-                            v-if="! isCouponApplied"
-                        >
-                            @lang('shop::app.checkout.cart.coupon.apply')
-                        </span>
-                    </x-slot:toggle>
+                <!-- Apply Coupon Form -->
+                <x-shop::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <!-- Apply coupon form -->
+                    <form @submit="handleSubmit($event, applyCoupon)">
+                        <!-- Apply coupon modal -->
+                        <x-shop::modal ref="couponModel">
+                            <!-- Modal Toggler -->
+                            <x-slot:toggle>
+                                <span 
+                                    class="text-[#0A49A7] cursor-pointer"
+                                    role="button"
+                                    tabindex="0"
+                                    v-if="! isCouponApplied"
+                                >
+                                    @lang('shop::app.checkout.cart.coupon.apply')
+                                </span>
+                            </x-slot:toggle>
 
-                    <!-- Modal Header -->
-                    <x-slot:header>
-                        <h2 class="text-[25px] font-medium max-sm:text-[22px]">
-                            @lang('shop::app.checkout.cart.coupon.apply')
-                        </h2>
-                    </x-slot:header>
+                            <!-- Modal Header -->
+                            <x-slot:header>
+                                <h2 class="text-[25px] font-medium max-sm:text-[22px]">
+                                    @lang('shop::app.checkout.cart.coupon.apply')
+                                </h2>
+                            </x-slot:header>
 
-                    <!-- Modal Contentd -->
-                    <x-slot:content>
-                        <!-- Apply Coupon Form -->
-                        <x-shop::form
-                            v-slot="{ meta, errors, handleSubmit }"
-                            as="div"
-                        >
-                            <!-- Apply coupon form -->
-                            <form @submit="handleSubmit($event, applyCoupon)">
+                            <!-- Modal Content -->
+                            <x-slot:content>
                                 <x-shop::form.control-group>
-                                    <div class="p-[30px] bg-white">
-                                        <x-shop::form.control-group.control
-                                            type="text"
-                                            name="code"
-                                            class="py-[20px] px-[25px]"
-                                            rules="required"
-                                            :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
-                                            v-model="code"
-                                        >
-                                        </x-shop::form.control-group.control>
+                                    <x-shop::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        class="py-[20px] px-[25px]"
+                                        rules="required"
+                                        :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
+                                        v-model="code"
+                                    >
+                                    </x-shop::form.control-group.control>
 
-                                        <x-shop::form.control-group.error
-                                            class="flex"
-                                            control-name="code"
-                                        >
-                                        </x-shop::form.control-group.error>
-                                    </div>
+                                    <x-shop::form.control-group.error
+                                        class="flex"
+                                        control-name="code"
+                                    >
+                                    </x-shop::form.control-group.error>
                                 </x-shop::form.control-group>
+                            </x-slot:content>
 
+                            <!-- Modal Footer -->
+                            <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
-                                <div class="p-[30px] bg-white mt-[20px]">
-                                    <div class="flex justify-between items-center gap-[15px] flex-wrap">
-                                        <p class="text-[14px] font-medium text-[#6E6E6E]">
-                                            @lang('shop::app.checkout.cart.coupon.subtotal')
+                                <div class="flex justify-between items-center gap-[15px] flex-wrap">
+                                    <p class="text-[14px] font-medium text-[#6E6E6E]">
+                                        @lang('shop::app.checkout.cart.coupon.subtotal')
+                                    </p>
+
+                                    <div class="flex gap-[30px] items-center flex-auto flex-wrap">
+                                        <p 
+                                            class="text-[30px] font-semibold max-sm:text-[22px]"
+                                            v-text="subTotal"
+                                        >
                                         </p>
 
-                                        <div class="flex gap-[30px] items-center flex-auto flex-wrap">
-                                            <p 
-                                                class="text-[30px] font-semibold max-sm:text-[22px]"
-                                                v-text="subTotal"
-                                            >
-                                            </p>
-
-                                            <button
-                                                class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
-                                                type="submit"
-                                            >
-                                               @lang('shop::app.checkout.cart.coupon.button-title')
-                                            </button>
-                                        </div>
+                                        <button
+                                            class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                                            type="submit"
+                                        >
+                                            @lang('shop::app.checkout.cart.coupon.button-title')
+                                        </button>
                                     </div>
                                 </div>
-                            </form>
-                        </x-shop::form>
-                    </x-slot:content>
-                </x-shop::modal>
+                            </x-slot:footer>
+                        </x-shop::modal>
+                    </form>
+                </x-shop::form>
 
                 <!-- Applied Coupon Information Container -->
                 <div 

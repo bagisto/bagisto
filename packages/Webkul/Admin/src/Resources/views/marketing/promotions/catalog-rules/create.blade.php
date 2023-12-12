@@ -618,7 +618,7 @@
                                     />
                                 </x-admin::flat-picker.date>
                             </div>
-gi
+                            
                             <div v-if="matchedAttribute.type == 'datetime'">
                                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                                     <input 
