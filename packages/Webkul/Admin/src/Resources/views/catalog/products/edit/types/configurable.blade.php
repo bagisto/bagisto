@@ -565,7 +565,13 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editName'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group 
+                                        class="flex-1 mb-0"
+                                        ::class="{ 
+                                            'max-w-[115px]' : selectedType !== 'editName',
+                                            '!mb-0': selectedType === 'editName'
+                                        }"
+                                    >
                                         <div class="relative">
                                             <v-field
                                                 type="text"
@@ -630,7 +636,13 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editSku'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group 
+                                        class="flex-1 mb-0"
+                                        ::class="{ 
+                                            'max-w-[115px]' : selectedType !== 'editSku',
+                                            '!mb-0': selectedType === 'editSku'
+                                        }"
+                                    >
                                         <div class="relative">
                                             <v-field
                                                 type="text"
