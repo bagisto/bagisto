@@ -606,7 +606,7 @@
                                                 <v-field
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
-                                                    :value="variant.inventories[inventorySource.id]"
+                                                    v-model="variant.inventories[inventorySource.id]"
                                                     class="flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"
@@ -884,6 +884,7 @@
                                                 ::value="variant.sku"
                                                 rules="required"
                                                 :label="trans('admin::app.catalog.products.edit.types.configurable.edit.sku')"
+                                                v-slugify
                                             >
                                             </x-admin::form.control-group.control>
                 
@@ -1269,7 +1270,7 @@
 
                 editInventories(params) {
                     this.selectedVariants.forEach(function (variant) {
-                        variant.inventories = params?.inventories ?? params.inventories[variant.id];
+                        variant.inventories = params?.inventories ?? params.variants[variant.id];
                     });
                 },
 
@@ -1301,11 +1302,17 @@
                     this.selectedVariants.forEach((variant) => {
                         if (this.updateTypes.addImages.images.length) {
                             variant.images = variant.images.concat(this.updateTypes.addImages.images);
+
+                            variant.images.temp_images = [];
+
+                            this.updateTypes.addImages.images.forEach(element => {
+                                variant.temp_images.push(element);
+                            });
                         } else {
                             variant.images = variant.images.concat(variant.temp_images);
-
-                            variant.temp_images = [];
                         }
+
+                        variant.temp_images = [];
                     });
 
                     this.updateTypes.addImages.images = [];
