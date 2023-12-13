@@ -356,7 +356,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <v-media-images
                                                 name="images"
                                                 class="mb-2.5"
@@ -371,7 +371,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editWeight'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
@@ -463,7 +463,7 @@
                                 :class="{'flex gap-2.5 justify-between items-center': [
                                     'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
                                 ].includes(selectedType) }"
-                                v-for="variant in selectedVariants"
+                                v-for="variant in tempSelectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
                                     <span
@@ -565,7 +565,13 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editName'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group 
+                                        class="flex-1 mb-0"
+                                        ::class="{ 
+                                            'max-w-[115px]' : selectedType !== 'editName',
+                                            '!mb-0': selectedType === 'editName'
+                                        }"
+                                    >
                                         <div class="relative">
                                             <v-field
                                                 type="text"
@@ -630,7 +636,13 @@
                                 </template>
 
                                 <template v-if="selectedType == 'editSku'">
-                                    <x-admin::form.control-group class="flex-1 mb-0 max-w-[115px]">
+                                    <x-admin::form.control-group 
+                                        class="flex-1 mb-0"
+                                        ::class="{ 
+                                            'max-w-[115px]' : selectedType !== 'editSku',
+                                            '!mb-0': selectedType === 'editSku'
+                                        }"
+                                    >
                                         <div class="relative">
                                             <v-field
                                                 type="text"
@@ -884,7 +896,6 @@
                                                 ::value="variant.sku"
                                                 rules="required"
                                                 :label="trans('admin::app.catalog.products.edit.types.configurable.edit.sku')"
-                                                v-slugify
                                             >
                                             </x-admin::form.control-group.control>
                 
@@ -1115,56 +1126,67 @@
                 return {
                     inventorySources: @json($inventorySources),
 
+                    selectedType: '',
+                    
+                    tempSelectedVariants: [],
+
                     updateTypes: {
                         editName: {
                             key: 'editName',
+                            value: 'name',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-names')"
                         },
 
                         editSku: {
                             key: 'editSku',
+                            value: 'sku',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-sku')"
                         },
 
                         editPrices: {
                             key: 'editPrices',
+                            value: 'price',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-prices')"
                         },
 
                         editInventories: {
                             key: 'editInventories',
+                            value: 'edit-inventories',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-inventories')"
                         },
 
                         editWeight: {
                             key: 'editWeight',
+                            value: 'weight',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-weight')",
                         },
 
                         editStatus: {
                             key: 'editStatus',
+                            value: 'status',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-status')",
                         },
 
                         addImages: {
                             key: 'addImages',
+                            value: 'images',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.add-images')",
                             images: []
                         },
 
                         removeImages: {
                             key: 'removeImages',
-                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-images')"
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-images')",
+                            value: 'remove-images',
                         },
 
                         removeVariants: {
                             key: 'removeVariants',
-                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-variants')"
+                            value: 'remove-variants',
+                            title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-variants')",
                         }
                     },
-
-                    selectedType: ''
-                }
+                };
             },
 
             computed: {
@@ -1174,7 +1196,17 @@
 
                         return variant.selected;
                     });
-                }
+                },
+            },
+
+            watch: {
+                selectedVariants(newSelectedVariants) {
+                    this.tempSelectedVariants = JSON.parse(JSON.stringify(newSelectedVariants));
+                },
+            },
+
+            mounted() {
+                this.tempSelectedVariants = this.selectedVariants;
             },
 
             methods: {
@@ -1253,7 +1285,45 @@
                 },
 
                 update(params) {
-                    this[this.selectedType](params);
+                    switch (this.selectedType) {
+                        case 'addImages':
+                            this.tempSelectedVariants.forEach((variant) => {
+                                if (this.updateTypes.addImages.images.length) {
+                                    variant.images = variant.images.concat(this.updateTypes.addImages.images);
+
+                                    variant.images.temp_images = [];
+
+                                    this.updateTypes.addImages.images.forEach(element => {
+                                        variant.temp_images.push(element);
+                                    });
+                                } else {
+                                    variant.images = variant.images.concat(variant.temp_images);
+                                }
+
+                                variant.temp_images = [];
+                            });
+
+                            break;
+
+                        case 'editInventories': 
+                            this.tempSelectedVariants.forEach((variant) => {
+                                variant.inventories = {
+                                    ...variant?.inventories,
+                                    ...(params?.inventories ?? params.variants[variant.id]),
+                                };
+                            });
+
+                            break;
+                    
+                        default:
+                            this.tempSelectedVariants.forEach((variant) => {
+                                let updateType = this.updateTypes[this.selectedType].value;
+
+                                variant[updateType] = params[updateType] ?? params.variants[variant.id];
+                            });
+
+                            break;
+                    }
                 },
 
                 updateAll(params) {
@@ -1344,7 +1414,7 @@
                         return option.id == optionId;
                     })?.admin_name;
                 },
-            }
+            },
         });
 
         app.component('v-product-variation-item', {

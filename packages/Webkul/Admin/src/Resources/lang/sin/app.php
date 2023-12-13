@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'SKU සංස්කරණ',
                             'edit-status'         => 'ස්ථාන සංස්කරණ',
                             'edit-weight'         => 'බර සංස්කරණ',
+                            'name'                => 'නම',
                             'price'               => 'මිල',
                             'remove-images'       => 'පින්තූර ඉවත් කරන්න',
                             'remove-variants'     => 'වෙනස් කරන්න',

@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'تحرير الرمز التعريفي',
                             'edit-status'         => 'تحرير الحالة',
                             'edit-weight'         => 'تحرير الوزن',
+                            'name'                => 'الاسم',
                             'price'               => 'السعر',
                             'remove-images'       => 'إزالة الصور',
                             'remove-variants'     => 'إزالة الاختلافات',
