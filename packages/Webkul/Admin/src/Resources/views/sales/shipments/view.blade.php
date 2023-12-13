@@ -129,7 +129,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">

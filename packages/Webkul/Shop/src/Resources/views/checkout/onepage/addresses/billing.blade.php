@@ -33,7 +33,7 @@
                             />
 
                             <label 
-                                class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>

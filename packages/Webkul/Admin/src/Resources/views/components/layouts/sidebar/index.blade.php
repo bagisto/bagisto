@@ -1,4 +1,4 @@
-<div class="fixed top-[57px] h-full bg-white dark:bg-gray-900  pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
+<div class="fixed top-[57px] h-full bg-white dark:bg-gray-900 pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
     <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid gap-[7px] w-full">
             <!-- Navigation Menu -->
@@ -42,7 +42,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-sidebar-collapse-template">
         <div
-            class="bg-white dark:bg-gray-900  fixed w-full max-w-[270px] bottom-0 px-4 hover:bg-gray-100 dark:hover:bg-gray-950 border-t-[1px] border-gray-200 dark:border-gray-800 transition-all duration-300 cursor-pointer"
+            class="bg-white dark:bg-gray-900 fixed w-full max-w-[270px] bottom-0 px-4 hover:bg-gray-100 dark:hover:bg-gray-950 border-t-[1px] border-gray-200 dark:border-gray-800 transition-all duration-300 cursor-pointer"
             :class="{'max-w-[70px]': isCollapsed}"
             @click="toggle"
         >

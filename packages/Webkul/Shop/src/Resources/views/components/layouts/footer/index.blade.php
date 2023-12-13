@@ -18,7 +18,7 @@
     ]); 
 @endphp
 
-<footer class="mt-[36px] bg-lightOrange  max-sm:mt-[30px]">
+<footer class="mt-9 bg-lightOrange  max-sm:mt-[30px]">
     <div class="flex gap-x-[25px] gap-y-[30px] justify-between p-[60px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-[15px]">
         <div class="flex gap-[85px] items-start flex-wrap max-1180:gap-[25px] max-1060:justify-between">
             @if ($customization?->options)
@@ -83,7 +83,7 @@
 
                         <button
                             type="submit"
-                            class=" absolute flex items-center top-2 w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium rtl:left-[8px] ltr:right-[8px]"
+                            class=" absolute flex items-center top-2 w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium rtl:left-2 ltr:right-2"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>

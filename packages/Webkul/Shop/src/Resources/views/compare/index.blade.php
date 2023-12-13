@@ -73,7 +73,7 @@
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="hidden absolute top-[60px] right-[20px] justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            class="hidden absolute top-[60px] right-5 justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
                                             @click="remove(product.id)"
                                         ></span>
 

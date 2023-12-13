@@ -51,7 +51,7 @@
                     @lang('shop::app.components.layouts.header.search')
                 </label>
 
-                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-2.5 text-[22px] pointer-events-none"></div>
+                <div class="icon-search flex items-center  absolute ltr:left-3 rtl:right-3 top-2.5 text-[22px] pointer-events-none"></div>
 
                 <input
                     type="text"
@@ -114,7 +114,7 @@
                             </p>
                         </div>
 
-                        <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
+                        <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
                         <div class="flex gap-4 mt-[25px]">
                             <a
@@ -148,7 +148,7 @@
                             </p>
                         </div>
 
-                        <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
+                        <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
                         <div class="grid gap-1 mt-2.5 pb-2.5">
                             <a

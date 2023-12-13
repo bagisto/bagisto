@@ -32,7 +32,7 @@
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-[22px] absolute ltr:right-[12px] rtl:left-[12px] top-1.5 flex items-center pointer-events-none"></span>
+                        <span class="icon-search text-[22px] absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
                     </div>
                 </div>
             </x-slot:header>

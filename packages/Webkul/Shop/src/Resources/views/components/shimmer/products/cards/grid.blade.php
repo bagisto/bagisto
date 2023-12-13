@@ -11,7 +11,7 @@
             <p class="shimmer w-[55%] h-6"></p>
 
             <!-- Needs to implement that in future -->
-            <div class="hidden flex gap-4 mt-[12px]">
+            <div class="hidden flex gap-4 mt-3">
                 <span class="shimmer w-[30px] h-[30px] block rounded-full"></span>
                 <span class="shimmer w-[30px] h-[30px] block rounded-full"></span>
             </div>

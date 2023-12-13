@@ -1,5 +1,5 @@
 <div class="container px-[60px] max-1180:px-[0px]">
-    <div class="flex gap-10 mt-[48px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+    <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
 
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
             <div class="shimmer min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>

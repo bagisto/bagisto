@@ -14,7 +14,7 @@
         <!-- Logo -->
         <a
             href="{{ route('admin.dashboard.index') }}" 
-            class="place-self-start -mt-[4px]"            
+            class="place-self-start -mt-1"            
         >
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img
@@ -34,7 +34,7 @@
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
             <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
-                <i class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] text-[22px] top-1.5"></i>
+                <i class="icon-search absolute flex items-center ltr:left-3 rtl:right-3 text-[22px] top-1.5"></i>
 
                 <input 
                     type="text" 
@@ -204,7 +204,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
         <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
-            <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-1.5"></i>
+            <i class="icon-search text-[22px] flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
 
             <input 
                 type="text"

@@ -197,7 +197,7 @@
                         @endforeach
                     </div>
 
-                    <div class="flex w-full gap-2.5 justify-end mt-[16px] p-4">
+                    <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600 dark:text-gray-300  font-semibold">
                                 @lang('admin::app.sales.orders.view.summary-sub-total')
@@ -529,7 +529,7 @@
 
                         <!-- Shipping Method and Price Details -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="pt-[16px]">
                                 <p class="text-gray-800 font-semibold dark:text-white">
@@ -593,7 +593,7 @@
                             </div>
 
                             @if ($index < count($order->invoices) - 1)
-                                <span class="block w-full mb-4 mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
+                                <span class="block w-full mb-4 mt-4 border-b-[1px] dark:border-gray-800  "></span>
                             @endif
                         @empty 
                             <p class="text-gray-600 dark:text-gray-300">
@@ -663,7 +663,7 @@
                                         {{ core()->formatDate($refund->created_at, 'd M, Y H:i:s a') }}
                                     </p>
 
-                                    <p class="mt-[16px] text-gray-800 dark:text-white font-semibold">
+                                    <p class="mt-4 text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.sales.orders.view.name')
                                     </p>
 
@@ -671,7 +671,7 @@
                                         {{ $refund->order->customer_full_name }}
                                     </p>
 
-                                    <p class="mt-[16px] text-gray-800 dark:text-white font-semibold">
+                                    <p class="mt-4 text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.sales.orders.view.status')
                                     </p>
 

@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <div class="mt-[16px] grid grid-cols-2 gap-[5px]">
+            <div class="mt-4 grid grid-cols-2 gap-[5px]">
                 <p
                     class="cursor-pointer rounded-[6px] border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
                     v-for="option in column.options"

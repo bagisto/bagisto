@@ -60,7 +60,7 @@
         @endphp
 
         <!-- Channel and Locale Switcher -->
-        <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+        <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
             <div class="flex gap-x-1 items-center">
                 <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">

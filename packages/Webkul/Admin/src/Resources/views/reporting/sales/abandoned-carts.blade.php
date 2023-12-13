@@ -118,7 +118,7 @@
                     </div>
 
                     <!-- Header -->
-                    <p class="py-2.5 text-[16px] text-gray-600 dark:text-white font-semibold mt-[16px]">
+                    <p class="py-2.5 text-[16px] text-gray-600 dark:text-white font-semibold mt-4">
                         @lang('admin::app.reporting.sales.index.abandoned-products')
                     </p>
 

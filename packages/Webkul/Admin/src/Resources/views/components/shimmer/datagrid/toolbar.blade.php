@@ -1,4 +1,4 @@
-<div class="flex gap-4 mt-[28px] justify-between items-center max-md:flex-wrap">
+<div class="flex gap-4 mt-7 justify-between items-center max-md:flex-wrap">
     <!-- Left Toolbar -->
     <div class="flex gap-x-1">
         <!-- Mass Actions Panel --><!-- Filters And Search Panel -->

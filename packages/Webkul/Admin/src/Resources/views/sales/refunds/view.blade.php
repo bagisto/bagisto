@@ -119,7 +119,7 @@
                 </div>
 
                 <!-- Subtotal / Grand Total od the page -->
-                <div class="flex w-full gap-2.5 justify-end mt-[16px] p-4">
+                <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.refunds.view.sub-total')
@@ -246,7 +246,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300  text-[16px] py-4 font-semibold">

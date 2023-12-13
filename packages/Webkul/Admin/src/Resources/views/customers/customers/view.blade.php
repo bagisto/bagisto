@@ -45,7 +45,7 @@
     {!! view_render_event('bagisto.admin.customers.customers.view.filters.before') !!}
 
     <!-- Filters -->
-    <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap mt-[28px]">
+    <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap mt-7">
         <!-- Address Create component -->
         @include('admin::customers.addresses.create')
 
@@ -728,7 +728,7 @@
                             </div>
                             
                             @if ($index < count($customer->addresses) - 1)
-                                <span class="block w-full mb-4 mt-[16px] border-b-[1px] dark:border-gray-800"></span>
+                                <span class="block w-full mb-4 mt-4 border-b-[1px] dark:border-gray-800"></span>
                             @endif
                         @endforeach
                     @else    

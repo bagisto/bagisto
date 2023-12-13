@@ -3,7 +3,7 @@
 </template>
 
 <template v-else>
-    <div class="mt-[28px] flex items-center justify-between gap-4 max-md:flex-wrap">
+    <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
         <!-- Left Toolbar -->
         <div class="flex gap-x-1">
             <!-- Mass Actions Panel -->
@@ -107,7 +107,7 @@
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute rtl:left-[10px] ltr:right-[10px] top-2 flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute rtl:left-2.5 ltr:right-2.5 top-2 flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>

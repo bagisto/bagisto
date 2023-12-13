@@ -111,7 +111,7 @@
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute ltr:right-[10px] rtl:left-[10px] top-2 flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute ltr:right-2.5 rtl:left-2.5 top-2 flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                             </span>
 
                             <span
-                                class="icon-dot absolute top-[5px] right-[8px] text-[14px] font-bold"
+                                class="icon-dot absolute top-[5px] right-2 text-[14px] font-bold"
                                 v-if="applied.filters.columns.length > 1"
                             ></span>
                         </div>

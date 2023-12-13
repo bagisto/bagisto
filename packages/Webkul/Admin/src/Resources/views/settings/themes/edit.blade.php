@@ -41,7 +41,7 @@
         </div>
 
         <!-- Channel and Locale Switcher -->
-        <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+        <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
             <div class="flex gap-x-1 items-center">
                 <!-- Locale Switcher -->
                 <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">

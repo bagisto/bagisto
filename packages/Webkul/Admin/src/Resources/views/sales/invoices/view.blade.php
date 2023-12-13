@@ -36,7 +36,7 @@
     </div>
 
     <!-- Filter row -->
-    <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+    <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
         <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap">
             {!! view_render_event('sales.invoice.page_action.before', ['order' => $order]) !!}
 
@@ -217,7 +217,7 @@
                 </div>
 
                 <!--Sale Summary -->
-                <div class="flex w-full gap-2.5 justify-end mt-[16px] p-4">
+                <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total-summary')

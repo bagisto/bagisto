@@ -172,7 +172,7 @@
                                 </p>
                             </div>
 
-                            <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
+                            <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
                             <div class="flex gap-4 mt-[25px]">
                                 <a
@@ -206,7 +206,7 @@
                                 </p>
                             </div>
 
-                            <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
+                            <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
                             <div class="grid gap-1 mt-2.5 pb-2.5">
                                 <a
@@ -268,7 +268,7 @@
 
         <div class="relative w-full">
             <div
-                class="icon-search flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-3 text-[25px] pointer-events-none">
+                class="icon-search flex items-center absolute ltr:left-3 rtl:right-3 top-3 text-[25px] pointer-events-none">
             </div>
 
             <input

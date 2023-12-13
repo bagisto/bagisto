@@ -11,7 +11,7 @@
     <script type="text/x-template" id="v-product-customer-group-price-template">
         <div>
             <!-- Header -->
-            <div class="flex items-center justify-between mt-[6px] py-[15px]">
+            <div class="flex items-center justify-between mt-1.5 py-[15px]">
                 <p class="text-gray-800 text-[16px] py-2.5 font-semibold dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>

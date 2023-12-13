@@ -171,7 +171,7 @@
                                 >
                                 </x-admin::form.control-group.error>
 
-                                <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
                                 </p>
 
@@ -198,7 +198,7 @@
                                 >
                                 </x-admin::form.control-group.error>
 
-                                <p class="mt-[8px] ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
                                 </p>
                             </x-admin::form.control-group>
