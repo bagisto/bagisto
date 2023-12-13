@@ -8,8 +8,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
+use Webkul\Product\Repositories\ProductRepository;
 
 class UpdateCreateCatalogRuleIndex implements ShouldQueue
 {

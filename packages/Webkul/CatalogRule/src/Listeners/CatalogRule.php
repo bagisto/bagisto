@@ -2,10 +2,10 @@
 
 namespace Webkul\CatalogRule\Listeners;
 
-use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
-use Webkul\CatalogRule\Jobs\UpdateCreateCatalogRuleIndex as UpdateCreateCatalogRuleIndexJob;
 use Webkul\CatalogRule\Jobs\DeleteCatalogRuleIndex as DeleteCatalogRuleIndexJob;
+use Webkul\CatalogRule\Jobs\UpdateCreateCatalogRuleIndex as UpdateCreateCatalogRuleIndexJob;
+use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
+use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 
 class CatalogRule
 {
@@ -17,10 +17,9 @@ class CatalogRule
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleProductPriceRepository $catalogRuleProductPriceRepository
-    )
-    {
+    ) {
     }
-    
+
     /**
      * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $catalogRule
      * @return void
@@ -29,9 +28,9 @@ class CatalogRule
     {
         UpdateCreateCatalogRuleIndexJob::dispatch($catalogRule);
     }
-    
+
     /**
-     * @param  integer  $catalogRuleId
+     * @param  int  $catalogRuleId
      * @return void
      */
     public function beforeUpdate($catalogRuleId)
@@ -45,9 +44,8 @@ class CatalogRule
         DeleteCatalogRuleIndexJob::dispatch($productIds->toArray());
     }
 
-
     /**
-     * @param  integer  $catalogRuleId
+     * @param  int  $catalogRuleId
      * @return void
      */
     public function beforeDelete($catalogRuleId)
