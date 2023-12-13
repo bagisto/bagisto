@@ -542,6 +542,10 @@
 
                     this.$refs.addOptionsRow.toggle();
                 },
+
+                removeOption(id) {
+                    this.slots.one = this.slots.one.filter(option => option.id !== id);
+                },
             }
         });
     </script>

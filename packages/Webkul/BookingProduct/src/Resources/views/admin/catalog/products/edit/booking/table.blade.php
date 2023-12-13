@@ -498,7 +498,19 @@
                     }
 
                     this.$refs.addOptionsRow.toggle();
-                }
+                },
+
+                editModal(values) {
+                    values.params.id = values.id;
+
+                    this.$refs.modelForm.setValues(values.params);
+
+                    this.$refs.addOptionsRow.toggle();
+                },
+
+                removeOption(id) {
+                    this.slots = this.slots.filter(option => option.id !== id);
+                },
             },
         });
     </script>

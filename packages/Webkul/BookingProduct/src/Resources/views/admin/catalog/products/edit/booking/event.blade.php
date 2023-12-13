@@ -397,7 +397,6 @@
 
             methods: {
                 store(params) {
-                    console.log(params);
                     if (params.id) {
                         let foundIndex = this.storeTickets.findIndex(item => item.id === params.id);
 
@@ -424,6 +423,10 @@
                     this.$refs.modelForm.setValues(values.params);
 
                     this.$refs.addOptionsRow.toggle();
+                },
+
+                removeOption(id) {
+                    this.storeTickets = this.storeTickets.filter(option => option.id !== id);
                 },
             }
         });
