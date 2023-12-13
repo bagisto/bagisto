@@ -700,7 +700,7 @@ return [
                             'status'              => '状态',
                             'variant-name'        => '变体名称',
                             'variant-sku'         => '变体 SKU',
-                            'weight'              => '重量'
+                            'weight'              => '重量',
                         ],
                     ],
 

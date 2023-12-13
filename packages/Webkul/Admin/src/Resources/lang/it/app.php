@@ -701,7 +701,7 @@ return [
                             'status'              => 'Stato',
                             'variant-name'        => 'Nome Variante',
                             'variant-sku'         => 'SKU Variante',
-                            'weight'              => 'Peso'
+                            'weight'              => 'Peso',
                         ],
                     ],
 

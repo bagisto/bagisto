@@ -701,7 +701,7 @@ return [
                             'status'              => 'ステータス',
                             'variant-name'        => 'バリアント名',
                             'variant-sku'         => 'バリアントSKU',
-                            'weight'              => '重さ'
+                            'weight'              => '重さ',
                         ],
                     ],
 

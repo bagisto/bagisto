@@ -701,7 +701,7 @@ return [
                             'status'              => 'Durum',
                             'variant-name'        => 'Varyant Adı',
                             'variant-sku'         => 'Varyant SKU',
-                            'weight'              => 'Ağırlık'
+                            'weight'              => 'Ağırlık',
                         ],
                     ],
 
