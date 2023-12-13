@@ -6,6 +6,7 @@
 @switch($type)
     @case('time')
         <v-field
+            type="text"
             name="{{ $name }}"
             v-slot="{ field, errors }"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}

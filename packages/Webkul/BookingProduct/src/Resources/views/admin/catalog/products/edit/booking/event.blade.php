@@ -32,6 +32,163 @@
             </div>
         </div>
 
+         <!-- Table Information -->
+         <div class="mt-[15px] overflow-x-auto">
+            <template v-if="storeTickets?.length">
+                <x-admin::table>
+                    <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
+                        <x-admin::table.thead.tr>
+                            <!-- Name -->
+                            <x-admin::table.th>
+                                @lang('Name')
+                            </x-admin::table.th>
+
+                            <!-- Price -->
+                            <x-admin::table.th>
+                                @lang('Price')
+                            </x-admin::table.th>
+
+                            <!-- Qty -->
+                            <x-admin::table.th>
+                                @lang('Qty')
+                            </x-admin::table.th>
+
+                            <!-- Special Price -->
+                            <x-admin::table.th>
+                                @lang('Special Price')
+                            </x-admin::table.th>
+
+                            <!-- Valid From -->
+                            <x-admin::table.th>
+                                @lang('Valid From')
+                            </x-admin::table.th>
+
+                            <!-- Valid Until -->
+                            <x-admin::table.th>
+                                @lang('Valid Until')
+                            </x-admin::table.th>
+
+                            <!-- Description -->
+                            <x-admin::table.th>
+                                @lang('Description')
+                            </x-admin::table.th>
+
+                            <!-- Action tables heading -->
+                            <x-admin::table.th>
+                                @lang('Actions')
+                            </x-admin::table.th>
+                        </x-admin::table.thead.tr>
+                    </x-admin::table.thead>
+
+                    <x-admin::table.tbody.tr v-for="element in storeTickets">
+                        <!-- Name-->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="element.params.name"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Price -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="element.params.price"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Qty -->
+                        <x-admin::table.td>
+                            <p
+                                v-text="element.params.qty"
+                                class="dark:text-white"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Special Price -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="element.params.special_price"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Valid From -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="element.params.special_price_from"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Valid Until -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="element.params.special_price_to"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Description -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="element.params.description"
+                            >
+                            </p>
+                        </x-admin::table.td>
+
+                        <!-- Actions button -->
+                        <x-admin::table.td class="!px-0">
+                            <span
+                                class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @click="editModal(element)"
+                            >
+                            </span>
+
+                            <span
+                                class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @click="removeOption(element.id)"
+                            >
+                            </span>
+                        </x-admin::table.td>
+                    </x-admin::table.tbody.tr>
+                </x-admin::table>
+            </template>
+
+            <template v-else>
+                <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
+                    <!-- Attribute Option Image -->
+                    <img
+                        class="w-[120px] h-[120px]"
+                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                        alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
+                    />
+
+                    <!-- Add Slots Information -->
+                    <div class="flex flex-col gap-[5px] items-center">
+                        <p class="text-[16px] text-gray-400 font-semibold">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
+                        </p>
+                    </div>
+
+                    <!-- Add Slot Button -->
+                    <div
+                        class="secondary-button text-[14px]"
+                        @click="$refs.addOptionsRow.toggle()"
+                    >
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
+                    </div>
+                </div>
+            </template>
+        </div>
+
         <!-- Add Options Model Form -->
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
@@ -39,7 +196,7 @@
             ref="modelForm"
         >
             <form
-                @submit.prevent="handleSubmit($event, storeTickets)"
+                @submit.prevent="handleSubmit($event, store)"
                 enctype="multipart/form-data"
                 ref="createOptionsForm"
             >
@@ -52,6 +209,13 @@
 
                     <x-slot:content>
                         <div class="grid grid-cols-3 gap-4 px-4 py-2.5">
+                            <!-- ID -->
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                            >
+                            </x-admin::form.control-group.control>
+
                             <!-- Name -->
                             <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
@@ -60,16 +224,15 @@
             
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="{{ $currentLocale->code }}[name]"
+                                    name="name"
                                     rules="required"
-                                    {{-- v-model="ticketItem.name" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.name')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.name')"
                                 >
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error 
-                                    control-name="{{ $currentLocale->code }}[name]"
+                                    control-name="name"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
@@ -84,7 +247,6 @@
                                     type="text"
                                     name="price"
                                     rules="required"
-                                    {{-- v-model="ticketItem.price" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.price')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.price')"
                                 >
@@ -106,7 +268,6 @@
                                     type="text"
                                     name="qty"
                                     required="required|min_value:0"
-                                    {{-- v-model="ticketItem.qty" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.qty')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.qty')"
                                 >
@@ -128,7 +289,6 @@
                                     type="text"
                                     name="special_price"
                                     required="{decimal: true, min_value:0, ...(ticketItem.price ? {max_value: ticketItem.price} : {})}"
-                                    {{-- v-model="ticketItem.special_price" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.special-price')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.special-price')"
                                 >
@@ -150,7 +310,6 @@
                                     type="datetime"
                                     name="special_price_from"
                                     required="date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}"
-                                    {{-- v-model="ticketItem.special_price_from" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')"
                                     ref="special_price_from"
@@ -173,7 +332,6 @@
                                     type="datetime"
                                     name="special_price_to"
                                     required="date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from"
-                                    {{-- v-model="ticketItem.special_price_to" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')"
                                     ref="special_price_to"
@@ -194,16 +352,15 @@
             
                                 <x-admin::form.control-group.control
                                     type="textarea"
-                                    name="{{ $currentLocale->code }}[description]"
+                                    name="[description]"
                                     rules="required"
-                                    {{-- v-model="ticketItem.description" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.description')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.description')"
                                 >
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error 
-                                    control-name="{{ $currentLocale->code }}[description]"
+                                    control-name="[description]"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
@@ -230,13 +387,43 @@
 
             data() {
                 return {
-                    tickets: @json($bookingProduct ? $bookingProduct->event_tickets()->get() : [])
+                    tickets: @json($bookingProduct ? $bookingProduct->event_tickets()->get() : []),
+
+                    storeTickets: [],
+
+                    optionRowCount: 1,
                 }
             },
 
             methods: {
-                storeTickets(params) {
+                store(params) {
                     console.log(params);
+                    if (params.id) {
+                        let foundIndex = this.storeTickets.findIndex(item => item.id === params.id);
+
+                        this.storeTickets.splice(foundIndex, 1, {
+                            ...this.storeTickets[foundIndex],
+                            params: {
+                                ...this.storeTickets[foundIndex].params,
+                                ...params,
+                            }
+                        }); 
+                    } else {
+                        this.storeTickets.push({
+                            id: 'option_' + this.optionRowCount++,
+                            params
+                        });
+                    }
+
+                    this.$refs.addOptionsRow.toggle();
+                },
+
+                editModal(values) {
+                    values.params.id = values.id;
+
+                    this.$refs.modelForm.setValues(values.params);
+
+                    this.$refs.addOptionsRow.toggle();
                 },
             }
         });
