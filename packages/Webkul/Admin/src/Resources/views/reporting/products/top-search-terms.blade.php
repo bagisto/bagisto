@@ -73,6 +73,17 @@
                     <template v-else>
                         @include('admin::reporting.empty')
                     </template>
+
+                    <!-- Date Range -->
+                    <div class="flex gap-[20px] justify-end">
+                        <div class="flex gap-[4px] items-center">
+                            <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
+
+                            <p class="text-[12px] dark:text-gray-300">
+                                @{{ report.date_range.current }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </template>
