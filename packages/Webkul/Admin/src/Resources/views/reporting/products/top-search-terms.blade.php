@@ -22,47 +22,65 @@
 
                 <!-- Content -->
                 <div class="grid gap-[16px]">
-                    <div class="table-responsive grid w-full rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
-                        <!-- Table Header -->
-                        <div
-                            class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
-                            style="grid-template-columns: repeat(3, minmax(0, 1fr));"
-                        >
-                            <div class="flex gap-[10px]">
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.reporting.products.index.search-term')
-                                </p>
+                    <template v-if="report.statistics.length">
+                        <div class="table-responsive grid w-full rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
+                            <!-- Table Header -->
+                            <div
+                                class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                                style="grid-template-columns: repeat(3, minmax(0, 1fr));"
+                            >
+                                <div class="flex gap-[10px]">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.reporting.products.index.search-term')
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-[10px]">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.reporting.products.index.results')
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-[10px]">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.reporting.products.index.uses')
+                                    </p>
+                                </div>
                             </div>
 
-                            <div class="flex gap-[10px]">
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.reporting.products.index.results')
+                            <!-- Table Body -->
+                            <div
+                                class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                style="grid-template-columns: repeat(3, minmax(0, 1fr));"
+                                v-for="record in report.statistics"
+                            >
+                                <p>
+                                    @{{ record.term }}
                                 </p>
-                            </div>
 
-                            <div class="flex gap-[10px]">
-                                <p class="text-gray-600 dark:text-gray-300">
-                                    @lang('admin::app.reporting.products.index.uses')
+                                <p>
+                                    @{{ record.results }}
+                                </p>
+
+                                <p>
+                                    @{{ record.uses }}
                                 </p>
                             </div>
                         </div>
+                    </template>
 
-                        <!-- Table Body -->
-                        <div
-                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                            style="grid-template-columns: repeat(3, minmax(0, 1fr));"
-                            v-for="record in report.statistics"
-                        >
-                            <p>
-                                @{{ record.term }}
-                            </p>
+                    <!-- Empty State -->
+                    <template v-else>
+                        @include('admin::reporting.empty')
+                    </template>
 
-                            <p>
-                                @{{ record.results }}
-                            </p>
+                    <!-- Date Range -->
+                    <div class="flex gap-[20px] justify-end">
+                        <div class="flex gap-[4px] items-center">
+                            <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
 
-                            <p>
-                                @{{ record.uses }}
+                            <p class="text-[12px] dark:text-gray-300">
+                                @{{ report.date_range.current }}
                             </p>
                         </div>
                     </div>

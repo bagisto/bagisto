@@ -20,6 +20,14 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\CatalogRule\Listeners\CatalogRule@afterUpdateCreate',
         ],
 
+        'promotions.catalog_rule.update.before'  => [
+            'Webkul\CatalogRule\Listeners\CatalogRule@beforeUpdate',
+        ],
+
+        'promotions.catalog_rule.delete.before'  => [
+            'Webkul\CatalogRule\Listeners\CatalogRule@beforeDelete',
+        ],
+
         'catalog.product.update.after'  => [
             'Webkul\CatalogRule\Listeners\Product@afterUpdate',
         ],

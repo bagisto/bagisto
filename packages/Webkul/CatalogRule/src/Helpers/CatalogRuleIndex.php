@@ -58,11 +58,11 @@ class CatalogRuleIndex
         if (
             (
                 ! $startsFrom
-                || $rule->starts_from <= Carbon::now()
+                || $startsFrom <= Carbon::now()
             )
             && (
                 ! $endsTill
-                || $rule->ends_till >= Carbon::now()
+                || $endsTill >= Carbon::now()
             )
         ) {
             $this->catalogRuleProductHelper->insertRuleProduct($rule);
