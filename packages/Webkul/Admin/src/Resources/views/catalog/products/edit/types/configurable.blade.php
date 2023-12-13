@@ -461,8 +461,10 @@
                             <div
                                 class="py-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0"
                                 :class="{'grid grid-cols-2 gap-3 justify-between items-center': [
-                                    'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
-                                ].includes(selectedType) }"
+                                        'editName', 'editSku',
+                                ].includes(selectedType), 'flex justify-between items-center' : [
+                                    'editWeight', 'editPrices', 'editStatus',
+                                ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
