@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'Редагувати SKU',
                             'edit-status'         => 'Редагувати статус',
                             'edit-weight'         => 'Редагувати вагу',
+                            'name'                => 'Ім\'я',
                             'price'               => 'Ціна',
                             'remove-images'       => 'Видалити зображення',
                             'remove-variants'     => 'Видалити варіанти',
@@ -700,7 +701,7 @@ return [
                             'status'              => 'Статус',
                             'variant-name'        => 'Назва варіанту',
                             'variant-sku'         => 'SKU варіанту',
-                            'weight'              => 'Вага',
+                            'weight'              => 'Вага'
                         ],
                     ],
 

@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'ویرایش SKU',
                             'edit-status'         => 'ویرایش وضعیت',
                             'edit-weight'         => 'ویرایش وزن',
+                            'name'                => 'نام',
                             'price'               => 'قیمت',
                             'remove-images'       => 'حذف تصاویر',
                             'remove-variants'     => 'حذف نوع‌ها',

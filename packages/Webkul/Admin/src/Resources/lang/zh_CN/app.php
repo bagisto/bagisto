@@ -691,6 +691,7 @@ return [
                             'edit-sku'            => '编辑 SKU',
                             'edit-status'         => '编辑状态',
                             'edit-weight'         => '编辑重量',
+                            'name'                => '名称',
                             'price'               => '价格',
                             'remove-images'       => '移除图片',
                             'remove-variants'     => '移除变体',
@@ -699,7 +700,7 @@ return [
                             'status'              => '状态',
                             'variant-name'        => '变体名称',
                             'variant-sku'         => '变体 SKU',
-                            'weight'              => '重量',
+                            'weight'              => '重量'
                         ],
                     ],
 

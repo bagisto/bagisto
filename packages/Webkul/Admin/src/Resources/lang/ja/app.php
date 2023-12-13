@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'SKUを編集',
                             'edit-status'         => 'ステータスを編集',
                             'edit-weight'         => '重さを編集',
+                            'name'                => '名前',
                             'price'               => '価格',
                             'remove-images'       => '画像を削除',
                             'remove-variants'     => 'バリアントを削除',
@@ -700,7 +701,7 @@ return [
                             'status'              => 'ステータス',
                             'variant-name'        => 'バリアント名',
                             'variant-sku'         => 'バリアントSKU',
-                            'weight'              => '重さ',
+                            'weight'              => '重さ'
                         ],
                     ],
 

@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'SKU\'ları Düzenle',
                             'edit-status'         => 'Durumu Düzenle',
                             'edit-weight'         => 'Ağırlığı Düzenle',
+                            'name'                => 'Ad',
                             'price'               => 'Fiyat',
                             'remove-images'       => 'Resimleri Kaldır',
                             'remove-variants'     => 'Varyantları Kaldır',
@@ -700,7 +701,7 @@ return [
                             'status'              => 'Durum',
                             'variant-name'        => 'Varyant Adı',
                             'variant-sku'         => 'Varyant SKU',
-                            'weight'              => 'Ağırlık',
+                            'weight'              => 'Ağırlık'
                         ],
                     ],
 

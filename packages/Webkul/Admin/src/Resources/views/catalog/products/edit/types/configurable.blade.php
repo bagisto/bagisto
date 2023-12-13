@@ -296,6 +296,12 @@
                                                         </span>
 
                                                         <x-admin::form.control-group.control
+                                                            type="hidden"
+                                                            name="type"
+                                                            value="price"
+                                                        ></x-admin::form.control-group.control>
+
+                                                        <x-admin::form.control-group.control
                                                             type="text"
                                                             name="price"
                                                             class="ltr:pl-[30px] rtl:pr-[30px]"
@@ -325,6 +331,12 @@
                                                     <x-admin::form.control-group.label>
                                                         @{{ inventorySource.name }}
                                                     </x-admin::form.control-group.label>
+
+                                                    <x-admin::form.control-group.control
+                                                        type="hidden"
+                                                        name="type"
+                                                        value="inventories"
+                                                    ></x-admin::form.control-group.control>
 
                                                     <v-field
                                                         type="text"
@@ -356,7 +368,13 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800">
+                                            <x-admin::form.control-group.control
+                                                type="hidden"
+                                                name="type"
+                                                value="images"
+                                            ></x-admin::form.control-group.control>
+
                                             <v-media-images
                                                 name="images"
                                                 class="mb-[10px]"
@@ -379,6 +397,12 @@
                                                     </x-admin::form.control-group.label>
                         
                                                     <div class="relative">
+                                                        <x-admin::form.control-group.control
+                                                            type="hidden"
+                                                            name="type"
+                                                            value="weight"
+                                                        ></x-admin::form.control-group.control>
+
                                                         <x-admin::form.control-group.control
                                                             type="text"
                                                             name="weight"
@@ -409,6 +433,12 @@
 
                                                     <div class="relative">
                                                         <x-admin::form.control-group.control
+                                                            type="hidden"
+                                                            name="type"
+                                                            value="name"
+                                                        ></x-admin::form.control-group.control>
+
+                                                        <x-admin::form.control-group.control
                                                             type="text"
                                                             name="name"
                                                             ::rules="{ required: true }"
@@ -435,6 +465,12 @@
                                                     </x-admin::form.control-group.label>
 
                                                     <div class="relative">
+                                                        <x-admin::form.control-group.control
+                                                            type="hidden"
+                                                            name="type"
+                                                            value="status"
+                                                        ></x-admin::form.control-group.control>
+
                                                         <x-admin::form.control-group.control
                                                             type="select"
                                                             name="status"
@@ -463,7 +499,7 @@
                                 :class="{'flex gap-[10px] justify-between items-center': [
                                     'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
                                 ].includes(selectedType) }"
-                                v-for="variant in selectedVariants"
+                                v-for="variant in tempSelectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
                                     <span
@@ -896,7 +932,6 @@
                                                 ::value="variant.sku"
                                                 rules="required"
                                                 :label="trans('admin::app.catalog.products.edit.types.configurable.edit.sku')"
-                                                v-slugify
                                             >
                                             </x-admin::form.control-group.control>
                 
@@ -1127,6 +1162,10 @@
                 return {
                     inventorySources: @json($inventorySources),
 
+                    selectedType: '',
+                    
+                    tempSelectedVariants: [],
+
                     updateTypes: {
                         editName: {
                             key: 'editName',
@@ -1174,9 +1213,7 @@
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-variants')"
                         }
                     },
-
-                    selectedType: ''
-                }
+                };
             },
 
             computed: {
@@ -1186,7 +1223,17 @@
 
                         return variant.selected;
                     });
-                }
+                },
+            },
+
+            watch: {
+                selectedVariants(newSelectedVariants) {
+                    this.tempSelectedVariants = JSON.parse(JSON.stringify(newSelectedVariants));
+                },
+            },
+
+            mounted() {
+                this.tempSelectedVariants = this.selectedVariants;
             },
 
             methods: {
@@ -1265,7 +1312,43 @@
                 },
 
                 update(params) {
-                    this[this.selectedType](params);
+                    switch (params.type) {
+                        case 'images':
+                            this.tempSelectedVariants.forEach((variant) => {
+                                if (this.updateTypes.addImages.images.length) {
+                                    variant.images = variant.images.concat(this.updateTypes.addImages.images);
+
+                                    variant.images.temp_images = [];
+
+                                    this.updateTypes.addImages.images.forEach(element => {
+                                        variant.temp_images.push(element);
+                                    });
+                                } else {
+                                    variant.images = variant.images.concat(variant.temp_images);
+                                }
+
+                                variant.temp_images = [];
+                            });
+
+                            break;
+
+                        case 'inventories': 
+                            this.tempSelectedVariants.forEach(function (variant) {
+                                variant.inventories = {
+                                    ...variant?.inventories,
+                                    ...(params?.inventories ?? params.variants[variant.id]),
+                                };
+                            });
+
+                            break;
+                    
+                        default:
+                            this.tempSelectedVariants.forEach(function (variant) {
+                                variant[params.type] = params[params.type] ?? params.variants[variant.id];
+                            });
+
+                            break;
+                    }
                 },
 
                 updateAll(params) {
@@ -1356,7 +1439,7 @@
                         return option.id == optionId;
                     })?.admin_name;
                 },
-            }
+            },
         });
 
         app.component('v-product-variation-item', {
