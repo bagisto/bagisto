@@ -7,11 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Helpers\Indexers\Price as PriceIndexer;
 
-class UpdateCreateCatalogRuleIndex implements ShouldQueue
+class DeleteCatalogRuleIndex implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -23,12 +22,12 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $catalogRule
+     * @param  array  $productIds
      * @return void
      */
-    public function __construct(protected $catalogRule)
+    public function __construct(protected $productIds)
     {
-        $this->catalogRule = $catalogRule;
+        $this->productIds = $productIds;
     }
 
     /**
@@ -38,16 +37,12 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
      */
     public function handle()
     {
-        app(CatalogRuleIndex::class)->reIndexRule($this->catalogRule);
-
         /**
          * Reindex price index for the products associated with the catalog rule.
          */
-        $productIds = $this->catalogRule->catalog_rule_products->pluck('product_id')->unique();
-
         while (true) {
             $paginator = app(ProductRepository::class)
-                ->whereIn('id', $productIds)
+                ->whereIn('id', $this->productIds)
                 ->cursorPaginate(self::BATCH_SIZE);
 
             app(PriceIndexer::class)->reindexBatch($paginator->items());
