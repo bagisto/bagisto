@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('product_price_indices', function (Blueprint $table) {
-            $table->integer('channel_id')->unsigned()->default(1);
+            $table->integer('channel_id')->unsigned()->default(1)->after('customer_group_id');
 
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
 
