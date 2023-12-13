@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'Редактировать SKU',
                             'edit-status'         => 'Редактировать статус',
                             'edit-weight'         => 'Редактировать вес',
+                            'name'                => 'Имя',
                             'price'               => 'Цена',
                             'remove-images'       => 'Удалить изображения',
                             'remove-variants'     => 'Удалить варианты',

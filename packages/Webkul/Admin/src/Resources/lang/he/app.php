@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'ערוך SKU',
                             'edit-status'         => 'ערוך סטטוס',
                             'edit-weight'         => 'ערוך משקל',
+                            'name'                => 'שם',
                             'price'               => 'מחיר',
                             'remove-images'       => 'הסר תמונות',
                             'remove-variants'     => 'הסר הבחרות',

@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'স্টক ইউনিট সম্পাদনা',
                             'edit-status'         => 'অবস্থা সম্পাদনা',
                             'edit-weight'         => 'ওজন সম্পাদনা',
+                            'name'                => 'নাম',
                             'price'               => 'মূল্য',
                             'remove-images'       => 'চিত্র সরান',
                             'remove-variants'     => 'প্রকার সরান',
