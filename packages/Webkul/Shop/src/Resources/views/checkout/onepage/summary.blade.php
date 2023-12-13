@@ -132,40 +132,14 @@
                         class="flex justify-end"
                         v-else
                     >
-                        <button
-                            v-if="! isLoading"
-                            class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-10"
+                        <x-shop::button
+                            class="primary-button w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                            :loading="false"
+                            ref="placeOrder"
                             @click="placeOrder"
                         >
-                            @lang('shop::app.checkout.onepage.summary.place-order')    
-                        </button>
-
-                        <button
-                            v-else
-                            class="flex gap-2.5 items-center w-max py-[11px] px-8 bg-navyBlue text-white text-base font-medium rounded-[18px] text-center max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-10"
-                        >
-                            <!-- Spinner -->
-                            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle
-                                    class="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    stroke-width="4"
-                                >
-                                </circle>
-
-                                <path
-                                    class="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                >
-                                </path>
-                            </svg>
-
-                            @lang('shop::app.checkout.onepage.summary.processing')
-                        </button>
+                        </x-shop::button>
                     </div>
                 </template>
             </div>
@@ -190,7 +164,7 @@
 
             methods: {
                 placeOrder() {
-                    this.isLoading = true;
+                    this.$refs.placeOrder.isLoading = true;
 
                     this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
                         .then(response => {
@@ -199,8 +173,13 @@
                             } else {
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
+
+                            this.$refs.placeOrder.isLoading = false;
+
                         })
-                        .catch(error => console.log(error));
+                        .catch(error => {
+                            this.$refs.placeOrder.isLoading = false;
+                        });
                 },
             },
         });

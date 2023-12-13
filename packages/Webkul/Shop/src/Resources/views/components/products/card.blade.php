@@ -70,6 +70,7 @@
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             :disabled="! product.is_saleable"
                             @click="addToCart()"
+                            ref="addToCartButton"
                         >
                             @lang('shop::app.components.products.card.add-to-cart')
                         </button>
@@ -188,13 +189,16 @@
                     >
                     </x-shop::products.star-rating>
                 </p>
-            
-                <div 
+
+                <x-shop::button
                     class="primary-button px-[30px] py-2.5 whitespace-nowrap"
+                    :title="trans('shop::app.components.products.card.add-to-cart')"
+                    :loading="false"
+                    ::disabled="! product.is_saleable"
+                    ref="addToCartButton"
                     @click="addToCart()"
                 >
-                    @lang('shop::app.components.products.card.add-to-cart')
-                </div> 
+                </x-shop::button>
             </div> 
         </div>
     </script>
@@ -286,6 +290,9 @@
                 },
 
                 addToCart() {
+
+                    this.$refs.addToCartButton.isLoading = true;
+
                     this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
                             'quantity': 1,
                             'product_id': this.product.id,
@@ -302,8 +309,12 @@
                             } else {
                                 this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                             }
+
+                            this.$refs.addToCartButton.isLoading = false;
                         })
                         .catch(error => {
+                            this.$refs.addToCartButton.isLoading = false;
+
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                         });
                 },
