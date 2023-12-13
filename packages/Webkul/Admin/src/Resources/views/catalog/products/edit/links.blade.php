@@ -163,7 +163,7 @@
                         }, {
                             key: 'cross_sells',
                             title: "@lang('admin::app.catalog.products.edit.links.cross-sells.title')",
-                            info: "@lang('admin::app.catalog.products.edit.links.cross-sells.info')",
+                            info: `@lang('admin::app.catalog.products.edit.links.cross-sells.info')`,
                             empty_info: "@lang('admin::app.catalog.products.edit.links.cross-sells.empty-info')",
                         }
                     ],
