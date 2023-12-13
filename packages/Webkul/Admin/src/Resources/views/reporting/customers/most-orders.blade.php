@@ -29,7 +29,7 @@
                 </div>
                 
                 <!-- Content -->
-                <div class="grid gap-[16px]">
+                <div class="grid gap-4">
                     <!-- Customers with Most Orders -->
                     <template v-if="report.statistics.length">
                         <!-- Customers -->
@@ -63,7 +63,7 @@
 
                     <!-- Date Range -->
                     <div class="flex gap-5 justify-end">
-                        <div class="flex gap-[4px] items-center">
+                        <div class="flex gap-1 items-center">
                             <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
 
                             <p class="text-[12px] dark:text-gray-300">

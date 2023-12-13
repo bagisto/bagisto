@@ -22,12 +22,12 @@
                 >
                     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create_form_controls.before') !!}
 
-                    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.create.add-title')
                         </p>
 
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.inventory_sources.index') }}"

@@ -10,7 +10,7 @@
                 @lang('admin::app.settings.users.index.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Create User Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
@@ -34,7 +34,7 @@
                     @lang('admin::app.settings.users.index.title')
                 </p>
 
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- User Create Button -->
                     @if (bouncer()->hasPermission('settings.users.users.create'))
                         <button
@@ -58,7 +58,7 @@
                 @endphp
                 <!-- DataGrid Header -->
                 <template #header="{columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
                             class="flex gap-2.5 cursor-pointer"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
@@ -101,7 +101,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
@@ -256,7 +256,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <div class="flex gap-[16px]">
+                            <div class="flex gap-4">
                                 <!-- Password -->
                                 <x-admin::form.control-group class="flex-1 mb-2.5">
                                     <x-admin::form.control-group.label>
@@ -305,7 +305,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="flex gap-[16px]">
+                            <div class="flex gap-4">
 
                                 <!-- Role -->
                                 <x-admin::form.control-group class="flex-1 w-full mb-2.5">
@@ -395,7 +395,7 @@
 
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button
                                     type="submit"
                                     class="primary-button"
@@ -453,7 +453,7 @@
 
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button
                                     type="submit"
                                     class="primary-button"

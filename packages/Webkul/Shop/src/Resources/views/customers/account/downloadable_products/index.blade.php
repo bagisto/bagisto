@@ -25,35 +25,35 @@
                             <tr>
                                 <th
                                     scope="col"
-                                    class="px-6 py-[16px] font-medium"
+                                    class="px-6 py-4 font-medium"
                                 >
                                     @lang('shop::app.customers.account.downloadable-products.orderId')
                                 </th>
 
                                 <th
                                     scope="col"
-                                    class="px-6 py-[16px] font-medium"
+                                    class="px-6 py-4 font-medium"
                                 >
                                     @lang('shop::app.customers.account.downloadable-products.title')
                                 </th>
 
                                 <th
                                     scope="col"
-                                    class="px-6 py-[16px] font-medium"
+                                    class="px-6 py-4 font-medium"
                                 >
                                     @lang('shop::app.customers.account.downloadable-products.date')
                                 </th>
 
                                 <th
                                     scope="col"
-                                    class="px-6 py-[16px] font-medium"
+                                    class="px-6 py-4 font-medium"
                                 >
                                     @lang('shop::app.customers.account.downloadable-products.status')
                                 </th>
 
                                 <th
                                     scope="col"
-                                    class="px-6 py-[16px] font-medium"
+                                    class="px-6 py-4 font-medium"
                                 >
                                     @lang('shop::app.customers.account.downloadable-products.remaining-downloads')
                                 </th>
@@ -65,13 +65,13 @@
                                 <tr class="bg-white border-b">
                                     <th 
                                         scope="row" 
-                                        class="px-6 py-[16px] whitespace-nowrap text-blackfont-medium  first:rounded-bl-[12px]"
+                                        class="px-6 py-4 whitespace-nowrap text-blackfont-medium  first:rounded-bl-[12px]"
                                     >
                                         {{ $item->order_id }}
                                     </th>
 
                                     <td 
-                                        class="px-6 py-[16px] text-black font-medium"
+                                        class="px-6 py-4 text-black font-medium"
                                     >
                                         @if ($item->status == 'available')
                                             <a  
@@ -86,30 +86,30 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-[16px] text-black font-medium">
+                                    <td class="px-6 py-4 text-black font-medium">
                                         {{ $item->created_at }}
                                     </td>
 
                                     <td 
-                                        class="px-6 py-[16px] text-black font-medium"
+                                        class="px-6 py-4 text-black font-medium"
                                     > 
                                         @switch($item->status)
                                             @case('completed')
 
-                                                <span class="px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
+                                                <span class="px-2.5 py-1 rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break
 
                                             @case('pending')
 
-                                                <span class="px-[10px] py-[4px] rounded-[12px] bg-[#FDB60C] text-white text-[12px]">
+                                                <span class="px-2.5 py-1 rounded-[12px] bg-[#FDB60C] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break
 
                                             @case('available')
-                                                <span class=" px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
+                                                <span class=" px-2.5 py-1 rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break
@@ -117,7 +117,7 @@
                                     </td>
 
                                     <td 
-                                        class="px-6 py-[16px] text-black font-medium last:rounded-br-[12px]"
+                                        class="px-6 py-4 text-black font-medium last:rounded-br-[12px]"
                                     > 
                                         {{ $item->download_bought }} - {{ $item->download_used }}
                                     </td>

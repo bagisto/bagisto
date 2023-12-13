@@ -30,7 +30,7 @@
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
 
-                    <div class="flex gap-x-[10px] items-center">
+                    <div class="flex gap-x-2.5 items-center">
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
@@ -135,7 +135,7 @@
                                 || $attribute->type == 'checkbox'
                                 || $attribute->type == 'price'
                             )
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Input Options -->
                                     <x-admin::form.control-group
                                         class="w-full mb-2.5"
@@ -350,7 +350,7 @@
                             @else
                                 <!-- For Empty Attribute Options -->
                                 <template>
-                                    <div class="grid gap-[14px] justify-items-center py-10 px-[10px]">
+                                    <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
                                         <!-- Attribute Option Image -->
                                         <img
                                             class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px]"
@@ -395,7 +395,7 @@
                                 </p>
                             </div>
 
-                            <div class="px-[16px] pb-[16px]">
+                            <div class="px-4 pb-[16px]">
                                 <!-- Attribute Code -->
                                 <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
@@ -861,7 +861,7 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="grid grid-cols-3 px-[16px] py-2.5">
+                            <div class="grid grid-cols-3 px-4 py-2.5">
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
@@ -914,7 +914,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-[16px] px-[16px] py-2.5">
+                            <div class="grid grid-cols-3 gap-4 px-4 py-2.5">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"

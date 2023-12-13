@@ -9,11 +9,11 @@
             @lang('admin::app.customers.customers.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.customers.customers.index') }}"></x-admin::datagrid.export>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Customer Create Vue Component -->
 
                 {!! view_render_event('admin.customers.customers.create.before') !!}
@@ -43,14 +43,14 @@
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800">
                     <div
                         class="flex gap-2.5 items-center select-none"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group'], ['revenue', 'order_count', 'address_count']]"
                     >
                         @if ($hasPermission)
                             <label
-                                class="flex gap-[4px] items-center w-max cursor-pointer select-none"
+                                class="flex gap-1 items-center w-max cursor-pointer select-none"
                                 for="mass_action_select_all_records"
                                 v-if="! index"
                             >
@@ -113,7 +113,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-4 py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
                     <div class="flex gap-2.5">
@@ -135,7 +135,7 @@
                             </label>
                         @endif
 
-                        <div class="flex flex-col gap-[6px]">
+                        <div class="flex flex-col gap-1.5">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="record.full_name"
@@ -156,8 +156,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-[6px]">
-                        <div class="flex gap-[6px]">
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex gap-1.5">
                             <span
                                 :class="{
                                     'label-canceled': record.status == '',
@@ -189,8 +189,8 @@
                         </p>
                     </div>
 
-                    <div class="flex gap-x-[16px] justify-between items-center">
-                        <div class="flex flex-col gap-[6px]">
+                    <div class="flex gap-x-4 justify-between items-center">
+                        <div class="flex flex-col gap-1.5">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="$admin.formatPrice(record.revenue)"
@@ -265,7 +265,7 @@
                             <x-slot:content>
                                 {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- First Name -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label class="required">
@@ -375,7 +375,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Gender -->
                                     <x-admin::form.control-group class="w-full">
                                         <x-admin::form.control-group.label class="required">
@@ -445,7 +445,7 @@
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <!-- Save Button -->
                                     <button
                                         type="submit"

@@ -12,7 +12,7 @@
     @endforeach
 
     <div class="flex gap-5 justify-end">
-        <div class="flex gap-[4px] items-center">
+        <div class="flex gap-1 items-center">
             <div class="shimmer w-[14px] h-[14px] rounded-[3px]"></div>
             <div class="shimmer w-[143px] h-[17px]"></div>
         </div>

@@ -26,7 +26,7 @@
                 @lang('admin::app.settings.channels.edit.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"

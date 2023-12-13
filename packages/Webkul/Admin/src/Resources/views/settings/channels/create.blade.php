@@ -15,7 +15,7 @@
                 @lang('admin::app.settings.channels.create.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.settings.channels.index') }}"

@@ -4,7 +4,7 @@
         additional levels are required, users can customize them according to their needs.
     -->
     <!-- Left Nagivation Section -->
-    <div class="flex items-center gap-x-[40px] max-[1180px]:gap-x-[20px]">
+    <div class="flex items-center gap-x-[40px] max-[1180px]:gap-x-5">
         <a
             href="{{ route('shop.home.index') }}"
             aria-label="@lang('shop::app.components.layouts.header.bagisto')"
@@ -116,7 +116,7 @@
 
                         <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                        <div class="flex gap-[16px] mt-[25px]">
+                        <div class="flex gap-4 mt-[25px]">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
                                 class="primary-button block w-max px-[29px] mx-auto m-0 ml-[0px] rounded-[18px] text-base text-center"
@@ -150,7 +150,7 @@
 
                         <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                        <div class="grid gap-[4px] mt-2.5 pb-2.5">
+                        <div class="grid gap-1 mt-2.5 pb-2.5">
                             <a
                                 class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                 href="{{ route('shop.customers.account.profile.index') }}"
@@ -230,7 +230,7 @@
                 <span>
                     <a
                         :href="category.url"
-                        class="inline-block px-[20px] uppercase"
+                        class="inline-block px-5 uppercase"
                         v-text="category.name"
                     >
                     </a>
@@ -255,7 +255,7 @@
                                 </p>
 
                                 <ul
-                                    class="grid grid-cols-[1fr] gap-[12px]"
+                                    class="grid grid-cols-[1fr] gap-3"
                                     v-if="secondLevelCategory.children.length"
                                 >
                                     <li

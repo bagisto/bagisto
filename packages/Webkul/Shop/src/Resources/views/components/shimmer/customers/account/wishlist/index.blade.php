@@ -3,7 +3,7 @@
 <div class="flex justify-between items-center overflow-auto journal-scroll">
     <h2 class="shimmer w-[110px] h-[39px]"></h2>
 
-    <div class="shimmer flex items-center gap-x-[10px] py-3 px-[20px] rounded-[12px]">
+    <div class="shimmer flex items-center gap-x-2.5 py-3 px-5 rounded-[12px]">
         <span class="w-[108px] h-[24px]"></span>
     </div>
 </div>
@@ -13,15 +13,15 @@
         <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
             <div class="grid gap-y-[25px] flex-1">
                 <!-- Single card -->
-                <div class="flex justify-between gap-x-[10px] pb-[18px] border-b-[1px] border-[#E9E9E9]">
-                    <div class="flex gap-x-[20px]">
+                <div class="flex justify-between gap-x-2.5 pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                    <div class="flex gap-x-5">
                         <div class="">
                             <div class="shimmer w-[110px] h-[110px]"></div>
                         </div>
 
                         <div class="grid gap-y-[10px]">
                             <div class="shimmer w-[200px] h-[21px]"></div>
-                            <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
+                            <div class="flex gap-x-2.5 gap-y-[6px] flex-wrap">
                                 <div class="grid gap-2">
                                 </div>
                             </div>

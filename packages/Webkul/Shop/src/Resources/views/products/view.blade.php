@@ -74,7 +74,7 @@
                 :title="trans('shop::app.products.view.description')"
                 :is-selected="true"
             >
-                <div class="container mt-[60px] max-1180:px-[20px]">
+                <div class="container mt-[60px] max-1180:px-5">
                     <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
                         {!! $product->description !!}
                     </p>
@@ -90,7 +90,7 @@
                 :title="trans('shop::app.products.view.additional-information')"
                 :is-selected="false"
             >
-                <div class="container mt-[60px] max-1180:px-[20px]">
+                <div class="container mt-[60px] max-1180:px-5">
                     <div class="grid gap-[15px] grid-cols-[auto_1fr] max-w-max mt-[30px]">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
@@ -146,7 +146,7 @@
     </div>
 
     <!-- Information Section -->
-    <div class="container mt-[40px] !p-0 max-1180:px-[20px] 1180:hidden">
+    <div class="container mt-10 !p-0 max-1180:px-5 1180:hidden">
         <!-- Description Accordion -->
         <x-shop::accordion :is-active="true">
             <x-slot:header class="bg-gray-100">
@@ -171,7 +171,7 @@
             </x-slot:header>
 
             <x-slot:content>
-                <div class="container mt-5 mb-5 max-1180:px-[20px]">
+                <div class="container mt-5 mb-5 max-1180:px-5">
                     <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
@@ -264,12 +264,12 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-[0px]">
-                        <div class="flex gap-[40px] mt-[48px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                        <div class="flex gap-10 mt-[48px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
                             <!-- Details -->
-                            <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-[20px]">
+                            <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-5">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex gap-[15px] justify-between">
@@ -365,7 +365,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-[16px] py-[15px] px-[26px] rounded-[12px]"
+                                            class="gap-x-4 py-[15px] px-[26px] rounded-[12px]"
                                         >
                                         </x-shop::quantity-changer>
                                     @endif
@@ -403,7 +403,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap max-sm:justify-center">
+                                <div class="flex gap-[35px] mt-10 max-sm:flex-wrap max-sm:justify-center">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div

@@ -13,12 +13,12 @@
     >
         {!! view_render_event('bagisto.admin.catalog.categories.create.create_form_controls.before') !!}
 
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.create.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.catalog.categories.index') }}"
@@ -98,7 +98,7 @@
                         </label>
 
                         <!-- Radio select button -->
-                        <div class="flex flex-col gap-[12px]">
+                        <div class="flex flex-col gap-3">
                             <x-admin::tree.view
                                 input-type="radio"
                                 name-field="parent_id"

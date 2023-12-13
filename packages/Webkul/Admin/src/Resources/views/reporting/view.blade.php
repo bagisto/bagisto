@@ -12,16 +12,16 @@
         <script type="text/x-template" id="v-reporting-stats-table-template">
             <div>
                 <!-- Page Header -->
-                <div class="flex gap-[16px] justify-between items-center mb-5 max-sm:flex-wrap">
+                <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
                     <!-- Title -->
-                    <div class="grid gap-[6px]">
+                    <div class="grid gap-1.5">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                             @lang('admin::app.reporting.' . $entity . '.index.' . request()->query('type'))
                         </p>
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex gap-[6px] items-center">
+                    <div class="flex gap-1.5 items-center">
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
                                 <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
@@ -99,7 +99,7 @@
                     <template v-else>
                         <!-- Table Header -->
                         <div
-                            class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                            class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
                             :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
                         >
                             <div
@@ -114,7 +114,7 @@
 
                         <!-- Table Body -->
                         <div
-                            class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
                             :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
                             v-if="reporing.statistics.records.length"
                             v-for="record in reporing.statistics.records"
@@ -128,7 +128,7 @@
 
                         <div
                             v-else
-                            class="row grid gap-2.5 text-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid gap-2.5 text-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         >
                             <p>@lang('admin::app.reporting.view.not-available')</p>
                         </div>

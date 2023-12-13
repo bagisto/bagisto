@@ -4,7 +4,7 @@
             <div class="flex gap-2.5">
                 <div class="shimmer w-[65px] h-[65px] rounded-[4px]"></div>
 
-                <div class="flex flex-col gap-[6px]">
+                <div class="flex flex-col gap-1.5">
                     <!-- Product Name -->
                     <div class="shimmer w-[150px] h-[17px] rounded-[4px]"></div>
                     
@@ -13,8 +13,8 @@
                 </div>
             </div>
 
-            <div class="flex gap-[6px] items-center justify-between">
-                <div class="flex flex-col gap-[6px]">
+            <div class="flex gap-1.5 items-center justify-between">
+                <div class="flex flex-col gap-1.5">
                     <!-- Product Price -->
                     <div class="shimmer w-[50px] h-[17px] rounded-[4px]"></div>
 

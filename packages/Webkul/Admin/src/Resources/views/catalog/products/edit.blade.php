@@ -13,14 +13,14 @@
 
         <!-- Page Header -->
         <div class="grid gap-2.5">
-            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <div class="grid gap-[6px]">
+            <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+                <div class="grid gap-1.5">
                     <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                         @lang('admin::app.catalog.products.edit.title')
                     </p>
                 </div>
 
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
@@ -60,15 +60,15 @@
         @endphp
 
         <!-- Channel and Locale Switcher -->
-        <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
+        <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+            <div class="flex gap-x-1 items-center">
                 <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-store text-[24px] "></span>
                             
@@ -99,7 +99,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -165,13 +165,13 @@
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
-                                                <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentChannel->name }}
                                                 </span>
                                             @endif
 
                                             @if ($attribute->value_per_locale)
-                                                <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentLocale->name }}
                                                 </span>
                                             @endif

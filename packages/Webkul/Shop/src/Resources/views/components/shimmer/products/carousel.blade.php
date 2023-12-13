@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="flex gap-8 mt-[40px] overflow-auto scrollbar-hide max-sm:mt-5">
+    <div class="flex gap-8 mt-10 overflow-auto scrollbar-hide max-sm:mt-5">
         <x-shop::shimmer.products.cards.grid
             class="min-w-[291px]"
             :count="4"

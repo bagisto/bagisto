@@ -17,7 +17,7 @@
                 @lang('admin::app.catalog.families.edit.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -136,7 +136,7 @@
                     </div>
                     
                     <!-- Panel Content -->
-                    <div class="flex gap-x-[4px] items-center">
+                    <div class="flex gap-x-1 items-center">
                         <!-- Delete Group Button -->
                         <div
                             class="transparent-button text-red-600"
@@ -156,7 +156,7 @@
                 </div>
 
                 <!-- Panel Content -->
-                <div class="flex [&>*]:flex-1 gap-5 justify-between px-[16px]">
+                <div class="flex [&>*]:flex-1 gap-5 justify-between px-4">
                     <!-- Attributes Groups Container -->
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->
@@ -196,7 +196,7 @@
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] transition-all text-gray-600 dark:text-gray-300 group"
+                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] transition-all text-gray-600 dark:text-gray-300 group"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
@@ -256,7 +256,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                            <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                 <i
@@ -315,7 +315,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                     <i class="icon-attribute text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -408,7 +408,7 @@
                             </x-slot:content>
 
                             <x-slot:footer>
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button 
                                         type="submit"
                                         class="primary-button"

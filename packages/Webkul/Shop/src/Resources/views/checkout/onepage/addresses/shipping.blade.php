@@ -82,7 +82,7 @@
                                 @click="showNewShippingAddressForm"
                             >
                                 <div
-                                    class="flex gap-x-[10px] items-center cursor-pointer"
+                                    class="flex gap-x-2.5 items-center cursor-pointer"
                                     role="button"
                                     tabindex="0"
                                 >
@@ -197,7 +197,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.company_name.after') !!}
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
@@ -306,7 +306,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.street_address.after') !!}
                         
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
@@ -387,7 +387,7 @@
 
                         </div>
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.city')

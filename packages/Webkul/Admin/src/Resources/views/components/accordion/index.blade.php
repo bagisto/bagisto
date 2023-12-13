@@ -25,7 +25,7 @@
         @isset($content)
             <template v-slot:content="{ isOpen }">
                 <div
-                    {{ $content->attributes->merge(['class' => 'px-[16px] pb-[16px]']) }}
+                    {{ $content->attributes->merge(['class' => 'px-4 pb-[16px]']) }}
                     v-show="isOpen"
                 >
                     {{ $content }}

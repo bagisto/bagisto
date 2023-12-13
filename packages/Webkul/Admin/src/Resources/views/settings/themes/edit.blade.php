@@ -21,8 +21,8 @@
                 @lang('admin::app.settings.themes.edit.title')
             </p>
             
-            <div class="flex gap-x-[10px] items-center">
-                <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <a 
                         href="{{ route('admin.settings.themes.index') }}"
                         class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -41,15 +41,15 @@
         </div>
 
         <!-- Channel and Locale Switcher -->
-        <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
+        <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+            <div class="flex gap-x-1 items-center">
                 <!-- Locale Switcher -->
                 <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-language text-[24px]"></span>
 

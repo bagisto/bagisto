@@ -252,7 +252,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.new_password_confirmation.after') !!}
 
-        <div class="select-none items-center flex gap-[6px] mb-4">
+        <div class="select-none items-center flex gap-1.5 mb-4">
             <input
                 type="checkbox"
                 name="subscribed_to_news_letter"

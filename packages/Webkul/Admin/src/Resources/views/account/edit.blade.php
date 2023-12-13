@@ -9,12 +9,12 @@
         enctype="multipart/form-data"
         method="PUT"
     >
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.account.edit.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                  <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.dashboard.index') }}"
@@ -24,7 +24,7 @@
                 </a>
 
                 <!-- Save Button -->
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <button 
                         type="submit"
                         class="primary-button"

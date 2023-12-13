@@ -14,7 +14,7 @@
         <!-- Total Sales Section -->
         <template v-else>
             <div class="rounded-[4px] box-shadow">
-                <div class="flex gap-[16px] flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800">
+                <div class="flex gap-4 flex-wrap p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800">
                     <!-- Today's Sales -->
                     <div class="flex gap-2.5 flex-1">
                         <img
@@ -24,7 +24,7 @@
                         >
 
                         <!-- Sales Stats -->
-                        <div class="grid gap-[4px] place-content-start">
+                        <div class="grid gap-1 place-content-start">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_sales.formatted_total }}
                             </p>
@@ -34,7 +34,7 @@
                             </p>
 
                             <!-- Percentage Of Sales -->
-                            <div class="flex gap-[2px] items-center">
+                            <div class="flex gap-0.5 items-center">
                                 <span
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.total_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
@@ -59,7 +59,7 @@
                         >
 
                         <!-- Orders Stats -->
-                        <div class="grid gap-[4px] place-content-start">
+                        <div class="grid gap-1 place-content-start">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_orders.current }}
                             </p>
@@ -69,7 +69,7 @@
                             </p>
 
                             <!-- Orders Percentage -->
-                            <div class="flex gap-[2px] items-center">
+                            <div class="flex gap-0.5 items-center">
                                 <span
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.total_orders.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
@@ -94,7 +94,7 @@
                         >
 
                         <!-- Customers Stats -->
-                        <div class="grid gap-[4px] place-content-start">
+                        <div class="grid gap-1 place-content-start">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_customers.current }}
                             </p>
@@ -104,7 +104,7 @@
                             </p>
 
                             <!-- Customers Percentage -->
-                            <div class="flex gap-[2px] items-center">
+                            <div class="flex gap-0.5 items-center">
                                 <span
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.total_customers.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
@@ -128,7 +128,7 @@
                 >
                     <!-- Order ID, Status, Created -->
                     <div class="flex gap-2.5">
-                        <div class="flex flex-col gap-[6px]">
+                        <div class="flex flex-col gap-1.5">
                             <!-- Order Id -->
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ "@lang('admin::app.dashboard.index.order-id', ['id' => ':replace'])".replace(':replace', order.increment_id) }}
@@ -146,7 +146,7 @@
                     </div>
 
                     <!-- Payment And Channel Detailes -->
-                    <div class="flex flex-col gap-[6px]">
+                    <div class="flex flex-col gap-1.5">
                         <!-- Grand Total -->
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @{{ order.formatted_base_grand_total }}
@@ -163,7 +163,7 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col gap-[6px]">
+                    <div class="flex flex-col gap-1.5">
                         <!-- Customer Detailes -->
                         <p class="text-[16px] text-gray-800 dark:text-white">
                             @{{ order.customer_name }}
@@ -181,9 +181,9 @@
 
                     <!-- Ordered Product Images -->
                     <div class="max-1580:col-span-full">
-                        <div class="flex gap-[6px] items-center justify-between">
+                        <div class="flex gap-1.5 items-center justify-between">
                             <div
-                                class="flex gap-[6px] items-center flex-wrap"
+                                class="flex gap-1.5 items-center flex-wrap"
                                 v-html="order.image"
                             >
                             </div>

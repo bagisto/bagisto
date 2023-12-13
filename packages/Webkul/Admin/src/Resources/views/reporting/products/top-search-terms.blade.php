@@ -21,11 +21,11 @@
                 </div>
 
                 <!-- Content -->
-                <div class="grid gap-[16px]">
+                <div class="grid gap-4">
                     <div class="table-responsive grid w-full rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
                         <!-- Table Header -->
                         <div
-                            class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-[16px] py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                            class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
                             style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                         >
                             <div class="flex gap-2.5">
@@ -49,7 +49,7 @@
 
                         <!-- Table Body -->
                         <div
-                            class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                             v-for="record in report.statistics"
                         >

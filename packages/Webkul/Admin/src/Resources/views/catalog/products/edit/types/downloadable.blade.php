@@ -22,7 +22,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[4px] items-center">
+                <div class="flex gap-x-1 items-center">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateLinkDrawer.open()"
@@ -89,7 +89,7 @@
                                 <!-- Drag Icon -->
                                 <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
@@ -157,12 +157,12 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
+                            <div class="grid gap-1 place-content-start text-right">
                                 <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.price) }}    
                                 </p>
 
-                                <div class="flex gap-x-[20px] items-center">
+                                <div class="flex gap-x-5 items-center">
                                     <p
                                         class="text-red-600 cursor-pointer transition-all hover:underline"
                                         @click="remove(element)"
@@ -185,7 +185,7 @@
 
             <!-- For Empty Links -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
@@ -225,7 +225,7 @@
                     <x-admin::drawer ref="updateCreateLinkDrawer">
                         <!-- Drawer Header -->
                         <x-slot:header>
-                            <div class="grid gap-[12px]">
+                            <div class="grid gap-3">
                                 <div class="flex justify-between items-center">
                                     <p class="text-[20px] font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.title')
@@ -241,7 +241,7 @@
                         <!-- Drawer Content -->
                         <x-slot:content class="!p-0">
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-2.5">
+                            <div class="px-4 py-2.5">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.name')
@@ -259,7 +259,7 @@
                                     <x-admin::form.control-group.error control-name="title"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px]">
+                                <div class="flex gap-4">
                                     <x-admin::form.control-group class="flex-1">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.price')
@@ -295,7 +295,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="flex gap-[16px]">
+                                <div class="flex gap-4">
                                     <x-admin::form.control-group class="flex-1">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.file-type')
@@ -393,7 +393,7 @@
                                     </template>
                                 </div>
 
-                                <div class="flex gap-[16px]">
+                                <div class="flex gap-4">
                                     <x-admin::form.control-group class="flex-1">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.sample-type')
@@ -504,7 +504,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[4px] items-center">
+                <div class="flex gap-x-1 items-center">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateSampleDrawer.open()"
@@ -553,7 +553,7 @@
                                 <!-- Drag Icon -->
                                 <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
@@ -591,8 +591,8 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
-                                <div class="flex gap-x-[20px] items-center">
+                            <div class="grid gap-1 place-content-start text-right">
+                                <div class="flex gap-x-5 items-center">
                                     <p
                                         class="text-red-600 cursor-pointer transition-all hover:underline"
                                         @click="remove(element)"
@@ -615,7 +615,7 @@
 
             <!-- For Empty Links -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
@@ -655,7 +655,7 @@
                     <x-admin::drawer ref="updateCreateSampleDrawer">
                         <!-- Drawer Header -->
                         <x-slot:header>
-                            <div class="grid gap-[12px]">
+                            <div class="grid gap-3">
                                 <div class="flex justify-between items-center">
                                     <p class="text-[20px] font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.title')
@@ -671,7 +671,7 @@
                         <!-- Drawer Content -->
                         <x-slot:content class="!p-0">
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-2.5">
+                            <div class="px-4 py-2.5">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.name')
@@ -689,7 +689,7 @@
                                     <x-admin::form.control-group.error control-name="title"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px]">
+                                <div class="flex gap-4">
                                     <x-admin::form.control-group class="flex-1">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.file-type')

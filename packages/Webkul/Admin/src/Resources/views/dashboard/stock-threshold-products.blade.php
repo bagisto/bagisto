@@ -44,7 +44,7 @@
                                 </div>
                             </template>
 
-                            <div class="flex flex-col gap-[6px]">
+                            <div class="flex flex-col gap-1.5">
                                 <!-- Product Name -->
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
@@ -57,8 +57,8 @@
                             </div>
                         </div>
 
-                        <div class="flex gap-[6px] items-center justify-between">
-                            <div class="flex flex-col gap-[6px]">
+                        <div class="flex gap-1.5 items-center justify-between">
+                            <div class="flex flex-col gap-1.5">
                                 <!-- Product Price -->
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @{{ product.formatted_price }}
@@ -84,7 +84,7 @@
                 class="rounded-[4px] box-shadow"
                 v-else
             >
-                <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px] ">
+                <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 ">
                     <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
                     
                     <div class="flex flex-col items-center">

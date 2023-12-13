@@ -1,4 +1,4 @@
-<div class="flex gap-[6px]">
+<div class="flex gap-1.5">
     @php
         $restCount = max($order->items->count() - 3, 0);
     @endphp
@@ -12,7 +12,7 @@
                         src="{{ $item->product->base_image_url }}"
                     >
 
-                    <span class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
+                    <span class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-1.5">
                         {{ $item->qty_ordered }}
                     </span>
                 @else
@@ -31,7 +31,7 @@
     @if ($restCount >= 1)
         <a href="{{ route('admin.sales.orders.view', $order->id) }}">
             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 dark:bg-gray-800 rounded-[4px]">
-                <p class="text-[12px] text-gray-600 dark:text-gray-300 text-center font-bold px-[6px] py-[6px]">
+                <p class="text-[12px] text-gray-600 dark:text-gray-300 text-center font-bold px-1.5 py-1.5">
                     @lang('admin::app.sales.orders.index.datagrid.product-count', ['count' => $restCount])
                 </p>
             </div>

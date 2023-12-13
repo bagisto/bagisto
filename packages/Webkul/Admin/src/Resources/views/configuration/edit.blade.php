@@ -24,13 +24,13 @@
         enctype="multipart/form-data"
     >
         <!-- Save Inventory -->
-        <div class="flex gap-[16px] justify-between items-center mt-3.5 max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center mt-3.5 max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 {{ $title }}
             </p>
 
             <!-- Save Inventory -->
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.configuration.index') }}"
@@ -48,15 +48,15 @@
             </div>
         </div>
 
-        <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
+        <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+            <div class="flex gap-x-1 items-center">
                 <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-store text-[24px] "></span>
                             
@@ -87,7 +87,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -115,7 +115,7 @@
         </div>
 
         @if ($groups)
-            <div class="grid grid-cols-[1fr_2fr] gap-[40px] mt-[25px] max-xl:flex-wrap">
+            <div class="grid grid-cols-[1fr_2fr] gap-10 mt-[25px] max-xl:flex-wrap">
                 @foreach ($groups as $key => $item)
                     <div class="grid gap-2.5 content-start">
                         <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">

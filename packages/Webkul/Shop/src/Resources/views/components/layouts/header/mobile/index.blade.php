@@ -67,7 +67,7 @@
                     <v-mobile-category></v-mobile-category>
 
                     <!-- Localization & Currency Section -->
-                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-[20px] justify-between items-center mb-[15px]">
+                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-5 justify-between items-center mb-[15px]">
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
@@ -142,7 +142,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex items-center gap-x-[20px]">
+            <div class="flex items-center gap-x-5">
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
@@ -174,7 +174,7 @@
 
                             <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                            <div class="flex gap-[16px] mt-[25px]">
+                            <div class="flex gap-4 mt-[25px]">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
                                     class="block w-max mx-auto m-0 ml-[0px] py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
@@ -184,7 +184,7 @@
 
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
-                                    class="block w-max mx-auto m-0 ml-[0px] py-[14px] px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-[0px] py-3.5 px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>
@@ -208,7 +208,7 @@
 
                             <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
-                            <div class="grid gap-[4px] mt-2.5 pb-2.5">
+                            <div class="grid gap-1 mt-2.5 pb-2.5">
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.profile.index') }}"

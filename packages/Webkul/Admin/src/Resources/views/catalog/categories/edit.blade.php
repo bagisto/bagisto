@@ -19,12 +19,12 @@
 
         {!! view_render_event('bagisto.admin.catalog.categories.edit.edit_form_controls.before', ['category' => $category]) !!}
 
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.edit.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.catalog.categories.index') }}"
@@ -44,8 +44,8 @@
         </div>
 
         <!-- Filter Row -->
-        <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
+        <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+            <div class="flex gap-x-1 items-center">
                 <!-- Locale Switcher -->
 
                 <x-admin::dropdown :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''">
@@ -53,7 +53,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
                             <span class="icon-language text-[24px] "></span>
 
@@ -133,7 +133,7 @@
                             </label>
 
                             <!-- Radio select button -->
-                            <div class="flex flex-col gap-[12px]">
+                            <div class="flex flex-col gap-3">
                                 <x-admin::tree.view
                                     input-type="radio"
                                     name-field="parent_id"

@@ -10,8 +10,8 @@
                 @lang('admin::app.settings.taxes.categories.index.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
-                <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- Create Tax Category Button -->
                     @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                         <button
@@ -36,8 +36,8 @@
                     @lang('admin::app.settings.taxes.categories.index.title')
                 </p>
 
-                <div class="flex gap-x-[10px] items-center">
-                    <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
+                    <div class="flex gap-x-2.5 items-center">
                         <!-- Create Tax Category Button -->
                         @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                             <button
@@ -61,7 +61,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
@@ -251,7 +251,7 @@
                         </x-slot:content>
 
                         <x-slot:footer>
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <!-- Save Button -->
                                 <button
                                     type="submit"

@@ -53,7 +53,7 @@
                         </div>
 
                         <!-- Product Detailes -->
-                        <div class="flex flex-col gap-[6px] w-full">
+                        <div class="flex flex-col gap-1.5 w-full">
                             <p
                                 class="text-gray-600 dark:text-gray-300"
                                 v-text="item.name"
@@ -79,10 +79,10 @@
 
                 <!-- Empty Product Design -->
                 <div
-                    class="flex flex-col gap-[32px] p-[16px]"
+                    class="flex flex-col gap-8 p-[16px]"
                     v-else
                 >
-                    <div class="grid gap-[14px] justify-center justify-items-center py-2.5">
+                    <div class="grid gap-3.5 justify-center justify-items-center py-2.5">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"

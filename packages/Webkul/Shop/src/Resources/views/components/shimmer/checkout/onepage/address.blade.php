@@ -24,7 +24,7 @@
             <!-- Single card addredd -->
             <div
                 class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <span class="shimmer w-[52px] h-[52px] rounded-full"></span>
 
                     <p class="shimmer w-[140px] h-[24px]"></p>

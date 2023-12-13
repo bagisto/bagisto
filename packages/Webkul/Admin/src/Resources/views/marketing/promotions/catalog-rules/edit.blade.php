@@ -23,12 +23,12 @@
 
                     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.create_form_controls.before') !!}
 
-                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                    <div class="flex gap-4 justify-between items-center mt-3 max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
                         </p>
 
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
@@ -109,7 +109,7 @@
 
                             <!-- Conditions -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <div class="flex gap-[16px] items-center justify-between">
+                                <div class="flex gap-4 items-center justify-between">
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.conditions')
                                     </p>
@@ -164,12 +164,12 @@
 
                             <!-- Actions -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <div class="grid gap-[6px]">
+                                <div class="grid gap-1.5">
                                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.actions')
                                     </p>
 
-                                    <div class="flex  gap-[16px]  max-sm:flex-wrap">
+                                    <div class="flex  gap-4  max-sm:flex-wrap">
                                         <div class="w-full mb-2.5">
                                             @php($selectedOption = old('action_type') ?? $catalogRule->action_type)
 
@@ -427,7 +427,7 @@
                                 </x-slot:header>
 
                                 <x-slot:content>
-                                    <div class="flex gap-[16px]">
+                                    <div class="flex gap-4">
                                         <x-admin::form.control-group class="mb-2.5">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.from')
@@ -529,12 +529,12 @@
 
         <!-- v catalog rule condition item form template -->
         <script type="text/x-template" id="v-catalog-rule-condition-item-template">
-            <div class="flex gap-[16px] justify-between mt-[15px]">
-                <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
+            <div class="flex gap-4 justify-between mt-[15px]">
+                <div class="flex gap-4 flex-1 max-sm:flex-wrap max-sm:flex-1">
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.marketing.promotions.catalog-rules.edit.choose-condition-to-add')</option>
@@ -554,7 +554,7 @@
 
                     <select
                         :name="['conditions[' + index + '][operator]']"
-                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -609,7 +609,7 @@
                                         type="text"
                                         v-bind="field"
                                         :class="{ 'border border-red-500': errorMessage }"
-                                        class="flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                                        class="flex w-[289px] min:w-1/3 h-[40px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                                     />
                                 </v-field>
 
@@ -645,7 +645,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	rtl:pr-3 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -661,7 +661,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -675,7 +675,7 @@
 
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                                     v-model="condition.value"
                                     v-else
                                 >
@@ -696,7 +696,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
+                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 ltr:pr-[40px] rtl:pl-[40px]"
                                     v-model="condition.value"
                                     multiple
                                 >

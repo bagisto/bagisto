@@ -38,7 +38,7 @@
                 </x-shop::dropdown>
 
                 <!-- Product Pagination Limit -->
-                <div class="flex gap-[40px] items-center">
+                <div class="flex gap-10 items-center">
                     <!-- Product Pagination Limit -->
                     <x-shop::dropdown position="bottom-right">
                         <x-slot:toggle>

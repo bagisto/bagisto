@@ -29,14 +29,14 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-2.5 bg-navyBlue rounded-[44px] text-white text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -115,14 +115,14 @@
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-2.5 bg-navyBlue rounded-[44px] text-white text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')

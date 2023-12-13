@@ -9,7 +9,7 @@
             @lang('admin::app.cms.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
@@ -17,7 +17,7 @@
                 </x-slot:toggle>
 
                 <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800 rounded-[4px] z-10 bg-white dark:bg-gray-900 shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
-                    <div class="grid gap-[2px]">
+                    <div class="grid gap-0.5">
                         <!-- Current Channel -->
                         <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]">
                             <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">

@@ -9,7 +9,7 @@
 <x-shop::shimmer.products.reviews.ratings/>
 
 <!-- Ratings By Individual Stars Shimmer -->
-<div class="flex gap-x-[20px] items-center">
+<div class="flex gap-x-5 items-center">
     <div class="flex gap-y-[18px] max-w-[365px] mt-2.5 flex-wrap">
         @for ($i = 5; $i >= 1; $i--)
             <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">

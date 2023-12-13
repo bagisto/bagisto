@@ -6,7 +6,7 @@
 
     <!-- Header -->
     <div class="grid">
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
             <div class="flex gap-2.5 items-center">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-5">
+    <div class="justify-between gap-x-1 gap-y-[8px] items-center flex-wrap mt-5">
         <div class="flex gap-[5px]">
             {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
@@ -48,7 +48,7 @@
                 </form>
 
                 <div 
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                    class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                     @click="$emitter.emit('open-confirm-modal', {
                         message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
                         agree: () => {
@@ -108,7 +108,7 @@
                     <!-- Order items -->
                     <div class="grid">
                         @foreach ($order->items as $item)
-                            <div class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                            <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
                                 <div class="flex gap-2.5">
                                     @if($item?->product?->base_image_url)
                                         <img
@@ -125,12 +125,12 @@
                                         </div>
                                     @endif
                     
-                                    <div class="grid gap-[6px] place-content-start">
+                                    <div class="grid gap-1.5 place-content-start">
                                         <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                             {{ $item->name }}
                                         </p>
 
-                                        <div class="flex flex-col gap-[6px] place-items-start">
+                                        <div class="flex flex-col gap-1.5 place-items-start">
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 @lang('admin::app.sales.orders.view.amount-per-unit', [
                                                     'amount' => core()->formatBasePrice($item->base_price),
@@ -165,14 +165,14 @@
                                     </div>
                                 </div>
 
-                                <div class="grid gap-[4px] place-content-start">
+                                <div class="grid gap-1 place-content-start">
                                     <div class="">
-                                        <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
+                                        <p class="flex items-center gap-x-1 justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
                                             {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                         </p>
                                     </div>
 
-                                    <div class="flex flex-col gap-[6px] items-end place-items-start">
+                                    <div class="flex flex-col gap-1.5 items-end place-items-start">
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.orders.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                         </p>
@@ -299,7 +299,7 @@
 
                             <div class="flex justify-between items-center">
                                 <label
-                                    class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                                    class="flex gap-1 w-max items-center p-[6px] cursor-pointer select-none"
                                     for="customer_notified"
                                 >
                                     <input
@@ -317,7 +317,7 @@
                                     >
                                     </span>
                         
-                                    <p class="flex gap-x-[4px] items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
+                                    <p class="flex gap-x-1 items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                         @lang('admin::app.sales.orders.view.notify-customer')
                                     </p>
                                 </label>
@@ -337,7 +337,7 @@
 
                     <!-- Comment List -->
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
-                        <div class="grid gap-[6px] p-[16px]">
+                        <div class="grid gap-1.5 p-[16px]">
                             <p class="text-[16px] text-gray-800 dark:text-white leading-6">
                                 {{ $comment->comment }}
                             </p>
@@ -403,7 +403,7 @@
                             <div class="{{ $order->shipping_address ? 'pb-[16px]' : '' }}">
 
                                 <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                    <p class="text-gray-600 dark:text-gray-300  text-[16px] py-4 font-semibold">
                                         @lang('admin::app.sales.orders.view.billing-address')
                                     </p>
                                 </div>
@@ -419,7 +419,7 @@
                             <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
                                     @lang('admin::app.sales.orders.view.shipping-address')
                                 </p>
                             </div>

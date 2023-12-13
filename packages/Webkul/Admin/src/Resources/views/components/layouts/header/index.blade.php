@@ -2,8 +2,8 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-[16px] py-2.5 bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800 sticky top-0 z-[10001]">
-    <div class="flex gap-[6px] items-center">
+<header class="flex justify-between items-center px-4 py-2.5 bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800 sticky top-0 z-[10001]">
+    <div class="flex gap-1.5 items-center">
         <!-- Hamburger Menu -->
         <i
             class="hidden icon-menu text-[24px] p-[6px] max-lg:block cursor-pointer"
@@ -97,7 +97,7 @@
 
             <!-- Admin Dropdown -->
             <x-slot:content class="!p-[0px]">
-                <div class="flex gap-[5px] items-center px-[20px] py-2.5 border border-b-gray-300 dark:border-gray-800">
+                <div class="flex gap-[5px] items-center px-5 py-2.5 border border-b-gray-300 dark:border-gray-800">
                     <img
                         src="{{ url('cache/logo/bagisto.png') }}"
                         width="24"
@@ -110,7 +110,7 @@
                     </p>
                 </div>
 
-                <div class="grid gap-[4px] pb-2.5">
+                <div class="grid gap-1 pb-2.5">
                     <a
                         class="px-5 py-2 text-[16px] text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                         href="{{ route('admin.account.edit') }}"
@@ -187,7 +187,7 @@
                                 @foreach ($menuItem['children'] as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem['url'] }}"
-                                        class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-[4px]"
+                                        class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-1"
                                     >
                                         @lang($subMenuItem['name'])
                                     </a>
@@ -266,7 +266,7 @@
                                     </div>
 
                                     <!-- Details -->
-                                    <div class="grid gap-[6px] place-content-start">
+                                    <div class="grid gap-1.5 place-content-start">
                                         <p
                                             class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold"
                                             v-text="product.name"
@@ -280,7 +280,7 @@
                                 </div>
 
                                 <!-- Right Information -->
-                                <div class="grid gap-[4px] place-content-center text-right">
+                                <div class="grid gap-1 place-content-center text-right">
                                     <p
                                         class="text-gray-600 dark:text-gray-300 font-semibold"
                                         v-text="product.formatted_price"
@@ -319,7 +319,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
-                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid gap-1.5 place-content-start p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="order in searchedResults.orders.data"
                             >
                                 <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
@@ -397,7 +397,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
-                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid gap-1.5 place-content-start p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="customer in searchedResults.customers.data"
                             >
                                 <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
@@ -595,7 +595,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex gap-[5px] justify-between h-[47px] py-[16px] px-[24px] border-t-[1px] dark:border-gray-800">
+                <div class="flex gap-[5px] justify-between h-[47px] py-4 px-6 border-t-[1px] dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
                         class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"

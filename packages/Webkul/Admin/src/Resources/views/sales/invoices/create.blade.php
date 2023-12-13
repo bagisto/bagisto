@@ -1,7 +1,7 @@
 <!-- Invoice Create Vue Component -->
 <v-create-invoices>
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
     >
         <span class="icon-sales text-[24px]"></span> 
 
@@ -13,7 +13,7 @@
     <script type="text/x-template" id="v-create-invoices-template">
         <div>
             <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                     @click="$refs.invoice.open()"
                 >
                     <span
@@ -33,7 +33,7 @@
                 <x-admin::drawer ref="invoice">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-[12px]">
+                        <div class="grid gap-3">
                             <div class="flex justify-between items-center">
                                 <p class="text-[20px] font-medium dark:text-white">
                                     @lang('admin::app.sales.invoices.create.new-invoice')         
@@ -55,7 +55,7 @@
                             <div class="p-[16px] !pt-0">
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-2.5 justify-between py-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="flex gap-2.5 justify-between py-4 border-b-[1px] border-slate-300 dark:border-gray-800">
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
@@ -72,12 +72,12 @@
                                                     </div>
                                                 @endif
                 
-                                                <div class="grid gap-[6px] place-content-start">
+                                                <div class="grid gap-1.5 place-content-start">
                                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 
-                                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                                    <div class="flex flex-col gap-1.5 place-items-start">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.invoices.create.amount-per-unit', [
                                                                 'amount' => core()->formatBasePrice($item->base_price),

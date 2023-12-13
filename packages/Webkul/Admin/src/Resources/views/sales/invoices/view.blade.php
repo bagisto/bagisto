@@ -10,7 +10,7 @@
 
     <!-- Main Body -->
     <div class="grid">
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
 
             <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
@@ -23,7 +23,7 @@
 
             {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.sales.invoices.index') }}"
@@ -36,13 +36,13 @@
     </div>
 
     <!-- Filter row -->
-    <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-        <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap">
+    <div class="flex  gap-4 justify-between items-center mt-[28px] max-md:flex-wrap">
+        <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap">
             {!! view_render_event('sales.invoice.page_action.before', ['order' => $order]) !!}
 
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
             >
                 <span class="icon-printer text-[24px] "></span> 
 
@@ -53,7 +53,7 @@
             <div>
                 <button
                     type="button"
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                    class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                     @click="$refs.groupCreateModal.open()"
                 >
                     <span class="icon-mail text-[24px] "></span>
@@ -97,7 +97,7 @@
         
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button 
                                     type="submit"
                                     class="primary-button"
@@ -128,7 +128,7 @@
                 <div class="grid">
                     <!-- Invoice Item Details-->
                     @foreach($invoice->items as $item)
-                        <div class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
                             <div class="flex gap-2.5">
                                 <!-- Product Image -->
                                 @if ($item->product?->base_image_url)
@@ -146,7 +146,7 @@
                                     </div>
                                 @endif
                                 
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <!-- Item Name -->
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
@@ -159,7 +159,7 @@
                                             ])
                                     </p>
 
-                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                    <div class="flex flex-col gap-1.5 place-items-start">
                                         @if (isset($item->additional['attributes']))
                                             <!-- Item Additional Details -->
                                             <p class="text-gray-600 dark:text-gray-300">
@@ -182,14 +182,14 @@
                                 </div>
                             </div>
 
-                            <div class="grid gap-[4px] place-content-start">
+                            <div class="grid gap-1 place-content-start">
                                 <!-- Item Grand Total -->
-                                <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="flex items-center gap-x-1 justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                 </p>
 
                                 <!-- Item Base Price -->
-                                <div class="flex flex-col gap-[6px] items-end place-items-start">
+                                <div class="flex flex-col gap-1.5 items-end place-items-start">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.invoices.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                     </p>
@@ -306,7 +306,7 @@
                                 <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
 
                                 <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
+                                    <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
                                         @lang('Billing Address')
                                     </p>
                                 </div>
@@ -322,7 +322,7 @@
                             <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
                                     @lang('Shipping Address')
                                 </p>
                             </div>

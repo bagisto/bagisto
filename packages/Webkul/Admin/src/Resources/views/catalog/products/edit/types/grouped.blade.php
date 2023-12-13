@@ -20,7 +20,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[4px] items-center">
+                <div class="flex gap-x-1 items-center">
                     <div
                         class="secondary-button"
                         @click="$refs.productSearch.openDrawer()"
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <!-- Details -->
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.associated_product.name }}
                                     </p>
@@ -81,7 +81,7 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
+                            <div class="grid gap-1 place-content-start text-right">
                                 <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.associated_product.price) }}    
                                 </p>
@@ -129,7 +129,7 @@
 
             <!-- For Empty Variations -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->

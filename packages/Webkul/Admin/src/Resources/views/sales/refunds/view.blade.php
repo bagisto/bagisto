@@ -8,13 +8,13 @@
 
     <!-- Page Header -->
     <div class="grid pt-[11px]">
-        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
             </p>
 
             <!-- Cancel Button -->
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <a
                     href="{{ route('admin.sales.refunds.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -38,7 +38,7 @@
                 <!-- Products List -->
                 <div class="grid">
                     @foreach ($refund->items as $item)
-                        <div class="flex gap-2.5 justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
                             <div class="flex gap-2.5">
                                 @if ($item->product?->base_image_url)
                                     <img
@@ -56,13 +56,13 @@
                                 @endif
 
                                 <!-- Product Name -->
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
                                     <!-- Product Attribute Detailes -->
-                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                    <div class="flex flex-col gap-1.5 place-items-start">
                                         @if (isset($item->additional['attributes']))
                                             @foreach ($item->additional['attributes'] as $attribute)
                                                 <p class="text-gray-600 dark:text-gray-300">
@@ -85,14 +85,14 @@
                             </div>
 
                             <!-- Product Price Section -->
-                            <div class="grid gap-[4px] place-content-start">
+                            <div class="grid gap-1 place-content-start">
                                 <div class="">
-                                    <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
+                                    <p class="flex items-center gap-x-1 justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                     </p>
                                 </div>
 
-                                <div class="flex flex-col gap-[6px] items-end place-items-start">
+                                <div class="flex flex-col gap-1.5 items-end place-items-start">
                                     <!-- Base Total -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.refunds.view.price', ['price' => core()->formatBasePrice($item->base_total)])
@@ -236,7 +236,7 @@
 
                             <!-- Billing Address -->
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
                                     @lang('admin::app.sales.refunds.view.billing-address')
                                 </p>
                             </div>
@@ -249,7 +249,7 @@
                             <span class="block w-full mt-[16px] border-b-[1px] dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-[16px] font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-4 font-semibold">
                                     @lang('admin::app.sales.refunds.view.shipping-address')
                                 </p>
                             </div>

@@ -50,7 +50,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <button
                                 type="submit"
                                 class="secondary-button"
@@ -95,7 +95,7 @@
 
                     <x-slot:footer>
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <button
                                 type="button"
                                 class="primary-button"

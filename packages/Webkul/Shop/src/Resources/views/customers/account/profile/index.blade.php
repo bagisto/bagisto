@@ -16,7 +16,7 @@
 
         <a
             href="{{ route('shop.customers.account.profile.edit') }}"
-            class="secondary-button py-3 px-[20px] border-[#E9E9E9] font-normal"
+            class="secondary-button py-3 px-5 border-[#E9E9E9] font-normal"
         >
             @lang('shop::app.customers.account.profile.edit')
         </a>
@@ -100,7 +100,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password"
-                            class="py-[20px] px-[25px]"
+                            class="py-5 px-[25px]"
                             rules="required"
                             placeholder="Enter your password"
                         />

@@ -7,14 +7,14 @@
             </div>
             <!-- Details -->
 
-            <div class="grid gap-[6px] place-content-start">
+            <div class="grid gap-1.5 place-content-start">
                 <p class="shimmer w-[350px] h-[17px]"></p>
                 <p class="shimmer w-[150px] h-[17px]"></p>
             </div>
         </div>
 
         <!-- Right Information -->
-        <div class="grid gap-[4px] place-content-center text-right">
+        <div class="grid gap-1 place-content-center text-right">
                 <p class="shimmer w-[50px] h-[17px]"></p>
         </div>
     </div>

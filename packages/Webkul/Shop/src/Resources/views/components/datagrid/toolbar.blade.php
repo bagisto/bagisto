@@ -3,19 +3,19 @@
 </template>
 
 <template v-else>
-    <div class="mt-[28px] flex items-center justify-between gap-[16px] max-md:flex-wrap">
+    <div class="mt-[28px] flex items-center justify-between gap-4 max-md:flex-wrap">
         <!-- Left Toolbar -->
-        <div class="flex gap-x-[4px]">
+        <div class="flex gap-x-1">
             <!-- Mass Actions Panel -->
             <div
-                class="flex w-full items-center gap-x-[4px]"
+                class="flex w-full items-center gap-x-1"
                 v-if="applied.massActions.indices.length"
             >
                 <!-- Mass Action Dropdown -->
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
+                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border border-gray-300 bg-white px-2.5 py-1.5 text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
                             <span>
                                 @lang('shop::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
@@ -92,7 +92,7 @@
 
             <!-- Search Panel -->
             <div
-                class="flex w-full items-center gap-x-[4px]"
+                class="flex w-full items-center gap-x-1"
                 v-else
             >
                 <!-- Search Panel -->
@@ -115,7 +115,7 @@
         </div>
 
         <!-- Right Toolbar -->
-        <div class="flex gap-x-[16px]">
+        <div class="flex gap-x-4">
             <!-- Items Per Page Dropdown -->
             <x-shop::dropdown position="bottom-left">
                 <!-- Dropdown Toggler -->

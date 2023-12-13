@@ -13,7 +13,7 @@
 
     <!-- Breadcrumb -->
     <div class="flex justify-center mt-5 max-lg:hidden">
-		<div class="flex gap-x-[10px] items-center">
+		<div class="flex gap-x-2.5 items-center">
             <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
                         </h1>
 
                         <div
-                            class="secondary-button flex gap-x-[10px] items-center py-3 px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
+                            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -67,7 +67,7 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
                                         v-for="product in items"
@@ -93,7 +93,7 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="w-[311px] max-w-[311px] pr-0 p-[20px] max-sm:pl-0"
                                         v-for="(product, index) in items"

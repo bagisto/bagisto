@@ -4,12 +4,12 @@
         @lang('admin::app.sales.transactions.index.title')
     </x-slot:title>
 
-    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.sales.transactions.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
 
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.transactions.index') }}"></x-admin::datagrid.export>
@@ -31,7 +31,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-2.5 items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
@@ -117,7 +117,7 @@
 
                     <!-- Drawer Content -->
                     <x-slot:content>
-                        <div class="flex flex-col gap-[16px] px-[5px] py-2.5">
+                        <div class="flex flex-col gap-4 px-[5px] py-2.5">
                             <p class="text-[18px] text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.sales.transactions.index.view.transaction-data')
                             </p>

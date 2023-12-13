@@ -78,7 +78,7 @@
                         class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                     />
 
-                    <div class="flex flex-col gap-[6px]">
+                    <div class="flex flex-col gap-1.5">
                         <p class="text-[16px] text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.price.group.add-group-price')
                         </p>
@@ -143,7 +143,7 @@
                                 </x-admin::form.control-group.control>
                             </x-admin::form.control-group>
 
-                            <div class="flex gap-[16px]">
+                            <div class="flex gap-4">
                                 <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.price.group.create.qty')
@@ -208,10 +208,10 @@
         
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button
                                     type="button"
-                                    class="text-red-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                                    class="text-red-600 font-semibold whitespace-nowrap px-3 py-1.5 border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                                     @click="remove"
                                     v-if="selectedPrice.id"
                                 >

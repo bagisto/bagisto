@@ -22,7 +22,7 @@
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>
                 
-                <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-5">
+                <div class="grid mt-10 border-b-[1px] border-[#E9E9E9] max-sm:mt-5">
                     <div 
                         class="flex gap-x-[15px] pb-5"
                         v-for="item in cart.items"
@@ -134,7 +134,7 @@
                     >
                         <button
                             v-if="! isLoading"
-                            class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-10"
                             @click="placeOrder"
                         >
                             @lang('shop::app.checkout.onepage.summary.place-order')    
@@ -142,7 +142,7 @@
 
                         <button
                             v-else
-                            class="flex gap-2.5 items-center w-max py-[11px] px-[32px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            class="flex gap-2.5 items-center w-max py-[11px] px-8 bg-navyBlue text-white text-base font-medium rounded-[18px] text-center max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-10"
                         >
                             <!-- Spinner -->
                             <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -4,7 +4,7 @@
             <!-- Navigation Menu -->
             @foreach ($menu->items as $menuItem)
                 <div
-                    class="relative px-[16px] group/item"
+                    class="relative px-4 group/item"
                     onmouseenter="adjustSubMenuPosition(event)"
                 >
                     <a
@@ -23,7 +23,7 @@
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a
                                     href="{{ $subMenuItem['url'] }}"
-                                    class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 dark:text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-300 whitespace-nowrap py-[4px] group-[.sidebar-collapsed]/container:px-[20px] group-[.sidebar-collapsed]/container:py-2.5 hover:text-blue-600 dark:hover:bg-gray-950"
+                                    class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 dark:text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-5 group-[.sidebar-collapsed]/container:py-2.5 hover:text-blue-600 dark:hover:bg-gray-950"
                                 >
                                     @lang($subMenuItem['name'])
                                 </a>
@@ -42,7 +42,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-sidebar-collapse-template">
         <div
-            class="bg-white dark:bg-gray-900  fixed w-full max-w-[270px] bottom-0 px-[16px] hover:bg-gray-100 dark:hover:bg-gray-950 border-t-[1px] border-gray-200 dark:border-gray-800 transition-all duration-300 cursor-pointer"
+            class="bg-white dark:bg-gray-900  fixed w-full max-w-[270px] bottom-0 px-4 hover:bg-gray-100 dark:hover:bg-gray-950 border-t-[1px] border-gray-200 dark:border-gray-800 transition-all duration-300 cursor-pointer"
             :class="{'max-w-[70px]': isCollapsed}"
             @click="toggle"
         >

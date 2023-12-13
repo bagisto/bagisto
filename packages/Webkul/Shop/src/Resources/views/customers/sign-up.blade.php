@@ -15,7 +15,7 @@
         @lang('shop::app.customers.signup-form.page-title')
     </x-slot>
 
-	<div class="container mt-20 max-1180:px-[20px]">
+	<div class="container mt-20 max-1180:px-5">
         <!-- Company Logo -->
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
@@ -187,7 +187,7 @@
                     @endif
 
                     @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-                        <div class="flex gap-[6px] items-center select-none">
+                        <div class="flex gap-1.5 items-center select-none">
                             <input
                                 type="checkbox"
                                 name="is_subscribed"
@@ -212,9 +212,9 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.newsletter_subscription.after') !!}
 
-                    <div class="flex gap-[36px] flex-wrap items-center mt-[30px]">
+                    <div class="flex gap-9 flex-wrap items-center mt-[30px]">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button-title')

@@ -1,5 +1,5 @@
 <v-create-customer-address>
-    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
+    <div class="inline-flex gap-x-2 mr-[4px] items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
         <span class="icon-location text-[24px]"></span>
 
         @lang('admin::app.customers.addresses.create.create-address-btn')
@@ -16,7 +16,7 @@
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$refs.CustomerAddress.toggle()"
             >
                 <span class="icon-location text-[24px]"></span>
@@ -57,7 +57,7 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Company Name -->
                             <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label>
@@ -99,7 +99,7 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- First Name -->
                             <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
@@ -197,7 +197,7 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- City -->
                             <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
@@ -241,7 +241,7 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Country Name -->
                             <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
@@ -309,7 +309,7 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap items-center">
+                        <div class="flex gap-4 max-sm:flex-wrap items-center">
                             <!--Phone number -->
                             <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
@@ -363,7 +363,7 @@
     
                     <x-slot:footer>
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <button 
                                 type="submit"
                                 class="primary-button"

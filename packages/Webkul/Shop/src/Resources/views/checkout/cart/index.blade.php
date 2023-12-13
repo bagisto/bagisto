@@ -130,8 +130,8 @@
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-[10px] justify-between flex-wrap pb-[18px] border-b-[1px] border-[#E9E9E9]">
-                                    <div class="flex gap-x-[20px]">
+                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                                    <div class="flex gap-x-5">
                                         <div class="select-none mt-[43px]">
                                             <input
                                                 type="checkbox"
@@ -176,7 +176,7 @@
                                             
                                             <!-- Cart Item Options Container -->
                                             <div
-                                                class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                                class="grid gap-x-2.5 gap-y-[6px] select-none"
                                                 v-if="item.options.length"
                                             >
                                                 <!-- Details Toggler -->
@@ -228,7 +228,7 @@
                                             <x-shop::quantity-changer
                                                 name="quantity"
                                                 ::value="item?.quantity"
-                                                class="flex gap-x-[10px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-max"
+                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-[5px] px-3.5 items-center max-w-max"
                                                 @change="setItemQuantity(item.id, $event)"
                                             >
                                             </x-shop::quantity-changer>

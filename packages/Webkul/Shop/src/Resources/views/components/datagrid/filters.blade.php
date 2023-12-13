@@ -47,7 +47,7 @@
 
             <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                    class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <!-- Retrieving the label from the options based on the applied column value. -->
@@ -112,7 +112,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <!-- Retrieving the label from the options based on the applied column value. -->
@@ -160,7 +160,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue"></span>
@@ -199,7 +199,7 @@
 
             <div class="mt-[16px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-[6px] border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -244,7 +244,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
@@ -283,7 +283,7 @@
 
             <div class="my-[16px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-[6px] border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -328,7 +328,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
@@ -377,7 +377,7 @@
 
             <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                    class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <span v-text="appliedColumnValue"></span>
@@ -412,7 +412,7 @@
                         <ul class="list-reset">
                             <li class="p-2">
                                 <input
-                                    class="block w-full rounded-[6px] border border-gray-300 bg-white px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="block w-full rounded-[6px] border border-gray-300 bg-white px-2 py-1.5 text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     @keyup="lookUp($event)"
                                 >
                             </li>

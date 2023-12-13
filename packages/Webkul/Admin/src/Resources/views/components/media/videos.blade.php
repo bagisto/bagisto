@@ -21,7 +21,7 @@
     <script type="text/x-template" id="v-media-videos-template">
         <!-- Panel Content -->
         <div class="grid">
-            <div class="flex gap-[4px]">
+            <div class="flex gap-1">
                 <!-- Upload Video Button -->
                 <label
                     class="grid justify-items-center items-center w-full h-[120px] max-w-[210px] max-h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
@@ -53,7 +53,7 @@
 
                 <!-- Uploaded Videos -->
                 <draggable
-                    class="flex gap-[4px]"
+                    class="flex gap-1"
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     :list="videos"

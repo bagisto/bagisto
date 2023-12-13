@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-[20px] bg-white border-t-[1px] border-[#E9E9E9] z-50"
+    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-5 bg-white border-t-[1px] border-[#E9E9E9] z-50"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,7 +26,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-[16px] font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-[24px]"></span>
@@ -76,7 +76,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-[16px] font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-[24px]"></span>

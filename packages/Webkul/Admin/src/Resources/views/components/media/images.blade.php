@@ -23,7 +23,7 @@
     <script type="text/x-template" id="v-media-images-template">
         <!-- Panel Content -->
         <div class="grid">
-            <div class="flex flex-wrap gap-[4px]">
+            <div class="flex flex-wrap gap-1">
                 <!-- Upload Image Button -->
                 <template v-if="allowMultiple || images.length == 0">
                     <!-- AI Image Generation Button -->
@@ -78,7 +78,7 @@
 
                 <!-- Uploaded Images -->
                 <draggable
-                    class="flex flex-wrap gap-[4px]"
+                    class="flex flex-wrap gap-1"
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     :list="images"
@@ -276,7 +276,7 @@
 
                             <!-- Modal Submission -->
                             <x-slot:footer>
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <template v-if="! ai.images.length">
                                         <button class="secondary-button">
                                             <!-- Spinner -->

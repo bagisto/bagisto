@@ -3,7 +3,7 @@
 
     <div class="shimmer w-[143px] h-[54px] rounded-lg"></div>
 
-    <div class="flex gap-[40px] items-center max-md:hidden">
+    <div class="flex gap-10 items-center max-md:hidden">
         <div class="shimmer w-[84px] h-[54px] rounded-lg"></div>
 
         <div class="flex gap-5 items-center">

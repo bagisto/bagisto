@@ -58,8 +58,8 @@
                         <x-slot:content>
                             <!-- Modal Content -->
                             {!! view_render_event('admin.customer.addresses.edit.before') !!}
-                            <div class="px-[16px] py-2.5 border-b-[1px] dark:border-gray-800  ">
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Company Name -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
@@ -103,7 +103,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- First Name -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
@@ -209,7 +209,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- City -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
@@ -255,7 +255,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Country Name -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
@@ -329,7 +329,7 @@
                                     </x-admin::form.control-group>
                                 </div>
 
-                                <div class="flex gap-[16px] max-sm:flex-wrap items-center">
+                                <div class="flex gap-4 max-sm:flex-wrap items-center">
                                     <!--Phone number -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
@@ -384,7 +384,7 @@
         
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button 
                                     type="submit"
                                     class="primary-button"

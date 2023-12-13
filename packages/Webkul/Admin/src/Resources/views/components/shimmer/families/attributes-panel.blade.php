@@ -9,7 +9,7 @@
         </div>
 
         <!-- Panel Content -->
-        <div class="flex gap-x-[4px] items-center">
+        <div class="flex gap-x-1 items-center">
             <!-- Delete Group Button -->
             <div class="shimmer w-[130px] h-[40px] rounded-[6px]"></div>
 
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Panel Content -->
-    <div class="flex [&amp;>*]:flex-1 gap-5 justify-between px-[16px]">
+    <div class="flex [&amp;>*]:flex-1 gap-5 justify-between px-4">
         @for ($i = 0; $i < 2; $i++)
             <!-- Attributes Groups Container -->
             <div>
@@ -40,7 +40,7 @@
                                 <div class="shimmer w-[16px] h-[16px] mr-[4px]"></div>
 
                                 <!-- Group Name -->
-                                <div class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5">
+                                <div class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5">
                                     <div class="shimmer w-[20px] h-[21px]"></div>
 
                                     <div class="shimmer w-[20px] h-[21px]"></div>
@@ -52,7 +52,7 @@
                             <!-- Group Attributes -->
                             <div class="ltr:ml-[43px] rtl:mr-[43px]">
                                 @for ($k = 0; $k < 5; $k++)
-                                    <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5">
+                                    <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5">
                                         <div class="shimmer w-[20px] h-[21px]"></div>
 
                                         <div class="shimmer w-[20px] h-[21px]"></div>
@@ -79,7 +79,7 @@
             <!-- Draggable Unassigned Attributes -->
             <div class="h-[calc(100vh-285px)] pb-[16px] overflow-auto">
                 @for ($i = 0; $i < 10; $i++)
-                    <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-1.5 rtl:pl-1.5">
+                    <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5">
                         <div class="shimmer w-[20px] h-[21px]"></div>
 
                         <div class="shimmer w-[20px] h-[21px]"></div>

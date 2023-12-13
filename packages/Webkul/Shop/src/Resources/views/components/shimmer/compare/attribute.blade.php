@@ -6,7 +6,7 @@
             <p class="shimmer w-[55%] h-[21px]"></p>
         </div>
         
-        <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+        <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
             @for ($j = 0;  $j < $productCount; $j++)
                 <div class="w-[311px] max-w-[311px] pr-0 p-[20px] max-sm:pl-0">
                     <div class="grid gap-[5px]">

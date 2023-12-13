@@ -13,9 +13,9 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <div class="grid gap-[16px] px-[16px] py-[8px] border-b dark:border-gray-800">
+            <div class="grid gap-4 px-4 py-2 border-b dark:border-gray-800">
                 <div class="flex gap-2 justify-between">
-                    <div class="flex flex-col gap-[4px] justify-between">
+                    <div class="flex flex-col gap-1 justify-between">
                         <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.dashboard.index.visitors')
                         </p>
@@ -26,7 +26,7 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col gap-[4px] justify-between">
+                    <div class="flex flex-col gap-1 justify-between">
                         <!-- Orders Time Duration -->
                         <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
                             @{{ report.date_range }}

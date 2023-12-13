@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
 
-    <div class="grid grid-cols-4 gap-[24px]">
+    <div class="grid grid-cols-4 gap-6">
         @foreach (range(1, 4) as $i)
-            <div class="grid gap-[16px]">
-                <div class="grid gap-[2px]">
+            <div class="grid gap-4">
+                <div class="grid gap-0.5">
                     <div class="shimmer w-[75px] h-[17px]"></div>
                     <div class="shimmer w-[120px] h-[17px]"></div>
                 </div>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="flex gap-5 justify-end mt-[24px]">
-        <div class="flex gap-[4px] items-center">
+        <div class="flex gap-1 items-center">
             <div class="shimmer w-[14px] h-[14px] rounded-[3px]"></div>
             <div class="shimmer w-[143px] h-[17px]"></div>
         </div>

@@ -26,12 +26,12 @@
 
                     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.edit_form_controls.before') !!}
 
-                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                    <div class="flex gap-4 justify-between items-center mt-3 max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.marketing.promotions.cart-rules.edit.title')
                         </p>
 
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <!-- Back Button -->
                             <a
                                 href="{{ route('admin.marketing.promotions.cart_rules.index') }}"
@@ -261,7 +261,7 @@
 
                             <!-- Conditions -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <div class="flex gap-[16px] items-center justify-between">
+                                <div class="flex gap-4 items-center justify-between">
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.conditions')
                                     </p>
@@ -320,12 +320,12 @@
 
                             <!-- Action -->
                             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <div class="grid gap-[6px]">
+                                <div class="grid gap-1.5">
                                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.actions')
                                     </p>
 
-                                    <div class="flex  gap-[16px]  max-sm:flex-wrap">
+                                    <div class="flex  gap-4  max-sm:flex-wrap">
                                         <div class="w-full">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label class="required">
@@ -402,7 +402,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex gap-[16px] max-sm:flex-wrap">
+                                    <div class="flex gap-4 max-sm:flex-wrap">
                                         <div class="w-full">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
@@ -450,7 +450,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex  gap-[16px]  max-sm:flex-wrap">
+                                    <div class="flex  gap-4  max-sm:flex-wrap">
                                         <div class="w-full">
                                             @php($selectedOption = old('apply_to_shipping') ?? $cartRule->apply_to_shipping)
 
@@ -529,7 +529,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex gap-[16px] justify-between max-sm:flex-wrap">
+                                    <div class="flex gap-4 justify-between max-sm:flex-wrap">
                                         <div class="w-full">
                                             @php($selectedOption = old('end_other_rules') ?? $cartRule->end_other_rules)
 
@@ -834,12 +834,12 @@
             type="text/x-template"
             id="v-cart-rule-condition-item-template"
         >
-            <div class="flex gap-[16px] justify-between mt-[15px]">
-                <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
+            <div class="flex gap-4 justify-between mt-[15px]">
+                <div class="flex gap-4 flex-1 max-sm:flex-wrap max-sm:flex-1">
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	rtl:pr-3 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
+                        class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.marketing.promotions.cart-rules.edit.choose-condition-to-add')</option>
@@ -859,7 +859,7 @@
 
                     <select
                         :name="['conditions[' + index + '][operator]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	rtl:pr-3 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                        class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -937,7 +937,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	rtl:pr-3 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -953,7 +953,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-3	rtl:pr-3 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -967,7 +967,7 @@
 
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] ltr:pl-[12px] rtl:pr-[12px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-full max-w-[196px] py-1.5 ltr:pl-[12px] rtl:pr-[12px] px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                     v-else
                                 >
@@ -988,7 +988,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-[196px] max-w-[196px] py-[6px] ltr:pl-3 rtl:pr-3 px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="inline-flex gap-x-1 justify-between items-center max-h-[40px] w-[196px] max-w-[196px] py-1.5 ltr:pl-3 rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                     multiple
                                 >
@@ -1218,7 +1218,7 @@
             id="v-create-coupon-form-template"
         >
             <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                <div class="grid gap-[6px]">
+                <div class="grid gap-1.5">
                     <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-code')
                     </p>
@@ -1228,7 +1228,7 @@
                         as="div"
                     >
                         <form @submit="handleSubmit($event, store)">
-                            <div class="flex gap-[16px]  max-sm:flex-wrap">
+                            <div class="flex gap-4  max-sm:flex-wrap">
                                 <div class="w-full mb-2.5">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
@@ -1278,7 +1278,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex gap-[16px] max-sm:flex-wrap">
+                            <div class="flex gap-4 max-sm:flex-wrap">
                                 <div class="w-full mb-2.5">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
@@ -1377,11 +1377,11 @@
 
                     <!-- Coupons Export Modal -->
                     <div class="flex justify-between items-center">
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <p class="text-[20px] text-gray-800 dark:text-white font-bold"></p>
                         </div>
                         <div> <!-- Empty div to push content to the right end --> </div>
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <x-admin::datagrid.export src="{{ route('admin.marketing.promotions.cart_rules.coupons.index', $cartRule->id) }}"></x-admin::datagrid.export>
                         </div>
                     </div>

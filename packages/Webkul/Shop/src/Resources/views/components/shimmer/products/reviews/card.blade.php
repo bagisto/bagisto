@@ -10,7 +10,7 @@
             <div class="flex justify-between">
                 <p class="shimmer w-[90px] h-[30px]"></p>
                 
-                <div class="flex items-center gap-[6px]">
+                <div class="flex items-center gap-1.5">
                     <span class="shimmer w-[24px] h-[24px]"></span>
                     <span class="shimmer w-[24px] h-[24px]"></span>
                     <span class="shimmer w-[24px] h-[24px]"></span>
@@ -21,7 +21,7 @@
 
             <p class="shimmer mt-2.5 w-[130px] h-[21px]"></p>
 
-            <div class="grid gap-[6px] mt-5 ">
+            <div class="grid gap-1.5 mt-5 ">
                 <p class="shimmer w-[130px] h-[21px]"></p>
                 <p class="shimmer w-[130px] h-[21px]"></p>
             </div>

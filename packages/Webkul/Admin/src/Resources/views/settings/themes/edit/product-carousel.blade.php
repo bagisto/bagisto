@@ -6,8 +6,8 @@
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
-                    <div class="flex gap-x-[10px] justify-between items-center mb-2.5">
-                        <div class="flex flex-col gap-[4px]">
+                    <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
+                        <div class="flex flex-col gap-1">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.product-carousel')
                             </p>
@@ -56,7 +56,7 @@
                             <select
                                 name="{{ $currentLocale->code }}[options][filters][sort]"
                                 v-bind="field"
-                                class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
+                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
                                 :class="[errors['{{ $currentLocale->code }}[options][filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             >
                                 <option value="" selected disabled>
@@ -94,7 +94,7 @@
                             <select
                                 name="options[filters][limit]"
                                 v-bind="field"
-                                class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
+                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400"
                                 :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             >
                                 <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -113,8 +113,8 @@
 
                     <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800"></span>
 
-                    <div class="flex gap-x-[10px] justify-between items-center">
-                        <div class="flex flex-col gap-[4px]">
+                    <div class="flex gap-x-2.5 justify-between items-center">
+                        <div class="flex flex-col gap-1">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.filters')
                             </p>
@@ -151,7 +151,7 @@
                             }"
                         >
                             <div class="flex gap-2.5">
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <div> 
                                             @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
@@ -165,8 +165,8 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
-                                <div class="flex gap-x-[20px] items-center">
+                            <div class="grid gap-1 place-content-start text-right">
+                                <div class="flex gap-x-5 items-center">
                                     <p 
                                         class="text-red-600 cursor-pointer transition-all hover:underline"
                                         @click="remove(filter)"
@@ -179,7 +179,7 @@
                     </div>
                     <!-- Filters Illustration -->
                     <div    
-                        class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px] "
+                        class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 "
                         v-else
                     >
                         <img
@@ -376,11 +376,11 @@
                         </x-slot:content>
 
                         <x-slot:footer>
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <!-- Save Button -->
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                 >
                                     @lang('admin::app.settings.themes.edit.save-btn')
                                 </button>

@@ -24,7 +24,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[4px] items-center">
+                <div class="flex gap-x-1 items-center">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateOptionModal.open()"
@@ -53,7 +53,7 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
@@ -98,7 +98,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-2.5 border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
@@ -116,7 +116,7 @@
                                     <x-admin::form.control-group.error control-name="label"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px]">
+                                <div class="flex gap-4">
                                     <x-admin::form.control-group class="flex-1">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
@@ -178,7 +178,7 @@
         
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button 
                                     type="submit"
                                     class="primary-button"
@@ -221,7 +221,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[20px] items-center">
+                <div class="flex gap-x-5 items-center">
                     <p
                         class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         @click="$refs['productSearch' + option.id].openDrawer()"
@@ -306,7 +306,7 @@
                                 </div>
 
                                 <!-- Details -->
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.product.name }}
                                     </p>
@@ -318,7 +318,7 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
+                            <div class="grid gap-1 place-content-start text-right">
                                 <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.product.price) }}    
                                 </p>
@@ -365,7 +365,7 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->

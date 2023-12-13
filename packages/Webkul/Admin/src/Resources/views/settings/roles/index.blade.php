@@ -9,7 +9,7 @@
             @lang('admin::app.settings.roles.index.title')
         </p>
         
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Add Role Button -->
             @if (bouncer()->hasPermission('settings.roles.create')) 
                 <a 

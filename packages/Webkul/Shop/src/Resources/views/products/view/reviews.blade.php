@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
 <v-product-reviews :product-id="{{ $product->id }}">
-    <div class="container max-1180:px-[20px]">
+    <div class="container max-1180:px-5">
         <x-shop::shimmer.products.reviews/>
     </div>
 </v-product-reviews>
@@ -11,7 +11,7 @@
 @pushOnce('scripts')
     <!-- Product Review Template -->
     <script type="text/x-template" id="v-product-reviews-template">
-        <div class="container max-1180:px-[20px]">
+        <div class="container max-1180:px-5">
             <!-- Create Review Form Container -->
             <div 
                 class="w-full" 
@@ -23,7 +23,7 @@
                 >
                     <!-- Review Form -->
                     <form
-                        class="grid grid-cols-[auto_1fr] gap-[40px] justify-center max-md:grid-cols-[1fr]"
+                        class="grid grid-cols-[auto_1fr] gap-10 justify-center max-md:grid-cols-[1fr]"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -140,7 +140,7 @@
 
                             <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
                                 <button
-                                    class="primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
+                                    class="primary-button w-full max-w-[374px] py-4 px-[43px] rounded-[18px] text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -201,7 +201,7 @@
                         </div>
 
                         <!-- Ratings By Individual Stars -->
-                        <div class="flex gap-x-[20px] items-center">
+                        <div class="flex gap-x-5 items-center">
                             <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
                                     <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
@@ -308,7 +308,7 @@
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-2.5 px-[8px] py-[4px] rounded-[8px] text-[14px]"
+                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-[8px] text-[14px]"
                     @click="translate"
                 >
                     <!-- Spinner -->

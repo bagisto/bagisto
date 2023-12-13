@@ -12,7 +12,7 @@
                 <div class="shimmer w-[65px] h-[65px] rounded-[4px]"></div>
 
                 <!-- Product Detailes -->
-                <div class="flex flex-col gap-[6px] w-[251px]">
+                <div class="flex flex-col gap-1.5 w-[251px]">
                     <!-- Product Name -->
                     <div class="shimmer w-full h-[17px]"></div>
 

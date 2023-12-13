@@ -28,7 +28,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                            class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                         >
                             <span 
                                 class="text-[14px] text-gray-400 dark:text-gray-400" 
@@ -54,7 +54,7 @@
 
             <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                    class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <!-- Retrieving the label from the options based on the applied column value. -->
@@ -99,7 +99,7 @@
                         <x-slot:toggle>
                             <button
                                 type="button"
-                                class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
+                                class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
                             >
                                 <span 
                                     class="text-[14px] text-gray-400 dark:text-gray-400" 
@@ -125,7 +125,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <!-- Retrieving the label from the options based on the applied column value. -->
@@ -173,7 +173,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue"></span>
@@ -212,7 +212,7 @@
 
             <div class="mt-[5px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                    class="cursor-pointer rounded-[6px] border px-2 py-1.5 text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -257,7 +257,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
@@ -296,7 +296,7 @@
 
             <div class="my-[16px] grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border px-[8px] py-[6px] text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                    class="cursor-pointer rounded-[6px] border px-2 py-1.5 text-center text-[14px] font-medium leading-[24px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -341,7 +341,7 @@
 
                 <div class="mb-[16px] flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
@@ -381,7 +381,7 @@
             <div class="mb-[8px] mt-[5px] grid">
                 <input
                     type="text"
-                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2 py-1.5 text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"
@@ -390,7 +390,7 @@
 
             <div class="mb-[16px] flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                    class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <span v-text="appliedColumnValue"></span>
@@ -413,7 +413,7 @@
             <x-slot:toggle>
                 <button
                     type="button"
-                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[10px] py-[6px] text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
+                    class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
                 >
                     <span
                         class="text-[14px] text-gray-400 dark:text-gray-400" 
@@ -432,7 +432,7 @@
                         <ul class="list-reset">
                             <li class="p-2">
                                 <input
-                                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                                    class="block w-full rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2 py-1.5 text-[14px] leading-[24px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                                     @keyup="lookUp($event)"
                                 >
                             </li>

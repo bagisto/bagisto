@@ -15,7 +15,7 @@
                 @lang('admin::app.marketing.communications.templates.create.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
@@ -27,7 +27,7 @@
                 <!-- Save Button -->
                 <button
                     type="submit"
-                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.marketing.communications.templates.create.save-btn')
                 </button>

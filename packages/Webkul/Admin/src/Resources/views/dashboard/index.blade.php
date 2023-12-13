@@ -4,8 +4,8 @@
     </x-slot:title>
 
     <!-- User Detailes Section -->
-    <div class="flex gap-[16px] justify-between items-center mb-5 max-sm:flex-wrap">
-        <div class="grid gap-[6px]">
+    <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
+        <div class="grid gap-1.5">
             <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => auth()->guard('admin')->user()->name])
             </p>
@@ -18,7 +18,7 @@
         <!-- Actions -->
         <v-dashboard-filters>
             <!-- Shimmer -->
-            <div class="flex gap-[6px]">
+            <div class="flex gap-1.5">
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
                 <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
             </div>
@@ -88,7 +88,7 @@
         <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
 
         <script type="text/x-template" id="v-dashboard-filters-template">
-            <div class="flex gap-[6px]">
+            <div class="flex gap-1.5">
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
                         class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"

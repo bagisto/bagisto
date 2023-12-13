@@ -15,8 +15,8 @@
 
         <!-- Cart Items -->
         @for ($i = 0; $i < $count; $i++)
-            <div class="flex gap-x-[10px] justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
-                <div class="flex gap-x-[20px]">
+            <div class="flex gap-x-2.5 justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                <div class="flex gap-x-5">
                     <div class="select-none mt-[43px]">
                         <div class="shimmer w-[24px] h-[25px] rounded-[4px]"></div>
                     </div>

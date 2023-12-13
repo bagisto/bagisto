@@ -20,10 +20,10 @@
                 </p>
                 
                 <!-- Content -->
-                <div class="grid grid-cols-4 gap-[24px]">
+                <div class="grid grid-cols-4 gap-6">
                     <!-- Total Visits -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.visitors.total }}
                             </p>
@@ -46,8 +46,8 @@
                     </div>
 
                     <!-- Total Product Visits -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.product_visitors.total }}
                             </p>
@@ -71,8 +71,8 @@
                     </div>
 
                     <!-- Total Added To Cart -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.carts.total }}
                             </p>
@@ -96,8 +96,8 @@
                     </div>
 
                     <!-- Total Purchased -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.orders.total }}
                             </p>
@@ -123,7 +123,7 @@
 
                 <!-- Date Range Section -->
                 <div class="flex gap-5 justify-end mt-[24px]">
-                    <div class="flex gap-[4px] items-center">
+                    <div class="flex gap-1 items-center">
                         <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
 
                         <p class="text-[12px] dark:text-gray-300">

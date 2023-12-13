@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="grid">
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             <div class="flex gap-2.5 items-center">
                 <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
                     {{ $customer->first_name . " " . $customer->last_name }}
@@ -45,14 +45,14 @@
     {!! view_render_event('bagisto.admin.customers.customers.view.filters.before') !!}
 
     <!-- Filters -->
-    <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
+    <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap mt-[28px]">
         <!-- Address Create component -->
         @include('admin::customers.addresses.create')
 
         <!-- Account Delete button -->
         @if (bouncer()->hasPermission('customers.customers.delete'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                 @click="$emitter.emit('open-confirm-modal', {
                     message: '@lang('admin::app.customers.customers.view.account-delete-confirmation')',
 
@@ -111,10 +111,10 @@
                     <!-- Order Details -->
                     <div class="table-responsive grid w-full">
                         @foreach ($orders->paginate(10) as $order)
-                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
+                            <div class="flex justify-between items-center px-4 py-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-2.5">
-                                        <div class="flex flex-col gap-[6px]">
+                                        <div class="flex flex-col gap-1.5">
                                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                                 @lang('admin::app.customers.customers.view.increment-id', ['increment_id' => $order->increment_id])
                                             </p>
@@ -158,7 +158,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex flex-col gap-[6px]">
+                                    <div class="flex flex-col gap-1.5">
                                         <!-- Grand Total -->
                                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                             {{ core()->formatBasePrice($order->base_grand_total ) }}
@@ -176,7 +176,7 @@
                                     </div>
 
                                     <!-- Order Address Details -->
-                                    <div class="flex flex-col gap-[6px]">
+                                    <div class="flex flex-col gap-1.5">
                                         <p class="text-[16px] text-gray-800 dark:text-white">
                                             {{ $order->billingAddress->name }}
                                         </p>
@@ -210,9 +210,9 @@
 
                     <!-- Pagination -->
                     @if ($totalOrderCount > 10)
-                        <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] dark:border-gray-800">
+                        <div class="flex gap-x-2 items-center p-[24px] border-t-[1px] dark:border-gray-800">
                             <div
-                                class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
+                                class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
                             >
                                 {{ $pagination['per_page'] }}
                             </div>
@@ -222,7 +222,7 @@
                             </span>
     
                             <p
-                                class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
+                                class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
                             >
                                 {{ $pagination['current_page'] }}
                             </p>
@@ -236,15 +236,15 @@
                             </span>
     
                             <!-- Prev & Next Page Button -->
-                            <div class="flex gap-[4px] items-center">
+                            <div class="flex gap-1 items-center">
                                 <a href="{{ $pagination['first_page_url'] }}">
-                                    <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                         <span class="icon-sort-left text-[24px]"></span>
                                     </div>
                                 </a>
     
                                 <a href="{{ $pagination['next_page_url'] }}">
-                                    <div class="inline-flex gap-x-[4px] items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                         <span class="icon-sort-right text-[24px]"></span>
                                     </div>
                                 </a>
@@ -261,7 +261,7 @@
 
                     <!-- Order Details -->
                     <div class="table-responsive grid w-full">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
+                        <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
@@ -296,7 +296,7 @@
                             <thead class="text-[14px] text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b-[1px] border-gray-200 dark:border-gray-800">
                                 <tr>
                                     @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
-                                        <th scope="col" class="px-6 py-[16px] font-semibold"> 
+                                        <th scope="col" class="px-6 py-4 font-semibold"> 
                                             @lang('admin::app.customers.customers.view.' . $item)
                                         </th>
                                     @endforeach
@@ -307,19 +307,19 @@
                                 <tbody>
                                     <!-- Invoice Details -->
                                     <tr class="bg-white dark:bg-gray-900 border-b transition-all hover:bg-gray-50 dark:hover:bg-gray-950 dark:border-gray-800">
-                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
+                                        <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
 
-                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-gray-600 dark:text-gray-300 whitespace-nowrap">
                                             {{ $invoice->created_at }}
                                         </td>
 
-                                        <td scope="row" class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
+                                        <td scope="row" class="px-6 py-4 text-gray-600 dark:text-gray-300">
                                             {{ core()->formatBasePrice($invoice->base_grand_total) }}
                                         </td>
 
-                                        <td class="px-6 py-[16px] text-gray-600 dark:text-gray-300">
+                                        <td class="px-6 py-4 text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.customers.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
                                         </td>
 
@@ -345,7 +345,7 @@
                     </div>
 
                     <div class="table-responsive grid w-full">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
+                        <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
@@ -378,7 +378,7 @@
                         <!-- Reviews Details -->
                         <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                             <div class="flex justify-start [&amp;>*]:flex-1">
-                                <div class="flex flex-col gap-[6px]">
+                                <div class="flex flex-col gap-1.5">
                                     <!-- Review Name -->
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ $review->name }}
@@ -412,7 +412,7 @@
                                     @endswitch
                                 </div>
 
-                                <div class="flex flex-col gap-[6px]">
+                                <div class="flex flex-col gap-1.5">
                                     <!-- need to update shivendra-webkul -->
                                     <div class="flex">
                                         <x-admin::star-rating 
@@ -432,8 +432,8 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between gap-x-[16px] items-center">
-                                <div class="flex flex-col gap-[6px]">
+                            <div class="flex justify-between gap-x-4 items-center">
+                                <div class="flex flex-col gap-1.5">
                                     <!-- Review Title -->
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         {{ $review->title }}
@@ -464,7 +464,7 @@
                     </div>
 
                     <div class="table-responsive grid w-full">
-                        <div class="grid gap-[14px] justify-center justify-items-center py-10 px-[10px]">
+                        <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
@@ -516,7 +516,7 @@
 
                         <div class="flex justify-between items-center">
                             <label 
-                                class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                                class="flex gap-1 w-max items-center p-[6px] cursor-pointer select-none"
                                 for="customer_notified"
                             >
                                 <input 
@@ -529,7 +529,7 @@
                     
                                 <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                     
-                                <p class="flex gap-x-[4px] items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
+                                <p class="flex gap-x-1 items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                     @lang('admin::app.customers.customers.view.notify-customer')
                                 </p>
                             </label>
@@ -549,7 +549,7 @@
                 <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                 @foreach ($customer->notes as $note)
-                    <div class="grid gap-[6px] p-[16px]">
+                    <div class="grid gap-1.5 p-[16px]">
                         <p class="text-[16px] text-gray-800 dark:text-white leading-6">
                             {{$note->note}}
                         </p>
@@ -739,7 +739,7 @@
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             >
 
-                            <div class="flex flex-col gap-[6px]">
+                            <div class="flex flex-col gap-1.5">
                                 <p class="text-[16px] text-gray-400 font-semibold">
                                     @lang('admin::app.customers.customers.view.empty-title')
                                 </p>

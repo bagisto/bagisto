@@ -16,7 +16,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-2.5 px-6 py-[16px] font-medium border-b-[1px] border-[#E9E9E9] text-[14px] bg-[#F5F5F5] text-black items-center"
+                            class="row grid gap-2.5 px-6 py-4 font-medium border-b-[1px] border-[#E9E9E9] text-[14px] bg-[#F5F5F5] text-black items-center"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -79,7 +79,7 @@
                         <template v-if="$parent.available.records.length">
                             <div>
                                 <div
-                                    class="row grid gap-2.5 items-center px-6 py-[16px] bg-white border-b text-gray-600 transition-all font-medium"
+                                    class="row grid gap-2.5 items-center px-6 py-4 bg-white border-b text-gray-600 transition-all font-medium"
                                     v-for="record in $parent.available.records"
                                     :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                                 >
@@ -139,16 +139,16 @@
                                     </p>
 
                                     <!-- Pagination -->
-                                    <div class="flex items-center gap-[4px]">
+                                    <div class="flex items-center gap-1">
                                         <div
-                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                             @click="changePage('previous')"
                                         >
                                             <span class="icon-sort-left text-[24px]"></span>
                                         </div>
 
                                         <div
-                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                             @click="changePage('next')"
                                         >
                                             <span class="icon-sort-right text-[24px]"></span>
@@ -193,7 +193,7 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 text-center">
+                            <div class="row grid px-4 py-4 border-b-[1px] border-gray-300 text-gray-600 text-center">
                                 <p>
                                     @lang('shop::app.components.datagrid.table.no-records-available')
                                 </p>

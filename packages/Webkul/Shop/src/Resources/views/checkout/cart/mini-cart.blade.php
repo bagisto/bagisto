@@ -50,7 +50,7 @@
                     v-if="cart?.items?.length"
                 >
                     <div 
-                        class="flex gap-x-[20px]" 
+                        class="flex gap-x-5" 
                         v-for="item in cart?.items"
                     >
                         <!-- Cart Item Image -->
@@ -83,7 +83,7 @@
 
                             <!-- Cart Item Options Container -->
                             <div
-                                class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                class="grid gap-x-2.5 gap-y-[6px] select-none"
                                 v-if="item.options.length"
                             >
                                 <!-- Details Toggler -->
@@ -122,7 +122,7 @@
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="item?.quantity"
-                                    class="gap-x-[10px] max-w-[150px] max-h-[36px] py-[5px] px-[14px] rounded-[54px]"
+                                    class="gap-x-2.5 max-w-[150px] max-h-[36px] py-[5px] px-3.5 rounded-[54px]"
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
@@ -174,7 +174,7 @@
                     <div class="grid gap-2.5 px-[25px]">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-[20px]"
+                            class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
