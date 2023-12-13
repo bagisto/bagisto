@@ -118,7 +118,7 @@
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
                                     <img 
-                                        class="h-[20px] w-[20px] min-h-[20px] min-w-[20px]"
+                                        class="h-5 w-5 min-h-5 min-w-5"
                                         src="{{ Storage::url($customAttributeValue['value']) }}"
                                     />
                                 </a>

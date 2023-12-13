@@ -13,7 +13,7 @@
 
         <!-- Sold Products Quantity Section -->
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-[16px]">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
@@ -63,7 +63,7 @@
                     <!-- Date Range -->
                     <div class="flex gap-5 justify-center">
                         <div class="flex gap-1 items-center">
-                            <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
+                            <span class="w-[14px] h-3.5 rounded-[3px] bg-emerald-400"></span>
 
                             <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.previous }}
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="flex gap-1 items-center">
-                            <span class="w-[14px] h-[14px] rounded-[3px] bg-sky-400"></span>
+                            <span class="w-[14px] h-3.5 rounded-[3px] bg-sky-400"></span>
 
                             <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}

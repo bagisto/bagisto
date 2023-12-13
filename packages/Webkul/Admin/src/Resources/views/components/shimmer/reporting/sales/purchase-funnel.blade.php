@@ -1,5 +1,5 @@
 <!-- Purchase Funnel Section -->
-<div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+<div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
     <!-- Header -->
     <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
 
@@ -20,7 +20,7 @@
 
     <div class="flex gap-5 justify-end mt-[24px]">
         <div class="flex gap-1 items-center">
-            <div class="shimmer w-[14px] h-[14px] rounded-[3px]"></div>
+            <div class="shimmer w-[14px] h-3.5 rounded-[3px]"></div>
             <div class="shimmer w-[143px] h-[17px]"></div>
         </div>
     </div>

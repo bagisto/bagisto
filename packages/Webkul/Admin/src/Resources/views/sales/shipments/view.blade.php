@@ -30,7 +30,7 @@
         <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
+                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-4">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
 
@@ -94,7 +94,7 @@
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.customer')
                     </p>
                 </x-slot:header>
@@ -147,7 +147,7 @@
             <!-- component 2 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.order-information')
                     </p>
                 </x-slot:header>
@@ -202,7 +202,7 @@
             <!-- Component 3 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.payment-and-shipping')
                     </p>
                 </x-slot:header>

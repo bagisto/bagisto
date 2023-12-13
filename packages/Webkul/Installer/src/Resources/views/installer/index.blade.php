@@ -873,7 +873,7 @@
 
                                         <!-- Allowed Locales -->
                                         @foreach ($locales as $key => $locale)
-                                            <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                                 @php
                                                     $selectedOption = ($key == config('app.locale')) ? 1: 0;
                                                 @endphp
@@ -914,7 +914,7 @@
     
                                         <!-- Allowed Currencies -->
                                         @foreach ($currencies as $key => $currency)
-                                            <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                                 @php
                                                     $selectedOption = ($key == config('app.currency')) ? 1 : 0;
                                                 @endphp

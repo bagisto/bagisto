@@ -11,11 +11,11 @@
 
         @isset($header)
             <template v-slot:header="{ toggle, isOpen }">
-                <div {{ $header->attributes->merge(['class' => 'flex items-center justify-between p-[6px]']) }}>
+                <div {{ $header->attributes->merge(['class' => 'flex items-center justify-between p-1.5']) }}>
                     {{ $header }}
 
                     <span
-                        :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
+                        :class="`text-[24px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
                         @click="toggle"
                     ></span>
                 </div>

@@ -5,7 +5,7 @@
     >
         <label
             :for="id"
-            class="inline-flex items-center w-max p-[6px] text-gray-600 dark:text-gray-300 cursor-pointer select-none"
+            class="inline-flex items-center w-max p-1.5 text-gray-600 dark:text-gray-300 cursor-pointer select-none"
         >
             <input
                 type="radio"

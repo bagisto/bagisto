@@ -170,7 +170,7 @@
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                        <div class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
@@ -314,13 +314,13 @@
                                                     <!-- Actions button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                            class="icon-edit p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editModal(element)"
                                                         >
                                                         </span>
 
                                                         <span
-                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                            class="icon-delete p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -373,7 +373,7 @@
                     <div class="flex flex-col gap-2 w-[360px] max-w-full">
                         <!-- General -->
                         <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
-                            <div class="flex justify-between items-center p-[6px]">
+                            <div class="flex justify-between items-center p-1.5">
                                 <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.create.general')
                                 </p>
@@ -544,7 +544,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
-                                 <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                 <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_required"
@@ -563,7 +563,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_unique"
@@ -593,7 +593,7 @@
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="value_per_locale"
@@ -612,7 +612,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="value_per_channel"
@@ -631,7 +631,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_configurable"
@@ -650,7 +650,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_visible_on_front"
@@ -669,7 +669,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_comparable"
@@ -690,7 +690,7 @@
                                 <!-- Use in Layered -->
                                 <label
                                     for="is_filterable"
-                                    class="flex gap-2.5 items-center w-max p-[6px] cursor-pointer select-none"
+                                    class="flex gap-2.5 items-center w-max p-1.5 cursor-pointer select-none"
                                 >
                                     <input
                                         type="checkbox"

@@ -208,14 +208,14 @@
 
                         <div class="flex items-center">
                             <a
-                                class="icon-login text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                                class="icon-login text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                                 :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
                                 target="_blank"
                             >
                             </a>
 
                             <a
-                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
                                 :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
                             >
                             </a>

@@ -8,9 +8,9 @@
         </div>
 
         <div class="grid gap-[15px] content-start">
-            <p class="shimmer w-[75%] h-[24px]"></p>
+            <p class="shimmer w-[75%] h-6"></p>
 
-            <p class="shimmer w-[55%] h-[24px]"></p>
+            <p class="shimmer w-[55%] h-6"></p>
 
             <!-- Needs to implement that in future -->
             <div class="hidden flex gap-4"> 
@@ -19,7 +19,7 @@
                 <span class="shimmer w-[30px] h-[30px] block rounded-full"></span> 
             </div>
 
-            <p class="shimmer w-[100%] h-[24px]"></p>
+            <p class="shimmer w-[100%] h-6"></p>
 
             <div class="shimmer w-[152px] h-[46px] rounded-[12px]"></div>
         </div>

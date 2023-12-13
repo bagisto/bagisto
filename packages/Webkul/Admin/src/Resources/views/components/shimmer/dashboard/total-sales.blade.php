@@ -15,7 +15,7 @@
             <div class="shimmer w-[83px] h-[17px]"></div>
 
             <!-- Total Orders -->
-            <div class="shimmer w-[56px] h-[17px] self-end"></div>
+            <div class="shimmer w-14 h-[17px] self-end"></div>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="flex gap-[5px]">
         <div class="grid">
             @foreach (range(1, 10) as $i)
-                <div class="shimmer w-[34px] h-[10px]">
+                <div class="shimmer w-[34px] h-2.5">
                 </div>
             @endforeach
         </div>

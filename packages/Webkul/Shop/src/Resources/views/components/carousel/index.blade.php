@@ -26,7 +26,7 @@
             </a>
 
             <span
-                class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
                 aria-label="@lang('shop::components.carousel.previous')"
                 tabindex="0"
@@ -36,7 +36,7 @@
             </span>
 
             <span
-                class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
                 aria-label="@lang('shop::components.carousel.next')"
                 tabindex="0"

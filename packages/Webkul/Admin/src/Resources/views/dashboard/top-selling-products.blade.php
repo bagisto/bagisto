@@ -14,7 +14,7 @@
         <!-- Total Sales Section -->
         <template v-else>
             <div class="border-b dark:border-gray-800">
-                <div class="flex items-center justify-between p-[16px]">
+                <div class="flex items-center justify-between p-4">
                     <p class="text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                         @lang('admin::app.dashboard.index.top-selling-products')
                     </p>
@@ -31,7 +31,7 @@
                 >
                     <a
                         :href="`{{route('admin.catalog.products.edit', '')}}/${item.id}`"
-                        class="flex gap-2.5 p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="flex gap-2.5 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         v-for="item in report.statistics"
                     >
                         <!-- Product Item -->
@@ -79,14 +79,14 @@
 
                 <!-- Empty Product Design -->
                 <div
-                    class="flex flex-col gap-8 p-[16px]"
+                    class="flex flex-col gap-8 p-4"
                     v-else
                 >
                     <div class="grid gap-3.5 justify-center justify-items-center py-2.5">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                            class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                         >
 
                         <!-- Add Variants Information -->

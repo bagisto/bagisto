@@ -127,7 +127,7 @@
                                     @endforeach
 
                                     <!-- Create Transaction Button -->
-                                    <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             name="can_create_transaction"

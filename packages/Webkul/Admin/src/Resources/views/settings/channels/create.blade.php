@@ -122,7 +122,7 @@
                         </p>
 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
+                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="inventory_sources[]"
@@ -399,7 +399,7 @@
                             </p>
                         
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
+                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="locales[]"
@@ -466,7 +466,7 @@
                             </p>
                         
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
+                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="currencies[]" 

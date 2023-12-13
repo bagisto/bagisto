@@ -3,7 +3,7 @@
 </template>
 
 <template v-else>
-    <div class="mt-[28px] flex items-center justify-between gap-4 max-md:flex-wrap">
+    <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
         <!-- Left Toolbar -->
         <div class="flex gap-x-1">
             <!-- Mass Actions Panel -->
@@ -105,13 +105,13 @@
                             type="text"
                             name="search"
                             :value="getAppliedColumnValues('all')"
-                            class="block w-full rounded-lg border dark:border-gray-800 bg-white dark:bg-gray-900 py-1.5 ltr:pl-3 rtl:pr-3	ltr:pr-[40px] rtl:pl-[40px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400  dark:focus:border-gray-400"
+                            class="block w-full rounded-lg border dark:border-gray-800 bg-white dark:bg-gray-900 py-1.5 ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400  dark:focus:border-gray-400"
                             placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
                             autocomplete="off"
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute ltr:right-[10px] rtl:left-[10px] top-[8px] flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute ltr:right-[10px] rtl:left-[10px] top-2 flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                 </x-slot:header>
 
                 <!-- Drawer Content -->
-                <x-slot:content class="!p-[20px]">
+                <x-slot:content class="!p-5">
                     <x-admin::datagrid.filters></x-admin::datagrid.filters>
                 </x-slot:content>
             </x-admin::drawer>

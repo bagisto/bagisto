@@ -8,7 +8,7 @@
     <script type="text/x-template" id="v-group-products-template">
         <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex gap-5 justify-between mb-2.5 p-[16px]">
+            <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.grouped.title')
@@ -44,7 +44,7 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800">
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
@@ -135,7 +135,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->

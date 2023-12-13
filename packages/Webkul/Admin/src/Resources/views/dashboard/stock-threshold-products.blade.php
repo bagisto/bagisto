@@ -23,7 +23,7 @@
                     class="relative"
                     v-for="product in report.statistics"
                 >
-                    <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
+                    <div class="row grid grid-cols-2 gap-y-[24px] p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
                         <div class="flex gap-2.5">
                             <template v-if="product.image">
                                 <div class="">
@@ -72,7 +72,7 @@
 
                             <!-- View More Icon -->
                             <a :href="'{{ route('admin.catalog.products.edit', ':replace') }}'.replace(':replace', product.id)">
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
                             </a>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                 v-else
             >
                 <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 ">
-                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
+                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-20 h-20 dark:invert dark:mix-blend-exclusion">
                     
                     <div class="flex flex-col items-center">
                         <p class="text-[16px] text-gray-400 font-semibold">

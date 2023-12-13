@@ -1,15 +1,15 @@
 <v-image-search-result-component>
-    <div class="mt-[30px] p-[20px] border border-gray-200 rounded-lg">
+    <div class="mt-[30px] p-5 border border-gray-200 rounded-lg">
         <div class="flex gap-[46px]">
             <x-shop::media.images.lazy class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-sm"></x-shop::media.images.lazy>
              
             <div class="flex flex-col gap-[15px]">
-                <span class="shimmer w-[200px] h-[40px]"></span>
+                <span class="shimmer w-[200px] h-10"></span>
 
                 <div class="flex gap-2 flex-wrap">
                     @for ($i = 1; $i < 10; $i++)
                         <div class="shimmer flex justify-center items-center m-1 font-medium rounded-full cursor-pointer">
-                            <span class="shimmer w-[80px] h-[40px] rounded-full"></span>
+                            <span class="shimmer w-20 h-10 rounded-full"></span>
                         </div>
                     @endfor
                 </div>
@@ -20,7 +20,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-image-search-result-component-template">
-        <div class="mt-[30px] p-[20px] bg-gray-100 border border-gray-200 rounded-lg">
+        <div class="mt-[30px] p-5 bg-gray-100 border border-gray-200 rounded-lg">
             <div class="flex gap-[46px]">
                 <img 
                     class="max-w-[110px] max-h-[110px] min-h-[110px] w-[110px] h-[110px] rounded-sm" 

@@ -242,11 +242,11 @@
 
                         <div class="flex gap-[5px] items-center">
                             <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
-                                <span class="icon-copy text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-copy text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                             
                             <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
                                         >
                                         </label>
 
-                                        <div class="flex flex-wrap gap-1 min-h-[38px] p-[6px] border dark:border-gray-800 rounded-[6px]">
+                                        <div class="flex flex-wrap gap-1 min-h-[38px] p-1.5 border dark:border-gray-800 rounded-[6px]">
                                             <p
                                                 class="flex items-center py-[3px] px-2 bg-gray-600 rounded-[4px] text-white font-semibold"
                                                 v-for="option in attribute.options"

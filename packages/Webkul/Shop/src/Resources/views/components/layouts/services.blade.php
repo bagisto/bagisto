@@ -21,7 +21,7 @@
             @foreach ($customization->options['services'] as $service)
                 <div class="flex items-center gap-5 bg-white">
                     <span
-                        class="{{$service['service_icon']}} flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"
+                        class="{{$service['service_icon']}} flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-2.5"
                         role="presentation"
                     ></span>
 

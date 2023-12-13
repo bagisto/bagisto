@@ -402,8 +402,8 @@
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                                    <div class="flex items-center justify-between p-1.5">
+                                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                                             @lang('admin::app.settings.inventory-sources.create.settings')
                                         </p>
                                     </div>

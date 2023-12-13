@@ -57,7 +57,7 @@
                         <v-field
                             as="select"
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="custom-select block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select block w-full p-3.5 pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
                             :rules="{'required': option.is_required}"
                             v-model="selectedProduct"
@@ -202,7 +202,7 @@
                         >
                             <select
                                 :name="'bundle_options[' + option.id + '][]'"
-                                class="block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                                class="block w-full p-3.5 pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                                 :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
                                 v-model="selectedProduct"
                                 multiple

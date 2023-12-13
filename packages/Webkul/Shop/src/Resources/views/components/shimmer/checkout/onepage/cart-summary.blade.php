@@ -7,8 +7,8 @@
             <div class="shimmer w-[90px] h-[90px] rounded-md"></div>
 
             <div>
-                <p class="shimmer w-[180px] h-[24px]"></p>
-                <p class="shimmer w-[80px] h-[27px] mt-2.5"></p>
+                <p class="shimmer w-[180px] h-6"></p>
+                <p class="shimmer w-20 h-[27px] mt-2.5"></p>
             </div>
         </div>
 
@@ -17,8 +17,8 @@
             <div class="shimmer w-[90px] h-[90px] rounded-md"></div>
 
             <div>
-                <p class="shimmer w-[180px] h-[24px]"></p>
-                <p class="shimmer w-[80px] h-[27px] mt-2.5"></p>
+                <p class="shimmer w-[180px] h-6"></p>
+                <p class="shimmer w-20 h-[27px] mt-2.5"></p>
             </div>
         </div>
 
@@ -27,30 +27,30 @@
             <div class="shimmer w-[90px] h-[90px] rounded-md"></div>
 
             <div>
-                <p class="shimmer w-[180px] h-[24px]"></p>
-                <p class="shimmer w-[80px] h-[27px] mt-2.5"></p>
+                <p class="shimmer w-[180px] h-6"></p>
+                <p class="shimmer w-20 h-[27px] mt-2.5"></p>
             </div>
         </div>
     </div>
 
     <div class="grid gap-[15px] mt-[25px] mb-[30px]">
         <div class="flex text-right justify-between">
-            <p class="shimmer w-[20%] h-[24px]"></p>
-            <p class="shimmer w-[25%] h-[24px]"></p>
+            <p class="shimmer w-[20%] h-6"></p>
+            <p class="shimmer w-[25%] h-6"></p>
         </div>
         
         <div class="flex text-right justify-between">
-            <p class="shimmer w-[20%] h-[24px]"></p>
-            <p class="shimmer w-[15%] h-[24px]"></p>
+            <p class="shimmer w-[20%] h-6"></p>
+            <p class="shimmer w-[15%] h-6"></p>
         </div>
 
         <div class="flex text-right justify-between">
-            <p class="shimmer w-[25%] h-[24px]"></p>
-            <p class="shimmer w-[35%] h-[24px]"></p>
+            <p class="shimmer w-[25%] h-6"></p>
+            <p class="shimmer w-[35%] h-6"></p>
         </div>
 
         <div class="flex text-right justify-between">
-            <p class="shimmer w-[35%] h-[24px]"></p>
+            <p class="shimmer w-[35%] h-6"></p>
             <p class="shimmer w-[30%] h-[38px]"></p>
         </div>
     </div>

@@ -15,7 +15,7 @@
 
         <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
             <x-shop::shimmer.products.cards.grid
-                class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"
+                class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-5 max-sm:pl-0"
                 count="3"
             ></x-shop::shimmer.products.cards.grid>
         </div>

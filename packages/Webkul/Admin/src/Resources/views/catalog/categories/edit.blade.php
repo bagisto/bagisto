@@ -436,7 +436,7 @@
                 <!-- Filterable Attributes -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                        <p class="required text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
                     </x-slot:header>
@@ -446,7 +446,7 @@
                     <x-slot:content class="pointer-events-none">
                         @foreach ($attributes as $attribute)
                             <label
-                                class="flex gap-2.5 w-max items-center p-[6px] cursor-pointer select-none"
+                                class="flex gap-2.5 w-max items-center p-1.5 cursor-pointer select-none"
                                 for="{{ $attribute->name ?? $attribute->admin_name }}"
                             >
                                 <x-admin::form.control-group.control

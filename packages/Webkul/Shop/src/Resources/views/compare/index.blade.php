@@ -77,7 +77,7 @@
                                             @click="remove(product.id)"
                                         ></span>
 
-                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"></x-shop::products.card>
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-5 max-sm:pl-0"></x-shop::products.card>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
 
                                 <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
-                                        class="w-[311px] max-w-[311px] pr-0 p-[20px] max-sm:pl-0"
+                                        class="w-[311px] max-w-[311px] pr-0 p-5 max-sm:pl-0"
                                         v-for="(product, index) in items"
                                     >
                                         <p class="hidden mb-[5px] text-[14px] font-medium max-sm:block">

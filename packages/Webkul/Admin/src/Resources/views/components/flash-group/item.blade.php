@@ -8,7 +8,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-flash-item-template">
         <div
-            class="flex gap-[46px] justify-between w-max p-[12px] rounded-full"
+            class="flex gap-[46px] justify-between w-max p-3 rounded-full"
             :style="typeStyles[flash.type]['container']"
         >
             <p

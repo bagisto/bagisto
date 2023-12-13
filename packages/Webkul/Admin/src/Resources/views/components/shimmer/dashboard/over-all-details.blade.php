@@ -8,7 +8,7 @@
 
                 <div class="shimmer w-[100px] h-[17px]"></div>
                 
-                <div class="shimmer w-[40px] h-[17px]"></div>
+                <div class="shimmer w-10 h-[17px]"></div>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
 
                 <div class="shimmer w-[100px] h-[17px]"></div>
                 
-                <div class="shimmer w-[40px] h-[17px]"></div>
+                <div class="shimmer w-10 h-[17px]"></div>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
 
                 <div class="shimmer w-[100px] h-[17px]"></div>
                 
-                <div class="shimmer w-[40px] h-[17px]"></div>
+                <div class="shimmer w-10 h-[17px]"></div>
             </div>
         </div>
 
@@ -44,7 +44,7 @@
 
                 <div class="shimmer w-[100px] h-[17px]"></div>
                 
-                <div class="shimmer w-[40px] h-[17px]"></div>
+                <div class="shimmer w-10 h-[17px]"></div>
             </div>
         </div>
 

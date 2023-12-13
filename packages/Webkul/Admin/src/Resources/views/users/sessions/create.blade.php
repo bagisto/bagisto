@@ -77,7 +77,7 @@
                         </x-admin::form.control-group>
                     </div>
 
-                    <div class="flex justify-between items-center p-[16px]">
+                    <div class="flex justify-between items-center p-4">
                         <!-- Forgot Password Link -->
                         <a 
                             class="text-[12px] text-blue-600 font-semibold leading-[24px] cursor-pointer"

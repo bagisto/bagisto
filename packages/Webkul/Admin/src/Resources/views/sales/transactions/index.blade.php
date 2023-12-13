@@ -91,7 +91,7 @@
                                     @click="view(record.actions.find(action => action.title === 'View')?.url)"
                                 >
                                     <span
-                                        class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                        class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                         role="button"
                                         tabindex="0"
                                     >
@@ -122,7 +122,7 @@
                                 @lang('admin::app.sales.transactions.index.view.transaction-data')
                             </p>
 
-                            <div class="flex w-full justify-between p-[16px]">
+                            <div class="flex w-full justify-between p-4">
                                 <div class="flex flex-col gap-y-[6px]">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.transactions.index.view.transaction-id')

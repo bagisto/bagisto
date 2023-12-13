@@ -277,7 +277,7 @@
                             </p>
 
                             @foreach(core()->getAllChannels() as $channel)
-                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-[6px]">
+                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="channels[]"

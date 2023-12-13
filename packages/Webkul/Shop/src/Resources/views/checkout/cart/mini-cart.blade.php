@@ -122,7 +122,7 @@
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="item?.quantity"
-                                    class="gap-x-2.5 max-w-[150px] max-h-[36px] py-[5px] px-3.5 rounded-[54px]"
+                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-[5px] px-3.5 rounded-[54px]"
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>

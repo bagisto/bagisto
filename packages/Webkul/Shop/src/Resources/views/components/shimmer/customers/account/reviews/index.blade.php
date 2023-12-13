@@ -19,19 +19,19 @@
                     <p class="shimmer h-[30px] w-[110px]"></p>
 
                     <div class="flex gap-2.5 items-center">
-                        <span class="shimmer h-[24px] w-[24px]"></span>
-                        <span class="shimmer h-[24px] w-[24px]"></span>
-                        <span class="shimmer h-[24px] w-[24px]"></span>
-                        <span class="shimmer h-[24px] w-[24px]"></span>
-                        <span class="shimmer h-[24px] w-[24px]"></span>
+                        <span class="shimmer h-6 w-6"></span>
+                        <span class="shimmer h-6 w-6"></span>
+                        <span class="shimmer h-6 w-6"></span>
+                        <span class="shimmer h-6 w-6"></span>
+                        <span class="shimmer h-6 w-6"></span>
                     </div>
                 </div>
 
-                <p class="shimmer h-[20px] w-[110px] mt-2.5"></p>
+                <p class="shimmer h-5 w-[110px] mt-2.5"></p>
 
-                <p class="shimmer h-[20px] w-full mt-5"></p>
+                <p class="shimmer h-5 w-full mt-5"></p>
 
-                <p class="shimmer h-[20px] w-full mt-2.5"></p>
+                <p class="shimmer h-5 w-full mt-2.5"></p>
             </div>
         </div>
     @endfor

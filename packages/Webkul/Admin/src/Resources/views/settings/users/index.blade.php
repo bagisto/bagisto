@@ -111,11 +111,11 @@
                         <p>
                             <div class="flex gap-2.5 items-center">
                                 <div
-                                    class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
+                                    class="inline-block w-9 h-9 rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
                                     v-if="record.user_img"
                                 >
                                     <img
-                                        class="w-[36px] h-[36px]"
+                                        class="w-9 h-9"
                                         :src="record.user_img"
                                         alt="record.user_name"
                                     />
@@ -126,7 +126,7 @@
                                     v-else
                                 >
                                     <button
-                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
+                                        class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
                                         v-text="record.user_name[0].toUpperCase()"
                                     >
                                     </button>
@@ -154,7 +154,7 @@
                             <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                 <span
                                     :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -162,7 +162,7 @@
                             <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                 <span
                                     :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>

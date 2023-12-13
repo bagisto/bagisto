@@ -40,7 +40,7 @@
 
                             <label 
                                 :for="'billing_address_id_' + address.id"
-                                class="block p-[20px] rounded-[12px] cursor-pointer"
+                                class="block p-5 rounded-[12px] cursor-pointer"
                             >
                                 <div class="flex justify-between items-center">
                                     <p class="text-[16px] font-medium">
@@ -71,7 +71,7 @@
                         </div>
 
                         <div 
-                            class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
+                            class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
                             @click="showNewBillingAddressForm"
                         >
                             <div
@@ -80,7 +80,7 @@
                                 tabindex="0"
                             >
                                 <span
-                                    class="icon-plus p-[10px] border border-black rounded-full text-[30px]"
+                                    class="icon-plus p-2.5 border border-black rounded-full text-[30px]"
                                     role="presentation"
                                 ></span>
 

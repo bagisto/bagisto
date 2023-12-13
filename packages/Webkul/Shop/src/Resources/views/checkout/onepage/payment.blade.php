@@ -51,7 +51,7 @@
 
                                     <label 
                                         :for="payment.method" 
-                                        class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
+                                        class="w-[190px] p-5 block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
                                     >
 
                                         <img

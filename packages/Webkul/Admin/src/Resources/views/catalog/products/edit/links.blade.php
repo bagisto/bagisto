@@ -12,7 +12,7 @@
                 class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow"
                 v-for="type in types"
             >
-                <div class="flex gap-5 justify-between mb-2.5 p-[16px]">
+                <div class="flex gap-5 justify-between mb-2.5 p-4">
                     <div class="flex flex-col gap-2">
                         <p
                             class="text-[16px] text-gray-800 dark:text-white font-semibold"
@@ -44,7 +44,7 @@
                     v-if="addedProducts[type.key].length"
                 >
                     <div
-                        class="flex gap-2.5 justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800"
+                        class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800"
                         v-for="product in addedProducts[type.key]"
                     >
                         <!-- Hidden Input -->
@@ -112,7 +112,7 @@
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                        class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                     />
 
                     <!-- Add Variants Information -->

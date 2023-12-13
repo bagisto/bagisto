@@ -58,7 +58,7 @@
                     >
                         <a
                             :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                            class="flex gap-[5px] h-[56px] p-[16px] items-start hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="flex gap-[5px] h-14 p-4 items-start hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-for="notification in notifications"
                         >
                             <span
@@ -94,7 +94,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex gap-x-2 items-center p-[24px] border-t-[1px] dark:border-gray-800">
+                <div class="flex gap-x-2 items-center p-4 border-t-[1px] dark:border-gray-800">
                     <div
                         class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-[8px] rtl:mr-[8px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-gray-600 dark:text-gray-300 leading-[24px] text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
                         v-text="pagination.per_page"
@@ -120,14 +120,14 @@
                     <!-- Prev & Next Page Button -->
                     <div class="flex gap-1 items-center">
                         <a @click="getResults(pagination.prev_page_url)">
-                            <div class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-[8px] rtl:mr-[8px] p-[6px] bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                            <div class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-[8px] rtl:mr-[8px] p-1.5 bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                 <span class="icon-sort-left text-[24px]"></span>
                             </div>
                         </a>
 
                         <a @click="getResults(pagination.next_page_url)">
                             <div
-                                class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-[8px] rtl:mr-[8px] p-[6px] bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-[8px] rtl:mr-[8px] p-1.5 bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                 <span class="icon-sort-right text-[24px]"></span>
                             </div>
                         </a>

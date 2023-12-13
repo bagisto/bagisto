@@ -35,7 +35,7 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
+                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-2.5 border border-[#E9E9E9] rounded-[12px]">
                         <div class="">
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -195,7 +195,7 @@
                     <!-- Customers Dropdown -->
                     @auth('customer')
                         <x-slot:content class="!p-[0px]">
-                            <div class="grid gap-2.5 p-[20px] pb-0">
+                            <div class="grid gap-2.5 p-5 pb-0">
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome')’
                                     {{ auth()->guard('customer')->user()->first_name }}

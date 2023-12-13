@@ -91,7 +91,7 @@
             <!-- Orders -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 @if ($totalOrderCount = $orders->count())
-                    <div class=" p-[16px] flex justify-between">
+                    <div class=" p-4 flex justify-between">
                         <!-- Total Order Count -->
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
@@ -197,7 +197,7 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                 >
                                 </a>
                             </div>
@@ -210,7 +210,7 @@
 
                     <!-- Pagination -->
                     @if ($totalOrderCount > 10)
-                        <div class="flex gap-x-2 items-center p-[24px] border-t-[1px] dark:border-gray-800">
+                        <div class="flex gap-x-2 items-center p-4 border-t-[1px] dark:border-gray-800">
                             <div
                                 class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
                             >
@@ -238,13 +238,13 @@
                             <!-- Prev & Next Page Button -->
                             <div class="flex gap-1 items-center">
                                 <a href="{{ $pagination['first_page_url'] }}">
-                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-1.5 text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                         <span class="icon-sort-left text-[24px]"></span>
                                     </div>
                                 </a>
     
                                 <a href="{{ $pagination['next_page_url'] }}">
-                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-[6px] text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-1.5 text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                         <span class="icon-sort-right text-[24px]"></span>
                                     </div>
                                 </a>
@@ -265,7 +265,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -326,7 +326,7 @@
                                         <td class="text-center">
                                             <a 
                                                 href="{{ route('admin.sales.invoices.view', $invoice->id) }}" 
-                                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                                 role="presentation"
                                             >
                                             </a>
@@ -338,7 +338,7 @@
                     </div>
                 @else
                     <!-- Empty Container -->
-                    <div class="flex justify-between p-[16px]">
+                    <div class="flex justify-between p-4">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                         </p>
@@ -349,7 +349,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -376,7 +376,7 @@
 
                     @foreach($customer->reviews as $review)
                         <!-- Reviews Details -->
-                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
+                        <div class="grid gap-y-[16px] p-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-1.5">
                                     <!-- Review Name -->
@@ -447,7 +447,7 @@
 
                                 <a 
                                     href="{{ route('admin.catalog.products.edit', $review->product->id) }}"
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                 >
                                 </a>
                             </div>
@@ -457,7 +457,7 @@
                     @endforeach
                 @else
                     <!-- Empty Invoice Container -->
-                    <div class="flex justify-between p-[16px]">
+                    <div class="flex justify-between p-4">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                         </p>
@@ -468,7 +468,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -516,7 +516,7 @@
 
                         <div class="flex justify-between items-center">
                             <label 
-                                class="flex gap-1 w-max items-center p-[6px] cursor-pointer select-none"
+                                class="flex gap-1 w-max items-center p-1.5 cursor-pointer select-none"
                                 for="customer_notified"
                             >
                                 <input 
@@ -549,7 +549,7 @@
                 <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                 @foreach ($customer->notes as $note)
-                    <div class="grid gap-1.5 p-[16px]">
+                    <div class="grid gap-1.5 p-4">
                         <p class="text-[16px] text-gray-800 dark:text-white leading-6">
                             {{$note->note}}
                         </p>
@@ -585,7 +585,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex w-[100%]">
-                        <p class="w-[100%] p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                        <p class="w-[100%] p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.customer')
                         </p>
     
@@ -630,7 +630,7 @@
             <!-- Addresses listing-->
             <x-admin::accordion>
                 <x-slot:header>
-                    <div class="flex items-center justify-between p-[6px]">
+                    <div class="flex items-center justify-between p-1.5">
                         <p class="text-gray-800 dark:text-white text-[16px] font-semibold">
                             @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
@@ -736,7 +736,7 @@
                         <div class="flex gap-5 items-center py-2.5">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
-                                class="w-[80px] h-[80px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
                             >
 
                             <div class="flex flex-col gap-1.5">

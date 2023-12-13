@@ -121,7 +121,7 @@
         <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- Invoice Item Section -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-[16px]">
+                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-4">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
@@ -217,7 +217,7 @@
                 </div>
 
                 <!--Sale Summary -->
-                <div class="flex w-full gap-2.5 justify-end mt-[16px] p-[16px]">
+                <div class="flex w-full gap-2.5 justify-end mt-[16px] p-4">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total-summary')
@@ -279,7 +279,7 @@
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                         @lang('admin::app.sales.invoices.view.customer')
                     </p>
                 </x-slot:header>
@@ -338,7 +338,7 @@
             <!-- component 2 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
                         @lang('admin::app.sales.invoices.view.order-information') 
                     </p>
                 </x-slot:header>

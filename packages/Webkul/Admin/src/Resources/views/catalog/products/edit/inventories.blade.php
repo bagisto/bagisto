@@ -12,7 +12,7 @@
             
             <i class="icon-information text-[18px] ltr:ml-2.5 rtl:mr-[10px] font-bold text-white rounded-full bg-gray-700 transition-all hover:bg-gray-800 peer"></i>
 
-            <div class="hidden absolute bottom-[25px] p-[10px] bg-black opacity-80 rounded-[8px] text-[14px] italic text-white peer-hover:block">
+            <div class="hidden absolute bottom-[25px] p-2.5 bg-black opacity-80 rounded-[8px] text-[14px] italic text-white peer-hover:block">
                 @lang('admin::app.catalog.products.edit.inventories.pending-ordered-qty-info')
             </div>
         </div>

@@ -83,7 +83,7 @@
                                 <img
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="rounded-[12px] min-w-[48px] max-h-[48px]"
+                                    class="rounded-[12px] min-w-12 max-h-12"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
 

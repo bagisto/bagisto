@@ -20,15 +20,15 @@
         <v-desktop-category>
             <div class="flex gap-5 items-center">
                 <span
-                    class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                    class="shimmer w-20 h-6 rounded-[4px]"
                     role="presentation"
                 ></span>
                 <span
-                    class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                    class="shimmer w-20 h-6 rounded-[4px]"
                     role="presentation"
                 ></span>
                 <span
-                    class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                    class="shimmer w-20 h-6 rounded-[4px]"
                     role="presentation"
                 ></span>
             </div>
@@ -137,7 +137,7 @@
                 <!-- Customers Dropdown -->
                 @auth('customer')
                     <x-slot:content class="!p-[0px]">
-                        <div class="grid gap-2.5 p-[20px] pb-0">
+                        <div class="grid gap-2.5 p-5 pb-0">
                             <p class="text-[20px] font-dmserif">
                                 @lang('shop::app.components.layouts.header.welcome')’
                                 {{ auth()->guard('customer')->user()->first_name }}
@@ -206,15 +206,15 @@
             v-if="isLoading"
         >
             <span
-                class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                class="shimmer w-20 h-6 rounded-[4px]"
                 role="presentation"
             ></span>
             <span
-                class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                class="shimmer w-20 h-6 rounded-[4px]"
                 role="presentation"
             ></span>
             <span
-                class="shimmer w-[80px] h-[24px] rounded-[4px]"
+                class="shimmer w-20 h-6 rounded-[4px]"
                 role="presentation"
             ></span>
         </div>

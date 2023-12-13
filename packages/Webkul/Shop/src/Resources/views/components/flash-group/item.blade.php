@@ -25,7 +25,7 @@
             </p>
 
 			<span
-                class="icon-cancel max-h-[16px] max-w-[16px] cursor-pointer"
+                class="icon-cancel max-h-4 max-w-4 cursor-pointer"
                 :style="typeStyles[flash.type]['icon']"
                 @click="remove"
             ></span>

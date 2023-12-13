@@ -11,11 +11,11 @@
                 <p class="shimmer w-[90px] h-[30px]"></p>
                 
                 <div class="flex items-center gap-1.5">
-                    <span class="shimmer w-[24px] h-[24px]"></span>
-                    <span class="shimmer w-[24px] h-[24px]"></span>
-                    <span class="shimmer w-[24px] h-[24px]"></span>
-                    <span class="shimmer w-[24px] h-[24px]"></span>
-                    <span class="shimmer w-[24px] h-[24px]"></span>
+                    <span class="shimmer w-6 h-6"></span>
+                    <span class="shimmer w-6 h-6"></span>
+                    <span class="shimmer w-6 h-6"></span>
+                    <span class="shimmer w-6 h-6"></span>
+                    <span class="shimmer w-6 h-6"></span>
                 </div>
             </div>
 
@@ -27,12 +27,12 @@
             </div>
 
             <div class="flex gap-2 flex-wrap mt-2.5">
-                <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
-                <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
-                <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
-                <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
-                <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
-                <span class="shimmer rounded-[12px] w-[48px] h-[48px]"></span>
+                <span class="shimmer rounded-[12px] w-12 h-12"></span>
+                <span class="shimmer rounded-[12px] w-12 h-12"></span>
+                <span class="shimmer rounded-[12px] w-12 h-12"></span>
+                <span class="shimmer rounded-[12px] w-12 h-12"></span>
+                <span class="shimmer rounded-[12px] w-12 h-12"></span>
+                <span class="shimmer rounded-[12px] w-12 h-12"></span>
             </div>
         </div>
     </div>

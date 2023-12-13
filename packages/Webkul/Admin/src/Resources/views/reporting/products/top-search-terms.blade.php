@@ -12,7 +12,7 @@
         </template>
 
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-[16px]">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">

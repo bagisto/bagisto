@@ -23,11 +23,11 @@
         <div class="flex items-center gap-x-2">
             <div class="shimmer w-[72px] h-[38px] rounded-[6px]"></div>
 
-            <p class="shimmer w-[56px] h-[24px]"></p>
+            <p class="shimmer w-14 h-6"></p>
 
-            <div class="shimmer w-[40px] h-[38px] rounded-[6px]"></div>
+            <div class="shimmer w-10 h-[38px] rounded-[6px]"></div>
 
-            <div class="shimmer w-[37px] h-[24px]"></div>
+            <div class="shimmer w-[37px] h-6"></div>
 
             <!-- Pagination -->
             <div class="flex items-center gap-1">

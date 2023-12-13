@@ -21,7 +21,7 @@
 
             <div class="shimmer w-[30%] h-[21px] mt-[15px] max-sm:w-[220px]"></div>
 
-            <p class="shimmer w-[35%] h-[36px] mt-[25px]"></p>
+            <p class="shimmer w-[35%] h-9 mt-[25px]"></p>
 
             <div class="grid gap-2.5 mt-[25px] max-sm:my-[20px] max-sm:justify-between max-sm:flex">
                 <p class="shimmer w-[100%] h-[27px] max-sm:w-[100px] max-sm:h-[21px]"></p>
@@ -31,20 +31,20 @@
 
             <!-- Colors -->
             <div class="mt-5">
-                <h3 class="shimmer w-[20%] h-[36px] mb-[15px]"></h3>
+                <h3 class="shimmer w-[20%] h-9 mb-[15px]"></h3>
 
                 <div class="flex items-center space-x-3">
-                    <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-                    <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-                    <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-                    <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-                    <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
+                    <span class="shimmer w-8 h-8 rounded-full"></span>
+                    <span class="shimmer w-8 h-8 rounded-full"></span>
+                    <span class="shimmer w-8 h-8 rounded-full"></span>
+                    <span class="shimmer w-8 h-8 rounded-full"></span>
+                    <span class="shimmer w-8 h-8 rounded-full"></span>
                 </div>
             </div>
 
             <!-- Size -->
             <div class="mt-5">
-                <h3 class="shimmer w-[20%] h-[36px] mb-[15px]"></h3>
+                <h3 class="shimmer w-[20%] h-9 mb-[15px]"></h3>
 
                 <div class="flex flex-wrap gap-3">
                     <span class="shimmer w-[60px] h-[60px] rounded-full"></span>
@@ -58,26 +58,26 @@
 
             <div class="flex gap-[15px] mt-[30px] max-w-[470px] flex-wrap">
                 <!-- Quantity changer button -->
-                <div class="shimmer w-[161px] h-[56px] rounded-[12px] max-sm:w-[124px]"></div>
+                <div class="shimmer w-[161px] h-14 rounded-[12px] max-sm:w-[124px]"></div>
 
                 <!-- Add to cart Button -->
-                <button class="shimmer w-[279px] h-[56px] rounded-[12px]"></button>
+                <button class="shimmer w-[279px] h-14 rounded-[12px]"></button>
             </div>
 
             <!-- Buy Now Button -->
-            <button class="shimmer w-full h-[56px] mt-5 rounded-[12px]"></button>
+            <button class="shimmer w-full h-14 mt-5 rounded-[12px]"></button>
 
             <div class="flex gap-[35px] items-center mt-10 max-sm:flex-wrap">
-                <div class="shimmer w-[80px] h-[24px]"></div>
+                <div class="shimmer w-20 h-6"></div>
 
                 <div class="flex gap-[25px] items-center max-sm:flex-wrap">
-                    <div class="shimmer w-[80px] h-[24px]"></div>
+                    <div class="shimmer w-20 h-6"></div>
                     
                     <div class="flex gap-[15px]">
-                        <span class="shimmer w-[40px] h-[40px] rounded-full"></span>
-                        <span class="shimmer w-[40px] h-[40px] rounded-full"></span>
-                        <span class="shimmer w-[40px] h-[40px] rounded-full"></span>
-                        <span class="shimmer w-[40px] h-[40px] rounded-full"></span>
+                        <span class="shimmer w-10 h-10 rounded-full"></span>
+                        <span class="shimmer w-10 h-10 rounded-full"></span>
+                        <span class="shimmer w-10 h-10 rounded-full"></span>
+                        <span class="shimmer w-10 h-10 rounded-full"></span>
                     </div>
                 </div>
             </div>

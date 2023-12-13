@@ -103,7 +103,7 @@
 
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-[6px]">
+                                    <div class="flex items-center justify-between p-1.5">
                                         <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                             @lang('admin::app.settings.roles.create.general')
                                         </p>

@@ -4,7 +4,7 @@
     <h2 class="shimmer w-[110px] h-[39px]"></h2>
 
     <div class="shimmer flex items-center gap-x-2.5 py-3 px-5 rounded-[12px]">
-        <span class="w-[108px] h-[24px]"></span>
+        <span class="w-[108px] h-6"></span>
     </div>
 </div>
 
@@ -31,12 +31,12 @@
                             <div class="hidden gap-2.5 place-content-start max-sm:grid">
                                 <div class="shimmer w-[100px] h-[27px]"></div>
 
-                                <div class="shimmer w-[100px] h-[24px]"></div>
+                                <div class="shimmer w-[100px] h-6"></div>
                             </div>
 
                             <div class="flex gap-5 flex-wrap">
-                                <div class="shimmer w-[110px] h-[40px] rounded-[54px]"></div>
-                                <div class="shimmer w-[158px] h-[40px] rounded-[18px]"></div>
+                                <div class="shimmer w-[110px] h-10 rounded-[54px]"></div>
+                                <div class="shimmer w-[158px] h-10 rounded-[18px]"></div>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="grid gap-2.5 place-content-start max-sm:hidden">
                         <div class="shimmer w-[100px] h-[27px]"></div>
                         
-                        <div class="shimmer w-[100px] h-[24px]"></div>
+                        <div class="shimmer w-[100px] h-6"></div>
                     </div>
                 </div>
             </div>

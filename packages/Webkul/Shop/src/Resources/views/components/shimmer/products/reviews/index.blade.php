@@ -13,9 +13,9 @@
     <div class="flex gap-y-[18px] max-w-[365px] mt-2.5 flex-wrap">
         @for ($i = 5; $i >= 1; $i--)
             <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
-                <div class="shimmer w-[55px] h-[24px]"></div>
+                <div class="shimmer w-[55px] h-6"></div>
 
-                <div class="shimmer w-[275px] h-[16px] rounded-[2px]"></div>
+                <div class="shimmer w-[275px] h-4 rounded-[2px]"></div>
             </div>
         @endfor
     </div>

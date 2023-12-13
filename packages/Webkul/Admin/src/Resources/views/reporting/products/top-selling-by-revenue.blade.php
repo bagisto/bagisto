@@ -13,7 +13,7 @@
 
         <!-- Top Selling Products By Revenue Section -->
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-[16px]">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
@@ -41,9 +41,9 @@
                                 <p class="dark:text-white">@{{ product.name }}</p>
 
                                 <div class="flex gap-5 items-center">
-                                    <div class="w-full h-[8px] relative bg-slate-100">
+                                    <div class="w-full h-2 relative bg-slate-100">
                                         <div
-                                            class="h-[8px] absolute left-0 bg-emerald-500"
+                                            class="h-2 absolute left-0 bg-emerald-500"
                                             :style="{ 'width': product.progress + '%' }"
                                         ></div>
                                     </div>
@@ -64,7 +64,7 @@
                     <!-- Date Range -->
                     <div class="flex gap-5 justify-end">
                         <div class="flex gap-1 items-center">
-                            <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
+                            <span class="w-[14px] h-3.5 rounded-[3px] bg-emerald-400"></span>
 
                             <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}

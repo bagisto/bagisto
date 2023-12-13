@@ -122,7 +122,7 @@
                                         class="place-self-end"
                                     >
                                         <span
-                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
                                             :class="action.icon"
                                             v-text="!action.icon ? action.title : ''"
                                             v-for="action in record.actions"
@@ -141,14 +141,14 @@
                                     <!-- Pagination -->
                                     <div class="flex items-center gap-1">
                                         <div
-                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                             @click="changePage('previous')"
                                         >
                                             <span class="icon-sort-left text-[24px]"></span>
                                         </div>
 
                                         <div
-                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                                             @click="changePage('next')"
                                         >
                                             <span class="icon-sort-right text-[24px]"></span>

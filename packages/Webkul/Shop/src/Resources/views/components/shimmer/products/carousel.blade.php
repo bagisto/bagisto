@@ -4,12 +4,12 @@
 
         <div class="flex gap-8 justify-between items-center">
             <span
-                class="shimmer inline-block w-[24px] h-[24px]"
+                class="shimmer inline-block w-6 h-6"
                 role="presentation"
             ></span>
 
             <span
-                class="shimmer inline-block w-[24px] h-[24px]"
+                class="shimmer inline-block w-6 h-6"
                 role="presentation"
             ></span>
         </div>
@@ -25,7 +25,7 @@
 
     @if ($navigationLink)
         <a
-            class="shimmer block w-[150.172px] h-[48px] mt-[60px] mx-auto rounded-[18px]"
+            class="shimmer block w-[150.172px] h-12 mt-[60px] mx-auto rounded-[18px]"
             role="button"
             aria-label="Show more products"
         ></a>
