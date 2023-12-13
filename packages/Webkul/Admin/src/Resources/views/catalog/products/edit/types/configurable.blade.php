@@ -1151,6 +1151,7 @@
 
                         editInventories: {
                             key: 'editInventories',
+                            value: 'edit-inventories',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.edit-inventories')"
                         },
 
@@ -1176,10 +1177,12 @@
                         removeImages: {
                             key: 'removeImages',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-images')"
+                            value: 'remove-images',
                         },
 
                         removeVariants: {
                             key: 'removeVariants',
+                            value: 'remove-variants',
                             title: "@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.remove-variants')"
                         }
                     },
