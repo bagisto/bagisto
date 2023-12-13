@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="mb-[8px] mt-[5px]">
+            <div class="mb-2 mt-[5px]">
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
@@ -45,7 +45,7 @@
                 </x-shop::dropdown>
             </div>
 
-            <div class="mb-[16px] flex gap-2 flex-wrap">
+            <div class="mb-4 flex gap-2 flex-wrap">
                 <p
                     class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -86,7 +86,7 @@
                     </div>
                 </div>
 
-                <div class="mb-[8px] mt-[5px]">
+                <div class="mb-2 mt-[5px]">
                     <x-shop::dropdown>
                         <!-- Dropdown Toggler -->
                         <x-slot:toggle>
@@ -110,7 +110,7 @@
                     </x-shop::dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="mb-[8px] mt-[5px]">
+                <div class="mb-2 mt-[5px]">
                     <v-datagrid-searchable-dropdown
                         :datagrid-id="available.id"
                         :column="column"
@@ -158,7 +158,7 @@
                     </v-datagrid-searchable-dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -242,7 +242,7 @@
                     />
                 </x-shop::flat-picker.date>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -326,7 +326,7 @@
                     />
                 </x-shop::flat-picker.datetime>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
                         class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -365,7 +365,7 @@
                 </div>
             </div>
 
-            <div class="mb-[8px] mt-[5px] grid">
+            <div class="mb-2 mt-[5px] grid">
                 <input
                     type="text"
                     class="mb-3 w-full rounded border px-3 py-2 text-[14px] text-gray-600 shadow transition-all hover:border-gray-400 focus:border-gray-400"
@@ -375,7 +375,7 @@
                 />
             </div>
 
-            <div class="mb-[16px] flex gap-2 flex-wrap">
+            <div class="mb-4 flex gap-2 flex-wrap">
                 <p
                     class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"

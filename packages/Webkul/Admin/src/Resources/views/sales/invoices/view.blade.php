@@ -121,7 +121,7 @@
         <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- Invoice Item Section -->
             <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px] p-4">
+                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 

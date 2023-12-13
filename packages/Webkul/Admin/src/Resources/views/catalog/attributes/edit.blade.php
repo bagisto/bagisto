@@ -57,8 +57,8 @@
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
-                            <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                        <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
+                            <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
 
@@ -111,11 +111,11 @@
 
                         <!-- Options -->
                         <div
-                            class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.title')
                                 </p>
 

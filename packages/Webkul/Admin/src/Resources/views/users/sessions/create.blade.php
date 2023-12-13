@@ -16,11 +16,11 @@
             <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-[6px] box-shadow">
                 <!-- Login Form -->
                 <x-admin::form :action="route('admin.session.store')">
-                    <p class="p-[16px] text-[20px] text-gray-800 dark:text-white font-bold">
+                    <p class="p-4 text-[20px] text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.users.sessions.title')
                     </p>
 
-                    <div class="p-[16px] border-t-[1px] border-b-[1px] dark:border-gray-800">
+                    <div class="p-4 border-t-[1px] border-b-[1px] dark:border-gray-800">
                         <!-- Email -->
                         <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">

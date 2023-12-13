@@ -15,7 +15,7 @@
         <template v-else>
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-[16px]">
+                <div class="flex items-center justify-between mb-4">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.products.index.top-selling-products-by-revenue')
                     </p>

@@ -88,8 +88,8 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
 
                 <!-- General -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
 
@@ -154,8 +154,8 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.before', ['category' => $category]) !!}
 
                 <!-- Description and images -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.edit.description-and-images')
                     </p>
 
@@ -229,8 +229,8 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
                 <!-- SEO Deatils -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
 

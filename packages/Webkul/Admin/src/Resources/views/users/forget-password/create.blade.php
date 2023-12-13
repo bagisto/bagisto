@@ -16,13 +16,13 @@
             <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-[6px] box-shadow">
                 <!-- Forget Password Form -->
                 <x-admin::form :action="route('admin.forget_password.store')">
-                    <div class="p-[16px]">
+                    <div class="p-4">
                         <p class="text-[20px] text-gray-800 dark:text-white font-bold ">
                             @lang('admin::app.users.forget-password.create.title')
                         </p>
                     </div>
 
-                    <div class="p-[16px] border-t-[1px] border-b-[1px] dark:border-gray-800">
+                    <div class="p-4 border-t-[1px] border-b-[1px] dark:border-gray-800">
                         <!-- Registered Email -->
                         <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">

@@ -65,7 +65,7 @@
     </x-shop::drawer>
 
     <!-- Seperator -->
-    <span class="h-[20px] w-[2px] bg-[#E9E9E9]"></span>
+    <span class="h-5 w-[2px] bg-[#E9E9E9]"></span>
 
     <!-- Sort Drawer -->
     <x-shop::drawer

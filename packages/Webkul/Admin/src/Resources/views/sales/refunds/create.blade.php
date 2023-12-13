@@ -62,7 +62,7 @@
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
                         <div class="grid">
-                            <div class="p-[16px] !pt-0">
+                            <div class="p-4 !pt-0">
                                 <div class="grid">
                                     <!-- Item Listing -->
                                     @foreach ($order->items as $item)

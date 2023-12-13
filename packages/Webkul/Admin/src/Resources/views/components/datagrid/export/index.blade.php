@@ -23,7 +23,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="p-[16px]">
+                    <div class="p-4">
                         <x-admin::form action="">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.control

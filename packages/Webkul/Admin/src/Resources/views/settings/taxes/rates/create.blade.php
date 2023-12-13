@@ -46,8 +46,8 @@
                 <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                     <!-- Left Component -->
                     <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                        <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                                 @lang('admin::app.settings.taxes.rates.create.general')
                             </p>
 

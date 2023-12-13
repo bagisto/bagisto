@@ -47,7 +47,7 @@
                 <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                     <!-- Left component -->
                     <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                        <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                             <div class="mb-2.5">
                                 <!-- Identifier -->
                                 <x-admin::form.control-group class="mb-2.5">

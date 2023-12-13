@@ -49,8 +49,8 @@
                             {!! view_render_event('bagisto.admin.settings.roles.create.card.access_control.before') !!}
 
                             <!-- Access Control Input Fields -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                                     @lang('admin::app.settings.roles.create.access-control')
                                 </p>
 

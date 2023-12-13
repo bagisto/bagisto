@@ -42,8 +42,8 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.general.before') !!}
 
                 <!-- General Information -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.settings.channels.create.general')
                     </p>
 
@@ -210,8 +210,8 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.design.before') !!}
 
                 <!-- Logo and Design -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.create.design')
                     </p>
 
@@ -295,8 +295,8 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.seo.before') !!}
 
                 <!-- Home Page SEO -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.create.seo')
                     </p>
 

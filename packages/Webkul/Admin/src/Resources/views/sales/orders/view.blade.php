@@ -96,7 +96,7 @@
             <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="flex justify-between p-4">
-                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                             @lang('Order Items') ({{ count($order->items) }})
                         </p>
 
@@ -271,12 +271,12 @@
             
                 <!-- Customer's comment form -->
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="p-4 pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.sales.orders.view.comments')
                     </p>
 
                     <x-admin::form action="{{ route('admin.sales.orders.comment', $order->id) }}">
-                        <div class="p-[16px]">
+                        <div class="p-4">
                             <div class="mb-2.5">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.control
@@ -593,7 +593,7 @@
                             </div>
 
                             @if ($index < count($order->invoices) - 1)
-                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
+                                <span class="block w-full mb-4 mt-[16px] border-b-[1px] dark:border-gray-800  "></span>
                             @endif
                         @empty 
                             <p class="text-gray-600 dark:text-gray-300">

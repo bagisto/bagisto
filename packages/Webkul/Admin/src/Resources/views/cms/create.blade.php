@@ -45,8 +45,8 @@
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.description.before') !!}
 
                 <!--Content -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.create.description')
                     </p>
 
@@ -80,8 +80,8 @@
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.seo.before') !!}
 
                 <!-- SEO Input Fields -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.create.seo')
                     </p>
 

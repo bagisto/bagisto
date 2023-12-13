@@ -24,8 +24,8 @@
             <!-- Attributes Groups Container -->
             <div>
                 <!-- Attributes Groups Header -->
-                <div class="flex flex-col mb-[16px]">
-                    <div class="shimmer w-[82px] h-6 mb-[4px]"></div>
+                <div class="flex flex-col mb-4">
+                    <div class="shimmer w-[82px] h-6 mb-1"></div>
 
                     <div class="shimmer w-[147px] h-[17px]"></div>
                 </div>
@@ -70,8 +70,8 @@
         <!-- Unassigned Attributes Container -->
         <div class="">
             <!-- Unassigned Attributes Header -->
-            <div class="flex flex-col mb-[16px]">
-                <div class="shimmer w-[82px] h-6 mb-[4px]"></div>
+            <div class="flex flex-col mb-4">
+                <div class="shimmer w-[82px] h-6 mb-1"></div>
 
                 <div class="shimmer w-[147px] h-[17px]"></div>
             </div>

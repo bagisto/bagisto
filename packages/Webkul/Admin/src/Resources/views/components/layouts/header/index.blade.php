@@ -34,7 +34,7 @@
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
             <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
-                <i class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] text-[22px] top-[6px]"></i>
+                <i class="icon-search absolute flex items-center ltr:left-[12px] rtl:right-[12px] text-[22px] top-1.5"></i>
 
                 <input 
                     type="text" 
@@ -165,7 +165,7 @@
     </x-slot:header>
 
     <!-- Drawer Content -->
-    <x-slot:content class="p-[16px]">
+    <x-slot:content class="p-4">
         <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll">
             <nav class="grid gap-[7px] w-full">
                 <!-- Navigation Menu -->
@@ -204,7 +204,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
         <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
-            <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[6px]"></i>
+            <i class="icon-search text-[22px] flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-1.5"></i>
 
             <input 
                 type="text"
@@ -217,13 +217,13 @@
             >
 
             <div
-                class="absolute top-[40px] w-full bg-white dark:bg-gray-900 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border dark:border-gray-800 rounded-[8px] z-10"
+                class="absolute top-10 w-full bg-white dark:bg-gray-900 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border dark:border-gray-800 rounded-[8px] z-10"
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
                 <div class="flex border-b-[1px] dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300">
                     <div
-                        class="p-[16px] hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                        class="p-4 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                         :class="{ 'border-b-[2px] border-blue-600': activeTab == tab.key }"
                         v-for="tab in tabs"
                         @click="activeTab = tab.key; search();"
@@ -361,7 +361,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-[16px] border-b-[1px] dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="p-4 border-b-[1px] dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}

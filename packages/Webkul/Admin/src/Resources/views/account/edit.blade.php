@@ -40,8 +40,8 @@
              <!-- Left sub Component -->
              <div class="flex flex-col gap-2 flex-1">
                  <!-- General -->
-                 <div class="p-[16px] bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                 <div class="p-4 bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.account.edit.general')
                     </p>
 

@@ -275,7 +275,7 @@
                         </x-slot:header>
 
                         <!-- Drawer Content -->
-                        <x-slot:content class="p-[16px]">
+                        <x-slot:content class="p-4">
                             <x-admin::form
                                 v-slot="{ meta, errors, handleSubmit }"
                                 as="div"
@@ -745,7 +745,7 @@
                         <img :src="variant.images[0].url">
 
                         <span
-                            class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-1.5"
+                            class="absolute bottom-px ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-1.5"
                             v-text="variant.images.length"
                         >
                         </span>

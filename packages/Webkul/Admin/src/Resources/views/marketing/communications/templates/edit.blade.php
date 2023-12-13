@@ -46,7 +46,7 @@
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.content.before') !!}
 
                 <!--Content -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                     <div class="w-full">
                         <!-- Template Textarea -->
                         <x-admin::form.control-group>

@@ -43,8 +43,8 @@
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.general.before') !!}
 
                 <!-- General Section -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.communications.campaigns.create.general')
                     </p>
 

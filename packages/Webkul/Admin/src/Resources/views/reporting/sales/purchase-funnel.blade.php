@@ -15,7 +15,7 @@
         <template v-else>
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <!-- Header -->
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
+                <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-4">
                     @lang('admin::app.reporting.sales.index.purchase-funnel')
                 </p>
                 

@@ -59,8 +59,8 @@
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.general.before') !!}
 
                             <!-- General -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.general')
                                 </p>
 
@@ -260,7 +260,7 @@
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.conditions.before') !!}
 
                             <!-- Conditions -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <div class="flex gap-4 items-center justify-between">
                                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.conditions')
@@ -319,9 +319,9 @@
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.actions.before') !!}
 
                             <!-- Action -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                                 <div class="grid gap-1.5">
-                                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.actions')
                                     </p>
 
@@ -1217,9 +1217,9 @@
             type="text/x-template"
             id="v-create-coupon-form-template"
         >
-            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
                 <div class="grid gap-1.5">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.promotions.cart-rules.edit.coupon-code')
                     </p>
 

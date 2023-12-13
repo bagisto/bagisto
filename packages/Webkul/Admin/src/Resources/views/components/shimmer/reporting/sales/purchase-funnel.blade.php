@@ -1,7 +1,7 @@
 <!-- Purchase Funnel Section -->
 <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
     <!-- Header -->
-    <div class="shimmer w-[150px] h-[17px] mb-[16px]"></div>
+    <div class="shimmer w-[150px] h-[17px] mb-4"></div>
 
     <div class="grid grid-cols-4 gap-6">
         @foreach (range(1, 4) as $i)

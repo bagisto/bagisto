@@ -3,7 +3,7 @@
 @for ($i = 0;  $i < 10; $i++)
     @if (! $isMultiRow)
         <div class="row grid grid-cols-6 gap-2.5 px-4 py-4 border-b-[1px] border-gray-300 text-gray-600">
-            <div class="shimmer w-6 h-6 mb-[2px]"></div>
+            <div class="shimmer w-6 h-6 mb-0.5"></div>
 
             <div class="shimmer w-[100px] h-6"></div>
 

@@ -60,8 +60,8 @@
                     <!-- Left sub Component -->
                     <div class="flex flex-col gap-2 flex-1 overflow-auto">
                         <!-- Label -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
-                            <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                        <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
+                            <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.create.label')
                             </p>
 
@@ -112,7 +112,7 @@
 
                         <!-- Options -->
                         <div
-                            class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]"
+                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px]"
                             v-if="swatchAttribute && (
                                     attributeType == 'select'
                                     || attributeType == 'multiselect'
@@ -121,7 +121,7 @@
                                 )"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.create.title')
                                 </p>
 

@@ -53,7 +53,7 @@
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
                         <div class="grid">
-                            <div class="p-[16px] pt-2">
+                            <div class="p-4 pt-2">
                                 <div class="grid grid-cols-2 gap-x-5">
                                     <!-- Carrier Name -->
                                     <x-admin::form.control-group>

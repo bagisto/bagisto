@@ -268,7 +268,7 @@
 
         <div class="relative w-full">
             <div
-                class="icon-search flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[12px] text-[25px] pointer-events-none">
+                class="icon-search flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-3 text-[25px] pointer-events-none">
             </div>
 
             <input

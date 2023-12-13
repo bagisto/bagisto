@@ -6,7 +6,7 @@
         <div>
             <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                 <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
+                    <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         <!-- Add Links-->
                         <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
                             <div class="flex flex-col gap-1">
@@ -249,7 +249,7 @@
                                     </v-field>
                         
                                     <label
-                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
+                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
                                         for="status"
                                     ></label>
                                 </label>

@@ -51,7 +51,7 @@
                     @lang('shop::app.components.layouts.header.search')
                 </label>
 
-                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
+                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-2.5 text-[22px] pointer-events-none"></div>
 
                 <input
                     type="text"

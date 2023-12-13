@@ -253,7 +253,7 @@
                     @endif
                 @else
                     <!-- Empty Container --> 
-                    <div class="p-[16px] flex justify-between">
+                    <div class="p-4 flex justify-between">
                         <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>
@@ -286,7 +286,7 @@
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if ($totalInvoiceCount = count($customer->invoices))
                     <!--Invoice Count -->
-                    <p class="p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="p-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                     </p>
 
@@ -370,7 +370,7 @@
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if($totalReviewsCount = count($customer->reviews))
                     <!-- Reviews Count -->
-                    <p class="p-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="p-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.customers.customers.view.reviews', ['review_count' => $totalReviewsCount])
                     </p>
 
@@ -487,14 +487,14 @@
 
             <!-- Notes Form -->
             <div class="bg-white dark:bg-gray-900  rounded box-shadow">
-                <p class="p-[16px] pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
+                <p class="p-4 pb-0 text-[16px] text-gray-800 dark:text-white font-semibold">
                     @lang('admin::app.customers.customers.view.add-note')
                 </p>
 
                 <x-admin::form 
                     :action="route('admin.customer.note.store', $customer->id)"
                 >
-                    <div class="p-[16px]">
+                    <div class="p-4">
                         <!-- Note -->
                         <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.control
@@ -728,7 +728,7 @@
                             </div>
                             
                             @if ($index < count($customer->addresses) - 1)
-                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] dark:border-gray-800"></span>
+                                <span class="block w-full mb-4 mt-[16px] border-b-[1px] dark:border-gray-800"></span>
                             @endif
                         @endforeach
                     @else    

@@ -45,7 +45,7 @@
                                     >
 
                                     <label 
-                                        class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                         :for="rate.method"
                                     >
                                     </label>
