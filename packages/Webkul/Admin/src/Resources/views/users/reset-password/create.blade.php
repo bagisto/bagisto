@@ -17,7 +17,7 @@
                 <!-- Login Form -->
                 <x-admin::form :action="route('admin.reset_password.store')">
                     <div class="p-4  ">
-                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.users.reset-password.title')
                         </p>
                     </div>
@@ -105,7 +105,7 @@
                     <div class="flex justify-between items-center p-4">
                         <!-- Back Button-->
                         <a 
-                            class="text-[12px] text-blue-600 font-semibold leading-[24px] cursor-pointer"
+                            class="text-xs text-blue-600 font-semibold leading-6 cursor-pointer"
                             href="{{ route('admin.session.create') }}"
                         >
                             @lang('admin::app.users.reset-password.back-link-title')

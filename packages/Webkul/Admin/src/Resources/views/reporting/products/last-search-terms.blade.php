@@ -15,13 +15,13 @@
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-4">
-                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                    <p class="text-base leading-none text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.products.index.last-search-terms')
                     </p>
 
                     <a
                         href="{{ route('admin.reporting.products.view', ['type' => 'last-search-terms']) }}"
-                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="text-sm leading-none text-blue-600 cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.products.index.view-details')
                     </a>
@@ -86,7 +86,7 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-[12px] dark:text-gray-300">
+                            <p class="text-xs leading-none dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>

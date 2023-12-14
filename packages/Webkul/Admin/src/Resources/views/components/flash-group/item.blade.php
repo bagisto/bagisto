@@ -8,15 +8,15 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-flash-item-template">
         <div
-            class="flex gap-[46px] justify-between w-max p-3 rounded-full"
+            class="flex gap-12 justify-between w-max p-3 rounded-full"
             :style="typeStyles[flash.type]['container']"
         >
             <p
-                class="text-[14px] flex items-center break-all"
+                class="text-sm leading-none flex items-center break-all"
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done text-[24px] ltr:mr-2.5 rtl:ml-2.5 bg-white dark:bg-gray-900 rounded-full"
+                    class="icon-toast-done text-2xl leading-none ltr:mr-2.5 rtl:ml-2.5 bg-white dark:bg-gray-900 rounded-full"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>

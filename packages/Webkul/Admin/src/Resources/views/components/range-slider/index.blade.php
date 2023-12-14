@@ -3,13 +3,13 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-range-slider-template">
         <div>
-            <div class="flex items-center gap-[15px]">
-                <p class="text-[14px]">
+            <div class="flex items-center gap-4">
+                <p class="text-sm leading-none">
                     @lang('shop::app.components.range-slider.range')
                 </p>
 
                 <p
-                    class="text-[14px] font-semibold"
+                    class="text-sm leading-none font-semibold"
                     v-text="rangeText"
                 >
                 </p>

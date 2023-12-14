@@ -16,24 +16,24 @@
             <div class="grid gap-4 px-4 py-2 border-b dark:border-gray-800">
                 <div class="flex gap-2 justify-between">
                     <div class="flex flex-col gap-1 justify-between">
-                        <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.dashboard.index.total-sales')
                         </p>
 
                         <!-- Total Order Revenue -->
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
                             @{{ report.statistics.total_sales.formatted_total }}
                         </p>
                     </div>
 
                     <div class="flex flex-col gap-1 justify-between">
                         <!-- Orders Time Duration -->
-                        <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
+                        <p class="text-xs leading-none text-gray-400 font-semibold text-right dark:text-white">
                             @{{ report.date_range }}
                         </p>
 
                         <!-- Total Orders -->
-                        <p class="text-[12px] text-gray-400 font-semibold text-right dark:text-white">
+                        <p class="text-xs leading-none text-gray-400 font-semibold text-right dark:text-white">
                             @{{ "@lang('admin::app.dashboard.index.order')".replace(':total_orders', report.statistics.total_orders.current ?? 0) }}
                         </p>
                     </div>

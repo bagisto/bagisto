@@ -1,5 +1,5 @@
 <!-- Seperator -->
-<span class="block w-full absolute ltr:left-0 rtl:right-0 my-[5px] border border-gray-200"></span>
+<span class="block w-full absolute ltr:left-0 rtl:right-0 my-1.5 border border-gray-200"></span>
 
 <v-product-customer-group-price>
     <x-admin::shimmer.products.edit.group-price/>
@@ -11,8 +11,8 @@
     <script type="text/x-template" id="v-product-customer-group-price-template">
         <div>
             <!-- Header -->
-            <div class="flex items-center justify-between mt-1.5 py-[15px]">
-                <p class="text-gray-800 text-[16px] py-2.5 font-semibold dark:text-white">
+            <div class="flex items-center justify-between mt-1.5 py-4">
+                <p class="text-gray-800 text-base leading-none py-2.5 font-semibold dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>
 
@@ -79,7 +79,7 @@
                     />
 
                     <div class="flex flex-col gap-1.5">
-                        <p class="text-[16px] text-gray-400 font-semibold">
+                        <p class="text-base leading-none text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.price.group.add-group-price')
                         </p>
 
@@ -101,14 +101,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
                                 v-if="! selectedPrice.id"
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.create-title')
                             </p>
 
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.update-title')

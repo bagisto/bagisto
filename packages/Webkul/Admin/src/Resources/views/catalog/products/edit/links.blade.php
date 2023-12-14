@@ -15,13 +15,13 @@
                 <div class="flex gap-5 justify-between mb-2.5 p-4">
                     <div class="flex flex-col gap-2">
                         <p
-                            class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                            class="text-base leading-none text-gray-800 dark:text-white font-semibold"
                             v-text="type.title"
                         >
                         </p>
 
                         <p
-                            class="text-[12px] text-gray-500 dark:text-gray-300 font-medium"
+                            class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium"
                             v-text="type.info"
                         >
                         </p>
@@ -64,7 +64,7 @@
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                         @lang('admin::app.catalog.products.edit.links.image-placeholder')
                                     </p>
                                 </template>
@@ -77,7 +77,7 @@
                             <!-- Details -->
                             <div class="grid gap-1.5 place-content-start">
                                 <p
-                                    class="text-[16x] text-gray-800 dark:text-white font-semibold"
+                                    class="text-base leading-none text-gray-800 dark:text-white font-semibold"
                                     v-text="product.name"
                                 >
                                 </p>
@@ -116,8 +116,8 @@
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col gap-[5px] items-center">
-                        <p class="text-[16px] text-gray-400 font-semibold">
+                    <div class="flex flex-col gap-1.5 items-center">
+                        <p class="text-base leading-none text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 

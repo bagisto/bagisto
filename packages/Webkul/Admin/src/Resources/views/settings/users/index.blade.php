@@ -6,7 +6,7 @@
 
     <v-users>
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.users.index.title')
             </p>
 
@@ -30,7 +30,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-users-template">
             <div class="flex justify-between items-center">
-                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.users.index.title')
                 </p>
 
@@ -81,7 +81,7 @@
 
                                 <!-- Filter Arrow Icon -->
                                 <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
+                                    class="ltr:ml-1.5 rtl:mr-1.5 text-base leading-none text-gray-800 dark:text-white align-text-bottom"
                                     :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="columnGroup.includes(applied.sort.column)"
                                 ></i>
@@ -126,7 +126,7 @@
                                     v-else
                                 >
                                     <button
-                                        class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
+                                        class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-sm text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
                                         v-text="record.user_name[0].toUpperCase()"
                                     >
                                     </button>
@@ -154,7 +154,7 @@
                             <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                 <span
                                     :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -162,7 +162,7 @@
                             <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                 <span
                                     :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -186,14 +186,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
                                 v-if="isUpdating"
                             >
                                 @lang('admin::app.settings.users.index.edit.title')
                             </p>
 
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.users.index.create.title')
@@ -321,7 +321,7 @@
                                     >
                                         <select
                                             name="role_id"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >
@@ -343,7 +343,7 @@
                                 </x-admin::form.control-group>
 
                                 <template v-if="currentUserId != data.user.id">
-                                    <x-admin::form.control-group class="w-full flex-1 !mb-[0px]">
+                                    <x-admin::form.control-group class="w-full flex-1 !mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.status')
                                         </x-admin::form.control-group.label>
@@ -387,7 +387,7 @@
                                 >
                                 </v-media-images>
 
-                                <p class="required my-3 text-[14px] text-gray-400">
+                                <p class="required my-3 text-sm leading-none text-gray-400">
                                     @lang('admin::app.settings.users.index.create.upload-image-info')
                                 </p>
                             </x-admin::form.control-group>
@@ -420,7 +420,7 @@
                     <x-admin::modal ref="confirmPasswordModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
                                 @lang('Confirm Password Before DELETE')
                             </p>
 

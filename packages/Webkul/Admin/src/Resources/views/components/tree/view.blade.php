@@ -198,21 +198,21 @@
                             this.$h(
                                 'div', {
                                     class: [
-                                        'v-tree-item active inline-block w-full [&>.v-tree-item]:ltr:pl-[25px] [&>.v-tree-item]:rtl:pr-[25px] [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
-                                        level > 1 ? 'ltr:!pl-[55px] rtl:!pr-[55px]' : '',
+                                        'v-tree-item active inline-block w-full [&>.v-tree-item]:ltr:pl-6 [&>.v-tree-item]:rtl:pr-6 [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
+                                        level > 1 ? 'ltr:!pl-14 rtl:!pr-14' : '',
                                     ],
                                 }, [
                                     this.generateToggleIconComponent({
                                         class: [
                                             typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-sort-down' : '',
-                                            'text-[20px] rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
+                                            'text-xl leading-none rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
                                         ],
                                     }),
 
                                     this.generateFolderIconComponent({
                                         class: [
                                             typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-folder' : 'icon-attribute',
-                                            'text-[24px] cursor-pointer'
+                                            'text-2xl leading-none cursor-pointer'
                                         ],
                                     }),
 

@@ -19,7 +19,7 @@
                 {!! view_render_event('admin.settings.taxes.rates.create.create_form_controls.before') !!}
 
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                    <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.taxes.rates.create.title')
                     </p>
 
@@ -47,7 +47,7 @@
                     <!-- Left Component -->
                     <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
                         <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
+                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
                                 @lang('admin::app.settings.taxes.rates.create.general')
                             </p>
 
@@ -193,7 +193,7 @@
                     <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
                                     @lang('admin::app.settings.taxes.rates.create.settings')
                                 </p>
                             </x-slot:header>

@@ -9,7 +9,7 @@
     <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.search-seo.url-rewrites.index.title')
             </p>
 
@@ -33,7 +33,7 @@
             id="v-create-sitemaps-template"
         >
             <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.marketing.search-seo.url-rewrites.index.title')
                 </p>
 
@@ -75,7 +75,7 @@
                                         @change="setCurrentSelectionMode"
                                     >
 
-                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-[24px]">
+                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl leading-none">
                                     </span>
                                 </label>
                             </p>
@@ -105,7 +105,7 @@
                                         <a @click="selectedSitemap=1; editModal(record)">
                                             <span
                                                 :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -115,7 +115,7 @@
                                         <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                             <span
                                                 :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -150,7 +150,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.search-seo.url-rewrites.index.edit.title')
@@ -158,7 +158,7 @@
 
                             <!-- Edit Modal title -->
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.marketing.search-seo.url-rewrites.index.create.title')

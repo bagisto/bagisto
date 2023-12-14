@@ -50,7 +50,7 @@
                             </div>
 
                             <!-- Group Attributes -->
-                            <div class="ltr:ml-[43px] rtl:mr-[43px]">
+                            <div class="ltr:ml-11 rtl:mr-11">
                                 @for ($k = 0; $k < 5; $k++)
                                     <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5">
                                         <div class="shimmer w-5 h-[21px]"></div>

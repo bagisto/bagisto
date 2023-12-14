@@ -10,22 +10,22 @@
             <div class="w-full">
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
-                    class="mb-[25px]"
+                    class="mb-6"
                 >
 
 				<div class="text-[38px] text-gray-800 dark:text-white font-bold">
                     {{ $errorCode }}
                 </div>
 
-                <p class="mb-[25px] text-[14px] text-gray-800">
+                <p class="mb-6 text-sm leading-none text-gray-800">
                     @lang("admin::app.errors.{$errorCode}.description")
                 </p>
 
-                <div class="mb-[25px]">
+                <div class="mb-6">
                     <div class="flex gap-2.5 items-center">
                         <a
                             onclick="history.back()"
-                            class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"
+                            class="text-sm leading-none text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.go-back')
                         </a>
@@ -38,14 +38,14 @@
 
                         <a
                             href="{{ route('admin.dashboard.index') }}"
-                            class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"
+                            class="text-sm leading-none text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.dashboard')
                         </a>
                     </div>
                 </div>
 
-                <p class="text-[14px] text-gray-800">
+                <p class="text-sm leading-none text-gray-800">
                     @lang('admin::app.errors.support', [
                         'link'  => 'mailto:support@example.com',
                         'email' => 'support@example.com',

@@ -7,9 +7,9 @@
     </x-slot:title>
 
     <!-- Page Header -->
-    <div class="grid pt-[11px]">
+    <div class="grid pt-3">
         <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+            <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
                 @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
             </p>
 
@@ -31,7 +31,7 @@
         <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class=" bg-white dark:bg-gray-900 rounded box-shadow">
-                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4 p-4">
+                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>
 
@@ -49,7 +49,7 @@
                                     <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
-                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                        <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
                                             @lang('admin::app.sales.invoices.view.product-image') 
                                         </p>
                                     </div>
@@ -57,7 +57,7 @@
 
                                 <!-- Product Name -->
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
@@ -87,7 +87,7 @@
                             <!-- Product Price Section -->
                             <div class="grid gap-1 place-content-start">
                                 <div class="">
-                                    <p class="flex items-center gap-x-1 justify-end text-[16px] text-gray-800 dark:text-white font-semibold">
+                                    <p class="flex items-center gap-x-1 justify-end text-base leading-none text-gray-800 dark:text-white font-semibold">
                                         {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                     </p>
                                 </div>
@@ -151,7 +151,7 @@
                             @lang('admin::app.sales.refunds.view.adjustment-fee')
                         </p>
 
-                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.sales.refunds.view.grand-total')
                         </p>
                     </div>
@@ -194,7 +194,7 @@
                         </p>
 
                         <!-- Base Grand Total -->
-                        <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($refund->base_grand_total) }}
                         </p>
                     </div>
@@ -211,7 +211,7 @@
             )
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
                             @lang('admin::app.sales.refunds.view.account-information')
                         </p>
                     </x-slot:header>
@@ -236,7 +236,7 @@
 
                             <!-- Billing Address -->
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
                                     @lang('admin::app.sales.refunds.view.billing-address')
                                 </p>
                             </div>
@@ -249,7 +249,7 @@
                             <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-[16px] py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300  text-base leading-none py-4 font-semibold">
                                     @lang('admin::app.sales.refunds.view.shipping-address')
                                 </p>
                             </div>
@@ -263,7 +263,7 @@
             <!-- Order Information -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
                         @lang('admin::app.sales.refunds.view.order-information')
                     </p>
                 </x-slot:header>
@@ -309,7 +309,7 @@
              <!-- Payment Information -->
              <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
                         @lang('admin::app.sales.refunds.view.payment-information')
                     </p>
                 </x-slot:header>

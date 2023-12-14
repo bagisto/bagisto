@@ -1,4 +1,4 @@
-<div class="grid gap-[27px]">
+<div class="grid gap-7">
     @foreach (range(1, 5) as $i)
         <div class="grid">
             <div class="shimmer w-[150px] h-[17px]"></div>

@@ -20,7 +20,7 @@
                 {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
 
                 <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                    <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.taxes.rates.edit.title')
                     </p>
     
@@ -193,7 +193,7 @@
                         <!-- Basic Settings -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
                                     @lang('admin::app.settings.taxes.rates.edit.basic-settings')
                                 </p>
                             </x-slot:header>

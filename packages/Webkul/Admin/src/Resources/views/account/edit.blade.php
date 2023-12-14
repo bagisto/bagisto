@@ -10,7 +10,7 @@
         method="PUT"
     >
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.account.edit.title')
             </p>
 
@@ -41,7 +41,7 @@
              <div class="flex flex-col gap-2 flex-1">
                  <!-- General -->
                  <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.account.edit.general')
                     </p>
 
@@ -54,7 +54,7 @@
                         </x-admin::media.images>
                     </x-admin::form.control-group>
 
-                    <p class="my-5 text-[14px] text-gray-400">
+                    <p class="my-5 text-sm leading-none text-gray-400">
                         @lang('admin::app.account.edit.upload-image-info')
                     </p>
 
@@ -108,7 +108,7 @@
              <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
                             @lang('admin::app.account.edit.change-password')
                         </p>
                     </x-slot:header>

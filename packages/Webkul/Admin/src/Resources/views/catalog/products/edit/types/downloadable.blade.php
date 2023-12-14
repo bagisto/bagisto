@@ -12,11 +12,11 @@
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.info')
                     </p>
                 </div>
@@ -87,10 +87,10 @@
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl leading-none text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
 
@@ -195,8 +195,8 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-[5px] items-center">
-                    <p class="text-[16px] text-gray-400 font-semibold">
+                <div class="flex flex-col gap-1.5 items-center">
+                    <p class="text-base leading-none text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.empty-title')
                     </p>
 
@@ -207,7 +207,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-[14px]"
+                    class="secondary-button text-sm leading-none"
                     @click="resetForm(); $refs.updateCreateLinkDrawer.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.downloadable.links.add-btn')
@@ -227,11 +227,11 @@
                         <x-slot:header>
                             <div class="grid gap-3">
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[20px] font-medium dark:text-white">
+                                    <p class="text-xl leading-none font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.title')
                                     </p>
 
-                                    <button class="mr-[45px] primary-button">
+                                    <button class="mr-11 primary-button">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.save-btn')
                                     </button>
                                 </div>
@@ -353,7 +353,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"
@@ -445,7 +445,7 @@
                                             <input
                                                 type="file"
                                                 name="sample_file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 ref="sample_file"
                                                 @change="uploadFile('sample_file')"
                                             />
@@ -494,11 +494,11 @@
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.info')
                     </p>
                 </div>
@@ -551,10 +551,10 @@
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl leading-none text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                         @{{ element.title }}
                                     </p>
 
@@ -625,8 +625,8 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-[5px] items-center">
-                    <p class="text-[16px] text-gray-400 font-semibold">
+                <div class="flex flex-col gap-1.5 items-center">
+                    <p class="text-base leading-none text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.empty-title')
                     </p>
 
@@ -637,7 +637,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-[14px]"
+                    class="secondary-button text-sm leading-none"
                     @click="resetForm(); $refs.updateCreateSampleDrawer.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.downloadable.samples.add-btn')
@@ -657,11 +657,11 @@
                         <x-slot:header>
                             <div class="grid gap-3">
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[20px] font-medium dark:text-white">
+                                    <p class="text-xl leading-none font-medium dark:text-white">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.title')
                                     </p>
 
-                                    <button class="mr-[45px] primary-button">
+                                    <button class="mr-11 primary-button">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.save-btn')
                                     </button>
                                 </div>
@@ -747,7 +747,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"

@@ -15,11 +15,11 @@
         <template v-else>
             <div class="border-b dark:border-gray-800">
                 <div class="flex items-center justify-between p-4">
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
                         @lang('admin::app.dashboard.index.top-selling-products')
                     </p>
 
-                    <p class="text-[12px] text-gray-400 font-semibold">
+                    <p class="text-xs leading-none text-gray-400 font-semibold">
                         @{{ report.date_range }}
                     </p>
                 </div>
@@ -47,7 +47,7 @@
                         >
                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                             
-                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                            <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                 @lang('admin::app.dashboard.index.product-image')
                             </p>
                         </div>
@@ -68,7 +68,7 @@
                                 </p>
 
                                 <p
-                                    class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                                    class="text-base leading-none text-gray-800 dark:text-white font-semibold"
                                     v-text="item.formatted_revenue"
                                 >
                                 </p>
@@ -91,7 +91,7 @@
 
                         <!-- Add Variants Information -->
                         <div class="flex flex-col items-center">
-                            <p class="text-[16px] text-gray-400 font-semibold">
+                            <p class="text-base leading-none text-gray-400 font-semibold">
                                 @lang('admin::app.dashboard.index.add-product')
                             </p>
 

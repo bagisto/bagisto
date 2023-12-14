@@ -4,9 +4,9 @@
         src="{{ bagisto_asset('images/empty-placeholders/report-empty.svg') }}"
     >
 
-    <div class="flex flex-col gap-[5px] items-center">
+    <div class="flex flex-col gap-1.5 items-center">
 
-        <p class="text-[16px] text-gray-400 font-semibold">
+        <p class="text-base leading-none text-gray-400 font-semibold">
             @lang('admin::app.reporting.empty.title')
         </p>
         

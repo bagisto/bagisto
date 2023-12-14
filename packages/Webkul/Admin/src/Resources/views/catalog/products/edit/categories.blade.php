@@ -3,14 +3,14 @@
 <!-- Panel -->
 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
     <!-- Panel Header -->
-    <p class="flex justify-between text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
+    <p class="flex justify-between text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
         @lang('admin::app.catalog.products.edit.categories.title')
     </p>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.controls.before', ['product' => $product]) !!}
 
     <!-- Panel Content -->
-    <div class="mb-5 text-[14px] text-gray-600 dark:text-gray-300">
+    <div class="mb-5 text-sm leading-none text-gray-600 dark:text-gray-300">
 
         <v-product-categories>
             <x-admin::shimmer.tree/>

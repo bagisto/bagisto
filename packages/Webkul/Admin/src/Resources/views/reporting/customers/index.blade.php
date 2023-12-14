@@ -6,7 +6,7 @@
     <!-- Page Header -->
     <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
         <div class="grid gap-1.5">
-            <p class="pt-1.5 text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+            <p class="pt-1.5 text-xl text-gray-800 dark:text-white font-bold leading-6">
                 @lang('admin::app.reporting.customers.index.title')
             </p>
         </div>
@@ -22,12 +22,12 @@
     </div>
 
     <!-- Customers Stats Vue Component -->
-    <div class="flex flex-col gap-[15px] flex-1 max-xl:flex-auto">
+    <div class="flex flex-col gap-4 flex-1 max-xl:flex-auto">
         <!-- Customers Section -->
         @include('admin::reporting.customers.total-customers')
 
         <!-- Customers With Most Sales and Customers With Most Orders Sections Container -->
-        <div class="flex justify-between gap-[15px] flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
             <!-- Customers With Most Sales Section -->
             @include('admin::reporting.customers.most-sales')
 
@@ -39,7 +39,7 @@
         @include('admin::reporting.customers.total-traffic')
 
         <!-- Top Customer Groups Sections Container -->
-        <div class="flex justify-between gap-[15px] flex-1 [&>*]:flex-1 max-xl:flex-auto">
+        <div class="flex justify-between gap-4 flex-1 [&>*]:flex-1 max-xl:flex-auto">
             <!-- Top Customer Groups Section -->
             @include('admin::reporting.customers.top-customer-groups')
 
@@ -55,7 +55,7 @@
             <div class="flex gap-1.5">
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.start"
                         placeholder="@lang('admin::app.reporting.customers.index.start-date')"
                     />
@@ -63,7 +63,7 @@
 
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.end"
                         placeholder="@lang('admin::app.reporting.customers.index.end-date')"
                     />

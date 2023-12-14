@@ -15,7 +15,7 @@
         {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.create_form_controls.before') !!}
 
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.campaigns.edit.title')
             </p>
 
@@ -47,7 +47,7 @@
 
                 <!-- General Section -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.marketing.communications.campaigns.edit.general')
                     </p>
 
@@ -174,7 +174,7 @@
                 <!-- Setting -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
                             @lang('admin::app.marketing.communications.campaigns.create.setting')
                         </p>
                     </x-slot:header>

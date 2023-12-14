@@ -1,7 +1,7 @@
 <!-- Refund Vue Component -->
 <v-create-refund>
     <div class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
-        <span class="icon-cancel text-[24px]"></span> 
+        <span class="icon-cancel text-2xl leading-none"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
     </div>
@@ -15,7 +15,7 @@
                 @click="$refs.refund.open()"
             >
                 <span
-                    class="icon-cancel text-[24px]"
+                    class="icon-cancel text-2xl leading-none"
                     role="presentation"
                     tabindex="0"
                 >
@@ -34,7 +34,7 @@
                     <x-slot:header>
                         <div class="grid gap-3">
                             <div class="flex justify-between items-center">
-                                <p class="text-[20px] font-medium dark:text-white">
+                                <p class="text-xl leading-none font-medium dark:text-white">
                                     @lang('admin::app.sales.refunds.create.title')
                                 </p>
 
@@ -50,7 +50,7 @@
                                     <!-- Refund Submit Button -->
                                     <button
                                         type="submit"
-                                        class="mr-[45px] primary-button"
+                                        class="mr-11 primary-button"
                                     >
                                         @lang('admin::app.sales.refunds.create.refund-btn')
                                     </button>
@@ -77,7 +77,7 @@
                                                     <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
-                                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                        <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
                                                             @lang('admin::app.sales.invoices.view.product-image') 
                                                         </p>
                                                     </div>
@@ -85,7 +85,7 @@
                 
                                                 <div class="grid gap-1.5 place-content-start">
                                                     <!-- Item Additional Attributes -->
-                                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 

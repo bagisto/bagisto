@@ -38,7 +38,7 @@
                                 <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded overflow-hidden dark:invert dark:mix-blend-exclusion">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                         @lang('admin::app.dashboard.index.product-image')
                                     </p>
                                 </div>
@@ -46,7 +46,7 @@
 
                             <div class="flex flex-col gap-1.5">
                                 <!-- Product Name -->
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
                                 </p>
 
@@ -60,7 +60,7 @@
                         <div class="flex gap-1.5 items-center justify-between">
                             <div class="flex flex-col gap-1.5">
                                 <!-- Product Price -->
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                     @{{ product.formatted_price }}
                                 </p>
 
@@ -72,7 +72,7 @@
 
                             <!-- View More Icon -->
                             <a :href="'{{ route('admin.catalog.products.edit', ':replace') }}'.replace(':replace', product.id)">
-                                <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
+                                <span class="icon-sort-right text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                             </a>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                     <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-20 h-20 dark:invert dark:mix-blend-exclusion">
                     
                     <div class="flex flex-col items-center">
-                        <p class="text-[16px] text-gray-400 font-semibold">
+                        <p class="text-base leading-none text-gray-400 font-semibold">
                             @lang('admin::app.dashboard.index.empty-threshold')
                         </p>
     

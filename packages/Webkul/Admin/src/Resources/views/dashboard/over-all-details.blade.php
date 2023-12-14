@@ -26,23 +26,23 @@
 
                         <!-- Sales Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_sales.formatted_total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.total-sales')
                             </p>
 
                             <!-- Sales Percentage -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-[16px] text-emerald-500"
+                                    class="text-base leading-none text-emerald-500"
                                     :class="[report.statistics.total_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-[12px] text-emerald-500 font-semibold"
+                                    class="text-xs leading-none text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_sales.progress.toFixed(2)) }}%
@@ -62,23 +62,23 @@
 
                         <!-- Orders Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_orders.current }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.total-orders')
                             </p>
 
                             <!-- Order Percentage -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-[16px] text-emerald-500"
+                                    class="text-base leading-none text-emerald-500"
                                     :class="[report.statistics.total_orders.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-[12px] text-emerald-500 font-semibold"
+                                    class="text-xs leading-none text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_orders.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_orders.progress.toFixed(2)) }}%
@@ -98,23 +98,23 @@
 
                         <!-- Customers Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_customers.current }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.total-customers')
                             </p>
 
                             <!-- Customers Percentage -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-[16px] text-emerald-500"
+                                    class="text-base leading-none text-emerald-500"
                                     :class="[report.statistics.total_customers.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-[12px] text-emerald-500 font-semibold"
+                                    class="text-xs leading-none text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_customers.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_customers.progress.toFixed(2)) }}%
@@ -134,23 +134,23 @@
 
                         <!-- Sales Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.avg_sales.formatted_total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.average-sale')
                             </p>
 
                             <!-- Sales Percentage -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-[16px] text-emerald-500"
+                                    class="text-base leading-none text-emerald-500"
                                     :class="[report.statistics.avg_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-[12px] font-semibold"
+                                    class="text-xs leading-none font-semibold"
                                     :class="[report.statistics.avg_sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.avg_sales.progress).toFixed(2) }}%
@@ -170,11 +170,11 @@
                         </div>
 
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.total_unpaid_invoices.formatted_total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.total-unpaid-invoices')
                             </p>
                         </div>

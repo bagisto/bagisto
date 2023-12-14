@@ -21,7 +21,7 @@
 
     <!-- Graph Chart -->
 
-    <div class="flex gap-[5px]">
+    <div class="flex gap-1.5">
         <div class="grid">
             @foreach (range(1, 10) as $i)
                 <div class="shimmer w-[34px] h-2.5">
@@ -29,7 +29,7 @@
             @endforeach
         </div>
 
-        <div class="w-full grid gap-[5px]">
+        <div class="w-full grid gap-1.5">
             <div class="flex items-end w-[285px] h-[180px] pl-2.5 border-l border-b dark:border-gray-800 aspect-[2]">
                 <div class="w-full flex gap-2.5 justify-between items-end aspect-[2]">
                     @foreach (range(1, 14) as $i)
@@ -38,9 +38,9 @@
                 </div>
             </div>
 
-            <div class="flex gap-5 justify-between pl-2.5 max-lg:gap-[15px] max-sm:gap-2.5">
+            <div class="flex gap-5 justify-between pl-2.5 max-lg:gap-4 max-sm:gap-2.5">
                 @foreach (range(1, 10) as $i)
-                    <div class="shimmer rotate-45 flex w-full mt-[3px] h-[42px]"></div>
+                    <div class="shimmer rotate-45 flex w-full mt-1 h-[42px]"></div>
                 @endforeach
             </div>
         </div>

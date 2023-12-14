@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex gap-4 justify-between max-sm:flex-wrap">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
             @lang('admin::app.marketing.communications.campaigns.index.title')
         </p>
 

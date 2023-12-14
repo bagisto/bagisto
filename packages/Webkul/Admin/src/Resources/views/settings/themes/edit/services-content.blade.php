@@ -9,11 +9,11 @@
                     <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         <div class="flex gap-x-2.5 justify-between items-center">
                             <div class="flex flex-col gap-1">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.services-content.services')
                                 </p>
                                 
-                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                                <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.services-content.service-info')
                                 </p>
                             </div>
@@ -141,8 +141,8 @@
                                 alt="add-product-to-store"
                             >
             
-                            <div class="flex flex-col gap-[5px] items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">
+                            <div class="flex flex-col gap-1.5 items-center">
+                                <p class="text-base leading-none text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.services-content.add-btn')
                                 </p>
                                 
@@ -158,7 +158,7 @@
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
                                 @lang('admin::app.settings.themes.edit.services-content.general')
                             </p>
                         </x-slot:header>
@@ -181,7 +181,7 @@
                                     name="name"
                                     value="{{ $theme->name }}"
                                     rules="required"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.services-content.name')"
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.name')"
@@ -204,7 +204,7 @@
                                     name="sort_order"
                                     rules="required|min_value:1"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
@@ -289,7 +289,7 @@
                     <x-admin::modal ref="addServiceModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.services-content.update-service')
                             </p>
                         </x-slot:header>

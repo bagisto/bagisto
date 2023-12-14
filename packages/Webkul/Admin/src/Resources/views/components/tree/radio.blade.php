@@ -17,10 +17,10 @@
                 @change="inputChanged()"
             >
 
-            <span class="icon-radio-normal mr-1 text-[24px] rounded-md cursor-pointer peer-checked:icon-radio-selected peer-checked:text-blue-600"></span>
+            <span class="icon-radio-normal mr-1 text-2xl leading-none rounded-md cursor-pointer peer-checked:icon-radio-selected peer-checked:text-blue-600"></span>
 
             <div
-                class="text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
+                class="text-sm leading-none text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
                 v-text="label"
             >
             </div>

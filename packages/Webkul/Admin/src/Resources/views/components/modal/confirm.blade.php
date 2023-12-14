@@ -34,12 +34,12 @@
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-5 sm:items-center sm:p-0">
-                        <div class="w-full max-w-[400px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
-                            <div class="flex justify-between items-center gap-2.5 px-4 py-[11px] border-b dark:border-gray-800 text-[18px] text-gray-800 dark:text-white font-bold">
+                        <div class="w-full max-w-[400px] z-[999] absolute left-1/2 top-1/2 rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
+                            <div class="flex justify-between items-center gap-2.5 px-4 py-3 border-b dark:border-gray-800 text-lg leading-none text-gray-800 dark:text-white font-bold">
                                 @{{ title }}
                             </div>
 
-                            <div class="px-4 py-[11px] text-gray-600 dark:text-gray-300 text-left">
+                            <div class="px-4 py-3 text-gray-600 dark:text-gray-300 text-left">
                                 @{{ message }}
                             </div>
                             

@@ -25,7 +25,7 @@
     >
         <!-- Save Inventory -->
         <div class="flex gap-4 justify-between items-center mt-3.5 max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
                 {{ $title }}
             </p>
 
@@ -58,13 +58,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-store text-[24px] "></span>
+                            <span class="icon-store text-2xl leading-none "></span>
                             
                             {{ $currentChannel->name }}
 
                             <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-sort-down text-2xl leading-none"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -73,7 +73,7 @@
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white"
+                                class="flex gap-2.5 px-5 py-2 text-base leading-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white"
                             >
                                 {{ $channel->name }}
                             </a>
@@ -89,13 +89,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-language text-[24px] "></span>
+                            <span class="icon-language text-2xl leading-none "></span>
 
                             {{ $currentLocale->name }}
                             
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-sort-down text-2xl leading-none"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -104,7 +104,7 @@
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-base leading-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -115,10 +115,10 @@
         </div>
 
         @if ($groups)
-            <div class="grid grid-cols-[1fr_2fr] gap-10 mt-[25px] max-xl:flex-wrap">
+            <div class="grid grid-cols-[1fr_2fr] gap-10 mt-6 max-xl:flex-wrap">
                 @foreach ($groups as $key => $item)
                     <div class="grid gap-2.5 content-start">
-                        <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
                             @lang($item['name'])
                         </p>
 
@@ -136,7 +136,7 @@
                             @if ($hint !== __($hint))
                                 <label 
                                     for="@lang($hint)"
-                                    class="block leading-[20px] text-[12px] text-gray-600 dark:text-gray-300 font-medium"
+                                    class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
                                 >
                                     @lang($hint)
                                 </label>
