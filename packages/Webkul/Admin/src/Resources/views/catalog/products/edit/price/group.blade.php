@@ -1,5 +1,5 @@
 <!-- Seperator -->
-<span class="block w-full absolute ltr:left-0 rtl:right-0 my-[5px] border border-[#E9E9E9]"></span>
+<span class="block w-full absolute ltr:left-0 rtl:right-0 my-[5px] border border-gray-200"></span>
 
 <v-product-customer-group-price>
     <x-admin::shimmer.products.edit.group-price/>
