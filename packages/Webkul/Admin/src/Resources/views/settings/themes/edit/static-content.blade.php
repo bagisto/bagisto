@@ -48,7 +48,7 @@
                                 <p @click="switchEditor('v-html-editor-theme', 1)">
                                     <div
                                         class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
+                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.html')
                                     </div>
@@ -58,7 +58,7 @@
                                 <p @click="switchEditor('v-css-editor-theme', 0);">
                                     <div
                                         class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
+                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.css')
                                     </div>
@@ -68,7 +68,7 @@
                                 <p @click="switchEditor('v-static-content-previewer', 0);">
                                     <div
                                         class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.preview')
                                     </div>
