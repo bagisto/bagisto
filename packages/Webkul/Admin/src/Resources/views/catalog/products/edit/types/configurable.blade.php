@@ -283,9 +283,9 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <!-- Mass Update -->
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                            <div class="flex gap-2.5 items-end">
+                                                <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-sku')
                                                     </x-admin::form.control-group.label>
@@ -306,7 +306,7 @@
                                                     </div>
                                                 </x-admin::form.control-group>
 
-                                                <button class="secondary-button mt-[15px]">
+                                                <button class="secondary-button">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
                                                 </button>
                                             </div>
@@ -319,7 +319,7 @@
                                         <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <div class="grid grid-cols-3 gap-4 mb-2.5">
                                                 <x-admin::form.control-group
-                                                    class="mb-[0px]"
+                                                    class="!mb-[0px]"
                                                     v-for='inventorySource in inventorySources'
                                                 >
                                                     <x-admin::form.control-group.label>
@@ -371,9 +371,9 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editWeight'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800">
+                                            <div class="flex gap-2.5 items-end">
+                                                <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-weight')
                                                     </x-admin::form.control-group.label>
@@ -390,7 +390,7 @@
                                                     </div>
                                                 </x-admin::form.control-group>
 
-                                                <button class="secondary-button mt-[15px]">
+                                                <button class="secondary-button">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
                                                 </button>
                                             </div>
@@ -401,8 +401,8 @@
 
                                     <template v-if="selectedType == 'editName'">
                                         <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                            <div class="flex gap-2.5 items-end">
+                                                <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-name')
                                                     </x-admin::form.control-group.label>
@@ -417,7 +417,7 @@
                                                     </div>
                                                 </x-admin::form.control-group>
 
-                                                <button class="secondary-button mt-[15px]">
+                                                <button class="secondary-button">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
                                                 </button>
                                             </div>
@@ -428,8 +428,8 @@
 
                                     <template v-if="selectedType == 'editStatus'">
                                         <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
-                                            <div class="flex gap-2.5 items-center">
-                                                <x-admin::form.control-group class="flex-1 mb-0">
+                                            <div class="flex gap-2.5 items-end">
+                                                <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
                                                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-status')
                                                     </x-admin::form.control-group.label>
@@ -447,7 +447,7 @@
                                                     </div>
                                                 </x-admin::form.control-group>
 
-                                                <button class="secondary-button mt-[15px]">
+                                                <button class="secondary-button">
                                                     @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
                                                 </button>
                                             </div>
@@ -460,9 +460,11 @@
 
                             <div
                                 class="py-4 border-b-[1px] dark:border-gray-800 last:border-b-0"
-                                :class="{'flex gap-2.5 justify-between items-center': [
-                                    'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
-                                ].includes(selectedType) }"
+                                :class="{'grid grid-cols-2 gap-3 justify-between items-center': [
+                                        'editName', 'editSku',
+                                ].includes(selectedType), 'flex justify-between items-center' : [
+                                    'editWeight', 'editPrices', 'editStatus',
+                                ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
                             >
                                 <div class="text-[14px] text-gray-800">
@@ -602,7 +604,7 @@
                                     <x-admin::form.control-group class="mt-2.5 mb-0">
                                         <div class="grid grid-cols-3 gap-4 mb-2.5">
                                             <x-admin::form.control-group
-                                                class="mb-[0px]"
+                                                class="!mb-[0px]"
                                                 v-for='inventorySource in inventorySources'
                                             >
                                                 <x-admin::form.control-group.label>
@@ -970,7 +972,7 @@
 
                                             <div class="grid grid-cols-3 gap-4 mb-2.5">
                                                 <x-admin::form.control-group
-                                                    class="mb-[0px]"
+                                                    class="!mb-[0px]"
                                                     v-for='inventorySource in inventorySources'
                                                 >
                                                     <x-admin::form.control-group.label>
