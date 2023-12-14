@@ -67,7 +67,7 @@
                         @endif
 
                         <button
-                            class="absolute bottom-4 left-[50%] py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
+                            class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             :disabled="! product.is_saleable"
                             @click="addToCart()"
                             ref="addToCartButton"

@@ -244,7 +244,7 @@
 
                 <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-1 font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
@@ -328,7 +328,7 @@
 
                 <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-1 font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
@@ -377,7 +377,7 @@
 
             <div class="mb-4 flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[3px] bg-gray-600 px-2 py-1 font-semibold text-white"
+                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <span v-text="appliedColumnValue"></span>

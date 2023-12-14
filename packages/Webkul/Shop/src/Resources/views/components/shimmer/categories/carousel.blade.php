@@ -9,7 +9,7 @@
                         <img class="bg-[#F5F5F5] rounded-sm">
                     </div>
 
-                    <p class="shimmer w-[90px] h-[27px] rounded-[18px]"></p>
+                    <p class="shimmer w-[90px] h-[27px] rounded-2xl"></p>
                 </div>
             @endfor
         </div>

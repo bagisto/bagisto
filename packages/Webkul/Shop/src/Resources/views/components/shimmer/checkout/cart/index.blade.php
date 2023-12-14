@@ -49,15 +49,15 @@
         @endfor
 
         <div class="flex flex-wrap gap-8 justify-end">
-            <div class="shimmer w-[217px] h-14 rounded-[18px]"></div>
+            <div class="shimmer w-[217px] h-14 rounded-2xl"></div>
 
-            <div class="shimmer w-[161px] h-14 rounded-[18px]"></div>
+            <div class="shimmer w-[161px] h-14 rounded-2xl"></div>
         </div>
     </div>
 
     <div class="w-[418px] max-w-full">
 
-        <p class="shimmer w-[40%] h-[39px]"></p>
+        <p class="shimmer w-2/5 h-[39px]"></p>
 
         <div class="grid gap-4 mt-6">
             <div class="flex justify-between text-right">
@@ -67,7 +67,7 @@
             </div>
 
             <div class="flex justify-between text-right">
-                <p class="shimmer w-[40%] h-6"></p>
+                <p class="shimmer w-2/5 h-6"></p>
 
                 <p class="shimmer w-[36%] h-6"></p>
             </div>
@@ -83,7 +83,7 @@
                 
                 <p class="shimmer w-[38%] h-6"></p>
             </div>
-            <div class="shimmer block place-self-end w-[60%] h-[46px] mt-4 rounded-[18px]"></div>
+            <div class="shimmer block place-self-end w-3/5 h-[46px] mt-4 rounded-2xl"></div>
         </div>
     </div>
 </div>

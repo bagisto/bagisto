@@ -16,7 +16,7 @@
     </canvas>
 
     {{-- Error page Information --}}
-	<div class="container absolute left-[50%] top-0 px-[60px] max-lg:px-8 max-sm:px-4 -translate-x-[50%]">
+	<div class="container absolute left-1/2 top-0 px-[60px] max-lg:px-8 max-sm:px-4 -translate-x-1/2">
 		<div class="grid w-full h-[100vh]">
 			<div class="wrapper-404 max-868:!text-[294px] max-md:!text-[140px]">
 				<div class="glow-404">
@@ -27,7 +27,7 @@
                     {{ $errorCode }}
                 </div>
 
-				<div class="absolute left-[50%] top-[74%] -translate-x-[50%] -translate-y-[50%] text-center mt-10 max-868:w-full">
+				<div class="absolute left-1/2 top-[74%] -translate-x-1/2 -translate-y-1/2 text-center mt-10 max-868:w-full">
 					<h1 class="text-[30px] font-semibold">
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>

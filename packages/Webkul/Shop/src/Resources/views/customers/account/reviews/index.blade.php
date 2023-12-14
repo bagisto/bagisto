@@ -76,7 +76,7 @@
                                 </div>
                             @else
                                 <!-- Review Empty Page -->
-                                <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+                                <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
                 
                                     <p class="text-[20px]">

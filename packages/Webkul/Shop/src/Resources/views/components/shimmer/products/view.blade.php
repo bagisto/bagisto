@@ -13,7 +13,7 @@
 
         <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-5">
             <div class="flex justify-between gap-4">
-                <h1 class="shimmer w-[50%] h-[46px]"></h1>
+                <h1 class="shimmer w-2/4 h-[46px]"></h1>
 
                 <div class="shimmer w-[46px] h-[46px] rounded-full">
                 </div>
@@ -24,14 +24,14 @@
             <p class="shimmer w-[35%] h-9 mt-6"></p>
 
             <div class="grid gap-2.5 mt-6 max-sm:my-[20px] max-sm:justify-between max-sm:flex">
-                <p class="shimmer w-[100%] h-[27px] max-sm:w-[100px] max-sm:h-[21px]"></p>
+                <p class="shimmer w-full h-[27px] max-sm:w-[100px] max-sm:h-[21px]"></p>
                 <p class="shimmer h-[27px] max-sm:hidden w-[90%]"></p>
-                <p class="shimmer w-[80%] h-[27px] max-sm:w-[60px] max-sm:h-[21px]"></p>
+                <p class="shimmer w-4/5 h-[27px] max-sm:w-[60px] max-sm:h-[21px]"></p>
             </div>
 
             <!-- Colors -->
             <div class="mt-5">
-                <h3 class="shimmer w-[20%] h-9 mb-4"></h3>
+                <h3 class="shimmer w-1/5 h-9 mb-4"></h3>
 
                 <div class="flex items-center space-x-3">
                     <span class="shimmer w-8 h-8 rounded-full"></span>
@@ -44,7 +44,7 @@
 
             <!-- Size -->
             <div class="mt-5">
-                <h3 class="shimmer w-[20%] h-9 mb-4"></h3>
+                <h3 class="shimmer w-1/5 h-9 mb-4"></h3>
 
                 <div class="flex flex-wrap gap-3">
                     <span class="shimmer w-[60px] h-[60px] rounded-full"></span>

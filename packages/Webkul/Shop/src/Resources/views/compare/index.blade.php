@@ -114,7 +114,7 @@
                     </div>
 
                     <div
-                        class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center"
+                        class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center"
                         v-else
                     >
                         <img

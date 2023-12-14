@@ -66,7 +66,7 @@
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-2.5 place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
-                                <a  class="max-w-[80%]" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                <a  class="max-w-4/5" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                     <p
                                         class="text-[16px] font-medium"
                                         v-text="item.name"
@@ -206,7 +206,7 @@
                     <div class="grid gap-2.5 px-6">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="block w-full mx-auto py-4 px-11 bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
+                            class="block w-full mx-auto py-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>

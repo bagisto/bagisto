@@ -23,7 +23,7 @@
                 </div> 
             @endif
 
-            <button class="shimmer block w-[171.516px] h-12 mt-[60px] mx-auto py-3 rounded-[18px]"></button>
+            <button class="shimmer block w-[171.516px] h-12 mt-[60px] mx-auto py-3 rounded-2xl"></button>
         </div>
     </div>
 </div>

@@ -140,7 +140,7 @@
 
                             <div class="flex gap-4 justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
                                 <button
-                                    class="primary-button w-full max-w-[374px] py-4 px-11 rounded-[18px] text-center"
+                                    class="primary-button w-full max-w-[374px] py-4 px-11 rounded-2xl text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -148,7 +148,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center px-8 py-2.5 rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center px-8 py-2.5 rounded-2xl max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -207,8 +207,8 @@
                                     <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
 
-                                        <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
-                                            <div class="h-4 bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
+                                        <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-sm">
+                                            <div class="h-4 bg-[#FEA82B] rounded-sm" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
                                 @endfor
@@ -224,7 +224,7 @@
                         </div>
 
                         <button
-                            class="block mx-auto w-max mt-[60px] py-3 px-11 bg-white border border-navyBlue rounded-[18px] text-center text-navyBlue text-base font-medium"
+                            class="block mx-auto w-max mt-[60px] py-3 px-11 bg-white border border-navyBlue rounded-2xl text-center text-navyBlue text-base font-medium"
                             v-if="links?.next"
                             @click="get()"
                         >
@@ -234,7 +234,7 @@
 
                     <template v-else>
                         <!-- Empty Review Section -->
-                        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                        <div class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center">
                             <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
                             <p class="text-[20px]">

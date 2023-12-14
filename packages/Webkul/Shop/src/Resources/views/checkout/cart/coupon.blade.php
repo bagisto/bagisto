@@ -78,7 +78,7 @@
                                         </p>
 
                                         <button
-                                            class="block flex-auto w-max py-3 px-11 bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-6"
+                                            class="block flex-auto w-max py-3 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-6"
                                             type="submit"
                                         >
                                             @lang('shop::app.checkout.cart.coupon.button-title')

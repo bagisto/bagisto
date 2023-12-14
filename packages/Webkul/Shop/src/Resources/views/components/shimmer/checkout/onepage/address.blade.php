@@ -14,11 +14,11 @@
                     <p class="shimmer w-[150px] h-6"></p>
 
                     <div class="flex gap-6 items-center">
-                        <div class="shimmer block w-6 h-6 m-0 ml-0 rounded-[10px]"></div>
+                        <div class="shimmer block w-6 h-6 m-0 ml-0 rounded-xl"></div>
                     </div>
                 </div>
 
-                <p class="shimmer w-[100%] h-[21px] mt-6"></p>
+                <p class="shimmer w-full h-[21px] mt-6"></p>
             </div>
 
             <!-- Single card addredd -->
@@ -33,5 +33,5 @@
         </div>
     </div>
 
-    <p class="shimmer w-[40%] h-[21px] mt-5"></p>
+    <p class="shimmer w-2/5 h-[21px] mt-5"></p>
 </div>

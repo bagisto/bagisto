@@ -276,7 +276,7 @@
 
         <button
             type="submit"
-            class="primary-button block m-0 w-max py-3 px-11 rounded-[18px] text-base text-center"
+            class="primary-button block m-0 w-max py-3 px-11 rounded-2xl text-base text-center"
         >
             @lang('shop::app.customers.account.profile.save')
         </button>

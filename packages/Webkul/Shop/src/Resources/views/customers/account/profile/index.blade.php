@@ -83,7 +83,7 @@
             <x-shop::modal>
                 <x-slot:toggle>
                     <div
-                        class="primary-button py-3 px-11 rounded-[18px]"
+                        class="primary-button py-3 px-11 rounded-2xl"
                     >
                         @lang('shop::app.customers.account.profile.delete-profile')
                     </div>
@@ -117,7 +117,7 @@
                 <x-slot:footer>
                     <button
                         type="submit"
-                        class="primary-button flex py-3 px-11 rounded-[18px] max-sm:text-[14px] max-sm:px-6"
+                        class="primary-button flex py-3 px-11 rounded-2xl max-sm:text-[14px] max-sm:px-6"
                     >
                         @lang('shop::app.customers.account.profile.delete')
                     </button>

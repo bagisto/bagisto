@@ -75,7 +75,7 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                   
                                         <p class="text-[20px]">
@@ -109,7 +109,7 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
                                         <p class="text-[20px]">
@@ -122,7 +122,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="secondary-button block mx-auto w-max py-3 mt-[60px] px-11 rounded-[18px] text-base text-center"
+                            class="secondary-button block mx-auto w-max py-3 mt-[60px] px-11 rounded-2xl text-base text-center"
                             @click="loadMoreProducts"
                             v-if="links.next"
                         >

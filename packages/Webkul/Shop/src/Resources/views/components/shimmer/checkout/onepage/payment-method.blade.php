@@ -12,7 +12,7 @@
                 <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full ">
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
-                    <p class="shimmer w-[100%] h-[21px] mt-1.5"></p>
+                    <p class="shimmer w-full h-[21px] mt-1.5"></p>
                     <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
@@ -23,7 +23,7 @@
                 <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full">
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
-                    <p class="shimmer w-[100%] h-[21px] mt-1.5"></p>
+                    <p class="shimmer w-full h-[21px] mt-1.5"></p>
                     <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
@@ -34,7 +34,7 @@
                 <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full">
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
-                    <p class="shimmer w-[100%] h-[21px] mt-1.5"></p>
+                    <p class="shimmer w-full h-[21px] mt-1.5"></p>
                     <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>
@@ -45,7 +45,7 @@
                 <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full">
                     <div class="shimmer w-[45px] h-[45px]"></div>
 
-                    <p class="shimmer w-[100%] h-[21px] mt-1.5"></p>
+                    <p class="shimmer w-full h-[21px] mt-1.5"></p>
                     <p class="shimmer w-[70%] h-[18px] mt-2.5"></p>
                 </label>
             </div>

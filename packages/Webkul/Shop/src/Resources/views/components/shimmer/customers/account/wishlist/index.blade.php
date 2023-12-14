@@ -36,7 +36,7 @@
 
                             <div class="flex gap-5 flex-wrap">
                                 <div class="shimmer w-[110px] h-10 rounded-[54px]"></div>
-                                <div class="shimmer w-[158px] h-10 rounded-[18px]"></div>
+                                <div class="shimmer w-[158px] h-10 rounded-2xl"></div>
                             </div>
                         </div>
                     </div>

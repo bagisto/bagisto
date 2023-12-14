@@ -107,7 +107,7 @@
                             <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.length">
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
-                                        class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-[18px] text-center cursor-pointer"
+                                        class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
                                         @click="store"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
@@ -121,7 +121,7 @@
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
                                         type="submit"
-                                        class="block w-max py-3 px-11 bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer"
+                                        class="block w-max py-3 px-11 bg-navyBlue text-white text-base font-medium rounded-2xl text-center cursor-pointer"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
@@ -490,7 +490,7 @@
                         >
                             <button
                                 type="submit"
-                                class="block w-max px-11 py-3 bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                class="block w-max px-11 py-3 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                             </button>

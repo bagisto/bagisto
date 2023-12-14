@@ -260,14 +260,14 @@
                             <!-- Cart Item Actions -->
                             <div class="flex flex-wrap gap-8 justify-end">
                                 <a
-                                    class="secondary-button max-h-[55px] rounded-[18px]"
+                                    class="secondary-button max-h-[55px] rounded-2xl"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
                                 </a> 
 
                                 <button
-                                    class="secondary-button max-h-[55px] rounded-[18px]"
+                                    class="secondary-button max-h-[55px] rounded-2xl"
                                     @click="update()"
                                 >
                                     @lang('shop::app.checkout.cart.index.update-cart')
@@ -289,7 +289,7 @@
 
                     <!-- Empty Cart Section -->
                     <div
-                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
+                        class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
                         <img

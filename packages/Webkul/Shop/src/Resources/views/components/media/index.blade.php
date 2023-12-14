@@ -7,7 +7,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-media-template">
         <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
-            <div :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[18px]': isDragOver }">
+            <div :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl': isDragOver }">
                 <div
                     class="flex flex-col items-center justify-center w-[284px] h-[284px] bg-[#F5F5F5] rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:gray-950"
                     v-if="uploadedFiles.isPicked"
@@ -44,7 +44,7 @@
                 >
                     <label 
                         for="file-input"
-                        class="primary-button block w-max m-0 mx-auto py-3 px-11 rounded-[18px] text-base text-center"
+                        class="primary-button block w-max m-0 mx-auto py-3 px-11 rounded-2xl text-base text-center"
                     >
                         @lang('shop::app.components.media.add-attachments')
                     </label>

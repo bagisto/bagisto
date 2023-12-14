@@ -12,7 +12,7 @@
                 <label class="block p-5 border border-[#E9E9E9] rounded-xl ">
                     <span class="shimmer block w-[60px] h-[60px]"></span>
                     
-                    <p class="shimmer w-[60%] h-[37.5px] mt-2"></p>
+                    <p class="shimmer w-3/5 h-[37.5px] mt-2"></p>
                     <p class="shimmer w-[180px] h-[18px] mt-2.5"></p>
                 </label>
             </div>
@@ -23,7 +23,7 @@
                 <label class="block p-5 border border-[#E9E9E9] rounded-xl ">
                     <span class="shimmer block w-[60px] h-[60px]"></span>
 
-                    <p class="shimmer w-[60%] h-[37.5px] mt-2"></p>
+                    <p class="shimmer w-3/5 h-[37.5px] mt-2"></p>
                     <p class="shimmer w-[180px] h-[18px] mt-2.5"></p>
                 </label>
             </div>

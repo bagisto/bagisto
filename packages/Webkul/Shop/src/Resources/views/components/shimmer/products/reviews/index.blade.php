@@ -15,7 +15,7 @@
             <div class="flex gap-x-6 items-center max-sm:flex-wrap">
                 <div class="shimmer w-[55px] h-6"></div>
 
-                <div class="shimmer w-[275px] h-4 rounded-[2px]"></div>
+                <div class="shimmer w-[275px] h-4 rounded-sm"></div>
             </div>
         @endfor
     </div>

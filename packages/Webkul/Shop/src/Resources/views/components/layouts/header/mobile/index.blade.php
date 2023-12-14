@@ -177,14 +177,14 @@
                             <div class="flex gap-4 mt-6">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
-                                    class="block w-max mx-auto m-0 ml-0 py-4 px-7 bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-4 px-7 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-in')
                                 </a>
 
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
-                                    class="block w-max mx-auto m-0 ml-0 py-3.5 px-7 bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-3.5 px-7 bg-white border-2 border-navyBlue rounded-2xl text-navyBlue text-base font-medium  text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>

@@ -131,7 +131,7 @@
 
                     <div class="flex gap-9 flex-wrap mt-8 items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ml-0 mx-auto rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ml-0 mx-auto rounded-2xl text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.reset-password.submit-btn-title')

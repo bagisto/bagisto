@@ -42,7 +42,7 @@
 
                             @if ($address->default_address)
                                 <div 
-                                    class="block w-max m-0 ml-0 mx-auto p-1.5 rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
+                                    class="block w-max m-0 ml-0 mx-auto p-1.5 rounded-xl bg-navyBlue text-[12px] text-white font-medium text-center"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
@@ -114,7 +114,7 @@
 
     @else
         <!-- Address Empty Page -->
-        <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+        <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
             <img 
                 class="" 
                 src="{{ bagisto_asset('images/no-address.png') }}" 

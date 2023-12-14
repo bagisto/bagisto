@@ -135,7 +135,7 @@
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <button
                                                     type="button"
-                                                    class="primary-button block w-max max-h-10 py-1.5 px-6 rounded-[18px] text-base text-center"
+                                                    class="primary-button block w-max max-h-10 py-1.5 px-6 rounded-2xl text-base text-center"
                                                     @click="moveToCart(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
@@ -165,7 +165,7 @@
 
                     <!--Empty Wishlist-->
                     <div
-                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
+                        class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
                         <img

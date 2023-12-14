@@ -66,7 +66,7 @@
 
         <a 
             href="{{ route('shop.checkout.onepage.index') }}" 
-            class="block w-max place-self-end py-3 mt-4 px-11 bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+            class="block w-max place-self-end py-3 mt-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>
