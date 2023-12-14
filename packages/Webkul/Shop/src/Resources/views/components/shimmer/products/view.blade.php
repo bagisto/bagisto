@@ -1,4 +1,4 @@
-<div class="container px-[60px] max-1180:px-[0px]">
+<div class="container px-[60px] max-1180:px-0">
     <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
 
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
@@ -58,14 +58,14 @@
 
             <div class="flex gap-[15px] mt-[30px] max-w-[470px] flex-wrap">
                 <!-- Quantity changer button -->
-                <div class="shimmer w-[161px] h-14 rounded-[12px] max-sm:w-[124px]"></div>
+                <div class="shimmer w-[161px] h-14 rounded-xl max-sm:w-[124px]"></div>
 
                 <!-- Add to cart Button -->
-                <button class="shimmer w-[279px] h-14 rounded-[12px]"></button>
+                <button class="shimmer w-[279px] h-14 rounded-xl"></button>
             </div>
 
             <!-- Buy Now Button -->
-            <button class="shimmer w-full h-14 mt-5 rounded-[12px]"></button>
+            <button class="shimmer w-full h-14 mt-5 rounded-xl"></button>
 
             <div class="flex gap-[35px] items-center mt-10 max-sm:flex-wrap">
                 <div class="shimmer w-20 h-6"></div>

@@ -61,7 +61,7 @@
                     </span>
                 </div>
 
-                <div class="relative overflow-x-auto mt-[30px] border rounded-[12px]">
+                <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
                     <table class="w-full text-sm text-left ">
                         <thead class="bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9] text-[14px] text-black">
                             <tr>
@@ -363,7 +363,7 @@
                             </a>
                         </div>
 
-                        <div class="relative overflow-x-auto mt-[30px] border rounded-[12px]">
+                        <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
                             <table class="w-full text-sm text-left">
                                 <thead class="bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9] text-[14px] text-black">
                                     <tr>
@@ -579,7 +579,7 @@
                             </span>
                         </div>
 
-                        <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">
+                        <div class="relative overflow-x-auto border rounded-xl mt-[30px]">
                             <table class="w-full text-sm text-left">
                                 <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
                                     <tr>
@@ -649,7 +649,7 @@
                             </span>
                         </div>
 
-                        <div class="relative overflow-x-auto mt-[30px] border rounded-[12px]">
+                        <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
                             <table class="w-full text-sm text-left">
                                 <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
                                     <tr>

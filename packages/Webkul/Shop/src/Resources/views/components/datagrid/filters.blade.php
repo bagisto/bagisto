@@ -47,7 +47,7 @@
 
             <div class="mb-4 flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
+                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <!-- Retrieving the label from the options based on the applied column value. -->
@@ -112,7 +112,7 @@
 
                 <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <!-- Retrieving the label from the options based on the applied column value. -->
@@ -160,7 +160,7 @@
 
                 <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-2 py-1 font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue"></span>
@@ -199,7 +199,7 @@
 
             <div class="mt-4 grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -213,7 +213,7 @@
                 <x-shop::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -230,7 +230,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -281,9 +281,9 @@
                 </div>
             </div>
 
-            <div class="my-[16px] grid grid-cols-2 gap-[5px]">
+            <div class="my-4 grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -297,7 +297,7 @@
                 <x-shop::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -314,7 +314,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -412,7 +412,7 @@
                         <ul class="list-reset">
                             <li class="p-2">
                                 <input
-                                    class="block w-full rounded-[6px] border border-gray-300 bg-white px-2 py-1.5 text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="block w-full rounded-md border border-gray-300 bg-white px-2 py-1.5 text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     @keyup="lookUp($event)"
                                 >
                             </li>

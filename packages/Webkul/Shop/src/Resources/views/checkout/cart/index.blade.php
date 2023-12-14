@@ -111,7 +111,7 @@
                                     </span>
 
                                     @if (auth()->guard()->check())
-                                        <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
+                                        <span class="mx-2.5 border-r-[2px] border-[#E9E9E9]"></span>
 
                                         <span
                                             class="text-[16px] text-[#0A49A7] cursor-pointer" 
@@ -153,7 +153,7 @@
                                         <!-- Cart Item Image -->
                                         <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                             <x-shop::media.images.lazy
-                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
+                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-xl"
                                                 ::src="item.base_image.small_image_url"
                                                 ::alt="item.name"
                                                 width="110"
@@ -165,7 +165,7 @@
                                         </a>
 
                                         <!-- Cart Item Options Container -->
-                                        <div class="grid place-content-start gap-y-[10px]">
+                                        <div class="grid place-content-start gap-y-2.5">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                                 <p 
                                                     class="text-[16px] font-medium" 
@@ -176,7 +176,7 @@
                                             
                                             <!-- Cart Item Options Container -->
                                             <div
-                                                class="grid gap-x-2.5 gap-y-[6px] select-none"
+                                                class="grid gap-x-2.5 gap-y-1.5 select-none"
                                                 v-if="item.options.length"
                                             >
                                                 <!-- Details Toggler -->

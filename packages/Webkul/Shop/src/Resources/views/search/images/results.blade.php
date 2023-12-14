@@ -42,7 +42,7 @@
                             @click="search(term)"
                         >
                             <span
-                                class="p-[10px] text-xs font-normal leading-none max-w-full flex-initial"
+                                class="p-2.5 text-xs font-normal leading-none max-w-full flex-initial"
                                 v-text="term.name"
                             >
                             </span>

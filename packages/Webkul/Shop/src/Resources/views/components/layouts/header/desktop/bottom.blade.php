@@ -20,15 +20,15 @@
         <v-desktop-category>
             <div class="flex gap-5 items-center">
                 <span
-                    class="shimmer w-20 h-6 rounded-[4px]"
+                    class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
                 <span
-                    class="shimmer w-20 h-6 rounded-[4px]"
+                    class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
                 <span
-                    class="shimmer w-20 h-6 rounded-[4px]"
+                    class="shimmer w-20 h-6 rounded"
                     role="presentation"
                 ></span>
             </div>
@@ -119,14 +119,14 @@
                         <div class="flex gap-4 mt-[25px]">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="primary-button block w-max px-[29px] mx-auto m-0 ml-[0px] rounded-[18px] text-base text-center"
+                                class="primary-button block w-max px-[29px] mx-auto m-0 ml-0 rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="secondary-button block w-max m-0 ml-[0px] mx-auto px-[29px] border-2 rounded-[18px] text-base text-center"
+                                class="secondary-button block w-max m-0 ml-0 mx-auto px-[29px] border-2 rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
@@ -136,7 +136,7 @@
 
                 <!-- Customers Dropdown -->
                 @auth('customer')
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         <div class="grid gap-2.5 p-5 pb-0">
                             <p class="text-[20px] font-dmserif">
                                 @lang('shop::app.components.layouts.header.welcome')’
@@ -206,15 +206,15 @@
             v-if="isLoading"
         >
             <span
-                class="shimmer w-20 h-6 rounded-[4px]"
+                class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
             <span
-                class="shimmer w-20 h-6 rounded-[4px]"
+                class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
             <span
-                class="shimmer w-20 h-6 rounded-[4px]"
+                class="shimmer w-20 h-6 rounded"
                 role="presentation"
             ></span>
         </div>

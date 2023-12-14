@@ -36,7 +36,7 @@
                         <!-- Save Button -->
                         <button 
                             type="submit" 
-                            class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                         >
                             @lang('admin::app.settings.taxes.rates.edit.save-btn')
                         </button>
@@ -47,7 +47,7 @@
                 <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                     <!-- Left component -->
                     <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                        <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                        <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                             <div class="mb-2.5">
                                 <!-- Identifier -->
                                 <x-admin::form.control-group class="mb-2.5">
@@ -193,7 +193,7 @@
                         <!-- Basic Settings -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                     @lang('admin::app.settings.taxes.rates.edit.basic-settings')
                                 </p>
                             </x-slot:header>

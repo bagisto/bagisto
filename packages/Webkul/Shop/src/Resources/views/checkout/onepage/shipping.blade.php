@@ -51,7 +51,7 @@
                                     </label>
 
                                     <label 
-                                        class="block p-5 border border-[#E9E9E9] rounded-[12px] cursor-pointer"
+                                        class="block p-5 border border-[#E9E9E9] rounded-xl cursor-pointer"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-[60px] text-navyBlue"></span>

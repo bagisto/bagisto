@@ -22,7 +22,7 @@
         <div class="container mt-[30px] px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
             <div>
                 <img
-                    class="rounded-[12px]"
+                    class="rounded-xl"
                     src="{{ $category->banner_url }}"
                     alt="{{ $category->name }}"
                     width="1320"

@@ -364,11 +364,11 @@
     }
 
     .primary-button {
-        @apply flex gap-x-[5px] items-center place-content-center font-medium rounded-[12px] text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-[5px] items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:opacity-[0.9];
     }
     
     .secondary-button {
-        @apply flex gap-x-[5px] items-center place-content-center font-medium rounded-[12px] bg-white text-navyBlue border border-navyBlue  px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
+        @apply flex gap-x-[5px] items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue  px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
 
     .shimmer {

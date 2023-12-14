@@ -154,7 +154,7 @@
                             <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                 <span
                                     :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -162,7 +162,7 @@
                             <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                 <span
                                     :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -321,7 +321,7 @@
                                     >
                                         <select
                                             name="role_id"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >

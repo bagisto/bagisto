@@ -69,7 +69,7 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
@@ -100,7 +100,7 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
@@ -127,7 +127,7 @@
                         </p>
                     </div>
 
-                    <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         @foreach ($item['fields'] as $field)
                             @include ('admin::configuration.field-type')
                         

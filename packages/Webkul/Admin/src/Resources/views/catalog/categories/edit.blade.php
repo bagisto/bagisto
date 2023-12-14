@@ -66,7 +66,7 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
@@ -88,7 +88,7 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
 
                 <!-- General -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
@@ -113,7 +113,7 @@
                                 id="{{ $currentLocale->code }}[name]"
                                 v-bind="field"
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
                                 v-slugify-target:{{$currentLocale->code . '[slug]'}}="setValues"
                             >
@@ -154,7 +154,7 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.before', ['category' => $category]) !!}
 
                 <!-- Description and images -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.edit.description-and-images')
                     </p>
@@ -229,7 +229,7 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
                 <!-- SEO Deatils -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
@@ -275,7 +275,7 @@
                                     id="{{$currentLocale->code}}[slug]"
                                     v-bind="field"
                                     :class="[errors['{{$currentLocale->code}}[slug]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                     v-slugify-target:slug
                                 >
@@ -333,7 +333,7 @@
 
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.catalog.categories.edit.settings')
                         </p>
                     </x-slot:header>

@@ -49,7 +49,7 @@
                                         <a @click="editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                             <span
                                                 :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                                class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -59,7 +59,7 @@
                                         <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                             <span
                                                 :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                                class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>

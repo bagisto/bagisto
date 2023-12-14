@@ -34,7 +34,7 @@
                             <!-- Save Button -->
                             <button
                                 type="submit"
-                                class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                             >
                                 @lang('admin::app.settings.roles.create.save-btn')
                             </button>
@@ -49,7 +49,7 @@
                             {!! view_render_event('bagisto.admin.settings.roles.create.card.access_control.before') !!}
 
                             <!-- Access Control Input Fields -->
-                            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                                     @lang('admin::app.settings.roles.create.access-control')
                                 </p>
@@ -104,7 +104,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-1.5">
-                                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                             @lang('admin::app.settings.roles.create.general')
                                         </p>
                                     </div>

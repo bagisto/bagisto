@@ -33,7 +33,7 @@
                             <select
                                 name="{{ $currentLocale->code }}[options][sort]"
                                 v-bind="field"
-                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                 :class="[errors['{{ $currentLocale->code }}[options][filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             >
                                 <option value="" selected disabled>
@@ -65,7 +65,7 @@
                             type="text"
                             name="{{ $currentLocale->code }}[options][filters][limit]"
                             value="{{ $theme->translate($currentLocale->code)->options['filters']['limit'] ?? '' }}"
-                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                             :class="[errors['{{ $currentLocale->code }}[options][filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             rules="required|min_value:1"
                             label="@lang('admin::app.settings.themes.edit.limit')"
@@ -178,7 +178,7 @@
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
                     </x-slot:header>
@@ -195,7 +195,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ $theme->name }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.name')"
@@ -218,7 +218,7 @@
                                 type="text"
                                 name="sort_order"
                                 value="{{ $theme->sort_order }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -353,7 +353,7 @@
                                 <!-- Save Button -->
                                 <button 
                                     type="submit"
-                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                                 >
                                     @lang('admin::app.settings.themes.edit.save-btn')
                                 </button>

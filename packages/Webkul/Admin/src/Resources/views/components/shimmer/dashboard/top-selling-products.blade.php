@@ -9,7 +9,7 @@
         @for ($i = 1; $i <= 3; $i++)
             <div class="flex gap-2.5 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0">
                 <!-- Product Image -->
-                <div class="shimmer w-[65px] h-[65px] rounded-[4px]"></div>
+                <div class="shimmer w-[65px] h-[65px] rounded"></div>
 
                 <!-- Product Detailes -->
                 <div class="flex flex-col gap-1.5 w-[251px]">

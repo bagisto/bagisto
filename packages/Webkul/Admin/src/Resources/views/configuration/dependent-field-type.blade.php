@@ -85,7 +85,7 @@
                 <select 
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full py-2 px-3 appearance-none border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                 >
                     <option 
                         v-for='(option, index) in this.options' 
@@ -110,7 +110,7 @@
                     type="text"
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full py-2 px-3 appearance-none border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                 />
             </v-field>
         </div>
@@ -150,7 +150,7 @@
                 <select 
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full py-2 px-3 appearance-none border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                 >
                     <option
                         v-for='option in this.options'
@@ -175,7 +175,7 @@
                     type="text"
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full appearance-none py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                    class="w-full appearance-none py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 />
             </v-field>
         </div>

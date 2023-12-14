@@ -13,7 +13,7 @@
 
         <!-- Abandoned Carts Section -->
         <template v-else>
-            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <div class="flex items-center justify-between mb-4">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.sales.index.abandoned-carts')
@@ -155,7 +155,7 @@
                     <!-- Date Range -->
                     <div class="flex gap-5 justify-end">
                         <div class="flex gap-1 items-center">
-                            <span class="w-[14px] h-3.5 rounded-[3px] bg-blue-500"></span>
+                            <span class="w-3.5 h-3.5 rounded-[3px] bg-blue-500"></span>
 
                             <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}

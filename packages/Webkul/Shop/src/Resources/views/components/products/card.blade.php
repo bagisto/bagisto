@@ -11,7 +11,7 @@
             class='grid gap-2.5 content-start w-full relative'
             v-if="mode != 'list'"
         >
-            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded-[4px]">
+            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded">
                 <a
                     :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
                     :aria-label="product.name + ' '"
@@ -98,7 +98,7 @@
 
         <!-- List Card -->
         <div
-            class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap rounded-[4px] overflow-hidden"
+            class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap rounded overflow-hidden"
             v-else
         >
             <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 

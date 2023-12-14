@@ -9,12 +9,12 @@
         <div
             class="grid gap-5 grid-cols-2 mt-[30px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
             <!-- Single card addredd -->
-            <div class="max-w-[414px] p-5 border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
+            <div class="max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                 <div class="flex gap-2.5 justify-between items-center">
                     <p class="shimmer w-[150px] h-6"></p>
 
                     <div class="flex gap-[25px] items-center">
-                        <div class="shimmer block w-6 h-6 m-0 ml-[0px] rounded-[10px]"></div>
+                        <div class="shimmer block w-6 h-6 m-0 ml-0 rounded-[10px]"></div>
                     </div>
                 </div>
 
@@ -23,7 +23,7 @@
 
             <!-- Single card addredd -->
             <div
-                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
+                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                 <div class="flex gap-x-2.5 items-center">
                     <span class="shimmer w-[52px] h-[52px] rounded-full"></span>
 

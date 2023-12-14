@@ -7,7 +7,7 @@
 @pushOnce('scripts')
     <!-- Variations Template -->
     <script type="text/x-template" id="v-product-variations-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
@@ -100,7 +100,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800">
                                 <x-admin::form.control-group
                                     v-for='(attribute, index) in superAttributes'
                                 >
@@ -111,7 +111,7 @@
                                     <v-field
                                         as="select"
                                         :name="attribute.code"
-                                        class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                        class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800 rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                         :class="[errors[attribute.code] ? 'border border-red-500' : '']"
                                         rules="required"
                                         :label="attribute.admin_name"
@@ -176,7 +176,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-1.5 rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-1.5 rounded-md text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-variants')
 
@@ -185,7 +185,7 @@
                 </x-slot:toggle>
 
                 <!-- Dropdown Content -->
-                <x-slot:content class="px-[0px] py-[15px]">
+                <x-slot:content class="px-0 py-[15px]">
                     <template v-for="attribute in superAttributes">
                         <label
                             class="flex gap-2.5 items-center px-5 py-2 text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
@@ -228,7 +228,7 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-1.5 rounded-[6px] text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-1.5 rounded-md text-[12px] text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-action')
 
@@ -283,7 +283,7 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <!-- Mass Update -->
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
@@ -316,7 +316,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <div class="grid grid-cols-3 gap-4 mb-2.5">
                                                 <x-admin::form.control-group
                                                     class="mb-[0px]"
@@ -329,7 +329,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
-                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"
                                                         :label="inventorySource.name"
@@ -400,7 +400,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editName'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
@@ -427,7 +427,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editStatus'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
                                             <div class="flex gap-2.5 items-center">
                                                 <x-admin::form.control-group class="flex-1 mb-0">
                                                     <x-admin::form.control-group.label>
@@ -459,7 +459,7 @@
                             </x-admin::form>
 
                             <div
-                                class="py-4 border-b-[1px] dark:border-gray-800   last:border-b-0"
+                                class="py-4 border-b-[1px] dark:border-gray-800 last:border-b-0"
                                 :class="{'flex gap-2.5 justify-between items-center': [
                                     'editPrices', 'editName', 'editSku', 'editStatus', 'editWeight',
                                 ].includes(selectedType) }"
@@ -485,7 +485,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.price"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-[30px] rtl:pr-[30px] bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
@@ -513,7 +513,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.weight"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
@@ -541,7 +541,7 @@
                                                 as="select"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.status"
-                                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')"
@@ -577,7 +577,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.name"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-name')"
@@ -613,7 +613,7 @@
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
                                                     v-model="variant.inventories[inventorySource.id]"
-                                                    class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                    class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"
                                                     :label="inventorySource.name"
@@ -648,7 +648,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.sku"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-sku')"
@@ -742,7 +742,7 @@
 
                 <!-- Image -->
                 <div
-                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
                     :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! variant.images.length}"
                 >
                     <template v-if="! variant.images.length">
@@ -981,7 +981,7 @@
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-model="variant.inventories[inventorySource.id]"
-                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="numeric|min:0"
                                                         :label="inventorySource.name"

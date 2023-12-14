@@ -68,7 +68,7 @@
                     <x-shop::form.control-group.control
                         type="email"
                         name="email"
-                        class=" blockw-[420px] max-w-full px-5 py-5 pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-[12px] text-xs font-medium max-1060:w-full"
+                        class="blockw-[420px] max-w-full px-5 py-5 pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-xl text-xs font-medium max-1060:w-full"
                         rules="required|email"
                         label="Email"
                         :aria-label="trans('shop::app.components.layouts.footer.email')"
@@ -83,7 +83,7 @@
 
                         <button
                             type="submit"
-                            class=" absolute flex items-center top-2 w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium rtl:left-2 ltr:right-2"
+                            class=" absolute flex items-center top-2 w-max px-[26px] py-[13px] bg-white rounded-xl text-[12px] font-medium rtl:left-2 ltr:right-2"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>

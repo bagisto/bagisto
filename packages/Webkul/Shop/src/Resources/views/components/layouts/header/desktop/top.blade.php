@@ -19,7 +19,7 @@
         </x-slot:toggle>
 
         <!-- Dropdown Content -->
-        <x-slot:content class="!p-[0px]">
+        <x-slot:content class="!p-0">
             <v-currency-switcher></v-currency-switcher>
         </x-slot:content>
     </x-shop::dropdown>
@@ -60,7 +60,7 @@
         </x-slot:toggle>
     
         <!-- Dropdown Content -->
-        <x-slot:content class="!p-[0px]">
+        <x-slot:content class="!p-0">
             <v-locale-switcher></v-locale-switcher>
         </x-slot:content>
     </x-shop::dropdown>

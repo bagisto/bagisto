@@ -1,6 +1,6 @@
 <!-- Refund Vue Component -->
 <v-create-refund>
-    <div class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
+    <div class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
         <span class="icon-cancel text-[24px]"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
@@ -11,7 +11,7 @@
     <script type="text/x-template" id="v-create-refund-template">
         <div>
             <div
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                 @click="$refs.refund.open()"
             >
                 <span
@@ -70,11 +70,11 @@
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
-                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                                         src="{{ $item->product->base_image_url }}"
                                                     >
                                                 @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
                                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="gap-2.5 justify-between pb-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="gap-2.5 justify-between pb-4 border-b-[1px] border-slate-300 dark:border-gray-800">
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->
@@ -157,7 +157,7 @@
 
                                                 <!-- Item Order Summary -->
                                                 <div class="flex w-full gap-5 justify-end item">
-                                                    <div class="flex flex-col gap-y-[6px]">
+                                                    <div class="flex flex-col gap-y-1.5">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.price')
                                                         </p>
@@ -181,7 +181,7 @@
                                                         </p>
                                                     </div>
 
-                                                    <div class="flex flex-col gap-y-[6px]">
+                                                    <div class="flex flex-col gap-y-1.5">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             {{ core()->formatBasePrice($item->base_price) }}
                                                         </p>
@@ -283,7 +283,7 @@
 
                                 <!-- Order Summary -->
                                 <div class="flex w-full gap-5 justify-end">
-                                    <div class="flex flex-col gap-y-[6px]">
+                                    <div class="flex flex-col gap-y-1.5">
                                         <p class="text-gray-600 dark:text-gray-300">
                                             @lang('admin::app.sales.refunds.create.subtotal')
                                         </p>
@@ -301,7 +301,7 @@
                                         </p>
                                     </div>
 
-                                    <div class="flex flex-col gap-y-[6px]">
+                                    <div class="flex flex-col gap-y-1.5">
                                         <p
                                             class="text-gray-600 dark:text-gray-300"
                                             v-text="refund.summary.subtotal.formatted_price"

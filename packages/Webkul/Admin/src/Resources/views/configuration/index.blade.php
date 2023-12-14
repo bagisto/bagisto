@@ -27,11 +27,11 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-4 gap-12 flex-wrap justify-between p-4 mt-2 bg-white dark:bg-gray-900 rounded-[4px] box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1">
+                <div class="grid grid-cols-4 gap-12 flex-wrap justify-between p-4 mt-2 bg-white dark:bg-gray-900 rounded box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1">
                     <!-- Menus cards -->
                     @foreach ($item['children'] as $childKey =>  $child)
                         <a 
-                            class="flex items-center gap-2 max-w-[360px] p-2 rounded-[8px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                            class="flex items-center gap-2 max-w-[360px] p-2 rounded-lg transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                             href="{{ route('admin.configuration.index', ($itemKey . '/' . $childKey)) }}"
                         >
                             @if (isset($child['icon']))

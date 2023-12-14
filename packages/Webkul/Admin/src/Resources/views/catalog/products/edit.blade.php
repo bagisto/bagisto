@@ -81,7 +81,7 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
@@ -112,7 +112,7 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
@@ -144,7 +144,7 @@
                         @if (count($customAttributes))
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->code . '.before', ['product' => $product]) !!}
 
-                            <div class="relative p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                            <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                                     {{ $group->name }}
                                 </p>

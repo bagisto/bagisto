@@ -3,7 +3,7 @@
         <!-- Left Information -->
         <div class="flex gap-2.5">
             <!-- Image -->
-            <div class="shimmer w-[46px] h-[46px] rounded-[4px]">
+            <div class="shimmer w-[46px] h-[46px] rounded">
             </div>
             <!-- Details -->
 

@@ -30,7 +30,7 @@
         <!-- Left sub-component -->
         <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
-            <div class=" bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class=" bg-white dark:bg-gray-900 rounded box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>
@@ -42,11 +42,11 @@
                             <div class="flex gap-2.5">
                                 @if ($item->product?->base_image_url)
                                     <img
-                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                         src="{{ $item->product->base_image_url }}"
                                     >
                                 @else
-                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -120,7 +120,7 @@
 
                 <!-- Subtotal / Grand Total od the page -->
                 <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
-                    <div class="flex flex-col gap-y-[6px]">
+                    <div class="flex flex-col gap-y-1.5">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.refunds.view.sub-total')
                         </p>
@@ -156,7 +156,7 @@
                         </p>
                     </div>
 
-                    <div class="flex  flex-col gap-y-[6px]">
+                    <div class="flex  flex-col gap-y-1.5">
                         <!-- Base Sub Total -->
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             {{ core()->formatBasePrice($refund->base_sub_total) }}
@@ -218,7 +218,7 @@
                 
                     <x-slot:content>
                         <!-- Account Info -->
-                        <div class="flex flex-col pb-[16px]">
+                        <div class="flex flex-col pb-4">
                             <!-- Customer Full Name -->
                             <p class="text-gray-800 font-semibold dark:text-white">
                                 {{ $refund->order->customer_full_name }}
@@ -271,7 +271,7 @@
                 <x-slot:content>
                     <div class="flex w-full gap-2.5">
                         <!-- Order Info Left Section  -->
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             @foreach (['order-id', 'order-date', 'order-status', 'order-channel'] as $item)
                                 <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.sales.refunds.view.' . $item)
@@ -280,7 +280,7 @@
                         </div>
 
                         <!-- Order Info Right Section  -->
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                 <a
                                     href="{{ route('admin.sales.orders.view', $order->id) }}"
@@ -317,7 +317,7 @@
                 <x-slot:content>
                     <div class="flex w-full gap-2.5">
                         <!-- Payment Information Left Section  -->
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             @foreach (['payment-method', 'shipping-method', 'currency', 'shipping-price'] as $item)
                                 <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                     @lang('admin::app.sales.refunds.view.' . $item)
@@ -326,7 +326,7 @@
                         </div>
 
                         <!-- Payment Information Right Section  -->
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             <p class="text-gray-600 dark:text-gray-300">
                                 <a href="{{ route('admin.sales.orders.view', $order->id) }}">
                                     {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}

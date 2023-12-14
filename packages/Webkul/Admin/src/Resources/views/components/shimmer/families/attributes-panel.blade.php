@@ -11,10 +11,10 @@
         <!-- Panel Content -->
         <div class="flex gap-x-1 items-center">
             <!-- Delete Group Button -->
-            <div class="shimmer w-[130px] h-10 rounded-[6px]"></div>
+            <div class="shimmer w-[130px] h-10 rounded-md"></div>
 
             <!-- Add Group Button -->
-            <div class="shimmer w-[109px] h-10 rounded-[6px]"></div>
+            <div class="shimmer w-[109px] h-10 rounded-md"></div>
         </div>
     </div>
 
@@ -31,13 +31,13 @@
                 </div>
 
                 <!-- Draggable Attribute Groups -->
-                <div class="h-[calc(100vh-285px)] pb-[16px] overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200">
+                <div class="h-[calc(100vh-285px)] pb-4 overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200">
                     @for ($j = 0; $j < 3; $j++)
                         <div>
                             <!-- Group Container -->
                             <div class="flex items-center">
                                 <!-- Toggle -->
-                                <div class="shimmer w-4 h-4 mr-[4px]"></div>
+                                <div class="shimmer w-4 h-4 mr-1"></div>
 
                                 <!-- Group Name -->
                                 <div class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5">
@@ -77,7 +77,7 @@
             </div>
 
             <!-- Draggable Unassigned Attributes -->
-            <div class="h-[calc(100vh-285px)] pb-[16px] overflow-auto">
+            <div class="h-[calc(100vh-285px)] pb-4 overflow-auto">
                 @for ($i = 0; $i < 10; $i++)
                     <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5">
                         <div class="shimmer w-5 h-[21px]"></div>

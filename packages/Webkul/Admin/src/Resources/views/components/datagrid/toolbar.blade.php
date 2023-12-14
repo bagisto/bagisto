@@ -17,7 +17,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 focus:ring-black"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 focus:ring-black"
                         >
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.mass-actions.select-action')
@@ -49,10 +49,10 @@
                                         @{{ massAction.title }}
                                     </span>
 
-                                    <i class="icon-arrow-left text-[20px] -mt-[1px]"></i>
+                                    <i class="icon-arrow-left text-[20px] -mt-px"></i>
                                 </a>
 
-                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border dark:border-gray-800 rounded-[4px] bg-white dark:bg-gray-900 shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border dark:border-gray-800 rounded bg-white dark:bg-gray-900 shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 text-[14px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
@@ -133,7 +133,7 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="relative inline-flex w-full max-w-max ltr:pl-3 rtl:pr-3 ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-1 py-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:ring-2"
+                            class="relative inline-flex w-full max-w-max ltr:pl-3 rtl:pr-3 ltr:pr-[18px] rtl:pl-[18px] cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-1 py-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:ring-2"
                             :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': applied.filters.columns.length > 1}"
                         >
                             <span class="icon-filter text-[22px]"></span>
@@ -174,7 +174,7 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                            class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                         >
                             <span v-text="applied.pagination.perPage"></span>
 
@@ -197,7 +197,7 @@
 
                 <input
                     type="text"
-                    class="inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-1 rounded-[6px] border dark:border-gray-800 bg-white dark:bg-gray-900 px-3 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:border-gray-400 dark:focus:border-gray-400 max-sm:hidden"
+                    class="inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-1 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-3 py-1.5 text-center leading-[24px] text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:border-gray-400 dark:focus:border-gray-400 max-sm:hidden"
                     :value="available.meta.current_page"
                     @change="changePage(parseInt($event.target.value))"
                 >
@@ -211,14 +211,14 @@
                 <!-- Pagination -->
                 <div class="flex items-center gap-1">
                     <div
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
+                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
                         @click="changePage('previous')"
                     >
                         <span class="icon-sort-left text-[24px]"></span>
                     </div>
 
                     <div
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
+                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
                         @click="changePage('next')"
                     >
                         <span class="icon-sort-right text-[24px]"></span>

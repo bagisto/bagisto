@@ -31,7 +31,7 @@
                 <!-- Save Button -->
                 <button
                     type="submit"
-                    class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.marketing.communications.templates.edit.save-btn')
                 </button>
@@ -46,7 +46,7 @@
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.content.before') !!}
 
                 <!--Content -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="w-full">
                         <!-- Template Textarea -->
                         <x-admin::form.control-group>
@@ -84,11 +84,11 @@
 
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.card.accordion.general.before') !!}
 
-                <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
-                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.marketing.communications.templates.edit.general')
                                 </p>
                             </div>

@@ -40,7 +40,7 @@
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.before', ['attributeFamily' => $attributeFamily]) !!}
 
-            <div class="flex flex-col gap-2 flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex flex-col gap-2 flex-1 bg-white dark:bg-gray-900 rounded box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
@@ -56,7 +56,7 @@
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.catalog.families.edit.general')
                         </p>
                     </x-slot:header>
@@ -176,7 +176,7 @@
 
                         <!-- Draggable Attribute Groups -->
                         <draggable
-                            class="h-[calc(100vh-285px)] pb-[16px] overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200"
+                            class="h-[calc(100vh-285px)] pb-4 overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"
@@ -190,13 +190,13 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800"
+                                            class="icon-sort-down text-[20px] rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] transition-all text-gray-600 dark:text-gray-300 group"
+                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded transition-all text-gray-600 dark:text-gray-300 group"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
@@ -256,7 +256,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                            <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                 <i
@@ -306,7 +306,7 @@
                         <!-- Draggable Unassigned Attributes -->
                         <draggable
                             id="unassigned-attributes"
-                            class="h-[calc(100vh-285px)] pb-[16px] overflow-auto"
+                            class="h-[calc(100vh-285px)] pb-4 overflow-auto"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"
@@ -315,7 +315,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                     <i class="icon-attribute text-[20px] transition-all group-hover:text-gray-700"></i>

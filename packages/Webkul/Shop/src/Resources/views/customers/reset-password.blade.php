@@ -34,7 +34,7 @@
 
         <!-- Form Container -->
         <div
-            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-[30px] max-md:py-[30px]"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.reset-password.title')
@@ -131,7 +131,7 @@
 
                     <div class="flex gap-9 flex-wrap mt-[30px] items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] m-0 ml-[0px] mx-auto rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] m-0 ml-0 mx-auto rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.reset-password.submit-btn-title')

@@ -9,7 +9,7 @@
         <div class="grid gap-2.5">
             <!-- Panel -->
             <div
-                class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow"
+                class="relative bg-white dark:bg-gray-900 rounded box-shadow"
                 v-for="type in types"
             >
                 <div class="flex gap-5 justify-between mb-2.5 p-4">
@@ -58,7 +58,7 @@
                         <div class="flex gap-2.5">
                             <!-- Image -->
                             <div
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
                                 :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">

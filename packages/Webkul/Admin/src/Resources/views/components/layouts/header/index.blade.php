@@ -33,7 +33,7 @@
 
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
-            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
+            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5">
                 <i class="icon-search absolute flex items-center ltr:left-3 rtl:right-3 text-[22px] top-1.5"></i>
 
                 <input 
@@ -50,7 +50,7 @@
         <v-dark>
             <div class="flex">
                 <span
-                    class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                    class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} p-1.5 rounded-md text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 ></span>
             </div>
         </v-dark>
@@ -61,7 +61,7 @@
             class="flex"
         >
             <span 
-                class="icon-store p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                class="icon-store p-1.5 rounded-md text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 title="@lang('admin::app.components.layouts.header.visit-shop')"
             >
             </span>
@@ -71,7 +71,7 @@
         <v-notifications {{ $attributes }}>
             <span class="flex relative">
                 <span 
-                    class="icon-notification p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                    class="icon-notification p-1.5 rounded-md text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
                     title="@lang('admin::app.components.layouts.header.notifications')"
                 >
                 </span>
@@ -96,7 +96,7 @@
             </x-slot:toggle>
 
             <!-- Admin Dropdown -->
-            <x-slot:content class="!p-[0px]">
+            <x-slot:content class="!p-0">
                 <div class="flex gap-[5px] items-center px-5 py-2.5 border border-b-gray-300 dark:border-gray-800">
                     <img
                         src="{{ url('cache/logo/bagisto.png') }}"
@@ -173,7 +173,7 @@
                     <div class="relative group/item">
                         <a
                             href="{{ $menuItem['url'] }}"
-                            class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
+                            class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
                         >
                             <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                             
@@ -203,7 +203,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
-        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-[10px]">
+        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5">
             <i class="icon-search text-[22px] flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
 
             <input 
@@ -217,7 +217,7 @@
             >
 
             <div
-                class="absolute top-10 w-full bg-white dark:bg-gray-900 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border dark:border-gray-800 rounded-[8px] z-10"
+                class="absolute top-10 w-full bg-white dark:bg-gray-900 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border dark:border-gray-800 rounded-lg z-10"
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
@@ -249,8 +249,8 @@
                                 <div class="flex gap-2.5">
                                     <!-- Image -->
                                     <div
-                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                                        :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! product.images.length}"
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
+                                        :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -543,7 +543,7 @@
             <x-slot:toggle>
                 <span class="flex relative">
                     <span
-                        class="icon-notification p-1.5 rounded-[6px] text-[24px] text-red cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                        class="icon-notification p-1.5 rounded-md text-[24px] text-red cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
@@ -723,7 +723,7 @@
     <script type="text/x-template" id="v-dark-template">
         <div class="flex">
             <span
-                class="p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                class="p-1.5 rounded-md text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
                 @click="toggle"
             ></span>

@@ -15,7 +15,7 @@
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-[6px] border border-gray-300 bg-white px-2.5 py-1.5 text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
+                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
                             <span>
                                 @lang('shop::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
@@ -49,7 +49,7 @@
                                     <i class="icon-arrow-right !icon-arrow-left text-[24px]"></i>
                                 </a>
 
-                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] rounded-[4px] border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] rounded border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"

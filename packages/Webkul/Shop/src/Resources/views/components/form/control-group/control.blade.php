@@ -51,7 +51,7 @@
                 type="{{ $type }}"
                 :class="[errors.length ? 'border !border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-md text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
         </v-field>
         @break
@@ -140,7 +140,7 @@
             v-slot="{ errors }"
             name="{{ $name }}"
             :class="[errors.length ? 'border !border-red-500' : '']"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-2 px-3 bg-white border border-[#E9E9E9] rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-2 px-3 bg-white border border-[#E9E9E9] rounded-md text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             multiple
         >
             {{ $slot }}

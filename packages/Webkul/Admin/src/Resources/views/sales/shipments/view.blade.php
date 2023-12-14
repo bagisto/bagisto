@@ -29,7 +29,7 @@
         <!-- Left sub-component -->
         <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
-            <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
@@ -42,11 +42,11 @@
                                 <!-- Image -->
                                 @if ($item->product?->base_image_url)
                                     <img
-                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                         src="{{ $item->product->base_image_url }}"
                                     >
                                 @else
-                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -100,7 +100,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="flex flex-col pb-[16px]">
+                    <div class="flex flex-col pb-4">
                         <!-- Customer Full Name -->
                         <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $shipment->order->customer_full_name }}
@@ -154,7 +154,7 @@
 
                 <x-slot:content>
                     <div class="flex w-full gap-5 justify-start">
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             <p class="text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.sales.shipments.view.order-id')     
                             </p>
@@ -172,7 +172,7 @@
                             </p>
                         </div>
 
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             <!-- Order Id -->
                             <p class="text-blue-600 font-semibold">
                                 <a href="{{ route('admin.sales.orders.view', $order->id) }}">
@@ -208,7 +208,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="pb-[16px]">
+                    <div class="pb-4">
                         <!-- Payment method -->
                         <p class="text-gray-800 font-semibold dark:text-white">
                             {{ core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title') }}
@@ -219,7 +219,7 @@
                         </p>
 
                         <!-- Currency Code -->
-                        <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">  
+                        <p class="pt-4 text-gray-800 dark:text-white font-semibold">  
                             {{ $order->order_currency_code }}
                         </p>
 
@@ -231,7 +231,7 @@
                     <!-- Horizontal Line -->
                     <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
                 
-                    <div class="pt-[16px]">
+                    <div class="pt-4">
                         <!-- Shipping Menthod -->
                         <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $order->shipping_title }}
@@ -242,7 +242,7 @@
                         </p>
 
                         <!-- Inventory Source -->
-                        <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
+                        <p class="pt-4 text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($order->base_shipping_amount) }}
                         </p>
 
@@ -254,7 +254,7 @@
                             $shipment->inventory_source
                             || $shipment->inventory_source_name
                         )
-                            <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="pt-4 text-gray-800 dark:text-white font-semibold">
                                 {{ $shipment->inventory_source ? $shipment->inventory_source->name : $shipment->inventory_source_name }}
                             </p>
 
@@ -264,7 +264,7 @@
                         @endif
 
                         @if ($shipment->carrier_title)
-                            <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="pt-4 text-gray-800 dark:text-white font-semibold">
                                 {{ $shipment->carrier_title }}
                             </p>
                             
@@ -274,7 +274,7 @@
                         @endif
 
                         @if ($shipment->track_number)
-                            <p class="pt-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="pt-4 text-gray-800 dark:text-white font-semibold">
                                 {{ $shipment->track_number }}
                             </p>
 

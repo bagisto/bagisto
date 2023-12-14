@@ -8,7 +8,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-downloadable-links-template">
-        <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
@@ -353,7 +353,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"
@@ -445,7 +445,7 @@
                                             <input
                                                 type="file"
                                                 name="sample_file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 ref="sample_file"
                                                 @change="uploadFile('sample_file')"
                                             />
@@ -490,7 +490,7 @@
     </script>
 
     <script type="text/x-template" id="v-downloadable-samples-template">
-        <div class="relative bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
@@ -747,7 +747,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"

@@ -61,7 +61,7 @@
                                 >
 
                                 <span
-                                    class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                    class="icon-uncheckbox cursor-pointer rounded-md text-[24px]"
                                     :class="[
                                         applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                             applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -127,7 +127,7 @@
                             >
 
                             <label
-                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.product_id}`"
                             ></label>
                         @endif
@@ -158,7 +158,7 @@
                         <div class="relative">
                             <template v-if="record.base_image">
                                 <img
-                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded"
                                     :src=`{{ Storage::url('') }}${record.base_image}`
                                 />
 
@@ -170,7 +170,7 @@
                             </template>
 
                             <template v-else>
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -242,11 +242,11 @@
 
                         <div class="flex gap-[5px] items-center">
                             <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
-                                <span class="icon-copy text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-copy text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                             
                             <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                         </div>
                     </div>
@@ -382,9 +382,9 @@
                                         >
                                         </label>
 
-                                        <div class="flex flex-wrap gap-1 min-h-[38px] p-1.5 border dark:border-gray-800 rounded-[6px]">
+                                        <div class="flex flex-wrap gap-1 min-h-[38px] p-1.5 border dark:border-gray-800 rounded-md">
                                             <p
-                                                class="flex items-center py-[3px] px-2 bg-gray-600 rounded-[4px] text-white font-semibold"
+                                                class="flex items-center py-[3px] px-2 bg-gray-600 rounded text-white font-semibold"
                                                 v-for="option in attribute.options"
                                             >
                                                 @{{ option.name }}

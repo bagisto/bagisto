@@ -18,7 +18,7 @@
                  <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.dashboard.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -40,7 +40,7 @@
              <!-- Left sub Component -->
              <div class="flex flex-col gap-2 flex-1">
                  <!-- General -->
-                 <div class="p-4 bg-white dark:bg-gray-900  box-shadow rounded-[4px]">
+                 <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
                     <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.account.edit.general')
                     </p>
@@ -108,7 +108,7 @@
              <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.account.edit.change-password')
                         </p>
                     </x-slot:header>

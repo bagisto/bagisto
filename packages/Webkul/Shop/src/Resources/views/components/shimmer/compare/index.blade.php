@@ -3,7 +3,7 @@
 <div class="flex justify-between items-center">
     <h2 class="shimmer w-[200px] h-[39px]"></h2>
 
-    <div class="shimmer w-[150px] h-[50px] rounded-[12px]"></div>
+    <div class="shimmer w-[150px] h-[50px] rounded-xl"></div>
 </div>
 
 <div class="grid mt-[60px] overflow-auto journal-scroll">

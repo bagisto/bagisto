@@ -53,7 +53,7 @@
                                         >
                             
                                         <span
-                                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                            class="icon-uncheckbox cursor-pointer rounded-md text-[24px]"
                                             :class="[
                                                 applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                                     applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -119,7 +119,7 @@
                                     >
                         
                                     <label 
-                                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                         :for="`mass_action_select_record_${record.product_review_id}`"
                                     ></label>
                                 @endif
@@ -183,7 +183,7 @@
                                 <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                     <span
                                         :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                        class="text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>
                                 </a>
@@ -193,7 +193,7 @@
                                     v-if="record.actions.find(action => action.title === 'Edit')"
                                     @click="edit(record.actions.find(action => action.title === 'Edit')?.url)"
                                 >
-                                    <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
+                                    <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
                                     </span>
                                 </a>
                             </div>
@@ -375,14 +375,14 @@
                                             <div v-for="image in review.images" :key="image.id">
                                                 <img
                                                     v-if="image.type === 'image'"
-                                                    class="h-[60px] w-[60px] rounded-[4px]"
+                                                    class="h-[60px] w-[60px] rounded"
                                                     :src="image.url"
                                                     alt="Image"
                                                 />
 
                                                 <video
                                                     v-else
-                                                    class="h-[60px] w-[60px] rounded-[4px]"
+                                                    class="h-[60px] w-[60px] rounded"
                                                     controls
                                                     autoplay
                                                 >

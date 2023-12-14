@@ -10,7 +10,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-bundle-options-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900  rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
@@ -59,7 +59,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-20 h-20 border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                    class="w-20 h-20 border border-dashed dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->
@@ -289,8 +289,8 @@
                                 
                                 <!-- Image -->
                                 <div
-                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
+                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
+                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
                                 >
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -345,7 +345,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>

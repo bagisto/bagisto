@@ -73,7 +73,7 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
@@ -95,7 +95,7 @@
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before') !!}
 
                 <!--Content -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.edit.description')
                     </p>
@@ -130,7 +130,7 @@
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.before') !!}
 
                 <!-- SEO Input Fields -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.edit.seo')
                     </p>
@@ -241,7 +241,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>

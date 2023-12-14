@@ -13,7 +13,7 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <div class="rounded-[4px] box-shadow">
+            <div class="rounded box-shadow">
                 <div class="flex gap-4 flex-wrap p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800">
                     <!-- Today's Sales -->
                     <div class="flex gap-2.5 flex-1">
@@ -123,7 +123,7 @@
 
                 <!-- Today Orders Details -->
                 <div
-                    class="row grid grid-cols-4 gap-y-[24px] p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-1580:grid-cols-3 max-sm:grid-cols-1"
+                    class="row grid grid-cols-4 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-1580:grid-cols-3 max-sm:grid-cols-1"
                     v-for="order in report.statistics.orders"
                 >
                     <!-- Order ID, Status, Created -->
@@ -190,7 +190,7 @@
 
                             <!-- View More Icon -->
                             <a :href="'{{ route('admin.sales.orders.view', ':replace') }}'.replace(':replace', order.id)">
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                             </a>
                         </div>
 

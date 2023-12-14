@@ -32,7 +32,7 @@
 
         <div class="grid grid-cols-2 gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
-                <div class="p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
+                <div class="p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                     <div class="flex justify-between items-center">
                         <p class="text-[16px] font-medium">
                             {{ $address->company_name }}
@@ -42,7 +42,7 @@
 
                             @if ($address->default_address)
                                 <div 
-                                    class="block w-max m-0 ml-[0px] mx-auto p-[5px] rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
+                                    class="block w-max m-0 ml-0 mx-auto p-[5px] rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
@@ -51,7 +51,7 @@
                             <!-- Dropdown Actions -->
                             <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
-                                    <button class="icon-more px-1.5 py-1 rounded-[6px] text-[24px] text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
+                                    <button class="icon-more px-1.5 py-1 rounded-md text-[24px] text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
                                 </x-slot:toggle>
 
                                 <x-slot:menu>

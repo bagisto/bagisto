@@ -14,7 +14,7 @@
                 @change="inputChanged()"
             >
 
-            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600">
+            <span class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600">
             </span>
 
             <div

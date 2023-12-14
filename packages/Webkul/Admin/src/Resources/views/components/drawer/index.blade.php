@@ -18,12 +18,12 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-[10px] p-3 border-b-[1px] dark:border-gray-800 max-sm:px-[15px]']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-3 border-b-[1px] dark:border-gray-800 max-sm:px-[15px]']) }}>
                 {{ $header }}
 
                 <div class="absolute top-4 ltr:right-3 rtl:left-3">
                     <span
-                        class="icon-cross text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
+                        class="icon-cross text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                         @click="close"
                     >
                     </span>

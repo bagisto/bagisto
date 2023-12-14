@@ -38,7 +38,7 @@
                         </template>
 
                         <div
-                            class="grid pt-[16px]"
+                            class="grid pt-4"
                             v-if="servicesContent.services.length"
                             v-for="(service_details, index) in servicesContent.services"
                         >
@@ -136,7 +136,7 @@
                             v-else
                         >
                             <img    
-                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -158,7 +158,7 @@
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.settings.themes.edit.services-content.general')
                             </p>
                         </x-slot:header>
@@ -181,7 +181,7 @@
                                     name="name"
                                     value="{{ $theme->name }}"
                                     rules="required"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.services-content.name')"
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.name')"
@@ -204,7 +204,7 @@
                                     name="sort_order"
                                     rules="required|min_value:1"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
@@ -367,7 +367,7 @@
                                 <!-- Save Button -->
                                 <button 
                                     type="submit"
-                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                                 >
                                     @lang('admin::app.settings.themes.edit.services-content.save-btn')
                                 </button>

@@ -2,7 +2,7 @@
     'isActive' => true,
 ])
 
-<div {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-900 rounded-[4px] box-shadow']) }}>
+<div {{ $attributes->merge(['class' => 'bg-white dark:bg-gray-900 rounded box-shadow']) }}>
     <v-accordion
         is-active="{{ $isActive }}"
         {{ $attributes }}
@@ -15,7 +15,7 @@
                     {{ $header }}
 
                     <span
-                        :class="`text-[24px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
+                        :class="`text-[24px] p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
                         @click="toggle"
                     ></span>
                 </div>
@@ -25,7 +25,7 @@
         @isset($content)
             <template v-slot:content="{ isOpen }">
                 <div
-                    {{ $content->attributes->merge(['class' => 'px-4 pb-[16px]']) }}
+                    {{ $content->attributes->merge(['class' => 'px-4 pb-4']) }}
                     v-show="isOpen"
                 >
                     {{ $content }}

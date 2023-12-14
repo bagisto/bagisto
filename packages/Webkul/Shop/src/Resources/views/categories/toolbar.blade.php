@@ -94,7 +94,7 @@
             <div class="md:hidden">
                 <ul>
                     <li
-                        class="p-[10px]"
+                        class="p-2.5"
                         :class="{'bg-gray-100': sort.value == filters.applied.sort}"
                         v-for="(sort, key) in filters.available.sort"
                         @click="apply('sort', sort.value)"

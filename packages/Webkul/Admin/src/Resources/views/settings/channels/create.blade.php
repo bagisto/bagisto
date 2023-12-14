@@ -42,7 +42,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.general.before') !!}
 
                 <!-- General Information -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.settings.channels.create.general')
                     </p>
@@ -210,7 +210,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.design.before') !!}
 
                 <!-- Logo and Design -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.create.design')
                     </p>
@@ -295,7 +295,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.seo.before') !!}
 
                 <!-- Home Page SEO -->
-                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.create.seo')
                     </p>
@@ -385,7 +385,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                                 @lang('admin::app.settings.channels.create.currencies-and-locales')
                             </p>
                         </div>
@@ -537,7 +537,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                                 @lang('admin::app.settings.channels.create.settings')
                             </p>
                         </div>

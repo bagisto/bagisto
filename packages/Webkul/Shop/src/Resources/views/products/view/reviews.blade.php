@@ -178,7 +178,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-[15px] items-center px-[15px] py-2.5 border border-navyBlue rounded-[12px] cursor-pointer"
+                                class="flex gap-x-[15px] items-center px-[15px] py-2.5 border border-navyBlue rounded-xl cursor-pointer"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-[24px]"></span>
@@ -249,11 +249,11 @@
 
     <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-5">
+        <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img
                     v-if="review.profile"
-                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] max-sm:hidden"
+                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl max-sm:hidden"
                     :src="review.profile"
                     :alt="review.name"
                     :title="review.name"
@@ -261,7 +261,7 @@
 
                 <div
                     v-else
-                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] bg-[#F5F5F5] max-sm:hidden"
+                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
                     <span
@@ -308,7 +308,7 @@
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-[8px] text-[14px]"
+                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-[14px]"
                     @click="translate"
                 >
                     <!-- Spinner -->
@@ -341,7 +341,7 @@
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
+                                class="min-w-[50px] max-h-[50px] rounded-xl cursor-pointer"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -355,7 +355,7 @@
                             v-else
                         >
                             <video
-                                class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
+                                class="min-w-[50px] max-h-[50px] rounded-xl cursor-pointer"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

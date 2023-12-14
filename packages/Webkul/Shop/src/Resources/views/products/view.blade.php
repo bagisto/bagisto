@@ -263,7 +263,7 @@
                         :value="qty"
                     >
 
-                    <div class="container px-[60px] max-1180:px-[0px]">
+                    <div class="container px-[60px] max-1180:px-0">
                         <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
@@ -365,7 +365,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 py-[15px] px-[26px] rounded-[12px]"
+                                            class="gap-x-4 py-[15px] px-[26px] rounded-xl"
                                         >
                                         </x-shop::quantity-changer>
                                     @endif

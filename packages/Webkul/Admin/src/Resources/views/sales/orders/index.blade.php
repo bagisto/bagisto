@@ -157,7 +157,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
+                            <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                         </a>
                     </div>
                 </div>

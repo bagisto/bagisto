@@ -1,7 +1,7 @@
 <!-- Invoice Create Vue Component -->
 <v-create-invoices>
     <div
-        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
     >
         <span class="icon-sales text-[24px]"></span> 
 
@@ -13,7 +13,7 @@
     <script type="text/x-template" id="v-create-invoices-template">
         <div>
             <div
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     @click="$refs.invoice.open()"
                 >
                     <span
@@ -59,11 +59,11 @@
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
-                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                                         src="{{ $item->product?->base_image_url }}"
                                                     />
                                                 @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
                                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 

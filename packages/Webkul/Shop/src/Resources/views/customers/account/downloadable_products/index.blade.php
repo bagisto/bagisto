@@ -19,7 +19,7 @@
 
             @if (! $downloadableLinkPurchased->isEmpty())
                 <!-- Downloadable Products Information -->
-                <div class="relative overflow-x-auto border border-b-0  rounded-[12px] mt-[30px]">
+                <div class="relative overflow-x-auto border border-b-0  rounded-xl mt-[30px]">
                     <table class="w-full text-sm text-left">
                         <thead class="border-b-[1px] border-[#E9E9E9] text-[14px] text-black bg-[#F5F5F5]">
                             <tr>
@@ -96,20 +96,20 @@
                                         @switch($item->status)
                                             @case('completed')
 
-                                                <span class="px-2.5 py-1 rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
+                                                <span class="px-2.5 py-1 rounded-xl bg-[#5BA34B] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break
 
                                             @case('pending')
 
-                                                <span class="px-2.5 py-1 rounded-[12px] bg-[#FDB60C] text-white text-[12px]">
+                                                <span class="px-2.5 py-1 rounded-xl bg-[#FDB60C] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break
 
                                             @case('available')
-                                                <span class=" px-2.5 py-1 rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
+                                                <span class=" px-2.5 py-1 rounded-xl bg-[#5BA34B] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break

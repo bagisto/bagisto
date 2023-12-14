@@ -45,14 +45,14 @@
     {!! view_render_event('bagisto.admin.customers.customers.view.filters.before') !!}
 
     <!-- Filters -->
-    <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap mt-7">
+    <div class="flex gap-x-1 gap-y-2 items-center flex-wrap mt-7">
         <!-- Address Create component -->
         @include('admin::customers.addresses.create')
 
         <!-- Account Delete button -->
         @if (bouncer()->hasPermission('customers.customers.delete'))
             <div 
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                 @click="$emitter.emit('open-confirm-modal', {
                     message: '@lang('admin::app.customers.customers.view.account-delete-confirmation')',
 
@@ -89,7 +89,7 @@
             @php $orders = $customer->orders(); @endphp
 
             <!-- Orders -->
-            <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if ($totalOrderCount = $orders->count())
                     <div class=" p-4 flex justify-between">
                         <!-- Total Order Count -->
@@ -197,7 +197,7 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                    class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                 >
                                 </a>
                             </div>
@@ -212,7 +212,7 @@
                     @if ($totalOrderCount > 10)
                         <div class="flex gap-x-2 items-center p-4 border-t-[1px] dark:border-gray-800">
                             <div
-                                class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
+                                class="inline-flex gap-x-1 items-center justify-between ltr:ml-2 rtl:mr-2 text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
                             >
                                 {{ $pagination['per_page'] }}
                             </div>
@@ -222,7 +222,7 @@
                             </span>
     
                             <p
-                                class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
+                                class="inline-flex gap-x-1 items-center justify-between ltr:ml-2 rtl:mr-2 text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
                             >
                                 {{ $pagination['current_page'] }}
                             </p>
@@ -238,13 +238,13 @@
                             <!-- Prev & Next Page Button -->
                             <div class="flex gap-1 items-center">
                                 <a href="{{ $pagination['first_page_url'] }}">
-                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-1.5 text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-2 rtl:mr-2 text-gray-600 dark:text-gray-300 p-1.5 text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                         <span class="icon-sort-left text-[24px]"></span>
                                     </div>
                                 </a>
     
                                 <a href="{{ $pagination['next_page_url'] }}">
-                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-[8px] rtl:mr-[8px] text-gray-600 dark:text-gray-300 p-1.5 text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-[6px] dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                    <div class="inline-flex gap-x-1 items-center justify-between ltr:ml-2 rtl:mr-2 text-gray-600 dark:text-gray-300 p-1.5 text-center w-full max-w-max bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
                                         <span class="icon-sort-right text-[24px]"></span>
                                     </div>
                                 </a>
@@ -265,7 +265,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -326,7 +326,7 @@
                                         <td class="text-center">
                                             <a 
                                                 href="{{ route('admin.sales.invoices.view', $invoice->id) }}" 
-                                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                                class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                                 role="presentation"
                                             >
                                             </a>
@@ -349,7 +349,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -376,7 +376,7 @@
 
                     @foreach($customer->reviews as $review)
                         <!-- Reviews Details -->
-                        <div class="grid gap-y-[16px] p-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
+                        <div class="grid gap-y-4 p-4 transition-all hover:bg-gray-50 dark:hover:bg-gray-950">
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-1.5">
                                     <!-- Review Name -->
@@ -447,7 +447,7 @@
 
                                 <a 
                                     href="{{ route('admin.catalog.products.edit', $review->product->id) }}"
-                                    class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                    class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                 >
                                 </a>
                             </div>
@@ -468,7 +468,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -527,7 +527,7 @@
                                     class="hidden peer"
                                 >
                     
-                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
+                                <span class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
                     
                                 <p class="flex gap-x-1 items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                     @lang('admin::app.customers.customers.view.notify-customer')
@@ -595,7 +595,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="grid gap-y-[10px]">
+                    <div class="grid gap-y-2.5">
                         <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $customer->first_name . " " . $customer->last_name }}
                         </p>
@@ -640,7 +640,7 @@
                 <x-slot:content>
                     @if (count($customer->addresses))
                         @foreach ($customer->addresses as $index => $address)
-                            <div class="grid gap-y-[10px]">
+                            <div class="grid gap-y-2.5">
                                 @if ( $address->default_address )
                                     <p class="label-pending">
                                         @lang('admin::app.customers.customers.view.default-address')
@@ -736,7 +736,7 @@
                         <div class="flex gap-5 items-center py-2.5">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                             >
 
                             <div class="flex flex-col gap-1.5">

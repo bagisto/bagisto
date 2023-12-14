@@ -37,13 +37,13 @@
                         <!-- Product Item -->
                         <img
                             v-if="item.images.length"
-                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
+                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded overflow-hidden"
                             :src="item.images[0]?.url"
                         />
 
                         <div
                             v-else
-                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion"
+                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded overflow-hidden dark:invert dark:mix-blend-exclusion"
                         >
                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                             

@@ -57,7 +57,7 @@
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                         <!-- Label -->
-                        <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
+                        <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
                             <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
@@ -111,7 +111,7 @@
 
                         <!-- Options -->
                         <div
-                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
@@ -184,7 +184,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
+                                                class="icon-uncheckbox text-[24px] rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
                                             >
                                             </label>
 
@@ -331,13 +331,13 @@
                                                     <!-- Actions Button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                            class="icon-edit p-1.5 rounded-md text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
 
                                                         <span
-                                                            class="icon-delete p-1.5 rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
+                                                            class="icon-delete p-1.5 rounded-md text-[24px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -353,7 +353,7 @@
                                     <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
                                         <!-- Attribute Option Image -->
                                         <img
-                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px]"
+                                            class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded"
                                             src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
@@ -388,14 +388,14 @@
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
+                        <div class="bg-white dark:bg-gray-900 box-shadow rounded">
                             <div class="flex justify-between items-center p-1.5">
-                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')
                                 </p>
                             </div>
 
-                            <div class="px-4 pb-[16px]">
+                            <div class="px-4 pb-4">
                                 <!-- Attribute Code -->
                                 <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
@@ -531,7 +531,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot:header>
@@ -648,7 +648,7 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot:header>

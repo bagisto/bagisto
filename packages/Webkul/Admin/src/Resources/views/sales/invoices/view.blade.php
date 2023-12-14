@@ -37,12 +37,12 @@
 
     <!-- Filter row -->
     <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
-        <div class="flex gap-x-1 gap-y-[8px] items-center flex-wrap">
+        <div class="flex gap-x-1 gap-y-2 items-center flex-wrap">
             {!! view_render_event('sales.invoice.page_action.before', ['order' => $order]) !!}
 
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
             >
                 <span class="icon-printer text-[24px] "></span> 
 
@@ -53,7 +53,7 @@
             <div>
                 <button
                     type="button"
-                    class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                    class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     @click="$refs.groupCreateModal.open()"
                 >
                     <span class="icon-mail text-[24px] "></span>
@@ -120,7 +120,7 @@
         <!-- Left sub-component -->
         <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- Invoice Item Section -->
-            <div class="bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
@@ -133,11 +133,11 @@
                                 <!-- Product Image -->
                                 @if ($item->product?->base_image_url)
                                     <img
-                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                         src="{{ $item->product->base_image_url }}"
                                     >
                                 @else
-                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                         
                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -218,7 +218,7 @@
 
                 <!--Sale Summary -->
                 <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
-                    <div class="flex flex-col gap-y-[6px]">
+                    <div class="flex flex-col gap-y-1.5">
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total-summary')
                         </p>
@@ -242,7 +242,7 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col gap-y-[6px]">
+                    <div class="flex flex-col gap-y-1.5">
                         <!-- Subtotal -->
                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                             {{ core()->formatBasePrice($invoice->base_sub_total) }}
@@ -285,7 +285,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="flex flex-col {{ $order->billing_address ? 'pb-[16px]' : ''}}">
+                    <div class="flex flex-col {{ $order->billing_address ? 'pb-4' : ''}}">
                         <p class="text-gray-800 font-semibold dark:text-white">
                             {{ $invoice->order->customer_full_name }}
                         </p>
@@ -302,8 +302,8 @@
                     @if ($order->billing_address || $order->shipping_address)
                         <!-- Billing Address -->
                         @if ($order->billing_address)
-                            <div class="{{ $order->shipping_address ? 'pb-[16px]' : '' }}">
-                                <span class="block w-full border-b-[1px] dark:border-gray-800  "></span>
+                            <div class="{{ $order->shipping_address ? 'pb-4' : '' }}">
+                                <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
 
                                 <div class="flex items-center justify-between">
                                     <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
@@ -345,7 +345,7 @@
 
                 <x-slot:content>
                     <div class="flex w-full gap-5 justify-start">
-                        <div class="flex flex-col gap-y-[6px]">
+                        <div class="flex flex-col gap-y-1.5">
                             @foreach (['order-id', 'order-date', 'order-status', 'invoice-status', 'channel'] as $item)
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.invoices.view.' . $item) 
@@ -353,7 +353,7 @@
                             @endforeach
                         </div>
 
-                        <div class="flex  flex-col gap-y-[6px]">
+                        <div class="flex  flex-col gap-y-1.5">
                             <!-- Order Id -->
                             <p class="text-blue-600 font-semibold transition-all hover:underline">
                                 <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>

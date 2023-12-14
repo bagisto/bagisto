@@ -64,7 +64,7 @@
                                 >
 
                                 <span
-                                    class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                    class="icon-uncheckbox cursor-pointer rounded-md text-[24px]"
                                     :class="[
                                         applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                             applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -129,7 +129,7 @@
                             >
 
                             <label
-                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.customer_id}`"
                             >
                             </label>
@@ -208,14 +208,14 @@
 
                         <div class="flex items-center">
                             <a
-                                class="icon-login text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                                class="icon-login text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                                 :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
                                 target="_blank"
                             >
                             </a>
 
                             <a
-                                class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                                class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                                 :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
                             >
                             </a>

@@ -54,7 +54,7 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.general.before') !!}
 
                             <!-- General -->
-                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
+                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
                                 <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.create.general')
                                 </p>
@@ -134,7 +134,7 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.contact_info.before') !!}
 
                             <!-- Contact Information -->
-                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
+                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
                                 <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.create.contact-info')
                                 </p>
@@ -236,7 +236,7 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.address.before') !!}
 
                             <!-- Source Address -->
-                            <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                                 <p class="mb-4 text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.create.address')
                                 </p>

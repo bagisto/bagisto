@@ -28,7 +28,7 @@
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
-                class="!p-0 rounded-[12px] text-gray-700 mb-0"
+                class="!p-0 rounded-xl text-gray-700 mb-0"
                 :label="trans('Image')"
                 :is-multiple="false"
                 accepted-types="image/*"

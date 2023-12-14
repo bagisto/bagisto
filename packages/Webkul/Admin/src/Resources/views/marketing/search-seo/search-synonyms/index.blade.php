@@ -75,7 +75,7 @@
                                         @change="setCurrentSelectionMode"
                                     >
 
-                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-[6px] text-[24px]">
+                                    <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-[24px]">
                                     </span>
                                 </label>
                             </p>
@@ -96,7 +96,7 @@
                                         <a @click="selectedSitemap=1; editModal(record)">
                                             <span
                                                 :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                                class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -106,7 +106,7 @@
                                         <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                             <span
                                                 :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                                class="cursor-pointer rounded-[6px] p-1.5 text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -201,7 +201,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <p class="mt-2 ltr:ml-[4px] rtl:mr-[4px] text-[12px] text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-[12px] text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
                                 </p>
 

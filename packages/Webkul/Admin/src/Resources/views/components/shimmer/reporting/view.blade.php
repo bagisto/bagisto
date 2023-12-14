@@ -7,14 +7,14 @@
 
     <!-- Actions -->
     <div class="flex gap-1.5 items-center">
-        <div class="shimmer w-6 h-6 rounded-[6px]"></div>
-        <div class="shimmer w-[88px] h-[39px] rounded-[6px]"></div>
-        <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
-        <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
+        <div class="shimmer w-6 h-6 rounded-md"></div>
+        <div class="shimmer w-[88px] h-[39px] rounded-md"></div>
+        <div class="shimmer w-[140px] h-[39px] rounded-md"></div>
+        <div class="shimmer w-[140px] h-[39px] rounded-md"></div>
     </div>
 </div>
 
-<div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
+<div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
     <x-admin::shimmer.datagrid.table.head/>
 
     <x-admin::shimmer.datagrid.table.body/>

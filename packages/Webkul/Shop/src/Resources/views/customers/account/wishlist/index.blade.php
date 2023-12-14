@@ -56,14 +56,14 @@
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <x-shop::media.images.lazy
-                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-[12px]" 
+                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-xl" 
                                                     ::src="item.product.base_image.small_image_url"                                         
                                                 >
                                                 </x-shop::media.images.lazy>
                                             </a>
                                         </div>
 
-                                        <div class="grid gap-y-[10px]">
+                                        <div class="grid gap-y-2.5">
                                             <p 
                                                 class="text-[16px] font-medium" 
                                                 v-text="item.product.name"
@@ -72,7 +72,7 @@
 
                                             <!--Wishlist Item attributes -->
                                             <div 
-                                                class="flex gap-x-2.5 gap-y-[6px] flex-wrap"
+                                                class="flex gap-x-2.5 gap-y-1.5 flex-wrap"
                                                 v-if="item.options.length"
                                             >
                                                 <div class="grid gap-2">

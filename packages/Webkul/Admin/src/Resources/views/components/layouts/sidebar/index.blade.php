@@ -1,4 +1,4 @@
-<div class="fixed top-[57px] h-full bg-white dark:bg-gray-900 pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
+<div class="fixed top-[57px] h-full bg-white dark:bg-gray-900 pt-2 w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
     <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid gap-[7px] w-full">
             <!-- Navigation Menu -->
@@ -9,7 +9,7 @@
                 >
                     <a
                         href="{{ $menuItem['url'] }}"
-                        class="flex gap-2.5 p-1.5 items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
+                        class="flex gap-2.5 p-1.5 items-center cursor-pointer hover:rounded-lg {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
                     >
                         <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         

@@ -35,7 +35,7 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-2.5 border border-[#E9E9E9] rounded-[12px]">
+                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-2.5 border border-[#E9E9E9] rounded-xl">
                         <div class="">
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -84,7 +84,7 @@
                             </x-slot:toggle>
 
                             <!-- Dropdown Content -->
-                            <x-slot:content class="!p-[0px]">
+                            <x-slot:content class="!p-0">
                                 <v-currency-switcher></v-currency-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
@@ -116,7 +116,7 @@
                             </x-slot:toggle>
 
                             <!-- Dropdown Content -->
-                            <x-slot:content class="!p-[0px]">
+                            <x-slot:content class="!p-0">
                                 <v-locale-switcher></v-locale-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
@@ -177,14 +177,14 @@
                             <div class="flex gap-4 mt-[25px]">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
-                                    class="block w-max mx-auto m-0 ml-[0px] py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-in')
                                 </a>
 
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
-                                    class="block w-max mx-auto m-0 ml-[0px] py-3.5 px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-3.5 px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>
@@ -194,7 +194,7 @@
 
                     <!-- Customers Dropdown -->
                     @auth('customer')
-                        <x-slot:content class="!p-[0px]">
+                        <x-slot:content class="!p-0">
                             <div class="grid gap-2.5 p-5 pb-0">
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome')’

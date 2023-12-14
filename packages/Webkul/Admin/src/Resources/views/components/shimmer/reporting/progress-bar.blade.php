@@ -13,7 +13,7 @@
 
     <div class="flex gap-5 justify-end">
         <div class="flex gap-1 items-center">
-            <div class="shimmer w-[14px] h-3.5 rounded-[3px]"></div>
+            <div class="shimmer w-3.5 h-3.5 rounded-[3px]"></div>
             <div class="shimmer w-[143px] h-[17px]"></div>
         </div>
     </div>

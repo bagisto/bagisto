@@ -1,9 +1,9 @@
 @props(['count' => 0])
 
 @for ($i = 0;  $i < $count; $i++)
-    <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
+    <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
         <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
-            <div class="shimmer w-[100px] h-[100px] rounded-[12px]"></div>
+            <div class="shimmer w-[100px] h-[100px] rounded-xl"></div>
         </div>
 
         <div class="">
@@ -27,12 +27,12 @@
             </div>
 
             <div class="flex gap-2 flex-wrap mt-2.5">
-                <span class="shimmer rounded-[12px] w-12 h-12"></span>
-                <span class="shimmer rounded-[12px] w-12 h-12"></span>
-                <span class="shimmer rounded-[12px] w-12 h-12"></span>
-                <span class="shimmer rounded-[12px] w-12 h-12"></span>
-                <span class="shimmer rounded-[12px] w-12 h-12"></span>
-                <span class="shimmer rounded-[12px] w-12 h-12"></span>
+                <span class="shimmer rounded-xl w-12 h-12"></span>
+                <span class="shimmer rounded-xl w-12 h-12"></span>
+                <span class="shimmer rounded-xl w-12 h-12"></span>
+                <span class="shimmer rounded-xl w-12 h-12"></span>
+                <span class="shimmer rounded-xl w-12 h-12"></span>
+                <span class="shimmer rounded-xl w-12 h-12"></span>
             </div>
         </div>
     </div>

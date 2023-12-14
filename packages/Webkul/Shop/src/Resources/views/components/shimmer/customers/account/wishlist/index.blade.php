@@ -3,7 +3,7 @@
 <div class="flex justify-between items-center overflow-auto journal-scroll">
     <h2 class="shimmer w-[110px] h-[39px]"></h2>
 
-    <div class="shimmer flex items-center gap-x-2.5 py-3 px-5 rounded-[12px]">
+    <div class="shimmer flex items-center gap-x-2.5 py-3 px-5 rounded-xl">
         <span class="w-[108px] h-6"></span>
     </div>
 </div>
@@ -19,9 +19,9 @@
                             <div class="shimmer w-[110px] h-[110px]"></div>
                         </div>
 
-                        <div class="grid gap-y-[10px]">
+                        <div class="grid gap-y-2.5">
                             <div class="shimmer w-[200px] h-[21px]"></div>
-                            <div class="flex gap-x-2.5 gap-y-[6px] flex-wrap">
+                            <div class="flex gap-x-2.5 gap-y-1.5 flex-wrap">
                                 <div class="grid gap-2">
                                 </div>
                             </div>

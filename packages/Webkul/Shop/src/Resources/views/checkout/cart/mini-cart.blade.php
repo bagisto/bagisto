@@ -58,13 +58,13 @@
                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                 <img
                                     :src="item.base_image.small_image_url"
-                                    class="max-w-[110px] max-h-[110px] rounded-[12px]"
+                                    class="max-w-[110px] max-h-[110px] rounded-xl"
                                 />
                             </a>
                         </div>
 
                         <!-- Cart Item Information -->
-                        <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
+                        <div class="grid flex-1 gap-y-2.5 place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
                                 <a  class="max-w-[80%]" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                     <p
@@ -83,7 +83,7 @@
 
                             <!-- Cart Item Options Container -->
                             <div
-                                class="grid gap-x-2.5 gap-y-[6px] select-none"
+                                class="grid gap-x-2.5 gap-y-1.5 select-none"
                                 v-if="item.options.length"
                             >
                                 <!-- Details Toggler -->
@@ -145,7 +145,7 @@
                     class="pb-[30px]"
                     v-else
                 >
-                    <div class="grid gap-y-[20px] b-0 place-items-center">
+                    <div class="grid gap-y-5 b-0 place-items-center">
                         <img src="{{ bagisto_asset('images/thank-you.png') }}">
 
                         <p class="text-[20px]">
@@ -158,7 +158,7 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-[8px] border-b-[1px] border-[#E9E9E9]">
+                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-2 border-b-[1px] border-[#E9E9E9]">
                         <p class="text-[14px] font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>

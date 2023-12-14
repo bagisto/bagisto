@@ -13,7 +13,7 @@
                 alt="Bagisto Logo"
             >
 
-            <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-[6px] box-shadow">
+            <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-md box-shadow">
                 <!-- Login Form -->
                 <x-admin::form :action="route('admin.reset_password.store')">
                     <div class="p-4  ">
@@ -113,7 +113,7 @@
 
                         <!-- Submit Button -->
                         <button 
-                            class="px-3.5 py-1.5 bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                            class="px-3.5 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer">
                             @lang('admin::app.users.reset-password.submit-btn')
                         </button>
                     </div>

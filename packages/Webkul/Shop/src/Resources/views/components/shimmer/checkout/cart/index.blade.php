@@ -5,7 +5,7 @@
         <!-- Cart Action -->
         <div class="flex justify-between items-center pb-2.5 border-b-[1px] border-[#E9E9E9] max-sm:block">
             <div class="flex select-none items-center">
-                <div class="shimmer w-6 h-[25px] rounded-[4px]"></div>
+                <div class="shimmer w-6 h-[25px] rounded"></div>
 
                 <div class="shimmer ml-2.5 w-[165px] h-[30px]"></div>
             </div>
@@ -18,14 +18,14 @@
             <div class="flex gap-x-2.5 justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
                 <div class="flex gap-x-5">
                     <div class="select-none mt-[43px]">
-                        <div class="shimmer w-6 h-[25px] rounded-[4px]"></div>
+                        <div class="shimmer w-6 h-[25px] rounded"></div>
                     </div>
 
                     <div>
-                        <div class="shimmer w-[110px] h-[110px] rounded-[12px]"></div>
+                        <div class="shimmer w-[110px] h-[110px] rounded-xl"></div>
                     </div>
 
-                    <div class="grid gap-y-[10px]">
+                    <div class="grid gap-y-2.5">
                         <div class="shimmer w-[200px] h-6"></div>
 
                         <div class="shimmer w-[100px] h-6"></div>
