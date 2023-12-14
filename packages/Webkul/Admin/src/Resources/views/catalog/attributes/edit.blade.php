@@ -34,7 +34,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                         >
                             @lang('admin::app.catalog.attributes.edit.back-btn')
                         </a>
@@ -184,7 +184,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
+                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                             >
                                             </label>
 

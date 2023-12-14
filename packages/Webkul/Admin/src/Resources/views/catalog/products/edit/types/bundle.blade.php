@@ -98,7 +98,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-4 py-2.5 border-b dark:border-gray-800  ">
+                            <div class="px-4 py-2.5 border-b dark:border-gray-800">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')

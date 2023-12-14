@@ -28,7 +28,7 @@
     <!-- Body Component -->
     <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
         <!-- Left Section -->
-        <div class=" flex flex-col gap-8 flex-1 max-xl:flex-auto">
+        <div class="flex flex-col gap-8 flex-1 max-xl:flex-auto">
             <!-- Overall Detailes -->
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
@@ -40,7 +40,7 @@
             </div>
 
             <!-- Todays Details -->
-            <div class="flex flex-col gap-2  ">
+            <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
@@ -50,7 +50,7 @@
             </div>
 
             <!-- Stock Thereshold -->
-            <div class="flex flex-col gap-2  ">
+            <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>

@@ -44,7 +44,7 @@
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
                 class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
             >
-                <span class="icon-printer text-2xl "></span> 
+                <span class="icon-printer text-2xl"></span> 
 
                 @lang('admin::app.sales.invoices.view.print')
             </a>
@@ -56,7 +56,7 @@
                     class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     @click="$refs.groupCreateModal.open()"
                 >
-                    <span class="icon-mail text-2xl "></span>
+                    <span class="icon-mail text-2xl"></span>
 
                     @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                 </button>

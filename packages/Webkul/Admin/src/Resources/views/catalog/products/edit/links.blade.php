@@ -106,7 +106,7 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 "
+                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                     v-else
                 >
                     <!-- Placeholder Image -->

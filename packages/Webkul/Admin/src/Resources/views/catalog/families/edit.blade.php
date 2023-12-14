@@ -169,7 +169,7 @@
                                 }}
                             </p>
                             
-                            <p class="text-xs text-gray-800 dark:text-white font-medium ">
+                            <p class="text-xs text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.families.edit.edit-group-info')
                             </p>
                         </div>
@@ -298,7 +298,7 @@
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes')
                             </p>
 
-                            <p class="text-xs text-gray-800 dark:text-white font-medium ">
+                            <p class="text-xs text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes-info')
                             </p>
                         </div>

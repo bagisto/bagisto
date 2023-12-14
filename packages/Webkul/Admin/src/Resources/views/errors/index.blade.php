@@ -5,7 +5,7 @@
     </x-slot>
 
     <!-- Error page Information -->
-	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900 ">
+	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900">
         <div class="flex gap-5 items-center max-w-[745px]">
             <div class="w-full">
                 <img

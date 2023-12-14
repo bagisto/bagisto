@@ -332,7 +332,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t dark:border-gray-800  ">
+                        <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class="text-xs text-blue-600 font-semibold cursor-pointer transition-all hover:underline"

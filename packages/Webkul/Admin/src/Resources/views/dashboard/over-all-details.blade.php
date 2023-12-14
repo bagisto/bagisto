@@ -14,7 +14,7 @@
         <!-- Total Sales Section -->
         <template v-else>
             <div class="p-4 rounded bg-white dark:bg-gray-900 box-shadow">
-                <div class="flex gap-4 flex-wrap ">
+                <div class="flex gap-4 flex-wrap">
                     <!-- Total Sales -->
                     <div class="flex gap-2.5 flex-1 min-w-[200px]">
                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] dark:invert dark:mix-blend-exclusion">

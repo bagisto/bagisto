@@ -104,7 +104,7 @@
             </x-admin::datagrid>
 
             <!-- Drawer content -->
-            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <x-admin::drawer ref="transaction">
                     <!-- Drawer Header -->
                     <x-slot:header>

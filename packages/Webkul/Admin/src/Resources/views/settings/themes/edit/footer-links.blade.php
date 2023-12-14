@@ -5,7 +5,7 @@
     <script type="text/x-template" id="v-footer-links-template">
         <div>
             <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
-                <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                     <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         <!-- Add Links-->
                         <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
@@ -46,7 +46,7 @@
                                 <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'" :value="link.sort_order"> 
                                 
                                 <div class="flex gap-2.5 justify-between py-5 cursor-pointer">
-                                    <div class="flex gap-2.5 ">
+                                    <div class="flex gap-2.5">
                                         <div class="grid gap-1.5 place-content-start">
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 <div> 
@@ -122,7 +122,7 @@
 
                         <div   
                             v-else
-                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 "
+                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                         >
                             <img
                                 class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"

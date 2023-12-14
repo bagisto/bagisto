@@ -34,7 +34,7 @@
                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.configuration.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.configuration.index.back-btn')
                 </a>

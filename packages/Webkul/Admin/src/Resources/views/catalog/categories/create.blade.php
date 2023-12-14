@@ -22,7 +22,7 @@
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.catalog.categories.index') }}"
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                 >
                     @lang('admin::app.catalog.categories.create.back-btn')
                 </a>
@@ -41,7 +41,7 @@
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
 
             <!-- Left Section -->
-            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.general.before') !!}
 

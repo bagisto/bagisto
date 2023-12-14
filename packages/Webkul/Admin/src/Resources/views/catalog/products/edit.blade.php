@@ -24,7 +24,7 @@
                     <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                     >
                         @lang('admin::app.account.edit.back-btn')
                     </a>
@@ -85,7 +85,7 @@
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white  "
+                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white"
                             >
                                 {{ $channel->name }}
                             </a>

@@ -27,7 +27,7 @@
     <!-- body content -->
     <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
         <!-- Left sub-component -->
-        <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+        <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 <p class="text-base text-gray-800 dark:text-white font-semibold mb-4 p-4">

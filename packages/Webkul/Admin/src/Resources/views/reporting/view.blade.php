@@ -24,7 +24,7 @@
                     <div class="flex gap-1.5 items-center">
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
-                                <span class="flex icon-setting p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                                <span class="flex icon-setting p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </x-slot:toggle>
 
                             <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">

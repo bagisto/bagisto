@@ -213,7 +213,7 @@
                                     @{{ attribute.admin_name }}
                                 </span>
 
-                                <i class="icon-sort-right text-lg "></i>
+                                <i class="icon-sort-right text-lg"></i>
 
                                 @{{ option.admin_name }}
                             </div>
@@ -283,7 +283,7 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <!-- Mass Update -->
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-2.5 border-b dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b dark:border-gray-800">
                                             <div class="flex gap-2.5 items-end">
                                                 <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>

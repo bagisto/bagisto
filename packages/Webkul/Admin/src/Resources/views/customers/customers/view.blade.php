@@ -25,7 +25,7 @@
 
                     <!-- Customer Suspended Status -->
                     @if ($customer->is_suspended == 1)
-                        <span class="label-canceled text-sm ">
+                        <span class="label-canceled text-sm">
                             @lang('admin::app.customers.customers.view.suspended')
                         </span>
                     @endif
@@ -91,7 +91,7 @@
             <!-- Orders -->
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                 @if ($totalOrderCount = $orders->count())
-                    <div class=" p-4 flex justify-between">
+                    <div class="p-4 flex justify-between">
                         <!-- Total Order Count -->
                         <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                             @lang('admin::app.customers.customers.view.orders', ['order_count' => $totalOrderCount])
@@ -527,7 +527,7 @@
                                     class="hidden peer"
                                 >
                     
-                                <span class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "></span>
+                                <span class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
                     
                                 <p class="flex gap-x-1 items-center cursor-pointer text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 font-semibold">
                                     @lang('admin::app.customers.customers.view.notify-customer')

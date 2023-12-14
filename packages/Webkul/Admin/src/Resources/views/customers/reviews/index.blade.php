@@ -210,7 +210,7 @@
             {!! view_render_event('admin.customers.reviews.list.after') !!}
 
             <!-- Drawer content -->
-            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -325,7 +325,7 @@
                                         </x-admin::form.control-group>
                                     </div>
                 
-                                    <div class="w-full ">
+                                    <div class="w-full">
                                         <p class="text-gray-600 dark:text-gray-300 font-semibold">
                                             @lang('admin::app.customers.reviews.index.edit.rating') 
                                         </p>
