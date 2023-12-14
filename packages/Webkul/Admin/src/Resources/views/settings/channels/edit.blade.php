@@ -126,9 +126,9 @@
 
                     <!-- Inventory Sources -->
                     <div class="mb-2.5">
-                        <p class="required block leading-6 text-xs text-gray-800 dark:text-white font-medium">
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.inventory-sources')
-                        </p>
+                        </x-admin::form.control-group.label>
                 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
                             <x-admin::form.control-group class="flex gap-2.5 mb-2.5">
@@ -406,9 +406,9 @@
                     <x-slot:content>
                         <!-- Locales Checkboxes -->
                         <div class="mb-2.5">
-                            <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.locales') 
-                            </p>
+                            </x-admin::form.control-group.label>
 
                             @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
                             
@@ -472,9 +472,9 @@
 
                         <!-- Currencies Checkboxes -->
                         <div class="mb-2.5">
-                            <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.currencies')
-                            </p>
+                            </x-admin::form.control-group.label>
                         
                             @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
 
