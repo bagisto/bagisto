@@ -16,13 +16,13 @@
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-4">
-                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                    <p class="text-base text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.sales.index.top-payment-methods')
                     </p>
 
                     <a
                         href="{{ route('admin.reporting.sales.view', ['type' => 'top-payment-methods']) }}"
-                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.sales.index.view-details')
                     </a>
@@ -33,7 +33,7 @@
                     <!-- Top Payment Methods -->
                     <template v-if="report.statistics.length">
                         <!-- Payment Methods -->
-                        <div class="grid gap-[27px]">
+                        <div class="grid gap-7">
                             <div
                                 class="grid"
                                 v-for="method in report.statistics"
@@ -48,7 +48,7 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
                                         @{{ method.formatted_total }}
                                     </p>
                                 </div>
@@ -64,9 +64,9 @@
                     <!-- Date Range -->
                     <div class="flex gap-5 justify-end">
                         <div class="flex gap-1 items-center">
-                            <span class="w-3.5 h-3.5 rounded-[3px] bg-emerald-400"></span>
+                            <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-[12px] dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>

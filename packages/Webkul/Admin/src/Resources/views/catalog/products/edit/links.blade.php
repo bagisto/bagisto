@@ -15,13 +15,13 @@
                 <div class="flex gap-5 justify-between mb-2.5 p-4">
                     <div class="flex flex-col gap-2">
                         <p
-                            class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                            class="text-base text-gray-800 dark:text-white font-semibold"
                             v-text="type.title"
                         >
                         </p>
 
                         <p
-                            class="text-[12px] text-gray-500 dark:text-gray-300 font-medium"
+                            class="text-xs text-gray-500 dark:text-gray-300 font-medium"
                             v-text="type.info"
                         >
                         </p>
@@ -44,7 +44,7 @@
                     v-if="addedProducts[type.key].length"
                 >
                     <div
-                        class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800"
+                        class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800"
                         v-for="product in addedProducts[type.key]"
                     >
                         <!-- Hidden Input -->
@@ -64,7 +64,7 @@
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                         @lang('admin::app.catalog.products.edit.links.image-placeholder')
                                     </p>
                                 </template>
@@ -77,7 +77,7 @@
                             <!-- Details -->
                             <div class="grid gap-1.5 place-content-start">
                                 <p
-                                    class="text-[16x] text-gray-800 dark:text-white font-semibold"
+                                    class="text-base text-gray-800 dark:text-white font-semibold"
                                     v-text="product.name"
                                 >
                                 </p>
@@ -106,7 +106,7 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 "
+                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                     v-else
                 >
                     <!-- Placeholder Image -->
@@ -116,8 +116,8 @@
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col gap-[5px] items-center">
-                        <p class="text-[16px] text-gray-400 font-semibold">
+                    <div class="flex flex-col gap-1.5 items-center">
+                        <p class="text-base text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 

@@ -5,16 +5,16 @@
     <script type="text/x-template" id="v-footer-links-template">
         <div>
             <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
-                <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                     <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         <!-- Add Links-->
                         <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
                             <div class="flex flex-col gap-1">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.footer-link')
                                 </p>
 
-                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                                <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.footer-link-description')
                                 </p>
                             </div>
@@ -36,7 +36,7 @@
                         >
                             <!-- Information -->
                             <div 
-                                class="grid border-b-[1px] last:border-b-0 border-slate-300 dark:border-gray-800"
+                                class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800"
                                 v-for="(link, key) in footerLink"
                             >
                                 <!-- Hidden Input -->
@@ -46,7 +46,7 @@
                                 <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'" :value="link.sort_order"> 
                                 
                                 <div class="flex gap-2.5 justify-between py-5 cursor-pointer">
-                                    <div class="flex gap-2.5 ">
+                                    <div class="flex gap-2.5">
                                         <div class="grid gap-1.5 place-content-start">
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 <div> 
@@ -122,7 +122,7 @@
 
                         <div   
                             v-else
-                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 "
+                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                         >
                             <img
                                 class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
@@ -130,8 +130,8 @@
                                 alt="add-product-to-store"
                             >
             
-                            <div class="flex flex-col gap-[5px] items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">
+                            <div class="flex flex-col gap-1.5 items-center">
+                                <p class="text-base text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.footer-link')
                                     
                                 </p>
@@ -152,7 +152,7 @@
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                 @lang('admin::app.settings.themes.edit.general')
                             </p>
                         </x-slot:header>
@@ -169,7 +169,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -192,7 +192,7 @@
                                     type="text"
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -274,7 +274,7 @@
                     <x-admin::modal ref="addLinksModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.footer-link-form-title')
                             </p>
                         </x-slot:header>

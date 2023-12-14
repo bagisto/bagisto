@@ -3,7 +3,7 @@
     <div
         class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
     >
-        <span class="icon-ship text-[24px]"></span> 
+        <span class="icon-ship text-2xl"></span> 
 
         @lang('admin::app.sales.orders.view.ship')     
     </div>
@@ -17,7 +17,7 @@
                 @click="$refs.shipment.open()"
             >
                 <span
-                    class="icon-ship text-[24px]"
+                    class="icon-ship text-2xl"
                     role="button"
                     tabindex="0"
                 >
@@ -36,13 +36,13 @@
                     <x-slot:header>
                         <div class="grid gap-3">
                             <div class="flex justify-between items-center">
-                                <p class="text-[20px] font-medium dark:text-white">
+                                <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.shipments.create.title')
                                 </p>
 
                                 <button
                                     type="submit"
-                                    class="mr-[45px] primary-button"
+                                    class="mr-11 primary-button"
                                 >
                                     @lang('admin::app.sales.shipments.create.create-btn')
                                 </button>
@@ -145,7 +145,7 @@
                                                         <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                             
-                                                            <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                            <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
                                                                 @lang('admin::app.sales.invoices.view.product-image') 
                                                             </p>
                                                         </div>
@@ -153,7 +153,7 @@
                     
                                                     <div class="grid gap-1.5 place-content-start">
                                                         <!-- Item Name -->
-                                                        <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                                                             {{ $item->name }}
                                                         </p>
                     
@@ -198,10 +198,10 @@
 
                                             <!-- Information -->
                                             @foreach ($order->channel->inventory_sources as $inventorySource)
-                                                <div class="flex gap-2.5 justify-between pb-2.5 mt-2.5 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                                <div class="flex gap-2.5 justify-between pb-2.5 mt-2.5 border-b border-slate-300 dark:border-gray-800">
                                                     <div class="grid gap-2.5">
                                                         <!--Inventory Source -->
-                                                        <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                                                             {{ $inventorySource->name }}
                                                         </p>
 

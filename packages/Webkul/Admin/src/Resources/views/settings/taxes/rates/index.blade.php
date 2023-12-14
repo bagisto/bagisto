@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.settings.taxes.rates.index.title')
         </p>
         
