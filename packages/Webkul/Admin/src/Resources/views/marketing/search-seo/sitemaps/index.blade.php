@@ -9,7 +9,7 @@
     <!-- Create Sitemap Vue Component -->
     <v-create-sitemaps>
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.search-seo.sitemaps.index.title')
             </p>
 
@@ -33,7 +33,7 @@
             id="v-create-sitemaps-template"
         >
             <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+                <p class="text-xl text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.marketing.search-seo.sitemaps.index.title')
                 </p>
 
@@ -87,7 +87,7 @@
                                     <a @click="selectedSitemap=1; editModal(record)">
                                         <span
                                             :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                         >
                                         </span>
                                     </a>
@@ -97,7 +97,7 @@
                                     <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                         <span
                                             :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                         >
                                         </span>
                                     </a>
@@ -126,7 +126,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
+                                class="text-lg  text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.search-seo.sitemaps.index.edit.title')
@@ -134,7 +134,7 @@
 
                             <!-- Edit Modal title -->
                             <p
-                                class="text-lg leading-none text-gray-800 dark:text-white font-bold"
+                                class="text-lg  text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.marketing.search-seo.sitemaps.index.create.title')
@@ -171,7 +171,7 @@
                                 >
                                 </x-admin::form.control-group.error>
 
-                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs leading-none text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs  text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
                                 </p>
 
@@ -198,7 +198,7 @@
                                 >
                                 </x-admin::form.control-group.error>
 
-                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs leading-none text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs  text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
                                 </p>
                             </x-admin::form.control-group>

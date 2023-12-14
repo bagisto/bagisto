@@ -6,7 +6,7 @@
     <div class="flex gap-1.5 items-center">
         <!-- Hamburger Menu -->
         <i
-            class="hidden icon-menu text-2xl leading-none p-1.5 max-lg:block cursor-pointer"
+            class="hidden icon-menu text-2xlp-1.5 max-lg:block cursor-pointer"
             @click="$refs.sidebarMenuDrawer.open()"
         >
         </i>
@@ -34,7 +34,7 @@
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
             <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5">
-                <i class="icon-search absolute flex items-center ltr:left-3 rtl:right-3 text-2xl leading-none top-1.5"></i>
+                <i class="icon-search absolute flex items-center ltr:left-3 rtl:right-3 text-2xl top-1.5"></i>
 
                 <input 
                     type="text" 
@@ -50,7 +50,7 @@
         <v-dark>
             <div class="flex">
                 <span
-                    class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                    class="{{ request()->cookie('dark_mode') ? 'icon-light' : 'icon-dark' }} p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 ></span>
             </div>
         </v-dark>
@@ -61,7 +61,7 @@
             class="flex"
         >
             <span 
-                class="icon-store p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                class="icon-store p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 title="@lang('admin::app.components.layouts.header.visit-shop')"
             >
             </span>
@@ -71,7 +71,7 @@
         <v-notifications {{ $attributes }}>
             <span class="flex relative">
                 <span 
-                    class="icon-notification p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                    class="icon-notification p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
                     title="@lang('admin::app.components.layouts.header.notifications')"
                 >
                 </span>
@@ -112,7 +112,7 @@
 
                 <div class="grid gap-1 pb-2.5">
                     <a
-                        class="px-5 py-2 text-base leading-none text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                        class="px-5 py-2 text-base  text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                         href="{{ route('admin.account.edit') }}"
                     >
                         @lang('admin::app.components.layouts.header.my-account')
@@ -127,7 +127,7 @@
                     </x-admin::form>
 
                     <a
-                        class="px-5 py-2 text-base leading-none text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                        class="px-5 py-2 text-base  text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                         href="{{ route('admin.session.destroy') }}"
                         onclick="event.preventDefault(); document.getElementById('adminLogout').submit();"
                     >
@@ -175,7 +175,7 @@
                             href="{{ $menuItem['url'] }}"
                             class="flex gap-2.5 p-1.5 items-center cursor-pointer {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 dark:hover:bg-gray-950 ' }} peer"
                         >
-                            <span class="{{ $menuItem['icon'] }} text-2xl leading-none {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
+                            <span class="{{ $menuItem['icon'] }} text-2xl {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                             
                             <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
                                 @lang($menuItem['name'])
@@ -187,7 +187,7 @@
                                 @foreach ($menuItem['children'] as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem['url'] }}"
-                                        class="text-sm leading-none text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-1"
+                                        class="text-sm  text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-1"
                                     >
                                         @lang($subMenuItem['name'])
                                     </a>
@@ -204,7 +204,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
         <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5">
-            <i class="icon-search text-2xl leading-none flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
+            <i class="icon-search text-2xl flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
 
             <input 
                 type="text"
@@ -221,7 +221,7 @@
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
-                <div class="flex border-b dark:border-gray-800 text-sm leading-none text-gray-600 dark:text-gray-300">
+                <div class="flex border-b dark:border-gray-800 text-sm  text-gray-600 dark:text-gray-300">
                     <div
                         class="p-4 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                         :class="{ 'border-b-2 border-blue-600': activeTab == tab.key }"
@@ -268,7 +268,7 @@
                                     <!-- Details -->
                                     <div class="grid gap-1.5 place-content-start">
                                         <p
-                                            class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold"
+                                            class="text-base  text-gray-600 dark:text-gray-300 font-semibold"
                                             v-text="product.name"
                                         >
                                         </p>
@@ -293,7 +293,7 @@
                         <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class="text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.products.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
@@ -301,7 +301,7 @@
 
                             <a
                                 href="{{ route('admin.catalog.products.index') }}"
-                                class="text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class="text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-products')
@@ -322,7 +322,7 @@
                                 class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="order in searchedResults.orders.data"
                             >
-                                <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                                     #@{{ order.increment_id }}
                                 </p>
 
@@ -335,7 +335,7 @@
                         <div class="flex p-3 border-t dark:border-gray-800  ">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class=" text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.orders.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-orders')".replace(':query', searchTerm).replace(':count', searchedResults.orders.total) }}
@@ -343,7 +343,7 @@
 
                             <a
                                 href="{{ route('admin.sales.orders.index') }}"
-                                class=" text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class=" text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-orders')
@@ -361,7 +361,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-4 border-b dark:border-gray-800 text-sm leading-none text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="p-4 border-b dark:border-gray-800 text-sm  text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
@@ -371,7 +371,7 @@
                         <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class=" text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.categories.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-categories')".replace(':query', searchTerm).replace(':count', searchedResults.categories.total) }}
@@ -379,7 +379,7 @@
 
                             <a
                                 href="{{ route('admin.catalog.categories.index') }}"
-                                class=" text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class=" text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-categories')
@@ -400,7 +400,7 @@
                                 class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="customer in searchedResults.customers.data"
                             >
-                                <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                                     @{{ customer.first_name + ' ' + customer.last_name }}
                                 </p>
 
@@ -413,7 +413,7 @@
                         <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class=" text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.customers.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
@@ -421,7 +421,7 @@
 
                             <a
                                 href="{{ route('admin.customers.customers.index') }}"
-                                class=" text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                                class=" text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-customers')
@@ -543,7 +543,7 @@
             <x-slot:toggle>
                 <span class="flex relative">
                     <span
-                        class="icon-notification p-1.5 rounded-md text-2xl leading-none text-red cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                        class="icon-notification p-1.5 rounded-md text-2xl text-red cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
@@ -560,7 +560,7 @@
             <!-- Notification Content -->
             <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
                 <!-- Header -->
-                <div class="text-base leading-none p-3 text-gray-600 dark:text-gray-300 font-semibold border-b dark:border-gray-800">
+                <div class="text-base  p-3 text-gray-600 dark:text-gray-300 font-semibold border-b dark:border-gray-800">
                     @lang('admin::app.notifications.title', ['read' => 0])
                 </div>
 
@@ -587,7 +587,7 @@
                             </p>
 
                             <!-- Created Date In humand Readable Format -->
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300">
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @{{ notification.order.datetime }}
                             </p>
                         </div>
@@ -598,13 +598,13 @@
                 <div class="flex gap-1.5 justify-between h-[47px] py-4 px-6 border-t dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
-                        class="text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.notifications.view-all')
                     </a>
 
                     <a
-                        class="text-xs leading-none text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        class="text-xs  text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         v-if="notifications?.length"
                         @click="readAll()"
                     >
@@ -676,11 +676,11 @@
                 computed: {
                     notificationStatusIcon() {
                         return {
-                            pending: 'icon-information text-2xl leading-none text-amber-600 bg-amber-100 rounded-full',
-                            closed: 'icon-repeat text-2xl leading-none text-red-600 bg-red-100 rounded-full',
-                            completed: 'icon-done text-2xl leading-none text-blue-600 bg-blue-100 rounded-full',
-                            canceled: 'icon-cancel-1 text-2xl leading-none text-red-600 bg-red-100 rounded-full',
-                            processing: 'icon-sort-right text-2xl leading-none text-green-600 bg-green-100 rounded-full',
+                            pending: 'icon-information text-2xl text-amber-600 bg-amber-100 rounded-full',
+                            closed: 'icon-repeat text-2xl text-red-600 bg-red-100 rounded-full',
+                            completed: 'icon-done text-2xl text-blue-600 bg-blue-100 rounded-full',
+                            canceled: 'icon-cancel-1 text-2xl text-red-600 bg-red-100 rounded-full',
+                            processing: 'icon-sort-right text-2xl text-green-600 bg-green-100 rounded-full',
                         };
                     },
                 },
@@ -723,7 +723,7 @@
     <script type="text/x-template" id="v-dark-template">
         <div class="flex">
             <span
-                class="p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                class="p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                 :class="[isDarkMode ? 'icon-light' : 'icon-dark']"
                 @click="toggle"
             ></span>

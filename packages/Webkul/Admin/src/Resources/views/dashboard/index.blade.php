@@ -31,7 +31,7 @@
         <div class=" flex flex-col gap-8 flex-1 max-xl:flex-auto">
             <!-- Overall Detailes -->
             <div class="flex flex-col gap-2">
-                <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
@@ -41,7 +41,7 @@
 
             <!-- Todays Details -->
             <div class="flex flex-col gap-2  ">
-                <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
@@ -51,7 +51,7 @@
 
             <!-- Stock Thereshold -->
             <div class="flex flex-col gap-2  ">
-                <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>
 
@@ -63,7 +63,7 @@
         <!-- Right Section -->
         <div class="flex flex-col gap-2 w-[360px] max-w-full   max-sm:w-full">
             <!-- First Component -->
-            <p class="text-base leading-none text-gray-600 dark:text-gray-300 font-semibold">
+            <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
             </p>
 
@@ -91,7 +91,7 @@
             <div class="flex gap-1.5">
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.start"
                         placeholder="@lang('admin::app.dashboard.index.start-date')"
                     />
@@ -99,7 +99,7 @@
 
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.end"
                         placeholder="@lang('admin::app.dashboard.index.end-date')"
                     />

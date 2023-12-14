@@ -10,11 +10,11 @@
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.grouped.title')
                     </p>
 
-                    <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.grouped.info')
                     </p>
                 </div>
@@ -48,7 +48,7 @@
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl leading-none text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl  text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
                                 
                                 <!-- Image -->
                                 <div
@@ -70,7 +70,7 @@
 
                                 <!-- Details -->
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         @{{ element.associated_product.name }}
                                     </p>
 
@@ -109,7 +109,7 @@
                                         type="text"
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -140,7 +140,7 @@
 
                 <!-- Add Variants Information -->
                 <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base leading-none text-gray-400 font-semibold">
+                    <p class="text-base text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.grouped.empty-title')
                     </p>
 
@@ -151,7 +151,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-sm leading-none"
+                    class="secondary-button text-sm "
                     @click="$refs.productSearch.openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.grouped.add-btn')

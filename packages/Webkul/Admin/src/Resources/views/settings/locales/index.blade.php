@@ -7,7 +7,7 @@
 
     <v-locales>
         <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.locales.index.title')
             </p>
 
@@ -32,7 +32,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-locales-template">
             <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-                <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+                <p class="text-xl text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.locales.index.title')
                 </p>
 
@@ -80,7 +80,7 @@
                                     <a @click="selectedLocales=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                         <span
                                             :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>
                                     </a>
@@ -90,7 +90,7 @@
                                     <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                         <span
                                             :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>
                                     </a>
@@ -116,7 +116,7 @@
                     <x-admin::modal ref="localeUpdateOrCreateModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 <span v-if="selectedLocales">
                                     @lang('admin::app.settings.locales.index.edit.title')
                                 </span>
@@ -236,7 +236,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300">
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.settings.locales.index.logo-size')
                             </p>
 

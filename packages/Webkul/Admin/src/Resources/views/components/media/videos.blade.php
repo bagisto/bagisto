@@ -29,12 +29,12 @@
                     v-if="allowMultiple || videos.length == 0"
                 >
                     <div class="flex flex-col items-center">
-                        <span class="icon-image text-2xl leading-none"></span>
+                        <span class="icon-image text-2xl"></span>
 
-                        <p class="grid text-sm leading-none text-gray-600 dark:text-gray-300 font-semibold text-center">
+                        <p class="grid text-sm  text-gray-600 dark:text-gray-300 font-semibold text-center">
                             @lang('admin::app.components.media.videos.add-video-btn')
                             
-                            <span class="text-xs leading-none">
+                            <span class="text-xs ">
                                 @lang('admin::app.components.media.videos.allowed-types')
                             </span>
                         </p>
@@ -87,26 +87,26 @@
 
             <div class="flex flex-col justify-between invisible w-full p-3 bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Video Name -->
-                <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
+                <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <!-- Remove Button -->
                     <span
-                        class="icon-delete text-2xl leading-none p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-delete text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         @click="remove"
                     ></span>
 
                     <!-- Play Pause Button -->
                     <span
-                        class="text-2xl leading-none p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :class="[isPlaying ? 'icon-pause': 'icon-play']"
                         @click="playPause"
                     ></span>
 
                     <!-- Edit Button -->
                     <label
-                        class="icon-edit text-2xl leading-none p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-edit text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :for="$.uid + '_videoInput_' + index"
                     ></label>
 

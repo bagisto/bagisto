@@ -205,14 +205,14 @@
                                     this.generateToggleIconComponent({
                                         class: [
                                             typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-sort-down' : '',
-                                            'text-xl leading-none rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
+                                            'text-xl rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
                                         ],
                                     }),
 
                                     this.generateFolderIconComponent({
                                         class: [
                                             typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-folder' : 'icon-attribute',
-                                            'text-2xl leading-none cursor-pointer'
+                                            'text-2xl cursor-pointer'
                                         ],
                                     }),
 

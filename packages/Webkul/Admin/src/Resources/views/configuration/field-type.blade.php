@@ -255,7 +255,7 @@
 
                     <x-admin::form.control-group.label
                         :for="$name.'[delete]'"
-                        class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                        class="!text-sm  !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>

@@ -15,7 +15,7 @@
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-4">
-                    <p class="text-base leading-none text-gray-600 dark:text-white font-semibold">
+                    <p class="text-base text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.products.index.top-search-terms')
                     </p>
                 </div>
@@ -79,7 +79,7 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs leading-none dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>

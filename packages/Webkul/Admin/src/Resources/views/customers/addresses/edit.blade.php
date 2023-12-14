@@ -50,7 +50,7 @@
 
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.customers.addresses.edit.title')
                             </p>    
                         </x-slot:header>

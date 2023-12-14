@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="py-3 text-xl leading-none text-gray-800 dark:text-white font-bold">
+        <p class="py-3 text-xl  text-gray-800 dark:text-white font-bold">
             @lang('admin::app.sales.orders.index.title')
         </p>
 
@@ -43,7 +43,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-1.5 rtl:mr-1.5 text-base leading-none text-gray-800 dark:text-white align-text-bottom"
+                                class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -69,7 +69,7 @@
                         <div class="flex gap-2.5">
                             <div class="flex flex-col gap-1.5">
                                 <p
-                                    class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                    class="text-base text-gray-800 dark:text-white font-semibold"
                                 >
                                     @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                                 </p>
@@ -98,7 +98,7 @@
                     <!-- Total Amount, Pay Via, Channel -->
                     <div class="">
                         <div class="flex flex-col gap-1.5">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @{{ $admin.formatPrice(record.base_grand_total) }}
                             </p>
 
@@ -118,7 +118,7 @@
                     <div class="">
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base leading-none text-gray-800 dark:text-white"
+                                class="text-base  text-gray-800 dark:text-white"
                                 v-text="record.full_name"
                             >
                             </p>
@@ -157,7 +157,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                            <span class="icon-sort-right text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
+                            <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                         </a>
                     </div>
                 </div>

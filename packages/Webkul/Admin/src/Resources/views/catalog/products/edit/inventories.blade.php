@@ -2,7 +2,7 @@
 
 <v-inventories>
     <!-- Panel Content -->
-    <div class="mb-5 text-sm leading-none text-gray-600 dark:text-gray-300">
+    <div class="mb-5 text-sm  text-gray-600 dark:text-gray-300">
         <div class="flex items-center relative mb-2.5">
             <span class="inline-block ltr:mr-1.5 rtl:ml-1.5 p-1.5 bg-yellow-500 rounded-full"></span>
 
@@ -10,9 +10,9 @@
                 'qty' => $product->ordered_inventories->pluck('qty')->first() ?? 0,
             ])
             
-            <i class="icon-information text-lg leading-none ltr:ml-2.5 rtl:mr-2.5 font-bold text-white rounded-full bg-gray-700 transition-all hover:bg-gray-800 peer"></i>
+            <i class="icon-information text-lg  ltr:ml-2.5 rtl:mr-2.5 font-bold text-white rounded-full bg-gray-700 transition-all hover:bg-gray-800 peer"></i>
 
-            <div class="hidden absolute bottom-6 p-2.5 bg-black opacity-80 rounded-lg text-sm leading-none italic text-white peer-hover:block">
+            <div class="hidden absolute bottom-6 p-2.5 bg-black opacity-80 rounded-lg text-sm  italic text-white peer-hover:block">
                 @lang('admin::app.catalog.products.edit.inventories.pending-ordered-qty-info')
             </div>
         </div>

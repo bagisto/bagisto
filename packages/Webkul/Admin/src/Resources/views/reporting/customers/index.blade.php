@@ -55,7 +55,7 @@
             <div class="flex gap-1.5">
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.start"
                         placeholder="@lang('admin::app.reporting.customers.index.start-date')"
                     />
@@ -63,7 +63,7 @@
 
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.end"
                         placeholder="@lang('admin::app.reporting.customers.index.end-date')"
                     />

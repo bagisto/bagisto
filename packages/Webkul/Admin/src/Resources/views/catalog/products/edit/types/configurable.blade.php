@@ -11,11 +11,11 @@
             <!-- Panel Header -->
             <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
                     </p>
 
-                    <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.configurable.info')
                     </p>
                 </div>
@@ -64,7 +64,7 @@
 
                     <!-- Add Variants Information -->
                     <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base leading-none text-gray-400 font-semibold">
+                        <p class="text-base text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.types.configurable.empty-title')
                         </p>
 
@@ -75,7 +75,7 @@
                     
                     <!-- Add Row Button -->
                     <div
-                        class="secondary-button text-sm leading-none"
+                        class="secondary-button text-sm "
                         @click="$refs.variantCreateModal.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.add-btn')
@@ -93,7 +93,7 @@
                     <x-admin::modal ref="variantCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.configurable.create.title')
                             </p>
                         </x-slot:header>
@@ -111,7 +111,7 @@
                                     <v-field
                                         as="select"
                                         :name="attribute.code"
-                                        class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800 rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                        class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800 rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                         :class="[errors[attribute.code] ? 'border border-red-500' : '']"
                                         rules="required"
                                         :label="attribute.admin_name"
@@ -160,7 +160,7 @@
         <!-- Mass Actions -->
         <div class="flex gap-1.5 items-center px-4">
             <span
-                class="flex icon-uncheckbox text-2xl leading-none cursor-pointer select-none"
+                class="flex icon-uncheckbox text-2xl cursor-pointer select-none"
                 :class="{
                     '!icon-checked text-blue-600': variants.length == selectedVariants.length,
                     '!icon-checkbox-partial text-blue-600': selectedVariants.length && variants.length != selectedVariants.length
@@ -176,11 +176,11 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-1.5 rounded-md text-xs leading-none text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-1.5 rounded-md text-xs text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-variants')
 
-                        <i class="icon-sort-down text-2xl leading-none text-blue-600"></i>
+                        <i class="icon-sort-down text-2xl text-blue-600"></i>
                     </button>
                 </x-slot:toggle>
 
@@ -188,7 +188,7 @@
                 <x-slot:content class="px-0 py-4">
                     <template v-for="attribute in superAttributes">
                         <label
-                            class="flex gap-2.5 items-center px-5 py-2 text-sm leading-none text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
+                            class="flex gap-2.5 items-center px-5 py-2 text-sm  text-gray-600 dark:text-gray-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950  select-none"
                             :for="'attribute_' + attribute.id + '_option_' + option.id"
                             v-for="option in usedAttributeOptions(attribute)"
                         >
@@ -202,7 +202,7 @@
                                 >
 
                                 <label
-                                    class="icon-uncheckbox text-2xl leading-none peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                                    class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                                     :for="'attribute_' + attribute.id + '_option_' + option.id"
                                 >
                                 </label>
@@ -213,7 +213,7 @@
                                     @{{ attribute.admin_name }}
                                 </span>
 
-                                <i class="icon-sort-right text-lg leading-none"></i>
+                                <i class="icon-sort-right text-lg "></i>
 
                                 @{{ option.admin_name }}
                             </div>
@@ -228,11 +228,11 @@
                 <x-slot:toggle>
                     <button
                         type="button"
-                        class="flex items-center p-1.5 rounded-md text-xs leading-none text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
+                        class="flex items-center p-1.5 rounded-md text-xs  text-blue-600 font-semibold transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100 cursor-pointer"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.select-action')
 
-                        <i class="icon-sort-down text-2xl leading-none text-blue-600"></i>
+                        <i class="icon-sort-down text-2xl text-blue-600"></i>
                     </button>
                 </x-slot:toggle>
 
@@ -261,7 +261,7 @@
                         <!-- Drawer Header -->
                         <x-slot:header>
                             <div class="flex justify-between items-center">
-                                <p class="text-xl leading-none font-medium dark:text-white">
+                                <p class="text-xl font-medium dark:text-white">
                                     @{{ updateTypes[selectedType].title }}
                                 </p>
 
@@ -329,7 +329,7 @@
                                                     <v-field
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
-                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="required|numeric|min:0"
                                                         :label="inventorySource.name"
@@ -467,7 +467,7 @@
                                 ].includes(selectedType)}"
                                 v-for="variant in tempSelectedVariants"
                             >
-                                <div class="text-sm leading-none text-gray-800">
+                                <div class="text-sm  text-gray-800">
                                     <span
                                         class="dark:text-white after:content-['_/_'] last:after:content-['']"
                                         v-for='(attribute, index) in superAttributes'
@@ -487,7 +487,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.price"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-8 rtl:pr-8 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-8 rtl:pr-8 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
@@ -515,7 +515,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.weight"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
@@ -543,7 +543,7 @@
                                                 as="select"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.status"
-                                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')"
@@ -579,7 +579,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.name"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-name')"
@@ -615,7 +615,7 @@
                                                     type="text"
                                                     :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
                                                     v-model="variant.inventories[inventorySource.id]"
-                                                    class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                    class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                     rules="required|numeric|min:0"
                                                     :label="inventorySource.name"
@@ -650,7 +650,7 @@
                                                 type="text"
                                                 :name="'variants[' + variant.id + ']'"
                                                 v-model="variant.sku"
-                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-sku')"
@@ -737,7 +737,7 @@
                     >
 
                     <label
-                        class="icon-uncheckbox text-2xl leading-none peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                        class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                         :for="'variant_' + variant.id"
                     ></label>
                 </div>
@@ -759,7 +759,7 @@
                         <img :src="variant.images[0].url">
 
                         <span
-                            class="absolute bottom-px ltr:left-px rtl:right-px text-xs leading-none font-bold text-white bg-darkPink rounded-full px-1.5"
+                            class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5"
                             v-text="variant.images.length"
                         >
                         </span>
@@ -769,7 +769,7 @@
                 <!-- Details -->
                 <div class="grid gap-1.5 place-content-start">
                     <p
-                        class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                        class="text-base text-gray-800 dark:text-white font-semibold"
                         v-text="variant.name ?? 'N/A'"
                     >
                     </p>
@@ -851,7 +851,7 @@
                                     <!-- Drawer Header -->
                                     <x-slot:header>
                                         <div class="flex justify-between items-center">
-                                            <p class="text-xl leading-none font-medium dark:text-white">
+                                            <p class="text-xl font-medium dark:text-white">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
                                             </p>
 
@@ -983,7 +983,7 @@
                                                         type="text"
                                                         :name="'inventories[' + inventorySource.id + ']'"
                                                         v-model="variant.inventories[inventorySource.id]"
-                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                                        class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm  text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
                                                         rules="numeric|min:0"
                                                         :label="inventorySource.name"
@@ -1019,7 +1019,7 @@
 
                                         <!-- Actions -->
                                         <div
-                                            class="mt-2.5 text-sm leading-none text-gray-800 dark:text-white font-semibold"
+                                            class="mt-2.5 text-sm  text-gray-800 dark:text-white font-semibold"
                                             v-if="typeof variant.id !== 'string'"
                                         >
                                             @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-info')

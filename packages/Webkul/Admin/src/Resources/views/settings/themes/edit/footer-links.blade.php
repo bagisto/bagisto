@@ -10,11 +10,11 @@
                         <!-- Add Links-->
                         <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
                             <div class="flex flex-col gap-1">
-                                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.footer-link')
                                 </p>
 
-                                <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
+                                <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.footer-link-description')
                                 </p>
                             </div>
@@ -131,7 +131,7 @@
                             >
             
                             <div class="flex flex-col gap-1.5 items-center">
-                                <p class="text-base leading-none text-gray-400 font-semibold">
+                                <p class="text-base text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.footer-link')
                                     
                                 </p>
@@ -152,7 +152,7 @@
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                 @lang('admin::app.settings.themes.edit.general')
                             </p>
                         </x-slot:header>
@@ -169,7 +169,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -192,7 +192,7 @@
                                     type="text"
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -274,7 +274,7 @@
                     <x-admin::modal ref="addLinksModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.footer-link-form-title')
                             </p>
                         </x-slot:header>

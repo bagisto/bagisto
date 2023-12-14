@@ -11,7 +11,7 @@
                         href="{{ $menuItem['url'] }}"
                         class="flex gap-2.5 p-1.5 items-center cursor-pointer hover:rounded-lg {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
                     >
-                        <span class="{{ $menuItem['icon'] }} text-2xl leading-none {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
+                        <span class="{{ $menuItem['icon'] }} text-2xl {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         
                         <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
                             @lang($menuItem['name'])
@@ -48,7 +48,7 @@
         >
             <div class="flex gap-2.5 p-1.5 items-center">
                 <span
-                    class="icon-collapse transition-all text-2xl leading-none"
+                    class="icon-collapse transition-all"
                     :class="[isCollapsed ? 'ltr:rotate-[180deg] rtl:rotate-[0]' : 'ltr:rotate-[0] rtl:rotate-[180deg]']"
                 ></span>
             </div>

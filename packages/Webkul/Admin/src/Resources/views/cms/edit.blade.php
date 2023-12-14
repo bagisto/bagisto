@@ -18,7 +18,7 @@
         {!! view_render_event('bagisto.admin.cms.pages.edit.create_form_controls.before') !!}
 
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.cms.edit.title')
             </p>
 
@@ -62,13 +62,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-language text-2xl leading-none "></span>
+                            <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
                             
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
-                            <span class="icon-sort-down text-2xl leading-none"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -77,7 +77,7 @@
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-base leading-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -96,7 +96,7 @@
 
                 <!--Content -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.edit.description')
                     </p>
 
@@ -131,7 +131,7 @@
 
                 <!-- SEO Input Fields -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.edit.seo')
                     </p>
 
@@ -241,7 +241,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>
@@ -292,7 +292,7 @@
 
                                     <x-admin::form.control-group.label
                                         :for="'channels_' . $channel->id"
-                                        class="!text-sm leading-none !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                        class="!text-sm  !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
                                     >
                                         {{ core()->getChannelName($channel) }}
                                     </x-admin::form.control-group.label>

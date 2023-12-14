@@ -35,7 +35,7 @@
                 >
                     <div class="flex min-h-full items-end justify-center p-5 sm:items-center sm:p-0">
                         <div class="w-full max-w-[400px] z-[999] absolute left-1/2 top-1/2 rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
-                            <div class="flex justify-between items-center gap-2.5 px-4 py-3 border-b dark:border-gray-800 text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <div class="flex justify-between items-center gap-2.5 px-4 py-3 border-b dark:border-gray-800 text-lg  text-gray-800 dark:text-white font-bold">
                                 @{{ title }}
                             </div>
 

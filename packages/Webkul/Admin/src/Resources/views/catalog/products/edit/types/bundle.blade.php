@@ -14,11 +14,11 @@
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
 
-                    <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.bundle.info')
                     </p>
                 </div>
@@ -64,7 +64,7 @@
 
                 <!-- Add Variants Information -->
                 <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base leading-none text-gray-400 font-semibold">
+                    <p class="text-base text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.empty-title')
                     </p>
 
@@ -74,7 +74,7 @@
                 </div>
 
                 <div
-                    class="secondary-button text-sm leading-none"
+                    class="secondary-button text-sm "
                     @click="resetForm(); $refs.updateCreateOptionModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.add-btn')
@@ -91,7 +91,7 @@
                     <x-admin::modal ref="updateCreateOptionModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
                         </x-slot:header>
@@ -209,13 +209,13 @@
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
                     <p
-                        class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                        class="text-base text-gray-800 dark:text-white font-semibold"
                         :class="{'required': option.is_required}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
 
-                    <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @{{ types[option.type].info }}
                     </p>
                 </div>
@@ -264,7 +264,7 @@
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
                                 <div>
-                                    <i class="icon-drag text-xl leading-none dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
+                                    <i class="icon-drag text-xl  dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
                                 </div>
 
                                 <!-- Is Default Option -->
@@ -280,7 +280,7 @@
                                     />
 
                                     <label
-                                        class="text-2xl leading-none peer-checked:text-blue-600 cursor-pointer"
+                                        class="text-2xl peer-checked:text-blue-600 cursor-pointer"
                                         :class="[option.type == 'checkbox' || option.type == 'multiselect' ? 'icon-uncheckbox  peer-checked:icon-checked' : 'icon-radio-normal peer-checked:icon-radio-selected']"
                                         :for="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
                                     >
@@ -307,7 +307,7 @@
 
                                 <!-- Details -->
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         @{{ element.product.name }}
                                     </p>
 
@@ -345,7 +345,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -376,7 +376,7 @@
 
                 <!-- Add Variants Information -->
                 <div class="flex flex-col gap-1.5 items-center">
-                    <p class="text-base leading-none text-gray-400 font-semibold">
+                    <p class="text-base text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.option.empty-title')
                     </p>
 
@@ -386,7 +386,7 @@
                 </div>
 
                 <div
-                    class="secondary-button text-sm leading-none"
+                    class="secondary-button text-sm "
                     @click="$refs['productSearch' + option.id].openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.option.add-btn')

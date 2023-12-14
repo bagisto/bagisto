@@ -16,13 +16,13 @@
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-4">
-                    <p class="text-base leading-none text-gray-600 dark:text-white font-semibold">
+                    <p class="text-base text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.customers.index.customers-with-most-reviews')
                     </p>
 
                     <a
                         href="{{ route('admin.reporting.customers.view', ['type' => 'customers-with-most-reviews']) }}"
-                        class="text-sm leading-none text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="text-sm  text-blue-600 cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.customers.index.view-details')
                     </a>
@@ -48,7 +48,7 @@
                                         ></div>
                                     </div>
 
-                                    <p class="text-sm leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
                                         @{{ customer.reviews }}
                                     </p>
                                 </div>
@@ -66,7 +66,7 @@
                         <div class="flex gap-1 items-center">
                             <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-xs leading-none dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>

@@ -44,7 +44,7 @@
                             </p>
 
                             <span
-                                class="text-xs leading-none text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
+                                class="text-xs  text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
                                 v-text="data.status_count ?? '0'"
                             >
                             </span>
@@ -63,7 +63,7 @@
                         >
                             <span
                                 v-if="notification.order.status in orderType"
-                                class="h-fit text-2xl leading-none rounded-full"
+                                class="h-fit text-2xl rounded-full"
                                 :class="orderType[notification.order.status].icon"
                             >
                             </span>
@@ -77,7 +77,7 @@
                                     @{{ orderType[notification.order.status].message }}
                                 </p>
     
-                                <p class="text-xs leading-none text-gray-600 dark:text-gray-300">
+                                <p class="text-xs text-gray-600 dark:text-gray-300">
                                     @{{ notification.order.datetime }}
                                 </p>
                             </div>
@@ -121,14 +121,14 @@
                     <div class="flex gap-1 items-center">
                         <a @click="getResults(pagination.prev_page_url)">
                             <div class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-2 rtl:mr-2 p-1.5 bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
-                                <span class="icon-sort-left text-2xl leading-none"></span>
+                                <span class="icon-sort-left text-2xl"></span>
                             </div>
                         </a>
 
                         <a @click="getResults(pagination.next_page_url)">
                             <div
                                 class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-2 rtl:mr-2 p-1.5 bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
-                                <span class="icon-sort-right text-2xl leading-none"></span>
+                                <span class="icon-sort-right text-2xl"></span>
                             </div>
                         </a>
                     </div>

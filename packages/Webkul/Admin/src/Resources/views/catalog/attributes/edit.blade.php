@@ -26,7 +26,7 @@
                 method="PUT"
             >
                 <div class="flex justify-between items-center">
-                    <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+                    <p class="text-xl text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.catalog.attributes.edit.title')
                     </p>
 
@@ -58,7 +58,7 @@
 
                         <!-- Label -->
                         <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                            <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.catalog.attributes.edit.label')
                             </p>
 
@@ -115,13 +115,13 @@
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
-                                <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.title')
                                 </p>
 
                                 <!-- Add Row Button -->
                                 <div
-                                    class="secondary-button text-sm leading-none"
+                                    class="secondary-button text-sm"
                                     @click="$refs.addOptionsRow.toggle(), swatchValue=''"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.add-row')
@@ -171,7 +171,7 @@
                                             @lang('admin::app.catalog.attributes.edit.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                        <div class="flex gap-2.5 item-center w-max !mb-0 p-1.5 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
@@ -184,13 +184,13 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-2xl leading-none rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
+                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600 "
                                             >
                                             </label>
 
                                             <label
                                                 for="empty_option"
-                                                class="text-sm leading-none text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
+                                                class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
                                             >
                                                 @lang('admin::app.catalog.attributes.edit.create-empty-option')
                                             </label>
@@ -201,7 +201,7 @@
                                 <!-- Table Information -->
                                 <div class="mt-4 overflow-x-auto">
                                     <x-admin::table>
-                                        <x-admin::table.thead class="text-sm leading-none font-medium dark:bg-gray-800">
+                                        <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
@@ -255,7 +255,7 @@
 
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0">
-                                                        <i class="icon-drag text-xl leading-none transition-all group-hover:text-gray-700 cursor-grab"></i>
+                                                        <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
                                                             type="hidden"
@@ -331,13 +331,13 @@
                                                     <!-- Actions Button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
-                                                            class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                            class="icon-edit p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editOptions(element)"
                                                         >
                                                         </span>
 
                                                         <span
-                                                            class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
+                                                            class="icon-delete p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
                                                             @click="removeOption(element.id)"
                                                         >
                                                         </span>
@@ -360,7 +360,7 @@
 
                                         <!-- Add Attribute Options Information -->
                                         <div class="flex flex-col gap-1.5 items-center">
-                                            <p class="text-base leading-none text-gray-400 font-semibold">
+                                            <p class="text-base text-gray-400 font-semibold">
                                                 @lang('admin::app.catalog.attributes.edit.add-attribute-options')
                                             </p>
 
@@ -371,7 +371,7 @@
 
                                         <!-- Add Row Button -->
                                         <div
-                                            class="secondary-button text-sm leading-none"
+                                            class="secondary-button text-sm"
                                             @click="$refs.addOptionsRow.toggle()"
                                         >
                                             @lang('admin::app.catalog.attributes.edit.add-row')
@@ -390,7 +390,7 @@
                         <!-- General -->
                         <div class="bg-white dark:bg-gray-900 box-shadow rounded">
                             <div class="flex justify-between items-center p-1.5">
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base leading-none font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.general')
                                 </p>
                             </div>
@@ -531,7 +531,7 @@
                         <!-- Validations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base leading-none font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
                             </x-slot:header>
@@ -608,7 +608,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_required"
-                                        class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
                                     </x-admin::form.control-group.label>
@@ -627,7 +627,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
                                     </x-admin::form.control-group.label>
 
@@ -648,7 +648,7 @@
                         <!-- Configurations -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base leading-none font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
                             </x-slot:header>
@@ -669,7 +669,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                     </x-admin::form.control-group.label>
 
@@ -696,7 +696,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                     </x-admin::form.control-group.label>
 
@@ -726,7 +726,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_filterable"
-                                        class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
                                     </x-admin::form.control-group.label>
@@ -757,7 +757,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_configurable"
-                                        class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
                                     </x-admin::form.control-group.label>
@@ -788,7 +788,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_visible_on_front"
-                                        class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                     </x-admin::form.control-group.label>
@@ -819,7 +819,7 @@
 
                                     <x-admin::form.control-group.label
                                         for="is_comparable"
-                                        class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
                                     </x-admin::form.control-group.label>
@@ -855,7 +855,7 @@
                         ref="addOptionsRow"
                     >
                         <x-slot:header>
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
                         </x-slot:header>

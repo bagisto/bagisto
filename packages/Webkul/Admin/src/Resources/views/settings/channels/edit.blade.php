@@ -22,7 +22,7 @@
         {!! view_render_event('admin.settings.channels.edit.edit_form_controls.before') !!}
 
         <div class="flex justify-between items-center">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.channels.edit.title')
             </p>
 
@@ -52,7 +52,7 @@
 
                 <!-- General Information -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
 
@@ -146,7 +146,7 @@
 
                                 <x-admin::form.control-group.label
                                     :for="'inventory_sources_' . $inventorySource->id"
-                                    class="!text-sm leading-none !text-gray-600 font-semibold cursor-pointer"
+                                    class="!text-sm  !text-gray-600 font-semibold cursor-pointer"
                                 >
                                     <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                         {{ $inventorySource->name }}
@@ -218,7 +218,7 @@
 
                 <!-- Logo and Design -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.edit.design')
                     </p>
 
@@ -270,7 +270,7 @@
                                 </x-admin::media.images>
                             </x-admin::form.control-group>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300">
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.settings.channels.edit.logo-size')
                             </p>
                         </div>
@@ -295,7 +295,7 @@
                                 </x-admin::media.images>
                             </x-admin::form.control-group>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300">
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.settings.channels.edit.favicon-size')
                             </p>
                         </div>
@@ -308,7 +308,7 @@
 
                 <!-- Home Page SEO -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.edit.seo')
                     </p>
 
@@ -397,7 +397,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base leading-none font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                 @lang('admin::app.settings.channels.edit.currencies-and-locales')
                             </p>
                         </div>
@@ -428,7 +428,7 @@
 
                                     <x-admin::form.control-group.label
                                         :for="'locales_' . $locale->id"
-                                        class="!text-sm leading-none !text-gray-600 font-semibold cursor-pointer"
+                                        class="!text-sm  !text-gray-600 font-semibold cursor-pointer"
                                     >
                                         <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                             {{ $locale->name }} 
@@ -494,7 +494,7 @@
 
                                     <x-admin::form.control-group.label
                                         :for="'currencies_' . $currency->id"
-                                        class="!text-sm leading-none !text-gray-600 font-semibold cursor-pointer"
+                                        class="!text-sm  !text-gray-600 font-semibold cursor-pointer"
                                     >
                                         <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                             {{ $currency->name }} 
@@ -546,7 +546,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base leading-none font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                 @lang('admin::app.settings.channels.edit.maintenance-mode')
                             </p>
                         </div>

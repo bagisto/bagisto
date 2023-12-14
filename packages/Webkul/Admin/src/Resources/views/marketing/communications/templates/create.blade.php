@@ -11,7 +11,7 @@
         {!! view_render_event('bagisto.admin.marketing.communications.templates.create.create_form_controls.before') !!}
 
         <div class="flex justify-between items-center">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.templates.create.title')
             </p>
 
@@ -84,7 +84,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
-                                <p class="p-2.5 text-gray-800 dark:text-white text-base leading-none font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                     @lang('admin::app.marketing.communications.templates.create.general')
                                 </p>
                             </div>

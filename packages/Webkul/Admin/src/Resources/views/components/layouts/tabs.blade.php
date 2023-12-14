@@ -3,7 +3,7 @@
         <div class="flex gap-4 mb-4 pt-2 border-b-2 max-sm:hidden dark:border-gray-800">
             @foreach ($items as $key => $item)
                 <a href="{{ $item['url'] }}">
-                    <div class="{{  $menu->getActive($item) ? "mb-[-1px] border-blue-600 border-b-2 transition" : '' }} pb-3.5 px-2.5 text-base leading-none font-medium text-gray-600 dark:text-gray-300 cursor-pointer">
+                    <div class="{{  $menu->getActive($item) ? "mb-[-1px] border-blue-600 border-b-2 transition" : '' }} pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer">
                         @lang($item['name'])
                     </div>
                 </a>

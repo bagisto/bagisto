@@ -70,13 +70,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-store text-2xl leading-none "></span>
+                            <span class="icon-store text-2xl"></span>
                             
                             {{ $currentChannel->name }}
 
                             <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
 
-                            <span class="icon-sort-down text-2xl leading-none"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -85,7 +85,7 @@
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-base leading-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white  "
+                                class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white  "
                             >
                                 {{ $channel->name }}
                             </a>
@@ -101,13 +101,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-language text-2xl leading-none "></span>
+                            <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
                             
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
-                            <span class="icon-sort-down text-2xl leading-none"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -116,7 +116,7 @@
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-base leading-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -145,7 +145,7 @@
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->code . '.before', ['product' => $product]) !!}
 
                             <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                                     {{ $group->name }}
                                 </p>
 

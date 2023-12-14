@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.catalog.products.index.title')
         </p>
 
@@ -61,7 +61,7 @@
                                 >
 
                                 <span
-                                    class="icon-uncheckbox cursor-pointer rounded-md text-2xl leading-none"
+                                    class="icon-uncheckbox cursor-pointer rounded-md text-2xl"
                                     :class="[
                                         applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                             applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -91,7 +91,7 @@
                             </span>
 
                             <i
-                                class="ltr:ml-1.5 rtl:mr-1.5 text-base leading-none text-gray-800 dark:text-white align-text-bottom"
+                                class="ltr:ml-1.5 rtl:mr-1.5 text-base text-gray-800 dark:text-white align-text-bottom"
                                 :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                 v-if="columnGroup.includes(applied.sort.column)"
                             ></i>
@@ -127,14 +127,14 @@
                             >
 
                             <label
-                                class="icon-uncheckbox rounded-md text-2xl leading-none cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.product_id}`"
                             ></label>
                         @endif
 
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                class="text-base text-gray-800 dark:text-white font-semibold"
                                 v-text="record.name"
                             >
                             </p>
@@ -163,7 +163,7 @@
                                 />
 
                                 <span
-                                    class="absolute bottom-px ltr:left-px rtl:right-px text-xs leading-none font-bold text-white bg-darkPink rounded-full px-1.5"
+                                    class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5"
                                     v-text="record.images_count"
                                 >
                                 </span>
@@ -182,7 +182,7 @@
 
                         <div class="flex flex-col gap-1.5">
                             <p
-                                class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                class="text-base text-gray-800 dark:text-white font-semibold"
                                 v-text="$admin.formatPrice(record.price)"
                             >
                             </p>
@@ -242,11 +242,11 @@
 
                         <div class="flex gap-1.5 items-center">
                             <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
-                                <span class="icon-copy text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-copy text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                             
                             <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                                <span class="icon-sort-right text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                         </div>
                     </div>
@@ -286,14 +286,14 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <p
-                                    class="text-lg leading-none text-gray-800 dark:text-white font-bold"
+                                    class="text-lg  text-gray-800 dark:text-white font-bold"
                                     v-if="! attributes.length"
                                 >
                                     @lang('admin::app.catalog.products.index.create.title')
                                 </p>
 
                                 <p
-                                    class="text-lg leading-none text-gray-800 dark:text-white font-bold"
+                                    class="text-lg  text-gray-800 dark:text-white font-bold"
                                     v-else
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
@@ -390,7 +390,7 @@
                                                 @{{ option.name }}
 
                                                 <span
-                                                    class="icon-cross text-white text-lg leading-none ltr:ml-1.5 rtl:mr-1.5 cursor-pointer"
+                                                    class="icon-cross text-white text-lg  ltr:ml-1.5 rtl:mr-1.5 cursor-pointer"
                                                     @click="removeOption(option)"
                                                 >
                                                 </span>

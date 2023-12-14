@@ -26,7 +26,7 @@
                     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.edit_form_controls.before') !!}
 
                     <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-                        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+                        <p class="text-xl text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.edit.title')
                         </p>
 
@@ -61,7 +61,7 @@
 
                             <!-- General -->
                             <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
-                                <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.general')
                                 </p>
 
@@ -141,7 +141,7 @@
 
                             <!-- Contact Information -->
                             <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                                <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.contact-info')
                                 </p>
 
@@ -243,7 +243,7 @@
 
                             <!-- Source Address -->
                             <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                                <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.edit.source-address')
                                 </p>
 
@@ -402,7 +402,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-1.5">
-                                        <p class="text-gray-600 dark:text-gray-300  text-base leading-none p-2.5 font-semibold">
+                                        <p class="text-gray-600 dark:text-gray-300  text-base  p-2.5 font-semibold">
                                             @lang('admin::app.settings.inventory-sources.edit.settings')
                                         </p>
                                     </div>

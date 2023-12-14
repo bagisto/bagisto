@@ -17,7 +17,7 @@
                 </x-slot:toggle>
 
                 <x-slot:header>
-                    <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                    <p class="text-lg text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.export.download')
                     </p>
                 </x-slot:header>

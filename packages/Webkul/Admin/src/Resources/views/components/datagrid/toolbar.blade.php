@@ -23,7 +23,7 @@
                                 @lang('admin::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
 
-                            <span class="icon-sort-down text-2xl leading-none"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -35,11 +35,11 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="flex gap-1.5 justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-sm leading-none text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    class="flex gap-1.5 justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-sm  text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                     href="javascript:void(0);"
                                 >
                                     <i
-                                        class="text-2xl leading-none"
+                                        class="text-2xl"
                                         :class="massAction.icon"
                                         v-if="massAction?.icon"
                                     >
@@ -49,13 +49,13 @@
                                         @{{ massAction.title }}
                                     </span>
 
-                                    <i class="icon-arrow-left text-xl leading-none -mt-px"></i>
+                                    <i class="icon-arrow-left text-xl  -mt-px"></i>
                                 </a>
 
                                 <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border dark:border-gray-800 rounded bg-white dark:bg-gray-900 shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
-                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm leading-none text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm  text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                             href="javascript:void(0);"
                                             v-text="option.label"
                                             @click="performMassAction(massAction, option)"
@@ -67,12 +67,12 @@
 
                             <li v-else>
                                 <a
-                                    class="flex gap-1.5 whitespace-no-wrap rounded-b px-4 py-2 text-sm leading-none text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    class="flex gap-1.5 whitespace-no-wrap rounded-b px-4 py-2 text-sm  text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >
                                     <i
-                                        class="text-2xl leading-none"
+                                        class="text-2xl"
                                         :class="massAction.icon"
                                         v-if="massAction?.icon"
                                     >
@@ -86,7 +86,7 @@
                 </x-admin::dropdown>
 
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
-                    <p class="text-sm leading-none font-light text-gray-800 dark:text-white">
+                    <p class="text-sm  font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
                         @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
                     </p>
@@ -111,14 +111,14 @@
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute ltr:right-2.5 rtl:left-2.5 top-2 flex items-center text-2xl leading-none">
+                        <div class="icon-search pointer-events-none absolute ltr:right-2.5 rtl:left-2.5 top-2 flex items-center text-2xl">
                         </div>
                     </div>
                 </div>
 
                 <!-- Information Panel -->
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
-                    <p class="text-sm leading-none font-light text-gray-800 dark:text-white">
+                    <p class="text-sm  font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
                         @{{ available.meta.total }} Results
                     </p>
@@ -136,14 +136,14 @@
                             class="relative inline-flex w-full max-w-max ltr:pl-3 rtl:pr-3 ltr:pr-5 rtl:pl-5 cursor-pointer select-none appearance-none items-center justify-between gap-x-1 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-1 py-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:outline-none focus:ring-2"
                             :class="{'[&>*]:text-blue-600 [&>*]:dark:text-white': applied.filters.columns.length > 1}"
                         >
-                            <span class="icon-filter text-2xl leading-none"></span>
+                            <span class="icon-filter text-2xl"></span>
 
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.filter.title')
                             </span>
 
                             <span
-                                class="icon-dot absolute top-1.5 right-2 text-sm leading-none font-bold"
+                                class="icon-dot absolute top-1.5 right-2 text-sm  font-bold"
                                 v-if="applied.filters.columns.length > 1"
                             ></span>
                         </div>
@@ -156,7 +156,7 @@
                 <!-- Drawer Header -->
                 <x-slot:header>
                     <div class="flex justify-between items-center p-3">
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.components.datagrid.filters.title')
                         </p>
                     </div>
@@ -178,7 +178,7 @@
                         >
                             <span v-text="applied.pagination.perPage"></span>
 
-                            <span class="icon-sort-down text-2xl leading-none"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -214,14 +214,14 @@
                         class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
                         @click="changePage('previous')"
                     >
-                        <span class="icon-sort-left text-2xl leading-none"></span>
+                        <span class="icon-sort-left text-2xl"></span>
                     </div>
 
                     <div
                         class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300"
                         @click="changePage('next')"
                     >
-                        <span class="icon-sort-right text-2xl leading-none"></span>
+                        <span class="icon-sort-right text-2xl"></span>
                     </div>
                 </div>
             </div>

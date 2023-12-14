@@ -25,23 +25,23 @@
 
                         <!-- Sales Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.total_sales.formatted_total }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.today-sales')
                             </p>
 
                             <!-- Percentage Of Sales -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-base leading-none text-emerald-500"
+                                    class="text-base  text-emerald-500"
                                     :class="[report.statistics.total_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-xs leading-none text-emerald-500 font-semibold"
+                                    class="text-xs  text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_sales.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_sales.progress.toFixed(2)) }}%
@@ -60,23 +60,23 @@
 
                         <!-- Orders Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.total_orders.current }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.today-orders')
                             </p>
 
                             <!-- Orders Percentage -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-base leading-none text-emerald-500"
+                                    class="text-base  text-emerald-500"
                                     :class="[report.statistics.total_orders.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-xs leading-none text-emerald-500 font-semibold"
+                                    class="text-xs  text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_orders.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_orders.progress.toFixed(2)) }}%
@@ -95,23 +95,23 @@
 
                         <!-- Customers Stats -->
                         <div class="grid gap-1 place-content-start">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.total_customers.current }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.dashboard.index.today-customers')
                             </p>
 
                             <!-- Customers Percentage -->
                             <div class="flex gap-0.5 items-center">
                                 <span
-                                    class="text-base leading-none text-emerald-500"
+                                    class="text-base  text-emerald-500"
                                     :class="[report.statistics.total_customers.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                                 ></span>
 
                                 <p
-                                    class="text-xs leading-none text-emerald-500 font-semibold"
+                                    class="text-xs  text-emerald-500 font-semibold"
                                     :class="[report.statistics.total_customers.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
                                 >
                                     @{{ Math.abs(report.statistics.total_customers.progress.toFixed(2)) }}%
@@ -130,7 +130,7 @@
                     <div class="flex gap-2.5">
                         <div class="flex flex-col gap-1.5">
                             <!-- Order Id -->
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ "@lang('admin::app.dashboard.index.order-id', ['id' => ':replace'])".replace(':replace', order.increment_id) }}
                             </p>
 
@@ -148,7 +148,7 @@
                     <!-- Payment And Channel Detailes -->
                     <div class="flex flex-col gap-1.5">
                         <!-- Grand Total -->
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                             @{{ order.formatted_base_grand_total }}
                         </p>
 
@@ -165,7 +165,7 @@
 
                     <div class="flex flex-col gap-1.5">
                         <!-- Customer Detailes -->
-                        <p class="text-base leading-none text-gray-800 dark:text-white">
+                        <p class="text-base text-gray-800 dark:text-white">
                             @{{ order.customer_name }}
                         </p>
 
@@ -190,7 +190,7 @@
 
                             <!-- View More Icon -->
                             <a :href="'{{ route('admin.sales.orders.view', ':replace') }}'.replace(':replace', order.id)">
-                                <span class="icon-sort-right text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
+                                <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                             </a>
                         </div>
 

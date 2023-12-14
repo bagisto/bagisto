@@ -13,7 +13,7 @@
         {!! view_render_event('bagisto.admin.cms.pages.create.create_form_controls.before') !!}
 
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.cms.create.title')
             </p>
 
@@ -46,7 +46,7 @@
 
                 <!--Content -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.create.description')
                     </p>
 
@@ -81,7 +81,7 @@
 
                 <!-- SEO Input Fields -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.cms.create.seo')
                     </p>
 
@@ -188,7 +188,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>
@@ -238,7 +238,7 @@
 
                                     <x-admin::form.control-group.label
                                         :for="'channels_' . $channel->id"
-                                        class="!text-sm leading-none !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                        class="!text-sm  !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
                                     >
                                         {{ core()->getChannelName($channel) }}
                                     </x-admin::form.control-group.label>

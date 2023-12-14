@@ -15,7 +15,7 @@
         <template v-else>
             <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
-                <p class="text-base leading-none text-gray-600 dark:text-white font-semibold mb-4">
+                <p class="text-base text-gray-600 dark:text-white font-semibold mb-4">
                     @lang('admin::app.reporting.sales.index.purchase-funnel')
                 </p>
                 
@@ -24,11 +24,11 @@
                     <!-- Total Visits -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.visitors.total }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.total-visits')
                             </p>
                         </div>
@@ -48,11 +48,11 @@
                     <!-- Total Product Visits -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.product_visitors.total }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.product-views')
                             </p>
                         </div>
@@ -73,11 +73,11 @@
                     <!-- Total Added To Cart -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.carts.total }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.added-to-cart')
                             </p>
                         </div>
@@ -98,11 +98,11 @@
                     <!-- Total Purchased -->
                     <div class="flex flex-col gap-4">
                         <div class="grid gap-0.5">
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.orders.total }}
                             </p>
 
-                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.purchased')
                             </p>
                         </div>
@@ -126,7 +126,7 @@
                     <div class="flex gap-1 items-center">
                         <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                        <p class="text-xs leading-none dark:text-gray-300">
+                        <p class="text-xs dark:text-gray-300">
                             @{{ report.date_range.current }}
                         </p>
                     </div>

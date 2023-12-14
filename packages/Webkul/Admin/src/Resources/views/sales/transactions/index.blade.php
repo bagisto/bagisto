@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.sales.transactions.index.title')
         </p>
 
@@ -91,7 +91,7 @@
                                     @click="view(record.actions.find(action => action.title === 'View')?.url)"
                                 >
                                     <span
-                                        class="icon-sort-right text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                        class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                         role="button"
                                         tabindex="0"
                                     >
@@ -109,7 +109,7 @@
                     <!-- Drawer Header -->
                     <x-slot:header>
                         <div class="grid gap-y-2.5 py-3 dark:border-gray-800 max-sm:px-4">
-                            <p class="text-xl leading-none font-medium dark:text-white">
+                            <p class="text-xl font-medium dark:text-white">
                                 @lang('admin::app.sales.transactions.index.view.title')
                             </p>
                         </div>
@@ -118,7 +118,7 @@
                     <!-- Drawer Content -->
                     <x-slot:content>
                         <div class="flex flex-col gap-4 px-1.5 py-2.5">
-                            <p class="text-lg leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-lg text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.sales.transactions.index.view.transaction-data')
                             </p>
 

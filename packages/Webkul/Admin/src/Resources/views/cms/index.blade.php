@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="flex justify-between items-center">
-        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.cms.index.title')
         </p>
 
@@ -13,7 +13,7 @@
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
-                    <span class="flex icon-setting p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                    <span class="flex icon-setting p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                 </x-slot:toggle>
 
                 <x-slot:content class="w-[174px] max-w-full !p-2 border dark:border-gray-800 rounded z-10 bg-white dark:bg-gray-900 shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">

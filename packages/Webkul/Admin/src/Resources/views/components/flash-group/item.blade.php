@@ -12,11 +12,11 @@
             :style="typeStyles[flash.type]['container']"
         >
             <p
-                class="text-sm leading-none flex items-center break-all"
+                class="text-sm  flex items-center break-all"
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done text-2xl leading-none ltr:mr-2.5 rtl:ml-2.5 bg-white dark:bg-gray-900 rounded-full"
+                    class="icon-toast-done text-2xl ltr:mr-2.5 rtl:ml-2.5 bg-white dark:bg-gray-900 rounded-full"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>

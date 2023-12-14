@@ -4,11 +4,11 @@
     <!-- Panel Header -->
     <div class="flex gap-5 justify-between mb-4">
         <div class="flex flex-col gap-2">
-            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+            <p class="text-base text-gray-800 dark:text-white font-semibold">
                 @lang('admin::app.catalog.products.edit.videos.title')
             </p>
 
-            <p class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium">
+            <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                 @lang('admin::app.catalog.products.edit.videos.info', ['size' => core()->getMaxUploadSize()])
             </p>
         </div>

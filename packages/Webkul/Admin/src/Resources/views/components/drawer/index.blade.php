@@ -23,7 +23,7 @@
 
                 <div class="absolute top-4 ltr:right-3 rtl:left-3">
                     <span
-                        class="icon-cross text-3xl leading-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                        class="icon-cross text-3xl  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                         @click="close"
                     >
                     </span>

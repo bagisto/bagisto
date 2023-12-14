@@ -14,7 +14,7 @@
                 </p>
 
                 <!-- Order Status -->
-                <span class="{{ 'label-' . $order->status }} text-sm leading-none mx-1.5">
+                <span class="{{ 'label-' . $order->status }} text-sm  mx-1.5">
                     @lang("admin::app.sales.orders.view.$order->status")
                 </span>
             </div>
@@ -57,7 +57,7 @@
                     })"
                 >
                     <span
-                        class="icon-cancel text-2xl leading-none"
+                        class="icon-cancel text-2xl"
                         role="presentation"
                         tabindex="0"
                     >
@@ -96,11 +96,11 @@
             <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex justify-between p-4">
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                             @lang('Order Items') ({{ count($order->items) }})
                         </p>
 
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.sales.orders.view.grand-total', ['grand_total' => core()->formatBasePrice($order->base_grand_total)])
                         </p>
                     </div>
@@ -126,7 +126,7 @@
                                     @endif
                     
                                     <div class="grid gap-1.5 place-content-start">
-                                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                                             {{ $item->name }}
                                         </p>
 
@@ -167,7 +167,7 @@
 
                                 <div class="grid gap-1 place-content-start">
                                     <div class="">
-                                        <p class="flex items-center gap-x-1 justify-end text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                        <p class="flex items-center gap-x-1 justify-end text-base text-gray-800 dark:text-white font-semibold">
                                             {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                         </p>
                                     </div>
@@ -212,7 +212,7 @@
                                     @lang('admin::app.sales.orders.view.shipping-and-handling')</p>
                             @endif
 
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.sales.orders.view.summary-grand-total')
                             </p>
 
@@ -244,7 +244,7 @@
                                 </p>
                             @endif
 
-                            <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 {{ core()->formatBasePrice($order->base_grand_total) }}
                             </p>
 
@@ -271,7 +271,7 @@
             
                 <!-- Customer's comment form -->
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="p-4 pb-0 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                    <p class="p-4 pb-0 text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.sales.orders.view.comments')
                     </p>
 
@@ -311,7 +311,7 @@
                                     >
 
                                     <span
-                                        class="icon-uncheckbox rounded-md text-2xl leading-none cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                         role="button"
                                         tabindex="0"
                                     >
@@ -345,11 +345,11 @@
                             <!-- Notes List Title and Time -->
                             <p class="flex gap-2 text-gray-600 dark:text-gray-300 items-center">  
                                 @if ($comment->customer_notified)
-                                    <span class="h-fit text-2xl leading-none rounded-full icon-done text-blue-600 bg-blue-100"></span> 
+                                    <span class="h-fit text-2xl rounded-full icon-done text-blue-600 bg-blue-100"></span> 
 
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
-                                    <span class="h-fit text-2xl leading-none rounded-full icon-cancel-1 text-red-600 bg-red-100"></span>
+                                    <span class="h-fit text-2xl rounded-full icon-cancel-1 text-red-600 bg-red-100"></span>
 
                                     @lang('admin::app.sales.orders.view.customer-not-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @endif
@@ -368,7 +368,7 @@
                 <!-- Customer and address information -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.customer')
                         </p>
                     </x-slot:header>
@@ -403,7 +403,7 @@
                             <div class="{{ $order->shipping_address ? 'pb-4' : '' }}">
 
                                 <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 dark:text-gray-300  text-base leading-none py-4 font-semibold">
+                                    <p class="text-gray-600 dark:text-gray-300  text-base  py-4 font-semibold">
                                         @lang('admin::app.sales.orders.view.billing-address')
                                     </p>
                                 </div>
@@ -419,7 +419,7 @@
                             <span class="block w-full border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-base  py-4 font-semibold">
                                     @lang('admin::app.sales.orders.view.shipping-address')
                                 </p>
                             </div>
@@ -434,7 +434,7 @@
                 <!-- Order Information -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.order-information')
                         </p>
                     </x-slot:header>
@@ -486,7 +486,7 @@
                 <!-- Payment and Shipping Information-->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.payment-and-shipping')
                         </p>
                     </x-slot:header>
@@ -557,7 +557,7 @@
                 <!-- Invoice Information-->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.invoices') ({{ count($order->invoices) }})
                         </p>
                     </x-slot:header>
@@ -578,14 +578,14 @@
                                 <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.invoices.view', $invoice->id) }}"
-                                        class="text-sm leading-none text-blue-600 transition-all hover:underline"
+                                        class="text-sm  text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.view')
                                     </a>
 
                                     <a
                                         href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                                        class="text-sm leading-none text-blue-600 transition-all hover:underline"
+                                        class="text-sm  text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.download-pdf')
                                     </a>
@@ -606,7 +606,7 @@
                 <!-- Shipment Information-->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.shipments') ({{ count($order->shipments) }})
                         </p>
                     </x-slot:header>
@@ -629,7 +629,7 @@
                                 <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.shipments.view', $shipment->id) }}"
-                                        class="text-sm leading-none text-blue-600 transition-all hover:underline"
+                                        class="text-sm  text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.view')
                                     </a>
@@ -646,7 +646,7 @@
                 <!-- Refund Information-->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.refund')
                         </p>
                     </x-slot:header>
@@ -687,7 +687,7 @@
                                 <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.refunds.view', $refund->id) }}"
-                                        class="text-sm leading-none text-blue-600 transition-all hover:underline"
+                                        class="text-sm  text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.view')
                                     </a>

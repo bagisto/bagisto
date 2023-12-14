@@ -17,7 +17,7 @@
                 <!-- Forget Password Form -->
                 <x-admin::form :action="route('admin.forget_password.store')">
                     <div class="p-4">
-                        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold ">
+                        <p class="text-xl text-gray-800 dark:text-white font-bold ">
                             @lang('admin::app.users.forget-password.create.title')
                         </p>
                     </div>

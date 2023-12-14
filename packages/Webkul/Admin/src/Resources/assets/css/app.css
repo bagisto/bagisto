@@ -51,6 +51,7 @@
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        line-height: 1 !important;
     }
 
     html.dark [class^="icon-"],
@@ -371,7 +372,7 @@
     }
       
     p {
-        @apply text-[14px] leading-[17px];
+        @apply text-[14px] !leading-[17px];
     }
 
     input,

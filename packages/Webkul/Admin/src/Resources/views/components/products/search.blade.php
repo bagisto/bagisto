@@ -11,7 +11,7 @@
             <x-slot:header>
                 <div class="grid gap-3">
                     <div class="flex justify-between items-center">
-                        <p class="text-xl leading-none font-medium dark:text-white">
+                        <p class="text-xl font-medium dark:text-white">
                             @lang('admin::app.components.products.search.title')
                         </p>
 
@@ -32,7 +32,7 @@
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-2xl leading-none absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                        <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
                     </div>
                 </div>
             </x-slot:header>
@@ -59,7 +59,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheckbox text-2xl leading-none peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                                    class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                                     :for="'searched-product' + product.id"
                                 >
                                 </label>
@@ -83,7 +83,7 @@
 
                             <!-- Details -->
                             <div class="grid gap-1.5 place-content-start">
-                                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
                                 </p>
 
@@ -119,7 +119,7 @@
 
                     <!-- Add Variants Information -->
                     <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base leading-none text-gray-400 font-semibold">
+                        <p class="text-base text-gray-400 font-semibold">
                             @lang('admin::app.components.products.search.empty-title')
                         </p>
 

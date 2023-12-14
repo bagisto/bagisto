@@ -16,7 +16,7 @@
             <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-md box-shadow">
                 <!-- Login Form -->
                 <x-admin::form :action="route('admin.session.store')">
-                    <p class="p-4 text-xl leading-none text-gray-800 dark:text-white font-bold">
+                    <p class="p-4 text-xl text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.users.sessions.title')
                     </p>
 
@@ -62,7 +62,7 @@
                             </x-admin::form.control-group.control>
                     
                             <span 
-                                class="icon-view text-2xl leading-none cursor-pointer absolute top-[38px] -translate-y-2/4 ltr:right-2 rtl:left-2"
+                                class="icon-view text-2xl cursor-pointer absolute top-[42px] -translate-y-2/4 ltr:right-2 rtl:left-2"
                                 onclick="switchVisibility()"
                                 id="visibilityIcon"
                                 role="presentation"

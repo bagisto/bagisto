@@ -31,7 +31,7 @@
                                     >
 
                                     <span
-                                        class="icon-uncheckbox cursor-pointer rounded-md text-2xl leading-none"
+                                        class="icon-uncheckbox cursor-pointer rounded-md text-2xl"
                                         :class="[
                                             $parent.applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600 ' : (
                                                 $parent.applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -52,7 +52,7 @@
                                 @{{ column.label }}
 
                                 <i
-                                    class="text-base leading-none text-gray-600 dark:text-gray-300 align-text-bottom"
+                                    class="text-base  text-gray-600 dark:text-gray-300 align-text-bottom"
                                     :class="[$parent.applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="column.index == $parent.applied.sort.column"
                                 ></i>
@@ -94,7 +94,7 @@
                                             @change="$parent.setCurrentSelectionMode"
                                         >
 
-                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl leading-none">
+                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl">
                                         </span>
                                     </label>
                                 </p>
@@ -122,7 +122,7 @@
                                     v-if="$parent.available.actions.length"
                                 >
                                     <span
-                                        class="cursor-pointer rounded-md p-1.5 text-2xl leading-none transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         :class="action.icon"
                                         v-text="!action.icon ? action.title : ''"
                                         v-for="action in record.actions"

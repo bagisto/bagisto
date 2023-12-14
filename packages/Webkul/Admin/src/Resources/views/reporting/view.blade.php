@@ -24,7 +24,7 @@
                     <div class="flex gap-1.5 items-center">
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
-                                <span class="flex icon-setting p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                                <span class="flex icon-setting p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
                             </x-slot:toggle>
 
                             <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
@@ -54,7 +54,7 @@
                             'total-products-added-to-wishlist',
                         ]))
                             <select
-                                class="custom-select flex w-fit min-h-[39px] rounded-md border px-3 pl-2 pr-9 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                class="custom-select flex w-fit min-h-[39px] rounded-md border px-3 pl-2 pr-9 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.period"
                             >
                                 <option value="day">
@@ -73,7 +73,7 @@
 
                         <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                             <input
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.start"
                                 placeholder="@lang('admin::app.reporting.view.start-date')"
                             />
@@ -81,7 +81,7 @@
 
                         <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                             <input
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                 v-model="filters.end"
                                 placeholder="@lang('admin::app.reporting.view.end-date')"
                             />

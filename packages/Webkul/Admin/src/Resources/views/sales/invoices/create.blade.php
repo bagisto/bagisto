@@ -3,7 +3,7 @@
     <div
         class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
     >
-        <span class="icon-sales text-2xl leading-none"></span> 
+        <span class="icon-sales text-2xl"></span> 
 
         @lang('admin::app.sales.invoices.create.invoice')     
     </div>
@@ -17,7 +17,7 @@
                     @click="$refs.invoice.open()"
                 >
                     <span
-                        class="icon-sales text-2xl leading-none"
+                        class="icon-sales text-2xl"
                         role="presentation"
                         tabindex="0"
                     ></span> 
@@ -35,7 +35,7 @@
                     <x-slot:header>
                         <div class="grid gap-3">
                             <div class="flex justify-between items-center">
-                                <p class="text-xl leading-none font-medium dark:text-white">
+                                <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.invoices.create.new-invoice')         
                                 </p>
     
@@ -73,7 +73,7 @@
                                                 @endif
                 
                                                 <div class="grid gap-1.5 place-content-start">
-                                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 
@@ -139,7 +139,7 @@
     
                                         <x-admin::form.control-group.label
                                             for="can_create_transaction"
-                                            class="!text-sm leading-none !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                            class="!text-sm  !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                         >
                                             @lang('Create Transaction')
                                         </x-admin::form.control-group.label>

@@ -15,11 +15,11 @@
         <template v-else>
             <div class="border-b dark:border-gray-800">
                 <div class="flex items-center justify-between p-4">
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  font-semibold">
                         @lang('admin::app.dashboard.index.top-selling-products')
                     </p>
 
-                    <p class="text-xs leading-none text-gray-400 font-semibold">
+                    <p class="text-xs text-gray-400 font-semibold">
                         @{{ report.date_range }}
                     </p>
                 </div>
@@ -68,7 +68,7 @@
                                 </p>
 
                                 <p
-                                    class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                    class="text-base text-gray-800 dark:text-white font-semibold"
                                     v-text="item.formatted_revenue"
                                 >
                                 </p>
@@ -91,7 +91,7 @@
 
                         <!-- Add Variants Information -->
                         <div class="flex flex-col items-center">
-                            <p class="text-base leading-none text-gray-400 font-semibold">
+                            <p class="text-base text-gray-400 font-semibold">
                                 @lang('admin::app.dashboard.index.add-product')
                             </p>
 

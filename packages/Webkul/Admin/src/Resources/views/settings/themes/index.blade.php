@@ -4,7 +4,7 @@
     </x-slot:title>
    
     <div class="flex justify-between items-center">
-        <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.settings.themes.index.title')
         </p>
         
@@ -57,7 +57,7 @@
                         <x-admin::modal ref="themeCreateModal">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.create.title')
                                 </p>
                             </x-slot:header>

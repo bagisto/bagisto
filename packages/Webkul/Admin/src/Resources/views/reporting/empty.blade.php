@@ -6,7 +6,7 @@
 
     <div class="flex flex-col gap-1.5 items-center">
 
-        <p class="text-base leading-none text-gray-400 font-semibold">
+        <p class="text-base text-gray-400 font-semibold">
             @lang('admin::app.reporting.empty.title')
         </p>
         

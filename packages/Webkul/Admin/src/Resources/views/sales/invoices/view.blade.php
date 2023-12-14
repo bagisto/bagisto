@@ -16,7 +16,7 @@
             <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
                 @lang('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
 
-                <span class="label-active text-sm leading-none mx-1.5">
+                <span class="label-active text-sm  mx-1.5">
                     {{ $invoice->status_label }}
                 </span>
             </p>
@@ -44,7 +44,7 @@
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
                 class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
             >
-                <span class="icon-printer text-2xl leading-none "></span> 
+                <span class="icon-printer text-2xl "></span> 
 
                 @lang('admin::app.sales.invoices.view.print')
             </a>
@@ -56,7 +56,7 @@
                     class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     @click="$refs.groupCreateModal.open()"
                 >
-                    <span class="icon-mail text-2xl leading-none "></span>
+                    <span class="icon-mail text-2xl "></span>
 
                     @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                 </button>
@@ -66,7 +66,7 @@
                     <x-admin::modal ref="groupCreateModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-lg leading-none text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                             </p>
                         </x-slot:header>
@@ -121,7 +121,7 @@
         <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- Invoice Item Section -->
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4 p-4">
+                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
@@ -148,7 +148,7 @@
                                 
                                 <div class="grid gap-1.5 place-content-start">
                                     <!-- Item Name -->
-                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
@@ -184,7 +184,7 @@
 
                             <div class="grid gap-1 place-content-start">
                                 <!-- Item Grand Total -->
-                                <p class="flex items-center gap-x-1 justify-end text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                <p class="flex items-center gap-x-1 justify-end text-base text-gray-800 dark:text-white font-semibold">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                 </p>
 
@@ -237,7 +237,7 @@
                             </p>
                         @endif
 
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.sales.invoices.view.grand-total')   
                         </p>
                     </div>
@@ -266,7 +266,7 @@
                         @endif
                         
                         <!-- Grand Total -->
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($invoice->base_grand_total) }}
                         </p>
                     </div>
@@ -279,7 +279,7 @@
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.invoices.view.customer')
                     </p>
                 </x-slot:header>
@@ -306,7 +306,7 @@
                                 <span class="block w-full border-b dark:border-gray-800"></span>
 
                                 <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
+                                    <p class="text-gray-600 dark:text-gray-300 text-base  py-4 font-semibold">
                                         @lang('Billing Address')
                                     </p>
                                 </div>
@@ -322,7 +322,7 @@
                             <span class="block w-full border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-base  py-4 font-semibold">
                                     @lang('Shipping Address')
                                 </p>
                             </div>
@@ -338,7 +338,7 @@
             <!-- component 2 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.invoices.view.order-information') 
                     </p>
                 </x-slot:header>

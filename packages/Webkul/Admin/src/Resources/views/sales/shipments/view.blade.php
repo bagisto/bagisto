@@ -30,7 +30,7 @@
         <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class="bg-white dark:bg-gray-900 rounded box-shadow">
-                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4 p-4">
+                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
 
@@ -56,7 +56,7 @@
                                 @endif
 
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
@@ -94,7 +94,7 @@
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.customer')
                     </p>
                 </x-slot:header>
@@ -118,7 +118,7 @@
                         <!-- Billing Address -->
                         @if ($order->billing_address)
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-base  py-4 font-semibold">
                                     @lang('admin::app.sales.shipments.view.billing-address')
                                 </p>
                             </div>
@@ -132,7 +132,7 @@
                             <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-base  py-4 font-semibold">
                                     @lang('admin::app.sales.shipments.view.shipping-address')
                                 </p>
                             </div>
@@ -147,7 +147,7 @@
             <!-- component 2 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.order-information')
                     </p>
                 </x-slot:header>
@@ -202,7 +202,7 @@
             <!-- Component 3 -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.payment-and-shipping')
                     </p>
                 </x-slot:header>

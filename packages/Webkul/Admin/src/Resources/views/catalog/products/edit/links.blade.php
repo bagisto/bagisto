@@ -15,13 +15,13 @@
                 <div class="flex gap-5 justify-between mb-2.5 p-4">
                     <div class="flex flex-col gap-2">
                         <p
-                            class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                            class="text-base text-gray-800 dark:text-white font-semibold"
                             v-text="type.title"
                         >
                         </p>
 
                         <p
-                            class="text-xs leading-none text-gray-500 dark:text-gray-300 font-medium"
+                            class="text-xs  text-gray-500 dark:text-gray-300 font-medium"
                             v-text="type.info"
                         >
                         </p>
@@ -77,7 +77,7 @@
                             <!-- Details -->
                             <div class="grid gap-1.5 place-content-start">
                                 <p
-                                    class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                    class="text-base text-gray-800 dark:text-white font-semibold"
                                     v-text="product.name"
                                 >
                                 </p>
@@ -117,7 +117,7 @@
 
                     <!-- Add Variants Information -->
                     <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base leading-none text-gray-400 font-semibold">
+                        <p class="text-base text-gray-400 font-semibold">
                             @lang('admin::app.catalog.products.edit.links.empty-title')
                         </p>
 

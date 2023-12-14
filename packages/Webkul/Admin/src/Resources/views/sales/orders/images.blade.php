@@ -12,7 +12,7 @@
                         src="{{ $item->product->base_image_url }}"
                     >
 
-                    <span class="absolute bottom-px ltr:left-px rtl:right-px text-xs leading-none font-bold text-white bg-darkPink rounded-full px-1.5">
+                    <span class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5">
                         {{ $item->qty_ordered }}
                     </span>
                 @else
@@ -31,7 +31,7 @@
     @if ($restCount >= 1)
         <a href="{{ route('admin.sales.orders.view', $order->id) }}">
             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 dark:bg-gray-800 rounded">
-                <p class="text-xs leading-none text-gray-600 dark:text-gray-300 text-center font-bold px-1.5 py-1.5">
+                <p class="text-xs text-gray-600 dark:text-gray-300 text-center font-bold px-1.5 py-1.5">
                     @lang('admin::app.sales.orders.index.datagrid.product-count', ['count' => $restCount])
                 </p>
             </div>

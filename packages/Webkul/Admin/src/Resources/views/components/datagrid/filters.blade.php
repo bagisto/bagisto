@@ -31,12 +31,12 @@
                             class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                         >
                             <span 
-                                class="text-sm leading-none text-gray-400 dark:text-gray-400" 
+                                class="text-sm  text-gray-400 dark:text-gray-400" 
                                 v-text="'@lang('admin::app.components.datagrid.filters.select')'"
                             >
                             </span>
 
-                            <span class="icon-sort-down text-2xl leading-none"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -61,7 +61,7 @@
                     <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                     <span
-                        class="icon-cross cursor-pointer text-lg leading-none text-white ltr:ml-1.5 rtl:mr-1.5"
+                        class="icon-cross cursor-pointer text-lg  text-white ltr:ml-1.5 rtl:mr-1.5"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
@@ -107,7 +107,7 @@
                                 >
                                 </span>
 
-                                <span class="icon-sort-down text-2xl leading-none"></span>
+                                <span class="icon-sort-down text-2xl"></span>
                             </button>
                         </x-slot:toggle>
 
@@ -132,7 +132,7 @@
                         <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                         <span
-                            class="icon-cross cursor-pointer text-lg leading-none text-white ltr:ml-1.5 rtl:mr-1.5"
+                            class="icon-cross cursor-pointer text-lg  text-white ltr:ml-1.5 rtl:mr-1.5"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -179,7 +179,7 @@
                         <span v-text="appliedColumnValue"></span>
 
                         <span
-                            class="icon-cross cursor-pointer text-lg leading-none text-white ltr:ml-1.5 rtl:mr-1.5"
+                            class="icon-cross cursor-pointer text-lg  text-white ltr:ml-1.5 rtl:mr-1.5"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -226,7 +226,7 @@
                 <x-admin::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -243,7 +243,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -263,7 +263,7 @@
                         <span v-text="appliedColumnValue.join(' to ')"></span>
 
                         <span
-                            class="icon-cross cursor-pointer text-lg leading-none text-white ltr:ml-1.5 rtl:mr-1.5"
+                            class="icon-cross cursor-pointer text-lg  text-white ltr:ml-1.5 rtl:mr-1.5"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -310,7 +310,7 @@
                 <x-admin::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -327,7 +327,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm leading-none text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm  text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -347,7 +347,7 @@
                         <span v-text="appliedColumnValue.join(' to ')"></span>
 
                         <span
-                            class="icon-cross cursor-pointer text-lg leading-none text-white ltr:ml-1.5 rtl:mr-1.5"
+                            class="icon-cross cursor-pointer text-lg  text-white ltr:ml-1.5 rtl:mr-1.5"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -396,7 +396,7 @@
                     <span v-text="appliedColumnValue"></span>
 
                     <span
-                        class="icon-cross cursor-pointer text-lg leading-none text-white ltr:ml-1.5 rtl:mr-1.5"
+                        class="icon-cross cursor-pointer text-lg  text-white ltr:ml-1.5 rtl:mr-1.5"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
@@ -416,12 +416,12 @@
                     class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 "
                 >
                     <span
-                        class="text-sm leading-none text-gray-400 dark:text-gray-400" 
+                        class="text-sm  text-gray-400 dark:text-gray-400" 
                         v-text="'@lang('admin::app.components.datagrid.filters.select')'"
                     >
                     </span>
 
-                    <span class="icon-sort-down text-2xl leading-none"></span>
+                    <span class="icon-sort-down text-2xl"></span>
                 </button>
             </x-slot:toggle>
 
@@ -459,7 +459,7 @@
                                     v-else
                                 >
                                     <p
-                                        class="text-sm leading-none text-gray-600 dark:text-gray-300 p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950"
+                                        class="text-sm  text-gray-600 dark:text-gray-300 p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950"
                                         v-text="option.label"
                                         @click="selectOption(option)"
                                     >

@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="py-3 text-xl leading-none text-gray-800 dark:text-white font-bold">
+        <p class="py-3 text-xl  text-gray-800 dark:text-white font-bold">
             @lang('admin::app.customers.reviews.index.title')
         </p>
     </div>
@@ -53,7 +53,7 @@
                                         >
                             
                                         <span
-                                            class="icon-uncheckbox cursor-pointer rounded-md text-2xl leading-none"
+                                            class="icon-uncheckbox cursor-pointer rounded-md text-2xl"
                                             :class="[
                                                 applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                                     applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -84,7 +84,7 @@
                                     </span>
 
                                     <i
-                                        class="ltr:ml-1.5 rtl:mr-1.5 text-base leading-none text-gray-800 dark:text-white align-text-bottom"
+                                        class="ltr:ml-1.5 rtl:mr-1.5 text-base  text-gray-800 dark:text-white align-text-bottom"
                                         :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                         v-if="columnGroup.includes(applied.sort.column)"
                                     ></i>
@@ -119,14 +119,14 @@
                                     >
                         
                                     <label 
-                                        class="icon-uncheckbox rounded-md text-2xl leading-none cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                         :for="`mass_action_select_record_${record.product_review_id}`"
                                     ></label>
                                 @endif
 
                                 <div class="flex flex-col gap-1.5">
                                     <p
-                                        class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                        class="text-base text-gray-800 dark:text-white font-semibold"
                                         v-text="record.customer_full_name"
                                     >
                                     </p>
@@ -166,7 +166,7 @@
                             <!-- Title, Description -->
                             <div class="flex flex-col gap-1.5">
                                 <p
-                                    class="text-base leading-none text-gray-800 dark:text-white font-semibold"
+                                    class="text-base text-gray-800 dark:text-white font-semibold"
                                     v-text="record.title"
                                 >
                                 </p>
@@ -183,7 +183,7 @@
                                 <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                     <span
                                         :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                        class="text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>
                                 </a>
@@ -193,7 +193,7 @@
                                     v-if="record.actions.find(action => action.title === 'Edit')"
                                     @click="edit(record.actions.find(action => action.title === 'Edit')?.url)"
                                 >
-                                    <span class="icon-sort-right text-2xl leading-none ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
+                                    <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
                                     </span>
                                 </a>
                             </div>
@@ -223,7 +223,7 @@
                             <!-- Drawer Header -->
                             <x-slot:header>
                                 <div class="flex justify-between items-center">
-                                    <p class="text-xl leading-none font-medium dark:text-white">
+                                    <p class="text-xl font-medium dark:text-white">
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
@@ -239,7 +239,7 @@
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="">
                                             <!-- Customer Name -->
-                                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.customer')
                                             </p>
 
@@ -251,7 +251,7 @@
                                         </div>
 
                                         <div class="">
-                                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.product')
                                             </p>
 
@@ -263,7 +263,7 @@
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.id')
                                             </p>
 
@@ -275,7 +275,7 @@
                                         </div>
                 
                                         <div class="">
-                                            <p class="text-xs leading-none text-gray-600 dark:text-gray-300 font-semibold">
+                                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                                 @lang('admin::app.customers.reviews.index.edit.date')
                                             </p>
 

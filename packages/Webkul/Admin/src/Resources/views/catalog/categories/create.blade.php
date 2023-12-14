@@ -14,7 +14,7 @@
         {!! view_render_event('bagisto.admin.catalog.categories.create.create_form_controls.before') !!}
 
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            <p class="text-xl leading-none text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.catalog.categories.create.title')
             </p>
 
@@ -47,7 +47,7 @@
 
                 <!-- General -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
 
@@ -79,7 +79,7 @@
                                 id="name"
                                 v-bind="field"
                                 :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.name') }}"
                                 v-slugify-target:slug="setValues"
                             >
@@ -118,7 +118,7 @@
 
                 <!-- Description and images -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4 text-base leading-none text-gray-800 dark:text-white font-semibold">
+                    <p class="mb-4  text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
 
@@ -156,7 +156,7 @@
                                 @lang('admin::app.catalog.categories.create.logo')
                             </p>
 
-                            <p class="text-xs leading-none text-gray-500">
+                            <p class="text-xs text-gray-500">
                                 @lang('admin::app.catalog.categories.create.logo-size')
                             </p>
 
@@ -169,7 +169,7 @@
                                 @lang('admin::app.catalog.categories.create.banner')
                             </p>
 
-                            <p class="text-xs leading-none text-gray-500">
+                            <p class="text-xs text-gray-500">
                                 @lang('admin::app.catalog.categories.create.banner-size')
                             </p>
 
@@ -188,7 +188,7 @@
 
                 <!-- SEO Deatils -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 
@@ -233,7 +233,7 @@
                                     id="slug"
                                     v-bind="field"
                                     :class="[errors['{{ 'slug' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm leading-none text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                     v-slugify-target:slug
                                 >
@@ -292,7 +292,7 @@
 
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base leading-none font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base font-semibold">
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
                     </x-slot:header>
@@ -382,7 +382,7 @@
                 <!-- Filterable Attributes -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="required text-gray-600 dark:text-gray-300 text-base p-2.5 font-semibold">
                             @lang('admin::app.catalog.categories.create.filterable-attributes')
                         </p>
                     </x-slot:header>
@@ -406,7 +406,7 @@
                                 </x-admin::form.control-group.control>
 
 
-                                <div class="text-sm leading-none text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
+                                <div class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
                                     {{ $attribute->name ?? $attribute->admin_name }}
                                 </div>
                             </label>

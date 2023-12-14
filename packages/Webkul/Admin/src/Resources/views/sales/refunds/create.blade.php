@@ -1,7 +1,7 @@
 <!-- Refund Vue Component -->
 <v-create-refund>
     <div class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
-        <span class="icon-cancel text-2xl leading-none"></span> 
+        <span class="icon-cancel text-2xl"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
     </div>
@@ -15,7 +15,7 @@
                 @click="$refs.refund.open()"
             >
                 <span
-                    class="icon-cancel text-2xl leading-none"
+                    class="icon-cancel text-2xl"
                     role="presentation"
                     tabindex="0"
                 >
@@ -34,7 +34,7 @@
                     <x-slot:header>
                         <div class="grid gap-3">
                             <div class="flex justify-between items-center">
-                                <p class="text-xl leading-none font-medium dark:text-white">
+                                <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.refunds.create.title')
                                 </p>
 
@@ -85,7 +85,7 @@
                 
                                                 <div class="grid gap-1.5 place-content-start">
                                                     <!-- Item Additional Attributes -->
-                                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 

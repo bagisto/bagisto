@@ -31,7 +31,7 @@
         <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
             <!-- General -->
             <div class=" bg-white dark:bg-gray-900 rounded box-shadow">
-                <p class="text-base leading-none text-gray-800 dark:text-white font-semibold mb-4 p-4">
+                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4 p-4">
                     @lang('admin::app.sales.refunds.view.product-ordered') ({{ $refund->items->count() ?? 0 }})
                 </p>
 
@@ -57,7 +57,7 @@
 
                                 <!-- Product Name -->
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         {{ $item->name }}
                                     </p>
 
@@ -87,7 +87,7 @@
                             <!-- Product Price Section -->
                             <div class="grid gap-1 place-content-start">
                                 <div class="">
-                                    <p class="flex items-center gap-x-1 justify-end text-base leading-none text-gray-800 dark:text-white font-semibold">
+                                    <p class="flex items-center gap-x-1 justify-end text-base text-gray-800 dark:text-white font-semibold">
                                         {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                     </p>
                                 </div>
@@ -151,7 +151,7 @@
                             @lang('admin::app.sales.refunds.view.adjustment-fee')
                         </p>
 
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.sales.refunds.view.grand-total')
                         </p>
                     </div>
@@ -194,7 +194,7 @@
                         </p>
 
                         <!-- Base Grand Total -->
-                        <p class="text-base leading-none text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold">
                             {{ core()->formatBasePrice($refund->base_grand_total) }}
                         </p>
                     </div>
@@ -211,7 +211,7 @@
             )
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.refunds.view.account-information')
                         </p>
                     </x-slot:header>
@@ -236,7 +236,7 @@
 
                             <!-- Billing Address -->
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300 text-base leading-none py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300 text-base  py-4 font-semibold">
                                     @lang('admin::app.sales.refunds.view.billing-address')
                                 </p>
                             </div>
@@ -249,7 +249,7 @@
                             <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 dark:text-gray-300  text-base leading-none py-4 font-semibold">
+                                <p class="text-gray-600 dark:text-gray-300  text-base  py-4 font-semibold">
                                     @lang('admin::app.sales.refunds.view.shipping-address')
                                 </p>
                             </div>
@@ -263,7 +263,7 @@
             <!-- Order Information -->
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.refunds.view.order-information')
                     </p>
                 </x-slot:header>
@@ -309,7 +309,7 @@
              <!-- Payment Information -->
              <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 dark:text-gray-300 text-base leading-none p-2.5 font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.refunds.view.payment-information')
                     </p>
                 </x-slot:header>
