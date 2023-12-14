@@ -89,93 +89,92 @@
                 <form @submit="handleSubmit($event, updateOrCreate)">
                     <!-- Customer Create Modal -->
                     <x-admin::modal ref="updateCreateOptionModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Modal Header -->
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
                         </x-slot:header>
         
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Modal Content -->
-                            <div class="px-4 py-2.5 border-b dark:border-gray-800">
-                                <x-admin::form.control-group>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="label"
+                                    rules="required"
+                                    v-model="selectedOption.label"
+                                    :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.name')"
+                                >
+                                </x-admin::form.control-group.control>
+        
+                                <x-admin::form.control-group.error control-name="label"></x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <div class="flex gap-4">
+                                <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
+                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="text"
-                                        name="label"
+                                        type="select"
+                                        name="type"
                                         rules="required"
-                                        v-model="selectedOption.label"
-                                        :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.name')"
+                                        v-model="selectedOption.type"
+                                        :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.type')"
                                     >
+                                        <option value="select">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                        </option>
+
+                                        <option value="radio">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.radio')
+                                        </option>
+
+                                        <option value="checkbox">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.checkbox')
+                                        </option>
+
+                                        <option value="multiselect">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.multiselect')
+                                        </option>
                                     </x-admin::form.control-group.control>
-            
-                                    <x-admin::form.control-group.error control-name="label"></x-admin::form.control-group.error>
+        
+                                    <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-4">
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="flex-1">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.is-required')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="type"
-                                            rules="required"
-                                            v-model="selectedOption.type"
-                                            :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.type')"
-                                        >
-                                            <option value="select">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                            </option>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="is_required"
+                                        rules="required"
+                                        v-model="selectedOption.is_required"
+                                        :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.is-required')"
+                                    >
+                                        <option value="1">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.yes')
+                                        </option>
 
-                                            <option value="radio">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.radio')
-                                            </option>
-
-                                            <option value="checkbox">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.checkbox')
-                                            </option>
-
-                                            <option value="multiselect">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.multiselect')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.is-required')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="is_required"
-                                            rules="required"
-                                            v-model="selectedOption.is_required"
-                                            :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.is-required')"
-                                        >
-                                            <option value="1">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.yes')
-                                            </option>
-
-                                            <option value="0">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.no')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="is_required"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
+                                        <option value="0">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.no')
+                                        </option>
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error control-name="is_required"></x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
         
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
                             <div class="flex gap-x-2.5 items-center">

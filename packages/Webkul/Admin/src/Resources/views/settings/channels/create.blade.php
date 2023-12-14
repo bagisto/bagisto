@@ -117,9 +117,9 @@
 
                     <!-- Invertory Sources -->
                     <div class="mb-2.5">
-                        <p class="required block text-xs text-gray-800 dark:text-white font-medium">
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.inventory-sources')
-                        </p>
+                        </x-admin::form.control-group.label>
 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
                             <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
@@ -394,9 +394,9 @@
                     <x-slot:content>
                         <!-- Locale Checkboxes  -->
                         <div class="mb-2.5">
-                            <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.locales')
-                            </p>
+                            </x-admin::form.control-group.label>
                         
                             @foreach (core()->getAllLocales() as $locale)
                                 <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
@@ -461,9 +461,9 @@
 
                         <!-- Currencies Checkboxes -->
                         <div class="mb-2.5">
-                            <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.currencies')
-                            </p>
+                            </x-admin::form.control-group.label>
                         
                             @foreach (core()->getAllCurrencies() as $currency)
                                 <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">

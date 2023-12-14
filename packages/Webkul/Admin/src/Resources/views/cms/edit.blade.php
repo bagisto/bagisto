@@ -272,9 +272,9 @@
                             </x-admin::form.control-group>
 
                             <!-- Select Channels -->
-                            <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.cms.create.channels')
-                            </p>
+                            </x-admin::form.control-group.label>
 
                             @foreach(core()->getAllChannels() as $channel)
                                 <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">

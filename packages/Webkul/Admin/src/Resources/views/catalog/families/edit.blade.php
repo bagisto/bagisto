@@ -407,6 +407,7 @@
                                 </x-admin::form.control-group>
                             </x-slot:content>
 
+                            <!-- Modal Footer -->
                             <x-slot:footer>
                                 <div class="flex gap-x-2.5 items-center">
                                     <button 

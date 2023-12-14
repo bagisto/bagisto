@@ -645,7 +645,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">

@@ -269,7 +269,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="w-[25px] h-[25px] mx-auto rounded-md"
+                                                                class="w-[25px] h-[25px] rounded-md"
                                                                 :style="{ background: element.params.swatch_value }"
                                                             >
                                                             </div>
@@ -736,14 +736,16 @@
                         @toggle="listenModal"
                         ref="addOptionsRow"
                     >
+                        <!-- Modal Header !-->
                         <x-slot:header>
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content !-->
                         <x-slot:content>
-                            <div class="grid grid-cols-3 px-4 py-2.5">
+                            <div class="grid">
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
@@ -789,7 +791,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-4 px-4 py-2.5">
+                            <div class="grid grid-cols-3 gap-4">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -843,8 +845,8 @@
                             </div>
                         </x-slot:content>
 
+                        <!-- Modal Footer !-->
                         <x-slot:footer>
-                            <!-- Save Button -->
                             <button
                                 type="submit"
                                 class="primary-button"

@@ -585,9 +585,9 @@
 
                                     <!-- channels -->
                                     <div class="mb-2.5">
-                                        <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.channels')
-                                        </p>
+                                        </x-admin::form.control-group.label>
 
                                         @foreach(core()->getAllChannels() as $channel)
                                             <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
@@ -620,9 +620,9 @@
 
                                     <!-- Customer Grous -->
                                     <div class="mb-2.5">
-                                        <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.customer-groups')
-                                        </p>
+                                        </x-admin::form.control-group.label>
 
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                             <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">

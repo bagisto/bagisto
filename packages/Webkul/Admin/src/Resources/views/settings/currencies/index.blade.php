@@ -237,8 +237,8 @@
                             {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                         </x-slot:content>
 
+                        <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Save Button -->
                             <div class="flex gap-x-2.5 items-center">
                                <button
                                     type="submit"

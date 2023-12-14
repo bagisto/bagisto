@@ -212,8 +212,8 @@
                             </x-admin::form.control-group>
                         </x-slot:content>
 
+                        <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Save Button -->
                             <button class="primary-button">
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.create.save-btn')
                             </button>
