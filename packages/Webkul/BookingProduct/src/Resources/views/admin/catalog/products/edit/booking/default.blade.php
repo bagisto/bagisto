@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
-<v-default-booking></v-default-booking>
+<v-default-booking :bookingProduct = "{{ $bookingProduct }}"></v-default-booking>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
@@ -120,11 +120,6 @@
                                 @lang('To Day')
                             </x-admin::table.th>
 
-                            <!-- Day -->
-                            <x-admin::table.th v-if="slots.many?.length">
-                                @lang('Day')
-                            </x-admin::table.th>
-
                             <!-- To -->
                             <x-admin::table.th>
                                 @lang('To')
@@ -221,17 +216,22 @@
                     </x-admin::table.tbody.tr>
 
                     <x-admin::table.tbody.tr
-                        v-for="slot in slots.many[0]"
-                        v-else
+                        v-if="slots.many?.length"
+                        v-for="(slot, index) in slots.many[0]"
                     >
                         <!-- Day -->
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.day"
-                            >
-                            </p>
-                        </x-admin::table.td>
+                        <p
+                            class="hidden"
+                            v-text="slot.day"
+                        >
+                        </p>
+
+                        <!-- Hidden Field Id -->
+                        <input
+                            type="hidden"
+                            :name="'booking[slots][' + index + '][id]'"
+                            :value="slot.id"
+                        />
 
                         <!-- From -->
                         <x-admin::table.td>
@@ -240,6 +240,12 @@
                                 v-text="slot.from ?? 'N/A'"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][from]'"
+                                :value="slot.from"
+                            />
                         </x-admin::table.td>
 
                         <!-- To -->
@@ -249,6 +255,12 @@
                                 v-text="slot.to ?? 'N/A'"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][to]'"
+                                :value="slot.to"
+                            />
                         </x-admin::table.td>
 
                         <!-- Status -->
@@ -258,6 +270,12 @@
                                 v-text="slot.status ?? 'N/A'"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][status]'"
+                                :value="slot.status"
+                            />
                         </x-admin::table.td>
 
                         <!-- Actions button -->
@@ -586,21 +604,6 @@
                             >
                             </x-admin::form.control-group.control>
 
-                            <!-- Day -->
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
-                                    @lang('Day')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    class="text-[0]"
-                                    name="day"
-                                    contenteditable="false"
-                                >
-                                </x-admin::form.control-group.control>
-                            </x-admin::form.control-group>
-                
                             <!-- From -->
                             <x-booking::form.control-group class="w-full mb-2.5">
                                 <x-booking::form.control-group.label class="required">
@@ -642,7 +645,7 @@
                             </x-booking::form.control-group>
 
                             <!-- Status -->
-                            <x-admin::form.control-group>
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('Status')
                                 </x-admin::form.control-group.label>
@@ -704,7 +707,7 @@
                 if (this.default_booking.booking_type === 'one') {
                     this.slots['one'] = this.default_booking.slots ?? [];
                 } else {
-                    this.slots['many'] = this.default_booking.slots ?? [];
+                    this.slots['many'].push(this.default_booking.slots ?? []);
                 }
             },
 
@@ -724,24 +727,31 @@
                                 params
                             });
                         }
-                    } else {
-                        if (params.id) {
-                            let foundIndex = this.slots.many.findIndex(item => item.id === params.id);
 
-                            this.slots.many[foundIndex].params = {
-                                ...this.slots.many[foundIndex].params,
-                                ...params
-                            };
+                        this.$refs.addOptionsRow.toggle();
+                    } else {
+                        if (params && params.id) {
+                            let item = this.slots.many.flatMap(i => Object.values(i)).find(i => i.id === params.id);
+
+                            if (item) {
+                                for (const key in params) {
+                                    item[key] = params[key];
+                                }
+
+                                this.slots.many = [...this.slots.many.filter(i => i !== item)];
+                            }
+
+                            this.$refs.addManyOptionsRow.toggle();
                         } else {
                             for (const key in params) {
                                 params[key].id = 'option_' + this.optionRowCount++;
                             }
 
                             this.slots.many = [{ ...params }];
+
+                            this.$refs.addOptionsRow.toggle();
                         }
                     }
-
-                    this.$refs.addOptionsRow.toggle();
                 },
 
                 editModal(values) {
