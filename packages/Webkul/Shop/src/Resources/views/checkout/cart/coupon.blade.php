@@ -47,7 +47,7 @@
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="code"
-                                        class="py-[20px] px-[25px]"
+                                        class="py-5 px-[25px]"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
                                         v-model="code"

@@ -1,6 +1,6 @@
 <v-create-customer-address>
-    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
-        <span class="icon-location text-[24px]"></span>
+    <div class="inline-flex gap-x-2 mr-1 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
+        <span class="icon-location text-2xl"></span>
 
         @lang('admin::app.customers.addresses.create.create-address-btn')
     </div>
@@ -16,10 +16,10 @@
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                 @click="$refs.CustomerAddress.toggle()"
             >
-                <span class="icon-location text-[24px]"></span>
+                <span class="icon-location text-2xl"></span>
 
                 @lang('admin::app.customers.addresses.create.create-address-btn')
             </div>
@@ -39,7 +39,7 @@
                 <x-admin::modal ref="CustomerAddress">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.customers.addresses.create.title')
                         </p>    
                     </x-slot:header>
@@ -48,7 +48,7 @@
                     <x-slot:content>
                         {!! view_render_event('admin.customers.addresses.create.before') !!}
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="customer_id"
@@ -57,9 +57,9 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Company Name -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.addresses.create.company-name')
                                 </x-admin::form.control-group.label>
@@ -79,7 +79,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Vat Id -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.addresses.create.vat-id')
                                 </x-admin::form.control-group.label>
@@ -99,9 +99,9 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- First Name -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.first-name')
                                 </x-admin::form.control-group.label>
@@ -122,7 +122,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Last Name -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.last-name')
                                 </x-admin::form.control-group.label>
@@ -144,7 +144,7 @@
                         </div>
 
                         <!-- Street Address -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.customers.addresses.create.street-address')
                             </x-admin::form.control-group.label>
@@ -180,7 +180,7 @@
 
                         <!--need to check this -->
                         <div v-if="streetLineCount && streetLineCount > 1" v-for="index in streetLineCount">
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.control
                                     type="text"
                                     ::name="'address1[' + index + ']'"
@@ -197,9 +197,9 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- City -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.city')
                                 </x-admin::form.control-group.label>
@@ -220,7 +220,7 @@
                             </x-admin::form.control-group>
 
                             <!-- PostCode -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.post-code')
                                 </x-admin::form.control-group.label>
@@ -241,9 +241,9 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap">
+                        <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Country Name -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.country')
                                 </x-admin::form.control-group.label>
@@ -267,7 +267,7 @@
                             </x-admin::form.control-group>
 
                             <!-- State Name -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.state')
                                 </x-admin::form.control-group.label>
@@ -309,9 +309,9 @@
                             </x-admin::form.control-group>
                         </div>
 
-                        <div class="flex gap-[16px] max-sm:flex-wrap items-center">
+                        <div class="flex gap-4 max-sm:flex-wrap items-center">
                             <!--Phone number -->
-                            <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group class="w-full mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.phone')
                                 </x-admin::form.control-group.label>
@@ -332,7 +332,7 @@
                             </x-admin::form.control-group>
                             
                             <!-- Default Address -->
-                            <x-admin::form.control-group class="flex gap-[10px] w-full mt-[20px]">
+                            <x-admin::form.control-group class="flex gap-2.5 w-full mt-5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="default_address"
@@ -363,7 +363,7 @@
     
                     <x-slot:footer>
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <button 
                                 type="submit"
                                 class="primary-button"

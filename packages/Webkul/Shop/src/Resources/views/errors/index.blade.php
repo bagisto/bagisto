@@ -27,7 +27,7 @@
                     {{ $errorCode }}
                 </div>
 
-				<div class="absolute left-[50%] top-[74%] -translate-x-[50%] -translate-y-[50%] text-center mt-[40px] max-868:w-full">
+				<div class="absolute left-[50%] top-[74%] -translate-x-[50%] -translate-y-[50%] text-center mt-10 max-868:w-full">
 					<h1 class="text-[30px] font-semibold">
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>
@@ -41,7 +41,7 @@
 
 					<a 
                         href="{{ route('shop.home.index') }}"
-						class="block w-max mt-[30px] m-auto py-[15px] px-[40px] bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+						class="block w-max mt-[30px] m-auto py-[15px] px-10 bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-10"
                     >
 						@lang('shop::app.errors.go-to-home') 
                     </a>

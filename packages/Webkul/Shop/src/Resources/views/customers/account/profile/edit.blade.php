@@ -28,7 +28,7 @@
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
-                class="!p-0 rounded-[12px] text-gray-700 mb-0"
+                class="!p-0 rounded-xl text-gray-700 mb-0"
                 :label="trans('Image')"
                 :is-multiple="false"
                 accepted-types="image/*"
@@ -252,7 +252,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.new_password_confirmation.after') !!}
 
-        <div class="select-none items-center flex gap-[6px] mb-4">
+        <div class="select-none items-center flex gap-1.5 mb-4">
             <input
                 type="checkbox"
                 name="subscribed_to_news_letter"

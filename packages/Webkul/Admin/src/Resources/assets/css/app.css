@@ -51,6 +51,7 @@
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        line-height: 1 !important;
     }
 
     html.dark [class^="icon-"],
@@ -371,7 +372,7 @@
     }
       
     p {
-        @apply text-[14px] leading-[17px];
+        @apply text-[14px] !leading-[17px];
     }
 
     input,
@@ -381,15 +382,15 @@
     }
 
     .primary-button {
-        @apply flex gap-x-[4px] items-center px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer transition-all hover:opacity-[0.9] focus:opacity-[0.9];
+        @apply flex gap-x-1 items-center px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer transition-all hover:opacity-[0.9] focus:opacity-[0.9];
     }
 
     .secondary-button {
-        @apply flex gap-x-[4px] items-center px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
+        @apply flex gap-x-1 items-center px-3 py-[5px] bg-white border-[2px] border-blue-600 rounded-md text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
     }
 
     .transparent-button {
-        @apply flex gap-x-[4px] items-center px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap cursor-pointer marker:shadow appearance-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100;
+        @apply flex gap-x-1 items-center px-3 py-1.5 border-[2px] border-transparent rounded-md text-gray-600 font-semibold whitespace-nowrap cursor-pointer marker:shadow appearance-none transition-all hover:bg-gray-100 dark:hover:bg-gray-950  focus:bg-gray-100;
     }
 
     .journal-scroll::-webkit-scrollbar {
@@ -437,7 +438,7 @@
     .label-info,
     .label-completed,
     .label-active {
-        @apply text-[12px] text-white font-semibold py-[1px] px-[6px] max-w-max rounded-[35px];
+        @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
 	.label-pending {

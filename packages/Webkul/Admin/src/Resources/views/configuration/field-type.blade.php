@@ -32,13 +32,13 @@
                     ! empty($field['channel_based'])
                     && $channels->count() > 1
                 )
-                    <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                    <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                         {{ $currentChannel->name }}
                     </span>
                 @endif
 
                 @if (! empty($field['locale_based']))
-                    <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                    <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                         {{ $currentLocale->name }}
                     </span>
                 @endif
@@ -208,7 +208,7 @@
                     {{ $selectedOption ? 'checked' : '' }}
                 >
 
-                <div class="w-[36px] h-[20px] bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-[16px] after:w-[16px] after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
 
         @elseif ($field['type'] == 'image')
@@ -242,7 +242,7 @@
             </div>
 
             @if ($result)
-                <x-admin::form.control-group class="flex gap-[5px] w-max  mt-[5px] cursor-pointer select-none">
+                <x-admin::form.control-group class="flex gap-1.5 w-max mt-1.5 cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
@@ -255,7 +255,7 @@
 
                     <x-admin::form.control-group.label
                         :for="$name.'[delete]'"
-                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
@@ -287,7 +287,7 @@
             </x-admin::form.control-group.control>
 
             @if ($result)
-                <div class="flex gap-[10px] cursor-pointer">
+                <div class="flex gap-2.5 cursor-pointer">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
@@ -377,7 +377,7 @@
 
     @if (isset($field['info']))
         <label
-            class="block leading-[20px] text-[12px] text-gray-600 dark:text-gray-300 font-medium"
+            class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
         >
             {!! trans($field['info']) !!}
         </label>

@@ -23,7 +23,7 @@
             </span>
 
             <p
-                class="w-[10px] text-center select-none"
+                class="w-2.5 text-center select-none"
                 v-text="quantity"
             ></p>
             

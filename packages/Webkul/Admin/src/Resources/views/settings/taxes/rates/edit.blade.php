@@ -19,12 +19,12 @@
 
                 {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
 
-                <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+                    <p class="text-xl text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.taxes.rates.edit.title')
                     </p>
     
-                    <div class="flex gap-x-[10px] items-center">
+                    <div class="flex gap-x-2.5 items-center">
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.taxes.rates.index') }}"
@@ -36,7 +36,7 @@
                         <!-- Save Button -->
                         <button 
                             type="submit" 
-                            class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                         >
                             @lang('admin::app.settings.taxes.rates.edit.save-btn')
                         </button>
@@ -44,13 +44,13 @@
                 </div>
     
                 <!-- Tax Rates Informations -->
-                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                     <!-- Left component -->
-                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                            <div class="mb-[10px]">
+                    <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                        <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                            <div class="mb-2.5">
                                 <!-- Identifier -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.edit.identifier')
                                     </x-admin::form.control-group.label>
@@ -72,7 +72,7 @@
                                 </x-admin::form.control-group>
     
                                 <!-- Country -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.edit.country')
                                     </x-admin::form.control-group.label>
@@ -104,7 +104,7 @@
                                 </x-admin::form.control-group>
                     
                                 <!-- State -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <!-- Country Have States -->
                                     <template v-if="haveStates()">
                                         <x-admin::form.control-group.label class="required">
@@ -161,7 +161,7 @@
                                 </x-admin::form.control-group>
     
                                 <!-- Tax Rate -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.rates.edit.tax-rate')
                                     </x-admin::form.control-group.label>
@@ -186,14 +186,14 @@
                     </div>
                 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
                         {!! view_render_event('admin.settings.taxes.rates.edit.card.accordion.basic_settings.before') !!}
 
                         <!-- Basic Settings -->
                         <x-admin::accordion>
                             <x-slot:header>
-                                <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                     @lang('admin::app.settings.taxes.rates.edit.basic-settings')
                                 </p>
                             </x-slot:header>
@@ -209,7 +209,7 @@
                                     </x-admin::form.control-group.control>
     
                                     <!-- Zip From -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.rates.edit.zip-from')
                                         </x-admin::form.control-group.label>
@@ -232,7 +232,7 @@
                                     </x-admin::form.control-group>
     
                                     <!-- Zip To -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.rates.edit.zip-to')
                                         </x-admin::form.control-group.label>
@@ -256,7 +256,7 @@
     
                                 @else
                                     <!-- Zip Code -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.taxes.rates.edit.zip-code')
                                         </x-admin::form.control-group.label>

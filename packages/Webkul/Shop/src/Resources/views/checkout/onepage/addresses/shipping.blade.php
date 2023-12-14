@@ -21,9 +21,9 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, store)">
-                        <div class="grid grid-cols-2 mt-[30px] gap-[20px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                        <div class="grid grid-cols-2 mt-[30px] gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                             <div 
-                                class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
+                                class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                                 v-for="(address, index) in addresses.shipping"
                             >
                                 <v-field
@@ -40,14 +40,14 @@
                                 />
                                 
                                 <label 
-                                    class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                    class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     :for="'shipping_address_id_' + address.id"
                                 >
                                 </label>
 
                                 <label 
                                     :for="'shipping_address_id_' + address.id"
-                                    class="block p-[20px] rounded-[12px] cursor-pointer"
+                                    class="block p-5 rounded-xl cursor-pointer"
                                 >
                                     <div class="flex justify-between items-center">
                                         <p class="text-[16px] font-medium">
@@ -78,16 +78,16 @@
                             </div>
 
                             <div 
-                                class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
+                                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap"
                                 @click="showNewShippingAddressForm"
                             >
                                 <div
-                                    class="flex gap-x-[10px] items-center cursor-pointer"
+                                    class="flex gap-x-2.5 items-center cursor-pointer"
                                     role="button"
                                     tabindex="0"
                                 >
                                     <span
-                                        class="icon-plus p-[10px] text-[30px]  border border-black rounded-full"
+                                        class="icon-plus p-2.5 text-[30px]  border border-black rounded-full"
                                         role="presentation"
                                     ></span>
 
@@ -197,9 +197,9 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.company_name.after') !!}
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
                                 </x-shop::form.control-group.label>
                             
@@ -222,7 +222,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.first_name.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.last-name')
                                 </x-shop::form.control-group.label>
                             
@@ -247,7 +247,7 @@
                         </div>
                         
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.email')
                             </x-shop::form.control-group.label>
                         
@@ -270,7 +270,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.email.after') !!}
                         
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.street-address')
                             </x-shop::form.control-group.label>
                         
@@ -306,11 +306,11 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.street_address.after') !!}
                         
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
-                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.country')
                                 </x-shop::form.control-group.label>
                             
@@ -342,7 +342,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.country.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
                             
@@ -387,9 +387,9 @@
 
                         </div>
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.city')
                                 </x-shop::form.control-group.label>
                             
@@ -412,7 +412,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.city.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.postcode')
                                 </x-shop::form.control-group.label>
                             
@@ -437,7 +437,7 @@
                         </div>
 
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
                             </x-shop::form.control-group.label>
                             
@@ -460,7 +460,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.phone.after') !!}
 
                         <div class="mt-[30px] pb-[15px]">
-                            <div class="grid gap-[10px]">
+                            <div class="grid gap-2.5">
                                 @auth('customer')
                                     <div class="select-none flex gap-x-[15px]">
                                         <input 

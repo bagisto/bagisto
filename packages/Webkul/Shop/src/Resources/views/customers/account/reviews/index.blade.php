@@ -35,15 +35,15 @@
                 
                             @if (! $reviews->isEmpty())
                                 <!-- Review Information -->
-                                <div class="grid gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
+                                <div class="grid gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
                                     @foreach($reviews as $review)
                                         <a
                                             href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
                                             id="{{ $review->product_id }}"
                                         >
-                                            <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
+                                            <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                                                 <x-shop::media.images.lazy
-                                                    class="max-w-[128px] max-h-[146px] min-w-[128px] w-[128px] h-[146px] rounded-[12px]" 
+                                                    class="max-w-[128px] max-h-[146px] min-w-[128px] w-[128px] h-[146px] rounded-xl" 
                                                     src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                     alt="Review Image"                   
                                                 >
@@ -55,18 +55,18 @@
                                                             {{ $review->title}}
                                                         </p>
                 
-                                                        <div class="flex gap-[10px] items-center">
+                                                        <div class="flex gap-2.5 items-center">
                                                             @for ($i = 1; $i <= 5; $i++)
                                                                 <span class="icon-star-fill text-[24px] {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
                                                             @endfor
                                                         </div>
                                                     </div>
                 
-                                                    <p class="mt-[10px] text-[14px] font-medium max-sm:text-[12px]">
+                                                    <p class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]">
                                                         {{ $review->created_at }}
                                                     </p>
                 
-                                                    <p class="mt-[20px] text-[16px] text-[#6E6E6E] max-sm:text-[12px]">
+                                                    <p class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]">
                                                         {{ $review->comment }}
                                                     </p>
                                                 </div>

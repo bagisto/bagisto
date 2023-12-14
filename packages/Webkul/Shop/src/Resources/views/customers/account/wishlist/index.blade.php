@@ -33,7 +33,7 @@
                         </h2>
 
                         <div
-                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9]"
+                            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9]"
                             @click="removeAll"
                             v-if="wishlist.length"
                         >
@@ -50,20 +50,20 @@
                         <div class="grid gap-[30px] flex-1">
                             <div class="grid gap-y-[25px]">
                                 <!-- Wishlist item -->
-                                <div class="flex gap-x-[10px] justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
-                                    <div class="flex gap-x-[20px]">
+                                <div class="flex gap-x-2.5 justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                                    <div class="flex gap-x-5">
                                         <div class="">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <x-shop::media.images.lazy
-                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-[12px]" 
+                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-xl" 
                                                     ::src="item.product.base_image.small_image_url"                                         
                                                 >
                                                 </x-shop::media.images.lazy>
                                             </a>
                                         </div>
 
-                                        <div class="grid gap-y-[10px]">
+                                        <div class="grid gap-y-2.5">
                                             <p 
                                                 class="text-[16px] font-medium" 
                                                 v-text="item.product.name"
@@ -72,10 +72,10 @@
 
                                             <!--Wishlist Item attributes -->
                                             <div 
-                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                class="flex gap-x-2.5 gap-y-1.5 flex-wrap"
                                                 v-if="item.options.length"
                                             >
-                                                <div class="grid gap-[8px]">
+                                                <div class="grid gap-2">
                                                     <div class="">
                                                         <p
                                                             class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
@@ -92,7 +92,7 @@
                                                     </div>
         
                                                     <div 
-                                                        class="grid gap-[8px]" 
+                                                        class="grid gap-2" 
                                                         v-show="item.option_show"
                                                     >
                                                         <div v-for="option in item.options">
@@ -124,10 +124,10 @@
                                                 </a>
                                             </div>
 
-                                            <div class="flex gap-[20px] flex-wrap">
+                                            <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
-                                                    class="flex gap-x-[10px] items-center max-h-[40px] py-[5px] px-[14px] border border-navyBlue  rounded-[54px]"
+                                                    class="flex gap-x-2.5 items-center max-h-10 py-[5px] px-3.5 border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
                                                 >
                                                 </x-shop::quantity-changer>
@@ -135,7 +135,7 @@
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <button
                                                     type="button"
-                                                    class="primary-button block w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-base text-center"
+                                                    class="primary-button block w-max max-h-10 py-1.5 px-[25px] rounded-[18px] text-base text-center"
                                                     @click="moveToCart(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.move-to-cart')

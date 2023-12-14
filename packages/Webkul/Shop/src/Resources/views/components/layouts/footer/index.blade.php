@@ -18,12 +18,12 @@
     ]); 
 @endphp
 
-<footer class="mt-[36px] bg-lightOrange  max-sm:mt-[30px]">
+<footer class="mt-9 bg-lightOrange  max-sm:mt-[30px]">
     <div class="flex gap-x-[25px] gap-y-[30px] justify-between p-[60px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-[15px]">
         <div class="flex gap-[85px] items-start flex-wrap max-1180:gap-[25px] max-1060:justify-between">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-[20px] text-[14px]">
+                    <ul class="grid gap-5 text-[14px]">
                         @php
                             usort($footerLinkSection, function ($a, $b) {
                                 return $a['sort_order'] - $b['sort_order'];
@@ -44,7 +44,7 @@
         
         <!-- News Letter subscription -->
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-[10px]">
+            <div class="grid gap-2.5">
                 <p
                     class="max-w-[288px] leading-[45px] text-[30px] italic text-navyBlue"
                     role="heading"
@@ -59,7 +59,7 @@
 
                 <x-shop::form
                     :action="route('shop.subscription.store')"
-                    class="mt-[10px] rounded max-sm:mt-[30px]"
+                    class="mt-2.5 rounded max-sm:mt-[30px]"
                 >
                     <label for="organic-search" class="sr-only">Search</label>
 
@@ -68,7 +68,7 @@
                     <x-shop::form.control-group.control
                         type="email"
                         name="email"
-                        class=" blockw-[420px] max-w-full px-[20px] py-[20px] pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-[12px] text-xs font-medium max-1060:w-full"
+                        class="blockw-[420px] max-w-full px-5 py-5 pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-xl text-xs font-medium max-1060:w-full"
                         rules="required|email"
                         label="Email"
                         :aria-label="trans('shop::app.components.layouts.footer.email')"
@@ -83,7 +83,7 @@
 
                         <button
                             type="submit"
-                            class=" absolute flex items-center top-[8px] w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium rtl:left-[8px] ltr:right-[8px]"
+                            class=" absolute flex items-center top-2 w-max px-[26px] py-[13px] bg-white rounded-xl text-[12px] font-medium rtl:left-2 ltr:right-2"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>

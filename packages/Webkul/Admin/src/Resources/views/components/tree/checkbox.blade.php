@@ -2,7 +2,7 @@
     <script type="text/x-template" id="v-tree-checkbox-template">
         <label
             :for="id"
-            class="inline-flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none group"
+            class="inline-flex gap-2.5 w-max p-1.5 items-center cursor-pointer select-none group"
         >
             <input
                 type="checkbox"
@@ -14,11 +14,11 @@
                 @change="inputChanged()"
             >
 
-            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600">
+            <span class="icon-uncheckbox rounded-md text-2xl cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600">
             </span>
 
             <div
-                class="text-[14px] text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
+                class="text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
                 v-text="label"
             >
             </div>

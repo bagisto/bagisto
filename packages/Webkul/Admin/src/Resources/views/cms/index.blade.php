@@ -5,29 +5,29 @@
     </x-slot:title>
 
     <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.cms.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
-                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 "></span>
+                    <span class="flex icon-setting p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                 </x-slot:toggle>
 
-                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border dark:border-gray-800 rounded-[4px] z-10 bg-white dark:bg-gray-900 shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
-                    <div class="grid gap-[2px]">
+                <x-slot:content class="w-[174px] max-w-full !p-2 border dark:border-gray-800 rounded z-10 bg-white dark:bg-gray-900 shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
+                    <div class="grid gap-0.5">
                         <!-- Current Channel -->
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-[24px]">
+                        <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md">
+                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-6">
                                 Channel - {{ core()->getCurrentChannel()->name }}
                             </p>
                         </div>
 
                         <!-- Current Locale -->
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]">
-                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
+                        <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
                                 Language - {{ core()->getCurrentLocale()->name }}
                             </p>
                         </div>
