@@ -18,7 +18,7 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-3 border-b-[1px] dark:border-gray-800 max-sm:px-[15px]']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-3 border-b dark:border-gray-800 max-sm:px-[15px]']) }}>
                 {{ $header }}
 
                 <div class="absolute top-4 ltr:right-3 rtl:left-3">

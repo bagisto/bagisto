@@ -14,7 +14,7 @@
         <!-- Total Sales Section -->
         <template v-else>
             <div class="rounded box-shadow">
-                <div class="flex gap-4 flex-wrap p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800">
+                <div class="flex gap-4 flex-wrap p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800">
                     <!-- Today's Sales -->
                     <div class="flex gap-2.5 flex-1">
                         <img
@@ -123,7 +123,7 @@
 
                 <!-- Today Orders Details -->
                 <div
-                    class="row grid grid-cols-4 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-1580:grid-cols-3 max-sm:grid-cols-1"
+                    class="row grid grid-cols-4 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-1580:grid-cols-3 max-sm:grid-cols-1"
                     v-for="order in report.statistics.orders"
                 >
                     <!-- Order ID, Status, Created -->

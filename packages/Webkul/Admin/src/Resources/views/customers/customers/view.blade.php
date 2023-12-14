@@ -202,7 +202,7 @@
                                 </a>
                             </div>
 
-                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full border-b dark:border-gray-800"></span>
                         @endforeach
                     </div>
 
@@ -210,7 +210,7 @@
 
                     <!-- Pagination -->
                     @if ($totalOrderCount > 10)
-                        <div class="flex gap-x-2 items-center p-4 border-t-[1px] dark:border-gray-800">
+                        <div class="flex gap-x-2 items-center p-4 border-t dark:border-gray-800">
                             <div
                                 class="inline-flex gap-x-1 items-center justify-between ltr:ml-2 rtl:mr-2 text-gray-600 dark:text-gray-300 py-1.5 px-2 leading-[24px] text-center w-full max-w-max bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden" 
                             >
@@ -293,7 +293,7 @@
                     <!-- Invoice Table -->
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left min-w-[800px]">
-                            <thead class="text-[14px] text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b-[1px] border-gray-200 dark:border-gray-800">
+                            <thead class="text-[14px] text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                                 <tr>
                                     @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
                                         <th scope="col" class="px-6 py-4 font-semibold"> 
@@ -453,7 +453,7 @@
                             </div>
                         </div>
 
-                        <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                        <span class="block w-full border-b dark:border-gray-800"></span>
                     @endforeach
                 @else
                     <!-- Empty Invoice Container -->
@@ -546,7 +546,7 @@
                 </x-admin::form> 
 
                 <!-- Notes List -->
-                <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                <span class="block w-full border-b dark:border-gray-800"></span>
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-1.5 p-4">
@@ -568,7 +568,7 @@
                         </p>
                     </div>
 
-                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                    <span class="block w-full border-b dark:border-gray-800"></span>
                 @endforeach
             </div>
 
@@ -728,7 +728,7 @@
                             </div>
                             
                             @if ($index < count($customer->addresses) - 1)
-                                <span class="block w-full mb-4 mt-4 border-b-[1px] dark:border-gray-800"></span>
+                                <span class="block w-full mb-4 mt-4 border-b dark:border-gray-800"></span>
                             @endif
                         @endforeach
                     @else    

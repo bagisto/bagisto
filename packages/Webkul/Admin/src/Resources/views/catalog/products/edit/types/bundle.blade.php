@@ -98,7 +98,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-4 py-2.5 border-b dark:border-gray-800  ">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
@@ -259,7 +259,7 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->

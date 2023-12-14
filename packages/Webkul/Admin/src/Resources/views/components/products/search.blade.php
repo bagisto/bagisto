@@ -44,7 +44,7 @@
                     v-if="filteredSearchedProducts.length"
                 >
                     <div
-                        class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800"
+                        class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800"
                         v-for="product in filteredSearchedProducts"
                     >
                         <!-- Information -->

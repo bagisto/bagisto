@@ -46,7 +46,7 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
                             <!-- Hidden Input -->
                             <input type="hidden" :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'" :value="element.title"/>
 
@@ -528,7 +528,7 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
                             <!-- Hidden Input -->
                             <input type="hidden" :name="'downloadable_samples[' + element.id + '][title]'" :value="element.title"/>
 

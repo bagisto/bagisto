@@ -108,7 +108,7 @@
                     <!-- Order items -->
                     <div class="grid">
                         @foreach ($order->items as $item)
-                            <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
+                            <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
                                 <div class="flex gap-2.5">
                                     @if($item?->product?->base_image_url)
                                         <img
@@ -333,7 +333,7 @@
                         </div>
                     </x-admin::form> 
 
-                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                    <span class="block w-full border-b dark:border-gray-800"></span>
 
                     <!-- Comment List -->
                     @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
@@ -356,7 +356,7 @@
                             </p>
                         </div>
 
-                        <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                        <span class="block w-full border-b dark:border-gray-800"></span>
                     @endforeach
                 </div>
             </div>
@@ -398,7 +398,7 @@
                         
                         <!-- Billing Address -->
                         @if ($order->billing_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full border-b dark:border-gray-800"></span>
 
                             <div class="{{ $order->shipping_address ? 'pb-4' : '' }}">
 
@@ -416,7 +416,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
@@ -529,7 +529,7 @@
 
                         <!-- Shipping Method and Price Details -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-4 border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="pt-4">
                                 <p class="text-gray-800 font-semibold dark:text-white">
@@ -593,7 +593,7 @@
                             </div>
 
                             @if ($index < count($order->invoices) - 1)
-                                <span class="block w-full mb-4 mt-4 border-b-[1px] dark:border-gray-800"></span>
+                                <span class="block w-full mb-4 mt-4 border-b dark:border-gray-800"></span>
                             @endif
                         @empty 
                             <p class="text-gray-600 dark:text-gray-300">

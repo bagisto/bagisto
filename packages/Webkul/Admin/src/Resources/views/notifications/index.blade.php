@@ -29,9 +29,9 @@
 
             <div class="flex flex-col justify-between max-w-max bg-white dark:bg-gray-900 rounded-md box-shadow h-[calc(100vh-179px)]">
                 <div class="">
-                    <div class="flex border-b-[1px] dark:border-gray-800 overflow-auto journal-scroll">
+                    <div class="flex border-b dark:border-gray-800 overflow-auto journal-scroll">
                         <div
-                            class="flex py-[15px] px-[15px] gap-1 border-b-[2px] hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                            class="flex py-[15px] px-[15px] gap-1 border-b-2 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                             :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
                             ref="tabs"
                             v-for="data in orderType"
@@ -94,7 +94,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex gap-x-2 items-center p-4 border-t-[1px] dark:border-gray-800">
+                <div class="flex gap-x-2 items-center p-4 border-t dark:border-gray-800">
                     <div
                         class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-2 rtl:mr-2 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-gray-600 dark:text-gray-300 leading-[24px] text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
                         v-text="pagination.per_page"

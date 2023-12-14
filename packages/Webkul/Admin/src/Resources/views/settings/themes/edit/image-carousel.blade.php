@@ -72,7 +72,7 @@
                             <div 
                                 class="flex gap-2.5 justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < sliders.images.length - 1
+                                    'border-b border-slate-300 dark:border-gray-800': index < sliders.images.length - 1
                                 }"
                             >
                                 <div class="flex gap-2.5">

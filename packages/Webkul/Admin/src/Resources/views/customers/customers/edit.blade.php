@@ -33,7 +33,7 @@
             <!-- Modal Content -->
             {!! view_render_event('bagisto.admin.customers.customers.edit.before') !!}
 
-            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
+            <div class="px-4 py-2.5 border-b dark:border-gray-800  ">
                 <div class="flex gap-4 max-sm:flex-wrap">
                     <!--First Name -->
                     <x-admin::form.control-group class="w-full mb-2.5">

@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-4 py-2.5 bg-white dark:bg-gray-900  border-b-[1px] dark:border-gray-800 sticky top-0 z-[10001]">
+<header class="flex justify-between items-center px-4 py-2.5 bg-white dark:bg-gray-900  border-b dark:border-gray-800 sticky top-0 z-[10001]">
     <div class="flex gap-1.5 items-center">
         <!-- Hamburger Menu -->
         <i
@@ -221,10 +221,10 @@
                 v-if="isDropdownOpen"
             >
                 <!-- Search Tabs -->
-                <div class="flex border-b-[1px] dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300">
+                <div class="flex border-b dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300">
                     <div
                         class="p-4 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
-                        :class="{ 'border-b-[2px] border-blue-600': activeTab == tab.key }"
+                        :class="{ 'border-b-2 border-blue-600': activeTab == tab.key }"
                         v-for="tab in tabs"
                         @click="activeTab = tab.key; search();"
                     >
@@ -242,7 +242,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
-                                class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="product in searchedResults.products.data"
                             >
                                 <!-- Left Information -->
@@ -290,7 +290,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t-[1px] dark:border-gray-800">
+                        <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -319,7 +319,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
-                                class="grid gap-1.5 place-content-start p-4 border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="order in searchedResults.orders.data"
                             >
                                 <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
@@ -332,7 +332,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t-[1px] dark:border-gray-800  ">
+                        <div class="flex p-3 border-t dark:border-gray-800  ">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -361,14 +361,14 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-4 border-b-[1px] dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="p-4 border-b dark:border-gray-800 text-[14px] text-gray-600 dark:text-gray-300 font-semibold cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t-[1px] dark:border-gray-800">
+                        <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -397,7 +397,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
-                                class="grid gap-1.5 place-content-start p-4 border-b-[1px] border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
+                                class="grid gap-1.5 place-content-start p-4 border-b border-slate-300 dark:border-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 last:border-b-0"
                                 v-for="customer in searchedResults.customers.data"
                             >
                                 <p class="text-[16x] text-gray-600 dark:text-gray-300 font-semibold">
@@ -410,7 +410,7 @@
                             </a>
                         </div>
 
-                        <div class="flex p-3 border-t-[1px] dark:border-gray-800">
+                        <div class="flex p-3 border-t dark:border-gray-800">
                             <a
                                 :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
@@ -560,14 +560,14 @@
             <!-- Notification Content -->
             <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
                 <!-- Header -->
-                <div class="text-[16px] p-3 text-gray-600 dark:text-gray-300 font-semibold border-b-[1px] dark:border-gray-800">
+                <div class="text-[16px] p-3 text-gray-600 dark:text-gray-300 font-semibold border-b dark:border-gray-800">
                     @lang('admin::app.notifications.title', ['read' => 0])
                 </div>
 
                 <!-- Content -->
                 <div class="grid">
                     <a
-                        class="flex gap-[5px] items-start p-3 hover:bg-gray-50 dark:hover:bg-gray-950 border-b-[1px] dark:border-gray-800 last:border-b-0"
+                        class="flex gap-[5px] items-start p-3 hover:bg-gray-50 dark:hover:bg-gray-950 border-b dark:border-gray-800 last:border-b-0"
                         v-for="notification in notifications"
                         :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
                     >
@@ -595,7 +595,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex gap-[5px] justify-between h-[47px] py-4 px-6 border-t-[1px] dark:border-gray-800">
+                <div class="flex gap-[5px] justify-between h-[47px] py-4 px-6 border-t dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
                         class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"

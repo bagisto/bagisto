@@ -126,7 +126,7 @@
                     <div class="flex gap-x-1 items-center">
                         <!-- Delete Group Button -->
                         <div
-                            class="px-3 py-[5px] border-[2px] border-transparent rounded-md text-red-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                            class="px-3 py-[5px] border-2 border-transparent rounded-md text-red-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                             @click="deleteGroup"
                         >
                             @lang('admin::app.catalog.families.create.delete-group-btn')
@@ -163,7 +163,7 @@
 
                         <!-- Draggable Attribute Groups -->
                         <draggable
-                            class="h-[calc(100vh-285px)] pb-4 overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200"
+                            class="h-[calc(100vh-285px)] pb-4 overflow-auto ltr:border-r rtl:border-l border-gray-200"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"

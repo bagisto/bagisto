@@ -31,7 +31,7 @@
                 >
                     <a
                         :href="`{{route('admin.catalog.products.edit', '')}}/${item.id}`"
-                        class="flex gap-2.5 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="flex gap-2.5 p-4 border-b dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         v-for="item in report.statistics"
                     >
                         <!-- Product Item -->

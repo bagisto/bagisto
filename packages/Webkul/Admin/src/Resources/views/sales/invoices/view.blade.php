@@ -128,7 +128,7 @@
                 <div class="grid">
                     <!-- Invoice Item Details-->
                     @foreach($invoice->items as $item)
-                        <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
                             <div class="flex gap-2.5">
                                 <!-- Product Image -->
                                 @if ($item->product?->base_image_url)
@@ -303,7 +303,7 @@
                         <!-- Billing Address -->
                         @if ($order->billing_address)
                             <div class="{{ $order->shipping_address ? 'pb-4' : '' }}">
-                                <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                                <span class="block w-full border-b dark:border-gray-800"></span>
 
                                 <div class="flex items-center justify-between">
                                     <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
@@ -319,7 +319,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">

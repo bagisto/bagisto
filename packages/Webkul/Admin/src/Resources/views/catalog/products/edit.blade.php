@@ -165,13 +165,13 @@
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
-                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentChannel->name }}
                                                 </span>
                                             @endif
 
                                             @if ($attribute->value_per_locale)
-                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentLocale->name }}
                                                 </span>
                                             @endif

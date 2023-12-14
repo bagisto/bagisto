@@ -36,7 +36,7 @@
                         >
                             <!-- Information -->
                             <div 
-                                class="grid border-b-[1px] last:border-b-0 border-slate-300 dark:border-gray-800"
+                                class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800"
                                 v-for="(link, key) in footerLink"
                             >
                                 <!-- Hidden Input -->

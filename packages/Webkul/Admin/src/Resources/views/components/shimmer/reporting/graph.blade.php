@@ -8,7 +8,7 @@
     </div>
 
     <div class="w-full grid gap-[5px]">
-        <div class="flex items-end w-full pl-2.5 border-l-[1px] border-b-[1px] dark:border-gray-800 aspect-[3.23/1]">
+        <div class="flex items-end w-full pl-2.5 border-l border-b dark:border-gray-800 aspect-[3.23/1]">
             <div class="w-full flex gap-5 justify-between items-end aspect-[3.23/1] max-lg:gap-[15px] max-sm:gap-2.5">
                 @foreach (range(1, $count) as $i)
                     <div

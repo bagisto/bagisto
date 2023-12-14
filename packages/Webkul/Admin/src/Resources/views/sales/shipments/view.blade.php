@@ -82,7 +82,7 @@
                         </div>
 
                         @if ($index < count($shipment->items) - 1)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full border-b dark:border-gray-800"></span>
                         @endif
                     @endforeach
                 </div>
@@ -112,7 +112,7 @@
                         </p>
                     </div>
 
-                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                    <span class="block w-full border-b dark:border-gray-800"></span>
 
                     @if ($order->billing_address || $order->shipping_address)
                         <!-- Billing Address -->
@@ -129,7 +129,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-4 border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300 text-[16px] py-4 font-semibold">
@@ -229,7 +229,7 @@
                     </div>
 
                     <!-- Horizontal Line -->
-                    <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                    <span class="block w-full border-b dark:border-gray-800"></span>
                 
                     <div class="pt-4">
                         <!-- Shipping Menthod -->

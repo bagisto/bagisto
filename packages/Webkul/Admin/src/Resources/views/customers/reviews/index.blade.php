@@ -32,7 +32,7 @@
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
-                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800">
+                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-4 py-2.5 border-b dark:border-gray-800">
                             <div
                                 class="flex gap-2.5 items-center"
                                 v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
@@ -102,7 +102,7 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, performAction }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-4 py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->

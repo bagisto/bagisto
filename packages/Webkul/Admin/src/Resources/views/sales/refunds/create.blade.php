@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="gap-2.5 justify-between pb-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="gap-2.5 justify-between pb-4 border-b border-slate-300 dark:border-gray-800">
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->

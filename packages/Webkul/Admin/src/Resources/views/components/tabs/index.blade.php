@@ -20,7 +20,7 @@
                 <div
                     v-for="tab in tabs"
                     class="pb-3.5 px-2.5 text-[16px] font-medium text-gray-300 cursor-pointer"
-                    :class="{'border-navyBlue border-b-[2px] text-black transition': tab.isActive }"
+                    :class="{'border-navyBlue border-b-2 text-black transition': tab.isActive }"
                     v-text="tab.title"
                     @click="change(tab)"
                 >

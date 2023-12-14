@@ -99,7 +99,7 @@
                     <template v-else>
                         <!-- Table Header -->
                         <div
-                            class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                            class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
                             :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
                         >
                             <div
@@ -114,7 +114,7 @@
 
                         <!-- Table Body -->
                         <div
-                            class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
                             :style="`grid-template-columns: repeat(${reporing.statistics.columns.length}, minmax(0, 1fr))`"
                             v-if="reporing.statistics.records.length"
                             v-for="record in reporing.statistics.records"
@@ -128,7 +128,7 @@
 
                         <div
                             v-else
-                            class="row grid gap-2.5 text-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid gap-2.5 text-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         >
                             <p>@lang('admin::app.reporting.view.not-available')</p>
                         </div>

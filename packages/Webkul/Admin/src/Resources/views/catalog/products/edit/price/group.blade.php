@@ -211,7 +211,7 @@
                             <div class="flex gap-x-2.5 items-center">
                                 <button
                                     type="button"
-                                    class="text-red-600 font-semibold whitespace-nowrap px-3 py-1.5 border-[2px] border-transparent rounded-md transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                                    class="text-red-600 font-semibold whitespace-nowrap px-3 py-1.5 border-2 border-transparent rounded-md transition-all hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                                     @click="remove"
                                     v-if="selectedPrice.id"
                                 >

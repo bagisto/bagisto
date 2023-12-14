@@ -14,7 +14,7 @@
 
     @isset($header)
         <template v-slot:header="{ toggle, isOpen }">
-            <div {{ $header->attributes->merge(['class' => 'flex justify-between items-center gap-2.5 px-4 py-[11px] border-b-[1px] dark:border-gray-800']) }}>
+            <div {{ $header->attributes->merge(['class' => 'flex justify-between items-center gap-2.5 px-4 py-[11px] border-b dark:border-gray-800']) }}>
                 {{ $header }}
 
                 <span
@@ -28,7 +28,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'px-4 py-2.5 border-b-[1px] dark:border-gray-800']) }}>
+            <div {{ $content->attributes->merge(['class' => 'px-4 py-2.5 border-b dark:border-gray-800']) }}>
                 {{ $content }}
             </div>
         </template>

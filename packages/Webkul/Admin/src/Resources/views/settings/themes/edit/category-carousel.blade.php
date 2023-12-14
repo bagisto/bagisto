@@ -79,7 +79,7 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <span class="block w-full mb-4 mt-4 border-b-[1px] dark:border-gray-800"></span>
+                    <span class="block w-full mb-4 mt-4 border-b dark:border-gray-800"></span>
 
                     <div class="flex gap-x-2.5 justify-between items-center">
                         <div class="flex flex-col gap-1">
@@ -111,7 +111,7 @@
                         <div 
                             class="flex gap-2.5 justify-between py-5 cursor-pointer"
                             :class="{
-                                'border-b-[1px] border-slate-300 dark:border-gray-800': index < options.filters.length - 1
+                                'border-b border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                             }"
                         >
                             <div class="flex gap-2.5">

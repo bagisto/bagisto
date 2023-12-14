@@ -100,7 +100,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800">
+                            <div class="px-4 py-2.5 border-b dark:border-gray-800">
                                 <x-admin::form.control-group
                                     v-for='(attribute, index) in superAttributes'
                                 >
@@ -283,7 +283,7 @@
                                 <form @submit="handleSubmit($event, update)">
                                     <!-- Mass Update -->
                                     <template v-if="selectedType == 'editPrices'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800  ">
+                                        <div class="pb-2.5 border-b dark:border-gray-800  ">
                                             <div class="flex gap-2.5 items-end">
                                                 <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
@@ -316,7 +316,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editInventories'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
+                                        <div class="pb-2.5 border-b dark:border-gray-800">
                                             <div class="grid grid-cols-3 gap-4 mb-2.5">
                                                 <x-admin::form.control-group
                                                     class="!mb-[0px]"
@@ -356,7 +356,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'addImages'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
+                                        <div class="pb-2.5 border-b dark:border-gray-800">
                                             <v-media-images
                                                 name="images"
                                                 class="mb-2.5"
@@ -371,7 +371,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editWeight'">
-                                        <div class="pb-[10px] border-b-[1px] dark:border-gray-800">
+                                        <div class="pb-[10px] border-b dark:border-gray-800">
                                             <div class="flex gap-2.5 items-end">
                                                 <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
@@ -400,7 +400,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editName'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
+                                        <div class="pb-2.5 border-b dark:border-gray-800">
                                             <div class="flex gap-2.5 items-end">
                                                 <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
@@ -427,7 +427,7 @@
                                     </template>
 
                                     <template v-if="selectedType == 'editStatus'">
-                                        <div class="pb-2.5 border-b-[1px] dark:border-gray-800">
+                                        <div class="pb-2.5 border-b dark:border-gray-800">
                                             <div class="flex gap-2.5 items-end">
                                                 <x-admin::form.control-group class="flex-1 !mb-0">
                                                     <x-admin::form.control-group.label>
@@ -459,7 +459,7 @@
                             </x-admin::form>
 
                             <div
-                                class="py-4 border-b-[1px] dark:border-gray-800 last:border-b-0"
+                                class="py-4 border-b dark:border-gray-800 last:border-b-0"
                                 :class="{'grid grid-cols-2 gap-3 justify-between items-center': [
                                         'editName', 'editSku',
                                 ].includes(selectedType), 'flex justify-between items-center' : [
@@ -690,7 +690,7 @@
 
     <!-- Variation Item Template -->
     <script type="text/x-template" id="v-product-variation-item-template"> 
-        <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
+        <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
 
             <!-- Information -->
             <div class="flex gap-2.5">

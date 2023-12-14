@@ -23,7 +23,7 @@
                     class="relative"
                     v-for="product in report.statistics"
                 >
-                    <div class="row grid grid-cols-2 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
+                    <div class="row grid grid-cols-2 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
                         <div class="flex gap-2.5">
                             <template v-if="product.image">
                                 <div class="">

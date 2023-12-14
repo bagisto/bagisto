@@ -285,7 +285,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="w-[25px] h-[25px] mx-auto rounded-[5px]"
+                                                                class="w-[25px] h-[25px] mx-auto rounded-md"
                                                                 :style="{ background: element.swatch_value }"
                                                             >
                                                             </div>

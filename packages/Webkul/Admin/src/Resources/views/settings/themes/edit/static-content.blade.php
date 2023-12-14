@@ -43,12 +43,12 @@
                     
                     <div class="text-sm font-medium text-center pt-4 text-gray-500">
                         <div class="tabs">
-                            <div class="flex gap-[15px] mb-[15px] pt-2 border-b-[2px] max-sm:hidden">
+                            <div class="flex gap-[15px] mb-[15px] pt-2 border-b-2 max-sm:hidden">
                                 <!-- HTML Tab Header -->
                                 <p @click="switchEditor('v-html-editor-theme', 1)">
                                     <div
                                         class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-html-editor-theme'}"
+                                        :class="{'mb-[-1px] border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.html')
                                     </div>
@@ -58,7 +58,7 @@
                                 <p @click="switchEditor('v-css-editor-theme', 0);">
                                     <div
                                         class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-css-editor-theme'}"
+                                        :class="{'mb-[-1px] border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.css')
                                     </div>
@@ -68,7 +68,7 @@
                                 <p @click="switchEditor('v-static-content-previewer', 0);">
                                     <div
                                         class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                        :class="{'mb-[-1px] border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.preview')
                                     </div>

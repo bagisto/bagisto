@@ -55,7 +55,7 @@
                             <div class="p-4 !pt-0">
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-2.5 justify-between py-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="flex gap-2.5 justify-between py-4 border-b border-slate-300 dark:border-gray-800">
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img

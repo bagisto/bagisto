@@ -38,7 +38,7 @@
                 <!-- Products List -->
                 <div class="grid">
                     @foreach ($refund->items as $item)
-                        <div class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
                             <div class="flex gap-2.5">
                                 @if ($item->product?->base_image_url)
                                     <img
@@ -232,7 +232,7 @@
 
                         <!-- Billing Address -->
                         @if ($order->billing_address)
-                            <span class="block w-full border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full border-b dark:border-gray-800"></span>
 
                             <!-- Billing Address -->
                             <div class="flex items-center justify-between">
@@ -246,7 +246,7 @@
 
                         <!-- Shipping Address -->
                         @if ($order->shipping_address)
-                            <span class="block w-full mt-4 border-b-[1px] dark:border-gray-800"></span>
+                            <span class="block w-full mt-4 border-b dark:border-gray-800"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 dark:text-gray-300  text-[16px] py-4 font-semibold">
