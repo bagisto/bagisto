@@ -171,7 +171,7 @@
                                             @lang('admin::app.catalog.attributes.edit.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-2.5 item-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                        <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
