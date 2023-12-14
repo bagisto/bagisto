@@ -8,7 +8,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-flash-item-template">
         <div
-            class="flex gap-[46px] justify-between w-max max-w-[408px] px-[20px] py-[12px] rounded-[8px]"
+            class="flex gap-[46px] justify-between w-max max-w-[408px] px-5 py-3 rounded-lg"
             :style="typeStyles[flash.type]['container']"
         >
             <p
@@ -16,7 +16,7 @@
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done mr-[10px] text-[24px]"
+                    class="icon-toast-done mr-2.5 text-[24px]"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>
@@ -25,7 +25,7 @@
             </p>
 
 			<span
-                class="icon-cancel max-h-[16px] max-w-[16px] cursor-pointer"
+                class="icon-cancel max-h-4 max-w-4 cursor-pointer"
                 :style="typeStyles[flash.type]['icon']"
                 @click="remove"
             ></span>

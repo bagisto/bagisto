@@ -8,8 +8,8 @@
             @lang('admin::app.settings.themes.index.title')
         </p>
         
-        <div class="flex gap-x-[10px] items-center">
-            <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
+            <div class="flex gap-x-2.5 items-center">
                 {!! view_render_event('bagisto.admin.settings.themes.create.before') !!}
 
                 <!-- Create Button -->
@@ -146,7 +146,7 @@
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button
                                         type="submit"
                                         class="primary-button"

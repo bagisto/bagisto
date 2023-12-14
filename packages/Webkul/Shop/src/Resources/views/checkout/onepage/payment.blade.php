@@ -45,13 +45,13 @@
         
                                     <label 
                                         :for="payment.method" 
-                                        class="absolute ltr:right-[20px] rtl:left-[20px] top-[20px] icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="absolute ltr:right-5 rtl:left-5 top-5 icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     >
                                     </label>
 
                                     <label 
                                         :for="payment.method" 
-                                        class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
+                                        class="w-[190px] p-5 block border border-[#E9E9E9] rounded-xl max-sm:w-full cursor-pointer"
                                     >
 
                                         <img
@@ -67,7 +67,7 @@
                                             @{{ payment.method_title }}
                                         </p>
                                         
-                                        <p class="text-[12px] font-medium mt-[10px]">
+                                        <p class="text-[12px] font-medium mt-2.5">
                                             @{{ payment.description }}
                                         </p> 
                                     </label>

@@ -70,7 +70,7 @@
                     >
                         <div class="grid gap-[25px] flex-1">
                             <!-- Cart Mass Action Container -->
-                            <div class="flex justify-between items-center pb-[10px] border-b-[1px] border-[#E9E9E9] max-sm:block">
+                            <div class="flex justify-between items-center pb-2.5 border-b-[1px] border-[#E9E9E9] max-sm:block">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -90,7 +90,7 @@
                                     </label>
 
                                     <span
-                                        class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-[10px]"
+                                        class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-2.5"
                                         role="heading"
                                     >
                                         @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
@@ -98,7 +98,7 @@
                                 </div>
 
                                 <div 
-                                    class="max-sm:ml-[35px] max-sm:mt-[10px]"
+                                    class="max-sm:ml-[35px] max-sm:mt-2.5"
                                     v-if="selectedItemsCount"
                                 >
                                     <span
@@ -111,7 +111,7 @@
                                     </span>
 
                                     @if (auth()->guard()->check())
-                                        <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
+                                        <span class="mx-2.5 border-r-[2px] border-[#E9E9E9]"></span>
 
                                         <span
                                             class="text-[16px] text-[#0A49A7] cursor-pointer" 
@@ -130,8 +130,8 @@
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-[10px] justify-between flex-wrap pb-[18px] border-b-[1px] border-[#E9E9E9]">
-                                    <div class="flex gap-x-[20px]">
+                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                                    <div class="flex gap-x-5">
                                         <div class="select-none mt-[43px]">
                                             <input
                                                 type="checkbox"
@@ -153,7 +153,7 @@
                                         <!-- Cart Item Image -->
                                         <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                             <x-shop::media.images.lazy
-                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
+                                                class="h-[110px] min-w-[110px] max-w[110px] rounded-xl"
                                                 ::src="item.base_image.small_image_url"
                                                 ::alt="item.name"
                                                 width="110"
@@ -165,7 +165,7 @@
                                         </a>
 
                                         <!-- Cart Item Options Container -->
-                                        <div class="grid place-content-start gap-y-[10px]">
+                                        <div class="grid place-content-start gap-y-2.5">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                                 <p 
                                                     class="text-[16px] font-medium" 
@@ -176,7 +176,7 @@
                                             
                                             <!-- Cart Item Options Container -->
                                             <div
-                                                class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                                class="grid gap-x-2.5 gap-y-1.5 select-none"
                                                 v-if="item.options.length"
                                             >
                                                 <!-- Details Toggler -->
@@ -195,7 +195,7 @@
                                                 </div>
 
                                                 <!-- Option Details -->
-                                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                                <div class="grid gap-2" v-show="item.option_show">
                                                     <div class="" v-for="option in item.options">
                                                         <p class="text-[14px] font-medium">
                                                             @{{ option.attribute_name + ':' }}
@@ -228,7 +228,7 @@
                                             <x-shop::quantity-changer
                                                 name="quantity"
                                                 ::value="item?.quantity"
-                                                class="flex gap-x-[10px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-max"
+                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-[5px] px-3.5 items-center max-w-max"
                                                 @change="setItemQuantity(item.id, $event)"
                                             >
                                             </x-shop::quantity-changer>

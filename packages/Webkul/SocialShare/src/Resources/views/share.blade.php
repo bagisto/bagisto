@@ -6,7 +6,7 @@
     <div class="flex gap-[25px]">
         {!! view_render_event('bagisto.shop.products.view.share.before', ['product' => $product]) !!}
 
-        <div class="hidden gap-[10px] justify-center items-center max-md:flex cursor-pointer">
+        <div class="hidden gap-2.5 justify-center items-center max-md:flex cursor-pointer">
             <span class="icon-share text-[24px]"></span>
             <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . route('shop.product_or_category.index', [$product->url_key])) }};end">
                 @lang('admin::app.configuration.index.catalog.products.social-share.share')

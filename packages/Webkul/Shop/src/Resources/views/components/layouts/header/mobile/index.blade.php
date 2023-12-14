@@ -35,7 +35,7 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
+                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-2.5 border border-[#E9E9E9] rounded-xl">
                         <div class="">
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -50,12 +50,12 @@
                             >
                                 @lang('Sign up or Login')
 
-                                <i class="icon-double-arrow text-[24px] ml-[10px]"></i>
+                                <i class="icon-double-arrow text-[24px] ml-2.5"></i>
                             </a>
                         @endguest
 
                         @auth('customer')
-                            <div class="flex flex-col gap-[10px] justify-between">
+                            <div class="flex flex-col gap-2.5 justify-between">
                                 <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
 
                                 <p class="text-[#6E6E6E] ">{{ auth()->user()?->email }}</p>
@@ -67,11 +67,11 @@
                     <v-mobile-category></v-mobile-category>
 
                     <!-- Localization & Currency Section -->
-                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-[20px] justify-between items-center mb-[15px]">
+                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-5 justify-between items-center mb-[15px]">
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
+                                <div class="w-full flex gap-2.5 justify-between items-center cursor-pointer" role="button">
                                     <span>
                                         {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
                                     </span>
@@ -84,7 +84,7 @@
                             </x-slot:toggle>
 
                             <!-- Dropdown Content -->
-                            <x-slot:content class="!p-[0px]">
+                            <x-slot:content class="!p-0">
                                 <v-currency-switcher></v-currency-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
@@ -92,7 +92,7 @@
                         <x-shop::dropdown position="top-right">
                             <x-slot:toggle>
                                 <!-- Dropdown Toggler -->
-                                <div class="w-full flex gap-[10px] justify-between items-center cursor-pointer" role="button">
+                                <div class="w-full flex gap-2.5 justify-between items-center cursor-pointer" role="button">
                                     <img
                                         src="{{ ! empty(core()->getCurrentLocale()->logo_url)
                                                 ? core()->getCurrentLocale()->logo_url
@@ -116,7 +116,7 @@
                             </x-slot:toggle>
 
                             <!-- Dropdown Content -->
-                            <x-slot:content class="!p-[0px]">
+                            <x-slot:content class="!p-0">
                                 <v-locale-switcher></v-locale-switcher>
                             </x-slot:content>
                         </x-shop::dropdown>
@@ -142,7 +142,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex items-center gap-x-[20px]">
+            <div class="flex items-center gap-x-5">
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
@@ -162,7 +162,7 @@
                     <!-- Guest Dropdown -->
                     @guest('customer')
                         <x-slot:content>
-                            <div class="grid gap-[10px]">
+                            <div class="grid gap-2.5">
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome-guest')
                                 </p>
@@ -172,19 +172,19 @@
                                 </p>
                             </div>
 
-                            <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
+                            <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
-                            <div class="flex gap-[16px] mt-[25px]">
+                            <div class="flex gap-4 mt-[25px]">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
-                                    class="block w-max mx-auto m-0 ml-[0px] py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-in')
                                 </a>
 
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
-                                    class="block w-max mx-auto m-0 ml-[0px] py-[14px] px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-3.5 px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>
@@ -194,8 +194,8 @@
 
                     <!-- Customers Dropdown -->
                     @auth('customer')
-                        <x-slot:content class="!p-[0px]">
-                            <div class="grid gap-[10px] p-[20px] pb-0">
+                        <x-slot:content class="!p-0">
+                            <div class="grid gap-2.5 p-5 pb-0">
                                 <p class="text-[20px] font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome')’
                                     {{ auth()->guard('customer')->user()->first_name }}
@@ -206,9 +206,9 @@
                                 </p>
                             </div>
 
-                            <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
+                            <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
-                            <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+                            <div class="grid gap-1 mt-2.5 pb-2.5">
                                 <a
                                     class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.profile.index') }}"
@@ -268,7 +268,7 @@
 
         <div class="relative w-full">
             <div
-                class="icon-search flex items-center absolute ltr:left-[12px] rtl:right-[12px] top-[12px] text-[25px] pointer-events-none">
+                class="icon-search flex items-center absolute ltr:left-3 rtl:right-3 top-3 text-[25px] pointer-events-none">
             </div>
 
             <input
@@ -294,7 +294,7 @@
                 <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                     <a
                         :href="category.url"
-                        class="flex items-center justify-between pb-[20px] mt-[20px]"
+                        class="flex items-center justify-between pb-5 mt-5"
                         v-text="category.name"
                     >
                     </a>
@@ -308,7 +308,7 @@
                 </div>
 
                 <div
-                    class="grid gap-[8px]"
+                    class="grid gap-2"
                     v-if="category.isOpen"
                 >
                     <ul v-if="category.children.length">
@@ -316,7 +316,7 @@
                             <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                 <a
                                     :href="secondLevelCategory.url"
-                                    class="flex items-center justify-between pb-[20px] mt-[20px]"
+                                    class="flex items-center justify-between pb-5 mt-5"
                                     v-text="secondLevelCategory.name"
                                 >
                                 </a>
@@ -338,7 +338,7 @@
                                         <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                             <a
                                                 :href="thirdLevelCategory.url"
-                                                class="flex items-center justify-between mt-[20px] ml-3 pb-[20px]"
+                                                class="flex items-center justify-between mt-5 ml-3 pb-5"
                                                 v-text="thirdLevelCategory.name"
                                             >
                                             </a>

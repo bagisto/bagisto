@@ -13,8 +13,8 @@
 
         <!-- Abandoned Carts Section -->
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                <div class="flex items-center justify-between mb-[16px]">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                <div class="flex items-center justify-between mb-4">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.sales.index.abandoned-carts')
                     </p>
@@ -28,11 +28,11 @@
                 </div>
 
                 <!-- Content -->
-                <div class="grid gap-[16px]">
+                <div class="grid gap-4">
                     <!-- Stats -->
-                    <div class="flex gap-[16px] justify-between">
+                    <div class="flex gap-4 justify-between">
                         <!-- Abandoned Revenue -->
-                        <div class="grid gap-[4px]">
+                        <div class="grid gap-1">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.sales.formatted_total }}
                             </p>
@@ -41,7 +41,7 @@
                                 @lang('admin::app.reporting.sales.index.abandoned-revenue')
                             </p>
                             
-                            <div class="flex gap-[2px] items-center">
+                            <div class="flex gap-0.5 items-center">
                                 <span
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
@@ -57,7 +57,7 @@
                         </div>
 
                         <!-- Abandoned Cart -->
-                        <div class="grid gap-[4px]">
+                        <div class="grid gap-1">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ report.statistics.carts.current }}
                             </p>
@@ -66,7 +66,7 @@
                                 @lang('admin::app.reporting.sales.index.abandoned-carts')
                             </p>
                             
-                            <div class="flex gap-[2px] items-center">
+                            <div class="flex gap-0.5 items-center">
                                 <span
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.carts.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
@@ -82,8 +82,8 @@
                         </div>
 
                         <!-- Abandoned Rate -->
-                        <div class="grid gap-[4px]">
-                            <div class="flex gap-[2px]">
+                        <div class="grid gap-1">
+                            <div class="flex gap-0.5">
                                 <p
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.rate.progress >= 0 ?  'text-red-500' : 'text-emerald-500']"
@@ -101,7 +101,7 @@
                                 @lang('admin::app.reporting.sales.index.abandoned-rate')
                             </p>
                             
-                            <div class="flex gap-[2px] items-center">
+                            <div class="flex gap-0.5 items-center">
                                 <p
                                     class="text-[16px] text-emerald-500"
                                     :class="[report.statistics.rate.progress < 0 ?  'text-red-500' : 'text-emerald-500']"
@@ -118,7 +118,7 @@
                     </div>
 
                     <!-- Header -->
-                    <p class="py-[10px] text-[16px] text-gray-600 dark:text-white font-semibold mt-[16px]">
+                    <p class="py-2.5 text-[16px] text-gray-600 dark:text-white font-semibold mt-4">
                         @lang('admin::app.reporting.sales.index.abandoned-products')
                     </p>
 
@@ -131,10 +131,10 @@
                             >
                                 <p class="dark:text-white">@{{ product.name }}</p>
 
-                                <div class="flex gap-[20px] items-center">
-                                    <div class="w-full h-[8px] relative bg-slate-100">
+                                <div class="flex gap-5 items-center">
+                                    <div class="w-full h-2 relative bg-slate-100">
                                         <div
-                                            class="h-[8px] absolute left-0 bg-blue-500"
+                                            class="h-2 absolute left-0 bg-blue-500"
                                             :style="{ 'width': product.progress + '%' }"
                                         ></div>
                                     </div>
@@ -153,9 +153,9 @@
                     </template>
 
                     <!-- Date Range -->
-                    <div class="flex gap-[20px] justify-end">
-                        <div class="flex gap-[4px] items-center">
-                            <span class="w-[14px] h-[14px] rounded-[3px] bg-blue-500"></span>
+                    <div class="flex gap-5 justify-end">
+                        <div class="flex gap-1 items-center">
+                            <span class="w-3.5 h-3.5 rounded-[3px] bg-blue-500"></span>
 
                             <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}

@@ -10,8 +10,8 @@
                 @lang('admin::app.settings.taxes.categories.index.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
-                <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- Create Tax Category Button -->
                     @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                         <button
@@ -36,8 +36,8 @@
                     @lang('admin::app.settings.taxes.categories.index.title')
                 </p>
 
-                <div class="flex gap-x-[10px] items-center">
-                    <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
+                    <div class="flex gap-x-2.5 items-center">
                         <!-- Create Tax Category Button -->
                         @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                             <button
@@ -61,7 +61,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
@@ -83,7 +83,7 @@
                                     <a @click="selectedTaxCategories=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                         <span
                                             :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>
                                     </a>
@@ -93,7 +93,7 @@
                                     <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                         <span
                                             :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                            class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>
                                     </a>
@@ -131,7 +131,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Code -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.categories.index.create.code')
                                 </x-admin::form.control-group.label>
@@ -161,7 +161,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.categories.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -184,7 +184,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Description -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.taxes.categories.index.create.description')
                                 </x-admin::form.control-group.label>
@@ -212,7 +212,7 @@
                             </p>
 
                             <x-admin::form.control-group
-                                class="flex gap-[10px] !mb-0 p-[6px]"
+                                class="flex gap-2.5 !mb-0 p-1.5"
                             >
                                 <v-field
                                     name="taxrates[]"
@@ -223,7 +223,7 @@
                                 >
                                     <select
                                         name="taxrates[]"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         multiple
                                         v-model="selectedTaxRates.tax_rates"
@@ -251,7 +251,7 @@
                         </x-slot:content>
 
                         <x-slot:footer>
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <!-- Save Button -->
                                 <button
                                     type="submit"
