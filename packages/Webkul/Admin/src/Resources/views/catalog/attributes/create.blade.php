@@ -736,12 +736,14 @@
                         @toggle="listenModal"
                         ref="addOptionsRow"
                     >
+                        <!-- Modal Header !-->
                         <x-slot:header>
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content !-->
                         <x-slot:content>
                             <div class="grid grid-cols-3 px-4 py-2.5">
                                 <!-- Image Input -->
@@ -843,6 +845,7 @@
                             </div>
                         </x-slot:content>
 
+                        <!-- Modal Footer !-->
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button

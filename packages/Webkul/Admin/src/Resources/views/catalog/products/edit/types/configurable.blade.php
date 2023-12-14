@@ -91,53 +91,52 @@
                 <form @submit="handleSubmit($event, addVariant)">
                     <!-- Customer Create Modal -->
                     <x-admin::modal ref="variantCreateModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Modal Header -->
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.configurable.create.title')
                             </p>
                         </x-slot:header>
         
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Modal Content -->
-                            <div class="px-4 py-2.5 border-b dark:border-gray-800">
-                                <x-admin::form.control-group
-                                    v-for='(attribute, index) in superAttributes'
+                            <x-admin::form.control-group
+                                v-for='(attribute, index) in superAttributes'
+                            >
+                                <x-admin::form.control-group.label class="required">
+                                    @{{ attribute.admin_name }}
+                                </x-admin::form.control-group.label>
+
+                                <v-field
+                                    as="select"
+                                    :name="attribute.code"
+                                    class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                    :class="[errors[attribute.code] ? 'border border-red-500' : '']"
+                                    rules="required"
+                                    :label="attribute.admin_name"
                                 >
-                                    <x-admin::form.control-group.label class="required">
-                                        @{{ attribute.admin_name }}
-                                    </x-admin::form.control-group.label>
-
-                                    <v-field
-                                        as="select"
-                                        :name="attribute.code"
-                                        class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                        :class="[errors[attribute.code] ? 'border border-red-500' : '']"
-                                        rules="required"
-                                        :label="attribute.admin_name"
+                                    <option
+                                        v-for="option in attribute.options"
+                                        :value="option.id"
                                     >
-                                        <option
-                                            v-for="option in attribute.options"
-                                            :value="option.id"
-                                        >
-                                            @{{ option.admin_name }}
-                                        </option>
-                                    </v-field>
+                                        @{{ option.admin_name }}
+                                    </option>
+                                </v-field>
 
-                                    <v-error-message
-                                        :name="attribute.code"
-                                        v-slot="{ message }"
+                                <v-error-message
+                                    :name="attribute.code"
+                                    v-slot="{ message }"
+                                >
+                                    <p
+                                        class="mt-1 text-red-600 text-xs italic"
+                                        v-text="message"
                                     >
-                                        <p
-                                            class="mt-1 text-red-600 text-xs italic"
-                                            v-text="message"
-                                        >
-                                        </p>
-                                    </v-error-message>
-                                </x-admin::form.control-group>
-                            </div>
+                                    </p>
+                                </v-error-message>
+                            </x-admin::form.control-group>
                         </x-slot:content>
         
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
                             <div class="flex gap-x-2.5 items-center">

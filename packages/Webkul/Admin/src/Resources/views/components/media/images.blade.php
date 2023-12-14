@@ -274,7 +274,7 @@
                                 </div>
                             </x-slot:content>
 
-                            <!-- Modal Submission -->
+                            <!-- Modal Footer -->
                             <x-slot:footer>
                                 <div class="flex gap-x-2.5 items-center">
                                     <template v-if="! ai.images.length">

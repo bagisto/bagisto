@@ -48,15 +48,15 @@
                     <!-- Address Edit Modal -->
                     <x-admin::modal ref="CustomerAddressEdit">
 
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Modal Header -->
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.customers.addresses.edit.title')
                             </p>    
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Modal Content -->
                             {!! view_render_event('admin.customer.addresses.edit.before') !!}
                             <div class="px-4 py-2.5 border-b dark:border-gray-800">
                                 <div class="flex gap-4 max-sm:flex-wrap">
@@ -382,6 +382,7 @@
                             {!! view_render_event('bagisto.admin.customers.edit.after') !!}
                         </x-slot:content>
         
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
                             <div class="flex gap-x-2.5 items-center">

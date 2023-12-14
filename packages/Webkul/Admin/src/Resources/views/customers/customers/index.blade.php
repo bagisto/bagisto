@@ -443,6 +443,7 @@
                                 {!! view_render_event('bagisto.admin.customers.create.after') !!}
                             </x-slot:content>
 
+                            <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Modal Submission -->
                                 <div class="flex gap-x-2.5 items-center">
