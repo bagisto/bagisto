@@ -50,7 +50,7 @@
 
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.customers.addresses.edit.title')
                             </p>    
                         </x-slot:header>
@@ -58,7 +58,7 @@
                         <x-slot:content>
                             <!-- Modal Content -->
                             {!! view_render_event('admin.customer.addresses.edit.before') !!}
-                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-4 py-2.5 border-b dark:border-gray-800">
                                 <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Company Name -->
                                     <x-admin::form.control-group class="w-full mb-2.5">

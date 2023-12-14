@@ -34,12 +34,12 @@
                         @click="resetAIModal(); $refs.magicAIImageModal.open()"
                     >
                         <div class="flex flex-col items-center">
-                            <span class="icon-magic text-[24px] text-blue-600"></span>
+                            <span class="icon-magic text-2xl text-blue-600"></span>
 
-                            <p class="grid text-[14px] text-blue-600 font-semibold text-center">
+                            <p class="grid text-sm text-blue-600 font-semibold text-center">
                                 @lang('admin::app.components.media.images.ai-add-image-btn')
                                 
-                                <span class="text-[12px]">
+                                <span class="text-xs">
                                     @lang('admin::app.components.media.images.ai-btn-info')
                                 </span>
                             </p>
@@ -53,12 +53,12 @@
                         :for="$.uid + '_imageInput'"
                     >
                         <div class="flex flex-col items-center">
-                            <span class="icon-image text-[24px]"></span>
+                            <span class="icon-image text-2xl"></span>
 
-                            <p class="grid text-[14px] text-gray-600 dark:text-gray-300 font-semibold text-center">
+                            <p class="grid text-sm text-gray-600 dark:text-gray-300 font-semibold text-center">
                                 @lang('admin::app.components.media.images.add-image-btn')
                                 
-                                <span class="text-[12px]">
+                                <span class="text-xs">
                                     @lang('admin::app.components.media.images.allowed-types')
                                 </span>
                             </p>
@@ -105,7 +105,7 @@
                     >
                         <img :src="placeholder.image">
 
-                        <p class="w-full absolute bottom-[15px] text-[12px] text-gray-400 text-center font-semibold">
+                        <p class="w-full absolute bottom-4 text-xs text-gray-400 text-center font-semibold">
                             @{{ placeholder.label }}
                         </p>
                     </div>
@@ -121,17 +121,17 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <template v-if="! ai.images.length">
-                                    <p class="flex gap-2.5 items-center text-[18px] text-gray-800 dark:text-white font-bold">
-                                        <span class="icon-magic text-[24px] text-gray-800"></span>
+                                    <p class="flex gap-2.5 items-center text-lg text-gray-800 dark:text-white font-bold">
+                                        <span class="icon-magic text-2xl text-gray-800"></span>
 
                                         @lang('admin::app.components.media.images.ai-generation.title')
                                     </p>
                                 </template>
 
                                 <template v-else>
-                                    <p class="text-[18px] text-gray-800 truncate dark:text-white font-bold">
+                                    <p class="text-lg text-gray-800 truncate dark:text-white font-bold">
                                         <span
-                                            class="align-middle mr-[5px] icon-arrow-right text-[24px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                                            class="align-middle mr-1 icon-arrow-right text-2xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                                             @click="ai.images = []"
                                         ></span>
 
@@ -290,7 +290,7 @@
                                             </template>
 
                                             <template v-else>
-                                                <span class="icon-magic text-[24px] text-blue-600"></span>
+                                                <span class="icon-magic  text-blue-600"></span>
                                                 
                                                 @lang('admin::app.components.media.images.ai-generation.generate')
                                             </template>
@@ -310,7 +310,7 @@
                                             </template>
 
                                             <template v-else>
-                                                <span class="icon-magic text-[24px] text-blue-600"></span>
+                                                <span class="icon-magic text-2xl text-blue-600"></span>
                                                 
                                                 @lang('admin::app.components.media.images.ai-generation.regenerate')
                                             </template>
@@ -342,19 +342,19 @@
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-3 bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Image Name -->
-                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
+                <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <span
-                        class="icon-delete text-[24px] p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-delete text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         @click="remove"
                     ></span>
 
                     <label
-                        class="icon-edit text-[24px] p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-edit text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 

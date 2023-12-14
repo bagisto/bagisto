@@ -14,7 +14,7 @@
         <script type="text/x-template" id="v-create-group-template">
             <div>
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                    <p class="text-xl text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.customers.groups.index.title')
                     </p>
 
@@ -42,7 +42,7 @@
                     <template #body="{ columns, records, performAction }">
                         <div
                             v-for="record in records"
-                            class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Id -->
@@ -64,7 +64,7 @@
                                         <a @click="selectedGroups=1; editModal(record)">
                                             <span
                                                 :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                 :title="record.actions.find(action => action.title === 'Edit')?.title"
                                             >
                                             </span>
@@ -75,7 +75,7 @@
                                         <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                             <span
                                                 :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                                class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                 :title="record.actions.find(action => action.method === 'DELETE')?.title"
                                             >
                                             </span>
@@ -103,7 +103,7 @@
                         <x-admin::modal ref="groupUpdateOrCreateModal">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     <span v-if="selectedGroups">
                                         @lang('admin::app.customers.groups.index.edit.title')
                                     </span>

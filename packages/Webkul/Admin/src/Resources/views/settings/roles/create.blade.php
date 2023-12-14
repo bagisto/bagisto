@@ -18,7 +18,7 @@
                     {!! view_render_event('admin.settings.roles.create.create_form_controls.before') !!}
 
                     <div class="flex justify-between items-center">
-                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-xl text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.roles.create.title')
                         </p>
 
@@ -44,13 +44,13 @@
                     <!-- body content -->
                     <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                         <!-- Left sub-component -->
-                        <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                        <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                             {!! view_render_event('bagisto.admin.settings.roles.create.card.access_control.before') !!}
 
                             <!-- Access Control Input Fields -->
                             <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                                     @lang('admin::app.settings.roles.create.access-control')
                                 </p>
 
@@ -104,7 +104,7 @@
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-1.5">
-                                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                             @lang('admin::app.settings.roles.create.general')
                                         </p>
                                     </div>

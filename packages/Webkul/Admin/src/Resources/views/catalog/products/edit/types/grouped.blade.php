@@ -10,11 +10,11 @@
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
                 <div class="flex flex-col gap-2">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.grouped.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.grouped.info')
                     </p>
                 </div>
@@ -44,11 +44,11 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
                                 
                                 <!-- Image -->
                                 <div
@@ -58,7 +58,7 @@
                                     <template v-if="! element.associated_product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     
-                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                        <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                             @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                         </p>
                                     </template>
@@ -70,7 +70,7 @@
 
                                 <!-- Details -->
                                 <div class="grid gap-1.5 place-content-start">
-                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         @{{ element.associated_product.name }}
                                     </p>
 
@@ -109,7 +109,7 @@
                                         type="text"
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -139,8 +139,8 @@
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-[5px] items-center">
-                    <p class="text-[16px] text-gray-400 font-semibold">
+                <div class="flex flex-col gap-1.5 items-center">
+                    <p class="text-base text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.grouped.empty-title')
                     </p>
 
@@ -151,7 +151,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-[14px]"
+                    class="secondary-button text-sm"
                     @click="$refs.productSearch.openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.grouped.add-btn')
