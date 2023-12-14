@@ -791,7 +791,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-4 px-4 py-2.5">
+                            <div class="grid grid-cols-3 gap-4">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
