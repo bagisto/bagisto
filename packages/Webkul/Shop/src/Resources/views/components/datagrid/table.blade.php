@@ -16,7 +16,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-2.5 px-6 py-4 font-medium border-b-[1px] border-[#E9E9E9] text-[14px] bg-[#F5F5F5] text-black items-center"
+                            class="row grid gap-2.5 px-6 py-4 font-medium border-b border-[#E9E9E9] text-[14px] bg-[#F5F5F5] text-black items-center"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -193,7 +193,7 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid px-4 py-4 border-b-[1px] border-gray-300 text-gray-600 text-center">
+                            <div class="row grid px-4 py-4 border-b border-gray-300 text-gray-600 text-center">
                                 <p>
                                     @lang('shop::app.components.datagrid.table.no-records-available')
                                 </p>

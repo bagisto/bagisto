@@ -4,7 +4,7 @@
         <div v-if="column.type === 'boolean'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
@@ -14,7 +14,7 @@
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-[12px] font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -68,7 +68,7 @@
             <div v-if="column.options.type === 'basic'">
                 <div class="flex items-center justify-between">
                     <p
-                        class="text-[14px] font-medium leading-[24px] text-gray-800"
+                        class="text-[14px] font-medium leading-6 text-gray-800"
                         v-text="column.label"
                     >
                     </p>
@@ -78,7 +78,7 @@
                         @click="removeAppliedColumnAllValues(column.index)"
                     >
                         <p
-                            class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                            class="cursor-pointer text-[12px] font-medium leading-6 text-blue-600"
                             v-if="hasAnyAppliedColumnValues(column.index)"
                         >
                             @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -131,7 +131,7 @@
             <div v-else-if="column.options.type === 'searchable'">
                 <div class="flex items-center justify-between">
                     <p
-                        class="text-[14px] font-medium leading-[24px] text-gray-800"
+                        class="text-[14px] font-medium leading-6 text-gray-800"
                         v-text="column.label"
                     >
                     </p>
@@ -141,7 +141,7 @@
                         @click="removeAppliedColumnAllValues(column.index)"
                     >
                         <p
-                            class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                            class="cursor-pointer text-[12px] font-medium leading-6 text-blue-600"
                             v-if="hasAnyAppliedColumnValues(column.index)"
                         >
                             @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -179,7 +179,7 @@
         <div v-else-if="column.type === 'date_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
@@ -189,7 +189,7 @@
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-[12px] font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
@@ -199,7 +199,7 @@
 
             <div class="mt-4 grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -263,7 +263,7 @@
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
@@ -273,7 +273,7 @@
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-[12px] font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
@@ -283,7 +283,7 @@
 
             <div class="my-4 grid grid-cols-2 gap-[5px]">
                 <p
-                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -347,7 +347,7 @@
         <div v-else>
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-[14px] font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
@@ -357,7 +357,7 @@
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-[12px] font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
@@ -412,7 +412,7 @@
                         <ul class="list-reset">
                             <li class="p-2">
                                 <input
-                                    class="block w-full rounded-md border border-gray-300 bg-white px-2 py-1.5 text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="block w-full rounded-md border border-gray-300 bg-white px-2 py-1.5 text-[14px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     @keyup="lookUp($event)"
                                 >
                             </li>

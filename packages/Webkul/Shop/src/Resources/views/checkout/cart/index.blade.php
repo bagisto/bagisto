@@ -17,7 +17,7 @@
 
     <!-- Page Header -->
     <div class="flex flex-wrap">
-        <div class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[17px] max-lg:px-[30px] max-sm:px-[15px]">
+        <div class="w-full flex justify-between px-[60px] border border-t-0 border-b border-l-0 border-r-0 py-[17px] max-lg:px-[30px] max-sm:px-[15px]">
             <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
                 <a
                     href="{{ route('shop.home.index') }}"
@@ -70,7 +70,7 @@
                     >
                         <div class="grid gap-[25px] flex-1">
                             <!-- Cart Mass Action Container -->
-                            <div class="flex justify-between items-center pb-2.5 border-b-[1px] border-[#E9E9E9] max-sm:block">
+                            <div class="flex justify-between items-center pb-2.5 border-b border-[#E9E9E9] max-sm:block">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -130,7 +130,7 @@
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-[18px] border-b border-[#E9E9E9]">
                                     <div class="flex gap-x-5">
                                         <div class="select-none mt-[43px]">
                                             <input

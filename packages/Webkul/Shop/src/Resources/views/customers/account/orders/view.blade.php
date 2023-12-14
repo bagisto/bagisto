@@ -63,7 +63,7 @@
 
                 <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
                     <table class="w-full text-sm text-left ">
-                        <thead class="bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9] text-[14px] text-black">
+                        <thead class="bg-[#F5F5F5] border-b border-[#E9E9E9] text-[14px] text-black">
                             <tr>
                                 <th
                                     scope="col"
@@ -365,7 +365,7 @@
 
                         <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
                             <table class="w-full text-sm text-left">
-                                <thead class="bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9] text-[14px] text-black">
+                                <thead class="bg-[#F5F5F5] border-b border-[#E9E9E9] text-[14px] text-black">
                                     <tr>
                                         <th
                                             scope="col"
@@ -581,7 +581,7 @@
 
                         <div class="relative overflow-x-auto border rounded-xl mt-[30px]">
                             <table class="w-full text-sm text-left">
-                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
+                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b border-[#E9E9E9]  ">
                                     <tr>
                                         <th
                                             scope="col"
@@ -651,7 +651,7 @@
 
                         <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
                             <table class="w-full text-sm text-left">
-                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
+                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b border-[#E9E9E9]  ">
                                     <tr>
                                         <th
                                             scope="col"
@@ -882,7 +882,7 @@
             @endif
         </x-shop::tabs>
 
-        <div class="flex flex-wrap gap-x-[64px] gap-y-[30px] justify-between mt-[42px] pt-[26px] border-t-[1px] border-[#E9E9E9]">
+        <div class="flex flex-wrap gap-x-[64px] gap-y-[30px] justify-between mt-[42px] pt-[26px] border-t border-[#E9E9E9]">
             <!-- Biiling Address -->
             @if ($order->billing_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">

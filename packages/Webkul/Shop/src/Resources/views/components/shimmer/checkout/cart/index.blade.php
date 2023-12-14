@@ -3,7 +3,7 @@
 <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
     <div class="grid gap-y-[25px] flex-1">
         <!-- Cart Action -->
-        <div class="flex justify-between items-center pb-2.5 border-b-[1px] border-[#E9E9E9] max-sm:block">
+        <div class="flex justify-between items-center pb-2.5 border-b border-[#E9E9E9] max-sm:block">
             <div class="flex select-none items-center">
                 <div class="shimmer w-6 h-[25px] rounded"></div>
 
@@ -15,7 +15,7 @@
 
         <!-- Cart Items -->
         @for ($i = 0; $i < $count; $i++)
-            <div class="flex gap-x-2.5 justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
+            <div class="flex gap-x-2.5 justify-between pb-[18px] border-b border-[#E9E9E9]">
                 <div class="flex gap-x-5">
                     <div class="select-none mt-[43px]">
                         <div class="shimmer w-6 h-[25px] rounded"></div>

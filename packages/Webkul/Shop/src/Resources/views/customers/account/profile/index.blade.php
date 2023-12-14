@@ -24,7 +24,7 @@
 
     <!-- Profile Information -->
     <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
-        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b-[1px] border-[#E9E9E9]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.first-name')
             </p>
@@ -34,7 +34,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b-[1px] border-[#E9E9E9]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.last-name')
             </p>
@@ -44,7 +44,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b-[1px] border-[#E9E9E9]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.gender')
             </p>
@@ -54,7 +54,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b-[1px] border-[#E9E9E9]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.dob')
             </p>
@@ -64,7 +64,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b-[1px] border-[#E9E9E9]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-3 border-b border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.email')
             </p>

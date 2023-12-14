@@ -291,7 +291,7 @@
     <script type="text/x-template" id="v-mobile-category-template">
         <div>
             <template v-for="(category) in categories">
-                <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                <div class="flex justify-between items-center border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                     <a
                         :href="category.url"
                         class="flex items-center justify-between pb-5 mt-5"
@@ -313,7 +313,7 @@
                 >
                     <ul v-if="category.children.length">
                         <li v-for="secondLevelCategory in category.children">
-                            <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                            <div class="flex justify-between items-center ml-3 border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                 <a
                                     :href="secondLevelCategory.url"
                                     class="flex items-center justify-between pb-5 mt-5"
@@ -335,7 +335,7 @@
                             <div v-if="secondLevelCategory.category_show">
                                 <ul v-if="secondLevelCategory.children.length">
                                     <li v-for="thirdLevelCategory in secondLevelCategory.children">
-                                        <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                                        <div class="flex justify-between items-center ml-3 border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                             <a
                                                 :href="thirdLevelCategory.url"
                                                 class="flex items-center justify-between mt-5 ml-3 pb-5"

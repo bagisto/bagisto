@@ -1,6 +1,6 @@
 <div class="max-w-full h-max sticky top-[30px] w-[442px] pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
     <h2 class="shimmer w-[50%] h-[39px]"></h2>
-    <div class="grid border-b-[1px] border-[#E9E9E9] mt-10 max-sm:mt-5">
+    <div class="grid border-b border-[#E9E9E9] mt-10 max-sm:mt-5">
 
         <!-- single card -->
         <div class="flex gap-x-[15px] pb-5">

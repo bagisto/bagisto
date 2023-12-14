@@ -158,7 +158,7 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-2 border-b-[1px] border-[#E9E9E9]">
+                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-2 border-b border-[#E9E9E9]">
                         <p class="text-[14px] font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>

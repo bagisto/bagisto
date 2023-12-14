@@ -58,7 +58,7 @@
                         <template v-for="attribute in comparableAttributes">
                             <!---- Product Card -->
                             <div
-                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
+                                class="flex items-center max-w-full border-b border-[#E9E9E9]"
                                 v-if="attribute.code == 'product'"
                             >
                                 <div class="min-w-[304px] max-w-full max-sm:hidden">
@@ -84,7 +84,7 @@
 
                             <!---- Comparable Attributes -->
                             <div
-                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] last:border-none"
+                                class="flex items-center max-w-full border-b border-[#E9E9E9] last:border-none"
                                 v-else
                             >
                                 <div class="min-w-[304px] max-w-full max-sm:hidden">

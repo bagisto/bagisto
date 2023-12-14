@@ -47,7 +47,7 @@
         </script>
 
         <script type="text/x-template" id="v-product-bundle-option-item-template">
-            <div class="mt-[30px] border-b-[1px] border-[#E9E9E9] pb-[15px]">
+            <div class="mt-[30px] border-b border-[#E9E9E9] pb-[15px]">
                 <div>
                     <label class="block text-[16px] mb-[5px]">
                         @{{ option.label }}

@@ -1,7 +1,7 @@
 @props(['attributeCount' => 3, 'productCount' => 3])
 
 @for ($i = 0;  $i < $attributeCount; $i++)
-    <div class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] max-sm:border-0">
+    <div class="flex items-center max-w-full border-b border-[#E9E9E9] max-sm:border-0">
         <div class="min-w-[304px] max-w-full max-sm:hidden">
             <p class="shimmer w-[55%] h-[21px]"></p>
         </div>

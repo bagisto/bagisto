@@ -13,7 +13,7 @@
         <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
             <div class="grid gap-y-[25px] flex-1">
                 <!-- Single card -->
-                <div class="flex justify-between gap-x-2.5 pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                <div class="flex justify-between gap-x-2.5 pb-[18px] border-b border-[#E9E9E9]">
                     <div class="flex gap-x-5">
                         <div class="">
                             <div class="shimmer w-[110px] h-[110px]"></div>

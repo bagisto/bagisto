@@ -36,7 +36,7 @@
 
     <!-- Account Navigation Menus -->
     @foreach ($menu->items as $menuItem)
-        <div class="max-md:border max-md:border-t-0 max-md:border-r-[1px] max-md:border-l-[1px] max-md:border-b-[1px] max-md:border-[#E9E9E9]   max-md:rounded-md">
+        <div class="max-md:border max-md:border-t-0 max-md:border-r max-md:border-l-[1px] max-md:border-b max-md:border-[#E9E9E9]   max-md:rounded-md">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
                 <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-[25px] max-md:py-5 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
@@ -46,7 +46,7 @@
                 </div>
 
                 <!-- Account Navigation Content -->
-                <div class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-md max-md:hidden max-md:border-none accordian-content">
+                <div class="grid border border-t-0 border-r border-l-[1px] border-b border-[#E9E9E9] rounded-md max-md:hidden max-md:border-none accordian-content">
                     @if (! (bool) core()->getConfigData('general.content.shop.wishlist_option'))
                         @php
                             unset($menuItem['children']['wishlist']);
@@ -55,7 +55,7 @@
 
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
-                            <div class="flex justify-between px-[25px] py-5 border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
+                            <div class="flex justify-between px-[25px] py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
                                 <p class="flex gap-x-[15px] items-center text-[18px] font-medium">
                                     <span class="{{ $subMenuItem['icon'] }}  text-[24px]"></span>
 

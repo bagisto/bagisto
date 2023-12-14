@@ -50,7 +50,7 @@
                         <div class="grid gap-[30px] flex-1">
                             <div class="grid gap-y-[25px]">
                                 <!-- Wishlist item -->
-                                <div class="flex gap-x-2.5 justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                                <div class="flex gap-x-2.5 justify-between pb-[18px] border-b border-[#E9E9E9]">
                                     <div class="flex gap-x-5">
                                         <div class="">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
