@@ -119,14 +119,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-if="selectedCurrencies"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
 
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.currencies.index.create.title')

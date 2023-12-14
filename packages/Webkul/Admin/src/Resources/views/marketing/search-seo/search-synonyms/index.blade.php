@@ -141,7 +141,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.edit.title')
@@ -149,7 +149,7 @@
 
                             <!-- Edit Modal title -->
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.create.title')
@@ -201,7 +201,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs  text-gray-600 dark:text-gray-300 font-medium">
+                                <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
                                 </p>
 

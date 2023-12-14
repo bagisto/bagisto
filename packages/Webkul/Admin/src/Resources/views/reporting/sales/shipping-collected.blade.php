@@ -22,7 +22,7 @@
 
                     <a
                         href="{{ route('admin.reporting.sales.view', ['type' => 'shipping-collected']) }}"
-                        class="text-sm  text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.sales.index.view-details')
                     </a>

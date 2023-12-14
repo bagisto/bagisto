@@ -22,7 +22,7 @@
 
                     <a
                         href="{{ route('admin.reporting.products.view', ['type' => 'top-selling-products-by-revenue']) }}"
-                        class="text-sm  text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.products.index.view-details')
                     </a>

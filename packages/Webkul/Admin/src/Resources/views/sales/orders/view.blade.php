@@ -14,7 +14,7 @@
                 </p>
 
                 <!-- Order Status -->
-                <span class="{{ 'label-' . $order->status }} text-sm  mx-1.5">
+                <span class="{{ 'label-' . $order->status }} text-sm mx-1.5">
                     @lang("admin::app.sales.orders.view.$order->status")
                 </span>
             </div>
@@ -578,14 +578,14 @@
                                 <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.invoices.view', $invoice->id) }}"
-                                        class="text-sm  text-blue-600 transition-all hover:underline"
+                                        class="text-sm text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.view')
                                     </a>
 
                                     <a
                                         href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                                        class="text-sm  text-blue-600 transition-all hover:underline"
+                                        class="text-sm text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.download-pdf')
                                     </a>
@@ -629,7 +629,7 @@
                                 <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.shipments.view', $shipment->id) }}"
-                                        class="text-sm  text-blue-600 transition-all hover:underline"
+                                        class="text-sm text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.view')
                                     </a>
@@ -687,7 +687,7 @@
                                 <div class="flex gap-2.5">
                                     <a
                                         href="{{ route('admin.sales.refunds.view', $refund->id) }}"
-                                        class="text-sm  text-blue-600 transition-all hover:underline"
+                                        class="text-sm text-blue-600 transition-all hover:underline"
                                     >
                                         @lang('admin::app.sales.orders.view.view')
                                     </a>

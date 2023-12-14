@@ -223,7 +223,7 @@
                                 >
                                     <select
                                         name="taxrates[]"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         multiple
                                         v-model="selectedTaxRates.tax_rates"
@@ -238,7 +238,7 @@
                                 </v-field>
 
                                 <x-admin::form.control-group.label
-                                    class="!text-sm  !text-gray-600 cursor-pointer"
+                                    class="!text-sm !text-gray-600 cursor-pointer"
                                 >
                                 </x-admin::form.control-group.label>
 

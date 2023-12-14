@@ -14,11 +14,11 @@
                 <div>
                     <!-- Customer Status -->
                     @if ($customer->status == 1)
-                        <span class="label-active text-sm  mx-1.5">
+                        <span class="label-active text-sm mx-1.5">
                             @lang('admin::app.customers.customers.view.active')
                         </span>
                     @else    
-                        <span class="label-canceled text-sm  mx-1.5">
+                        <span class="label-canceled text-sm mx-1.5">
                             @lang('admin::app.customers.customers.view.inactive')
                         </span>
                     @endif
@@ -293,7 +293,7 @@
                     <!-- Invoice Table -->
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left min-w-[800px]">
-                            <thead class="text-sm  text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+                            <thead class="text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
                                 <tr>
                                     @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
                                         <th scope="col" class="px-6 py-4 font-semibold"> 

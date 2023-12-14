@@ -139,7 +139,7 @@
     
                                         <x-admin::form.control-group.label
                                             for="can_create_transaction"
-                                            class="!text-sm  !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                            class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                         >
                                             @lang('Create Transaction')
                                         </x-admin::form.control-group.label>

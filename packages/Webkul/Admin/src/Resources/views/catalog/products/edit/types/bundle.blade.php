@@ -74,7 +74,7 @@
                 </div>
 
                 <div
-                    class="secondary-button text-sm "
+                    class="secondary-button text-sm"
                     @click="resetForm(); $refs.updateCreateOptionModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.add-btn')
@@ -264,7 +264,7 @@
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
                                 <div>
-                                    <i class="icon-drag text-xl  dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
+                                    <i class="icon-drag text-xl dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
                                 </div>
 
                                 <!-- Is Default Option -->
@@ -345,7 +345,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -386,7 +386,7 @@
                 </div>
 
                 <div
-                    class="secondary-button text-sm "
+                    class="secondary-button text-sm"
                     @click="$refs['productSearch' + option.id].openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.option.add-btn')

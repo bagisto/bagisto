@@ -18,7 +18,7 @@
             </span>
 
             <div
-                class="text-sm  text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
+                class="text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
                 v-text="label"
             >
             </div>

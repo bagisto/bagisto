@@ -16,7 +16,7 @@
             <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
                 @lang('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
 
-                <span class="label-active text-sm  mx-1.5">
+                <span class="label-active text-sm mx-1.5">
                     {{ $invoice->status_label }}
                 </span>
             </p>

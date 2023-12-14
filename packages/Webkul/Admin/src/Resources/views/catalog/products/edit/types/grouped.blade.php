@@ -48,7 +48,7 @@
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl  text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
                                 
                                 <!-- Image -->
                                 <div
@@ -109,7 +109,7 @@
                                         type="text"
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -151,7 +151,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-sm "
+                    class="secondary-button text-sm"
                     @click="$refs.productSearch.openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.grouped.add-btn')

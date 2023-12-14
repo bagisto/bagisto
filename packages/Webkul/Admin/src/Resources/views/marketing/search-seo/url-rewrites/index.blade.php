@@ -150,7 +150,7 @@
                         <x-slot:header>
                             <!-- Create Modal title -->
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-if="selectedSitemap"
                             >
                                 @lang('admin::app.marketing.search-seo.url-rewrites.index.edit.title')
@@ -158,7 +158,7 @@
 
                             <!-- Edit Modal title -->
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.marketing.search-seo.url-rewrites.index.create.title')

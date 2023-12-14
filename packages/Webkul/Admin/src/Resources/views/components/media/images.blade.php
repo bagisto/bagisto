@@ -36,10 +36,10 @@
                         <div class="flex flex-col items-center">
                             <span class="icon-magic text-2xl text-blue-600"></span>
 
-                            <p class="grid text-sm  text-blue-600 font-semibold text-center">
+                            <p class="grid text-sm text-blue-600 font-semibold text-center">
                                 @lang('admin::app.components.media.images.ai-add-image-btn')
                                 
-                                <span class="text-xs ">
+                                <span class="text-xs">
                                     @lang('admin::app.components.media.images.ai-btn-info')
                                 </span>
                             </p>
@@ -55,10 +55,10 @@
                         <div class="flex flex-col items-center">
                             <span class="icon-image text-2xl"></span>
 
-                            <p class="grid text-sm  text-gray-600 dark:text-gray-300 font-semibold text-center">
+                            <p class="grid text-sm text-gray-600 dark:text-gray-300 font-semibold text-center">
                                 @lang('admin::app.components.media.images.add-image-btn')
                                 
-                                <span class="text-xs ">
+                                <span class="text-xs">
                                     @lang('admin::app.components.media.images.allowed-types')
                                 </span>
                             </p>
@@ -105,7 +105,7 @@
                     >
                         <img :src="placeholder.image">
 
-                        <p class="w-full absolute bottom-4 text-xs  text-gray-400 text-center font-semibold">
+                        <p class="w-full absolute bottom-4 text-xs text-gray-400 text-center font-semibold">
                             @{{ placeholder.label }}
                         </p>
                     </div>
@@ -121,7 +121,7 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <template v-if="! ai.images.length">
-                                    <p class="flex gap-2.5 items-center text-lg  text-gray-800 dark:text-white font-bold">
+                                    <p class="flex gap-2.5 items-center text-lg text-gray-800 dark:text-white font-bold">
                                         <span class="icon-magic text-2xl text-gray-800"></span>
 
                                         @lang('admin::app.components.media.images.ai-generation.title')
@@ -131,7 +131,7 @@
                                 <template v-else>
                                     <p class="text-lg text-gray-800 truncate dark:text-white font-bold">
                                         <span
-                                            class="align-middle mr-11 icon-arrow-right text-2xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
+                                            class="align-middle mr-1 icon-arrow-right text-2xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                                             @click="ai.images = []"
                                         ></span>
 

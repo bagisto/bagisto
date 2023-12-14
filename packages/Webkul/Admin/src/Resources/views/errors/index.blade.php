@@ -17,7 +17,7 @@
                     {{ $errorCode }}
                 </div>
 
-                <p class="mb-6 text-sm  text-gray-800">
+                <p class="mb-6 text-sm text-gray-800">
                     @lang("admin::app.errors.{$errorCode}.description")
                 </p>
 
@@ -25,7 +25,7 @@
                     <div class="flex gap-2.5 items-center">
                         <a
                             onclick="history.back()"
-                            class="text-sm  text-blue-600 font-semibold transition-all hover:underline"
+                            class="text-sm text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.go-back')
                         </a>
@@ -38,14 +38,14 @@
 
                         <a
                             href="{{ route('admin.dashboard.index') }}"
-                            class="text-sm  text-blue-600 font-semibold transition-all hover:underline"
+                            class="text-sm text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.dashboard')
                         </a>
                     </div>
                 </div>
 
-                <p class="text-sm  text-gray-800">
+                <p class="text-sm text-gray-800">
                     @lang('admin::app.errors.support', [
                         'link'  => 'mailto:support@example.com',
                         'email' => 'support@example.com',

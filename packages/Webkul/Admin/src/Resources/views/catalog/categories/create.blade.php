@@ -118,7 +118,7 @@
 
                 <!-- Description and images -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                    <p class="mb-4  text-gray-800 dark:text-white font-semibold">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
 

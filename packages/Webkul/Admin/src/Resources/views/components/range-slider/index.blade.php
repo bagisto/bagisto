@@ -9,7 +9,7 @@
                 </p>
 
                 <p
-                    class="text-sm  font-semibold"
+                    class="text-sm font-semibold"
                     v-text="rangeText"
                 >
                 </p>

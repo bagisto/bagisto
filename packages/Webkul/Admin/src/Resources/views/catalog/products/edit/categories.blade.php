@@ -10,7 +10,7 @@
     {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.controls.before', ['product' => $product]) !!}
 
     <!-- Panel Content -->
-    <div class="mb-5 text-sm  text-gray-600 dark:text-gray-300">
+    <div class="mb-5 text-sm text-gray-600 dark:text-gray-300">
 
         <v-product-categories>
             <x-admin::shimmer.tree/>

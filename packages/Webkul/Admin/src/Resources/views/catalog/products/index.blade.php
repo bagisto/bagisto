@@ -286,14 +286,14 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <p
-                                    class="text-lg  text-gray-800 dark:text-white font-bold"
+                                    class="text-lg text-gray-800 dark:text-white font-bold"
                                     v-if="! attributes.length"
                                 >
                                     @lang('admin::app.catalog.products.index.create.title')
                                 </p>
 
                                 <p
-                                    class="text-lg  text-gray-800 dark:text-white font-bold"
+                                    class="text-lg text-gray-800 dark:text-white font-bold"
                                     v-else
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
@@ -390,7 +390,7 @@
                                                 @{{ option.name }}
 
                                                 <span
-                                                    class="icon-cross text-white text-lg  ltr:ml-1.5 rtl:mr-1.5 cursor-pointer"
+                                                    class="icon-cross text-white text-lg ltr:ml-1.5 rtl:mr-1.5 cursor-pointer"
                                                     @click="removeOption(option)"
                                                 >
                                                 </span>

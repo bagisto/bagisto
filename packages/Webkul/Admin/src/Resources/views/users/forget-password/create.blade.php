@@ -22,7 +22,7 @@
                         </p>
                     </div>
 
-                    <div class="p-4 border-t border-b dark:border-gray-800">
+                    <div class="p-4 border-y dark:border-gray-800">
                         <!-- Registered Email -->
                         <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">

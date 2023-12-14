@@ -31,10 +31,10 @@
                     <div class="flex flex-col items-center">
                         <span class="icon-image text-2xl"></span>
 
-                        <p class="grid text-sm  text-gray-600 dark:text-gray-300 font-semibold text-center">
+                        <p class="grid text-sm text-gray-600 dark:text-gray-300 font-semibold text-center">
                             @lang('admin::app.components.media.videos.add-video-btn')
                             
-                            <span class="text-xs ">
+                            <span class="text-xs">
                                 @lang('admin::app.components.media.videos.allowed-types')
                             </span>
                         </p>

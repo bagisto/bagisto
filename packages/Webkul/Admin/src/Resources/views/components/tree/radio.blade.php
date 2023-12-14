@@ -20,7 +20,7 @@
             <span class="icon-radio-normal mr-1 text-2xl rounded-md cursor-pointer peer-checked:icon-radio-selected peer-checked:text-blue-600"></span>
 
             <div
-                class="text-sm  text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
+                class="text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:text-gray-800 dark:hover:text-white"
                 v-text="label"
             >
             </div>

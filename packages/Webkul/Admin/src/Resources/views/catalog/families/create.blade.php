@@ -284,7 +284,7 @@
                     <div class="">
                         <!-- Unassigned Attributes Header -->
                         <div class="flex flex-col mb-4">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold leading-6">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
                                 @lang('admin::app.catalog.families.create.unassigned-attributes')
                             </p>
 

@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
-        <p class="py-3 text-xl  text-gray-800 dark:text-white font-bold">
+        <p class="py-3 text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.customers.reviews.index.title')
         </p>
     </div>

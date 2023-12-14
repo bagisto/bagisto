@@ -87,7 +87,7 @@
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl  text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-1.5 place-content-start">
                                     <p class="text-base text-gray-800 dark:text-white font-semibold">
@@ -207,7 +207,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-sm "
+                    class="secondary-button text-sm"
                     @click="resetForm(); $refs.updateCreateLinkDrawer.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.downloadable.links.add-btn')
@@ -353,7 +353,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"
@@ -445,7 +445,7 @@
                                             <input
                                                 type="file"
                                                 name="sample_file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 ref="sample_file"
                                                 @change="uploadFile('sample_file')"
                                             />
@@ -551,7 +551,7 @@
                             <!-- Information -->
                             <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-xl  text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
+                                <i class="icon-drag text-xl text-gray-600 dark:text-gray-300 transition-all cursor-grab"></i>
 
                                 <div class="grid gap-1.5 place-content-start">
                                     <p class="text-base text-gray-800 dark:text-white font-semibold">
@@ -637,7 +637,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="secondary-button text-sm "
+                    class="secondary-button text-sm"
                     @click="resetForm(); $refs.updateCreateSampleDrawer.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.downloadable.samples.add-btn')
@@ -747,7 +747,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm  text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                                                class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"

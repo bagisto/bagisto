@@ -21,7 +21,7 @@
                 <x-admin::modal ref="magicAIModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="flex gap-2.5 items-center text-lg  text-gray-800 dark:text-white font-bold">
+                        <p class="flex gap-2.5 items-center text-lg text-gray-800 dark:text-white font-bold">
                             <span class="icon-magic text-2xl text-gray-800"></span>
 
                             @lang('admin::app.components.tinymce.ai-generation.title')
@@ -87,7 +87,7 @@
                             >
                             </x-admin::form.control-group.control>
 
-                            <span class="text-xs  text-gray-500">
+                            <span class="text-xs text-gray-500">
                                 @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
                             </span>
                         </x-admin::form.control-group>

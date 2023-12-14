@@ -12,7 +12,7 @@
         <div>
             <!-- Header -->
             <div class="flex items-center justify-between mt-1.5 py-4">
-                <p class="text-gray-800 text-base  py-2.5 font-semibold dark:text-white">
+                <p class="text-gray-800 text-base py-2.5 font-semibold dark:text-white">
                     @lang('admin::app.catalog.products.edit.price.group.title')
                 </p>
 
@@ -101,14 +101,14 @@
                         <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-if="! selectedPrice.id"
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.create-title')
                             </p>
 
                             <p
-                                class="text-lg  text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.update-title')

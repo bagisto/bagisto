@@ -44,7 +44,7 @@
                             </p>
 
                             <span
-                                class="text-xs  text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
+                                class="text-xs text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
                                 v-text="data.status_count ?? '0'"
                             >
                             </span>

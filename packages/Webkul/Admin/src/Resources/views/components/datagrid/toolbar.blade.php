@@ -35,7 +35,7 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="flex gap-1.5 justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-sm  text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    class="flex gap-1.5 justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -49,13 +49,13 @@
                                         @{{ massAction.title }}
                                     </span>
 
-                                    <i class="icon-arrow-left text-xl  -mt-px"></i>
+                                    <i class="icon-arrow-left text-xl -mt-px"></i>
                                 </a>
 
                                 <ul class="absolute ltr:left-full rtl:right-full top-0 z-10 hidden w-max min-w-[150px] border dark:border-gray-800 rounded bg-white dark:bg-gray-900 shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
-                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm  text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                            class="whitespace-no-wrap block rounded-t px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                             href="javascript:void(0);"
                                             v-text="option.label"
                                             @click="performMassAction(massAction, option)"
@@ -67,7 +67,7 @@
 
                             <li v-else>
                                 <a
-                                    class="flex gap-1.5 whitespace-no-wrap rounded-b px-4 py-2 text-sm  text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    class="flex gap-1.5 whitespace-no-wrap rounded-b px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-950"
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >
@@ -86,7 +86,7 @@
                 </x-admin::dropdown>
 
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
-                    <p class="text-sm  font-light text-gray-800 dark:text-white">
+                    <p class="text-sm font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
                         @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
                     </p>
@@ -118,7 +118,7 @@
 
                 <!-- Information Panel -->
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
-                    <p class="text-sm  font-light text-gray-800 dark:text-white">
+                    <p class="text-sm font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
                         @{{ available.meta.total }} Results
                     </p>
@@ -143,7 +143,7 @@
                             </span>
 
                             <span
-                                class="icon-dot absolute top-1.5 right-2 text-sm  font-bold"
+                                class="icon-dot absolute top-1.5 right-2 text-sm font-bold"
                                 v-if="applied.filters.columns.length > 1"
                             ></span>
                         </div>

@@ -21,7 +21,7 @@
                         </p>
 
                         <p
-                            class="text-xs  text-gray-500 dark:text-gray-300 font-medium"
+                            class="text-xs text-gray-500 dark:text-gray-300 font-medium"
                             v-text="type.info"
                         >
                         </p>
