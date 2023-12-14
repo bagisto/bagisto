@@ -112,14 +112,14 @@
             },
 
             created() {
-                if (! bookingProduct || ! bookingProduct[this.bookingType].slots || ! bookingProduct[this.bookingType].slots) {
+                if (! this.bookingProduct || ! this.bookingProduct[this.bookingType].slots || ! this.bookingProduct[this.bookingType].slots) {
                     return;
                 }
 
-                if (bookingProduct[this.bookingType].same_slot_all_days) {
-                    this.slots['same_for_week'] = bookingProduct[this.bookingType].slots;
+                if (this.bookingProduct[this.bookingType].same_slot_all_days) {
+                    this.slots['same_for_week'] = this.bookingProduct[this.bookingType].slots;
                 } else {
-                    this.slots['different_for_week'] = bookingProduct[this.bookingType].slots;
+                    this.slots['different_for_week'] = this.bookingProduct[this.bookingType].slots;
                 }
             },
 
