@@ -11,7 +11,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-categories-carousel-template">
-        <div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-[20px]" v-if="! isLoading && categories?.length">
+        <div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-5" v-if="! isLoading && categories?.length">
             <div class="relative">
                 <div
                     ref="swiperContainer"

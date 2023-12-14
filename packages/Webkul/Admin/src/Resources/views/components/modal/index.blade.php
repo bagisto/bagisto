@@ -14,11 +14,11 @@
 
     @isset($header)
         <template v-slot:header="{ toggle, isOpen }">
-            <div {{ $header->attributes->merge(['class' => 'flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] dark:border-gray-800']) }}>
+            <div {{ $header->attributes->merge(['class' => 'flex justify-between items-center gap-2.5 px-4 py-[11px] border-b-[1px] dark:border-gray-800']) }}>
                 {{ $header }}
 
                 <span
-                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
+                    class="icon-cancel-1 text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                     @click="toggle"
                 >
                 </span>
@@ -28,7 +28,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'px-[16px] py-[10px] border-b-[1px] dark:border-gray-800']) }}>
+            <div {{ $content->attributes->merge(['class' => 'px-4 py-2.5 border-b-[1px] dark:border-gray-800']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -36,7 +36,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $content->attributes->merge(['class' => 'flex justify-end px-[16px] py-[10px]']) }}>
+            <div {{ $content->attributes->merge(['class' => 'flex justify-end px-4 py-2.5']) }}>
                 {{ $footer }}
             </div>
         </template>

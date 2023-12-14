@@ -3,19 +3,19 @@
 </template>
 
 <template v-else>
-    <div class="mt-[28px] flex items-center justify-between gap-[16px] max-md:flex-wrap">
+    <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
         <!-- Left Toolbar -->
-        <div class="flex gap-x-[4px]">
+        <div class="flex gap-x-1">
             <!-- Mass Actions Panel -->
             <div
-                class="flex w-full items-center gap-x-[4px]"
+                class="flex w-full items-center gap-x-1"
                 v-if="applied.massActions.indices.length"
             >
                 <!-- Mass Action Dropdown -->
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
+                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
                             <span>
                                 @lang('shop::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
@@ -49,7 +49,7 @@
                                     <i class="icon-arrow-right !icon-arrow-left text-[24px]"></i>
                                 </a>
 
-                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] rounded-[4px] border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] rounded border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
@@ -82,7 +82,7 @@
                     </x-slot:menu>
                 </x-shop::dropdown>
 
-                <div class="pl-[10px]">
+                <div class="pl-2.5">
                     <p class="text-[14px] font-light text-gray-800">
                         <!-- Need to manage this translation. -->
                         @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
@@ -92,7 +92,7 @@
 
             <!-- Search Panel -->
             <div
-                class="flex w-full items-center gap-x-[4px]"
+                class="flex w-full items-center gap-x-1"
                 v-else
             >
                 <!-- Search Panel -->
@@ -107,7 +107,7 @@
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute rtl:left-[10px] ltr:right-[10px] top-[8px] flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute rtl:left-2.5 ltr:right-2.5 top-2 flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>
@@ -115,12 +115,12 @@
         </div>
 
         <!-- Right Toolbar -->
-        <div class="flex gap-x-[16px]">
+        <div class="flex gap-x-4">
             <!-- Items Per Page Dropdown -->
             <x-shop::dropdown position="bottom-left">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[15px] pr-[12px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[15px] pr-3	py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                         <span v-text="applied.pagination.perPage"></span>
 
                         <span class="icon-arrow-down text-[24px]"></span>
@@ -142,7 +142,7 @@
             <x-shop::drawer width="350px">
                 <x-slot:toggle>
                     <button 
-                        class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[12px] pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer"
+                        class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-3	 pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer"
                         :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
                     >
                         <span class="flex justify-between items-center gap-[5px]">

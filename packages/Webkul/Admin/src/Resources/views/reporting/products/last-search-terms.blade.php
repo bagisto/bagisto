@@ -12,9 +12,9 @@
         </template>
 
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-[16px]">
+                <div class="flex items-center justify-between mb-4">
                     <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.products.index.last-search-terms')
                     </p>
@@ -28,27 +28,27 @@
                 </div>
 
                 <!-- Content -->
-                <div class="grid gap-[16px]">
+                <div class="grid gap-4">
                     <template v-if="report.statistics.length">
-                        <div class="table-responsive grid w-full rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
+                        <div class="table-responsive grid w-full rounded bg-white dark:bg-gray-900 overflow-hidden">
                             <!-- Table Header -->
                             <div
-                                class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                                class="row grid grid-cols-4 grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
                                 style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                             >
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.reporting.products.index.search-term')
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.reporting.products.index.results')
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[10px]">
+                                <div class="flex gap-2.5">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.reporting.products.index.uses')
                                     </p>
@@ -57,7 +57,7 @@
 
                             <!-- Table Body -->
                             <div
-                                class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 style="grid-template-columns: repeat(3, minmax(0, 1fr));"
                                 v-for="record in report.statistics"
                             >
@@ -82,9 +82,9 @@
                     </template>
 
                     <!-- Date Range -->
-                    <div class="flex gap-[20px] justify-end">
-                        <div class="flex gap-[4px] items-center">
-                            <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
+                    <div class="flex gap-5 justify-end">
+                        <div class="flex gap-1 items-center">
+                            <span class="w-3.5 h-3.5 rounded-[3px] bg-emerald-400"></span>
 
                             <p class="text-[12px] dark:text-gray-300">
                                 @{{ report.date_range.current }}

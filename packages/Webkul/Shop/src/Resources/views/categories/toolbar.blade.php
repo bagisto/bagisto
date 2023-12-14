@@ -15,7 +15,7 @@
                 <x-shop::dropdown position="bottom-left">
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
-                        <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-3.5 rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                             @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
 
                             <span
@@ -38,12 +38,12 @@
                 </x-shop::dropdown>
 
                 <!-- Product Pagination Limit -->
-                <div class="flex gap-[40px] items-center">
+                <div class="flex gap-10 items-center">
                     <!-- Product Pagination Limit -->
                     <x-shop::dropdown position="bottom-right">
                         <x-slot:toggle>
                             <!-- Dropdown Toggler -->
-                            <button class="flex gap-[15px] justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-[14px] max-md:pr-[10px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                            <button class="flex gap-[15px] justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-3.5 max-md:pr-2.5 transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                                 @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
 
                                 <span
@@ -66,7 +66,7 @@
                     </x-shop::dropdown>
 
                     <!-- Listing Mode Switcher -->
-                    <div class="flex gap-[20px] items-center">
+                    <div class="flex gap-5 items-center">
                         <span
                             class="text-[24px] cursor-pointer"
                             role="button"
@@ -94,7 +94,7 @@
             <div class="md:hidden">
                 <ul>
                     <li
-                        class="p-[10px]"
+                        class="p-2.5"
                         :class="{'bg-gray-100': sort.value == filters.applied.sort}"
                         v-for="(sort, key) in filters.available.sort"
                         @click="apply('sort', sort.value)"

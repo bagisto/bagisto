@@ -8,7 +8,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-flash-item-template">
         <div
-            class="flex gap-[46px] justify-between w-max p-[12px] rounded-full"
+            class="flex gap-[46px] justify-between w-max p-3 rounded-full"
             :style="typeStyles[flash.type]['container']"
         >
             <p
@@ -16,7 +16,7 @@
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done text-[24px] ltr:mr-[10px] rtl:ml-[10px] bg-white dark:bg-gray-900 rounded-full"
+                    class="icon-toast-done text-[24px] ltr:mr-2.5 rtl:ml-2.5 bg-white dark:bg-gray-900 rounded-full"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>

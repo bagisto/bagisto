@@ -1,7 +1,7 @@
 <!-- Shipment Vue Components -->
 <v-create-shipment>
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
     >
         <span class="icon-ship text-[24px]"></span> 
 
@@ -13,7 +13,7 @@
     <script type="text/x-template" id="v-create-shipment-template">
         <div>
             <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                 @click="$refs.shipment.open()"
             >
                 <span
@@ -34,7 +34,7 @@
                 <x-admin::drawer ref="shipment">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-[12px]">
+                        <div class="grid gap-3">
                             <div class="flex justify-between items-center">
                                 <p class="text-[20px] font-medium dark:text-white">
                                     @lang('admin::app.sales.shipments.create.title')
@@ -53,8 +53,8 @@
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
                         <div class="grid">
-                            <div class="p-[16px] pt-2">
-                                <div class="grid grid-cols-2 gap-x-[20px]">
+                            <div class="p-4 pt-2">
+                                <div class="grid grid-cols-2 gap-x-5">
                                     <!-- Carrier Name -->
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
@@ -134,15 +134,15 @@
                                             $item->qty_to_ship > 0
                                             && $item->product
                                         )
-                                            <div class="flex gap-[10px] justify-between py-[16px]">
-                                                <div class="flex gap-[10px]">
+                                            <div class="flex gap-2.5 justify-between py-4">
+                                                <div class="flex gap-2.5">
                                                     @if ($item->product?->base_image_url)
                                                         <img
-                                                            class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                            class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                                             src="{{ $item->product?->base_image_url }}"
                                                         >
                                                     @else
-                                                        <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                                        <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                             
                                                             <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -151,13 +151,13 @@
                                                         </div>
                                                     @endif
                     
-                                                    <div class="grid gap-[6px] place-content-start">
+                                                    <div class="grid gap-1.5 place-content-start">
                                                         <!-- Item Name -->
                                                         <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                             {{ $item->name }}
                                                         </p>
                     
-                                                        <div class="flex flex-col gap-[6px] place-items-start">
+                                                        <div class="flex flex-col gap-1.5 place-items-start">
                                                             <p class="text-gray-600 dark:text-gray-300">
                                                                 @lang('admin::app.sales.shipments.create.amount-per-unit', [
                                                                     'amount' => core()->formatBasePrice($item->base_price),
@@ -198,8 +198,8 @@
 
                                             <!-- Information -->
                                             @foreach ($order->channel->inventory_sources as $inventorySource)
-                                                <div class="flex gap-[10px] justify-between pb-[10px] mt-[10px] border-b-[1px] border-slate-300 dark:border-gray-800">
-                                                    <div class="grid gap-[10px]">
+                                                <div class="flex gap-2.5 justify-between pb-2.5 mt-2.5 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                                    <div class="grid gap-2.5">
                                                         <!--Inventory Source -->
                                                         <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                             {{ $inventorySource->name }}
@@ -219,7 +219,7 @@
                                                         </p>
                                                     </div>
 
-                                                    <div class="flex gap-[10px] items-center">
+                                                    <div class="flex gap-2.5 items-center">
                                                         @php
                                                             $inputName = "shipment[items][$item->id][$inventorySource->id]";
                                                         @endphp

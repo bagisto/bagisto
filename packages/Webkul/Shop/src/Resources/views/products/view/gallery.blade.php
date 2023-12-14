@@ -6,7 +6,7 @@
     <script type="text/x-template" id="v-product-gallery-template">
         <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
             <!-- Product Image Slider -->
-            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[10px] max-w-[100px] flex-wrap">
+            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] flex-wrap">
                 <span
                     class="icon-arrow-up text-[24px] cursor-pointer"
                     role="button"
@@ -19,11 +19,11 @@
 
                 <div
                     ref="swiperContainer"
-                    class="flex flex-col max-h-[540px] gap-[10px] [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
+                    class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
                 >
 
                     <img 
-                        :class="`min-w-[100px] max-h-[100px] rounded-[12px] border transparent cursor-pointer ${activeIndex === index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
+                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(image, index) in media.images"
                         :src="image.small_image_url"
                         alt="{{ $product->name }}"
@@ -34,7 +34,7 @@
 
                     <!-- Need to Set Play Button  -->
                     <video 
-                        class="min-w-[100px] rounded-[12px]"
+                        class="min-w-[100px] rounded-xl"
                         v-for="(video, index) in media.videos"
                         @click="change(video, index)"
                     >
@@ -61,7 +61,7 @@
                 class="max-w-[560px] max-h-[609px]"
                 v-show="isMediaLoading"
             >
-                <div class="min-w-[560px] min-h-[607px] bg-[#E9E9E9] rounded-[12px] shimmer"></div>
+                <div class="min-w-[560px] min-h-[607px] bg-[#E9E9E9] rounded-xl shimmer"></div>
             </div>
 
             <div
@@ -69,7 +69,7 @@
                 v-show="! isMediaLoading"
             >
                 <img 
-                    class="min-w-[450px] rounded-[12px]" 
+                    class="min-w-[450px] rounded-xl" 
                     :src="baseFile.path" 
                     v-if="baseFile.type == 'image'"
                     alt="{{ $product->name }}"
@@ -79,7 +79,7 @@
                 />
 
                 <div
-                    class="min-w-[450px] rounded-[12px]"
+                    class="min-w-[450px] rounded-xl"
                     v-if="baseFile.type == 'video'"
                 >
                     <video  

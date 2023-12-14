@@ -4,11 +4,11 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-image-carousel-template">
         <div>
-            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
-                            <div class="flex flex-col gap-[4px]">
+            <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                    <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                        <div class="flex gap-x-2.5 justify-between items-center">
+                            <div class="flex flex-col gap-1">
                                 <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.slider')
                                 </p>
@@ -19,7 +19,7 @@
                             </div>
             
                             <!-- Add Slider Button -->
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 <div
                                     class="secondary-button"
                                     @click="$refs.addSliderModal.toggle()"
@@ -38,7 +38,7 @@
                         </template>
 
                         <div
-                            class="grid pt-[16px]"
+                            class="grid pt-4"
                             v-if="sliders.images.length"
                             v-for="(image, index) in sliders.images"
                         >
@@ -70,13 +70,13 @@
                         
                             <!-- Details -->
                             <div 
-                                class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                class="flex gap-2.5 justify-between py-5 cursor-pointer"
                                 :class="{
                                     'border-b-[1px] border-slate-300 dark:border-gray-800': index < sliders.images.length - 1
                                 }"
                             >
-                                <div class="flex gap-[10px]">
-                                    <div class="grid gap-[6px] place-content-start">
+                                <div class="flex gap-2.5">
+                                    <div class="grid gap-1.5 place-content-start">
                                         <p class="text-gray-600 dark:text-gray-300">
                                             <div> 
                                                 @lang('admin::app.settings.themes.edit.image-title'): 
@@ -120,8 +120,8 @@
                                 </div>
 
                                 <!-- Actions -->
-                                <div class="grid gap-[4px] place-content-start text-right">
-                                    <div class="flex gap-x-[20px] items-center">
+                                <div class="grid gap-1 place-content-start text-right">
+                                    <div class="flex gap-x-5 items-center">
                                         <p 
                                             class="text-red-600 cursor-pointer transition-all hover:underline"
                                             @click="remove(image)"
@@ -135,11 +135,11 @@
 
                         <!-- Empty Page -->
                         <div    
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                             v-else
                         >
                             <img    
-                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                 alt="add-product-to-store"
                             >
@@ -158,10 +158,10 @@
                 </div>
             
                 <!-- General -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                                 @lang('admin::app.settings.themes.edit.general')
                             </p>
                         </x-slot:header>
@@ -173,7 +173,7 @@
                                 value="image_carousel"
                             />
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
@@ -183,7 +183,7 @@
                                     name="name"
                                     value="{{ $theme->name }}"
                                     rules="required"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.name')"
                                     placeholder="@lang('admin::app.settings.themes.edit.name')"
@@ -195,7 +195,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
                                 </x-admin::form.control-group.label>
@@ -205,7 +205,7 @@
                                     name="sort_order"
                                     rules="required|min_value:1"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -261,7 +261,7 @@
                                     </v-field>
                         
                                     <label
-                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:ltr:left-0.5 after:rtl:right-0.5 peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
                                         for="status"
                                     ></label>
                                 </label>
@@ -296,7 +296,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.image-title')
                                 </x-admin::form.control-group.label>
@@ -315,7 +315,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.themes.edit.link')
                                 </x-admin::form.control-group.label>
@@ -353,11 +353,11 @@
                         </x-slot:content>
 
                         <x-slot:footer>
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <!-- Save Button -->
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                                 >
                                     @lang('admin::app.settings.themes.edit.save-btn')
                                 </button>

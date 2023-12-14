@@ -14,7 +14,7 @@
         <!-- Total Sales Section -->
         <template v-else>
             <div class="border-b dark:border-gray-800">
-                <div class="flex items-center justify-between p-[16px]">
+                <div class="flex items-center justify-between p-4">
                     <p class="text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                         @lang('admin::app.dashboard.index.customer-with-most-sales')
                     </p>
@@ -25,12 +25,12 @@
                 </div>
 
                 <div
-                    class="flex flex-col gap-[32px] p-[16px] border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="flex flex-col gap-8 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-if="report.statistics.length"
                     v-for="customer in report.statistics"
                 >
                     <a :href="customer.id ? `{{ route('admin.customers.customers.view', '') }}/${customer.id}` : '#'">
-                        <div class="flex justify-between gap-[6px]">
+                        <div class="flex justify-between gap-1.5">
                             <div class="flex flex-col">
                                 <p
                                     class="text-gray-600 dark:text-gray-300 font-semibold"
@@ -61,14 +61,14 @@
                 </div>
 
                 <div
-                    class="flex flex-col gap-[32px] p-[16px]"
+                    class="flex flex-col gap-8 p-4"
                     v-else
                 >
-                    <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
+                    <div class="grid gap-3.5 justify-center justify-items-center py-2.5">
                         <!-- Placeholder Image -->
                         <img
                             src="{{ bagisto_asset('images/empty-placeholders/customers.svg') }}"
-                            class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                            class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                         />
 
                         <!-- Add Variants Information -->

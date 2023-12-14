@@ -10,7 +10,7 @@
                 @lang('admin::app.settings.users.index.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Create User Button -->
                 @if (bouncer()->hasPermission('settings.users.users.create'))
                     <button
@@ -34,7 +34,7 @@
                     @lang('admin::app.settings.users.index.title')
                 </p>
 
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- User Create Button -->
                     @if (bouncer()->hasPermission('settings.users.users.create'))
                         <button
@@ -58,9 +58,9 @@
                 @endphp
                 <!-- DataGrid Header -->
                 <template #header="{columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
+                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
                         <div
-                            class="flex gap-[10px] cursor-pointer"
+                            class="flex gap-2.5 cursor-pointer"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
                         >
                             <p class="text-gray-600 dark:text-gray-300">
@@ -90,7 +90,7 @@
 
                         <!-- Actions -->
                         @if ($hasPermission)
-                            <p class="flex gap-[10px] justify-end">
+                            <p class="flex gap-2.5 justify-end">
                                 @lang('admin::app.components.datagrid.table.actions')
                             </p>
                         @endif
@@ -101,7 +101,7 @@
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="row grid gap-2.5 items-center px-4 py-4 border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(0, 1fr));'"
                     >
                         <!-- Id -->
@@ -109,13 +109,13 @@
 
                         <!-- User Profile -->
                         <p>
-                            <div class="flex gap-[10px] items-center">
+                            <div class="flex gap-2.5 items-center">
                                 <div
-                                    class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
+                                    class="inline-block w-9 h-9 rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
                                     v-if="record.user_img"
                                 >
                                     <img
-                                        class="w-[36px] h-[36px]"
+                                        class="w-9 h-9"
                                         :src="record.user_img"
                                         alt="record.user_name"
                                     />
@@ -126,7 +126,7 @@
                                     v-else
                                 >
                                     <button
-                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
+                                        class="flex justify-center items-center w-9 h-9 bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500"
                                         v-text="record.user_name[0].toUpperCase()"
                                     >
                                     </button>
@@ -154,7 +154,7 @@
                             <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                 <span
                                     :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -162,7 +162,7 @@
                             <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                 <span
                                     :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-md p-1.5 text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
                             </a>
@@ -204,7 +204,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.users.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -234,7 +234,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Email -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.users.index.create.email')
                                 </x-admin::form.control-group.label>
@@ -256,9 +256,9 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <div class="flex gap-[16px]">
+                            <div class="flex gap-4">
                                 <!-- Password -->
-                                <x-admin::form.control-group class="flex-1 mb-[10px]">
+                                <x-admin::form.control-group class="flex-1 mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.password')
                                     </x-admin::form.control-group.label>
@@ -282,7 +282,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Confirm Password -->
-                                <x-admin::form.control-group class="flex-1 mb-[10px]">
+                                <x-admin::form.control-group class="flex-1 mb-2.5">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.confirm-password')
                                     </x-admin::form.control-group.label>
@@ -305,10 +305,10 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="flex gap-[16px]">
+                            <div class="flex gap-4">
 
                                 <!-- Role -->
-                                <x-admin::form.control-group class="flex-1 w-full mb-[10px]">
+                                <x-admin::form.control-group class="flex-1 w-full mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.users.index.create.role')
                                     </x-admin::form.control-group.label>
@@ -321,7 +321,7 @@
                                     >
                                         <select
                                             name="role_id"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >
@@ -348,7 +348,7 @@
                                             @lang('admin::app.settings.users.index.create.status')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="gap-[10px] w-full mt-[10px]">
+                                        <div class="gap-2.5 w-full mt-2.5">
                                             <x-admin::form.control-group.control
                                                 type="switch"
                                                 name="status"
@@ -395,7 +395,7 @@
 
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button
                                     type="submit"
                                     class="primary-button"
@@ -429,7 +429,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Password -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('Enter Current Password')
                                 </x-admin::form.control-group.label>
@@ -453,7 +453,7 @@
 
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button
                                     type="submit"
                                     class="primary-button"
