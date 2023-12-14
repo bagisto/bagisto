@@ -138,9 +138,9 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
+                            <div class="flex gap-4 justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
                                 <button
-                                    class="primary-button w-full max-w-[374px] py-4 px-[43px] rounded-[18px] text-center"
+                                    class="primary-button w-full max-w-[374px] py-4 px-11 rounded-[18px] text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -148,7 +148,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center px-[30px] py-2.5 rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center px-8 py-2.5 rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -168,7 +168,7 @@
 
                 <template v-else>
                     <!-- Review Section Header -->
-                    <div class="flex gap-[15px] items-center justify-between  max-sm:flex-wrap">
+                    <div class="flex gap-4 items-center justify-between  max-sm:flex-wrap">
                         <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
                             @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
@@ -178,7 +178,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-[15px] items-center px-[15px] py-2.5 border border-navyBlue rounded-xl cursor-pointer"
+                                class="flex gap-x-[15px] items-center px-4 py-2.5 border border-navyBlue rounded-xl cursor-pointer"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-[24px]"></span>
@@ -190,7 +190,7 @@
 
                     <template v-if="reviews.length">
                         <!-- Average Rating Section -->
-                        <div class="flex gap-[15px] justify-between items-center max-w-[365px] mt-[30px] max-sm:flex-wrap">
+                        <div class="flex gap-4 justify-between items-center max-w-[365px] mt-8 max-sm:flex-wrap">
                             <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
 
                             <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
@@ -224,7 +224,7 @@
                         </div>
 
                         <button
-                            class="block mx-auto w-max mt-[60px] py-[11px] px-[43px] bg-white border border-navyBlue rounded-[18px] text-center text-navyBlue text-base font-medium"
+                            class="block mx-auto w-max mt-[60px] py-3 px-11 bg-white border border-navyBlue rounded-[18px] text-center text-navyBlue text-base font-medium"
                             v-if="links?.next"
                             @click="get()"
                         >
@@ -249,7 +249,7 @@
 
     <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
+        <div class="flex gap-5 p-6 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img
                     v-if="review.profile"

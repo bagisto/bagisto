@@ -34,17 +34,17 @@
 
         <!-- Form Container -->
 		<div
-			class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-[30px] max-md:py-[30px]"
+			class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
         >
 			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.signup-form.page-title')
             </h1>
 
-			<p class="mt-[15px] text-[#6E6E6E] text-[20px] max-sm:text-[16px]">
+			<p class="mt-4 text-[#6E6E6E] text-[20px] max-sm:text-[16px]">
                 @lang('shop::app.customers.signup-form.form-signup-text')
             </p>
 
-            <div class="mt-[60px] rounded max-sm:mt-[30px]">
+            <div class="mt-[60px] rounded max-sm:mt-8">
                 <x-shop::form :action="route('shop.customers.register.store')">
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
 
@@ -212,15 +212,15 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.newsletter_subscription.after') !!}
 
-                    <div class="flex gap-9 flex-wrap items-center mt-[30px]">
+                    <div class="flex gap-9 flex-wrap items-center mt-8">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] mx-auto m-0 ml-0 rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ml-0 rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button-title')
                         </button>
 
-                        <div class="flex gap-[15px] flex-wrap">
+                        <div class="flex gap-4 flex-wrap">
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
                         </div>
                     </div>
@@ -241,7 +241,7 @@
             </p>
 		</div>
 
-        <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
+        <p class="mt-8 mb-4 text-center text-[#6E6E6E] text-xs">
             @lang('shop::app.customers.signup-form.footer', ['current_year'=> date('Y') ])
         </p>
 	</div>

@@ -19,7 +19,7 @@
 	</div>
 
     <!-- Compare Component -->
-    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px] mt-[30px]">
+    <div class="container px-[60px] max-lg:px-8 max-sm:px-4 mt-8">
         <v-compare>
             <!---- Shimmer Effect -->
             <x-shop::shimmer.compare
@@ -98,7 +98,7 @@
                                         class="w-[311px] max-w-[311px] pr-0 p-5 max-sm:pl-0"
                                         v-for="(product, index) in items"
                                     >
-                                        <p class="hidden mb-[5px] text-[14px] font-medium max-sm:block">
+                                        <p class="hidden mb-1.5 text-[14px] font-medium max-sm:block">
                                             @{{ attribute.name ?? attribute.admin_name }} :
                                         </p>
 

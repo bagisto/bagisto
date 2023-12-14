@@ -16,9 +16,9 @@
     $customer = auth()->guard('customer')->user();
 @endphp
 
-<div class="panel-side grid grid-cols-[1fr] gap-[30px] max-w-[380px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] max-md:max-w-full">
+<div class="panel-side grid grid-cols-[1fr] gap-8 max-w-[380px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] max-md:max-w-full">
     <!-- Account Profile Hero Section -->
-    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center px-5 py-[25px] border border-[#E9E9E9] rounded-xl">
+    <div class="grid grid-cols-[auto_1fr] gap-4 items-center px-5 py-[25px] border border-[#E9E9E9] rounded-xl">
         <div class="">
             <img
                 src="{{ $customer->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -39,7 +39,7 @@
         <div class="max-md:border max-md:border-t-0 max-md:border-r max-md:border-l-[1px] max-md:border-b max-md:border-[#E9E9E9]   max-md:rounded-md">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
-                <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-[25px] max-md:py-5 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
+                <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-6 max-md:py-5 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
                     <p class="text-[20px] md:font-medium">@lang($menuItem['name'])</p>
 
                     <span class="icon-arrow-right text-[24px] md:hidden"></span>
@@ -55,7 +55,7 @@
 
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
-                            <div class="flex justify-between px-[25px] py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
+                            <div class="flex justify-between px-6 py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
                                 <p class="flex gap-x-[15px] items-center text-[18px] font-medium">
                                     <span class="{{ $subMenuItem['icon'] }}  text-[24px]"></span>
 

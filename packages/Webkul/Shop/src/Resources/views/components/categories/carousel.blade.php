@@ -11,14 +11,14 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-categories-carousel-template">
-        <div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-5" v-if="! isLoading && categories?.length">
+        <div class="container mt-[60px] max-lg:px-8 max-sm:mt-5" v-if="! isLoading && categories?.length">
             <div class="relative">
                 <div
                     ref="swiperContainer"
                     class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide max-sm:gap-4"
                 >
                     <div
-                        class="grid grid-cols-1 gap-[15px] justify-items-center min-w-[120px] max-w-[120px] font-medium"
+                        class="grid grid-cols-1 gap-4 justify-items-center min-w-[120px] max-w-[120px] font-medium"
                         v-for="category in categories"
                     >
                         <a

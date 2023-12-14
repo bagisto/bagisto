@@ -19,7 +19,7 @@
 
             @if (! $downloadableLinkPurchased->isEmpty())
                 <!-- Downloadable Products Information -->
-                <div class="relative overflow-x-auto border border-b-0  rounded-xl mt-[30px]">
+                <div class="relative overflow-x-auto border border-b-0  rounded-xl mt-8">
                     <table class="w-full text-sm text-left">
                         <thead class="border-b border-[#E9E9E9] text-[14px] text-black bg-[#F5F5F5]">
                             <tr>

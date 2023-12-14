@@ -9,7 +9,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-method-template">
-        <div class="mt-[30px]">
+        <div class="mt-8">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.shipping-method/>
@@ -26,7 +26,7 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex flex-wrap gap-[30px] mt-[15px]">
+                        <div class="flex flex-wrap gap-8 mt-4">
                             <div
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
@@ -56,7 +56,7 @@
                                     >
                                         <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
 
-                                        <p class="text-[25px] mt-[5px] font-semibold max-sm:text-[20px]">
+                                        <p class="text-[25px] mt-1.5 font-semibold max-sm:text-[20px]">
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         

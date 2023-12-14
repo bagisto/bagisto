@@ -38,11 +38,11 @@
                             {{ $address->company_name }}
                         </p>
 
-                        <div class="flex gap-[25px] items-center">
+                        <div class="flex gap-6 items-center">
 
                             @if ($address->default_address)
                                 <div 
-                                    class="block w-max m-0 ml-0 mx-auto p-[5px] rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
+                                    class="block w-max m-0 ml-0 mx-auto p-1.5 rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <p class="text-[#6E6E6E] mt-[25px]">
+                    <p class="text-[#6E6E6E] mt-6">
                         {{ $address->address1 }},
 
                         @if ($address->address2)

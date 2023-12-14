@@ -26,7 +26,7 @@
                     >
                         <!-- Dropdown Label -->
                         <h2
-                            class="mb-[15px] text-[20px] max-sm:text-[16px]"
+                            class="mb-4 text-[20px] max-sm:text-[16px]"
                             v-text="attribute.label"
                         ></h2>
                         
@@ -57,7 +57,7 @@
                     <template v-else>
                         <!-- Option Label -->
                         <h2
-                            class="mb-[15px] text-[20px] max-sm:text-[16px]"
+                            class="mb-4 text-[20px] max-sm:text-[16px]"
                             v-text="attribute.label"
                         ></h2>
 

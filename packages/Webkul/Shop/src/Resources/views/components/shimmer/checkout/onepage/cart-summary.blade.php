@@ -1,4 +1,4 @@
-<div class="max-w-full h-max sticky top-[30px] w-[442px] pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
+<div class="max-w-full h-max sticky top-8 w-[442px] pl-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
     <h2 class="shimmer w-[50%] h-[39px]"></h2>
     <div class="grid border-b border-[#E9E9E9] mt-10 max-sm:mt-5">
 
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+    <div class="grid gap-4 mt-6 mb-8">
         <div class="flex text-right justify-between">
             <p class="shimmer w-[20%] h-6"></p>
             <p class="shimmer w-[25%] h-6"></p>

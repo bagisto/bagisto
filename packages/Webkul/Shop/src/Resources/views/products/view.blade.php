@@ -64,7 +64,7 @@
     </v-product>
 
     <!-- Information Section -->
-    <div class="1180:mt-[80px]">
+    <div class="1180:mt-20">
         <x-shop::tabs position="center">
             <!-- Description Tab -->
             {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
@@ -91,7 +91,7 @@
                 :is-selected="false"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <div class="grid gap-[15px] grid-cols-[auto_1fr] max-w-max mt-[30px]">
+                    <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max mt-8">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
                                 <p class="text-[16px] text-black">
@@ -272,7 +272,7 @@
                             <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-5">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
-                                <div class="flex gap-[15px] justify-between">
+                                <div class="flex gap-4 justify-between">
                                     <h1 class="text-[30px] font-medium max-sm:text-[20px]">
                                         {{ $product->name }}
                                     </h1>
@@ -295,14 +295,14 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="flex gap-[15px] items-center mt-[15px]">
+                                <div class="flex gap-4 items-center mt-4">
                                     <x-shop::products.star-rating 
                                         :value="$avgRatings"
                                         :is-editable=false
                                     >
                                     </x-shop::products.star-rating>
 
-                                    <div class="flex gap-[15px] items-center">
+                                    <div class="flex gap-4 items-center">
                                         <p class="text-[#6E6E6E] text-[14px]">
                                             ({{ $product->approvedReviews->count() }} @lang('reviews'))
                                         </p>
@@ -314,7 +314,7 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="flex gap-2.5 items-center mt-[25px] text-[24px] !font-medium max-sm:mt-[15px] max-sm:text-[18px]">
+                                <p class="flex gap-2.5 items-center mt-6 text-[24px] !font-medium max-sm:mt-4 max-sm:text-[18px]">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
 
                                     <span class="text-[18px] text-[#6E6E6E]">
@@ -341,7 +341,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-[25px] text-[18px] text-[#6E6E6E] max-sm:text-[14px] max-sm:mt-[15px]">
+                                <p class="mt-6 text-[18px] text-[#6E6E6E] max-sm:text-[14px] max-sm:mt-4">
                                     {!! $product->short_description !!}
                                 </p>
 
@@ -357,7 +357,7 @@
 
 
                                 <!-- Product Actions and Qunatity Box -->
-                                <div class="flex gap-[15px] max-w-[470px] mt-[30px]">
+                                <div class="flex gap-4 max-w-[470px] mt-8">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -365,7 +365,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 py-[15px] px-[26px] rounded-xl"
+                                            class="gap-x-4 py-4 px-7 rounded-xl"
                                         >
                                         </x-shop::quantity-changer>
                                     @endif

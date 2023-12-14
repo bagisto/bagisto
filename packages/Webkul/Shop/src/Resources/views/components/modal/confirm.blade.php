@@ -46,7 +46,7 @@
                                         @{{ title }}
                                     </div>
 
-                                    <div class="pt-[5px] pb-5 tex-[14px] text-[#727272] text-left">
+                                    <div class="pt-1.5 pb-5 text-[14px] text-[#727272] text-left">
                                         @{{ message }}
                                     </div>
                                     

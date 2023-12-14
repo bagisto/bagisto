@@ -1,6 +1,6 @@
 <div class="grid gap-[5px]">
     @if ($prices['from']['regular']['price'] != $prices['from']['final']['price'])
-        <p class="flex gap-[15px] items-center max-sm:text-[18px]">
+        <p class="flex gap-4 items-center max-sm:text-[18px]">
             <span
                 class="text-[#6E6E6E] line-through max-sm:text-[15px]"
                 aria-label="{{ $prices['from']['regular']['formatted_price'] }}"
@@ -11,7 +11,7 @@
             {{ $prices['from']['final']['formatted_price'] }}
         </p>
     @else
-        <p class="flex gap-[15px] items-center max-sm:text-[18px]">
+        <p class="flex gap-4 items-center max-sm:text-[18px]">
             {{ $prices['from']['regular']['formatted_price'] }}
         </p>
     @endif
@@ -23,7 +23,7 @@
         <p class="text-[18px] max-sm:text-[15px]">To</p>
         
         @if ($prices['to']['regular']['price'] != $prices['to']['final']['price'])
-            <p class="flex gap-[15px] items-center max-sm:text-[18px]">
+            <p class="flex gap-4 items-center max-sm:text-[18px]">
                 <span
                     class="text-[#6E6E6E] line-through max-sm:text-[15px]"
                     aria-label="{{ $prices['to']['regular']['formatted_price'] }}"
@@ -34,7 +34,7 @@
                 {{ $prices['to']['final']['formatted_price'] }}
             </p>
         @else
-            <p class="flex gap-[15px] items-center max-sm:text-[18px]">
+            <p class="flex gap-4 items-center max-sm:text-[18px]">
                 {{ $prices['to']['regular']['formatted_price'] }}
             </p>
         @endif

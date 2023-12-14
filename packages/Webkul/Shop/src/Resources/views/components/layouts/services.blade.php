@@ -16,8 +16,8 @@
 
 <!-- Features -->
 @if ($customization)
-    <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
-        <div class="flex gap-[25px] justify-center max-lg:flex-wrap">
+    <div class="container mt-20 max-lg:px-8 max-sm:mt-8">
+        <div class="flex gap-6 justify-center max-lg:flex-wrap">
             @foreach ($customization->options['services'] as $service)
                 <div class="flex items-center gap-5 bg-white">
                     <span

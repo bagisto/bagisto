@@ -133,7 +133,7 @@
                                 </div>
 
                                 <!-- Information Panel -->
-                                <div class="flex justify-between items-center p-[25px]">
+                                <div class="flex justify-between items-center p-6">
                                     <p class="text-[12px] font-medium">
                                         Showing @{{ $parent.available.meta.from }} to @{{ $parent.available.meta.to }} of @{{ $parent.available.meta.total }} entries
                                     </p>
@@ -171,7 +171,7 @@
                                                 <input
                                                     type="text"
                                                     :value="$parent.available.meta.current_page"
-                                                    class="px-[15px] pt-1.5 pb-[5px] max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium text-center hover:bg-gray-100"
+                                                    class="px-4 pt-1.5 pb-1.5 max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium text-center hover:bg-gray-100"
                                                     @change="$parent.changePage(parseInt($event.target.value))"
                                                     aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                                 >

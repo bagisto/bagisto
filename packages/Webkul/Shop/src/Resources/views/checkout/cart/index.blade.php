@@ -17,8 +17,8 @@
 
     <!-- Page Header -->
     <div class="flex flex-wrap">
-        <div class="w-full flex justify-between px-[60px] border border-t-0 border-b border-l-0 border-r-0 py-[17px] max-lg:px-[30px] max-sm:px-[15px]">
-            <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
+        <div class="w-full flex justify-between px-[60px] border border-t-0 border-b border-l-0 border-r-0 py-4 max-lg:px-8 max-sm:px-4">
+            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="flex-auto">
-        <div class="container px-[60px] max-lg:px-[30px]">
+        <div class="container px-[60px] max-lg:px-8">
             <!-- Breadcrumbs -->
             <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
@@ -65,10 +65,10 @@
                 <!-- Cart Information -->
                 <template v-else>
                     <div 
-                        class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px] max-1060:flex-col"
+                        class="flex flex-wrap gap-[75px] mt-8 pb-8 max-1060:flex-col"
                         v-if="cart?.items?.length"
                     >
-                        <div class="grid gap-[25px] flex-1">
+                        <div class="grid gap-6 flex-1">
                             <!-- Cart Mass Action Container -->
                             <div class="flex justify-between items-center pb-2.5 border-b border-[#E9E9E9] max-sm:block">
                                 <div class="flex select-none items-center">
@@ -98,7 +98,7 @@
                                 </div>
 
                                 <div 
-                                    class="max-sm:ml-[35px] max-sm:mt-2.5"
+                                    class="max-sm:ml-9 max-sm:mt-2.5"
                                     v-if="selectedItemsCount"
                                 >
                                     <span
@@ -130,9 +130,9 @@
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-[18px] border-b border-[#E9E9E9]">
+                                <div class="flex gap-x-2.5 justify-between flex-wrap pb-5 border-b border-[#E9E9E9]">
                                     <div class="flex gap-x-5">
-                                        <div class="select-none mt-[43px]">
+                                        <div class="select-none mt-11">
                                             <input
                                                 type="checkbox"
                                                 :id="'item_' + item.id"
@@ -182,7 +182,7 @@
                                                 <!-- Details Toggler -->
                                                 <div class="">
                                                     <p
-                                                        class="flex gap-x-[15px] text-[16px] items-center cursor-pointer whitespace-nowrap"
+                                                        class="flex gap-x-1.5 text-[16px] items-center cursor-pointer whitespace-nowrap"
                                                         @click="item.option_show = ! item.option_show"
                                                     >
                                                         @lang('shop::app.checkout.cart.index.see-details')
@@ -228,7 +228,7 @@
                                             <x-shop::quantity-changer
                                                 name="quantity"
                                                 ::value="item?.quantity"
-                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-[5px] px-3.5 items-center max-w-max"
+                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-1.5 px-3.5 items-center max-w-max"
                                                 @change="setItemQuantity(item.id, $event)"
                                             >
                                             </x-shop::quantity-changer>
@@ -258,7 +258,7 @@
                             {!! view_render_event('bagisto.shop.checkout.cart.controls.before') !!}
         
                             <!-- Cart Item Actions -->
-                            <div class="flex flex-wrap gap-[30px] justify-end">
+                            <div class="flex flex-wrap gap-8 justify-end">
                                 <a
                                     class="secondary-button max-h-[55px] rounded-[18px]"
                                     href="{{ route('shop.home.index') }}"

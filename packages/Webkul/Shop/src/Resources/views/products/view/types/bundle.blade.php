@@ -7,7 +7,7 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-product-bundle-options-template">
-            <div class="mt-[30px]">
+            <div class="mt-8">
                 <v-product-bundle-option-item
                     v-for="(option, index) in options"
                     :option="option"
@@ -28,7 +28,7 @@
 
                 <ul class="grid gap-2.5 text-[16px]">
                     <li v-for="option in options">
-                        <span class="inline-block mb-[5px]">
+                        <span class="inline-block mb-1.5">
                             @{{ option.label }}
                         </span>
 
@@ -47,9 +47,9 @@
         </script>
 
         <script type="text/x-template" id="v-product-bundle-option-item-template">
-            <div class="mt-[30px] border-b border-[#E9E9E9] pb-[15px]">
+            <div class="mt-8 border-b border-[#E9E9E9] pb-4">
                 <div>
-                    <label class="block text-[16px] mb-[5px]">
+                    <label class="block text-[16px] mb-1.5">
                         @{{ option.label }}
                     </label>
 
@@ -57,7 +57,7 @@
                         <v-field
                             as="select"
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="custom-select block w-full p-3.5 pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select block w-full p-3.5 pr-9 bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
                             :rules="{'required': option.is_required}"
                             v-model="selectedProduct"
@@ -202,7 +202,7 @@
                         >
                             <select
                                 :name="'bundle_options[' + option.id + '][]'"
-                                class="block w-full p-3.5 pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                                class="block w-full p-3.5 pr-9 bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                                 :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
                                 v-model="selectedProduct"
                                 multiple
@@ -244,7 +244,7 @@
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
                         ::value="productQty"
-                        class="gap-x-4 w-max rounded-xl py-2.5 px-[17px] mt-5 !border-[#E9E9E9]"
+                        class="gap-x-4 w-max rounded-xl py-2.5 px-4 mt-5 !border-[#E9E9E9]"
                         @change="qtyUpdated($event)"
                     >
                     </x-shop::quantity-changer>

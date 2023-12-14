@@ -17,8 +17,8 @@
 
     <!-- Page Header -->
     <div class="lex flex-wrap">
-        <div class="w-full flex justify-between px-[60px] py-[17px] border border-t-0 border-b border-l-0 border-r-0 max-lg:px-[30px] max-sm:px-[15px]">
-            <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
+        <div class="w-full flex justify-between px-[60px] py-4 border border-t-0 border-b border-l-0 border-r-0 max-lg:px-8 max-sm:px-4">
+            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-[35px]">
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+    <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
         <!-- Breadcrumbs -->
         <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
 
@@ -47,7 +47,7 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-checkout-template">
-            <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
+            <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
                 <div    
                     class="overflow-y-auto"
                     ref="scrollBottom"

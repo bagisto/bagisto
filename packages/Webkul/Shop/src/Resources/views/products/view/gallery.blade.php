@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-gallery-template">
-        <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
+        <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
             <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] flex-wrap">
                 <span
@@ -98,7 +98,7 @@
         </div>
 
         <!-- Product slider Image with shimmer -->
-        <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
+        <div class="flex gap-8 1180:hidden overflow-auto scrollbar-hide">
             <x-shop::media.images.lazy
                 ::src="image.large_image_url"
                 class="min-w-[450px] max-sm:min-w-full w-[490px]" 

@@ -17,7 +17,7 @@
         </template>
 
         <template v-else>
-            <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
+            <div class="sticky top-8 h-max w-[442px] max-w-full pl-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
                 <h1 class="text-[26px] font-medium max-sm:text-[20px]">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+                <div class="grid gap-4 mt-6 mb-8">
                     <div class="flex text-right justify-between">
                         <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
                             @lang('shop::app.checkout.onepage.summary.sub-total')
@@ -133,7 +133,7 @@
                         v-else
                     >
                         <x-shop::button
-                            class="primary-button w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-[18px] max-sm:text-[14px] max-sm:px-6 max-sm:mb-10"
                             :title="trans('shop::app.checkout.onepage.summary.place-order')"
                             :loading="false"
                             ref="placeOrder"

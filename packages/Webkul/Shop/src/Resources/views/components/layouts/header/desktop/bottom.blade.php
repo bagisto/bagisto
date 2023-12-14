@@ -1,4 +1,4 @@
-<div class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b border-l-0 border-r-0 max-1180:px-[30px]">
+<div class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b border-l-0 border-r-0 max-1180:px-8">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -57,7 +57,7 @@
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full px-11 py-3.5 bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
@@ -73,7 +73,7 @@
         </div>
 
         <!-- Right Navigation Links -->
-        <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
+        <div class="flex gap-x-[35px] mt-1.5 max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             <!-- Compare -->
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
@@ -116,17 +116,17 @@
 
                         <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
-                        <div class="flex gap-4 mt-[25px]">
+                        <div class="flex gap-4 mt-6">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="primary-button block w-max px-[29px] mx-auto m-0 ml-0 rounded-[18px] text-base text-center"
+                                class="primary-button block w-max px-7 mx-auto m-0 ml-0 rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="secondary-button block w-max m-0 ml-0 mx-auto px-[29px] border-2 rounded-[18px] text-base text-center"
+                                class="secondary-button block w-max m-0 ml-0 mx-auto px-7 border-2 rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
@@ -237,7 +237,7 @@
                 </span>
 
                 <div
-                    class="w-max absolute top-[78px] max-h-[580px] max-w-[1260px] p-[35px] z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
+                    class="w-max absolute top-[78px] max-h-[580px] max-w-[1260px] p-9 z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
                     v-if="category.children.length"
                 >
                     <div class="flex aigns gap-x-[70px] justify-between">

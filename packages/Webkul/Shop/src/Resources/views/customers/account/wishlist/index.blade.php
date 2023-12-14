@@ -45,12 +45,12 @@
                     <div 
                         v-if="wishlist.length" 
                         v-for="item in wishlist"
-                        class="flex gap-[75px] flex-wrap mt-[30px] max-1060:flex-col"
+                        class="flex gap-[75px] flex-wrap mt-8 max-1060:flex-col"
                     >
-                        <div class="grid gap-[30px] flex-1">
+                        <div class="grid gap-8 flex-1">
                             <div class="grid gap-y-[25px]">
                                 <!-- Wishlist item -->
-                                <div class="flex gap-x-2.5 justify-between pb-[18px] border-b border-[#E9E9E9]">
+                                <div class="flex gap-x-2.5 justify-between pb-5 border-b border-[#E9E9E9]">
                                     <div class="flex gap-x-5">
                                         <div class="">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
@@ -127,7 +127,7 @@
                                             <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
-                                                    class="flex gap-x-2.5 items-center max-h-10 py-[5px] px-3.5 border border-navyBlue  rounded-[54px]"
+                                                    class="flex gap-x-2.5 items-center max-h-10 py-1.5 px-3.5 border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
                                                 >
                                                 </x-shop::quantity-changer>
@@ -135,7 +135,7 @@
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <button
                                                     type="button"
-                                                    class="primary-button block w-max max-h-10 py-1.5 px-[25px] rounded-[18px] text-base text-center"
+                                                    class="primary-button block w-max max-h-10 py-1.5 px-6 rounded-[18px] text-base text-center"
                                                     @click="moveToCart(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.move-to-cart')

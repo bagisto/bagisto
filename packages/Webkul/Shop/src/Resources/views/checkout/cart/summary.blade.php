@@ -6,7 +6,7 @@
         @lang('shop::app.checkout.cart.summary.cart-summary')
     </p>
 
-    <div class="grid gap-[15px] mt-[25px]">
+    <div class="grid gap-4 mt-6">
         <div class="flex justify-between text-right">
             <p class="text-[16px]">
                 @lang('shop::app.checkout.cart.summary.sub-total')
@@ -66,7 +66,7 @@
 
         <a 
             href="{{ route('shop.checkout.onepage.index') }}" 
-            class="block w-max place-self-end py-[11px] mt-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+            class="block w-max place-self-end py-3 mt-4 px-11 bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

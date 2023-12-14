@@ -113,7 +113,7 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-[26px]">
+            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
                 <div class="flex justify-between items-center h-[50px] pb-2.5 border-b border-[#E9E9E9] max-md:hidden">
                     <p class="text-[18px] font-semibold">
@@ -177,7 +177,7 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100 select-none">
+                            <div class="items-center flex gap-x-4 pl-2 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"

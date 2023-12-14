@@ -22,11 +22,11 @@
                 </div>
             </div>
 
-            <div class="mb-2 mt-[5px]">
+            <div class="mb-2 mt-1.5">
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="flex justify-between items-center gap-[15px] w-full pl-[15px] pr-3 py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <button class="flex justify-between items-center gap-4 w-full pl-[15px] pr-3 py-2 rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                             <span v-text="'@lang('admin::app.components.datagrid.filters.select')'"></span>
 
                             <span class="icon-arrow-down text-[24px]"></span>
@@ -54,7 +54,7 @@
                     <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                     <span
-                        class="icon-cross cursor-pointer text-[18px] text-white ltr:ml-[5px] rtl:mr-[5px]"
+                        class="icon-cross cursor-pointer text-[18px] text-white ltr:ml-1.5 rtl:mr-1.5"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
@@ -86,11 +86,11 @@
                     </div>
                 </div>
 
-                <div class="mb-2 mt-[5px]">
+                <div class="mb-2 mt-1.5">
                     <x-shop::dropdown>
                         <!-- Dropdown Toggler -->
                         <x-slot:toggle>
-                            <button class="flex justify-between items-center gap-[15px] w-full pl-[15px] pr-3	 py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                            <button class="flex justify-between items-center gap-4 w-full pl-[15px] pr-3	 py-2 rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                                 <span v-text="'@lang('admin::app.components.datagrid.filters.select')'"></span>
 
                                 <span class="icon-arrow-down text-[24px]"></span>
@@ -119,7 +119,7 @@
                         <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ml-1.5 cursor-pointer text-[18px] text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="mb-2 mt-[5px]">
+                <div class="mb-2 mt-1.5">
                     <v-datagrid-searchable-dropdown
                         :datagrid-id="available.id"
                         :column="column"
@@ -166,7 +166,7 @@
                         <span v-text="appliedColumnValue"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ml-1.5 cursor-pointer text-[18px] text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -244,13 +244,13 @@
 
                 <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
+                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ml-1.5 cursor-pointer text-[18px] text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -328,13 +328,13 @@
 
                 <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
+                        class="flex items-center rounded-[3px] bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ml-1.5 cursor-pointer text-[18px] text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -365,7 +365,7 @@
                 </div>
             </div>
 
-            <div class="mb-2 mt-[5px] grid">
+            <div class="mb-2 mt-1.5 grid">
                 <input
                     type="text"
                     class="mb-3 w-full rounded border px-3 py-2 text-[14px] text-gray-600 shadow transition-all hover:border-gray-400 focus:border-gray-400"
@@ -377,13 +377,13 @@
 
             <div class="mb-4 flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[3px] bg-gray-600 px-2 py-[3px] font-semibold text-white"
+                    class="flex items-center rounded-[3px] bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <span v-text="appliedColumnValue"></span>
 
                     <span
-                        class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                        class="icon-cancel ml-1.5 cursor-pointer text-[18px] text-white"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
@@ -398,7 +398,7 @@
         <x-shop::dropdown ::close-on-click="false">
             <!-- Dropdown Toggler -->
             <x-slot:toggle>
-                <button class="flex justify-between items-center gap-[15px] w-full pl-[15px] pr-3	 py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                <button class="flex justify-between items-center gap-4 w-full pl-[15px] pr-3	 py-2 rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                     <span v-text="'@lang('admin::app.components.datagrid.filters.select')'"></span>
 
                     <span class="icon-arrow-down text-[24px]"></span>

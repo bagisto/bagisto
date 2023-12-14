@@ -1,5 +1,5 @@
 <!-- Review Section Header -->
-<div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
+<div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
     <div class="shimmer w-[245px] h-[45px]"></div>
 
     <div class="shimmer w-[187px] h-[46px] rounded-xl"></div>
