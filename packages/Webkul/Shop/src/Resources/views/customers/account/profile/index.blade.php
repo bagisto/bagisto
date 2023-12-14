@@ -23,7 +23,7 @@
     </div>
 
     <!-- Profile Information -->
-    <div class="grid grid-cols-1 gap-y-[25px] mt-8">
+    <div class="grid grid-cols-1 gap-y-6 mt-8">
         <div class="grid grid-cols-[2fr_3fr] w-full px-8 py-3 border-b border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.first-name')

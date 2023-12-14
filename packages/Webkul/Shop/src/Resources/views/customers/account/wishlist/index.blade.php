@@ -45,10 +45,10 @@
                     <div 
                         v-if="wishlist.length" 
                         v-for="item in wishlist"
-                        class="flex gap-[75px] flex-wrap mt-8 max-1060:flex-col"
+                        class="flex gap-20 flex-wrap mt-8 max-1060:flex-col"
                     >
                         <div class="grid gap-8 flex-1">
-                            <div class="grid gap-y-[25px]">
+                            <div class="grid gap-y-6">
                                 <!-- Wishlist item -->
                                 <div class="flex gap-x-2.5 justify-between pb-5 border-b border-[#E9E9E9]">
                                     <div class="flex gap-x-5">
@@ -78,7 +78,7 @@
                                                 <div class="grid gap-2">
                                                     <div class="">
                                                         <p
-                                                            class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                                            class="flex gap-x-4 text-[16px] items-center cursor-pointer"
                                                             @click="item.option_show = ! item.option_show"
                                                         >
                                                             @lang('shop::app.customers.account.wishlist.see-details')

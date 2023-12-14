@@ -1,5 +1,5 @@
 <div class="container px-[60px] max-1180:px-0">
-    <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+    <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
 
         <div class="flex gap-8 1180:hidden overflow-auto scrollbar-hide">
             <div class="shimmer min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px]"></div>
@@ -67,7 +67,7 @@
             <!-- Buy Now Button -->
             <button class="shimmer w-full h-14 mt-5 rounded-xl"></button>
 
-            <div class="flex gap-[35px] items-center mt-10 max-sm:flex-wrap">
+            <div class="flex gap-9 items-center mt-10 max-sm:flex-wrap">
                 <div class="shimmer w-20 h-6"></div>
 
                 <div class="flex gap-6 items-center max-sm:flex-wrap">

@@ -65,7 +65,7 @@
                 <!-- Cart Information -->
                 <template v-else>
                     <div 
-                        class="flex flex-wrap gap-[75px] mt-8 pb-8 max-1060:flex-col"
+                        class="flex flex-wrap gap-20 mt-8 pb-8 max-1060:flex-col"
                         v-if="cart?.items?.length"
                     >
                         <div class="grid gap-6 flex-1">
@@ -127,7 +127,7 @@
                         
                             <!-- Cart Item Listing Container -->
                             <div 
-                                class="grid gap-y-[25px]" 
+                                class="grid gap-y-6" 
                                 v-for="item in cart?.items"
                             >
                                 <div class="flex gap-x-2.5 justify-between flex-wrap pb-5 border-b border-[#E9E9E9]">

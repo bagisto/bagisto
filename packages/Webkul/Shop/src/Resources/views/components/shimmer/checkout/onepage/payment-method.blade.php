@@ -5,7 +5,7 @@
     </div>
 
     <div>
-        <div class="flex flex-wrap gap-[29px] mt-8">
+        <div class="flex flex-wrap gap-7 mt-8">
             <div class="relative max-sm:max-w-full max-sm:flex-auto">
                 <span class="shimmer block absolute right-5 top-5 w-6 h-6 rounded-full"></span>
 

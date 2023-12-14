@@ -19,8 +19,8 @@
 @endphp
 
 <footer class="mt-9 bg-lightOrange  max-sm:mt-8">
-    <div class="flex gap-x-[25px] gap-y-[30px] justify-between p-[60px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-4">
-        <div class="flex gap-[85px] items-start flex-wrap max-1180:gap-6 max-1060:justify-between">
+    <div class="flex gap-x-6 gap-y-8 justify-between p-[60px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-4">
+        <div class="flex gap-24 items-start flex-wrap max-1180:gap-6 max-1060:justify-between">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
                     <ul class="grid gap-5 text-[14px]">

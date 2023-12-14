@@ -11,7 +11,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'p-[20px]']) }}>
+            <div {{ $content->attributes->merge(['class' => 'p-5']) }}>
                 {{ $content }}
             </div>
         </template>

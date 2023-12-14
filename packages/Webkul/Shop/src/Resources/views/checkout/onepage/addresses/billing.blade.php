@@ -95,7 +95,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-[15px] mt-5 text-[14px] text-[#6E6E6E] select-none">
+                    <div class="flex gap-x-1.5 mt-5 text-[14px] text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -466,7 +466,7 @@
                         <div class="mt-8 pb-4">
                             <div class="grid gap-2.5">
                                 @auth('customer')
-                                    <div class="select-none flex gap-x-[15px]">
+                                    <div class="select-none flex gap-x-4">
                                         <input 
                                             type="checkbox"
                                             name="billing[default_address]"

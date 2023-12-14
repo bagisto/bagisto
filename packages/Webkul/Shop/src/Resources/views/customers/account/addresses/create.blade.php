@@ -295,7 +295,7 @@
         {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.after') !!}
 
         <!-- Set As Default -->
-        <div class="flex gap-x-[15px] mb-4 select-none">
+        <div class="flex gap-x-4 mb-4 select-none">
             <input
                 type="checkbox"
                 name="default_address"

@@ -11,7 +11,7 @@
 <div class="gap-4 flex-wrap px-4 pt-6 hidden max-lg:flex max-lg:mb-4">
     <div class="w-full flex justify-between items-center">
         <!-- Left Navigation -->
-        <div class="flex items-center gap-x-[5px]">
+        <div class="flex items-center gap-x-1.5">
             <x-shop::drawer
                 position="left"
                 width="80%"

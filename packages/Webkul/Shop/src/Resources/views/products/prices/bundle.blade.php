@@ -1,4 +1,4 @@
-<div class="grid gap-[5px]">
+<div class="grid gap-1.5">
     @if ($prices['from']['regular']['price'] != $prices['from']['final']['price'])
         <p class="flex gap-4 items-center max-sm:text-[18px]">
             <span

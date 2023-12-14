@@ -10,8 +10,8 @@
 
 <div class="overflow-auto journal-scroll">
     @for ($i = 0;  $i < $count; $i++)
-        <div class="flex flex-wrap gap-[75px] mt-8 max-1060:flex-col">
-            <div class="grid gap-y-[25px] flex-1">
+        <div class="flex flex-wrap gap-20 mt-8 max-1060:flex-col">
+            <div class="grid gap-y-6 flex-1">
                 <!-- Single card -->
                 <div class="flex justify-between gap-x-2.5 pb-5 border-b border-[#E9E9E9]">
                     <div class="flex gap-x-5">

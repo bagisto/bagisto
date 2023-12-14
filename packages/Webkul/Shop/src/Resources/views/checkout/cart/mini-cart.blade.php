@@ -21,7 +21,7 @@
                     ></span>
 
                     <span
-                        class="absolute px-2 top-[-15px] left-[18px] py-1.5 bg-[#060C3B] rounded-[44px] text-white text-[10px] font-semibold leading-[9px]"
+                        class="absolute px-2 top-[-15px] left-5 py-1.5 bg-[#060C3B] rounded-[44px] text-white text-[10px] font-semibold leading-[9px]"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -46,7 +46,7 @@
             <x-slot:content>
                 <!-- Cart Item Listing -->
                 <div 
-                    class="grid gap-[50px] mt-9" 
+                    class="grid gap-12 mt-9" 
                     v-if="cart?.items?.length"
                 >
                     <div 
@@ -89,7 +89,7 @@
                                 <!-- Details Toggler -->
                                 <div class="">
                                     <p
-                                        class="flex gap-x-1.5 items-center text-[16px] cursor-pointer"
+                                        class="flex gap-x-[15px] items-center text-[16px] cursor-pointer"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('shop::app.checkout.cart.mini-cart.see-details')

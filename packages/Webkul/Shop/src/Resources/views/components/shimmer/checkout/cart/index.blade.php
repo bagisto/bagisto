@@ -1,7 +1,7 @@
 @props(['count' => 0])
 
-<div class="flex flex-wrap gap-[75px] mt-8 max-1060:flex-col">
-    <div class="grid gap-y-[25px] flex-1">
+<div class="flex flex-wrap gap-20 mt-8 max-1060:flex-col">
+    <div class="grid gap-y-6 flex-1">
         <!-- Cart Action -->
         <div class="flex justify-between items-center pb-2.5 border-b border-[#E9E9E9] max-sm:block">
             <div class="flex select-none items-center">

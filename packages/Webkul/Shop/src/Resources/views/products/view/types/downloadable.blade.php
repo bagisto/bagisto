@@ -30,7 +30,7 @@
 
         <div class="grid gap-4">
             @foreach ($product->downloadable_links as $link)
-                <div class="select-none flex gap-x-[15px]">
+                <div class="select-none flex gap-x-4">
                     <div class="flex">
                         <v-field
                             type="checkbox"

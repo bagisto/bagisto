@@ -10,7 +10,7 @@
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
@@ -74,7 +74,7 @@
                     </p>
 
                     <div
-                        class="flex items-center gap-x-[5px]"
+                        class="flex items-center gap-x-1.5"
                         @click="removeAppliedColumnAllValues(column.index)"
                     >
                         <p
@@ -137,7 +137,7 @@
                     </p>
 
                     <div
-                        class="flex items-center gap-x-[5px]"
+                        class="flex items-center gap-x-1.5"
                         @click="removeAppliedColumnAllValues(column.index)"
                     >
                         <p
@@ -185,7 +185,7 @@
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <div class="mt-4 grid grid-cols-2 gap-[5px]">
+            <div class="mt-4 grid grid-cols-2 gap-1.5">
                 <p
                     class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600"
                     v-for="option in column.options"
@@ -269,7 +269,7 @@
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
@@ -281,7 +281,7 @@
                 </div>
             </div>
 
-            <div class="my-4 grid grid-cols-2 gap-[5px]">
+            <div class="my-4 grid grid-cols-2 gap-1.5">
                 <p
                     class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600"
                     v-for="option in column.options"
@@ -353,7 +353,7 @@
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p

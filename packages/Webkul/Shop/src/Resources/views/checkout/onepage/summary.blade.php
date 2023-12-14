@@ -24,7 +24,7 @@
                 
                 <div class="grid mt-10 border-b border-[#E9E9E9] max-sm:mt-5">
                     <div 
-                        class="flex gap-x-[15px] pb-5"
+                        class="flex gap-x-1.5 pb-5"
                         v-for="item in cart.items"
                     >
                         <img

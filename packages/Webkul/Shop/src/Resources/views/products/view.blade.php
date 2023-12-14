@@ -264,7 +264,7 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                        <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
@@ -328,7 +328,7 @@
                                 </p>
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
-                                    <div class="grid gap-[5px] mt-2.5">
+                                    <div class="grid gap-1.5 mt-2.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
                                             <p class="text-[#6E6E6E] [&>*]:text-black">
                                                 {!! $offer !!}
@@ -409,7 +409,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="flex gap-[35px] mt-10 max-sm:flex-wrap max-sm:justify-center">
+                                <div class="flex gap-9 mt-10 max-sm:flex-wrap max-sm:justify-center">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div

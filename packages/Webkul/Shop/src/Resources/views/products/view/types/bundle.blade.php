@@ -82,7 +82,7 @@
                     <div v-if="option.type == 'radio'">
                         <div class="grid gap-2.5">
                             <span
-                                class="flex gap-x-[15px]"
+                                class="flex gap-x-4"
                                 v-if="! option.is_required"
                             >
                                 <input
@@ -109,7 +109,7 @@
                             </span>
 
                             <span
-                                class="flex gap-x-[15px] select-none"
+                                class="flex gap-x-4 select-none"
                                 v-for="(product, index) in option.products"
                             >
                                 <v-field
@@ -151,7 +151,7 @@
                     <div v-if="option.type == 'checkbox'">
                         <div class="grid gap-2.5">
                             <div
-                                class="flex gap-x-[15px] select-none"
+                                class="flex gap-x-4 select-none"
                                 v-for="(product, index) in option.products"
                             >
                                 <v-field

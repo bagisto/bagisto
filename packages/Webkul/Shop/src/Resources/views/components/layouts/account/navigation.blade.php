@@ -39,7 +39,7 @@
         <div class="max-md:border max-md:border-t-0 max-md:border-r max-md:border-l-[1px] max-md:border-b max-md:border-[#E9E9E9]   max-md:rounded-md">
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
-                <div class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-6 max-md:py-5 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
+                <div class="max-md:flex max-md:gap-x-4 max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-6 max-md:py-5 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
                     <p class="text-[20px] md:font-medium">@lang($menuItem['name'])</p>
 
                     <span class="icon-arrow-right text-[24px] md:hidden"></span>
@@ -56,7 +56,7 @@
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
                             <div class="flex justify-between px-6 py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
-                                <p class="flex gap-x-[15px] items-center text-[18px] font-medium">
+                                <p class="flex gap-x-4 items-center text-[18px] font-medium">
                                     <span class="{{ $subMenuItem['icon'] }}  text-[24px]"></span>
 
                                     @lang($subMenuItem['name'])

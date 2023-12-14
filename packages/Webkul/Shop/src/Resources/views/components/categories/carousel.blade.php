@@ -51,7 +51,7 @@
                 </div>
 
                 <span
-                    class="flex items-center justify-center absolute top-[37px] -left-[41px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px] cursor-pointer"
+                    class="flex items-center justify-center absolute top-9 -left-10 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-7 cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::components.carousel.previous')"
                     tabindex="0"
@@ -60,7 +60,7 @@
                 </span>
 
                 <span
-                    class="flex items-center justify-center absolute top-[37px] -right-[22px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px] cursor-pointer"
+                    class="flex items-center justify-center absolute top-9 -right-6 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-7 cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::components.carousel.next')"
                     tabindex="0"

@@ -18,7 +18,7 @@
     <!-- Page Header -->
     <div class="lex flex-wrap">
         <div class="w-full flex justify-between px-[60px] py-4 border border-t-0 border-b border-l-0 border-r-0 max-lg:px-8 max-sm:px-4">
-            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-[35px]">
+            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"

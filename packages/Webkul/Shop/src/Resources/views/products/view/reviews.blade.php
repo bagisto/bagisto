@@ -178,7 +178,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-[15px] items-center px-4 py-2.5 border border-navyBlue rounded-xl cursor-pointer"
+                                class="flex gap-x-4 items-center px-4 py-2.5 border border-navyBlue rounded-xl cursor-pointer"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-[24px]"></span>
@@ -202,7 +202,7 @@
 
                         <!-- Ratings By Individual Stars -->
                         <div class="flex gap-x-5 items-center">
-                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-2.5">
+                            <div class="grid gap-y-5 flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
                                     <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>

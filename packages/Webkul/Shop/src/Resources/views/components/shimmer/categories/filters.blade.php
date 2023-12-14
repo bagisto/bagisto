@@ -25,7 +25,7 @@
         </div>
 
         <div class="grid pb-3 z-10 bg-white rounded-lg">
-            <div class="flex items-center gap-x-[15px] pl-2 ">
+            <div class="flex items-center gap-x-4 pl-2 ">
                 <div class="shimmer w-5 h-5 rounded"></div>
                 
                 <div class="p-2 pl-0">
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -75,7 +75,7 @@
         </div>
 
         <div class="grid pb-3 z-10 bg-white rounded-lg">
-            <div class="flex items-center gap-x-[15px] pl-2 ">
+            <div class="flex items-center gap-x-4 pl-2 ">
                 <div class="shimmer w-5 h-5 rounded"></div>
                 
                 <div class="p-2 pl-0">
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
@@ -107,7 +107,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+            <div class="flex items-center gap-x-4 pl-2 rounded">
                 <div class="shimmer w-5 h-5 rounded"></div>
 
                 <div class="p-2 pl-0">
