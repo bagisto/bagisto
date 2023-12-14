@@ -2,7 +2,7 @@
 @if (bouncer()->hasPermission('customers.customers.edit'))
     <button 
         type="button"
-        class="flex gap-[6px] items-center justify-between px-[10px] text-blue-600 cursor-pointer transition-all hover:underline"
+        class="flex gap-1.5 items-center justify-between px-2.5 text-blue-600 cursor-pointer transition-all hover:underline"
         @click="$refs.customerEditModal.toggle()"
     >
         @lang('admin::app.customers.customers.edit.edit-btn')
@@ -33,10 +33,10 @@
             <!-- Modal Content -->
             {!! view_render_event('bagisto.admin.customers.customers.edit.before') !!}
 
-            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
-                <div class="flex gap-[16px] max-sm:flex-wrap">
+            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
+                <div class="flex gap-4 max-sm:flex-wrap">
                     <!--First Name -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group class="w-full mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.customers.customers.edit.first-name')
                         </x-admin::form.control-group.label>
@@ -59,7 +59,7 @@
                     </x-admin::form.control-group>
 
                     <!--Last Name -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group class="w-full mb-2.5">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.customers.customers.edit.last-name')
                         </x-admin::form.control-group.label>
@@ -83,7 +83,7 @@
                 </div>
 
                 <!-- Email -->
-                <x-admin::form.control-group class="mb-[10px]">
+                <x-admin::form.control-group class="mb-2.5">
                     <x-admin::form.control-group.label class="required">
                         @lang('admin::app.customers.customers.edit.email')
                     </x-admin::form.control-group.label>
@@ -105,9 +105,9 @@
                     </x-admin::form.control-group.error>
                 </x-admin::form.control-group>
 
-                <div class="flex gap-[16px] max-sm:flex-wrap">
+                <div class="flex gap-4 max-sm:flex-wrap">
                     <!-- Phone -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group class="w-full mb-2.5">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.customers.customers.edit.contact-number')
                         </x-admin::form.control-group.label>
@@ -130,7 +130,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Date -->
-                    <x-admin::form.control-group class="w-full mb-[10px]">
+                    <x-admin::form.control-group class="w-full mb-2.5">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.customers.customers.edit.date-of-birth')
                         </x-admin::form.control-group.label>
@@ -152,7 +152,7 @@
                     </x-admin::form.control-group>
                 </div>
 
-                <div class="flex gap-[16px] max-sm:flex-wrap">
+                <div class="flex gap-4 max-sm:flex-wrap">
                     <!-- Gender -->
                     <x-admin::form.control-group class="w-full">
                         <x-admin::form.control-group.label class="required">
@@ -215,9 +215,9 @@
                     </x-admin::form.control-group>
                 </div>
 
-                <div class="flex gap-[16px] max-sm:flex-wrap">
+                <div class="flex gap-4 max-sm:flex-wrap">
                     <!-- Customer Status -->
-                    <x-admin::form.control-group class="flex gap-[10px] w-full mb-[10px]">
+                    <x-admin::form.control-group class="flex gap-2.5 w-full mb-2.5">
                         <x-admin::form.control-group.control
                             type="checkbox"
                             name="status"
@@ -242,7 +242,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Customer Suspended Status -->
-                    <x-admin::form.control-group class="flex gap-[10px] w-full mb-[10px]">
+                    <x-admin::form.control-group class="flex gap-2.5 w-full mb-2.5">
                         <x-admin::form.control-group.control
                             type="checkbox"
                             name="is_suspended"
@@ -273,7 +273,7 @@
 
         <x-slot:footer>
             <!-- Modal Submission -->
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <button 
                     type="submit"
                     class="primary-button"

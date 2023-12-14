@@ -5,7 +5,7 @@
     </x-slot>
 
 	<div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
-		<div class="grid gap-y-[20px] place-items-center">
+		<div class="grid gap-y-5 place-items-center">
 			<img 
 				class="" 
 				src="{{ bagisto_asset('images/thank-you.png') }}" 

@@ -2,11 +2,11 @@
     <span class="shimmer w-[45px] h-[45px]"></span>
 
     <div class="flex items-center space-x-3">
-        <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-        <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-        <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-        <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
-        <span class="shimmer w-[32px] h-[32px] rounded-full"></span>
+        <span class="shimmer w-8 h-8 rounded-full"></span>
+        <span class="shimmer w-8 h-8 rounded-full"></span>
+        <span class="shimmer w-8 h-8 rounded-full"></span>
+        <span class="shimmer w-8 h-8 rounded-full"></span>
+        <span class="shimmer w-8 h-8 rounded-full"></span>
     </div>
 
     <span class="shimmer w-[132px] h-[18px]"></span>

@@ -14,9 +14,9 @@
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid gap-[20px] grid-cols-2 mt-[15px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                    <div class="grid gap-5 grid-cols-2 mt-[15px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                         <div 
-                            class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
+                            class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses"
                         >
                             <v-field
@@ -33,14 +33,14 @@
                             />
 
                             <label 
-                                class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>
 
                             <label 
                                 :for="'billing_address_id_' + address.id"
-                                class="block p-[20px] rounded-[12px] cursor-pointer"
+                                class="block p-5 rounded-xl cursor-pointer"
                             >
                                 <div class="flex justify-between items-center">
                                     <p class="text-[16px] font-medium">
@@ -71,16 +71,16 @@
                         </div>
 
                         <div 
-                            class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
+                            class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap"
                             @click="showNewBillingAddressForm"
                         >
                             <div
-                                class="flex gap-x-[10px] items-center cursor-pointer"
+                                class="flex gap-x-2.5 items-center cursor-pointer"
                                 role="button"
                                 tabindex="0"
                             >
                                 <span
-                                    class="icon-plus p-[10px] border border-black rounded-full text-[30px]"
+                                    class="icon-plus p-2.5 border border-black rounded-full text-[30px]"
                                     role="presentation"
                                 ></span>
 
@@ -95,7 +95,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#6E6E6E] select-none">
+                    <div class="flex gap-x-[15px] mt-5 text-[14px] text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -203,9 +203,9 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.company_name.after') !!}
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.first-name')
                                 </x-shop::form.control-group.label>
         
@@ -229,7 +229,7 @@
 
 
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.last-name')
                                 </x-shop::form.control-group.label>
         
@@ -253,7 +253,7 @@
                         </div>
     
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.email')
                             </x-shop::form.control-group.label>
     
@@ -276,7 +276,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.email.after') !!}
     
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.street-address')
                             </x-shop::form.control-group.label>
     
@@ -312,11 +312,11 @@
     
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.address1.after') !!}
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
-                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.billing.country')
                                 </x-shop::form.control-group.label>
         
@@ -346,7 +346,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.country.after') !!}
     
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.billing.state')
                                 </x-shop::form.control-group.label>
         
@@ -391,9 +391,9 @@
 
                         </div>
     
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.billing.city')
                                 </x-shop::form.control-group.label>
     
@@ -416,7 +416,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.city.after') !!}
         
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.billing.postcode')
                                 </x-shop::form.control-group.label>
         
@@ -441,7 +441,7 @@
                         </div>
 
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.telephone')
                             </x-shop::form.control-group.label>
                             
@@ -464,7 +464,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
 
                         <div class="mt-[30px] pb-[15px]">
-                            <div class="grid gap-[10px]">
+                            <div class="grid gap-2.5">
                                 @auth('customer')
                                     <div class="select-none flex gap-x-[15px]">
                                         <input 

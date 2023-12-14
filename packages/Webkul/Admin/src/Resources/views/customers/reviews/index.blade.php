@@ -3,7 +3,7 @@
         @lang('admin::app.customers.reviews.index.title')
     </x-slot:title>
 
-    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="py-[11px] text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.customers.reviews.index.title')
         </p>
@@ -32,14 +32,14 @@
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
-                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                        <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800">
                             <div
-                                class="flex gap-[10px] items-center"
+                                class="flex gap-2.5 items-center"
                                 v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
                             >
                                 @if ($hasPermission)
                                     <label
-                                        class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                                        class="flex gap-1 w-max items-center cursor-pointer select-none"
                                         for="mass_action_select_all_records"
                                         v-if="! index"
                                     >
@@ -53,7 +53,7 @@
                                         >
                             
                                         <span
-                                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                            class="icon-uncheckbox cursor-pointer rounded-md text-[24px]"
                                             :class="[
                                                 applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                                     applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -102,11 +102,11 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading, performAction }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-4 py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 @if ($hasPermission)
                                     <input 
                                         type="checkbox" 
@@ -119,12 +119,12 @@
                                     >
                         
                                     <label 
-                                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                        class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                         :for="`mass_action_select_record_${record.product_review_id}`"
                                     ></label>
                                 @endif
 
-                                <div class="flex flex-col gap-[6px]">
+                                <div class="flex flex-col gap-1.5">
                                     <p
                                         class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                         v-text="record.customer_full_name"
@@ -141,7 +141,7 @@
                             </div>
 
                             <!-- Rating, Date, Id Section -->
-                            <div class="flex flex-col gap-[6px]">
+                            <div class="flex flex-col gap-1.5">
                                 <div class="flex">
                                     <x-admin::star-rating 
                                         :is-editable="false"
@@ -164,7 +164,7 @@
                             </div>
 
                             <!-- Title, Description -->
-                            <div class="flex flex-col gap-[6px]">
+                            <div class="flex flex-col gap-1.5">
                                 <p
                                     class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                     v-text="record.title"
@@ -183,7 +183,7 @@
                                 <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                     <span
                                         :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
+                                        class="text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>
                                 </a>
@@ -193,7 +193,7 @@
                                     v-if="record.actions.find(action => action.title === 'Edit')"
                                     @click="edit(record.actions.find(action => action.title === 'Edit')?.url)"
                                 >
-                                    <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
+                                    <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
                                     </span>
                                 </a>
                             </div>
@@ -210,7 +210,7 @@
             {!! view_render_event('admin.customers.reviews.list.after') !!}
 
             <!-- Drawer content -->
-            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -235,8 +235,8 @@
 
                             <!-- Drawer Content -->
                             <x-slot:content>
-                                <div class="flex flex-col gap-[16px] px-[5px] py-[10px]">
-                                    <div class="grid grid-cols-2 gap-[16px]">
+                                <div class="flex flex-col gap-4 px-[5px] py-2.5">
+                                    <div class="grid grid-cols-2 gap-4">
                                         <div class="">
                                             <!-- Customer Name -->
                                             <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
@@ -375,14 +375,14 @@
                                             <div v-for="image in review.images" :key="image.id">
                                                 <img
                                                     v-if="image.type === 'image'"
-                                                    class="h-[60px] w-[60px] rounded-[4px]"
+                                                    class="h-[60px] w-[60px] rounded"
                                                     :src="image.url"
                                                     alt="Image"
                                                 />
 
                                                 <video
                                                     v-else
-                                                    class="h-[60px] w-[60px] rounded-[4px]"
+                                                    class="h-[60px] w-[60px] rounded"
                                                     controls
                                                     autoplay
                                                 >

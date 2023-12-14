@@ -3,12 +3,12 @@
         @lang('admin::app.marketing.promotions.catalog-rules.index.title')
     </x-slot:title>
 
-    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+    <div class="flex gap-4 justify-between items-center mt-3 max-sm:flex-wrap">
         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.marketing.promotions.catalog-rules.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             @if (bouncer()->hasPermission('marketing.promotions.catalog-rules.create'))
                 <a 
                     href="{{ route('admin.marketing.promotions.catalog_rules.create') }}"

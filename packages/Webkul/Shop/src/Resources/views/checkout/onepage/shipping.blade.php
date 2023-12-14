@@ -45,13 +45,13 @@
                                     >
 
                                     <label 
-                                        class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                         :for="rate.method"
                                     >
                                     </label>
 
                                     <label 
-                                        class="block p-[20px] border border-[#E9E9E9] rounded-[12px] cursor-pointer"
+                                        class="block p-5 border border-[#E9E9E9] rounded-xl cursor-pointer"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
@@ -60,7 +60,7 @@
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         
-                                        <p class="text-[12px] mt-[10px] font-medium">
+                                        <p class="text-[12px] mt-2.5 font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                         </p>
                                     </label>

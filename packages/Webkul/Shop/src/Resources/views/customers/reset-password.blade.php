@@ -15,7 +15,7 @@
         @lang('shop::app.customers.reset-password.title')
     </x-slot>
 
-    <div class="container mt-20 max-1180:px-[20px]">
+    <div class="container mt-20 max-1180:px-5">
         <!-- Company Logo -->
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
@@ -34,7 +34,7 @@
 
         <!-- Form Container -->
         <div
-            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-[30px] max-md:py-[30px]"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.reset-password.title')
@@ -129,9 +129,9 @@
 
                     {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.after') !!}
 
-                    <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
+                    <div class="flex gap-9 flex-wrap mt-[30px] items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] m-0 ml-[0px] mx-auto rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] m-0 ml-0 mx-auto rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.reset-password.submit-btn-title')

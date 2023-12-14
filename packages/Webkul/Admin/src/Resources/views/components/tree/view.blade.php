@@ -205,7 +205,7 @@
                                     this.generateToggleIconComponent({
                                         class: [
                                             typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-sort-down' : '',
-                                            'text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
+                                            'text-[20px] rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
                                         ],
                                     }),
 

@@ -4,12 +4,12 @@
         @lang('admin::app.sales.orders.index.title')
     </x-slot:title>
 
-    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="py-[11px] text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.sales.orders.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}"></x-admin::datagrid.export>
         </div>
@@ -19,9 +19,9 @@
         <!-- Datagrid Header -->
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
              <template v-if="! isLoading">
-                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
+                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800">
                     <div
-                        class="flex gap-[10px] items-center select-none"
+                        class="flex gap-2.5 items-center select-none"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
@@ -61,13 +61,13 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                    class="row grid grid-cols-4 px-4 py-2.5 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                     v-for="record in records"
                 >
                     <!-- Order Id, Created, Status Section -->
                     <div class="">
-                        <div class="flex gap-[10px]">
-                            <div class="flex flex-col gap-[6px]">
+                        <div class="flex gap-2.5">
+                            <div class="flex flex-col gap-1.5">
                                 <p
                                     class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 >
@@ -97,7 +97,7 @@
 
                     <!-- Total Amount, Pay Via, Channel -->
                     <div class="">
-                        <div class="flex flex-col gap-[6px]">
+                        <div class="flex flex-col gap-1.5">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @{{ $admin.formatPrice(record.base_grand_total) }}
                             </p>
@@ -116,7 +116,7 @@
 
                     <!-- Custoemr, Email, Location Section -->
                     <div class="">
-                        <div class="flex flex-col gap-[6px]">
+                        <div class="flex flex-col gap-1.5">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white"
                                 v-text="record.full_name"
@@ -138,8 +138,8 @@
                     </div>
 
                     <!-- Imgaes Section -->
-                    <div class="flex gap-x-[16px] justify-between items-center">
-                        <div class="flex flex-col gap-[6px]">
+                    <div class="flex gap-x-4 justify-between items-center">
+                        <div class="flex flex-col gap-1.5">
                             <p
                                 v-if="record.is_closure"
                                 class="text-gray-600 dark:text-gray-300"
@@ -157,7 +157,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                            <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
+                            <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                         </a>
                     </div>
                 </div>

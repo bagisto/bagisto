@@ -1,7 +1,7 @@
 <!-- Invoice Create Vue Component -->
 <v-create-invoices>
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+        class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
     >
         <span class="icon-sales text-[24px]"></span> 
 
@@ -13,7 +13,7 @@
     <script type="text/x-template" id="v-create-invoices-template">
         <div>
             <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                     @click="$refs.invoice.open()"
                 >
                     <span
@@ -33,7 +33,7 @@
                 <x-admin::drawer ref="invoice">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-[12px]">
+                        <div class="grid gap-3">
                             <div class="flex justify-between items-center">
                                 <p class="text-[20px] font-medium dark:text-white">
                                     @lang('admin::app.sales.invoices.create.new-invoice')         
@@ -52,18 +52,18 @@
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
                         <div class="grid">
-                            <div class="p-[16px] !pt-0">
+                            <div class="p-4 !pt-0">
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
-                                            <div class="flex gap-[10px]">
+                                        <div class="flex gap-2.5 justify-between py-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                            <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
-                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                                         src="{{ $item->product?->base_image_url }}"
                                                     />
                                                 @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
                                                         <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
@@ -72,12 +72,12 @@
                                                     </div>
                                                 @endif
                 
-                                                <div class="grid gap-[6px] place-content-start">
+                                                <div class="grid gap-1.5 place-content-start">
                                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 
-                                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                                    <div class="flex flex-col gap-1.5 place-items-start">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.invoices.create.amount-per-unit', [
                                                                 'amount' => core()->formatBasePrice($item->base_price),
@@ -101,7 +101,7 @@
                                             </div>
 
                                             <!-- Quantity Details -->
-                                            <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group class="mb-2.5">
                                                 <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.sales.invoices.create.qty-to-invoiced')
                                                 </x-admin::form.control-group.label>
@@ -127,7 +127,7 @@
                                     @endforeach
 
                                     <!-- Create Transaction Button -->
-                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                    <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             name="can_create_transaction"
