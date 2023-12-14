@@ -17,7 +17,7 @@
                     <div class="grid gap-[20px] grid-cols-2 mt-[15px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                         <div 
                             class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
-                            v-for="(address, index) in addresses"
+                            v-for="(address, index) in addresses.billing"
                         >
                             <v-field
                                 type="radio"
@@ -95,7 +95,10 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#6E6E6E] select-none">
+                    <div 
+                        class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#6E6E6E] select-none"
+                        v-if="addresses.billing.length"
+                    >
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -120,7 +123,7 @@
 
 
                     <template v-if="meta.valid">
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.length">
+                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.billing.length">
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
                                     class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
@@ -164,7 +167,7 @@
                     <a 
                         class="flex justify-end"
                         href="javascript:void(0)" 
-                        v-if="addresses.length > 0"
+                        v-if="addresses.billing.length > 0"
                         @click="forms.billing.isNew = ! forms.billing.isNew"
                     >
                         <span class="icon-arrow-left text-[24px]"></span>
