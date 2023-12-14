@@ -269,7 +269,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="w-[25px] h-[25px] mx-auto rounded-md"
+                                                                class="w-[25px] h-[25px] rounded-md"
                                                                 :style="{ background: element.params.swatch_value }"
                                                             >
                                                             </div>
@@ -745,7 +745,7 @@
 
                         <!-- Modal Content !-->
                         <x-slot:content>
-                            <div class="grid grid-cols-3 px-4 py-2.5">
+                            <div class="grid">
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
@@ -847,7 +847,6 @@
 
                         <!-- Modal Footer !-->
                         <x-slot:footer>
-                            <!-- Save Button -->
                             <button
                                 type="submit"
                                 class="primary-button"
