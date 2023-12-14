@@ -12,8 +12,8 @@
     </x-slot:title>
 
     <!-- Breadcrumb -->
-    <div class="flex justify-center mt-[20px] max-lg:hidden">
-		<div class="flex gap-x-[10px] items-center">
+    <div class="flex justify-center mt-5 max-lg:hidden">
+		<div class="flex gap-x-2.5 items-center">
             <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
                         </h1>
 
                         <div
-                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
+                            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -67,17 +67,17 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="hidden absolute top-[60px] right-[20px] justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            class="hidden absolute top-[60px] right-5 justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
                                             @click="remove(product.id)"
                                         ></span>
 
-                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"></x-shop::products.card>
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-5 max-sm:pl-0"></x-shop::products.card>
                                     </div>
                                 </div>
                             </div>
@@ -93,9 +93,9 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
-                                        class="w-[311px] max-w-[311px] pr-0 p-[20px] max-sm:pl-0"
+                                        class="w-[311px] max-w-[311px] pr-0 p-5 max-sm:pl-0"
                                         v-for="(product, index) in items"
                                     >
                                         <p class="hidden mb-[5px] text-[14px] font-medium max-sm:block">

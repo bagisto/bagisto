@@ -3,12 +3,12 @@
         @lang('admin::app.catalog.products.index.title')
     </x-slot:title>
 
-    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="text-[20px] text-gray-800 dark:text-white font-bold">
             @lang('admin::app.catalog.products.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
             <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}"></x-admin::datagrid.export>
 
@@ -40,14 +40,14 @@
 
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
                     <div
-                        class="flex gap-[10px] items-center select-none"
+                        class="flex gap-2.5 items-center select-none"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
                     >
                         @if ($hasPermission)
                             <label
-                                class="flex gap-[4px] items-center w-max cursor-pointer select-none"
+                                class="flex gap-1 items-center w-max cursor-pointer select-none"
                                 for="mass_action_select_all_records"
                                 v-if="! index"
                             >
@@ -61,7 +61,7 @@
                                 >
 
                                 <span
-                                    class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                    class="icon-uncheckbox cursor-pointer rounded-md text-[24px]"
                                     :class="[
                                         applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                             applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -110,11 +110,11 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-4 py-2.5 border-b-[1px] dark:border-gray-800   transition-all hover:bg-gray-50 dark:hover:bg-gray-950  "
                     v-for="record in records"
                 >
                     <!-- Name, SKU, Attribute Family Columns -->
-                    <div class="flex gap-[10px]">
+                    <div class="flex gap-2.5">
                         @if ($hasPermission)
                             <input
                                 type="checkbox"
@@ -127,12 +127,12 @@
                             >
 
                             <label
-                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                class="icon-uncheckbox rounded-md text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.product_id}`"
                             ></label>
                         @endif
 
-                        <div class="flex flex-col gap-[6px]">
+                        <div class="flex flex-col gap-1.5">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="record.name"
@@ -154,23 +154,23 @@
                     </div>
 
                     <!-- Image, Price, Id, Stock Columns -->
-                    <div class="flex gap-[6px]">
+                    <div class="flex gap-1.5">
                         <div class="relative">
                             <template v-if="record.base_image">
                                 <img
-                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded"
                                     :src=`{{ Storage::url('') }}${record.base_image}`
                                 />
 
                                 <span
-                                    class="absolute bottom-[1px] ltr:left-[1px] rtl:right-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
+                                    class="absolute bottom-px ltr:left-px rtl:right-px text-[12px] font-bold text-white bg-darkPink rounded-full px-1.5"
                                     v-text="record.images_count"
                                 >
                                 </span>
                             </template>
 
                             <template v-else>
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -180,7 +180,7 @@
                             </template>
                         </div>
 
-                        <div class="flex flex-col gap-[6px]">
+                        <div class="flex flex-col gap-1.5">
                             <p
                                 class="text-[16px] text-gray-800 dark:text-white font-semibold"
                                 v-text="$admin.formatPrice(record.price)"
@@ -221,8 +221,8 @@
                     </div>
 
                     <!-- Status, Category, Type Columns -->
-                    <div class="flex gap-x-[16px] justify-between items-center">
-                        <div class="flex flex-col gap-[6px]">
+                    <div class="flex gap-x-4 justify-between items-center">
+                        <div class="flex flex-col gap-1.5">
                             <p :class="[record.status ? 'label-active': 'label-info']">
                                 @{{ record.status ? "@lang('admin::app.catalog.products.index.datagrid.active')" : "@lang('admin::app.catalog.products.index.datagrid.disable')" }}
                             </p>
@@ -242,11 +242,11 @@
 
                         <div class="flex gap-[5px] items-center">
                             <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
-                                <span class="icon-copy text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-copy text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                             
                             <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
+                                <span class="icon-sort-right text-[24px] ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                             </a>
                         </div>
                     </div>
@@ -350,7 +350,7 @@
                                     </x-admin::form.control-group>
 
                                     <!-- SKU -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-2.5">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.index.create.sku')
                                         </x-admin::form.control-group.label>
@@ -373,7 +373,7 @@
                                     {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
 
                                     <div
-                                        class="mb-[10px]"
+                                        class="mb-2.5"
                                         v-for="attribute in attributes"
                                     >
                                         <label
@@ -382,9 +382,9 @@
                                         >
                                         </label>
 
-                                        <div class="flex flex-wrap gap-[4px] min-h-[38px] p-[6px] border dark:border-gray-800 rounded-[6px]">
+                                        <div class="flex flex-wrap gap-1 min-h-[38px] p-1.5 border dark:border-gray-800 rounded-md">
                                             <p
-                                                class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[4px] text-white font-semibold"
+                                                class="flex items-center py-[3px] px-2 bg-gray-600 rounded text-white font-semibold"
                                                 v-for="option in attribute.options"
                                             >
                                                 @{{ option.name }}
@@ -404,7 +404,7 @@
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button
                                         type="button"
                                         class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "

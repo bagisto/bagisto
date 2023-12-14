@@ -3,11 +3,11 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-static-content-template">
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            <div class="flex flex-col gap-[8px] flex-1 min-w-[931px] max-xl:flex-auto">
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
-                    <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
-                        <div class="flex flex-col gap-[4px]">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+            <div class="flex flex-col gap-2 flex-1 min-w-[931px] max-xl:flex-auto">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                    <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
+                        <div class="flex flex-col gap-1">
                             <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.static-content')
                             </p>
@@ -18,7 +18,7 @@
                         </div>
 
                         <div
-                            class="flex gap-[10px]"
+                            class="flex gap-2.5"
                             v-if="isHtmlEditorActive"
                         >
                             <!-- Hidden Input Filed for upload images -->
@@ -41,13 +41,13 @@
                         </div>
                     </div>
                     
-                    <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
+                    <div class="text-sm font-medium text-center pt-4 text-gray-500">
                         <div class="tabs">
-                            <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
+                            <div class="flex gap-[15px] mb-[15px] pt-2 border-b-[2px] max-sm:hidden">
                                 <!-- HTML Tab Header -->
                                 <p @click="switchEditor('v-html-editor-theme', 1)">
                                     <div
-                                        class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
                                         :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.html')
@@ -57,7 +57,7 @@
                                 <!-- CSS Tab Editor -->
                                 <p @click="switchEditor('v-css-editor-theme', 0);">
                                     <div
-                                        class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
                                         :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.css')
@@ -67,7 +67,7 @@
                                 <!-- Preview Tab Editor -->
                                 <p @click="switchEditor('v-static-content-previewer', 0);">
                                     <div
-                                        class="transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
                                         :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.preview')
@@ -102,10 +102,10 @@
             </div>
 
             <!-- General -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
                     </x-slot:header>
@@ -113,7 +113,7 @@
                     <x-slot:content>
                         <input type="hidden" name="type" value="static_content">
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
                             </x-admin::form.control-group.label>
@@ -122,7 +122,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ $theme->name }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.name')"
@@ -136,7 +136,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
                             </x-admin::form.control-group.label>
@@ -146,7 +146,7 @@
                                 name="sort_order"
                                 value="{{ $theme->sort_order }}"
                                 rules="required|min_value:1"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 label="@lang('admin::app.settings.themes.edit.sort-order')"
                                 placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -202,7 +202,7 @@
                                 </v-field>
                     
                                 <label
-                                    class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                    class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:ltr:left-0.5 after:rtl:right-0.5 peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
                                     for="status"
                                 ></label>
                             </label>

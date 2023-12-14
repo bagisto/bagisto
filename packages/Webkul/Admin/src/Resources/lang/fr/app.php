@@ -692,6 +692,7 @@ return [
                             'edit-sku'            => 'Modifier la référence',
                             'edit-status'         => 'Modifier le statut',
                             'edit-weight'         => 'Modifier le poids',
+                            'name'                => 'Nom',
                             'price'               => 'Prix',
                             'remove-images'       => 'Supprimer les images',
                             'remove-variants'     => 'Supprimer les variantes',

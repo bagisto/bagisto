@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-[20px] bg-white border-t-[1px] border-[#E9E9E9] z-50"
+    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-5 bg-white border-t-[1px] border-[#E9E9E9] z-50"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,7 +26,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-[16px] font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.filter = true"
             >
                 <span class="icon-filter-1 text-[24px]"></span>
@@ -37,7 +37,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
+            <div class="flex justify-between items-center pb-5 border-b-[1px] border-[#E9E9E9]">
                 <p class="text-[18px] font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
@@ -65,7 +65,7 @@
     </x-shop::drawer>
 
     <!-- Seperator -->
-    <span class="h-[20px] w-[2px] bg-[#E9E9E9]"></span>
+    <span class="h-5 w-0.5 bg-[#E9E9E9]"></span>
 
     <!-- Sort Drawer -->
     <x-shop::drawer
@@ -76,7 +76,7 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-[16px] font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.toolbar = true"
             >
                 <span class="icon-sort-1 text-[24px]"></span>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
+            <div class="flex justify-between items-center pb-5 border-b-[1px] border-[#E9E9E9]">
                 <p class="text-[18px] font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -115,7 +115,7 @@
         <template v-else>
             <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-[26px]">
                 <!-- Filters Header Container -->
-                <div class="flex justify-between items-center h-[50px] pb-[10px] border-b-[1px] border-[#E9E9E9] max-md:hidden">
+                <div class="flex justify-between items-center h-[50px] pb-2.5 border-b-[1px] border-[#E9E9E9] max-md:hidden">
                     <p class="text-[18px] font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
@@ -147,7 +147,7 @@
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion>
                 <!-- Filter Item Header -->
-                <x-slot:header class="px-0 py-[10px]">
+                <x-slot:header class="px-0 py-2.5">
                     <div class="flex justify-between items-center">
                         <p
                             class="text-[18px] font-semibold"

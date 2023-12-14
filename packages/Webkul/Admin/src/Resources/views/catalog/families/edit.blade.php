@@ -17,7 +17,7 @@
                 @lang('admin::app.catalog.families.edit.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -35,12 +35,12 @@
         </div>
 
         <!-- Container -->
-        <div class="flex gap-[10px] mt-[14px]">
+        <div class="flex gap-2.5 mt-3.5">
             <!-- Left Container -->
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.before', ['attributeFamily' => $attributeFamily]) !!}
 
-            <div class="flex flex-col gap-[8px] flex-1 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex flex-col gap-2 flex-1 bg-white dark:bg-gray-900 rounded box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
@@ -51,12 +51,12 @@
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.before', ['attributeFamily' => $attributeFamily]) !!}
     
             <!-- Right Container -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full select-none">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full select-none">
                 <!-- General Pannel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
                             @lang('admin::app.catalog.families.edit.general')
                         </p>
                     </x-slot:header>
@@ -123,9 +123,9 @@
         <script type="text/x-template" id="v-family-attributes-template">
             <div class="">
                 <!-- Panel Header -->
-                <div class="flex gap-[10px] justify-between flex-wrap mb-[10px] p-[16px]">
+                <div class="flex gap-2.5 justify-between flex-wrap mb-2.5 p-4">
                     <!-- Panel Header -->
-                    <div class="flex flex-col gap-[8px]">
+                    <div class="flex flex-col gap-2">
                         <p class=" text-[16px] text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.families.edit.groups')
                         </p>
@@ -136,7 +136,7 @@
                     </div>
                     
                     <!-- Panel Content -->
-                    <div class="flex gap-x-[4px] items-center">
+                    <div class="flex gap-x-1 items-center">
                         <!-- Delete Group Button -->
                         <div
                             class="transparent-button text-red-600"
@@ -156,11 +156,11 @@
                 </div>
 
                 <!-- Panel Content -->
-                <div class="flex [&>*]:flex-1 gap-[20px] justify-between px-[16px]">
+                <div class="flex [&>*]:flex-1 gap-5 justify-between px-4">
                     <!-- Attributes Groups Container -->
                     <div v-for="(groups, column) in columnGroups">
                         <!-- Attributes Groups Header -->
-                        <div class="flex flex-col mb-[16px]">
+                        <div class="flex flex-col mb-4">
                             <p class="text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                 @{{
                                     column == 1
@@ -176,7 +176,7 @@
 
                         <!-- Draggable Attribute Groups -->
                         <draggable
-                            class="h-[calc(100vh-285px)] pb-[16px] overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200"
+                            class="h-[calc(100vh-285px)] pb-4 overflow-auto ltr:border-r-[1px] rtl:border-l-[1px] border-gray-200"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"
@@ -190,13 +190,13 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800"
+                                            class="icon-sort-down text-[20px] rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] transition-all text-gray-600 dark:text-gray-300 group"
+                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded transition-all text-gray-600 dark:text-gray-300 group"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
@@ -256,7 +256,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                            <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
                                                 <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                 <i
@@ -293,7 +293,7 @@
                     <!-- Unassigned Attributes Container -->
                     <div class="">
                         <!-- Unassigned Attributes Header -->
-                        <div class="flex flex-col mb-[16px]">
+                        <div class="flex flex-col mb-4">
                             <p class="text-gray-600 dark:text-gray-300 font-semibold leading-[24px]">
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes')
                             </p>
@@ -306,7 +306,7 @@
                         <!-- Draggable Unassigned Attributes -->
                         <draggable
                             id="unassigned-attributes"
-                            class="h-[calc(100vh-285px)] pb-[16px] overflow-auto"
+                            class="h-[calc(100vh-285px)] pb-4 overflow-auto"
                             ghost-class="draggable-ghost"
                             handle=".icon-drag"
                             v-bind="{animation: 200}"
@@ -315,7 +315,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="flex gap-[6px] max-w-max py-[6px] ltr:pr-[6px] rtl:pl-[6px] rounded-[4px] text-gray-600 dark:text-gray-300 group">
+                                <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                     <i class="icon-attribute text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -344,7 +344,7 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.families.edit.code')
                                     </x-admin::form.control-group.label>
@@ -361,7 +361,7 @@
                                     <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.families.edit.name')
                                     </x-admin::form.control-group.label>
@@ -408,7 +408,7 @@
                             </x-slot:content>
 
                             <x-slot:footer>
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button 
                                         type="submit"
                                         class="primary-button"

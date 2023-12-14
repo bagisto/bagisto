@@ -4,7 +4,7 @@
 ])
 
 <div class="flex justify-start mt-[30px] max-lg:hidden">
-    <div class="flex gap-x-[14px] items-center">        
+    <div class="flex gap-x-3.5 items-center">        
         {{ Breadcrumbs::view('shop::partials.breadcrumbs', $name, $entity) }}
     </div>
 </div>

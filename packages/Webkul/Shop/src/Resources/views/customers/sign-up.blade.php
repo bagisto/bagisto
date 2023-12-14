@@ -15,7 +15,7 @@
         @lang('shop::app.customers.signup-form.page-title')
     </x-slot>
 
-	<div class="container mt-20 max-1180:px-[20px]">
+	<div class="container mt-20 max-1180:px-5">
         <!-- Company Logo -->
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
@@ -34,7 +34,7 @@
 
         <!-- Form Container -->
 		<div
-			class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+			class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-[30px] max-md:py-[30px]"
         >
 			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.signup-form.page-title')
@@ -181,13 +181,13 @@
 
 
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
-                        <div class="flex mb-[20px]">
+                        <div class="flex mb-5">
                             {!! Captcha::render() !!}
                         </div>
                     @endif
 
                     @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-                        <div class="flex gap-[6px] items-center select-none">
+                        <div class="flex gap-1.5 items-center select-none">
                             <input
                                 type="checkbox"
                                 name="is_subscribed"
@@ -212,9 +212,9 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.newsletter_subscription.after') !!}
 
-                    <div class="flex gap-[36px] flex-wrap items-center mt-[30px]">
+                    <div class="flex gap-9 flex-wrap items-center mt-[30px]">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-[16px] px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] mx-auto m-0 ml-0 rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button-title')
@@ -230,7 +230,7 @@
                 </x-shop::form>
             </div>
 
-			<p class="mt-[20px] text-[#6E6E6E] font-medium">
+			<p class="mt-5 text-[#6E6E6E] font-medium">
                 @lang('shop::app.customers.signup-form.account-exists')
 
                 <a class="text-navyBlue"

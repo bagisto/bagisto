@@ -10,10 +10,10 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-bundle-options-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+        <div class="relative bg-white dark:bg-gray-900  rounded box-shadow">
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
-                <div class="flex flex-col gap-[8px]">
+            <div class="flex gap-5 justify-between mb-2.5 p-4">
+                <div class="flex flex-col gap-2">
                     <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
@@ -24,7 +24,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[4px] items-center">
+                <div class="flex gap-x-1 items-center">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateOptionModal.open()"
@@ -53,13 +53,13 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                    class="w-20 h-20 border border-dashed dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->
@@ -98,7 +98,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
+                            <div class="px-4 py-2.5 border-b-[1px] dark:border-gray-800  ">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
@@ -116,7 +116,7 @@
                                     <x-admin::form.control-group.error control-name="label"></x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px]">
+                                <div class="flex gap-4">
                                     <x-admin::form.control-group class="flex-1">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
@@ -178,7 +178,7 @@
         
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button 
                                     type="submit"
                                     class="primary-button"
@@ -206,8 +206,8 @@
             <input type="hidden" :name="'bundle_options[' + option.id + '][sort_order]'" :value="index"/>
 
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
-                <div class="flex flex-col gap-[8px]">
+            <div class="flex gap-5 justify-between mb-2.5 p-4">
+                <div class="flex flex-col gap-2">
                     <p
                         class="text-[16px] text-gray-800 dark:text-white font-semibold"
                         :class="{'required': option.is_required}"
@@ -221,7 +221,7 @@
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[20px] items-center">
+                <div class="flex gap-x-5 items-center">
                     <p
                         class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         @click="$refs['productSearch' + option.id].openDrawer()"
@@ -259,9 +259,9 @@
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300 dark:border-gray-800">
                             <!-- Information -->
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
                                 <div>
                                     <i class="icon-drag text-[20px] dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
@@ -289,8 +289,8 @@
                                 
                                 <!-- Image -->
                                 <div
-                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
+                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
+                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
                                 >
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
@@ -306,7 +306,7 @@
                                 </div>
 
                                 <!-- Details -->
-                                <div class="grid gap-[6px] place-content-start">
+                                <div class="grid gap-1.5 place-content-start">
                                     <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                         @{{ element.product.name }}
                                     </p>
@@ -318,7 +318,7 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
+                            <div class="grid gap-1 place-content-start text-right">
                                 <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.product.price) }}    
                                 </p>
@@ -345,7 +345,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -365,13 +365,13 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->

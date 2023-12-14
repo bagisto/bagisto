@@ -50,7 +50,7 @@
                     v-if="cart?.items?.length"
                 >
                     <div 
-                        class="flex gap-x-[20px]" 
+                        class="flex gap-x-5" 
                         v-for="item in cart?.items"
                     >
                         <!-- Cart Item Image -->
@@ -58,13 +58,13 @@
                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                 <img
                                     :src="item.base_image.small_image_url"
-                                    class="max-w-[110px] max-h-[110px] rounded-[12px]"
+                                    class="max-w-[110px] max-h-[110px] rounded-xl"
                                 />
                             </a>
                         </div>
 
                         <!-- Cart Item Information -->
-                        <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
+                        <div class="grid flex-1 gap-y-2.5 place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
                                 <a  class="max-w-[80%]" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                     <p
@@ -83,7 +83,7 @@
 
                             <!-- Cart Item Options Container -->
                             <div
-                                class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                class="grid gap-x-2.5 gap-y-1.5 select-none"
                                 v-if="item.options.length"
                             >
                                 <!-- Details Toggler -->
@@ -102,7 +102,7 @@
                                 </div>
 
                                 <!-- Option Details -->
-                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                <div class="grid gap-2" v-show="item.option_show">
                                     <div class="" v-for="option in item.options">
                                         <p class="text-[14px] font-medium">
                                             @{{ option.attribute_name + ':' }}
@@ -116,13 +116,13 @@
                                 </div>
                             </div>
 
-                            <div class="flex gap-[20px] items-center flex-wrap">
+                            <div class="flex gap-5 items-center flex-wrap">
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="item?.quantity"
-                                    class="gap-x-[10px] max-w-[150px] max-h-[36px] py-[5px] px-[14px] rounded-[54px]"
+                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-[5px] px-3.5 rounded-[54px]"
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
@@ -145,7 +145,7 @@
                     class="pb-[30px]"
                     v-else
                 >
-                    <div class="grid gap-y-[20px] b-0 place-items-center">
+                    <div class="grid gap-y-5 b-0 place-items-center">
                         <img src="{{ bagisto_asset('images/thank-you.png') }}">
 
                         <p class="text-[20px]">
@@ -158,23 +158,55 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-[8px] border-b-[1px] border-[#E9E9E9]">
+                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-2 border-b-[1px] border-[#E9E9E9]">
                         <p class="text-[14px] font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 
                         <p
+                            v-if="! isLoading"
                             class="text-[30px] font-semibold"
                             v-text="cart.formatted_grand_total"
                         >
                         </p>
+                        
+                        <div
+                            v-else
+                            class="flex justify-center items-center"
+                        >
+                            <!-- Spinner -->
+                            <svg
+                                class="absolute animate-spin  h-8 w-8  text-[5px] font-semibold text-blue"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                aria-hidden="true"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    class="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    stroke-width="4"
+                                ></circle>
+                
+                                <path
+                                    class="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                            </svg>
+                
+                            <span class="opacity-0 realative text-[30px] font-semibold" v-text="cart.formatted_grand_total"></span>
+                        </div>
                     </div>
 
                     <!-- Cart Action Container -->
-                    <div class="grid gap-[10px] px-[25px]">
+                    <div class="grid gap-2.5 px-[25px]">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-[20px]"
+                            class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
@@ -197,6 +229,8 @@
             data() {
                 return  {
                     cart: null,
+
+                    isLoading:false,
                 }
             },
 
@@ -223,6 +257,8 @@
                 },
 
                 updateItem(quantity, item) {
+                    this.isLoading = true;
+
                     let qty = {};
 
                     qty[item.id] = quantity;
@@ -234,8 +270,9 @@
                             } else {
                                 this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                             }
-                        })
-                        .catch(error => {});
+
+                            this.isLoading = false;
+                        }).catch(error => this.isLoading = false);
                 },
 
                 removeItem(itemId) {

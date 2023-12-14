@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
 <v-product-reviews :product-id="{{ $product->id }}">
-    <div class="container max-1180:px-[20px]">
+    <div class="container max-1180:px-5">
         <x-shop::shimmer.products.reviews/>
     </div>
 </v-product-reviews>
@@ -11,7 +11,7 @@
 @pushOnce('scripts')
     <!-- Product Review Template -->
     <script type="text/x-template" id="v-product-reviews-template">
-        <div class="container max-1180:px-[20px]">
+        <div class="container max-1180:px-5">
             <!-- Create Review Form Container -->
             <div 
                 class="w-full" 
@@ -23,7 +23,7 @@
                 >
                     <!-- Review Form -->
                     <form
-                        class="grid grid-cols-[auto_1fr] gap-[40px] justify-center max-md:grid-cols-[1fr]"
+                        class="grid grid-cols-[auto_1fr] gap-10 justify-center max-md:grid-cols-[1fr]"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -138,9 +138,9 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
+                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
                                 <button
-                                    class="primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
+                                    class="primary-button w-full max-w-[374px] py-4 px-[43px] rounded-[18px] text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -148,7 +148,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center px-[30px] py-2.5 rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -178,7 +178,7 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
+                                class="flex gap-x-[15px] items-center px-[15px] py-2.5 border border-navyBlue rounded-xl cursor-pointer"
                                 @click="canReview = true"
                             >
                                 <span class="icon-pen text-[24px]"></span>
@@ -201,21 +201,21 @@
                         </div>
 
                         <!-- Ratings By Individual Stars -->
-                        <div class="flex gap-x-[20px] items-center">
-                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
+                        <div class="flex gap-x-5 items-center">
+                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
-                                    <div class="row grid grid-cols-[1fr_2fr] gap-[10px] items-center max-sm:flex-wrap">
+                                    <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
 
-                                        <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
-                                            <div class="h-[16px] bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
+                                        <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
+                                            <div class="h-4 bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
                                 @endfor
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-[1fr_1fr] gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
+                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
                             <!-- Product Review Item Vue Component -->
                             <v-product-review-item
                                 v-for='review in reviews'
@@ -249,11 +249,11 @@
 
     <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-[20px]">
+        <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img
                     v-if="review.profile"
-                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] max-sm:hidden"
+                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl max-sm:hidden"
                     :src="review.profile"
                     :alt="review.name"
                     :title="review.name"
@@ -261,7 +261,7 @@
 
                 <div
                     v-else
-                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] bg-[#F5F5F5] max-sm:hidden"
+                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-xl bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
                     <span
@@ -290,25 +290,25 @@
                 </div>
 
                 <p
-                    class="mt-[10px] text-[14px] font-medium max-sm:text-[12px]"
+                    class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]"
                     v-text="review.created_at"
                 >
                 </p>
 
                 <p
-                    class="mt-[20px] text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
+                    class="mt-5 text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
                     v-text="review.title"
                 >
                 </p>
 
                 <p
-                    class="mt-[20px] text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
+                    class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
                     v-text="review.comment"
                 >
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-[10px] px-[8px] py-[4px] rounded-[8px] text-[14px]"
+                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-[14px]"
                     @click="translate"
                 >
                     <!-- Spinner -->
@@ -341,7 +341,7 @@
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
+                                class="min-w-[50px] max-h-[50px] rounded-xl cursor-pointer"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -355,7 +355,7 @@
                             v-else
                         >
                             <video
-                                class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
+                                class="min-w-[50px] max-h-[50px] rounded-xl cursor-pointer"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

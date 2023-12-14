@@ -21,7 +21,7 @@
                 <x-admin::modal ref="magicAIModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="flex gap-2.5 items-center text-[18px] text-gray-800 dark:text-white font-bold">
                             <span class="icon-magic text-[24px] text-gray-800"></span>
 
                             @lang('admin::app.components.tinymce.ai-generation.title')
@@ -50,7 +50,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <button
                                 type="submit"
                                 class="secondary-button"
@@ -74,7 +74,7 @@
                         </div>
 
                         <!-- Generated Content -->
-                        <x-admin::form.control-group class="mt-[20px]">
+                        <x-admin::form.control-group class="mt-5">
                             <x-admin::form.control-group.label class="text-left">
                                 @lang('admin::app.components.tinymce.ai-generation.generated-content')
                             </x-admin::form.control-group.label>
@@ -95,7 +95,7 @@
 
                     <x-slot:footer>
                         <!-- Modal Submission -->
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <button
                                 type="button"
                                 class="primary-button"

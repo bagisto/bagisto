@@ -9,7 +9,7 @@
         >
             <!-- Drawer Header -->
             <x-slot:header>
-                <div class="grid gap-[12px]">
+                <div class="grid gap-3">
                     <div class="flex justify-between items-center">
                         <p class="text-[20px] font-medium dark:text-white">
                             @lang('admin::app.components.products.search.title')
@@ -26,13 +26,13 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-[12px] rtl:pr-[12px] ltr:pr-[40px] rtl:pl-[40px] py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-[22px] absolute ltr:right-[12px] rtl:left-[12px] top-[6px] flex items-center pointer-events-none"></span>
+                        <span class="icon-search text-[22px] absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
                     </div>
                 </div>
             </x-slot:header>
@@ -44,11 +44,11 @@
                     v-if="filteredSearchedProducts.length"
                 >
                     <div
-                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300 dark:border-gray-800"
+                        class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800"
                         v-for="product in filteredSearchedProducts"
                     >
                         <!-- Information -->
-                        <div class="flex gap-[10px]">
+                        <div class="flex gap-2.5">
                             <!-- Checkbox -->
                             <div class="">
                                 <input
@@ -67,7 +67,7 @@
 
                             <!-- Image -->
                             <div
-                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
                                 :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:invert dark:mix-blend-exclusion': ! product.images.length}"
                             >
                                 <template v-if="! product.images.length">
@@ -82,7 +82,7 @@
                             </div>
 
                             <!-- Details -->
-                            <div class="grid gap-[6px] place-content-start">
+                            <div class="grid gap-1.5 place-content-start">
                                 <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
                                 </p>
@@ -94,7 +94,7 @@
                         </div>
 
                         <!-- Actions -->
-                        <div class="grid gap-[4px] place-content-start text-right">
+                        <div class="grid gap-1 place-content-start text-right">
                             <p class="text-gray-800 font-semibold dark:text-white">
                                 @{{ product.formatted_price }}
                             </p>
@@ -108,13 +108,13 @@
 
                 <!-- For Empty Variations -->
                 <div
-                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                    class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                     v-else
                 >
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                        class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                     />
 
                     <!-- Add Variants Information -->
