@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
 
-    <h2 class="text-2xl font-medium">
+    <h2 class="mb-8 text-2xl font-medium">
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
@@ -18,10 +18,8 @@
     {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
-        class="rounded mt-8"
         enctype="multipart/form-data"
     >
-
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
 
         <x-shop::form.control-group class="mt-4">

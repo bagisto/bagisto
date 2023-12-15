@@ -44,8 +44,8 @@
     {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
     <!-- Order view tabs -->
-    <div>
-        <x-shop::tabs class="mt-5">
+    <div class="mt-5">
+        <x-shop::tabs>
             <x-shop::tabs.item
                 class="!px-0"
                 :title="trans('shop::app.customers.account.orders.view.information.info')"
@@ -347,7 +347,7 @@
 
             @if ($order->invoices->count())
                 <x-shop::tabs.item  :title="trans('shop::app.customers.account.orders.view.invoices.invoices')">
-
+                    
                     @foreach ($order->invoices as $invoice)
                         <div class="flex justify-between items-center">
                             <div class="">
@@ -561,7 +561,7 @@
 
             @if ($order->shipments->count())
                 <x-shop::tabs.item title="{{__('shop::app.customers.account.orders.view.shipments.shipments') }}">
-
+                    
                     @foreach ($order->shipments as $shipment)
                         <div>
                             <label class="text-base font-medium">
@@ -635,13 +635,13 @@
                             </table>
                         </div>
                     @endforeach
+
                 </x-shop::tabs.item>
             @endif
 
             @if ($order->refunds->count())
-                <x-shop::tabs.item
-                    :title="trans('shop::app.customers.account.orders.view.refunds.refunds')"
-                >
+                <x-shop::tabs.item :title="trans('shop::app.customers.account.orders.view.refunds.refunds')">
+
                     @foreach ($order->refunds as $refund)
                         <div class="text-base font-medium">
                             <span>

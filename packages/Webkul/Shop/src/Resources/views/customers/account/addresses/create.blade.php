@@ -9,22 +9,14 @@
         <x-shop::breadcrumbs name="addresses.create"></x-shop::breadcrumbs>
     @endSection
 
-    <div class="flex justify-between items-center">
-        <div class="">
-            <h2 class="text-2xl font-medium">
-                @lang('shop::app.customers.account.addresses.add-address')
-            </h2>
-        </div>
-    </div>
+    <h2 class="mb-8 text-2xl font-medium">
+        @lang('shop::app.customers.account.addresses.add-address')
+    </h2>
 
     {!! view_render_event('bagisto.shop.customers.account.addresses.create.before') !!}
 
     <!-- Create Address Form -->
-    <x-shop::form
-        :action="route('shop.customers.account.addresses.store')"
-        class="rounded mt-8"
-    >
-
+    <x-shop::form :action="route('shop.customers.account.addresses.store')">
         {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.before') !!}
 
         <!--Company Name -->

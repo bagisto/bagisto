@@ -1,4 +1,4 @@
-<div class="flex gap-8 justify-center mt-20 pt-5 bg-[#F5F5F5] max-1180:hidden">
+<div class="flex gap-8 justify-center pt-5 bg-[#F5F5F5] max-1180:hidden">
     <div class="pb-5 px-8">
         <span class="shimmer block w-[200px] h-[30px] bg-[#D9D9D9]"></span>
     </div>

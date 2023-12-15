@@ -1,6 +1,6 @@
 <v-media {{ $attributes }} >
     <x-shop::media.images.lazy
-        class="w-[284px] h-[284px] mt-8 rounded-xl"
+        class="w-[284px] h-[284px] mb-4 rounded-xl"
     ></x-shop::media.images.lazy>
 </v-media>
 
