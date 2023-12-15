@@ -337,7 +337,7 @@
                                 <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
                                     <!-- Attribute Option Image -->
                                     <img
-                                        class="w-[120px] h-[120px]"
+                                        class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                         alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
                                     />
