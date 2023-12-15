@@ -117,20 +117,127 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <div class="section">
-                        <div class="secton-title">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
+                    <div class="flex gap-5 justify-between p-4">
+                        <div class="flex flex-col gap-2">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
+                            </p>
                         </div>
-
-                        <div class="section-content">
-                            <slot-list
-                                booking-type="rental_slot"
-                                :same-slot-all-days="rental_booking.same_slot_all_days">
-                            </slot-list>
+            
+                        <!-- Add Ticket Button -->
+                        <div class="flex gap-x-1 items-center">
+                            <div
+                                class="secondary-button"
+                                @click="$refs.addOptionsRow.toggle()"
+                            >
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Table Information -->
+            <div class="mt-4 overflow-x-auto">
+                <template v-if="slots?.length">
+                    <x-admin::table>
+                        <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
+                            <x-admin::table.thead.tr>
+                                <!-- From -->
+                                <x-admin::table.th>
+                                    @lang('From')
+                                </x-admin::table.th>
+
+                                <!-- To -->
+                                <x-admin::table.th>
+                                    @lang('To')
+                                </x-admin::table.th>
+
+                                <!-- Action tables heading -->
+                                <x-admin::table.th>
+                                    @lang('Actions')
+                                </x-admin::table.th>
+                            </x-admin::table.thead.tr>
+                        </x-admin::table.thead>
+
+                        <x-admin::table.tbody.tr v-for="element in slots">
+                            <x-admin::table.td>
+                                <p
+                                    class="dark:text-white"
+                                    v-text="element.params.from"
+                                >
+                                </p>
+                            </x-admin::table.td>
+
+                            <x-admin::table.td>
+                                <p
+                                    class="dark:text-white"
+                                    v-text="element.params.to"
+                                >
+                                </p>
+                            </x-admin::table.td>
+
+                            <!-- Actions button -->
+                            <x-admin::table.td class="!px-0">
+                                <span
+                                    class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    @click="editModal(element)"
+                                >
+                                </span>
+
+                                <span
+                                    class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    @click="removeOption(element.id)"
+                                >
+                                </span>
+                            </x-admin::table.td>
+                        </x-admin::table.tbody.tr>
+                    </x-admin::table>
+                </template>
+
+                <template v-else>
+                    <v-empty-info type="rental"></v-empty-info>
+                </template>
+            </div>
                 </div>
             </div>
+        </x-admin::form>
+
+        <!-- Add Options Model Form -->
+        <x-admin::form
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+            ref="modelForm"
+        >
+            <form
+                @submit.prevent="handleSubmit($event, store)"
+                enctype="multipart/form-data"
+                ref="createOptionsForm"
+            >
+                <x-admin::modal ref="addOptionsRow">
+                    <x-slot:header>
+                        <p class="text-gray-800 dark:text-white font-bold">
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
+                        </p>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <v-slots
+                            booking-type="rental_slot"
+                            :same-slot-all-days="rental_booking.same_slot_all_days"
+                        >
+                        </v-slots>
+                    </x-slot:content>
+
+                    <x-slot:footer>
+                        <!-- Save Button -->
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.save')
+                        </button>
+                    </x-slot:footer>
+                </x-admin::modal>
+            </form>
         </x-admin::form>
     </script>
 

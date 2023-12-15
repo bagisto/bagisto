@@ -38,8 +38,8 @@
                         dateFormat: "H:i",
                         time_24hr: true,
 
-                        onChange(selectedTimes, timeStr, instance) {
-                            self.$emit("onChange", timeStr);
+                        onChange(selectedDates, dateStr, instance) {
+                            self.$emit("onChange", dateStr);
                         },
                     };
                 },

@@ -202,7 +202,7 @@
                 class="{{ $bookingType }}-booking-section"
                 v-if="booking.type === '{{ $bookingType }}'"
             >
-                @include ('booking::admin.catalog.products.edit.booking.' . $bookingType, ['bookingProduct' => $bookingProduct])
+                @include('booking::admin.catalog.products.edit.booking.' . $bookingType, ['bookingProduct' => $bookingProduct])
             </div>
         @endforeach
     </script>
@@ -242,5 +242,9 @@
         });
     </script>
 
-    @include ('booking::admin.catalog.products.edit.booking.slots')
+    <!-- Slots component Included -->
+    @include('booking::admin.catalog.products.edit.booking.slots')
+
+    <!-- Empty Info Page Included -->
+    @include('booking::admin.catalog.products.edit.booking.empty-info')
 @endpushOnce

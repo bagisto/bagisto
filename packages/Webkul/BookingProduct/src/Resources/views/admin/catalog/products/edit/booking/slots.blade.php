@@ -1,18 +1,27 @@
-<v-slots :bookingType = {{ $bookingType }}></v-slots>
-
 @pushOnce('scripts')
     <script type="text/x-template" id="v-slots-template">
         <div>
-            <div class="grid grid-cols-4 gap-2.5 mb-3">
-                @foreach (['day', 'from', 'to', 'status'] as $item)
+            <div
+                class="grid gap-2.5 mb-3"
+                :class="bookingType == 'default_slot' ? 'grid-cols-4' : 'grid-cols-3'"
+            >
+                @foreach (['day', 'from', 'to'] as $item)
                     <div class="text-black dark:text-white">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
                     </div>
                 @endforeach
+
+                <div
+                    v-if="bookingType == 'default_slot'"
+                    class="text-black dark:text-white"
+                >
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
+                </div>
             </div>
 
             <div
-                class="grid grid-cols-4 gap-2.5"
+                class="grid gap-2.5"
+                :class="bookingType == 'default_slot' ? 'grid-cols-4' : 'grid-cols-3'"
                 v-for="(day, key) in days"
             >
                 <div
@@ -75,7 +84,10 @@
                 </x-booking::form.control-group>
 
                 <!-- Status -->
-                <x-admin::form.control-group class="w-full mb-2.5">
+                <x-admin::form.control-group
+                    v-if="bookingType == 'default_slot'"
+                    class="w-full mb-2.5"
+                >
                     <x-admin::form.control-group.label class="hidden">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
                     </x-admin::form.control-group.label>
@@ -105,10 +117,9 @@
 
     <script type="module">
         app.component('v-slots', {
-
-            props: ['bookingType'],
-
             template: '#v-slots-template',
+
+            props: ['bookingType', 'sameSlotAllDays'],
 
             data() {
                 return {

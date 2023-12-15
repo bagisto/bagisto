@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
-<v-default-booking :bookingProduct = "{{ $bookingProduct ?? 'Null' }}"></v-default-booking>
+<v-default-booking :bookingProduct = "$bookingProduct ?? []"></v-default-booking>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
@@ -297,29 +297,7 @@
             </template>
 
             <template v-else>
-                <div class="grid gap-3 justify-items-center">
-                    <!-- Attribute Option Image -->
-                    <img
-                        class="w-28 h-28 rounded"
-                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
-                    />
-
-                    <!-- Add Slots Information -->
-                    <div class="flex flex-col gap-1.5 items-center">
-                        <p class="text-base text-gray-400 font-semibold">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                        </p>
-                    </div>
-
-                    <!-- Add Slot Button -->
-                    <div
-                        class="secondary-button text-sm"
-                        @click="$refs.addOptionsRow.toggle()"
-                    >
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                    </div>
-                </div>
+                <v-empty-info type="default"></v-empty-info>
             </template>
         </div>
 
@@ -354,7 +332,10 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div v-if="default_booking.booking_type == 'one'" class="mb-2.5">
+                        <div
+                            v-if="default_booking.booking_type == 'one'"
+                            class="mb-2.5"
+                        >
                             <div class="flex gap-4 mb-2.5 px-4 py-2.5 border-b dark:border-gray-800">
                                 <!-- From Day -->
                                 <x-admin::form.control-group class="w-full mb-2.5">
@@ -465,8 +446,11 @@
                         </div>
 
                         <div v-if="default_booking.booking_type == 'many'">
-                            <!-- Include Slots for multiple booking select options -->
-                            @include('booking::admin.catalog.products.edit.booking.slots', ['bookingType' => $bookingProduct ?? 'Null'])
+                            <v-slots
+                                booking-type="default_slot"
+                                :same-slot-all-days="default_booking.booking_type == 'many' ? 1 : 0"
+                            >
+                            </v-slots>
                         </div>
                     </x-slot:content>
 

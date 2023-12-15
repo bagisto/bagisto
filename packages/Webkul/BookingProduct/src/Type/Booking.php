@@ -68,7 +68,7 @@ class Booking extends Virtual
 
         if (request()->route()->getName() != 'admin.catalog.products.mass_update') {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
-
+            dd($bookingProduct);
             $bookingProduct
                 ? $this->bookingProductRepository->update($data['booking'], $bookingProduct->id)
                 : $this->bookingProductRepository->create(array_merge($data['booking'], [
@@ -130,8 +130,8 @@ class Booking extends Virtual
     public function prepareForCart($data)
     {
         if (
-            ! isset($data['booking'])
-            || ! count($data['booking'])
+            !isset($data['booking'])
+            || !count($data['booking'])
         ) {
             return trans('shop::app.checkout.cart.integrity.missing_options');
         }
@@ -163,14 +163,14 @@ class Booking extends Virtual
                 return $qty != 0;
             });
 
-            if (! count($filtered)) {
+            if (!count($filtered)) {
                 return trans('shop::app.checkout.cart.integrity.missing_options');
             }
 
             $cartProductsList = [];
 
             foreach ($data['booking']['qty'] as $ticketId => $qty) {
-                if (! $qty) {
+                if (!$qty) {
                     continue;
                 }
 
@@ -193,7 +193,7 @@ class Booking extends Virtual
 
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
-        if (! $typeHelper->isSlotAvailable($products)) {
+        if (!$typeHelper->isSlotAvailable($products)) {
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
         }
 
@@ -250,7 +250,7 @@ class Booking extends Virtual
 
         $bookingProduct = $this->getBookingProduct($item->product_id);
 
-        if (! $bookingProduct) {
+        if (!$bookingProduct) {
             $result->cartIsInvalid();
 
             return $result;

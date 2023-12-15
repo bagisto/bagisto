@@ -197,7 +197,7 @@
             </div>
 
             <!-- Table Information -->
-            <div class="mt-[15px] overflow-x-auto">
+            <div class="mt-4 overflow-x-auto">
                 <template v-if="slots?.length">
                     <x-admin::table>
                         <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
@@ -255,29 +255,7 @@
                 </template>
 
                 <template v-else>
-                    <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
-                        <!-- Attribute Option Image -->
-                        <img
-                            class="w-[120px] h-[120px]"
-                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                            alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
-                        />
-
-                        <!-- Add Slots Information -->
-                        <div class="flex flex-col gap-[5px] items-center">
-                            <p class="text-[16px] text-gray-400 font-semibold">
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                            </p>
-                        </div>
-
-                        <!-- Add Slot Button -->
-                        <div
-                            class="secondary-button text-[14px]"
-                            @click="$refs.addOptionsRow.toggle()"
-                        >
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                        </div>
-                    </div>
+                    <v-empty-info type="table"></v-empty-info>
                 </template>
             </div>
         </x-admin::form>
@@ -366,66 +344,11 @@
                         </div>
 
                         <div v-else>
-                            <div class="grid grid-cols-3 gap-[10px] pb-[10px]">
-                                @foreach (['day', 'from', 'to'] as $item)
-                                    <div class="text-black dark:text-white">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
-                                    </div>
-                                @endforeach
-                            </div>
-
-                            @foreach ($days as $key => $day)
-                                <div class="grid grid-cols-3 gap-[10px] pb-[10px]">
-                                    <div class="text-black dark:text-white">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
-                                    </div>
-
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="id"
-                                        >
-                                    </x-admin::form.control-group.control>
-                                
-                                    <!-- Slots From -->
-                                    <x-booking::form.control-group class="w-full mb-2.5">
-                                        <x-booking::form.control-group.label class="hidden">
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
-                                        </x-booking::form.control-group.label>
-
-                                        <x-booking::form.control-group.control
-                                            type="time"
-                                            name="booking[slots][{{ $key }}][from]"
-                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
-                                        >
-                                        </x-booking::form.control-group.control>
-
-                                        <x-booking::form.control-group.error 
-                                            control-name="booking[slots][{{ $key }}][from]"
-                                        >
-                                        </x-booking::form.control-group.error>
-                                    </x-booking::form.control-group>
-
-                                    <!-- Slots To -->
-                                    <x-booking::form.control-group class="w-full mb-2.5">
-                                        <x-booking::form.control-group.label class="hidden">
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
-                                        </x-booking::form.control-group.label>
-
-                                        <x-booking::form.control-group.control
-                                            type="time"
-                                            name="booking[slots][{{ $day }}][to]"
-                                            {{-- rules="{ slots.many[index].status ? {required: true, time_min: slots.many[index].from } : '' }" --}}
-                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
-                                        >
-                                        </x-booking::form.control-group.control>
-
-                                        <x-booking::form.control-group.error 
-                                            control-name="booking[slots][{{ $day }}][to]"
-                                        >
-                                        </x-booking::form.control-group.error>
-                                    </x-booking::form.control-group>
-                                </div>
-                            @endforeach
+                            <v-slots
+                                booking-type="table_slot"
+                                :same-slot-all-days="table_booking.same_slot_all_days"
+                            >
+                            </v-slots>
                         </div>
                     </x-slot:content>
 

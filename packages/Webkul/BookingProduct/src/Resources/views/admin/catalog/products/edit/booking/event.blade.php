@@ -32,8 +32,8 @@
             </div>
         </div>
 
-         <!-- Table Information -->
-         <div class="mt-[15px] overflow-x-auto">
+        <!-- Table Information -->
+        <div class="mt-4 overflow-x-auto">
             <template v-if="storeTickets?.length">
                 <x-admin::table>
                     <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
@@ -80,7 +80,7 @@
                         </x-admin::table.thead.tr>
                     </x-admin::table.thead>
 
-                    <x-admin::table.tbody.tr v-for="element in storeTickets">
+                    <x-admin::table.tbody.tr v-for="(element, index) in storeTickets">
                         <!-- Name-->
                         <x-admin::table.td>
                             <p
@@ -88,6 +88,12 @@
                                 v-text="element.params.name"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][name]'"
+                                :value="element.params.name"
+                            />
                         </x-admin::table.td>
 
                         <!-- Price -->
@@ -97,6 +103,12 @@
                                 v-text="element.params.price"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][price]'"
+                                :value="element.params.price"
+                            />
                         </x-admin::table.td>
 
                         <!-- Qty -->
@@ -106,6 +118,12 @@
                                 class="dark:text-white"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets][' + index + '][' + currentLocaleCode + '][qty]'"
+                                :value="element.params.qty"
+                            />
                         </x-admin::table.td>
 
                         <!-- Special Price -->
@@ -115,6 +133,12 @@
                                 v-text="element.params.special_price"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][special_price]'"
+                                :value="element.params.special_price"
+                            />
                         </x-admin::table.td>
 
                         <!-- Valid From -->
@@ -124,6 +148,12 @@
                                 v-text="element.params.special_price_from"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][special_price_from]'"
+                                :value="element.params.special_price_from"
+                            />
                         </x-admin::table.td>
 
                         <!-- Valid Until -->
@@ -133,6 +163,12 @@
                                 v-text="element.params.special_price_to"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][special_price_to]'"
+                                :value="element.params.special_price_to"
+                            />
                         </x-admin::table.td>
 
                         <!-- Description -->
@@ -142,6 +178,12 @@
                                 v-text="element.params.description"
                             >
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][description]'"
+                                :value="element.params.description"
+                            />
                         </x-admin::table.td>
 
                         <!-- Actions button -->
@@ -163,29 +205,7 @@
             </template>
 
             <template v-else>
-                <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
-                    <!-- Attribute Option Image -->
-                    <img
-                        class="w-[120px] h-[120px]"
-                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                        alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
-                    />
-
-                    <!-- Add Slots Information -->
-                    <div class="flex flex-col gap-[5px] items-center">
-                        <p class="text-[16px] text-gray-400 font-semibold">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                        </p>
-                    </div>
-
-                    <!-- Add Slot Button -->
-                    <div
-                        class="secondary-button text-[14px]"
-                        @click="$refs.addOptionsRow.toggle()"
-                    >
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                    </div>
-                </div>
+                <v-empty-info type="event"></v-empty-info>
             </template>
         </div>
 
@@ -202,7 +222,7 @@
             >
                 <x-admin::modal ref="addOptionsRow">
                     <x-slot:header>
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-gray-800 dark:text-white font-bold">
                             @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
                         </p>
                     </x-slot:header>
@@ -305,11 +325,15 @@
                                 <x-admin::form.control-group.label>
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')
                                 </x-admin::form.control-group.label>
-            
+
+                                @php
+                                    $dateMin = \Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59');
+                                @endphp
+
                                 <x-admin::form.control-group.control
                                     type="datetime"
                                     name="special_price_from"
-                                    required="date_format:yyyy-MM-dd HH:mm:ss|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}"
+                                    :rules="'after:' . $dateMin"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')"
                                     ref="special_price_from"
@@ -321,7 +345,7 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                    
+
                             <!-- Special Price To -->
                             <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
@@ -331,7 +355,7 @@
                                 <x-admin::form.control-group.control
                                     type="datetime"
                                     name="special_price_to"
-                                    required="date_format:yyyy-MM-dd HH:mm:ss|after:special_price_from"
+                                    :rules="'after:special_price_from'"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')"
                                     ref="special_price_to"
@@ -392,6 +416,8 @@
                     storeTickets: [],
 
                     optionRowCount: 1,
+
+                    currentLocaleCode: @json(core()->getCurrentLocale()->code),
                 }
             },
 
