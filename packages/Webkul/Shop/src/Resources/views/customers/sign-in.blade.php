@@ -34,7 +34,7 @@
 
         <!-- Form Container -->
         <div
-            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
+            class="w-full max-w-[870px] m-auto px-[90px] p-16 border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.login-form.page-title')
@@ -46,7 +46,7 @@
 
             {!! view_render_event('bagisto.shop.customers.login.before') !!}
 
-            <div class="mt-[60px] rounded max-sm:mt-8">
+            <div class="mt-14 rounded max-sm:mt-8">
                 <x-shop::form :action="route('shop.customer.session.create')">
 
                     {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}

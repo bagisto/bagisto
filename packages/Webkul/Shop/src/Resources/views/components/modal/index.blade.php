@@ -28,7 +28,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'p-[30px] bg-white']) }}>
+            <div {{ $content->attributes->merge(['class' => 'p-8 bg-white']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -36,7 +36,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $content->attributes->merge(['class' => 'p-[30px] bg-white mt-5']) }}>
+            <div {{ $content->attributes->merge(['class' => 'p-8 bg-white mt-5']) }}>
                 {{ $footer }}
             </div>
         </template>
