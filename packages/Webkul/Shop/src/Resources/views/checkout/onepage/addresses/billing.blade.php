@@ -463,30 +463,28 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
 
-                        <div class="mt-8 pb-4">
-                            <div class="grid gap-2.5">
-                                @auth('customer')
-                                    <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
-                                        <input 
-                                            type="checkbox"
-                                            name="billing[default_address]"
-                                            id="billing[default_address]"
-                                            class="hidden peer"
-                                            v-model="forms.billing.address.isSaved"
-                                        >
+                        <div class="grid gap-2.5 pb-4">
+                            @auth('customer')
+                                <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
+                                    <input 
+                                        type="checkbox"
+                                        name="billing[default_address]"
+                                        id="billing[default_address]"
+                                        class="hidden peer"
+                                        v-model="forms.billing.address.isSaved"
+                                    >
 
-                                        <label
-                                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                            for="billing[default_address]"
-                                        >
-                                        </label>
+                                    <label
+                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        for="billing[default_address]"
+                                    >
+                                    </label>
 
-                                        <label for="billing[default_address]">
-                                            @lang('shop::app.checkout.onepage.addresses.billing.save-address')
-                                        </label>
-                                    </div>
-                                @endauth
-                            </div>
+                                    <label for="billing[default_address]">
+                                        @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                                    </label>
+                                </div>
+                            @endauth
                         </div>
 
                         <div class="flex justify-end mt-4 mb-4">

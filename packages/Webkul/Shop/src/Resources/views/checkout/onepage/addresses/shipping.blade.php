@@ -459,30 +459,28 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.phone.after') !!}
 
-                        <div class="mt-8 pb-4">
-                            <div class="grid gap-2.5">
-                                @auth('customer')
-                                    <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
-                                        <input 
-                                            type="checkbox"
-                                            name="shipping[is_save_as_address]"
-                                            id="shipping[is_save_as_address]"
-                                            class="hidden peer"
-                                            v-model="forms.shipping.address.isSaved"
-                                        >
+                        <div class="grid gap-2.5 pb-4">
+                            @auth('customer')
+                                <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
+                                    <input 
+                                        type="checkbox"
+                                        name="shipping[is_save_as_address]"
+                                        id="shipping[is_save_as_address]"
+                                        class="hidden peer"
+                                        v-model="forms.shipping.address.isSaved"
+                                    >
 
-                                        <label
-                                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                            for="shipping[is_save_as_address]"
-                                        >
-                                        </label>
+                                    <label
+                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        for="shipping[is_save_as_address]"
+                                    >
+                                    </label>
 
-                                        <label for="shipping[is_save_as_address]">
-                                            @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
-                                        </label>
-                                    </div>
-                                @endauth
-                            </div>
+                                    <label for="shipping[is_save_as_address]">
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
+                                    </label>
+                                </div>
+                            @endauth
                         </div>
 
                         <div 
