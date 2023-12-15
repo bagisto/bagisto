@@ -58,14 +58,14 @@
             
             <!-- Media shimmer Effect -->
             <div
-                class="max-w-[560px] max-h-[609px]"
+                class="max-w-[560px] max-h-[610px]"
                 v-show="isMediaLoading"
             >
                 <div class="min-w-[560px] min-h-[607px] bg-[#E9E9E9] rounded-xl shimmer"></div>
             </div>
 
             <div
-                class="max-w-[560px] max-h-[609px]"
+                class="max-w-[560px] max-h-[610px]"
                 v-show="! isMediaLoading"
             >
                 <img 
@@ -74,7 +74,7 @@
                     v-if="baseFile.type == 'image'"
                     alt="{{ $product->name }}"
                     width="560"
-                    height="609"
+                    height="610"
                     @load="onMediaLoad()"
                 />
 
