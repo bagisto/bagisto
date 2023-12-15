@@ -125,7 +125,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors.length ? 'border !border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select block w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-base transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-base transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
                 <option value="" selected disabled>Select</option>
                 {{ $slot }}
