@@ -12,6 +12,13 @@
 
         @stack('meta')
 
+        <link
+            rel="preload"
+            href="{{ bagisto_asset('fonts/bagisto-admin.woff') }}"
+            as="font"
+            type="font/woff"
+        />
+
         @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
         <link
