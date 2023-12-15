@@ -18,7 +18,7 @@
                 {{ $header }}
 
                 <span
-                    class="icon-cancel text-[30px] cursor-pointer"
+                    class="icon-cancel text-3xl cursor-pointer"
                     @click="toggle"
                 >
                 </span>

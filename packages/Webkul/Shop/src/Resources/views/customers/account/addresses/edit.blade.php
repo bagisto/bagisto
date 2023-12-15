@@ -10,7 +10,7 @@
         <x-shop::breadcrumbs name="addresses.edit" :entity="$address"></x-shop::breadcrumbs>
     @endSection
 
-    <h2 class="text-[26px] font-medium">
+    <h2 class="mb-8 text-2xl font-medium">
         @lang('shop::app.customers.account.addresses.edit')
         @lang('shop::app.customers.account.addresses.title')
     </h2>
@@ -21,7 +21,6 @@
     <x-shop::form
         method="PUT"
         :action="route('shop.customers.account.addresses.update',  $address->id)"
-        class="rounded mt-8"
     >
 
         {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.before', ['address' => $address]) !!}

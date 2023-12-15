@@ -13,22 +13,22 @@
 				title=""
 			>
 
-			<p class="text-[20px]">
+			<p class="text-xl">
 
 				@if (auth()->guard('customer')->user())
 					@lang('shop::app.checkout.success.order-id-info', [
-							'order_id' => '<a class="text-[#0A49A7]" href="' . route('shop.customers.account.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
+						'order_id' => '<a class="text-[#0A49A7]" href="' . route('shop.customers.account.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
 					])
 				@else
 					@lang('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) 
 				@endif
 			</p>
 
-			<p class="text-[26px] font-medium">
+			<p class="text-2xl font-medium">
 				@lang('shop::app.checkout.success.thanks')
 			</p>
 			
-			<p class="text-[20px] text-[#6E6E6E]">
+			<p class="text-xl text-[#6E6E6E]">
 				@if (! empty($order->checkout_message))
 					{!! nl2br($order->checkout_message) !!}
 				@else

@@ -15,11 +15,11 @@
                 <x-shop::dropdown position="bottom-left">
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
-                        <button class="flex justify-between items-center gap-4 max-w-[200px] w-full p-3.5 rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <button class="flex justify-between items-center gap-4 max-w-[200px] w-full p-3.5 rounded-lg bg-white border border-[#E9E9E9] text-base transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                             @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
 
                             <span
-                                class="text-[24px] icon-arrow-down"
+                                class="text-2xl icon-arrow-down"
                                 role="presentation"
                             ></span>
                         </button>
@@ -43,11 +43,11 @@
                     <x-shop::dropdown position="bottom-right">
                         <x-slot:toggle>
                             <!-- Dropdown Toggler -->
-                            <button class="flex gap-4 justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-3.5 max-md:pr-2.5 transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                            <button class="flex gap-4 justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-base rounded-lg w-full p-3.5 max-md:pr-2.5 transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                                 @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
 
                                 <span
-                                    class="text-[24px] icon-arrow-down"
+                                    class="text-2xl icon-arrow-down"
                                     role="presentation"
                                 ></span>
                             </button>
@@ -68,7 +68,7 @@
                     <!-- Listing Mode Switcher -->
                     <div class="flex gap-5 items-center">
                         <span
-                            class="text-[24px] cursor-pointer"
+                            class="text-2xl cursor-pointer"
                             role="button"
                             aria-label="@lang('shop::app.categories.toolbar.list')"
                             tabindex="0"
@@ -78,7 +78,7 @@
                         </span>
 
                         <span
-                            class="text-[24px] cursor-pointer"
+                            class="text-2xl cursor-pointer"
                             role="button"
                             aria-label="@lang('shop::app.categories.toolbar.grid')"
                             tabindex="0"

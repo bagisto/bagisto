@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex flex-col justify-between">
-            <p class="text-[25px] font-mediums">Hello! {{ $customer->first_name }}</p>
+            <p class="text-2xl font-mediums">Hello! {{ $customer->first_name }}</p>
 
             <p class="text-[#6E6E6E] ">{{ $customer->email }}</p>
         </div>
@@ -40,9 +40,9 @@
             <v-account-navigation>
                 <!-- Account Navigation Toggler -->
                 <div class="max-md:flex max-md:gap-x-4 max-md:justify-between max-md:items-center pb-5 max-md:bg-gray-100 max-md:px-6 max-md:py-5 max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] accordian-toggle md:pointer-events-none select-none">
-                    <p class="text-[20px] md:font-medium">@lang($menuItem['name'])</p>
+                    <p class="text-xl md:font-medium">@lang($menuItem['name'])</p>
 
-                    <span class="icon-arrow-right text-[24px] md:hidden"></span>
+                    <span class="icon-arrow-right text-2xl md:hidden"></span>
                 </div>
 
                 <!-- Account Navigation Content -->
@@ -56,13 +56,13 @@
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
                             <div class="flex justify-between px-6 py-5 border-t border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-gray-100' : '' }}">
-                                <p class="flex gap-x-4 items-center text-[18px] font-medium">
-                                    <span class="{{ $subMenuItem['icon'] }}  text-[24px]"></span>
+                                <p class="flex gap-x-4 items-center text-lg font-medium">
+                                    <span class="{{ $subMenuItem['icon'] }}  text-2xl"></span>
 
                                     @lang($subMenuItem['name'])
                                 </p>
 
-                                <span class="icon-arrow-right text-[24px] max-md:hidden"></span>
+                                <span class="icon-arrow-right text-2xl max-md:hidden"></span>
                             </div>
                         </a>
                     @endforeach

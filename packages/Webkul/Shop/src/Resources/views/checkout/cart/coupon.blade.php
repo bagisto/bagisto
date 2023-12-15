@@ -8,11 +8,11 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-coupon-template">
         <div class="flex justify-between text-right">
-            <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+            <p class="text-base max-sm:text-sm max-sm:font-normal">
                 @{{ isCouponApplied ? "@lang('shop::app.checkout.cart.coupon.applied')" : "@lang('shop::app.checkout.cart.coupon.discount')" }}
             </p>
 
-            <p class="text-[16px] font-medium max-sm:text-[14px]">
+            <p class="text-base font-medium max-sm:text-sm">
                 <!-- Apply Coupon Form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -36,7 +36,7 @@
 
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <h2 class="text-[25px] font-medium max-sm:text-[22px]">
+                                <h2 class="text-2xl font-medium max-sm:text-xl">
                                     @lang('shop::app.checkout.cart.coupon.apply')
                                 </h2>
                             </x-slot:header>
@@ -66,19 +66,19 @@
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
                                 <div class="flex justify-between items-center gap-4 flex-wrap">
-                                    <p class="text-[14px] font-medium text-[#6E6E6E]">
+                                    <p class="text-sm font-medium text-[#6E6E6E]">
                                         @lang('shop::app.checkout.cart.coupon.subtotal')
                                     </p>
 
                                     <div class="flex gap-8 items-center flex-auto flex-wrap">
                                         <p 
-                                            class="text-[30px] font-semibold max-sm:text-[22px]"
+                                            class="text-3xl font-semibold max-sm:text-xl"
                                             v-text="subTotal"
                                         >
                                         </p>
 
                                         <button
-                                            class="block flex-auto w-max py-3 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-6"
+                                            class="block flex-auto w-max py-3 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:text-sm max-sm:px-6"
                                             type="submit"
                                         >
                                             @lang('shop::app.checkout.cart.coupon.button-title')
@@ -92,18 +92,18 @@
 
                 <!-- Applied Coupon Information Container -->
                 <div 
-                    class="flex justify-between items-center text-[12px] font-small "
+                    class="flex justify-between items-center text-xs font-small "
                     v-if="isCouponApplied"
                 >
                     <p 
-                        class="text-[16px] font-medium cursor-pointer text-navyBlue"
+                        class="text-base font-medium cursor-pointer text-navyBlue"
                         title="@lang('shop::app.checkout.cart.coupon.applied')"
                     >
                         "@{{ isCouponApplied }}"
                     </p>
 
                     <span 
-                        class="icon-cancel text-[30px] cursor-pointer"
+                        class="icon-cancel text-3xl cursor-pointer"
                         title="@lang('shop::app.checkout.cart.coupon.remove')"
                         @click="destroyCoupon"
                     >

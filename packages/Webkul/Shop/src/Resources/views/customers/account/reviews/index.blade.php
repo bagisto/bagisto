@@ -29,7 +29,7 @@
                 <template v-else>
                     <div class="flex-auto">
                         <div class="max-md:max-w-full">
-                            <h2 class="text-[26px] font-medium">
+                            <h2 class="text-2xl font-medium">
                                 @lang('shop::app.customers.account.reviews.title')
                             </h2>
                 
@@ -51,22 +51,22 @@
                 
                                                 <div class="w-full">
                                                     <div class="flex justify-between">
-                                                        <p class="text-[20px] font-medium max-sm:text-[16px]">
+                                                        <p class="text-xl font-medium max-sm:text-base">
                                                             {{ $review->title}}
                                                         </p>
                 
                                                         <div class="flex gap-2.5 items-center">
                                                             @for ($i = 1; $i <= 5; $i++)
-                                                                <span class="icon-star-fill text-[24px] {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
+                                                                <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
                                                             @endfor
                                                         </div>
                                                     </div>
                 
-                                                    <p class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]">
+                                                    <p class="mt-2.5 text-sm font-medium max-sm:text-xs">
                                                         {{ $review->created_at }}
                                                     </p>
                 
-                                                    <p class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]">
+                                                    <p class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs">
                                                         {{ $review->comment }}
                                                     </p>
                                                 </div>
@@ -79,7 +79,7 @@
                                 <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
                 
-                                    <p class="text-[20px]">
+                                    <p class="text-xl">
                                         @lang('shop::app.customers.account.reviews.empty-review')
                                     </p>
                                 </div>

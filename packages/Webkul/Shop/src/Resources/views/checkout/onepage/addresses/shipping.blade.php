@@ -6,10 +6,10 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
 
-        <x-shop::accordion class="!border-b-[0px]">
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
@@ -40,7 +40,7 @@
                                 />
                                 
                                 <label 
-                                    class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                    class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     :for="'shipping_address_id_' + address.id"
                                 >
                                 </label>
@@ -50,14 +50,14 @@
                                     class="block p-5 rounded-xl cursor-pointer"
                                 >
                                     <div class="flex justify-between items-center">
-                                        <p class="text-[16px] font-medium">
+                                        <p class="text-base font-medium">
                                             @{{ address.first_name }} @{{ address.last_name }}
 
                                             <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                         </p>
                                     </div>
 
-                                    <p class="mt-6 text-[#6E6E6E] text-[14px]">
+                                    <p class="mt-6 text-[#6E6E6E] text-sm">
                                         <template v-if="typeof address.address1 === 'string'">
                                             @{{ address.address1 }},
                                         </template>
@@ -87,11 +87,11 @@
                                     tabindex="0"
                                 >
                                     <span
-                                        class="icon-plus p-2.5 text-[30px]  border border-black rounded-full"
+                                        class="icon-plus p-2.5 text-3xl  border border-black rounded-full"
                                         role="presentation"
                                     ></span>
 
-                                    <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
+                                    <p class="text-base">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
                                 </div>
                             </div>
                         </div>
@@ -141,10 +141,10 @@
         class="mt-8"
         v-else
     >
-        <x-shop::accordion>
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
@@ -167,7 +167,7 @@
                                 v-if="addresses.length > 0"
                                 @click="forms.shipping.isNew = ! forms.shipping.isNew"
                             >
-                                <span class="icon-arrow-left text-[24px]"></span>
+                                <span class="icon-arrow-left text-2xl"></span>
 
                                 <span>@lang('shop::app.checkout.onepage.addresses.shipping.back')</span>
                             </a>
@@ -472,7 +472,7 @@
                                         >
 
                                         <label
-                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                             for="shipping[is_save_as_address]"
                                         >
                                         </label>

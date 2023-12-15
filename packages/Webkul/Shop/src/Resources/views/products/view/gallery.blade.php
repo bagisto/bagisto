@@ -8,7 +8,7 @@
             <!-- Product Image Slider -->
             <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] flex-wrap">
                 <span
-                    class="icon-arrow-up text-[24px] cursor-pointer"
+                    class="icon-arrow-up text-2xl cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::app.components.products.carousel.previous')"
                     tabindex="0"
@@ -46,7 +46,7 @@
                 </div>
 
                 <span
-                    class="icon-arrow-down text-[24px] cursor-pointer"
+                    class="icon-arrow-down text-2xl cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::app.components.products.carousel.previous')"
                     tabindex="0"

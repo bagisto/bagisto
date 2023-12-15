@@ -4,12 +4,12 @@
     <script type="text/x-template" id="v-range-slider-template">
         <div>
             <div class="flex items-center gap-4">
-                <p class="text-[14px]">
+                <p class="text-sm">
                     @lang('shop::app.components.range-slider.range')
                 </p>
 
                 <p
-                    class="text-[14px] font-semibold"
+                    class="text-sm font-semibold"
                     v-text="rangeText"
                 >
                 </p>

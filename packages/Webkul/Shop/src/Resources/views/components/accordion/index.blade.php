@@ -18,7 +18,7 @@
                     {{ $header }}
 
                     <span
-                        :class="`text-[24px] ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
+                        :class="`text-2xl ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
                         role="button"
                         aria-label="Toggle accordion"
                         tabindex="0"

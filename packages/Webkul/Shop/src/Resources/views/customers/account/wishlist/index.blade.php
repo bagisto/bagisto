@@ -28,7 +28,7 @@
                 <!-- Wishlist Information -->
                 <template v-else>
                     <div class="flex justify-between items-center overflow-auto journal-scroll">
-                        <h2 class="text-[26px] font-medium">
+                        <h2 class="text-2xl font-medium">
                             @lang('shop::app.customers.account.wishlist.page-title')
                         </h2>
 
@@ -37,7 +37,7 @@
                             @click="removeAll"
                             v-if="wishlist.length"
                         >
-                            <span class="icon-bin text-[24px]"></span>
+                            <span class="icon-bin text-2xl"></span>
                             @lang('shop::app.customers.account.wishlist.delete-all')
                         </div>
                     </div>
@@ -65,7 +65,7 @@
 
                                         <div class="grid gap-y-2.5">
                                             <p 
-                                                class="text-[16px] font-medium" 
+                                                class="text-base font-medium" 
                                                 v-text="item.product.name"
                                             >
                                             </p>
@@ -78,13 +78,13 @@
                                                 <div class="grid gap-2">
                                                     <div class="">
                                                         <p
-                                                            class="flex gap-x-4 text-[16px] items-center cursor-pointer"
+                                                            class="flex gap-x-4 text-base items-center cursor-pointer"
                                                             @click="item.option_show = ! item.option_show"
                                                         >
                                                             @lang('shop::app.customers.account.wishlist.see-details')
         
                                                             <span
-                                                                class="text-[24px]"
+                                                                class="text-2xl"
                                                                 :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                                             >
                                                             </span>
@@ -96,11 +96,11 @@
                                                         v-show="item.option_show"
                                                     >
                                                         <div v-for="option in item.options">
-                                                            <p class="text-[14px] font-medium">
+                                                            <p class="text-sm font-medium">
                                                                 @{{ option.attribute_name + ':' }}
                                                             </p>
         
-                                                            <p class="text-[14px]">
+                                                            <p class="text-sm">
                                                                 @{{ option.option_label }}
                                                             </p>
                                                         </div>
@@ -110,14 +110,14 @@
 
                                             <div class="sm:hidden">
                                                 <p 
-                                                    class="text-[18px] font-semibold" 
+                                                    class="text-lg font-semibold" 
                                                     v-html="item.product.min_price"
                                                 >
                                                 </p>
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="flex justify-end text-[16px] text-[#0A49A7] cursor-pointer" 
+                                                    class="flex justify-end text-base text-[#0A49A7] cursor-pointer" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
@@ -146,13 +146,13 @@
 
                                     <div class="max-sm:hidden">
                                         <p 
-                                            class="text-[18px] font-semibold" 
+                                            class="text-lg font-semibold" 
                                             v-html="item.product.min_price"
                                         >
                                         </p>
 
                                         <a 
-                                            class="flex justify-end text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            class="flex justify-end text-base text-[#0A49A7] cursor-pointer" 
                                             @click="remove(item.id)"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')
@@ -175,7 +175,7 @@
                             title=""
                         >
 
-                        <p class="text-[20px]">
+                        <p class="text-xl">
                             @lang('shop::app.customers.account.wishlist.empty')
                         </p>
                     </div>

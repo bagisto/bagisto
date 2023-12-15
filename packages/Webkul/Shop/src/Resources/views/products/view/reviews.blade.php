@@ -169,7 +169,7 @@
                 <template v-else>
                     <!-- Review Section Header -->
                     <div class="flex gap-4 items-center justify-between  max-sm:flex-wrap">
-                        <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
+                        <h3 class="font-dmserif text-3xl max-sm:text-xl">
                             @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
                         
@@ -181,7 +181,7 @@
                                 class="flex gap-x-4 items-center px-4 py-2.5 border border-navyBlue rounded-xl cursor-pointer"
                                 @click="canReview = true"
                             >
-                                <span class="icon-pen text-[24px]"></span>
+                                <span class="icon-pen text-2xl"></span>
 
                                 @lang('shop::app.products.view.reviews.write-a-review')
                             </div>
@@ -191,11 +191,11 @@
                     <template v-if="reviews.length">
                         <!-- Average Rating Section -->
                         <div class="flex gap-4 justify-between items-center max-w-[365px] mt-8 max-sm:flex-wrap">
-                            <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
+                            <p class="text-3xl font-medium max-sm:text-base">{{ number_format($avgRatings, 1) }}</p>
 
                             <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
 
-                            <p class="text-[12px] text-[#858585]">
+                            <p class="text-xs text-[#858585]">
                                 (@{{ meta.total }} @lang('shop::app.products.view.reviews.customer-review'))
                             </p>
                         </div>
@@ -205,7 +205,7 @@
                             <div class="grid gap-y-5 flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
                                     <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
-                                        <div class="text-[16px] font-medium">{{ $i }} Stars</div>
+                                        <div class="text-base font-medium">{{ $i }} Stars</div>
 
                                         <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-sm">
                                             <div class="h-4 bg-[#FEA82B] rounded-sm" style="width: {{ $percentageRatings[$i] }}%"></div>
@@ -237,7 +237,7 @@
                         <div class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center">
                             <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
-                            <p class="text-[20px]">
+                            <p class="text-xl">
                                 @lang('shop::app.products.view.reviews.empty-review')
                             </p>
                         </div>
@@ -265,7 +265,7 @@
                     :title="review.name"
                 >
                     <span
-                        class="text-[24px] text-[#6E6E6E] font-semibold"
+                        class="text-2xl text-[#6E6E6E] font-semibold"
                         v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
                     >
                     </span>
@@ -275,7 +275,7 @@
             <div class="w-full">
                 <div class="flex justify-between">
                     <p
-                        class="text-[20px] font-medium max-sm:text-[16px]"
+                        class="text-xl font-medium max-sm:text-base"
                         v-text="review.name"
                     >
                     </p>
@@ -290,25 +290,25 @@
                 </div>
 
                 <p
-                    class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]"
+                    class="mt-2.5 text-sm font-medium max-sm:text-xs"
                     v-text="review.created_at"
                 >
                 </p>
 
                 <p
-                    class="mt-5 text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
+                    class="mt-5 text-base text-[#6E6E6E] font-semibold max-sm:text-xs"
                     v-text="review.title"
                 >
                 </p>
 
                 <p
-                    class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
+                    class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs"
                     v-text="review.comment"
                 >
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-[14px]"
+                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-sm"
                     @click="translate"
                 >
                     <!-- Spinner -->

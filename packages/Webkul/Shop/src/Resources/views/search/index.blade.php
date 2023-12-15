@@ -25,7 +25,7 @@
         @endif
 
         <div class="flex justify-between items-center mt-8">
-            <h1 class="text-[26px] font-medium">
+            <h1 class="text-2xl font-medium">
                 {{ $title }}
             </h1>
         </div>
@@ -78,7 +78,7 @@
                                     <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                   
-                                        <p class="text-[20px]">
+                                        <p class="text-xl">
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>
@@ -112,7 +112,7 @@
                                     <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
-                                        <p class="text-[20px]">
+                                        <p class="text-xl">
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>

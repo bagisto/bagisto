@@ -18,7 +18,7 @@
                     role="button"
                     tabindex="0"
                     v-for="tab in tabs"
-                    class="pb-5 px-8 text-[20px] font-medium text-[#6E6E6E] cursor-pointer"
+                    class="pb-5 px-8 text-xl font-medium text-[#6E6E6E] cursor-pointer"
                     :class="{'text-black border-navyBlue border-b-2 transition': tab.isActive }"
                     v-text="tab.title"
                     @click="change(tab)"
