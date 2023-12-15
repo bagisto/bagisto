@@ -52,7 +52,7 @@
                     </div>
 
                     <div
-                        class="grid mt-[60px] overflow-auto journal-scroll"
+                        class="grid mt-16 overflow-auto journal-scroll"
                         v-if="items.length"
                     >
                         <template v-for="attribute in comparableAttributes">
