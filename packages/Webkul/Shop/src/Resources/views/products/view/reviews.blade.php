@@ -49,7 +49,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="mt-[0] required">
+                                <x-shop::form.control-group.label class="mt-0 required">
                                     @lang('shop::app.products.view.reviews.rating')
                                 </x-shop::form.control-group.label>
 
@@ -215,7 +215,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
+                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-14 max-1060:grid-cols-[1fr]">
                             <!-- Product Review Item Vue Component -->
                             <v-product-review-item
                                 v-for='review in reviews'
@@ -224,7 +224,7 @@
                         </div>
 
                         <button
-                            class="block mx-auto w-max mt-[60px] py-3 px-11 bg-white border border-navyBlue rounded-2xl text-center text-navyBlue text-base font-medium"
+                            class="block mx-auto w-max mt-14 py-3 px-11 bg-white border border-navyBlue rounded-2xl text-center text-navyBlue text-base font-medium"
                             v-if="links?.next"
                             @click="get()"
                         >
