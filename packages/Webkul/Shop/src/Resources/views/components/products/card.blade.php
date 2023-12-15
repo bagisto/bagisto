@@ -144,7 +144,7 @@
                         
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span 
-                                class="icon-compare flex justify-center items-center absolute top-[60px] right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
+                                class="icon-compare flex justify-center items-center absolute top-16 right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
