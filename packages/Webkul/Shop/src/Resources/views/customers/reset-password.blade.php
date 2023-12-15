@@ -17,7 +17,7 @@
 
     <div class="container mt-20 max-1180:px-5">
         <!-- Company Logo -->
-        <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
+        <div class="flex gap-x-14 items-center max-[1180px]:gap-x-9">
             <a
                 href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
@@ -34,7 +34,7 @@
 
         <!-- Form Container -->
         <div
-            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-[30px] max-md:py-[30px]"
+            class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.reset-password.title')
@@ -42,7 +42,7 @@
 
             {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
-            <div class="mt-[60px] rounded max-sm:mt-[30px]">
+            <div class="mt-[60px] rounded max-sm:mt-8">
                 <x-shop::form :action="route('shop.customers.reset_password.store')" >
                     <x-shop::form.control-group.control
                         type="hidden"
@@ -129,9 +129,9 @@
 
                     {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.after') !!}
 
-                    <div class="flex gap-9 flex-wrap mt-[30px] items-center">
+                    <div class="flex gap-9 flex-wrap mt-8 items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-[43px] m-0 ml-0 mx-auto rounded-[18px] text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ml-0 mx-auto rounded-2xl text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.reset-password.submit-btn-title')
@@ -145,7 +145,7 @@
 
         </div>
 
-        <p class="mt-[30px] mb-[15px] text-center text-[#6E6E6E] text-xs">
+        <p class="mt-8 mb-4 text-center text-[#6E6E6E] text-xs">
             @lang('shop::app.customers.reset_password.footer', ['current_year'=> date('Y') ])
         </p>
     </div>

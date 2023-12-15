@@ -61,9 +61,9 @@
                     </span>
                 </div>
 
-                <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
+                <div class="relative overflow-x-auto mt-8 border rounded-xl">
                     <table class="w-full text-sm text-left ">
-                        <thead class="bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9] text-[14px] text-black">
+                        <thead class="bg-[#F5F5F5] border-b border-[#E9E9E9] text-[14px] text-black">
                             <tr>
                                 <th
                                     scope="col"
@@ -213,8 +213,8 @@
                     </table>
                 </div>
 
-                <div class="flex gap-10 items-start mt-[30px] max-lg:gap-5 max-md:grid">
-                    <div class="flex-auto max-md:mt-[30px]">
+                <div class="flex gap-10 items-start mt-8 max-lg:gap-5 max-md:grid">
+                    <div class="flex-auto max-md:mt-8">
                         <div class="flex justify-end">
                             <div class="grid gap-2 max-w-max">
                                 <div class="flex gap-x-5 justify-between w-full">
@@ -363,9 +363,9 @@
                             </a>
                         </div>
 
-                        <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
+                        <div class="relative overflow-x-auto mt-8 border rounded-xl">
                             <table class="w-full text-sm text-left">
-                                <thead class="bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9] text-[14px] text-black">
+                                <thead class="bg-[#F5F5F5] border-b border-[#E9E9E9] text-[14px] text-black">
                                     <tr>
                                         <th
                                             scope="col"
@@ -475,8 +475,8 @@
                             </table>
                         </div>
 
-                        <div class="flex gap-10 items-start mt-[30px] max-lg:gap-5 max-md:grid">
-                            <div class="flex-auto max-md:mt-[30px]">
+                        <div class="flex gap-10 items-start mt-8 max-lg:gap-5 max-md:grid">
+                            <div class="flex-auto max-md:mt-8">
                                 <div class="flex justify-end">
                                     <div class="grid gap-2 max-w-max">
                                         <div class="flex gap-x-5 justify-between w-full">
@@ -579,9 +579,9 @@
                             </span>
                         </div>
 
-                        <div class="relative overflow-x-auto border rounded-xl mt-[30px]">
+                        <div class="relative overflow-x-auto border rounded-xl mt-8">
                             <table class="w-full text-sm text-left">
-                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
+                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b border-[#E9E9E9]  ">
                                     <tr>
                                         <th
                                             scope="col"
@@ -649,9 +649,9 @@
                             </span>
                         </div>
 
-                        <div class="relative overflow-x-auto mt-[30px] border rounded-xl">
+                        <div class="relative overflow-x-auto mt-8 border rounded-xl">
                             <table class="w-full text-sm text-left">
-                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
+                                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b border-[#E9E9E9]  ">
                                     <tr>
                                         <th
                                             scope="col"
@@ -767,8 +767,8 @@
                             </table>
                         </div>
 
-                        <div class="flex gap-10 items-start mt-[30px] max-lg:gap-5 max-md:grid">
-                            <div class="flex-auto max-md:mt-[30px]">
+                        <div class="flex gap-10 items-start mt-8 max-lg:gap-5 max-md:grid">
+                            <div class="flex-auto max-md:mt-8">
                                 <div class="flex justify-end">
                                     <div class="grid gap-2 max-w-max">
                                         <div class="flex gap-x-5 justify-between w-full">
@@ -882,10 +882,10 @@
             @endif
         </x-shop::tabs>
 
-        <div class="flex flex-wrap gap-x-[64px] gap-y-[30px] justify-between mt-[42px] pt-[26px] border-t-[1px] border-[#E9E9E9]">
+        <div class="flex flex-wrap gap-x-11 gap-y-8 justify-between mt-11 pt-7 border-t border-[#E9E9E9]">
             <!-- Biiling Address -->
             @if ($order->billing_address)
-                <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
+                <div class="grid gap-4 max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                     <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.billing-address')
                     </p>
@@ -902,7 +902,7 @@
 
             <!-- Shipping Address -->
             @if ($order->shipping_address)
-                <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
+                <div class="grid gap-4 max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                     <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-address')
                     </p>
@@ -917,7 +917,7 @@
                 </div>
 
                 <!-- Shipping Method -->
-                <div class="grid gap-[15px] max-w-[200px] place-content-baseline max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
+                <div class="grid gap-4 max-w-[200px] place-content-baseline max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                     <p class="text-[16px] text-[#6E6E6E]">
                         @lang('shop::app.customers.account.orders.view.shipping-method')
                     </p>
@@ -932,7 +932,7 @@
             @endif
 
             <!-- Billing Method -->
-            <div class="grid gap-[15px] place-content-baseline max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
+            <div class="grid gap-4 place-content-baseline max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">
                 <p class="text-[16px] text-[#6E6E6E]">
                     @lang('shop::app.customers.account.orders.view.payment-method')
                 </p>

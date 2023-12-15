@@ -7,7 +7,7 @@
         @endphp
 
         @if ($groupedProducts->count())
-            <div class="grid gap-5 mt-[30px]">
+            <div class="grid gap-5 mt-8">
                 @foreach ($groupedProducts as $groupedProduct)
                     @if ($groupedProduct->associated_product->getTypeInstance()->isSaleable())
                         <div class="flex gap-5 justify-between items-center">
@@ -16,7 +16,7 @@
                                     @lang('shop::app.products.view.type.grouped.name')
                                 </p>
 
-                                <p class="text-[#6E6E6E] mt-[5px]">
+                                <p class="text-[#6E6E6E] mt-1.5">
                                     {{ $groupedProduct->associated_product->name . ' + ' . core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) }}
                                 </p>
 

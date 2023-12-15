@@ -3,7 +3,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-range-slider-template">
         <div>
-            <div class="flex items-center gap-[15px]">
+            <div class="flex items-center gap-4">
                 <p class="text-[14px]">
                     @lang('shop::app.components.range-slider.range')
                 </p>

@@ -10,10 +10,10 @@
 
 <div class="overflow-auto journal-scroll">
     @for ($i = 0;  $i < $count; $i++)
-        <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
-            <div class="grid gap-y-[25px] flex-1">
+        <div class="flex flex-wrap gap-20 mt-8 max-1060:flex-col">
+            <div class="grid gap-y-6 flex-1">
                 <!-- Single card -->
-                <div class="flex justify-between gap-x-2.5 pb-[18px] border-b-[1px] border-[#E9E9E9]">
+                <div class="flex justify-between gap-x-2.5 pb-5 border-b border-[#E9E9E9]">
                     <div class="flex gap-x-5">
                         <div class="">
                             <div class="shimmer w-[110px] h-[110px]"></div>
@@ -36,7 +36,7 @@
 
                             <div class="flex gap-5 flex-wrap">
                                 <div class="shimmer w-[110px] h-10 rounded-[54px]"></div>
-                                <div class="shimmer w-[158px] h-10 rounded-[18px]"></div>
+                                <div class="shimmer w-[158px] h-10 rounded-2xl"></div>
                             </div>
                         </div>
                     </div>

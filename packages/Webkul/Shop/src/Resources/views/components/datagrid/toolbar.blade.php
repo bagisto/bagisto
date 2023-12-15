@@ -15,7 +15,7 @@
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
+                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
                             <span>
                                 @lang('shop::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
@@ -32,7 +32,7 @@
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="whitespace-no-wrap flex cursor-not-allowed justify-between gap-[5px] rounded-t px-4 py-2 hover:bg-gray-100"
+                                    class="whitespace-no-wrap flex cursor-not-allowed justify-between gap-1.5 rounded-t px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -64,7 +64,7 @@
 
                             <li v-else>
                                 <a
-                                    class="whitespace-no-wrap flex gap-[5px] rounded-b px-4 py-2 hover:bg-gray-100"
+                                    class="whitespace-no-wrap flex gap-1.5 rounded-b px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >
@@ -120,7 +120,7 @@
             <x-shop::dropdown position="bottom-left">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[15px] pr-3	py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button class="flex justify-between items-center gap-4 max-w-[200px] w-full pl-[15px] pr-3	py-2 rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                         <span v-text="applied.pagination.perPage"></span>
 
                         <span class="icon-arrow-down text-[24px]"></span>
@@ -142,10 +142,10 @@
             <x-shop::drawer width="350px">
                 <x-slot:toggle>
                     <button 
-                        class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-3	 pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer"
+                        class="flex justify-between items-center gap-4 max-w-[200px] w-full pl-3 pr-4 py-2 rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer"
                         :class="{'[&>*]:text-blue-600': applied.filters.columns.length > 1}"
                     >
-                        <span class="flex justify-between items-center gap-[5px]">
+                        <span class="flex justify-between items-center gap-1.5">
                             <span class="icon-filter text-[24px]"></span>
 
                             @lang('shop::app.components.datagrid.toolbar.filter.title')
@@ -153,7 +153,7 @@
                     </button>
                 </x-slot:toggle>
 
-                <x-slot:header class="border-b-[1px] border-[#E9E9E9]">
+                <x-slot:header class="border-b border-[#E9E9E9]">
                     @lang('shop::app.components.datagrid.filters.title')
                 </x-slot:header>
 

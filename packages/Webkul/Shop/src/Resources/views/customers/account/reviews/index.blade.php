@@ -41,7 +41,7 @@
                                             href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
                                             id="{{ $review->product_id }}"
                                         >
-                                            <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
+                                            <div class="flex gap-5 p-6 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                                                 <x-shop::media.images.lazy
                                                     class="max-w-[128px] max-h-[146px] min-w-[128px] w-[128px] h-[146px] rounded-xl" 
                                                     src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
@@ -76,7 +76,7 @@
                                 </div>
                             @else
                                 <!-- Review Empty Page -->
-                                <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+                                <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
                 
                                     <p class="text-[20px]">
