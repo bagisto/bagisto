@@ -317,7 +317,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[country]"
-                                    class="py-2 mb-2"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
@@ -360,7 +359,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[state]"
-                                    class="py-2 mb-2"
                                     rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
