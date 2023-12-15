@@ -19,7 +19,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-3 px-5 shadow border rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
         </v-field>
 
@@ -35,7 +35,7 @@
                 type="{{ $type }}"
                 name="{{ $name }}"
                 :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-3 px-5 shadow border rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
         </v-field>
 
@@ -51,7 +51,7 @@
                 type="{{ $type }}"
                 :class="[errors.length ? 'border !border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-md text-sm text-gray-600 transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-lg-md text-sm text-gray-600 transition-all hover:border-gray-400']) }}
             >
         </v-field>
         @break
@@ -67,7 +67,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-3 px-5 shadow border rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
             </textarea>
         </v-field>
@@ -89,7 +89,7 @@
                     name="{{ $name }}"
                     v-bind="field"
                     :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
-                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-3 px-5 shadow border rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
                     autocomplete="off"
                 >
             </x-shop::flat-picker.date>
@@ -108,7 +108,7 @@
                     name="{{ $name }}"
                     v-bind="field"
                     :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']"
-                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'w-full mb-3 py-3 px-5 shadow border rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400']) }}
                     autocomplete="off"
                 >
             </x-shop::flat-picker.datetime>
@@ -125,7 +125,7 @@
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors.length ? 'border !border-red-500' : '']"
-                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-base transition-all hover:border-gray-400 focus:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select w-full mb-3 py-3 px-5 shadow bg-white border border-[#E9E9E9] rounded-lg text-sm text-gray-600 transition-all hover:border-gray-400 focus-visible:outline-none']) }}
             >
                 <option value="" selected disabled>Select</option>
                 {{ $slot }}
@@ -140,7 +140,7 @@
             v-slot="{ errors }"
             name="{{ $name }}"
             :class="[errors.length ? 'border !border-red-500' : '']"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-2 px-3 bg-white border border-[#E9E9E9] rounded-md text-sm text-gray-600 font-normal transition-all hover:border-gray-400']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-3 px-5 bg-white border border-[#E9E9E9] rounded-lg-md text-sm text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             multiple
         >
             {{ $slot }}
@@ -218,7 +218,7 @@
             </v-field>
 
             <label
-                class="rounded-full w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-0.5 peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
+                class="rounded-lg-full w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-0.5 after:left-0.5 peer-focus:outline-none after:border after:rounded-lg-full after:h-4 after:w-4 after:transition-all"
                 for="{{ $name }}"
             ></label>
         </label>
