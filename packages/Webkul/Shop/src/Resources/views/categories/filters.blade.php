@@ -145,7 +145,7 @@
     <!-- Filter Item Vue template -->
     <script type="text/x-template" id="v-filter-item-template">
         <template v-if="filter.type === 'price' || filter.options.length">
-            <x-shop::accordion>
+            <x-shop::accordion class="last:border-b-0">
                 <!-- Filter Item Header -->
                 <x-slot:header class="px-0 py-2.5">
                     <div class="flex justify-between items-center">
