@@ -35,7 +35,7 @@
                 
                             @if (! $reviews->isEmpty())
                                 <!-- Review Information -->
-                                <div class="grid gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
+                                <div class="grid gap-5 mt-14 max-1060:grid-cols-[1fr]">
                                     @foreach($reviews as $review)
                                         <a
                                             href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
@@ -55,7 +55,7 @@
                                                             {{ $review->title}}
                                                         </p>
                 
-                                                        <div class="flex gap-2.5 items-center">
+                                                        <div class="flex gap-0.5 items-center">
                                                             @for ($i = 1; $i <= 5; $i++)
                                                                 <span class="icon-star-fill text-2xl {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#6E6E6E]' }}"></span>
                                                             @endfor
