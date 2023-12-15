@@ -52,7 +52,7 @@
                     {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
 
                     <!-- Email -->
-                    <x-shop::form.control-group class="mb-4">
+                    <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
                         </x-shop::form.control-group.label>
@@ -77,7 +77,7 @@
                     </x-shop::form.control-group>
 
                     <!-- Password -->
-                    <x-shop::form.control-group class="mb-4">
+                    <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.password')
                         </x-shop::form.control-group.label>

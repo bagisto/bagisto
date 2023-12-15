@@ -42,7 +42,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.image.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.first-name')
             </x-shop::form.control-group.label>
@@ -65,7 +65,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.first_name.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.last-name')
             </x-shop::form.control-group.label>
@@ -88,7 +88,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.last_name.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.email')
             </x-shop::form.control-group.label>
@@ -111,7 +111,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.email.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.phone')
             </x-shop::form.control-group.label>
@@ -134,7 +134,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.phone.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.gender')
             </x-shop::form.control-group.label>
@@ -161,7 +161,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.gender.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.dob')
             </x-shop::form.control-group.label>
@@ -183,7 +183,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.date_of_birth.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.current-password')
             </x-shop::form.control-group.label>
@@ -205,7 +205,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.old_password.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.new-password')
             </x-shop::form.control-group.label>
@@ -227,7 +227,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.new_password.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.confirm-password')
             </x-shop::form.control-group.label>
