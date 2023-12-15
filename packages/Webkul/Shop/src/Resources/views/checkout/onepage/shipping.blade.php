@@ -16,7 +16,7 @@
             </template>
 
             <template v-if="isShowShippingMethod">
-                <x-shop::accordion>
+                <x-shop::accordion class="!border-b-0">
                     <x-slot:header>
                         <div class="flex justify-between items-center">
                             <h2 class="text-2xl font-medium max-sm:text-xl">

@@ -1,7 +1,7 @@
 <div>
     <div v-if="! forms.billing.isNew">
-        <x-shop::accordion class="!border-b-[0px]">
-            <x-slot:header >
+        <x-shop::accordion class="!border-b-0">
+            <x-slot:header>
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
@@ -150,7 +150,7 @@
     </div>
 
     <div v-else>
-        <x-shop::accordion>
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">

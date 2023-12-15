@@ -17,7 +17,7 @@
 
 				@if (auth()->guard('customer')->user())
 					@lang('shop::app.checkout.success.order-id-info', [
-							'order_id' => '<a class="text-[#0A49A7]" href="' . route('shop.customers.account.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
+						'order_id' => '<a class="text-[#0A49A7]" href="' . route('shop.customers.account.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
 					])
 				@else
 					@lang('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) 
