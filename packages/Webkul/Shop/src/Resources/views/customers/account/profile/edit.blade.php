@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
 
-    <h2 class="text-[26px] font-medium">
+    <h2 class="mb-8 text-2xl font-medium">
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
@@ -18,13 +18,11 @@
     {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
-        class="rounded mt-[30px]"
         enctype="multipart/form-data"
     >
-
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
 
-        <x-shop::form.control-group class="mt-[15px]">
+        <x-shop::form.control-group class="mt-4">
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
@@ -262,12 +260,12 @@
             />
 
             <label
-                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                 for="is-subscribed"
             ></label>
 
             <label
-                class="text-[16] text-[#6E6E6E] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                class="text-base text-[#6E6E6E] max-sm:text-xs pl-0 select-none cursor-pointer"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.subscribe-to-newsletter')
@@ -276,7 +274,7 @@
 
         <button
             type="submit"
-            class="primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
+            class="primary-button block m-0 w-max py-3 px-11 rounded-2xl text-base text-center"
         >
             @lang('shop::app.customers.account.profile.save')
         </button>

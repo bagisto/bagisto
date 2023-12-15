@@ -14,7 +14,7 @@
     <script type="text/x-template" id="v-quantity-changer-template">
         <div>
             <span 
-                class="icon-minus text-[24px] cursor-pointer"
+                class="icon-minus text-2xl cursor-pointer"
                 role="button"
                 tabindex="0"
                 aria-label="@lang('shop::app.components.quantity-changer.decrease-quantity')"
@@ -28,7 +28,7 @@
             ></p>
             
             <span 
-                class="icon-plus text-[24px] cursor-pointer"
+                class="icon-plus text-2xl cursor-pointer"
                 role="button"
                 tabindex="0"
                 aria-label="@lang('shop::app.components.quantity-changer.increase-quantity')"
