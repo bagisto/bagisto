@@ -462,7 +462,7 @@
                         <div class="mt-8 pb-4">
                             <div class="grid gap-2.5">
                                 @auth('customer')
-                                    <div class="select-none flex gap-x-4">
+                                    <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
                                         <input 
                                             type="checkbox"
                                             name="shipping[is_save_as_address]"
