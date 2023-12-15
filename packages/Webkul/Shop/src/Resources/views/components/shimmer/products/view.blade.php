@@ -67,13 +67,14 @@
             <!-- Buy Now Button -->
             <button class="shimmer w-full h-14 mt-5 rounded-xl"></button>
 
+            <!-- Share Buttons -->
             <div class="flex gap-9 items-center mt-10 max-sm:flex-wrap">
                 <div class="shimmer w-20 h-6"></div>
 
                 <div class="flex gap-6 items-center max-sm:flex-wrap">
                     <div class="shimmer w-20 h-6"></div>
                     
-                    <div class="flex gap-4">
+                    <div class="flex gap-3">
                         <span class="shimmer w-10 h-10 rounded-full"></span>
                         <span class="shimmer w-10 h-10 rounded-full"></span>
                         <span class="shimmer w-10 h-10 rounded-full"></span>
