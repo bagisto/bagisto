@@ -6,7 +6,7 @@
     <script type="text/x-template" id="v-product-gallery-template">
         <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
-            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] flex-wrap">
+            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                 <span
                     class="icon-arrow-up text-2xl cursor-pointer"
                     role="button"
