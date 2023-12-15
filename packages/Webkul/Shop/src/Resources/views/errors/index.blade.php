@@ -28,11 +28,11 @@
                 </div>
 
 				<div class="absolute left-1/2 top-[74%] -translate-x-1/2 -translate-y-1/2 text-center mt-10 max-868:w-full">
-					<h1 class="text-[30px] font-semibold">
+					<h1 class="text-3xl font-semibold">
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>
 
-					<p class="text-[18px] text-[#6E6E6E] mt-4">
+					<p class="text-lg text-[#6E6E6E] mt-4">
                         {{ 
                             $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
                             ? core()->getCurrentChannel()->maintenance_mode_text : trans("admin::app.errors.{$errorCode}.description")
@@ -41,7 +41,7 @@
 
 					<a 
                         href="{{ route('shop.home.index') }}"
-						class="block w-max mt-8 m-auto py-4 px-10 bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-6 max-sm:mb-10"
+						class="block w-max mt-8 m-auto py-4 px-10 bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-sm max-sm:px-6 max-sm:mb-10"
                     >
 						@lang('shop::app.errors.go-to-home') 
                     </a>

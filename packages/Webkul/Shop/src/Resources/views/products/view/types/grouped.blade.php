@@ -11,7 +11,7 @@
                 @foreach ($groupedProducts as $groupedProduct)
                     @if ($groupedProduct->associated_product->getTypeInstance()->isSaleable())
                         <div class="flex gap-5 justify-between items-center">
-                            <div class="text-[14px] font-medium">
+                            <div class="text-sm font-medium">
                                 <p class="">
                                     @lang('shop::app.products.view.type.grouped.name')
                                 </p>

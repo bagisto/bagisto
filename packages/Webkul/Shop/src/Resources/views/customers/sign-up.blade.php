@@ -36,11 +36,11 @@
 		<div
 			class="w-full max-w-[870px] m-auto px-[90px] p-16 border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
         >
-			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+			<h1 class="text-4xl font-dmserif max-sm:text-2xl">
                 @lang('shop::app.customers.signup-form.page-title')
             </h1>
 
-			<p class="mt-4 text-[#6E6E6E] text-[20px] max-sm:text-[16px]">
+			<p class="mt-4 text-[#6E6E6E] text-xl max-sm:text-base">
                 @lang('shop::app.customers.signup-form.form-signup-text')
             </p>
 
@@ -197,12 +197,12 @@
                             />
 
                             <label
-                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                 for="is-subscribed"
                             ></label>
 
                             <label
-                                class="pl-0 text-[16] text-[#6E6E6E] max-sm:text-[12px] select-none cursor-pointer"
+                                class="pl-0 text-base text-[#6E6E6E] max-sm:text-xs select-none cursor-pointer"
                                 for="is-subscribed"
                             >
                                 @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
@@ -214,7 +214,7 @@
 
                     <div class="flex gap-9 flex-wrap items-center mt-8">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ml-0 rounded-2xl text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ml-0 rounded-2xl text-base text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button-title')

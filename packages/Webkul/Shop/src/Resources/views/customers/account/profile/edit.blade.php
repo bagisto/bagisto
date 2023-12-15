@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
 
-    <h2 class="text-[26px] font-medium">
+    <h2 class="text-2xl font-medium">
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
@@ -262,12 +262,12 @@
             />
 
             <label
-                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                 for="is-subscribed"
             ></label>
 
             <label
-                class="text-[16] text-[#6E6E6E] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                class="text-base text-[#6E6E6E] max-sm:text-xs pl-0 select-none cursor-pointer"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.subscribe-to-newsletter')

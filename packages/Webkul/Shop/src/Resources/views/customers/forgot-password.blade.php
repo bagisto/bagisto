@@ -36,11 +36,11 @@
         <div
             class="w-full max-w-[870px] m-auto px-[90px] p-16 border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
         >
-            <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+            <h1 class="text-4xl font-dmserif max-sm:text-2xl">
                 @lang('shop::app.customers.forgot-password.title')
             </h1>
 
-            <p class="mt-4 text-[#6E6E6E] text-[20px] max-sm:text-[16px]">
+            <p class="mt-4 text-[#6E6E6E] text-xl max-sm:text-base">
                 @lang('shop::app.customers.forgot-password.forgot-password-text')
             </p>
 
@@ -84,7 +84,7 @@
 
                     <div class="flex gap-9 flex-wrap mt-8 items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] m-0 ml-0 mx-auto px-11 py-4 rounded-2xl text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] m-0 ml-0 mx-auto px-11 py-4 rounded-2xl text-base text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.forgot-password.submit')

@@ -17,7 +17,7 @@
                 width="80%"
             >
                 <x-slot:toggle>
-                    <span class="icon-hamburger text-[24px] cursor-pointer"></span>
+                    <span class="icon-hamburger text-2xl cursor-pointer"></span>
                 </x-slot:toggle>
 
                 <x-slot:header>
@@ -46,17 +46,17 @@
                         @guest('customer')
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="flex text-[16px] font-medium"
+                                class="flex text-base font-medium"
                             >
                                 @lang('Sign up or Login')
 
-                                <i class="icon-double-arrow text-[24px] ml-2.5"></i>
+                                <i class="icon-double-arrow text-2xl ml-2.5"></i>
                             </a>
                         @endguest
 
                         @auth('customer')
                             <div class="flex flex-col gap-2.5 justify-between">
-                                <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
+                                <p class="text-2xl font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
 
                                 <p class="text-[#6E6E6E] ">{{ auth()->user()?->email }}</p>
                             </div>
@@ -77,7 +77,7 @@
                                     </span>
 
                                     <span
-                                        class="icon-arrow-down text-[24px]"
+                                        class="icon-arrow-down text-2xl"
                                         role="presentation"
                                     ></span>
                                 </div>
@@ -109,7 +109,7 @@
                                     </span>
 
                                     <span
-                                        class="icon-arrow-down text-[24px]"
+                                        class="icon-arrow-down text-2xl"
                                         role="presentation"
                                     ></span>
                                 </div>
@@ -148,7 +148,7 @@
                         href="{{ route('shop.compare.index') }}"
                         aria-label="@lang('shop::app.components.layouts.header.compare')"
                     >
-                        <span class="icon-compare text-[24px] cursor-pointer"></span>
+                        <span class="icon-compare text-2xl cursor-pointer"></span>
                     </a>
                 @endif
 
@@ -156,18 +156,18 @@
 
                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                     <x-slot:toggle>
-                        <span class="icon-users text-[24px] cursor-pointer"></span>
+                        <span class="icon-users text-2xl cursor-pointer"></span>
                     </x-slot:toggle>
 
                     <!-- Guest Dropdown -->
                     @guest('customer')
                         <x-slot:content>
                             <div class="grid gap-2.5">
-                                <p class="text-[20px] font-dmserif">
+                                <p class="text-xl font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome-guest')
                                 </p>
 
-                                <p class="text-[14px]">
+                                <p class="text-sm">
                                     @lang('shop::app.components.layouts.header.dropdown-text')
                                 </p>
                             </div>
@@ -196,12 +196,12 @@
                     @auth('customer')
                         <x-slot:content class="!p-0">
                             <div class="grid gap-2.5 p-5 pb-0">
-                                <p class="text-[20px] font-dmserif">
+                                <p class="text-xl font-dmserif">
                                     @lang('shop::app.components.layouts.header.welcome')’
                                     {{ auth()->guard('customer')->user()->first_name }}
                                 </p>
 
-                                <p class="text-[14px]">
+                                <p class="text-sm">
                                     @lang('shop::app.components.layouts.header.dropdown-text')
                                 </p>
                             </div>
@@ -210,14 +210,14 @@
 
                             <div class="grid gap-1 mt-2.5 pb-2.5">
                                 <a
-                                    class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
+                                    class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.profile.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.profile')
                                 </a>
 
                                 <a
-                                    class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
+                                    class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.orders.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.orders')
@@ -225,7 +225,7 @@
 
                                 @if ($showWishlist)
                                     <a
-                                        class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
+                                        class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
                                         href="{{ route('shop.customers.account.wishlist.index') }}"
                                     >
                                         @lang('shop::app.components.layouts.header.wishlist')
@@ -242,7 +242,7 @@
                                     </x-shop::form>
 
                                     <a
-                                        class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
+                                        class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
                                         href="{{ route('shop.customer.session.destroy') }}"
                                         onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                                     >
@@ -268,7 +268,7 @@
 
         <div class="relative w-full">
             <div
-                class="icon-search flex items-center absolute ltr:left-3 rtl:right-3 top-3 text-[25px] pointer-events-none">
+                class="icon-search flex items-center absolute ltr:left-3 rtl:right-3 top-3 text-2xl pointer-events-none">
             </div>
 
             <input
@@ -300,7 +300,7 @@
                     </a>
 
                     <span
-                        class="text-[24px] cursor-pointer"
+                        class="text-2xl cursor-pointer"
                         :class="{'icon-arrow-down': category.isOpen, 'icon-arrow-right': ! category.isOpen}"
                         @click="toggle(category)"
                     >
@@ -322,7 +322,7 @@
                                 </a>
 
                                 <span
-                                    class="text-[24px] cursor-pointer"
+                                    class="text-2xl cursor-pointer"
                                     :class="{
                                         'icon-arrow-down': secondLevelCategory.category_show,
                                         'icon-arrow-right': ! secondLevelCategory.category_show

@@ -23,7 +23,7 @@
 
                 <div class="absolute top-5 ltr:right-5 rtl:left-5">
                     <span
-                        class="icon-cancel text-[30px] cursor-pointer"
+                        class="icon-cancel text-3xl cursor-pointer"
                         @click="close"
                     >
                     </span>

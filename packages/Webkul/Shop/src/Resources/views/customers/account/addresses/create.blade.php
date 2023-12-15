@@ -11,7 +11,7 @@
 
     <div class="flex justify-between items-center">
         <div class="">
-            <h2 class="text-[26px] font-medium">
+            <h2 class="text-2xl font-medium">
                 @lang('shop::app.customers.account.addresses.add-address')
             </h2>
         </div>
@@ -305,13 +305,13 @@
             >
 
             <label
-                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                 for="default_address"
             >
             </label>
 
             <label 
-                class="block text-[16px] cursor-pointer"
+                class="block text-base cursor-pointer"
                 for="default_address"
             >
                 @lang('shop::app.customers.account.addresses.set-as-default')

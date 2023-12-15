@@ -42,7 +42,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-black text-[18px] max-sm:font-normal"
+                                class="text-center text-black text-lg max-sm:font-normal"
                                 v-text="category.name"
                             >
                             </p>
@@ -51,7 +51,7 @@
                 </div>
 
                 <span
-                    class="flex items-center justify-center absolute top-9 -left-10 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-7 cursor-pointer"
+                    class="flex items-center justify-center absolute top-9 -left-10 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-2xl hover:bg-black hover:text-white max-lg:-left-7 cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::components.carousel.previous')"
                     tabindex="0"
@@ -60,7 +60,7 @@
                 </span>
 
                 <span
-                    class="flex items-center justify-center absolute top-9 -right-6 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-7 cursor-pointer"
+                    class="flex items-center justify-center absolute top-9 -right-6 w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-2xl hover:bg-black hover:text-white max-lg:-right-7 cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::components.carousel.next')"
                     tabindex="0"

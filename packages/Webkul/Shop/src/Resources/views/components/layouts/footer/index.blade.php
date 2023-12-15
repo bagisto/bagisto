@@ -23,7 +23,7 @@
         <div class="flex gap-24 items-start flex-wrap max-1180:gap-6 max-1060:justify-between">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-5 text-[14px]">
+                    <ul class="grid gap-5 text-sm">
                         @php
                             usort($footerLinkSection, function ($a, $b) {
                                 return $a['sort_order'] - $b['sort_order'];
@@ -46,14 +46,14 @@
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-2.5">
                 <p
-                    class="max-w-[288px] leading-[45px] text-[30px] italic text-navyBlue"
+                    class="max-w-[288px] leading-[45px] text-3xl italic text-navyBlue"
                     role="heading"
                     aria-level="2"
                 >
                     @lang('shop::app.components.layouts.footer.newsletter-text')
                 </p>
 
-                <p class="text-[12px]">
+                <p class="text-xs">
                     @lang('shop::app.components.layouts.footer.subscribe-stay-touch')
                 </p>
 
@@ -83,7 +83,7 @@
 
                         <button
                             type="submit"
-                            class=" absolute flex items-center top-2 w-max px-7 py-3.5 bg-white rounded-xl text-[12px] font-medium rtl:left-2 ltr:right-2"
+                            class=" absolute flex items-center top-2 w-max px-7 py-3.5 bg-white rounded-xl text-xs font-medium rtl:left-2 ltr:right-2"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="flex justify-between  px-[60px] py-3.5 bg-[#F1EADF]">
-        <p class="text-[14px] text-[#4D4D4D]">
+        <p class="text-sm text-[#4D4D4D]">
             @lang('shop::app.components.layouts.footer.footer-text')
         </p>
     </div>

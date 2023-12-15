@@ -36,7 +36,7 @@
         <div
             class="w-full max-w-[870px] m-auto px-[90px] p-16 border border-[#E9E9E9] rounded-xl max-md:px-8 max-md:py-8"
         >
-            <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
+            <h1 class="text-4xl font-dmserif max-sm:text-2xl">
                 @lang('shop::app.customers.reset-password.title')
             </h1>
 
@@ -131,7 +131,7 @@
 
                     <div class="flex gap-9 flex-wrap mt-8 items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ml-0 mx-auto rounded-2xl text-[16px] text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ml-0 mx-auto rounded-2xl text-base text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.reset-password.submit-btn-title')

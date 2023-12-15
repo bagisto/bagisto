@@ -94,7 +94,7 @@
                                         />
                                   
                                         <p
-                                            class="text-[20px]"
+                                            class="text-xl"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')
@@ -134,7 +134,7 @@
                                         />
                                         
                                         <p
-                                            class="text-[20px]"
+                                            class="text-xl"
                                             role="heading"
                                         >
                                             @lang('shop::app.categories.view.empty')

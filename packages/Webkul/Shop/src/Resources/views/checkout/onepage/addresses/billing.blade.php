@@ -3,7 +3,7 @@
         <x-shop::accordion class="!border-b-[0px]">
             <x-slot:header >
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
                     </h2>
                 </div>
@@ -33,7 +33,7 @@
                             />
 
                             <label 
-                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>
@@ -43,14 +43,14 @@
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[16px] font-medium">
+                                    <p class="text-base font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
                                         
                                         <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                     </p>
                                 </div>
 
-                                <p class="mt-6 text-[14px] text-[#6E6E6E]">
+                                <p class="mt-6 text-sm text-[#6E6E6E]">
                                     <template v-if="typeof address.address1 === 'string'">
                                         @{{ address.address1 }},
                                     </template>
@@ -80,11 +80,11 @@
                                 tabindex="0"
                             >
                                 <span
-                                    class="icon-plus p-2.5 border border-black rounded-full text-[30px]"
+                                    class="icon-plus p-2.5 border border-black rounded-full text-3xl"
                                     role="presentation"
                                 ></span>
 
-                                <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
+                                <p class="text-base">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-1.5 mt-5 text-[14px] text-[#6E6E6E] select-none">
+                    <div class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -105,7 +105,7 @@
                         />
                 
                         <label 
-                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="isUsedForShipping"
                         >
                         </label>
@@ -153,7 +153,7 @@
         <x-shop::accordion>
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
                     </h2>
                 </div>
@@ -167,7 +167,7 @@
                         v-if="addresses.length > 0"
                         @click="forms.billing.isNew = ! forms.billing.isNew"
                     >
-                        <span class="icon-arrow-left text-[24px]"></span>
+                        <span class="icon-arrow-left text-2xl"></span>
 
                         <span>@lang('shop::app.checkout.onepage.addresses.billing.back')</span>
                     </a>
@@ -476,7 +476,7 @@
                                         >
 
                                         <label
-                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                             for="billing[default_address]"
                                         >
                                         </label>

@@ -81,7 +81,7 @@
                                     >
 
                                     <label
-                                        class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                         for="select-all"
                                         role="button"
                                         tabindex="0"
@@ -90,7 +90,7 @@
                                     </label>
 
                                     <span
-                                        class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-2.5"
+                                        class="text-xl max-md:text-xl max-sm:text-lg ml-2.5"
                                         role="heading"
                                     >
                                         @{{ "@lang('shop::app.checkout.cart.index.items-selected')".replace(':count', selectedItemsCount) }}
@@ -102,7 +102,7 @@
                                     v-if="selectedItemsCount"
                                 >
                                     <span
-                                        class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                        class="text-base text-[#0A49A7] cursor-pointer" 
                                         role="button"
                                         tabindex="0"
                                         @click="removeSelectedItems"
@@ -114,7 +114,7 @@
                                         <span class="mx-2.5 border-r-[2px] border-[#E9E9E9]"></span>
 
                                         <span
-                                            class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            class="text-base text-[#0A49A7] cursor-pointer" 
                                             role="button"
                                             tabindex="0"
                                             @click="moveToWishlistSelectedItems"
@@ -142,7 +142,7 @@
                                             >
 
                                             <label
-                                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                                 :for="'item_' + item.id"
                                                 role="button"
                                                 tabindex="0"
@@ -168,7 +168,7 @@
                                         <div class="grid place-content-start gap-y-2.5">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                                 <p 
-                                                    class="text-[16px] font-medium" 
+                                                    class="text-base font-medium" 
                                                     v-text="item.name"
                                                 >
                                                 </p>
@@ -182,13 +182,13 @@
                                                 <!-- Details Toggler -->
                                                 <div class="">
                                                     <p
-                                                        class="flex gap-x-1.5 text-[16px] items-center cursor-pointer whitespace-nowrap"
+                                                        class="flex gap-x-1.5 text-base items-center cursor-pointer whitespace-nowrap"
                                                         @click="item.option_show = ! item.option_show"
                                                     >
                                                         @lang('shop::app.checkout.cart.index.see-details')
 
                                                         <span
-                                                            class="text-[24px]"
+                                                            class="text-2xl"
                                                             :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                                         ></span>
                                                     </p>
@@ -197,11 +197,11 @@
                                                 <!-- Option Details -->
                                                 <div class="grid gap-2" v-show="item.option_show">
                                                     <div class="" v-for="option in item.options">
-                                                        <p class="text-[14px] font-medium">
+                                                        <p class="text-sm font-medium">
                                                             @{{ option.attribute_name + ':' }}
                                                         </p>
 
-                                                        <p class="text-[14px]">
+                                                        <p class="text-sm">
                                                             @{{ option.option_label }}
                                                         </p>
                                                     </div>
@@ -210,13 +210,13 @@
 
                                             <div class="sm:hidden">
                                                 <p 
-                                                    class="text-[18px] font-semibold" 
+                                                    class="text-lg font-semibold" 
                                                     v-text="item.formatted_total"
                                                 >
                                                 </p>
                                                 
                                                 <span
-                                                    class="text-[16px] text-[#0A49A7] cursor-pointer"
+                                                    class="text-base text-[#0A49A7] cursor-pointer"
                                                     role="button"
                                                     tabindex="0"
                                                     @click="removeItem(item.id)"
@@ -237,14 +237,14 @@
 
                                     <div class="max-sm:hidden text-right">
                                         <p 
-                                            class="text-[18px] font-semibold" 
+                                            class="text-lg font-semibold" 
                                             v-text="item.formatted_total"
                                         >
                                         </p>
                                         
                                         <!-- Cart Item Remove Button -->
                                         <span
-                                            class="text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            class="text-base text-[#0A49A7] cursor-pointer" 
                                             role="button"
                                             tabindex="0"
                                             @click="removeItem(item.id)"
@@ -298,7 +298,7 @@
                         />
                         
                         <p
-                            class="text-[20px]"
+                            class="text-xl"
                             role="heading"
                         >
                             @lang('shop::app.checkout.cart.index.empty-product')

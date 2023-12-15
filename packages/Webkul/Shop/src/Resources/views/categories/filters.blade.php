@@ -26,10 +26,10 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.filter = true"
             >
-                <span class="icon-filter-1 text-[24px]"></span>
+                <span class="icon-filter-1 text-2xl"></span>
 
                 @lang('shop::app.categories.filters.filter')
             </div>
@@ -38,12 +38,12 @@
         <!-- Drawer Header -->
         <x-slot:header>
             <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
-                <p class="text-[18px] font-semibold">
+                <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
 
                 <p
-                    class="mr-[50px] text-[12px] font-medium cursor-pointer"
+                    class="mr-[50px] text-xs font-medium cursor-pointer"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
@@ -76,10 +76,10 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.toolbar = true"
             >
-                <span class="icon-sort-1 text-[24px]"></span>
+                <span class="icon-sort-1 text-2xl"></span>
 
                 @lang('shop::app.categories.filters.sort')
             </div>
@@ -88,7 +88,7 @@
         <!-- Drawer Header -->
         <x-slot:header>
             <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
-                <p class="text-[18px] font-semibold">
+                <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
             </div>
@@ -116,12 +116,12 @@
             <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
                 <div class="flex justify-between items-center h-[50px] pb-2.5 border-b border-[#E9E9E9] max-md:hidden">
-                    <p class="text-[18px] font-semibold">
+                    <p class="text-lg font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
                     <p
-                        class="text-[12px] font-medium cursor-pointer"
+                        class="text-xs font-medium cursor-pointer"
                         tabindex="0"
                         @click="clear()"
                     >
@@ -150,7 +150,7 @@
                 <x-slot:header class="px-0 py-2.5">
                     <div class="flex justify-between items-center">
                         <p
-                            class="text-[18px] font-semibold"
+                            class="text-lg font-semibold"
                             v-text="filter.name"
                         >
                         </p>
@@ -188,7 +188,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                    class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                     role="checkbox"
                                     aria-checked="false"
                                     :aria-label="option.name"
@@ -199,7 +199,7 @@
                                 </label>
 
                                 <label
-                                    class="w-full p-2 pl-0 text-[16px] text-gray-900 cursor-pointer"
+                                    class="w-full p-2 pl-0 text-base text-gray-900 cursor-pointer"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"
