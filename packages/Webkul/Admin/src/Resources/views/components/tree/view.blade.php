@@ -201,7 +201,11 @@
                                 'div', {
                                     class: [
                                         'v-tree-item active inline-block w-full [&>.v-tree-item]:ltr:pl-6 [&>.v-tree-item]:rtl:pr-6 [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
-                                        level > 1 && ! hasChildren ? 'ltr:!pl-14 rtl:!pr-14' : '',
+                                        level === 1 && ! hasChildren
+                                            ? 'ltr:!pl-5 rtl:!pr-5'
+                                            : level > 1 && ! hasChildren
+                                            ? 'ltr:!pl-14 rtl:!pr-14'
+                                            : '',
                                     ],
                                 }, [
                                     this.generateToggleIconComponent({
