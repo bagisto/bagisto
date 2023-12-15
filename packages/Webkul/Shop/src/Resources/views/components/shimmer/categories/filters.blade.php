@@ -68,7 +68,7 @@
     </div>
 
     <!-- Checkbox Filter Shimmer -->
-    <div class="border-b border-[#E9E9E9]">
+    <div class="border-b-0">
         <div class="flex py-2.5 justify-between items-center">
             <p class="shimmer w-2/5 h-[27px]"></p>
             <span class="shimmer h-6 w-6"></span>
