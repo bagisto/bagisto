@@ -11,12 +11,12 @@
             <x-slot:header>
                 <div class="grid gap-3">
                     <div class="flex justify-between items-center">
-                        <p class="text-[20px] font-medium dark:text-white">
+                        <p class="text-xl font-medium dark:text-white">
                             @lang('admin::app.components.products.search.title')
                         </p>
 
                         <div
-                            class="mr-[45px] primary-button"
+                            class="mr-11 primary-button"
                             @click="addSelected"
                         >
                             @lang('admin::app.components.products.search.add-btn')
@@ -26,13 +26,13 @@
                     <div class="relative w-full">
                         <input
                             type="text"
-                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 py-[5px] leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                            class="bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-lg block w-full ltr:pl-3 rtl:pr-3 ltr:pr-10 rtl:pl-10 py-1.5 leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                             placeholder="Search by name"
                             v-model.lazy="searchTerm"
                             v-debounce="500"
                         />
 
-                        <span class="icon-search text-[22px] absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
+                        <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
                     </div>
                 </div>
             </x-slot:header>
@@ -44,7 +44,7 @@
                     v-if="filteredSearchedProducts.length"
                 >
                     <div
-                        class="flex gap-2.5 justify-between px-4 py-6 border-b-[1px] border-slate-300 dark:border-gray-800"
+                        class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800"
                         v-for="product in filteredSearchedProducts"
                     >
                         <!-- Information -->
@@ -59,7 +59,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
+                                    class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
                                     :for="'searched-product' + product.id"
                                 >
                                 </label>
@@ -73,7 +73,7 @@
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
+                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                                 </template>
 
                                 <template v-else>
@@ -83,7 +83,7 @@
 
                             <!-- Details -->
                             <div class="grid gap-1.5 place-content-start">
-                                <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
                                 </p>
 
@@ -118,8 +118,8 @@
                     />
 
                     <!-- Add Variants Information -->
-                    <div class="flex flex-col gap-[5px] items-center">
-                        <p class="text-[16px] text-gray-400 font-semibold">
+                    <div class="flex flex-col gap-1.5 items-center">
+                        <p class="text-base text-gray-400 font-semibold">
                             @lang('admin::app.components.products.search.empty-title')
                         </p>
 

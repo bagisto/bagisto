@@ -4,7 +4,7 @@
 		@lang('shop::app.checkout.success.thanks')
     </x-slot>
 
-	<div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+	<div class="container mt-8 px-[60px] max-lg:px-8">
 		<div class="grid gap-y-5 place-items-center">
 			<img 
 				class="" 
@@ -39,7 +39,7 @@
 			{{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
 
 			<a href="{{ route('shop.home.index') }}">
-				<div class="block w-max mx-auto m-auto py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-basefont-medium text-center cursor-pointer">
+				<div class="block w-max mx-auto m-auto py-3 px-11 bg-navyBlue rounded-2xl text-white text-basefont-medium text-center cursor-pointer">
              		@lang('shop::app.checkout.cart.index.continue-shopping')
 				</div> 
 			</a>

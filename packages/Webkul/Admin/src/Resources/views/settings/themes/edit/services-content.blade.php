@@ -5,15 +5,15 @@
     <script type="text/x-template" id="v-services-content-template">
         <div>
             <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
-                <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                     <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         <div class="flex gap-x-2.5 justify-between items-center">
                             <div class="flex flex-col gap-1">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.services-content.services')
                                 </p>
                                 
-                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                                <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.services-content.service-info')
                                 </p>
                             </div>
@@ -72,7 +72,7 @@
                             <div 
                                 class="flex gap-2.5 justify-between py-5 cursor-pointer"
                                 :class="{
-                                    'border-b-[1px] border-slate-300 dark:border-gray-800': index < servicesContent.services.length - 1
+                                    'border-b border-slate-300 dark:border-gray-800': index < servicesContent.services.length - 1
                                 }"
                             >
                                 <div class="flex gap-2.5">
@@ -141,8 +141,8 @@
                                 alt="add-product-to-store"
                             >
             
-                            <div class="flex flex-col gap-[5px] items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">
+                            <div class="flex flex-col gap-1.5 items-center">
+                                <p class="text-base text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.services-content.add-btn')
                                 </p>
                                 
@@ -158,7 +158,7 @@
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                 @lang('admin::app.settings.themes.edit.services-content.general')
                             </p>
                         </x-slot:header>
@@ -181,7 +181,7 @@
                                     name="name"
                                     value="{{ $theme->name }}"
                                     rules="required"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.services-content.name')"
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.name')"
@@ -204,7 +204,7 @@
                                     name="sort_order"
                                     rules="required|min_value:1"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     label="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.sort-order')"
@@ -289,7 +289,7 @@
                     <x-admin::modal ref="addServiceModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.services-content.update-service')
                             </p>
                         </x-slot:header>
@@ -362,9 +362,9 @@
                             </x-admin::form.control-group>
                         </x-slot:content>
 
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <div class="flex gap-x-2.5 items-center">
-                                <!-- Save Button -->
                                 <button 
                                     type="submit"
                                     class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"

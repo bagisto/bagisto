@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-5 bg-white border-t-[1px] border-[#E9E9E9] z-50"
+    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-5 bg-white border-t border-[#E9E9E9] z-50"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -37,7 +37,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-5 border-b-[1px] border-[#E9E9E9]">
+            <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
                 <p class="text-[18px] font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
@@ -87,7 +87,7 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-5 border-b-[1px] border-[#E9E9E9]">
+            <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
                 <p class="text-[18px] font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
@@ -113,9 +113,9 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-[26px]">
+            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
-                <div class="flex justify-between items-center h-[50px] pb-2.5 border-b-[1px] border-[#E9E9E9] max-md:hidden">
+                <div class="flex justify-between items-center h-[50px] pb-2.5 border-b border-[#E9E9E9] max-md:hidden">
                     <p class="text-[18px] font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
@@ -177,7 +177,7 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100 select-none">
+                            <div class="items-center flex gap-x-4 pl-2 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"

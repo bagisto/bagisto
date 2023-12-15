@@ -17,7 +17,7 @@
         >
             <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
                 <div class="grid gap-1.5">
-                    <p class="pt-1.5 text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+                    <p class="pt-1.5 text-xl text-gray-800 dark:text-white font-bold leading-6">
                         @lang('admin::app.notifications.title')
                     </p>
 
@@ -29,9 +29,9 @@
 
             <div class="flex flex-col justify-between max-w-max bg-white dark:bg-gray-900 rounded-md box-shadow h-[calc(100vh-179px)]">
                 <div class="">
-                    <div class="flex border-b-[1px] dark:border-gray-800 overflow-auto journal-scroll">
+                    <div class="flex border-b dark:border-gray-800 overflow-auto journal-scroll">
                         <div
-                            class="flex py-[15px] px-[15px] gap-1 border-b-[2px] hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
+                            class="flex py-4 px-4 gap-1 border-b-2 hover:bg-gray-100 dark:hover:bg-gray-950 cursor-pointer"
                             :class="{'border-blue-600 dark:border-blue-600': status == data.status}"
                             ref="tabs"
                             v-for="data in orderType"
@@ -44,7 +44,7 @@
                             </p>
 
                             <span
-                                class="text-[12px] text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
+                                class="text-xs text-white font-semibold py-px px-1.5 bg-gray-400 rounded-[35px]"
                                 v-text="data.status_count ?? '0'"
                             >
                             </span>
@@ -58,12 +58,12 @@
                     >
                         <a
                             :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                            class="flex gap-[5px] h-14 p-4 items-start hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="flex gap-1.5 h-14 p-4 items-start hover:bg-gray-50 dark:hover:bg-gray-950"
                             v-for="notification in notifications"
                         >
                             <span
                                 v-if="notification.order.status in orderType"
-                                class="h-fit text-[24px] rounded-full"
+                                class="h-fit text-2xl rounded-full"
                                 :class="orderType[notification.order.status].icon"
                             >
                             </span>
@@ -77,7 +77,7 @@
                                     @{{ orderType[notification.order.status].message }}
                                 </p>
     
-                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                <p class="text-xs text-gray-600 dark:text-gray-300">
                                     @{{ notification.order.datetime }}
                                 </p>
                             </div>
@@ -94,9 +94,9 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex gap-x-2 items-center p-4 border-t-[1px] dark:border-gray-800">
+                <div class="flex gap-x-2 items-center p-4 border-t dark:border-gray-800">
                     <div
-                        class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-2 rtl:mr-2 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-gray-600 dark:text-gray-300 leading-[24px] text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
+                        class="inline-flex gap-x-1 items-center justify-between w-full max-w-max py-1.5 px-2 ltr:ml-2 rtl:mr-2 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-gray-600 dark:text-gray-300 leading-6 text-center marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black max-sm:hidden"
                         v-text="pagination.per_page"
                     >
                     </div>
@@ -121,14 +121,14 @@
                     <div class="flex gap-1 items-center">
                         <a @click="getResults(pagination.prev_page_url)">
                             <div class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-2 rtl:mr-2 p-1.5 bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
-                                <span class="icon-sort-left text-[24px]"></span>
+                                <span class="icon-sort-left text-2xl"></span>
                             </div>
                         </a>
 
                         <a @click="getResults(pagination.next_page_url)">
                             <div
                                 class="inline-flex gap-x-1 items-center justify-between w-full max-w-max ltr:ml-2 rtl:mr-2 p-1.5 bg-white dark:bg-gray-900 border rounded-md dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center cursor-pointer transition-all hover:border hover:bg-gray-100 dark:hover:bg-gray-950 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
-                                <span class="icon-sort-right text-[24px]"></span>
+                                <span class="icon-sort-right text-2xl"></span>
                             </div>
                         </a>
                     </div>

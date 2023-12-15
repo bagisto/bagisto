@@ -2,7 +2,7 @@
     'isActive' => true,
 ])
 
-<div {{ $attributes->merge(['class' => 'border-b-[1px] border-[#E9E9E9]']) }}>
+<div {{ $attributes->merge(['class' => 'border-b border-[#E9E9E9]']) }}>
     <v-accordion
         is-active="{{ $isActive }}"
         {{ $attributes }}
@@ -10,7 +10,7 @@
         @isset($header)
             <template v-slot:header="{ toggle, isOpen }">
                 <div
-                    {{ $header->attributes->merge(['class' => 'flex justify-between items-center p-[15px] cursor-pointer select-none']) }}
+                    {{ $header->attributes->merge(['class' => 'flex justify-between items-center p-4 cursor-pointer select-none']) }}
                     role="button"
                     tabindex="0"
                     @click="toggle"
@@ -30,7 +30,7 @@
         @isset($content)
             <template v-slot:content="{ isOpen }">
                 <div
-                    {{ $content->attributes->merge(['class' => 'p-[15px] z-10 bg-white rounded-lg']) }}
+                    {{ $content->attributes->merge(['class' => 'p-1.5 z-10 bg-white rounded-lg']) }}
                     v-show="isOpen"
                 >
                     {{ $content }}

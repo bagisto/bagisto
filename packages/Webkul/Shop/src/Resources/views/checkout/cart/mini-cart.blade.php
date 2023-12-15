@@ -21,7 +21,7 @@
                     ></span>
 
                     <span
-                        class="absolute  px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-white text-[10px] font-semibold leading-[9px]"
+                        class="absolute px-2 -top-4 left-5 py-1.5 bg-[#060C3B] rounded-[44px] text-white text-[10px] font-semibold leading-[9px]"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}
@@ -46,7 +46,7 @@
             <x-slot:content>
                 <!-- Cart Item Listing -->
                 <div 
-                    class="grid gap-[50px] mt-[35px]" 
+                    class="grid gap-12 mt-9" 
                     v-if="cart?.items?.length"
                 >
                     <div 
@@ -66,7 +66,7 @@
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-2.5 place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
-                                <a  class="max-w-[80%]" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                <a  class="max-w-4/5" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                     <p
                                         class="text-[16px] font-medium"
                                         v-text="item.name"
@@ -122,7 +122,7 @@
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="item?.quantity"
-                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-[5px] px-3.5 rounded-[54px]"
+                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-1.5 px-3.5 rounded-[54px]"
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
@@ -142,7 +142,7 @@
 
                 <!-- Empty Cart Section -->
                 <div
-                    class="pb-[30px]"
+                    class="pb-8"
                     v-else
                 >
                     <div class="grid gap-y-5 b-0 place-items-center">
@@ -158,7 +158,7 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-[30px] mb-[30px] px-[25px] pb-2 border-b-[1px] border-[#E9E9E9]">
+                    <div class="flex justify-between items-center mt-8 mb-8 px-6 pb-2 border-b border-[#E9E9E9]">
                         <p class="text-[14px] font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
@@ -203,10 +203,10 @@
                     </div>
 
                     <!-- Cart Action Container -->
-                    <div class="grid gap-2.5 px-[25px]">
+                    <div class="grid gap-2.5 px-6">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="block w-full mx-auto py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
+                            class="block w-full mx-auto py-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>

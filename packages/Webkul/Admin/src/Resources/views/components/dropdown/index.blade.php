@@ -19,7 +19,7 @@
 
     @isset($menu)
         <template v-slot:menu>
-            <ul {{ $menu->attributes->merge(['class' => 'py-[15px]']) }}>
+            <ul {{ $menu->attributes->merge(['class' => 'py-4']) }}>
                 {{ $menu }}
             </ul>
         </template>

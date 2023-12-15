@@ -22,7 +22,7 @@
     <!-- Create Address Form -->
     <x-shop::form
         :action="route('shop.customers.account.addresses.store')"
-        class="rounded mt-[30px]"
+        class="rounded mt-8"
     >
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.before') !!}
@@ -295,7 +295,7 @@
         {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.after') !!}
 
         <!-- Set As Default -->
-        <div class="flex gap-x-[15px] mb-4 select-none">
+        <div class="flex gap-x-4 mb-4 select-none">
             <input
                 type="checkbox"
                 name="default_address"
@@ -320,7 +320,7 @@
 
         <button
             type="submit"
-            class="primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
+            class="primary-button m-0 block text-base w-max py-3 px-11 rounded-2xl text-center"
         >
             @lang('shop::app.customers.account.addresses.save')
         </button>

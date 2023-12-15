@@ -23,12 +23,12 @@
         <!-- Date Range -->
         <div class="flex gap-5 justify-center">
             <div class="flex gap-1 items-center">
-                <div class="shimmer w-3.5 h-3.5 rounded-[3px]"></div>
+                <div class="shimmer w-3.5 h-3.5 rounded-md"></div>
                 <div class="shimmer w-[143px] h-[17px]"></div>
             </div>
             
             <div class="flex gap-1 items-center">
-                <div class="shimmer w-3.5 h-3.5 rounded-[3px]"></div>
+                <div class="shimmer w-3.5 h-3.5 rounded-md"></div>
                 <div class="shimmer w-[143px] h-[17px]"></div>
             </div>
         </div>

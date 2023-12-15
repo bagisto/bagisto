@@ -15,7 +15,7 @@
                 <x-shop::dropdown position="bottom-left">
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
-                        <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-3.5 rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <button class="flex justify-between items-center gap-4 max-w-[200px] w-full p-3.5 rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                             @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
 
                             <span
@@ -43,7 +43,7 @@
                     <x-shop::dropdown position="bottom-right">
                         <x-slot:toggle>
                             <!-- Dropdown Toggler -->
-                            <button class="flex gap-[15px] justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-3.5 max-md:pr-2.5 transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
+                            <button class="flex gap-4 justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-3.5 max-md:pr-2.5 transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                                 @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
 
                                 <span

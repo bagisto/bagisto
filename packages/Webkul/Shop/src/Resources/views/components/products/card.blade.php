@@ -57,7 +57,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-5 bg-white rounded-md cursor-pointer text-[25px]"
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 right-5 bg-white rounded-md cursor-pointer text-[25px]"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -67,7 +67,7 @@
                         @endif
 
                         <button
-                            class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
+                            class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             :disabled="! product.is_saleable"
                             @click="addToCart()"
                             ref="addToCartButton"
@@ -98,7 +98,7 @@
 
         <!-- List Card -->
         <div
-            class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap rounded overflow-hidden"
+            class="flex gap-4 grid-cols-2 max-w-max relative max-sm:flex-wrap rounded overflow-hidden"
             v-else
         >
             <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
@@ -156,7 +156,7 @@
                 </div> 
             </div> 
 
-            <div class="grid gap-[15px] content-start"> 
+            <div class="grid gap-4 content-start"> 
                 <p 
                     class="text-base" 
                     v-text="product.name"
@@ -191,7 +191,7 @@
                 </p>
 
                 <x-shop::button
-                    class="primary-button px-[30px] py-2.5 whitespace-nowrap"
+                    class="primary-button px-8 py-2.5 whitespace-nowrap"
                     :title="trans('shop::app.components.products.card.add-to-cart')"
                     :loading="false"
                     ::disabled="! product.is_saleable"

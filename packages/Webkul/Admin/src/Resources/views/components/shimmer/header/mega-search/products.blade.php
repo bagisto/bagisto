@@ -1,5 +1,5 @@
 @for ($i = 0; $i < 3; $i++)
-    <div class="flex gap-2.5 justify-between p-4 border-b-[1px] border-slate-300">
+    <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300">
         <!-- Left Information -->
         <div class="flex gap-2.5">
             <!-- Image -->

@@ -47,7 +47,7 @@
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="code"
-                                        class="py-5 px-[25px]"
+                                        class="py-5 px-6"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
                                         v-model="code"
@@ -65,12 +65,12 @@
                             <!-- Modal Footer -->
                             <x-slot:footer>
                                 <!-- Coupon Form Action Container -->
-                                <div class="flex justify-between items-center gap-[15px] flex-wrap">
+                                <div class="flex justify-between items-center gap-4 flex-wrap">
                                     <p class="text-[14px] font-medium text-[#6E6E6E]">
                                         @lang('shop::app.checkout.cart.coupon.subtotal')
                                     </p>
 
-                                    <div class="flex gap-[30px] items-center flex-auto flex-wrap">
+                                    <div class="flex gap-8 items-center flex-auto flex-wrap">
                                         <p 
                                             class="text-[30px] font-semibold max-sm:text-[22px]"
                                             v-text="subTotal"
@@ -78,7 +78,7 @@
                                         </p>
 
                                         <button
-                                            class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                                            class="block flex-auto w-max py-3 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-6"
                                             type="submit"
                                         >
                                             @lang('shop::app.checkout.cart.coupon.button-title')

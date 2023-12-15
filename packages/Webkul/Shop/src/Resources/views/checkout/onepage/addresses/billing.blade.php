@@ -14,7 +14,7 @@
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid gap-5 grid-cols-2 mt-[15px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                    <div class="grid gap-5 grid-cols-2 mt-4 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses"
@@ -50,7 +50,7 @@
                                     </p>
                                 </div>
 
-                                <p class="mt-[25px] text-[14px] text-[#6E6E6E]">
+                                <p class="mt-6 text-[14px] text-[#6E6E6E]">
                                     <template v-if="typeof address.address1 === 'string'">
                                         @{{ address.address1 }},
                                     </template>
@@ -95,7 +95,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-[15px] mt-5 text-[14px] text-[#6E6E6E] select-none">
+                    <div class="flex gap-x-1.5 mt-5 text-[14px] text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -123,7 +123,7 @@
                         <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.length">
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
-                                    class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
+                                    class="block py-3 px-11 bg-navyBlue rounded-2xl text-white text-base w-max font-medium text-center cursor-pointer"
                                     @click="store"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.confirm')
@@ -137,7 +137,7 @@
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
                                     type="submit"
-                                    class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
+                                    class="block py-3 px-11 bg-navyBlue rounded-2xl text-white text-base w-max font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                                 </button>
@@ -463,10 +463,10 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
 
-                        <div class="mt-[30px] pb-[15px]">
+                        <div class="mt-8 pb-4">
                             <div class="grid gap-2.5">
                                 @auth('customer')
-                                    <div class="select-none flex gap-x-[15px]">
+                                    <div class="select-none flex gap-x-4">
                                         <input 
                                             type="checkbox"
                                             name="billing[default_address]"
@@ -492,7 +492,7 @@
                         <div class="flex justify-end mt-4 mb-4">
                             <button
                                 type="submit"
-                                class="block py-[11px] px-[43px] bg-navyBlue text-white text-base w-max font-medium rounded-[18px] text-center cursor-pointer"
+                                class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                             </button>

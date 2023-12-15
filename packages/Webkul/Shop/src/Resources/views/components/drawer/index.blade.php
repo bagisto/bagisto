@@ -18,7 +18,7 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-[25px] pb-5 max-sm:px-[15px]']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-sm:px-4']) }}>
                 {{ $header }}
 
                 <div class="absolute top-5 ltr:right-5 rtl:left-5">
@@ -34,7 +34,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div class="px-[25px] overflow-auto flex-1 max-sm:px-[15px]">
+            <div class="px-6 overflow-auto flex-1 max-sm:px-4">
                 {{ $content }}
             </div>
         </template>
@@ -42,7 +42,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div class="pb-[30px]">
+            <div class="pb-8">
                 {{ $footer }}
             </div>
         </template>

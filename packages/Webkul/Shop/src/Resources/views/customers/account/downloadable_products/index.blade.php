@@ -19,9 +19,9 @@
 
             @if (! $downloadableLinkPurchased->isEmpty())
                 <!-- Downloadable Products Information -->
-                <div class="relative overflow-x-auto border border-b-0  rounded-xl mt-[30px]">
+                <div class="relative overflow-x-auto border border-b-0  rounded-xl mt-8">
                     <table class="w-full text-sm text-left">
-                        <thead class="border-b-[1px] border-[#E9E9E9] text-[14px] text-black bg-[#F5F5F5]">
+                        <thead class="border-b border-[#E9E9E9] text-[14px] text-black bg-[#F5F5F5]">
                             <tr>
                                 <th
                                     scope="col"
@@ -134,7 +134,7 @@
                 </p>
             @else
                 <!-- Downloadable Empty page -->
-                <div class="grid items-center justify-items-center place-content-center w-[100%]] m-auto h-[476px] text-center">
+                <div class="grid items-center justify-items-center place-content-center w-full] m-auto h-[476px] text-center">
                     <img
                         src="{{ bagisto_asset('images/empty-dwn-product.png')}}"
                         class=""

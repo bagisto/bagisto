@@ -7,7 +7,7 @@
 
     <div class="flex flex-col">
         @for ($i = 1; $i <= 3; $i++)
-            <div class="flex gap-8 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0">
+            <div class="flex gap-8 p-4 border-b dark:border-gray-800 last:border-b-0">
                 <div class="flex justify-between gap-1.5 w-full h-[38px]">
                     <div class="flex flex-col gap-y-1">
                         <!-- Customer Name -->

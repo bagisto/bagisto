@@ -32,13 +32,13 @@
                     ! empty($field['channel_based'])
                     && $channels->count() > 1
                 )
-                    <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                    <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                         {{ $currentChannel->name }}
                     </span>
                 @endif
 
                 @if (! empty($field['locale_based']))
-                    <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                    <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                         {{ $currentLocale->name }}
                     </span>
                 @endif
@@ -242,7 +242,7 @@
             </div>
 
             @if ($result)
-                <x-admin::form.control-group class="flex gap-[5px] w-max  mt-[5px] cursor-pointer select-none">
+                <x-admin::form.control-group class="flex gap-1.5 w-max mt-1.5 cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
@@ -255,7 +255,7 @@
 
                     <x-admin::form.control-group.label
                         :for="$name.'[delete]'"
-                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
@@ -377,7 +377,7 @@
 
     @if (isset($field['info']))
         <label
-            class="block leading-[20px] text-[12px] text-gray-600 dark:text-gray-300 font-medium"
+            class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
         >
             {!! trans($field['info']) !!}
         </label>

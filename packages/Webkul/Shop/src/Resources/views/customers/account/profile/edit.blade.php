@@ -18,13 +18,13 @@
     {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
-        class="rounded mt-[30px]"
+        class="rounded mt-8"
         enctype="multipart/form-data"
     >
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
 
-        <x-shop::form.control-group class="mt-[15px]">
+        <x-shop::form.control-group class="mt-4">
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
@@ -276,7 +276,7 @@
 
         <button
             type="submit"
-            class="primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
+            class="primary-button block m-0 w-max py-3 px-11 rounded-2xl text-base text-center"
         >
             @lang('shop::app.customers.account.profile.save')
         </button>

@@ -5,14 +5,14 @@
     </x-slot:title>
 
     <!-- Heading of the page -->
-    <div class="flex justify-between items-center mb-[26px]">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+    <div class="flex justify-between items-center mb-7">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.configuration.index.title')
         </p>
     </div>
 
     <!-- Page Content -->
-    <div class="grid gap-y-[30px]">
+    <div class="grid gap-y-8">
         @foreach ($config->items as $itemKey => $item)
             <div>
                 <div class="grid gap-1">
@@ -42,11 +42,11 @@
                             @endif
 
                             <div class="grid">
-                                <p class="mb-[5px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="mb-1.5 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang($child['name'])
                                 </p>
                                 
-                                <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                                <p class="text-xs text-gray-600 dark:text-gray-300">
                                     @lang($child['info'] ?? '')
                                 </p>
                             </div>

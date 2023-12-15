@@ -11,7 +11,7 @@
         {!! view_render_event('bagisto.admin.marketing.communications.templates.create.create_form_controls.before') !!}
 
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.marketing.communications.templates.create.title')
             </p>
 
@@ -37,7 +37,7 @@
         <!-- body content -->
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left sub-component -->
-            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.marketing.communications.templates.create.card.content.before') !!}
 
@@ -84,7 +84,7 @@
                     <x-admin::accordion>
                         <x-slot:header>
                             <div class="flex items-center justify-between">
-                                <p class="p-2.5 text-gray-800 dark:text-white text-[16px] font-semibold">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                     @lang('admin::app.marketing.communications.templates.create.general')
                                 </p>
                             </div>
