@@ -105,10 +105,10 @@
                 </div>
 
                 <!-- Table Information -->
-                <div class="mt-[15px] overflow-x-auto">
+                <div class="mt-4 overflow-x-auto">
                     <template v-if="slots?.length">
                         <x-admin::table>
-                            <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
+                            <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                 <x-admin::table.thead.tr>
                                     <!-- From -->
                                     <x-admin::table.th>
@@ -147,13 +147,13 @@
                                 <!-- Actions button -->
                                 <x-admin::table.td class="!px-0">
                                     <span
-                                        class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        class="icon-edit p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         @click="editModal(element)"
                                     >
                                     </span>
 
                                     <span
-                                        class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        class="icon-delete p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         @click="removeOption(element.id)"
                                     >
                                     </span>
@@ -163,7 +163,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
+                        <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
                             <!-- Attribute Option Image -->
                             <img
                                 class="w-[120px] h-[120px]"
@@ -172,15 +172,15 @@
                             />
 
                             <!-- Add Slots Information -->
-                            <div class="flex flex-col gap-[5px] items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">
+                            <div class="flex flex-col gap-1.5 items-center">
+                                <p class="text-base text-gray-400 font-semibold">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
                                 </p>
                             </div>
 
                             <!-- Add Slot Button -->
                             <div
-                                class="secondary-button text-[14px]"
+                                class="secondary-button text-sm"
                                 @click="$refs.addOptionsRow.toggle()"
                             >
                                 @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
@@ -216,7 +216,7 @@
             >
                 <x-admin::modal ref="addOptionsRow">
                     <x-slot:header>
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg text-gray-800 dark:text-white font-bold">
                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.title')
                         </p>
                     </x-slot:header>
@@ -275,66 +275,8 @@
                         </div>
 
                         <div v-else>
-                            <div class="grid grid-cols-3 gap-[10px] pb-[10px]">
-                                @foreach (['day', 'from', 'to'] as $item)
-                                    <div class="text-black dark:text-white">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
-                                    </div>
-                                @endforeach
-                            </div>
-
-                            @foreach ($days as $key => $day)
-                                <div class="grid grid-cols-3 gap-[10px] pb-[10px]">
-                                    <div class="text-black dark:text-white">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
-                                    </div>
-
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="id"
-                                        >
-                                    </x-admin::form.control-group.control>
-                                
-                                    <!-- Slots From -->
-                                    <x-booking::form.control-group class="w-full mb-2.5">
-                                        <x-booking::form.control-group.label class="hidden">
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
-                                        </x-booking::form.control-group.label>
-
-                                        <x-booking::form.control-group.control
-                                            type="time"
-                                            name="booking[slots][{{ $key }}][from]"
-                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
-                                        >
-                                        </x-booking::form.control-group.control>
-
-                                        <x-booking::form.control-group.error 
-                                            control-name="booking[slots][{{ $key }}][from]"
-                                        >
-                                        </x-booking::form.control-group.error>
-                                    </x-booking::form.control-group>
-
-                                    <!-- Slots To -->
-                                    <x-booking::form.control-group class="w-full mb-2.5">
-                                        <x-booking::form.control-group.label class="hidden">
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
-                                        </x-booking::form.control-group.label>
-
-                                        <x-booking::form.control-group.control
-                                            type="time"
-                                            name="booking[slots][{{ $day }}][to]"
-                                            {{-- rules="{ slots.many[index].status ? {required: true, time_min: slots.many[index].from } : '' }" --}}
-                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
-                                        >
-                                        </x-booking::form.control-group.control>
-
-                                        <x-booking::form.control-group.error 
-                                            control-name="booking[slots][{{ $day }}][to]"
-                                        >
-                                        </x-booking::form.control-group.error>
-                                    </x-booking::form.control-group>
-                                </div>
-                            @endforeach
+                             <!-- Include Slots for multiple booking select options -->
+                             @include('booking::admin.catalog.products.edit.booking.slots', ['bookingType' => $bookingProduct ?? 'Null'])
                         </div>
                     </x-slot:content>
 
