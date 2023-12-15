@@ -15,11 +15,11 @@
         <template v-else>
             <div class="border-b dark:border-gray-800">
                 <div class="flex items-center justify-between p-4">
-                    <p class="text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                    <p class="text-gray-600 dark:text-gray-300 text-base  font-semibold">
                         @lang('admin::app.dashboard.index.top-selling-products')
                     </p>
 
-                    <p class="text-[12px] text-gray-400 font-semibold">
+                    <p class="text-xs text-gray-400 font-semibold">
                         @{{ report.date_range }}
                     </p>
                 </div>
@@ -31,7 +31,7 @@
                 >
                     <a
                         :href="`{{route('admin.catalog.products.edit', '')}}/${item.id}`"
-                        class="flex gap-2.5 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        class="flex gap-2.5 p-4 border-b dark:border-gray-800 last:border-b-0 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                         v-for="item in report.statistics"
                     >
                         <!-- Product Item -->
@@ -47,7 +47,7 @@
                         >
                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                             
-                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                            <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                 @lang('admin::app.dashboard.index.product-image')
                             </p>
                         </div>
@@ -68,7 +68,7 @@
                                 </p>
 
                                 <p
-                                    class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                                    class="text-base text-gray-800 dark:text-white font-semibold"
                                     v-text="item.formatted_revenue"
                                 >
                                 </p>
@@ -91,7 +91,7 @@
 
                         <!-- Add Variants Information -->
                         <div class="flex flex-col items-center">
-                            <p class="text-[16px] text-gray-400 font-semibold">
+                            <p class="text-base text-gray-400 font-semibold">
                                 @lang('admin::app.dashboard.index.add-product')
                             </p>
 

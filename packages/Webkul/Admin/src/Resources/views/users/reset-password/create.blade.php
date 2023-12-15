@@ -16,8 +16,8 @@
             <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-md box-shadow">
                 <!-- Login Form -->
                 <x-admin::form :action="route('admin.reset_password.store')">
-                    <div class="p-4  ">
-                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                    <div class="p-4">
+                        <p class="text-xl text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.users.reset-password.title')
                         </p>
                     </div>
@@ -29,7 +29,7 @@
                     >
                     </x-admin::form.control-group.control>
 
-                    <div class="p-4 border-t-[1px] border-b-[1px] dark:border-gray-800">
+                    <div class="p-4 border-y dark:border-gray-800">
                         <!-- Email -->
                         <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label class="required">
@@ -105,7 +105,7 @@
                     <div class="flex justify-between items-center p-4">
                         <!-- Back Button-->
                         <a 
-                            class="text-[12px] text-blue-600 font-semibold leading-[24px] cursor-pointer"
+                            class="text-xs text-blue-600 font-semibold leading-6 cursor-pointer"
                             href="{{ route('admin.session.create') }}"
                         >
                             @lang('admin::app.users.reset-password.back-link-title')

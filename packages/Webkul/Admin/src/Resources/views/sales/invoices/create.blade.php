@@ -3,7 +3,7 @@
     <div
         class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
     >
-        <span class="icon-sales text-[24px]"></span> 
+        <span class="icon-sales text-2xl"></span> 
 
         @lang('admin::app.sales.invoices.create.invoice')     
     </div>
@@ -17,7 +17,7 @@
                     @click="$refs.invoice.open()"
                 >
                     <span
-                        class="icon-sales text-[24px]"
+                        class="icon-sales text-2xl"
                         role="presentation"
                         tabindex="0"
                     ></span> 
@@ -35,13 +35,13 @@
                     <x-slot:header>
                         <div class="grid gap-3">
                             <div class="flex justify-between items-center">
-                                <p class="text-[20px] font-medium dark:text-white">
+                                <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.invoices.create.new-invoice')         
                                 </p>
     
                                 <button
                                     type="submit"
-                                    class="mr-[45px] primary-button"
+                                    class="mr-11 primary-button"
                                 >
                                 @lang('admin::app.sales.invoices.create.create-invoice')        
                                 </button>
@@ -55,7 +55,7 @@
                             <div class="p-4 !pt-0">
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-2.5 justify-between py-4 border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="flex gap-2.5 justify-between py-4 border-b border-slate-300 dark:border-gray-800">
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
@@ -66,14 +66,14 @@
                                                     <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
-                                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                        <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
                                                             @lang('admin::app.sales.invoices.create.product-image')
                                                         </p>
                                                     </div>
                                                 @endif
                 
                                                 <div class="grid gap-1.5 place-content-start">
-                                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 
@@ -139,7 +139,7 @@
     
                                         <x-admin::form.control-group.label
                                             for="can_create_transaction"
-                                            class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                            class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                         >
                                             @lang('Create Transaction')
                                         </x-admin::form.control-group.label>

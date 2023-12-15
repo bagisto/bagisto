@@ -4,15 +4,15 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-category-carousel-template">
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
-            <div class=" flex flex-col gap-2 flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
                         <div class="flex flex-col gap-1">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.category-carousel')
                             </p>
 
-                            <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                            <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                                 @lang('admin::app.settings.themes.edit.category-carousel-description')
                             </p>
                         </div>
@@ -33,7 +33,7 @@
                             <select
                                 name="{{ $currentLocale->code }}[options][sort]"
                                 v-bind="field"
-                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-[14px] text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
+                                class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                 :class="[errors['{{ $currentLocale->code }}[options][filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             >
                                 <option value="" selected disabled>
@@ -65,7 +65,7 @@
                             type="text"
                             name="{{ $currentLocale->code }}[options][filters][limit]"
                             value="{{ $theme->translate($currentLocale->code)->options['filters']['limit'] ?? '' }}"
-                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                             :class="[errors['{{ $currentLocale->code }}[options][filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                             rules="required|min_value:1"
                             label="@lang('admin::app.settings.themes.edit.limit')"
@@ -79,11 +79,11 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <span class="block w-full mb-4 mt-4 border-b-[1px] dark:border-gray-800"></span>
+                    <span class="block w-full mb-4 mt-4 border-b dark:border-gray-800"></span>
 
                     <div class="flex gap-x-2.5 justify-between items-center">
                         <div class="flex flex-col gap-1">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.filters')
                             </p>
                         </div>
@@ -111,7 +111,7 @@
                         <div 
                             class="flex gap-2.5 justify-between py-5 cursor-pointer"
                             :class="{
-                                'border-b-[1px] border-slate-300 dark:border-gray-800': index < options.filters.length - 1
+                                'border-b border-slate-300 dark:border-gray-800': index < options.filters.length - 1
                             }"
                         >
                             <div class="flex gap-2.5">
@@ -144,7 +144,7 @@
 
                     <!-- Filters Illustration -->
                     <div    
-                        class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 "
+                        class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                         v-else
                     >
                         <img
@@ -153,8 +153,8 @@
                             alt="add-category-to-store"
                         >
         
-                        <div class="flex flex-col gap-[5px] items-center">
-                            <p class="text-[16px] text-gray-400 font-semibold">
+                        <div class="flex flex-col gap-1.5 items-center">
+                            <p class="text-base text-gray-400 font-semibold">
                                 @lang('admin::app.settings.themes.edit.category-carousel')
                             </p>
 
@@ -178,7 +178,7 @@
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
                     </x-slot:header>
@@ -195,7 +195,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ $theme->name }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.name')"
@@ -218,7 +218,7 @@
                                 type="text"
                                 name="sort_order"
                                 value="{{ $theme->sort_order }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required|min_value:1"
                                 label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -298,7 +298,7 @@
                     <x-admin::modal ref="categoryFilterModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.create-filter')
                             </p>
                         </x-slot:header>
@@ -348,9 +348,9 @@
                             </x-admin::form.control-group>
                         </x-slot:content>
 
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <div class="flex gap-x-2.5 items-center">
-                                <!-- Save Button -->
                                 <button 
                                     type="submit"
                                     class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"

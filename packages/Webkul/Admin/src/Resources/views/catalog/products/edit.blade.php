@@ -15,7 +15,7 @@
         <div class="grid gap-2.5">
             <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
                 <div class="grid gap-1.5">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+                    <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
                         @lang('admin::app.catalog.products.edit.title')
                     </p>
                 </div>
@@ -24,7 +24,7 @@
                     <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                     >
                         @lang('admin::app.account.edit.back-btn')
                     </a>
@@ -70,13 +70,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-store text-[24px] "></span>
+                            <span class="icon-store text-2xl"></span>
                             
                             {{ $currentChannel->name }}
 
                             <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -85,7 +85,7 @@
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white  "
+                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white"
                             >
                                 {{ $channel->name }}
                             </a>
@@ -101,13 +101,13 @@
                             type="button"
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-language text-[24px] "></span>
+                            <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
                             
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
@@ -116,7 +116,7 @@
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -145,7 +145,7 @@
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->code . '.before', ['product' => $product]) !!}
 
                             <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-4">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                                     {{ $group->name }}
                                 </p>
 
@@ -165,13 +165,13 @@
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
-                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentChannel->name }}
                                                 </span>
                                             @endif
 
                                             @if ($attribute->value_per_locale)
-                                                <span class="px-1.5 py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentLocale->name }}
                                                 </span>
                                             @endif

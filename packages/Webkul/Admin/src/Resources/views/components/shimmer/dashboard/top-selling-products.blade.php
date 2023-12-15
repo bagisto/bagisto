@@ -7,7 +7,7 @@
 
     <div class="flex flex-col">
         @for ($i = 1; $i <= 3; $i++)
-            <div class="flex gap-2.5 p-4 border-b-[1px] dark:border-gray-800 last:border-b-0">
+            <div class="flex gap-2.5 p-4 border-b dark:border-gray-800 last:border-b-0">
                 <!-- Product Image -->
                 <div class="shimmer w-[65px] h-[65px] rounded"></div>
 

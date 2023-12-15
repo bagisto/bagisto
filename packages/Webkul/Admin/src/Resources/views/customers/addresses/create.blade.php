@@ -1,6 +1,6 @@
 <v-create-customer-address>
     <div class="inline-flex gap-x-2 mr-1 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
-        <span class="icon-location text-[24px]"></span>
+        <span class="icon-location text-2xl"></span>
 
         @lang('admin::app.customers.addresses.create.create-address-btn')
     </div>
@@ -19,7 +19,7 @@
                 class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                 @click="$refs.CustomerAddress.toggle()"
             >
-                <span class="icon-location text-[24px]"></span>
+                <span class="icon-location text-2xl"></span>
 
                 @lang('admin::app.customers.addresses.create.create-address-btn')
             </div>
@@ -39,7 +39,7 @@
                 <x-admin::modal ref="CustomerAddress">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.customers.addresses.create.title')
                         </p>    
                     </x-slot:header>
@@ -360,7 +360,8 @@
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
                     </x-slot:content>
-    
+
+                    <!-- Modal Footer -->
                     <x-slot:footer>
                         <!-- Modal Submission -->
                         <div class="flex gap-x-2.5 items-center">

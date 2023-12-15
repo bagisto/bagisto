@@ -8,11 +8,11 @@
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
                         <div class="flex flex-col gap-1">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold">
                                 @lang('admin::app.settings.themes.edit.static-content')
                             </p>
 
-                            <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                            <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                                 @lang('admin::app.settings.themes.edit.static-content-description')
                             </p>
                         </div>
@@ -43,12 +43,12 @@
                     
                     <div class="text-sm font-medium text-center pt-4 text-gray-500">
                         <div class="tabs">
-                            <div class="flex gap-[15px] mb-[15px] pt-2 border-b-[2px] max-sm:hidden">
+                            <div class="flex gap-4 mb-4 pt-2 border-b-2 max-sm:hidden">
                                 <!-- HTML Tab Header -->
                                 <p @click="switchEditor('v-html-editor-theme', 1)">
                                     <div
-                                        class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-html-editor-theme'}"
+                                        class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.html')
                                     </div>
@@ -57,8 +57,8 @@
                                 <!-- CSS Tab Editor -->
                                 <p @click="switchEditor('v-css-editor-theme', 0);">
                                     <div
-                                        class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-css-editor-theme'}"
+                                        class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.css')
                                     </div>
@@ -67,8 +67,8 @@
                                 <!-- Preview Tab Editor -->
                                 <p @click="switchEditor('v-static-content-previewer', 0);">
                                     <div
-                                        class="transition pb-3.5 px-2.5 text-[16px] font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
-                                        :class="{'mb-[-1px] border-b-[2px] border-blue-600': inittialEditor == 'v-static-content-previewer'}"
+                                        class="transition pb-3.5 px-2.5 text-base  font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                                        :class="{'-mb-px border-b-2 border-blue-600': inittialEditor == 'v-static-content-previewer'}"
                                     >
                                         @lang('admin::app.settings.themes.edit.preview')
                                     </div>
@@ -105,7 +105,7 @@
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
                     </x-slot:header>
@@ -122,7 +122,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ $theme->name }}"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.name')"
@@ -146,7 +146,7 @@
                                 name="sort_order"
                                 value="{{ $theme->sort_order }}"
                                 rules="required|min_value:1"
-                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                 :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 label="@lang('admin::app.settings.themes.edit.sort-order')"
                                 placeholder="@lang('admin::app.settings.themes.edit.sort-order')"

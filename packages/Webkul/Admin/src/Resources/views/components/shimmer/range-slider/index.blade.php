@@ -1,5 +1,5 @@
 <div>
-    <div class="flex items-center gap-[15px]">
+    <div class="flex items-center gap-4">
         <p class="h-[21px] w-[55px] shimmer"></p>
 
         <p class="h-[21px] w-20 shimmer"></p>
