@@ -29,14 +29,14 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-sm"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -45,7 +45,7 @@
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
+                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -57,7 +57,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 right-5 bg-white rounded-md cursor-pointer text-[25px]"
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 right-5 bg-white rounded-md cursor-pointer text-2xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -116,14 +116,14 @@
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-sm"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -132,7 +132,7 @@
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span 
-                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -144,7 +144,7 @@
                         
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span 
-                                class="icon-compare flex justify-center items-center absolute top-[60px] right-5 w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                class="icon-compare flex justify-center items-center absolute top-[60px] right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -178,11 +178,11 @@
                     </span> 
                 </div> 
                 
-                <p class="text-[14px] text-[#6E6E6E]" v-if="! product.avg_ratings">
+                <p class="text-sm text-[#6E6E6E]" v-if="! product.avg_ratings">
                     @lang('shop::app.components.products.card.review-description')
                 </p>
             
-                <p v-else class="text-[14px] text-[#6E6E6E]">
+                <p v-else class="text-sm text-[#6E6E6E]">
                     <x-shop::products.star-rating 
                         ::value="product && product.avg_ratings ? product.avg_ratings : 0"
                         :is-editable=false

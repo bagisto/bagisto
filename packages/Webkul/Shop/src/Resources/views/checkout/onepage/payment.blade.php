@@ -19,7 +19,7 @@
                     <x-shop::accordion>
                         <x-slot:header>
                             <div class="flex justify-between items-center">
-                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                                <h2 class="text-2xl font-medium max-sm:text-xl">
                                     @lang('shop::app.checkout.onepage.payment.payment-method')
                                 </h2>
                             </div>
@@ -45,7 +45,7 @@
         
                                     <label 
                                         :for="payment.method" 
-                                        class="absolute ltr:right-5 rtl:left-5 top-5 icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="absolute ltr:right-5 rtl:left-5 top-5 icon-radio-unselect text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     >
                                     </label>
 
@@ -63,11 +63,11 @@
                                             :title="payment.method_title"
                                         />
 
-                                        <p class="text-[14px] font-semibold mt-1.5">
+                                        <p class="text-sm font-semibold mt-1.5">
                                             @{{ payment.method_title }}
                                         </p>
                                         
-                                        <p class="text-[12px] font-medium mt-2.5">
+                                        <p class="text-xs font-medium mt-2.5">
                                             @{{ payment.description }}
                                         </p> 
                                     </label>

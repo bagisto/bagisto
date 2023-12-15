@@ -26,7 +26,7 @@
                     >
                         <!-- Dropdown Label -->
                         <h2
-                            class="mb-4 text-[20px] max-sm:text-[16px]"
+                            class="mb-4 text-xl max-sm:text-base"
                             v-text="attribute.label"
                         ></h2>
                         
@@ -34,7 +34,7 @@
                         <v-field
                             as="select"
                             :name="'super_attribute[' + attribute.id + ']'"
-                            class="custom-select block w-full p-3.5 pr-9 bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select block w-full p-3.5 pr-9 bg-white border border-[#E9E9E9] rounded-lg text-base text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             :class="[errors['super_attribute[' + attribute.id + ']'] ? 'border border-red-500' : '']"
                             :id="'attribute_' + attribute.id"
                             rules="required"
@@ -57,7 +57,7 @@
                     <template v-else>
                         <!-- Option Label -->
                         <h2
-                            class="mb-4 text-[20px] max-sm:text-[16px]"
+                            class="mb-4 text-xl max-sm:text-base"
                             v-text="attribute.label"
                         ></h2>
 
@@ -162,7 +162,7 @@
                                         </v-field>
 
                                         <span
-                                            class="text-[18px] max-sm:text-[14px]"
+                                            class="text-lg max-sm:text-sm"
                                             v-text="option.label"
                                         ></span>
 
@@ -172,7 +172,7 @@
                             </template>
 
                             <span
-                                class="text-gray-600 text-sm max-sm:text-[12px]"
+                                class="text-gray-600 text-sm max-sm:text-xs"
                                 v-if="! attribute.options.length"
                             >
                                 @lang('shop::app.products.view.type.configurable.select-above-options')

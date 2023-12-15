@@ -37,16 +37,16 @@
                             <div class="flex gap-2.5">
                                 <div>
                                     <span class="flex p-2.5 border border-[rgba(6,12,59,0.20)] rounded-full">
-                                        <i class="icon-error text-[28px]"></i>
+                                        <i class="icon-error text-3xl"></i>
                                     </span>
                                 </div>
                             
                                 <div>
-                                    <div class="flex gap-5 justify-between items-center text-[20px]">
+                                    <div class="flex gap-5 justify-between items-center text-xl">
                                         @{{ title }}
                                     </div>
 
-                                    <div class="pt-1.5 pb-5 text-[14px] text-[#727272] text-left">
+                                    <div class="pt-1.5 pb-5 text-sm text-[#727272] text-left">
                                         @{{ message }}
                                     </div>
                                     

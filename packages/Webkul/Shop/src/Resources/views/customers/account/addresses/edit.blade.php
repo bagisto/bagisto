@@ -10,7 +10,7 @@
         <x-shop::breadcrumbs name="addresses.edit" :entity="$address"></x-shop::breadcrumbs>
     @endSection
 
-    <h2 class="text-[26px] font-medium">
+    <h2 class="text-2xl font-medium">
         @lang('shop::app.customers.account.addresses.edit')
         @lang('shop::app.customers.account.addresses.title')
     </h2>

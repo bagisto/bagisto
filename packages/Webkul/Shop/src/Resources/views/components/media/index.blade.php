@@ -26,7 +26,7 @@
 
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                             <span 
-                                class="icon-bin text-[24px] text-black cursor-pointer"
+                                class="icon-bin text-2xl text-black cursor-pointer"
                                 @click="removeFile"
                             >
                             </span>
@@ -89,7 +89,7 @@
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span 
-                                        class="icon-bin text-[24px] text-black cursor-pointer"
+                                        class="icon-bin text-2xl text-black cursor-pointer"
                                         @click="removeFile(index)"
                                     >
                                     </span>
@@ -113,7 +113,7 @@
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span 
-                                        class="icon-bin text-[24px] text-black cursor-pointer"
+                                        class="icon-bin text-2xl text-black cursor-pointer"
                                         @click="removeFile(index)"
                                     >
                                     </span>

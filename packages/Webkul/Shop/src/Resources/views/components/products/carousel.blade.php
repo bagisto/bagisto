@@ -10,11 +10,11 @@
     <script type="text/x-template" id="v-products-carousel-template">
         <div class="container mt-20 max-lg:px-8 max-sm:mt-8" v-if="! isLoading && products.length">
             <div class="flex justify-between">
-                <h2 class="text-[30px] font-dmserif max-sm:text-[25px]" v-text="title"></h2>
+                <h2 class="text-3xl font-dmserif max-sm:text-2xl" v-text="title"></h2>
 
                 <div class="flex gap-8 justify-between items-center">
                     <span
-                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block text-[24px] cursor-pointer"
+                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block text-2xl cursor-pointer"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.previous')"
                         tabindex="0"
@@ -23,7 +23,7 @@
                     </span>
 
                     <span
-                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block text-[24px] cursor-pointer"
+                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish inline-block text-2xl cursor-pointer"
                         role="button"
                         aria-label="@lang('shop::app.components.products.carousel.next')"
                         tabindex="0"

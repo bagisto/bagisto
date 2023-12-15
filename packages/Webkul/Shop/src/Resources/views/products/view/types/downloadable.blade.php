@@ -44,7 +44,7 @@
                         </v-field>
                         
                         <label
-                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="{{ $link->id }}"
                         ></label>
                         
