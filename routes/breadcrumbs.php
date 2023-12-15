@@ -81,7 +81,7 @@ Breadcrumbs::for('cart', function (BreadcrumbTrail $trail) {
 
 // Home > Checkout
 Breadcrumbs::for('checkout', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('cart');
     $trail->push(trans('shop::app.checkout.onepage.index.checkout'), route('shop.checkout.onepage.index'));
 });
 
