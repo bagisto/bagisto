@@ -21,7 +21,7 @@
 
             <div class="shimmer w-[30%] h-[21px] mt-4 max-sm:w-[220px]"></div>
 
-            <p class="shimmer w-[35%] h-9 mt-6"></p>
+            <p class="shimmer w-[35%] h-9 mt-5"></p>
 
             <div class="grid gap-2.5 mt-6 max-sm:my-[20px] max-sm:justify-between max-sm:flex">
                 <p class="shimmer w-full h-[27px] max-sm:w-[100px] max-sm:h-[21px]"></p>
