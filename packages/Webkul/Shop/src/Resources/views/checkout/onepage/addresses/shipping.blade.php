@@ -6,7 +6,7 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
 
-        <x-shop::accordion class="!border-b-[0px]">
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
@@ -141,7 +141,7 @@
         class="mt-8"
         v-else
     >
-        <x-shop::accordion>
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
