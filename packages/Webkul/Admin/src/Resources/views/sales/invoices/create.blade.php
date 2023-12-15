@@ -51,101 +51,99 @@
     
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
-                        <div class="grid">
-                            <div class="p-4 !pt-0">
-                                <div class="grid">
-                                    @foreach ($order->items as $item)
-                                        <div class="flex gap-2.5 justify-between py-4 border-b border-slate-300 dark:border-gray-800">
-                                            <div class="flex gap-2.5">
-                                                @if ($item->product?->base_image_url)
-                                                    <img
-                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
-                                                        src="{{ $item->product?->base_image_url }}"
-                                                    />
-                                                @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
-                                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                                        
-                                                        <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
-                                                            @lang('admin::app.sales.invoices.create.product-image')
-                                                        </p>
-                                                    </div>
-                                                @endif
-                
-                                                <div class="grid gap-1.5 place-content-start">
-                                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
-                                                        {{ $item->name }}
+                        <div class="grid p-4 !pt-0">
+                            @foreach ($order->items as $item)
+                                @if ($item->qty_to_invoice)
+                                    <div class="flex gap-2.5 justify-between py-4 border-b border-slate-300 dark:border-gray-800">
+                                        <div class="flex gap-2.5">
+                                            @if ($item->product?->base_image_url)
+                                                <img
+                                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
+                                                    src="{{ $item->product?->base_image_url }}"
+                                                />
+                                            @else
+                                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
+                                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                                    
+                                                    <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
+                                                        @lang('admin::app.sales.invoices.create.product-image')
                                                     </p>
-                
-                                                    <div class="flex flex-col gap-1.5 place-items-start">
+                                                </div>
+                                            @endif
+            
+                                            <div class="grid gap-1.5 place-content-start">
+                                                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                                                    {{ $item->name }}
+                                                </p>
+            
+                                                <div class="flex flex-col gap-1.5 place-items-start">
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.invoices.create.amount-per-unit', [
+                                                            'amount' => core()->formatBasePrice($item->base_price),
+                                                            'qty'    => $item->qty_ordered,
+                                                        ])
+                                                    </p>
+            
+                                                    @if (isset($item->additional['attributes']))
                                                         <p class="text-gray-600 dark:text-gray-300">
-                                                            @lang('admin::app.sales.invoices.create.amount-per-unit', [
-                                                                'amount' => core()->formatBasePrice($item->base_price),
-                                                                'qty'    => $item->qty_ordered,
-                                                            ])
+                                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                                {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                            @endforeach
                                                         </p>
-                
-                                                        @if (isset($item->additional['attributes']))
-                                                            <p class="text-gray-600 dark:text-gray-300">
-                                                                @foreach ($item->additional['attributes'] as $attribute)
-                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                                @endforeach
-                                                            </p>
-                                                        @endif
-                
-                                                        <p class="text-gray-600 dark:text-gray-300">
-                                                            @lang('admin::app.sales.invoices.create.sku', ['sku' => $item->sku])
-                                                        </p>
-                                                    </div>
+                                                    @endif
+            
+                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                        @lang('admin::app.sales.invoices.create.sku', ['sku' => $item->sku])
+                                                    </p>
                                                 </div>
                                             </div>
-
-                                            <!-- Quantity Details -->
-                                            <x-admin::form.control-group class="mb-2.5">
-                                                <x-admin::form.control-group.label class="required">
-                                                    @lang('admin::app.sales.invoices.create.qty-to-invoiced')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    :name="'invoice[items][' . $item->id . ']'"
-                                                    :id="'invoice[items][' . $item->id . ']'"
-                                                    :value="$item->qty_to_invoice"
-                                                    rules="required|numeric|min:0" 
-                                                    class="!w-[100px]"
-                                                    label="Qty to invoiced"
-                                                    placeholder="Qty to invoiced"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    :control-name="'invoice[items][' . $item->id . ']'"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
                                         </div>
-                                    @endforeach
 
-                                    <!-- Create Transaction Button -->
-                                    <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            name="can_create_transaction"
-                                            id="can_create_transaction"
-                                            for="can_create_transaction"
-                                            value="1"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.label
-                                            for="can_create_transaction"
-                                            class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
-                                        >
-                                            @lang('Create Transaction')
-                                        </x-admin::form.control-group.label>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </div>
+                                        <!-- Quantity Details -->
+                                        <x-admin::form.control-group class="mb-2.5">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.sales.invoices.create.qty-to-invoiced')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                :name="'invoice[items][' . $item->id . ']'"
+                                                :id="'invoice[items][' . $item->id . ']'"
+                                                :value="$item->qty_to_invoice"
+                                                rules="required|numeric|min:0" 
+                                                class="!w-[100px]"
+                                                label="Qty to invoiced"
+                                                placeholder="Qty to invoiced"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                :control-name="'invoice[items][' . $item->id . ']'"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                @endif
+                            @endforeach
+
+                            <!-- Create Transaction Button -->
+                            <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group.control
+                                    type="checkbox"
+                                    name="can_create_transaction"
+                                    id="can_create_transaction"
+                                    for="can_create_transaction"
+                                    value="1"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.label
+                                    for="can_create_transaction"
+                                    class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                                >
+                                    @lang('Create Transaction')
+                                </x-admin::form.control-group.label>
+                            </x-admin::form.control-group>
                         </div>
                     </x-slot:content>
                 </x-admin::drawer>
