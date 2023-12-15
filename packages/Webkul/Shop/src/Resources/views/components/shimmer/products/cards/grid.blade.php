@@ -7,7 +7,7 @@
         </div>
 
         <div class="grid gap-2.5 content-start">
-            <p class="shimmer w-[75%] h-6"></p>
+            <p class="shimmer w-3/4 h-6"></p>
             <p class="shimmer w-[55%] h-6"></p>
 
             <!-- Needs to implement that in future -->

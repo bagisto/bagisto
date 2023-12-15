@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center gap-[15px] mt-[30px] max-w-[365px] max-sm:flex-wrap">
+<div class="flex justify-between items-center gap-4 mt-8 max-w-[365px] max-sm:flex-wrap">
     <span class="shimmer w-[45px] h-[45px]"></span>
 
     <div class="flex items-center space-x-3">

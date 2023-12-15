@@ -8,10 +8,10 @@
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
 @endphp
 
-<div class="gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
+<div class="gap-4 flex-wrap px-4 pt-6 hidden max-lg:flex max-lg:mb-4">
     <div class="w-full flex justify-between items-center">
         <!-- Left Navigation -->
-        <div class="flex items-center gap-x-[5px]">
+        <div class="flex items-center gap-x-1.5">
             <x-shop::drawer
                 position="left"
                 width="80%"
@@ -35,7 +35,7 @@
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
-                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[15px] p-2.5 border border-[#E9E9E9] rounded-xl">
+                    <div class="grid grid-cols-[auto_1fr] gap-4 items-center mb-4 p-2.5 border border-[#E9E9E9] rounded-xl">
                         <div class="">
                             <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
@@ -67,7 +67,7 @@
                     <v-mobile-category></v-mobile-category>
 
                     <!-- Localization & Currency Section -->
-                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-5 justify-between items-center mb-[15px]">
+                    <div class="absolute w-full flex bottom-0 left-0 bg-white shadow-lg p-4 gap-x-5 justify-between items-center mb-4">
                         <x-shop::dropdown position="top-left">
                             <!-- Dropdown Toggler -->
                             <x-slot:toggle>
@@ -174,17 +174,17 @@
 
                             <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
-                            <div class="flex gap-4 mt-[25px]">
+                            <div class="flex gap-4 mt-6">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
-                                    class="block w-max mx-auto m-0 ml-0 py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-4 px-7 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-in')
                                 </a>
 
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
-                                    class="block w-max mx-auto m-0 ml-0 py-3.5 px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-0 py-3.5 px-7 bg-white border-2 border-navyBlue rounded-2xl text-navyBlue text-base font-medium  text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>
@@ -291,7 +291,7 @@
     <script type="text/x-template" id="v-mobile-category-template">
         <div>
             <template v-for="(category) in categories">
-                <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                <div class="flex justify-between items-center border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                     <a
                         :href="category.url"
                         class="flex items-center justify-between pb-5 mt-5"
@@ -313,7 +313,7 @@
                 >
                     <ul v-if="category.children.length">
                         <li v-for="secondLevelCategory in category.children">
-                            <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                            <div class="flex justify-between items-center ml-3 border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                 <a
                                     :href="secondLevelCategory.url"
                                     class="flex items-center justify-between pb-5 mt-5"
@@ -335,7 +335,7 @@
                             <div v-if="secondLevelCategory.category_show">
                                 <ul v-if="secondLevelCategory.children.length">
                                     <li v-for="thirdLevelCategory in secondLevelCategory.children">
-                                        <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
+                                        <div class="flex justify-between items-center ml-3 border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                             <a
                                                 :href="thirdLevelCategory.url"
                                                 class="flex items-center justify-between mt-5 ml-3 pb-5"

@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center p-[25px]">
+<div class="flex justify-between items-center p-6">
     <div class="shimmer w-[160px] h-[18px]"></div>
 
     <div>

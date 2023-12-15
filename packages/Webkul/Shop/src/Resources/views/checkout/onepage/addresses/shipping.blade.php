@@ -1,6 +1,6 @@
 <div v-if="! forms.billing.isUsedForShipping">
     <div 
-        class="mt-[30px]"
+        class="mt-8"
         v-if="! forms.shipping.isNew"
     >
 
@@ -21,7 +21,7 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, store)">
-                        <div class="grid grid-cols-2 mt-[30px] gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                        <div class="grid grid-cols-2 mt-8 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                                 v-for="(address, index) in addresses"
@@ -57,7 +57,7 @@
                                         </p>
                                     </div>
 
-                                    <p class="mt-[25px] text-[#6E6E6E] text-[14px]">
+                                    <p class="mt-6 text-[#6E6E6E] text-[14px]">
                                         <template v-if="typeof address.address1 === 'string'">
                                             @{{ address.address1 }},
                                         </template>
@@ -107,7 +107,7 @@
                             <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.length">
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
-                                        class="block py-[11px] px-[43px] bg-navyBlue text-white text-base w-max font-medium rounded-[18px] text-center cursor-pointer"
+                                        class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
                                         @click="store"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
@@ -121,7 +121,7 @@
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
                                         type="submit"
-                                        class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer"
+                                        class="block w-max py-3 px-11 bg-navyBlue text-white text-base font-medium rounded-2xl text-center cursor-pointer"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
@@ -138,7 +138,7 @@
     </div>
 
     <div 
-        class="mt-[30px]"
+        class="mt-8"
         v-else
     >
         <x-shop::accordion>
@@ -459,10 +459,10 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.phone.after') !!}
 
-                        <div class="mt-[30px] pb-[15px]">
+                        <div class="mt-8 pb-4">
                             <div class="grid gap-2.5">
                                 @auth('customer')
-                                    <div class="select-none flex gap-x-[15px]">
+                                    <div class="select-none flex gap-x-4">
                                         <input 
                                             type="checkbox"
                                             name="shipping[is_save_as_address]"
@@ -490,7 +490,7 @@
                         >
                             <button
                                 type="submit"
-                                class="block w-max px-[43px] py-[11px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                class="block w-max px-11 py-3 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                             </button>
