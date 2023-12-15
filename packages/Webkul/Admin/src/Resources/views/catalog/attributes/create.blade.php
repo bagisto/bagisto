@@ -238,7 +238,7 @@
                                             <template #item="{ element, index }">
                                                 <x-admin::table.thead.tr class="hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <!-- Draggable Icon -->
-                                                    <x-admin::table.td class="!px-0">
+                                                    <x-admin::table.td class="!px-0 text-center">
                                                         <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
@@ -745,7 +745,10 @@
 
                         <!-- Modal Content !-->
                         <x-slot:content>
-                            <div class="grid">
+                            <div
+                                class="grid"
+                                v-if="swatchType == 'image' || swatchType == 'color'"
+                            >
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"

@@ -387,29 +387,27 @@
                         </p>
                     </x-slot:header>
 
-                    <x-slot:content class="pointer-events-none">
+                    <x-slot:content>
                         @foreach ($attributes as $attribute)
-                            <label
-                                class="flex gap-2.5 w-max items-center p-1.5 cursor-pointer select-none"
-                                for="{{ $attribute->name ?? $attribute->admin_name }}"
-                            >
+                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="attributes[]"
-                                    id="{{ $attribute->name ?? $attribute->admin_name }}"
-                                    class="cursor-pointer"
+                                    :id="$attribute->name ?? $attribute->admin_name"
+                                    :value="$attribute->id"
                                     rules="required"
-                                    value="{{ $attribute->id }}"
-                                    for="{{ $attribute->name ?? $attribute->admin_name }}"
+                                    :for="$attribute->name ?? $attribute->admin_name"
                                     :label="trans('admin::app.catalog.categories.create.filterable-attributes')"
                                 >
                                 </x-admin::form.control-group.control>
 
-
-                                <div class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
+                                <x-admin::form.control-group.label
+                                    :for="$attribute->name ?? $attribute->admin_name"
+                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                >
                                     {{ $attribute->name ?? $attribute->admin_name }}
-                                </div>
-                            </label>
+                                </x-admin::form.control-group.label>
+                            </x-admin::form.control-group>
                         @endforeach
 
                         <x-admin::form.control-group.error

@@ -254,7 +254,7 @@
                                                     >
 
                                                     <!-- Draggable Icon -->
-                                                    <x-admin::table.td class="!px-0">
+                                                    <x-admin::table.td class="!px-0 text-center">
                                                         <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
