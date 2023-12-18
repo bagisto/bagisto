@@ -80,8 +80,6 @@
                                         <a 
                                             href="javascript:void(0);"                                                
                                             @click="$emitter.emit('open-confirm-modal', {
-                                            message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
-
                                                 agree: () => {
                                                     $refs['addressDelete'].submit()
                                                 }
@@ -94,14 +92,28 @@
                                     </x-shop::dropdown.menu.item>
 
                                     <x-shop::dropdown.menu.item>
-                                        <x-shop::form
-                                            :action="route('shop.customers.account.addresses.update.default', $address->id)"
-                                            method="PATCH"
+                                        <form
+                                            method="POST"
+                                            ref="setAsDefault"
+                                            action="{{ route('shop.customers.account.addresses.update.default', $address->id) }}"
+                                        >
+                                            @method('PATCH')
+                                            @csrf
+
+                                        </form>
+
+                                        <a 
+                                            href="javascript:void(0);"                                                
+                                            @click="$emitter.emit('open-confirm-modal', {
+                                                agree: () => {
+                                                    $refs['setAsDefault'].submit()
+                                                }
+                                            })"
                                         >
                                             <button>
                                                 @lang('shop::app.customers.account.addresses.set-as-default')
                                             </button>
-                                        </x-shop::form>
+                                        </a>
                                     </x-shop::dropdown.menu.item>
                                 </x-slot:menu>
                             </x-shop::dropdown>
