@@ -23,20 +23,20 @@
                 >
 
                     <img 
-                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
+                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === 'image'+index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(image, index) in media.images"
                         :src="image.small_image_url"
                         alt="{{ $product->name }}"
                         width="100"
                         height="100"
-                        @click="change(image, index)"
+                        @click="change(image, 'image'+index)"
                     />
 
                     <!-- Need to Set Play Button  -->
                     <video 
-                        class="min-w-[100px] rounded-xl"
+                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === 'video'+index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(video, index) in media.videos"
-                        @click="change(video, index)"
+                        @click="change(video, 'video'+index)"
                     >
                         <source 
                             :src="video.video_url"
@@ -85,7 +85,7 @@
                     <video  
                         controls                             
                         width='475'
-                        @load="onMediaLoad()"
+                        @loadeddata="onMediaLoad()"                        
                     >
                         <source 
                             :src="baseFile.path" 
@@ -148,9 +148,11 @@
     
             mounted() {
                 if (this.media.images.length) {
+                    this.activeIndex = 'image0';
                     this.baseFile.type = 'image';
                     this.baseFile.path = this.media.images[0].large_image_url;
                 } else if (this.media.videos.length) {
+                    this.activeIndex = 'image0';
                     this.baseFile.type = 'video';
                     this.baseFile.path = this.media.videos[0].video_url;
                 }
@@ -173,6 +175,7 @@
                     if (file.type == 'videos') {
                         this.baseFile.type = 'video';
                         this.baseFile.path = file.video_url;
+                        this.onMediaLoad();
                     } else {
                         this.baseFile.type = 'image';
                         this.baseFile.path = file.large_image_url;
