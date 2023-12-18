@@ -12,19 +12,19 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit.actions.before', ['product' => $product]) !!}
 
         <!-- Page Header -->
-        <div class="grid gap-[10px]">
-            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <div class="grid gap-[6px]">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+        <div class="grid gap-2.5">
+            <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+                <div class="grid gap-1.5">
+                    <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
                         @lang('admin::app.catalog.products.edit.title')
                     </p>
                 </div>
 
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- Back Button -->
                     <a
                         href="{{ route('admin.catalog.products.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white "
+                        class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                     >
                         @lang('admin::app.account.edit.back-btn')
                     </a>
@@ -60,32 +60,32 @@
         @endphp
 
         <!-- Channel and Locale Switcher -->
-        <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
+        <div class="flex  gap-4 justify-between items-center mt-7 max-md:flex-wrap">
+            <div class="flex gap-x-1 items-center">
                 <!-- Channel Switcher -->
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-store text-[24px] "></span>
+                            <span class="icon-store text-2xl"></span>
                             
                             {{ $currentChannel->name }}
 
                             <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white  "
+                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white"
                             >
                                 {{ $channel->name }}
                             </a>
@@ -99,24 +99,24 @@
                     <x-slot:toggle>
                         <button
                             type="button"
-                            class="transparent-button px-[4px] py-[6px] hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 focus:bg-gray-200 dark:focus:bg-gray-800 dark:text-white"
                         >
-                            <span class="icon-language text-[24px] "></span>
+                            <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
                             
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-sort-down text-2xl"></span>
                         </button>
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-[0px]">
+                    <x-slot:content class="!p-0">
                         @foreach ($currentChannel->locales as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
                             >
                                 {{ $locale->name }}
                             </a>
@@ -131,11 +131,11 @@
         <!-- body content -->
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.before', ['product' => $product]) !!}
 
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
                 {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
 
-                <div class="flex flex-col gap-[8px] @if ($column == 1) flex-1 max-xl:flex-auto @elseif ($column == 2) w-[360px] max-w-full max-sm:w-full @endif">
+                <div class="flex flex-col gap-2 @if ($column == 1) flex-1 max-xl:flex-auto @elseif ($column == 2) w-[360px] max-w-full max-sm:w-full @endif">
                     @foreach ($groups as $group)
                         @php
                             $customAttributes = $product->getEditableAttributes($group);
@@ -144,8 +144,8 @@
                         @if (count($customAttributes))
                             {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->code . '.before', ['product' => $product]) !!}
 
-                            <div class="relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                            <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                                     {{ $group->name }}
                                 </p>
 
@@ -165,13 +165,13 @@
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
-                                                <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentChannel->name }}
                                                 </span>
                                             @endif
 
                                             @if ($attribute->value_per_locale)
-                                                <span class="px-[6px] py-[3px] bg-gray-100 border border-gray-200 rounded-[3px] text-[10px] text-gray-600 font-semibold leading-normal">
+                                                <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
                                                     {{ $currentLocale->name }}
                                                 </span>
                                             @endif

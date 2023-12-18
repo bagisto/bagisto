@@ -28,16 +28,16 @@
                 <!-- Wishlist Information -->
                 <template v-else>
                     <div class="flex justify-between items-center overflow-auto journal-scroll">
-                        <h2 class="text-[26px] font-medium">
+                        <h2 class="text-2xl font-medium">
                             @lang('shop::app.customers.account.wishlist.page-title')
                         </h2>
 
                         <div
-                            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9]"
+                            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9]"
                             @click="removeAll"
                             v-if="wishlist.length"
                         >
-                            <span class="icon-bin text-[24px]"></span>
+                            <span class="icon-bin text-2xl"></span>
                             @lang('shop::app.customers.account.wishlist.delete-all')
                         </div>
                     </div>
@@ -45,46 +45,46 @@
                     <div 
                         v-if="wishlist.length" 
                         v-for="item in wishlist"
-                        class="flex gap-[75px] flex-wrap mt-[30px] max-1060:flex-col"
+                        class="flex gap-20 flex-wrap mt-8 max-1060:flex-col"
                     >
-                        <div class="grid gap-[30px] flex-1">
-                            <div class="grid gap-y-[25px]">
+                        <div class="grid gap-8 flex-1">
+                            <div class="grid gap-y-6">
                                 <!-- Wishlist item -->
-                                <div class="flex gap-x-[10px] justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
-                                    <div class="flex gap-x-[20px]">
+                                <div class="flex gap-x-2.5 justify-between pb-5 border-b border-[#E9E9E9]">
+                                    <div class="flex gap-x-5">
                                         <div class="">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <x-shop::media.images.lazy
-                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-[12px]" 
+                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-xl" 
                                                     ::src="item.product.base_image.small_image_url"                                         
                                                 >
                                                 </x-shop::media.images.lazy>
                                             </a>
                                         </div>
 
-                                        <div class="grid gap-y-[10px]">
+                                        <div class="grid gap-y-2.5">
                                             <p 
-                                                class="text-[16px] font-medium" 
+                                                class="text-base font-medium" 
                                                 v-text="item.product.name"
                                             >
                                             </p>
 
                                             <!--Wishlist Item attributes -->
                                             <div 
-                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                class="flex gap-x-2.5 gap-y-1.5 flex-wrap"
                                                 v-if="item.options.length"
                                             >
-                                                <div class="grid gap-[8px]">
+                                                <div class="grid gap-2">
                                                     <div class="">
                                                         <p
-                                                            class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                                            class="flex gap-x-4 text-base items-center cursor-pointer"
                                                             @click="item.option_show = ! item.option_show"
                                                         >
                                                             @lang('shop::app.customers.account.wishlist.see-details')
         
                                                             <span
-                                                                class="text-[24px]"
+                                                                class="text-2xl"
                                                                 :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                                             >
                                                             </span>
@@ -92,15 +92,15 @@
                                                     </div>
         
                                                     <div 
-                                                        class="grid gap-[8px]" 
+                                                        class="grid gap-2" 
                                                         v-show="item.option_show"
                                                     >
                                                         <div v-for="option in item.options">
-                                                            <p class="text-[14px] font-medium">
+                                                            <p class="text-sm font-medium">
                                                                 @{{ option.attribute_name + ':' }}
                                                             </p>
         
-                                                            <p class="text-[14px]">
+                                                            <p class="text-sm">
                                                                 @{{ option.option_label }}
                                                             </p>
                                                         </div>
@@ -110,24 +110,24 @@
 
                                             <div class="sm:hidden">
                                                 <p 
-                                                    class="text-[18px] font-semibold" 
+                                                    class="text-lg font-semibold" 
                                                     v-html="item.product.min_price"
                                                 >
                                                 </p>
 
                                                 <!--Wishlist Item removed button-->
                                                 <a 
-                                                    class="flex justify-end text-[16px] text-[#0A49A7] cursor-pointer" 
+                                                    class="flex justify-end text-base text-[#0A49A7] cursor-pointer" 
                                                     @click="remove(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
                                                 </a>
                                             </div>
 
-                                            <div class="flex gap-[20px] flex-wrap">
+                                            <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
-                                                    class="flex gap-x-[10px] items-center max-h-[40px] py-[5px] px-[14px] border border-navyBlue  rounded-[54px]"
+                                                    class="flex gap-x-2.5 items-center max-h-10 py-1.5 px-3.5 border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
                                                 >
                                                 </x-shop::quantity-changer>
@@ -135,7 +135,7 @@
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <button
                                                     type="button"
-                                                    class="primary-button block w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-base text-center"
+                                                    class="primary-button block w-max max-h-10 py-1.5 px-6 rounded-2xl text-base text-center"
                                                     @click="moveToCart(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
@@ -146,13 +146,13 @@
 
                                     <div class="max-sm:hidden">
                                         <p 
-                                            class="text-[18px] font-semibold" 
+                                            class="text-lg font-semibold" 
                                             v-html="item.product.min_price"
                                         >
                                         </p>
 
                                         <a 
-                                            class="flex justify-end text-[16px] text-[#0A49A7] cursor-pointer" 
+                                            class="flex justify-end text-base text-[#0A49A7] cursor-pointer" 
                                             @click="remove(item.id)"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')
@@ -165,7 +165,7 @@
 
                     <!--Empty Wishlist-->
                     <div
-                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
+                        class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
                         <img
@@ -175,7 +175,7 @@
                             title=""
                         >
 
-                        <p class="text-[20px]">
+                        <p class="text-xl">
                             @lang('shop::app.customers.account.wishlist.empty')
                         </p>
                     </div>

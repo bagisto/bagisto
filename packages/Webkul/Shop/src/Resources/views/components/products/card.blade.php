@@ -11,7 +11,7 @@
             class='grid gap-2.5 content-start w-full relative'
             v-if="mode != 'list'"
         >
-            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded-[4px]">
+            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded">
                 <a
                     :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
                     :aria-label="product.name + ' '"
@@ -29,14 +29,14 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-sm"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -45,7 +45,7 @@
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
+                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -57,7 +57,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 right-5 bg-white rounded-md cursor-pointer text-2xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -67,7 +67,7 @@
                         @endif
 
                         <button
-                            class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
+                            class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             :disabled="! product.is_saleable"
                             @click="addToCart()"
                             ref="addToCartButton"
@@ -82,13 +82,13 @@
                 <p class="text-base" v-text="product.name"></p>
 
                 <div
-                    class="flex gap-2.5 font-semibold text-lg"
+                    class="flex gap-2.5 items-center font-semibold text-lg"
                     v-html="product.price_html"
                 >
                 </div>
 
                 <!-- Needs to implement that in future -->
-                <div class="hidden flex gap-4 mt-[8px]">
+                <div class="hidden flex gap-4 mt-2">
                     <span class="block w-[30px] h-[30px] bg-[#B5DCB4] rounded-full cursor-pointer"></span>
 
                     <span class="block w-[30px] h-[30px] bg-[#5C5C5C] rounded-full cursor-pointer"></span>
@@ -98,7 +98,7 @@
 
         <!-- List Card -->
         <div
-            class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap rounded-[4px] overflow-hidden"
+            class="flex gap-4 grid-cols-2 max-w-max relative max-sm:flex-wrap rounded overflow-hidden"
             v-else
         >
             <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
@@ -116,14 +116,14 @@
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E51A1A] rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-sm"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-white text-[14px]"
+                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -132,7 +132,7 @@
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span 
-                                class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -144,7 +144,7 @@
                         
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span 
-                                class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
+                                class="icon-compare flex justify-center items-center absolute top-16 right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -156,7 +156,7 @@
                 </div> 
             </div> 
 
-            <div class="grid gap-[15px] content-start"> 
+            <div class="grid gap-4 content-start"> 
                 <p 
                     class="text-base" 
                     v-text="product.name"
@@ -178,11 +178,11 @@
                     </span> 
                 </div> 
                 
-                <p class="text-[14px] text-[#6E6E6E]" v-if="! product.avg_ratings">
+                <p class="text-sm text-[#6E6E6E]" v-if="! product.avg_ratings">
                     @lang('shop::app.components.products.card.review-description')
                 </p>
             
-                <p v-else class="text-[14px] text-[#6E6E6E]">
+                <p v-else class="text-sm text-[#6E6E6E]">
                     <x-shop::products.star-rating 
                         ::value="product && product.avg_ratings ? product.avg_ratings : 0"
                         :is-editable=false
@@ -191,7 +191,7 @@
                 </p>
 
                 <x-shop::button
-                    class="primary-button px-[30px] py-[10px] whitespace-nowrap"
+                    class="primary-button px-8 py-2.5 whitespace-nowrap"
                     :title="trans('shop::app.components.products.card.add-to-cart')"
                     :loading="false"
                     ::disabled="! product.is_saleable"

@@ -4,12 +4,12 @@
     </x-slot:title>
    
     <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.settings.themes.index.title')
         </p>
         
-        <div class="flex gap-x-[10px] items-center">
-            <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
+            <div class="flex gap-x-2.5 items-center">
                 {!! view_render_event('bagisto.admin.settings.themes.create.before') !!}
 
                 <!-- Create Button -->
@@ -57,7 +57,7 @@
                         <x-admin::modal ref="themeCreateModal">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.create.title')
                                 </p>
                             </x-slot:header>
@@ -146,7 +146,7 @@
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button
                                         type="submit"
                                         class="primary-button"

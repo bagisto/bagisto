@@ -17,14 +17,14 @@
         </template>
 
         <template v-else>
-            <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
-                <h1 class="text-[26px] font-medium max-sm:text-[20px]">
+            <div class="sticky top-8 h-max w-[442px] max-w-full pl-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
+                <h1 class="text-2xl font-medium max-sm:text-xl">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>
                 
-                <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-[20px]">
+                <div class="grid mt-10 border-b border-[#E9E9E9] max-sm:mt-5">
                     <div 
-                        class="flex gap-x-[15px] pb-[20px]"
+                        class="flex gap-x-4 pb-5"
                         v-for="item in cart.items"
                     >
                         <img
@@ -37,26 +37,26 @@
 
                         <div>
                             <p 
-                                class="text-[16px] text-navyBlue max-sm:text-[14px] max-sm:font-medium" 
+                                class="text-base text-navyBlue max-sm:text-sm max-sm:font-medium" 
                                 v-text="item.name"
                             >
                             </p>
 
-                            <p class="mt-[10px] text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
+                            <p class="mt-2.5 text-lg font-medium max-sm:text-sm max-sm:font-normal">
                                 @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price }}', 'qty' => '@{{ item.quantity }}'])
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+                <div class="grid gap-4 mt-6 mb-8">
                     <div class="flex text-right justify-between">
-                        <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+                        <p class="text-base max-sm:text-sm max-sm:font-normal">
                             @lang('shop::app.checkout.onepage.summary.sub-total')
                         </p>
 
                         <p 
-                            class="text-[16px] font-medium max-sm:text-[14px]"
+                            class="text-base font-medium max-sm:text-sm"
                             v-text="cart.base_sub_total"
                         >
                         </p>
@@ -67,12 +67,12 @@
                         v-for="(amount, index) in cart.base_tax_amounts"
                         v-if="parseFloat(cart.base_tax_total)"
                     >
-                        <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+                        <p class="text-base max-sm:text-sm max-sm:font-normal">
                             @lang('shop::app.checkout.onepage.summary.tax') (@{{ index }})%
                         </p>
 
                         <p 
-                            class="text-[16px] font-medium max-sm:text-[14px]"
+                            class="text-base font-medium max-sm:text-sm"
                             v-text="amount"
                         >
                         </p>
@@ -82,12 +82,12 @@
                         class="flex text-right justify-between"
                         v-if="cart.selected_shipping_rate"
                     >
-                        <p class="text-[16px]">
+                        <p class="text-base">
                             @lang('shop::app.checkout.onepage.summary.delivery-charges')
                         </p>
 
                         <p 
-                            class="text-[16px] font-medium"
+                            class="text-base font-medium"
                             v-text="cart.selected_shipping_rate"
                         >
                         </p>
@@ -97,12 +97,12 @@
                         class="flex text-right justify-between"
                         v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
                     >
-                        <p class="text-[16px]">
+                        <p class="text-base">
                             @lang('shop::app.checkout.onepage.summary.discount-amount')
                         </p>
 
                         <p 
-                            class="text-[16px] font-medium"
+                            class="text-base font-medium"
                             v-text="cart.formatted_base_discount_amount"
                         >
                         </p>
@@ -111,12 +111,12 @@
                     @include('shop::checkout.cart.coupon')
 
                     <div class="flex text-right justify-between">
-                        <p class="text-[18px] font-semibold">
+                        <p class="text-lg font-semibold">
                             @lang('shop::app.checkout.onepage.summary.grand-total')
                         </p>
 
                         <p 
-                            class="text-[18px] font-semibold"
+                            class="text-lg font-semibold"
                             v-text="cart.base_grand_total"
                         >
                         </p>
@@ -133,7 +133,7 @@
                         v-else
                     >
                         <x-shop::button
-                            class="primary-button w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
                             :title="trans('shop::app.checkout.onepage.summary.place-order')"
                             :loading="false"
                             ref="placeOrder"

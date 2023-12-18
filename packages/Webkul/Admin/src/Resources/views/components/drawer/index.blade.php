@@ -18,12 +18,12 @@
 
     @isset($header)
         <template v-slot:header="{ close }">
-            <div {{ $header->attributes->merge(['class' => 'grid gap-y-[10px] p-[12px] border-b-[1px] dark:border-gray-800 max-sm:px-[15px]']) }}>
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-3 border-b dark:border-gray-800 max-sm:px-4']) }}>
                 {{ $header }}
 
                 <div class="absolute top-4 ltr:right-3 rtl:left-3">
                     <span
-                        class="icon-cross text-[30px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
+                        class="icon-cross text-3xl  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                         @click="close"
                     >
                     </span>
@@ -34,7 +34,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'p-[11px] overflow-auto flex-1 max-sm:px-[15px]']) }}>
+            <div {{ $content->attributes->merge(['class' => 'p-3 overflow-auto flex-1 max-sm:px-4']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -42,7 +42,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div {{ $footer->attributes->merge(['class' => 'pb-[30px]']) }}>
+            <div {{ $footer->attributes->merge(['class' => 'pb-8']) }}>
                 {{ $footer }}
             </div>
         </template>

@@ -10,16 +10,16 @@
     @endSection
     <div class="flex justify-between items-center">
         <div class="">
-            <h2 class="text-[26px] font-medium">
+            <h2 class="text-2xl font-medium">
                 @lang('shop::app.customers.account.addresses.title')
             </h2>
         </div>
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal"
+            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal"
         >
-            <span class="icon-location text-[24px]"></span>
+            <span class="icon-location text-2xl"></span>
 
             @lang('shop::app.customers.account.addresses.add-address') 
         </a>
@@ -30,19 +30,19 @@
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-        <div class="grid grid-cols-2 gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
+        <div class="grid grid-cols-2 gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
-                <div class="p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
+                <div class="p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                     <div class="flex justify-between items-center">
-                        <p class="text-[16px] font-medium">
+                        <p class="text-base font-medium">
                             {{ $address->company_name }}
                         </p>
 
-                        <div class="flex gap-[25px] items-center">
+                        <div class="flex gap-6 items-center">
 
                             @if ($address->default_address)
                                 <div 
-                                    class="block w-max m-0 ml-[0px] mx-auto p-[5px] rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
+                                    class="block w-max m-0 ml-0 mx-auto p-1.5 rounded-xl bg-navyBlue text-xs text-white font-medium text-center"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
@@ -51,7 +51,7 @@
                             <!-- Dropdown Actions -->
                             <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
-                                    <button class="icon-more px-[6px] py-[4px] rounded-[6px] text-[24px] text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
+                                    <button class="icon-more px-1.5 py-1 rounded-md text-2xl text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
                                 </x-slot:toggle>
 
                                 <x-slot:menu>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <p class="text-[#6E6E6E] mt-[25px]">
+                    <p class="text-[#6E6E6E] mt-6">
                         {{ $address->address1 }},
 
                         @if ($address->address2)
@@ -114,7 +114,7 @@
 
     @else
         <!-- Address Empty Page -->
-        <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+        <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
             <img 
                 class="" 
                 src="{{ bagisto_asset('images/no-address.png') }}" 
@@ -122,7 +122,7 @@
                 title=""
             >
             
-            <p class="text-[20px]">
+            <p class="text-xl">
                 @lang('shop::app.customers.account.addresses.empty-address')
             </p>
         </div>    

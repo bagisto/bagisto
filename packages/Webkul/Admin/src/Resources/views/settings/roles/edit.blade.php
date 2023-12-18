@@ -23,11 +23,11 @@
                 {!! view_render_event('admin.settings.roles.edit.edit_form_controls.before') !!}
 
                 <div class="flex justify-between items-center">
-                    <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                    <p class="text-xl text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.settings.roles.edit.title')
                     </p>
 
-                    <div class="flex gap-x-[10px] items-center">
+                    <div class="flex gap-x-2.5 items-center">
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.settings.roles.index') }}"
@@ -39,7 +39,7 @@
                         <!-- Save Button -->
                         <button
                             type="submit"
-                            class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                         >
                             @lang('admin::app.settings.roles.edit.save-btn')
                         </button>
@@ -47,20 +47,20 @@
                 </div>
 
                 <!-- body content -->
-                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                     <!-- Left sub-component -->
-                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                         {!! view_render_event('bagisto.admin.settings.roles.edit.card.access-control.before') !!}
 
                         <!-- Access Control Input Fields -->
-                        <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                        <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                                 @lang('admin::app.settings.roles.edit.access-control')
                             </p>
 
                             <!-- Permission Type -->
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group class="mb-2.5">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.roles.edit.permissions')
                                 </x-admin::form.control-group.label>
@@ -81,10 +81,10 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-
-                            <!-- Tree Structure -->
-                            <div
-                                class="mb-[10px]"
+                            
+                            <!-- Tree structure -->
+                            <div 
+                                class="mb-2.5"
                                 v-if="permission_type == 'custom'"
                             >
                                 <x-admin::tree.view
@@ -104,14 +104,14 @@
                     </div>
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
                         {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.before') !!}
 
                         <x-admin::accordion>
                             <x-slot:header>
-                                <div class="flex items-center justify-between p-[6px]">
-                                    <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                                <div class="flex items-center justify-between p-1.5">
+                                    <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
                                         @lang('admin::app.settings.roles.edit.general')
                                     </p>
                                 </div>
@@ -119,7 +119,7 @@
 
                             <x-slot:content>
                                 <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.edit.name')
                                     </x-admin::form.control-group.label>
@@ -142,7 +142,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Description -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.edit.description')
                                     </x-admin::form.control-group.label>

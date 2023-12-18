@@ -9,24 +9,24 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-method-template">
-        <div class="mt-[30px]">
+        <div class="mt-8">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.shipping-method/>
             </template>
 
             <template v-if="isShowShippingMethod">
-                <x-shop::accordion>
+                <x-shop::accordion class="!border-b-0">
                     <x-slot:header>
                         <div class="flex justify-between items-center">
-                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                            <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
                         </div>
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex flex-wrap gap-[30px] mt-[15px]">
+                        <div class="flex flex-wrap gap-8 mt-4">
                             <div
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
@@ -45,22 +45,22 @@
                                     >
 
                                     <label 
-                                        class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                         :for="rate.method"
                                     >
                                     </label>
 
                                     <label 
-                                        class="block p-[20px] border border-[#E9E9E9] rounded-[12px] cursor-pointer"
+                                        class="block p-5 border border-[#E9E9E9] rounded-xl cursor-pointer"
                                         :for="rate.method"
                                     >
-                                        <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
+                                        <span class="icon-flate-rate text-6xl text-navyBlue"></span>
 
-                                        <p class="text-[25px] mt-[5px] font-semibold max-sm:text-[20px]">
+                                        <p class="text-2xl mt-1.5 font-semibold max-sm:text-xl">
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         
-                                        <p class="text-[12px] mt-[10px] font-medium">
+                                        <p class="text-xs mt-2.5 font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                         </p>
                                     </label>

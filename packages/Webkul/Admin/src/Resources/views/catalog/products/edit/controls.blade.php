@@ -14,7 +14,7 @@
                 id="{{ $attribute->code }}"
                 v-bind="field"
                 :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 @if ($attribute->code == 'url_key') v-slugify @endif
                 @if ($attribute->code == 'name') v-slugify-target:url_key="setValues" @endif
             >
@@ -24,7 +24,7 @@
 
     @case('price')
         <div class="relative">
-            <span class="absolute ltr:left-[15px] rtl:right-[15px] top-[50%] -translate-y-[50%] text-gray-500 dark:text-gray-300 {{ $attribute->code == 'price' ? 'text-[20px]' : '' }}">
+            <span class="absolute ltr:left-4 rtl:right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-300 {{ $attribute->code == 'price' ? 'text-xl ' : '' }}">
                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
             </span>
 
@@ -35,7 +35,7 @@
                 ::rules="{{ $attribute->validations }}"
                 :label="$attribute->admin_name"
                 value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
-                :class="'ltr:pl-[30px] rtl:pr-[30px] ' . ($attribute->code == 'price' ? 'py-2 bg-gray-50 text-[20px] font-bold' : '')"
+                :class="'ltr:pl-8 rtl:pr-8 ' . ($attribute->code == 'price' ? 'py-2 bg-gray-50 text-xl font-bold' : '')"
             >
             </x-admin::form.control-group.control>
         </div>
@@ -143,7 +143,7 @@
         @endphp
 
         @foreach ($attribute->options as $option)
-            <div class="flex gap-[10px] py-[6px] items-center">
+            <div class="flex gap-2.5 py-1.5 items-center">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[]'"
@@ -181,7 +181,7 @@
 
     @case('image')
     @case('file')
-        <div class="flex gap-[10px]">
+        <div class="flex gap-2.5">
             @if ($product[$attribute->code])
                 <a
                     href="{{ route('admin.catalog.products.file.download', [$product->id, $attribute->id] )}}"
@@ -190,11 +190,11 @@
                     @if ($attribute->type == 'image')
                         <img
                             src="{{ Storage::url($product[$attribute->code]) }}"
-                            class="w-[45px] h-[45px] border dark:border-gray-800 rounded-[4px] overflow-hidden hover:border-gray-400"
+                            class="w-[45px] h-[45px] border dark:border-gray-800 rounded overflow-hidden hover:border-gray-400"
                         />
                     @else
-                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300">
-                            <i class="icon-down-stat text-[24px]"></i>
+                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:bg-gray-200 dark:hover:bg-gray-800 active:border-gray-300">
+                            <i class="icon-down-stat text-2xl"></i>
                         </div>
                     @endif
                 </a>
@@ -216,7 +216,7 @@
                     name="{{ $attribute->code }}"
                     id="{{ $attribute->code }}"
                     :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:file:bg-gray-800 dark:file:dark:text-white focus:border-gray-400 dark:focus:border-gray-400 dark:border-gray-800"
+                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:file:bg-gray-800 dark:file:dark:text-white focus:border-gray-400 dark:focus:border-gray-400 dark:border-gray-800"
                     @change="handleChange"
                     @blur="handleBlur"
                 >
@@ -224,7 +224,7 @@
         </div>
 
         @if ($product[$attribute->code])
-            <div class="flex gap-[10px] items-center mt-[10px]">
+            <div class="flex gap-2.5 items-center mt-2.5">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[delete]'"
@@ -234,7 +234,7 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-[14px] text-gray-600 dark:text-gray-300">
+                <p class="text-sm text-gray-600 dark:text-gray-300">
                     @lang('admin::app.catalog.products.edit.remove')
                 </p>
             </div>

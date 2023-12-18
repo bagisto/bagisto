@@ -1,15 +1,15 @@
 <div v-if="! forms.billing.isUsedForShipping">
     <div 
-        class="mt-[30px]"
+        class="mt-8"
         v-if="! forms.shipping.isNew"
     >
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
 
-        <x-shop::accordion class="!border-b-[0px]">
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
@@ -21,9 +21,9 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, store)">
-                        <div class="grid grid-cols-2 mt-[30px] gap-[20px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                        <div class="grid grid-cols-2 mt-8 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
-                                class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
+                                class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                                 v-for="(address, index) in addresses"
                             >
                                 <v-field
@@ -40,24 +40,24 @@
                                 />
                                 
                                 <label 
-                                    class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                    class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     :for="'shipping_address_id_' + address.id"
                                 >
                                 </label>
 
                                 <label 
                                     :for="'shipping_address_id_' + address.id"
-                                    class="block p-[20px] rounded-[12px] cursor-pointer"
+                                    class="block p-5 rounded-xl cursor-pointer"
                                 >
                                     <div class="flex justify-between items-center">
-                                        <p class="text-[16px] font-medium">
+                                        <p class="text-base font-medium">
                                             @{{ address.first_name }} @{{ address.last_name }}
 
                                             <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                         </p>
                                     </div>
 
-                                    <p class="mt-[25px] text-[#6E6E6E] text-[14px]">
+                                    <p class="mt-6 text-[#6E6E6E] text-sm">
                                         <template v-if="typeof address.address1 === 'string'">
                                             @{{ address.address1 }},
                                         </template>
@@ -78,20 +78,20 @@
                             </div>
 
                             <div 
-                                class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
+                                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap"
                                 @click="showNewShippingAddressForm"
                             >
                                 <div
-                                    class="flex gap-x-[10px] items-center cursor-pointer"
+                                    class="flex gap-x-2.5 items-center cursor-pointer"
                                     role="button"
                                     tabindex="0"
                                 >
                                     <span
-                                        class="icon-plus p-[10px] text-[30px]  border border-black rounded-full"
+                                        class="icon-plus p-2.5 text-3xl  border border-black rounded-full"
                                         role="presentation"
                                     ></span>
 
-                                    <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
+                                    <p class="text-base">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                             <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.length">
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
-                                        class="block py-[11px] px-[43px] bg-navyBlue text-white text-base w-max font-medium rounded-[18px] text-center cursor-pointer"
+                                        class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
                                         @click="store"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
@@ -121,7 +121,7 @@
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
                                         type="submit"
-                                        class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer"
+                                        class="block w-max py-3 px-11 bg-navyBlue text-white text-base font-medium rounded-2xl text-center cursor-pointer"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
@@ -138,13 +138,13 @@
     </div>
 
     <div 
-        class="mt-[30px]"
+        class="mt-8"
         v-else
     >
-        <x-shop::accordion>
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
@@ -167,7 +167,7 @@
                                 v-if="addresses.length > 0"
                                 @click="forms.shipping.isNew = ! forms.shipping.isNew"
                             >
-                                <span class="icon-arrow-left text-[24px]"></span>
+                                <span class="icon-arrow-left text-2xl"></span>
 
                                 <span>@lang('shop::app.checkout.onepage.addresses.shipping.back')</span>
                             </a>
@@ -197,9 +197,9 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.company_name.after') !!}
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
                                 </x-shop::form.control-group.label>
                             
@@ -222,7 +222,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.first_name.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.last-name')
                                 </x-shop::form.control-group.label>
                             
@@ -247,7 +247,7 @@
                         </div>
                         
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.email')
                             </x-shop::form.control-group.label>
                         
@@ -270,7 +270,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.email.after') !!}
                         
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.street-address')
                             </x-shop::form.control-group.label>
                         
@@ -306,18 +306,17 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.street_address.after') !!}
                         
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
-                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.country')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[country]"
-                                    class="py-2 mb-2"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
@@ -342,7 +341,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.country.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-[0px]">
+                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
                             
@@ -360,7 +359,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[state]"
-                                    class="py-2 mb-2"
                                     rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
@@ -387,9 +385,9 @@
 
                         </div>
 
-                        <div class="grid grid-cols-2 gap-x-[20px]">
+                        <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.city')
                                 </x-shop::form.control-group.label>
                             
@@ -412,7 +410,7 @@
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.city.after') !!}
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px] required">
+                                <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.postcode')
                                 </x-shop::form.control-group.label>
                             
@@ -437,7 +435,7 @@
                         </div>
 
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px] required">
+                            <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
                             </x-shop::form.control-group.label>
                             
@@ -459,30 +457,28 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.phone.after') !!}
 
-                        <div class="mt-[30px] pb-[15px]">
-                            <div class="grid gap-[10px]">
-                                @auth('customer')
-                                    <div class="select-none flex gap-x-[15px]">
-                                        <input 
-                                            type="checkbox"
-                                            name="shipping[is_save_as_address]"
-                                            id="shipping[is_save_as_address]"
-                                            class="hidden peer"
-                                            v-model="forms.shipping.address.isSaved"
-                                        >
+                        <div class="grid gap-2.5 pb-4">
+                            @auth('customer')
+                                <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
+                                    <input 
+                                        type="checkbox"
+                                        name="shipping[is_save_as_address]"
+                                        id="shipping[is_save_as_address]"
+                                        class="hidden peer"
+                                        v-model="forms.shipping.address.isSaved"
+                                    >
 
-                                        <label
-                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                            for="shipping[is_save_as_address]"
-                                        >
-                                        </label>
+                                    <label
+                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        for="shipping[is_save_as_address]"
+                                    >
+                                    </label>
 
-                                        <label for="shipping[is_save_as_address]">
-                                            @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
-                                        </label>
-                                    </div>
-                                @endauth
-                            </div>
+                                    <label for="shipping[is_save_as_address]">
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
+                                    </label>
+                                </div>
+                            @endauth
                         </div>
 
                         <div 
@@ -490,7 +486,7 @@
                         >
                             <button
                                 type="submit"
-                                class="block w-max px-[43px] py-[11px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
+                                class="block w-max px-11 py-3 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                             </button>

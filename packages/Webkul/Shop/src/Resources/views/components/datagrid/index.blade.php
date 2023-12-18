@@ -14,7 +14,7 @@
         <div>
             <x-shop::datagrid.toolbar></x-shop::datagrid.toolbar>
 
-            <div class="flex mt-[30px]">
+            <div class="flex mt-8">
                 <x-shop::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
@@ -104,7 +104,7 @@
                             columns: [
                                 {
                                     index: 'all',
-                                    value: @json(request()->has('search') ? [request()->get('search')] : []),
+                                    value: [],
                                 },
                             ],
                         },
@@ -125,6 +125,14 @@
                 boot() {
                     let datagrids = this.getDatagrids();
 
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    if (urlParams.has('search')) {
+                        let searchAppliedColumn = this.findAppliedColumn('all');
+
+                        searchAppliedColumn.value = [urlParams.get('search')];
+                    }
+
                     if (datagrids?.length) {
                         const currentDatagrid = datagrids.find(({
                             src
@@ -136,6 +144,12 @@
                             this.applied.sort = currentDatagrid.applied.sort;
 
                             this.applied.filters = currentDatagrid.applied.filters;
+
+                            if (urlParams.has('search')) {
+                                let searchAppliedColumn = this.findAppliedColumn('all');
+
+                                searchAppliedColumn.value = [urlParams.get('search')];
+                            }
 
                             this.get();
 
@@ -365,7 +379,7 @@
                         let appliedColumn = this.findAppliedColumn('all');
 
                         if (!requestedValue) {
-                            this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== 'all');
+                            appliedColumn.value = [];
 
                             return;
                         }

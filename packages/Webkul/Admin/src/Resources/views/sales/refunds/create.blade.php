@@ -1,7 +1,7 @@
 <!-- Refund Vue Component -->
 <v-create-refund>
-    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]">
-        <span class="icon-cancel text-[24px]"></span> 
+    <div class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
+        <span class="icon-cancel text-2xl"></span> 
 
         @lang('admin::app.sales.orders.view.refund')     
     </div>
@@ -11,11 +11,11 @@
     <script type="text/x-template" id="v-create-refund-template">
         <div>
             <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"
+                class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"
                 @click="$refs.refund.open()"
             >
                 <span
-                    class="icon-cancel text-[24px]"
+                    class="icon-cancel text-2xl"
                     role="presentation"
                     tabindex="0"
                 >
@@ -32,13 +32,13 @@
                 <x-admin::drawer ref="refund">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-[12px]">
+                        <div class="grid gap-3">
                             <div class="flex justify-between items-center">
-                                <p class="text-[20px] font-medium dark:text-white">
+                                <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.refunds.create.title')
                                 </p>
 
-                                <div class="flex gap-x-[10px]">
+                                <div class="flex gap-x-2.5">
                                     <!-- Update Quantity Button -->
                                     <div 
                                         class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
@@ -50,7 +50,7 @@
                                     <!-- Refund Submit Button -->
                                     <button
                                         type="submit"
-                                        class="mr-[45px] primary-button"
+                                        class="mr-11 primary-button"
                                     >
                                         @lang('admin::app.sales.refunds.create.refund-btn')
                                     </button>
@@ -61,35 +61,35 @@
 
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
-                        <div class="grid">
-                            <div class="p-[16px] !pt-0">
-                                <div class="grid">
-                                    <!-- Item Listing -->
-                                    @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px]">
-                                            <div class="flex gap-[10px]">
+                        <div class="grid p-4 !pt-0">
+                            <div class="grid">
+                                <!-- Item Listing -->
+                                @foreach ($order->items as $item)
+                                    @if ($item->qty_to_refund)
+                                        <div class="flex gap-2.5 justify-between py-4">
+                                            <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
-                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded"
                                                         src="{{ $item->product->base_image_url }}"
                                                     >
                                                 @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion">
+                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                                         
-                                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                        <p class="absolute w-full bottom-1.5 text-[6px] text-gray-400 text-center font-semibold"> 
                                                             @lang('admin::app.sales.invoices.view.product-image') 
                                                         </p>
                                                     </div>
                                                 @endif
                 
-                                                <div class="grid gap-[6px] place-content-start">
+                                                <div class="grid gap-1.5 place-content-start">
                                                     <!-- Item Additional Attributes -->
-                                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                                         {{ $item->name }}
                                                     </p>
                 
-                                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                                    <div class="flex flex-col gap-1.5 place-items-start">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.amount-per-unit', [
                                                                 'amount' => core()->formatBasePrice($item->base_price),
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                                        <div class="gap-2.5 justify-between pb-4 border-b border-slate-300 dark:border-gray-800">
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->
@@ -156,8 +156,8 @@
                                                 </div>
 
                                                 <!-- Item Order Summary -->
-                                                <div class="flex w-full gap-[20px] justify-end item">
-                                                    <div class="flex flex-col gap-y-[6px]">
+                                                <div class="flex w-full gap-5 justify-end item">
+                                                    <div class="flex flex-col gap-y-1.5">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             @lang('admin::app.sales.refunds.create.price')
                                                         </p>
@@ -181,7 +181,7 @@
                                                         </p>
                                                     </div>
 
-                                                    <div class="flex flex-col gap-y-[6px]">
+                                                    <div class="flex flex-col gap-y-1.5">
                                                         <p class="text-gray-600 dark:text-gray-300">
                                                             {{ core()->formatBasePrice($item->base_price) }}
                                                         </p>
@@ -207,125 +207,125 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            <div
+                                v-if="refund.summary"
+                                class="grid grid-cols-3 gap-x-5 mt-2.5"
+                            >
+                                <!-- Refund Shipping -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.refunds.create.refund-shipping')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="refund[shipping]" 
+                                        id="refund[shipping]"
+                                        :rules="'required|min_value:0|max_value:' . $order->base_shipping_invoiced - $order->base_shipping_refunded"
+                                        v-model="refund.summary.shipping.price"
+                                        :label="trans('admin::app.sales.refunds.create.refund-shipping')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="refund[shipping]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Adjustment Refund -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.refunds.create.adjustment-refund')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="refund[adjustment_refund]"
+                                        id="refund[adjustment_refund]" 
+                                        value="0"
+                                        rules="required|min_value:0"
+                                        :label="trans('admin::app.sales.refunds.create.adjustment-refund')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="refund[adjustment_refund]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Adjustment Fee -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.refunds.create.adjustment-fee')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="refund[adjustment_fee]"
+                                        id="refund[adjustment_fee]" 
+                                        value="0"
+                                        rules="required|min_value:0"
+                                        :label="trans('admin::app.sales.refunds.create.adjustment-fee')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="refund[adjustment_fee]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+
+                            <!-- Order Summary -->
+                            <div class="flex w-full gap-5 justify-end">
+                                <div class="flex flex-col gap-y-1.5">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.refunds.create.subtotal')
+                                    </p>
+
+                                    <p class="text-gray-600 dark:text-gray-300"> 
+                                        @lang('admin::app.sales.refunds.create.discount-amount')
+                                    </p>
+
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @lang('admin::app.sales.refunds.create.tax-amount')
+                                    </p>
+
+                                    <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                                        @lang('admin::app.sales.refunds.create.grand-total')
+                                    </p>
                                 </div>
 
-                                <div
-                                    v-if="refund.summary"
-                                    class="grid grid-cols-3 gap-x-[20px] mt-[10px]"
-                                >
-                                    <!-- Refund Shipping -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.sales.refunds.create.refund-shipping')
-                                        </x-admin::form.control-group.label>
+                                <div class="flex flex-col gap-y-1.5">
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="refund.summary.subtotal.formatted_price"
+                                    >
+                                    </p>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="refund[shipping]" 
-                                            id="refund[shipping]"
-                                            :rules="'required|min_value:0|max_value:' . $order->base_shipping_invoiced - $order->base_shipping_refunded"
-                                            v-model="refund.summary.shipping.price"
-                                            :label="trans('admin::app.sales.refunds.create.refund-shipping')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="refund.summary.discount.formatted_price"
+                                    >
+                                    </p>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="refund[shipping]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="refund.summary.tax.formatted_price"
+                                    >
+                                    </p>
 
-                                    <!-- Adjustment Refund -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.sales.refunds.create.adjustment-refund')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="refund[adjustment_refund]"
-                                            id="refund[adjustment_refund]" 
-                                            value="0"
-                                            rules="required|min_value:0"
-                                            :label="trans('admin::app.sales.refunds.create.adjustment-refund')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="refund[adjustment_refund]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <!-- Adjustment Fee -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.sales.refunds.create.adjustment-fee')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="refund[adjustment_fee]"
-                                            id="refund[adjustment_fee]" 
-                                            value="0"
-                                            rules="required|min_value:0"
-                                            :label="trans('admin::app.sales.refunds.create.adjustment-fee')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="refund[adjustment_fee]"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-
-                                <!-- Order Summary -->
-                                <div class="flex w-full gap-[20px] justify-end">
-                                    <div class="flex flex-col gap-y-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.refunds.create.subtotal')
-                                        </p>
-
-                                        <p class="text-gray-600 dark:text-gray-300"> 
-                                            @lang('admin::app.sales.refunds.create.discount-amount')
-                                        </p>
-
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            @lang('admin::app.sales.refunds.create.tax-amount')
-                                        </p>
-
-                                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
-                                            @lang('admin::app.sales.refunds.create.grand-total')
-                                        </p>
-                                    </div>
-
-                                    <div class="flex flex-col gap-y-[6px]">
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="refund.summary.subtotal.formatted_price"
-                                        >
-                                        </p>
-
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="refund.summary.discount.formatted_price"
-                                        >
-                                        </p>
-
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="refund.summary.tax.formatted_price"
-                                        >
-                                        </p>
-
-                                        <p
-                                            class="text-gray-600 dark:text-gray-300"
-                                            v-text="refund.summary.grand_total.formatted_price"
-                                        >
-                                        </p>
-                                    </div>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="refund.summary.grand_total.formatted_price"
+                                    >
+                                    </p>
                                 </div>
                             </div>
                         </div>

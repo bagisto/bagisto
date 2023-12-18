@@ -16,30 +16,30 @@
     height="{{ $height }}"
     :errors="errors"
 >
-    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded-[4px]"></x-admin::shimmer.image>
+    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded"></x-admin::shimmer.image>
 </v-media-images>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-media-images-template">
         <!-- Panel Content -->
         <div class="grid">
-            <div class="flex flex-wrap gap-[4px]">
+            <div class="flex flex-wrap gap-1">
                 <!-- Upload Image Button -->
                 <template v-if="allowMultiple || images.length == 0">
                     <!-- AI Image Generation Button -->
                     <label
-                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-blue-300 rounded-[4px] cursor-pointer transition-all hover:border-blue-600 dark:invert dark:mix-blend-exclusion"
+                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-blue-300 rounded cursor-pointer transition-all hover:border-blue-600 dark:invert dark:mix-blend-exclusion"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         v-if="ai.enabled"
                         @click="resetAIModal(); $refs.magicAIImageModal.open()"
                     >
                         <div class="flex flex-col items-center">
-                            <span class="icon-magic text-[24px] text-blue-600"></span>
+                            <span class="icon-magic text-2xl text-blue-600"></span>
 
-                            <p class="grid text-[14px] text-blue-600 font-semibold text-center">
+                            <p class="grid text-sm text-blue-600 font-semibold text-center">
                                 @lang('admin::app.components.media.images.ai-add-image-btn')
                                 
-                                <span class="text-[12px]">
+                                <span class="text-xs">
                                     @lang('admin::app.components.media.images.ai-btn-info')
                                 </span>
                             </p>
@@ -48,17 +48,17 @@
 
                     <!-- Upload Image Button -->
                     <label
-                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
+                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[110px] max-h-[120px] min-h-[110px] border border-dashed border-gray-300 dark:border-gray-800 rounded cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
                     >
                         <div class="flex flex-col items-center">
-                            <span class="icon-image text-[24px]"></span>
+                            <span class="icon-image text-2xl"></span>
 
-                            <p class="grid text-[14px] text-gray-600 dark:text-gray-300 font-semibold text-center">
+                            <p class="grid text-sm text-gray-600 dark:text-gray-300 font-semibold text-center">
                                 @lang('admin::app.components.media.images.add-image-btn')
                                 
-                                <span class="text-[12px]">
+                                <span class="text-xs">
                                     @lang('admin::app.components.media.images.allowed-types')
                                 </span>
                             </p>
@@ -78,7 +78,7 @@
 
                 <!-- Uploaded Images -->
                 <draggable
-                    class="flex flex-wrap gap-[4px]"
+                    class="flex flex-wrap gap-1"
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     :list="images"
@@ -100,12 +100,12 @@
                 <template v-if="showPlaceholders && ! images.length">
                     <!-- Front Placeholder -->
                     <div
-                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                        class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                         v-for="placeholder in placeholders"
                     >
                         <img :src="placeholder.image">
 
-                        <p class="w-full absolute bottom-[15px] text-[12px] text-gray-400 text-center font-semibold">
+                        <p class="w-full absolute bottom-4 text-xs text-gray-400 text-center font-semibold">
                             @{{ placeholder.label }}
                         </p>
                     </div>
@@ -121,17 +121,17 @@
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <template v-if="! ai.images.length">
-                                    <p class="flex gap-[10px] items-center text-[18px] text-gray-800 dark:text-white font-bold">
-                                        <span class="icon-magic text-[24px] text-gray-800"></span>
+                                    <p class="flex gap-2.5 items-center text-lg text-gray-800 dark:text-white font-bold">
+                                        <span class="icon-magic text-2xl text-gray-800"></span>
 
                                         @lang('admin::app.components.media.images.ai-generation.title')
                                     </p>
                                 </template>
 
                                 <template v-else>
-                                    <p class="text-[18px] text-gray-800 truncate dark:text-white font-bold">
+                                    <p class="text-lg text-gray-800 truncate dark:text-white font-bold">
                                         <span
-                                            class="align-middle mr-[5px] icon-arrow-right text-[24px] cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-[6px]"
+                                            class="align-middle mr-1 icon-arrow-right text-2xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 hover:rounded-md"
                                             @click="ai.images = []"
                                         ></span>
 
@@ -257,9 +257,9 @@
                                 </div>
 
                                 <div v-show="ai.images.length">
-                                    <div class="grid grid-cols-4 gap-[20px]">
+                                    <div class="grid grid-cols-4 gap-5">
                                         <div
-                                            class="grid justify-items-center min-w-[120px] max-h-[120px] relative border-[3px] border-transparent rounded-[4px] overflow-hidden transition-all hover:opacity-80 cursor-pointer"
+                                            class="grid justify-items-center min-w-[120px] max-h-[120px] relative border-[3px] border-transparent rounded overflow-hidden transition-all hover:opacity-80 cursor-pointer"
                                             :class="{'!border-blue-600': image.selected}"
                                             v-for="image in ai.images"
                                             @click="image.selected = ! image.selected"
@@ -274,9 +274,9 @@
                                 </div>
                             </x-slot:content>
 
-                            <!-- Modal Submission -->
+                            <!-- Modal Footer -->
                             <x-slot:footer>
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <template v-if="! ai.images.length">
                                         <button class="secondary-button">
                                             <!-- Spinner -->
@@ -290,7 +290,7 @@
                                             </template>
 
                                             <template v-else>
-                                                <span class="icon-magic text-[24px] text-blue-600"></span>
+                                                <span class="icon-magic  text-blue-600"></span>
                                                 
                                                 @lang('admin::app.components.media.images.ai-generation.generate')
                                             </template>
@@ -310,7 +310,7 @@
                                             </template>
 
                                             <template v-else>
-                                                <span class="icon-magic text-[24px] text-blue-600"></span>
+                                                <span class="icon-magic text-2xl text-blue-600"></span>
                                                 
                                                 @lang('admin::app.components.media.images.ai-generation.regenerate')
                                             </template>
@@ -335,26 +335,26 @@
     </script>
 
     <script type="text/x-template" id="v-media-image-item-template">
-        <div class="grid justify-items-center min-w-[120px] max-h-[120px] relative rounded-[4px] overflow-hidden transition-all hover:border-gray-400 group">
+        <div class="grid justify-items-center min-w-[120px] max-h-[120px] relative rounded overflow-hidden transition-all hover:border-gray-400 group">
             <!-- Image Preview -->
             <img
                 :src="image.url"
                 :style="{'width': this.width, 'height': this.height}"
             />
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-3 bg-white dark:bg-gray-900 absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Image Name -->
-                <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
+                <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold break-all"></p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <span
-                        class="icon-delete text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-delete text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         @click="remove"
                     ></span>
 
                     <label
-                        class="icon-edit text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
+                        class="icon-edit text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800"
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 

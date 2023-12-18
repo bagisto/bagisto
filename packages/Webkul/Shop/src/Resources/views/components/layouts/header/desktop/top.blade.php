@@ -1,10 +1,10 @@
-<div class="flex justify-between items-center w-full py-[11px] px-16 border border-t-0 border-b-[1px] border-l-0 border-r-0">
+<div class="flex justify-between items-center w-full py-3 px-16 border border-t-0 border-b border-l-0 border-r-0">
     <!-- Currency Switcher -->
     <x-shop::dropdown>
         <!-- Dropdown Toggler -->
         <x-slot:toggle>
             <div
-                class="flex gap-[10px] cursor-pointer" role="button"
+                class="flex gap-2.5 cursor-pointer" role="button"
                 tabindex="0"
             >
                 <span>
@@ -12,14 +12,14 @@
                 </span>
 
                 <span
-                    class="text-[24px] icon-arrow-down"
+                    class="text-2xl icon-arrow-down"
                     role="presentation"
                 ></span>
             </div>
         </x-slot:toggle>
 
         <!-- Dropdown Content -->
-        <x-slot:content class="!p-[0px]">
+        <x-slot:content class="!p-0">
             <v-currency-switcher></v-currency-switcher>
         </x-slot:content>
     </x-shop::dropdown>
@@ -33,7 +33,7 @@
         <x-slot:toggle>
             <!-- Dropdown Toggler -->
             <div
-                class="flex items-center gap-[10px] cursor-pointer"
+                class="flex items-center gap-2.5 cursor-pointer"
                 role="button"
                 tabindex="0"
             >
@@ -53,14 +53,14 @@
                 </span>
 
                 <span
-                    class="icon-arrow-down text-[24px]"
+                    class="icon-arrow-down text-2xl"
                     role="presentation"
                 ></span>
             </div>
         </x-slot:toggle>
     
         <!-- Dropdown Content -->
-        <x-slot:content class="!p-[0px]">
+        <x-slot:content class="!p-0">
             <v-locale-switcher></v-locale-switcher>
         </x-slot:content>
     </x-shop::dropdown>
@@ -68,9 +68,9 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-currency-switcher-template">
-        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+        <div class="grid gap-1 mt-2.5 pb-2.5">
             <span
-                class="px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
+                class="px-5 py-2 text-base cursor-pointer hover:bg-gray-100"
                 v-for="currency in currencies"
                 :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
                 @click="change(currency)"
@@ -81,9 +81,9 @@
     </script>
 
     <script type="text/x-template" id="v-locale-switcher-template">
-        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+        <div class="grid gap-1 mt-2.5 pb-2.5">
             <span
-                class="flex items-center gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
+                class="flex items-center gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100"
                 v-for="locale in locales"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 @click="change(locale)"                  

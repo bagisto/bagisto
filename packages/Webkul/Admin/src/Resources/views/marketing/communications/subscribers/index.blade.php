@@ -4,8 +4,8 @@
         @lang('admin::app.marketing.communications.subscribers.index.title')
     </x-slot:title>
 
-    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.marketing.communications.subscribers.index.title')
         </p>
     </div>
@@ -27,7 +27,7 @@
                     <template #body="{ columns, records, performAction }">
                         <div
                             v-for="record in records"
-                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                            class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Id -->
@@ -49,7 +49,7 @@
                                         <a @click="editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                             <span
                                                 :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                                class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -59,7 +59,7 @@
                                         <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
                                             <span
                                                 :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                                class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             >
                                             </span>
                                         </a>
@@ -83,7 +83,7 @@
                         <x-admin::modal ref="groupCreateModal">
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.marketing.communications.subscribers.index.edit.title')
                                 </p>
                             </x-slot:header>
@@ -98,7 +98,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <!-- Email -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.email')
                                     </x-admin::form.control-group.label>
@@ -129,7 +129,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Subscribed -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-2.5">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
                                     </x-admin::form.control-group.label>
@@ -162,9 +162,9 @@
                                 </x-admin::form.control-group>
                             </x-slot:content>
 
+                            <!-- Modal Footer -->
                             <x-slot:footer>
-                                <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button
                                         type="submit"
                                         class="primary-button"

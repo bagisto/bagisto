@@ -9,7 +9,7 @@
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
 
-    <h2 class="text-[26px] font-medium">
+    <h2 class="mb-8 text-2xl font-medium">
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
@@ -18,17 +18,15 @@
     {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
-        class="rounded mt-[30px]"
         enctype="multipart/form-data"
     >
-
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
 
-        <x-shop::form.control-group class="mt-[15px]">
+        <x-shop::form.control-group class="mt-4">
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
-                class="!p-0 rounded-[12px] text-gray-700 mb-0"
+                class="!p-0 rounded-xl text-gray-700 mb-0"
                 :label="trans('Image')"
                 :is-multiple="false"
                 accepted-types="image/*"
@@ -44,7 +42,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.image.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.first-name')
             </x-shop::form.control-group.label>
@@ -67,7 +65,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.first_name.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.last-name')
             </x-shop::form.control-group.label>
@@ -90,7 +88,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.last_name.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.email')
             </x-shop::form.control-group.label>
@@ -113,7 +111,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.email.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.phone')
             </x-shop::form.control-group.label>
@@ -136,7 +134,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.phone.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.gender')
             </x-shop::form.control-group.label>
@@ -163,7 +161,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.gender.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.dob')
             </x-shop::form.control-group.label>
@@ -185,7 +183,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.date_of_birth.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.current-password')
             </x-shop::form.control-group.label>
@@ -207,7 +205,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.old_password.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.new-password')
             </x-shop::form.control-group.label>
@@ -229,7 +227,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.new_password.after') !!}
 
-        <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group>
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.confirm-password')
             </x-shop::form.control-group.label>
@@ -252,7 +250,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.new_password_confirmation.after') !!}
 
-        <div class="select-none items-center flex gap-[6px] mb-4">
+        <div class="select-none items-center flex gap-1.5 mb-4">
             <input
                 type="checkbox"
                 name="subscribed_to_news_letter"
@@ -262,12 +260,12 @@
             />
 
             <label
-                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                 for="is-subscribed"
             ></label>
 
             <label
-                class="text-[16] text-[#6E6E6E] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                class="text-base text-[#6E6E6E] max-sm:text-xs pl-0 select-none cursor-pointer"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.subscribe-to-newsletter')
@@ -276,7 +274,7 @@
 
         <button
             type="submit"
-            class="primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
+            class="primary-button block m-0 w-max py-3 px-11 rounded-2xl text-base text-center"
         >
             @lang('shop::app.customers.account.profile.save')
         </button>

@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-[20px] bg-white border-t-[1px] border-[#E9E9E9] z-50"
+    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-5 bg-white border-t border-[#E9E9E9] z-50"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -26,10 +26,10 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.filter = true"
             >
-                <span class="icon-filter-1 text-[24px]"></span>
+                <span class="icon-filter-1 text-2xl"></span>
 
                 @lang('shop::app.categories.filters.filter')
             </div>
@@ -37,13 +37,13 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
-                <p class="text-[18px] font-semibold">
+            <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
+                <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.filters')
                 </p>
 
                 <p
-                    class="mr-[50px] text-[12px] font-medium cursor-pointer"
+                    class="mr-[50px] text-xs font-medium cursor-pointer"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
@@ -65,7 +65,7 @@
     </x-shop::drawer>
 
     <!-- Seperator -->
-    <span class="h-[20px] w-[2px] bg-[#E9E9E9]"></span>
+    <span class="h-5 w-0.5 bg-[#E9E9E9]"></span>
 
     <!-- Sort Drawer -->
     <x-shop::drawer
@@ -76,10 +76,10 @@
         <!-- Drawer Toggler -->
         <x-slot:toggle>
             <div
-                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                class="flex items-center gap-x-2.5 px-2.5 py-3.5 text-base font-medium uppercase cursor-pointer"
                 @click="isDrawerActive.toolbar = true"
             >
-                <span class="icon-sort-1 text-[24px]"></span>
+                <span class="icon-sort-1 text-2xl"></span>
 
                 @lang('shop::app.categories.filters.sort')
             </div>
@@ -87,8 +87,8 @@
 
         <!-- Drawer Header -->
         <x-slot:header>
-            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
-                <p class="text-[18px] font-semibold">
+            <div class="flex justify-between items-center pb-5 border-b border-[#E9E9E9]">
+                <p class="text-lg font-semibold">
                     @lang('shop::app.categories.filters.sort')
                 </p>
             </div>
@@ -113,15 +113,15 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-[26px]">
+            <div class="panel-side grid grid-cols-[1fr] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-7">
                 <!-- Filters Header Container -->
-                <div class="flex justify-between items-center h-[50px] pb-[10px] border-b-[1px] border-[#E9E9E9] max-md:hidden">
-                    <p class="text-[18px] font-semibold">
+                <div class="flex justify-between items-center h-[50px] pb-2.5 border-b border-[#E9E9E9] max-md:hidden">
+                    <p class="text-lg font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
                     <p
-                        class="text-[12px] font-medium cursor-pointer"
+                        class="text-xs font-medium cursor-pointer"
                         tabindex="0"
                         @click="clear()"
                     >
@@ -145,12 +145,12 @@
     <!-- Filter Item Vue template -->
     <script type="text/x-template" id="v-filter-item-template">
         <template v-if="filter.type === 'price' || filter.options.length">
-            <x-shop::accordion>
+            <x-shop::accordion class="last:border-b-0">
                 <!-- Filter Item Header -->
-                <x-slot:header class="px-0 py-[10px]">
+                <x-slot:header class="px-0 py-2.5">
                     <div class="flex justify-between items-center">
                         <p
-                            class="text-[18px] font-semibold"
+                            class="text-lg font-semibold"
                             v-text="filter.name"
                         >
                         </p>
@@ -177,7 +177,7 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100 select-none">
+                            <div class="items-center flex gap-x-4 pl-2 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"
@@ -188,7 +188,7 @@
                                 />
 
                                 <label
-                                    class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                    class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                     role="checkbox"
                                     aria-checked="false"
                                     :aria-label="option.name"
@@ -199,7 +199,7 @@
                                 </label>
 
                                 <label
-                                    class="w-full p-2 pl-0 text-[16px] text-gray-900 cursor-pointer"
+                                    class="w-full p-2 pl-0 text-base text-gray-900 cursor-pointer"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"

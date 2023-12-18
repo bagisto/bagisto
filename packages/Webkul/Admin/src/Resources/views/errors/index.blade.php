@@ -5,27 +5,27 @@
     </x-slot>
 
     <!-- Error page Information -->
-	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900 ">
-        <div class="flex gap-[20px] items-center max-w-[745px]">
+	<div class="flex justify-center items-center h-[100vh] bg-white dark:bg-gray-900">
+        <div class="flex gap-5 items-center max-w-[745px]">
             <div class="w-full">
                 <img
                     src="{{ bagisto_asset('images/logo.svg') }}"
-                    class="mb-[25px]"
+                    class="mb-6"
                 >
 
 				<div class="text-[38px] text-gray-800 dark:text-white font-bold">
                     {{ $errorCode }}
                 </div>
 
-                <p class="mb-[25px] text-[14px] text-gray-800">
+                <p class="mb-6 text-sm text-gray-800">
                     @lang("admin::app.errors.{$errorCode}.description")
                 </p>
 
-                <div class="mb-[25px]">
-                    <div class="flex gap-[10px] items-center">
+                <div class="mb-6">
+                    <div class="flex gap-2.5 items-center">
                         <a
                             onclick="history.back()"
-                            class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"
+                            class="text-sm text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.go-back')
                         </a>
@@ -38,14 +38,14 @@
 
                         <a
                             href="{{ route('admin.dashboard.index') }}"
-                            class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"
+                            class="text-sm text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.dashboard')
                         </a>
                     </div>
                 </div>
 
-                <p class="text-[14px] text-gray-800">
+                <p class="text-sm text-gray-800">
                     @lang('admin::app.errors.support', [
                         'link'  => 'mailto:support@example.com',
                         'email' => 'support@example.com',
