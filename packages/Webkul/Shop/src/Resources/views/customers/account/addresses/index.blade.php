@@ -35,7 +35,11 @@
                 <div class="p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
                     <div class="flex justify-between items-center">
                         <p class="text-base font-medium">
-                            {{ $address->company_name }}
+                            {{ $address->first_name }} {{ $address->last_name }}
+
+                            @if ($address->company_name)
+                                ({{ $address->company_name }})
+                            @endif
                         </p>
 
                         <div class="flex gap-6 items-center">
@@ -64,20 +68,29 @@
                                     </x-shop::dropdown.menu.item>
 
                                     <x-shop::dropdown.menu.item>
-                                        <x-shop::form
-                                            :action="route('shop.customers.account.addresses.delete', $address->id)"
-                                            method="DELETE"
-                                            id="addressDelete"
+                                        <form
+                                            method="POST"
+                                            ref="addressDelete"
+                                            action="{{ route('shop.customers.account.addresses.delete', $address->id) }}"
                                         >
-                                            <a 
-                                                onclick="event.preventDefault(); document.getElementById('addressDelete').submit();"
-                                                href="{{ route('shop.customers.account.addresses.delete', $address->id) }}"
-                                            >
-                                                <p class="w-full">
-                                                    @lang('shop::app.customers.account.addresses.delete')
-                                                </p>
-                                            </a>
-                                        </x-shop::form>
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+
+                                        <a 
+                                            href="javascript:void(0);"                                                
+                                            @click="$emitter.emit('open-confirm-modal', {
+                                            message: '@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')',
+
+                                                agree: () => {
+                                                    $refs['addressDelete'].submit()
+                                                }
+                                            })"
+                                        >
+                                            <p class="w-full">
+                                                @lang('shop::app.customers.account.addresses.delete')
+                                            </p>
+                                        </a>
                                     </x-shop::dropdown.menu.item>
 
                                     <x-shop::dropdown.menu.item>

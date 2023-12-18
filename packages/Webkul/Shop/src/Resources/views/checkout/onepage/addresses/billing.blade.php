@@ -71,11 +71,11 @@
                         </div>
 
                         <div 
-                            class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap"
+                            class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
                             @click="showNewBillingAddressForm"
                         >
                             <div
-                                class="flex gap-x-2.5 items-center cursor-pointer"
+                                class="flex gap-x-2.5 items-center"
                                 role="button"
                                 tabindex="0"
                             >
