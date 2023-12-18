@@ -3759,6 +3759,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => '新的客户帐户已成功创建。 他们现在可以使用电子邮件地址和密码凭据登录。 登录后，他们将可以访问各种服务，包括查看过去的订单、管理愿望清单和更新帐户信息的能力。',
+                'greeting'    => '我们热烈欢迎刚刚在我们这里注册的新客户：customer_name！',
+                'subject'     => '新客户注册',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => '您在 :created_at 下单了新订单 :order_id',

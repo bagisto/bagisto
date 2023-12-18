@@ -3760,6 +3760,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => 'Un nouveau compte client a été créé avec succès. Ils peuvent désormais se connecter en utilisant leur adresse e-mail et leur mot de passe. Une fois connectés, ils auront accès à divers services, notamment la possibilité de consulter les commandes passées, de gérer les listes de souhaits et de mettre à jour les informations de leur compte.',
+                'greeting'    => 'Nous souhaitons la bienvenue au nouveau client, :customer_name qui vient de s`inscrire chez nous !',
+                'subject'     => 'Enregistrement d`un nouveau client',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'subject'  => 'Confirmation de nouvelle commande',

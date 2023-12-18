@@ -3760,6 +3760,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => 'Se ha creado correctamente una nueva cuenta de cliente. Ahora pueden iniciar sesión con sus credenciales de dirección de correo electrónico y contraseña. Una vez que hayan iniciado sesión, tendrán acceso a varios servicios, incluida la capacidad de revisar pedidos anteriores, administrar listas de deseos y actualizar la información de su cuenta.',
+                'greeting'    => '¡Damos una cálida bienvenida al nuevo cliente, :customer_name que acaba de registrarse con nosotros!',
+                'subject'     => 'Registro de nuevo cliente',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => 'Tienes un nuevo pedido :order_id realizado el :created_at',

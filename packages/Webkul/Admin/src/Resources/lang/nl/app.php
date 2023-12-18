@@ -3760,6 +3760,14 @@ return [
             ],
         ],
 
+        'customers' => [
+            'registration' => [
+                'description' => 'Er is succesvol een nieuw klantaccount aangemaakt. Ze kunnen nu inloggen met hun e-mailadres en wachtwoord. Eenmaal ingelogd hebben ze toegang tot verschillende diensten, waaronder de mogelijkheid om eerdere bestellingen te bekijken, verlanglijstjes te beheren en hun accountgegevens bij te werken.',
+                'greeting'    => 'Wij heten de nieuwe klant, :customer_name, die zich zojuist bij ons heeft geregistreerd, van harte welkom!',
+                'subject'     => 'Nieuwe klantregistratie',
+            ],
+        ],
+
         'orders' => [
             'created' => [
                 'greeting' => 'U heeft een nieuwe bestelling :order_id geplaatst op :created_at',
