@@ -255,7 +255,7 @@
 
                     <div class="flex justify-between">
                         <!-- Logo -->
-                        <div class="flex flex-col w-[40%]">
+                        <div class="flex flex-col w-2/5">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.channels.edit.logo')
@@ -276,7 +276,7 @@
                         </div>
 
                         <!-- Favicon -->
-                        <div class="flex flex-col w-[40%]">
+                        <div class="flex flex-col w-2/5">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.channels.edit.favicon')
