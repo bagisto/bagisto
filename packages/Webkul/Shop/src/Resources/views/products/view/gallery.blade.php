@@ -84,7 +84,7 @@
                 >
                     <video  
                         controls                             
-                        width='475'
+                        width="475"
                         @load="onMediaLoad()"
                     >
                         <source 
@@ -173,6 +173,7 @@
                     if (file.type == 'videos') {
                         this.baseFile.type = 'video';
                         this.baseFile.path = file.video_url;
+                        this.isMediaLoading = false;
                     } else {
                         this.baseFile.type = 'image';
                         this.baseFile.path = file.large_image_url;
