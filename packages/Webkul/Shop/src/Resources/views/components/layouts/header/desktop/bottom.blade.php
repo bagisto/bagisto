@@ -73,7 +73,7 @@
         </div>
 
         <!-- Right Navigation Links -->
-        <div class="flex gap-x-9 mt-1.5 max-lg:gap-x-8 max-[1100px]:gap-x-6">
+        <div class="flex gap-x-8 mt-1.5 max-lg:gap-x-8 max-[1100px]:gap-x-6">
             <!-- Compare -->
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
