@@ -1,59 +1,44 @@
-@if ($product->type == 'booking')
+@if (
+    $product->type == 'booking'
+    && $bookingProduct = app('\Webkul\BookingProduct\Repositories\BookingProductRepository')->findOneByField('product_id', $product->id)
+)
+    <v-booking-information></v-booking-information>
 
-    @if ($bookingProduct = app('\Webkul\BookingProduct\Repositories\BookingProductRepository')->findOneByField('product_id', $product->id))
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-booking-information-template">
+            <div class="booking-information">
+                @if ($bookingProduct->location)
+                    <div class="flex">
+                        <div class="icon-location font-bold"></div>
 
-        @push('css')
-            <link rel="stylesheet" href="{{ bagisto_asset('css/velocity-booking.css') }}">
-        @endpush
-
-        <accordian :title="'{{ __('bookingproduct::app.shop.products.booking-information') }}'" :active="true">
-            <div slot="header">
-                <h3 class="no-margin display-inbl">
-                    {{ __('bookingproduct::app.shop.products.booking-information') }}
-                </h3>
-                <i class="rango-arrow"></i>
-            </div>
-
-            <div slot="body">
-                <booking-information></booking-information>        
-            </div>
-        </accordian>
-
-        @push('scripts')
-
-            <script type="text/x-template" id="booking-information-template">
-                <div class="booking-information">
-
-                    @if ($bookingProduct->location != '')
-                        <div class="booking-info-row">
-                            <span class="icon bp-location-icon"></span>
-                            <span class="title">{{ __('bookingproduct::app.shop.products.location') }}</span>
-                            <span class="value">{{ $bookingProduct->location }}</span>
-                            <a href="https://maps.google.com/maps?q={{ $bookingProduct->location }}" target="_blank">View on Map</a>
+                        <div class="block">
+                            <div>
+                                @lang('booking::app.shop.products.location')
+                            </div>
+    
+                            <div>
+                                {{ $bookingProduct->location }}
+                            </div>
+    
+                            <a
+                                href="https://maps.google.com/maps?q={{ $bookingProduct->location }}"
+                                target="_blank"
+                            >
+                                View on Map
+                            </a>
                         </div>
-                    @endif
+                    </div>
+                @endif
 
-                    @include ('bookingproduct::shop.products.view.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
+                @include ('booking::shop.products.view.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
+            </div>
+        </script>
 
-                </div>
-            </script>
+        <script type="module">
+            app.component('v-booking-information', {
+                template: '#v-booking-information-template',
 
-            <script>
-                Vue.component('booking-information', {
-                    template: '#booking-information-template',
-
-                    inject: ['$validator'],
-
-                    data: function() {
-                        return {
-                            showDaysAvailability: false
-                        }
-                    }
-                });
-            </script>
-        
-        @endpush
-
-    @endif
-
+            });
+        </script>
+    @endpushOnce
 @endif

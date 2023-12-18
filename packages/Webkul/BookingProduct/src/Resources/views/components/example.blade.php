@@ -9,7 +9,6 @@
         name="time"
         rules="required"
         label="time"
-        placeholder="time"
     >
     </x-booking::form.control-group.control>
 

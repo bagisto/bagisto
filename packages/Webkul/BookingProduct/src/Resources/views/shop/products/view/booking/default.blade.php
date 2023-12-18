@@ -1,12 +1,13 @@
 @if ($bookingProduct->default_slot->duration)
     <div class="booking-info-row">
-        <span class="icon bp-slot-icon"></span>
-        <span class="title">
-            {{ __('bookingproduct::app.shop.products.slot-duration') }} :
+        <span class="icon-calendar font-bold"></span>
 
-            {{ __('bookingproduct::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration]) }}
+        <span class="title">
+            @lang('booking::app.shop.products.slot-duration') :
+
+            @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration])
         </span>
     </div>
 @endif
 
-@include ('bookingproduct::shop.products.view.booking.slots', ['bookingProduct' => $bookingProduct])
+@include ('booking::shop.products.view.booking.slots', ['bookingProduct' => $bookingProduct])

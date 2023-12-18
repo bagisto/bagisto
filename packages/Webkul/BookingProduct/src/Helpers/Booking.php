@@ -122,26 +122,15 @@ class Booking
     {
         $slots = [];
 
-        foreach ($this->getTodaySlots($bookingProduct) as $slot) {
+        $weekSlots = $this->getWeekSlotDurations($bookingProduct);
+
+        foreach ($weekSlots[Carbon::now()->format('w')]['slots'] as $slot) {
             $slots[] = $slot['from'] . ' - ' . $slot['to'];
         }
 
         return count($slots)
             ? implode(' | ', $slots)
-            : '<span class="text-danger">' . trans('bookingproduct::app.shop.products.closed') . '</span>';
-    }
-
-    /**
-     * Returns slots for a current day
-     *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
-     * @return array
-     */
-    public function getTodaySlots($bookingProduct)
-    {
-        $weekSlots = $this->getWeekSlotDurations($bookingProduct);
-
-        return $weekSlots[Carbon::now()->format('w')]['slots'];
+            : '<span class="text-danger">' . trans('booking::app.shop.products.closed') . '</span>';
     }
 
     /**

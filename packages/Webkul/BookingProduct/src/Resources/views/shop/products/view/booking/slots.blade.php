@@ -1,10 +1,11 @@
-<book-slots></book-slots>
+<v-book-slots></v-book-slots>
 
-@push('scripts')
-    <script type="text/x-template" id="book-slots-template">
-
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-book-slots-template">
         <div class="book-slots">
-            <label class="label-style required">{{ $title ?? __('bookingproduct::app.shop.products.book-an-appointment') }}</label>
+            <label class="label-style required">
+                {{ $title ?? __('booking::app.shop.products.book-an-appointment') }}
+            </label>
 
             <div class="control-group-container">
                 <div class="form-group date" :class="[errors.has('booking[date]') ? 'has-error' : '']">
@@ -26,24 +27,21 @@
                 </div>
             </div>
         </div>
-
     </script>
 
-    <script>
+    <script type="module">
 
-        Vue.component('book-slots', {
-            template: '#book-slots-template',
+        app.component('v-book-slots', {
+            template: '#v-book-slots-template',
 
-            inject: ['$validator'],
-
-            data: function() {
+            data:() {
                 return {
                     slots: []
                 }
             },
 
             methods: {
-                dateSelected: function(date) {
+                dateSelected(date) {
                     var this_this = this;
 
                     this.$http.get("{{ route('booking_product.slots.index', $bookingProduct->id) }}", {params: {date: date}})
@@ -58,4 +56,4 @@
         });
 
     </script>
-@endpush
+@endpushOnce

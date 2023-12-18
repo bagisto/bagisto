@@ -4,7 +4,7 @@
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
-@push('scripts')
+@pushOnce('scripts')
     <script
         type="text/x-template"
         id="v-rental-booking-template"
@@ -116,26 +116,28 @@
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
+                </div>
+            </div>
 
-                    <div class="flex gap-5 justify-between p-4">
-                        <div class="flex flex-col gap-2">
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
-                            </p>
-                        </div>
-            
-                        <!-- Add Ticket Button -->
-                        <div class="flex gap-x-1 items-center">
-                            <div
-                                class="secondary-button"
-                                @click="$refs.addOptionsRow.toggle()"
-                            >
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                            </div>
-                        </div>
+            <div class="flex gap-5 justify-between p-4">
+                <div class="flex flex-col gap-2">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
+                    </p>
+                </div>
+    
+                <!-- Add Slots Button -->
+                <div class="flex gap-x-1 items-center">
+                    <div
+                        class="secondary-button"
+                        @click="$refs.addOptionsRow.toggle()"
+                    >
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
                     </div>
-
-                    <!-- Table Information -->
+                </div>
+            </div>
+            
+            <!-- Table Information -->
             <div class="mt-4 overflow-x-auto">
                 <template v-if="slots?.length">
                     <x-admin::table>
@@ -197,8 +199,6 @@
                     <v-empty-info type="rental"></v-empty-info>
                 </template>
             </div>
-                </div>
-            </div>
         </x-admin::form>
 
         <!-- Add Options Model Form -->
@@ -220,11 +220,61 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <v-slots
-                            booking-type="rental_slot"
-                            :same-slot-all-days="rental_booking.same_slot_all_days"
+                        <div
+                            class="flex gap-4 px-4 py-2.5"
+                            v-if="parseInt(rental_booking.same_slot_all_days)"
                         >
-                        </v-slots>
+                            <!-- ID -->
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <!-- From -->
+                            <x-booking::form.control-group class="w-full mb-2.5">
+                                <x-booking::form.control-group.label class="required">
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
+                                </x-booking::form.control-group.label>
+                
+                                <x-booking::form.control-group.control
+                                    type="time"
+                                    name="from"
+                                    rules="required"
+                                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                >
+                                </x-booking::form.control-group.control>
+                
+                                <x-booking::form.control-group.error 
+                                    control-name="from"
+                                >
+                                </x-booking::form.control-group.error>
+                            </x-booking::form.control-group>
+                    
+                            <!-- To -->
+                            <x-booking::form.control-group class="w-full mb-2.5">
+                                <x-booking::form.control-group.label class="required">
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                </x-booking::form.control-group.label>
+                
+                                <x-booking::form.control-group.control
+                                    type="time"
+                                    name="to"
+                                    rules="required"
+                                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                >
+                                </x-booking::form.control-group.control>
+                
+                                <x-booking::form.control-group.error 
+                                    control-name="to"
+                                >
+                                </x-booking::form.control-group.error>
+                            </x-booking::form.control-group>
+                        </div>
+
+                        <div v-else>
+                            @include('booking::admin.catalog.products.edit.booking.slots', ['bookingType' => 'rental_slot'])
+                        </div>
                     </x-slot:content>
 
                     <x-slot:footer>
@@ -259,9 +309,48 @@
                         same_slot_all_days: 1,
 
                         slots: []
-                    }
+                    },
+
+                    slots: [],
+
+                    optionRowCount: 1,
                 }
-            }
+            },
+
+            methods: {
+                store(params) {
+                    if (params.id) {
+                        let foundIndex = this.slots.findIndex(item => item.id === params.id);
+
+                        this.slots.splice(foundIndex, 1, {
+                            ...this.slots[foundIndex],
+                            params: {
+                                ...this.slots[foundIndex].params,
+                                ...params,
+                            }
+                        }); 
+                    } else {
+                        this.slots.push({
+                            id: 'option_' + this.optionRowCount++,
+                            params
+                        });
+                    }
+
+                    this.$refs.addOptionsRow.toggle();
+                },
+
+                editModal(values) {
+                    values.params.id = values.id;
+
+                    this.$refs.modelForm.setValues(values.params);
+
+                    this.$refs.addOptionsRow.toggle();
+                },
+
+                removeOption(id) {
+                    this.slots = this.slots.filter(option => option.id !== id);
+                },
+            },
         });
     </script>
-@endpush
+@endpushOnce

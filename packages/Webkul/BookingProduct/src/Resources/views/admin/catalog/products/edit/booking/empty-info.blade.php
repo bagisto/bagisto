@@ -51,4 +51,4 @@
             props: ['type'],
         });
     </script>
-@endPushOnce
+@endpushOnce

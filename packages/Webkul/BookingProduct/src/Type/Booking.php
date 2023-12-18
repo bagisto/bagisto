@@ -68,7 +68,7 @@ class Booking extends Virtual
 
         if (request()->route()->getName() != 'admin.catalog.products.mass_update') {
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
-            dd($bookingProduct);
+
             $bookingProduct
                 ? $this->bookingProductRepository->update($data['booking'], $bookingProduct->id)
                 : $this->bookingProductRepository->create(array_merge($data['booking'], [
@@ -81,8 +81,10 @@ class Booking extends Virtual
 
     /**
      * Returns additional views
+     * 
+     * @return mixed
      */
-    public function getBookingProduct(int $productId): array
+    public function getBookingProduct(int $productId)
     {
         $bookingProducts = [];
 

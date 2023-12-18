@@ -317,7 +317,6 @@
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
-            ref="modelForm"
         >
             <form
                 @submit.prevent="handleSubmit($event, storeSlots)"
@@ -446,11 +445,7 @@
                         </div>
 
                         <div v-if="default_booking.booking_type == 'many'">
-                            <v-slots
-                                booking-type="default_slot"
-                                :same-slot-all-days="default_booking.booking_type == 'many' ? 1 : 0"
-                            >
-                            </v-slots>
+                            @include('booking::admin.catalog.products.edit.booking.slots', ['bookingType' => 'default_slot'])
                         </div>
                     </x-slot:content>
 

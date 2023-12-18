@@ -1,34 +1,39 @@
 <div class="booking-info-row">
-    <span class="icon bp-slot-icon"></span>
-    <span class="title">
-        {{ __('bookingproduct::app.shop.products.slot-duration') }} :
+    <span class="icon-calendar font-bold"></span>
 
-        {{ __('bookingproduct::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration]) }}
+    <span class="title">
+        @lang('booking::app.shop.products.slot-duration') :
+
+        @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
     </span>
 </div>
 
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\TableSlot')
 
 <div class="booking-info-row">
-    <span class="icon bp-slot-icon"></span>
+    <span class="icon-calendar font-bold"></span>
+
     <span class="title">
-        {{ __('bookingproduct::app.shop.products.today-availability') }}
+        @lang('bookingproduct::app.shop.products.today-availability')
     </span>
 
     <span class="value">
-    
         {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
-
     </span>
 
-    <div class="toggle" @click="showDaysAvailability = ! showDaysAvailability">
-        {{ __('bookingproduct::app.shop.products.slots-for-all-days') }}
+    <div    
+        class="toggle"
+        @click="showDaysAvailability = ! showDaysAvailability"
+    >
+        @lang('booking::app.shop.products.slots-for-all-days')
 
-        <i class="icon" :class="[! showDaysAvailability ? 'arrow-down-icon' : 'arrow-up-icon']"></i>
+        <i :class="[! showDaysAvailability ? 'icon-arrow-down' : 'icon-arrow-up']"></i>
     </div>
 
-    <div class="days-availability" v-show="showDaysAvailability">
-
+    <div
+        class="days-availability"
+        v-show="showDaysAvailability"
+    >
         <table>
             <tbody>
                 @foreach ($bookingSlotHelper->getWeekSlotDurations($bookingProduct) as $day)
@@ -44,14 +49,15 @@
                                     {{ $slot['from'] . ' - ' . $slot['to'] }}</br>
                                 @endforeach
                             @else
-                                <span class="text-danger">{{ __('bookingproduct::app.shop.products.closed') }}</span>
+                                <span class="text-danger">
+                                    @lang('booking::app.shop.products.closed')
+                                </span>
                             @endif
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
     </div>
 </div>
 
@@ -61,6 +67,9 @@
     ])
 
 <div class="form-group">
-    <label class="label-style required">{{ __('bookingproduct::app.shop.products.special-notes') }}</label>
+    <label class="label-style required">
+        @lang('bookingproduct::app.shop.products.special-notes')
+    </label>
+
     <textarea name="booking[note]" class="form-style" style="width: 100%"/>
 </div>

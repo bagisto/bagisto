@@ -322,11 +322,7 @@
                         </div>
 
                         <div v-else>
-                            <v-slots
-                                booking-type="appointment_slot"
-                                :same-slot-all-days="appointment_booking.same_slot_all_days"
-                            >
-                            </v-slots>
+                            @include('booking::admin.catalog.products.edit.booking.slots', ['bookingType' => 'appointment_slot'])
                         </div>
                     </x-slot:content>
 
