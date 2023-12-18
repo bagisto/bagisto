@@ -3562,12 +3562,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => 'Ajouter le produit sélectionné',
-                'empty-title' => 'Aucun produit trouvé',
-                'empty-info'  => 'Aucun produit disponible pour ce terme de recherche.',
-                'qty'         => ':qty disponible(s)',
-                'sku'         => 'SKU - :sku',
-                'title'       => 'Sélectionner des produits',
+                'add-btn'       => 'Adicionar Produto Selecionado',
+                'empty-info'    => 'Não há produtos disponíveis para o termo de pesquisa.',
+                'empty-title'   => 'Nenhum produto encontrado',
+                'product-image' => 'Imagem do Produto',
+                'qty'           => ':qty disponível',
+                'sku'           => 'SKU - :sku',
+                'title'         => 'Selecionar Produtos',
             ],
         ],
 
