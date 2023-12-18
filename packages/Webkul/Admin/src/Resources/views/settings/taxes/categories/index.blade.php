@@ -207,13 +207,11 @@
                             </x-admin::form.control-group>
 
                             <!-- Select Tax Rates -->
-                            <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
-                                @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
-                            </p>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group
-                                class="flex gap-2.5 !mb-0 p-1.5"
-                            >
                                 <v-field
                                     name="taxrates[]"
                                     rules="required"
@@ -237,17 +235,12 @@
                                     </select>
                                 </v-field>
 
-                                <x-admin::form.control-group.label
-                                    class="!text-sm !text-gray-600 cursor-pointer"
+                                <x-admin::form.control-group.error
+                                    control-name="taxrates[]"
                                 >
-                                </x-admin::form.control-group.label>
-
+                                </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group.error
-                                control-name="taxrates[]"
-                            >
-                            </x-admin::form.control-group.error>
                         </x-slot:content>
 
                         <!-- Modal Footer -->

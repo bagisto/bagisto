@@ -3561,12 +3561,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => '添加已选择的产品',
-                'empty-title' => '未找到产品',
-                'empty-info'  => '未找到符合搜索条件的产品。',
-                'qty'         => ':qty 可用',
-                'sku'         => 'SKU - :sku',
-                'title'       => '选择产品',
+                'add-btn'       => '添加所选产品',
+                'empty-info'    => '没有找到与搜索词匹配的产品。',
+                'empty-title'   => '未找到任何产品',
+                'product-image' => '产品图片',
+                'qty'           => ':qty 可用',
+                'sku'           => 'SKU - :sku',
+                'title'         => '选择产品',
             ],
         ],
 
