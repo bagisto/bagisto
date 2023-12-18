@@ -6,9 +6,9 @@
     <div class="shimmer w-[150px] h-[50px] rounded-xl"></div>
 </div>
 
-<div class="grid mt-[60px] overflow-auto journal-scroll">
+<div class="grid mt-16 overflow-auto journal-scroll">
     <!-- Single row -->
-    <div class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] ">
+    <div class="flex items-center max-w-full border-b border-[#E9E9E9] ">
         <div class="min-w-[304px] max-w-full max-sm:hidden">
             <p class="shimmer w-[55%] h-[21px]"></p>
         </div>

@@ -4,11 +4,11 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-gallery-template">
-        <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
+        <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
-            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] flex-wrap">
+            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                 <span
-                    class="icon-arrow-up text-[24px] cursor-pointer"
+                    class="icon-arrow-up text-2xl cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::app.components.products.carousel.previous')"
                     tabindex="0"
@@ -46,7 +46,7 @@
                 </div>
 
                 <span
-                    class="icon-arrow-down text-[24px] cursor-pointer"
+                    class="icon-arrow-down text-2xl cursor-pointer"
                     role="button"
                     aria-label="@lang('shop::app.components.products.carousel.previous')"
                     tabindex="0"
@@ -58,14 +58,14 @@
             
             <!-- Media shimmer Effect -->
             <div
-                class="max-w-[560px] max-h-[609px]"
+                class="max-w-[560px] max-h-[610px]"
                 v-show="isMediaLoading"
             >
                 <div class="min-w-[560px] min-h-[607px] bg-[#E9E9E9] rounded-xl shimmer"></div>
             </div>
 
             <div
-                class="max-w-[560px] max-h-[609px]"
+                class="max-w-[560px] max-h-[610px]"
                 v-show="! isMediaLoading"
             >
                 <img 
@@ -74,7 +74,7 @@
                     v-if="baseFile.type == 'image'"
                     alt="{{ $product->name }}"
                     width="560"
-                    height="609"
+                    height="610"
                     @load="onMediaLoad()"
                 />
 
@@ -98,7 +98,7 @@
         </div>
 
         <!-- Product slider Image with shimmer -->
-        <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
+        <div class="flex gap-8 1180:hidden overflow-auto scrollbar-hide">
             <x-shop::media.images.lazy
                 ::src="image.large_image_url"
                 class="min-w-[450px] max-sm:min-w-full w-[490px]" 

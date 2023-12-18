@@ -1,4 +1,4 @@
-<div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
+<div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
     <div>
         <!-- Billing Address Shimmer -->
         <x-shop::shimmer.checkout.onepage.address/>

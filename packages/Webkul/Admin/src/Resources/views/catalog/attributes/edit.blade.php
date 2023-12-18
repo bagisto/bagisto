@@ -171,7 +171,7 @@
                                             @lang('admin::app.catalog.attributes.edit.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-2.5 item-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                        <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
@@ -254,7 +254,7 @@
                                                     >
 
                                                     <!-- Draggable Icon -->
-                                                    <x-admin::table.td class="!px-0">
+                                                    <x-admin::table.td class="!px-0 text-center">
                                                         <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
@@ -285,7 +285,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="w-[25px] h-[25px] mx-auto rounded-md"
+                                                                class="w-[25px] h-[25px] rounded-md"
                                                                 :style="{ background: element.swatch_value }"
                                                             >
                                                             </div>
@@ -854,14 +854,16 @@
                         @toggle="listenModel"
                         ref="addOptionsRow"
                     >
+                        <!-- Modal Header !-->
                         <x-slot:header>
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content !-->
                         <x-slot:content>
-                            <div class="grid grid-cols-3 px-4 py-2.5">
+                            <div class="grid">
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
@@ -914,7 +916,7 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="grid grid-cols-3 gap-4 px-4 py-2.5">
+                            <div class="grid grid-cols-3 gap-4">
                                 <!-- Hidden Id Input -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -976,6 +978,7 @@
                             </div>
                         </x-slot:content>
 
+                        <!-- Modal Footer !-->
                         <x-slot:footer>
                             <!-- Save Button -->
                             <button

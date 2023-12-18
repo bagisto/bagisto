@@ -64,7 +64,7 @@
     </v-product>
 
     <!-- Information Section -->
-    <div class="1180:mt-[80px]">
+    <div class="1180:mt-20">
         <x-shop::tabs position="center">
             <!-- Description Tab -->
             {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
@@ -75,7 +75,7 @@
                 :is-selected="true"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
+                    <p class="text-[#6E6E6E] text-lg max-1180:text-sm">
                         {!! $product->description !!}
                     </p>
                 </div>
@@ -91,10 +91,10 @@
                 :is-selected="false"
             >
                 <div class="container mt-[60px] max-1180:px-5">
-                    <div class="grid gap-[15px] grid-cols-[auto_1fr] max-w-max mt-[30px]">
+                    <div class="grid gap-4 grid-cols-[auto_1fr] max-w-max mt-8">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
-                                <p class="text-[16px] text-black">
+                                <p class="text-base text-black">
                                     {!! $customAttributeValue['label'] !!}
                                 </p>
                             </div>
@@ -107,7 +107,7 @@
                                     href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
-                                    <span class="icon-download text-[24px]"></span>
+                                    <span class="icon-download text-2xl"></span>
                                 </a>
                             @elseif (
                                 $customAttributeValue['type'] == 'image'
@@ -124,7 +124,7 @@
                                 </a>
                             @else 
                                 <div class="grid">
-                                    <p class="text-[16px] text-[#7D7D7D]">
+                                    <p class="text-base text-[#7D7D7D]">
                                         {!! $customAttributeValue['value'] ? $customAttributeValue['value'] : '-' !!}
                                     </p>
                                 </div>
@@ -150,13 +150,13 @@
         <!-- Description Accordion -->
         <x-shop::accordion :is-active="true">
             <x-slot:header class="bg-gray-100">
-                <p class="text-[16px] font-medium 1180:hidden">
+                <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
                 </p>
             </x-slot:header>
 
             <x-slot:content>
-                <div class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-5">
+                <div class="text-[#7D7D7D] text-lg max-1180:text-sm mb-5">
                     {!! $product->description !!}
                 </div>
             </x-slot:content>
@@ -165,17 +165,17 @@
         <!-- Additional Information Accordion -->
         <x-shop::accordion class="bg-gray-100" :is-active="false">
             <x-slot:header>
-                <p class="text-[16px] font-medium 1180:hidden">
+                <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.additional-information')
                 </p>
             </x-slot:header>
 
             <x-slot:content>
                 <div class="container mt-5 mb-5 max-1180:px-5">
-                    <p class="text-[#6E6E6E] text-[18px] max-1180:text-[14px]">
+                    <p class="text-[#6E6E6E] text-lg max-1180:text-sm">
                         @foreach ($customAttributeValues as $customAttributeValue)
                             <div class="grid">
-                                <p class="text-[16px] text-black">
+                                <p class="text-base text-black">
                                     {{ $customAttributeValue['label'] }}
                                 </p>
                             </div>
@@ -188,13 +188,13 @@
                                     href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                     download="{{ $customAttributeValue['label'] }}"
                                 >
-                                    <p class="text-[16px] text-blue-500 underline">
+                                    <p class="text-base text-blue-500 underline">
                                         {{ $customAttributeValue['label'] }}
                                     </p>
                                 </a>
                             @else 
                                 <div class="grid">
-                                    <p class="text-[16px] text-[#6E6E6E]">
+                                    <p class="text-base text-[#6E6E6E]">
                                         {{ $customAttributeValue['value'] ?? '-' }}
                                     </p>
                                 </div>
@@ -208,7 +208,7 @@
         <!-- Reviews Accordion -->
         <x-shop::accordion class="bg-gray-100" :is-active="false">
             <x-slot:header>
-                <p class="text-[16px] font-medium 1180:hidden">
+                <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
                 </p>
             </x-slot:header>
@@ -264,7 +264,7 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="flex gap-10 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                        <div class="flex gap-9 mt-12 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-6">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
@@ -272,14 +272,14 @@
                             <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-5">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
-                                <div class="flex gap-[15px] justify-between">
-                                    <h1 class="text-[30px] font-medium max-sm:text-[20px]">
+                                <div class="flex gap-4 justify-between">
+                                    <h1 class="text-3xl font-medium max-sm:text-xl">
                                         {{ $product->name }}
                                     </h1>
 
                                     @if (core()->getConfigData('general.content.shop.wishlist_option'))
                                         <div
-                                            class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
+                                            class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-2xl transition-all hover:opacity-[0.8] cursor-pointer"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -295,15 +295,15 @@
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
 
-                                <div class="flex gap-[15px] items-center mt-[15px]">
+                                <div class="flex gap-4 items-center mt-4">
                                     <x-shop::products.star-rating 
                                         :value="$avgRatings"
                                         :is-editable=false
                                     >
                                     </x-shop::products.star-rating>
 
-                                    <div class="flex gap-[15px] items-center">
-                                        <p class="text-[#6E6E6E] text-[14px]">
+                                    <div class="flex gap-4 items-center">
+                                        <p class="text-[#6E6E6E] text-sm">
                                             ({{ $product->approvedReviews->count() }} @lang('reviews'))
                                         </p>
                                     </div>
@@ -314,10 +314,10 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="flex gap-2.5 items-center mt-[25px] text-[24px] !font-medium max-sm:mt-[15px] max-sm:text-[18px]">
+                                <p class="flex gap-2.5 items-center mt-5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
 
-                                    <span class="text-[18px] text-[#6E6E6E]">
+                                    <span class="text-lg text-[#6E6E6E]">
                                         @if (
                                             (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
                                             && $product->getTypeInstance()->getTaxCategory()
@@ -328,7 +328,7 @@
                                 </p>
 
                                 @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
-                                    <div class="grid gap-[5px] mt-2.5">
+                                    <div class="grid gap-1.5 mt-2.5">
                                         @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
                                             <p class="text-[#6E6E6E] [&>*]:text-black">
                                                 {!! $offer !!}
@@ -341,7 +341,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                                <p class="mt-[25px] text-[18px] text-[#6E6E6E] max-sm:text-[14px] max-sm:mt-[15px]">
+                                <p class="mt-6 text-lg text-[#6E6E6E] max-sm:text-sm max-sm:mt-4">
                                     {!! $product->short_description !!}
                                 </p>
 
@@ -357,7 +357,7 @@
 
 
                                 <!-- Product Actions and Qunatity Box -->
-                                <div class="flex gap-[15px] max-w-[470px] mt-[30px]">
+                                <div class="flex gap-4 max-w-[470px] mt-8">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -365,7 +365,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
-                                            class="gap-x-4 py-[15px] px-[26px] rounded-xl"
+                                            class="gap-x-4 py-4 px-7 rounded-xl"
                                         >
                                         </x-shop::quantity-changer>
                                     @endif
@@ -409,7 +409,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="flex gap-[35px] mt-10 max-sm:flex-wrap max-sm:justify-center">
+                                <div class="flex gap-9 mt-10 max-sm:flex-wrap max-sm:justify-center">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div
@@ -420,7 +420,7 @@
                                     >
                                         @if (core()->getConfigData('general.content.shop.compare_option'))
                                             <span
-                                                class="icon-compare text-[24px]"
+                                                class="icon-compare text-2xl"
                                                 role="presentation"
                                             ></span>
 

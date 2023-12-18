@@ -3562,12 +3562,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => 'Agregar Producto Seleccionado',
-                'empty-info'  => 'No hay productos disponibles para el término de búsqueda.',
-                'empty-title' => 'No se encontraron productos',
-                'qty'         => ':qty Disponibles',
-                'sku'         => 'SKU - :sku',
-                'title'       => 'Seleccionar Productos',
+                'add-btn'       => 'Agregar producto seleccionado',
+                'empty-info'    => 'No hay productos disponibles para el término de búsqueda.',
+                'empty-title'   => 'No se encontraron productos',
+                'product-image' => 'Imagen del producto',
+                'qty'           => ':qty disponible',
+                'sku'           => 'SKU - :sku',
+                'title'         => 'Seleccionar productos',
             ],
         ],
 

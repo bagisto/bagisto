@@ -60,13 +60,13 @@
                         ! empty($field['channel_based'])
                         && $channels->count() > 1
                     )
-                        <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
+                        <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
                             {{ $currentChannel->name }}
                         </span>
                     @endif
 
                     @if (! empty($field['locale_based']))
-                        <span class="px-1.5 py-1 bg-gray-100 border border-gray-200 rounded-md text-[10px] text-gray-600 font-semibold leading-normal">
+                        <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
                             {{ $currentLocale->name }}
                         </span>
                     @endif

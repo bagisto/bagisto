@@ -3562,12 +3562,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => 'Seçilen Ürünü Ekle',
-                'empty-title' => 'Ürün bulunamadı',
-                'empty-info'  => 'Arama terimi için uygun ürün bulunmuyor.',
-                'qty'         => ':qty Mevcut',
-                'sku'         => 'Stok Kodu - :sku',
-                'title'       => 'Ürünleri Seç',
+                'add-btn'       => 'Seçilen Ürünü Ekle',
+                'empty-info'    => 'Arama terimi için hiçbir ürün bulunamadı.',
+                'empty-title'   => 'Hiçbir ürün bulunamadı',
+                'product-image' => 'Ürün Resmi',
+                'qty'           => ':qty Mevcut',
+                'sku'           => 'Stok Kodu - :sku',
+                'title'         => 'Ürünleri Seç',
             ],
         ],
 

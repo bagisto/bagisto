@@ -3562,12 +3562,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => '選択した製品を追加',
-                'empty-title' => '製品が見つかりません',
-                'empty-info'  => '検索語句に一致する製品はありません。',
-                'qty'         => ':qty 個利用可能',
-                'sku'         => 'SKU - :sku',
-                'title'       => '製品を選択',
+                'add-btn'       => '選択した製品を追加',
+                'empty-info'    => '検索語に該当する製品はありません。',
+                'empty-title'   => '製品が見つかりませんでした',
+                'product-image' => '製品画像',
+                'qty'           => ':qty 利用可能',
+                'sku'           => 'SKU - :sku',
+                'title'         => '製品を選択',
             ],
         ],
 

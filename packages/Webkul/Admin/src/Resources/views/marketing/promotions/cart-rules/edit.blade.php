@@ -616,9 +616,9 @@
                                     @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
                                     <!--Channel--> 
                                     <div class="mb-2.5">
-                                        <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.channels')
-                                        </p>
+                                        </x-admin::form.control-group.label>
 
                                         @foreach(core()->getAllChannels() as $channel)
                                             <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
@@ -651,9 +651,9 @@
 
                                     <!--Customer Groups -->
                                     <div class="mb-2.5">
-                                        <p class="required block leading-6 text-gray-800 dark:text-white font-medium">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.customer-groups')
-                                        </p>
+                                        </x-admin::form.control-group.label>
 
                                         @php($selectedOptionIds = old('customer_groups') ?? $cartRule->customer_groups->pluck('id')->toArray())
 
@@ -839,7 +839,7 @@
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
+                        class="custom-select inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.marketing.promotions.cart-rules.edit.choose-condition-to-add')</option>
@@ -859,7 +859,7 @@
 
                     <select
                         :name="['conditions[' + index + '][operator]']"
-                        class="inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                        class="custom-select inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -937,7 +937,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -953,7 +953,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3	rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -967,7 +967,7 @@
 
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3 rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-1 justify-between items-center max-h-10 w-full max-w-[196px] py-1.5 ltr:pl-3 rtl:pr-3 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                     v-else
                                 >

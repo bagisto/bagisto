@@ -194,24 +194,30 @@
                     let treeItems = [];
 
                     for (let key in items) {
+                        let hasChildren = Object.entries(items[key][this.childrenField]).length > 0;
+
                         treeItems.push(
                             this.$h(
                                 'div', {
                                     class: [
                                         'v-tree-item active inline-block w-full [&>.v-tree-item]:ltr:pl-6 [&>.v-tree-item]:rtl:pr-6 [&>.v-tree-item]:hidden [&.active>.v-tree-item]:block',
-                                        level > 1 ? 'ltr:!pl-14 rtl:!pr-14' : '',
+                                        level === 1 && ! hasChildren
+                                            ? 'ltr:!pl-5 rtl:!pr-5'
+                                            : level > 1 && ! hasChildren
+                                            ? 'ltr:!pl-14 rtl:!pr-14'
+                                            : '',
                                     ],
                                 }, [
                                     this.generateToggleIconComponent({
                                         class: [
-                                            typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-sort-down' : '',
+                                            hasChildren ? 'icon-sort-down' : '',
                                             'text-xl rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950'
                                         ],
                                     }),
 
                                     this.generateFolderIconComponent({
                                         class: [
-                                            typeof items[key][this.childrenField] === 'object' && Object.keys(items[key][this.childrenField]).length ? 'icon-folder' : 'icon-attribute',
+                                            hasChildren ? 'icon-folder' : 'icon-attribute',
                                             'text-2xl cursor-pointer'
                                         ],
                                     }),

@@ -7,7 +7,7 @@
         <span class="relative">
             <slot></slot>
 
-            <i class="icon-calendar text-[24px] text-gray-400 absolute ltr:right-2 rtl:left-2 top-[50%] -translate-y-[50%]"></i>
+            <i class="icon-calendar text-2xl text-gray-400 absolute ltr:right-2 rtl:left-2 top-1/2 -translate-y-1/2"></i>
         </span>
     </script>
 

@@ -183,7 +183,7 @@
                         </a>
 
                         @if (count($menuItem['children']))
-                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-[8px] z-[100]">
+                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
                                 @foreach ($menuItem['children'] as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem['url'] }}"
@@ -549,7 +549,7 @@
                     </span>
                 
                     <span
-                        class="flex justify-center items-center min-w-5 h-5 absolute -top-2 p-1.5 ltr:left-5 rtl:right-5 bg-blue-600 rounded-[44px] text-white text-[10px] font-semibold leading-[9px] cursor-pointer"
+                        class="flex justify-center items-center min-w-5 h-5 absolute -top-2 p-1.5 ltr:left-5 rtl:right-5 bg-blue-600 rounded-full text-white text-[10px] font-semibold leading-[9px] cursor-pointer"
                         v-text="totalUnRead"
                         v-if="totalUnRead"
                     >

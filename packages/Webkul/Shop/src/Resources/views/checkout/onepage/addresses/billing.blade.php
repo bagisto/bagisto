@@ -1,9 +1,9 @@
 <div>
     <div v-if="! forms.billing.isNew">
-        <x-shop::accordion class="!border-b-[0px]">
-            <x-slot:header >
+        <x-shop::accordion class="!border-b-0">
+            <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
                     </h2>
                 </div>
@@ -14,7 +14,7 @@
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid gap-5 grid-cols-2 mt-[15px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                    <div class="grid gap-5 grid-cols-2 mt-8 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses.billing"
@@ -33,7 +33,7 @@
                             />
 
                             <label 
-                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>
@@ -43,14 +43,14 @@
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
                                 <div class="flex justify-between items-center">
-                                    <p class="text-[16px] font-medium">
+                                    <p class="text-base font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
                                         
                                         <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                     </p>
                                 </div>
 
-                                <p class="mt-[25px] text-[14px] text-[#6E6E6E]">
+                                <p class="mt-6 text-sm text-[#6E6E6E]">
                                     <template v-if="typeof address.address1 === 'string'">
                                         @{{ address.address1 }},
                                     </template>
@@ -80,11 +80,11 @@
                                 tabindex="0"
                             >
                                 <span
-                                    class="icon-plus p-2.5 border border-black rounded-full text-[30px]"
+                                    class="icon-plus p-2.5 border border-black rounded-full text-3xl"
                                     role="presentation"
                                 ></span>
 
-                                <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
+                                <p class="text-base">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         />
                 
                         <label 
-                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="isUsedForShipping"
                         >
                         </label>
@@ -126,7 +126,7 @@
                         <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.billing.length">
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
-                                    class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
+                                    class="block py-3 px-11 bg-navyBlue rounded-2xl text-white text-base w-max font-medium text-center cursor-pointer"
                                     @click="store"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.confirm')
@@ -140,7 +140,7 @@
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
                                     type="submit"
-                                    class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
+                                    class="block py-3 px-11 bg-navyBlue rounded-2xl text-white text-base w-max font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                                 </button>
@@ -153,10 +153,10 @@
     </div>
 
     <div v-else>
-        <x-shop::accordion>
+        <x-shop::accordion class="!border-b-0">
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                    <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
                     </h2>
                 </div>
@@ -170,7 +170,7 @@
                         v-if="addresses.billing.length > 0"
                         @click="forms.billing.isNew = ! forms.billing.isNew"
                     >
-                        <span class="icon-arrow-left text-[24px]"></span>
+                        <span class="icon-arrow-left text-2xl"></span>
 
                         <span>@lang('shop::app.checkout.onepage.addresses.billing.back')</span>
                     </a>
@@ -326,7 +326,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[country]"
-                                    class="py-2 mb-2"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
@@ -367,7 +366,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[state]"
-                                    class="py-2 mb-2"
                                     rules="required"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
@@ -466,36 +464,34 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
 
-                        <div class="mt-[30px] pb-[15px]">
-                            <div class="grid gap-2.5">
-                                @auth('customer')
-                                    <div class="select-none flex gap-x-[15px]">
-                                        <input 
-                                            type="checkbox"
-                                            name="billing[default_address]"
-                                            id="billing[default_address]"
-                                            class="hidden peer"
-                                            v-model="forms.billing.address.isSaved"
-                                        >
+                        <div class="grid gap-2.5 pb-4">
+                            @auth('customer')
+                                <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
+                                    <input 
+                                        type="checkbox"
+                                        name="billing[default_address]"
+                                        id="billing[default_address]"
+                                        class="hidden peer"
+                                        v-model="forms.billing.address.isSaved"
+                                    >
 
-                                        <label
-                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                            for="billing[default_address]"
-                                        >
-                                        </label>
+                                    <label
+                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        for="billing[default_address]"
+                                    >
+                                    </label>
 
-                                        <label for="billing[default_address]">
-                                            @lang('shop::app.checkout.onepage.addresses.billing.save-address')
-                                        </label>
-                                    </div>
-                                @endauth
-                            </div>
+                                    <label for="billing[default_address]">
+                                        @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                                    </label>
+                                </div>
+                            @endauth
                         </div>
 
                         <div class="flex justify-end mt-4 mb-4">
                             <button
                                 type="submit"
-                                class="block py-[11px] px-[43px] bg-navyBlue text-white text-base w-max font-medium rounded-[18px] text-center cursor-pointer"
+                                class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                             </button>

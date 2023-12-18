@@ -8,10 +8,10 @@
         <div class="grid gap-y-2.5">
             <p class="w-[200px] p-2.5 shimmer"></p>
             <p class="w-[200px] p-2.5 shimmer"></p>
-            <p class="w-[160px] p-2.5 shimmer"></p>
-            <p class="w-[160px] p-2.5 shimmer"></p>
-            <p class="w-[160px] p-2.5 shimmer"></p>
-            <p class="w-[160px] p-2.5 shimmer"></p>
+            <p class="w-40 p-2.5 shimmer"></p>
+            <p class="w-40 p-2.5 shimmer"></p>
+            <p class="w-40 p-2.5 shimmer"></p>
+            <p class="w-40 p-2.5 shimmer"></p>
         </div>
     </div>
 </div>

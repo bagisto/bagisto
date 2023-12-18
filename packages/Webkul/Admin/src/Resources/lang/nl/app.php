@@ -3562,12 +3562,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => 'Geselecteerd Product Toevoegen',
-                'empty-title' => 'Geen producten gevonden',
-                'empty-info'  => 'Geen producten beschikbaar voor zoekterm.',
-                'qty'         => ':qty Beschikbaar',
-                'sku'         => 'SKU - :sku',
-                'title'       => 'Selecteer Producten',
+                'add-btn'       => 'Geselecteerd product toevoegen',
+                'empty-info'    => 'Geen producten beschikbaar voor zoekterm.',
+                'empty-title'   => 'Geen producten gevonden',
+                'product-image' => 'Productafbeelding',
+                'qty'           => ':qty beschikbaar',
+                'sku'           => 'SKU - :sku',
+                'title'         => 'Producten selecteren',
             ],
         ],
 

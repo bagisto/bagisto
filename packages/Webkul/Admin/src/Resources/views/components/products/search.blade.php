@@ -73,7 +73,9 @@
                                 <template v-if="! product.images.length">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                 
-                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
+                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
+                                        @lang('admin::app.components.products.search.product-image')
+                                    </p>
                                 </template>
 
                                 <template v-else>

@@ -49,7 +49,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="mt-[0] required">
+                                <x-shop::form.control-group.label class="mt-0 required">
                                     @lang('shop::app.products.view.reviews.rating')
                                 </x-shop::form.control-group.label>
 
@@ -138,9 +138,9 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
+                            <div class="flex gap-4 justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-5 max-xl:mb-5">
                                 <button
-                                    class="primary-button w-full max-w-[374px] py-4 px-[43px] rounded-[18px] text-center"
+                                    class="primary-button w-full max-w-[374px] py-4 px-11 rounded-2xl text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -148,7 +148,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center px-[30px] py-2.5 rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
+                                    class="secondary-button items-center px-8 py-2.5 rounded-2xl max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -168,8 +168,8 @@
 
                 <template v-else>
                     <!-- Review Section Header -->
-                    <div class="flex gap-[15px] items-center justify-between  max-sm:flex-wrap">
-                        <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
+                    <div class="flex gap-4 items-center justify-between  max-sm:flex-wrap">
+                        <h3 class="font-dmserif text-3xl max-sm:text-xl">
                             @lang('shop::app.products.view.reviews.customer-review')
                         </h3>
                         
@@ -178,10 +178,10 @@
                             || auth()->guard('customer')->user()
                         )
                             <div
-                                class="flex gap-x-[15px] items-center px-[15px] py-2.5 border border-navyBlue rounded-xl cursor-pointer"
+                                class="flex gap-x-4 items-center px-4 py-2.5 border border-navyBlue rounded-xl cursor-pointer"
                                 @click="canReview = true"
                             >
-                                <span class="icon-pen text-[24px]"></span>
+                                <span class="icon-pen text-2xl"></span>
 
                                 @lang('shop::app.products.view.reviews.write-a-review')
                             </div>
@@ -190,32 +190,32 @@
 
                     <template v-if="reviews.length">
                         <!-- Average Rating Section -->
-                        <div class="flex gap-[15px] justify-between items-center max-w-[365px] mt-[30px] max-sm:flex-wrap">
-                            <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
+                        <div class="flex gap-4 justify-between items-center max-w-[365px] mt-8 max-sm:flex-wrap">
+                            <p class="text-3xl font-medium max-sm:text-base">{{ number_format($avgRatings, 1) }}</p>
 
                             <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
 
-                            <p class="text-[12px] text-[#858585]">
+                            <p class="text-xs text-[#858585]">
                                 (@{{ meta.total }} @lang('shop::app.products.view.reviews.customer-review'))
                             </p>
                         </div>
 
                         <!-- Ratings By Individual Stars -->
                         <div class="flex gap-x-5 items-center">
-                            <div class="grid gap-y-[18px] flex-wrap max-w-[365px] mt-2.5">
+                            <div class="grid gap-y-5 flex-wrap max-w-[365px] mt-2.5">
                                 @for ($i = 5; $i >= 1; $i--)
                                     <div class="row grid grid-cols-[1fr_2fr] gap-2.5 items-center max-sm:flex-wrap">
-                                        <div class="text-[16px] font-medium">{{ $i }} Stars</div>
+                                        <div class="text-base font-medium">{{ $i }} Stars</div>
 
-                                        <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
-                                            <div class="h-4 bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
+                                        <div class="h-4 w-[275px] max-w-full bg-[#E5E5E5] rounded-sm">
+                                            <div class="h-4 bg-[#FEA82B] rounded-sm" style="width: {{ $percentageRatings[$i] }}%"></div>
                                         </div>
                                     </div>
                                 @endfor
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
+                        <div class="grid grid-cols-[1fr_1fr] gap-5 mt-14 max-1060:grid-cols-[1fr]">
                             <!-- Product Review Item Vue Component -->
                             <v-product-review-item
                                 v-for='review in reviews'
@@ -224,7 +224,7 @@
                         </div>
 
                         <button
-                            class="block mx-auto w-max mt-[60px] py-[11px] px-[43px] bg-white border border-navyBlue rounded-[18px] text-center text-navyBlue text-base font-medium"
+                            class="block mx-auto w-max mt-14 py-3 px-11 bg-white border border-navyBlue rounded-2xl text-center text-navyBlue text-base font-medium"
                             v-if="links?.next"
                             @click="get()"
                         >
@@ -234,10 +234,10 @@
 
                     <template v-else>
                         <!-- Empty Review Section -->
-                        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                        <div class="grid items-center justify-items-center w-full m-auto h-[476px] place-content-center text-center">
                             <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
-                            <p class="text-[20px]">
+                            <p class="text-xl">
                                 @lang('shop::app.products.view.reviews.empty-review')
                             </p>
                         </div>
@@ -249,7 +249,7 @@
 
     <!-- Product Review Item Template -->
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-5 p-[25px] border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
+        <div class="flex gap-5 p-6 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap max-xl:mb-5">
             <div>
                 <img
                     v-if="review.profile"
@@ -265,7 +265,7 @@
                     :title="review.name"
                 >
                     <span
-                        class="text-[24px] text-[#6E6E6E] font-semibold"
+                        class="text-2xl text-[#6E6E6E] font-semibold"
                         v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
                     >
                     </span>
@@ -275,7 +275,7 @@
             <div class="w-full">
                 <div class="flex justify-between">
                     <p
-                        class="text-[20px] font-medium max-sm:text-[16px]"
+                        class="text-xl font-medium max-sm:text-base"
                         v-text="review.name"
                     >
                     </p>
@@ -290,25 +290,25 @@
                 </div>
 
                 <p
-                    class="mt-2.5 text-[14px] font-medium max-sm:text-[12px]"
+                    class="mt-2.5 text-sm font-medium max-sm:text-xs"
                     v-text="review.created_at"
                 >
                 </p>
 
                 <p
-                    class="mt-5 text-[16px] text-[#6E6E6E] font-semibold max-sm:text-[12px]"
+                    class="mt-5 text-base text-[#6E6E6E] font-semibold max-sm:text-xs"
                     v-text="review.title"
                 >
                 </p>
 
                 <p
-                    class="mt-5 text-[16px] text-[#6E6E6E] max-sm:text-[12px]"
+                    class="mt-5 text-base text-[#6E6E6E] max-sm:text-xs"
                     v-text="review.comment"
                 >
                 </p>
 
                 <button
-                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-[14px]"
+                    class="secondary-button min-h-[34px] mt-2.5 px-2 py-1 rounded-lg text-sm"
                     @click="translate"
                 >
                     <!-- Spinner -->

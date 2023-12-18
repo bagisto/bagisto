@@ -19,13 +19,13 @@
         {{ $title }}
     </x-slot>
 
-    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+    <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
         @if (request()->has('image-search'))
             @include('shop::search.images.results')
         @endif
 
-        <div class="flex justify-between items-center mt-[30px]">
-            <h1 class="text-[26px] font-medium">
+        <div class="flex justify-between items-center mt-8">
+            <h1 class="text-2xl font-medium">
                 {{ $title }}
             </h1>
         </div>
@@ -41,7 +41,7 @@
             type="text/x-template" 
             id="v-search-template"
         >
-            <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+            <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
                 <div class="flex gap-10 items-start md:mt-10 max-lg:gap-5">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
@@ -55,7 +55,7 @@
 
                         <!-- Product List Card Container -->
                         <div
-                            class="grid grid-cols-1 gap-[25px] mt-[30px]"
+                            class="grid grid-cols-1 gap-6 mt-8"
                             v-if="filters.toolbar.mode === 'list'"
                         >
                             <!-- Product Card Shimmer Effect -->
@@ -75,10 +75,10 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                   
-                                        <p class="text-[20px]">
+                                        <p class="text-xl">
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>
@@ -90,7 +90,7 @@
                         <div v-else>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-5 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
+                                <div class="grid grid-cols-3 gap-8 mt-8 max-sm:mt-5 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
                                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                                 </div>
                             </template>
@@ -98,7 +98,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-5 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
+                                    <div class="grid grid-cols-3 gap-8 mt-8 max-sm:mt-5 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -109,10 +109,10 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
-                                        <p class="text-[20px]">
+                                        <p class="text-xl">
                                             @lang('shop::app.categories.view.empty')
                                         </p>
                                     </div>
@@ -122,7 +122,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="secondary-button block mx-auto w-max py-[11px] mt-[60px] px-[43px] rounded-[18px] text-base text-center"
+                            class="secondary-button block mx-auto w-max py-3 mt-[60px] px-11 rounded-2xl text-base text-center"
                             @click="loadMoreProducts"
                             v-if="links.next"
                         >
