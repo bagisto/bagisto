@@ -6,16 +6,13 @@
     <div class="flex gap-1.5 items-center">
         <!-- Hamburger Menu -->
         <i
-            class="hidden icon-menu text-2xl p-1.5 max-lg:block cursor-pointer"
+            class="hidden icon-menu text-2xl p-1.5 rounded-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 max-lg:block"
             @click="$refs.sidebarMenuDrawer.open()"
         >
         </i>
 
         <!-- Logo -->
-        <a
-            href="{{ route('admin.dashboard.index') }}" 
-            class="place-self-start -mt-1"            
-        >
+        <a href="{{ route('admin.dashboard.index') }}">
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
                 <img
                     class="w-[110px] h-10"
@@ -33,7 +30,7 @@
 
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search>
-            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5">
+            <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5 max-lg:w-[400px]">
                 <i class="icon-search absolute flex items-center ltr:left-3 rtl:right-3 text-2xl top-1.5"></i>
 
                 <input 
@@ -183,11 +180,11 @@
                         </a>
 
                         @if (count($menuItem['children']))
-                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
+                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-10 rtl:pr-10 pb-2 rounded-b-lg z-[100]">
                                 @foreach ($menuItem['children'] as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem['url'] }}"
-                                        class="text-sm text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-1"
+                                        class="text-sm text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 dark:text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-300 whitespace-nowrap py-1 dark:hover:bg-gray-950"
                                     >
                                         @lang($subMenuItem['name'])
                                     </a>
@@ -203,7 +200,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mega-search-template">
-        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5">
+        <div class="flex items-center relative w-[525px] max-w-[525px] ltr:ml-2.5 rtl:mr-2.5 max-lg:w-[400px]">
             <i class="icon-search text-2xl flex items-center absolute ltr:left-3 rtl:right-3 top-1.5"></i>
 
             <input 
@@ -534,10 +531,7 @@
         });
     </script>
 
-    <script 
-        type="text/x-template"
-        id="v-notifications-template"
-    >
+    <script type="text/x-template" id="v-notifications-template">
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <!-- Notification Toggle -->
             <x-slot:toggle>
