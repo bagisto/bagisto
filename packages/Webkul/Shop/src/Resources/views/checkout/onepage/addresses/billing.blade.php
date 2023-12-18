@@ -96,7 +96,7 @@
                     </v-error-message>
 
                     <div 
-                        class="flex gap-x-[15px] mt-5 text-[14px] text-[#6E6E6E] select-none"
+                        class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
                         v-if="addresses.billing.length"
                     >
                         <input
