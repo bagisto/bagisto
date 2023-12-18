@@ -5,5 +5,5 @@
 
     <span class="shimmer block w-[101px] h-10 bg-gray-300"></span>
 
-    <span class="shimmer block w-[208px] h-10 bg-gray-300"></span>
+    <span class="shimmer block w-52 h-10 bg-gray-300"></span>
 </div>

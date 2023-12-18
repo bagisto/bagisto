@@ -53,7 +53,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
 
-                    <x-shop::form.control-group class="mb-4">
+                    <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.reset-password.email')
                         </x-shop::form.control-group.label>

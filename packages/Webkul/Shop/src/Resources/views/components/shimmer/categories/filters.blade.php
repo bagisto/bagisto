@@ -4,11 +4,10 @@
         <p class="shimmer w-1/5 h-5"></p>
     </div>
 
-
     <!-- Price Range Filter Shimmer -->
     <div class="border-b border-[#E9E9E9]">
         <div class="flex py-2.5 justify-between items-center">
-            <p class="shimmer h-[27px] w-2/5"></p>
+            <p class="shimmer h-[28px] w-2/5"></p>
             <span class="shimmer h-6 w-6"></span>
         </div>
 
@@ -25,7 +24,7 @@
         </div>
 
         <div class="grid pb-3 z-10 bg-white rounded-lg">
-            <div class="flex items-center gap-x-4 pl-2 ">
+            <div class="flex items-center gap-x-4 pl-2">
                 <div class="shimmer w-5 h-5 rounded"></div>
                 
                 <div class="p-2 pl-0">

@@ -350,17 +350,17 @@
                                     class="ml-2"
                                     v-else
                                 >
-                                    @lang('No category found.')
+                                    @lang('shop::app.components.layouts.header.no-category-found')
                                 </span>
                             </div>
                         </li>
                     </ul>
 
                     <span
-                        class="ml-2"
+                        class="ml-2 mt-2"
                         v-else
                     >
-                        @lang('No category found.')
+                        @lang('shop::app.components.layouts.header.no-category-found')
                     </span>
                 </div>
             </template>

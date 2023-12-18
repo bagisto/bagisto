@@ -238,7 +238,7 @@
                                             <template #item="{ element, index }">
                                                 <x-admin::table.thead.tr class="hover:bg-gray-50 dark:hover:bg-gray-950">
                                                     <!-- Draggable Icon -->
-                                                    <x-admin::table.td class="!px-0">
+                                                    <x-admin::table.td class="!px-0 text-center">
                                                         <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
 
                                                         <input
@@ -337,7 +337,7 @@
                                 <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
                                     <!-- Attribute Option Image -->
                                     <img
-                                        class="w-[120px] h-[120px]"
+                                        class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                         alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
                                     />
@@ -745,7 +745,10 @@
 
                         <!-- Modal Content !-->
                         <x-slot:content>
-                            <div class="grid">
+                            <div
+                                class="grid"
+                                v-if="swatchType == 'image' || swatchType == 'color'"
+                            >
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"

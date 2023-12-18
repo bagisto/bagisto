@@ -14,7 +14,7 @@
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid gap-5 grid-cols-2 mt-4 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                    <div class="grid gap-5 grid-cols-2 mt-8 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses"
@@ -95,7 +95,7 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none">
+                    <div class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -323,7 +323,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[country]"
-                                    class="py-2 mb-2"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
@@ -364,7 +363,6 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[state]"
-                                    class="py-2 mb-2"
                                     rules="required"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
@@ -463,30 +461,28 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
 
-                        <div class="mt-8 pb-4">
-                            <div class="grid gap-2.5">
-                                @auth('customer')
-                                    <div class="select-none flex gap-x-4">
-                                        <input 
-                                            type="checkbox"
-                                            name="billing[default_address]"
-                                            id="billing[default_address]"
-                                            class="hidden peer"
-                                            v-model="forms.billing.address.isSaved"
-                                        >
+                        <div class="grid gap-2.5 pb-4">
+                            @auth('customer')
+                                <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
+                                    <input 
+                                        type="checkbox"
+                                        name="billing[default_address]"
+                                        id="billing[default_address]"
+                                        class="hidden peer"
+                                        v-model="forms.billing.address.isSaved"
+                                    >
 
-                                        <label
-                                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                            for="billing[default_address]"
-                                        >
-                                        </label>
+                                    <label
+                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                        for="billing[default_address]"
+                                    >
+                                    </label>
 
-                                        <label for="billing[default_address]">
-                                            @lang('shop::app.checkout.onepage.addresses.billing.save-address')
-                                        </label>
-                                    </div>
-                                @endauth
-                            </div>
+                                    <label for="billing[default_address]">
+                                        @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                                    </label>
+                                </div>
+                            @endauth
                         </div>
 
                         <div class="flex justify-end mt-4 mb-4">

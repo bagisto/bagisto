@@ -3562,12 +3562,13 @@ return [
 
         'products' => [
             'search' => [
-                'add-btn'     => 'Add Selected Product',
-                'empty-info'  => 'No products available for search term.',
-                'empty-title' => 'No products found',
-                'qty'         => ':qty Available',
-                'sku'         => 'SKU - :sku',
-                'title'       => 'Select Products',
+                'add-btn'       => 'Add Selected Product',
+                'empty-info'    => 'No products available for search term.',
+                'empty-title'   => 'No products found',
+                'product-image' => 'Product Image',
+                'qty'           => ':qty Available',
+                'sku'           => 'SKU - :sku',
+                'title'         => 'Select Products',
             ],
         ],
 

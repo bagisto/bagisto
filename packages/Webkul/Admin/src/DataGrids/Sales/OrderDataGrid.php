@@ -162,7 +162,7 @@ class OrderDataGrid extends DataGrid
             ],
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => false,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([

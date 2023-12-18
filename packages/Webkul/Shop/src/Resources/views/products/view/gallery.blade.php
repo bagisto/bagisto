@@ -6,7 +6,7 @@
     <script type="text/x-template" id="v-product-gallery-template">
         <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
-            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] flex-wrap">
+            <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                 <span
                     class="icon-arrow-up text-2xl cursor-pointer"
                     role="button"
@@ -58,14 +58,14 @@
             
             <!-- Media shimmer Effect -->
             <div
-                class="max-w-[560px] max-h-[609px]"
+                class="max-w-[560px] max-h-[610px]"
                 v-show="isMediaLoading"
             >
                 <div class="min-w-[560px] min-h-[607px] bg-[#E9E9E9] rounded-xl shimmer"></div>
             </div>
 
             <div
-                class="max-w-[560px] max-h-[609px]"
+                class="max-w-[560px] max-h-[610px]"
                 v-show="! isMediaLoading"
             >
                 <img 
@@ -74,7 +74,7 @@
                     v-if="baseFile.type == 'image'"
                     alt="{{ $product->name }}"
                     width="560"
-                    height="609"
+                    height="610"
                     @load="onMediaLoad()"
                 />
 

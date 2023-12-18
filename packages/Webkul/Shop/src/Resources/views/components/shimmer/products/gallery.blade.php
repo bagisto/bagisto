@@ -11,7 +11,7 @@
         </div>
     </div>
     
-    <div class="max-h-[609px] max-w-[560px]">
+    <div class="max-h-[610px] max-w-[560px]">
         <div class="shimmer min-w-[560px] min-h-[607px] rounded-xl"></div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="mt-8">
     <div class="flex justify-between items-center py-4">
-        <h2 class="shimmer w-[193px] h-[39px]"></h2>
+        <h2 class="shimmer w-[180px] h-[34px]"></h2>
         
         <span class="shimmer w-6 h-6"></span>
     </div>
@@ -33,5 +33,5 @@
         </div>
     </div>
 
-    <p class="shimmer w-2/5 h-[21px] mt-5"></p>
+    <p class="shimmer w-2/5 h-6 mt-5"></p>
 </div>
