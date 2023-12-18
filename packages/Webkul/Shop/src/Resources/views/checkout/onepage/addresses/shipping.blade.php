@@ -24,7 +24,7 @@
                         <div class="grid grid-cols-2 mt-8 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
-                                v-for="(address, index) in addresses"
+                                v-for="(address, index) in addresses.shipping"
                             >
                                 <v-field
                                     type="radio"
@@ -104,7 +104,7 @@
 
 
                         <template v-if="meta.valid">
-                            <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.length">
+                            <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.shipping.length">
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
                                         class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
@@ -164,7 +164,7 @@
                             <a 
                                 class="flex justify-end"
                                 href="javascript:void(0)" 
-                                v-if="addresses.length > 0"
+                                v-if="addresses.shipping.length > 0"
                                 @click="forms.shipping.isNew = ! forms.shipping.isNew"
                             >
                                 <span class="icon-arrow-left text-2xl"></span>
