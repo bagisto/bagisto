@@ -212,7 +212,7 @@
 
             <div class="mt-1.5 grid grid-cols-2 gap-1.5">
                 <p
-                    class="cursor-pointer rounded-md border px-2 py-1.5 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                    class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -296,7 +296,7 @@
 
             <div class="my-4 grid grid-cols-2 gap-1.5">
                 <p
-                    class="cursor-pointer rounded-md border px-2 py-1.5 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
+                    class="cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium leading-6 text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:text-gray-300"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
