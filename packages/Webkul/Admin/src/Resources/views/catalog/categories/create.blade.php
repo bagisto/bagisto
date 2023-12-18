@@ -151,7 +151,7 @@
 
                     <div class="flex gap-12">
                         <!-- Add Logo -->
-                        <div class="flex flex-col gap-2 w-[40%] mt-5">
+                        <div class="flex flex-col gap-2 w-2/5 mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.logo')
                             </p>
@@ -164,7 +164,7 @@
                         </div>
 
                         <!-- Add Banner -->
-                        <div class="flex flex-col gap-2 w-[40%] mt-5">
+                        <div class="flex flex-col gap-2 w-2/5 mt-5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.banner')
                             </p>
