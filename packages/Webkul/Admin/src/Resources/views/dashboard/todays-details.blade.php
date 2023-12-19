@@ -169,7 +169,7 @@
                             @{{ order.customer_name }}
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 break-words">
                             @{{ order.customer_email }}
                         </p>
 
