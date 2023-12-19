@@ -1,4 +1,4 @@
-<v-slots booking-type="{{ $bookingType }}"></v-slots>
+{{-- <v-slots booking-type="{{ $bookingType }}"></v-slots> --}}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-slots-template">
@@ -119,7 +119,11 @@
         app.component('v-slots', {
             template: '#v-slots-template',
 
-            props: ['bookingType', 'sameSlotAllDays'],
+            props: ['bookingType'],
+
+            mounted() {
+                console.log(this.bookingType);
+            },
 
             data() {
                 return {

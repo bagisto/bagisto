@@ -73,6 +73,7 @@ return [
                                 'yes'   => 'Yes',
                             ],
 
+                            'action'                => 'Actions',
                             'available-from'        => 'Available From',
                             'available-to'          => 'Available To',
                             'booking_type'          => 'Booking Type',
@@ -91,6 +92,7 @@ return [
                             ],
 
                             'event' => [
+                                'action'             => 'Actions',
                                 'description'        => 'Description',
                                 'name'               => 'Name',
                                 'price'              => 'Price',
@@ -101,6 +103,9 @@ return [
                                 'valid-from'         => 'Valid From',
                                 'valid-until'        => 'Valid Until',
                             ],
+
+                            'from-day'  => 'From Day',
+                            'from'  => 'From',
 
                             'guest-limit'           => 'Guest Limit Per Table',
                             'guest-capacity'        => 'Guest Capacity',
@@ -168,6 +173,8 @@ return [
                                 'title'    => 'Slots',
                             ],
 
+                            'status'  => 'Status',
+
                             'tickets' => [
                                 'add'      => 'Add Tickets',
                                 'add-desc' => 'Add booking Tickets on the go.',
@@ -185,7 +192,9 @@ return [
                                 'table'       => 'Table',
                             ],
 
-                            'title' => 'Booking Information',
+                            'to-day' => 'To Day',
+                            'to'     => 'To',
+                            'title'  => 'Booking Information',
                         ],
                     ],
                 ],

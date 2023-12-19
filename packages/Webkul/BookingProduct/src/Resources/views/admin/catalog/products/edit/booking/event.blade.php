@@ -36,46 +36,46 @@
         <div class="mt-4 overflow-x-auto">
             <template v-if="storeTickets?.length">
                 <x-admin::table>
-                    <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
+                    <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                         <x-admin::table.thead.tr>
                             <!-- Name -->
                             <x-admin::table.th>
-                                @lang('Name')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.name')
                             </x-admin::table.th>
 
                             <!-- Price -->
                             <x-admin::table.th>
-                                @lang('Price')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.price')
                             </x-admin::table.th>
 
                             <!-- Qty -->
                             <x-admin::table.th>
-                                @lang('Qty')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.qty')
                             </x-admin::table.th>
 
                             <!-- Special Price -->
                             <x-admin::table.th>
-                                @lang('Special Price')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.special-price')
                             </x-admin::table.th>
 
                             <!-- Valid From -->
                             <x-admin::table.th>
-                                @lang('Valid From')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')
                             </x-admin::table.th>
 
                             <!-- Valid Until -->
                             <x-admin::table.th>
-                                @lang('Valid Until')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')
                             </x-admin::table.th>
 
                             <!-- Description -->
                             <x-admin::table.th>
-                                @lang('Description')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.description')
                             </x-admin::table.th>
 
                             <!-- Action tables heading -->
                             <x-admin::table.th>
-                                @lang('Actions')
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.action')
                             </x-admin::table.th>
                         </x-admin::table.thead.tr>
                     </x-admin::table.thead>
@@ -189,13 +189,13 @@
                         <!-- Actions button -->
                         <x-admin::table.td class="!px-0">
                             <span
-                                class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 @click="editModal(element)"
                             >
                             </span>
 
                             <span
-                                class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 @click="removeOption(element.id)"
                             >
                             </span>
@@ -308,7 +308,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="special_price"
-                                    required="{decimal: true, min_value:0, ...(ticketItem.price ? {max_value: ticketItem.price} : {})}"
+                                    {{-- required="{decimal: true, min_value:0, ...(ticketItem.price ? {max_value: ticketItem.price} : {})}" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.special-price')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.special-price')"
                                 >
@@ -321,30 +321,30 @@
                             </x-admin::form.control-group>
                     
                             <!-- Special Price From -->
-                            <x-admin::form.control-group class="mb-2.5">
-                                <x-admin::form.control-group.label>
+                            <x-booking::form.control-group class="mb-2.5">
+                                <x-booking::form.control-group.label>
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')
-                                </x-admin::form.control-group.label>
+                                </x-booking::form.control-group.label>
 
                                 @php
                                     $dateMin = \Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59');
                                 @endphp
 
-                                <x-admin::form.control-group.control
+                                <x-booking::form.control-group.control
                                     type="datetime"
                                     name="special_price_from"
-                                    :rules="'after:' . $dateMin"
+                                    {{-- :rules="'required_if:!value,date,required|after:' . $dateMin" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')"
                                     ref="special_price_from"
                                 >
-                                </x-admin::form.control-group.control>
+                                </x-booking::form.control-group.control>
 
-                                <x-admin::form.control-group.error 
+                                <x-booking::form.control-group.error 
                                     control-name="special_price_from"
                                 >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                                </x-booking::form.control-group.error>
+                            </x-booking::form.control-group>
 
                             <!-- Special Price To -->
                             <x-admin::form.control-group class="mb-2.5">
@@ -355,7 +355,7 @@
                                 <x-admin::form.control-group.control
                                     type="datetime"
                                     name="special_price_to"
-                                    :rules="'after:special_price_from'"
+                                    {{-- :rules="'after:special_price_from'" --}}
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')"
                                     ref="special_price_to"

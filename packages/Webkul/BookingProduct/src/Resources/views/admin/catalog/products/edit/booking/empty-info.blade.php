@@ -24,23 +24,6 @@
                     @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
                 </p>
             </div>
-
-            <!-- Add Slot Button -->
-            <div
-                class="secondary-button text-sm"
-                v-if="type == 'event'"
-                @click="$refs.addOptionsRow.toggle()"
-            >
-                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
-            </div>
-
-            <div
-                class="secondary-button text-sm"
-                v-else
-                @click="$refs.addOptionsRow.toggle()"
-            >
-                @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-            </div>
         </div>
     </script>
 

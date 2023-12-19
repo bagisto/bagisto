@@ -140,7 +140,7 @@
                         <x-admin::form.control-group.control
                             type="datetime"
                             name="booking[available_from]"
-                            {{-- rules="required|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}" --}}
+                            rules="required|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}"
                             rules="required"
                             v-model="booking.available_from"
                             :label="trans('booking::app.admin.catalog.products.edit.type.booking.available-from')"

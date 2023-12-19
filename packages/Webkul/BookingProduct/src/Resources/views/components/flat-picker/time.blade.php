@@ -15,40 +15,39 @@
         app.component('v-time-picker', {
             template: '#v-time-picker-template',
 
-            data() {
+            data: function() {
                 return {
                     timepicker: null
                 };
             },
 
-            mounted() {
+            mounted: function() {
                 let options = this.setOptions();
 
                 this.activate(options);
             },
 
             methods: {
-                setOptions() {
+                setOptions: function() {
                     let self = this;
 
                     return {
-                        enableTime: true,
-                        noCalendar: true,
-                        altFormat: "H:i",
                         dateFormat: "H:i",
+                        noCalendar: true,
+                        enableTime: true,
                         time_24hr: true,
 
-                        onChange(selectedDates, dateStr, instance) {
-                            self.$emit("onChange", dateStr);
-                        },
+                        onChange: function(selectedDates, timeStr, instance) {
+                            self.$emit("onChange", timeStr);
+                        }
                     };
                 },
 
-                activate(options) {
+                activate: function(options) {
                     let element = this.$el.getElementsByTagName("input")[0];
 
                     this.timepicker = new Flatpickr(element, options);
-                }
+                },
             }
         });
     </script>
