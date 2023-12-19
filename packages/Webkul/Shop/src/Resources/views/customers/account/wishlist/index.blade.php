@@ -44,7 +44,7 @@
 
                     <div 
                         v-if="wishlist.length" 
-                        v-for="item in wishlist"
+                        v-for="(item,index) in wishlist"
                         class="flex gap-20 flex-wrap mt-8 max-1060:flex-col"
                     >
                         <div class="grid gap-8 flex-1">
@@ -133,13 +133,14 @@
                                                 </x-shop::quantity-changer>
 
                                                 <!--Wishlist Item Move-to-cart-->
-                                                <button
-                                                    type="button"
-                                                    class="primary-button block w-max max-h-10 py-1.5 px-6 rounded-2xl text-base text-center"
-                                                    @click="moveToCart(item.id)"
+                                                <x-shop::button
+                                                    class="primary-button w-max max-h-10 py-1.5 px-6 rounded-2xl text-base text-center"
+                                                    :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
+                                                    :loading="false"
+                                                    ref="moveToCart"
+                                                    @click="moveToCart(item.id,index)"
                                                 >
-                                                    @lang('shop::app.customers.account.wishlist.move-to-cart')
-                                                </button>   
+                                                </x-shop::button>
                                             </div>
                                         </div>
                                     </div>
@@ -241,7 +242,9 @@
                         });
                     },
 
-                    moveToCart(id) {
+                    moveToCart(id, index) {
+                        this.$refs.moveToCart[index].isLoading = true;
+
                         let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;
                         url = url.replace(':wishlist_id:', id);
 
@@ -264,8 +267,12 @@
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                     }
+
+                                    this.$refs.moveToCart.map((item) => item.isLoading =  false);
                                 })
-                                .catch(error => {});
+                                .catch(error => {
+                                    this.$refs.moveToCart.map((item) => item.isLoading =  false);
+                                });
                         }
                     },
                     setItemQuantity(quantity, requestedItem) {
