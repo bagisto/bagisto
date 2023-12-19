@@ -615,9 +615,9 @@
                         <p class="text-gray-600 dark:text-gray-300">
                             @lang('admin::app.customers.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
                         </p>
-
+                        
                         <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->code ?? 'N/A'])
+                            @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->name ?? 'N/A'])
                         </p>
                     </div>
                 </x-slot:content>
