@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Utwórz źródło inwentarza',
                 'title'      => 'Źródła Inwentarza',
-                'create-btn' => 'Utwórz Źródło Inwentarza',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Stawki Podatków',
+                    'button-title' => 'Utwórz stawkę podatku',
                     'tax-rate'     => 'Stawka Podatku',
-                    'button-title' => 'Utwórz Stawki Podatków',
+                    'title'        => 'Stawki Podatków',
 
                     'datagrid' => [
                         'id'         => 'ID',

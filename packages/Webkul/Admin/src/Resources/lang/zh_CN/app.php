@@ -2285,8 +2285,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => '创建库存源',
                 'title'      => '库存来源',
-                'create-btn' => '创建库存来源',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2407,9 +2407,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => '税率',
-                    'tax-rate'     => '税率',
                     'button-title' => '创建税率',
+                    'tax-rate'     => '税率',
+                    'title'        => '税率',
 
                     'datagrid' => [
                         'id'         => 'ID',

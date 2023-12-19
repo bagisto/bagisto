@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index' => [
+                'create-btn' => 'ইনভেন্টরি সোর্স তৈরি করুন',
                 'title'      => 'ইনভেন্টরি উৎস',
-                'create-btn' => 'ইনভেন্টরি উৎস তৈরি করুন',
 
                 'datagrid' => [
                     'id'       => 'আইডি',
@@ -2408,9 +2408,9 @@ return [
 
             'rates' => [
                 'index' => [
-                    'title'        => 'কর হার',
+                    'button-title' => 'করেট ট্যাক্স রেট',
                     'tax-rate'     => 'কর হার',
-                    'button-title' => 'কর হার তৈরি করুন',
+                    'title'        => 'কর হার',
 
                     'datagrid' => [
                         'id'         => 'আইডি',

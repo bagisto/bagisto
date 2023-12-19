@@ -2286,7 +2286,7 @@ return [
 
         'inventory-sources' => [
             'index'  => [
-                'create-btn' => 'Crear Fuente de Inventario',
+                'create-btn' => 'Crear fuente de inventario',
                 'title'      => 'Fuentes de Inventario',
 
                 'datagrid' => [
@@ -2408,7 +2408,7 @@ return [
 
             'rates' => [
                 'index' => [
-                    'button-title' => 'Crear Tasas de Impuestos',
+                    'button-title' => 'Crear tasa de impuestos',
                     'tax-rate'     => 'Tasa de Impuestos',
                     'title'        => 'Tasas de Impuestos',
 

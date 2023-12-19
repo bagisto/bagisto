@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'ගනුදෙනු උළෙස්ම සාදන්නා ගාණන්',
                 'title'      => 'මානන ගණන',
-                'create-btn' => 'මානන ගණනයක් එකතු කරන්න',
 
                 'datagrid' => [
                     'id'       => 'අංකය',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'බදා අනුපාත',
+                    'button-title' => 'වර්ගය සාදන්නා ගාණන්',
                     'tax-rate'     => 'බදා අනුපාත',
-                    'button-title' => 'බදා අනුපාතයන් සාදන්න',
+                    'title'        => 'බදා අනුපාත',
 
                     'datagrid' => [
                         'id'         => 'අංකය',

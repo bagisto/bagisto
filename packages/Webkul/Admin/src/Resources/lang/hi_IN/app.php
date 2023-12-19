@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'इन्वेंटरी स्रोत बनाएं',
                 'title'      => 'स्टॉक स्रोत',
-                'create-btn' => 'स्टॉक स्रोत बनाएं',
 
                 'datagrid' => [
                     'id'       => 'आईडी',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'कर दरें',
+                    'button-title' => 'कर दर बनाएं',
                     'tax-rate'     => 'कर दर',
-                    'button-title' => 'कर दरें बनाएं',
+                    'title'        => 'कर दरें',
 
                     'datagrid' => [
                         'id'         => 'आईडी',

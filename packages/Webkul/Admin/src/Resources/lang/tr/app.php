@@ -2287,8 +2287,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
-                'title'      => 'Envanter Kaynakları',
                 'create-btn' => 'Envanter Kaynağı Oluştur',
+                'title'      => 'Envanter Kaynakları',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2409,9 +2409,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Vergi Oranları',
-                    'tax-rate'     => 'Vergi Oranı',
                     'button-title' => 'Vergi Oranı Oluştur',
+                    'tax-rate'     => 'Vergi Oranı',
+                    'title'        => 'Vergi Oranları',
 
                     'datagrid' => [
                         'id'         => 'ID',
