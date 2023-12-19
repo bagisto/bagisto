@@ -225,13 +225,20 @@
                     },
 
                     removeAll() {
-                        this.$axios.delete("{{ route('shop.api.customers.account.wishlist.destroy_all') }}")
-                            .then(response => {
-                                this.wishlist = [];
+                        this.$emitter.emit('open-confirm-modal', {
+                            agree: () => {
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                            })
-                            .catch(error => {});
+                            this.$axios.post("{{ route('shop.api.customers.account.wishlist.destroy_all') }}", {
+                                    '_method': 'DELETE',
+                                })
+                                .then(response => {
+                                    this.wishlist = [];
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                })
+                                .catch(error => {});
+                            }
+                        });
                     },
 
                     moveToCart(id) {
