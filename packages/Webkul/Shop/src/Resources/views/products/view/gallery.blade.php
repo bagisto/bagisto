@@ -68,7 +68,7 @@
                 class="max-w-[560px] max-h-[610px]"
                 v-show="! isMediaLoading"
             >
-                <img 
+                <img
                     class="min-w-[450px] rounded-xl" 
                     :src="baseFile.path" 
                     v-if="baseFile.type == 'image'"
@@ -82,16 +82,16 @@
                     class="min-w-[450px] rounded-xl"
                     v-if="baseFile.type == 'video'"
                 >
-                    <video  
-                        controls                             
+                    <video
+                        controls
                         width="475"
-                        @loadeddata="onMediaLoad()"                        
+                        @loadeddata="onMediaLoad()"
                     >
                         <source 
-                            :src="baseFile.path" 
+                            :src="baseFile.path"
                             type="video/mp4"
                         />
-                    </video>    
+                    </video>
                 </div>
                 
             </div>
@@ -101,7 +101,7 @@
         <div class="flex gap-8 1180:hidden overflow-auto scrollbar-hide">
             <x-shop::media.images.lazy
                 ::src="image.large_image_url"
-                class="min-w-[450px] max-sm:min-w-full w-[490px]" 
+                class="min-w-[450px] max-sm:min-w-full w-[490px]"
                 v-for="image in media.images"
             >
             </x-shop::media.images.lazy>
@@ -117,9 +117,9 @@
                 isMediaLoading: true,
 
                 media: {
-                    images: @json(product_image() - > getGalleryImages($product)),
+                    images: @json(product_image()->getGalleryImages($product)),
 
-                    videos: @json(product_video() - > getVideos($product)),
+                    videos: @json(product_video()->getVideos($product)),
                 },
 
                 baseFile: {
