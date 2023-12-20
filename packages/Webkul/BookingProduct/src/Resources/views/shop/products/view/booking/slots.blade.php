@@ -1,56 +1,101 @@
-<v-book-slots></v-book-slots>
+<v-book-slots :bookingProduct = "{{ $bookingProduct }}"></v-book-slots>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-book-slots-template">
-        <div class="book-slots">
-            <label class="label-style required">
-                {{ $title ?? __('booking::app.shop.products.book-an-appointment') }}
-            </label>
+        <x-shop::form
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+        >
+            <form @submit="handleSubmit($event, handleBillingAddressForm)">
+                <div class="book-slots">
+                    <label class="label-style required">
+                        {{ $title ?? __('booking::app.shop.products.book-an-appointment') }}
+                    </label>
 
-            <div class="control-group-container">
-                <div class="form-group date" :class="[errors.has('booking[date]') ? 'has-error' : '']">
-                    <date @onChange="dateSelected($event)" :minDate="'{{$bookingProduct->available_from}}'" :maxDate="'{{$bookingProduct->available_to}}'">
-                        <input type="text" v-validate="'required'" name="booking[date]" class="form-style" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.date') }}&quot;"/>
-                    </date>
-
-                    <span class="control-error" v-if="errors.has('booking[date]')">@{{ errors.first('booking[date]') }}</span>
+                    <div class="flex gap-2.5">
+                        <x-shop::form.control-group class="w-full">
+                            <x-shop::form.control-group.label class="hidden">
+                                @lang('shop::app.customers.account.profile.dob')
+                            </x-shop::form.control-group.label>
+    
+                            <x-shop::form.control-group.control
+                                type="date"
+                                name="booking[date]"
+                                minDate="{{ $bookingProduct->available_from }}"
+                                maxDate="{{ $bookingProduct->available_to }}"
+                                rules="required"
+                                @change="getAvailableSlots"
+                            >
+                            </x-shop::form.control-group.control>
+    
+                            <x-shop::form.control-group.error
+                                control-name="booking[date]"
+                            >
+                            </x-shop::form.control-group.error>
+                        </x-shop::form.control-group>
+    
+                        <x-shop::form.control-group class="w-full !mb-px">
+                            <x-shop::form.control-group.label class="hidden">
+                                @lang('shop::app.checkout.onepage.addresses.billing.country')
+                            </x-shop::form.control-group.label>
+    
+                            <x-shop::form.control-group.control
+                                type="select"
+                                name="booking[slot]"
+                                class="!mb-1"
+                                rules="required"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
+                            >
+                                <option v-for="slot in slots" :value="slot.timestamp">
+                                    @{{ slot.from + ' - ' + slot.to }}
+                                </option>
+    
+                                <option value="" v-if="! slots.length">
+                                    @lang('booking::app.shop.products.no-slots-available')
+                                </option>
+                            </x-shop::form.control-group.control>
+    
+                            <x-shop::form.control-group.error
+                                control-name="booking[slot]"
+                            >
+                            </x-shop::form.control-group.error>
+                        </x-shop::form.control-group>
+                    </div>
                 </div>
-
-                <div class="form-group slots" :class="[errors.has('booking[slot]') ? 'has-error' : '']">
-                    <select v-validate="'required'" name="booking[slot]" class="form-style" data-vv-as="&quot;{{ __('bookingproduct::app.shop.products.slot') }}&quot;">
-                        <option v-for="slot in slots" :value="slot.timestamp">@{{ slot.from + ' - ' + slot.to }}</option>
-
-                        <option value="" v-if="! slots.length">{{ __('bookingproduct::app.shop.products.no-slots-available') }}</option>
-                    </select>
-
-                    <span class="control-error" v-if="errors.has('booking[slot]')">@{{ errors.first('booking[slot]') }}</span>
-                </div>
-            </div>
-        </div>
+            </form>
+        </x-shop::form>
     </script>
 
     <script type="module">
-
         app.component('v-book-slots', {
             template: '#v-book-slots-template',
 
-            data:() {
+            props: ['bookingProduct'],
+
+            data() {
                 return {
                     slots: []
                 }
             },
 
             methods: {
-                dateSelected(date) {
-                    var this_this = this;
+                getAvailableSlots(params) {
+                    let date = params.target.value;
 
-                    this.$http.get("{{ route('booking_product.slots.index', $bookingProduct->id) }}", {params: {date: date}})
-                        .then (function(response) {
-                            this_this.slots = response.data.data;
+                    this.$axios.get(`{{ route('booking_product.slots.index', '') }}/${this.bookingProduct.id}`, {
+                        params: { date }
+                    })
+                        .then((response) => {
+                            this.slots = response.data.data;
 
-                            this_this.errors.clear();
+                            this.errors.clear();
                         })
-                        .catch (function (error) {})
+                        .catch(error => {
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                 }
             }
         });
