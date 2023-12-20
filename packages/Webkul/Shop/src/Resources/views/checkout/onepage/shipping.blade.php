@@ -9,7 +9,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-method-template">
-        <div class="mt-8">
+        <div class="mb-7">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.shipping-method/>
@@ -17,7 +17,7 @@
 
             <template v-if="isShowShippingMethod">
                 <x-shop::accordion class="!border-b-0">
-                    <x-slot:header>
+                    <x-slot:header class="!p-0">
                         <div class="flex justify-between items-center">
                             <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
@@ -25,13 +25,12 @@
                         </div>
                     </x-slot:header>
 
-                    <x-slot:content>
-                        <div class="flex flex-wrap gap-8 mt-4">
+                    <x-slot:content class="!p-0 mt-8">
+                        <div class="flex flex-wrap gap-8">
                             <div
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
                             >
-
                                 {!! view_render_event('bagisto.shop.checkout.shipping-method.before') !!}
 
                                 <div v-for="rate in shippingMethod.rates">
