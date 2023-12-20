@@ -2288,8 +2288,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => '在庫ソースを作成する',
                 'title'      => '在庫ソース',
-                'create-btn' => '在庫ソースを作成',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2410,9 +2410,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => '税率',
+                    'button-title' => '税率を作成する',
                     'tax-rate'     => '税率',
-                    'button-title' => '税率を作成',
+                    'title'        => '税率',
 
                     'datagrid' => [
                         'id'         => 'ID',

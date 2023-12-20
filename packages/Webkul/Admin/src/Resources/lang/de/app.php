@@ -2288,8 +2288,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Inventarquelle erstellen',
                 'title'      => 'Lagerorte',
-                'create-btn' => 'Lagerorte erstellen',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2410,9 +2410,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Steuersätze',
+                    'button-title' => 'Steuerquote erstellen',
                     'tax-rate'     => 'Steuersatz',
-                    'button-title' => 'Steuersatz erstellen',
+                    'title'        => 'Steuersätze',
 
                     'datagrid' => [
                         'id'         => 'ID',

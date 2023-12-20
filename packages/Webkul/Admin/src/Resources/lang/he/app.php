@@ -2288,8 +2288,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'צור מקור אחסון',
                 'title'      => 'מקורות מלאי',
-                'create-btn' => 'צור מקורי מלאי',
 
                 'datagrid' => [
                     'id'       => 'מזהה',
@@ -2410,9 +2410,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'שערי מס',
+                    'button-title' => 'צור שיעור מס',
                     'tax-rate'     => 'שער מס',
-                    'button-title' => 'צור שערי מס',
+                    'title'        => 'שערי מס',
 
                     'datagrid' => [
                         'id'         => 'מזהה',

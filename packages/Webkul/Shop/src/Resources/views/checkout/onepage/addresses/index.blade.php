@@ -16,7 +16,7 @@
         </template>
         
         <template v-else>
-            <div class="mt-8">
+            <div class="mt-8 mb-7">
                 @include('shop::checkout.onepage.addresses.billing')
 
                 @include('shop::checkout.onepage.addresses.shipping')
@@ -221,6 +221,8 @@
                 },
 
                 store() {
+                    this.$refs.storeAddress.isLoading = true;
+
                     if (this.haveStockableItems) {
                         this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
                         
@@ -264,9 +266,11 @@
                             ) {
                                 this.getCustomerAddresses();
                             }
+
+                            this.$refs.storeAddress.isLoading = false;
                         })
-                        .catch(error => {                 
-                            console.log(error);
+                        .catch(error => {
+                            this.$refs.storeAddress.isLoading = false;
                         });
                 },
 
