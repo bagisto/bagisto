@@ -1,13 +1,9 @@
 <div v-if="! forms.billing.isUsedForShipping">
-    <div 
-        class="mt-8"
-        v-if="! forms.shipping.isNew"
-    >
-
+    <template v-if="! forms.shipping.isNew">
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
 
-        <x-shop::accordion class="!border-b-0">
-            <x-slot:header>
+        <x-shop::accordion class="!border-b-0 mt-8">
+            <x-slot:header class="!p-0">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
@@ -15,16 +11,16 @@
                 </div>
             </x-slot:header>
         
-            <x-slot:content>
+            <x-slot:content class="!p-0 mt-8">
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
                     <form @submit="handleSubmit($event, store)">
-                        <div class="grid grid-cols-2 mt-8 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                        <div class="grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
-                                v-for="(address, index) in addresses"
+                                v-for="(address, index) in addresses.shipping"
                             >
                                 <v-field
                                     type="radio"
@@ -78,11 +74,11 @@
                             </div>
 
                             <div 
-                                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap"
+                                class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
                                 @click="showNewShippingAddressForm"
                             >
                                 <div
-                                    class="flex gap-x-2.5 items-center cursor-pointer"
+                                    class="flex gap-x-2.5 items-center"
                                     role="button"
                                     tabindex="0"
                                 >
@@ -104,24 +100,26 @@
 
 
                         <template v-if="meta.valid">
-                            <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.length">
-                                <div class="flex justify-end mt-4 mb-4">
-                                    <button
-                                        class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                            <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.shipping.length">
+                                <div class="flex justify-end mt-4">
+                                    <x-shop::button
+                                        class="primary-button py-3 px-11 rounded-2xl"
+                                        :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                                        :loading="false"
+                                        ref="storeAddress"
                                         @click="store"
                                     >
-                                        @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
-                                    </button>
+                                    </x-shop::button>
                                 </div>
                             </div>
                         </template>
     
                         <template v-else>
                             <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping">
-                                <div class="flex justify-end mt-4 mb-4">
+                                <div class="flex justify-end mt-4">
                                     <button
                                         type="submit"
-                                        class="block w-max py-3 px-11 bg-navyBlue text-white text-base font-medium rounded-2xl text-center cursor-pointer"
+                                        class="primary-button py-3 px-11 rounded-2xl"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
@@ -134,15 +132,11 @@
         </x-shop::accordion>
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.after') !!}
+    </template>
 
-    </div>
-
-    <div 
-        class="mt-8"
-        v-else
-    >
-        <x-shop::accordion class="!border-b-0">
-            <x-slot:header>
+    <template v-else>
+        <x-shop::accordion class="!border-b-0 mt-8">
+            <x-slot:header class="!p-0">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
@@ -150,8 +144,7 @@
                 </div>
             </x-slot:header>
         
-            <x-slot:content>
-
+            <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.before') !!}
 
                 <!-- Shipping address form -->
@@ -164,7 +157,7 @@
                             <a 
                                 class="flex justify-end"
                                 href="javascript:void(0)" 
-                                v-if="addresses.length > 0"
+                                v-if="addresses.shipping.length > 0"
                                 @click="forms.shipping.isNew = ! forms.shipping.isNew"
                             >
                                 <span class="icon-arrow-left text-2xl"></span>
@@ -482,7 +475,7 @@
                         </div>
 
                         <div 
-                            class="flex justify-end mt-4 mb-4"
+                            class="flex justify-end mt-4"
                         >
                             <button
                                 type="submit"
@@ -501,5 +494,5 @@
 
             </x-slot:content>
         </x-shop::accordion>
-    </div>
+    </template>
 </div>

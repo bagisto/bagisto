@@ -2286,7 +2286,7 @@ return [
 
         'inventory-sources' => [
             'index' => [
-                'create-btn' => 'ساخت منابع موجودی',
+                'create-btn' => 'ایجاد منبع موجودی',
                 'title'      => 'منابع موجودی',
 
                 'datagrid' => [
@@ -2408,7 +2408,7 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'button-title' => 'ایجاد نرخ مالیاتی',
+                    'button-title' => 'ایجاد نرخ مالیات',
                     'tax-rate'     => 'نرخ مالیات',
                     'title'        => 'نرخ‌های مالیاتی',
 

@@ -146,7 +146,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="secondary-button block mx-auto w-max py-3 mt-[60px] px-11 rounded-2xl text-base text-center"
+                            class="secondary-button block mx-auto w-max py-3 mt-14 px-11 rounded-2xl text-base text-center"
                             @click="loadMoreProducts"
                             v-if="links.next && ! loader"
                         >
@@ -155,7 +155,7 @@
 
                         <button
                             v-else-if="links.next"
-                            class="secondary-button block w-max mx-auto py-3.5 mt-[60px] px-[74.5px] rounded-2xl text-base text-center"
+                            class="secondary-button block w-max mx-auto py-3.5 mt-14 px-[74.5px] rounded-2xl text-base text-center"
                         >
                             <!-- Spinner -->
                             <img

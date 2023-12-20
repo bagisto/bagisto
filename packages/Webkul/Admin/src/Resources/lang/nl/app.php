@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index' => [
+                'create-btn' => 'Voorraadbron aanmaken',
                 'title'      => 'Voorraadbronnen',
-                'create-btn' => 'Voorraadbronnen Aanmaken',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates' => [
                 'index' => [
-                    'title'        => 'Belastingtarieven',
+                    'button-title' => 'Belastingtarief maken',
                     'tax-rate'     => 'Belastingtarief',
-                    'button-title' => 'Belastingtarieven Aanmaken',
+                    'title'        => 'Belastingtarieven',
 
                     'datagrid' => [
                         'id'         => 'ID',

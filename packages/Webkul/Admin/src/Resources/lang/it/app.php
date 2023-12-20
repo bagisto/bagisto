@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Crea fonte inventario',
                 'title'      => 'Sorgenti di Inventario',
-                'create-btn' => 'Crea Sorgenti di Inventario',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Aliquote Fiscali',
+                    'button-title' => 'Crea aliquota fiscale',
                     'tax-rate'     => 'Aliquota Fiscale',
-                    'button-title' => 'Crea Aliquote Fiscali',
+                    'title'        => 'Aliquote Fiscali',
 
                     'datagrid' => [
                         'id'         => 'ID',

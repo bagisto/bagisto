@@ -266,12 +266,14 @@
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
                                 </a> 
 
-                                <button
+                                <x-shop::button
                                     class="secondary-button max-h-[55px] rounded-2xl"
+                                    :title="trans('shop::app.checkout.cart.index.update-cart')"
+                                    :loading="false"
+                                    ref="updateCart"
                                     @click="update()"
                                 >
-                                    @lang('shop::app.checkout.cart.index.update-cart')
-                                </button>
+                                </x-shop::button>
                             </div>
 
                             {!! view_render_event('bagisto.shop.checkout.cart.controls.after') !!}
@@ -362,13 +364,20 @@
                     },
 
                     update() {
+                        this.$refs.updateCart.isLoading = true;
+
                         this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty: this.applied.quantity })
                             .then(response => {
                                 this.cart = response.data.data;
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                this.$refs.updateCart.isLoading = false;
+
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                this.$refs.updateCart.isLoading = false;
+                            });
                     },
 
                     setItemQuantity(itemId, quantity) {

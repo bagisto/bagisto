@@ -1,10 +1,10 @@
 <v-product-gallery ref="gallery">
-    <x-shop::shimmer.products.gallery/>
+    <x-shop::shimmer.products.gallery />
 </v-product-gallery>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-gallery-template">
-        <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
+<script type="text/x-template" id="v-product-gallery-template">
+    <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
             <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                 <span
@@ -84,7 +84,7 @@
                 >
                     <video  
                         controls                             
-                        width='475'
+                        width="475"
                         @loadeddata="onMediaLoad()"                        
                     >
                         <source 
@@ -108,98 +108,98 @@
         </div>
     </script>
 
-    <script type="module">
-        app.component('v-product-gallery', {
-            template: '#v-product-gallery-template',
-    
-            data() {
-                return {
-                    isMediaLoading: true,
-    
-                    media: {
-                        images: @json(product_image()->getGalleryImages($product)),
+<script type="module">
+    app.component('v-product-gallery', {
+        template: '#v-product-gallery-template',
 
-                        videos: @json(product_video()->getVideos($product)),
-                    },
-    
-                    baseFile: {
-                        type: '',
+        data() {
+            return {
+                isMediaLoading: true,
 
-                        path: ''
-                    },
-    
-                    activeIndex: 0, 
+                media: {
+                    images: @json(product_image() - > getGalleryImages($product)),
 
-                    containerOffset: 110,
-                }
-            },
-    
-            watch: {
-                'media.images': {
-                    deep: true,
-                    
-                    handler(newImages, oldImages) {
-                        if (JSON.stringify(newImages) !== JSON.stringify(oldImages)) {
-                            this.baseFile.path = newImages[this.activeIndex].large_image_url;
-                        }
-                    },
-                },
-            },
-    
-            mounted() {
-                if (this.media.images.length) {
-                    this.activeIndex = 'image_0';
-                    this.baseFile.type = 'image';
-                    this.baseFile.path = this.media.images[0].large_image_url;
-                } else if (this.media.videos.length) {
-                    this.activeIndex = 'video_0';
-                    this.baseFile.type = 'video';
-                    this.baseFile.path = this.media.videos[0].video_url;
-                }
-            },
-
-            computed: {
-                lengthOfMedia() {
-                    return [...this.media.images, ...this.media.videos].length > 5;
-                }
-            },
-    
-            methods: {
-                onMediaLoad() {
-                    this.isMediaLoading = false;
+                    videos: @json(product_video() - > getVideos($product)),
                 },
 
-                change(file, index) {
-                    this.isMediaLoading = true;
+                baseFile: {
+                    type: '',
 
-                    if (file.type == 'videos') {
-                        this.baseFile.type = 'video';
-                        this.baseFile.path = file.video_url;
-                        this.onMediaLoad();
-                    } else {
-                        this.baseFile.type = 'image';
-                        this.baseFile.path = file.large_image_url;
-                    }
-
-                    if (index > this.activeIndex) {
-                        this.swipeDown();
-                    } else if (index < this.activeIndex) {
-                        this.swipeTop(); 
-                    }
-
-                    this.activeIndex = index;
+                    path: ''
                 },
 
-                swipeTop() {
-                    const container = this.$refs.swiperContainer;
-                    container.scrollTop -= this.containerOffset;
-                },
+                activeIndex: 0,
 
-                swipeDown() {
-                    const container = this.$refs.swiperContainer;
-                    container.scrollTop += this.containerOffset;
-                },
+                containerOffset: 110,
             }
-        })
-    </script>
+        },
+
+        watch: {
+            'media.images': {
+                deep: true,
+
+                handler(newImages, oldImages) {
+                    if (JSON.stringify(newImages) !== JSON.stringify(oldImages)) {
+                        this.baseFile.path = newImages[this.activeIndex].large_image_url;
+                    }
+                },
+            },
+        },
+
+        mounted() {
+            if (this.media.images.length) {
+                this.activeIndex = 'image_0';
+                this.baseFile.type = 'image';
+                this.baseFile.path = this.media.images[0].large_image_url;
+            } else if (this.media.videos.length) {
+                this.activeIndex = 'video_0';
+                this.baseFile.type = 'video';
+                this.baseFile.path = this.media.videos[0].video_url;
+            }
+        },
+
+        computed: {
+            lengthOfMedia() {
+                return [...this.media.images, ...this.media.videos].length > 5;
+            }
+        },
+
+        methods: {
+            onMediaLoad() {
+                this.isMediaLoading = false;
+            },
+
+            change(file, index) {
+                this.isMediaLoading = true;
+
+                if (file.type == 'videos') {
+                    this.baseFile.type = 'video';
+                    this.baseFile.path = file.video_url;
+                    this.onMediaLoad();
+                } else {
+                    this.baseFile.type = 'image';
+                    this.baseFile.path = file.large_image_url;
+                }
+
+                if (index > this.activeIndex) {
+                    this.swipeDown();
+                } else if (index < this.activeIndex) {
+                    this.swipeTop();
+                }
+
+                this.activeIndex = index;
+            },
+
+            swipeTop() {
+                const container = this.$refs.swiperContainer;
+                container.scrollTop -= this.containerOffset;
+            },
+
+            swipeDown() {
+                const container = this.$refs.swiperContainer;
+                container.scrollTop += this.containerOffset;
+            },
+        }
+    })
+</script>
 @endpushOnce

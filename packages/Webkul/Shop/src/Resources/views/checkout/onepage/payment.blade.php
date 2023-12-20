@@ -8,7 +8,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-payment-method-template">
-        <div class="mt-8 mb-8">
+        <div class="mb-7">
             <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
                 <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method/>
@@ -17,7 +17,7 @@
             <template v-if="isShowPaymentMethod">
                 <div>
                     <x-shop::accordion class="!border-b-0">
-                        <x-slot:header>
+                        <x-slot:header class="!p-0">
                             <div class="flex justify-between items-center">
                                 <h2 class="text-2xl font-medium max-sm:text-xl">
                                     @lang('shop::app.checkout.onepage.payment.payment-method')
@@ -25,8 +25,8 @@
                             </div>
                         </x-slot:header>
         
-                        <x-slot:content>
-                            <div class="flex flex-wrap gap-7 mt-4">
+                        <x-slot:content class="!p-0 mt-8">
+                            <div class="flex flex-wrap gap-7">
                                 <div 
                                     class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
                                     v-for="(payment, index) in payment_methods"
@@ -53,7 +53,6 @@
                                         :for="payment.method" 
                                         class="w-[190px] p-5 block border border-[#E9E9E9] rounded-xl max-sm:w-full cursor-pointer"
                                     >
-
                                         <img
                                             class="max-w-[55px] max-h-[45px]"
                                             :src="payment.image"

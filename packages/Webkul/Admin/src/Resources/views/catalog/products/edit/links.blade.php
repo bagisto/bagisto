@@ -152,19 +152,19 @@
                     types: [
                         {
                             key: 'related_products',
-                            title: "@lang('admin::app.catalog.products.edit.links.related-products.title')",
-                            info: "@lang('admin::app.catalog.products.edit.links.related-products.info')",
-                            empty_info: "@lang('admin::app.catalog.products.edit.links.related-products.empty-info')",
+                            title: `@lang('admin::app.catalog.products.edit.links.related-products.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.links.related-products.info')`,
+                            empty_info: `@lang('admin::app.catalog.products.edit.links.related-products.empty-info')`,
                         }, {
                             key: 'up_sells',
-                            title: "@lang('admin::app.catalog.products.edit.links.up-sells.title')",
-                            info: "@lang('admin::app.catalog.products.edit.links.up-sells.info')",
-                            empty_info: "@lang('admin::app.catalog.products.edit.links.up-sells.empty-info')",
+                            title: `@lang('admin::app.catalog.products.edit.links.up-sells.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.links.up-sells.info')`,
+                            empty_info: `@lang('admin::app.catalog.products.edit.links.up-sells.empty-info')`,
                         }, {
                             key: 'cross_sells',
-                            title: "@lang('admin::app.catalog.products.edit.links.cross-sells.title')",
-                            info: "@lang('admin::app.catalog.products.edit.links.cross-sells.info')",
-                            empty_info: "@lang('admin::app.catalog.products.edit.links.cross-sells.empty-info')",
+                            title: `@lang('admin::app.catalog.products.edit.links.cross-sells.title')`,
+                            info: `@lang('admin::app.catalog.products.edit.links.cross-sells.info')`,
+                            empty_info: `@lang('admin::app.catalog.products.edit.links.cross-sells.empty-info')`,
                         }
                     ],
 

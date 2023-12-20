@@ -159,7 +159,7 @@
 
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            {{ $attribute->admin_name . ($attribute->is_required ? '*' : '') }}
+                                            {!! $attribute->admin_name . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
 
                                             @if (
                                                 $attribute->value_per_channel
