@@ -334,7 +334,7 @@
                         <div v-else>
                             <div class="grid grid-cols-3 gap-2.5 pb-3">
                                 @foreach (['day', 'from', 'to'] as $item)
-                                    <div class="text-lg text-black dark:text-white">
+                                    <div class="font-semibold text-black dark:text-white">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
                                     </div>
                                 @endforeach

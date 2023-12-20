@@ -105,19 +105,9 @@
                 <x-admin::table>
                     <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                         <x-admin::table.thead.tr>
-                            <!-- From day -->
-                            <x-admin::table.th v-if="slots.one?.length">
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.from-day')
-                            </x-admin::table.th>
-
                             <!-- From -->
                             <x-admin::table.th>
                                 @lang('booking::app.admin.catalog.products.edit.type.booking.from')
-                            </x-admin::table.th>
-
-                            <!-- TO day -->
-                            <x-admin::table.th v-if="slots.one?.length">
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.to-day')
                             </x-admin::table.th>
 
                             <!-- To -->
@@ -146,8 +136,8 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="slot.params.from_day"
                             >
+                            @{{ slot.params.from_day }} - @{{ slot.params.from }}
                             </p>
 
                             <input
@@ -155,14 +145,6 @@
                                 :name="'booking[slots][' + index + '][from_day]'"
                                 :value="slot.params.from_day"
                             />
-                        </x-admin::table.td>
-
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.params.from"
-                            >
-                            </p>
 
                             <input
                                 type="hidden"
@@ -174,8 +156,8 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="slot.params.to_day"
                             >
+                                @{{ slot.params.to_day }} - @{{ slot.params.to }}
                             </p>
 
                             <input
@@ -183,14 +165,6 @@
                                 :name="'booking[slots][' + index + '][to_day]'"
                                 :value="slot.params.to_day"
                             />
-                        </x-admin::table.td>
-
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.params.to"
-                            >
-                            </p>
 
                             <input
                                 type="hidden"
@@ -450,11 +424,10 @@
                         <div v-if="default_booking.booking_type == 'many'">
                             <div class="grid grid-cols-4 gap-2.5 pb-3">
                                 @foreach (['day', 'from', 'to', 'status'] as $item)
-                                    <div class="text-black dark:text-white">
+                                    <div class="font-semibold text-black dark:text-white">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
                                     </div>
                                 @endforeach
-
                             </div>
 
                             @foreach ($days as $key => $day)

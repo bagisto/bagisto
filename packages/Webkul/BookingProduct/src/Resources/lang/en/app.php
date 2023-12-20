@@ -77,7 +77,7 @@ return [
                             'available-from'        => 'Available From',
                             'available-to'          => 'Available To',
                             'booking_type'          => 'Booking Type',
-                            'break-duration'        => 'Break Duration',
+                            'break-duration'        => 'Break Time b/w Slots (Mins)',
 
                             'charged-per'           => [
                                 'guest'  => 'Guest',
@@ -105,7 +105,7 @@ return [
                             ],
 
                             'from-day'  => 'From Day',
-                            'from'  => 'From',
+                            'from'      => 'From',
 
                             'guest-limit'           => 'Guest Limit Per Table',
                             'guest-capacity'        => 'Guest Capacity',
@@ -159,7 +159,7 @@ return [
                                 'daily_hourly' => 'Both (Daily and Hourly Basis)',
                             ],
 
-                            'slot-duration' => 'Slot Duration',
+                            'slot-duration' => 'Slot Duration (Mins)',
 
                             'same-slot-for-all-days' => [
                                 'no'    => 'No',
@@ -190,6 +190,11 @@ return [
                                 'rental'      => 'Rental',
                                 'title'       => 'Type',
                                 'table'       => 'Table',
+                            ],
+
+                            'table' => [
+                                'form' => ':from',
+                                'to'   => ':to',
                             ],
 
                             'to-day' => 'To Day',

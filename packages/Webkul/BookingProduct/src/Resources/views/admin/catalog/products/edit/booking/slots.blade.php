@@ -1,5 +1,3 @@
-{{-- <v-slots booking-type="{{ $bookingType }}"></v-slots> --}}
-
 @pushOnce('scripts')
     <script type="text/x-template" id="v-slots-template">
         <div
@@ -120,10 +118,6 @@
             template: '#v-slots-template',
 
             props: ['bookingType'],
-
-            mounted() {
-                console.log(this.bookingType);
-            },
 
             data() {
                 return {
