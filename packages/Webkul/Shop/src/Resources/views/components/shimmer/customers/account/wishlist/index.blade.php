@@ -16,7 +16,7 @@
                 <div class="flex justify-between gap-x-2.5 pb-5 border-b border-[#E9E9E9]">
                     <div class="flex gap-x-5">
                         <div class="">
-                            <div class="shimmer w-[110px] h-[110px]"></div>
+                            <div class="shimmer w-[110px] h-[110px] rounded-xl"></div>
                         </div>
 
                         <div class="grid gap-y-2.5">
