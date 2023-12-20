@@ -1,4 +1,4 @@
-<div class="flex gap-1.5">
+<div class="flex flex-wrap gap-1.5">
     @php
         $restCount = max($order->items->count() - 3, 0);
     @endphp
