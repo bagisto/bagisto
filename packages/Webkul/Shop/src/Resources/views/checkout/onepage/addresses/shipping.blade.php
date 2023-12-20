@@ -106,12 +106,14 @@
                         <template v-if="meta.valid">
                             <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.shipping.length">
                                 <div class="flex justify-end mt-4 mb-4">
-                                    <button
-                                        class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                                    <x-shop::button
+                                        class="primary-button py-3 px-11 rounded-2xl"
+                                        :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                                        :loading="false"
+                                        ref="storeAddress"
                                         @click="store"
                                     >
-                                        @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
-                                    </button>
+                                    </x-shop::button>
                                 </div>
                             </div>
                         </template>
@@ -121,7 +123,7 @@
                                 <div class="flex justify-end mt-4 mb-4">
                                     <button
                                         type="submit"
-                                        class="block w-max py-3 px-11 bg-navyBlue text-white text-base font-medium rounded-2xl text-center cursor-pointer"
+                                        class="primary-button py-3 px-11 rounded-2xl"
                                     >
                                         @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
