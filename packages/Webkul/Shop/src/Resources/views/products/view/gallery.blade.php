@@ -22,21 +22,21 @@
                     class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
                 >
 
-                    <img 
-                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === 'image'+index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
+                                 <img 
+                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `image_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(image, index) in media.images"
                         :src="image.small_image_url"
                         alt="{{ $product->name }}"
                         width="100"
                         height="100"
-                        @click="change(image, 'image'+index)"
+                        @click="change(image, `image_${index}`)"
                     />
 
                     <!-- Need to Set Play Button  -->
                     <video 
-                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === 'video'+index ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
+                        :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `video_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(video, index) in media.videos"
-                        @click="change(video, 'video'+index)"
+                        @click="change(video, `video_${index}`)"
                     >
                         <source 
                             :src="video.video_url"
@@ -148,11 +148,11 @@
     
             mounted() {
                 if (this.media.images.length) {
-                    this.activeIndex = 'image0';
+                    this.activeIndex = 'image_0';
                     this.baseFile.type = 'image';
                     this.baseFile.path = this.media.images[0].large_image_url;
                 } else if (this.media.videos.length) {
-                    this.activeIndex = 'video0';
+                    this.activeIndex = 'video_0';
                     this.baseFile.type = 'video';
                     this.baseFile.path = this.media.videos[0].video_url;
                 }
