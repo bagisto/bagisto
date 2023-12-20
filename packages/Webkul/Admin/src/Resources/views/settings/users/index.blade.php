@@ -151,9 +151,9 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
+                            <a @click="id=1; editModal(record.actions.find(action => action.icon === 'icon-edit')?.url)">
                                 <span
-                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                    :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
                                     class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 >
                                 </span>
