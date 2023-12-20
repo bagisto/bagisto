@@ -255,10 +255,12 @@ trait CartTools
 
         $this->cartItemRepository->delete($itemId);
 
-        $cart = $this->refreshCart();
+        $cart = $cart->fresh();
 
         if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
+
+            $this->resetCart();
         } else {
             $this->collectTotals();
         }
