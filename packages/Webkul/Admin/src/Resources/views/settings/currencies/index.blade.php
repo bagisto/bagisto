@@ -77,7 +77,7 @@
                         <!-- Actions -->
                         <div class="flex justify-end">
                             @if (bouncer()->hasPermission('settings.currencies.edit'))
-                                <a @click="selectedCurrencies=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
+                                <a @click="selectedCurrencies=1; editModal(record.actions.find(action => action.icon === 'icon-edit')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
                                         class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
