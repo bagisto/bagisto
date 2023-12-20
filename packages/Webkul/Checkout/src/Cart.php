@@ -98,6 +98,23 @@ class Cart
     }
 
     /**
+     * Refresh cart
+     */
+    public function refreshCart(): ?Contracts\Cart
+    {
+        if (auth()->guard()->check()) {
+            $this->cart = $this->cartRepository->findOneWhere([
+                'customer_id' => auth()->guard()->user()->id,
+                'is_active'   => 1,
+            ]);
+        } elseif (session()->has('cart')) {
+            $this->cart = $this->cartRepository->find(session()->get('cart')->id);
+        }
+
+        return $this->cart;
+    }
+
+    /**
      * Remove the item from the cart.
      *
      * @param  int  $itemId

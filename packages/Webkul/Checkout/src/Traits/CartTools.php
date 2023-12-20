@@ -253,7 +253,9 @@ trait CartTools
             ]);
         }
 
-        $result = $this->cartItemRepository->delete($itemId);
+        $this->cartItemRepository->delete($itemId);
+
+        $cart = $this->refreshCart();
 
         if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
