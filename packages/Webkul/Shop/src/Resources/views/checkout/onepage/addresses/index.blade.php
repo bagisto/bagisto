@@ -16,7 +16,7 @@
         </template>
         
         <template v-else>
-            <div class="mt-8">
+            <div class="mt-8 mb-7">
                 @include('shop::checkout.onepage.addresses.billing')
 
                 @include('shop::checkout.onepage.addresses.shipping')

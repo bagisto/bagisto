@@ -1,7 +1,7 @@
 <div>
-    <div v-if="! forms.billing.isNew">
+    <template v-if="! forms.billing.isNew">
         <x-shop::accordion class="!border-b-0">
-            <x-slot:header>
+            <x-slot:header class="!p-0">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
@@ -9,12 +9,12 @@
                 </div>
             </x-slot:header>
         
-            <x-slot:content>
+            <x-slot:content class="!p-0 mt-8">
                 <v-form 
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid gap-5 grid-cols-2 mt-8 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                    <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses.billing"
@@ -124,7 +124,7 @@
 
                     <template v-if="meta.valid">
                         <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.billing.length">
-                            <div class="flex justify-end mt-4 mb-4">
+                            <div class="flex justify-end mt-4">
                                 <x-shop::button
                                     class="primary-button py-3 px-11 rounded-2xl"
                                     :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
@@ -139,7 +139,7 @@
 
                     <template v-else>
                         <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
-                            <div class="flex justify-end mt-4 mb-4">
+                            <div class="flex justify-end mt-4">
                                 <button
                                     type="submit"
                                     class="block py-3 px-11 bg-navyBlue rounded-2xl text-white text-base w-max font-medium text-center cursor-pointer"
@@ -152,11 +152,11 @@
                 </v-form>
             </x-slot:content>
         </x-shop::accordion>
-    </div>
+    </template>
 
-    <div v-else>
+    <template v-else>
         <x-shop::accordion class="!border-b-0">
-            <x-slot:header>
+            <x-slot:header class="!p-0">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
@@ -164,7 +164,7 @@
                 </div>
             </x-slot:header>
         
-            <x-slot:content>
+            <x-slot:content class="!p-0 mt-8">
                 <div>
                     <a 
                         class="flex justify-end"
@@ -490,7 +490,7 @@
                             @endauth
                         </div>
 
-                        <div class="flex justify-end mt-4 mb-4">
+                        <div class="flex justify-end mt-4">
                             <button
                                 type="submit"
                                 class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
@@ -505,5 +505,5 @@
 
             </x-slot:content>
         </x-shop::accordion>
-    </div>
+    </template>
 </div>
