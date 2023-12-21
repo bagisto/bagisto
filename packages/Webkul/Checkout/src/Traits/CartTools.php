@@ -257,15 +257,13 @@ trait CartTools
 
         if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
-
-            $this->resetCart();
         } else {
             $this->cartItemRepository->delete($itemId);
 
             $this->collectTotals();
-
-            $this->resetCart();
         }
+
+        $this->resetCart();
 
         return true;
     }
