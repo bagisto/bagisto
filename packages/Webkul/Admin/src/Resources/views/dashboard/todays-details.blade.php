@@ -122,78 +122,81 @@
                 </div>
 
                 <!-- Today Orders Details -->
-                <div
-                    class="row grid grid-cols-4 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-1580:grid-cols-3 max-sm:grid-cols-1"
+                <div 
                     v-for="order in report.statistics.orders"
+                    class="p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                 >
-                    <!-- Order ID, Status, Created -->
-                    <div class="flex gap-2.5">
-                        <div class="flex flex-col gap-1.5">
-                            <!-- Order Id -->
-                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                                @{{ "@lang('admin::app.dashboard.index.order-id', ['id' => ':replace'])".replace(':replace', order.increment_id) }}
-                            </p>
-
-                            <p class="text-gray-600 dark:text-gray-300">
-                                @{{ order.created_at}}
-                            </p>
-
-                            <!-- Order Status -->
-                            <p :class="'label-' + order.status">
-                                @{{ order.status_label }}
-                            </p>
+                    <div class="flex gap-4 flex-wrap">
+                        <!-- Total Sales -->
+                        <div class="flex gap-2.5 flex-1 min-w-[180px]">
+                            <div class="flex flex-col gap-1.5">
+                                <!-- Order Id -->
+                                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                    @{{ "@lang('admin::app.dashboard.index.order-id', ['id' => ':replace'])".replace(':replace', order.increment_id) }}
+                                </p>
+    
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ order.created_at}}
+                                </p>
+    
+                                <!-- Order Status -->
+                                <p :class="'label-' + order.status">
+                                    @{{ order.status_label }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Payment And Channel Detailes -->
-                    <div class="flex flex-col gap-1.5">
-                        <!-- Grand Total -->
-                        <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
-                            @{{ order.formatted_base_grand_total }}
-                        </p>
+                        <div class="flex gap-2.5 flex-1 min-w-[180px]">
+                            <div class="flex flex-col gap-1.5">
+                                <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
+                                    @{{ order.formatted_base_grand_total }}
+                                </p>
+        
+                                <!-- Payment Mode -->
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ order.payment_method }}
+                                </p>
+        
+                                <!-- Channel Name -->
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ order.channel_name }}
+                                </p>
+                            </div>
+                        </div>
 
-                        <!-- Payment Mode -->
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @{{ order.payment_method }}
-                        </p>
-
-                        <!-- Channel Name -->
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @{{ order.channel_name }}
-                        </p>
-                    </div>
-
-                    <div class="flex flex-col gap-1.5">
-                        <!-- Customer Detailes -->
-                        <p class="text-base text-gray-800 dark:text-white">
-                            @{{ order.customer_name }}
-                        </p>
-
-                        <p class="text-gray-600 dark:text-gray-300 break-words">
-                            @{{ order.customer_email }}
-                        </p>
-
-                        <!-- Order Address -->
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @{{ order.billing_address }}
-                        </p>
-                    </div>
-
-                    <!-- Ordered Product Images -->
-                    <div class="max-1580:col-span-full">
-                        <div class="flex gap-1.5 items-center justify-between">
-                            <div
-                                class="flex gap-1.5 items-center flex-wrap"
-                                v-html="order.image"
-                            >
+                        <div class="flex gap-2.5 flex-1 min-w-[200px]">
+                            <div class="flex flex-col gap-1.5">
+                            <!-- Customer Detailes -->
+                                <p class="text-base text-gray-800 dark:text-white">
+                                    @{{ order.customer_name }}
+                                </p>
+        
+                                <p class="text-gray-600 dark:text-gray-300 break-words max-w-[180px]">
+                                    @{{ order.customer_email }}
+                                </p>
+        
+                                <!-- Order Address -->
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @{{ order.billing_address }}
+                                </p>
+                            </div>
+                        </div>
+ 
+                        <div class="flex gap-2.5 flex-1 min-w-[180px] justify-between items-center">
+                            <div class="flex flex-col gap-1.5">
+                                <!-- Ordered Product Images -->
+                                <div
+                                    class="flex gap-1.5 flex-wrap"
+                                    v-html="order.image"
+                                >
+                                </div>
                             </div>
 
-                            <!-- View More Icon -->
-                            <a :href="'{{ route('admin.sales.orders.view', ':replace') }}'.replace(':replace', order.id)">
+                             <!-- View More Icon -->
+                             <a :href="'{{ route('admin.sales.orders.view', ':replace') }}'.replace(':replace', order.id)">
                                 <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>
