@@ -55,11 +55,10 @@
                                         <div class="">
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
-                                                <x-shop::media.images.lazy
-                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-xl" 
-                                                    ::src="item.product.base_image.small_image_url"                                         
-                                                >
-                                                </x-shop::media.images.lazy>
+                                                <img 
+                                                    class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-xl"
+                                                    :src="item.product.base_image.small_image_url" 
+                                                /> 
                                             </a>
                                         </div>
 
