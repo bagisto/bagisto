@@ -362,6 +362,38 @@
     .direction-rtl {
         direction: rtl;
     }
+    
+    .label-pending,
+    .label-processing,
+    .label-closed,
+    .label-canceled,
+    .label-info,
+    .label-completed,
+    .label-active {
+        @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
+    }
+
+	.label-pending {
+		@apply bg-yellow-500;
+	}
+
+	.label-processing,
+	.label-completed,
+    .label-active {
+		@apply bg-darkGreen;
+	}
+
+	.label-closed {
+		@apply bg-darkBlue;
+	}
+
+    .label-canceled {
+        @apply bg-darkPink;
+    }
+
+    .label-info {
+        @apply bg-slate-400;
+    }
 
     .primary-button {
         @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
