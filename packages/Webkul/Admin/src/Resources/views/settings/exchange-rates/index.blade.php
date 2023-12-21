@@ -89,32 +89,27 @@
                         <p v-text="record.currency_rate"></p>
 
                         <!-- Actions -->
-                        @if (
-                            bouncer()->hasPermission('settings.exchange_rates.edit') 
-                            || bouncer()->hasPermission('settings.exchange_rates.delete')
-                        )
-                            <div class="flex justify-end">
-                                @if (bouncer()->hasPermission('settings.exchange_rates.edit'))
-                                    <a @click="selectedExchangeRates=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
-                                        <span
-                                            :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
+                        <div class="flex justify-end">
+                            @if (bouncer()->hasPermission('settings.exchange_rates.edit'))
+                                <a @click="selectedExchangeRates=1; editModal(record.actions.find(action => action.icon === 'icon-edit')?.url)">
+                                    <span
+                                        :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
 
-                                @if (bouncer()->hasPermission('settings.exchange_rates.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
-                                        <span
-                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                            class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        >
-                                        </span>
-                                    </a>
-                                @endif
-                            </div>
-                        @endif
+                            @if (bouncer()->hasPermission('settings.exchange_rates.delete'))
+                                <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                    <span
+                                        :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </template>
             </x-admin::datagrid>

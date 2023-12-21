@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Utwórz źródło inwentarza',
                 'title'      => 'Źródła Inwentarza',
-                'create-btn' => 'Utwórz Źródło Inwentarza',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Stawki Podatków',
+                    'button-title' => 'Utwórz stawkę podatku',
                     'tax-rate'     => 'Stawka Podatku',
-                    'button-title' => 'Utwórz Stawki Podatków',
+                    'title'        => 'Stawki Podatków',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Zapomniałeś hasła!',
                 'reset-password' => 'Resetuj hasło',
                 'subject'        => 'E-mail resetowania hasła',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Nowe konto klienta zostało pomyślnie utworzone. Mogą teraz logować się przy użyciu adresu e-mail i hasła. Po zalogowaniu będą mieli dostęp do różnych usług, w tym możliwość przeglądania poprzednich zamówień, zarządzania listami życzeń i aktualizowania informacji o swoim koncie.',
+                'greeting'    => 'Serdecznie witamy nowego klienta, :customer_name, który właśnie się u nas zarejestrował!',
+                'subject'     => 'Rejestracja nowego klienta',
             ],
         ],
 

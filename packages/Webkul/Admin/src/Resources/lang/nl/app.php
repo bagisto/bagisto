@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index' => [
+                'create-btn' => 'Voorraadbron aanmaken',
                 'title'      => 'Voorraadbronnen',
-                'create-btn' => 'Voorraadbronnen Aanmaken',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates' => [
                 'index' => [
-                    'title'        => 'Belastingtarieven',
+                    'button-title' => 'Belastingtarief maken',
                     'tax-rate'     => 'Belastingtarief',
-                    'button-title' => 'Belastingtarieven Aanmaken',
+                    'title'        => 'Belastingtarieven',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Wachtwoord vergeten!',
                 'reset-password' => 'Wachtwoord opnieuw instellen',
                 'subject'        => 'E-mail wachtwoord resetten',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Er is succesvol een nieuw klantaccount aangemaakt. Ze kunnen nu inloggen met hun e-mailadres en wachtwoord. Eenmaal ingelogd hebben ze toegang tot verschillende diensten, waaronder de mogelijkheid om eerdere bestellingen te bekijken, verlanglijstjes te beheren en hun accountgegevens bij te werken.',
+                'greeting'    => 'Wij heten de nieuwe klant, :customer_name, die zich zojuist bij ons heeft geregistreerd, van harte welkom!',
+                'subject'     => 'Nieuwe klantregistratie',
             ],
         ],
 

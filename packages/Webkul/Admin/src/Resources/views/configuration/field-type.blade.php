@@ -23,10 +23,9 @@
         <!-- Title of the input field -->
         <div class="flex justify-between">
             <x-admin::form.control-group.label
-                :class="$isRequired"
                 :for="$name"
             >
-                @lang($field['title'])
+                {!! __($field['title']) . ( __($field['title']) ? '<span class="'.$isRequired.'"></span>' : '') !!}
 
                 @if (
                     ! empty($field['channel_based'])

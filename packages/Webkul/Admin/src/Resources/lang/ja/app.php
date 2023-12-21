@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => '在庫ソースを作成する',
                 'title'      => '在庫ソース',
-                'create-btn' => '在庫ソースを作成',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => '税率',
+                    'button-title' => '税率を作成する',
                     'tax-rate'     => '税率',
-                    'button-title' => '税率を作成',
+                    'title'        => '税率',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'パスワードを忘れました！',
                 'reset-password' => 'パスワードをリセット',
                 'subject'        => 'パスワードリセットメール',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => '新しい顧客アカウントが正常に作成されました。 これで、電子メール アドレスとパスワードの資格情報を使用してログインできるようになります。 ログインすると、過去の注文の確認、ウィッシュリストの管理、アカウント情報の更新など、さまざまなサービスにアクセスできるようになります。',
+                'greeting'    => '私たちに登録したばかりの新しい顧客、:customer_name を温かく歓迎します。',
+                'subject'     => '新規顧客登録',
             ],
         ],
 

@@ -2286,7 +2286,7 @@ return [
 
         'inventory-sources' => [
             'index'  => [
-                'create-btn' => 'Create Inventory Sources',
+                'create-btn' => 'Create Inventory Source',
                 'title'      => 'Inventory Sources',
 
                 'datagrid' => [
@@ -2408,7 +2408,7 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'button-title' => 'Create Tax Rates',
+                    'button-title' => 'Create Tax Rate',
                     'tax-rate'     => 'Tax Rate',
                     'title'        => 'Tax Rates',
 
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Forgot Password!',
                 'reset-password' => 'Reset Password',
                 'subject'        => 'Reset Password Email',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'A new customer account has been successfully created. They can now log in using their email address and password credentials. Once logged in, they will have access to various services, including the ability to review past orders, manage wishlists, and update their account information.',
+                'greeting'    => 'We extend a warm welcome to the new customer, :customer_name who has just registered with us!',
+                'subject'     => 'New Customer Registration',
             ],
         ],
 

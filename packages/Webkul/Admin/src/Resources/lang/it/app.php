@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Crea fonte inventario',
                 'title'      => 'Sorgenti di Inventario',
-                'create-btn' => 'Crea Sorgenti di Inventario',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Aliquote Fiscali',
+                    'button-title' => 'Crea aliquota fiscale',
                     'tax-rate'     => 'Aliquota Fiscale',
-                    'button-title' => 'Crea Aliquote Fiscali',
+                    'title'        => 'Aliquote Fiscali',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Password dimenticata!',
                 'reset-password' => 'Resetta Password',
                 'subject'        => 'Email di Reset della Password',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Un nuovo account cliente è stato creato con successo. Ora possono accedere utilizzando il proprio indirizzo e-mail e le credenziali della password. Una volta effettuato l`accesso, avranno accesso a vari servizi, inclusa la possibilità di rivedere gli ordini passati, gestire le liste dei desideri e aggiornare le informazioni del proprio account.',
+                'greeting'    => 'Diamo un caloroso benvenuto al nuovo cliente, :customer_name che si è appena registrato con noi!',
+                'subject'     => 'Nuova registrazione cliente',
             ],
         ],
 

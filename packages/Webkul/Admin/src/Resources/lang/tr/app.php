@@ -2287,8 +2287,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
-                'title'      => 'Envanter Kaynakları',
                 'create-btn' => 'Envanter Kaynağı Oluştur',
+                'title'      => 'Envanter Kaynakları',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2409,9 +2409,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Vergi Oranları',
-                    'tax-rate'     => 'Vergi Oranı',
                     'button-title' => 'Vergi Oranı Oluştur',
+                    'tax-rate'     => 'Vergi Oranı',
+                    'title'        => 'Vergi Oranları',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Şifrenizi mi unuttunuz!',
                 'reset-password' => 'Şifreyi Sıfırla',
                 'subject'        => 'Şifre Sıfırlama E-postası',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Yeni bir müşteri hesabı başarıyla oluşturuldu. Artık e-posta adreslerini ve şifre bilgilerini kullanarak giriş yapabilirler. Giriş yaptıktan sonra geçmiş siparişleri inceleme, istek listelerini yönetme ve hesap bilgilerini güncelleme dahil olmak üzere çeşitli hizmetlere erişebilecekler.',
+                'greeting'    => 'Aramıza yeni kaydolan yeni müşterimiz :customer_name `e sıcak bir karşılama dileriz!',
+                'subject'     => 'Yeni Müşteri Kaydı',
             ],
         ],
 

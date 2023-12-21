@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Créer une source d\'inventaire',
                 'title'      => 'Sources d’inventaire',
-                'create-btn' => 'Créer une source d’inventaire',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Taux de taxe',
+                    'button-title' => 'Créer un taux de taxe',
                     'tax-rate'     => 'Taux de taxe',
-                    'button-title' => 'Créer des taux de taxe',
+                    'title'        => 'Taux de taxe',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'description'    => 'Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.',
                 'reset-password' => 'Réinitialiser le mot de passe',
                 'subject'        => 'E-mail de réinitialisation de mot de passe',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Un nouveau compte client a été créé avec succès. Ils peuvent désormais se connecter en utilisant leur adresse e-mail et leur mot de passe. Une fois connectés, ils auront accès à divers services, notamment la possibilité de consulter les commandes passées, de gérer les listes de souhaits et de mettre à jour les informations de leur compte.',
+                'greeting'    => 'Nous souhaitons la bienvenue au nouveau client, :customer_name qui vient de s`inscrire chez nous !',
+                'subject'     => 'Enregistrement d`un nouveau client',
             ],
         ],
 

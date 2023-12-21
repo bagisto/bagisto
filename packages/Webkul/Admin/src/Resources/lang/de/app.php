@@ -2286,8 +2286,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => 'Inventarquelle erstellen',
                 'title'      => 'Lagerorte',
-                'create-btn' => 'Lagerorte erstellen',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2408,9 +2408,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => 'Steuersätze',
+                    'button-title' => 'Steuerquote erstellen',
                     'tax-rate'     => 'Steuersatz',
-                    'button-title' => 'Steuersatz erstellen',
+                    'title'        => 'Steuersätze',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Passwort vergessen!',
                 'reset-password' => 'Passwort zurücksetzen',
                 'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Ein neues Kundenkonto wurde erfolgreich erstellt. Sie können sich nun mit ihrer E-Mail-Adresse und ihrem Passwort anmelden. Sobald sie angemeldet sind, haben sie Zugriff auf verschiedene Dienste, einschließlich der Möglichkeit, frühere Bestellungen einzusehen, Wunschlisten zu verwalten und ihre Kontoinformationen zu aktualisieren.',
+                'greeting'    => 'Wir heißen den neuen Kunden :customer_name, der sich gerade bei uns registriert hat, herzlich willkommen!',
+                'subject'     => 'Neukundenregistrierung',
             ],
         ],
 

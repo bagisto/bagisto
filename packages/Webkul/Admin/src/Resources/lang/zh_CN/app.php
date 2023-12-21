@@ -2285,8 +2285,8 @@ return [
 
         'inventory-sources' => [
             'index'  => [
+                'create-btn' => '创建库存源',
                 'title'      => '库存来源',
-                'create-btn' => '创建库存来源',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2407,9 +2407,9 @@ return [
 
             'rates'   => [
                 'index' => [
-                    'title'        => '税率',
-                    'tax-rate'     => '税率',
                     'button-title' => '创建税率',
+                    'tax-rate'     => '税率',
+                    'title'        => '税率',
 
                     'datagrid' => [
                         'id'         => 'ID',
@@ -3756,6 +3756,14 @@ return [
                 'greeting'       => '忘记密码！',
                 'reset-password' => '重置密码',
                 'subject'        => '重置密码电子邮件',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => '新的客户帐户已成功创建。 他们现在可以使用电子邮件地址和密码凭据登录。 登录后，他们将可以访问各种服务，包括查看过去的订单、管理愿望清单和更新帐户信息的能力。',
+                'greeting'    => '我们热烈欢迎刚刚在我们这里注册的新客户：customer_name！',
+                'subject'     => '新客户注册',
             ],
         ],
 

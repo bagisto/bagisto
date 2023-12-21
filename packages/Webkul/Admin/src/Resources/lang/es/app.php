@@ -2286,7 +2286,7 @@ return [
 
         'inventory-sources' => [
             'index'  => [
-                'create-btn' => 'Crear Fuente de Inventario',
+                'create-btn' => 'Crear fuente de inventario',
                 'title'      => 'Fuentes de Inventario',
 
                 'datagrid' => [
@@ -2408,7 +2408,7 @@ return [
 
             'rates' => [
                 'index' => [
-                    'button-title' => 'Crear Tasas de Impuestos',
+                    'button-title' => 'Crear tasa de impuestos',
                     'tax-rate'     => 'Tasa de Impuestos',
                     'title'        => 'Tasas de Impuestos',
 
@@ -3757,6 +3757,14 @@ return [
                 'greeting'       => 'Passwort vergessen!',
                 'reset-password' => 'Passwort zurücksetzen',
                 'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
+            ],
+        ],
+
+        'customers' => [
+            'registration' => [
+                'description' => 'Se ha creado correctamente una nueva cuenta de cliente. Ahora pueden iniciar sesión con sus credenciales de dirección de correo electrónico y contraseña. Una vez que hayan iniciado sesión, tendrán acceso a varios servicios, incluida la capacidad de revisar pedidos anteriores, administrar listas de deseos y actualizar la información de su cuenta.',
+                'greeting'    => '¡Damos una cálida bienvenida al nuevo cliente, :customer_name que acaba de registrarse con nosotros!',
+                'subject'     => 'Registro de nuevo cliente',
             ],
         ],
 

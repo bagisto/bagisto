@@ -6,11 +6,11 @@
     <!-- User Detailes Section -->
     <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
         <div class="grid gap-1.5">
-            <p class="pt-1.5 text-xl text-gray-800 dark:text-white font-bold leading-6">
+            <p class="text-xl text-gray-800 dark:text-white font-bold !leading-normal">
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => auth()->guard('admin')->user()->name])
             </p>
 
-            <p class="text-gray-600 dark:text-gray-300">
+            <p class="text-gray-600 !leading-normal dark:text-gray-300">
                 @lang('admin::app.dashboard.index.user-info')
             </p>
         </div>

@@ -16,7 +16,7 @@
         </template>
         
         <template v-else>
-            <div class="mt-8">
+            <div class="mt-8 mb-7">
                 @include('shop::checkout.onepage.addresses.billing')
 
                 @include('shop::checkout.onepage.addresses.shipping')
@@ -56,7 +56,10 @@
                         },
                     },
 
-                    addresses: [],
+                    addresses: {
+                        billing: [],
+                        shipping: [],
+                    },
 
                     countries: [],
 
@@ -105,7 +108,7 @@
                     if (this.isCustomer) {
                         this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
                             .then(response => {
-                                this.addresses = response.data.data.map((address, index, row) => {
+                                this.addresses.billing = response.data.data.map((address, index, row) => {
                                     if (! this.forms.billing.address.address_id) {
                                         let isDefault = address.default_address ? address.default_address : index === 0;
 
@@ -165,7 +168,7 @@
 
                         this.isTempAddress = true;
 
-                        this.addresses.push({
+                        this.addresses.billing.push({
                             ...this.forms.billing.address,
                             isSaved: false,
                         });
@@ -198,7 +201,7 @@
 
                         this.isTempAddress = true;
                         
-                        this.addresses.push({
+                        this.addresses.shipping.push({
                             ...this.forms.shipping.address,
                             isSaved: false,
                         });
@@ -218,6 +221,8 @@
                 },
 
                 store() {
+                    this.$refs.storeAddress.isLoading = true;
+
                     if (this.haveStockableItems) {
                         this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
                         
@@ -261,9 +266,11 @@
                             ) {
                                 this.getCustomerAddresses();
                             }
+
+                            this.$refs.storeAddress.isLoading = false;
                         })
-                        .catch(error => {                 
-                            console.log(error);
+                        .catch(error => {
+                            this.$refs.storeAddress.isLoading = false;
                         });
                 },
 
