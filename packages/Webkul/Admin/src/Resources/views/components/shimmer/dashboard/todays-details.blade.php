@@ -74,6 +74,7 @@
                     <div class="flex flex-col gap-1.5">
                         <div class="flex gap-1.5 items-center flex-wrap">
                             <div class="shimmer w-[65px] h-[65px] rounded"></div>
+                            
                             <div class="shimmer w-[65px] h-[65px] rounded"></div>
                         </div>
                     </div>
