@@ -253,8 +253,6 @@ trait CartTools
             ]);
         }
 
-        $this->cartItemRepository->delete($itemId);
-
         $cart = $cart->fresh();
 
         if (! $cart->items->count()) {
@@ -262,7 +260,11 @@ trait CartTools
 
             $this->resetCart();
         } else {
+            $this->cartItemRepository->delete($itemId);
+
             $this->collectTotals();
+
+            $this->resetCart();
         }
 
         return true;
