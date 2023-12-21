@@ -180,9 +180,9 @@
 
                             <div class="flex gap-1.5 place-content-end items-center self-center">
                                 <!-- Review Delete Button -->
-                                <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                <a @click="performAction(record.actions.find(action => action.icon === 'icon-delete'))">
                                     <span
-                                        :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                        :class="record.actions.find(action => action.icon === 'icon-delete')?.icon"
                                         class="text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>

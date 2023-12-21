@@ -68,9 +68,9 @@
                                 @endif
 
                                 @if (bouncer()->hasPermission('customers.groups.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                    <a @click="performAction(record.actions.find(action => action.icon === 'icon-delete'))">
                                         <span
-                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            :class="record.actions.find(action => action.icon === 'icon-delete')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             :title="record.actions.find(action => action.title === '@lang('admin::app.customers.groups.index.datagrid.delete')')?.title"
                                         >

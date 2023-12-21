@@ -118,9 +118,9 @@
                                 @endif
 
                                 @if (bouncer()->hasPermission('marketing.search_terms.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                    <a @click="performAction(record.actions.find(action => action.icon === 'icon-delete'))">
                                         <span
-                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            :class="record.actions.find(action => action.icon === 'icon-delete')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                         >
                                         </span>
