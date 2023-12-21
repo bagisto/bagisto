@@ -2966,8 +2966,8 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AI-Optionen einstellen.',
-                    'title' => 'Magic AI',
+                    'info'  => 'Magische KI-Optionen einstellen.',
+                    'title' => 'Magische KI',
 
                     'settings' => [
                         'title'        => 'Allgemeine Einstellungen',

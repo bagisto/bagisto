@@ -2966,8 +2966,8 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Настройте параметры Magic AI.',
-                    'title' => 'Magic AI',
+                    'info'  => 'Установите параметры Magic AI.',
+                    'title' => 'Магия ИИ',
 
                     'settings' => [
                         'title'        => 'Общие настройки',

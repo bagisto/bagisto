@@ -2965,8 +2965,8 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => '设置 Magic AI 选项。',
-                    'title' => 'Magic AI',
+                    'info'  => '设置魔法人工智能选项。',
+                    'title' => '魔法人工智能',
 
                     'settings' => [
                         'title'        => '通用设置',
