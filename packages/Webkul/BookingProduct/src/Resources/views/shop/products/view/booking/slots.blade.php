@@ -51,7 +51,7 @@
                                     @{{ slot.from + ' - ' + slot.to }}
                                 </option>
     
-                                <option value="" v-if="! slots.length">
+                                <option value="" v-if="! slots?.length">
                                     @lang('booking::app.shop.products.no-slots-available')
                                 </option>
                             </x-shop::form.control-group.control>

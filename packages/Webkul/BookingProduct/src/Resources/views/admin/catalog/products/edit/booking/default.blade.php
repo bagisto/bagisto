@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
-<v-default-booking :bookingProduct = "$bookingProduct ?? []"></v-default-booking>
+<v-default-booking></v-default-booking>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
@@ -21,7 +21,7 @@
                 rules="required"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.type.title')"
                 v-model="default_booking.booking_type"
-                @change="slots.one=[];slots.many=[];"
+                @change="slots.one=[];slots.many=[];optionRowCount=0"
             >
                 @foreach (['many', 'one'] as $item)
                     <option value="{{ $item }}">
@@ -132,24 +132,30 @@
                         v-if="slots.one?.length"
                         v-for="(slot, index) in slots.one"
                     >
+                        <!-- Hidden Field Id -->
+                        <input
+                            type="hidden"
+                            :name="'booking[slots][' + index + '][id]'"
+                            :value="slot.id"
+                        />
                         <!-- Admin-->
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
                             >
-                            @{{ slot.params.from_day }} - @{{ slot.params.from }}
+                                @{{ slot.from_day }} - @{{ slot.from }}
                             </p>
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][from_day]'"
-                                :value="slot.params.from_day"
+                                :value="slot.from_day"
                             />
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][from]'"
-                                :value="slot.params.from"
+                                :value="slot.from"
                             />
                         </x-admin::table.td>
 
@@ -157,19 +163,19 @@
                             <p
                                 class="dark:text-white"
                             >
-                                @{{ slot.params.to_day }} - @{{ slot.params.to }}
+                                @{{ slot.to_day }} - @{{ slot.to }}
                             </p>
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][to_day]'"
-                                :value="slot.params.to_day"
+                                :value="slot.to_day"
                             />
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][to]'"
-                                :value="slot.params.to"
+                                :value="slot.to"
                             />
                         </x-admin::table.td>
 
@@ -177,13 +183,13 @@
                         <x-admin::table.td class="!px-0">
                             <span
                                 class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="editModal(slot)"
+                                @click="editModal('one', slot)"
                             >
                             </span>
 
                             <span
                                 class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="removeOption(slot)"
+                                @click="removeOption('one', slot)"
                             >
                             </span>
                         </x-admin::table.td>
@@ -256,13 +262,13 @@
                         <x-admin::table.td class="!px-0">
                             <span
                                 class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="editModal(slot)"
+                                @click="editModal('many', slot)"
                             >
                             </span>
 
                             <span
                                 class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="removeOption(slot)"
+                                @click="removeOption('many', slot)"
                             >
                             </span>
                         </x-admin::table.td>
@@ -339,7 +345,7 @@
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')"
                                     >
                                         @foreach ($days as $key => $day)
-                                            <option value="{{ $day }}">
+                                            <option value="{{ $key }}">
                                                 @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
                                             </option>
                                         @endforeach
@@ -386,7 +392,7 @@
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                     >
                                         @foreach ($days as $key => $day)
-                                            <option value="{{ $day }}">
+                                            <option value="{{ $key }}">
                                                 @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
                                             </option>
                                         @endforeach
@@ -641,11 +647,9 @@
         app.component('v-default-booking', {
             template: '#v-default-booking-template',
 
-            props: ['bookingProduct'],
-
             data() {
                 return {
-                    default_booking: this.bookingProduct && this.bookingProduct.default_slot ? this.bookingProduct.default_slot : {
+                    default_booking: @json($bookingProduct && $bookingProduct?->default_slot) ? @json($bookingProduct?->default_slot) : {
                         booking_type: 'one',
 
                         duration: 45,
@@ -655,7 +659,7 @@
                         slots: []
                     },
 
-                    optionRowCount: 1,
+                    optionRowCount: 0,
 
                     slots: {
                         one: [],
@@ -676,6 +680,10 @@
             },
 
             created() {
+                let [lastId] = this.default_booking.slots?.map(({ id }) => id).slice(-1);
+
+                this.optionRowCount = lastId?.split('_')[1];
+
                 if (this.default_booking.booking_type === 'one') {
                     this.slots['one'] = this.default_booking.slots ?? [];
                 } else {
@@ -686,18 +694,20 @@
             methods: {
                 storeSlots(params) {
                     if (params.booking_type === 'one') {
-                        if (params.id) {
-                            let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+                        if (! params.id) {
+                            this.optionRowCount++;
+                            params.id = 'option_' + this.optionRowCount;
+                        }
 
-                            this.slots.one[foundIndex].params = { 
+                        let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+
+                        if (foundIndex !== -1) {
+                            this.slots.one[foundIndex] = { 
                                 ...this.slots.one[foundIndex].params, 
                                 ...params
                             };
                         } else {
-                            this.slots.one.push({ 
-                                id: 'option_' + this.optionRowCount++, 
-                                params
-                            });
+                            this.slots.one.push(params);
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -726,23 +736,11 @@
                     }
                 },
 
-                editModal(values) {
-                    let hasParam = values?.params;
-
-                    if (hasParam) {
-                        if (hasParam.booking_type === 'one') {
-                            hasParam.id = values.id;
-    
-                            this.oneOptionModal(hasParam);
-                        } else {
-                            this.manyOptionsModelForm(values);
-                        }
-                     } else {
-                        if (values.booking_type === 'one') {
-                            this.oneOptionModal(values);
-                        } else {
-                            this.manyOptionsModelForm(values);    
-                        }
+                editModal(type, values) {
+                    if (type === 'one') {    
+                        this.oneOptionModal(values);
+                    } else {
+                        this.manyOptionsModelForm(values);
                     }
                 },
 
@@ -758,9 +756,8 @@
                     this.$refs.addManyOptionsRow.toggle();
                 },
 
-                removeOption(values) {
-                    if (values.booking_type === 'many') {
-                        // console.log(this.slots.many);
+                removeOption(type , values) {
+                    if (type === 'many') {
                         // this.slots.many = this.slots.many.filter(option => option.id !== values.id);
                     } else {
                         this.slots.one = this.slots.one.filter(option => option.id !== values.id);

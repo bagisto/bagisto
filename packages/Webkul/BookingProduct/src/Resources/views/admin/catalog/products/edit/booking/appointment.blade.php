@@ -129,68 +129,19 @@
 
                         <x-admin::table.tbody.tr
                             v-if="slots.one?.length"
-                            v-for="slot in slots.one"
+                            v-for="(slot, index) in slots.one"
                         >
-                            <x-admin::table.td>
-                                <p
-                                    class="dark:text-white"
-                                    v-text="slot.params.from"
-                                >
-                                </p>
-
-                                <input
-                                    type="hidden"
-                                    :name="'booking[slots][' + index + '][from]'"
-                                    :value="slot.params.from"
-                                />
-                            </x-admin::table.td>
-
-                            <x-admin::table.td>
-                                <p
-                                    class="dark:text-white"
-                                    v-text="slot.params.to"
-                                >
-                                </p>
-
-                                <input
-                                    type="hidden"
-                                    :name="'booking[slots][' + index + '][to]'"
-                                    :value="slot.params.to"
-                                />
-                            </x-admin::table.td>
-
-                            <!-- Actions button -->
-                            <x-admin::table.td class="!px-0">
-                                <span
-                                    class="icon-edit p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="editModal(slot)"
-                                >
-                                </span>
-
-                                <span
-                                    class="icon-delete p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="removeOption(slot)"
-                                >
-                                </span>
-                            </x-admin::table.td>
-                        </x-admin::table.tbody.tr>
-
-                        <x-admin::table.tbody.tr
-                            v-if="slots.many?.length"
-                            v-for="(slot, index) in slots.many[0]"
-                        >
-                            <!-- Hidden Field Id -->
+                            <!-- Hidden Field ID -->
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][id]'"
                                 :value="slot.id"
                             />
 
-                            <!-- From -->
                             <x-admin::table.td>
                                 <p
                                     class="dark:text-white"
-                                    v-text="slot.from ?? '00:00'"
+                                    v-text="slot.from"
                                 >
                                 </p>
 
@@ -201,11 +152,10 @@
                                 />
                             </x-admin::table.td>
 
-                            <!-- To -->
                             <x-admin::table.td>
                                 <p
                                     class="dark:text-white"
-                                    v-text="slot.to ?? '00:00'"
+                                    v-text="slot.to"
                                 >
                                 </p>
 
@@ -219,14 +169,71 @@
                             <!-- Actions button -->
                             <x-admin::table.td class="!px-0">
                                 <span
+                                    class="icon-edit p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    @click="editModal('one', slot)"
+                                >
+                                </span>
+
+                                <span
+                                    class="icon-delete p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    @click="removeOption('one', slot)"
+                                >
+                                </span>
+                            </x-admin::table.td>
+                        </x-admin::table.tbody.tr>
+
+                        <x-admin::table.tbody.tr
+                            v-if="slots.many?.length"
+                            v-for="(slot, index) in slots.many[0]"
+                        >
+                            <!-- Hidden Field Id -->
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][0][id]'"
+                                :value="slot.id"
+                            />
+
+                            <!-- From -->
+                            <x-admin::table.td>
+                                <p
+                                    class="dark:text-white"
+                                    v-text="slot.from ?? '00:00'"
+                                >
+                                </p>
+
+                                <input
+                                    type="hidden"
+                                    :name="'booking[slots][' + index + '][0][from]'"
+                                    :value="slot.from ?? '00:00'"
+                                />
+                            </x-admin::table.td>
+
+                            <!-- To -->
+                            <x-admin::table.td>
+                                <p
+                                    class="dark:text-white"
+                                    v-text="slot.to ?? '00:00'"
+                                >
+                                </p>
+
+                                <input
+                                    type="hidden"
+                                    :name="'booking[slots][' + index + '][0][to]'"
+                                    :value="slot.to ?? '00:00'"
+                                />
+                            </x-admin::table.td>
+
+                            <!-- Actions button -->
+                            <x-admin::table.td class="!px-0">
+                                <span
                                     class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="editModal(slot)"
+                                    @click="editModal('many', slot)"
                                 >
                                 </span>
 
                                 <span
                                     class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="removeOption(slot)"
+                                    @click="removeOption('many', slot)"
                                 >
                                 </span>
                             </x-admin::table.td>
@@ -363,6 +370,14 @@
                                     </x-admin::form.control-group.control>
 
                                     <!-- Slots From -->
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="[{{ $key }}]from"
+                                        value="00:00"
+                                    >
+                                    </x-admin::form.control-group.control>
+
                                     <x-booking::form.control-group class="w-full mb-2.5">
                                         <x-booking::form.control-group.label class="hidden">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
@@ -386,6 +401,13 @@
                                         <x-booking::form.control-group.label class="hidden">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                         </x-booking::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            name="[{{ $key }}]to"
+                                            value="00:00"
+                                        >
+                                        </x-admin::form.control-group.control>
 
                                         <x-booking::form.control-group.control
                                             type="time"
@@ -507,7 +529,7 @@
 
             data: function() {
                 return {
-                    appointment_booking: this.bookingProduct && this.bookingProduct.appointment_slot ? this.bookingProduct.appointment_slot : {
+                    appointment_booking: @json($bookingProduct && $bookingProduct?->appointment_slot) ? @json($bookingProduct?->appointment_slot) : {
                         duration: 45,
 
                         break_time: 15,
@@ -517,7 +539,7 @@
                         slots: []
                     },
 
-                    optionRowCount: 1,
+                    optionRowCount: 0,
 
                     slots: {
                         one: [],
@@ -527,21 +549,41 @@
                 }
             },
 
+            created() {
+                if (this.appointment_booking.slots) {
+                    let [lastId] = this.appointment_booking.slots?.map(({ id }) => id).slice(-1);
+    
+                    this.optionRowCount = lastId?.split('_')[1];
+                }
+
+                if (this.appointment_booking.same_slot_all_days) {
+                    this.slots['one'] = this.appointment_booking.slots ?? [];
+                } else {
+                    this.slots['many'] = this.appointment_booking.slots ?? [];
+
+                    console.log(this.slots['many']);
+                }
+            },
+
             methods: {
                 storeSlots(params) {
                     if (params.booking_type === 'one') {
-                        if (params.id) {
-                            let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+                        if (! params.id) {
+                            this.optionRowCount++;
+                            params.id = 'option_' + this.optionRowCount;
+                        }
 
-                            this.slots.one[foundIndex].params = { 
+                        let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+
+                        console.log(foundIndex);
+
+                        if (foundIndex !== -1) {
+                            this.slots.one[foundIndex] = { 
                                 ...this.slots.one[foundIndex].params, 
                                 ...params
                             };
                         } else {
-                            this.slots.one.push({ 
-                                id: 'option_' + this.optionRowCount++, 
-                                params
-                            });
+                            this.slots.one.push(params);
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -563,30 +605,20 @@
                                 params[key].id = 'option_' + this.optionRowCount++;
                             }
 
-                            this.slots.many = [{ ...params }];
+                            this.slots.many.push([{ ...params }]);
+
+                            console.log(this.slots.many);
 
                             this.$refs.addOptionsRow.toggle();
                         }
                     }
                 },
     
-                editModal(values) {
-                    let hasParam = values?.params;
-
-                    if (hasParam) {
-                        if (hasParam.booking_type === 'one') {
-                            hasParam.id = values.id;
-    
-                            this.oneOptionModal(hasParam);
-                        } else {
-                            this.manyOptionsModelForm(values);
-                        }
-                     } else {
-                        if (values.booking_type === 'one') {
-                            this.oneOptionModal(values);
-                        } else {
-                            this.manyOptionsModelForm(values);    
-                        }
+                editModal(type, values) {
+                    if (type === 'one') {    
+                        this.oneOptionModal(values);
+                    } else {
+                        this.manyOptionsModelForm(values);
                     }
                 },
 
@@ -602,8 +634,8 @@
                     this.$refs.addManyOptionsRow.toggle();
                 },
 
-                removeOption(values) {
-                    if (values.booking_type === 'many') {
+                removeOption(type , values) {
+                    if (type === 'many') {
                         // console.log(this.slots.many);
                         // this.slots.many = this.slots.many.filter(option => option.id !== values.id);
                     } else {

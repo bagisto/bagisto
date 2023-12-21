@@ -159,7 +159,8 @@ class ProductRepository extends Repository
 
         if (! $product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -381,8 +382,10 @@ class ProductRepository extends Repository
         $countQuery = clone $query->model;
 
         $count = collect(
-            DB::select("select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
-                $countQuery->getBindings())
+            DB::select(
+                "select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
+                $countQuery->getBindings()
+            )
         )->pluck('aggregate')->first();
 
         $items = [];
@@ -452,10 +455,15 @@ class ProductRepository extends Repository
 
         $items = $indices['total'] ? $query->get() : [];
 
-        $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
-            'path'  => request()->url(),
-            'query' => request()->query(),
-        ]
+        $results = new LengthAwarePaginator(
+            $items,
+            $indices['total'],
+            $limit,
+            $currentPage,
+            [
+                'path'  => request()->url(),
+                'query' => request()->query(),
+            ]
         );
 
         return $results;

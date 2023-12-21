@@ -203,7 +203,7 @@
                     class="{{ $bookingType }}-booking-section"
                     v-if="booking.type === '{{ $bookingType }}'"
                 >
-                    @include('booking::admin.catalog.products.edit.booking.' . $bookingType, ['bookingProduct' => $bookingProduct])
+                    @include('booking::admin.catalog.products.edit.booking.' . $bookingType)
                 </div>
             @endforeach
         </script>
@@ -236,7 +236,7 @@
                 },
 
                 created() {
-                    this.booking.available_from = "{{ $bookingProduct && $bookingProduct->available_from ? $bookingProduct->available_from->format('Y-m-d H:i:s') : '' }}";
+                    this.booking.available_from = this.booking?.available_from;
 
                     this.booking.available_to = "{{ $bookingProduct && $bookingProduct->available_to ? $bookingProduct->available_to->format('Y-m-d H:i:s') : '' }}";
                 }
