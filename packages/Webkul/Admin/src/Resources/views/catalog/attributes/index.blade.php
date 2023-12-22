@@ -12,7 +12,7 @@
         <div class="flex items-center gap-x-2.5">
             @if (bouncer()->hasPermission('catalog.attributes.create'))
                 <a href="{{ route('admin.catalog.attributes.create') }}">
-                    <div class="cursor-pointer rounded-md border border-blue-700 bg-blue-600 px-3 py-1.5 font-semibold text-gray-50">
+                    <div class="primary-button">
                         @lang('admin::app.catalog.attributes.index.create-btn')
                     </div>
                 </a>

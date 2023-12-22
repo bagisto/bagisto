@@ -34,7 +34,7 @@
                             <!-- Save Button -->
                             <button
                                 type="submit"
-                                class="py-1.5 px-3 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.settings.roles.create.save-btn')
                             </button>
