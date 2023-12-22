@@ -21,42 +21,69 @@
         {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
     </span>
 
-    <div
-        class="toggle"
-        @click="showDaysAvailability = ! showDaysAvailability"
-    >
-        @lang('booking::app.shop.products.slots-for-all-days')
-
-        <i :class="[! showDaysAvailability ? 'icon-arrow-down' : 'icon-arrow-up']"></i>
-    </div>
-
-    <div class="days-availability" v-show="showDaysAvailability">
-        <table>
-            <tbody>
-                @foreach ($bookingSlotHelper->getWeekSlotDurations($bookingProduct) as $day)
-                    <tr>
-                        <td>{{ $day['name'] }}</td>
-
-                        <td>
-                            @if (
-                                $day['slots']
-                                && count($day['slots'])
-                            )
-                                @foreach ($day['slots'] as $slot)
-                                    {{ $slot['from'] . ' - ' . $slot['to'] }}</br>
-                                @endforeach
-                            @else
-                                <span class="text-danger">
-                                    @lang('booking::app.shop.products.closed')
-                                </span>
-                            @endif
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-    </div>
+    <v-toggler></v-toggler>
 </div>
+
+@pushOnce('scripts')
+    <script
+        type="text/x-template"
+        id="v-toggler-template"
+    >
+        <div class="grid gap-x-2.5 gap-y-1.5 select-none">
+            <!-- Details Toggler -->
+            <p
+                class="flex gap-x-[15px] items-center text-base cursor-pointer"
+                @click="showDaysAvailability = ! showDaysAvailability"
+            >
+                @lang('shop::app.checkout.cart.mini-cart.see-details')
+
+                <span
+                    class="text-2xl"
+                    :class="{'icon-arrow-up': showDaysAvailability, 'icon-arrow-down': ! showDaysAvailability}"
+                >
+                </span>
+            </p>
+
+            <!-- Option Details -->
+            <div
+                class="grid gap-2"
+                v-show="showDaysAvailability"
+            >
+                <template v-for="day in days">
+                    <p
+                        class="text-sm font-medium"
+                        v-text="day.name"
+                    ></p>
+
+                    <p class="text-sm">
+                        <div v-if="day.slots && day.slots?.length">
+                            <div v-for="slot in day.slots">
+                                @{{ slot.from }} - @{{ slot.to }}
+                            </div>
+                        </div>
+
+                        <div v-else class="text-danger">
+                            @lang('booking::app.shop.products.closed')
+                        </div>
+                    </p>
+                </template>
+            </div>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-toggler', {
+            template: '#v-toggler-template',
+
+            data() {
+                return{
+                    showDaysAvailability: '',
+
+                    days: @json($bookingSlotHelper->getWeekSlotDurations($bookingProduct)),
+                }
+            },
+        })
+    </script>
+@endpushOnce
 
 @include ('booking::shop.products.view.booking.slots', ['bookingProduct' => $bookingProduct])

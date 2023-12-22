@@ -88,8 +88,6 @@
                     })
                         .then((response) => {
                             this.slots = response.data.data;
-
-                            this.errors.clear();
                         })
                         .catch(error => {
                             if (error.response.status == 422) {

@@ -550,13 +550,15 @@
             },
 
             created() {
-                if (this.appointment_booking.slots) {
-                    let [lastId] = this.appointment_booking.slots?.map(({ id }) => id).slice(-1);
-    
-                    this.optionRowCount = lastId?.split('_')[1];
-                }
-
                 if (this.appointment_booking.same_slot_all_days) {
+                    if (this.appointment_booking.slots?.length) {
+                        if (this.appointment_booking) {
+                            let [lastId] = this.appointment_booking.slots.map(({ id }) => id).slice(-1);
+            
+                            this.optionRowCount = lastId?.split('_')[1];
+                        }
+                    }
+
                     this.slots['one'] = this.appointment_booking.slots ?? [];
                 } else {
                     this.slots['many'] = this.appointment_booking.slots ?? [];
