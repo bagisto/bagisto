@@ -106,7 +106,9 @@ class UserController extends Controller
         $data = $this->prepareUserData($request, $id);
 
         if ($data instanceof \Illuminate\Http\RedirectResponse) {
-            return $data;
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.users.update-success'),
+            ]);
         }
 
         Event::dispatch('user.admin.update.before', $id);
