@@ -1,6 +1,6 @@
 <v-datagrid-export {{ $attributes }}>
     <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
-        <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
+        <p class="transparent-button text-base hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
             @lang('admin::app.export.export')
         </p>
     </div>
@@ -13,7 +13,7 @@
             <x-admin::modal ref="exportModal">
                 <!-- Modal Toggle -->
                 <x-slot:toggle>
-                    <p class="text-gray-600 dark:text-gray-300 font-semibold leading-6">
+                    <p class="transparent-button text-base hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
                         @lang('admin::app.export.export')
                     </p>
                 </x-slot:toggle>
