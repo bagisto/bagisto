@@ -130,6 +130,7 @@ return [
                                     'title'     => 'Add Slots',
                                     'thursday'  => 'Thursday',
                                     'wednesday' => 'Wednesday',
+                                    'week'      => ':day',
                                 ],
 
                                 'ticket' => [

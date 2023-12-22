@@ -562,8 +562,6 @@
                     this.slots['one'] = this.appointment_booking.slots ?? [];
                 } else {
                     this.slots['many'] = this.appointment_booking.slots ?? [];
-
-                    console.log(this.slots['many']);
                 }
             },
 
@@ -608,8 +606,6 @@
                             }
 
                             this.slots.many.push([{ ...params }]);
-
-                            console.log(this.slots.many);
 
                             this.$refs.addOptionsRow.toggle();
                         }

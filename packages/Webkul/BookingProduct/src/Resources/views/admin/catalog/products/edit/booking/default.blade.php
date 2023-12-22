@@ -89,7 +89,7 @@
             </div>
 
             <!-- Add Slot Button -->
-            <div class="flex gap-x-1 items-center" v-if="! slots.many?.length">
+            <div class="flex gap-x-1 items-center" v-if="! slots.many[0]?.length">
                 <div
                     class="secondary-button"
                     @click="$refs.addOptionsRow.toggle()"
@@ -101,7 +101,7 @@
 
         <!-- Table Information -->
         <div class="mt-4 overflow-x-auto">
-            <template v-if="slots.one?.length || slots.many?.length">
+            <template v-if="slots.one?.length || slots.many[0]?.length">
                 <x-admin::table>
                     <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                         <x-admin::table.thead.tr>
@@ -140,9 +140,7 @@
                         />
                         <!-- Admin-->
                         <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                            >
+                            <p class="dark:text-white">
                                 @{{ slot.from_day }} - @{{ slot.from }}
                             </p>
 
@@ -160,9 +158,7 @@
                         </x-admin::table.td>
 
                         <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                            >
+                            <p class="dark:text-white">
                                 @{{ slot.to_day }} - @{{ slot.to }}
                             </p>
 
@@ -217,14 +213,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="slot.from ?? '00:00'"
+                                v-text="slot.from ? slot.from : '00:00'"
                             >
                             </p>
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][from]'"
-                                :value="slot.from"
+                                :value="slot.from ? slot.from : '00:00'"
                             />
                         </x-admin::table.td>
 
@@ -232,14 +228,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="slot.to ?? '00:00'"
+                                v-text="slot.to ? slot.to : '00:00'"
                             >
                             </p>
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][to]'"
-                                :value="slot.to"
+                                :value="slot.to ? slot.to : '00:00'"
                             />
                         </x-admin::table.td>
 
@@ -344,11 +340,12 @@
                                         rules="required"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')"
                                     >
-                                        @foreach ($days as $key => $day)
-                                            <option value="{{ $key }}">
-                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
-                                            </option>
-                                        @endforeach
+                                        <option
+                                            v-for="(day, index) in days"
+                                            :value="index"
+                                            v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
+                                        >
+                                        </option>
                                     </x-admin::form.control-group.control>
                     
                                     <x-admin::form.control-group.error 
@@ -391,11 +388,12 @@
                                         rules="required"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                     >
-                                        @foreach ($days as $key => $day)
-                                            <option value="{{ $key }}">
-                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
-                                            </option>
-                                        @endforeach
+                                        <option
+                                            v-for="(day, index) in days"
+                                            :value="index"
+                                            v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
+                                        >
+                                        </option>
                                     </x-admin::form.control-group.control>
                     
                                     <x-admin::form.control-group.error 
@@ -506,6 +504,7 @@
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="[{{ $key }}]status"
+                                            value="0"
                                             :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
                                             @change="slotsStatus[{{ $key }}]=$event.target.value==1?true:false;"
                                         >
@@ -675,19 +674,40 @@
                         4: false,
                         5: false,
                         6: false,
-                    }
+                    },
+
+                    days: {
+                        0: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.monday')',
+                        1: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.tuesday')',
+                        2: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.wednesday')',
+                        3: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.tuesday')',
+                        4: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.friday')',
+                        5: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.saturday')',
+                        6: '@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.sunday')',
+                    },
                 }
             },
 
             created() {
-                let [lastId] = this.default_booking.slots?.map(({ id }) => id).slice(-1);
-
-                this.optionRowCount = lastId?.split('_')[1];
+                if (this.default_booking.slots) {
+                    let [lastId] = this.default_booking.slots?.map(({ id }) => id).slice(-1);
+    
+                    this.optionRowCount = lastId?.split('_')[1];
+                }
 
                 if (this.default_booking.booking_type === 'one') {
-                    this.slots['one'] = this.default_booking.slots ?? [];
+                    let data = this.default_booking.slots.map((e) => {
+                        e.from_day = this.days[e.from_day];
+                        e.to_day = this.days[e.to_day];
+
+                        return e;
+                    })
+
+                    this.slots['one'] =  data ?? [];
                 } else {
-                    this.slots['many'].push(this.default_booking.slots ?? []);
+                    if (this.default_booking.slots) {
+                        this.slots['many'].push(this.default_booking.slots ?? []);
+                    }
                 }
             },
 
@@ -729,7 +749,7 @@
                                 params[key].id = 'option_' + this.optionRowCount++;
                             }
 
-                            this.slots.many = [{ ...params }];
+                            this.slots.many.push({ ...params });
 
                             this.$refs.addOptionsRow.toggle();
                         }
