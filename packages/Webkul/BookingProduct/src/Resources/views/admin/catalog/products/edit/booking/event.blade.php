@@ -34,7 +34,7 @@
 
         <!-- Table Information -->
         <div class="mt-4 overflow-x-auto">
-            <template v-if="storeTickets?.length">
+            <template v-if="tickets?.length">
                 <x-admin::table>
                     <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                         <x-admin::table.thead.tr>
@@ -80,19 +80,19 @@
                         </x-admin::table.thead.tr>
                     </x-admin::table.thead>
 
-                    <x-admin::table.tbody.tr v-for="(element, index) in storeTickets">
+                    <x-admin::table.tbody.tr v-for="(element, index) in tickets">
                         <!-- Name-->
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="element.params.name"
+                                v-text="element.name"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][name]'"
-                                :value="element.params.name"
+                                :name="'booking[tickets][ticket_' + index + '][' + currentLocaleCode + '][name]'"
+                                :value="element.name"
                             />
                         </x-admin::table.td>
 
@@ -100,29 +100,29 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="element.params.price"
+                                v-text="element.price"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][price]'"
-                                :value="element.params.price"
+                                :name="'booking[tickets][ticket_' + index + '][price]'"
+                                :value="element.price"
                             />
                         </x-admin::table.td>
 
                         <!-- Qty -->
                         <x-admin::table.td>
                             <p
-                                v-text="element.params.qty"
+                                v-text="element.qty"
                                 class="dark:text-white"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets][' + index + '][' + currentLocaleCode + '][qty]'"
-                                :value="element.params.qty"
+                                :name="'booking[tickets][ticket_' + index + '][qty]'"
+                                :value="element.qty"
                             />
                         </x-admin::table.td>
 
@@ -130,14 +130,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="element.params.special_price"
+                                v-text="element.special_price"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][special_price]'"
-                                :value="element.params.special_price"
+                                :name="'booking[tickets][ticket_' + index + '][special_price]'"
+                                :value="element.special_price"
                             />
                         </x-admin::table.td>
 
@@ -145,14 +145,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="element.params.special_price_from"
+                                v-text="element.special_price_from"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][special_price_from]'"
-                                :value="element.params.special_price_from"
+                                :name="'booking[tickets][ticket_' + index + '][special_price_from]'"
+                                :value="element.special_price_from"
                             />
                         </x-admin::table.td>
 
@@ -160,14 +160,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="element.params.special_price_to"
+                                v-text="element.special_price_to"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][special_price_to]'"
-                                :value="element.params.special_price_to"
+                                :name="'booking[tickets][ticket_' + index + '][special_price_to]'"
+                                :value="element.special_price_to"
                             />
                         </x-admin::table.td>
 
@@ -175,14 +175,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="element.params.description"
+                                v-text="element.description"
                             >
                             </p>
 
                             <input
                                 type="hidden"
-                                :name="'booking[tickets_' + index + '][' + currentLocaleCode + '][description]'"
-                                :value="element.params.description"
+                                :name="'booking[tickets][ticket_' + index + '][' + currentLocaleCode + '][description]'"
+                                :value="element.description"
                             />
                         </x-admin::table.td>
 
@@ -413,9 +413,7 @@
                 return {
                     tickets: @json($bookingProduct ? $bookingProduct->event_tickets()->get() : []),
 
-                    storeTickets: [],
-
-                    optionRowCount: 1,
+                    optionRowCount: 0,
 
                     currentLocaleCode: @json(core()->getCurrentLocale()->code),
                 }
@@ -423,36 +421,34 @@
 
             methods: {
                 store(params) {
-                    if (params.id) {
-                        let foundIndex = this.storeTickets.findIndex(item => item.id === params.id);
+                    console.log();
+                    if (! params.id) {
+                            this.optionRowCount++;
+                            params.id = 'option_' + this.optionRowCount;
+                        }
 
-                        this.storeTickets.splice(foundIndex, 1, {
-                            ...this.storeTickets[foundIndex],
-                            params: {
-                                ...this.storeTickets[foundIndex].params,
-                                ...params,
-                            }
-                        }); 
-                    } else {
-                        this.storeTickets.push({
-                            id: 'option_' + this.optionRowCount++,
-                            params
-                        });
-                    }
+                        let foundIndex = this.tickets.findIndex(item => item.id === params.id);
+
+                        if (foundIndex !== -1) {
+                            this.tickets[foundIndex] = { 
+                                ...this.tickets[foundIndex].params, 
+                                ...params
+                            };
+                        } else {
+                            this.tickets.push(params);
+                        }
 
                     this.$refs.addOptionsRow.toggle();
                 },
 
                 editModal(values) {
-                    values.params.id = values.id;
-
-                    this.$refs.modelForm.setValues(values.params);
+                    this.$refs.modelForm.setValues(values);
 
                     this.$refs.addOptionsRow.toggle();
                 },
 
                 removeOption(id) {
-                    this.storeTickets = this.storeTickets.filter(option => option.id !== id);
+                    this.tickets = this.tickets.filter(option => option.id !== id);
                 },
             }
         });

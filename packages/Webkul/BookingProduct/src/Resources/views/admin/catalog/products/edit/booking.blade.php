@@ -130,7 +130,7 @@
                 <!-- Available From  -->
                 <x-admin::form.control-group
                     class="w-full mb-2.5"
-                    v-if="((booking.availableEveryWeekSwatch && booking.available_every_week == 0) && booking.type != 'event') || booking.type == 'default'"
+                    v-if="(booking.availableEveryWeekSwatch && booking.available_every_week == 0) || booking.type == 'default'"
                 >
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.available-from')
@@ -157,7 +157,7 @@
                 <!-- Available To -->
                 <x-admin::form.control-group
                     class="w-full mb-2.5"
-                    v-if="(booking.availableEveryWeekSwatch && booking.available_every_week == 0) && (booking.type != 'event') || booking.type == 'default'"
+                    v-if="(booking.availableEveryWeekSwatch && booking.available_every_week == 0) || booking.type == 'default'"
                 >
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.available-to')

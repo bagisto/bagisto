@@ -1,22 +1,26 @@
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\EventTicket')
 
 <div class="booking-info-row">
-    <span class="icon bp-slot-icon"></span>
+    <span class="icon-calendar font-bold"></span>
+
     <span class="title">
-        {{ __('bookingproduct::app.shop.products.event-on') }}
+        @lang('booking::app.shop.products.event-on') :
     </span>
+
     <span class="value">
         {!! $bookingSlotHelper->getEventDate($bookingProduct) !!}
     </span>
 </div>
 
-<event-tickets></event-tickets>
+<!-- Event Vue Component -->
+<v-event-tickets></v-event-tickets>
 
-@push('scripts')
-
-    <script type="text/x-template" id="event-tickets-template">
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-event-tickets-template">
         <div class="book-slots">
-            <label style="font-weight: 600">{{ __('bookingproduct::app.shop.products.book-your-ticket') }}</label>
+            <label style="font-weight: 600">
+                @lang('booking::app.shop.products.book-your-ticket')
+            </label>
 
             <div class="ticket-list">
                 <div class="ticket-item" v-for="(ticket, index) in tickets">
@@ -25,22 +29,33 @@
                             @{{ ticket.name }}
                         </div>
 
-                        <div v-if="ticket.original_formatted_price" class="ticket-price">
-                            <span class="regular-price">@{{ ticket.original_formatted_price }}</span>
-                            <span class="special-price">@{{ ticket.formatted_price_text }}</span>
+                        <div
+                            v-if="ticket.original_formatted_price"
+                            class="ticket-price"
+                        >
+                            <span class="mr-1.5 line-through">
+                                @{{ ticket.original_formatted_price }}
+                            </span>
+
+                            <span class="text-lg">
+                                @{{ ticket.formatted_price_text }}
+                            </span>
                         </div>
+
                         <div v-else class="ticket-price">
                             @{{ ticket.formatted_price_text }}
                         </div>
                     </div>
 
-                    <div class="ticket-quantity qty">
-                        <quantity-changer
-                            :control-name="'booking[qty][' + ticket.id + ']'"
-                            :validations="'required|numeric|min_value:0'"
-                            :quantity="defaultQty"
-                            :min-quantity="defaultQty">
-                        </quantity-changer>
+                    <div class="ticket-quantity qty">                      
+                        <x-shop::quantity-changer
+                            ::name="'booking[qty][' + ticket.id + ']'"
+                            rules="required|numeric|min_value:0"
+                            ::value="defaultQty"
+                            ::min-quantity="defaultQty"
+                            class="gap-x-2.5 w-28 max-h-9 py-1.5 px-3.5 rounded-[10px]"
+                        >
+                        </x-shop::quantity-changer>
                     </div>
                     
                     <div class="ticket-item">
@@ -51,38 +66,21 @@
         </div>
     </script>
 
-    <script>
+    <script type="module">
+        app.component('v-event-tickets', {
+            template: '#v-event-tickets-template',
 
-        Vue.component('event-tickets', {
-
-            template: '#event-tickets-template',
-
-            inject: ['$validator'],
-
-            data: function() {
+            data() {
                 return {
                     tickets: @json($bookingSlotHelper->getTickets($bookingProduct)),
                 }
             },
 
             computed: {
-                defaultQty: function() {
+                defaultQty() {
                     return this.tickets.length > 1 ? 0 : 1;
                 }
             }
         });
-
     </script>
-
-    <style>
-        .ticket-price .regular-price{
-            color: #a5a5a5;
-            text-decoration: line-through;
-            margin-right: 5px;
-        }
-        .ticket-price .special-price {
-            color: #ff6472;
-            font-size: larger;
-        }
-    </style>
-@endpush
+@endpushOnce
