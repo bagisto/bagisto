@@ -19,8 +19,8 @@
                 type="select"
                 name="booking[renting_type]"
                 rules="required"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
                 v-model="rental_booking.renting_type"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
             >
                 @foreach (['daily', 'hourly', 'daily_hourly'] as $item)
                     <option value="{{ $item }}">
@@ -48,8 +48,8 @@
                 type="text"
                 name="booking[daily_price]"
                 rules="required"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
                 v-model="rental_booking.daily_price"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
             >
             </x-admin::form.control-group.control>
 
@@ -72,8 +72,8 @@
                 type="text"
                 name="booking[hourly_price]"
                 rules="required"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
                 v-model="rental_booking.hourly_price"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
             >
             </x-admin::form.control-group.control>
 
@@ -94,8 +94,8 @@
                     type="select"
                     name="booking[same_slot_all_days]"
                     rules="required"
-                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                     v-model="rental_booking.same_slot_all_days"
+                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
                     @change="slots.one=[];slots.many=[];"
                 >
                     <option value="1">
@@ -114,6 +114,7 @@
             </x-admin::form.control-group>
         </div>
 
+        <!-- Slots -->
         <div class="flex gap-5 justify-between p-4" v-if="rental_booking.renting_type != 'daily'">
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">

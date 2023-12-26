@@ -20,9 +20,9 @@
                 <x-admin::form.control-group.control
                     type="text"
                     name="booking[duration]"
+                    required="required|min_value:1"
                     v-model="appointment_booking.duration"
                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
-                    required="required|min_value:1"
                 >
                 </x-admin::form.control-group.control>
 
@@ -41,9 +41,9 @@
                 <x-admin::form.control-group.control
                     type="text"
                     name="booking[break_time]"
+                    required="required|min_value:1"
                     v-model="appointment_booking.break_time"
                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
-                    required="required|min_value:1"
                 >
                 </x-admin::form.control-group.control>
 
@@ -632,7 +632,6 @@
 
                 removeOption(type , values) {
                     if (type === 'many') {
-                        // console.log(this.slots.many);
                         // this.slots.many = this.slots.many.filter(option => option.id !== values.id);
                     } else {
                         this.slots.one = this.slots.one.filter(option => option.id !== values.id);

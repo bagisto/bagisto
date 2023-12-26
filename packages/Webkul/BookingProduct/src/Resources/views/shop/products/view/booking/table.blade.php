@@ -86,8 +86,12 @@
     </script>
 @endpushOnce
 
-@include ('booking::shop.products.view.booking.slots', ['bookingProduct' => $bookingProduct])
+@include ('booking::shop.products.view.booking.slots', [
+    'bookingProduct' => $bookingProduct, 
+    'title' => trans('booking::app.shop.products.book-a-table')
+])
 
+<!-- Notes -->
 <x-shop::form.control-group class="w-full">
     <x-shop::form.control-group.label class="required">
         @lang('booking::app.shop.products.special-notes')

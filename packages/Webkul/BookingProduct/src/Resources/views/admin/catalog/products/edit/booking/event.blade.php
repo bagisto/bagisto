@@ -4,10 +4,6 @@
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
-@php
-    $currentLocale = core()->getCurrentLocale();
-@endphp
-
 @pushOnce('scripts')
     <script
         type="text/x-template"
@@ -421,7 +417,6 @@
 
             methods: {
                 store(params) {
-                    console.log();
                     if (! params.id) {
                             this.optionRowCount++;
                             params.id = 'option_' + this.optionRowCount;
