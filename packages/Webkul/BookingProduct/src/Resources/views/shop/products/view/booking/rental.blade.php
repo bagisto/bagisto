@@ -186,7 +186,7 @@
 
                     <div v-else>
                         <label class="label-style required">
-                            @lang('bookingproduct::app.shop.products.select-date')
+                            @lang('booking::app.shop.products.select-date')
                         </label>
 
                         <div class="flex gap-2.5">

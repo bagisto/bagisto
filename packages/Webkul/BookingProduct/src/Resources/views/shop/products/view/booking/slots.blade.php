@@ -2,69 +2,62 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-book-slots-template">
-        <x-shop::form
-            v-slot="{ meta, errors, handleSubmit }"
-            as="div"
-        >
-            <form @submit="handleSubmit($event, handleBillingAddressForm)">
-                <div class="book-slots">
-                    <label class="label-style required">
-                        {{ $title ?? __('booking::app.shop.products.book-an-appointment') }}
-                    </label>
+        <div class="book-slots">
+            <label class="label-style required">
+                {{ $title ?? __('booking::app.shop.products.book-an-appointment') }}
+            </label>
 
-                    <div class="flex gap-2.5">
-                        <x-shop::form.control-group class="w-full">
-                            <x-shop::form.control-group.label class="hidden">
-                                @lang('shop::app.customers.account.profile.dob')
-                            </x-shop::form.control-group.label>
-    
-                            <x-shop::form.control-group.control
-                                type="date"
-                                name="booking[date]"
-                                minDate="{{ $bookingProduct->available_from }}"
-                                maxDate="{{ $bookingProduct->available_to }}"
-                                rules="required"
-                                @change="getAvailableSlots"
-                            >
-                            </x-shop::form.control-group.control>
-    
-                            <x-shop::form.control-group.error
-                                control-name="booking[date]"
-                            >
-                            </x-shop::form.control-group.error>
-                        </x-shop::form.control-group>
-    
-                        <x-shop::form.control-group class="w-full !mb-px">
-                            <x-shop::form.control-group.label class="hidden">
-                                @lang('shop::app.checkout.onepage.addresses.billing.country')
-                            </x-shop::form.control-group.label>
-    
-                            <x-shop::form.control-group.control
-                                type="select"
-                                name="booking[slot]"
-                                class="!mb-1"
-                                rules="required"
-                                :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
-                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
-                            >
-                                <option v-for="slot in slots" :value="slot.timestamp">
-                                    @{{ slot.from + ' - ' + slot.to }}
-                                </option>
-    
-                                <option value="" v-if="! slots?.length">
-                                    @lang('booking::app.shop.products.no-slots-available')
-                                </option>
-                            </x-shop::form.control-group.control>
-    
-                            <x-shop::form.control-group.error
-                                control-name="booking[slot]"
-                            >
-                            </x-shop::form.control-group.error>
-                        </x-shop::form.control-group>
-                    </div>
-                </div>
-            </form>
-        </x-shop::form>
+            <div class="flex gap-2.5">
+                <x-shop::form.control-group class="w-full">
+                    <x-shop::form.control-group.label class="hidden">
+                        @lang('shop::app.customers.account.profile.dob')
+                    </x-shop::form.control-group.label>
+
+                    <x-shop::form.control-group.control
+                        type="date"
+                        name="booking[date]"
+                        minDate="{{ $bookingProduct->available_from }}"
+                        maxDate="{{ $bookingProduct->available_to }}"
+                        rules="required"
+                        @change="getAvailableSlots"
+                    >
+                    </x-shop::form.control-group.control>
+
+                    <x-shop::form.control-group.error
+                        control-name="booking[date]"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
+
+                <x-shop::form.control-group class="w-full !mb-px">
+                    <x-shop::form.control-group.label class="hidden">
+                        @lang('shop::app.checkout.onepage.addresses.billing.country')
+                    </x-shop::form.control-group.label>
+
+                    <x-shop::form.control-group.control
+                        type="select"
+                        name="booking[slot]"
+                        class="!mb-1"
+                        rules="required"
+                        :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
+                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
+                    >
+                        <option v-for="slot in slots" :value="slot.timestamp">
+                            @{{ slot.from + ' - ' + slot.to }}
+                        </option>
+
+                        <option value="" v-if="! slots?.length">
+                            @lang('booking::app.shop.products.no-slots-available')
+                        </option>
+                    </x-shop::form.control-group.control>
+
+                    <x-shop::form.control-group.error
+                        control-name="booking[slot]"
+                    >
+                    </x-shop::form.control-group.error>
+                </x-shop::form.control-group>
+            </div>
+        </div>
     </script>
 
     <script type="module">
