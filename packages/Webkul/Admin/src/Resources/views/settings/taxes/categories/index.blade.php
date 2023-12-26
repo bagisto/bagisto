@@ -76,7 +76,7 @@
                         <!-- Actions -->
                         <div class="flex justify-end">
                             @if (bouncer()->hasPermission('settings.taxes.tax-categories.edit'))
-                                <a @click="selectedTaxCategories=1; editModal(record.actions.find(action => action.id === 'edit')?.url)">
+                                <a @click="selectedTaxCategories=1; editModal(record.actions.find(action => action.index === 'action_1')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.index === 'action_1')?.icon"
                                         class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"

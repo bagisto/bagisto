@@ -180,9 +180,9 @@
 
                             <div class="flex gap-1.5 place-content-end items-center self-center">
                                 <!-- Review Delete Button -->
-                                <a @click="performAction(record.actions.find(action => action.icon === 'icon-delete'))">
+                                <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
                                     <span
-                                        :class="record.actions.find(action => action.icon === 'icon-delete')?.icon"
+                                        :class="record.actions.find(action => action.index === 'action_2')?.icon"
                                         class="text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>
@@ -190,8 +190,8 @@
 
                                 <!-- View Button -->
                                 <a
-                                    v-if="record.actions.find(action => action.title === 'Edit')"
-                                    @click="edit(record.actions.find(action => action.title === 'Edit')?.url)"
+                                    v-if="record.actions.find(action => action.index === 'action_1')"
+                                    @click="edit(record.actions.find(action => action.index === 'action_1')?.url)"
                                 >
                                     <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
                                     </span>
