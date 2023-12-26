@@ -727,7 +727,21 @@
                                 ...params
                             };
                         } else {
-                            this.slots.one.push(params);
+                            let data = Object.keys(params).map((key) => {
+                                if (key == 'from_day') {
+                                    params.from_day = this.days[params.from_day];
+                                }
+
+                                if (key == 'to_day') {
+                                    params.to_day = this.days[params.to_day];
+                                }
+
+                                return key;
+                            });
+
+                            if (! this.slots.one.some(item => item.id === params.id)) {
+                                this.slots.one.push(params);
+                            }
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -749,7 +763,7 @@
                                 params[key].id = 'option_' + this.optionRowCount++;
                             }
 
-                            this.slots.many.push({ ...params });
+                            this.slots.many.push(params);
 
                             this.$refs.addOptionsRow.toggle();
                         }

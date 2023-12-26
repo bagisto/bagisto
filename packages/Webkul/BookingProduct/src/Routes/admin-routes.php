@@ -13,5 +13,4 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
 
         Route::get('get', 'get')->name('admin.sales.bookings.get');
     });
-
 });
