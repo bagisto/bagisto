@@ -57,7 +57,7 @@
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full px-11 py-3.5 bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
+                    class="block w-full px-11 py-3 bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
                     placeholder="@lang('shop::app.components.layouts.header.search-text')"
                     aria-label="@lang('shop::app.components.layouts.header.search-text')"
                     aria-required="true"
