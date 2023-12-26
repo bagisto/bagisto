@@ -43,7 +43,7 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <x-shop::form.control-group>
+                                <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="code"
