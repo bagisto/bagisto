@@ -101,7 +101,7 @@
                                 </label>
 
                                 <label
-                                    class="text-[#6E6E6E]"
+                                    class="text-[#6E6E6E] cursor-pointer"
                                     :for="'bundle_options[' + option.id + '][]'"
                                 >
                                     @lang('shop::app.products.view.type.bundle.none')
@@ -137,7 +137,10 @@
                                 >
                                 </label>
 
-                                <label class="text-[#6E6E6E]" :for="'bundle_options[' + option.id + '][' + index + ']'">
+                                <label
+                                    class="text-[#6E6E6E] cursor-pointer"
+                                    :for="'bundle_options[' + option.id + '][' + index + ']'"
+                                >
                                     @{{ product.name }}
 
                                     <span class="text-black">
@@ -180,7 +183,7 @@
                                 </label>
 
                                 <label 
-                                    class="text-[#6E6E6E]" 
+                                    class="text-[#6E6E6E] cursor-pointer" 
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
