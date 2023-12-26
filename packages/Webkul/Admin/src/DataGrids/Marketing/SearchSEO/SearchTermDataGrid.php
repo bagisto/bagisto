@@ -137,6 +137,7 @@ class SearchTermDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.search_terms.edit')) {
             $this->addAction([
+                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.edit'),
                 'method' => 'GET',

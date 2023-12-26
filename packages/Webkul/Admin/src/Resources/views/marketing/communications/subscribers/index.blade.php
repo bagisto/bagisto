@@ -42,9 +42,9 @@
                             <!-- Actions -->
                             <div class="flex justify-end">
                                 @if (bouncer()->hasPermission('marketing.communications.subscribers.edit'))
-                                    <a @click="editModal(record.actions.find(action => action.icon === 'icon-edit')?.url)">
+                                    <a @click="editModal(record.actions.find(action => action.id === 'edit')?.url)">
                                         <span
-                                            :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
+                                            :class="record.actions.find(action => action.id === 'edit')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>

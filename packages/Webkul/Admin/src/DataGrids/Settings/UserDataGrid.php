@@ -126,6 +126,7 @@ class UserDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.users.users.edit')) {
             $this->addAction([
+                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.users.index.datagrid.edit'),
                 'method' => 'GET',

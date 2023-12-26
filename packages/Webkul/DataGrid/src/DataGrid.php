@@ -153,6 +153,7 @@ abstract class DataGrid
     public function addAction(array $action): void
     {
         $this->actions[] = new Action(
+            id: $action['id'] ?? '',
             icon: $action['icon'] ?? '',
             title: $action['title'],
             method: $action['method'],
@@ -373,10 +374,11 @@ abstract class DataGrid
 
             $record->actions = [];
 
-            foreach ($this->actions as $action) {
+            foreach ($this->actions as $index => $action) {
                 $getUrl = $action->url;
 
                 $record->actions[] = [
+                    'id'     => $action->id,
                     'icon'   => $action->icon,
                     'title'  => $action->title,
                     'method' => $action->method,

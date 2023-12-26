@@ -53,6 +53,7 @@ class GroupDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('customers.groups.edit')) {
             $this->addAction([
+                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.customers.groups.index.datagrid.edit'),
                 'method' => 'PUT',

@@ -79,7 +79,7 @@
                                 @if (bouncer()->hasPermission('marketing.communications.events.edit'))
                                     <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
                                         <span
-                                            :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
+                                            :class="record.actions.find(action => action.id === 'edit')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             :title="record.actions.find(action => action.title === '@lang('admin::app.marketing.communications.events.index.datagrid.edit')')?.title"
                                         >

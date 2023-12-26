@@ -103,7 +103,7 @@
                                 @if (bouncer()->hasPermission('marketing.url_rewrites.edit'))
                                     <a @click="selectedSitemap=1; editModal(record)">
                                         <span
-                                            :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
+                                            :class="record.actions.find(action => action.id === 'edit')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                         >
                                         </span>

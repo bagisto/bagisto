@@ -77,6 +77,7 @@ class NewsLetterDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.communications.subscribers.edit')) {
             $this->addAction([
+                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.communications.subscribers.index.datagrid.edit'),
                 'method' => 'GET',

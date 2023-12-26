@@ -292,9 +292,8 @@
 
             setOriginalQuantityToAllShipmentInputElements() {
                 this.getAllShipmentInputElements().forEach((element) => {
-
                     let data = Object.assign({}, element.dataset);
-
+                    
                     element.value = data.originalQuantity;
                 });
             }
