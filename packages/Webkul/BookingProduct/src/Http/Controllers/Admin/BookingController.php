@@ -25,6 +25,10 @@ class BookingController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(BookingDataGrid::class)->toJson();
+        }
+
         return view('booking::admin.sales.bookings.index');
     }
 

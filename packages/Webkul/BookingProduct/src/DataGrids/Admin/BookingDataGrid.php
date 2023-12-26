@@ -114,7 +114,7 @@ class BookingDataGrid extends DataGrid
             'title'  => trans('booking::app.admin.sales.bookings.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.sales.orders.view', $row->id);
+                return route('admin.sales.orders.view', $row->order_id);
             },
         ]);
     }

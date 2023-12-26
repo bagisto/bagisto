@@ -3,7 +3,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-book-slots-template">
         <x-shop::form.control-group.label>
-            {{ $title  ?? "@lang('booking::app.shop.products.book-an-appointment')" }}
+            {{ $title  ?? trans('booking::app.shop.products.book-an-appointment') }}
         </x-shop::form.control-group.label>
 
         <div class="flex gap-2.5">
