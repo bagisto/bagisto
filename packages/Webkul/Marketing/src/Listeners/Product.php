@@ -36,7 +36,7 @@ class Product
     {
         $product = $this->productRepository->find($id);
 
-        $currentURLKey = request()->input('url_key');
+        $currentURLKey = request()->input('url_key', '');
 
         if ($currentURLKey === $product->url_key) {
             return;
