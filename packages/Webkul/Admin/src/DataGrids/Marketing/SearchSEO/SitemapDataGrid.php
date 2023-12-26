@@ -77,7 +77,6 @@ class SitemapDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.sitemaps.edit')) {
             $this->addAction([
-                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.edit'),
                 'method' => 'GET',

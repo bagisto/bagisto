@@ -68,7 +68,6 @@ class CurrencyDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.currencies.edit')) {
             $this->addAction([
-                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.currencies.index.datagrid.edit'),
                 'method' => 'GET',

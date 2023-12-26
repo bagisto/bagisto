@@ -63,7 +63,6 @@ class TaxCategoryDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.taxes.tax-categories.edit')) {
             $this->addAction([
-                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.edit'),
                 'method' => 'GET',

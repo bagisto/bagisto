@@ -110,7 +110,7 @@
                                 @if (bouncer()->hasPermission('marketing.search_terms.edit'))
                                     <a @click="selectedSitemap=1; editModal(record)">
                                         <span
-                                            :class="record.actions.find(action => action.id === 'edit')?.icon"
+                                            :class="record.actions.find(action => action.index === 'action_1')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                         >
                                         </span>
@@ -118,9 +118,9 @@
                                 @endif
 
                                 @if (bouncer()->hasPermission('marketing.search_terms.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.icon === 'icon-delete'))">
+                                    <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
                                         <span
-                                            :class="record.actions.find(action => action.icon === 'icon-delete')?.icon"
+                                            :class="record.actions.find(action => action.index === 'action_2')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
                                         >
                                         </span>

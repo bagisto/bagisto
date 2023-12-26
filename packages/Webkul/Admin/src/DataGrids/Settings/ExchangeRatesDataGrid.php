@@ -70,7 +70,6 @@ class ExchangeRatesDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.exchange_rates.edit')) {
             $this->addAction([
-                'id'     => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.exchange-rates.index.datagrid.edit'),
                 'method' => 'GET',
