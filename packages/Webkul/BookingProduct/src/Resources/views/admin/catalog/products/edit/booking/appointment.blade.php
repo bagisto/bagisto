@@ -92,7 +92,7 @@
             <!-- Add Ticket Button -->
             <div
                 class="flex gap-x-1 items-center"
-                v-if="! slots.many?.length"
+                v-if="! slots.many[0]?.length"
             >
                 <div
                     class="secondary-button"
@@ -105,7 +105,7 @@
 
         <!-- Table Information -->
         <div class="mt-4 overflow-x-auto">
-            <template v-if="slots.one?.length || slots.many?.length">
+            <template v-if="slots.one?.length || slots.many[0]?.length">
                 <x-admin::table>
                     <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                         <x-admin::table.thead.tr>
@@ -189,21 +189,21 @@
                         <input
                             type="hidden"
                             :name="'booking[slots][' + index + '][0][id]'"
-                            :value="slot.id"
+                            :value="slot[0].id"
                         />
 
                         <!-- From -->
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="slot.from ?? '00:00'"
+                                v-text="slot[0].from ? slot[0].from : '00:00'"
                             >
                             </p>
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][0][from]'"
-                                :value="slot.from ?? '00:00'"
+                                :value="slot[0].from ? slot[0].from : '00:00'"
                             />
                         </x-admin::table.td>
 
@@ -211,14 +211,14 @@
                         <x-admin::table.td>
                             <p
                                 class="dark:text-white"
-                                v-text="slot.to ?? '00:00'"
+                                v-text="slot[0].to ? slot[0].to : '00:00'"
                             >
                             </p>
 
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][0][to]'"
-                                :value="slot.to ?? '00:00'"
+                                :value="slot[0].to ? slot[0].to : '00:00'"
                             />
                         </x-admin::table.td>
 
@@ -227,12 +227,6 @@
                             <span
                                 class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                 @click="editModal('many', slot)"
-                            >
-                            </span>
-
-                            <span
-                                class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="removeOption('many', slot)"
                             >
                             </span>
                         </x-admin::table.td>
@@ -353,29 +347,21 @@
                                     </div>
 
                                     <!-- Hidden ID Field -->
-                                    <x-admin::form.control-group.control
+                                    <x-booking::form.control-group.control
                                         type="hidden"
-                                        name="[{{ $key }}]id"
+                                        name="[{{ $key }}][0]id"
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </x-booking::form.control-group.control>
 
                                     <!-- Hidden Days Field -->
-                                    <x-admin::form.control-group.control
+                                    <x-booking::form.control-group.control
                                         type="hidden"
-                                        name="[{{ $key }}]day"
+                                        name="[{{ $key }}][0]day"
                                         value="{{ $day }}"
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </x-booking::form.control-group.control>
 
                                     <!-- Slots From -->
-
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="[{{ $key }}]from"
-                                        value="00:00"
-                                    >
-                                    </x-admin::form.control-group.control>
-
                                     <x-booking::form.control-group class="w-full mb-2.5">
                                         <x-booking::form.control-group.label class="hidden">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
@@ -383,13 +369,13 @@
 
                                         <x-booking::form.control-group.control
                                             type="time"
-                                            name="[{{ $key }}]from"
+                                            name="[{{ $key }}][0]from"
                                             :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                         >
                                         </x-booking::form.control-group.control>
 
                                         <x-booking::form.control-group.error 
-                                            control-name="[{{ $key }}]from"
+                                            control-name="[{{ $key }}][0]from"
                                         >
                                         </x-booking::form.control-group.error>
                                     </x-booking::form.control-group>
@@ -400,22 +386,15 @@
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                         </x-booking::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            name="[{{ $key }}]to"
-                                            value="00:00"
-                                        >
-                                        </x-admin::form.control-group.control>
-
                                         <x-booking::form.control-group.control
                                             type="time"
-                                            name="[{{ $key }}]to"
+                                            name="[{{ $key }}][0]to"
                                             :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                         >
                                         </x-booking::form.control-group.control>
 
                                         <x-booking::form.control-group.error 
-                                            control-name="[{{ $key }}]to"
+                                            control-name="[{{ $key }}][0]to"
                                         >
                                         </x-booking::form.control-group.error>
                                     </x-booking::form.control-group>
@@ -557,7 +536,9 @@
 
                     this.slots['one'] = this.appointment_booking.slots ?? [];
                 } else {
-                    this.slots['many'] = this.appointment_booking.slots ?? [];
+                    if (this.appointment_booking.slots) {
+                        this.slots.many.push(this.appointment_booking.slots);
+                    }
                 }
             },
 
@@ -582,8 +563,8 @@
 
                         this.$refs.addOptionsRow.toggle();
                     } else {
-                        if (params && params.id) {
-                            let item = this.slots.many.flatMap(i => Object.values(i)).find(i => i.id === params.id);
+                        if (params && params?.id) {
+                            let item = this.slots.many[0].flatMap(i => Object.values(i)).find(i => i.id === params.id);
 
                             if (item) {
                                 for (const key in params) {
@@ -596,10 +577,10 @@
                             this.$refs.addManyOptionsRow.toggle();
                         } else {
                             for (const key in params) {
-                                params[key].id = 'option_' + this.optionRowCount++;
+                                params[key][0].id = 'option_' + this.optionRowCount++;
                             }
 
-                            this.slots.many.push([{ ...params }]);
+                            this.slots.many.push(params);
 
                             this.$refs.addOptionsRow.toggle();
                         }
@@ -608,9 +589,9 @@
     
                 editModal(type, values) {
                     if (type === 'one') {    
-                        this.oneOptionModal(values);
+                        this.oneOptionModal(values[0]);
                     } else {
-                        this.manyOptionsModelForm(values);
+                        this.manyOptionsModelForm(values[0]);
                     }
                 },
 
@@ -627,11 +608,7 @@
                 },
 
                 removeOption(type , values) {
-                    if (type === 'many') {
-                        // this.slots.many = this.slots.many.filter(option => option.id !== values.id);
-                    } else {
-                        this.slots.one = this.slots.one.filter(option => option.id !== values.id);
-                    }
+                    this.slots.one = this.slots.one.filter(option => option.id !== values.id);
                 },
             },
         });

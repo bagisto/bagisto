@@ -88,7 +88,7 @@ class BookingProductRepository extends Repository
             if (isset($data['slots'])) {
                 $data['slots'] = $this->formatSlots($data);
 
-                // $data['slots'] = $this->validateSlots($data);
+                $data['slots'] = $this->validateSlots($data);
             }
 
             if (! $bookingProductTypeSlot) {

@@ -602,7 +602,7 @@
 
             data() {
                 return {
-                    table_booking: @json($bookingProduct && $bookingProduct?->table_slot) ? @json($bookingProduct->table_slot) : {
+                    table_booking: @json($bookingProduct && $bookingProduct?->table_slot) ? @json($bookingProduct?->table_slot) : {
                         price_type: 'guest',
 
                         guest_limit: 2,

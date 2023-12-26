@@ -22,39 +22,22 @@ use Webkul\Product\Type\Virtual;
 class Booking extends Virtual
 {
     /**
-     * Do not allow booking products to be copied, it would be too complicated.
-     *
-     * @var bool
-     */
-    protected $canBeCopied = false;
-
-    /**
      * Create a new product type instance.
      *
      * @return void
      */
     public function __construct(
-        CustomerRepository $customerRepository,
-        AttributeRepository $attributeRepository,
-        ProductRepository $productRepository,
-        ProductAttributeValueRepository $attributeValueRepository,
-        ProductInventoryRepository $productInventoryRepository,
-        ProductImageRepository $productImageRepository,
-        ProductVideoRepository $productVideoRepository,
-        ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
+        protected CustomerRepository $customerRepository,
+        protected AttributeRepository $attributeRepository,
+        protected ProductRepository $productRepository,
+        protected ProductAttributeValueRepository $attributeValueRepository,
+        protected ProductInventoryRepository $productInventoryRepository,
+        protected ProductImageRepository $productImageRepository,
+        protected ProductVideoRepository $productVideoRepository,
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected BookingProductRepository $bookingProductRepository,
         protected BookingHelper $bookingHelper
     ) {
-        parent::__construct(
-            $customerRepository,
-            $attributeRepository,
-            $productRepository,
-            $attributeValueRepository,
-            $productInventoryRepository,
-            $productImageRepository,
-            $productVideoRepository,
-            $productCustomerGroupPriceRepository,
-        );
     }
 
     /**
