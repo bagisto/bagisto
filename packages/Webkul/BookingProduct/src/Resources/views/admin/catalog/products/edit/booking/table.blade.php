@@ -9,332 +9,331 @@
         type="text/x-template"
         id="v-table-booking-template"
     >
-        <x-admin::form
-            enctype="multipart/form-data"
-            method="PUT"
+        <!-- Charged Per -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="select"
+                name="booking[price_type]"
+                rules="required"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')"
+                v-model="table_booking.price_type"
+            >
+                @foreach (['guest', 'table'] as $item)
+                    <option value="{{ $item }}">
+                        @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per.' . $item)
+                    </option>
+                @endforeach
+            </x-admin::form.control-group.control>
+
+            <x-admin::form.control-group.error 
+                control-name="booking[price_type]"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
+
+        <!-- Guest Limit -->
+        <x-admin::form.control-group
+            class="w-full mb-2.5"
+            v-if="table_booking.price_type == 'table'"
         >
-            <div>
-                <!-- Charged Per -->
-                <x-admin::form.control-group class="w-full mb-2.5">
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')
-                    </x-admin::form.control-group.label>
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.guest-limit')
+            </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="select"
-                        name="booking[price_type]"
-                        rules="required"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')"
-                        v-model="table_booking.price_type"
-                    >
-                        @foreach (['guest', 'table'] as $item)
-                            <option value="{{ $item }}">
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per.' . $item)
-                            </option>
-                        @endforeach
-                    </x-admin::form.control-group.control>
+            <x-admin::form.control-group.control
+                type="text"
+                name="booking[guest_limit]"
+                rules="required|min_value:1"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit')"
+                v-model="table_booking.guest_limit"
+            >
+            </x-admin::form.control-group.control>
 
-                    <x-admin::form.control-group.error 
-                        control-name="booking[price_type]"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+            <x-admin::form.control-group.error 
+                control-name="booking[guest_limit]"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                <!-- Guest Limit -->
-                <x-admin::form.control-group
-                    class="w-full mb-2.5"
-                    v-if="table_booking.price_type == 'table'"
-                >
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.guest-limit')
-                    </x-admin::form.control-group.label>
+        <!-- Guest Capacity -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')
+            </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="text"
-                        name="booking[guest_limit]"
-                        rules="required|min_value:1"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit')"
-                        v-model="table_booking.guest_limit"
-                    >
-                    </x-admin::form.control-group.control>
+            <x-admin::form.control-group.control
+                type="text"
+                name="booking[qty]"
+                value="{{ $bookingProduct ? $bookingProduct->qty : 0 }}"
+                rules="required|min_value:1"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')"
+            >
+            </x-admin::form.control-group.control>
 
-                    <x-admin::form.control-group.error 
-                        control-name="booking[guest_limit]"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+            <x-admin::form.control-group.error 
+                control-name="booking[qty]"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                <!-- Guest Capacity -->
-                <x-admin::form.control-group class="w-full mb-2.5">
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')
-                    </x-admin::form.control-group.label>
+        <!-- Slot Duration -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
+            </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="text"
-                        name="booking[qty]"
-                        value="{{ $bookingProduct ? $bookingProduct->qty : 0 }}"
-                        rules="required|min_value:1"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')"
-                    >
-                    </x-admin::form.control-group.control>
+            <x-admin::form.control-group.control
+                type="text"
+                name="booking[duration]"
+                v-model="table_booking.duration"
+                rules="required|min_value:1"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
+            >
+            </x-admin::form.control-group.control>
 
-                    <x-admin::form.control-group.error 
-                        control-name="booking[qty]"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+            <x-admin::form.control-group.error 
+                control-name="booking[duration]"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                <!-- Slot Duration -->
-                <x-admin::form.control-group class="w-full mb-2.5">
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
-                    </x-admin::form.control-group.label>
+        <!-- Break Time -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
+            </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="text"
-                        name="booking[duration]"
-                        v-model="table_booking.duration"
-                        rules="required|min_value:1"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
-                    >
-                    </x-admin::form.control-group.control>
+            <x-admin::form.control-group.control
+                type="text"
+                name="booking[break_time]"
+                v-model="table_booking.break_time"
+                rules="required|min_value:1"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
+            >
+            </x-admin::form.control-group.control>
 
-                    <x-admin::form.control-group.error 
-                        control-name="booking[duration]"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+            <x-admin::form.control-group.error 
+                control-name="booking[break_time]"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                <!-- Break Time -->
-                <x-admin::form.control-group class="w-full mb-2.5">
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
-                    </x-admin::form.control-group.label>
+        <!-- Prevent Scheduling Before -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')
+            </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="text"
-                        name="booking[break_time]"
-                        v-model="table_booking.break_time"
-                        rules="required|min_value:1"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
-                    >
-                    </x-admin::form.control-group.control>
+            <x-admin::form.control-group.control
+                type="text"
+                name="booking[prevent_scheduling_before]"
+                v-model="table_booking.prevent_scheduling_before"
+                rules="required|min_value:1"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')"
+            >
+            </x-admin::form.control-group.control>
 
-                    <x-admin::form.control-group.error 
-                        control-name="booking[break_time]"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+            <x-admin::form.control-group.error 
+                control-name="booking[prevent_scheduling_before]"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                <!-- Prevent Scheduling Before -->
-                <x-admin::form.control-group class="w-full mb-2.5">
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')
-                    </x-admin::form.control-group.label>
+        <!-- Same slot all days -->
+        <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group.label class="required">
+                @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
+            </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="text"
-                        name="booking[prevent_scheduling_before]"
-                        v-model="table_booking.prevent_scheduling_before"
-                        rules="required|min_value:1"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')"
-                    >
-                    </x-admin::form.control-group.control>
+            <x-admin::form.control-group.control
+                type="select"
+                name="booking[same_slot_all_days]`"
+                v-model="table_booking.same_slot_all_days"
+                rules="required"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
+                @change="slots.one=[];slots.many=[];"
+            >
+                <option value="1">
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
+                </option>
 
-                    <x-admin::form.control-group.error 
-                        control-name="booking[prevent_scheduling_before]"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+                <option value="0">
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
+                </option>
+            </x-admin::form.control-group.control>
 
-                <!-- Same slot all days -->
-                <x-admin::form.control-group class="w-full mb-2.5">
-                    <x-admin::form.control-group.label class="required">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
-                    </x-admin::form.control-group.label>
+            <x-admin::form.control-group.error 
+                control-name="booking[same_slot_all_days]`"
+            >
+            </x-admin::form.control-group.error>
+        </x-admin::form.control-group>
 
-                    <x-admin::form.control-group.control
-                        type="select"
-                        name="booking[same_slot_all_days]`"
-                        v-model="table_booking.same_slot_all_days"
-                        rules="required"
-                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
-                        @change="slots.one=[];slots.many=[];"
-                    >
-                        <option value="1">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
-                        </option>
-
-                        <option value="0">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
-                        </option>
-                    </x-admin::form.control-group.control>
-
-                    <x-admin::form.control-group.error 
-                        control-name="booking[same_slot_all_days]`"
-                    >
-                    </x-admin::form.control-group.error>
-                </x-admin::form.control-group>
+        <!-- Slots Component -->
+        <div class="flex gap-5 justify-between p-4">
+            <div class="flex flex-col gap-2">
+                <p class="text-base text-gray-800 dark:text-white font-semibold">
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
+                </p>
             </div>
 
-            <!-- Slots Component -->
-            <div class="flex gap-5 justify-between p-4">
-                <div class="flex flex-col gap-2">
-                    <p class="text-base text-gray-800 dark:text-white font-semibold">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
-                    </p>
-                </div>
-    
-                <!-- Add SlotS Button -->
+            <!-- Add SlotS Button -->
+            <div
+                class="flex gap-x-1 items-center"
+                v-if="! slots.many?.length"
+            >
                 <div
-                    class="flex gap-x-1 items-center"
-                    v-if="! slots.many?.length"
+                    class="secondary-button"
+                    @click="$refs.addOptionsRow.toggle()"
                 >
-                    <div
-                        class="secondary-button"
-                        @click="$refs.addOptionsRow.toggle()"
-                    >
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                    </div>
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
                 </div>
             </div>
+        </div>
 
-            <!-- Table Information -->
-            <div class="mt-4 overflow-x-auto">
-                <template v-if="slots.one?.length || slots.many?.length">
-                    <x-admin::table>
-                        <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
-                            <x-admin::table.thead.tr>
-                                <!-- From -->
-                                <x-admin::table.th>
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.from')
-                                </x-admin::table.th>
+        <!-- Table Information -->
+        <div class="mt-4 overflow-x-auto">
+            <template v-if="slots.one?.length || slots.many?.length">
+                <x-admin::table>
+                    <x-admin::table.thead class="text-[14px] font-medium dark:bg-gray-800">
+                        <x-admin::table.thead.tr>
+                            <!-- From -->
+                            <x-admin::table.th>
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.from')
+                            </x-admin::table.th>
 
-                                <!-- To -->
-                                <x-admin::table.th>
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.to')
-                                </x-admin::table.th>
+                            <!-- To -->
+                            <x-admin::table.th>
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.to')
+                            </x-admin::table.th>
 
-                                <!-- Action tables heading -->
-                                <x-admin::table.th>
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.action')
-                                </x-admin::table.th>
-                            </x-admin::table.thead.tr>
-                        </x-admin::table.thead>
+                            <!-- Action tables heading -->
+                            <x-admin::table.th>
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.action')
+                            </x-admin::table.th>
+                        </x-admin::table.thead.tr>
+                    </x-admin::table.thead>
 
-                        <x-admin::table.tbody.tr
-                            v-if="slots.one?.length"
-                            v-for="(slot, index) in slots.one"
-                        >
-                            <x-admin::table.td>
-                                <p
-                                    class="dark:text-white"
-                                    v-text="slot.params.from"
-                                >
-                                </p>
-
-                                <input
-                                    type="hidden"
-                                    :name="'booking[slots][' + index + '][from]'"
-                                    :value="slot.params.from"
-                                />
-                            </x-admin::table.td>
-
-                            <x-admin::table.td>
-                                <p
-                                    class="dark:text-white"
-                                    v-text="slot.params.to"
-                                >
-                                </p>
-
-                                <input
-                                    type="hidden"
-                                    :name="'booking[slots][' + index + '][to]'"
-                                    :value="slot.params.to"
-                                />
-                            </x-admin::table.td>
-
-                            <!-- Actions button -->
-                            <x-admin::table.td class="!px-0">
-                                <span
-                                    class="icon-edit p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="editModal(slot)"
-                                >
-                                </span>
-
-                                <span
-                                    class="icon-delete p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="removeOption(slot)"
-                                >
-                                </span>
-                            </x-admin::table.td>
-                        </x-admin::table.tbody.tr>
-
-                        <x-admin::table.tbody.tr
-                            v-if="slots.many?.length"
-                            v-for="(slot, index) in slots.many[0]"
-                        >
-                            <!-- Hidden Field Id -->
+                    <x-admin::table.tbody.tr
+                        v-if="slots.one?.length"
+                        v-for="(slot, index) in slots.one"
+                    >
+                        <x-admin::table.td>
                             <input
                                 type="hidden"
                                 :name="'booking[slots][' + index + '][id]'"
                                 :value="slot.id"
                             />
 
-                            <!-- From -->
-                            <x-admin::table.td>
-                                <p
-                                    class="dark:text-white"
-                                    v-text="slot.from ?? '00:00'"
-                                >
-                                </p>
+                            <p
+                                class="dark:text-white"
+                                v-text="slot.from"
+                            >
+                            </p>
 
-                                <input
-                                    type="hidden"
-                                    :name="'booking[slots][' + index + '][from]'"
-                                    :value="slot.from"
-                                />
-                            </x-admin::table.td>
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][from]'"
+                                :value="slot.from"
+                            />
+                        </x-admin::table.td>
 
-                            <!-- To -->
-                            <x-admin::table.td>
-                                <p
-                                    class="dark:text-white"
-                                    v-text="slot.to ?? '00:00'"
-                                >
-                                </p>
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="slot.to"
+                            >
+                            </p>
 
-                                <input
-                                    type="hidden"
-                                    :name="'booking[slots][' + index + '][to]'"
-                                    :value="slot.to"
-                                />
-                            </x-admin::table.td>
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][to]'"
+                                :value="slot.to"
+                            />
+                        </x-admin::table.td>
 
-                            <!-- Actions button -->
-                            <x-admin::table.td class="!px-0">
-                                <span
-                                    class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="editModal(slot)"
-                                >
-                                </span>
+                        <!-- Actions button -->
+                        <x-admin::table.td class="!px-0">
+                            <span
+                                class="icon-edit p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @click="editModal('one', slot)"
+                            >
+                            </span>
 
-                                <span
-                                    class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    @click="removeOption(slot)"
-                                >
-                                </span>
-                            </x-admin::table.td>
-                        </x-admin::table.tbody.tr>
-                    </x-admin::table>
-                </template>
+                            <span
+                                class="icon-delete p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @click="removeOption('one', slot)"
+                            >
+                            </span>
+                        </x-admin::table.td>
+                    </x-admin::table.tbody.tr>
 
-                <template v-else>
-                    <v-empty-info type="rental"></v-empty-info>
-                </template>
-            </div>
-        </x-admin::form>
+                    <x-admin::table.tbody.tr
+                        v-if="slots.many?.length"
+                        v-for="(slot, index) in slots.many[0]"
+                    >
+                        <!-- Hidden Field Id -->
+                        <input
+                            type="hidden"
+                            :name="'booking[slots][' + index + '][id]'"
+                            :value="slot.id"
+                        />
+
+                        <!-- From -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="slot.from ?? '00:00'"
+                            >
+                            </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][from]'"
+                                :value="slot.from"
+                            />
+                        </x-admin::table.td>
+
+                        <!-- To -->
+                        <x-admin::table.td>
+                            <p
+                                class="dark:text-white"
+                                v-text="slot.to ?? '00:00'"
+                            >
+                            </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][to]'"
+                                :value="slot.to"
+                            />
+                        </x-admin::table.td>
+
+                        <!-- Actions button -->
+                        <x-admin::table.td class="!px-0">
+                            <span
+                                class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @click="editModal('many', slot)"
+                            >
+                            </span>
+
+                            <span
+                                class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @click="removeOption('many', slot)"
+                            >
+                            </span>
+                        </x-admin::table.td>
+                    </x-admin::table.tbody.tr>
+                </x-admin::table>
+            </template>
+
+            <template v-else>
+                <v-empty-info type="rental"></v-empty-info>
+            </template>
+        </div>
 
         @php
             $days =  [
@@ -595,13 +594,6 @@
         </x-admin::form>
     </script>
 
-    <script
-        type="text/x-template"
-        id="v-slot-list-template"
-    >
-        
-    </script>
-
     <script type="module">
         app.component('v-table-booking', {
             template: '#v-table-booking-template',
@@ -610,7 +602,7 @@
 
             data() {
                 return {
-                    table_booking: this.bookingProduct && this.bookingProduct.table_slot ? this.bookingProduct.table_slot : {
+                    table_booking: @json($bookingProduct && $bookingProduct?->table_slot) ? @json($bookingProduct->table_slot) : {
                         price_type: 'guest',
 
                         guest_limit: 2,
@@ -632,25 +624,41 @@
                         many: [],
                     },
 
-                    optionRowCount: 1,
+                    optionRowCount: 0,
+                }
+            },
+
+            created() {
+                if (this.table_booking && this.table_booking.same_slot_all_days) {
+                    if (this.table_booking.slots?.length) {
+                        let [lastId] = this.table_booking.slots.map(({ id }) => id).slice(-1);
+        
+                        this.optionRowCount = lastId?.split('_')[1];
+                    }
+
+                    this.slots['one'] = this.table_booking.slots ?? [];
+                } else {
+                    this.slots['many'] = this.table_booking.slots ?? [];
                 }
             },
 
             methods: {
                 store(params) {
                     if (params.booking_type === 'one') {
-                        if (params.id) {
-                            let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+                        if (! params.id) {
+                            this.optionRowCount++;
+                            params.id = 'option_' + this.optionRowCount;
+                        }
 
-                            this.slots.one[foundIndex].params = { 
+                        let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+
+                        if (foundIndex !== -1) {
+                            this.slots.one[foundIndex] = { 
                                 ...this.slots.one[foundIndex].params, 
                                 ...params
                             };
                         } else {
-                            this.slots.one.push({ 
-                                id: 'option_' + this.optionRowCount++, 
-                                params
-                            });
+                            this.slots.one.push(params);
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -679,23 +687,11 @@
                     }
                 },
 
-                editModal(values) {
-                    let hasParam = values?.params;
-
-                    if (hasParam) {
-                        if (hasParam.booking_type === 'one') {
-                            hasParam.id = values.id;
-    
-                            this.oneOptionModal(hasParam);
-                        } else {
-                            this.manyOptionsModelForm(values);
-                        }
-                     } else {
-                        if (values.booking_type === 'one') {
-                            this.oneOptionModal(values);
-                        } else {
-                            this.manyOptionsModelForm(values);    
-                        }
+                editModal(type, values) {
+                    if (type === 'one') {    
+                        this.oneOptionModal(values);
+                    } else {
+                        this.manyOptionsModelForm(values);
                     }
                 },
 
@@ -711,8 +707,12 @@
                     this.$refs.addManyOptionsRow.toggle();
                 },
 
-                removeOption(id) {
-                    this.slots = this.slots.filter(option => option.id !== id);
+                removeOption(type , values) {
+                    if (type === 'many') {
+                        // this.slots.many = this.slots.many.filter(option => option.id !== values.id);
+                    } else {
+                        this.slots.one = this.slots.one.filter(option => option.id !== values.id);
+                    }
                 },
             },
         });

@@ -575,8 +575,6 @@
 
                         let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
 
-                        console.log(foundIndex);
-
                         if (foundIndex !== -1) {
                             this.slots.one[foundIndex] = { 
                                 ...this.slots.one[foundIndex].params, 
