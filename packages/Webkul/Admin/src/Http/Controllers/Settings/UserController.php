@@ -248,7 +248,7 @@ class UserController extends Controller
         if (
             $isStatusChangedToInactive
             && (auth()->guard('admin')->user()->id === (int) $id
-                || $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
+                && $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
             )
         ) {
             return $this->cannotChangeRedirectResponse('status');
