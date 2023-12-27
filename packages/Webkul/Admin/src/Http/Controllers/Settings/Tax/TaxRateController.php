@@ -176,14 +176,16 @@ class TaxRateController extends Controller
     /**
      * Import function for the upload.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
     public function import()
     {
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
-            session()->flash('error', trans('admin::app.export.upload-error'));
+        if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+            return new JsonResponse([
+                'message' => trans('admin::app.export.upload-error'),
+            ], 500);
         } else {
             try {
                 $excelData = (new DataGridImport)->toArray(request()->file('file'));
@@ -195,8 +197,8 @@ class TaxRateController extends Controller
                         }
 
                         if (
-                            ! is_null($uploadData['zip_from'])
-                            && ! is_null($uploadData['zip_to'])
+                            !is_null($uploadData['zip_from'])
+                            && !is_null($uploadData['zip_to'])
                         ) {
                             $uploadData['is_zip'] = 1;
                         }
@@ -230,9 +232,9 @@ class TaxRateController extends Controller
                         $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
                     }
 
-                    $finalMsg = implode(' ', $message);
-
-                    session()->flash('error', $finalMsg);
+                    return new JsonResponse([
+                        'message' => implode(' ', $message),
+                    ]);
                 } else {
                     $errorMsg = [];
 
@@ -291,8 +293,8 @@ class TaxRateController extends Controller
                                 }
 
                                 if (
-                                    ! is_null($uploadData['zip_from'])
-                                    && ! is_null($uploadData['zip_to'])
+                                    !is_null($uploadData['zip_from'])
+                                    && !is_null($uploadData['zip_to'])
                                 ) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = null;
@@ -311,8 +313,9 @@ class TaxRateController extends Controller
                                 }
                             }
                         }
-
-                        session()->flash('success', trans('admin::app.export.upload-success', ['name' => 'Tax Rate']));
+                        return new JsonResponse([
+                            'message' => trans('admin::app.export.upload-success', ['name' => 'Tax Rate']),
+                        ]);
                     }
                 }
             } catch (\Exception $e) {
@@ -320,10 +323,10 @@ class TaxRateController extends Controller
 
                 $failure = new Failure(1, 'rows', [0 => trans('admin::app.export.enough-row-error')]);
 
-                session()->flash('error', $failure->errors()[0]);
+                return new JsonResponse([
+                    'message' => $failure->errors()[0],
+                ]);
             }
         }
-
-        return redirect()->route('admin.settings.taxes.rates.index');
     }
 }

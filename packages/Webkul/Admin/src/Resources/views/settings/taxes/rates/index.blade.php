@@ -10,34 +10,26 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-                <!-- Tax rate import -->
-                <v-tax-rates-import>
-                <button
-                    class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
-                >
+            <!-- Tax rate import -->
+            <v-tax-rates-import>
+                <button class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
                     @lang('import')
                 </button>
             </v-tax-rates-import>
 
             <!-- Tax Rate Export -->
             <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
-            
+
             <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
-                <a 
-                    href="{{ route('admin.settings.taxes.rates.create') }}"
-                    class="primary-button"
-                >
+                <a href="{{ route('admin.settings.taxes.rates.create') }}" class="primary-button">
                     @lang('admin::app.settings.taxes.rates.index.button-title')
                 </a>
             @endif
         </div>
     </div>
-    
-    <x-admin::datagrid 
-        :src="route('admin.settings.taxes.rates.index')" 
-        ref="datagrid"
-    >
+
+    <x-admin::datagrid :src="route('admin.settings.taxes.rates.index')" ref="datagrid">
     </x-admin::datagrid>
 
     @pushOnce('scripts')
@@ -71,17 +63,20 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <x-admin::form action="">
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.control
-                                            type="file"
-                                            id="file"
-                                            name="file"
-                                            ref="importFile"
-                                        >
-                                        </x-admin::form.control-group.control>
-                                    </x-admin::form.control-group>
-                                </x-admin::form>
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.control
+                                        type="file"
+                                        id="file"
+                                        name="file"
+                                        ref="importFile"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="file"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </x-slot:content>
 
                             <!-- Modal Footer -->
@@ -106,8 +101,10 @@
                 template: '#v-tax-rates-import-template',
 
                 methods: {
-                    create(params, { resetForm, setErrors }) {
-
+                    create(params, {
+                        resetForm,
+                        setErrors
+                    }) {
                         const formData = new FormData();
 
                         const fileInput = this.$refs.importFile;
@@ -118,16 +115,20 @@
 
                         this.$axios.post("{{ route('admin.settings.taxes.rates.import') }}", formData)
                             .then((response) => {
-
                                 this.$refs.importTaxRates.toggle();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.$parent.$refs.datagrid.get();
 
                                 resetForm();
                             })
                             .catch(error => {
-                        });
-1                   },
+                                setErrors({
+                                    file: error.response.data.message
+                                })
+                            });
+                    },
                 },
             });
         </script>
