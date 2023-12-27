@@ -174,9 +174,11 @@
                     multiple
                 >
                     @if (isset($field['repository']))
-                        <option value="{{ $key }}" {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            @lang($value[$key])
-                        </option>
+                        @foreach ($value as $key => $option)
+                            <option value="{{ $key }}" {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}>
+                                {{ trans($value[$key]) }}
+                            </option>
+                        @endforeach
                     @else
                         @foreach ($field['options'] as $option)
                             @php
