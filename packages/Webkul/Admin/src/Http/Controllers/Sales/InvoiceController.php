@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\DataGrids\Sales\InvoicesTransactionsDatagrid;
 use Webkul\Admin\DataGrids\Sales\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Traits\PDFHandler;
@@ -39,17 +38,6 @@ class InvoiceController extends Controller
         }
 
         return view('admin::sales.invoices.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function invoiceTransactions($id)
-    {
-        return app(InvoicesTransactionsDatagrid::class)->toJson();
     }
 
     /**
@@ -143,7 +131,7 @@ class InvoiceController extends Controller
 
         session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 
-        return redirect()->back();
+        return redirect()->route('admin.sales.invoices.view', $invoice->id);
     }
 
     /**

@@ -33,10 +33,8 @@ class CartItemFactory extends Factory
 
     /**
      * Adjust product.
-     *
-     * @return array
      */
-    public function adjustProduct()
+    public function adjustProduct(): CartItemFactory
     {
         return $this->state(function (array $attributes) {
             $product = isset($attributes['product_id'])

@@ -58,7 +58,7 @@ return [
     ], [
         'key'   => 'sales.invoices.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sales.invoices.create',
+        'route' => 'admin.sales.invoices.store',
         'sort'  => 2,
     ], [
         'key'   => 'sales.shipments',
@@ -73,7 +73,7 @@ return [
     ], [
         'key'   => 'sales.shipments.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sales.shipments.create',
+        'route' => 'admin.sales.shipments.store',
         'sort'  => 2,
     ], [
         'key'   => 'sales.refunds',
@@ -88,7 +88,7 @@ return [
     ], [
         'key'   => 'sales.refunds.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sales.refunds.create',
+        'route' => 'admin.sales.refunds.store',
         'sort'  => 2,
     ], [
         'key'   => 'sales.transactions',
@@ -123,7 +123,7 @@ return [
     ], [
         'key'   => 'catalog.products.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.catalog.products.create',
+        'route' => 'admin.catalog.products.store',
         'sort'  => 1,
     ], [
         'key'   => 'catalog.products.copy',

@@ -40,10 +40,8 @@ class CartFactory extends Factory
 
     /**
      * Adjust customer.
-     *
-     * @return array
      */
-    public function adjustCustomer()
+    public function adjustCustomer(): CartFactory
     {
         return $this->state(function (array $attributes) {
             $customer = isset($attributes['customer_id'])

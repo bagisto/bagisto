@@ -64,7 +64,7 @@ class AttributeController extends Controller
 
         $requestData = request()->all();
 
-        if (! $requestData['default_value']) {
+        if (! isset($requestData['default_value'])) {
             $requestData['default_value'] = null;
         }
 
