@@ -39,7 +39,7 @@ class Product
         if (! $currentURLKey) {
             return;
         }
-        
+
         $product = $this->productRepository->find($id);
 
         if ($currentURLKey === $product->url_key) {
