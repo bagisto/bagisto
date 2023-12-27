@@ -182,7 +182,7 @@ class TaxRateController extends Controller
     {
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             return new JsonResponse([
                 'message' => trans('admin::app.export.upload-error'),
             ], 500);
@@ -197,8 +197,8 @@ class TaxRateController extends Controller
                         }
 
                         if (
-                            !is_null($uploadData['zip_from'])
-                            && !is_null($uploadData['zip_to'])
+                            ! is_null($uploadData['zip_from'])
+                            && ! is_null($uploadData['zip_to'])
                         ) {
                             $uploadData['is_zip'] = 1;
                         }
@@ -293,8 +293,8 @@ class TaxRateController extends Controller
                                 }
 
                                 if (
-                                    !is_null($uploadData['zip_from'])
-                                    && !is_null($uploadData['zip_to'])
+                                    ! is_null($uploadData['zip_from'])
+                                    && ! is_null($uploadData['zip_to'])
                                 ) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = null;
@@ -313,6 +313,7 @@ class TaxRateController extends Controller
                                 }
                             }
                         }
+
                         return new JsonResponse([
                             'message' => trans('admin::app.export.upload-success', ['name' => 'Tax Rate']),
                         ]);
