@@ -408,6 +408,8 @@
 
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
+                                {!! view_render_event('bagisto.shop.products.view.compare_action.before', ['product' => $product]) !!}
+
                                 <!-- Share Buttons -->
                                 <div class="flex gap-9 mt-10 max-sm:flex-wrap max-sm:justify-center">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
@@ -430,6 +432,8 @@
 
                                     {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.products.view.compare_action.after', ['product' => $product]) !!}
                             </div>
                         </div>
                     </div>
