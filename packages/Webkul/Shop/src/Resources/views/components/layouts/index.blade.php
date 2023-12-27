@@ -18,12 +18,6 @@
 
         @stack('meta')
 
-        <link
-            rel="icon"
-            sizes="16x16"
-            href="{{ core()->getCurrentChannel()->favicon_url ?? bagisto_asset('images/favicon.ico') }}"
-        />
-
         <link rel="preload" href="{{ bagisto_asset('fonts/velicon.woff') }}" as="font" type="font/woff">
 
         @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
