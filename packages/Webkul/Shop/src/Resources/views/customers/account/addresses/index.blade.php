@@ -46,7 +46,7 @@
 
                             @if ($address->default_address)
                                 <div 
-                                    class="label-pending"
+                                    class="label-pending block w-max px-1.5 py-1 "
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
