@@ -161,16 +161,16 @@
             @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
             <v-field
-                name="{{ $name }}"
-                name="{{ $name }}"
+                name="{{ $name }}[]"
+                id="{{ $name }}"
                 rules="{{ $validations }}"
                 label="{{ trans($field['title']) }}"
                 multiple
             >
                 <select
-                    name="{{ $name }}"
+                    name="{{ $name }}[]"
                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
-                    :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    :class="[errors['{{ $name }}[]'] ? 'border border-red-600 hover:border-red-600' : '']"
                     multiple
                 >
                     @if (isset($field['repository']))
