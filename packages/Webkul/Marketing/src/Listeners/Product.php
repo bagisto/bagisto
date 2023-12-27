@@ -38,8 +38,8 @@ class Product
 
         $currentURLKey = request()->input('url_key');
 
-        if(! $currentURLKey) {
-            return; 
+        if (! $currentURLKey) {
+            return;
         }
 
         if ($currentURLKey === $product->url_key) {
