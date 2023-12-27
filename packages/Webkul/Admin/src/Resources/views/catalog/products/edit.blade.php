@@ -33,6 +33,7 @@
                     @if (
                         $product->status
                         && $product->visible_individually
+                        && $product->url_key
                     )
                         <a
                             href="{{ route('shop.product_or_category.index', $product->url_key) }}"
