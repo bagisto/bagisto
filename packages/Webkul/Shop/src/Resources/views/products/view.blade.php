@@ -408,7 +408,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
 
-                                {!! view_render_event('bagisto.shop.products.view.actions.before', ['product' => $product]) !!}
+                                {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
                                 <div class="flex gap-9 mt-10 max-sm:flex-wrap max-sm:justify-center">
@@ -433,7 +433,7 @@
                                     {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}
                                 </div>
 
-                                {!! view_render_event('bagisto.shop.products.view.actions.after', ['product' => $product]) !!}
+                                {!! view_render_event('bagisto.shop.products.view.additional_actions.after', ['product' => $product]) !!}
                             </div>
                         </div>
                     </div>

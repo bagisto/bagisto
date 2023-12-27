@@ -13,7 +13,7 @@
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px] rounded">
 
-                {!! view_render_event('bagisto.shop.components.products.card.product_image.before') !!}
+                {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <a
                     :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`"
@@ -30,7 +30,7 @@
                     ></x-shop::media.images.lazy>
                 </a>
 
-                {!! view_render_event('bagisto.shop.components.products.card.product_image.after') !!}
+                {!! view_render_event('bagisto.shop.components.products.card.image.after') !!}
                 
                 <div class="action-items bg-black">
                     <p
@@ -130,7 +130,7 @@
         >
             <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
 
-                {!! view_render_event('bagisto.shop.components.products.card.product_image.before') !!}
+                {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
                     <x-shop::media.images.lazy
@@ -144,7 +144,7 @@
                     ></x-shop::media.images.lazy>
                 </a>
 
-                {!! view_render_event('bagisto.shop.components.products.card.product_image.after') !!}
+                {!! view_render_event('bagisto.shop.components.products.card.image.after') !!}
             
                 <div class="action-items bg-black"> 
                     <p
