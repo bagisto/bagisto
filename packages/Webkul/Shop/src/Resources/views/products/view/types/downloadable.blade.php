@@ -3,13 +3,13 @@
 
     @if ($product->downloadable_samples->count())
         <div class="sample-list mb-6 mt-8">
-            <label class="mb-4 font-medium">
+            <label class="flex mb-3 font-medium">
                 @lang('shop::app.products.view.type.downloadable.samples')
             </label>
 
             <ul>
                 @foreach ($product->downloadable_samples as $sample)
-                    <li class="mb-6">
+                    <li class="mb-2">
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" 
                             class="text-[#0A49A7]"
@@ -54,20 +54,20 @@
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
-
-                        @if (
-                            $link->sample_file
-                            || $link->sample_url
-                        )
-                            <a 
-                                href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
-                                target="_blank"
-                                class="text-[#0A49A7] ml-2"
-                            >
-                                @lang('shop::app.products.view.type.downloadable.sample')
-                            </a>
-                        @endif
                     </div>
+
+                    @if (
+                        $link->sample_file
+                        || $link->sample_url
+                    )
+                        <a 
+                            href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
+                            target="_blank"
+                            class="text-[#0A49A7]"
+                        >
+                            @lang('shop::app.products.view.type.downloadable.sample')
+                        </a>
+                    @endif
                 </div>
             @endforeach
 
@@ -76,7 +76,7 @@
                 v-slot="{ message }"
             >
                 <p
-                    class="mt-1 text-red-500 text-xs italic"
+                    class="text-red-500 text-xs italic"
                     v-text="message"
                 >
                 </p>
