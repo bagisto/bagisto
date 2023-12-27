@@ -168,17 +168,17 @@ return [
                             ],
 
                             'slots'                    => [
-                                'add-desc' => 'Add booking slot on the go.',
-                                'add'      => 'Add Slots',
-                                'title'    => 'Slots',
+                                'description' => 'There is no slots available.',
+                                'add'         => 'Add Slots',
+                                'title'       => 'Slots',
                             ],
 
                             'status'                   => 'Status',
 
                             'tickets'                  => [
-                                'add-desc' => 'Add booking Tickets on the go.',
-                                'add'      => 'Add Tickets',
-                                'title'    => 'Tickets',
+                                'description' => 'There is no tickets available.',
+                                'add'         => 'Add Tickets',
+                                'title'       => 'Tickets',
                             ],
 
                             'type'                     => [

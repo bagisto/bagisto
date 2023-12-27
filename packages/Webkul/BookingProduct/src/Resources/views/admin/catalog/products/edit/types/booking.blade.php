@@ -196,7 +196,7 @@
                     class="{{ $bookingType }}-booking-section"
                     v-if="booking.type === '{{ $bookingType }}'"
                 >
-                    @include('booking::admin.catalog.products.edit.booking.' . $bookingType)
+                    @include('booking::admin.catalog.products.edit.booking.' . $bookingType, ['bookingProduct' => $bookingProduct])
                 </div>
             @endforeach
         </script>

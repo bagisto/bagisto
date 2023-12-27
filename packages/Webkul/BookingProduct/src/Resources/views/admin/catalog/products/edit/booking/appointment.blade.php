@@ -64,7 +64,6 @@
                 rules="required"
                 v-model="appointment_booking.same_slot_all_days"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
-                @change="slots.one=[];slots.many=[];"
             >
                 <option value="1">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
@@ -82,162 +81,12 @@
         </x-admin::form.control-group>
 
         <!-- Slots Component -->
-        <div class="flex gap-5 justify-between p-4">
-            <div class="flex flex-col gap-2">
-                <p class="text-base text-gray-800 dark:text-white font-semibold">
-                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
-                </p>
-            </div>
-
-            <!-- Add Ticket Button -->
-            <div
-                class="flex gap-x-1 items-center"
-                v-if="! slots.many[0]?.length"
-            >
-                <div
-                    class="secondary-button"
-                    @click="$refs.addOptionsRow.toggle()"
-                >
-                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                </div>
-            </div>
-        </div>
-
-        <!-- Table Information -->
-        <div class="mt-4 overflow-x-auto">
-            <template v-if="slots.one?.length || slots.many[0]?.length">
-                <x-admin::table>
-                    <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
-                        <x-admin::table.thead.tr>
-                            <!-- From -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.from')
-                            </x-admin::table.th>
-
-                            <!-- To -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.to')
-                            </x-admin::table.th>
-
-                            <!-- Action tables heading -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.action')
-                            </x-admin::table.th>
-                        </x-admin::table.thead.tr>
-                    </x-admin::table.thead>
-
-                    <x-admin::table.tbody.tr
-                        v-if="slots.one?.length"
-                        v-for="(slot, index) in slots.one"
-                    >
-                        <!-- Hidden Field ID -->
-                        <input
-                            type="hidden"
-                            :name="'booking[slots][' + index + '][id]'"
-                            :value="slot.id"
-                        />
-
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.from"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][from]'"
-                                :value="slot.from"
-                            />
-                        </x-admin::table.td>
-
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.to"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][to]'"
-                                :value="slot.to"
-                            />
-                        </x-admin::table.td>
-
-                        <!-- Actions button -->
-                        <x-admin::table.td class="!px-0">
-                            <span
-                                class="icon-edit p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="editModal('one', slot)"
-                            >
-                            </span>
-
-                            <span
-                                class="icon-delete p-1.5 rounded-1.5 text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="removeOption('one', slot)"
-                            >
-                            </span>
-                        </x-admin::table.td>
-                    </x-admin::table.tbody.tr>
-
-                    <x-admin::table.tbody.tr
-                        v-if="slots.many?.length"
-                        v-for="(slot, index) in slots.many[0]"
-                    >
-                        <!-- Hidden Field Id -->
-                        <input
-                            type="hidden"
-                            :name="'booking[slots][' + index + '][0][id]'"
-                            :value="slot[0].id"
-                        />
-
-                        <!-- From -->
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot[0].from ? slot[0].from : '00:00'"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][0][from]'"
-                                :value="slot[0].from ? slot[0].from : '00:00'"
-                            />
-                        </x-admin::table.td>
-
-                        <!-- To -->
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot[0].to ? slot[0].to : '00:00'"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][0][to]'"
-                                :value="slot[0].to ? slot[0].to : '00:00'"
-                            />
-                        </x-admin::table.td>
-
-                        <!-- Actions button -->
-                        <x-admin::table.td class="!px-0">
-                            <span
-                                class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="editModal('many', slot)"
-                            >
-                            </span>
-                        </x-admin::table.td>
-                    </x-admin::table.tbody.tr>
-                </x-admin::table>
-            </template>
-
-            <template v-else>
-                <v-empty-info type="appointment"></v-empty-info>
-            </template>
-        </div>
+        <v-slots
+            booking-type="appointment_slot"
+            :same-slot-all-days="appointment_booking.same_slot_all_days"
+            @store="store"
+        >
+        </v-slots>
 
         @php
             $days =  [
@@ -252,7 +101,7 @@
         @endphp
 
         <!-- Add Options Model Form -->
-        <x-admin::form
+        {{-- <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
             ref="modelForm"
@@ -414,10 +263,10 @@
                     </x-slot:footer>
                 </x-admin::modal>
             </form>
-        </x-admin::form>
+        </x-admin::form> --}}
 
         <!-- Model For Edit Many type same slots for all booking -->
-        <x-admin::form
+        {{-- <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
             ref="ManyOptionsModelForm"
@@ -495,7 +344,7 @@
                     </x-slot:footer>
                 </x-admin::modal>
             </form>
-        </x-admin::form>
+        </x-admin::form> --}}
     </script>
 
     <script type="module">
@@ -506,7 +355,7 @@
 
             data() {
                 return {
-                    appointment_booking: @json($bookingProduct && $bookingProduct?->appointment_slot) ? @json($bookingProduct?->appointment_slot) : {
+                    appointment_booking: this.bookingProduct && this.bookingProduct.appointment_slot ? this.bookingProduct.appointment_slot : {
                         duration: 45,
 
                         break_time: 15,
@@ -523,93 +372,119 @@
 
                         many: [],
                     },
+
+                    formData: [],
                 }
             },
 
             created() {
-                if (this.appointment_booking && this.appointment_booking.same_slot_all_days) {
-                    if (this.appointment_booking.slots?.length) {
-                        let [lastId] = this.appointment_booking.slots.map(({ id }) => id).slice(-1);
+            //     if (this.appointment_booking && this.appointment_booking.same_slot_all_days) {
+            //         if (this.appointment_booking.slots?.length) {
+            //             let [lastId] = this.appointment_booking.slots.map(({ id }) => id).slice(-1);
         
-                        this.optionRowCount = lastId?.split('_')[1];
-                    }
+            //             this.optionRowCount = lastId?.split('_')[1];
+            //         }
 
-                    this.slots['one'] = this.appointment_booking.slots ?? [];
-                } else {
-                    if (this.appointment_booking.slots) {
-                        this.slots.many.push(this.appointment_booking.slots);
-                    }
-                }
+            //         this.slots['one'] = this.appointment_booking.slots ?? [];
+            //     } else {
+            //         if (this.appointment_booking.slots) {
+            //             let data = [];
+
+            //             this.appointment_booking.slots.map(arr => {
+            //                 data.push(arr[0])
+            //             });
+
+            //             this.slots.many.push(data)
+            //         }
+            //     }
             },
 
             methods: {
-                storeSlots(params) {
-                    if (params.booking_type === 'one') {
-                        if (! params.id) {
-                            this.optionRowCount++;
-                            params.id = 'option_' + this.optionRowCount;
-                        }
+                store(params) {
+                    const preparedData = {};
 
-                        let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+                    for (const iterator of params) {
+                        const key = iterator[0];
+                        const value = iterator[1];
 
-                        if (foundIndex !== -1) {
-                            this.slots.one[foundIndex] = { 
-                                ...this.slots.one[foundIndex].params, 
-                                ...params
-                            };
-                        } else {
-                            this.slots.one.push(params);
-                        }
-
-                        this.$refs.addOptionsRow.toggle();
-                    } else {
-                        if (params && params?.id) {
-                            let item = this.slots.many[0].flatMap(i => Object.values(i)).find(i => i.id === params.id);
-
-                            if (item) {
-                                for (const key in params) {
-                                    item[key] = params[key];
-                                }
-
-                                this.slots.many = [...this.slots.many.filter(i => i !== item)];
-                            }
-
-                            this.$refs.addManyOptionsRow.toggle();
-                        } else {
-                            for (const key in params) {
-                                params[key][0].id = 'option_' + this.optionRowCount++;
-                            }
-
-                            this.slots.many.push(params);
-
-                            this.$refs.addOptionsRow.toggle();
-                        }
+                        this.formData[key] = value;
                     }
-                },
+
+                    console.log(this);
+                }
+                // storeSlots(params) {
+                //     if (params.booking_type === 'one') {
+                //         if (! params.id) {
+                //             this.optionRowCount++;
+                //             params.id = 'option_' + this.optionRowCount;
+                //         }
+
+                //         let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+
+                //         if (foundIndex !== -1) {
+                //             this.slots.one[foundIndex] = { 
+                //                 ...this.slots.one[foundIndex].params, 
+                //                 ...params
+                //             };
+                //         } else {
+                //             this.slots.one.push(params);
+                //         }
+
+                //         this.$refs.addOptionsRow.toggle();
+                //     } else {
+                //         if (params && params?.id) {
+                //             let item = this.slots.many[0].flatMap(i => Object.values(i)).find(i => i.id === params.id);
+
+                //             if (item) {
+                //                 for (const key in params) {
+                //                     item[key] = params[key];
+                //                 }
+
+                //                 this.slots.many = [...this.slots.many.filter(i => i !== item)];
+                //             }
+
+                //             this.$refs.addManyOptionsRow.toggle();
+                //         } else {
+                //             // let data = [];
+
+                //             // params.map(arr => {
+                //             //     data.push(arr[0])
+                //             // });
+
+                //             for (const key in params) {
+                //                 params[key][0].id = 'option_' + this.optionRowCount++;
+                //             }
+
+                //             this.slots.many.push(params);
+
+                //             this.$refs.addOptionsRow.toggle();
+                //         }
+                //     }
+                // },
     
-                editModal(type, values) {
-                    if (type === 'one') {    
-                        this.oneOptionModal(values[0]);
-                    } else {
-                        this.manyOptionsModelForm(values[0]);
-                    }
-                },
+                // editModal(type, values) {
+                //     if (type === 'one') {    
+                //         this.oneOptionModal(values);
+                //     } else {
+                //         this.manyOptionsModelForm(values);
+                //     }
+                // },
 
-                oneOptionModal(params) {
-                    this.$refs.modelForm.setValues(params);
+                // oneOptionModal(params) {
+                //     this.$refs.modelForm.setValues(params);
 
-                    this.$refs.addOptionsRow.toggle();
-                },
+                //     this.$refs.addOptionsRow.toggle();
+                // },
 
-                manyOptionsModelForm(params) {
-                    this.$refs.ManyOptionsModelForm.setValues(params);
+                // manyOptionsModelForm(params) {
+                //     this.$refs.ManyOptionsModelForm.setValues(params);
 
-                    this.$refs.addManyOptionsRow.toggle();
-                },
+                //     this.$refs.addManyOptionsRow.toggle();
+                // },
 
-                removeOption(type , values) {
-                    this.slots.one = this.slots.one.filter(option => option.id !== values.id);
-                },
+                // removeOption(type , values) {
+                //     this.slots.one = this.slots.one.filter(option => option.id !== values.id);
+                // },
             },
         });
     </script>

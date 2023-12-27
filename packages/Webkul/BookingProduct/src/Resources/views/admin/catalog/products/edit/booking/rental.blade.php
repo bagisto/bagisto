@@ -613,8 +613,7 @@
 
                             let result = Object.values(params).flat();
 
-                            
-                            this.slots.many[0].push(result);
+                            this.slots.many.push(result);
 
                             this.$refs.addOptionsRow.toggle();
                         }

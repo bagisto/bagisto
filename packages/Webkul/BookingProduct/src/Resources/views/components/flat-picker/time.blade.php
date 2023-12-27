@@ -15,25 +15,27 @@
         app.component('v-time-picker', {
             template: '#v-time-picker-template',
 
-            data: function() {
+            data () {
                 return {
                     timepicker: null
                 };
             },
 
-            mounted: function() {
+            mounted () {
                 let options = this.setOptions();
 
                 this.activate(options);
             },
 
             methods: {
-                setOptions: function() {
+                setOptions () {
                     let self = this;
 
                     return {
-                        dateFormat: "H:i",
+                        dateFormat: 'H:i',
+                        altFormat: 'H:i',
                         noCalendar: true,
+                        altInput: true,
                         enableTime: true,
                         time_24hr: true,
 
@@ -43,7 +45,7 @@
                     };
                 },
 
-                activate: function(options) {
+                activate (options) {
                     let element = this.$el.getElementsByTagName("input")[0];
 
                     this.timepicker = new Flatpickr(element, options);

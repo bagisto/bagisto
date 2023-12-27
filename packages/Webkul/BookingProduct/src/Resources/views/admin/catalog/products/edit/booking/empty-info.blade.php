@@ -1,15 +1,12 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-empty-info-template">
-        <div class="grid gap-3 justify-items-center">
-            <!-- Attribute Option Image -->
+        <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 ">
             <img
-                class="w-[120px] h-[120px] rounded"
                 src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
-            />
-
-            <!-- Add Slots Information -->
-            <div class="flex flex-col gap-1.5 items-center">
+                class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
+            >
+            
+            <div class="flex flex-col gap-2 items-center">
                 <p
                     class="text-base text-gray-400 font-semibold"
                     v-if="type == 'event'"
@@ -22,6 +19,10 @@
                     v-else
                 >
                     @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
+                </p>
+
+                <p class="text-gray-400">
+                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.description')
                 </p>
             </div>
         </div>
