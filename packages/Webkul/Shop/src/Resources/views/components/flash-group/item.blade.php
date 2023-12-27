@@ -12,7 +12,7 @@
             :style="typeStyles[flash.type]['container']"
         >
             <p
-                class="text-sm flex break-all"
+                class="flex text-sm break-all"
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
