@@ -11,6 +11,10 @@
 }
 
 @layer components {
+    ::selection {
+        background-color: rgba(0, 68, 242, .2);
+    }
+
     body {
         @apply bg-gray-50;
     }

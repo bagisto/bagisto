@@ -11,6 +11,10 @@
 }
 
 @layer components {
+    ::selection {
+        background-color: rgba(6, 12, 59, .2);
+    }
+
     input {
         @apply outline-none;
     }
