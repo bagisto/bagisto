@@ -42,11 +42,11 @@
                             @endif
                         </p>
 
-                        <div class="flex gap-6 items-center">
+                        <div class="flex gap-4 items-center">
 
                             @if ($address->default_address)
                                 <div 
-                                    class="block w-max m-0 ml-0 mx-auto p-1.5 rounded-xl bg-navyBlue text-xs text-white font-medium text-center"
+                                    class="label-pending"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
