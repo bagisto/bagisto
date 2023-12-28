@@ -2413,6 +2413,12 @@ return [
                     'tax-rate'     => 'Vergi Oranı',
                     'title'        => 'Vergi Oranları',
 
+                    'import' => [
+                        'import-btn' => 'İçe Aktar',
+                        'title'      => 'Yükle',
+                        'validation' => 'İzin Verilen Tür: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Tanımlayıcı',

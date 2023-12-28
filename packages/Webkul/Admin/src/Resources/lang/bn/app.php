@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'কর হার',
                     'title'        => 'কর হার',
 
+                    'import' => [
+                        'import-btn' => 'আমদানি',
+                        'title'      => 'আপলোড',
+                        'validation' => 'অনুমোদিত ধরণ: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'আইডি',
                         'identifier' => 'সনাক্তক',

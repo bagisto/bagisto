@@ -10,17 +10,17 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-            <!-- Tax rate import -->
+            <!-- Tax Rate Emport -->
             <v-tax-rates-import>
                 <button class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
-                    @lang('import')
+                    @lang('admin::app.settings.taxes.rates.index.import.import-btn')
                 </button>
             </v-tax-rates-import>
 
             <!-- Tax Rate Export -->
             <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
 
-            <!-- Create New Pages Button -->
+            <!-- Create New Tax Rate Button -->
             @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
                 <a href="{{ route('admin.settings.taxes.rates.create') }}" class="primary-button">
                     @lang('admin::app.settings.taxes.rates.index.button-title')
@@ -29,19 +29,22 @@
         </div>
     </div>
 
-    <x-admin::datagrid :src="route('admin.settings.taxes.rates.index')" ref="datagrid">
+    <x-admin::datagrid 
+        :src="route('admin.settings.taxes.rates.index')" 
+        ref="datagrid"
+    >
     </x-admin::datagrid>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-tax-rates-import-template">
             <div>
-                <!-- Import Button -->
+                <!-- Tax Rate Import Button -->
                 <button
                     href="{{ route('admin.settings.taxes.rates.import') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                     @click="$refs.importTaxRates.toggle()"
                 >
-                    @lang('Import')
+                    @lang('admin::app.settings.taxes.rates.index.import.import-btn')
                 </button>
 
                 <!-- Modal Form -->
@@ -51,13 +54,12 @@
                 >
                     <form
                         @submit="handleSubmit($event, create)"
-                        ref="importTaxForm"
                     >
                         <x-admin::modal ref="importTaxRates">
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
-                                    @lang('admin::app.export.download')
+                                    @lang('admin::app.settings.taxes.rates.index.import.title')
                                 </p>
                             </x-slot:header>
 
@@ -77,6 +79,10 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+
+                                <p class="text-xs text-gray-600 dark:text-gray-300">  
+                                    @lang('admin::app.settings.taxes.rates.index.import.validation') 
+                                </p>
                             </x-slot:content>
 
                             <!-- Modal Footer -->
@@ -86,7 +92,7 @@
                                         type="submit"
                                         class="primary-button"
                                     >
-                                        @lang('admin::app.settings.taxes.categories.index.create.save-btn')
+                                        @lang('admin::app.settings.taxes.rates.index.import.import-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>

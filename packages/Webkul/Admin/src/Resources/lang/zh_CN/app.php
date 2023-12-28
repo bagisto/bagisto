@@ -2411,6 +2411,12 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
+                    'import' => [
+                        'import-btn' => '导入',
+                        'title'      => '上传',
+                        'validation' => '允许的类型：xls、xlsx、csv。',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => '标识符',

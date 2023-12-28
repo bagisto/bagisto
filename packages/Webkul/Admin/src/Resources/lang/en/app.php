@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Tax Rate',
                     'title'        => 'Tax Rates',
 
+                    'import' => [
+                        'import-btn' => 'Import',
+                        'title'      => 'Upload',
+                        'validation' => 'Allowed Type : xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'country'    => 'Country',
                         'delete'     => 'Delete',

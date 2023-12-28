@@ -176,7 +176,7 @@ class TaxRateController extends Controller
     /**
      * Import function for the upload.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function import()
     {
@@ -192,14 +192,9 @@ class TaxRateController extends Controller
 
                 foreach ($excelData as $data) {
                     foreach ($data as $column => $uploadData) {
-                        if (is_null($uploadData['state'])) {
-                            $uploadData['state'] = '';
-                        }
+                        $uploadData['state'] = $uploadData['state'] ?? '';
 
-                        if (
-                            ! is_null($uploadData['zip_from'])
-                            && ! is_null($uploadData['zip_to'])
-                        ) {
+                        if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
                             $uploadData['is_zip'] = 1;
                         }
 
@@ -288,26 +283,14 @@ class TaxRateController extends Controller
 
                         foreach ($excelData as $data) {
                             foreach ($data as $column => $uploadData) {
-                                if (is_null($uploadData['state'])) {
-                                    $uploadData['state'] = '';
+                                $uploadData['state'] = $uploadData['state'] ?? '';
+
+                                if (! is_null($uploadData['zip_from']) && ! is_null($uploadData['zip_to'])) {
+                                    $uploadData += ['is_zip' => 1, 'zip_code' => null];
                                 }
 
-                                if (
-                                    ! is_null($uploadData['zip_from'])
-                                    && ! is_null($uploadData['zip_to'])
-                                ) {
-                                    $uploadData['is_zip'] = 1;
-                                    $uploadData['zip_code'] = null;
-                                }
-
-                                if (isset($rateIdentifier)) {
-                                    $id = array_search($uploadData['identifier'], $rateIdentifier);
-
-                                    if ($id) {
-                                        $this->taxRateRepository->update($uploadData, $id);
-                                    } else {
-                                        $this->taxRateRepository->create($uploadData);
-                                    }
+                                if (isset($rateIdentifier) && ($id = array_search($uploadData['identifier'], $rateIdentifier)) !== false) {
+                                    $this->taxRateRepository->update($uploadData, $id);
                                 } else {
                                     $this->taxRateRepository->create($uploadData);
                                 }

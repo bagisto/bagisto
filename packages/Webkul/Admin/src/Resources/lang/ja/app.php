@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
+                    'import' => [
+                        'import-btn' => 'インポート',
+                        'title'      => 'アップロード',
+                        'validation' => '許可されたタイプ: xls、xlsx、csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => '識別子',

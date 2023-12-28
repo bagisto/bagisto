@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'سعر الضريبة',
                     'title'        => 'أسعار الضرائب',
 
+                    'import' => [
+                        'import-btn' => 'استيراد',
+                        'title'      => 'تحميل',
+                        'validation' => 'الأنواع المسموح بها: xls، xlsx، csv.',
+                    ],
+
                     'datagrid' => [
                         'country'    => 'البلد',
                         'delete'     => 'حذف',

@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Steuersatz',
                     'title'        => 'Steuersätze',
 
+                    'import' => [
+                        'import-btn' => 'Importieren',
+                        'title'      => 'Hochladen',
+                        'validation' => 'Zulässiger Typ: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Bezeichner',

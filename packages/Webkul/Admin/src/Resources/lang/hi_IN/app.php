@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'कर दर',
                     'title'        => 'कर दरें',
 
+                    'import' => [
+                        'import-btn' => 'आयात',
+                        'title'      => 'अपलोड',
+                        'validation' => 'अनुमति योग्य प्रकार: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'आईडी',
                         'identifier' => 'पहचानकर्ता',

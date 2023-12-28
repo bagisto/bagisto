@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Belastingtarief',
                     'title'        => 'Belastingtarieven',
 
+                    'import' => [
+                        'import-btn' => 'Importeren',
+                        'title'      => 'Uploaden',
+                        'validation' => 'Toegestane type: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificatie',

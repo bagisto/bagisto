@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'බදා අනුපාත',
                     'title'        => 'බදා අනුපාත',
 
+                    'import' => [
+                        'import-btn' => 'ආයුබෝවන්',
+                        'title'      => 'උඩුගත',
+                        'validation' => 'ඉඩ දීමේ වර්ගය: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'අංකය',
                         'identifier' => 'හඳුනාගත්කරණය',

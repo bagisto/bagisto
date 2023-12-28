@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Aliquota Fiscale',
                     'title'        => 'Aliquote Fiscali',
 
+                    'import' => [
+                        'import-btn' => 'Importa',
+                        'title'      => 'Carica',
+                        'validation' => 'Tipo consentito: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificatore',

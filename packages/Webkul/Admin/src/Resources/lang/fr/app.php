@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Taux de taxe',
                     'title'        => 'Taux de taxe',
 
+                    'import' => [
+                        'import-btn' => 'Importer',
+                        'title'      => 'Télécharger',
+                        'validation' => 'Types autorisés : xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identifiant',

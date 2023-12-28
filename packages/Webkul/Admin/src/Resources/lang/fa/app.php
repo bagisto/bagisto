@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'نرخ مالیات',
                     'title'        => 'نرخ‌های مالیاتی',
 
+                    'import' => [
+                        'import-btn' => 'وارد کردن',
+                        'title'      => 'آپلود',
+                        'validation' => 'نوع مجاز: xls، xlsx، csv.',
+                    ],
+
                     'datagrid' => [
                         'country'    => 'کشور',
                         'delete'     => 'حذف',

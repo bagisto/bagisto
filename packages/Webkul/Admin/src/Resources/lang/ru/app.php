@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Налоговая ставка',
                     'title'        => 'Налоговые ставки',
 
+                    'import' => [
+                        'import-btn' => 'Импорт',
+                        'title'      => 'Загрузка',
+                        'validation' => 'Допустимые типы: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Идентификатор',

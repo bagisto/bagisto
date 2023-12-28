@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Податкова ставка',
                     'title'        => 'Податкові ставки',
 
+                    'import' => [
+                        'import-btn' => 'Імпорт',
+                        'title'      => 'Завантажити',
+                        'validation' => 'Дозволений тип: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Ідентифікатор',

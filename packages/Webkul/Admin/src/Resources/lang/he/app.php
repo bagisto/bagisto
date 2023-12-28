@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'שער מס',
                     'title'        => 'שערי מס',
 
+                    'import' => [
+                        'import-btn' => 'יבוא',
+                        'title'      => 'העלאה',
+                        'validation' => 'סוגים מותרים: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'מזהה',
                         'identifier' => 'מזהה',

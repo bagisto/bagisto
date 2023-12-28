@@ -2412,6 +2412,12 @@ return [
                     'tax-rate'     => 'Stawka Podatku',
                     'title'        => 'Stawki Podatków',
 
+                    'import' => [
+                        'import-btn' => 'Importuj',
+                        'title'      => 'Wgraj',
+                        'validation' => 'Dozwolone typy: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identyfikator',
