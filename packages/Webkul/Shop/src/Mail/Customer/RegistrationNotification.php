@@ -11,14 +11,6 @@ class RegistrationNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $senderDetails;
-
-    protected $adminDetails;
-
-    protected $senderEmail;
-
-    protected $senderName;
-
     /**
      * Create a new mailable instance.
      *
@@ -30,11 +22,6 @@ class RegistrationNotification extends Mailable
         public $customer,
         public $notify
     ) {
-        $this->senderDetails = core()->getSenderEmailDetails();
-        $this->adminDetails = core()->getAdminEmailDetails();
-
-        $this->senderEmail = $this->senderDetails['email'];
-        $this->senderName = $this->senderDetails['name'];
     }
 
     /**
@@ -63,8 +50,8 @@ class RegistrationNotification extends Mailable
      */
     protected function sendToAdmin()
     {
-        return $this->from($this->senderEmail, $this->senderName)
-            ->to($this->adminDetails['email'])
+        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
+            ->to(core()->getAdminEmailDetails()['email'])
             ->subject(trans('shop::app.emails.customers.admin.registration.subject'))
             ->view('shop::emails.customers.notify-admin-about-registration');
     }
@@ -76,7 +63,7 @@ class RegistrationNotification extends Mailable
      */
     protected function sendToCustomer()
     {
-        return $this->from($this->senderEmail, $this->senderName)
+        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->to($this->customer->email)
             ->subject(trans('shop::app.emails.customers.registration.subject'))
             ->view('shop::emails.customers.registration');
