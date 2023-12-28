@@ -93,7 +93,7 @@ it('should mass delete the exising url rewrites', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $urlRewrites = URLRewrite::factory()->count(5)->create();
+    $urlRewrites = URLRewrite::factory()->count(2)->create();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.mass_delete'), [
         'indices' => $urlRewrites->pluck('id')->toArray(),

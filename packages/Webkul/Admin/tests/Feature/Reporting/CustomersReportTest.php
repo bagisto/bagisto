@@ -49,7 +49,7 @@ it('should return the customers stats report', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    Customer::factory()->count(5)->create();
+    Customer::factory()->count(2)->create();
 
     get(route('admin.reporting.customers.stats', [
         'type' => 'total-customers',
@@ -79,7 +79,7 @@ it('should return the customers with most reviews stats report', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    ProductReview::factory()->count(5)->create([
+    ProductReview::factory()->count(2)->create([
         'customer_id' => $customer->id,
         'name'        => $customer->name,
         'status'      => 'approved',

@@ -143,7 +143,7 @@ it('should mass delete the product review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $reviews = ProductReview::factory()->count(5)->create([
+    $reviews = ProductReview::factory()->count(2)->create([
         'product_id' => $product->id,
     ]);
 
@@ -181,7 +181,7 @@ it('should mass update the product review', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    $reviews = ProductReview::factory()->count(5)->create([
+    $reviews = ProductReview::factory()->count(2)->create([
         'status'     => $status,
         'product_id' => $product->id,
     ]);

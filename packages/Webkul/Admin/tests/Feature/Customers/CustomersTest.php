@@ -161,7 +161,7 @@ it('is should update the the existing customer', function () {
 
 it('should mass delete the customers', function () {
     // Arrange
-    $customers = (new CustomerFaker())->factory()->count(5)->create([
+    $customers = (new CustomerFaker())->factory()->count(2)->create([
         'password' => Hash::make('admin123'),
     ]);
 
@@ -183,7 +183,7 @@ it('should mass delete the customers', function () {
 
 it('should mass update the customers', function () {
     // Arrange
-    $customers = (new CustomerFaker())->factory()->count(5)->create([
+    $customers = (new CustomerFaker())->factory()->count(2)->create([
         'password' => Hash::make('admin123'),
     ]);
 

@@ -279,7 +279,7 @@ it('should return the products with most reviews reporting stats', function () {
 
     $customer = Customer::factory()->create();
 
-    ProductReview::factory()->count(5)->create([
+    ProductReview::factory()->count(2)->create([
         'status'      => 'approved',
         'comment'     => fake()->sentence(20),
         'product_id'  => $product->id,

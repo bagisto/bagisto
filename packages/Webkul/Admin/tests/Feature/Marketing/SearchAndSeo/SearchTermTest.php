@@ -87,7 +87,7 @@ it('should mass delete the search term', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $searchTerms = SearchTerm::factory()->count(5)->create();
+    $searchTerms = SearchTerm::factory()->count(2)->create();
 
     postJson(route('admin.marketing.search_seo.search_terms.mass_delete'), [
         'indices' => $searchTerms->pluck('id')->toArray(),

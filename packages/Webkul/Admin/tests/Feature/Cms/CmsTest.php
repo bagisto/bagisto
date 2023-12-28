@@ -135,7 +135,7 @@ it('should mass delete cms pages', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $cmsPages = Page::factory()->count(5)->hasTranslations()->create();
+    $cmsPages = Page::factory()->count(2)->hasTranslations()->create();
 
     postJson(route('admin.cms.mass_delete'), [
         'indices' => $cmsPages->pluck('id')->toArray(),

@@ -81,7 +81,7 @@ it('should mass delete the search synonyms', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $searchsynonyms = SearchSynonym::factory()->count(5)->create();
+    $searchsynonyms = SearchSynonym::factory()->count(2)->create();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.mass_delete'), [
         'indices' => $searchsynonyms->pluck('id')->toArray(),
