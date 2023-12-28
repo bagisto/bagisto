@@ -56,6 +56,21 @@ defineRule("address", (value) => {
     return true;
 });
 
+defineRule("decimal", (value, { decimals = '*', separator = '.' } = {}) => {
+    if (value === null || value === undefined || value === '') {
+        return true;
+    }
+
+    if (Number(decimals) === 0) {
+        return /^-?\d*$/.test(value);
+    }
+
+    const regexPart = decimals === '*' ? '+' : `{1,${decimals}}`;
+    const regex = new RegExp(`^[-+]?\\d*(\\${separator}\\d${regexPart})?([eE]{1}[-]?\\d+)?$`);
+
+    return regex.test(value);
+});
+
 configure({
     /**
      * Built-in error messages and custom error messages are available. Multiple
