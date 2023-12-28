@@ -142,12 +142,8 @@
                     @endforeach
                 @else
                     @foreach ($field['options'] as $option)
-                        @php
-                            $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
-                        @endphp
-
                         <option
-                            value="{{ $value }}"
+                            value="{{ isset($option['value']) ?? 0 }}"
                             {{ $value == $selectedOption ? 'selected' : ''}}
                         >
                             @lang($option['title'])
