@@ -9,7 +9,7 @@
 
     <div class="w-full grid gap-1.5">
         <div class="flex items-end w-full pl-2.5 border-l border-b dark:border-gray-800 aspect-[3.23/1]">
-            <div class="w-full flex gap-5 justify-between items-end aspect-[3.23/1] max-lg:gap-4 max-sm:gap-2.5">
+            <div class="flex gap-5 justify-between items-end w-full aspect-[3.23/1] max-lg:gap-4 max-sm:gap-2.5">
                 @foreach (range(1, $count) as $i)
                     <div
                         class="flex shimmer w-full"
