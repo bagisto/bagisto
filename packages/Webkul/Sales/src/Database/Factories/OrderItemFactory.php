@@ -4,7 +4,6 @@ namespace Webkul\Sales\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Product\Models\Product;
-use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 
 class OrderItemFactory extends Factory
@@ -50,7 +49,6 @@ class OrderItemFactory extends Factory
             'qty_canceled' => 0,
             'qty_refunded' => 0,
             'additional'   => [],
-            'order_id'     => Order::factory(),
             'created_at'   => $now,
             'updated_at'   => $now,
             'product_type' => Product::class,
