@@ -339,26 +339,6 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Return the product id attribute.
-     *
-     * @return int
-     */
-    public function getProductIdAttribute()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Return the product attribute.
-     *
-     * @return self
-     */
-    public function getProductAttribute()
-    {
-        return $this;
-    }
-
-    /**
      * The images that belong to the product.
      *
      * @return string
