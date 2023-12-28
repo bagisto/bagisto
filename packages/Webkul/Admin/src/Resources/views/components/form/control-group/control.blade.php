@@ -32,7 +32,7 @@
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <div
-                class="flex items-center w-full border rounded-md overflow-hidden text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                class="flex items-center w-full border rounded-md overflow-hidden text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus-within:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
             >
                 @if (isset($currency))
