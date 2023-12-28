@@ -143,7 +143,7 @@
                 @else
                     @foreach ($field['options'] as $option)
                         <option
-                            value="{{ isset($option['value']) ?? 0 }}"
+                            value="{{ $option['value'] ?? 0 }}"
                             {{ $value == $selectedOption ? 'selected' : ''}}
                         >
                             @lang($option['title'])
@@ -171,17 +171,19 @@
                 >
                     @if (isset($field['repository']))
                         @foreach ($value as $key => $option)
-                            <option value="{{ $key }}" {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}>
+                            <option 
+                                value="{{ $key }}"
+                                {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}
+                            >
                                 {{ trans($value[$key]) }}
                             </option>
                         @endforeach
                     @else
                         @foreach ($field['options'] as $option)
-                            @php
-                                $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
-                            @endphp
-
-                            <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                            <option 
+                                value="{{ $option['value'] ?? 0 }}"
+                                {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}
+                            >
                                 @lang($option['title'])
                             </option>
                          @endforeach
