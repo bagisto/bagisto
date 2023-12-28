@@ -188,7 +188,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
+                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base font-semibold">
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>

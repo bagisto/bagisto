@@ -15,7 +15,7 @@
         enctype="multipart/form-data"
     >
 
-        {!! view_render_event('bagisto.admin.cms.pages.edit.create_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.cms.pages.edit.create_form_controls.before', ['page' => $page]) !!}
 
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             <p class="text-xl text-gray-800 dark:text-white font-bold">
@@ -92,7 +92,7 @@
             <!-- Left sub-component -->
             <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
-                {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before') !!}
+                {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before', ['page' => $page]) !!}
 
                 <!--Content -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
@@ -125,9 +125,9 @@
                     </x-admin::form.control-group>
                 </div>
 
-                {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.after') !!}
+                {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.after', ['page' => $page]) !!}
 
-                {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.before') !!}
+                {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.before', ['page' => $page]) !!}
 
                 <!-- SEO Input Fields -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
@@ -228,7 +228,7 @@
                     </div>
                 </div>
 
-                {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.after') !!}
+                {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.after', ['page' => $page]) !!}
 
             </div>
 
@@ -236,7 +236,7 @@
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <!-- General -->
 
-                {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.before') !!}
+                {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.before', ['page' => $page]) !!}
 
                 <x-admin::accordion>
                     <x-slot:header>
@@ -307,12 +307,12 @@
                     </x-slot:content>
                 </x-admin::accordion>
 
-                {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.after') !!}
+                {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.after', ['page' => $page]) !!}
 
             </div>
           </div>
 
-        {!! view_render_event('bagisto.admin.cms.pages.edit.create_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.cms.pages.edit.create_form_controls.after', ['page' => $page]) !!}
 
     </x-admin::form>
 </x-admin::layouts>
