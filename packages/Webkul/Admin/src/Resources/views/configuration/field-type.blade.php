@@ -181,8 +181,8 @@
                     @else
                         @foreach ($field['options'] as $option)
                             <option 
-                                value="{{ $option['value'] ?? 0 }}"
-                                {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}
+                                value="{{ $value = $option['value'] ?? 0 }}"
+                                {{ in_array($value, explode(',', $selectedOption)) ? 'selected' : ''}}
                             >
                                 @lang($option['title'])
                             </option>
