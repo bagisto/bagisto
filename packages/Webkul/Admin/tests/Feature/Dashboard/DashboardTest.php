@@ -259,7 +259,7 @@ it('should show the dashboard total sales stats', function () {
 
 it('should show the dashboard total visitors stats', function () {
     // Arrange
-    $product = (new ProductFaker([
+    (new ProductFaker([
         'attributes' => [
             5 => 'new',
         ],
@@ -275,6 +275,7 @@ it('should show the dashboard total visitors stats', function () {
 
     visitor()->visit();
 
+    // Act and Assert
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
@@ -283,4 +284,113 @@ it('should show the dashboard total visitors stats', function () {
         ->assertOk()
         ->assertJsonPath('statistics.total.current', 1)
         ->assertJsonPath('statistics.unique.current', 1);
+});
+
+it('should show the dashboard top selling products stats', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $order = Order::factory()->create([
+        'cart_id' => $cartId = CartItem::factory()->create([
+            'product_id' => $product->id,
+        ])->id,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id'          => $product->id,
+        'order_id'            => $order->id,
+        'base_total_invoiced' => $order->base_sub_total_invoiced,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    OrderAddress::factory()->create([
+        'order_id'     => $order->id,
+        'cart_id'      => $cartId,
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    Invoice::factory([
+        'order_id' => $order->id,
+        'state'    => 'paid',
+    ])->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    get(route('admin.dashboard.stats', [
+        'type' => 'top-selling-products',
+    ]))
+        ->assertOk()
+        ->assertJsonPath('statistics.0.id', $product->id);
+});
+
+it('should show the dashboard top customers stats', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $order = Order::factory()->create([
+        'cart_id' => $cartId = CartItem::factory()->create([
+            'product_id' => $product->id,
+        ])->id,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id'          => $product->id,
+        'order_id'            => $order->id,
+        'base_total_invoiced' => $order->base_sub_total_invoiced,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    OrderAddress::factory()->create([
+        'order_id'     => $order->id,
+        'cart_id'      => $cartId,
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    Invoice::factory([
+        'order_id' => $order->id,
+        'state'    => 'paid',
+    ])->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    get(route('admin.dashboard.stats', [
+        'type' => 'top-customers',
+    ]))
+        ->assertOk()
+        ->assertJsonPath('statistics.0.id', $order->customer->id)
+        ->assertJsonPath('statistics.0.email', $order->customer->email)
+        ->assertJsonPath('statistics.0.full_name', $order->customer->name)
+        ->assertJsonPath('statistics.0.orders', $order->count());
 });
