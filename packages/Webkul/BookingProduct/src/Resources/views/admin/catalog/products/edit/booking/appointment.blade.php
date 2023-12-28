@@ -400,18 +400,6 @@
             },
 
             methods: {
-                store(params) {
-                    const preparedData = {};
-
-                    for (const iterator of params) {
-                        const key = iterator[0];
-                        const value = iterator[1];
-
-                        this.formData[key] = value;
-                    }
-
-                    console.log(this);
-                }
                 // storeSlots(params) {
                 //     if (params.booking_type === 'one') {
                 //         if (! params.id) {
