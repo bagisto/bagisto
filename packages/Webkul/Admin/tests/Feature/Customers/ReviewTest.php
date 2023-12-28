@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Arr;
+use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 
 use function Pest\Laravel\deleteJson;
@@ -13,6 +15,7 @@ afterEach(function () {
      * Cleaning up rows which are created.
      */
     ProductReview::query()->delete();
+    Product::query()->delete();
 });
 
 it('should returns the review page', function () {
@@ -28,7 +31,24 @@ it('should return the edit page of the review', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $review = ProductReview::factory()->create();
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $review = ProductReview::factory()->create([
+        'product_id' => $product->id,
+    ]);
 
     get(route('admin.customers.customers.review.edit', $review->id))
         ->assertOk()
@@ -41,7 +61,24 @@ it('should update the status of the review', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $review = ProductReview::factory()->create();
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $review = ProductReview::factory()->create([
+        'product_id' => $product->id,
+    ]);
 
     putJson(route('admin.customers.customers.review.update', $review->id), [
         'status' => $status = Arr::random(['approved', 'disapproved', 'pending']),
@@ -59,7 +96,24 @@ it('should delete the review', function () {
     // Act and assert
     $this->loginAsAdmin();
 
-    $review = ProductReview::factory()->create();
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $review = ProductReview::factory()->create([
+        'product_id' => $product->id,
+    ]);
 
     deleteJson(route('admin.customers.customers.review.delete', $review->id))
         ->assertOk()
@@ -74,7 +128,24 @@ it('should mass delete the product review', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $reviews = ProductReview::factory()->count(5)->create();
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $reviews = ProductReview::factory()->count(5)->create([
+        'product_id' => $product->id,
+    ]);
 
     postJson(route('admin.customers.customers.review.mass_delete', [
         'indices' => $reviews->pluck('id')->toArray(),
@@ -95,8 +166,24 @@ it('should mass update the product review', function () {
 
     $status = Arr::random(['approved', 'disapproved', 'pending']);
 
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
     $reviews = ProductReview::factory()->count(5)->create([
-        'status' => $status,
+        'status'     => $status,
+        'product_id' => $product->id,
     ]);
 
     postJson(route('admin.customers.customers.review.mass_update', [

@@ -2,6 +2,7 @@
 
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Core\Models\Visit;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
@@ -11,7 +12,6 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
-use Webkul\Core\Models\Visit;
 
 use function Pest\Laravel\get;
 
@@ -64,10 +64,26 @@ it('should return the customers with most reviews stats report', function () {
 
     $customer = Customer::factory()->create();
 
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
     ProductReview::factory()->count(5)->create([
         'customer_id' => $customer->id,
         'name'        => $customer->name,
         'status'      => 'approved',
+        'product_id'  => $product->id,
     ]);
 
     get(route('admin.reporting.customers.stats', [

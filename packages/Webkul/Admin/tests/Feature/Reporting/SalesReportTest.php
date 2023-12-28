@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Core\Models\Visit;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
@@ -11,7 +12,6 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
-use Webkul\Core\Models\Visit;
 
 use function Pest\Laravel\get;
 
