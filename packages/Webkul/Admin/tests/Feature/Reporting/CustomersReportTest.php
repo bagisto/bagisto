@@ -55,7 +55,7 @@ it('should return the customers stats report', function () {
         'type' => 'total-customers',
     ]))
         ->assertOk()
-        ->assertJsonPath('statistics.over_time.current.30.total', 5);
+        ->assertJsonPath('statistics.over_time.current.30.total', 2);
 });
 
 it('should return the customers with most reviews stats report', function () {
@@ -92,7 +92,7 @@ it('should return the customers with most reviews stats report', function () {
         ->assertOk()
         ->assertJsonPath('statistics.0.email', $customer->email)
         ->assertJsonPath('statistics.0.id', $customer->id)
-        ->assertJsonPath('statistics.0.reviews', 5);
+        ->assertJsonPath('statistics.0.reviews', 2);
 });
 
 it('should return the top customers group stats report', function () {

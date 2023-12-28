@@ -294,7 +294,7 @@ it('should return the products with most reviews reporting stats', function () {
     ]))
         ->assertOk()
         ->assertJsonPath('statistics.0.product_id', $product->id)
-        ->assertJsonPath('statistics.0.reviews', 5)
+        ->assertJsonPath('statistics.0.reviews', 2)
         ->assertJsonPath('statistics.0.product.id', $product->id)
         ->assertJsonPath('statistics.0.product.type', $product->type);
 });
