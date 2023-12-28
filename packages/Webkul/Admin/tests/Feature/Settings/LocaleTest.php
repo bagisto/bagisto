@@ -63,7 +63,7 @@ it('should update the specified locale', function () {
     putJson(route('admin.settings.locales.update'), [
         'id'   => $locale->id,
         'code' => $code = fake()->randomElement([
-            'ar', 'bn', 'de', 'fa', 'es', 'sin', 'pl', 'nl', 'hi_IN'
+            'ar', 'bn', 'de', 'fa', 'es', 'sin', 'pl', 'nl', 'hi_IN',
         ]),
         'name' => $name = fake()->name(),
     ])
