@@ -82,9 +82,9 @@
 
         <!-- Slots Component -->
         <v-slots
+            :booking-product="appointment_booking"
             booking-type="appointment_slot"
             :same-slot-all-days="appointment_booking.same_slot_all_days"
-            @store="store"
         >
         </v-slots>
 
@@ -355,7 +355,7 @@
 
             data() {
                 return {
-                    appointment_booking: this.bookingProduct && this.bookingProduct.appointment_slot ? this.bookingProduct.appointment_slot : {
+                    appointment_booking: @json($bookingProduct && $bookingProduct?->appointment_slot) ? @json($bookingProduct?->appointment_slot) : {
                         duration: 45,
 
                         break_time: 15,
@@ -375,104 +375,6 @@
 
                     formData: [],
                 }
-            },
-
-            created() {
-            //     if (this.appointment_booking && this.appointment_booking.same_slot_all_days) {
-            //         if (this.appointment_booking.slots?.length) {
-            //             let [lastId] = this.appointment_booking.slots.map(({ id }) => id).slice(-1);
-        
-            //             this.optionRowCount = lastId?.split('_')[1];
-            //         }
-
-            //         this.slots['one'] = this.appointment_booking.slots ?? [];
-            //     } else {
-            //         if (this.appointment_booking.slots) {
-            //             let data = [];
-
-            //             this.appointment_booking.slots.map(arr => {
-            //                 data.push(arr[0])
-            //             });
-
-            //             this.slots.many.push(data)
-            //         }
-            //     }
-            },
-
-            methods: {
-                // storeSlots(params) {
-                //     if (params.booking_type === 'one') {
-                //         if (! params.id) {
-                //             this.optionRowCount++;
-                //             params.id = 'option_' + this.optionRowCount;
-                //         }
-
-                //         let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
-
-                //         if (foundIndex !== -1) {
-                //             this.slots.one[foundIndex] = { 
-                //                 ...this.slots.one[foundIndex].params, 
-                //                 ...params
-                //             };
-                //         } else {
-                //             this.slots.one.push(params);
-                //         }
-
-                //         this.$refs.addOptionsRow.toggle();
-                //     } else {
-                //         if (params && params?.id) {
-                //             let item = this.slots.many[0].flatMap(i => Object.values(i)).find(i => i.id === params.id);
-
-                //             if (item) {
-                //                 for (const key in params) {
-                //                     item[key] = params[key];
-                //                 }
-
-                //                 this.slots.many = [...this.slots.many.filter(i => i !== item)];
-                //             }
-
-                //             this.$refs.addManyOptionsRow.toggle();
-                //         } else {
-                //             // let data = [];
-
-                //             // params.map(arr => {
-                //             //     data.push(arr[0])
-                //             // });
-
-                //             for (const key in params) {
-                //                 params[key][0].id = 'option_' + this.optionRowCount++;
-                //             }
-
-                //             this.slots.many.push(params);
-
-                //             this.$refs.addOptionsRow.toggle();
-                //         }
-                //     }
-                // },
-    
-                // editModal(type, values) {
-                //     if (type === 'one') {    
-                //         this.oneOptionModal(values);
-                //     } else {
-                //         this.manyOptionsModelForm(values);
-                //     }
-                // },
-
-                // oneOptionModal(params) {
-                //     this.$refs.modelForm.setValues(params);
-
-                //     this.$refs.addOptionsRow.toggle();
-                // },
-
-                // manyOptionsModelForm(params) {
-                //     this.$refs.ManyOptionsModelForm.setValues(params);
-
-                //     this.$refs.addManyOptionsRow.toggle();
-                // },
-
-                // removeOption(type , values) {
-                //     this.slots.one = this.slots.one.filter(option => option.id !== values.id);
-                // },
             },
         });
     </script>

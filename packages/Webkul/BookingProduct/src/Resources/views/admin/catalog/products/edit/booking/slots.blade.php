@@ -34,23 +34,37 @@
                             <p class="text-gray-600 dark:text-gray-300">
                                 From - @{{ data.from }}
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][from]'"
+                                :value="data.from"
+                            />
                             
                             <p class="text-gray-600 dark:text-gray-300">
                                 To - @{{ data.to }}
                             </p>
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][to]'"
+                                :value="data.to"
+                            />
                         </div>
                         
                         <!-- Actions -->
-                        {{-- <div class="grid gap-1 "> --}}
-                            <div class="flex gap-x-5 items-center place-content-start text-right">
-                                <p
-                                    class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                    @click="editSlot(index)"
-                                > Edit </p>
-                                
-                                <p class="text-red-600 cursor-pointer transition-all hover:underline"> Delete </p>
-                            </div>
-                        {{-- </div> --}}
+                        <div class="flex gap-x-5 items-center place-content-start text-right">
+                            <p
+                                class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                @click="editSlot(index)"
+                            >
+                                Edit
+                            </p>
+                            
+                            <p class="text-red-600 cursor-pointer transition-all hover:underline">
+                                Delete
+                            </p>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -160,7 +174,7 @@
                                         :key="index"
                                     >
                                         <v-slot-item
-                                            :control-name="'booking[slots][' + dayIndex + '][' + slotIndex + ']'"
+                                            :control-name="'booking[slots][' + dayIndex + '][' + index + ']'"
                                             :slot-item="slot"
                                             @onRemoveSlot="removeSlot($event, dayIndex)"
                                         >
@@ -174,7 +188,7 @@
             </form>
         </x-booking::form>
 
-        <!-- Drawer component -->
+        <!-- Edit Drawer component -->
         <x-booking::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
@@ -311,9 +325,7 @@
                 >
                 </x-booking::form.control-group.control>
 
-                <x-booking::form.control-group.control
-                    type="hidden">
-                </x-booking::form.control-group.control>
+                <x-booking::form.control-group.control type="hidden"></x-booking::form.control-group.control>
 
                 <x-booking::form.control-group.error 
                     ::control-name="controlName + '[to]'"
@@ -334,7 +346,7 @@
         app.component('v-slots', {
             template: '#v-slots-template',
 
-            props: ['bookingType', 'sameSlotAllDays'],
+            props: ['bookingType', 'bookingProduct', 'sameSlotAllDays'],
 
             data() {
                 return {
@@ -356,6 +368,8 @@
 
                     same_for_week: [],
 
+                    different_for_week: [],
+
                     editSlots: {
                         'same_for_week': [],
                     },
@@ -363,14 +377,15 @@
             },
 
             created() {
-                if (! this.appointment_booking || ! this.appointment_booking[this.bookingType].slots || ! this.appointment_booking[this.bookingType].slots) {
+                console.log(this.bookingProduct);
+                if (! this.bookingProduct && ! this.bookingProduct.slots) {
                     return;
                 }
     
-                if (this.appointment_booking[this.bookingType].same_slot_all_days) {
-                    this.slots['same_for_week'] = $this.appointment_booking[this.bookingType].slots;
+                if (this.bookingProduct.same_slot_all_days) {
+                    this.same_for_week = this.bookingProduct.slots;
                 } else {
-                    this.slots['different_for_week'] = this.appointment_booking[this.bookingType].slots;
+                    this.different_for_week = this.bookingProduct.slots;
                 }
             },
 
@@ -381,19 +396,15 @@
                             this.slots['different_for_week'][dayIndex] = [];
                         }
     
-                        var slot = {
+                        this.slots['different_for_week'][dayIndex].push({
                             'from': '',
                             'to': ''
-                        };
-    
-                        this.slots['different_for_week'][dayIndex].push(slot)
+                        });
                     } else {
-                        var slot = {
+                        this.slots['same_for_week'].push({
                             'from': '',
                             'to': ''
-                        };
-    
-                        this.slots['same_for_week'].push(slot);
+                        });
                     }
                 },
     
@@ -409,16 +420,14 @@
                     }
                 },
 
-                storeSlot(params , { resetForm }) {
+                storeSlot() {
                     const formDataObj = {};
-
+                    
                     let formData = new FormData(this.$refs.createOptionsForm);
-
+                    
                     formData.forEach((value, key) => (formDataObj[key] = value));
 
                     this.slotData(formDataObj);
-
-                    resetForm();
 
                     this.$refs.drawerform.toggle();
                 },
@@ -442,35 +451,32 @@
                 slotData(params) {
                     let item = [];
 
-                    Object.keys(params).forEach(key => {
-                        let matches = key.match(/booking\[slots\]\[(\d+)\]\[(from|to)\]/);
+                    if (parseInt(this.sameSlotAllDays)) {
+                        Object.keys(params).forEach(key => {
+                            let matches = key.match(/booking\[slots\]\[(\d+)\]\[(from|to)\]/);
 
-                        if (matches) {
-                            let index = parseInt(matches[1]);
-                            let prop = matches[2];
+                            if (matches) {
+                                let index = parseInt(matches[1]);
 
-                            if (! item[index]) {
-                                item[index] = {};
+                                if (! item[index]) {
+                                    item[index] = {};
+                                }
+
+                                item[index][matches[2]] = params[key];
                             }
+                        });
 
-                            item[index][prop] = params[key];
+                        if (this.same_for_week.length) {
+                            this.same_for_week = this.same_for_week.concat(item);
+                        } else {
+                            this.same_for_week = item;
                         }
-                    });
 
-                    if (this.same_for_week.length) {
-                        this.same_for_week = this.same_for_week.concat(item);
+                        this.slots.same_for_week = [];
                     } else {
-                        this.same_for_week = item;
+                        console.log(params);
                     }
-
-                    this.slots.same_for_week = [];
-
-                    // let reservedArray = new Array(this.same_for_week.length);
-
-                    // reservedArray.fill(null);
-
-                    // console.log(reservedArray); // Output: [null, null, null, null, null]
-                }
+                },
             },
         });
 
