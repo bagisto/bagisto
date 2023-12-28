@@ -2414,9 +2414,13 @@ return [
                     'title'        => 'Vergi Oranları',
 
                     'import' => [
-                        'import-btn' => 'İçe Aktar',
-                        'title'      => 'Yükle',
-                        'validation' => 'İzin Verilen Tür: xls, xlsx, csv.',
+                        'duplicate-error'  => 'Kimlik benzersiz olmalı, satır :position\'da tekrarlanan kimlik :identifier.',
+                        'enough-row-error' => 'Dosyada yeterli satır yok',
+                        'import-btn'       => 'İçe Aktar',
+                        'title'            => 'Yükle',
+                        'upload-error'     => 'Dosya tipi: xls, xlsx, csv olmalıdır.',
+                        'upload-success'   => 'Vergi Oranı Başarıyla Yüklendi',
+                        'validation'       => 'İzin verilen Tür: xls, xlsx, csv.',
                     ],
 
                     'datagrid' => [
@@ -3726,21 +3730,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'İzin Verilen Tür :',
         'csv'              => 'CSV',
-        'duplicate-error'  => 'Kimlik benzersiz olmalı, kimlik :identifier sırasında yinelenen kimlik :position.',
         'download'         => 'İndir',
-        'enough-row-error' => 'Dosyada yeterince satır yok',
         'export'           => 'Dışa Aktar',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Dosya',
-        'format'           => 'Format Seçin',
-        'import'           => 'İçe Aktar',
-        'illegal-format'   => 'Hata! Bu tür biçim desteklenmiyor veya yasa dışı biçimdedir',
         'no-records'       => 'Dışa aktarılacak hiçbir şey yok',
-        'upload'           => 'Yükle',
-        'upload-error'     => 'Dosya, xls, xlsx veya csv türünde bir dosya olmalıdır.',
-        'upload-success'   => ':name Başarıyla Yüklendi',
         'xls'              => 'XLS',
     ],
 

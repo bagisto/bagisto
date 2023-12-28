@@ -2413,9 +2413,13 @@ return [
                     'title'        => 'نرخ‌های مالیاتی',
 
                     'import' => [
-                        'import-btn' => 'وارد کردن',
-                        'title'      => 'آپلود',
-                        'validation' => 'نوع مجاز: xls، xlsx، csv.',
+                        'duplicate-error'  => 'شناسه باید یکتا باشد، شناسه تکراری :identifier در ردیف :position.',
+                        'enough-row-error' => 'تعداد کافی از ردیف‌ها در فایل وجود ندارد',
+                        'import-btn'       => 'وارد کردن',
+                        'title'            => 'آپلود',
+                        'upload-error'     => 'فایل باید از نوع: xls، xlsx، csv باشد.',
+                        'upload-success'   => 'نرخ مالیات با موفقیت آپلود شد',
+                        'validation'       => 'انواع مجاز: xls، xlsx، csv.',
                     ],
 
                     'datagrid' => [
@@ -3726,21 +3730,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'انواع مجاز:',
         'csv'              => 'CSV',
         'download'         => 'دانلود',
-        'duplicate-error'  => 'شناسه باید یکتا باشد، شناسه تکراری :identifier در ردیف :position.',
-        'enough-row-error' => 'فایل حاوی تعداد کافی ردیف نیست',
         'export'           => 'خروجی گرفتن',
-        'file'             => 'فایل',
-        'file-type'        => 'csv، xls، xlsx.',
-        'format'           => 'انتخاب فرمت',
-        'illegal-format'   => 'خطا! این نوع فرمت پشتیبانی نمی‌شود یا فرمت غیرمجاز است',
-        'import'           => 'وارد کردن',
         'no-records'       => 'چیزی برای خروجی گرفتن وجود ندارد',
-        'upload'           => 'آپلود',
-        'upload-error'     => 'فایل باید یک فایل از نوع: xls، xlsx، csv باشد.',
-        'upload-success'   => ':name با موفقیت بارگذاری شد',
         'xls'              => 'XLS',
     ],
 

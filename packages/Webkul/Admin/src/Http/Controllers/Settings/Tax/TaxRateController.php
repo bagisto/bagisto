@@ -184,7 +184,7 @@ class TaxRateController extends Controller
 
         if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             return new JsonResponse([
-                'message' => trans('admin::app.export.upload-error'),
+                'message' => trans('admin::app.settings.taxes.rates.index.import.upload-error'),
             ], 500);
         } else {
             try {
@@ -224,7 +224,7 @@ class TaxRateController extends Controller
 
                 if ($filtered) {
                     foreach ($filtered as $position => $identifier) {
-                        $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
+                        $message[] = trans('admin::app.settings.taxes.rates.index.import.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
                     }
 
                     return new JsonResponse([
@@ -271,9 +271,9 @@ class TaxRateController extends Controller
                             $message[] = $msg . ' at Row ' . $key . '.';
                         }
 
-                        $finalMsg = implode(' ', $message);
-
-                        session()->flash('error', $finalMsg);
+                        return new JsonResponse([
+                            'message' => implode(' ', $message),
+                        ]);
                     } else {
                         $taxRate = $this->taxRateRepository->get()->toArray();
 
@@ -298,14 +298,14 @@ class TaxRateController extends Controller
                         }
 
                         return new JsonResponse([
-                            'message' => trans('admin::app.export.upload-success', ['name' => 'Tax Rate']),
+                            'message' => trans('admin::app.settings.taxes.rates.index.import.upload-success'),
                         ]);
                     }
                 }
             } catch (\Exception $e) {
                 report($e);
 
-                $failure = new Failure(1, 'rows', [0 => trans('admin::app.export.enough-row-error')]);
+                $failure = new Failure(1, 'rows', [0 => trans('admin::app.settings.taxes.rates.index.import.enough-row-error')]);
 
                 return new JsonResponse([
                     'message' => $failure->errors()[0],

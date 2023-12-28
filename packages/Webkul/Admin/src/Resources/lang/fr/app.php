@@ -2413,9 +2413,13 @@ return [
                     'title'        => 'Taux de taxe',
 
                     'import' => [
-                        'import-btn' => 'Importer',
-                        'title'      => 'Télécharger',
-                        'validation' => 'Types autorisés : xls, xlsx, csv.',
+                        'duplicate-error'  => "L'identifiant doit être unique, identifiant en double :identifier à la ligne :position.",
+                        'enough-row-error' => 'Le fichier n\'a pas assez de lignes',
+                        'import-btn'       => 'Importer',
+                        'title'            => 'Télécharger',
+                        'upload-error'     => 'Le fichier doit être de type : xls, xlsx, csv.',
+                        'upload-success'   => 'Taux de taxe téléchargé avec succès',
+                        'validation'       => 'Types autorisés : xls, xlsx, csv.',
                     ],
 
                     'datagrid' => [
@@ -3726,21 +3730,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Type autorisé :',
         'csv'              => 'CSV',
         'download'         => 'Télécharger',
-        'duplicate-error'  => 'L\'identifiant doit être unique, identifiant en double : :identifier à la ligne :position.',
-        'enough-row-error' => 'Le fichier n\'a pas assez de lignes',
         'export'           => 'Exporter',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Fichier',
-        'format'           => 'Sélectionner le format',
-        'import'           => 'Importer',
-        'illegal-format'   => 'Erreur ! Ce type de format n\'est pas pris en charge ou est un format illégal',
         'no-records'       => 'Rien à exporter',
-        'upload'           => 'Télécharger',
-        'upload-error'     => 'Le fichier doit être de type : xls, xlsx, csv.',
-        'upload-success'   => ':name Téléchargé avec succès',
         'xls'              => 'XLS',
     ],
 

@@ -2413,9 +2413,13 @@ return [
                     'title'        => 'कर दरें',
 
                     'import' => [
-                        'import-btn' => 'आयात',
-                        'title'      => 'अपलोड',
-                        'validation' => 'अनुमति योग्य प्रकार: xls, xlsx, csv.',
+                        'duplicate-error'  => 'पहचानकर्ता अद्वितीय होना चाहिए, पंक्ति:position पर दोहरा पहचानकर्ता :identifier।',
+                        'enough-row-error' => 'फ़ाइल में पर्याप्त पंक्तियाँ नहीं हैं',
+                        'import-btn'       => 'आयात करें',
+                        'title'            => 'अपलोड',
+                        'upload-error'     => 'फ़ाइल का प्रकार: xls, xlsx, csv होना चाहिए।',
+                        'upload-success'   => 'कर दर सफलतापूर्वक अपलोड हो गई है',
+                        'validation'       => 'अनुमत टाइप: xls, xlsx, csv।',
                     ],
 
                     'datagrid' => [
@@ -3726,21 +3730,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'अनुमत प्रकार:',
         'csv'              => 'CSV',
         'download'         => 'डाउनलोड करें',
-        'duplicate-error'  => 'पहचानकर्ता अद्वितीय होना चाहिए, डुप्लिकेट पहचानकर्ता :identifier पंक्ति :position पर।',
-        'enough-row-error' => 'फ़ाइल में पर्याप्त पंक्तियाँ नहीं हैं',
         'export'           => 'निर्यात',
-        'file-type'        => 'csv, xls, xlsx।',
-        'file'             => 'फ़ाइल',
-        'format'           => 'स्वरूप चुनें',
-        'import'           => 'आयात',
-        'illegal-format'   => 'त्रुटि! इस प्रकार का स्वरूप समर्थित नहीं है या यह अवैध स्वरूप है।',
         'no-records'       => 'निर्यात के लिए कुछ नहीं है',
-        'upload'           => 'अपलोड करें',
-        'upload-error'     => 'फ़ाइल का प्रकार: xls, xlsx, csv होना चाहिए।',
-        'upload-success'   => ':name सफलतापूर्वक अपलोड की गई',
         'xls'              => 'XLS',
     ],
 

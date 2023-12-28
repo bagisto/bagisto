@@ -2413,9 +2413,13 @@ return [
                     'title'        => 'שערי מס',
 
                     'import' => [
-                        'import-btn' => 'יבוא',
-                        'title'      => 'העלאה',
-                        'validation' => 'סוגים מותרים: xls, xlsx, csv.',
+                        'duplicate-error'  => 'הזהות חייבת להיות ייחודית, זהות כפולה :identifier בשורה :position.',
+                        'enough-row-error' => 'הקובץ אינו מכיל מספיק שורות',
+                        'import-btn'       => 'ייבא',
+                        'title'            => 'העלאה',
+                        'upload-error'     => 'הקובץ חייב להיות מסוג: xls, xlsx, csv.',
+                        'upload-success'   => 'שיעור המס הועלה בהצלחה',
+                        'validation'       => 'סוגים מותרים: xls, xlsx, csv.',
                     ],
 
                     'datagrid' => [
@@ -3726,21 +3730,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'סוגים מאושרים :',
         'csv'              => 'CSV',
         'download'         => 'הורדה',
-        'duplicate-error'  => 'מזהה חייב להיות ייחודי, מזהה כפול: :identifier בשורה :position.',
-        'enough-row-error' => 'הקובץ אינו מכיל מספיק שורות',
         'export'           => 'ייצוא',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'קובץ',
-        'format'           => 'בחר פורמט',
-        'import'           => 'יבוא',
-        'illegal-format'   => 'שגיאה! סוג פורמט זה אינו נתמך או זהו פורמט לא חוקי',
         'no-records'       => 'אין מידע לייצוא',
-        'upload'           => 'העלאה',
-        'upload-error'     => 'הקובץ חייב להיות מסוג: xls, xlsx, csv.',
-        'upload-success'   => ':name הועלה בהצלחה',
         'xls'              => 'XLS',
     ],
 

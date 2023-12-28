@@ -2412,9 +2412,13 @@ return [
                     'title'        => '税率',
 
                     'import' => [
-                        'import-btn' => '导入',
-                        'title'      => '上传',
-                        'validation' => '允许的类型：xls、xlsx、csv。',
+                        'duplicate-error'  => '标识符必须是唯一的，在行 :position 重复标识符 :identifier。',
+                        'enough-row-error' => '文件没有足够的行',
+                        'import-btn'       => '导入',
+                        'title'            => '上传',
+                        'upload-error'     => '文件必须是类型：xls、xlsx、csv。',
+                        'upload-success'   => '税率成功上传',
+                        'validation'       => '允许的类型：xls、xlsx、csv。',
                     ],
 
                     'datagrid' => [
@@ -3725,21 +3729,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => '允许的类型：',
         'csv'              => 'CSV',
-        'duplicate-error'  => '标识符必须是唯一的，行 :position 处存在重复标识符 :identifier。',
         'download'         => '下载',
-        'enough-row-error' => '文件没有足够的行',
         'export'           => '导出',
-        'file-type'        => 'csv、xls、xlsx。',
-        'file'             => '文件',
-        'format'           => '选择格式',
-        'import'           => '导入',
-        'illegal-format'   => '错误！此类型的格式不受支持，或者是非法格式',
         'no-records'       => '没有要导出的内容',
-        'upload'           => '上传',
-        'upload-error'     => '文件必须是以下类型的文件：xls、xlsx、csv。',
-        'upload-success'   => ':name 上传成功',
         'xls'              => 'XLS',
     ],
 

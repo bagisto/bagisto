@@ -2413,9 +2413,13 @@ return [
                     'title'        => 'Stawki Podatków',
 
                     'import' => [
-                        'import-btn' => 'Importuj',
-                        'title'      => 'Wgraj',
-                        'validation' => 'Dozwolone typy: xls, xlsx, csv.',
+                        'duplicate-error'  => 'Identyfikator musi być unikalny, zduplikowany identyfikator :identifier w wierszu :position.',
+                        'enough-row-error' => 'Plik nie ma wystarczającej liczby wierszy',
+                        'import-btn'       => 'Importuj',
+                        'title'            => 'Wgraj',
+                        'upload-error'     => 'Plik musi być plikiem typu: xls, xlsx, csv.',
+                        'upload-success'   => 'Stawka podatku została pomyślnie załadowana',
+                        'validation'       => 'Dozwolony typ: xls, xlsx, csv.',
                     ],
 
                     'datagrid' => [
@@ -3726,21 +3730,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Dozwolony typ :',
         'csv'              => 'CSV',
         'download'         => 'Pobierz',
-        'duplicate-error'  => 'Identyfikator musi być unikalny, zduplikowany identyfikator :identifier w wierszu :position.',
-        'enough-row-error' => 'Plik nie ma wystarczającej liczby wierszy',
         'export'           => 'Eksport',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Plik',
-        'format'           => 'Wybierz Format',
-        'import'           => 'Import',
-        'illegal-format'   => 'Błąd! Ten rodzaj formatu nie jest obsługiwany lub jest nielegalny format',
         'no-records'       => 'Nic do wyeksportowania',
-        'upload'           => 'Wgraj',
-        'upload-error'     => 'Plik musi być plikiem typu: xls, xlsx, csv.',
-        'upload-success'   => ':name Wgrany pomyślnie',
         'xls'              => 'XLS',
     ],
 
