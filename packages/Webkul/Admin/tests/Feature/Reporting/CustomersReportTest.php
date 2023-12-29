@@ -159,6 +159,9 @@ it('should return the customers with most orders stats report', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -172,8 +175,8 @@ it('should return the customers with most orders stats report', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -223,6 +226,9 @@ it('should return the customers with most sales stats report', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -236,8 +242,8 @@ it('should return the customers with most sales stats report', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert

@@ -73,6 +73,9 @@ it('should returns the sales stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -86,8 +89,8 @@ it('should returns the sales stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -138,6 +141,9 @@ it('should returns the purchase funnel stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -151,8 +157,8 @@ it('should returns the purchase funnel stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -237,6 +243,9 @@ it('should returns the total orders stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -250,8 +259,8 @@ it('should returns the total orders stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -300,6 +309,9 @@ it('should returns the average sale stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -313,8 +325,8 @@ it('should returns the average sale stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -365,6 +377,9 @@ it('should returns the shipping collected stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -378,8 +393,8 @@ it('should returns the shipping collected stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -426,6 +441,9 @@ it('should returns the tax collected stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -439,8 +457,8 @@ it('should returns the tax collected stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -488,6 +506,9 @@ it('should returns the refunds stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -501,8 +522,8 @@ it('should returns the refunds stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -550,6 +571,9 @@ it('should returns the top payment methods stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -563,8 +587,8 @@ it('should returns the top payment methods stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -614,6 +638,9 @@ it('should return the view page of sales stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -627,8 +654,8 @@ it('should return the view page of sales stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -675,6 +702,9 @@ it('should export the sales stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -688,8 +718,8 @@ it('should export the sales stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert

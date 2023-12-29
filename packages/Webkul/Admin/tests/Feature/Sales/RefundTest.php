@@ -69,6 +69,7 @@ it('should store the create page of refunds', function () {
         'order_id'     => $order->id,
         'qty_refunded' => $qty = rand(1, 2),
         'qty_invoiced' => $qty + 1,
+        'type'         => $product->type,
     ]);
 
     OrderPayment::factory()->create([

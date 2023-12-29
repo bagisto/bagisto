@@ -37,7 +37,7 @@ it('should return the index page of transactions', function () {
         ->assertSeeText(trans('admin::app.sales.transactions.index.title'));
 });
 
-it('should store the transaction', function () {
+it('should store the order transaction', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -71,25 +71,27 @@ it('should store the transaction', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     $payment = OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
-
+    
     OrderAddress::factory()->create([
-        'order_id'     => $order->id,
-        'cart_id'      => $cartId,
-        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+        'order_id'    => $order->id,
+        'cart_id'     => $cartId,
+        'customer_id' => $customer->id,
+        'first_name'  => $customer->first_name,
+        'last_name'   => $customer->last_name,
+        'email'       => $customer->email,
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'         => $order->id,
-        'sub_total'        => $order->grand_total,
-        'base_sub_total'   => $order->grand_total,
-        'grand_total'      => $order->grand_total,
-        'base_grand_total' => $order->grand_total,
-        'increment_id'     => app(InvoiceSequencer::class)->resolveGeneratorClass(),
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -142,6 +144,9 @@ it('should view the transaction', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -155,8 +160,9 @@ it('should view the transaction', function () {
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'     => $order->id,
-        'increment_id' => app(InvoiceSequencer::class)->resolveGeneratorClass(),
+        'order_id'      => $order->id,
+        'increment_id'  => app(InvoiceSequencer::class)->resolveGeneratorClass(),
+        'state'         => 'paid',
     ])->create();
 
     $transaction = OrderTransaction::create([

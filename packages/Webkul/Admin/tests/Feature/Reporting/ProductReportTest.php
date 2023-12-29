@@ -198,8 +198,8 @@ it('should return the top selling products by revenue reporting stats', function
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert
@@ -262,8 +262,8 @@ it('should return the top selling products by quantity reporting stats', functio
     ]);
 
     Invoice::factory()->create([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ]);
 
     // Act and Assert

@@ -4,6 +4,7 @@ use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Core\Models\Visit;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Invoice;
@@ -27,6 +28,7 @@ afterEach(function () {
     Invoice::query()->delete();
     Product::query()->delete();
     Visit::query()->delete();
+    CustomerAddress::query()->delete();
 });
 
 it('should return the dashboard index page', function () {
@@ -66,9 +68,6 @@ it('should show the dashboard over all stats', function () {
             'sku'        => $product->sku,
             'type'       => $product->type,
             'name'       => $product->name,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
         ])->id,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
@@ -79,31 +78,44 @@ it('should show the dashboard over all stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ])->create();
 
-    // Act and Assert
+    // Act and Assertd
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [
         'type' => 'over-all',
     ]))
         ->assertOk()
-        ->assertJsonPath('statistics.total_customers.current', 3)
+        ->assertJsonPath('statistics.total_customers.current', 1)
         ->assertJsonPath('statistics.total_orders.current', 1)
         ->assertJsonPath('statistics.total_sales.current', $order->grand_total);
 });
@@ -142,21 +154,34 @@ it('should show the dashboard today stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ])->create();
 
     // Act and Assert
@@ -166,7 +191,7 @@ it('should show the dashboard today stats', function () {
         'type' => 'today',
     ]))
         ->assertOk()
-        ->assertJsonPath('statistics.total_customers.current', 3)
+        ->assertJsonPath('statistics.total_customers.current', 1)
         ->assertJsonPath('statistics.total_orders.current', 1)
         ->assertJsonPath('statistics.total_sales.current', $order->grand_total)
         ->assertJsonPath('statistics.orders.0.id', $order->id)
@@ -208,21 +233,34 @@ it('should show the dashboard stock threshold products stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ])->create();
 
     // Act and Assert
@@ -270,21 +308,33 @@ it('should show the dashboard total sales stats', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
-
     Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ])->create();
 
     // Act and Assert
@@ -368,15 +418,25 @@ it('should show the dashboard top selling products stats', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ])->create();
 
     // Act and Assert
@@ -430,15 +490,25 @@ it('should show the dashboard top customers stats', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'      => $order->id,
+        'state'         => 'paid',
     ])->create();
 
     // Act and Assert

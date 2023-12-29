@@ -70,7 +70,7 @@ class OrderFactory extends Factory
 
     public function pending(): OrderFactory
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function () {
             return [
                 'status' => 'pending',
             ];
@@ -79,7 +79,7 @@ class OrderFactory extends Factory
 
     public function completed(): OrderFactory
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function () {
             return [
                 'status' => 'completed',
             ];
@@ -88,7 +88,7 @@ class OrderFactory extends Factory
 
     public function closed(): OrderFactory
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function () {
             return [
                 'status' => 'closed',
             ];

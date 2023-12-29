@@ -5,7 +5,6 @@ namespace Webkul\Checkout\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Product\Models\Product;
 
 class CartItemFactory extends Factory
 {

@@ -67,6 +67,9 @@ it('should return the view page of order', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -116,6 +119,9 @@ it('should cancel the order', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -164,6 +170,9 @@ it('should comment to the order', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([
@@ -216,6 +225,9 @@ it('should search the order', function () {
     OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
     ]);
 
     OrderPayment::factory()->create([

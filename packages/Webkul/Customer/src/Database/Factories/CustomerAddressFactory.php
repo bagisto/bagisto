@@ -26,7 +26,6 @@ class CustomerAddressFactory extends Factory
         $fakerIt = \Faker\Factory::create('it_IT');
 
         return [
-            'customer_id'     => Customer::factory(),
             'company_name'    => $this->faker->company,
             'vat_id'          => $fakerIt->vatId(),
             'first_name'      => $this->faker->firstName,

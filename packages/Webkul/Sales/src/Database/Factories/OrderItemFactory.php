@@ -22,27 +22,13 @@ class OrderItemFactory extends Factory
     {
         $now = date('Y-m-d H:i:s');
 
-        if (isset($attributes['product_id'])) {
-            $product = Product::query()
-                ->where('id', $attributes['product_id'])
-                ->first();
-        } else {
-            $product = Product::factory()
-                ->simple()
-                ->create();
-        }
-
         $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);
 
         return [
-            'sku'          => $product->sku,
-            'type'         => $product->type,
-            'name'         => $product->name,
-            'price'        => $product->price ?? $fallbackPrice,
-            'base_price'   => $product->price ?? $fallbackPrice,
-            'total'        => $product->price ?? $fallbackPrice,
-            'base_total'   => $product->price ?? $fallbackPrice,
-            'product_id'   => $product->id,
+            'price'        => $fallbackPrice,
+            'base_price'   => $fallbackPrice,
+            'total'        => $fallbackPrice,
+            'base_total'   => $fallbackPrice,
             'qty_ordered'  => 1,
             'qty_shipped'  => 0,
             'qty_invoiced' => 0,
