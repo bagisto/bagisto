@@ -38,7 +38,7 @@
 
                             <input
                                 type="hidden"
-                                :name="'booking[slots][' + index + '][from]'"
+                                :name="getFieldName(index, 'from')"
                                 :value="data.from"
                             />
                             
@@ -48,7 +48,7 @@
 
                             <input
                                 type="hidden"
-                                :name="'booking[slots][' + index + '][to]'"
+                                :name="getFieldName(index, 'to')"
                                 :value="data.to"
                             />
                         </div>
@@ -447,12 +447,15 @@
 
                     updatedData = this.bookingProduct.slots.map((item, index) => {
                         let day = this.week_days[index];
+
                         let updatedItem = {};
+
                         updatedItem[day] = item;
+
                         return updatedItem;
                     });
 
-                    this.different_for_week = updatedData
+                    this.different_for_week = updatedData;
                 }
             },
 
@@ -563,8 +566,11 @@
 
                         updatedData = this.different_for_week.map((item, index) => {
                             let day = this.week_days[index];
+
                             let updatedItem = {};
+
                             updatedItem[day] = item;
+
                             return updatedItem;
                         });
 
@@ -573,7 +579,11 @@
                 },
 
                 getFieldName(slotIndex, timeIndex, prop) {
-                    return `booking[slots][${slotIndex}][${timeIndex}][${prop}]`;
+                    if (! prop) {
+                        return `booking[slots][${slotIndex}][${timeIndex}][${prop}]`;
+                    }
+
+                    return `booking[slots][${slotIndex}][${timeIndex}]`;
                 },
             },
         });
