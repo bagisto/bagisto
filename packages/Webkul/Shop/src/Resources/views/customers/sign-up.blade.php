@@ -202,7 +202,7 @@
                             ></label>
 
                             <label
-                                class="pl-0 text-base text-[#6E6E6E] max-sm:text-xs select-none cursor-pointer"
+                                class="ltr:pl-0 rtl:pr-0 text-base text-[#6E6E6E] max-sm:text-xs select-none cursor-pointer"
                                 for="is-subscribed"
                             >
                                 @lang('shop::app.customers.signup-form.subscribe-to-newsletter')

@@ -1,4 +1,4 @@
-<div class="max-w-full h-max sticky top-8 w-[442px] pl-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
+<div class="max-w-full h-max sticky top-8 w-[442px] ltr:pl-8 rtl:pr-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:ltr:pl-0 max-lg:rtl:pr-0">
     <h2 class="shimmer w-2/4 h-[39px]"></h2>
     <div class="grid border-b border-[#E9E9E9] mt-10 max-sm:mt-5">
 

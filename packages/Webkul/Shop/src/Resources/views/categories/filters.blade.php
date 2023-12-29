@@ -14,7 +14,7 @@
 
 <!-- Mobile Filters Naviation -->
 <div
-    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-5 bg-white border-t border-[#E9E9E9] z-50"
+    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 ltr:left-0 rtl:right-0 px-5 bg-white border-t border-[#E9E9E9] z-50"
     v-if="isMobile"
 >
     <!-- Filter Drawer -->
@@ -177,7 +177,7 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="items-center flex gap-x-4 pl-2 rounded hover:bg-gray-100 select-none">
+                            <div class="items-center flex gap-x-4 ltr:pl-2 rtl:pr-3 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"
@@ -199,7 +199,7 @@
                                 </label>
 
                                 <label
-                                    class="w-full p-2 pl-0 text-base text-gray-900 cursor-pointer"
+                                    class="w-full p-2 ltr:pl-0 rtl:pr-0 text-base text-gray-900 cursor-pointer"
                                     :id="'label_option_' + option.id"
                                     :for="'option_' + option.id"
                                     role="button"

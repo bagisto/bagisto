@@ -26,7 +26,7 @@
             </a>
 
             <span
-                class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 left-2.5 bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 ltr:left-2.5 rtl:right-2.5 bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
                 aria-label="@lang('shop::components.carousel.previous')"
                 tabindex="0"

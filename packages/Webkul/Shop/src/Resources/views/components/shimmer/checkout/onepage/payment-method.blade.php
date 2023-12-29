@@ -6,7 +6,7 @@
 
     <div class="flex flex-wrap gap-7 mt-8">
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
-            <span class="shimmer block absolute right-5 top-5 w-6 h-6 rounded-full"></span>
+            <span class="shimmer block absolute ltr:right-5 rtl:left-5 top-5 w-6 h-6 rounded-full"></span>
 
             <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full ">
                 <div class="shimmer w-[45px] h-[45px]"></div>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
-            <span class="shimmer block absolute right-5 top-5 w-6 h-6 rounded-full"></span>
+            <span class="shimmer block absolute ltr:right-5 rtl:left-5 top-5 w-6 h-6 rounded-full"></span>
 
             <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full">
                 <div class="shimmer w-[45px] h-[45px]"></div>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
-            <span class="shimmer block absolute right-5 top-5 w-6 h-6 rounded-full"></span>
+            <span class="shimmer block absolute ltr:right-5 rtl:left-5 top-5 w-6 h-6 rounded-full"></span>
 
             <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full">
                 <div class="shimmer w-[45px] h-[45px]"></div>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="relative max-sm:max-w-full max-sm:flex-auto">
-            <span class="shimmer block absolute right-5 top-5 w-6 h-6 rounded-full"></span>
+            <span class="shimmer block absolute ltr:right-5 rtl:left-5 top-5 w-6 h-6 rounded-full"></span>
 
             <label class="block border border-[#E9E9E9] p-5 rounded-xl w-[190px] max-sm:w-full">
                 <div class="shimmer w-[45px] h-[45px]"></div>
