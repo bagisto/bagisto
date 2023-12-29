@@ -130,7 +130,7 @@
 
                             <!-- For Attribute Options If Data Exist -->
                             <div class="mt-4 overflow-x-auto">
-                                <div class="flex gap-4 max-sm:flex-wrap">
+                                <div class="flex gap-4 items-center max-sm:flex-wrap">
                                     <!-- Input Options -->
                                     <x-admin::form.control-group
                                         class="w-full mb-2.5"
