@@ -552,11 +552,9 @@
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                            @lang('admin::app.marketing.promotions.cart-rules.create.settings')
-                                        </p>
-                                    </div>
+                                    <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                        @lang('admin::app.marketing.promotions.cart-rules.create.settings')
+                                    </p>
                                 </x-slot:header>
 
                                 <x-slot:content>
@@ -681,11 +679,9 @@
                             <!-- Marketing Time -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                            @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
-                                        </p>
-                                    </div>
+                                    <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                        @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
+                                    </p>
                                 </x-slot:header>
 
                                 <x-slot:content>

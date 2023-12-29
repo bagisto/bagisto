@@ -384,11 +384,9 @@
                 <!-- Currencies and Locales -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                @lang('admin::app.settings.channels.create.currencies-and-locales')
-                            </p>
-                        </div>
+                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                            @lang('admin::app.settings.channels.create.currencies-and-locales')
+                        </p>
                     </x-slot:header>
             
                     <x-slot:content>

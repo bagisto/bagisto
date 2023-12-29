@@ -56,11 +56,9 @@
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
-                        <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                @lang('admin::app.catalog.families.edit.general')
-                            </p>
-                        </div>
+                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                            @lang('admin::app.catalog.families.edit.general')
+                        </p>
                     </x-slot:header>
                 
                     <!-- Panel Content -->

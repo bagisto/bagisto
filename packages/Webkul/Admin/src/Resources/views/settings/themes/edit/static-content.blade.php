@@ -105,11 +105,9 @@
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                @lang('admin::app.settings.themes.edit.general')
-                            </p>
-                        </div>
+                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                            @lang('admin::app.settings.themes.edit.general')
+                        </p>
                     </x-slot:header>
                 
                     <x-slot:content>
