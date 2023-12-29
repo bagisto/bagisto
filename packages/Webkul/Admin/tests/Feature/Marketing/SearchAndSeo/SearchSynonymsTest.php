@@ -42,10 +42,11 @@ it('should store the newly created search synonyms', function () {
 });
 
 it('should update the search synonyms', function () {
+    // Arrange
+    $searchsynonym = SearchSynonym::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchsynonym = SearchSynonym::factory()->create();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update'), [
         'id'    => $searchsynonym->id,

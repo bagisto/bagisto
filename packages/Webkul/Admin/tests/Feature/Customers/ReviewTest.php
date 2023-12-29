@@ -28,9 +28,6 @@ it('should returns the review page', function () {
 });
 
 it('should return the edit page of the review', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -49,6 +46,9 @@ it('should return the edit page of the review', function () {
     $review = ProductReview::factory()->create([
         'product_id' => $product->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.customers.customers.review.edit', $review->id))
         ->assertOk()
@@ -58,9 +58,6 @@ it('should return the edit page of the review', function () {
 });
 
 it('should update the status of the review', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -79,6 +76,9 @@ it('should update the status of the review', function () {
     $review = ProductReview::factory()->create([
         'product_id' => $product->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     putJson(route('admin.customers.customers.review.update', $review->id), [
         'status' => $status = Arr::random(['approved', 'disapproved', 'pending']),
@@ -93,9 +93,6 @@ it('should update the status of the review', function () {
 });
 
 it('should delete the review', function () {
-    // Act and assert
-    $this->loginAsAdmin();
-
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -114,6 +111,9 @@ it('should delete the review', function () {
     $review = ProductReview::factory()->create([
         'product_id' => $product->id,
     ]);
+    
+    // Act and assert
+    $this->loginAsAdmin();
 
     deleteJson(route('admin.customers.customers.review.delete', $review->id))
         ->assertOk()
@@ -125,9 +125,6 @@ it('should delete the review', function () {
 });
 
 it('should mass delete the product review', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -147,6 +144,9 @@ it('should mass delete the product review', function () {
         'product_id' => $product->id,
     ]);
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     postJson(route('admin.customers.customers.review.mass_delete', [
         'indices' => $reviews->pluck('id')->toArray(),
     ]))
@@ -161,12 +161,9 @@ it('should mass delete the product review', function () {
 });
 
 it('should mass update the product review', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $status = Arr::random(['approved', 'disapproved', 'pending']);
 
-    // Arrange
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -185,6 +182,9 @@ it('should mass update the product review', function () {
         'status'     => $status,
         'product_id' => $product->id,
     ]);
+    
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.review.mass_update', [
         'indices' => $reviews->pluck('id')->toArray(),

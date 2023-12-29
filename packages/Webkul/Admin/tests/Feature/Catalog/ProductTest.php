@@ -31,12 +31,13 @@ it('it should returns the product index page', function () {
 });
 
 it('should return the create page products', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     $productId = $product->id + 1;
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.store'), [
         'type'                => $type = fake()->randomElement(['simple', 'configurable', 'virtual', 'downloadable', 'grouped', 'bundle']),
@@ -54,10 +55,11 @@ it('should return the create page products', function () {
 });
 
 it('should copy the existing product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     get(route('admin.catalog.products.copy', $product->id))
         ->assertRedirect(route('admin.catalog.products.edit', $productId = $product->id + 1))
@@ -69,10 +71,11 @@ it('should copy the existing product', function () {
 });
 
 it('it should update the existing product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $sku = fake()->slug(),
@@ -99,10 +102,11 @@ it('it should update the existing product', function () {
 });
 
 it('should delete a product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
 
     deleteJson(route('admin.catalog.products.delete', $product->id))
         ->assertOk()
@@ -114,10 +118,11 @@ it('should delete a product', function () {
 });
 
 it('should upload link the product upload link', function () {
+    // Arrange
+    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
     $response = postJson(route('admin.catalog.products.upload_link', $product->id), [
         'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
@@ -131,10 +136,11 @@ it('should upload link the product upload link', function () {
 });
 
 it('should upload the sample file', function () {
+    // Arrange
+    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
     $response = postJson(route('admin.catalog.products.upload_sample', $product->id), [
         'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
@@ -148,10 +154,11 @@ it('should upload the sample file', function () {
 });
 
 it('should perform the mass action forn update status for products', function () {
+    // Arrange
+    $procuts = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $procuts = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 
     postJson(route('admin.catalog.products.mass_update'), [
         'indices' => $procuts->pluck('id')->toArray(),
@@ -169,10 +176,11 @@ it('should perform the mass action forn update status for products', function ()
 });
 
 it('should perform the mass action for delete for products', function () {
+    // Arrange
+    $procuts = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $procuts = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 
     postJson(route('admin.catalog.products.mass_delete'), [
         'indices' => $procuts->pluck('id')->toArray(),
@@ -190,9 +198,11 @@ it('should perform the mass action for delete for products', function () {
 });
 
 it('should search the product', function () {
-    $this->loginAsAdmin();
-
+    // Arrange
     $product = (new ProductFaker)->getSimpleProductFactory()->count(2)->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.catalog.products.search', [
         'query' => $product[0]->name,
@@ -204,9 +214,7 @@ it('should search the product', function () {
 });
 
 it('should download the product which is downloadable', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $attribute = Attribute::factory()->create([
         'type' => 'file',
     ]);
@@ -233,6 +241,9 @@ it('should download the product which is downloadable', function () {
     $atttributeValues->text_value = $fileName;
     $atttributeValues->save();
 
+    // Act and Assert
+    $this->loginAsAdmin();
+    
     get(route('admin.catalog.products.file.download', [$product->id, $attribute->id]))
         ->assertOk();
 

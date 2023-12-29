@@ -74,10 +74,11 @@ it('should store newly created cms pages', function () {
 });
 
 it('should show the edit cms page', function () {
+    // Arrange
+    $cms = Page::factory()->hasTranslations()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cms = Page::factory()->hasTranslations()->create();
 
     get(route('admin.cms.edit', $cms->id))
         ->assertOk()
@@ -86,12 +87,13 @@ it('should show the edit cms page', function () {
 });
 
 it('should update the cms page', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $cms = Page::factory()->hasTranslations()->create();
 
     $localeCode = core()->getCurrentLocale()->code;
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     putJson(route('admin.cms.update', $cms->id), [
         $localeCode => [
@@ -117,10 +119,11 @@ it('should update the cms page', function () {
 });
 
 it('should delete the cms page', function () {
+    // Arrange
+    $cms = Page::factory()->hasTranslations()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cms = Page::factory()->hasTranslations()->create();
 
     deleteJson(route('admin.cms.delete', $cms->id))
         ->assertOk()
@@ -132,10 +135,11 @@ it('should delete the cms page', function () {
 });
 
 it('should mass delete cms pages', function () {
+    // Arrange
+    $cmsPages = Page::factory()->count(2)->hasTranslations()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cmsPages = Page::factory()->count(2)->hasTranslations()->create();
 
     postJson(route('admin.cms.mass_delete'), [
         'indices' => $cmsPages->pluck('id')->toArray(),
