@@ -3,8 +3,6 @@
 namespace Webkul\Sales\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Customer\Models\Customer;
-use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 

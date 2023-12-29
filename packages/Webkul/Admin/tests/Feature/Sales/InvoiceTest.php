@@ -3,6 +3,7 @@
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Invoice;
@@ -221,9 +222,19 @@ it('should send duplicate mail to provided email address', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
@@ -290,9 +301,19 @@ it('should print/download the invoice', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 

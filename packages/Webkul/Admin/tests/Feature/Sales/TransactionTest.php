@@ -3,6 +3,7 @@
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Sales\Generators\InvoiceSequencer;
@@ -26,6 +27,7 @@ afterEach(function () {
     Cart::query()->delete();
     Product::query()->delete();
     Invoice::query()->delete();
+    CustomerAddress::query()->delete();
 });
 
 it('should return the index page of transactions', function () {
@@ -79,19 +81,30 @@ it('should store the order transaction', function () {
     $payment = OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
-    
-    OrderAddress::factory()->create([
-        'order_id'    => $order->id,
-        'cart_id'     => $cartId,
+
+    $customerAddress = CustomerAddress::factory()->create([
         'customer_id' => $customer->id,
-        'first_name'  => $customer->first_name,
-        'last_name'   => $customer->last_name,
-        'email'       => $customer->email,
+    ]);
+
+    OrderAddress::factory()->create([
+        'order_id'     => $order->id,
+        'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $invoice = Invoice::factory([
-        'order_id' => $order->id,
-        'state'    => 'paid',
+        'order_id'         => $order->id,
+        'sub_total'        => $order->grand_total,
+        'base_sub_total'   => $order->grand_total,
+        'grand_total'      => $order->grand_total,
+        'base_grand_total' => $order->grand_total,
+        'increment_id'     => app(InvoiceSequencer::class)->resolveGeneratorClass(),
     ])->create();
 
     // Act and Assert
@@ -153,9 +166,19 @@ it('should view the transaction', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 

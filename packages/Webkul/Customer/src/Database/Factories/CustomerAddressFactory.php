@@ -3,8 +3,6 @@
 namespace Webkul\Customer\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Arr;
-use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 
 class CustomerAddressFactory extends Factory
@@ -36,7 +34,7 @@ class CustomerAddressFactory extends Factory
             'city'            => $this->faker->city,
             'postcode'        => $this->faker->postcode,
             'phone'           => $this->faker->e164PhoneNumber,
-            'default_address' => Arr::random([0, 1]),
+            'default_address' => $this->faker->randomElement([0, 1]),
             'address_type'    => CustomerAddress::ADDRESS_TYPE,
         ];
     }

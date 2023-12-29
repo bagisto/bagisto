@@ -6,7 +6,6 @@ use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
@@ -16,7 +15,6 @@ use function Pest\Laravel\postJson;
 afterEach(function () {
     // Cleaning up the row  which are creating
     Customer::query()->delete();
-    OrderAddress::query()->delete();
     Order::query()->delete();
     OrderPayment::query()->delete();
     CartItem::query()->delete();

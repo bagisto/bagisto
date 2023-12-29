@@ -3,6 +3,7 @@
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Order;
@@ -26,6 +27,7 @@ afterEach(function () {
     Product::query()->delete();
     Shipment::query()->delete();
     ShipmentItem::query()->delete();
+    CustomerAddress::query()->delete();
 });
 
 it('should returns the shipment page', function () {
@@ -80,9 +82,19 @@ it('should store the shimpment to the order', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
@@ -158,10 +170,20 @@ it('should return the view page of shipments', function () {
         'order_id' => $order->id,
     ]);
 
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
     $address = OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cartId,
-        'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+        'address1'     => $customerAddress->address1,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     $shipment = Shipment::factory()->create([
