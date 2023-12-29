@@ -93,7 +93,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <!-- Email -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.email')
                                     </x-admin::form.control-group.label>
@@ -124,7 +124,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Subscribed -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
                                     </x-admin::form.control-group.label>

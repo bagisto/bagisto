@@ -60,7 +60,7 @@
                     </x-admin::form.control-group.control>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.create.name')
                         </x-admin::form.control-group.label>
@@ -91,7 +91,7 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <div class="mb-2.5">
+                    <div>
                         <!-- Parent category -->
                         <label class="block mb-2.5 text-xs text-gray-800 dark:text-white font-medium leading-6">
                             @lang('admin::app.catalog.categories.create.parent-category')
@@ -124,7 +124,7 @@
 
                     <!-- Description -->
                     <v-description v-slot="{ isDescriptionRequired }">
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label ::class="{ 'required' : isDescriptionRequired}">
                                 @lang('admin::app.catalog.categories.create.description')
                             </x-admin::form.control-group.label>
@@ -197,7 +197,7 @@
 
                     <div class="mt-8">
                         <!-- Meta Title -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.meta-title')
                             </x-admin::form.control-group.label>
@@ -214,7 +214,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Slug -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.categories.create.slug')
                             </x-admin::form.control-group.label>
@@ -246,7 +246,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.meta-keywords')
                             </x-admin::form.control-group.label>
@@ -262,7 +262,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Meta Description -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.meta-description')
                             </x-admin::form.control-group.label>
@@ -292,38 +292,36 @@
 
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base font-semibold">
+                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
                     </x-slot:header>
 
                     <x-slot:content>
                         <!-- Position -->
-                        <div class="mb-2.5">
-                            <x-admin::form.control-group class="mb-2.5">
-                                <x-admin::form.control-group.label class="required text-gray-800 dark:text-white">
-                                    @lang('admin::app.catalog.categories.create.position')
-                                </x-admin::form.control-group.label>
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required text-gray-800 dark:text-white">
+                                @lang('admin::app.catalog.categories.create.position')
+                            </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="position"
-                                    :value="old('position')"
-                                    rules="required"
-                                    :label="trans('admin::app.catalog.categories.create.position')"
-                                    :placeholder="trans('admin::app.catalog.categories.create.enter-position')"
-                                >
-                                </x-admin::form.control-group.control>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="position"
+                                :value="old('position')"
+                                rules="required"
+                                :label="trans('admin::app.catalog.categories.create.position')"
+                                :placeholder="trans('admin::app.catalog.categories.create.enter-position')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="position"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                        </div>
+                            <x-admin::form.control-group.error
+                                control-name="position"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
                         <!-- Display Mode  -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required text-gray-800 dark:text-white font-medium required">
                                 @lang('admin::app.catalog.categories.create.display-mode')
                             </x-admin::form.control-group.label>
@@ -382,14 +380,14 @@
                 <!-- Filterable Attributes -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required text-gray-600 dark:text-gray-300 text-base p-2.5 font-semibold">
+                        <p class="required p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.create.filterable-attributes')
                         </p>
                     </x-slot:header>
 
                     <x-slot:content>
                         @foreach ($attributes as $attribute)
-                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                            <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none last:!mb-0">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="attributes[]"
@@ -401,12 +399,12 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.label
-                                    :for="$attribute->name ?? $attribute->admin_name"
-                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                <label
+                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    for="{{ $attribute->name ?? $attribute->admin_name }}"
                                 >
                                     {{ $attribute->name ?? $attribute->admin_name }}
-                                </x-admin::form.control-group.label>
+                                </label>
                             </x-admin::form.control-group>
                         @endforeach
 

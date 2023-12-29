@@ -496,7 +496,7 @@
                 >
                     <div class="p-4">
                         <!-- Note -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 name="note" 
