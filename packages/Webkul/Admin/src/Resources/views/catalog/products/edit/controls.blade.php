@@ -14,7 +14,7 @@
                 id="{{ $attribute->code }}"
                 v-bind="field"
                 :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                class="w-full py-2.5 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 @if ($attribute->code == 'url_key') v-slugify @endif
                 @if ($attribute->code == 'name') v-slugify-target:url_key="setValues" @endif
             >
@@ -23,22 +23,19 @@
         @break
 
     @case('price')
-        <div class="relative">
-            <span class="absolute ltr:left-4 rtl:right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-300 {{ $attribute->code == 'price' ? 'text-xl ' : '' }}">
+        <x-admin::form.control-group.control
+            type="price"
+            :name="$attribute->code"
+            :id="$attribute->code"
+            ::rules="{{ $attribute->validations }}"
+            :label="$attribute->admin_name"
+            value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
+            :class="($attribute->code == 'price' ? 'py-2.5 bg-gray-50 text-xl font-bold' : '')"
+        >
+            <x-slot:currency :class="'dark:text-gray-300 ' . ($attribute->code == 'price' ? 'bg-gray-50 dark:bg-gray-900 text-xl' : '')">
                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
-            </span>
-
-            <x-admin::form.control-group.control
-                type="text"
-                :name="$attribute->code"
-                :id="$attribute->code"
-                ::rules="{{ $attribute->validations }}"
-                :label="$attribute->admin_name"
-                value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
-                :class="'ltr:pl-8 rtl:pr-8 ' . ($attribute->code == 'price' ? 'py-2 bg-gray-50 text-xl font-bold' : '')"
-            >
-            </x-admin::form.control-group.control>
-        </div>
+            </x-slot:currency>
+        </x-admin::form.control-group.control>
 
         @break
 
@@ -143,7 +140,7 @@
         @endphp
 
         @foreach ($attribute->options as $option)
-            <div class="flex gap-2.5 py-1.5 items-center">
+            <div class="flex gap-2.5 py-2.5 items-center">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[]'"
@@ -216,7 +213,7 @@
                     name="{{ $attribute->code }}"
                     id="{{ $attribute->code }}"
                     :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:file:bg-gray-800 dark:file:dark:text-white focus:border-gray-400 dark:focus:border-gray-400 dark:border-gray-800"
+                    class="w-full py-2.5 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:file:bg-gray-800 dark:file:dark:text-white focus:border-gray-400 dark:focus:border-gray-400 dark:border-gray-800"
                     @change="handleChange"
                     @blur="handleBlur"
                 >

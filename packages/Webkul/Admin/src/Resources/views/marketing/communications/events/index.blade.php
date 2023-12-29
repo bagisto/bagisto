@@ -149,7 +149,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- Event Name -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.communications.events.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -172,7 +172,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Event Description -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.communications.events.index.create.description')
                                 </x-admin::form.control-group.label>
@@ -196,7 +196,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Event Date -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.marketing.communications.events.index.create.date')
                                 </x-admin::form.control-group.label>

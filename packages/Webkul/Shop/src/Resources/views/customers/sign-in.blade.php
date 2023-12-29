@@ -117,7 +117,7 @@
                             ></label>
 
                             <label
-                                class="text-base text-[#6E6E6E] max-sm:text-xs pl-0 select-none cursor-pointer"
+                                class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
                                 for="show-password"
                             >
                                 @lang('shop::app.customers.login-form.show-password')
@@ -146,7 +146,7 @@
                     <!-- Submit Button -->
                     <div class="flex gap-9 flex-wrap mt-8 items-center">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ml-0 mx-auto rounded-2xl text-base text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ltr:ml-0 rtl:mr-0 mx-auto rounded-2xl text-base text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.login-form.button-title')

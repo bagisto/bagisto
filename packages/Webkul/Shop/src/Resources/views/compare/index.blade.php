@@ -67,17 +67,17 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 ltr:border-l-[1px] rtl:border-r-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
                                         class="relative group"
                                         v-for="product in items"
                                     >
                                         <span
-                                            class="hidden absolute top-16 right-5 justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-2xl group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            class="hidden absolute top-16 ltr:right-5 rtl:left-5 justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-2xl group-hover:flex group-hover:z-[1] transition-all duration-300"
                                             @click="remove(product.id)"
                                         ></span>
 
-                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-5 max-sm:pl-0"></x-shop::products.card>
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0"></x-shop::products.card>
                                     </div>
                                 </div>
                             </div>
@@ -93,9 +93,9 @@
                                     </p>
                                 </div>
 
-                                <div class="flex gap-3 border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                <div class="flex gap-3 ltr:border-l-[1px] rtl:border-r-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
-                                        class="w-[311px] max-w-[311px] pr-0 p-5 max-sm:pl-0"
+                                        class="w-[311px] max-w-[311px] ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0"
                                         v-for="(product, index) in items"
                                     >
                                         <p class="hidden mb-1.5 text-sm font-medium max-sm:block">

@@ -312,7 +312,7 @@
                                 </div>
 
                                 <!-- Email -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.customers.index.create.email')
                                     </x-admin::form.control-group.label>
@@ -334,7 +334,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Number -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.customers.index.create.contact-number')
                                     </x-admin::form.control-group.label>
@@ -355,7 +355,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.customers.index.create.date-of-birth')
                                     </x-admin::form.control-group.label>
