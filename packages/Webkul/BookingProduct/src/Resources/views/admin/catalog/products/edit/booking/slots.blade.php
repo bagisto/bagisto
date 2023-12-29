@@ -24,6 +24,7 @@
 
         <!-- Table Information -->
         <div class="overflow-x-auto">
+            <!-- For Same Slot All Days -->
             <template
                 v-if="same_for_week.length && parseInt(bookingProduct.same_slot_all_days)"
                 v-for="(data, index) in same_for_week"
@@ -69,6 +70,7 @@
                 </div>
             </template>
 
+            <!-- For Not Same Slot All Days -->
             <template
                 v-else-if="different_for_week.length"
                 v-for="(slot, slotIndex) in different_for_week"
@@ -76,7 +78,11 @@
             >
                 <div class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800">
                     <template v-for="(item, itemIndex) in slot">
-                        <div class="text-base text-white my-2" v-text="itemIndex"></div>
+                        <div
+                            class="text-base text-white my-2"
+                            v-text="itemIndex"
+                        >
+                        </div>
 
                         <template v-for="(time, timeIndex) in item">
                             <div class="flex gap-2.5 justify-between py-3 cursor-pointer">
@@ -121,52 +127,11 @@
                 </div>
             </template>
 
+            <!-- For Empty Illustration -->
             <div v-else>
                 <v-empty-info ::type="bookingType"></v-empty-info>
             </div>
         </div>
-
-        {{-- <div v-for="(slot, slotIndex) in different_for_week" :key="slotIndex">
-            <div class="border-b border-slate-300 dark:border-gray-800">
-                <div class="flex place-content-start justify-between mb-2.5" v-for="(time, timeIndex) in slot" :key="timeIndex">
-                    <div class="grid gap-1.5 place-content-start">
-                        <p class="text-gray-600 dark:text-gray-300">
-                            From - @{{ time.from }}
-                        </p>
-    
-                        <input
-                            type="hidden"
-                            :name="getFieldName(slotIndex, timeIndex, 'from')"
-                            :value="time.from"
-                        />
-                        
-                        <p class="text-gray-600 dark:text-gray-300">
-                            To - @{{ time.to }}
-                        </p>
-    
-                        <input
-                            type="hidden"
-                            :name="getFieldName(slotIndex, timeIndex, 'to')"
-                            :value="time.to"
-                        />
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="flex gap-x-5 items-center place-content-start text-right">
-                        <p
-                            class="text-blue-600 cursor-pointer transition-all hover:underline"
-                            @click="editSlot(index)"
-                        >
-                            Edit
-                        </p>
-                        
-                        <p class="text-red-600 cursor-pointer transition-all hover:underline">
-                            Delete
-                        </p>
-                    </div>
-                </div>
-            </div>
-          </div> --}}
 
         <!-- Drawer component -->
         <x-booking::form
@@ -282,7 +247,7 @@
             </form>
         </x-booking::form>
 
-        <!-- Edit Drawer component -->
+        <!-- Single Edit Drawer component -->
         <x-booking::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
@@ -451,13 +416,13 @@
                     },
     
                     week_days: [
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.sunday') }}",
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.monday') }}",
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.tuesday') }}",
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.wednesday') }}",
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.thursday') }}",
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.friday') }}",
-                        "{{ __('booking::app.admin.catalog.products.edit.type.booking.modal.slot.saturday') }}"
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.sunday') }}",
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.monday') }}",
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.tuesday') }}",
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.wednesday') }}",
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.thursday') }}",
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.friday') }}",
+                        "{{ trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.saturday') }}"
                     ],
 
                     same_for_week: [],
@@ -478,7 +443,16 @@
                 if (this.bookingProduct.same_slot_all_days) {
                     this.same_for_week = this.bookingProduct.slots;
                 } else {
-                    this.different_for_week = this.bookingProduct.slots;
+                    let updatedData = '';   
+
+                    updatedData = this.bookingProduct.slots.map((item, index) => {
+                        let day = this.week_days[index];
+                        let updatedItem = {};
+                        updatedItem[day] = item;
+                        return updatedItem;
+                    });
+
+                    this.different_for_week = updatedData
                 }
             },
 
