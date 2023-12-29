@@ -6,20 +6,20 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-booking-information-template">
-            <div class="booking-information">
-                @if ($bookingProduct->location)
+            @if ($bookingProduct->location)
+                <div class="grid grid-cols-2 gap-2.5 my-2.5">
                     <div class="flex">
                         <div class="icon-location font-bold"></div>
 
-                        <div class="block">
+                        <div>
                             <div>
                                 @lang('booking::app.shop.products.location')
                             </div>
-    
+
                             <div>
                                 {{ $bookingProduct->location }}
                             </div>
-    
+
                             <a
                                 href="https://maps.google.com/maps?q={{ $bookingProduct->location }}"
                                 target="_blank"
@@ -28,10 +28,10 @@
                             </a>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
 
-                @include ('booking::shop.products.view.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
-            </div>
+            @include ('booking::shop.products.view.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
         </script>
 
         <script type="module">
