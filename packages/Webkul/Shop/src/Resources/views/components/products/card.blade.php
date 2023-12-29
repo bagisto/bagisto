@@ -34,14 +34,14 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-sm"
+                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5  bg-[#E51A1A] rounded-[44px] text-white text-sm"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
+                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -53,7 +53,7 @@
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl"
+                                class="flex justify-center items-center absolute top-5 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -69,7 +69,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 right-5 bg-white rounded-md cursor-pointer text-2xl"
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 ltr:right-5 rtl:left-5 bg-white rounded-md cursor-pointer text-2xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -148,14 +148,14 @@
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-sm"
+                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5 bg-[#E51A1A] rounded-[44px] text-white text-sm"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="inline-block absolute top-5 left-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
+                        class="inline-block absolute top-5 ltr:left-5 rtl:right-5 px-2.5 bg-navyBlue rounded-[44px] text-white text-sm"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -167,7 +167,7 @@
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span 
-                                class="flex justify-center items-center absolute top-5 right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
+                                class="flex justify-center items-center absolute top-5 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -183,7 +183,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span 
-                                class="icon-compare flex justify-center items-center absolute top-16 right-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
+                                class="icon-compare flex justify-center items-center absolute top-16 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md text-2xl cursor-pointer"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"

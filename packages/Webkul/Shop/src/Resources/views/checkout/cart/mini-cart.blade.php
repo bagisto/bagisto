@@ -21,7 +21,7 @@
                     ></span>
 
                     <span
-                        class="absolute px-2 -top-4 left-5 py-1.5 bg-[#060C3B] rounded-[44px] text-white text-xs font-semibold leading-[9px]"
+                        class="absolute px-2 -top-4 ltr:left-5 rtl:right-5 py-1.5 bg-[#060C3B] rounded-[44px] text-white text-xs font-semibold leading-[9px]"
                         v-if="cart?.items_qty"
                     >
                         @{{ cart.items_qty }}

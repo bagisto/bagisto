@@ -14,7 +14,7 @@
                 <p class="shimmer w-[150px] h-6"></p>
 
                 <div class="flex gap-6 items-center">
-                    <div class="shimmer block w-6 h-6 m-0 ml-0 rounded-xl"></div>
+                    <div class="shimmer block w-6 h-6 m-0 ltr:ml-0 rtl:mr-0 rounded-xl"></div>
                 </div>
             </div>
 

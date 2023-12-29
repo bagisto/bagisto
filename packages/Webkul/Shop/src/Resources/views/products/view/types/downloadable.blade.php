@@ -50,7 +50,7 @@
                         
                         <label
                             for="{{ $link->id }}"
-                            class="ml-1 cursor-pointer"
+                            class="ltr:ml-1 rtl:mr-1 cursor-pointer"
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>

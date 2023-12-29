@@ -265,7 +265,7 @@
             ></label>
 
             <label
-                class="text-base text-[#6E6E6E] max-sm:text-xs pl-0 select-none cursor-pointer"
+                class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
                 for="is-subscribed"
             >
                 @lang('shop::app.customers.account.profile.subscribe-to-newsletter')
