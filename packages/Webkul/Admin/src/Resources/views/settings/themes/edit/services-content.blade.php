@@ -158,9 +158,11 @@
                 <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
-                                @lang('admin::app.settings.themes.edit.services-content.general')
-                            </p>
+                            <div class="flex items-center justify-between">
+                                <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                    @lang('admin::app.settings.themes.edit.services-content.general')
+                                </p>
+                            </div>
                         </x-slot:header>
                     
                         <x-slot:content>
@@ -171,7 +173,7 @@
                             />
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.name')
                                 </x-admin::form.control-group.label>
@@ -194,7 +196,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Short Order -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.sort-order')
                                 </x-admin::form.control-group.label>
@@ -237,7 +239,7 @@
                                 <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group>
+                            <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.status')
                                 </x-admin::form.control-group.label>
@@ -297,7 +299,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Title -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.services-content.title')
                                 </x-admin::form.control-group.label>
@@ -319,7 +321,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Description -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.themes.edit.services-content.description')
                                 </x-admin::form.control-group.label>

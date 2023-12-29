@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.sort')
                         </x-admin::form.control-group.label>
@@ -56,7 +56,7 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.themes.edit.limit')
                         </x-admin::form.control-group.label>
@@ -178,15 +178,17 @@
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
-                            @lang('admin::app.settings.themes.edit.general')
-                        </p>
+                        <div class="flex items-center justify-between">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                @lang('admin::app.settings.themes.edit.general')
+                            </p>
+                        </div>
                     </x-slot:header>
                 
                     <x-slot:content>
                         <input type="hidden" name="type" value="category_carousel">
 
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
                             </x-admin::form.control-group.label>
@@ -209,7 +211,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
                             </x-admin::form.control-group.label>
@@ -251,7 +253,7 @@
                             <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group>
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.status')
                             </x-admin::form.control-group.label>
@@ -306,7 +308,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Key -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.key-input')
                                 </x-admin::form.control-group.label>
@@ -327,7 +329,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Value -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.value-input')
                                 </x-admin::form.control-group.label>

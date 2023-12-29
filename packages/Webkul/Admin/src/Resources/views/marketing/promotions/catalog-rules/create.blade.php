@@ -57,7 +57,7 @@
                                     @lang('admin::app.marketing.promotions.catalog-rules.create.general')
                                 </p>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.name')
                                     </x-admin::form.control-group.label>
@@ -79,7 +79,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.description')
                                     </x-admin::form.control-group.label>
@@ -168,7 +168,7 @@
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.actions')
                                     </p>
 
-                                    <div class="flex  gap-4  max-sm:flex-wrap">
+                                    <div class="flex gap-4 max-sm:flex-wrap">
                                         <div class="w-full">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label class="required">
@@ -280,15 +280,15 @@
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-1.5">
-                                        <p class="text-gray-800 dark:text-white text-base  p-2.5 font-semibold">
+                                    <div class="flex items-center justify-between">
+                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.settings')
                                         </p>
                                     </div>
                                 </x-slot:header>
 
                                 <x-slot:content>
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.priority')
                                         </x-admin::form.control-group.label>
@@ -310,13 +310,13 @@
                                     </x-admin::form.control-group>
 
                                     <!-- channels -->
-                                    <div class="mb-2.5">
+                                    <div class="mb-4">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.channels')
                                         </x-admin::form.control-group.label>
 
                                         @foreach(core()->getAllChannels() as $channel)
-                                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="channels[]"
@@ -329,12 +329,12 @@
                                                 >
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
-                                                    :for="'channel_' . '_' . $channel->id"
-                                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                                <label
+                                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                    for="{{ 'channel_' . '_' . $channel->id }}"
                                                 >
                                                     {{ core()->getChannelName($channel) }}
-                                                </x-admin::form.control-group.label>
+                                                </label>
                                             </x-admin::form.control-group>
                                         @endforeach
 
@@ -345,13 +345,13 @@
                                     </div>
 
                                     <!-- Customer Groups -->
-                                    <div class="mb-2.5">
+                                    <div class="mb-4">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.customer-groups')
                                         </x-admin::form.control-group.label>
 
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="customer_groups[]"
@@ -364,12 +364,12 @@
                                                 >
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
-                                                    :for="'customer_group_' . '_' . $customerGroup->id"
-                                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                                <label
+                                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                    for="{{ 'customer_group_' . '_' . $customerGroup->id }}"
                                                 >
                                                     {{ $customerGroup->name }}
-                                                </x-admin::form.control-group.label>
+                                                </label>
                                             </x-admin::form.control-group>
                                         @endforeach
 
@@ -380,7 +380,7 @@
                                     </div>
 
                                     <!-- Status -->
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.status')
                                         </x-admin::form.control-group.label>
@@ -408,8 +408,8 @@
                             <!-- Marketing Time-->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-1.5">
-                                        <p class="text-gray-800 dark:text-white text-base  p-2.5 font-semibold">
+                                    <div class="flex items-center justify-between">
+                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                             @lang('admin::app.marketing.promotions.catalog-rules.create.marketing-time')
                                         </p>
                                     </div>
@@ -417,7 +417,7 @@
 
                                 <x-slot:content>
                                     <div class="flex gap-4">
-                                        <x-admin::form.control-group class="mb-2.5">
+                                        <x-admin::form.control-group class="!mb-0">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.catalog-rules.create.from')
                                             </x-admin::form.control-group.label>
@@ -438,7 +438,7 @@
                                             </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group class="mb-2.5">
+                                        <x-admin::form.control-group class="!mb-0">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.marketing.promotions.catalog-rules.create.to')
                                             </x-admin::form.control-group.label>
