@@ -37,11 +37,9 @@ class CustomerRepository extends Repository
      */
     public function getCurrentGroup()
     {
-        if ($customer = auth()->guard()->user()) {
-            return $customer->group;
-        }
+        $customer = auth()->guard()->user();
 
-        return core()->getGuestCustomerGroup();
+        return $customer->group ?? core()->getGuestCustomerGroup();
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace Webkul\Theme\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Admin\Database\Factories\ThemeFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Theme\Contracts\ThemeCustomization as ThemeCustomizationContract;
 
@@ -90,4 +92,12 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
         'status',
         'channel_id',
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return ThemeFactory::new();
+    }
 }

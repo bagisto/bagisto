@@ -146,6 +146,7 @@
                                     :label="trans('admin::app.settings.locales.index.create.code')"
                                     :placeholder="trans('admin::app.settings.locales.index.create.code')"
                                     v-model="locale.code"
+                                    ::disabled="locale.id"
                                 >
                                 </x-admin::form.control-group.control>
 

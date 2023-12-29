@@ -78,13 +78,11 @@ class LocaleController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'code'      => ['required', 'unique:locales,code,' . request()->id, new \Webkul\Core\Rules\Code],
             'name'      => 'required',
             'direction' => 'in:ltr,rtl',
         ]);
 
         $data = request()->only([
-            'code',
             'name',
             'direction',
         ]);
