@@ -43,7 +43,7 @@
                 </p>
 
                 <p
-                    class="mr-[50px] text-xs font-medium cursor-pointer"
+                    class="ltr:mr-[50px] rtl:ml-[50px] text-xs font-medium cursor-pointer"
                     @click="clearFilters('filter', '')"
                 >
                     @lang('shop::app.categories.filters.clear-all')
