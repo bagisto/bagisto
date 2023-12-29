@@ -142,12 +142,8 @@
                     @endforeach
                 @else
                     @foreach ($field['options'] as $option)
-                        @php
-                            $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
-                        @endphp
-
                         <option
-                            value="{{ $value }}"
+                            value="{{ $option['value'] ?? 0 }}"
                             {{ $value == $selectedOption ? 'selected' : ''}}
                         >
                             @lang($option['title'])
@@ -160,34 +156,41 @@
         @elseif ($field['type'] == 'multiselect')
             @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
-            <x-admin::form.control-group.control
-                type="select"
-                :name="$name"
-                :id="$name"
-                :rules="$validations"
-                :label="trans($field['title'])"
+            <v-field
+                name="{{ $name }}[]"
+                id="{{ $name }}"
+                rules="{{ $validations }}"
+                label="{{ trans($field['title']) }}"
                 multiple
             >
-                @if (isset($field['repository']))
-                    @foreach ($value as $key => $option)
+                <select
+                    name="{{ $name }}[]"
+                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                    :class="[errors['{{ $name }}[]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    multiple
+                >
+                    @if (isset($field['repository']))
+                        @foreach ($value as $key => $option)
+                            <option 
+                                value="{{ $key }}"
+                                {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}
+                            >
+                                {{ trans($value[$key]) }}
+                            </option>
+                        @endforeach
+                    @else
+                        @foreach ($field['options'] as $option)
+                            <option 
+                                value="{{ $value = $option['value'] ?? 0 }}"
+                                {{ in_array($value, explode(',', $selectedOption)) ? 'selected' : ''}}
+                            >
+                                @lang($option['title'])
+                            </option>
+                         @endforeach
+                    @endif
+                </select>
+            </v-field>
 
-                        <option value="{{ $key }}" {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            @lang($value[$key])
-                        </option>
-
-                    @endforeach
-                @else
-                    @foreach ($field['options'] as $option)
-                        @php
-                            $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
-                        @endphp
-
-                        <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            @lang($option['title'])
-                        </option>
-                    @endforeach
-                @endif
-            </x-admin::form.control-group.control>
 
         <!-- Boolean/Switch input -->
         @elseif ($field['type'] == 'boolean')

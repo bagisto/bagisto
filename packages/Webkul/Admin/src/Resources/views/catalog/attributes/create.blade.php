@@ -117,21 +117,22 @@
                         >
                             <div class="flex justify-between items-center mb-3">
                                 <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
-                                    @lang('admin::app.catalog.attributes.create.title')
+                                    @lang('admin::app.catalog.attributes.create.options')
                                 </p>
 
                                 <!-- Add Row Button -->
                                 <div
                                     class="secondary-button text-sm"
-                                    @click="$refs.addOptionsRow.toggle()"
+                                    @click="$refs.addOptionsRow.toggle();swatchValue=''"
                                 >
                                     @lang('admin::app.catalog.attributes.create.add-row')
                                 </div>
                             </div>
 
                             <!-- For Attribute Options If Data Exist -->
-                            <template v-if="this.options?.length">
+                            <div class="mt-4 overflow-x-auto">
                                 <div class="flex gap-4 max-sm:flex-wrap">
+                                    <!-- Input Options -->
                                     <x-admin::form.control-group class="w-full mb-2.5">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.attributes.create.input-options')
@@ -192,8 +193,8 @@
                                     </div>
                                 </div>
 
-                                <!-- Table Information -->
-                                <div class="mt-4 overflow-x-auto">
+                                <template v-if="this.options?.length">
+                                    <!-- Table Information -->
                                     <x-admin::table>
                                         <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
@@ -264,7 +265,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="w-[25px] h-[25px] rounded-md"
+                                                                class="w-[25px] h-[25px] border border-gray-200 dark:border-gray-800 rounded-md"
                                                                 :style="{ background: element.params.swatch_value }"
                                                             >
                                                             </div>
@@ -324,31 +325,31 @@
                                             </template>
                                         </draggable>
                                     </x-admin::table>
-                                </div>
-                            </template>
+                                </template>
 
-                            <!-- For Empty Attribute Options -->
-                            <template v-else>
-                                <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
-                                    <!-- Attribute Option Image -->
-                                    <img
-                                        class="w-20 h-20 rounded dark:invert dark:mix-blend-exclusion"
-                                        src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                        alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
-                                    />
+                                <!-- For Empty Attribute Options -->
+                                <template v-else>
+                                    <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
+                                        <!-- Attribute Option Image -->
+                                        <img
+                                            class="w-[120px] h-[120px] dark:invert dark:mix-blend-exclusion"
+                                            src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                                            alt="@lang('admin::app.catalog.attributes.create.add-attribute-options')"
+                                        />
 
-                                    <!-- Add Attribute Options Information -->
-                                    <div class="flex flex-col gap-1.5 items-center">
-                                        <p class="text-base text-gray-400 font-semibold">
-                                            @lang('admin::app.catalog.attributes.create.add-attribute-options')
-                                        </p>
+                                        <!-- Add Attribute Options Information -->
+                                        <div class="flex flex-col gap-1.5 items-center">
+                                            <p class="text-base text-gray-400 font-semibold">
+                                                @lang('admin::app.catalog.attributes.create.add-attribute-options')
+                                            </p>
 
-                                        <p class="text-gray-400">
-                                            @lang('admin::app.catalog.attributes.create.add-options-info')
-                                        </p>
+                                            <p class="text-gray-400">
+                                                @lang('admin::app.catalog.attributes.create.add-options-info')
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </template>
+                                </template>
+                            </div>
                         </div>
                     </div>
 
@@ -748,6 +749,14 @@
                                     >
                                     </x-admin::form.control-group.control>
 
+                                    <div class="hidden">
+                                        <x-admin::media.images
+                                            name="swatch_value"
+                                            ::uploaded-images='swatchValue.image'
+                                        >
+                                        </x-admin::media.images>
+                                    </div>
+
                                     <x-admin::form.control-group.error
                                         control-name="swatch_value"
                                     >
@@ -756,7 +765,7 @@
 
                                 <!-- Color Input -->
                                 <x-admin::form.control-group
-                                    class="w-full"
+                                    class="w-2/6"
                                     v-if="swatchType == 'color'"
                                 >
                                     <x-admin::form.control-group.label>
@@ -873,6 +882,12 @@
                         isNullOptionChecked: false,
 
                         options: [],
+
+                        swatchValue: [
+                            {
+                                image: [],
+                            }
+                        ],
                     }
                 },
 
@@ -890,16 +905,21 @@
                             });
                         } else {
                             this.options.push({
-                                id: 'option_' + this.optionRowCount++,
+                                id: 'option_' + this.optionRowCount,
                                 params
                             });
+
+                            params.id = 'option_' + this.optionRowCount;
+                            this.optionRowCount++;
                         }
 
                         let formData = new FormData(this.$refs.createOptionsForm);
 
                         const sliderImage = formData.get("swatch_value[]");
 
-                        params.swatch_value = sliderImage;
+                        if (sliderImage) {
+                            params.swatch_value = sliderImage;
+                        }
 
                         this.$refs.addOptionsRow.toggle();
 
@@ -912,6 +932,12 @@
 
                     editModal(values) {
                         values.params.id = values.id;
+
+                        this.swatchValue = {
+                            image: value.swatch_value_url
+                            ? [{ id: value.id, url: value.swatch_value_url }]
+                            : [],
+                        };
 
                         this.$refs.modelForm.setValues(values.params);
 
@@ -936,9 +962,9 @@
                         // use settimeout because need to wait for render dom before set the src or get the ref value
                         setTimeout(() => {
                             this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
-                        }, 0);
 
-                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
+                            this.$refs['imageInput_' + event.id].files = dataTransfer.files;
+                        }, 0);
                     }
                 },
             });
