@@ -21,7 +21,7 @@ class CurrencyExchangeRateFactory extends Factory
     public function definition()
     {
         return [
-            'rate'            => $rate = rand(1, 100),
+            'rate'            => rand(1, 100),
             'target_currency' => Currency::first()->id,
         ];
     }
