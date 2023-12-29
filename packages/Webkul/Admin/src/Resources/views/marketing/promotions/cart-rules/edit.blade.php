@@ -530,7 +530,7 @@
                                         <div class="w-full">
                                             @php($selectedOption = old('end_other_rules') ?? $cartRule->end_other_rules)
 
-                                            <x-admin::form.control-group>
+                                            <x-admin::form.control-group class="!mb-0">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.marketing.promotions.cart-rules.edit.end-of-other-rules')
                                                 </x-admin::form.control-group.label>
@@ -739,7 +739,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.to')
                                         </x-admin::form.control-group.label>

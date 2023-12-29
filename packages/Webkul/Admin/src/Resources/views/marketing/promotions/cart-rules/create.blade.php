@@ -501,7 +501,7 @@
 
                                     <div class="flex gap-4 justify-between max-sm:flex-wrap">
                                         <div class="w-full">
-                                            <x-admin::form.control-group>
+                                            <x-admin::form.control-group class="!mb-0">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.marketing.promotions.cart-rules.create.end-of-other-rules')
                                                 </x-admin::form.control-group.label>
@@ -706,7 +706,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.create.to')
                                         </x-admin::form.control-group.label>
