@@ -48,7 +48,7 @@
                     <x-slot:content>
                         {!! view_render_event('admin.customers.addresses.create.before') !!}
 
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="customer_id"
@@ -59,7 +59,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Company Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.addresses.create.company-name')
                                 </x-admin::form.control-group.label>
@@ -79,7 +79,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Vat Id -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.addresses.create.vat-id')
                                 </x-admin::form.control-group.label>
@@ -101,7 +101,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- First Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.first-name')
                                 </x-admin::form.control-group.label>
@@ -122,7 +122,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Last Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.last-name')
                                 </x-admin::form.control-group.label>
@@ -144,7 +144,7 @@
                         </div>
 
                         <!-- Street Address -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.customers.addresses.create.street-address')
                             </x-admin::form.control-group.label>
@@ -180,7 +180,7 @@
 
                         <!--need to check this -->
                         <div v-if="streetLineCount && streetLineCount > 1" v-for="index in streetLineCount">
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.control
                                     type="text"
                                     ::name="'address1[' + index + ']'"
@@ -199,7 +199,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- City -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.city')
                                 </x-admin::form.control-group.label>
@@ -220,7 +220,7 @@
                             </x-admin::form.control-group>
 
                             <!-- PostCode -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.post-code')
                                 </x-admin::form.control-group.label>
@@ -243,7 +243,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- Country Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.country')
                                 </x-admin::form.control-group.label>
@@ -267,7 +267,7 @@
                             </x-admin::form.control-group>
 
                             <!-- State Name -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.state')
                                 </x-admin::form.control-group.label>
@@ -311,7 +311,7 @@
 
                         <div class="flex gap-4 max-sm:flex-wrap items-center">
                             <!--Phone number -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full !mb-0">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.create.phone')
                                 </x-admin::form.control-group.label>
@@ -332,7 +332,7 @@
                             </x-admin::form.control-group>
                             
                             <!-- Default Address -->
-                            <x-admin::form.control-group class="flex gap-2.5 w-full mt-5">
+                            <x-admin::form.control-group class="flex gap-2.5 items-center w-full">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="default_address"
@@ -344,12 +344,12 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.label 
+                                <label
+                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                     for="default_address"
-                                    class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer" 
                                 >
                                     @lang('admin::app.customers.addresses.create.default-address')
-                                </x-admin::form.control-group.label>
+                                </label>
 
                                 <x-admin::form.control-group.error
                                     control-name="default_address"

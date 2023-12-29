@@ -34,9 +34,13 @@ class Product
      */
     public function beforeUpdate($id)
     {
-        $product = $this->productRepository->find($id);
-
         $currentURLKey = request()->input('url_key');
+
+        if (! $currentURLKey) {
+            return;
+        }
+
+        $product = $this->productRepository->find($id);
 
         if ($currentURLKey === $product->url_key) {
             return;

@@ -42,9 +42,9 @@
                             <!-- Actions -->
                             <div class="flex justify-end">
                                 @if (bouncer()->hasPermission('marketing.communications.subscribers.edit'))
-                                    <a @click="editModal(record.actions.find(action => action.icon === 'icon-edit')?.url)">
+                                    <a @click="editModal(record.actions.find(action => action.index === 'action_1')?.url)">
                                         <span
-                                            :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
+                                            :class="record.actions.find(action => action.index === 'action_1')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>
@@ -52,9 +52,9 @@
                                 @endif
 
                                 @if (bouncer()->hasPermission('marketing.communications.subscribers.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                    <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
                                         <span
-                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            :class="record.actions.find(action => action.index === 'action_2')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         >
                                         </span>
@@ -93,7 +93,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <!-- Email -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.email')
                                     </x-admin::form.control-group.label>
@@ -124,7 +124,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Subscribed -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.subscribers.index.edit.subscribed')
                                     </x-admin::form.control-group.label>

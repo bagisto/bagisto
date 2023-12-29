@@ -31,7 +31,7 @@
                     </p>
 
                     <div class="flex gap-x-2.5 items-center">
-                        <!-- Cancel Button -->
+                        <!-- Back Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
                             class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -63,7 +63,7 @@
                             </p>
 
                             <!-- Admin name -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.edit.admin')
                                 </x-admin::form.control-group.label>
@@ -86,7 +86,7 @@
 
                             <!-- Locales Inputs -->
                             @foreach ($allLocales as $locale)
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
                                     </x-admin::form.control-group.label>
@@ -116,25 +116,20 @@
                         >
                             <div class="flex justify-between items-center mb-3">
                                 <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
-                                    @lang('admin::app.catalog.attributes.edit.title')
+                                    @lang('admin::app.catalog.attributes.edit.options')
                                 </p>
 
                                 <!-- Add Row Button -->
                                 <div
                                     class="secondary-button text-sm"
-                                    @click="$refs.addOptionsRow.toggle(), swatchValue=''"
+                                    @click="$refs.addOptionsRow.toggle();swatchValue=''"
                                 >
                                     @lang('admin::app.catalog.attributes.edit.add-row')
                                 </div>
                             </div>
 
                             <!-- For Attribute Options If Data Exist -->
-                            @if (
-                                $attribute->type == 'select'
-                                || $attribute->type == 'multiselect'
-                                || $attribute->type == 'checkbox'
-                                || $attribute->type == 'price'
-                            )
+                            <div class="mt-4 overflow-x-auto">
                                 <div class="flex gap-4 max-sm:flex-wrap">
                                     <!-- Input Options -->
                                     <x-admin::form.control-group
@@ -165,13 +160,9 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <div class="w-full mb-2.5">
-                                        <!-- checkbox -->
-                                        <x-admin::form.control-group.label class="invisible">
-                                            @lang('admin::app.catalog.attributes.edit.input-options')
-                                        </x-admin::form.control-group.label>
-
-                                        <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                    <!-- checkbox -->
+                                    <div class="w-full">
+                                        <div class="flex gap-2.5 items-center w-max !mb-0 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
@@ -190,7 +181,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
+                                                class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                             >
                                                 @lang('admin::app.catalog.attributes.edit.create-empty-option')
                                             </label>
@@ -198,158 +189,165 @@
                                     </div>
                                 </div>
 
-                                <!-- Table Information -->
-                                <div class="mt-4 overflow-x-auto">
-                                    <x-admin::table>
-                                        <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
-                                            <x-admin::table.thead.tr>
-                                                <x-admin::table.th class="!p-0"></x-admin::table.th>
-
-                                                <!-- Swatch Select -->
-                                                <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
-                                                    @lang('admin::app.catalog.attributes.edit.swatch')
-                                                </x-admin::table.th>
-
-                                                <!-- Admin tables heading -->
-                                                <x-admin::table.th>
-                                                    @lang('admin::app.catalog.attributes.edit.admin-name')
-                                                </x-admin::table.th>
-
-                                                <!-- Loacles tables heading -->
-                                                @foreach ($allLocales as $locale)
-                                                    <x-admin::table.th>
-                                                        {{ $locale->name . ' (' . $locale->code . ')' }}
+                                <template v-if="optionsData?.length">
+                                    @if (
+                                        $attribute->type == 'select'
+                                        || $attribute->type == 'multiselect'
+                                        || $attribute->type == 'checkbox'
+                                        || $attribute->type == 'price'
+                                    )
+                                        <!-- Table Information -->
+                                        <x-admin::table>
+                                            <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
+                                                <x-admin::table.thead.tr>
+                                                    <x-admin::table.th class="!p-0"></x-admin::table.th>
+    
+                                                    <!-- Swatch Select -->
+                                                    <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
+                                                        @lang('admin::app.catalog.attributes.edit.swatch')
                                                     </x-admin::table.th>
-                                                @endforeach
-
-                                                <!-- Action tables heading -->
-                                                <x-admin::table.th></x-admin::table.th>
-                                            </x-admin::table.thead.tr>
-                                        </x-admin::table.thead>
-
-                                        <!-- Draggable Component -->
-                                        <draggable
-                                            tag="tbody"
-                                            ghost-class="draggable-ghost"
-                                            handle=".icon-drag"
-                                            v-bind="{animation: 200}"
-                                            :list="optionsData"
-                                            item-key="id"
-                                        >
-                                            <template #item="{ element, index }">
-                                                <x-admin::table.thead.tr
-                                                    class="hover:bg-gray-50 dark:hover:bg-gray-950"
-                                                    v-show="! element.isDelete"
-                                                >
-                                                    <input
-                                                        type="hidden"
-                                                        :name="'options[' + element.id + '][isNew]'"
-                                                        :value="element.isNew"
+    
+                                                    <!-- Admin tables heading -->
+                                                    <x-admin::table.th>
+                                                        @lang('admin::app.catalog.attributes.edit.admin-name')
+                                                    </x-admin::table.th>
+    
+                                                    <!-- Loacles tables heading -->
+                                                    @foreach ($allLocales as $locale)
+                                                        <x-admin::table.th>
+                                                            {{ $locale->name . ' (' . $locale->code . ')' }}
+                                                        </x-admin::table.th>
+                                                    @endforeach
+    
+                                                    <!-- Action tables heading -->
+                                                    <x-admin::table.th></x-admin::table.th>
+                                                </x-admin::table.thead.tr>
+                                            </x-admin::table.thead>
+    
+                                            <!-- Draggable Component -->
+                                            <draggable
+                                                tag="tbody"
+                                                ghost-class="draggable-ghost"
+                                                handle=".icon-drag"
+                                                v-bind="{animation: 200}"
+                                                :list="optionsData"
+                                                item-key="id"
+                                            >
+                                                <template #item="{ element, index }">
+                                                    <x-admin::table.thead.tr
+                                                        class="hover:bg-gray-50 dark:hover:bg-gray-950"
+                                                        v-show="! element.isDelete"
                                                     >
-
-                                                    <input
-                                                        type="hidden"
-                                                        :name="'options[' + element.id + '][isDelete]'"
-                                                        :value="element.isDelete"
-                                                    >
-
-                                                    <!-- Draggable Icon -->
-                                                    <x-admin::table.td class="!px-0 text-center">
-                                                        <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
-
                                                         <input
                                                             type="hidden"
-                                                            :name="'options[' + element.id + '][sort_order]'"
-                                                            :value="index"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Swatch Type Image / Color -->
-                                                    <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
-                                                        <!-- Swatch Image -->
-                                                        <div v-if="swatchType == 'image'">
-                                                            <img
-                                                                :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
-                                                                :ref="'image_' + element.id"
-                                                                class="h-[50px] w-[50px]"
-                                                            >
-
-                                                            <input
-                                                                type="file"
-                                                                :name="'options[' + element.id + '][swatch_value]'"
-                                                                class="hidden"
-                                                                :ref="'imageInput_' + element.id"
-                                                            />
-                                                        </div>
-
-                                                        <!-- Swatch Color -->
-                                                        <div v-if="swatchType == 'color'">
-                                                            <div
-                                                                class="w-[25px] h-[25px] rounded-md"
-                                                                :style="{ background: element.swatch_value }"
-                                                            >
-                                                            </div>
-
+                                                            :name="'options[' + element.id + '][isNew]'"
+                                                            :value="element.isNew"
+                                                        >
+    
+                                                        <input
+                                                            type="hidden"
+                                                            :name="'options[' + element.id + '][isDelete]'"
+                                                            :value="element.isDelete"
+                                                        >
+    
+                                                        <!-- Draggable Icon -->
+                                                        <x-admin::table.td class="!px-0 text-center">
+                                                            <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
+    
                                                             <input
                                                                 type="hidden"
-                                                                :name="'options[' + element.id + '][swatch_value]'"
-                                                                v-model="element.swatch_value"
+                                                                :name="'options[' + element.id + '][sort_order]'"
+                                                                :value="index"
                                                             />
-                                                        </div>
-                                                    </x-admin::table.td>
+                                                        </x-admin::table.td>
+    
+                                                        <!-- Swatch Type Image / Color -->
+                                                        <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
+                                                            <!-- Swatch Image -->
+                                                            <div v-if="swatchType == 'image'">
+                                                                <img
+                                                                    :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
+                                                                    :ref="'image_' + element.id"
+                                                                    class="h-[50px] w-[50px]"
+                                                                >
+    
+                                                                <input
+                                                                    type="file"
+                                                                    :name="'options[' + element.id + '][swatch_value]'"
+                                                                    class="hidden"
+                                                                    :ref="'imageInput_' + element.id"
+                                                                />
+                                                            </div>
+    
+                                                            <!-- Swatch Color -->
+                                                            <div v-if="swatchType == 'color'">
+                                                                <div
+                                                                    class="w-[25px] h-[25px] border border-gray-200 dark:border-gray-800 rounded-md"
+                                                                    :style="{ background: element.swatch_value }"
+                                                                >
+                                                                </div>
+    
+                                                                <input
+                                                                    type="hidden"
+                                                                    :name="'options[' + element.id + '][swatch_value]'"
+                                                                    v-model="element.swatch_value"
+                                                                />
+                                                            </div>
+                                                        </x-admin::table.td>
+    
+                                                        <!-- Admin-->
+                                                        <x-admin::table.td>
+                                                            <p
+                                                                class="dark:text-white"
+                                                                v-text="element.admin_name"
+                                                            >
+                                                            </p>
+    
+                                                            <input
+                                                                type="hidden"
+                                                                :name="'options[' + element.id + '][admin_name]'"
+                                                                v-model="element.admin_name"
+                                                            />
+                                                        </x-admin::table.td>
+    
+                                                        <!-- Loacles -->
+                                                        <x-admin::table.td v-for="locale in allLocales">
+                                                            <p
+                                                                class="dark:text-white"
+                                                                v-text="element['locales'][locale.code]"
+                                                            >
+                                                            </p>
+    
+                                                            <input
+                                                                type="hidden"
+                                                                :name="'options[' + element.id + '][' + locale.code + '][label]'"
+                                                                v-model="element['locales'][locale.code]"
+                                                            />
+                                                        </x-admin::table.td>
+    
+                                                        <!-- Actions Button -->
+                                                        <x-admin::table.td class="!px-0">
+                                                            <span
+                                                                class="icon-edit p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                                @click="editOptions(element)"
+                                                            >
+                                                            </span>
+    
+                                                            <span
+                                                                class="icon-delete p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
+                                                                @click="removeOption(element.id)"
+                                                            >
+                                                            </span>
+                                                        </x-admin::table.td>
+                                                    </x-admin::table.thead.tr>
+                                                </template>
+                                            </draggable>
+                                        </x-admin::table>
+                                    @endif
+                                </template>
 
-                                                    <!-- Admin-->
-                                                    <x-admin::table.td>
-                                                        <p
-                                                            class="dark:text-white"
-                                                            v-text="element.admin_name"
-                                                        >
-                                                        </p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][admin_name]'"
-                                                            v-model="element.admin_name"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Loacles -->
-                                                     <x-admin::table.td v-for="locale in allLocales">
-                                                        <p
-                                                            class="dark:text-white"
-                                                            v-text="element['locales'][locale.code]"
-                                                        >
-                                                        </p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][' + locale.code + '][label]'"
-                                                            v-model="element['locales'][locale.code]"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Actions Button -->
-                                                    <x-admin::table.td class="!px-0">
-                                                        <span
-                                                            class="icon-edit p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                                            @click="editOptions(element)"
-                                                        >
-                                                        </span>
-
-                                                        <span
-                                                            class="icon-delete p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-800  max-sm:place-self-center"
-                                                            @click="removeOption(element.id)"
-                                                        >
-                                                        </span>
-                                                    </x-admin::table.td>
-                                                </x-admin::table.thead.tr>
-                                            </template>
-                                        </draggable>
-                                    </x-admin::table>
-                                </div>
-                            @else
                                 <!-- For Empty Attribute Options -->
-                                <template>
+                                <template v-else>
                                     <div class="grid gap-3.5 justify-items-center py-10 px-2.5">
                                         <!-- Attribute Option Image -->
                                         <img
@@ -378,13 +376,12 @@
                                         </div>
                                     </div>
                                 </template>
-                            @endif
+                            </div>
                         </div>
                     </div>
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full">
-
+                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
@@ -397,7 +394,7 @@
 
                             <div class="px-4 pb-4">
                                 <!-- Attribute Code -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.edit.code')
                                     </x-admin::form.control-group.label>
@@ -433,7 +430,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute Type -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.edit.type')
                                     </x-admin::form.control-group.label>
@@ -503,7 +500,7 @@
                                 @endif
 
                                 <!-- Default Value -->
-                                <x-admin::form.control-group>
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.edit.default-value')
                                     </x-admin::form.control-group.label>
@@ -539,7 +536,7 @@
                             <x-slot:content>
                                 <!-- Input Validation -->
                                 @if($attribute->type == 'text')
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.attributes.edit.input-validation')
                                         </x-admin::form.control-group.label>
@@ -562,10 +559,7 @@
                                 @endif
 
                                 <!-- REGEX -->
-                                <x-admin::form.control-group
-                                    class="mb-2.5"
-                                    v-if="validationType === 'regex'"
-                                >
+                                <x-admin::form.control-group v-if="validationType === 'regex'">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.regex')
                                     </x-admin::form.control-group.label>
@@ -584,7 +578,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = old('is_required') ?? $attribute->is_required
                                     @endphp
@@ -606,16 +600,16 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_required"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
-                                    </x-admin::form.control-group.label>
+                                    </label>
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_unique"
@@ -627,9 +621,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="is_unique"
+                                    >
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
-                                    </x-admin::form.control-group.label>
+                                    </label>    
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -655,7 +652,7 @@
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
                                     @endphp
@@ -669,9 +666,11 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-not-allowed"
+                                    >
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
-                                    </x-admin::form.control-group.label>
+                                    </label>   
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -682,7 +681,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
@@ -696,9 +695,11 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-not-allowed"
+                                    >
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
-                                    </x-admin::form.control-group.label>
+                                    </label>   
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -709,7 +710,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = $attribute->is_filterable ?? old('is_filterable')
                                     @endphp
@@ -724,12 +725,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_filterable"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -740,7 +741,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = $attribute->is_configurable ?? old('is_configurable')
                                     @endphp
@@ -755,12 +756,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_configurable"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -771,7 +772,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = $attribute->is_visible_on_front ?? old('is_visible_on_front');
                                     @endphp
@@ -786,12 +787,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_visible_on_front"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -802,7 +803,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
                                     @php
                                         $selectedOption = old('is_comparable') ?? $attribute->is_comparable
                                     @endphp
@@ -817,12 +818,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_comparable"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -895,7 +896,7 @@
 
                                 <!-- Color Input -->
                                 <x-admin::form.control-group
-                                    class="w-full"
+                                    class="w-2/6"
                                     v-if="swatchType == 'color'"
                                 >
                                     <x-admin::form.control-group.label>
@@ -1069,7 +1070,7 @@
 
                         this.swatchValue = {
                             image: value.swatch_value_url
-                            ? [{ url: value.swatch_value_url }]
+                            ? [{ id: value.id, url: value.swatch_value_url }]
                             : [],
                         };
 

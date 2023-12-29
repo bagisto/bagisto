@@ -62,7 +62,7 @@
                                     @lang('admin::app.marketing.promotions.cart-rules.create.general')
                                 </p>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.promotions.cart-rules.create.name')
                                     </x-admin::form.control-group.label>
@@ -84,7 +84,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.cart-rules.create.description')
                                     </x-admin::form.control-group.label>
@@ -106,7 +106,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.promotions.cart-rules.create.coupon-type')
                                     </x-admin::form.control-group.label>
@@ -136,7 +136,7 @@
                                 </x-admin::form.control-group>
 
                                 <template v-if="parseInt(couponType)">
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.auto-generate-coupon')
                                         </x-admin::form.control-group.label>
@@ -165,9 +165,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group
-                                        class="mb-2.5"
-                                        v-if="! parseInt(useAutoGeneration)"
+                                    <x-admin::form.control-group v-if="! parseInt(useAutoGeneration)"
                                     >
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.coupon-code')
@@ -189,7 +187,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
                                     
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.create.uses-per-coupon')
                                         </x-admin::form.control-group.label>
@@ -211,7 +209,7 @@
                                     </x-admin::form.control-group>
                                 </template>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.cart-rules.create.uses-per-customer')
                                     </x-admin::form.control-group.label>
@@ -554,15 +552,15 @@
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-1.5">
-                                        <p class="text-gray-800 dark:text-white text-base  p-2.5 font-semibold">
+                                    <div class="flex items-center justify-between">
+                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.settings')
                                         </p>
                                     </div>
                                 </x-slot:header>
 
                                 <x-slot:content>
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.create.priority')
                                         </x-admin::form.control-group.label>
@@ -590,7 +588,7 @@
                                         </x-admin::form.control-group.label>
 
                                         @foreach(core()->getAllChannels() as $channel)
-                                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="channels[]"
@@ -603,12 +601,12 @@
                                                 >
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
-                                                    :for="'channel_' . '_' . $channel->id"
-                                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                                <label
+                                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                    for="{{ 'channel_' . '_' . $channel->id }}"
                                                 >
                                                     {{ core()->getChannelName($channel) }}
-                                                </x-admin::form.control-group.label>
+                                                </label>
                                             </x-admin::form.control-group>
                                         @endforeach
 
@@ -625,7 +623,7 @@
                                         </x-admin::form.control-group.label>
 
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="customer_groups[]"
@@ -638,12 +636,12 @@
                                                 >
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.label
-                                                    :for="'customer_group_' . '_' . $customerGroup->id"
-                                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                                <label
+                                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                    for="{{ 'customer_group_' . '_' . $customerGroup->id }}"
                                                 >
                                                     {{ $customerGroup->name }}
-                                                </x-admin::form.control-group.label>
+                                                </label>
                                             </x-admin::form.control-group>
                                         @endforeach
 
@@ -654,7 +652,7 @@
                                     </div>
 
                                     <!-- Status -->
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.create.status')
                                         </x-admin::form.control-group.label>
@@ -683,55 +681,55 @@
                             <!-- Marketing Time -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-1.5">
-                                        <p class="text-gray-800 dark:text-white text-base  p-2.5 font-semibold">
+                                    <div class="flex items-center justify-between">
+                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
                                         </p>
                                     </div>
                                 </x-slot:header>
 
                                 <x-slot:content>
-                                        <x-admin::form.control-group class="mb-2.5">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.marketing.promotions.cart-rules.create.from')
-                                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.marketing.promotions.cart-rules.create.from')
+                                        </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="datetime"
-                                                name="starts_from"
-                                                :value="old('starts_from')"
-                                                id="starts_from"
-                                                :label="trans('admin::app.marketing.promotions.cart-rules.create.from')"
-                                                :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.from')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                        <x-admin::form.control-group.control
+                                            type="datetime"
+                                            name="starts_from"
+                                            :value="old('starts_from')"
+                                            id="starts_from"
+                                            :label="trans('admin::app.marketing.promotions.cart-rules.create.from')"
+                                            :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.from')"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="starts_from"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
+                                        <x-admin::form.control-group.error
+                                            control-name="starts_from"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group class="mb-2.5">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.marketing.promotions.cart-rules.create.to')
-                                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.marketing.promotions.cart-rules.create.to')
+                                        </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="datetime"
-                                                name="ends_till"
-                                                :value="old('ends_till')"
-                                                id="ends_till"
-                                                :label="trans('admin::app.marketing.promotions.cart-rules.create.to')"
-                                                :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.to')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                        <x-admin::form.control-group.control
+                                            type="datetime"
+                                            name="ends_till"
+                                            :value="old('ends_till')"
+                                            id="ends_till"
+                                            :label="trans('admin::app.marketing.promotions.cart-rules.create.to')"
+                                            :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.to')"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="ends_till"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
+                                        <x-admin::form.control-group.error
+                                            control-name="ends_till"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
                                 </x-slot:content>
                             </x-admin::accordion>
 

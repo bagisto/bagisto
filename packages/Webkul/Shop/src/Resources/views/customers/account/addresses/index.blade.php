@@ -46,7 +46,7 @@
 
                             @if ($address->default_address)
                                 <div 
-                                    class="block w-max m-0 ml-0 mx-auto p-1.5 rounded-xl bg-navyBlue text-xs text-white font-medium text-center"
+                                    class="block w-max m-0 ltr:ml-0 rtl:mr-0 mx-auto p-1.5 rounded-xl bg-navyBlue text-xs text-white font-medium text-center"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>

@@ -59,7 +59,7 @@
                                 @if (bouncer()->hasPermission('customers.groups.edit'))
                                     <a @click="selectedGroups=1; editModal(record)">
                                         <span
-                                            :class="record.actions.find(action => action.icon === 'icon-edit')?.icon"
+                                            :class="record.actions.find(action => action.index === 'action_1')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             :title="record.actions.find(action => action.title === '@lang('admin::app.customers.groups.index.datagrid.edit')')?.title"
                                         >
@@ -68,9 +68,9 @@
                                 @endif
 
                                 @if (bouncer()->hasPermission('customers.groups.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                    <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
                                         <span
-                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            :class="record.actions.find(action => action.index === 'action_2')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             :title="record.actions.find(action => action.title === '@lang('admin::app.customers.groups.index.datagrid.delete')')?.title"
                                         >
@@ -112,7 +112,7 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.groups.index.create.code')
                                     </x-admin::form.control-group.label>
@@ -140,7 +140,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.groups.index.create.name')
                                     </x-admin::form.control-group.label>

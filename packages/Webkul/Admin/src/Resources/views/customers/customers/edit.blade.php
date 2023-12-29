@@ -82,7 +82,7 @@
             </div>
 
             <!-- Email -->
-            <x-admin::form.control-group class="mb-2.5">
+            <x-admin::form.control-group>
                 <x-admin::form.control-group.label class="required">
                     @lang('admin::app.customers.customers.edit.email')
                 </x-admin::form.control-group.label>

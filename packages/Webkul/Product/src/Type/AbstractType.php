@@ -310,7 +310,7 @@ abstract class AbstractType
 
         $productFlat->product_id = $product->id;
 
-        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
 
         $copyAttributes = [
             'name'           => trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]),
@@ -350,7 +350,7 @@ abstract class AbstractType
      */
     protected function copyRelationships($product)
     {
-        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
 
         if (! in_array('categories', $attributesToSkip)) {
             $product->categories()->sync($this->product->categories->pluck('id'));
@@ -384,7 +384,7 @@ abstract class AbstractType
             }
         }
 
-        if (config('products.linkProductsOnCopy')) {
+        if (! in_array('product_relations', $attributesToSkip)) {
             DB::table('product_relations')->insert([
                 'parent_id' => $this->product->id,
                 'child_id'  => $product->id,
@@ -449,13 +449,6 @@ abstract class AbstractType
     public function isSaleable()
     {
         if (! $this->product->status) {
-            return false;
-        }
-
-        if (
-            is_callable(config('products.isSaleable')) &&
-            call_user_func(config('products.isSaleable'), $this->product) === false
-        ) {
             return false;
         }
 

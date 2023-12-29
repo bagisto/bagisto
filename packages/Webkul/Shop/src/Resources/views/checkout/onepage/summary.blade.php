@@ -17,7 +17,7 @@
         </template>
 
         <template v-else>
-            <div class="sticky top-8 h-max w-[442px] max-w-full pl-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
+            <div class="sticky top-8 h-max w-[442px] max-w-full ltr:pl-8 rtl:pr-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:ltr:pl-0 max-lg:rtl:pr-0">
                 <h1 class="text-2xl font-medium max-sm:text-xl">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>

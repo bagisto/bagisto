@@ -12,13 +12,6 @@
 
         @stack('meta')
 
-        <link
-            rel="preload"
-            href="{{ bagisto_asset('fonts/bagisto-admin.woff') }}"
-            as="font"
-            type="font/woff"
-        />
-
         @bagistoVite(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
 
         <link
@@ -74,7 +67,7 @@
             <x-admin::layouts.header />
 
             <div
-                class="flex gap-4 group/container {{ (request()->cookie('sidebar_collapsed') ?? 0) ? 'sidebar-collapsed' : '' }}"
+                class="flex gap-4 group/container {{ (request()->cookie('sidebar_collapsed') ?? 0) ? 'sidebar-collapsed' : 'sidebar-not-collapsed' }}"
                 ref="appLayout"
             >
                 <!-- Page Sidebar Blade Component -->

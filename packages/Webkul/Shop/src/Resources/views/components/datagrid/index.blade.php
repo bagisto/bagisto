@@ -28,6 +28,7 @@
                             :selectAllRecords="selectAllRecords"
                             :applied="applied"
                             :is-loading="isLoading"
+                            :available="available"
                         >
                         </slot>
                     </template>
@@ -43,6 +44,8 @@
                             :setCurrentSelectionMode="setCurrentSelectionMode"
                             :applied="applied"
                             :is-loading="isLoading"
+                            :performAction="performAction"
+                            :available="available"
                         >
                         </slot>
                     </template>
@@ -165,7 +168,7 @@
                  *
                  * @returns {void}
                  */
-                get() {
+                get(extraParams = {}) {
                     let params = {
                         pagination: {
                             page: this.applied.pagination.page,
@@ -192,7 +195,7 @@
 
                     this.$axios
                         .get(this.src, {
-                            params
+                            params: { ...params, ...extraParams }
                         })
                         .then((response) => {
                             /**
@@ -729,7 +732,12 @@
                                 agree: () => {
                                     this.$axios[method](action.url)
                                         .then(response => {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                                             this.get();
+                                        })
+                                        .catch((error) => {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                                         });
                                 }
                             });
