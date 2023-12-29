@@ -111,7 +111,7 @@ it('should delete the review', function () {
     $review = ProductReview::factory()->create([
         'product_id' => $product->id,
     ]);
-    
+
     // Act and assert
     $this->loginAsAdmin();
 
@@ -182,7 +182,7 @@ it('should mass update the product review', function () {
         'status'     => $status,
         'product_id' => $product->id,
     ]);
-    
+
     // Act and Assert
     $this->loginAsAdmin();
 

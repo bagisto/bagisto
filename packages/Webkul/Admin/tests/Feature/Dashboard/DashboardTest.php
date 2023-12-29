@@ -332,7 +332,7 @@ it('should show the dashboard total sales stats', function () {
         'phone'        => $customerAddress->phone,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
-    
+
     Invoice::factory([
         'order_id'      => $order->id,
         'state'         => 'paid',

@@ -66,10 +66,11 @@ it('should store the newly created channels', function () {
 });
 
 it('should returns the edit page of channels', function () {
+    // Arrange
+    $channel = Channel::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $channel = Channel::factory()->create();
 
     get(route('admin.settings.channels.edit', $channel->id))
         ->assertOk()
@@ -78,10 +79,11 @@ it('should returns the edit page of channels', function () {
 });
 
 it('should update the existing channel', function () {
+    // Arrange
+    $channel = Channel::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $channel = Channel::factory()->create();
 
     putJson(route('admin.settings.channels.update', $channel->id), [
         'code'              => $code = fake()->unique()->word(),
@@ -115,10 +117,11 @@ it('should update the existing channel', function () {
 });
 
 it('should delete the existing channel', function () {
+    // Arrange
+    $channel = Channel::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $channel = Channel::factory()->create();
 
     deleteJson(route('admin.settings.channels.delete', $channel->id))
         ->assertOk()

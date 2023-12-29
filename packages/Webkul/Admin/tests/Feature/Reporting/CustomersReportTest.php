@@ -59,12 +59,9 @@ it('should return the customers stats report', function () {
 });
 
 it('should return the customers with most reviews stats report', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $customer = Customer::factory()->create();
 
-    // Arrange
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -86,6 +83,9 @@ it('should return the customers with most reviews stats report', function () {
         'product_id'  => $product->id,
     ]);
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     get(route('admin.reporting.customers.stats', [
         'type' => 'customers-with-most-reviews',
     ]))
@@ -96,10 +96,11 @@ it('should return the customers with most reviews stats report', function () {
 });
 
 it('should return the top customers group stats report', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $customer = Customer::factory()->create();
 
     get(route('admin.reporting.customers.stats', [
         'type' => 'top-customer-groups',
@@ -110,12 +111,13 @@ it('should return the top customers group stats report', function () {
 });
 
 it('should return the customers traffic stats report', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $customer = Customer::factory()->create();
 
     visitor()->visit($customer);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.reporting.customers.stats', [
         'type' => 'customers-traffic',

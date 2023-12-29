@@ -47,10 +47,11 @@ it('should store the newly created user/admin', function () {
 });
 
 it('should returns the user and its roles', function () {
+    // Arrange
+    $user = Admin::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $user = Admin::factory()->create();
 
     get(route('admin.settings.users.edit', $user->id))
         ->assertOk()
@@ -61,10 +62,11 @@ it('should returns the user and its roles', function () {
 });
 
 it('should update the existing user/admin', function () {
+    // Arrange
+    $user = Admin::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $user = Admin::factory()->create();
 
     putJson(route('admin.settings.users.update'), [
         'id'                    => $user->id,
@@ -86,10 +88,11 @@ it('should update the existing user/admin', function () {
 });
 
 it('should delete the existing user/admin', function () {
+    // Arrange
+    $user = Admin::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $user = Admin::factory()->create();
 
     deleteJson(route('admin.settings.users.delete', $user->id))
         ->assertOk()
@@ -101,11 +104,12 @@ it('should delete the existing user/admin', function () {
 });
 
 it('should delete self user/admin', function () {
-    // Act and Assert
+    // Arrange
     $admin = Admin::factory()->create([
         'password' => Hash::make($password = fake()->password()),
     ]);
 
+    // Act and Assert
     $this->loginAsAdmin($admin);
 
     putJson(route('admin.settings.users.destroy'), [

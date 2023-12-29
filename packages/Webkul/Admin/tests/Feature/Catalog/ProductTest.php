@@ -243,7 +243,7 @@ it('should download the product which is downloadable', function () {
 
     // Act and Assert
     $this->loginAsAdmin();
-    
+
     get(route('admin.catalog.products.file.download', [$product->id, $attribute->id]))
         ->assertOk();
 

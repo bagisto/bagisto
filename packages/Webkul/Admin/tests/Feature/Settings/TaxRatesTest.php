@@ -54,10 +54,11 @@ it('should store the newly created tax rates', function () {
 });
 
 it('should returns the edit page of the tax rate', function () {
+    // Arrange
+    $taxRate = TaxRate::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $taxRate = TaxRate::factory()->create();
 
     get(route('admin.settings.taxes.rates.edit', $taxRate->id))
         ->assertOk()
@@ -66,10 +67,11 @@ it('should returns the edit page of the tax rate', function () {
 });
 
 it('should update the tax rate', function () {
+    // Arrange
+    $taxRate = TaxRate::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $taxRate = TaxRate::factory()->create();
 
     putJson(route('admin.settings.taxes.rates.update', $taxRate->id), [
         'identifier' => $identifier = fake()->name(),
@@ -87,10 +89,11 @@ it('should update the tax rate', function () {
 });
 
 it('should delete the tax rate', function () {
+    // Arrange
+    $taxRate = TaxRate::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $taxRate = TaxRate::factory()->create();
 
     deleteJson(route('admin.settings.taxes.rates.delete', $taxRate->id))
         ->assertOk()
