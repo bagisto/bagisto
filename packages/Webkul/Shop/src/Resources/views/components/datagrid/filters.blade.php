@@ -54,7 +54,7 @@
                     <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                     <span
-                        class="icon-cross cursor-pointer text-lg text-white ltr:ltr:ml-1.5 rtl:mr-1.5 rtl:mr-1.5"
+                        class="icon-cross cursor-pointer text-lg text-white ltr:ltr:ml-1.5 rtl:mr-1.5"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
