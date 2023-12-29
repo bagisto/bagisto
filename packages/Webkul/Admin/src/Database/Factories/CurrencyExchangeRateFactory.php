@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Core\Models\Currency;
 use Webkul\Core\Models\CurrencyExchangeRate;
 
 class CurrencyExchangeRateFactory extends Factory
@@ -22,7 +21,6 @@ class CurrencyExchangeRateFactory extends Factory
     {
         return [
             'rate'            => rand(1, 100),
-            'target_currency' => Currency::first()->id,
         ];
     }
 }
