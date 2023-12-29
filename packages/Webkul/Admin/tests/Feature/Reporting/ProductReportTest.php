@@ -68,10 +68,19 @@ it('should return the product reporting stats', function () {
         ->getSimpleProductFactory()
         ->create();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -107,9 +116,7 @@ it('should return the product reporting stats', function () {
 });
 
 it('should return the total products added to wishlist reporting stats', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
@@ -131,6 +138,9 @@ it('should return the total products added to wishlist reporting stats', functio
         'product_id'  => $product->id,
         'customer_id' => $customer->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.reporting.products.stats', [
         'type' => 'total-products-added-to-wishlist',
@@ -161,6 +171,9 @@ it('should return the top selling products by revenue reporting stats', function
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
@@ -222,6 +235,9 @@ it('should return the top selling products by quantity reporting stats', functio
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
@@ -347,10 +363,10 @@ it('should return the last search terms reporting stats', function () {
         ->getSimpleProductFactory()
         ->create();
 
+    $searchTerm = SearchTerm::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchTerm = SearchTerm::factory()->create();
 
     get(route('admin.reporting.products.stats', [
         'type' => 'last-search-terms',
@@ -363,7 +379,7 @@ it('should return the last search terms reporting stats', function () {
 
 it('should return top search terms reporting stats', function () {
     // Arrange
-    $product = (new ProductFaker([
+    (new ProductFaker([
         'attributes' => [
             5 => 'new',
         ],
@@ -447,10 +463,19 @@ it('should returns the report the product', function () {
         ->getSimpleProductFactory()
         ->create();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([

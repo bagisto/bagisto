@@ -146,6 +146,9 @@ it('should return the customers with most orders stats report', function () {
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
@@ -207,6 +210,9 @@ it('should return the customers with most sales stats report', function () {
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,

@@ -54,10 +54,19 @@ it('should store the invoice', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -117,10 +126,19 @@ it('should return the view page of the invoice', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -169,10 +187,19 @@ it('should send duplicate mail to provided email address', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -226,10 +253,19 @@ it('should print/download the invoice', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([

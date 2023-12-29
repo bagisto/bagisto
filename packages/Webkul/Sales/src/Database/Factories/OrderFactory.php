@@ -36,17 +36,11 @@ class OrderFactory extends Factory
             ->select('id')
             ->first()->id ?? 0;
 
-        $customer = Customer::factory()->create();
-
         return [
             'increment_id'              => $lastOrder + 1,
             'status'                    => 'pending',
             'channel_name'              => 'Default',
             'is_guest'                  => 0,
-            'customer_id'               => $customer->id,
-            'customer_email'            => $customer->email,
-            'customer_first_name'       => $customer->first_name,
-            'customer_last_name'        => $customer->last_name,
             'is_gift'                   => 0,
             'total_item_count'          => 1,
             'total_qty_ordered'         => 1,

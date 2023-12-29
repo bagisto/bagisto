@@ -4,7 +4,6 @@ namespace Webkul\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Checkout\Models\Cart;
-use Webkul\Customer\Models\Customer;
 
 class CartFactory extends Factory
 {
@@ -36,24 +35,5 @@ class CartFactory extends Factory
             'created_at'            => $now,
             'updated_at'            => $now,
         ];
-    }
-
-    /**
-     * Adjust customer.
-     */
-    public function adjustCustomer(): CartFactory
-    {
-        return $this->state(function (array $attributes) {
-            $customer = isset($attributes['customer_id'])
-                ? Customer::query()->where('id', $attributes['customer_id'])->first()
-                : Customer::factory()->create();
-
-            return [
-                'customer_id'         => $customer->id,
-                'customer_email'      => $customer->email,
-                'customer_first_name' => $customer->first_name,
-                'customer_last_name'  => $customer->last_name,
-            ];
-        });
     }
 }

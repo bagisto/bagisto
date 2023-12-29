@@ -52,13 +52,16 @@ it('should store the create page of refunds', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -77,6 +80,9 @@ it('should store the create page of refunds', function () {
             $items[$item->id] = $inventorySource->id;
         }
     }
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.store', $order->id), [
         'refund' => [
@@ -111,13 +117,16 @@ it('should return the order refunded data', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -152,6 +161,7 @@ it('should return the order refunded data', function () {
         'shipping'    => ['price' => 0],
         'grand_total' => ['price' => 0],
     ];
+
     foreach ($items as $orderItemId => $qty) {
         $orderItem = app(OrderItemRepository::class)->find($orderItemId);
 
@@ -165,6 +175,9 @@ it('should return the order refunded data', function () {
     $summary['shipping']['price'] += $order->base_shipping_invoiced - $order->base_shipping_refunded - $order->base_shipping_discount_amount;
 
     $summary['grand_total']['price'] += $summary['subtotal']['price'] + $summary['tax']['price'] + $summary['shipping']['price'] - $summary['discount']['price'];
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.sales.refunds.update_qty', $order->id), $items)
         ->assertOk()
@@ -187,13 +200,16 @@ it('should return the view page of refund', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -210,6 +226,9 @@ it('should return the view page of refund', function () {
     $refund = Refund::factory()->create([
         'order_id' => $order->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.sales.refunds.view', $refund->id))
         ->assertOk()

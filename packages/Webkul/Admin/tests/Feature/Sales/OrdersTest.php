@@ -52,10 +52,16 @@ it('should return the view page of order', function () {
     // Act And Assert
     $this->loginAsAdmin();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -95,10 +101,16 @@ it('should cancel the order', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
+    $customer = Customer::factory()->create();
+
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -137,13 +149,16 @@ it('should comment to the order', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -154,6 +169,9 @@ it('should comment to the order', function () {
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.sales.orders.comment', $order->id), [
         'comment' => $comment = fake()->word(),
@@ -183,13 +201,16 @@ it('should search the order', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -200,6 +221,9 @@ it('should search the order', function () {
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.sales.orders.search'), [
         'query' => fake()->randomElement(['pending', 'completed', 'processing']),

@@ -53,13 +53,19 @@ it('should store the transaction', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -85,6 +91,9 @@ it('should store the transaction', function () {
         'base_grand_total' => $order->grand_total,
         'increment_id'     => app(InvoiceSequencer::class)->resolveGeneratorClass(),
     ])->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.sales.transactions.store'), [
         'invoice_id'     => $invoice->id,
@@ -117,14 +126,17 @@ it('should view the transaction', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'grand_total' => rand(111, 222),
         'cart_id'     => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -132,7 +144,7 @@ it('should view the transaction', function () {
         'order_id'   => $order->id,
     ]);
 
-    $payment = OrderPayment::factory()->create([
+    OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
 
@@ -147,14 +159,6 @@ it('should view the transaction', function () {
         'increment_id' => app(InvoiceSequencer::class)->resolveGeneratorClass(),
     ])->create();
 
-    postJson(route('admin.sales.transactions.store'), [
-        'invoice_id'     => $invoice->id,
-        'payment_method' => $payment->method,
-        'amount'         => 250,
-    ])
-        ->assertRedirect(route('admin.sales.transactions.index'))
-        ->isRedirection();
-
     $transaction = OrderTransaction::create([
         'transaction_id' => md5(uniqid()),
         'status'         => $invoice->state,
@@ -164,6 +168,9 @@ it('should view the transaction', function () {
         'invoice_id'     => $invoice->id,
         'amount'         => $invoice->grand_total,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.sales.transactions.view', $transaction->id))
         ->assertOk()

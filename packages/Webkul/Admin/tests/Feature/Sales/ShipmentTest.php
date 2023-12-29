@@ -53,13 +53,19 @@ it('should store the shimpment to the order', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -85,6 +91,9 @@ it('should store the shimpment to the order', function () {
         }
     }
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     postJson(route('admin.sales.shipments.store', $order->id), [
         'shipment' => [
             'source'        => fake()->randomElement($shipmentSources),
@@ -101,7 +110,6 @@ it('should store the shimpment to the order', function () {
         'carrier_title' => $carrierTitle,
         'track_number'  => $trackNumber,
     ]);
-
 });
 
 it('should return the view page of shipments', function () {
@@ -120,13 +128,19 @@ it('should return the view page of shipments', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
+    $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
         'cart_id' => $cartId = CartItem::factory()->create([
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'type'       => $product->type,
+            'name'       => $product->name,
         ])->id,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -157,6 +171,9 @@ it('should return the view page of shipments', function () {
         'inventory_source_id'   => 1,
         'inventory_source_name' => 'Default',
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.sales.shipments.view', $shipment->id))
         ->assertOk()

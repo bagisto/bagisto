@@ -36,22 +36,14 @@ class CartItemFactory extends Factory
      */
     public function adjustProduct(): CartItemFactory
     {
-        return $this->state(function (array $attributes) {
-            $product = isset($attributes['product_id'])
-                ? Product::query()->where('id', $attributes['product_id'])->first()
-                : Product::factory()->create();
-
+        return $this->state(function () {
             $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);
 
             return [
-                'sku'        => $product->sku,
-                'type'       => $product->type,
-                'name'       => $product->name,
-                'price'      => $product->price ?? $fallbackPrice,
-                'base_price' => $product->price ?? $fallbackPrice,
-                'total'      => $product->price ?? $fallbackPrice,
-                'base_total' => $product->price ?? $fallbackPrice,
-                'product_id' => $product->id,
+                'base_price' => $fallbackPrice,
+                'price'      => $fallbackPrice,
+                'total'      => $fallbackPrice,
+                'base_total' => $fallbackPrice,
             ];
         });
     }

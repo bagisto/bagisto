@@ -62,16 +62,13 @@ it('should update the specified locale', function () {
 
     putJson(route('admin.settings.locales.update'), [
         'id'   => $locale->id,
-        'code' => $code = fake()->randomElement([
-            'ar', 'bn', 'de', 'fa', 'es', 'sin', 'pl', 'nl', 'hi_IN',
-        ]),
         'name' => $name = fake()->name(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.update-success'));
 
     $this->assertDatabaseHas('locales', [
-        'code' => $code,
+        'code' => $locale->code,
         'name' => $name,
     ]);
 });
