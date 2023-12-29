@@ -48,7 +48,7 @@
         >
             <div class="flex gap-2.5 p-1.5 items-center">
                 <span
-                    class="icon-collapse transition-all"
+                    class="icon-collapse transition-all text-2xl"
                     :class="[isCollapsed ? 'ltr:rotate-[180deg] rtl:rotate-[0]' : 'ltr:rotate-[0] rtl:rotate-[180deg]']"
                 ></span>
             </div>
