@@ -149,13 +149,13 @@ class CategoryController extends Controller
 
             return new JsonResponse([
                 'message' => trans('admin::app.catalog.categories.delete-success', [
-                    'name' => 'admin::app.catalog.categories.category',
+                    'name' => trans('admin::app.catalog.categories.category'),
                 ]),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => trans('admin::app.catalog.categories.delete-failed', [
-                    'name' => 'admin::app.catalog.categories.category',
+                    'name' => trans('admin::app.catalog.categories.category'),
                 ]),
             ], 500);
         }

@@ -49,7 +49,9 @@ it('should return the exchange rate data for edit', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $exchangeRate = CurrencyExchangeRate::factory()->create();
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+    ]);
 
     get(route('admin.settings.exchange_rates.edit', $exchangeRate->id))
         ->assertOk()
@@ -61,7 +63,9 @@ it('should delete the exchange rate', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    $currencyExchangeRate = CurrencyExchangeRate::factory()->create();
+    $currencyExchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+    ]);
 
     deleteJson(route('admin.settings.exchange_rates.delete', $currencyExchangeRate->id))
         ->assertOk()
