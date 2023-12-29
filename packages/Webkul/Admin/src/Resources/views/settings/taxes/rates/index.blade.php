@@ -52,9 +52,7 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form
-                        @submit="handleSubmit($event, create)"
-                    >
+                    <form @submit="handleSubmit($event, create)">
                         <x-admin::modal ref="importTaxRates">
                             <!-- Modal Header -->
                             <x-slot:header>
@@ -115,7 +113,7 @@
 
                         const fileInput = this.$refs.importFile;
 
-                        if (fileInput.files.length > 0) {
+                        if (fileInput.files.length) {
                             formData.append('file', fileInput.files[0]);
                         }
 
