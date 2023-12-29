@@ -177,7 +177,7 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="items-center flex gap-x-4 ltr:pl-2 rtl:pr-3 rounded hover:bg-gray-100 select-none">
+                            <div class="items-center flex gap-x-4 ltr:pl-2 rtl:pr-2 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
                                     :id="'option_' + option.id"
