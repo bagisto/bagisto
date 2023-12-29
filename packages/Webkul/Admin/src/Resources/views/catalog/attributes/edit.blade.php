@@ -31,7 +31,7 @@
                     </p>
 
                     <div class="flex gap-x-2.5 items-center">
-                        <!-- Cancel Button -->
+                        <!-- Back Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
                             class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -63,7 +63,7 @@
                             </p>
 
                             <!-- Admin name -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.edit.admin')
                                 </x-admin::form.control-group.label>
@@ -86,7 +86,7 @@
 
                             <!-- Locales Inputs -->
                             @foreach ($allLocales as $locale)
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
                                     </x-admin::form.control-group.label>
@@ -160,13 +160,9 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <div class="w-full mb-2.5">
-                                        <!-- checkbox -->
-                                        <x-admin::form.control-group.label class="invisible">
-                                            @lang('admin::app.catalog.attributes.edit.input-options')
-                                        </x-admin::form.control-group.label>
-
-                                        <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                    <!-- checkbox -->
+                                    <div class="w-full">
+                                        <div class="flex gap-2.5 items-center w-max !mb-0 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
                                                 name="empty_option"
@@ -185,7 +181,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
+                                                class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                             >
                                                 @lang('admin::app.catalog.attributes.edit.create-empty-option')
                                             </label>
@@ -385,8 +381,7 @@
                     </div>
 
                     <!-- Right sub-component -->
-                    <div class="flex flex-col gap-2 w-[360px] max-w-full">
-
+                    <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.general.before', ['attribute' => $attribute]) !!}
 
                         <!-- General -->
@@ -399,7 +394,7 @@
 
                             <div class="px-4 pb-4">
                                 <!-- Attribute Code -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.edit.code')
                                     </x-admin::form.control-group.label>
@@ -435,7 +430,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute Type -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.edit.type')
                                     </x-admin::form.control-group.label>
@@ -505,7 +500,7 @@
                                 @endif
 
                                 <!-- Default Value -->
-                                <x-admin::form.control-group>
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.edit.default-value')
                                     </x-admin::form.control-group.label>
@@ -541,7 +536,7 @@
                             <x-slot:content>
                                 <!-- Input Validation -->
                                 @if($attribute->type == 'text')
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.attributes.edit.input-validation')
                                         </x-admin::form.control-group.label>
@@ -564,10 +559,7 @@
                                 @endif
 
                                 <!-- REGEX -->
-                                <x-admin::form.control-group
-                                    class="mb-2.5"
-                                    v-if="validationType === 'regex'"
-                                >
+                                <x-admin::form.control-group v-if="validationType === 'regex'">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.regex')
                                     </x-admin::form.control-group.label>
@@ -586,7 +578,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = old('is_required') ?? $attribute->is_required
                                     @endphp
@@ -608,16 +600,16 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_required"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-required')
-                                    </x-admin::form.control-group.label>
+                                    </label>
                                 </x-admin::form.control-group>
 
                                 <!-- Is Unique -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="is_unique"
@@ -629,9 +621,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="is_unique"
+                                    >
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
-                                    </x-admin::form.control-group.label>
+                                    </label>    
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -657,7 +652,7 @@
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
                                     @endphp
@@ -671,9 +666,11 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-not-allowed"
+                                    >
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
-                                    </x-admin::form.control-group.label>
+                                    </label>   
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -684,7 +681,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 opacity-70 select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
                                     @php
                                         $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
@@ -698,9 +695,11 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-not-allowed">
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-not-allowed"
+                                    >
                                         @lang('admin::app.catalog.attributes.edit.value-per-channel')
-                                    </x-admin::form.control-group.label>
+                                    </label>   
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -711,7 +710,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = $attribute->is_filterable ?? old('is_filterable')
                                     @endphp
@@ -726,12 +725,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_filterable"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-filterable')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -742,7 +741,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = $attribute->is_configurable ?? old('is_configurable')
                                     @endphp
@@ -757,12 +756,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_configurable"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-configurable')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -773,7 +772,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
                                         $selectedOption = $attribute->is_visible_on_front ?? old('is_visible_on_front');
                                     @endphp
@@ -788,12 +787,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_visible_on_front"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"
@@ -804,7 +803,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
-                                <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
                                     @php
                                         $selectedOption = old('is_comparable') ?? $attribute->is_comparable
                                     @endphp
@@ -819,12 +818,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
                                         for="is_comparable"
-                                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                     >
                                         @lang('admin::app.catalog.attributes.edit.is-comparable')
-                                    </x-admin::form.control-group.label>
+                                    </label> 
 
                                     <x-admin::form.control-group.control
                                         type="hidden"

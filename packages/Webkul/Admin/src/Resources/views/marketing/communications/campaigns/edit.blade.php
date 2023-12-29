@@ -53,7 +53,7 @@
 
                     <div class="mb-2.5">
                         <!-- Name -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.edit.name')
                             </x-admin::form.control-group.label>
@@ -75,7 +75,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Subject -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.edit.subject')
                             </x-admin::form.control-group.label>
@@ -97,7 +97,7 @@
                         </x-admin::form.control-group>
 
                          <!-- Event -->
-                         <x-admin::form.control-group class="mb-2.5">
+                         <x-admin::form.control-group>
                              <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.edit.event')
                             </x-admin::form.control-group.label>
@@ -129,7 +129,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Email Template -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.edit.email-template')
                             </x-admin::form.control-group.label>
@@ -174,14 +174,14 @@
                 <!-- Setting -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
+                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.marketing.communications.campaigns.create.setting')
                         </p>
                     </x-slot:header>
                 
                     <x-slot:content>
                          <!-- Channel -->
-                         <x-admin::form.control-group class="mb-2.5">
+                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.edit.channel')
                             </x-admin::form.control-group.label>
@@ -213,7 +213,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Customer Group -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.communications.campaigns.edit.customer-group')
                             </x-admin::form.control-group.label>
@@ -245,7 +245,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Status -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.communications.campaigns.edit.status')
                             </x-admin::form.control-group.label>

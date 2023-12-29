@@ -112,7 +112,7 @@
 
                             <!-- Modal Content -->
                             <x-slot:content>
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.groups.index.create.code')
                                     </x-admin::form.control-group.label>
@@ -140,7 +140,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.groups.index.create.name')
                                     </x-admin::form.control-group.label>
