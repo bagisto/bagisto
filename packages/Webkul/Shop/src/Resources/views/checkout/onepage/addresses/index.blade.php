@@ -245,6 +245,10 @@
                             },
                         })
                         .then(response => {
+                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                            this.$parent.$refs.vCartSummary.canPlaceOrder = false;
+
                             if (response.data.data.payment_methods) {
                                 this.$parent.$refs.vPaymentMethod.payment_methods = response.data.data.payment_methods;
                                 
