@@ -10,6 +10,7 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
+use Webkul\Core\Models\Visit;
 
 use function Pest\Laravel\get;
 
@@ -25,6 +26,7 @@ afterEach(function () {
     Cart::query()->delete();
     Invoice::query()->delete();
     Product::query()->delete();
+    Visit::query()->delete();
 });
 
 it('should return the dashboard index page', function () {
