@@ -350,7 +350,7 @@
                                     </x-admin::form.control-group>
 
                                     <!-- SKU -->
-                                    <x-admin::form.control-group class="mb-2.5">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.index.create.sku')
                                         </x-admin::form.control-group.label>

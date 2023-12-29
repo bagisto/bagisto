@@ -46,14 +46,16 @@
                 <x-admin::accordion>
                     <!-- Panel Header -->
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base font-semibold">
-                            @lang('admin::app.catalog.families.create.general')
-                        </p>
+                        <div class="flex items-center justify-between">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                @lang('admin::app.catalog.families.create.general')
+                            </p>
+                        </div>
                     </x-slot:header>
                 
                     <!-- Panel Content -->
                     <x-slot:content>
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.create.code')
                             </x-admin::form.control-group.label>
@@ -74,7 +76,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required !text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.create.name')
                             </x-admin::form.control-group.label>
@@ -338,7 +340,7 @@
                             <!--Model Content -->
                             <x-slot:content>
                                 <!-- Group Code -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.families.create.code')
                                     </x-admin::form.control-group.label>
@@ -356,7 +358,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Group Name -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.families.create.name')
                                     </x-admin::form.control-group.label>
