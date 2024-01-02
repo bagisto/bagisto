@@ -7,23 +7,6 @@ use Webkul\Admin\Helpers\Reporting;
 class SaleController extends Controller
 {
     /**
-     * Request param functions
-     *
-     * @var array
-     */
-    protected $typeFunctions = [
-        'total-sales'         => 'getTotalSalesStats',
-        'average-sales'       => 'getAverageSalesStats',
-        'total-orders'        => 'getTotalOrdersStats',
-        'purchase-funnel'     => 'getPurchaseFunnelStats',
-        'abandoned-carts'     => 'getAbandonedCartsStats',
-        'refunds'             => 'getRefundsStats',
-        'tax-collected'       => 'getTaxCollectedStats',
-        'shipping-collected'  => 'getShippingCollectedStats',
-        'top-payment-methods' => 'getTopPaymentMethods',
-    ];
-
-    /**
      * Create a controller instance.
      *
      * @return void
