@@ -26,7 +26,7 @@
         <div class="overflow-x-auto">
             <!-- For Same Slot All Days -->
             <template
-                v-if="same_for_week.length && parseInt(bookingProduct.same_slot_all_days)"
+                v-if="same_for_week && parseInt(bookingProduct.same_slot_all_days)"
                 v-for="(data, index) in same_for_week"
             >
                 <div class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800">
@@ -38,7 +38,13 @@
 
                             <input
                                 type="hidden"
-                                :name="getFieldName(index, 'from')"
+                                :name="'booking[slots][' + index + '][id]'"
+                                :value="data.id"
+                            />
+
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + index + '][from]'"
                                 :value="data.from"
                             />
                             
@@ -48,7 +54,7 @@
 
                             <input
                                 type="hidden"
-                                :name="getFieldName(index, 'to')"
+                                :name="'booking[slots][' + index + '][to]'"
                                 :value="data.to"
                             />
                         </div>
@@ -72,7 +78,7 @@
 
             <!-- For Not Same Slot All Days -->
             <template
-                v-else-if="different_for_week.length"
+                v-else-if="different_for_week?.length"
                 v-for="(slot, slotIndex) in different_for_week"
                 :key="slotIndex"
             >
@@ -93,7 +99,7 @@
                 
                                     <input
                                         type="hidden"
-                                        :name="getFieldName(slotIndex, timeIndex, 'from')"
+                                        :name="'booking[slots][' + slotIndex + '][' + timeIndex + '][from]'"
                                         :value="time.from"
                                     />
                                     
@@ -103,7 +109,7 @@
                 
                                     <input
                                         type="hidden"
-                                        :name="getFieldName(slotIndex, timeIndex, 'to')"
+                                        :name="'booking[slots][' + slotIndex + '][' + timeIndex + '][to]'"
                                         :value="time.to"
                                     />
                                 </div>
@@ -112,7 +118,7 @@
                                 <div class="flex gap-x-5 place-content-start text-right">
                                     <p
                                         class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                        @click="editSlot(index)"
+                                        @click="editSlot(time)"
                                     >
                                         Edit
                                     </p>
@@ -217,7 +223,7 @@
                                     </span>
                                 </div>
 
-                                <template v-if="slots['different_for_week'][dayIndex] && slots['different_for_week'][dayIndex].length">
+                                <template v-if="slots['different_for_week'][dayIndex] && slots['different_for_week'][dayIndex]?.length">
                                     <div class="grid grid-cols-3 gap-2.5 m-2.5">
                                         <div class="w-full">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
@@ -286,25 +292,23 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-2.5 mx-2.5" v-for="(slot, index) in editSlots.same_for_week">
+                        <div class="grid grid-cols-2 gap-2.5 mx-2.5">
                             <!-- From -->
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                            >
+                            </x-admin::form.control-group.control>
+
                             <x-booking::form.control-group class="w-full mb-2.5">
                                 <x-booking::form.control-group.label class="hidden">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                 </x-booking::form.control-group.label>
                 
                                 <x-booking::form.control-group.control
-                                    type="hidden"
-                                    name="id"
-                                    ::value="index"
-                                >
-                                </x-booking::form.control-group.control>
-
-                                <x-booking::form.control-group.control
                                     type="time"
                                     name="from"
                                     rules="required"
-                                    ::value="slot.from"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                 >
                                 </x-booking::form.control-group.control>
@@ -325,7 +329,6 @@
                                     type="time"
                                     name="to"
                                     rules="required"
-                                    ::value="slot.to"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                 >
                                 </x-booking::form.control-group.control>
@@ -349,6 +352,12 @@
     <script type="text/x-template" id="v-slot-item-template">
         <div class="grid grid-cols-3 gap-2.5 mx-2.5">
             <!-- From -->
+             <x-admin::form.control-group.control
+                type="hidden"
+                ::name="controlName + '[id]'"
+            >
+            </x-admin::form.control-group.control>
+
             <x-booking::form.control-group class="w-full mb-2.5">
                 <x-booking::form.control-group.label class="hidden">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
@@ -429,9 +438,7 @@
 
                     different_for_week: [],
 
-                    editSlots: {
-                        'same_for_week': [],
-                    },
+                    optionRowCount: 0,
                 }
             },
 
@@ -440,7 +447,7 @@
                     return;
                 }
     
-                if (this.bookingProduct.same_slot_all_days) {
+                if (parseInt(this.bookingProduct.same_slot_all_days)) {
                     this.same_for_week = this.bookingProduct.slots;
                 } else {
                     let updatedData = '';   
@@ -456,6 +463,12 @@
                     });
 
                     this.different_for_week = updatedData;
+                }
+
+                if (this.same_for_week){
+                    let [lastId] = Object.values(this.same_for_week).map(obj => obj.id);
+    
+                    this.optionRowCount = lastId?.split('_')[1];
                 }
             },
 
@@ -502,18 +515,26 @@
                     this.$refs.drawerform.toggle();
                 },
 
-                editSlot(id) {
-                    this.editSlots.same_for_week = [this.same_for_week[id]];
+                editSlot(element) {
+                    if (parseInt(this.sameSlotAllDays)) {
+                        this.$refs.editModalForm.setValues(this.same_for_week[element]);
+                    } else {
+                        this.$refs.editModalForm.setValues(element);
+                    }
 
                     this.$refs.editDrawerform.toggle();
                 },
 
                 editStore(params) {
-                    let id = params.id;
+                    console.log(params);
+                    let foundIndex = this.same_for_week.findIndex(item => item.id === params.id);
 
-                    delete params.id;
-
-                    this.same_for_week[id] = params;
+                    if (foundIndex !== -1) {
+                        this.same_for_week[foundIndex] = { 
+                            ...this.same_for_week[foundIndex], 
+                            ...params
+                        };
+                    }
 
                     this.$refs.editDrawerform.toggle();
                 },
@@ -523,7 +544,12 @@
 
                     if (parseInt(this.sameSlotAllDays)) {
                         Object.keys(params).forEach(key => {
-                            let matches = key.match(/booking\[slots\]\[(\d+)\]\[(from|to)\]/);
+                            let matches = key.match(/booking\[slots\]\[(\d+)\]\[(from|to|id)\]/);
+
+                            if (params[key] == '[object Object]') {
+                                this.optionRowCount++;
+                                params[key] = 'option_' + this.optionRowCount;
+                            }
 
                             if (matches) {
                                 let index = parseInt(matches[1]);
@@ -536,7 +562,7 @@
                             }
                         });
 
-                        if (this.same_for_week.length) {
+                        if (this.same_for_week?.length) {
                             this.same_for_week = this.same_for_week.concat(item);
                         } else {
                             this.same_for_week = item;
@@ -546,7 +572,6 @@
                     } else {
                         let updatedData = '';
 
-                        console.log(this.different_for_week);
                         for (const key in params) {
                             const matches = key.match(/\[(\d+)\]\[(\d+)\]\[(.+)\]/);
                             const slotIndex = matches[1];
@@ -576,14 +601,6 @@
 
                         this.different_for_week = updatedData;
                     }
-                },
-
-                getFieldName(slotIndex, timeIndex, prop) {
-                    if (! prop) {
-                        return `booking[slots][${slotIndex}][${timeIndex}][${prop}]`;
-                    }
-
-                    return `booking[slots][${slotIndex}][${timeIndex}]`;
                 },
             },
         });

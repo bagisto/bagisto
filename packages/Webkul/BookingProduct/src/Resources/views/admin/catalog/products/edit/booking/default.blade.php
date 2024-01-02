@@ -727,7 +727,7 @@
                                 ...params
                             };
                         } else {
-                            let data = Object.keys(params).map((key) => {
+                            let data = Object.keys(params)?.map((key) => {
                                 if (key == 'from_day') {
                                     params.from_day = this.days[params.from_day];
                                 }
