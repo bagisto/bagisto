@@ -19,7 +19,7 @@ class CartShippingRateFactory extends Factory
      */
     public function definition(): array
     {
-        $now = date('Y-m-d H:i:s');
+        $now = now();
 
         return [
             'is_calculate_tax'     => 1,
