@@ -7,50 +7,69 @@
             as="div"
         >
             <form @submit="handleSubmit($event, handleBillingAddressForm)">
-                <div class="book-slots">
-                    <h1>Hello</h1>
-                    <h3>
+                <div class="grid grid-cols-1 gap-2.5">
+                    <div>
                         @lang('booking::app.shop.products.rent-an-item')
-                    </h3>
+                    </div>
 
-                    <div v-if="renting_type == 'daily_hourly'">
-                        <div class="form-group">
-                            <label class="label-style required">
-                                @label('booking::app.shop.products.choose-rent-option')
-                            </label>
+                    <!-- Radio Button Selector -->
+                    <template v-if="renting_type != 'daily' && sub_renting_type == 'daily_hourly'">
+                        <x-shop::form.control-group.label class="required w-full">
+                            @lang('Choose Rent Option')
+                        </x-shop::form.control-group.label>
 
-                            <span class="radio">
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <span class="flex gap-x-4">
                                 <input
                                     type="radio"
-                                    id="daily-renting-type"
                                     name="booking[renting_type]"
                                     value="daily"
-                                    v-model="sub_renting_type"
+                                    id="booking[daily]"
+                                    class="hidden peer"
                                 >
 
-                                <label class="radio-view" for="daily-renting-type"></label>
+                                <label
+                                    class="icon-radio-unselect text-2xl text-navyBlue peer-checked:icon-radio-select"
+                                    for="booking[daily]"
+                                >
+                                </label>
 
-                                @lang('booking::app.shop.products.daily-basis')
+                                <label
+                                    class="text-[#6E6E6E] cursor-pointer"
+                                    for="booking[daily]"
+                                >
+                                    @lang('Daily')
+                                </label>
                             </span>
 
-                            <span class="radio">
+                            <span class="flex gap-x-4">
                                 <input
                                     type="radio"
-                                    id="hourly-renting-type"
                                     name="booking[renting_type]"
                                     value="hourly"
-                                    v-model="sub_renting_type"
+                                    id="booking[hourly]"
+                                    class="hidden peer"
                                 >
 
-                                <label class="radio-view" for="hourly-renting-type"></label>
-                                @lang('booking::app.shop.products.hourly-basis')
+                                <label
+                                    class="icon-radio-unselect text-2xl text-navyBlue peer-checked:icon-radio-select"
+                                    for="booking[hourly]"
+                                >
+                                </label>
+
+                                <label
+                                    class="text-[#6E6E6E] cursor-pointer"
+                                    for="booking[hourly]"
+                                >
+                                    @lang('Hourly')
+                                </label>
                             </span>
                         </div>
-                    </div>
-                    
+                    </template>
+
                     <div v-if="renting_type != 'daily' && sub_renting_type == 'hourly'">
                         <div>
-                            <label class="label-style required">
+                            <label class="required">
                                 @lang('booking::app.shop.products.select-slot')
                             </label>
 
@@ -79,7 +98,7 @@
 
                                 <x-shop::form.control-group class="w-full !mb-px">
                                     <x-shop::form.control-group.label class="hidden">
-                                        @lang('booking::app.shop.products.select-date')
+                                        @lang('booking::app.shop.products.select-slot')
                                     </x-shop::form.control-group.label>
 
                                     <x-shop::form.control-group.control
@@ -91,15 +110,11 @@
                                         :label="trans('booking::app.shop.products.select-date')"
                                         :placeholder="trans('booking::app.shop.products.select-date')"
                                     >
-                                        <option value="">
-                                            @lang('booking::app.shop.products.select-time-slot')
-                                        </option>
-
                                         <option
                                             v-for="(slot, index) in slots"
                                             :value="index"
+                                            v-text="slot.time"
                                         >
-                                            @{{ slot.time }}
                                         </option>
                                     </x-shop::form.control-group.control>
 
@@ -117,7 +132,7 @@
                             </label>
 
                             <div class="flex gap-2.5">
-                                <x-shop::form.control-group class="w-full !mb-px">
+                                <x-shop::form.control-group class="w-full !mb-0">
                                     <x-shop::form.control-group.label class="hidden">
                                         @lang('booking::app.shop.products.select-date')
                                     </x-shop::form.control-group.label>
@@ -125,21 +140,16 @@
                                     <x-shop::form.control-group.control
                                         type="select"
                                         name="booking[slot][from]"
-                                        class="!mb-1"
                                         rules="required"
                                         v-model="slot_from"
                                         :label="trans('booking::app.shop.products.select-date')"
                                         :placeholder="trans('booking::app.shop.products.select-date')"
                                     >
-                                        <option value="">
-                                            @lang('booking::app.shop.products.select-time-slot')
-                                        </option>
-
                                         <option
                                             v-for="slot in slots[selected_slot]?.slots"
                                             :value="slot.from_timestamp"
+                                            v-text="slot.from"
                                         >
-                                            @{{ slot.from }}
                                         </option>
                                     </x-shop::form.control-group.control>
 
@@ -149,7 +159,7 @@
                                     </x-shop::form.control-group.error>
                                 </x-shop::form.control-group>
 
-                                <x-shop::form.control-group class="w-full !mb-px">
+                                <x-shop::form.control-group class="w-full !mb-0">
                                     <x-shop::form.control-group.label class="hidden">
                                         @lang('booking::app.shop.products.slot')
                                     </x-shop::form.control-group.label>
@@ -157,21 +167,16 @@
                                     <x-shop::form.control-group.control
                                         type="select"
                                         name="booking[slot][to]"
-                                        class="!mb-1"
                                         rules="required"
                                         :label="trans('booking::app.shop.products.slot')"
                                         :placeholder="trans('booking::app.shop.products.slot')"
                                     >
-                                        <option value="">
-                                            @lang('booking::app.shop.products.select-time-slot')
-                                        </option>
-
                                         <option
                                             v-for="slot in slots[selected_slot]?.slots"
                                             {{-- v-if="slot_from < slot?.to_timestamp" --}}
                                             :value="slot?.to_timestamp"
+                                            v-text="slot.to"
                                         >
-                                            @{{ slot.to }}
                                         </option>
                                     </x-shop::form.control-group.control>
 
@@ -267,46 +272,6 @@
 
                     date_to: ''
                 }
-            },
-
-            created() {
-                var self = this;
-
-                // this.$validator.extend('after_or_equal', {
-                //     getMessage(field, val) {
-                //         return 'The "To" must be equal or after "From"';
-                //     },
-
-                //     validate(value, field) {
-                //         if (! self.date_from) {
-                //             return true;
-                //         }
-
-                //         var from = new Date(self.date_from);
-                        
-                //         var to = new Date(self.date_to);
-
-                //         return from <= to;
-                //     }
-                // });
-
-                // this.$validator.extend('before_or_equal', {
-                //     getMessage(field, val) {
-                //         return 'The "From must be equal or before "To"';
-                //     },
-
-                //     validate(value, field) {
-                //         if (! self.date_to) {
-                //             return true;
-                //         }
-
-                //         var from = new Date(self.date_from);
-                        
-                //         var to = new Date(self.date_to);
-
-                //         return from <= to;
-                //     }
-                // });
             },
 
             methods: {
