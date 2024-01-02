@@ -24,6 +24,12 @@ class Invoice extends Base
             }
 
             $this->prepareMail($invoice, new InvoicedNotification($invoice));
+
+            unset($invoice->email);
+
+            $invoice->email_sent = true;
+
+            $invoice->save();
         } catch (\Exception $e) {
             report($e);
         }

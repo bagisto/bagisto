@@ -60,7 +60,7 @@
                             </p>
 
                             <!-- Permission Type -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.roles.edit.permissions')
                                 </x-admin::form.control-group.label>
@@ -83,10 +83,7 @@
                             </x-admin::form.control-group>
                             
                             <!-- Tree structure -->
-                            <div 
-                                class="mb-2.5"
-                                v-if="permission_type == 'custom'"
-                            >
+                            <div v-if="permission_type == 'custom'">
                                 <x-admin::tree.view
                                     input-type="checkbox"
                                     value-field="key"
@@ -110,8 +107,8 @@
 
                         <x-admin::accordion>
                             <x-slot:header>
-                                <div class="flex items-center justify-between p-1.5">
-                                    <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base  font-semibold">
+                                <div class="flex items-center justify-between">
+                                    <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                                         @lang('admin::app.settings.roles.edit.general')
                                     </p>
                                 </div>
@@ -119,7 +116,7 @@
 
                             <x-slot:content>
                                 <!-- Name -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.edit.name')
                                     </x-admin::form.control-group.label>
@@ -142,7 +139,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Description -->
-                                <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.edit.description')
                                     </x-admin::form.control-group.label>

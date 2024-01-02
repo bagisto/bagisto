@@ -103,7 +103,7 @@ class ThemeController extends Controller
         $data['status'] = request()->input('status') == 'on';
 
         if (in_array($data['type'], ['image_carousel', 'services_content'])) {
-            unset($data['options']);
+            unset($data[$locale]['options']);
         }
 
         Event::dispatch('theme_customization.update.before', $id);

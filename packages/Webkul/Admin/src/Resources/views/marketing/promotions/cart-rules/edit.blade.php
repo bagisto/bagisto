@@ -530,7 +530,7 @@
                                         <div class="w-full">
                                             @php($selectedOption = old('end_other_rules') ?? $cartRule->end_other_rules)
 
-                                            <x-admin::form.control-group>
+                                            <x-admin::form.control-group class="!mb-0">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.marketing.promotions.cart-rules.edit.end-of-other-rules')
                                                 </x-admin::form.control-group.label>
@@ -581,11 +581,9 @@
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                            @lang('admin::app.marketing.promotions.cart-rules.edit.settings')
-                                        </p>
-                                    </div>
+                                    <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                        @lang('admin::app.marketing.promotions.cart-rules.edit.settings')
+                                    </p>
                                 </x-slot:header>
 
                                 <x-slot:content>
@@ -714,11 +712,9 @@
                             <!-- Marketing Time -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                            @lang('admin::app.marketing.promotions.cart-rules.edit.marketing-time')
-                                        </p>
-                                    </div>
+                                    <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                        @lang('admin::app.marketing.promotions.cart-rules.edit.marketing-time')
+                                    </p>
                                 </x-slot:header>
 
                                 <x-slot:content>
@@ -743,7 +739,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.to')
                                         </x-admin::form.control-group.label>

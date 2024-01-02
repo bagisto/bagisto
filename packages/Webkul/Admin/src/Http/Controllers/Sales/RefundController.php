@@ -25,7 +25,7 @@ class RefundController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\View
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -40,7 +40,7 @@ class RefundController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  int  $orderId
-     * @return \Illuminate\Http\View
+     * @return \Illuminate\View\View
      */
     public function create($orderId)
     {
@@ -71,7 +71,7 @@ class RefundController extends Controller
 
         $data = request()->all();
 
-        if (! $data['refund']['shipping']) {
+        if (! isset($data['refund']['shipping'])) {
             $data['refund']['shipping'] = 0;
         }
 
@@ -110,7 +110,7 @@ class RefundController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  int  $orderId
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function updateQty($orderId)
     {
@@ -127,7 +127,7 @@ class RefundController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\View
+     * @return \Illuminate\View\View
      */
     public function view($id)
     {

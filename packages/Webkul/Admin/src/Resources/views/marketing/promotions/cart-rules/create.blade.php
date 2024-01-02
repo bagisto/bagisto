@@ -501,7 +501,7 @@
 
                                     <div class="flex gap-4 justify-between max-sm:flex-wrap">
                                         <div class="w-full">
-                                            <x-admin::form.control-group>
+                                            <x-admin::form.control-group class="!mb-0">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.marketing.promotions.cart-rules.create.end-of-other-rules')
                                                 </x-admin::form.control-group.label>
@@ -552,11 +552,9 @@
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                            @lang('admin::app.marketing.promotions.cart-rules.create.settings')
-                                        </p>
-                                    </div>
+                                    <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                        @lang('admin::app.marketing.promotions.cart-rules.create.settings')
+                                    </p>
                                 </x-slot:header>
 
                                 <x-slot:content>
@@ -681,11 +679,9 @@
                             <!-- Marketing Time -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between">
-                                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
-                                            @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
-                                        </p>
-                                    </div>
+                                    <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                                        @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
+                                    </p>
                                 </x-slot:header>
 
                                 <x-slot:content>
@@ -710,7 +706,7 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.marketing.promotions.cart-rules.create.to')
                                         </x-admin::form.control-group.label>

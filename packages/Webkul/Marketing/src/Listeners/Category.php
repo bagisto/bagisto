@@ -116,7 +116,7 @@ class Category
      * @param  int  $id
      * @return void
      */
-    public function beforeDelete($category)
+    public function beforeDelete($id)
     {
         $category = $this->categoryRepository->find($id);
 
