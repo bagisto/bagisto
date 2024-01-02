@@ -125,10 +125,10 @@ class Installer extends Command
             config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
 
             // Updating App Allowed Locales
-            $allowedLocales = $this->allowedChoice('Please choose the allowed locales for your channels', $this->locales(), $defaultLocale);
+            $allowedLocales = $this->allowedChoice('Please choose the allowed locales for your channels', $this->locales());
 
             // Updating App Allowed Currencies
-            $allowedCurrencies = $this->allowedChoice('Please choose the allowed currencies for your channels', $this->currencies(), $defaultCurrency);
+            $allowedCurrencies = $this->allowedChoice('Please choose the allowed currencies for your channels', $this->currencies());
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
@@ -329,7 +329,7 @@ class Installer extends Command
     /**
      * Function for getting allowed choices based on the list of options.
      */
-    protected function allowedChoice(string $question, array $choices, $defaultValue)
+    protected function allowedChoice(string $question, array $choices)
     {
         $selectedValues = multiselect(
             label: $question,
