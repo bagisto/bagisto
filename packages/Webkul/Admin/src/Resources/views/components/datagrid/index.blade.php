@@ -166,7 +166,7 @@
                  *
                  * @returns {void}
                  */
-                get() {
+                get(extraParams = {}) {
                     let params = {
                         pagination: {
                             page: this.applied.pagination.page,
@@ -195,7 +195,7 @@
 
                     this.$axios
                         .get(this.src, {
-                            params
+                            params: { ...params, ...extraParams }
                         })
                         .then((response) => {
                             /**

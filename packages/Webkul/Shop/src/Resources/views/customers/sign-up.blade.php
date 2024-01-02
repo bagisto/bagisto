@@ -202,7 +202,7 @@
                             ></label>
 
                             <label
-                                class="pl-0 text-base text-[#6E6E6E] max-sm:text-xs select-none cursor-pointer"
+                                class="ltr:pl-0 rtl:pr-0 text-base text-[#6E6E6E] max-sm:text-xs select-none cursor-pointer"
                                 for="is-subscribed"
                             >
                                 @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
@@ -214,7 +214,7 @@
 
                     <div class="flex gap-9 flex-wrap items-center mt-8">
                         <button
-                            class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ml-0 rounded-2xl text-base text-center"
+                            class="primary-button block w-full max-w-[374px] py-4 px-11 mx-auto m-0 ltr:ml-0 rtl:mr-0 rounded-2xl text-base text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button-title')

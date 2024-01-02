@@ -34,18 +34,20 @@
                 <x-admin::drawer ref="shipment">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-3">
+                        <div class="grid gap-3 h-8">
                             <div class="flex justify-between items-center">
                                 <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.shipments.create.title')
                                 </p>
 
-                                <button
-                                    type="submit"
-                                    class="mr-11 primary-button"
-                                >
-                                    @lang('admin::app.sales.shipments.create.create-btn')
-                                </button>
+                                @if (bouncer()->hasPermission('sales.invoices.create'))
+                                    <button
+                                        type="submit"
+                                        class="mr-11 primary-button"
+                                    >
+                                        @lang('admin::app.sales.shipments.create.create-btn')
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </x-slot:header>
@@ -273,7 +275,7 @@
 
         methods: {
             onSourceChange() {
-                this.setOriginalQuantityToAllShipmentInputElements();
+                this.setOriginalQuantityToAllShipmentInputElements();   
             },
 
             getAllShipmentInputElements() {

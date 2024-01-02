@@ -204,7 +204,7 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.users.index.create.name')
                                 </x-admin::form.control-group.label>
@@ -234,7 +234,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Email -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.users.index.create.email')
                                 </x-admin::form.control-group.label>
@@ -282,7 +282,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Confirm Password -->
-                                <x-admin::form.control-group class="flex-1 mb-2.5">
+                                <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.confirm-password')
                                     </x-admin::form.control-group.label>
@@ -306,9 +306,8 @@
                             </div>
 
                             <div class="flex gap-4">
-
                                 <!-- Role -->
-                                <x-admin::form.control-group class="flex-1 w-full mb-2.5">
+                                <x-admin::form.control-group class="flex-1 w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.users.index.create.role')
                                     </x-admin::form.control-group.label>

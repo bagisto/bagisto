@@ -54,12 +54,12 @@
                         </x-admin::media.images>
                     </x-admin::form.control-group>
 
-                    <p class="my-5 text-sm text-gray-400">
+                    <p class="mb-4 text-xs text-gray-600 dark:text-gray-300">
                         @lang('admin::app.account.edit.upload-image-info')
                     </p>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.account.edit.name')
                         </x-admin::form.control-group.label>
@@ -81,7 +81,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Email -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.account.edit.email')
                         </x-admin::form.control-group.label>
@@ -108,7 +108,7 @@
              <div class="flex flex-col gap-2 w-[360px] max-w-full max-md:w-full">
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base font-semibold">
+                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.account.edit.change-password')
                         </p>
                     </x-slot:header>
@@ -116,7 +116,7 @@
                      <!-- Change Account Password -->
                     <x-slot:content>
                         <!-- Current Password -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.account.edit.current-password')
                             </x-admin::form.control-group.label>
@@ -137,7 +137,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Password -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.account.edit.password')
                             </x-admin::form.control-group.label>
@@ -158,7 +158,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Confirm Password -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.account.edit.confirm-password')
                             </x-admin::form.control-group.label>

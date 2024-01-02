@@ -104,7 +104,14 @@
                 swipeRight() {
                     const container = this.$refs.swiperContainer;
 
-                    container.scrollLeft += this.offset;
+                    // Check if scroll reaches the end
+                    if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+                        // Reset scroll to the beginning
+                        container.scrollLeft = 0;
+                    } else {
+                        // Scroll to the right
+                        container.scrollLeft += this.offset;
+                    }
                 },
             },
         });

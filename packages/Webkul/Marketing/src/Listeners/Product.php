@@ -34,9 +34,13 @@ class Product
      */
     public function beforeUpdate($id)
     {
-        $product = $this->productRepository->find($id);
-
         $currentURLKey = request()->input('url_key');
+
+        if (! $currentURLKey) {
+            return;
+        }
+
+        $product = $this->productRepository->find($id);
 
         if ($currentURLKey === $product->url_key) {
             return;
@@ -85,7 +89,7 @@ class Product
         $urlRewrite = $this->urlRewriteRepository->create([
             'entity_type'   => 'product',
             'request_path'  => $product->url_key,
-            'target_path'   => $currentURLKey,
+            'target_path'   => $currentURLKey ?? '',
             'locale'        => app()->getLocale(),
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);

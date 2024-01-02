@@ -15,7 +15,7 @@
                     </li>
                 @else
                     <li 
-                        class="flex gap-x-2.5 items-center ml-2.5 text-[#6E6E6E] text-base after:content-['/'] after:last:hidden" 
+                        class="flex gap-x-2.5 items-center ltr:ml-2.5 rtl:mr-0 text-[#6E6E6E] text-base after:content-['/'] after:last:hidden" 
                         aria-current="page"
                     >
                         {{ $breadcrumb->title }}

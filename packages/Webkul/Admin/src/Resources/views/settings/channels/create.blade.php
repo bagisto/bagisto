@@ -48,7 +48,7 @@
                     </p>
 
                     <!-- Code -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.code')
                         </x-admin::form.control-group.label>
@@ -71,7 +71,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.name')
                         </x-admin::form.control-group.label>
@@ -94,7 +94,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Description -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.description')
                         </x-admin::form.control-group.label>
@@ -116,13 +116,13 @@
                     </x-admin::form.control-group>
 
                     <!-- Invertory Sources -->
-                    <div class="mb-2.5">
+                    <div class="mb-4">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.inventory-sources')
                         </x-admin::form.control-group.label>
 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="inventory_sources[]"
@@ -134,12 +134,12 @@
                                 >
                                 </x-admin::form.control-group.control>
                                     
-                                <x-admin::form.control-group.label 
-                                    :for="'inventory_sources_' . $inventorySource->id"
-                                    class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+                                <label
+                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    for="inventory_sources_{{ $inventorySource->id }}"
                                 >
                                     {{ $inventorySource->name }}
-                                </x-admin::form.control-group.label>
+                                </label>
 
                             </x-admin::form.control-group>
                         @endforeach 
@@ -151,7 +151,7 @@
                     </div>
 
                     <!-- Root Catgegory -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.root-category')
                         </x-admin::form.control-group.label>
@@ -183,7 +183,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Host Name -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.hostname')
                         </x-admin::form.control-group.label>
@@ -216,7 +216,7 @@
                     </p>
 
                     <!-- Theme Selector -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.theme')
                         </x-admin::form.control-group.label>
@@ -304,7 +304,7 @@
                     <x-admin::seo/>
 
                     <!-- SEO Title -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-title')
                         </x-admin::form.control-group.label>
@@ -327,7 +327,7 @@
                     </x-admin::form.control-group>
 
                     <!-- SEO Keywords -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-keywords')
                         </x-admin::form.control-group.label>
@@ -350,7 +350,7 @@
                     </x-admin::form.control-group>
 
                     <!-- SEO Description -->
-                    <x-admin::form.control-group class="mb-2.5">
+                    <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-description')
                         </x-admin::form.control-group.label>
@@ -384,22 +384,20 @@
                 <!-- Currencies and Locales -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <div class="flex items-center justify-between">
-                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
-                                @lang('admin::app.settings.channels.create.currencies-and-locales')
-                            </p>
-                        </div>
+                        <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
+                            @lang('admin::app.settings.channels.create.currencies-and-locales')
+                        </p>
                     </x-slot:header>
             
                     <x-slot:content>
                         <!-- Locale Checkboxes  -->
-                        <div class="mb-2.5">
+                        <div class="mb-4">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.locales')
                             </x-admin::form.control-group.label>
                         
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                                <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="locales[]"
@@ -410,14 +408,13 @@
                                         :label="trans('admin::app.settings.channels.create.locales')"
                                     >
                                     </x-admin::form.control-group.control>
-                                        
-                                    <x-admin::form.control-group.label 
-                                        :for="'locales_' . $locale->id"
-                                        class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
+
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="locales_{{ $locale->id }}"
                                     >
                                         {{ $locale->name }} 
-                                    </x-admin::form.control-group.label>
-                            
+                                    </label>
                                 </x-admin::form.control-group>
                             @endforeach
 
@@ -428,7 +425,7 @@
                         </div>
 
                         <!-- Default Locale Selector -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.default-locale')
                             </x-admin::form.control-group.label>
@@ -460,13 +457,13 @@
                         </x-admin::form.control-group>
 
                         <!-- Currencies Checkboxes -->
-                        <div class="mb-2.5">
+                        <div class="mb-4">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.currencies')
                             </x-admin::form.control-group.label>
                         
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="flex gap-2.5 !mb-0 p-1.5">
+                                <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="currencies[]" 
@@ -477,15 +474,13 @@
                                         :label="trans('admin::app.settings.channels.create.currencies')"
                                     >
                                     </x-admin::form.control-group.control>
-                                        
-                                    <x-admin::form.control-group.label 
-                                        :for="'currencies_' . $currency->id"
-                                        class="!text-sm !text-gray-600 dark:!text-gray-300 font-semibold cursor-pointer"
-                                    >
-                                        {{ $currency->name }}  
-                                    </x-admin::form.control-group.label>
 
-                                    
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="currencies_{{ $currency->id }}"
+                                    >
+                                        {{ $currency->name }} 
+                                    </label>
                                 </x-admin::form.control-group>
                             @endforeach 
                             
@@ -496,7 +491,7 @@
                         </div>
 
                         <!-- Default Currency Selector -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.default-currency')
                             </x-admin::form.control-group.label>
@@ -545,7 +540,7 @@
             
                     <x-slot:content>
                         <!-- Maintenance Mode Text  -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.create.maintenance-mode-text')
                             </x-admin::form.control-group.label>
@@ -567,7 +562,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Allowed API's  -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.settings.channels.create.allowed-ips')
                             </x-admin::form.control-group.label>
@@ -589,7 +584,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Maintenance Mode Switcher -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.create.status')
                             </x-admin::form.control-group.label>

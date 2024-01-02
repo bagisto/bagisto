@@ -24,7 +24,7 @@
 
                     <div class="p-4 border-y dark:border-gray-800">
                         <!-- Registered Email -->
-                        <x-admin::form.control-group class="mb-2.5">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.forget-password.create.email')
                             </x-admin::form.control-group.label>

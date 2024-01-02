@@ -10,6 +10,9 @@
         </p>
         
         <div class="flex gap-x-2.5 items-center">
+            <!--Tax Rate Export -->
+            <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
+
             <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
                 <a 

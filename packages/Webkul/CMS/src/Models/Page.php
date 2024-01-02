@@ -2,12 +2,17 @@
 
 namespace Webkul\CMS\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Webkul\CMS\Contracts\Page as PageContract;
+use Webkul\CMS\Database\Factories\PageFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Core\Models\ChannelProxy;
 
 class Page extends TranslatableModel implements PageContract
 {
+    use HasFactory;
+
     /**
      * Table associated with the model.
      *
@@ -59,5 +64,13 @@ class Page extends TranslatableModel implements PageContract
     public function channels()
     {
         return $this->belongsToMany(ChannelProxy::modelClass(), 'cms_page_channels', 'cms_page_id');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return PageFactory::new();
     }
 }

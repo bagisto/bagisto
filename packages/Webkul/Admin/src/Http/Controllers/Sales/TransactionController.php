@@ -50,18 +50,19 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate(request(), [
             'invoice_id'     => 'required',
             'payment_method' => 'required',
             'amount'         => 'required|numeric',
         ]);
 
-        $invoice = $this->invoiceRepository->where('increment_id', $request->invoice_id)->first();
+        $invoice = $this->invoiceRepository->where('id', $request->invoice_id)->first();
 
         if (! $invoice) {
             session()->flash('error', trans('admin::app.sales.transactions.index.create.invoice-missing'));
 
-            return redirect()->back();
+            return redirect()->route('admin.sales.transactions.index');
         }
 
         $transactionAmtBefore = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
@@ -71,19 +72,19 @@ class TransactionController extends Controller
         if ($invoice->state == 'paid') {
             session()->flash('info', trans('admin::app.sales.transactions.index.create.already-paid'));
 
-            return redirect(route('admin.sales.transactions.index'));
+            return redirect()->route('admin.sales.transactions.index');
         }
 
         if ($transactionAmtFinal > $invoice->base_grand_total) {
             session()->flash('info', trans('admin::app.sales.transactions.index.create.transaction-amount-exceeds'));
 
-            return redirect(route('admin.sales.transactions.create'));
+            return redirect()->route('admin.sales.transactions.index');
         }
 
         if ($request->amount <= 0) {
             session()->flash('info', trans('admin::app.sales.transactions.index.create.transaction-amount-zero'));
 
-            return redirect(route('admin.sales.transactions.create'));
+            return redirect()->route('admin.sales.transactions.index');
         }
 
         $order = $this->orderRepository->find($invoice->order_id);
@@ -119,7 +120,7 @@ class TransactionController extends Controller
 
         session()->flash('success', trans('admin::app.sales.transactions.index.create.transaction-saved'));
 
-        return redirect(route('admin.sales.transactions.index'));
+        return redirect()->route('admin.sales.transactions.index');
     }
 
     /**

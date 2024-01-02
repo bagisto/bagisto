@@ -120,7 +120,7 @@ class ExchangeRateController extends Controller
             session()->flash('error', $e->getMessage());
         }
 
-        return redirect()->back();
+        return redirect()->route('admin.settings.exchange_rates.index');
     }
 
     /**
