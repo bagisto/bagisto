@@ -1,16 +1,8 @@
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\EventTicket')
 
-<div class="booking-info-row">
-    <span class="icon-calendar font-bold"></span>
-
-    <span class="title">
-        @lang('booking::app.shop.products.event-on') :
-    </span>
-
-    <span class="value">
-        {!! $bookingSlotHelper->getEventDate($bookingProduct) !!}
-    </span>
-</div>
+<span class="value">
+    {!! $bookingSlotHelper->getEventDate($bookingProduct) !!}
+</span>
 
 <!-- Event Vue Component -->
 <v-event-tickets></v-event-tickets>

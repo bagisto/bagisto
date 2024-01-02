@@ -1,13 +1,3 @@
-<div class="booking-info-row">
-    <span class="icon-calendar font-bold"></span>
-
-    <span class="title">
-        @lang('booking::app.shop.products.slot-duration') :
-
-        @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
-    </span>
-</div>
-
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\TableSlot')
 
 <div class="booking-info-row">

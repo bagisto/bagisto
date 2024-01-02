@@ -7,11 +7,11 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-booking-information-template">
             @if ($bookingProduct->location)
-                <div class="grid grid-cols-2 gap-2.5 my-2.5">
-                    <div class="flex">
-                        <div class="icon-location font-bold"></div>
+                <div class="grid grid-cols-2 gap-2.5 py-4">
+                    <div class="flex gap-3">
+                        <span class="icon-location font-bold"></span>
 
-                        <div>
+                        <div class="grid grid-cols-1 gap-2.5 text-sm font-medium text-[#6E6E6E]">
                             <div>
                                 @lang('booking::app.shop.products.location')
                             </div>
@@ -23,10 +23,53 @@
                             <a
                                 href="https://maps.google.com/maps?q={{ $bookingProduct->location }}"
                                 target="_blank"
+                                class="text-blue-600"
                             >
                                 View on Map
                             </a>
                         </div>
+                    </div>
+
+                    <div>
+                        @switch($bookingProduct->type)
+                            @case('default')
+                                @if ($bookingProduct->default_slot->duration)
+                                    <span class="icon-calendar font-bold"></span>
+                            
+                                    <span class="text-[#6E6E6E]">
+                                        @lang('booking::app.shop.products.slot-duration') :
+                            
+                                        @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration])
+                                    </span>
+                                @endif
+                                @break
+                            @case('appointment')
+                                <span class="icon-calendar font-bold"></span>
+                            
+                                <span class="text-[#6E6E6E]">
+                                    @lang('booking::app.shop.products.slot-duration') :
+                            
+                                    @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->appointment_slot->duration])
+                                </span>
+                                @break
+                            @case('event')
+                                <span class="icon-calendar font-bold"></span>
+                            
+                                <span class="text-[#6E6E6E]">
+                                    @lang('booking::app.shop.products.event-on') :
+                                </span>
+                            @break
+
+                            @case('table')
+                                <span class="icon-calendar font-bold"></span>
+                            
+                                <span class="text-[#6E6E6E]">
+                                    @lang('booking::app.shop.products.slot-duration') :
+                            
+                                    @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
+                                </span>
+                            @break
+                        @endswitch
                     </div>
                 </div>
             @endif

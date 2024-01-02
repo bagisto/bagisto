@@ -1,27 +1,22 @@
-<div class="booking-info-row">
-    <span class="icon-calendar font-bold"></span>
-
-    <span class="title">
-        @lang('booking::app.shop.products.slot-duration') :
-
-        @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->appointment_slot->duration])
-    </span>
-</div>
 
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\AppointmentSlot')
 
-<div class="booking-info-row">
-    <span class="icon-calendar font-bold"></span>
+<div class="grid grid-cols-1 gap-2.5">
+    <div>
+        <span class="icon-calendar font-bold"></span>
 
-    <span class="title">
-        @lang('booking::app.shop.products.today-availability')
-    </span>
+        <span class="title">
+            @lang('booking::app.shop.products.today-availability')
+        </span>
 
-    <span class="value">
-        {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
-    </span>
+        <span class="value">
+            {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
+        </span>
+    </div>
 
     <v-toggler></v-toggler>
+
+    @include ('booking::shop.products.view.booking.slots', ['bookingProduct' => $bookingProduct])
 </div>
 
 @pushOnce('scripts')
@@ -29,7 +24,7 @@
         type="text/x-template"
         id="v-toggler-template"
     >
-        <div class="grid gap-x-2.5 gap-y-1.5 select-none">
+        <div class="grid gap-2.5 w-max select-none">
             <!-- Details Toggler -->
             <p
                 class="flex gap-x-[15px] items-center text-base cursor-pointer"
@@ -85,5 +80,3 @@
         })
     </script>
 @endpushOnce
-
-@include ('booking::shop.products.view.booking.slots', ['bookingProduct' => $bookingProduct])
