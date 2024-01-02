@@ -80,7 +80,7 @@ class CurrencyDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('settings.currencies.delete')) {
             $this->addAction([
-                'index'  => 'delete', 
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
                 'method' => 'DELETE',

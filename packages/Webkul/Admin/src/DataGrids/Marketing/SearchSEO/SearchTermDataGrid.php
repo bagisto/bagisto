@@ -137,6 +137,7 @@ class SearchTermDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.search_terms.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.edit'),
                 'method' => 'GET',
@@ -149,6 +150,7 @@ class SearchTermDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.search_terms.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.search-seo.search-terms.index.datagrid.delete'),
                 'method' => 'DELETE',
