@@ -18,10 +18,10 @@ afterEach(function () {
      */
     Cart::query()->delete();
     CartItem::query()->delete();
-    Order::query()->delete();
     CartPayment::query()->delete();
     CartShippingRate::query()->delete();
     CustomerAddress::query()->delete();
+    Order::query()->delete();
 });
 
 it('should add product items to the cart', function () {
