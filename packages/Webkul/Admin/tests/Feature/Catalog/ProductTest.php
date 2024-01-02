@@ -155,19 +155,19 @@ it('should upload the sample file', function () {
 
 it('should perform the mass action forn update status for products', function () {
     // Arrange
-    $procuts = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
+    $products = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.mass_update'), [
-        'indices' => $procuts->pluck('id')->toArray(),
+        'indices' => $products->pluck('id')->toArray(),
         'value'   => 1,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-update-success'));
 
-    foreach ($procuts as $product) {
+    foreach ($products as $product) {
         $this->assertDatabaseHas('product_flat', [
             'status'     => 1,
             'product_id' => $product->id,
@@ -177,19 +177,19 @@ it('should perform the mass action forn update status for products', function ()
 
 it('should perform the mass action for delete for products', function () {
     // Arrange
-    $procuts = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
+    $products = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.products.mass_delete'), [
-        'indices' => $procuts->pluck('id')->toArray(),
+        'indices' => $products->pluck('id')->toArray(),
         'value'   => 1,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-delete-success'));
 
-    foreach ($procuts as $product) {
+    foreach ($products as $product) {
         $this->assertDatabaseMissing('product_flat', [
             'status'     => 1,
             'product_id' => $product->id,
