@@ -106,10 +106,10 @@ class Installer extends Command
     {
         try {
             // Updating App URL
-            $this->updateEnvVariable('APP_URL', 'Please enter the APP URL or press enter to continue', 'http://localhost:8000');
+            $this->updateEnvVariable('APP_URL', 'Please enter the application URL', 'http://localhost:8000');
 
             // Updating App Name
-            $this->updateEnvVariable('APP_NAME', 'Please enter the application name or press enter to continue', 'Bagisto');
+            $this->updateEnvVariable('APP_NAME', 'Please enter the application name', 'Bagisto');
 
             // Updating App Default Locales
             $defaultLocale = $this->updateEnvChoice('APP_LOCALE', 'Please select the default application locale', $this->locales());
@@ -282,7 +282,7 @@ class Installer extends Command
 
             $filePath = storage_path('installed');
 
-            File::put($filePath, 'Your Bagisto App is successfully installed');
+            File::put($filePath, 'Bagisto is successfully installed');
 
             $this->info('-----------------------------');
             $this->info('Congratulations!');
