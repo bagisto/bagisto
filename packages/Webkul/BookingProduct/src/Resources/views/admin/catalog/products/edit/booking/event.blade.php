@@ -21,7 +21,7 @@
             <div class="flex gap-x-1 items-center">
                 <div
                     class="secondary-button"
-                    @click="$refs.addOptionsRow.toggle()"
+                    @click="$refs.drawerform.toggle()"
                 >
                     @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
                 </div>
@@ -216,15 +216,26 @@
                 enctype="multipart/form-data"
                 ref="createOptionsForm"
             >
-                <x-admin::modal ref="addOptionsRow">
+                <x-admin::drawer ref="drawerform">
                     <x-slot:header>
-                        <p class="text-gray-800 dark:text-white font-bold">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
-                        </p>
+                        <div class="flex justify-between items-center">
+                            <p class="my-2.5 text-xl font-medium dark:text-white">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
+                            </p>
+        
+                            <div class="flex gap-2">
+                                <button
+                                    type="submit"
+                                    class="primary-button mr-11"
+                                >
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.save')
+                                </button>
+                            </div>
+                        </div>
                     </x-slot:header>
-
+        
                     <x-slot:content>
-                        <div class="grid grid-cols-3 gap-4 px-4 py-2.5">
+                        <div class="grid grid-cols-2 gap-4 px-4">
                             <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
@@ -233,7 +244,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- Name -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.name')
                                 </x-admin::form.control-group.label>
@@ -254,7 +265,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Price -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.price')
                                 </x-admin::form.control-group.label>
@@ -273,9 +284,11 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
+                        </div>
 
+                        <div class="grid grid-cols-2 gap-4 px-4">
                             <!-- Quantity -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.qty')
                                 </x-admin::form.control-group.label>
@@ -283,6 +296,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="qty"
+                                    rules="required"
                                     required="required|min_value:0"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.qty')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.qty')"
@@ -294,9 +308,9 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                    
+
                             <!-- Special Price -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.special-price')
                                 </x-admin::form.control-group.label>
@@ -315,9 +329,11 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                    
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 px-4">
                             <!-- Special Price From -->
-                            <x-booking::form.control-group class="mb-2.5">
+                            <x-booking::form.control-group>
                                 <x-booking::form.control-group.label>
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')
                                 </x-booking::form.control-group.label>
@@ -343,7 +359,7 @@
                             </x-booking::form.control-group>
 
                             <!-- Special Price To -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')
                                 </x-admin::form.control-group.label>
@@ -363,9 +379,11 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                    
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4 px-4">
                             <!-- Description -->
-                            <x-admin::form.control-group class="mb-2.5">
+                            <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.event.description')
                                 </x-admin::form.control-group.label>
@@ -376,6 +394,7 @@
                                     rules="required"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.event.description')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.event.description')"
+                                    rows="9"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -386,19 +405,10 @@
                             </x-admin::form.control-group>
                         </div>
                     </x-slot:content>
-
-                    <x-slot:footer>
-                        <!-- Save Button -->
-                        <button
-                            type="submit"
-                            class="primary-button"
-                        >
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.ticket.save')
-                        </button>
-                    </x-slot:footer>
-                </x-admin::modal>
+                </x-admin::drawer>
             </form>
         </x-admin::form>
+
     </script>
 
     <script type="module">
@@ -417,6 +427,7 @@
 
             methods: {
                 store(params) {
+                    console.log(params);
                     if (! params.id) {
                             this.optionRowCount++;
                             params.id = 'option_' + this.optionRowCount;
@@ -433,13 +444,13 @@
                             this.tickets.push(params);
                         }
 
-                    this.$refs.addOptionsRow.toggle();
+                    this.$refs.drawerform.toggle();
                 },
 
                 editModal(values) {
                     this.$refs.modelForm.setValues(values);
 
-                    this.$refs.addOptionsRow.toggle();
+                    this.$refs.drawerform.toggle();
                 },
 
                 removeOption(id) {

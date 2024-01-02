@@ -11,7 +11,7 @@
         id="v-appointment-booking-template"
     >
         <!-- Slot Duration -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
             </x-admin::form.control-group.label>
@@ -32,7 +32,7 @@
         </x-admin::form.control-group>
 
         <!-- Break Time -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
             </x-admin::form.control-group.label>
@@ -53,7 +53,7 @@
         </x-admin::form.control-group>
 
         <!-- Same slot for all days -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
             </x-admin::form.control-group.label>

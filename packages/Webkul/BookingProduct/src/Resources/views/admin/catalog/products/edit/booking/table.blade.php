@@ -10,7 +10,7 @@
         id="v-table-booking-template"
     >
         <!-- Charged Per -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')
             </x-admin::form.control-group.label>
@@ -37,7 +37,7 @@
 
         <!-- Guest Limit -->
         <x-admin::form.control-group
-            class="w-full mb-2.5"
+            class="w-full"
             v-if="table_booking.price_type == 'table'"
         >
             <x-admin::form.control-group.label class="required">
@@ -60,7 +60,7 @@
         </x-admin::form.control-group>
 
         <!-- Guest Capacity -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')
             </x-admin::form.control-group.label>
@@ -81,7 +81,7 @@
         </x-admin::form.control-group>
 
         <!-- Slot Duration -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
             </x-admin::form.control-group.label>
@@ -102,7 +102,7 @@
         </x-admin::form.control-group>
 
         <!-- Break Time -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
             </x-admin::form.control-group.label>
@@ -123,7 +123,7 @@
         </x-admin::form.control-group>
 
         <!-- Prevent Scheduling Before -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')
             </x-admin::form.control-group.label>
@@ -144,7 +144,7 @@
         </x-admin::form.control-group>
 
         <!-- Same slot all days -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
             </x-admin::form.control-group.label>
@@ -203,8 +203,8 @@
                         same_slot_all_days: 1,
 
                         slots: []
-                    },
-                },
+                    }
+                }
             },
         });
     </script>

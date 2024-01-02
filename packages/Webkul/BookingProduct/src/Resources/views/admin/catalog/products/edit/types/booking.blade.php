@@ -15,7 +15,7 @@
         <script type="text/x-template" id="v-booking-information-template">
             <div>
                 <!-- Booking Type -->
-                <x-admin::form.control-group class="w-full mb-2.5">
+                <x-admin::form.control-group class="w-full">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.booking_type')
                     </x-admin::form.control-group.label>
@@ -50,7 +50,7 @@
                 </x-admin::form.control-group>
 
                 <!-- Location -->
-                <x-admin::form.control-group class="w-full mb-2.5">
+                <x-admin::form.control-group class="w-full">
                     <x-admin::form.control-group.label class="required">
                         @lang('booking::app.admin.catalog.products.edit.type.booking.location')
                     </x-admin::form.control-group.label>
@@ -71,7 +71,7 @@
 
                 <!-- QTY -->
                 <x-admin::form.control-group
-                    class="w-full mb-2.5"
+                    class="w-full"
                     v-if="booking.type == 'default'
                         || booking.type == 'appointment'
                         || booking.type == 'rental'"
@@ -97,7 +97,7 @@
 
                 <!-- Available Every Week -->
                 <x-admin::form.control-group
-                    class="w-full mb-2.5"
+                    class="w-full"
                     v-if="booking.type != 'event' && booking.type != 'default'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -129,7 +129,7 @@
 
                 <!-- Available From  -->
                 <x-admin::form.control-group
-                    class="w-full mb-2.5"
+                    class="w-full"
                     v-if="(booking.availableEveryWeekSwatch && booking.available_every_week == 0) || booking.type == 'default'"
                 >
                     <x-admin::form.control-group.label class="required">
@@ -156,7 +156,7 @@
 
                 <!-- Available To -->
                 <x-admin::form.control-group
-                    class="w-full mb-2.5"
+                    class="w-full"
                     v-if="(booking.availableEveryWeekSwatch && booking.available_every_week == 0) || booking.type == 'default'"
                 >
                     <x-admin::form.control-group.label class="required">

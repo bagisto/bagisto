@@ -96,7 +96,7 @@
                                     </x-shop::form.control-group.error>
                                 </x-shop::form.control-group>
 
-                                <x-shop::form.control-group class="w-full !mb-px">
+                                <x-shop::form.control-group class="w-full !mb-0">
                                     <x-shop::form.control-group.label class="hidden">
                                         @lang('booking::app.shop.products.select-slot')
                                     </x-shop::form.control-group.label>

@@ -10,7 +10,7 @@
         id="v-default-booking-template"
     >
         <!-- Type -->
-        <x-admin::form.control-group class="w-full mb-2.5">
+        <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
                 @lang('booking::app.admin.catalog.products.edit.type.booking.type.title')
             </x-admin::form.control-group.label>
@@ -38,7 +38,7 @@
 
         <div v-if="default_booking.booking_type == 'many'">
             <!-- Slot Duration -->
-            <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group class="w-full">
                 <x-admin::form.control-group.label class="required">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.slot-duration')
                 </x-admin::form.control-group.label>
@@ -59,7 +59,7 @@
             </x-admin::form.control-group>
 
             <!-- Break Time -->
-            <x-admin::form.control-group class="w-full mb-2.5">
+            <x-admin::form.control-group class="w-full">
                 <x-admin::form.control-group.label class="required">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.break-duration')
                 </x-admin::form.control-group.label>
@@ -315,7 +315,7 @@
                         >
                             <div class="flex gap-4 mb-2.5 px-4 py-2.5 border-b dark:border-gray-800">
                                 <!-- From Day -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')
                                     </x-admin::form.control-group.label>
@@ -355,7 +355,7 @@
                                 </x-admin::form.control-group>
                     
                                 <!-- From -->
-                                <x-booking::form.control-group class="w-full mb-2.5">
+                                <x-booking::form.control-group class="w-full">
                                     <x-booking::form.control-group.label class="required">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                     </x-booking::form.control-group.label>
@@ -377,7 +377,7 @@
                     
                             <div class="flex gap-4 px-4 py-2.5">
                                 <!-- TO Day -->
-                                <x-admin::form.control-group class="w-full mb-2.5">
+                                <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                     </x-admin::form.control-group.label>
@@ -403,7 +403,7 @@
                                 </x-admin::form.control-group>
                     
                                 <!-- TO Time -->
-                                <x-booking::form.control-group class="w-full mb-2.5">
+                                <x-booking::form.control-group class="w-full">
                                     <x-booking::form.control-group.label class="required">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                     </x-booking::form.control-group.label>
@@ -456,7 +456,7 @@
                                     </x-admin::form.control-group.control>
 
                                     <!-- Slots From -->
-                                    <x-booking::form.control-group class="w-full mb-2.5">
+                                    <x-booking::form.control-group class="w-full">
                                         <x-booking::form.control-group.label class="hidden">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                         </x-booking::form.control-group.label>
@@ -476,7 +476,7 @@
                                     </x-booking::form.control-group>
 
                                     <!-- Slots To -->
-                                    <x-booking::form.control-group class="w-full mb-2.5">
+                                    <x-booking::form.control-group class="w-full">
                                         <x-booking::form.control-group.label class="hidden">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                         </x-booking::form.control-group.label>
@@ -496,7 +496,7 @@
                                     </x-booking::form.control-group>
 
                                     <!-- Status -->
-                                    <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group class="w-full">
                                         <x-admin::form.control-group.label class="hidden">
                                             @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
                                         </x-admin::form.control-group.label>
@@ -567,7 +567,7 @@
                             </x-admin::form.control-group.control>
 
                             <!-- From -->
-                            <x-booking::form.control-group class="w-full mb-2.5">
+                            <x-booking::form.control-group class="w-full">
                                 <x-booking::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                 </x-booking::form.control-group.label>
@@ -587,7 +587,7 @@
                             </x-booking::form.control-group>
 
                             <!-- To -->
-                            <x-booking::form.control-group class="w-full mb-2.5">
+                            <x-booking::form.control-group class="w-full">
                                 <x-booking::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                 </x-booking::form.control-group.label>
@@ -607,7 +607,7 @@
                             </x-booking::form.control-group>
 
                             <!-- Status -->
-                            <x-admin::form.control-group class="w-full mb-2.5">
+                            <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label>
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
                                 </x-admin::form.control-group.label>
@@ -696,7 +696,7 @@
                 }
 
                 if (this.default_booking.booking_type === 'one') {
-                    let data = this.default_booking.slots.map((e) => {
+                    let data = this.default_booking.slots?.map((e) => {
                         e.from_day = this.days[e.from_day];
                         e.to_day = this.days[e.to_day];
 

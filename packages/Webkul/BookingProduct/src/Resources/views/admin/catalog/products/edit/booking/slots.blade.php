@@ -11,7 +11,7 @@
                  </p>
             </div>
 
-            <!-- Add Ticket Button -->
+            <!-- Add Slots Button -->
             <div class="flex gap-x-1 items-center">                
                 <div
                     class="secondary-button"
@@ -300,7 +300,7 @@
                             >
                             </x-admin::form.control-group.control>
 
-                            <x-booking::form.control-group class="w-full mb-2.5">
+                            <x-booking::form.control-group class="w-full">
                                 <x-booking::form.control-group.label class="hidden">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                                 </x-booking::form.control-group.label>
@@ -320,7 +320,7 @@
                             </x-booking::form.control-group>
                 
                             <!-- To -->
-                            <x-booking::form.control-group class="w-full mb-2.5">
+                            <x-booking::form.control-group class="w-full">
                                 <x-booking::form.control-group.label class="hidden">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                                 </x-booking::form.control-group.label>
@@ -358,7 +358,7 @@
             >
             </x-admin::form.control-group.control>
 
-            <x-booking::form.control-group class="w-full mb-2.5">
+            <x-booking::form.control-group class="w-full">
                 <x-booking::form.control-group.label class="hidden">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
                 </x-booking::form.control-group.label>
@@ -379,7 +379,7 @@
             </x-booking::form.control-group>
 
             <!-- To -->
-            <x-booking::form.control-group class="w-full mb-2.5">
+            <x-booking::form.control-group class="w-full">
                 <x-booking::form.control-group.label class="hidden">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
                 </x-booking::form.control-group.label>
