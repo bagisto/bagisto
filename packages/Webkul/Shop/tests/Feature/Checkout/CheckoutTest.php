@@ -6,6 +6,7 @@ use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Sales\Models\Order;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -15,6 +16,12 @@ afterEach(function () {
     /**
      * Cleaing up the rows which are createing while testing.
      */
+    Cart::query()->delete();
+    CartItem::query()->delete();
+    Order::query()->delete();
+    CartPayment::query()->delete();
+    CartShippingRate::query()->delete();
+    CustomerAddress::query()->delete();
 });
 
 it('should add product items to the cart', function () {
