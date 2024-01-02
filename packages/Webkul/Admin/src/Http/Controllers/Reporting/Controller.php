@@ -10,21 +10,11 @@ use Webkul\Admin\Http\Controllers\Controller as BaseController;
 class Controller extends BaseController
 {
     /**
-     * Request param functions
+     * Request param functions.
      *
      * @var array
      */
-    protected $typeFunctions = [
-        'total-sales'         => 'getTotalSalesStats',
-        'average-sales'       => 'getAverageSalesStats',
-        'total-orders'        => 'getTotalOrdersStats',
-        'purchase-funnel'     => 'getPurchaseFunnelStats',
-        'abandoned-carts'     => 'getAbandonedCartsStats',
-        'refunds'             => 'getRefundsStats',
-        'tax-collected'       => 'getTaxCollectedStats',
-        'shipping-collected'  => 'getShippingCollectedStats',
-        'top-payment-methods' => 'getTopPaymentMethods',
-    ];
+    protected $typeFunctions = [];
 
     /**
      * Create a controller instance.
