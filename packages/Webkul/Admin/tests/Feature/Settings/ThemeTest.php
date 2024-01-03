@@ -22,12 +22,13 @@ it('should returns the theme index page', function () {
 });
 
 it('should store the newly created theme', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $lastThemeId = ThemeCustomization::factory()->create()->id + 1;
 
     $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content'];
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     postJson(route('admin.settings.themes.store'), [
         'type'       => $type = fake()->randomElement($types),
@@ -47,9 +48,6 @@ it('should store the newly created theme', function () {
 });
 
 it('should update the theme customizations', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
     $theme = ThemeCustomization::factory()->create();
 
     $data = [];
@@ -130,6 +128,9 @@ it('should update the theme customizations', function () {
     $data['channel_id'] = core()->getCurrentChannel()->id;
     $data['status'] = 'on';
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     postJson(route('admin.settings.themes.update', $theme->id), $data)
         ->assertRedirect(route('admin.settings.themes.index'))
         ->isRedirection();
@@ -142,10 +143,11 @@ it('should update the theme customizations', function () {
 });
 
 it('should delete the theme', function () {
+    // Arrange
+    $theme = ThemeCustomization::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $theme = ThemeCustomization::factory()->create();
 
     deleteJson(route('admin.settings.themes.delete', $theme->id))
         ->assertOk()

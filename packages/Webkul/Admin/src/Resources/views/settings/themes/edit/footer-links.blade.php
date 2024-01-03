@@ -121,13 +121,13 @@
                         </div>
 
                         <div   
-                            v-else
+                            v-if="isFooterLinksEmpty"
                             class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                         >
                             <img
-                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
-                                alt="add-product-to-store"
+                                alt="@lang('admin::app.settings.themes.edit.footer-link')"
                             >
             
                             <div class="flex flex-col gap-1.5 items-center">
@@ -139,10 +139,6 @@
                                 <p class="text-gray-400">
                                     @lang('admin::app.settings.themes.edit.footer-link-description')
                                 </p>
-                            </div>
-            
-                            <div class="secondary-button">
-                                @lang('admin::app.settings.themes.edit.add-footer-link-btn')
                             </div>
                         </div>
                     </div>
@@ -445,10 +441,6 @@
                     this.$emitter.emit('open-confirm-modal', {
                         agree: () => {
                             this.footerLinks[footerLink.column].splice(key, 1);
-
-                            if (this.isFooterLinksEmpty) {
-                                this.isShowIllustrator = true;
-                            }
                         }
                     });
                 },

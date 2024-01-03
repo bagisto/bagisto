@@ -42,7 +42,7 @@
                                 @if (bouncer()->hasPermission('sales.invoices.create'))
                                     <button
                                         type="submit"
-                                        class="mr-11 primary-button"
+                                        class="ltr:mr-11 rtl:ml-11 primary-button"
                                     >
                                         @lang('admin::app.sales.invoices.create.create-invoice')        
                                     </button>

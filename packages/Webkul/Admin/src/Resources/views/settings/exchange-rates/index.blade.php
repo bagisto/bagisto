@@ -91,9 +91,9 @@
                         <!-- Actions -->
                         <div class="flex justify-end">
                             @if (bouncer()->hasPermission('settings.exchange_rates.edit'))
-                                <a @click="selectedExchangeRates=1; editModal(record.actions.find(action => action.index === 'action_1')?.url)">
+                                <a @click="selectedExchangeRates=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
                                     <span
-                                        :class="record.actions.find(action => action.index === 'action_1')?.icon"
+                                        :class="record.actions.find(action => action.index === 'edit')?.icon"
                                         class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                     >
                                     </span>
@@ -101,9 +101,9 @@
                             @endif
 
                             @if (bouncer()->hasPermission('settings.exchange_rates.delete'))
-                                <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
+                                <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
                                     <span
-                                        :class="record.actions.find(action => action.index === 'action_2')?.icon"
+                                        :class="record.actions.find(action => action.index === 'delete')?.icon"
                                         class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                     >
                                     </span>

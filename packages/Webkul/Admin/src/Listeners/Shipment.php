@@ -15,10 +15,6 @@ class Shipment extends Base
      */
     public function afterCreated($shipment)
     {
-        if ($shipment->email_sent) {
-            return;
-        }
-
         try {
             if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_shipment')) {
                 return;

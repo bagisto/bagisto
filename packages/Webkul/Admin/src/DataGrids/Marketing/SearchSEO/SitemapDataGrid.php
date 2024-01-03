@@ -77,6 +77,7 @@ class SitemapDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.sitemaps.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.edit'),
                 'method' => 'GET',
@@ -89,6 +90,7 @@ class SitemapDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.sitemaps.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.delete'),
                 'method' => 'DELETE',
