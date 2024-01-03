@@ -106,6 +106,7 @@ class RegistrationController extends Controller
     public function verifyAccount($token)
     {
         $customer = $this->customerRepository->findOneByField('token', $token);
+
         if ($customer) {
             $this->customerRepository->update([
                 'is_verified' => 1,
