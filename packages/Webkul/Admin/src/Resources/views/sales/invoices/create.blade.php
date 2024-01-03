@@ -33,18 +33,20 @@
                 <x-admin::drawer ref="invoice">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-3">
+                        <div class="grid gap-3 h-8">
                             <div class="flex justify-between items-center">
                                 <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.invoices.create.new-invoice')         
                                 </p>
     
-                                <button
-                                    type="submit"
-                                    class="mr-11 primary-button"
-                                >
-                                @lang('admin::app.sales.invoices.create.create-invoice')        
-                                </button>
+                                @if (bouncer()->hasPermission('sales.invoices.create'))
+                                    <button
+                                        type="submit"
+                                        class="mr-11 primary-button"
+                                    >
+                                        @lang('admin::app.sales.invoices.create.create-invoice')        
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </x-slot:header>
@@ -100,7 +102,7 @@
                                         </div>
 
                                         <!-- Quantity Details -->
-                                        <x-admin::form.control-group class="mb-2.5">
+                                        <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.sales.invoices.create.qty-to-invoiced')
                                             </x-admin::form.control-group.label>

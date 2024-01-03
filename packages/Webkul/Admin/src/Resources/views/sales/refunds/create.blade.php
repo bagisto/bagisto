@@ -32,7 +32,7 @@
                 <x-admin::drawer ref="refund">
                     <!-- Drawer Header -->
                     <x-slot:header>
-                        <div class="grid gap-3">
+                        <div class="grid gap-3 h-8">
                             <div class="flex justify-between items-center">
                                 <p class="text-xl font-medium dark:text-white">
                                     @lang('admin::app.sales.refunds.create.title')
@@ -40,20 +40,23 @@
 
                                 <div class="flex gap-x-2.5">
                                     <!-- Update Quantity Button -->
-                                    <div 
-                                        class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
-                                        @click="updateQty"
-                                    >
-                                        @lang('admin::app.sales.refunds.create.update-quantity-btn')
-                                    </div>
+                                 
+                                    @if (bouncer()->hasPermission('sales.refunds.create'))
+                                        <div 
+                                            class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
+                                            @click="updateQty"
+                                        >
+                                            @lang('admin::app.sales.refunds.create.update-quantity-btn')
+                                        </div>
 
-                                    <!-- Refund Submit Button -->
-                                    <button
-                                        type="submit"
-                                        class="mr-11 primary-button"
-                                    >
-                                        @lang('admin::app.sales.refunds.create.refund-btn')
-                                    </button>
+                                        <!-- Refund Submit Button -->
+                                        <button
+                                            type="submit"
+                                            class="mr-11 primary-button"
+                                            >
+                                            @lang('admin::app.sales.refunds.create.refund-btn')
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

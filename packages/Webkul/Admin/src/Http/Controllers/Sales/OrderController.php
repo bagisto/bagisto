@@ -65,7 +65,7 @@ class OrderController extends Controller
             session()->flash('error', trans('admin::app.sales.orders.view.create-error'));
         }
 
-        return redirect()->back();
+        return redirect()->route('admin.sales.orders.view', $id);
     }
 
     /**
@@ -92,7 +92,7 @@ class OrderController extends Controller
 
         session()->flash('success', trans('admin::app.sales.orders.view.comment-success'));
 
-        return redirect()->back();
+        return redirect()->route('admin.sales.orders.view', $id);
     }
 
     /**

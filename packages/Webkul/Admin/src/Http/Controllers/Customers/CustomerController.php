@@ -142,7 +142,7 @@ class CustomerController extends Controller
 
         session()->flash('success', trans('admin::app.customers.customers.update-success'));
 
-        return redirect()->back();
+        return redirect()->route('admin.customers.customers.view', $id);
     }
 
     /**
@@ -165,12 +165,12 @@ class CustomerController extends Controller
 
             session()->flash('success', trans('admin::app.customers.customers.delete-success'));
 
-            return redirect(route('admin.customers.customers.index'));
+            return redirect()->route('admin.customers.customers.index');
         }
 
         session()->flash('success', trans('admin::app.customers.customers.view.order-pending'));
 
-        return redirect()->back();
+        return redirect()->route('admin.customers.customers.index');
     }
 
     /**
@@ -214,7 +214,7 @@ class CustomerController extends Controller
 
         session()->flash('success', trans('admin::app.customers.customers.view.note-created-success'));
 
-        return redirect()->back();
+        return redirect()->route('admin.customers.customers.view', $id);
     }
 
     /**
