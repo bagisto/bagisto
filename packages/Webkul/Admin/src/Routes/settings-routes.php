@@ -169,17 +169,17 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('confirm', 'destroySelf')->name('admin.settings.users.destroy');
         });
-    });
 
-    Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
-        Route::get('', 'index')->name('admin.settings.themes.index');
-
-        Route::get('edit/{id}', 'edit')->name('admin.settings.themes.edit');
-
-        Route::post('store', 'store')->name('admin.settings.themes.store');
-
-        Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');
-
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.themes.delete');
+        Route::controller(ThemeController::class)->prefix('themes')->group(function () {
+            Route::get('', 'index')->name('admin.settings.themes.index');
+    
+            Route::get('edit/{id}', 'edit')->name('admin.settings.themes.edit');
+    
+            Route::post('store', 'store')->name('admin.settings.themes.store');
+    
+            Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');
+    
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.themes.delete');
+        });
     });
 });
