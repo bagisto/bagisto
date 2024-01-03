@@ -79,6 +79,7 @@ class LocalesDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('settings.locales.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.locales.index.datagrid.edit'),
                 'method' => 'GET',
@@ -90,6 +91,7 @@ class LocalesDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('settings.locales.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.settings.locales.index.datagrid.delete'),
                 'method' => 'DELETE',
