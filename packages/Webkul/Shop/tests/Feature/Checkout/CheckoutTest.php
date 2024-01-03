@@ -1,12 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Models\ProductOrderedInventory;
 use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderItem;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -22,6 +25,10 @@ afterEach(function () {
     CartShippingRate::query()->delete();
     CustomerAddress::query()->delete();
     Order::query()->delete();
+    OrderItem::query()->delete();
+    ProductOrderedInventory::query()->delete();
+    DB::table('product_inventories')->truncate();
+    DB::table('product_ordered_inventories')->truncate();
 });
 
 it('should add product items to the cart', function () {
@@ -434,7 +441,8 @@ it('should store the orders for guest user', function () {
         'cart_id'           => $cart->id,
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
+    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
+    $shippingAddress = CustomerAddress::factory()->create(['cart_id'      => $cart->id, 'address_type' => 'cart_shipping']);
 
     CartShippingRate::factory()->create([
         'carrier'               => 'free',
@@ -442,10 +450,7 @@ it('should store the orders for guest user', function () {
         'method'                => 'free_free',
         'method_title'          => 'Free Shipping',
         'method_description'    => 'Free Shipping',
-        'cart_address_id'       => CustomerAddress::factory()->create([
-            'cart_id'      => $cart->id,
-            'address_type' => 'cart_shipping',
-        ])->id,
+        'cart_address_id'       => $shippingAddress->id,
     ]);
 
     $cartPayment = new CartPayment;
@@ -470,5 +475,49 @@ it('should store the orders for guest user', function () {
         'shipping_method' => 'free_free',
         'grand_total'     => $price,
         'cart_id'         => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'qty_ordered' => 1,
+        'price'       => $price,
+        'type'        => $product->type,
+        'product_id'  => $product->id,
+    ]);
+
+    $this->assertDatabaseHas('order_payment', ['method'  => $paymentMethod]);
+
+    $this->assertDatabaseHas('cart_payment', [
+        'method'  => $paymentMethod,
+        'cart_id' => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('cart', ['is_active' => 0]);
+
+    $this->assertDatabaseHas('addresses', [
+        'address_type' => $billingAddress->address_type,
+        'cart_id'      => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('addresses', [
+        'address_type' => $shippingAddress->address_type,
+        'cart_id'      => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'qty_ordered'  => 1,
+        'qty_shipped'  => 0,
+        'qty_invoiced' => 0,
+        'qty_canceled' => 0,
+        'qty_refunded' => 0,
+    ]);
+
+    $this->assertDatabaseHas('product_ordered_inventories', [
+        'qty'        => $product->ordered_inventories->pluck('qty')->first(),
+        'product_id' => $product->id,
+    ]);
+
+    $this->assertDatabaseHas('product_inventories', [
+        'product_id' => $product->id,
+        'qty'        => $product->inventories->where('inventory_source_id', 1)->pluck('qty')->first(),
     ]);
 });
