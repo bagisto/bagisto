@@ -84,6 +84,7 @@ it('should add product items to the cart', function () {
 
     session()->put('cart', $cartTemp);
 
+    // Act and Assert
     get(route('shop.api.checkout.cart.index'))
         ->assertOk()
         ->assertJsonPath('data.id', $cartId)
@@ -145,7 +146,7 @@ it('should remove product items to the cart', function () {
 
     session()->put('cart', $cartTemp);
 
-    // Assert
+    // Act and Assert
     deleteJson(route('shop.api.checkout.cart.destroy', [
         'cart_item_id' => $cartItem->id,
     ]))
@@ -209,7 +210,7 @@ it('should store the guest user address for cart billing/shipping for guest user
 
     session()->put('cart', $cartTemp);
 
-    // Assert
+    // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
             'address1'         => [fake()->address()],
@@ -304,7 +305,7 @@ it('should store the shipping method', function () {
 
     session()->put('cart', $cartTemp);
 
-    // Assert
+    // Act and Assert
     postJson(route('shop.checkout.onepage.shipping_methods.store'), [
         'shipping_method' => 'free_free',
     ])
@@ -370,7 +371,7 @@ it('should store the payment method for guest user', function () {
 
     session()->put('cart', $cartTemp);
 
-    // Assert
+    // Act and Assert
     postJson(route('shop.checkout.onepage.payment_methods.store'), [
         'payment' => [
             'method'       => 'cashondelivery',
@@ -466,32 +467,11 @@ it('should store the orders for guest user', function () {
 
     session()->put('cart', $cartTemp);
 
-    // Assert
+    // Act and Assert
     postJson(route('shop.checkout.onepage.orders.store'))
         ->assertOk()
         ->assertJsonPath('data.redirect', true)
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
-
-    $this->assertDatabaseHas('orders', [
-        'status'          => 'pending',
-        'shipping_method' => 'free_free',
-        'grand_total'     => $price,
-        'cart_id'         => $cart->id,
-    ]);
-
-    $this->assertDatabaseHas('order_items', [
-        'qty_ordered' => 1,
-        'price'       => $price,
-        'type'        => $product->type,
-        'product_id'  => $product->id,
-    ]);
-
-    $this->assertDatabaseHas('order_payment', ['method'  => $paymentMethod]);
-
-    $this->assertDatabaseHas('cart_payment', [
-        'method'  => $paymentMethod,
-        'cart_id' => $cart->id,
-    ]);
 
     $this->assertDatabaseHas('cart', ['is_active' => 0]);
 
@@ -505,13 +485,30 @@ it('should store the orders for guest user', function () {
         'cart_id'      => $cart->id,
     ]);
 
+    $this->assertDatabaseHas('orders', [
+        'status'          => 'pending',
+        'shipping_method' => 'free_free',
+        'grand_total'     => $price,
+        'cart_id'         => $cart->id,
+    ]);
+
     $this->assertDatabaseHas('order_items', [
         'qty_ordered'  => $quantity = $cartItem->quantity,
         'qty_shipped'  => 0,
         'qty_invoiced' => 0,
         'qty_canceled' => 0,
         'qty_refunded' => 0,
+        'price'        => $price,
+        'type'         => $product->type,
+        'product_id'   => $product->id,
     ]);
+
+    $this->assertDatabaseHas('cart_payment', [
+        'method'  => $paymentMethod,
+        'cart_id' => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('order_payment', ['method'  => $paymentMethod]);
 
     $this->assertDatabaseHas('product_ordered_inventories', [
         'qty'        => $quantity,
