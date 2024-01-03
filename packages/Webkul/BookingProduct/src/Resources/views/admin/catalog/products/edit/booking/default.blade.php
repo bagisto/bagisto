@@ -274,264 +274,264 @@
 
          <!-- Drawer component -->
          <x-booking::form
-         v-slot="{ meta, errors, handleSubmit }"
-         as="div"
-         ref="modelForm"
-     >
-         <form
-             @submit.prevent="handleSubmit($event, store)"
-             enctype="multipart/form-data"
-             ref="createOptionsForm"
-         >
-             <x-admin::drawer ref="drawerform">
-                 <x-slot:header>
-                     <div class="flex justify-between items-center">
-                        <p class="text-lg text-gray-800 dark:text-white font-bold">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.title')
-                        </p>
+            v-slot="{ meta, errors, handleSubmit }"
+            as="div"
+            ref="modelForm"
+        >
+            <form
+                @submit.prevent="handleSubmit($event, store)"
+                enctype="multipart/form-data"
+                ref="createOptionsForm"
+            >
+                <x-admin::drawer ref="drawerform">
+                    <x-slot:header>
+                        <div class="flex justify-between items-center">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.title')
+                            </p>
 
-                         <div class="flex gap-2">
-                             <button
-                                 type="submit"
-                                 class="primary-button"
-                                 :class="! parseInt(sameSlotAllDays) ? 'mr-11' : ''"
-                             >
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.save')
-                             </button>
+                            <div class="flex gap-2">
+                                <button
+                                    type="submit"
+                                    class="primary-button"
+                                    :class="! parseInt(sameSlotAllDays) ? 'mr-11' : ''"
+                                >
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.save')
+                                </button>
 
-                             <div
-                                 class="mr-11 primary-button"
-                                 v-if="parseInt(sameSlotAllDays)"
-                                 @click="addSlot()"
-                             >
-                                 @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                             </div>
-                         </div>
-                     </div>
-                 </x-slot:header>
-
-                 <x-slot:content>
-                     <!-- Booking Type One -->
-                     <div
-                        v-if="default_booking.booking_type == 'one'"
-                        class="mb-2.5"
-                    >
-                        <div class="flex gap-4 mb-2.5 px-4 py-2.5 border-b dark:border-gray-800">
-                            <!-- From Day -->
-                            <x-admin::form.control-group class="w-full">
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="booking_type"
-                                    value="one"
+                                <div
+                                    class="mr-11 primary-button"
+                                    v-if="parseInt(sameSlotAllDays)"
+                                    @click="addSlot()"
                                 >
-                                </x-admin::form.control-group.control>
-
-                                <!-- Hidden Id Input -->
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="id"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="from_day"
-                                    rules="required"
-                                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')"
-                                >
-                                    <option
-                                        v-for="(day, index) in days"
-                                        :value="index"
-                                        v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
-                                    >
-                                    </option>
-                                </x-admin::form.control-group.control>
-                
-                                <x-admin::form.control-group.error 
-                                    control-name="from_day"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                
-                            <!-- From -->
-                            <x-booking::form.control-group class="w-full">
-                                <x-booking::form.control-group.label class="required">
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
-                                </x-booking::form.control-group.label>
-                
-                                <x-booking::form.control-group.control
-                                    type="time"
-                                    name="from"
-                                    rules="required"
-                                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
-                                >
-                                </x-booking::form.control-group.control>
-                
-                                <x-booking::form.control-group.error 
-                                    control-name="from"
-                                >
-                                </x-booking::form.control-group.error>
-                            </x-booking::form.control-group>
-                        </div>
-                
-                        <div class="flex gap-4 px-4 py-2.5">
-                            <!-- TO Day -->
-                            <x-admin::form.control-group class="w-full">
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
-                                </x-admin::form.control-group.label>
-                
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="to_day"
-                                    rules="required"
-                                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
-                                >
-                                    <option
-                                        v-for="(day, index) in days"
-                                        :value="index"
-                                        v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
-                                    >
-                                    </option>
-                                </x-admin::form.control-group.control>
-                
-                                <x-admin::form.control-group.error 
-                                    control-name="to_day"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                
-                            <!-- TO Time -->
-                            <x-booking::form.control-group class="w-full">
-                                <x-booking::form.control-group.label class="required">
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
-                                </x-booking::form.control-group.label>
-                
-                                <x-booking::form.control-group.control
-                                    type="time"
-                                    name="to"
-                                    rules="required"
-                                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
-                                >
-                                </x-booking::form.control-group.control>
-                
-                                <x-booking::form.control-group.error 
-                                    control-name="to"
-                                >
-                                </x-booking::form.control-group.error>
-                            </x-booking::form.control-group>
-                        </div>
-                    </div>
-
-                     <!-- Booking Type Many -->
-                     <div v-if="default_booking.booking_type == 'many'">
-                        <div class="grid grid-cols-4 gap-2.5 pb-3">
-                            @foreach (['day', 'from', 'to', 'status'] as $item)
-                                <div class="font-semibold text-black dark:text-white">
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
+                    </x-slot:header>
 
-                        @foreach ($days as $key => $day)
-                            <div class="grid grid-cols-4 gap-2.5">
-                                <div class="text-black dark:text-white">
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
-                                </div>
-
-                                <!-- Hidden ID Field -->
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="[{{ $key }}]id"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <!-- Hidden Days Field -->
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="[{{ $key }}]day"
-                                    value="{{ $day }}"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <!-- Slots From -->
-                                <x-booking::form.control-group class="w-full">
-                                    <x-booking::form.control-group.label class="hidden">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
-                                    </x-booking::form.control-group.label>
-
-                                    <x-booking::form.control-group.control
-                                        type="time"
-                                        name="[{{ $key }}]from"
-                                        ::rules="slotsStatus[{{ $key }}] ? 'required' : ''"
-                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
-                                    >
-                                    </x-booking::form.control-group.control>
-
-                                    <x-booking::form.control-group.error 
-                                        control-name="[{{ $key }}]from"
-                                    >
-                                    </x-booking::form.control-group.error>
-                                </x-booking::form.control-group>
-
-                                <!-- Slots To -->
-                                <x-booking::form.control-group class="w-full">
-                                    <x-booking::form.control-group.label class="hidden">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
-                                    </x-booking::form.control-group.label>
-
-                                    <x-booking::form.control-group.control
-                                        type="time"
-                                        name="[{{ $key }}]to"
-                                        {{-- rules="{ slots.many[index].status ? {required: true, time_min: slots.many[index].from } : '' }" --}}
-                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
-                                    >
-                                    </x-booking::form.control-group.control>
-
-                                    <x-booking::form.control-group.error 
-                                        control-name="[{{ $key }}]to"
-                                    >
-                                    </x-booking::form.control-group.error>
-                                </x-booking::form.control-group>
-
-                                <!-- Status -->
+                    <x-slot:content>
+                        <!-- Booking Type One -->
+                        <div
+                            v-if="default_booking.booking_type == 'one'"
+                            class="mb-2.5"
+                        >
+                            <div class="flex gap-4 mb-2.5 px-4 py-2.5 border-b dark:border-gray-800">
+                                <!-- From Day -->
                                 <x-admin::form.control-group class="w-full">
-                                    <x-admin::form.control-group.label class="hidden">
-                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="select"
-                                        name="[{{ $key }}]status"
-                                        value="0"
-                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
-                                        @change="slotsStatus[{{ $key }}]=$event.target.value==1?true:false;"
+                                        type="hidden"
+                                        name="booking_type"
+                                        value="one"
                                     >
-                                        <option value="1">
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.open')
-                                        </option>
-
-                                        <option value="0">
-                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.close')
-                                        </option>
                                     </x-admin::form.control-group.control>
 
+                                    <!-- Hidden Id Input -->
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="id"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="from_day"
+                                        rules="required"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')"
+                                    >
+                                        <option
+                                            v-for="(day, index) in days"
+                                            :value="index"
+                                            v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
+                                        >
+                                        </option>
+                                    </x-admin::form.control-group.control>
+                    
                                     <x-admin::form.control-group.error 
-                                        control-name="[{{ $key }}]status"
+                                        control-name="from_day"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                    
+                                <!-- From -->
+                                <x-booking::form.control-group class="w-full">
+                                    <x-booking::form.control-group.label class="required">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
+                                    </x-booking::form.control-group.label>
+                    
+                                    <x-booking::form.control-group.control
+                                        type="time"
+                                        name="from"
+                                        rules="required"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                    >
+                                    </x-booking::form.control-group.control>
+                    
+                                    <x-booking::form.control-group.error 
+                                        control-name="from"
+                                    >
+                                    </x-booking::form.control-group.error>
+                                </x-booking::form.control-group>
                             </div>
-                        @endforeach
-                    </div>
-                 </x-slot:content>
-             </x-admin::drawer>
-         </form>
-     </x-booking::form>
+                    
+                            <div class="flex gap-4 px-4 py-2.5">
+                                <!-- TO Day -->
+                                <x-admin::form.control-group class="w-full">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                    </x-admin::form.control-group.label>
+                    
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="to_day"
+                                        rules="required"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                    >
+                                        <option
+                                            v-for="(day, index) in days"
+                                            :value="index"
+                                            v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
+                                        >
+                                        </option>
+                                    </x-admin::form.control-group.control>
+                    
+                                    <x-admin::form.control-group.error 
+                                        control-name="to_day"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                    
+                                <!-- TO Time -->
+                                <x-booking::form.control-group class="w-full">
+                                    <x-booking::form.control-group.label class="required">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                    </x-booking::form.control-group.label>
+                    
+                                    <x-booking::form.control-group.control
+                                        type="time"
+                                        name="to"
+                                        rules="required"
+                                        :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                    >
+                                    </x-booking::form.control-group.control>
+                    
+                                    <x-booking::form.control-group.error 
+                                        control-name="to"
+                                    >
+                                    </x-booking::form.control-group.error>
+                                </x-booking::form.control-group>
+                            </div>
+                        </div>
+
+                        <!-- Booking Type Many -->
+                        <div v-if="default_booking.booking_type == 'many'">
+                            <div class="grid grid-cols-4 gap-2.5 pb-3">
+                                @foreach (['day', 'from', 'to', 'status'] as $item)
+                                    <div class="font-semibold text-black dark:text-white">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            @foreach ($days as $key => $day)
+                                <div class="grid grid-cols-4 gap-2.5">
+                                    <div class="text-black dark:text-white">
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
+                                    </div>
+
+                                    <!-- Hidden ID Field -->
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="[{{ $key }}]id"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <!-- Hidden Days Field -->
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="[{{ $key }}]day"
+                                        value="{{ $day }}"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <!-- Slots From -->
+                                    <x-booking::form.control-group class="w-full">
+                                        <x-booking::form.control-group.label class="hidden">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
+                                        </x-booking::form.control-group.label>
+
+                                        <x-booking::form.control-group.control
+                                            type="time"
+                                            name="[{{ $key }}]from"
+                                            ::rules="slotsStatus[{{ $key }}] ? 'required' : ''"
+                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                        >
+                                        </x-booking::form.control-group.control>
+
+                                        <x-booking::form.control-group.error 
+                                            control-name="[{{ $key }}]from"
+                                        >
+                                        </x-booking::form.control-group.error>
+                                    </x-booking::form.control-group>
+
+                                    <!-- Slots To -->
+                                    <x-booking::form.control-group class="w-full">
+                                        <x-booking::form.control-group.label class="hidden">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
+                                        </x-booking::form.control-group.label>
+
+                                        <x-booking::form.control-group.control
+                                            type="time"
+                                            name="[{{ $key }}]to"
+                                            {{-- rules="{ slots.many[index].status ? {required: true, time_min: slots.many[index].from } : '' }" --}}
+                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                        >
+                                        </x-booking::form.control-group.control>
+
+                                        <x-booking::form.control-group.error 
+                                            control-name="[{{ $key }}]to"
+                                        >
+                                        </x-booking::form.control-group.error>
+                                    </x-booking::form.control-group>
+
+                                    <!-- Status -->
+                                    <x-admin::form.control-group class="w-full">
+                                        <x-admin::form.control-group.label class="hidden">
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="[{{ $key }}]status"
+                                            value="0"
+                                            :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.status')"
+                                            @change="slotsStatus[{{ $key }}]=$event.target.value==1?true:false;"
+                                        >
+                                            <option value="1">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.open')
+                                            </option>
+
+                                            <option value="0">
+                                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.close')
+                                            </option>
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error 
+                                            control-name="[{{ $key }}]status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            @endforeach
+                        </div>
+                    </x-slot:content>
+                </x-admin::drawer>
+            </form>
+        </x-booking::form>
 
         <!-- Model For Edit Many type same slots for all booking -->
         <x-admin::form
@@ -777,19 +777,15 @@
 
                 remove(element) {
                     if (this.default_booking.booking_type == 'one') {
-                        delete this.slots.one[element];
+                        const index = this.slots.one.findIndex((item, index) => index === element);
+    
+                        if (index !== -1) {
+                            this.slots.one.splice(index, 1);
+                        }
                     } else {
 
                     }
                 },
-
-                // removeOption(type , values) {
-                //     if (type === 'many') {
-                //         // this.slots.many = this.slots.many.filter(option => option.id !== values.id);
-                //     } else {
-                //         this.slots.one = this.slots.one.filter(option => option.id !== values.id);
-                //     }
-                // },
             }
         });
     </script>
