@@ -174,6 +174,63 @@
                     </div>
                 </template>
 
+                <!-- For Not Same Slot All Days -->
+                <template
+                    v-else-if="slots.many[0]?.length"
+                    v-for="(slot, slotIndex) in slots.many[0]"
+                    :key="slotIndex"
+                >
+                    <div class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800">
+                        {{-- <template v-for="(item, itemIndex) in slot">
+                            <div
+                                class="text-base text-white my-2"
+                                v-text="itemIndex"
+                            >
+                            </div>
+
+                            <template v-for="(time, timeIndex) in item">
+                                <div class="flex gap-2.5 justify-between py-3 cursor-pointer">
+                                    <div class="grid gap-1.5 place-content-start">
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            From - @{{ time.from }}
+                                        </p>
+                    
+                                        <input
+                                            type="hidden"
+                                            :name="'booking[slots][' + slotIndex + '][' + timeIndex + '][from]'"
+                                            :value="time.from"
+                                        />
+                                        
+                                        <p class="text-gray-600 dark:text-gray-300">
+                                            To - @{{ time.to }}
+                                        </p>
+                    
+                                        <input
+                                            type="hidden"
+                                            :name="'booking[slots][' + slotIndex + '][' + timeIndex + '][to]'"
+                                            :value="time.to"
+                                        />
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div class="flex gap-x-5 place-content-start text-right">
+                                        <p
+                                            class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                            @click="editSlot(time)"
+                                        >
+                                            Edit
+                                        </p>
+                                        
+                                        <p class="text-red-600 cursor-pointer transition-all hover:underline">
+                                            Delete
+                                        </p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template> --}}
+                    </div>
+                </template>
+
                     {{-- <x-admin::table.tbody.tr
                         v-if="slots.many?.length"
                         v-for="(slot, index) in slots.many[0]"
@@ -293,19 +350,10 @@
                             <div class="flex gap-2">
                                 <button
                                     type="submit"
-                                    class="primary-button"
-                                    :class="! parseInt(sameSlotAllDays) ? 'mr-11' : ''"
+                                    class="primary-button mr-11"
                                 >
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.save')
                                 </button>
-
-                                <div
-                                    class="mr-11 primary-button"
-                                    v-if="parseInt(sameSlotAllDays)"
-                                    @click="addSlot()"
-                                >
-                                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
-                                </div>
                             </div>
                         </div>
                     </x-slot:header>
@@ -691,14 +739,14 @@
                 }
 
                 if (this.default_booking.booking_type === 'one') {
-                    let data = this.default_booking.slots?.map((e) => {
-                        e.from_day = this.days[e.from_day];
-                        e.to_day = this.days[e.to_day];
+                    // let data = this.default_booking.slots?.map((e) => {
+                    //     e.from_day = this.days[e.from_day];
+                    //     e.to_day = this.days[e.to_day];
 
-                        return e;
-                    })
+                    //     return e;
+                    // })
 
-                    this.slots['one'] =  data ?? [];
+                    this.slots['one'] = this.default_booking.slots;
                 } else {
                     if (this.default_booking.slots) {
                         this.slots['many'].push(this.default_booking.slots ?? []);
@@ -726,7 +774,7 @@
                             return key;
                         });
 
-                        let foundIndex = this.slots.one.findIndex(item => item.id === params.id);
+                        let foundIndex = this.slots.one?.findIndex(item => item.id === params.id);
 
                         if (foundIndex !== -1) {
                             this.slots.one[foundIndex] = { 

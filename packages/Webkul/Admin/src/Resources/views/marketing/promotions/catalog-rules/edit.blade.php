@@ -764,7 +764,7 @@
                                 }, {
                                     'operator': '>=',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than')"
-                                }, {slot
+                                }, {
                                     'operator': '<=',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
@@ -814,7 +814,7 @@
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to')"
                                 }],
                             'date': [{
-                                    'operator': '==',slot
+                                    'operator': '==',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to')"
                                 }, {
                                     'operator': '!=',
