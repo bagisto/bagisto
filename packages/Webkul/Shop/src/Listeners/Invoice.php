@@ -21,7 +21,7 @@ class Invoice extends Base
 
             $this->prepareMail($invoice, new InvoicedNotification($invoice));
 
-            $invoice->update(['email_sent' => true]);
+            $invoice->query()->update(['email_sent' => 1]);
         } catch (\Exception $e) {
             report($e);
         }
