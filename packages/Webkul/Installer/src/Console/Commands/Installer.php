@@ -21,7 +21,9 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $signature = 'bagisto:install';
+    protected $signature = 'bagisto:install 
+        { --skip-env-check : Skip env check. }
+        { --skip-admin-creation : Skip admin creation. }';
 
     /**
      * The console command description.
@@ -35,17 +37,15 @@ class Installer extends Command
      */
     public function handle()
     {
-        // Checking for .env
-        $getSeederDetails = $this->checkForEnvFile();
+        $getSeederDetails = ! $this->option('skip-env-check')
+            ? $this->checkForEnvFile()
+            : [];
 
-        // Loading values at runtime
-        $this->loadEnvConfigAtRuntime();
+        $this->call('key:generate');
 
-        // Running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
         $this->call('migrate:fresh');
 
-        // Running `php artisan db:seed`
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
         $this->info(app(BagistoDatabaseSeeder::class)->run([
             'default_locale'     => $getSeederDetails['defaultLocale'] ?? 'en',
@@ -54,15 +54,15 @@ class Installer extends Command
             'allowed_currencies' => $getSeederDetails['allowedCurrencies'] ?? ['USD'],
         ]));
 
-        // Running `php artisan storage:link`
         $this->warn('Step: Linking storage directory...');
         $this->call('storage:link');
 
-        // Optimizing stuffs
         $this->warn('Step: Optimizing...');
         $this->call('optimize');
 
-        $this->createAdminCredential();
+        if (! $this->option('skip-admin-creation')) {
+            $this->createAdminCredential();
+        }
 
         ComposerEvents::postCreateProject();
     }
@@ -70,7 +70,7 @@ class Installer extends Command
     /**
      *  Checking .env file and if not found then create .env file.
      *
-     *  @return array
+     *  @return ?array
      */
     protected function checkForEnvFile()
     {
@@ -82,11 +82,7 @@ class Installer extends Command
             $this->info('Great! your environment configuration file already exists.');
         }
 
-        $getAllowedDetails = $this->createEnvFile();
-
-        $this->call('key:generate');
-
-        return $getAllowedDetails;
+        return $this->createEnvFile();
     }
 
     /**
@@ -100,10 +96,10 @@ class Installer extends Command
     {
         try {
             // Updating App URL
-            $this->updateEnvVariable('APP_URL', 'Please enter the <bg=green>application URL</>', 'http://localhost:8000');
+            $this->updateEnvVariable('APP_URL', 'Please enter the <bg=green>application URL</>', env('APP_URL', 'http://localhost:8000'));
 
             // Updating App Name
-            $this->updateEnvVariable('APP_NAME', 'Please enter the <bg=green>application name</>', 'Bagisto');
+            $this->updateEnvVariable('APP_NAME', 'Please enter the <bg=green>application name</>', env('APP_NAME', 'Bagisto'));
 
             // Updating App Default Locales
             $defaultLocale = $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>default application locale</>', $this->locales());
@@ -153,63 +149,61 @@ class Installer extends Command
      */
     protected function askForDatabaseDetails()
     {
-        $connectionOptions = ['mysql', 'pgsql', 'sqlsrv'];
+        $databaseDetails = [
+            'DB_CONNECTION' => select(
+                'Please select the <bg=green>database connection</>',
+                ['mysql', 'pgsql', 'sqlsrv']
+            ),
 
-        $dbConnection = select('Please select the <bg=green>database connection</>', $connectionOptions);
-
-        $dbDetails = [
-            'DB_CONNECTION' => $dbConnection,
             'DB_HOST'       => text(
                 label: 'Please enter the <bg=green>database host</>',
-                default: '127.0.0.1',
+                default: env('DB_HOST', '127.0.0.1'),
                 required: true
             ),
+
             'DB_PORT'       => text(
                 label: 'Please enter the <bg=green>database port</>',
-                default: '3306',
+                default: env('DB_PORT', '3306'),
+                required: true
+            ),
+
+            'DB_DATABASE' => text(
+                label: 'Please enter the <bg=green>database name</>',
+                default: env('DB_DATABASE', ''),
+                required: true
+            ),
+
+            'DB_PREFIX' => text(
+                label: 'Please enter the <bg=green>database prefix</>',
+                default: env('DB_PREFIX', ''),
+                hint: 'or press enter to continue'
+            ),
+
+            'DB_USERNAME' => text(
+                label: 'Please enter your <bg=green>database username</>',
+                default: env('DB_USERNAME', ''),
+                required: true
+            ),
+
+            'DB_PASSWORD' => password(
+                label: 'Please enter your <bg=green>database password</>',
                 required: true
             ),
         ];
 
-        // Here Asking Database Name, Prefix, Username, Password.
-        $dbDetails['DB_DATABASE'] = text(label: 'Please enter the <bg=green>database name</>', required: true);
-        $dbDetails['DB_PREFIX'] = text(label: 'Please enter the <bg=green>database prefix</>', hint: 'or press enter to continue');
-
-        $dbDetails['DB_USERNAME'] = text(label: 'Please enter your <bg=green>database username</>', required: true);
-        $dbDetails['DB_PASSWORD'] = password(label: 'Please enter your <bg=green>database password</>', required: true);
-
         if (
-            ! $dbDetails['DB_DATABASE']
-            || ! $dbDetails['DB_USERNAME']
-            || ! $dbDetails['DB_PASSWORD']
+            ! $databaseDetails['DB_DATABASE']
+            || ! $databaseDetails['DB_USERNAME']
+            || ! $databaseDetails['DB_PASSWORD']
         ) {
             return $this->error('Please enter the database credentials.');
         }
 
-        foreach ($dbDetails as $key => $value) {
+        foreach ($databaseDetails as $key => $value) {
             if ($value) {
                 $this->envUpdate($key, $value);
             }
         }
-    }
-
-    /**
-     * Loaded Env variables for config files.
-     */
-    protected function loadEnvConfigAtRuntime(): void
-    {
-        $this->warn('Loading configs...');
-
-        // Environment directly checked from `.env` so changing in config won't reflect
-        app()['env'] = $this->getEnvAtRuntime('APP_ENV');
-
-        // setting for the first time and then `.env` values will be in charge
-        config(['database.connections.mysql.database' => $this->getEnvAtRuntime('DB_DATABASE')]);
-        config(['database.connections.mysql.username' => $this->getEnvAtRuntime('DB_USERNAME')]);
-        config(['database.connections.mysql.password' => $this->getEnvAtRuntime('DB_PASSWORD')]);
-        DB::purge('mysql');
-
-        $this->info('Configuration loaded..');
     }
 
     /**
