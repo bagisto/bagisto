@@ -265,7 +265,7 @@
                                 </p>
 
                                 <button
-                                    class="mr-11 primary-button"
+                                    class="ltr:mr-11 rtl:ml-11 primary-button"
                                     type="submit"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
@@ -854,7 +854,7 @@
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
                                             </p>
 
-                                            <button class="mr-11 primary-button">
+                                            <button class="ltr:mr-11 rtl:ml-11 primary-button">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
                                             </button>
                                         </div>
