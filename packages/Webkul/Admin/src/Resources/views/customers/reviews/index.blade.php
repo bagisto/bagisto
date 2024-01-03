@@ -227,7 +227,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
-                                    <button class="mr-11 primary-button">
+                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
