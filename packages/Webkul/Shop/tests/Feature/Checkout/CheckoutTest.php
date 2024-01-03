@@ -7,6 +7,7 @@ use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Product\Models\ProductInventory;
 use Webkul\Product\Models\ProductOrderedInventory;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
@@ -27,7 +28,7 @@ afterEach(function () {
     Order::query()->delete();
     OrderItem::query()->delete();
     ProductOrderedInventory::query()->delete();
-    DB::table('product_inventories')->truncate();
+    ProductInventory::query()->delete();
     DB::table('product_ordered_inventories')->truncate();
 });
 
