@@ -2,12 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Reporting;
 
-use Webkul\Admin\Helpers\Reporting;
-
 class CustomerController extends Controller
 {
     /**
-     * Request param functions
+     * Request param functions.
      *
      * @var array
      */
@@ -19,15 +17,6 @@ class CustomerController extends Controller
         'customers-with-most-reviews' => 'getCustomersWithMostReviews',
         'top-customer-groups'         => 'getTopCustomerGroups',
     ];
-
-    /**
-     * Create a controller instance.
-     *
-     * @return void
-     */
-    public function __construct(protected Reporting $reportingHelper)
-    {
-    }
 
     /**
      * Display a listing of the resource.

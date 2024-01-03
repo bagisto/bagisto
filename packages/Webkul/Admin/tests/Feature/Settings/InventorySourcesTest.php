@@ -66,10 +66,11 @@ it('should store the newly created inventory sources', function () {
 });
 
 it('should return the edit of the inventory_sources', function () {
+    // Arrange
+    $inventorySource = InventorySource::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $inventorySource = InventorySource::factory()->create();
 
     get(route('admin.settings.inventory_sources.edit', $inventorySource->id))
         ->assertOk()
@@ -79,10 +80,11 @@ it('should return the edit of the inventory_sources', function () {
 });
 
 it('should update the inventory sources', function () {
+    // Arrange
+    $inventorySources = InventorySource::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $inventorySources = InventorySource::factory()->create();
 
     putJson(route('admin.settings.inventory_sources.update', $inventorySources->id), [
         'code'           => $code = strtolower(fake()->word),
@@ -112,10 +114,11 @@ it('should update the inventory sources', function () {
 });
 
 it('should delete the inventory source', function () {
+    // Arrange
+    $inventorySource = InventorySource::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $inventorySource = InventorySource::factory()->create();
 
     deleteJson(route('admin.settings.inventory_sources.delete', $inventorySource->id))
         ->assertOk()

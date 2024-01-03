@@ -37,10 +37,11 @@ it('should returns the create page of compaign', function () {
 });
 
 it('should store the newly created compaigns', function () {
+    // Arrange
+    $emailTemplate = Template::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $emailTemplate = Template::factory()->create();
 
     postJson(route('admin.marketing.communications.campaigns.store'), [
         'name'                  => $name = fake()->name(),
@@ -58,10 +59,11 @@ it('should store the newly created compaigns', function () {
 });
 
 it('should show the edit page of compaigns', function () {
+    // Arrange
+    $compaign = Campaign::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $compaign = Campaign::factory()->create();
 
     get(route('admin.marketing.communications.campaigns.edit', $compaign->id))
         ->assertOk()
@@ -70,10 +72,11 @@ it('should show the edit page of compaigns', function () {
 });
 
 it('should update specified the compaigns', function () {
+    // Arrange
+    $campaign = Campaign::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $campaign = Campaign::factory()->create();
 
     putJson(route('admin.marketing.communications.campaigns.edit', $campaign->id), [
         'name'                  => $campaign->name,
@@ -92,10 +95,11 @@ it('should update specified the compaigns', function () {
 });
 
 it('should delete the campaign', function () {
+    // Arrange
+    $campaign = Campaign::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $campaign = Campaign::factory()->create();
 
     deleteJson(route('admin.marketing.communications.campaigns.delete', $campaign->id))
         ->assertOk()

@@ -42,10 +42,11 @@ it('should store the newly created sitemap', function () {
 });
 
 it('should update the sitemap', function () {
+    // Arrange
+    $sitemap = Sitemap::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $sitemap = Sitemap::factory()->create();
 
     putJson(route('admin.marketing.search_seo.sitemaps.update'), [
         'id'        => $sitemap->id,
@@ -63,10 +64,11 @@ it('should update the sitemap', function () {
 });
 
 it('should delete the sitemap', function () {
+    // Arrange
+    $sitemap = Sitemap::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $sitemap = Sitemap::factory()->create();
 
     deleteJson(route('admin.marketing.search_seo.sitemaps.delete', $sitemap->id))
         ->assertOk()

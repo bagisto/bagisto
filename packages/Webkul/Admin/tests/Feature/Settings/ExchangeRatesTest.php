@@ -27,10 +27,11 @@ it('should returns the exchange rate index page', function () {
 });
 
 it('should store the newly created exchange rates', function () {
+    // Arrange
+    $currency = Currency::first();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $currency = Currency::first();
 
     postJson(route('admin.settings.exchange_rates.store'), [
         'rate'            => $rate = rand(1, 100),
@@ -46,12 +47,13 @@ it('should store the newly created exchange rates', function () {
 });
 
 it('should return the exchange rate data for edit', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $exchangeRate = CurrencyExchangeRate::factory()->create([
         'target_currency' => Currency::factory()->create()->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.settings.exchange_rates.edit', $exchangeRate->id))
         ->assertOk()
@@ -60,12 +62,13 @@ it('should return the exchange rate data for edit', function () {
 });
 
 it('should delete the exchange rate', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $currencyExchangeRate = CurrencyExchangeRate::factory()->create([
         'target_currency' => Currency::factory()->create()->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.exchange_rates.delete', $currencyExchangeRate->id))
         ->assertOk()

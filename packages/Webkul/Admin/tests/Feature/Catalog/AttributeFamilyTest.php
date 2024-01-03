@@ -28,10 +28,11 @@ it('should return attribute family listing page', function () {
 });
 
 it('should return listing items of attribute family', function () {
+    // Arrange
+    $attributeFamily = AttributeFamilyModel::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $attributeFamily = AttributeFamilyModel::factory()->create();
 
     getJson(route('admin.catalog.families.index'), [
         'X-Requested-With' => 'XMLHttpRequest',

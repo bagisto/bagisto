@@ -47,10 +47,11 @@ it('should store the tax category', function () {
 });
 
 it('should returns the edit page of the tax category', function () {
+    // Arrange
+    $taxCategory = TaxCategory::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $taxCategory = TaxCategory::factory()->create();
 
     get(route('admin.settings.taxes.categories.edit', $taxCategory->id))
         ->assertOk()
@@ -60,10 +61,11 @@ it('should returns the edit page of the tax category', function () {
 });
 
 it('should update the tax category', function () {
+    // Arrange
+    $taxCategory = TaxCategory::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $taxCategory = TaxCategory::factory()->create();
 
     putJson(route('admin.settings.taxes.categories.update'), [
         'id'          => $taxCategory->id,
@@ -83,10 +85,11 @@ it('should update the tax category', function () {
 });
 
 it('should delete the tax category', function () {
+    // Arrange
+    $taxCategory = TaxCategory::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $taxCategory = TaxCategory::factory()->create();
 
     deleteJson(route('admin.settings.taxes.categories.delete', $taxCategory->id))
         ->assertOk()

@@ -52,9 +52,6 @@ it('should store the invoice', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
-
     $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
@@ -97,6 +94,9 @@ it('should store the invoice', function () {
         'state'         => 'paid',
     ])->create();
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     postJson(route('admin.sales.invoices.store', $invoice->order_id), [
         'invoice' => [
             'items' => $items,
@@ -127,9 +127,6 @@ it('should return the view page of the invoice', function () {
     ]))
         ->getSimpleProductFactory()
         ->create();
-
-    // Act and Assert
-    $this->loginAsAdmin();
 
     $customer = Customer::factory()->create();
 
@@ -169,6 +166,9 @@ it('should return the view page of the invoice', function () {
         'state'         => 'paid',
     ])->create();
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     get(route('admin.sales.invoices.view', $invoice->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id]))
@@ -191,9 +191,6 @@ it('should send duplicate mail to provided email address', function () {
     ]))
         ->getSimpleProductFactory()
         ->create();
-
-    // Act and Assert
-    $this->loginAsAdmin();
 
     $customer = Customer::factory()->create();
 
@@ -243,6 +240,9 @@ it('should send duplicate mail to provided email address', function () {
         'state'         => 'paid',
     ])->create();
 
+    // Act and Assert
+    $this->loginAsAdmin();
+
     postJson(route('admin.sales.invoices.send_duplicate', $invoice->id), [
         'email' => fake()->email(),
     ])
@@ -270,9 +270,6 @@ it('should print/download the invoice', function () {
     ]))
         ->getSimpleProductFactory()
         ->create();
-
-    // Act and Assert
-    $this->loginAsAdmin();
 
     $customer = Customer::factory()->create();
 
@@ -323,6 +320,9 @@ it('should print/download the invoice', function () {
     ])->create();
 
     $fileName = 'invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf';
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.sales.invoices.print', $invoice->id))
         ->assertOk()

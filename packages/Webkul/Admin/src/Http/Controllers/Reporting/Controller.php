@@ -4,10 +4,27 @@ namespace Webkul\Admin\Http\Controllers\Reporting;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Webkul\Admin\Exports\ReportingExport;
+use Webkul\Admin\Helpers\Reporting as ReportingHelper;
 use Webkul\Admin\Http\Controllers\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    /**
+     * Request param functions.
+     *
+     * @var array
+     */
+    protected $typeFunctions = [];
+
+    /**
+     * Create a controller instance.
+     *
+     * @return void
+     */
+    public function __construct(protected ReportingHelper $reportingHelper)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +58,7 @@ class Controller extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function export()
     {

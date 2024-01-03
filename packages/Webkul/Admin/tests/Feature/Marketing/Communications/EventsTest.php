@@ -44,10 +44,11 @@ it('should store the newly create event', function () {
 });
 
 it('should edit the events template', function () {
+    // Arrange
+    $event = Event::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $event = Event::factory()->create();
 
     get(route('admin.marketing.communications.events.edit', $event->id))
         ->assertOk()
@@ -58,10 +59,11 @@ it('should edit the events template', function () {
 });
 
 it('should update the existing the events', function () {
+    // Arrange
+    $event = Event::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $event = Event::factory()->create();
 
     putJson(route('admin.marketing.communications.events.update'), [
         'id'          => $event->id,
@@ -81,10 +83,11 @@ it('should update the existing the events', function () {
 });
 
 it('should delete the specified events', function () {
+    // Arrange
+    $event = Event::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $event = Event::factory()->create();
 
     deleteJson(route('admin.marketing.communications.events.delete', $event->id))
         ->assertOk()
