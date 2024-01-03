@@ -2,19 +2,17 @@
 
 namespace Webkul\Installer\Console\Commands;
 
-use function Laravel\Prompts\multiselect;
-use function Laravel\Prompts\password;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\text;
-
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
-
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
+
+use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\password;
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 class Installer extends Command
 {
@@ -64,10 +62,6 @@ class Installer extends Command
         $this->warn('Step: Optimizing...');
         $this->call('optimize');
 
-        $this->warn('Step: Composer autoload...');
-        $result = shell_exec('composer dump-autoload');
-        $this->info($result);
-
         $this->createAdminCredential();
 
         ComposerEvents::postCreateProject();
@@ -80,10 +74,10 @@ class Installer extends Command
      */
     protected function checkForEnvFile()
     {
-        if (!file_exists(base_path('.env'))) {
+        if (! file_exists(base_path('.env'))) {
             $this->info('Creating the environment configuration file.');
 
-            File::copy('.env.example', '.env');            
+            File::copy('.env.example', '.env');
         } else {
             $this->info('Great! your environment configuration file already exists.');
         }
@@ -179,15 +173,15 @@ class Installer extends Command
 
         // Here Asking Database Name, Prefix, Username, Password.
         $dbDetails['DB_DATABASE'] = text(label: 'Please enter the database name', required: true);
-        $dbDetails['DB_PREFIX']   = text(label: 'Please enter the database prefix', hint: 'or press enter to continue');
+        $dbDetails['DB_PREFIX'] = text(label: 'Please enter the database prefix', hint: 'or press enter to continue');
 
         $dbDetails['DB_USERNAME'] = text(label: 'Please enter your database username', required: true);
         $dbDetails['DB_PASSWORD'] = password(label: 'Please enter your database password', required: true);
 
         if (
-            !$dbDetails['DB_DATABASE']
-            || !$dbDetails['DB_USERNAME']
-            || !$dbDetails['DB_PASSWORD']
+            ! $dbDetails['DB_DATABASE']
+            || ! $dbDetails['DB_USERNAME']
+            || ! $dbDetails['DB_PASSWORD']
         ) {
             return $this->error('Please enter the database credentials.');
         }
@@ -258,13 +252,16 @@ class Installer extends Command
             required: true
         );
 
-        if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
             $this->error('The email address you entered is not valid please try again.');
 
             return $this->createAdminCredential();
         }
 
-        $adminPassword = Str::password();
+        $adminPassword = text(
+            label: 'Configure the password for the admin user',
+            default: 'admin123',
+            required: true);
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
@@ -374,24 +371,24 @@ class Installer extends Command
     protected static function locales(): array
     {
         return [
-            'ar' => 'Arabic',
-            'bn' => 'Bengali',
-            'de' => 'German',
-            'en' => 'English',
-            'es' => 'Spanish',
-            'fa' => 'Persian',
-            'fr' => 'French',
-            'he' => 'Hebrew',
+            'ar'    => 'Arabic',
+            'bn'    => 'Bengali',
+            'de'    => 'German',
+            'en'    => 'English',
+            'es'    => 'Spanish',
+            'fa'    => 'Persian',
+            'fr'    => 'French',
+            'he'    => 'Hebrew',
             'hi_IN' => 'Hindi',
-            'it' => 'Italian',
-            'ja' => 'Japanese',
-            'nl' => 'Dutch',
-            'pl' => 'Polish',
+            'it'    => 'Italian',
+            'ja'    => 'Japanese',
+            'nl'    => 'Dutch',
+            'pl'    => 'Polish',
             'pt_BR' => 'Brazilian Portuguese',
-            'ru' => 'Russian',
-            'sin' => 'Sinhala',
-            'tr' => 'Turkish',
-            'uk' => 'Ukrainian',
+            'ru'    => 'Russian',
+            'sin'   => 'Sinhala',
+            'tr'    => 'Turkish',
+            'uk'    => 'Ukrainian',
             'zh_CN' => 'Chinese',
         ];
     }
