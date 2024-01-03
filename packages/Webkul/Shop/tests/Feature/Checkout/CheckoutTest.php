@@ -30,6 +30,7 @@ afterEach(function () {
     ProductOrderedInventory::query()->delete();
     ProductInventory::query()->delete();
     DB::table('product_ordered_inventories')->truncate();
+    DB::table('product_inventory_indices')->truncate();
 });
 
 it('should add product items to the cart', function () {
@@ -59,8 +60,8 @@ it('should add product items to the cart', function () {
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'	           => 1,
-        'total_weight'	     => 1,
+        'weight'	        => 1,
+        'total_weight'	    => 1,
         'base_total_weight' => 1,
         'cart_id'           => $cartId = Cart::factory()->create([
             'channel_id'            => core()->getCurrentChannel()->id,
@@ -70,8 +71,8 @@ it('should add product items to the cart', function () {
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
             'items_qty'             => 1,
-            'grand_total'	          => $price = $product->price,
-            'base_grand_total'	     => $price,
+            'grand_total'	        => $price = $product->price,
+            'base_grand_total'	    => $price,
             'sub_total'	            => $price,
             'base_sub_total'        => $price,
             'is_guest'              => 1,
@@ -120,8 +121,8 @@ it('should remove product items to the cart', function () {
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'	           => 1,
-        'total_weight'	     => 1,
+        'weight'	        => 1,
+        'total_weight'	    => 1,
         'base_total_weight' => 1,
         'cart_id'           => $cartId = Cart::factory()->create([
             'channel_id'            => core()->getCurrentChannel()->id,
@@ -131,8 +132,8 @@ it('should remove product items to the cart', function () {
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
             'items_qty'             => 1,
-            'grand_total'	          => $price = $product->price,
-            'base_grand_total'	     => $price,
+            'grand_total'	        => $price = $product->price,
+            'base_grand_total'	    => $price,
             'sub_total'	            => $price,
             'base_sub_total'        => $price,
             'is_guest'              => 1,
@@ -184,8 +185,8 @@ it('should store the guest user address for cart billing/shipping for guest user
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'	           => 1,
-        'total_weight'	     => 1,
+        'weight'	        => 1,
+        'total_weight'	    => 1,
         'base_total_weight' => 1,
         'cart_id'           => $cartId = Cart::factory()->create([
             'channel_id'            => core()->getCurrentChannel()->id,
@@ -195,8 +196,8 @@ it('should store the guest user address for cart billing/shipping for guest user
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
             'items_qty'             => 1,
-            'grand_total'	          => $price = $product->price,
-            'base_grand_total'	     => $price,
+            'grand_total'	        => $price = $product->price,
+            'base_grand_total'	    => $price,
             'sub_total'	            => $price,
             'base_sub_total'        => $price,
             'is_guest'              => 1,
@@ -276,8 +277,8 @@ it('should store the shipping method', function () {
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'	           => 1,
-        'total_weight'	     => 1,
+        'weight'	        => 1,
+        'total_weight'	    => 1,
         'base_total_weight' => 1,
         'cart_id'           => $cartId = Cart::factory()->create([
             'channel_id'            => core()->getCurrentChannel()->id,
@@ -287,8 +288,8 @@ it('should store the shipping method', function () {
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
             'items_qty'             => 1,
-            'grand_total'	          => $price = $product->price,
-            'base_grand_total'	     => $price,
+            'grand_total'	        => $price = $product->price,
+            'base_grand_total'	    => $price,
             'sub_total'	            => $price,
             'base_sub_total'        => $price,
             'is_guest'              => 1,
@@ -341,8 +342,8 @@ it('should store the payment method for guest user', function () {
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'	           => 1,
-        'total_weight'	     => 1,
+        'weight'	        => 1,
+        'total_weight'	    => 1,
         'base_total_weight' => 1,
         'cart_id'           => $cartId = Cart::factory()->create([
             'channel_id'            => core()->getCurrentChannel()->id,
@@ -352,8 +353,8 @@ it('should store the payment method for guest user', function () {
             'cart_currency_code'    => core()->getCurrentCurrencyCode(),
             'items_count'           => 1,
             'items_qty'             => 1,
-            'grand_total'	          => $price = $product->price,
-            'base_grand_total'	     => $price,
+            'grand_total'	        => $price = $product->price,
+            'base_grand_total'	    => $price,
             'sub_total'	            => $price,
             'base_sub_total'        => $price,
             'is_guest'              => 1,
@@ -422,28 +423,28 @@ it('should store the orders for guest user', function () {
         'cart_currency_code'    => core()->getCurrentCurrencyCode(),
         'items_count'           => 1,
         'items_qty'             => 1,
-        'grand_total'	          => $price = $product->price,
-        'base_grand_total'	     => $price,
+        'grand_total'	        => $price = $product->price,
+        'base_grand_total'	    => $price,
         'sub_total'	            => $price,
         'base_sub_total'        => $price,
         'is_guest'              => 1,
         'shipping_method'       => 'free_free',
     ]);
 
-    CartItem::factory()->create([
+    $cartItem = CartItem::factory()->create([
         'quantity'          => 1,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'	           => 1,
-        'total_weight'	     => 1,
+        'weight'	        => 1,
+        'total_weight'	    => 1,
         'base_total_weight' => 1,
         'cart_id'           => $cart->id,
     ]);
 
     $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id'      => $cart->id, 'address_type' => 'cart_shipping']);
+    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
 
     CartShippingRate::factory()->create([
         'carrier'               => 'free',
@@ -505,7 +506,7 @@ it('should store the orders for guest user', function () {
     ]);
 
     $this->assertDatabaseHas('order_items', [
-        'qty_ordered'  => 1,
+        'qty_ordered'  => $quantity = $cartItem->quantity,
         'qty_shipped'  => 0,
         'qty_invoiced' => 0,
         'qty_canceled' => 0,
@@ -513,12 +514,12 @@ it('should store the orders for guest user', function () {
     ]);
 
     $this->assertDatabaseHas('product_ordered_inventories', [
-        'qty'        => $product->ordered_inventories->pluck('qty')->first(),
+        'qty'        => $quantity,
         'product_id' => $product->id,
     ]);
 
-    $this->assertDatabaseHas('product_inventories', [
+    $this->assertDatabaseHas('product_inventory_indices', [
+        'qty'        => $product->inventory_source_qty(1) - $quantity,
         'product_id' => $product->id,
-        'qty'        => $product->inventories->where('inventory_source_id', 1)->pluck('qty')->first(),
     ]);
 });
