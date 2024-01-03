@@ -102,7 +102,7 @@
             <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex justify-between p-4">
-                        <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
+                        <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('Order Items') ({{ count($order->items) }})
                         </p>
 
@@ -205,69 +205,69 @@
 
                     <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
                         <div class="flex flex-col gap-y-1.5">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                                 @lang('admin::app.sales.orders.view.summary-sub-total')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.orders.view.summary-tax')
                             </p>
 
                             @if ($haveStockableItems = $order->haveStockableItems())
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                     @lang('admin::app.sales.orders.view.shipping-and-handling')</p>
                             @endif
 
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold !leading-5">
                                 @lang('admin::app.sales.orders.view.summary-grand-total')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.orders.view.total-paid')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.orders.view.total-refund')
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.orders.view.total-due')
                             </p>
                         </div>
 
                         <div class="flex  flex-col gap-y-1.5">
-                            <p class="text-gray-600 dark:text-gray-300  font-semibold">
+                            <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                                 {{ core()->formatBasePrice($order->base_sub_total) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($order->base_tax_amount) }}
                             </p>
 
                             @if ($haveStockableItems)
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                     {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                 </p>
                             @endif
 
-                            <p class="text-base text-gray-800 dark:text-white font-semibold">
+                            <p class="text-base text-gray-800 dark:text-white font-semibold !leading-5">
                                 {{ core()->formatBasePrice($order->base_grand_total) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($order->base_grand_total_invoiced) }}
                             </p>
 
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($order->base_grand_total_refunded) }}
                             </p>
 
                             @if($order->status !== 'canceled')
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                     {{ core()->formatBasePrice($order->base_total_due) }}
                                 </p>
                             @else
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                     {{ core()->formatBasePrice(0.00) }}
                                 </p>
                             @endif
