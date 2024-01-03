@@ -20,6 +20,8 @@ class Shipment extends Base
             }
 
             $this->prepareMail($shipment, new ShippedNotification($shipment));
+
+            $shipment->query()->update(['email_sent' => 1]);
         } catch (\Exception $e) {
             report($e);
         }
