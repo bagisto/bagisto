@@ -205,7 +205,7 @@
             </template>
         </div>
 
-        <!-- Add Options Model Form -->
+        <!-- Add Drawe Form -->
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
@@ -408,7 +408,6 @@
                 </x-admin::drawer>
             </form>
         </x-admin::form>
-
     </script>
 
     <script type="module">

@@ -52,7 +52,30 @@ return [
             'event-from'   => 'Event From',
             'event-ticket' => 'Event Ticket',
             'event-till'   => 'Event Till',
+
+            'event'        => [
+                'expired'  => 'This event has been expired.',
+            ],
+
             'hourly'       => 'Hourly',
+
+            'integrity'    => [
+                'missing_fields'         => 'Some required fields missing for this product.',
+                'missing_links'          => 'Downloadable links are missing for this product.',
+                'missing_options'        => 'Options are missing for this product.',
+                'qty_impossible'         => 'Cannot add more than one of these products to cart.',
+                'qty_missing'            => 'Atleast one product should have more than 1 quantity.',
+                'select_hourly_duration' => 'Select a slot duration of one hour.',
+            ],
+
+            'quantity'     => [
+                'error'             => 'Cannot update the item(s) at the moment, please try again later.',
+                'illegal'           => 'Quantity cannot be lesser than one.',
+                'inventory_warning' => 'The requested quantity is not available, please try again later.',
+                'quantity'          => 'Quantity',
+                'success'           => 'Cart Item(s) successfully updated.',
+            ],
+
             'rent-from'    => 'Rent From',
             'rent-till'    => 'Rent Till',
             'rent-type'    => 'Rent Type',
@@ -132,7 +155,7 @@ return [
                                     'week'      => ':day',
                                 ],
 
-                                'ticket'              => [
+                                'ticket'                => [
                                     'description'        => 'Description',
                                     'name'               => 'Name',
                                     'price'              => 'Price',
@@ -150,7 +173,7 @@ return [
                             'prevent-scheduling-before' => 'Prevent Scheduling Before',
                             'qty'                       => 'Qty',
 
-                            'renting-type'             => [
+                            'renting-type'              => [
                                 'daily_hourly' => 'Both (Daily and Hourly Basis)',
                                 'daily-price'  => 'Daily Price',
                                 'daily'        => 'Daily Basis',
