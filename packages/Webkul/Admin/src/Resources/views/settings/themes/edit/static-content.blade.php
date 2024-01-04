@@ -368,7 +368,7 @@
 
                     let formData = new FormData();
 
-                    formData.append('options[image][image]', selectedImage);
+                    formData.append('{{ $currentLocale->code }}[options][][image]', selectedImage);
                     formData.append('id', "{{ $theme->id }}");
                     formData.append('type', "static_content");
 
