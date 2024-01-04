@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Belastingtarief',
                     'title'        => 'Belastingtarieven',
 
+                    'import' => [
+                        'duplicate-error'  => 'Identificatie moet uniek zijn, dubbele identificatie :identifier in rij :position.',
+                        'enough-row-error' => 'Bestand heeft niet genoeg rijen',
+                        'import-btn'       => 'Importeren',
+                        'title'            => 'Uploaden',
+                        'upload-error'     => 'Het bestand moet van het type: xls, xlsx, csv zijn.',
+                        'upload-success'   => 'Belastingtarief succesvol geüpload',
+                        'validation'       => 'Toegestane type: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificatie',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Toegestaan formaat:',
         'csv'              => 'CSV',
         'download'         => 'Downloaden',
-        'duplicate-error'  => 'Het identificatienummer moet uniek zijn, dubbel identificatienummer :identifier op rij :position.',
-        'enough-row-error' => 'Het bestand heeft niet genoeg rijen.',
         'export'           => 'Exporteer',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Bestand',
-        'format'           => 'Selecteer Formaat',
-        'import'           => 'Importeer',
-        'illegal-format'   => 'Fout! Dit type formaat wordt ofwel niet ondersteund of het is een illegaal formaat',
         'no-records'       => 'Niets te exporteren',
-        'upload'           => 'Uploaden',
-        'upload-error'     => 'Het bestand moet van het type zijn: xls, xlsx, csv.',
-        'upload-success'   => ':name succesvol geüpload',
         'xls'              => 'XLS',
     ],
 

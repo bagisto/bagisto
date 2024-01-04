@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'බදා අනුපාත',
                     'title'        => 'බදා අනුපාත',
 
+                    'import' => [
+                        'duplicate-error'  => 'හැඳුනුම්කරු විවෘත විය යුතුය, පේළිය:position හි අනුපාත හැඳුනුම්කරු :identifier.',
+                        'enough-row-error' => 'ගොනුවේ සුලු පේළියෙන් පසු සහිත විස්තර නොමැත',
+                        'import-btn'       => 'ආයුක්ත',
+                        'title'            => 'උඩුගත',
+                        'upload-error'     => 'ගොනුවේ වර්ගය: xls, xlsx, csv යෙදී හෝදින් හැකි යැයි විය හැක.',
+                        'upload-success'   => 'බදු අනුවාදය සාර්ථකව උඩුගත වී ඇත',
+                        'validation'       => 'ඉඩ දෙන වර්ගය: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'අංකය',
                         'identifier' => 'හඳුනාගත්කරණය',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'හරි වර්ගය :',
         'csv'              => 'CSV',
         'download'         => 'බාගත කරන්න',
-        'duplicate-error'  => 'හරියටම අංකය ළඟා, අංකය :identifier අංකය :position කවුරු වෙනස් කරන්න.',
-        'enough-row-error' => 'ගොනුවට අත්වැල වල පේළි නැත',
         'export'           => 'අපාරයට පිටවන්න',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'ගොනුව',
-        'format'           => 'සියලු ආදේශය තෝරන්න',
-        'import'           => 'ආනායකයට පිටවන්න',
-        'illegal-format'   => 'දෝෂය! මෙම සියල්ල ආදේශයක් නොවේ හෝ එවක් නොමැත.',
         'no-records'       => 'අපාරයට හවුල් සාර්ථකවීමට හිතන්න',
-        'upload'           => 'උඩුගතකිරීම',
-        'upload-error'     => 'ගොනුව වෙනස් කරන්නේ උබල් නොවේ: xls, xlsx, csv වර්ගයේ ගොනුව විය යුතුය.',
-        'upload-success'   => ':name සාර්ථකයෙනින් උඩුගත කරන ලදි',
         'xls'              => 'XLS',
     ],
 
