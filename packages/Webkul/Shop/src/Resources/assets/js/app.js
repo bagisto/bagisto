@@ -15,24 +15,24 @@ import { createApp } from "vue/dist/vue.esm-bundler";
 import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
 import { localize, setLocale } from "@vee-validate/i18n";
 import ar from "@vee-validate/i18n/dist/locale/ar.json";
-import bn from "@vee-validate/i18n/dist/locale/ar.json";
-import de from "@vee-validate/i18n/dist/locale/ar.json";
+import bn from "@vee-validate/i18n/dist/locale/bn.json";
+import de from "@vee-validate/i18n/dist/locale/de.json";
 import en from "@vee-validate/i18n/dist/locale/en.json";
-import es from "@vee-validate/i18n/dist/locale/ar.json";
-import fa from "@vee-validate/i18n/dist/locale/ar.json";
-import fr from "@vee-validate/i18n/dist/locale/ar.json";
-import he from "@vee-validate/i18n/dist/locale/ar.json";
+import es from "@vee-validate/i18n/dist/locale/es.json";
+import fa from "@vee-validate/i18n/dist/locale/fa.json";
+import fr from "@vee-validate/i18n/dist/locale/fr.json";
+import he from "@vee-validate/i18n/dist/locale/he.json";
 import hi_IN from "../locales/hi_IN.json";
-import it from "@vee-validate/i18n/dist/locale/ar.json";
-import ja from "@vee-validate/i18n/dist/locale/ar.json";
-import nl from "@vee-validate/i18n/dist/locale/ar.json";
-import pl from "@vee-validate/i18n/dist/locale/ar.json";
-import pt_BR from "@vee-validate/i18n/dist/locale/ar.json";
-import ru from "@vee-validate/i18n/dist/locale/ar.json";
-import sin from "@vee-validate/i18n/dist/locale/ar.json";
-import tr from "@vee-validate/i18n/dist/locale/ar.json";
-import uk from "@vee-validate/i18n/dist/locale/ar.json";
-import zh_CN from "@vee-validate/i18n/dist/locale/ar.json";
+import it from "@vee-validate/i18n/dist/locale/it.json";
+import ja from "@vee-validate/i18n/dist/locale/ja.json";
+import nl from "@vee-validate/i18n/dist/locale/nl.json";
+import pl from "@vee-validate/i18n/dist/locale/pl.json";
+import pt_BR from "@vee-validate/i18n/dist/locale/pt_BR.json";
+import ru from "@vee-validate/i18n/dist/locale/ru.json";
+import sin from "../locales/sin.json";
+import tr from "@vee-validate/i18n/dist/locale/tr.json";
+import uk from "@vee-validate/i18n/dist/locale/uk.json";
+import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
 import * as AllRules from '@vee-validate/rules';
 
 /**
@@ -95,15 +95,6 @@ configure({
      * locales can be added in the same way.
      */
     generateMessage: localize({
-        en: {
-            ...en,
-            messages: {
-                ...en.messages,
-                phone: "This {field} must be a valid phone number",
-                address: "This {field} must be a valid address",
-            },
-        },
-
         ar: {
             ...ar,
             messages: {
@@ -128,6 +119,15 @@ configure({
                 ...de.messages,
                 phone: "Dieses {field} muss eine gültige Telefonnummer sein",
                 address: "Diese {field} muss eine gültige Adresse sein",
+            },
+        },
+
+        en: {
+            ...en,
+            messages: {
+                ...en.messages,
+                phone: "This {field} must be a valid phone number",
+                address: "This {field} must be a valid address",
             },
         },
 
