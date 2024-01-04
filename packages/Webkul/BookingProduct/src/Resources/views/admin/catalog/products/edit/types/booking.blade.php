@@ -5,15 +5,13 @@
 
     {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.before', ['product' => $product]) !!}
 
-    <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
-        <v-booking-information></v-booking-information>
-    </div>
+    <v-booking-information></v-booking-information>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.booking.after', ['product' => $product]) !!}
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-booking-information-template">
-            <div>
+            <div class="relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Booking Type -->
                 <x-admin::form.control-group class="w-full">
                     <x-admin::form.control-group.label class="required">
@@ -179,26 +177,26 @@
                     >
                     </x-admin::form.control-group.error>
                 </x-admin::form.control-group>
+
+                @php
+                    $bookingTypes = [
+                        'default',
+                        'appointment',
+                        'event',
+                        'rental',
+                        'table'
+                    ];
+                @endphp
+    
+                @foreach ($bookingTypes as $bookingType)
+                    <div
+                        class="{{ $bookingType }}-booking-section"
+                        v-if="booking.type === '{{ $bookingType }}'"
+                    >
+                        @include('booking::admin.catalog.products.edit.booking.' . $bookingType, ['bookingProduct' => $bookingProduct])
+                    </div>
+                @endforeach
             </div>
-
-            @php
-                $bookingTypes = [
-                    'default',
-                    'appointment',
-                    'event',
-                    'rental',
-                    'table'
-                ];
-            @endphp
-
-            @foreach ($bookingTypes as $bookingType)
-                <div
-                    class="{{ $bookingType }}-booking-section"
-                    v-if="booking.type === '{{ $bookingType }}'"
-                >
-                    @include('booking::admin.catalog.products.edit.booking.' . $bookingType, ['bookingProduct' => $bookingProduct])
-                </div>
-            @endforeach
         </script>
 
         <script type="module">

@@ -81,7 +81,7 @@
         </div>
 
         <!-- Slots Component -->
-        <div class="flex gap-5 justify-between p-4">
+        <div class="flex gap-5 justify-between py-4">
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.slots.title')
@@ -89,7 +89,10 @@
             </div>
 
             <!-- Add Slot Button -->
-            <div class="flex gap-x-1 items-center" v-if="! slots.many[0]?.length">
+            <div
+                class="flex gap-x-1 items-center"
+                v-if="! slots.many?.length"
+            >
                 <div
                     class="secondary-button"
                     @click="$refs.drawerform.toggle()"
@@ -100,9 +103,9 @@
         </div>
 
         <!-- Table Information -->
-        <div class="mt-4 overflow-x-auto">
-            <template v-if="slots.one?.length || slots.many[0]?.length">
-                <template v-if="slots.one?.length || slots.many[0]?.length">
+        <div class="overflow-x-auto">
+            <template v-if="slots.one?.length || slots.many?.length">
+                <template v-if="slots.one?.length">
                     <div
                         class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800"
                         v-if="slots.one?.length"
@@ -110,7 +113,8 @@
                     >
                         <div class="flex gap-2.5 justify-between py-3 cursor-pointer">
                             <div class="grid gap-1.5 place-content-start">
-                                <p class="text-gray-600 dark:text-gray-300">
+                                <!-- From day with Time -->
+                                <p class="text-gray-800 dark:text-white">
                                     @{{ slot.from_day }} - @{{ slot.from }}
                                 </p>
 
@@ -135,7 +139,8 @@
                                     :value="slot.from"
                                 />
 
-                                <p class="dark:text-white">
+                                <!-- To day Whith Time -->
+                                <p class="text-gray-800 dark:text-white">
                                     @{{ slot.to_day }} - @{{ slot.to }}
                                 </p>
 
@@ -157,17 +162,17 @@
                             <!-- Actions -->
                             <div class="flex gap-x-5 items-center place-content-start text-right">
                                 <p
-                                    class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                    class="text-blue-600 hover:underline"
                                     @click="edit(index)"
                                 >
-                                    Edit
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.default.edit')
                                 </p>
                                 
                                 <p
-                                    class="text-red-600 cursor-pointer transition-all hover:underline"
+                                    class="text-red-600 hover:underline"
                                     @click="remove(index)"
                                 >
-                                    Delete
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.default.delete')
                                 </p>
                             </div>
                         </div>
@@ -176,140 +181,97 @@
 
                 <!-- For Not Same Slot All Days -->
                 <template
-                    v-else-if="slots.many[0]?.length"
-                    v-for="(slot, slotIndex) in slots.many[0]"
-                    :key="slotIndex"
+                    v-else-if="slots.many?.length"
+                    v-for="(slot, slotIndex) in slots.many"
                 >
-                    <div class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800">
-                        {{-- <template v-for="(item, itemIndex) in slot">
+                    <template v-for="(item, itemIndex) in slot">
+                        <div class="grid py-2 border-b border-slate-300 dark:border-gray-800 last:border-b-0">
                             <div
-                                class="text-base text-white my-2"
-                                v-text="itemIndex"
+                                class="text-base text-gray-800 dark:text-white font-semibold"
+                                v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', item.day.charAt(0).toUpperCase() + item.day.slice(1))"
                             >
                             </div>
 
-                            <template v-for="(time, timeIndex) in item">
-                                <div class="flex gap-2.5 justify-between py-3 cursor-pointer">
-                                    <div class="grid gap-1.5 place-content-start">
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            From - @{{ time.from }}
-                                        </p>
-                    
-                                        <input
-                                            type="hidden"
-                                            :name="'booking[slots][' + slotIndex + '][' + timeIndex + '][from]'"
-                                            :value="time.from"
-                                        />
-                                        
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            To - @{{ time.to }}
-                                        </p>
-                    
-                                        <input
-                                            type="hidden"
-                                            :name="'booking[slots][' + slotIndex + '][' + timeIndex + '][to]'"
-                                            :value="time.to"
-                                        />
-                                    </div>
+                            <input
+                                type="hidden"
+                                :name="'booking[slots][' + slotIndex + '][' + itemIndex + '][day]'"
+                                :value="item.day"
+                            />
 
-                                    <!-- Actions -->
-                                    <div class="flex gap-x-5 place-content-start text-right">
+                            <div class="flex gap-2.5 justify-between py-3 cursor-pointer">
+                                <div class="grid gap-1.5 place-content-start">
+                                    <!-- From Detailes with hidden fields -->
+                                    <p class="text-gray-800 dark:text-white">
+                                        <span>From - </span>
+
+                                        <span v-text="item.from ? item.from : '00:00'"></span>
+                                    </p>
+
+                                    <input
+                                        type="hidden"
+                                        :name="'booking[slots][' + slotIndex + '][' + itemIndex + '][id]'"
+                                        :value="item.id"
+                                    />
+
+                                    <input
+                                        type="hidden"
+                                        :name="'booking[slots][' + slotIndex + '][' + itemIndex + '][from]'"
+                                        :value="item.from"
+                                    />
+
+                                    <!-- To Detailes With Hidden Fields -->
+                                    <p class="text-gray-800 dark:text-white">
+                                        <span>To - </span>
+
+                                        <span v-text="item.to ? item.to : '00:00'"></span>
+                                    </p>
+                
+                                    <input
+                                        type="hidden"
+                                        :name="'booking[slots][' + slotIndex + '][' + itemIndex + '][to]'"
+                                        :value="item.to"
+                                    />
+
+                                    <!-- Status Detailes With Hidden Fields -->
+                                    <div class="flex gap-1 text-gray-800 dark:text-white">
+                                        <p>Status - </p>
+
                                         <p
-                                            class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                            @click="editSlot(time)"
+                                            :class="parseInt(item.status) ? 'label-active' : 'label-canceled'"
+                                            v-text="parseInt(item.status) 
+                                                ? '@lang('booking::app.admin.catalog.products.edit.type.booking.default.open')'
+                                                : '@lang('booking::app.admin.catalog.products.edit.type.booking.default.close')'"
                                         >
-                                            Edit
-                                        </p>
-                                        
-                                        <p class="text-red-600 cursor-pointer transition-all hover:underline">
-                                            Delete
                                         </p>
                                     </div>
+
+                                    <input
+                                        type="hidden"
+                                        :name="'booking[slots][' + slotIndex + '][' + itemIndex + '][status]'"
+                                        :value="item.status"
+                                    />
                                 </div>
-                            </template>
-                        </template> --}}
-                    </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-x-5 place-content-start text-right">
+                                    <p
+                                        class="text-blue-600 hover:underline"
+                                        @click="edit(item)"
+                                    >
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.default.edit')
+                                    </p>
+                                    
+                                    <p
+                                        class="text-red-600 hover:underline"
+                                        @click="remove(item)"
+                                    >
+                                        @lang('booking::app.admin.catalog.products.edit.type.booking.default.delete')
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                 </template>
-
-                    {{-- <x-admin::table.tbody.tr
-                        v-if="slots.many?.length"
-                        v-for="(slot, index) in slots.many[0]"
-                    >
-                        <!-- Day -->
-                        <p
-                            class="hidden"
-                            v-text="slot.day"
-                        >
-                        </p>
-
-                        <!-- Hidden Field Id -->
-                        <input
-                            type="hidden"
-                            :name="'booking[slots][' + index + '][id]'"
-                            :value="slot.id"
-                        />
-
-                        <!-- From -->
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.from ? slot.from : '00:00'"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][from]'"
-                                :value="slot.from ? slot.from : '00:00'"
-                            />
-                        </x-admin::table.td>
-
-                        <!-- To -->
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.to ? slot.to : '00:00'"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][to]'"
-                                :value="slot.to ? slot.to : '00:00'"
-                            />
-                        </x-admin::table.td>
-
-                        <!-- Status -->
-                        <x-admin::table.td>
-                            <p
-                                class="dark:text-white"
-                                v-text="slot.status"
-                            >
-                            </p>
-
-                            <input
-                                type="hidden"
-                                :name="'booking[slots][' + index + '][status]'"
-                                :value="slot.status"
-                            />
-                        </x-admin::table.td>
-
-                        <!-- Actions button -->
-                        <x-admin::table.td class="!px-0">
-                            <span
-                                class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="editModal('many', slot)"
-                            >
-                            </span>
-
-                            <span
-                                class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="removeOption('many', slot)"
-                            >
-                            </span>
-                        </x-admin::table.td>
-                    </x-admin::table.tbody.tr>
-                </x-admin::table> --}}
             </template>
 
             <template v-else>
@@ -338,7 +300,6 @@
             <form
                 @submit.prevent="handleSubmit($event, store)"
                 enctype="multipart/form-data"
-                ref="createOptionsForm"
             >
                 <x-admin::drawer ref="drawerform">
                     <x-slot:header>
@@ -360,11 +321,8 @@
 
                     <x-slot:content>
                         <!-- Booking Type One -->
-                        <div
-                            v-if="default_booking.booking_type == 'one'"
-                            class="mb-2.5"
-                        >
-                            <div class="flex gap-4 mb-2.5 px-4 py-2.5 border-b dark:border-gray-800">
+                        <template v-if="default_booking.booking_type == 'one'">
+                            <div class="grid grid-cols-2 gap-4 mb-2.5 border-b dark:border-gray-800">
                                 <!-- From Day -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
@@ -392,6 +350,13 @@
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from-day')"
                                     >
                                         <option
+                                            value=""
+                                            selected
+                                        >
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.select')
+                                        </option>
+
+                                        <option
                                             v-for="(day, index) in days"
                                             :value="index"
                                             v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', day)"
@@ -416,6 +381,7 @@
                                         name="from"
                                         rules="required"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                     >
                                     </x-booking::form.control-group.control>
                     
@@ -426,7 +392,7 @@
                                 </x-booking::form.control-group>
                             </div>
                     
-                            <div class="flex gap-4 px-4 py-2.5">
+                            <div class="grid grid-cols-2 gap-4">
                                 <!-- TO Day -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
@@ -439,6 +405,13 @@
                                         rules="required"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                     >
+                                        <option
+                                            value=""
+                                            selected
+                                        >
+                                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.select')
+                                        </option>
+
                                         <option
                                             v-for="(day, index) in days"
                                             :value="index"
@@ -464,6 +437,7 @@
                                         name="to"
                                         rules="required"
                                         :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                        :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                     >
                                     </x-booking::form.control-group.control>
                     
@@ -473,13 +447,13 @@
                                     </x-booking::form.control-group.error>
                                 </x-booking::form.control-group>
                             </div>
-                        </div>
+                        </template>
 
                         <!-- Booking Type Many -->
-                        <div v-if="default_booking.booking_type == 'many'">
+                        <template v-if="default_booking.booking_type == 'many'">
                             <div class="grid grid-cols-4 gap-2.5 pb-3">
                                 @foreach (['day', 'from', 'to', 'status'] as $item)
-                                    <div class="font-semibold text-black dark:text-white">
+                                    <div class="font-semibold text-gray-800 dark:text-white">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $item)
                                     </div>
                                 @endforeach
@@ -487,7 +461,7 @@
 
                             @foreach ($days as $key => $day)
                                 <div class="grid grid-cols-4 gap-2.5">
-                                    <div class="text-black dark:text-white">
+                                    <div class="text-gray-800 dark:text-white">
                                         @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.' . $day)
                                     </div>
 
@@ -575,39 +549,49 @@
                                     </x-admin::form.control-group>
                                 </div>
                             @endforeach
-                        </div>
+                        </template>
                     </x-slot:content>
                 </x-admin::drawer>
             </form>
         </x-booking::form>
 
         <!-- Model For Edit Many type same slots for all booking -->
-        <x-admin::form
+        <x-booking::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
             ref="ManyOptionsModelForm"
         >
             <form
-                @submit.prevent="handleSubmit($event, storeSlots)"
+                @submit.prevent="handleSubmit($event, store)"
                 enctype="multipart/form-data"
             >
-                <x-admin::modal ref="addManyOptionsRow">
+                <x-admin::drawer ref="addManyOptionsRow">
                     <x-slot:header>
-                        <p class="text-lg text-gray-800 dark:text-white font-bold">
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.title')
-                        </p>
+                        <div class="flex justify-between items-center">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.edit-title')
+                            </p>
+
+                            <div class="flex gap-2">
+                                <button
+                                    type="submit"
+                                    class="primary-button mr-11"
+                                >
+                                    @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.save')
+                                </button>
+                            </div>
+                        </div>
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex gap-4 mb-2.5 px-4 py-2.5">
+                        <div class="grid gap-4 px-4">
                             <!-- Hidden Id Input -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
                             >
                             </x-admin::form.control-group.control>
-
-                            <!-- From -->
+                            <!-- From Time -->
                             <x-booking::form.control-group class="w-full">
                                 <x-booking::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')
@@ -618,6 +602,7 @@
                                     name="from"
                                     rules="required"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
+                                    :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.from')"
                                 >
                                 </x-booking::form.control-group.control>
                 
@@ -627,7 +612,7 @@
                                 </x-booking::form.control-group.error>
                             </x-booking::form.control-group>
 
-                            <!-- To -->
+                            <!-- TO Time -->
                             <x-booking::form.control-group class="w-full">
                                 <x-booking::form.control-group.label class="required">
                                     @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')
@@ -638,6 +623,7 @@
                                     name="to"
                                     rules="required"
                                     :label="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
+                                    :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.modal.slot.to')"
                                 >
                                 </x-booking::form.control-group.control>
                 
@@ -668,19 +654,9 @@
                             </x-admin::form.control-group>
                         </div>
                     </x-slot:content>
-
-                    <x-slot:footer>
-                        <!-- Save Button -->
-                        <button
-                            type="submit"
-                            class="primary-button"
-                        >
-                            @lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.save')
-                        </button>
-                    </x-slot:footer>
-                </x-admin::modal>
+                </x-admin::drawer>
             </form>
-        </x-admin::form>
+        </x-booking::form>
     </script>
 
     <script type="module">
@@ -739,17 +715,10 @@
                 }
 
                 if (this.default_booking.booking_type === 'one') {
-                    // let data = this.default_booking.slots?.map((e) => {
-                    //     e.from_day = this.days[e.from_day];
-                    //     e.to_day = this.days[e.to_day];
-
-                    //     return e;
-                    // })
-
                     this.slots['one'] = this.default_booking.slots;
                 } else {
                     if (this.default_booking.slots) {
-                        this.slots['many'].push(this.default_booking.slots ?? []);
+                        this.slots['many'] = this.default_booking.slots;
                     }
                 }
             },
@@ -762,7 +731,7 @@
                             params.id = 'option_' + this.optionRowCount;
                         }
 
-                        let data = Object.keys(params)?.map((key) => {
+                        Object.keys(params)?.map((key) => {
                             if (key == 'from_day') {
                                 params.from_day = this.days[params.from_day];
                             }
@@ -814,13 +783,15 @@
                 },
 
                 edit(element) {
-                    if (this.default_booking.booking_type == 'one') {
+                    if (this.default_booking.booking_type === 'one') {
                         this.$refs.modelForm.setValues(this.slots.one[element]);
-                    } else {
-                        this.$refs.modelForm.setValues(element);
-                    }
 
-                    this.$refs.drawerform.toggle();
+                        this.$refs.drawerform.toggle();
+                    } else {
+                        this.$refs.ManyOptionsModelForm.setValues(element);
+
+                        this.$refs.addManyOptionsRow.toggle();
+                    }
                 },
 
                 remove(element) {
@@ -831,7 +802,7 @@
                             this.slots.one.splice(index, 1);
                         }
                     } else {
-
+                        console.log(element);
                     }
                 },
             }
