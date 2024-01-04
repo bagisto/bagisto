@@ -195,7 +195,7 @@ class TaxRateController extends Controller
                         $uploadData['state'] = $uploadData['state'] ?? '';
 
                         if (
-                            ! is_null($uploadData['zip_from']) 
+                            ! is_null($uploadData['zip_from'])
                             && ! is_null($uploadData['zip_to'])
                         ) {
                             $uploadData['is_zip'] = 1;
@@ -289,14 +289,14 @@ class TaxRateController extends Controller
                                 $uploadData['state'] = $uploadData['state'] ?? '';
 
                                 if (
-                                    ! is_null($uploadData['zip_from']) 
+                                    ! is_null($uploadData['zip_from'])
                                     && ! is_null($uploadData['zip_to'])
                                 ) {
                                     $uploadData += ['is_zip' => 1, 'zip_code' => null];
                                 }
 
                                 if (
-                                    isset($rateIdentifier) 
+                                    isset($rateIdentifier)
                                     && ($id = array_search($uploadData['identifier'], $rateIdentifier)) !== false
                                 ) {
                                     $this->taxRateRepository->update($uploadData, $id);
