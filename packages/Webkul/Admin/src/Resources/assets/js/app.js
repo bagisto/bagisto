@@ -14,10 +14,10 @@ import { createApp } from "vue/dist/vue.esm-bundler";
  */
 import { configure, defineRule } from "vee-validate";
 import { localize, setLocale } from "@vee-validate/i18n";
-import en from "@vee-validate/i18n/dist/locale/en.json";
 import ar from "@vee-validate/i18n/dist/locale/ar.json";
 import bn from "@vee-validate/i18n/dist/locale/ar.json";
 import de from "@vee-validate/i18n/dist/locale/ar.json";
+import en from "@vee-validate/i18n/dist/locale/en.json";
 import es from "@vee-validate/i18n/dist/locale/ar.json";
 import fa from "@vee-validate/i18n/dist/locale/ar.json";
 import fr from "@vee-validate/i18n/dist/locale/ar.json";
