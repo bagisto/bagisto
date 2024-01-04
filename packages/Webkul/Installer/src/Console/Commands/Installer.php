@@ -85,7 +85,7 @@ class Installer extends Command
      */
     public function handle()
     {
-        $getSeederDetails = ! $this->option('skip-env-check')
+        $applicationDetails = ! $this->option('skip-env-check')
             ? $this->checkForEnvFile()
             : [];
 
@@ -99,10 +99,10 @@ class Installer extends Command
 
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
         $this->info(app(BagistoDatabaseSeeder::class)->run([
-            'default_locale'     => $getSeederDetails['default_locale'] ?? 'en',
-            'allowed_locales'    => $getSeederDetails['allowed_locales'] ?? ['en'],
-            'default_currency'   => $getSeederDetails['default_currency'] ?? 'USD',
-            'allowed_currencies' => $getSeederDetails['allowed_currencies'] ?? ['USD'],
+            'default_locale'     => $applicationDetails['default_locale'] ?? 'en',
+            'allowed_locales'    => $applicationDetails['allowed_locales'] ?? ['en'],
+            'default_currency'   => $applicationDetails['default_currency'] ?? 'USD',
+            'allowed_currencies' => $applicationDetails['allowed_currencies'] ?? ['USD'],
         ]));
 
         $this->warn('Step: Linking storage directory...');
@@ -112,7 +112,8 @@ class Installer extends Command
         $this->call('optimize:clear');
 
         if (! $this->option('skip-admin-creation')) {
-            $this->createAdminCredential();
+            $this->warn('Step: Create admin credentials...');
+            $this->createAdminCredentials();
         }
 
         ComposerEvents::postCreateProject();
@@ -145,177 +146,80 @@ class Installer extends Command
     protected function createEnvFile()
     {
         try {
-            // Updating App Name
-            $this->updateEnvVariable(
-                'APP_NAME',
-                'Please enter the <bg=green>application name</>',
-                env('APP_NAME', 'Bagisto')
-            );
+            $applicationDetails = $this->askForApplicationDetails();
 
-            // Updating App URL
-            $this->updateEnvVariable(
-                'APP_URL',
-                'Please enter the <bg=green>application URL</>',
-                env('APP_URL', 'http://localhost:8000')
-            );
-
-            // Updating App Default Timezone
-            $this->envUpdate(
-                'APP_TIMEZONE',
-                date_default_timezone_get()
-            );
-
-            $this->info('Your Default Timezone is ' . date_default_timezone_get());
-
-            // Updating App Default Locale
-            $defaultLocale = $this->updateEnvChoice(
-                'APP_LOCALE',
-                'Please select the <bg=green>default application locale</>',
-                $this->locales
-            );
-
-            // Updating App Default Currencies
-            $defaultCurrency = $this->updateEnvChoice(
-                'APP_CURRENCY',
-                'Please select the <bg=green>default currency</>',
-                $this->currencies
-            );
-
-            // Updating App Allowed Locales
-            $allowedLocales = $this->allowedChoice(
-                'Please choose the <bg=green>allowed locales</> for your channels',
-                $this->locales
-            );
-
-            // Updating App Allowed Currencies
-            $allowedCurrencies = $this->allowedChoice(
-                'Please choose the <bg=green>allowed currencies</> for your channels',
-                $this->currencies
-            );
-
-            // Updating Database Configuration
             $this->askForDatabaseDetails();
 
-            $allowedLocales = array_values(array_unique(array_merge(
-                [$defaultLocale],
-                array_keys($allowedLocales)
-            )));
-
-            $allowedCurrencies = array_values(array_unique(array_merge(
-                [$defaultCurrency ?? 'USD'],
-                array_keys($allowedCurrencies)
-            )));
-
-            return [
-                'default_locale'     => $defaultLocale,
-                'allowed_locales'    => $allowedLocales,
-                'default_currency'   => $defaultCurrency,
-                'allowed_currencies' => $allowedCurrencies,
-            ];
+            return $applicationDetails;
         } catch (\Exception $e) {
             $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
         }
     }
 
     /**
-     * Loaded Env variables for config files.
+     * Ask for application details.
+     *
+     * @return void
      */
-    protected function loadEnvConfigAtRuntime(): void
+    protected function askForApplicationDetails()
     {
-        $this->warn('Loading configs...');
-
-        /**
-         * Setting application environment.
-         */
-        app()['env'] = $this->getEnvAtRuntime('APP_ENV');
-
-        /**
-         * Setting application configuration.
-         */
-        config([
-            'app.env'      => $this->getEnvAtRuntime('APP_ENV'),
-            'app.name'     => $this->getEnvAtRuntime('APP_NAME'),
-            'app.url'      => $this->getEnvAtRuntime('APP_URL'),
-            'app.timezone' => $this->getEnvAtRuntime('APP_TIMEZONE'),
-            'app.locale'   => $this->getEnvAtRuntime('APP_LOCALE'),
-            'app.currency' => $this->getEnvAtRuntime('APP_CURRENCY'),
-        ]);
-
-        /**
-         * Setting database configurations.
-         */
-        $databaseConnection = $this->getEnvAtRuntime('DB_CONNECTION');
-
-        config([
-            "database.connections.{$databaseConnection}.host"     => $this->getEnvAtRuntime('DB_HOST'),
-            "database.connections.{$databaseConnection}.port"     => $this->getEnvAtRuntime('DB_PORT'),
-            "database.connections.{$databaseConnection}.database" => $this->getEnvAtRuntime('DB_DATABASE'),
-            "database.connections.{$databaseConnection}.username" => $this->getEnvAtRuntime('DB_USERNAME'),
-            "database.connections.{$databaseConnection}.password" => $this->getEnvAtRuntime('DB_PASSWORD'),
-            "database.connections.{$databaseConnection}.prefix"   => $this->getEnvAtRuntime('DB_PREFIX'),
-        ]);
-
-        DB::purge($databaseConnection);
-
-        $this->info('Configuration loaded...');
-    }
-
-    /**
-     * Create a new admin credentials.
-     */
-    protected function createAdminCredential()
-    {
-        $adminName = text(
-            label: 'Enter the <bg=green>name of the admin user</>',
-            default: 'Example',
-            required: true
+        $this->updateEnvVariable(
+            'APP_NAME',
+            'Please enter the <bg=green>application name</>',
+            env('APP_NAME', 'Bagisto')
         );
 
-        $adminEmail = text(
-            label: 'Enter the <bg=green>email address of the admin user</>',
-            default: 'admin@example.com',
-            validate: fn (string $value) => match (true) {
-                ! filter_var($value, FILTER_VALIDATE_EMAIL) => 'The email address you entered is not valid please try again.',
-                default                                     => null
-            }
+        $this->updateEnvVariable(
+            'APP_URL',
+            'Please enter the <bg=green>application URL</>',
+            env('APP_URL', 'http://localhost:8000')
         );
 
-        $adminPassword = text(
-            label: 'Configure the <bg=green>password</> for the admin user',
-            default: 'admin123',
-            required: true
+        $this->envUpdate(
+            'APP_TIMEZONE',
+            date_default_timezone_get()
         );
 
-        $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
+        $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
-        try {
-            DB::table('admins')->updateOrInsert(
-                ['id' => 1],
-                [
-                    'name'     => $adminName,
-                    'email'    => $adminEmail,
-                    'password' => $password,
-                    'role_id'  => 1,
-                    'status'   => 1,
-                ]
-            );
+        $defaultLocale = $this->updateEnvChoice(
+            'APP_LOCALE',
+            'Please select the <bg=green>default application locale</>',
+            $this->locales
+        );
 
-            $filePath = storage_path('installed');
+        $defaultCurrency = $this->updateEnvChoice(
+            'APP_CURRENCY',
+            'Please select the <bg=green>default currency</>',
+            $this->currencies
+        );
 
-            File::put($filePath, 'Bagisto is successfully installed');
+        $allowedLocales = $this->allowedChoice(
+            'Please choose the <bg=green>allowed locales</> for your channels',
+            $this->locales
+        );
 
-            $this->info('-----------------------------');
-            $this->info('Congratulations!');
-            $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to ' . env('APP_URL') . '/admin' . ' and authenticate with:');
-            $this->info('Email: ' . $adminEmail);
-            $this->info('Password: ' . $adminPassword);
-            $this->info('Cheers!');
+        $allowedCurrencies = $this->allowedChoice(
+            'Please choose the <bg=green>allowed currencies</> for your channels',
+            $this->currencies
+        );
 
-            Event::dispatch('bagisto.installed');
-        } catch (\Exception $e) {
-            return $this->error($e->getMessage());
-        }
+        $allowedLocales = array_values(array_unique(array_merge(
+            [$defaultLocale],
+            array_keys($allowedLocales)
+        )));
+
+        $allowedCurrencies = array_values(array_unique(array_merge(
+            [$defaultCurrency ?? 'USD'],
+            array_keys($allowedCurrencies)
+        )));
+
+        return [
+            'default_locale'     => $defaultLocale,
+            'allowed_locales'    => $allowedLocales,
+            'default_currency'   => $defaultCurrency,
+            'allowed_currencies' => $allowedCurrencies,
+        ];
     }
 
     /**
@@ -378,6 +282,109 @@ class Installer extends Command
                 $this->envUpdate($key, $value);
             }
         }
+    }
+
+    /**
+     * Create a admin credentials.
+     *
+     * @return mixed
+     */
+    protected function createAdminCredentials()
+    {
+        $adminName = text(
+            label: 'Enter the <bg=green>name of the admin user</>',
+            default: 'Example',
+            required: true
+        );
+
+        $adminEmail = text(
+            label: 'Enter the <bg=green>email address of the admin user</>',
+            default: 'admin@example.com',
+            validate: fn (string $value) => match (true) {
+                ! filter_var($value, FILTER_VALIDATE_EMAIL) => 'The email address you entered is not valid please try again.',
+                default                                     => null
+            }
+        );
+
+        $adminPassword = text(
+            label: 'Configure the <bg=green>password</> for the admin user',
+            default: 'admin123',
+            required: true
+        );
+
+        $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
+
+        try {
+            DB::table('admins')->updateOrInsert(
+                ['id' => 1],
+                [
+                    'name'     => $adminName,
+                    'email'    => $adminEmail,
+                    'password' => $password,
+                    'role_id'  => 1,
+                    'status'   => 1,
+                ]
+            );
+
+            $filePath = storage_path('installed');
+
+            File::put($filePath, 'Bagisto is successfully installed');
+
+            $this->info('-----------------------------');
+            $this->info('Congratulations!');
+            $this->info('The installation has been finished and you can now use Bagisto.');
+            $this->info('Go to ' . env('APP_URL') . '/admin' . ' and authenticate with:');
+            $this->info('Email: ' . $adminEmail);
+            $this->info('Password: ' . $adminPassword);
+            $this->info('Cheers!');
+
+            Event::dispatch('bagisto.installed');
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
+        }
+    }
+
+    /**
+     * Loaded Env variables for config files.
+     */
+    protected function loadEnvConfigAtRuntime(): void
+    {
+        $this->warn('Loading configs...');
+
+        /**
+         * Setting application environment.
+         */
+        app()['env'] = $this->getEnvAtRuntime('APP_ENV');
+
+        /**
+         * Setting application configuration.
+         */
+        config([
+            'app.env'      => $this->getEnvAtRuntime('APP_ENV'),
+            'app.name'     => $this->getEnvAtRuntime('APP_NAME'),
+            'app.url'      => $this->getEnvAtRuntime('APP_URL'),
+            'app.timezone' => $this->getEnvAtRuntime('APP_TIMEZONE'),
+            'app.locale'   => $this->getEnvAtRuntime('APP_LOCALE'),
+            'app.currency' => $this->getEnvAtRuntime('APP_CURRENCY'),
+        ]);
+
+        /**
+         * Setting database configurations.
+         */
+        $databaseConnection = $this->getEnvAtRuntime('DB_CONNECTION');
+
+        config([
+            "database.connections.{$databaseConnection}.host"     => $this->getEnvAtRuntime('DB_HOST'),
+            "database.connections.{$databaseConnection}.port"     => $this->getEnvAtRuntime('DB_PORT'),
+            "database.connections.{$databaseConnection}.database" => $this->getEnvAtRuntime('DB_DATABASE'),
+            "database.connections.{$databaseConnection}.username" => $this->getEnvAtRuntime('DB_USERNAME'),
+            "database.connections.{$databaseConnection}.password" => $this->getEnvAtRuntime('DB_PASSWORD'),
+            "database.connections.{$databaseConnection}.prefix"   => $this->getEnvAtRuntime('DB_PREFIX'),
+        ]);
+
+        DB::purge($databaseConnection);
+
+        $this->info('Configuration loaded...');
     }
 
     /**
