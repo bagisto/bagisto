@@ -13,8 +13,26 @@ import { createApp } from "vue/dist/vue.esm-bundler";
  * all the `vee-validate` settings.
  */
 import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
-import { localize } from "@vee-validate/i18n";
+import { localize, setLocale } from "@vee-validate/i18n";
+import ar from "@vee-validate/i18n/dist/locale/ar.json";
+import bn from "@vee-validate/i18n/dist/locale/ar.json";
+import de from "@vee-validate/i18n/dist/locale/ar.json";
 import en from "@vee-validate/i18n/dist/locale/en.json";
+import es from "@vee-validate/i18n/dist/locale/ar.json";
+import fa from "@vee-validate/i18n/dist/locale/ar.json";
+import fr from "@vee-validate/i18n/dist/locale/ar.json";
+import he from "@vee-validate/i18n/dist/locale/ar.json";
+import hi_IN from "../locales/hi_IN.json";
+import it from "@vee-validate/i18n/dist/locale/ar.json";
+import ja from "@vee-validate/i18n/dist/locale/ar.json";
+import nl from "@vee-validate/i18n/dist/locale/ar.json";
+import pl from "@vee-validate/i18n/dist/locale/ar.json";
+import pt_BR from "@vee-validate/i18n/dist/locale/ar.json";
+import ru from "@vee-validate/i18n/dist/locale/ar.json";
+import sin from "@vee-validate/i18n/dist/locale/ar.json";
+import tr from "@vee-validate/i18n/dist/locale/ar.json";
+import uk from "@vee-validate/i18n/dist/locale/ar.json";
+import zh_CN from "@vee-validate/i18n/dist/locale/ar.json";
 import * as AllRules from '@vee-validate/rules';
 
 /**
@@ -82,14 +100,169 @@ configure({
             messages: {
                 ...en.messages,
                 phone: "This {field} must be a valid phone number",
+                address: "This {field} must be a valid address",
             },
         },
 
-        en: {
-            ...en,
+        ar: {
+            ...ar,
             messages: {
-                ...en.messages,
-                address: "This {field} must be a valid address",
+                ...ar.messages,
+                phone: "يجب أن يكون هذا {field} رقم هاتف صالح",
+                address: "يجب أن يكون هذا {field} عنوانًا صالحًا",
+            },
+        },
+
+        bn: {
+            ...bn,
+            messages: {
+                ...bn.messages,
+                phone: "এই {field} একটি বৈধ ফোন নম্বর হতে হবে",
+                address: "এই {field} একটি বৈধ ঠিকানা হতে হবে",
+            },
+        },
+
+        de: {
+            ...de,
+            messages: {
+                ...de.messages,
+                phone: "Dieses {field} muss eine gültige Telefonnummer sein",
+                address: "Diese {field} muss eine gültige Adresse sein",
+            },
+        },
+
+        es: {
+            ...es,
+            messages: {
+                ...es.messages,
+                phone: "Este {field} debe ser un número de teléfono válido",
+                address: "Esta {field} debe ser una dirección válida",
+            },
+        },
+
+        fa: {
+            ...fa,
+            messages: {
+                ...fa.messages,
+                phone: "این {field} باید یک شماره تلفن معتبر باشد",
+                address: "این {field} باید یک آدرس معتبر باشد",
+            },
+        },
+
+        fr: {
+            ...fr,
+            messages: {
+                ...fr.messages,
+                phone: "Ce {field} doit être un numéro de téléphone valide",
+                address: "Cette {field} doit être une adresse valide",
+            },
+        },
+
+        he: {
+            ...he,
+            messages: {
+                ...he.messages,
+                phone: "זה {field} חייב להיות מספר טלפון תקין",
+                address: "זה {field} חייב להיות כתובת תקינה",
+            },
+        },
+
+        hi_IN: {
+            ...hi_IN,
+            messages: {
+                ...hi_IN.messages,
+                phone: "यह {field} कोई मान्य फ़ोन नंबर होना चाहिए",
+                address: "यह {field} एक मान्य पता होना चाहिए",
+            },
+        },
+
+        it: {
+            ...it,
+            messages: {
+                ...it.messages,
+                phone: "Questo {field} deve essere un numero di telefono valido",
+                address: "Questo {field} deve essere un indirizzo valido",
+            },
+        },
+
+        ja: {
+            ...ja,
+            messages: {
+                ...ja.messages,
+                phone: "この{field}は有効な電話番号である必要があります",
+                address: "この{field}は有効な住所である必要があります",
+            },
+        },
+
+        nl: {
+            ...nl,
+            messages: {
+                ...nl.messages,
+                phone: "Dit {field} moet een geldig telefoonnummer zijn",
+                address: "Dit {field} moet een geldig adres zijn",
+            },
+        },
+
+        pl: {
+            ...pl,
+            messages: {
+                ...pl.messages,
+                phone: "To {field} musi być prawidłowy numer telefonu",
+                address: "To {field} musi być prawidłowym adresem",
+            },
+        },
+
+        pt_BR: {
+            ...pt_BR,
+            messages: {
+                ...pt_BR.messages,
+                phone: "Este {field} deve ser um número de telefone válido",
+                address: "Este {field} deve ser um endereço válido",
+            },
+        },
+
+        ru: {
+            ...ru,
+            messages: {
+                ...ru.messages,
+                phone: "Это {field} должно быть действительным номером телефона",
+                address: "Это {field} должно быть действительным адресом",
+            },
+        },
+
+        sin: {
+            ...sin,
+            messages: {
+                ...sin.messages,
+                phone: "මෙම {field} වටේ වලංගු දුරකතන අංකය විය යුතුයි",
+                address: "මෙම {field} වටේ වලංගු ලිපිනය විය යුතුයි",
+            },
+        },
+
+        tr: {
+            ...tr,
+            messages: {
+                ...tr.messages,
+                phone: "Bu {field} geçerli bir telefon numarası olmalıdır",
+                address: "Bu {field} geçerli bir adres olmalıdır",
+            },
+        },
+
+        uk: {
+            ...uk,
+            messages: {
+                ...uk.messages,
+                phone: "Це {field} повинно бути дійсним номером телефону",
+                address: "Це {field} повинно бути дійсною адресою",
+            },
+        },
+
+        zh_CN: {
+            ...zh_CN,
+            messages: {
+                ...zh_CN.messages,
+                phone: "这个 {field} 必须是一个有效的电话号码",
+                address: "这个 {field} 必须是一个有效的地址",
             },
         },
     }),
@@ -191,5 +364,7 @@ app.component("VErrorMessage", ErrorMessage);
  * called in the last.
  */
 window.addEventListener("load", function (event) {
+    setLocale(document.documentElement.attributes.lang.value);
+
     app.mount("#app");
 });
