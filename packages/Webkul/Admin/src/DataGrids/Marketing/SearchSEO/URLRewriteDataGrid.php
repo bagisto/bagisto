@@ -111,6 +111,7 @@ class URLRewriteDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.url_rewrites.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.edit'),
                 'method' => 'GET',
@@ -123,6 +124,7 @@ class URLRewriteDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.url_rewrites.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.delete'),
                 'method' => 'DELETE',

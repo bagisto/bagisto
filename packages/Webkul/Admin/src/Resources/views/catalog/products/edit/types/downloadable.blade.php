@@ -231,7 +231,7 @@
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.title')
                                     </p>
 
-                                    <button class="mr-11 primary-button">
+                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.save-btn')
                                     </button>
                                 </div>
@@ -661,7 +661,7 @@
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.title')
                                     </p>
 
-                                    <button class="mr-11 primary-button">
+                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.save-btn')
                                     </button>
                                 </div>

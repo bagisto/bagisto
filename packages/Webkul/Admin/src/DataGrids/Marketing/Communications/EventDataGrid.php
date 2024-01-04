@@ -53,6 +53,7 @@ class EventDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.communications.events.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.communications.events.index.datagrid.edit'),
                 'method' => 'PUT',
@@ -64,6 +65,7 @@ class EventDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.communications.events.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.communications.events.index.datagrid.delete'),
                 'method' => 'DELETE',

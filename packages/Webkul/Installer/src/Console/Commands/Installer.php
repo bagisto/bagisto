@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\File;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
 
+use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\password;
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
+
 class Installer extends Command
 {
     /**
@@ -16,7 +21,9 @@ class Installer extends Command
      *
      * @var string
      */
-    protected $signature = 'bagisto:install';
+    protected $signature = 'bagisto:install 
+        { --skip-env-check : Skip env check. }
+        { --skip-admin-creation : Skip admin creation. }';
 
     /**
      * The console command description.
@@ -30,17 +37,15 @@ class Installer extends Command
      */
     public function handle()
     {
-        // Checking for .env
-        $getSeederDetails = $this->checkForEnvFile();
+        $getSeederDetails = ! $this->option('skip-env-check')
+            ? $this->checkForEnvFile()
+            : [];
 
-        // Loading values at runtime
-        $this->loadEnvConfigAtRuntime();
+        $this->call('key:generate');
 
-        // Running `php artisan migrate`
         $this->warn('Step: Migrating all tables into database...');
-        $this->info($this->call('migrate:fresh'));
+        $this->call('migrate:fresh');
 
-        // Running `php artisan db:seed`
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
         $this->info(app(BagistoDatabaseSeeder::class)->run([
             'default_locale'     => $getSeederDetails['defaultLocale'] ?? 'en',
@@ -49,19 +54,15 @@ class Installer extends Command
             'allowed_currencies' => $getSeederDetails['allowedCurrencies'] ?? ['USD'],
         ]));
 
-        // Running `php artisan storage:link`
         $this->warn('Step: Linking storage directory...');
-        $this->info($this->call('storage:link'));
+        $this->call('storage:link');
 
-        // Optimizing stuffs
         $this->warn('Step: Optimizing...');
-        $this->info($this->call('optimize'));
+        $this->call('optimize');
 
-        $this->warn('Step: Composer autoload...');
-        $result = shell_exec('composer dump-autoload');
-        $this->info($result);
-
-        $this->createAdminCredential();
+        if (! $this->option('skip-admin-creation')) {
+            $this->createAdminCredential();
+        }
 
         ComposerEvents::postCreateProject();
     }
@@ -69,7 +70,7 @@ class Installer extends Command
     /**
      *  Checking .env file and if not found then create .env file.
      *
-     *  @return array
+     *  @return ?array
      */
     protected function checkForEnvFile()
     {
@@ -81,11 +82,7 @@ class Installer extends Command
             $this->info('Great! your environment configuration file already exists.');
         }
 
-        $getAllowedDetails = $this->createEnvFile();
-
-        $this->call('key:generate');
-
-        return $getAllowedDetails;
+        return $this->createEnvFile();
     }
 
     /**
@@ -99,13 +96,14 @@ class Installer extends Command
     {
         try {
             // Updating App URL
-            $this->updateEnvVariable('APP_URL', 'Please enter the <bg=green>APP URL</> or press enter to continue', 'http://localhost:8000');
+            $this->updateEnvVariable('APP_URL', 'Please enter the <bg=green>application URL</>', env('APP_URL', 'http://localhost:8000'));
 
             // Updating App Name
-            $this->updateEnvVariable('APP_NAME', 'Please enter the <bg=green>Application Name</> or press enter to continue', 'Bagisto');
+            $this->updateEnvVariable('APP_NAME', 'Please enter the <bg=green>application name</>', env('APP_NAME', 'Bagisto'));
 
             // Updating App Default Locales
-            $defaultLocale = $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>Default Locale</>', $this->locales());
+            $defaultLocale = $this->updateEnvChoice('APP_LOCALE', 'Please select the <bg=green>default application locale</>', $this->locales());
+
             config(['app.locale' => $this->getEnvAtRuntime('APP_LOCALE')]);
 
             // Updating App Default Timezone
@@ -113,27 +111,27 @@ class Installer extends Command
             $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
             // Updating App Default Currencies
-            $defaultCurrency = $this->updateEnvChoice('APP_CURRENCY', 'Please enter the <bg=green>Default Currency</>', $this->currencies());
+            $defaultCurrency = $this->updateEnvChoice('APP_CURRENCY', 'Please select the <bg=green>default currency</>', $this->currencies());
             config(['app.currency' => $this->getEnvAtRuntime('APP_CURRENCY')]);
 
             // Updating App Allowed Locales
-            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>Allowed Locales</> along with the comma-separated', $this->locales(), $defaultLocale, 'Locales');
+            $allowedLocales = $this->allowedChoice('Please choose the <bg=green>allowed locales</> for your channels', $this->locales());
 
             // Updating App Allowed Currencies
-            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>Allowed Currencies</> along with the comma-separated', $this->currencies(), $defaultCurrency, 'Currencies');
+            $allowedCurrencies = $this->allowedChoice('Please choose the <bg=green>allowed currencies</> for your channels', $this->currencies());
 
             // Updating Database Configuration
             $this->askForDatabaseDetails();
 
-            $allowedLocales = array_unique(array_merge(
-                [$defaultLocale ?? 'en'],
-                $allowedLocales
-            ));
+            $allowedLocales = array_values(array_unique(array_merge(
+                [$defaultLocale],
+                array_keys($allowedLocales)
+            )));
 
-            $allowedCurrencies = array_unique(array_merge(
+            $allowedCurrencies = array_values(array_unique(array_merge(
                 [$defaultCurrency ?? 'USD'],
-                $allowedCurrencies
-            ));
+                array_keys($allowedCurrencies)
+            )));
 
             return [
                 'defaultLocale'     => $defaultLocale,
@@ -151,60 +149,61 @@ class Installer extends Command
      */
     protected function askForDatabaseDetails()
     {
-        $connectionOptions = ['mysql', 'pgsql', 'sqlsrv'];
+        $databaseDetails = [
+            'DB_CONNECTION' => select(
+                'Please select the <bg=green>database connection</>',
+                ['mysql', 'pgsql', 'sqlsrv']
+            ),
 
-        $dbConnection = $this->choice('Please select the <bg=green>Database Connection</> or press enter to continue', $connectionOptions, 0);
+            'DB_HOST'       => text(
+                label: 'Please enter the <bg=green>database host</>',
+                default: env('DB_HOST', '127.0.0.1'),
+                required: true
+            ),
 
-        if (! in_array($dbConnection, $connectionOptions)) {
-            $this->error('Please select the valid Database Connection.');
+            'DB_PORT'       => text(
+                label: 'Please enter the <bg=green>database port</>',
+                default: env('DB_PORT', '3306'),
+                required: true
+            ),
 
-            return $this->askForDatabaseDetails();
-        }
+            'DB_DATABASE' => text(
+                label: 'Please enter the <bg=green>database name</>',
+                default: env('DB_DATABASE', ''),
+                required: true
+            ),
 
-        $dbDetails = [
-            'DB_CONNECTION' => $dbConnection,
-            'DB_HOST'       => $this->ask('Please enter the <bg=green>Database Host</> or press enter to continue', '127.0.0.1'),
-            'DB_PORT'       => $this->ask('Please enter the <bg=green>Database Port Number</> or press enter to continue', '3306'),
+            'DB_PREFIX' => text(
+                label: 'Please enter the <bg=green>database prefix</>',
+                default: env('DB_PREFIX', ''),
+                hint: 'or press enter to continue'
+            ),
+
+            'DB_USERNAME' => text(
+                label: 'Please enter your <bg=green>database username</>',
+                default: env('DB_USERNAME', ''),
+                required: true
+            ),
+
+            'DB_PASSWORD' => password(
+                label: 'Please enter your <bg=green>database password</>',
+                required: true
+            ),
         ];
 
-        // Here Asking Database Name, Prefix, Username, Password.
-        $dbDetails['DB_DATABASE'] = $this->ask('Please enter the <bg=green>Database Name</>');
-        $dbDetails['DB_PREFIX'] = $this->ask('Please enter the <bg=green>Database Prefix</> or press enter to continue');
-        $dbDetails['DB_USERNAME'] = $this->anticipate('Please enter your <bg=green>Database Username</>', ['root']);
-        $dbDetails['DB_PASSWORD'] = $this->secret('Please enter your <bg=green>Database Password</>');
-
         if (
-            ! $dbDetails['DB_DATABASE']
-            || ! $dbDetails['DB_USERNAME']
-            || ! $dbDetails['DB_PASSWORD']
+            ! $databaseDetails['DB_DATABASE']
+            || ! $databaseDetails['DB_USERNAME']
+            || ! $databaseDetails['DB_PASSWORD']
         ) {
             return $this->error('Please enter the database credentials.');
         }
 
-        foreach ($dbDetails as $key => $value) {
+        foreach ($databaseDetails as $key => $value) {
             if ($value) {
                 $this->envUpdate($key, $value);
             }
         }
-    }
-
-    /**
-     * Loaded Env variables for config files.
-     */
-    protected function loadEnvConfigAtRuntime(): void
-    {
-        $this->warn('Loading configs...');
-
-        // Environment directly checked from `.env` so changing in config won't reflect
-        app()['env'] = $this->getEnvAtRuntime('APP_ENV');
-
-        // setting for the first time and then `.env` values will be in charge
-        config(['database.connections.mysql.database' => $this->getEnvAtRuntime('DB_DATABASE')]);
-        config(['database.connections.mysql.username' => $this->getEnvAtRuntime('DB_USERNAME')]);
-        config(['database.connections.mysql.password' => $this->getEnvAtRuntime('DB_PASSWORD')]);
-        DB::purge('mysql');
-
-        $this->info('Configuration loaded..');
     }
 
     /**
@@ -235,8 +234,17 @@ class Installer extends Command
     protected function createAdminCredential()
     {
         // Here! Asking for an admin name, email, and password
-        $adminName = $this->ask('Please enter the <bg=green>Name of Admin User</> or press enter to continue', 'Example');
-        $adminEmail = $this->ask('Please enter the <bg=green>Email of Admin User</> or press enter to continue', 'admin@example.com');
+        $adminName = text(
+            label: 'Enter the <bg=green>name of the admin user</>',
+            default: 'Example',
+            required: true
+        );
+
+        $adminEmail = text(
+            label: 'Enter the <bg=green>email address of the admin user</>',
+            default: 'admin@example.com',
+            required: true
+        );
 
         if (! filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
             $this->error('The email address you entered is not valid please try again.');
@@ -244,7 +252,10 @@ class Installer extends Command
             return $this->createAdminCredential();
         }
 
-        $adminPassword = $this->ask('Please enter the <bg=green>Password</> for admin login:', 'admin123');
+        $adminPassword = text(
+            label: 'Configure the <bg=green>password</> for the admin user',
+            default: 'admin123',
+            required: true);
 
         $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
 
@@ -262,7 +273,7 @@ class Installer extends Command
 
             $filePath = storage_path('installed');
 
-            File::put($filePath, 'Your Bagisto App is successfully installed');
+            File::put($filePath, 'Bagisto is successfully installed');
 
             $this->info('-----------------------------');
             $this->info('Congratulations!');
@@ -283,7 +294,11 @@ class Installer extends Command
      */
     protected function updateEnvVariable(string $key, string $question, string $defaultValue): void
     {
-        $input = $this->ask($question, $defaultValue);
+        $input = text(
+            label: $question,
+            default: $defaultValue,
+            required: true
+        );
 
         $this->envUpdate($key, $input ?: $defaultValue);
     }
@@ -295,51 +310,36 @@ class Installer extends Command
      */
     protected function updateEnvChoice(string $key, string $question, array $choices)
     {
-        $choice = $this->choice($question, $choices);
+        $choice = select($question, $choices);
 
-        preg_match('/\((.*?)\)/', $choice, $matches);
+        $this->envUpdate("$key", $choice);
 
-        $this->envUpdate("$key", $matches[1]);
-
-        return $matches[1];
+        return $choice;
     }
 
     /**
-     * function for getting allowed choices based on the list of option.
+     * Function for getting allowed choices based on the list of options.
      */
-    protected function allowedChoice(string $question, array $choices, $defaultValue, string $type)
+    protected function allowedChoice(string $question, array $choices)
     {
-        $this->warn('Available ' . $type . ' for Choice.');
-        $this->line(implode(', ', $choices));
+        $selectedValues = multiselect(
+            label: $question,
+            options: array_values($choices),
+            required: true
+        );
 
-        $userInput = $this->anticipate($question, $choices);
-
-        if (! $userInput) {
-            return [$defaultValue];
-        }
-
-        $userInputArray = array_map('trim', explode(',', $userInput));
-
-        $selectedChoices = array_filter($choices, function ($choice) use ($userInputArray) {
-            foreach ($userInputArray as $value) {
-                if (str_contains($choice, $value)) {
-                    return true;
+        // Create an associative array with selected keys and their corresponding values
+        $selectedChoices = [];
+        foreach ($selectedValues as $selectedValue) {
+            foreach ($choices as $key => $value) {
+                if ($selectedValue === $value) {
+                    $selectedChoices[$key] = $value;
+                    break;
                 }
             }
-
-            return false;
-        });
-
-        $extractedValues = [];
-
-        foreach ($selectedChoices as $value) {
-            // Extract the value that is in the parentheses.
-            if (preg_match('/\(([^)]+)\)/', $value, $matches)) {
-                $extractedValues[] = trim($matches[1]);
-            }
         }
 
-        return $extractedValues;
+        return $selectedChoices;
     }
 
     /**
@@ -365,25 +365,25 @@ class Installer extends Command
     protected static function locales(): array
     {
         return [
-            'Arabic (ar)',
-            'Bengali (bn)',
-            'German (de)',
-            'English (en)',
-            'Spanish (es)',
-            'Persian (fa)',
-            'French (fr)',
-            'Hebrew (he)',
-            'Hindi (hi_IN)',
-            'Italian (it)',
-            'Japanese (ja)',
-            'Dutch (nl)',
-            'Polish (pl)',
-            'Brazilian Portuguese (pt_BR)',
-            'Russian (ru)',
-            'Sinhala (sin)',
-            'Turkish (tr)',
-            'Ukrainian (uk)',
-            'Chinese (zh_CN)',
+            'ar'    => 'Arabic',
+            'bn'    => 'Bengali',
+            'de'    => 'German',
+            'en'    => 'English',
+            'es'    => 'Spanish',
+            'fa'    => 'Persian',
+            'fr'    => 'French',
+            'he'    => 'Hebrew',
+            'hi_IN' => 'Hindi',
+            'it'    => 'Italian',
+            'ja'    => 'Japanese',
+            'nl'    => 'Dutch',
+            'pl'    => 'Polish',
+            'pt_BR' => 'Brazilian Portuguese',
+            'ru'    => 'Russian',
+            'sin'   => 'Sinhala',
+            'tr'    => 'Turkish',
+            'uk'    => 'Ukrainian',
+            'zh_CN' => 'Chinese',
         ];
     }
 
@@ -393,19 +393,19 @@ class Installer extends Command
     protected static function currencies(): array
     {
         return [
-            'Chinese Yuan (CNY)',
-            'Dirham (AED)',
-            'Euro (EUR)',
-            'Indian Rupee (INR)',
-            'Iranian Rial (IRR)',
-            'Israeli Shekel (AFN)',
-            'Japanese Yen (JPY)',
-            'Pound Sterling (GBP)',
-            'Russian Ruble (RUB)',
-            'Saudi Riyal (SAR)',
-            'Turkish Lira (TRY)',
-            'US Dollar (USD)',
-            'Ukrainian Hryvnia (UAH)',
+            'CNY' => 'Chinese Yuan',
+            'AED' => 'Dirham',
+            'EUR' => 'Euro',
+            'INR' => 'Indian Rupee',
+            'IRR' => 'Iranian Rial',
+            'AFN' => 'Israeli Shekel',
+            'JPY' => 'Japanese Yen',
+            'GBP' => 'Pound Sterling',
+            'RUB' => 'Russian Ruble',
+            'SAR' => 'Saudi Riyal',
+            'TRY' => 'Turkish Lira',
+            'USD' => 'US Dollar',
+            'UAH' => 'Ukrainian Hryvnia',
         ];
     }
 }

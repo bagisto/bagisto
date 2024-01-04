@@ -121,80 +121,80 @@
                 <!-- Subtotal / Grand Total od the page -->
                 <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
                     <div class="flex flex-col gap-y-1.5">
-                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                             @lang('admin::app.sales.refunds.view.sub-total')
                         </p>
 
                         @if ($refund->base_shipping_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.refunds.view.shipping-handling')
                             </p>
                         @endif
 
                         @if ($refund->base_tax_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.refunds.view.tax')
                             </p>
                         @endif
 
                         @if ($refund->base_discount_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.refunds.view.discounted-amount')
                             </p>
                         @endif
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             @lang('admin::app.sales.refunds.view.adjustment-refund')
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             @lang('admin::app.sales.refunds.view.adjustment-fee')
                         </p>
 
-                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold !leading-5">
                             @lang('admin::app.sales.refunds.view.grand-total')
                         </p>
                     </div>
 
                     <div class="flex  flex-col gap-y-1.5">
                         <!-- Base Sub Total -->
-                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                             {{ core()->formatBasePrice($refund->base_sub_total) }}
                         </p>
 
                         <!-- Base Shipping Amount -->
                         @if ($refund->base_shipping_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($refund->base_shipping_amount) }}
                             </p>
                         @endif
 
                         <!-- Base Tax Amount -->
                         @if ($refund->base_tax_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($refund->base_tax_amount) }}
                             </p>
                         @endif
 
                         <!-- Base Discount Amouont -->
                         @if ($refund->base_discount_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($refund->base_discount_amount) }}
                             </p>
                         @endif
 
                         <!-- Base Adjustment Refund -->
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             {{ core()->formatBasePrice($refund->base_adjustment_refund) }}
                         </p>
 
                         <!-- Base Adjustment Fee -->
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             {{ core()->formatBasePrice($refund->base_adjustment_fee) }}
                         </p>
 
                         <!-- Base Grand Total -->
-                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold !leading-5">
                             {{ core()->formatBasePrice($refund->base_grand_total) }}
                         </p>
                     </div>

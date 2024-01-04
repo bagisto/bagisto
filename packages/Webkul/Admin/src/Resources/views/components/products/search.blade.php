@@ -16,7 +16,7 @@
                         </p>
 
                         <div
-                            class="mr-11 primary-button"
+                            class="ltr:mr-11 rtl:ml-11 primary-button"
                             @click="addSelected"
                         >
                             @lang('admin::app.components.products.search.add-btn')

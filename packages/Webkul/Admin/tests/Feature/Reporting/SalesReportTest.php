@@ -201,9 +201,9 @@ it('should returns the abandoned carts stats', function () {
     $this->loginAsAdmin();
 
     get(route('admin.reporting.sales.stats', [
-        'start' => Carbon::now()->copy()->subMonth(),
+        'start' => Carbon::now()->copy()->subMonth()->toDateString(),
         'type'  => 'abandoned-carts',
-        'end'   => Carbon::now()->addMonths(5),
+        'end'   => Carbon::now()->addMonths(5)->toDateString(),
     ]))
         ->assertOk()
         ->assertJsonPath('statistics.carts.current', 1);

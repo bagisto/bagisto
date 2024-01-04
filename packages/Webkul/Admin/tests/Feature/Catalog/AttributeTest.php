@@ -28,10 +28,11 @@ it('should show attribute page', function () {
 });
 
 it('should return listing items of attributes', function () {
+    // Arrange
+    $attribute = Attribute::factory()->create();
+
     // Act & Assert
     $this->loginAsAdmin();
-
-    $attribute = Attribute::factory()->create();
 
     getJson(route('admin.catalog.attributes.index'), [
         'X-Requested-With' => 'XMLHttpRequest',

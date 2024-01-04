@@ -358,7 +358,6 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-
         if (! method_exists(static::class, $key)
             && ! in_array($key, [
                 'pivot',

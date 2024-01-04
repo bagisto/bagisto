@@ -23,10 +23,11 @@ it('should return the subscription index page', function () {
 });
 
 it('should show the edit page of compaign', function () {
+    // Arrange
+    $subscriber = SubscribersList::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $subscriber = SubscribersList::factory()->create();
 
     get(route('admin.marketing.communications.subscribers.edit', $subscriber->id))
         ->assertOk()
@@ -36,10 +37,11 @@ it('should show the edit page of compaign', function () {
 });
 
 it('should update the subscriber', function () {
+    // Arrange
+    $subscriber = SubscribersList::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $subscriber = SubscribersList::factory()->create();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
         'id'            => $subscriber->id,
@@ -55,10 +57,11 @@ it('should update the subscriber', function () {
 });
 
 it('should delete the specific subscriber', function () {
+    // Arrange
+    $subscriber = SubscribersList::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $subscriber = SubscribersList::factory()->create();
 
     deleteJson(route('admin.marketing.communications.subscribers.delete', $subscriber->id))
         ->assertOk()

@@ -42,10 +42,11 @@ it('should store the newly created locale', function () {
 });
 
 it('should return the locale for edit', function () {
+    // Arrange
+    $locale = Locale::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $locale = Locale::factory()->create();
 
     get(route('admin.settings.locales.edit', $locale->id))
         ->assertOk()
@@ -55,10 +56,11 @@ it('should return the locale for edit', function () {
 });
 
 it('should update the specified locale', function () {
+    // Arrange
+    $locale = Locale::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $locale = Locale::factory()->create();
 
     putJson(route('admin.settings.locales.update'), [
         'id'   => $locale->id,
@@ -74,10 +76,11 @@ it('should update the specified locale', function () {
 });
 
 it('should delete the locale', function () {
+    // Arrange
+    $locale = Locale::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $locale = Locale::factory()->create();
 
     deleteJson(route('admin.settings.locales.delete', $locale->id))
         ->assertOk()

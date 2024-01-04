@@ -219,54 +219,54 @@
                 <!--Sale Summary -->
                 <div class="flex w-full gap-2.5 justify-end mt-4 p-4">
                     <div class="flex flex-col gap-y-1.5">
-                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                             @lang('admin::app.sales.invoices.view.sub-total-summary')
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             @lang('admin::app.sales.invoices.view.shipping-and-handling')                    
                         </p>
 
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             @lang('admin::app.sales.invoices.view.summary-tax')    
                         </p>
 
                         @if ($invoice->base_discount_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 @lang('admin::app.sales.invoices.view.summary-discount')    
                             </p>
                         @endif
 
-                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold !leading-5">
                             @lang('admin::app.sales.invoices.view.grand-total')   
                         </p>
                     </div>
 
                     <div class="flex flex-col gap-y-1.5">
                         <!-- Subtotal -->
-                        <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                        <p class="text-gray-600 dark:text-gray-300 font-semibold !leading-5">
                             {{ core()->formatBasePrice($invoice->base_sub_total) }}
                         </p>
 
                         <!-- Shipping and Handling -->
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             {{ core()->formatBasePrice($invoice->base_shipping_amount) }}
                         </p>
 
                         <!-- Tax -->
-                        <p class="text-gray-600 dark:text-gray-300">
+                        <p class="text-gray-600 dark:text-gray-300 !leading-5">
                             {{ core()->formatBasePrice($invoice->base_tax_amount) }}
                         </p>
 
                         <!-- Discount -->
                         @if ($invoice->base_discount_amount > 0)
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300 !leading-5">
                                 {{ core()->formatBasePrice($invoice->base_discount_amount) }}
                             </p>
                         @endif
                         
                         <!-- Grand Total -->
-                        <p class="text-base text-gray-800 dark:text-white font-semibold">
+                        <p class="text-base text-gray-800 dark:text-white font-semibold !leading-5">
                             {{ core()->formatBasePrice($invoice->base_grand_total) }}
                         </p>
                     </div>

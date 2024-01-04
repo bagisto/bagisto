@@ -150,9 +150,9 @@
                         <img
                             class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
                             src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
-                            alt="add-category-to-store"
+                            alt="@lang('admin::app.settings.themes.edit.category-carousel')"
                         >
-        
+
                         <div class="flex flex-col gap-1.5 items-center">
                             <p class="text-base text-gray-400 font-semibold">
                                 @lang('admin::app.settings.themes.edit.category-carousel')
