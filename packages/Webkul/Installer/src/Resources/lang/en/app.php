@@ -290,17 +290,17 @@ return [
                     'name'  => 'Services Content',
 
                     'title' => [
-                        'free-shipping'     => 'Free Shipping',
-                        'product-replace'   => 'Product Replace',
-                        'emi-available'     => 'Emi Available',
-                        'time-support'      => '24/7 Support',
+                        'free-shipping'   => 'Free Shipping',
+                        'product-replace' => 'Product Replace',
+                        'emi-available'   => 'Emi Available',
+                        'time-support'    => '24/7 Support',
                     ],
 
                     'description' => [
-                        'free-shipping-info'     => 'Enjoy free shipping on all orders',
-                        'product-replace-info'   => 'Easy Product Replacement Available!',
-                        'emi-available-info'     => 'No cost EMI available on all major credit cards',
-                        'time-support-info'      => 'Dedicated 24/7 support via chat and email',
+                        'free-shipping-info'   => 'Enjoy free shipping on all orders',
+                        'product-replace-info' => 'Easy Product Replacement Available!',
+                        'emi-available-info'   => 'No cost EMI available on all major credit cards',
+                        'time-support-info'    => 'Dedicated 24/7 support via chat and email',
                     ],
                 ],
             ],

@@ -290,17 +290,17 @@ return [
                     'name'  => 'Conteúdo de serviços',
 
                     'title' => [
-                        'free-shipping'     => 'Frete grátis',
-                        'product-replace'   => 'Substituição de produto',
-                        'emi-available'     => 'EMI disponível',
-                        'time-support'      => 'Suporte 24/7',
+                        'free-shipping'   => 'Frete grátis',
+                        'product-replace' => 'Substituição de produto',
+                        'emi-available'   => 'EMI disponível',
+                        'time-support'    => 'Suporte 24/7',
                     ],
 
                     'description' => [
-                        'free-shipping-info'     => 'Aproveite o frete grátis em todos os pedidos',
-                        'product-replace-info'   => 'Substituição fácil de produto disponível!',
-                        'emi-available-info'     => 'EMI sem custo disponível em todos os principais cartões de crédito',
-                        'time-support-info'      => 'Suporte dedicado 24/7 via chat e e-mail',
+                        'free-shipping-info'   => 'Aproveite o frete grátis em todos os pedidos',
+                        'product-replace-info' => 'Substituição fácil de produto disponível!',
+                        'emi-available-info'   => 'EMI sem custo disponível em todos os principais cartões de crédito',
+                        'time-support-info'    => 'Suporte dedicado 24/7 via chat e e-mail',
                     ],
                 ],
             ],
