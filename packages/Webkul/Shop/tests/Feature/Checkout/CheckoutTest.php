@@ -1103,7 +1103,6 @@ it('should store the orders of virtual product for customer', function () {
         'attributes' => [
             5  => 'new',
             6  => 'featured',
-            26 => 'guest_checkout',
         ],
 
         'attribute_value' => [
@@ -1112,10 +1111,6 @@ it('should store the orders of virtual product for customer', function () {
             ],
 
             'featured' => [
-                'boolean_value' => true,
-            ],
-
-            'guest_checkout' => [
                 'boolean_value' => true,
             ],
         ],
@@ -1222,7 +1217,6 @@ it('should store the orders of downloadable product for customer', function () {
         'attributes' => [
             5  => 'new',
             6  => 'featured',
-            26 => 'guest_checkout',
         ],
 
         'attribute_value' => [
@@ -1231,10 +1225,6 @@ it('should store the orders of downloadable product for customer', function () {
             ],
 
             'featured' => [
-                'boolean_value' => true,
-            ],
-
-            'guest_checkout' => [
                 'boolean_value' => true,
             ],
         ],
