@@ -89,6 +89,8 @@ class Installer extends Command
             ? $this->checkForEnvFile()
             : [];
 
+        $this->loadEnvConfigAtRuntime();
+
         $this->warn('Step: Generating key...');
         $this->call('key:generate');
 
@@ -213,6 +215,49 @@ class Installer extends Command
         } catch (\Exception $e) {
             $this->error('Error in creating .env file, please create it manually and then run `php artisan migrate` again.');
         }
+    }
+
+    /**
+     * Loaded Env variables for config files.
+     */
+    protected function loadEnvConfigAtRuntime(): void
+    {
+        $this->warn('Loading configs...');
+
+        /**
+         * Setting application environment.
+         */
+        app()['env'] = $this->getEnvAtRuntime('APP_ENV');
+
+        /**
+         * Setting application configuration.
+         */
+        config([
+            'app.env'      => $this->getEnvAtRuntime('APP_ENV'),
+            'app.name'     => $this->getEnvAtRuntime('APP_NAME'),
+            'app.url'      => $this->getEnvAtRuntime('APP_URL'),
+            'app.timezone' => $this->getEnvAtRuntime('APP_TIMEZONE'),
+            'app.locale'   => $this->getEnvAtRuntime('APP_LOCALE'),
+            'app.currency' => $this->getEnvAtRuntime('APP_CURRENCY'),
+        ]);
+
+        /**
+         * Setting database configurations.
+         */
+        $databaseConnection = $this->getEnvAtRuntime('DB_CONNECTION');
+
+        config([
+            "database.connections.{$databaseConnection}.host"     => $this->getEnvAtRuntime('DB_HOST'),
+            "database.connections.{$databaseConnection}.port"     => $this->getEnvAtRuntime('DB_PORT'),
+            "database.connections.{$databaseConnection}.database" => $this->getEnvAtRuntime('DB_DATABASE'),
+            "database.connections.{$databaseConnection}.username" => $this->getEnvAtRuntime('DB_USERNAME'),
+            "database.connections.{$databaseConnection}.password" => $this->getEnvAtRuntime('DB_PASSWORD'),
+            "database.connections.{$databaseConnection}.prefix"   => $this->getEnvAtRuntime('DB_PREFIX'),
+        ]);
+
+        DB::purge($databaseConnection);
+
+        $this->info('Configuration loaded...');
     }
 
     /**
@@ -406,5 +451,27 @@ class Installer extends Command
         $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
 
         file_put_contents(base_path('.env'), $data);
+    }
+
+    /**
+     * Check key in `.env` file because it will help to find values at runtime.
+     */
+    protected static function getEnvAtRuntime(string $key): string|bool
+    {
+        if ($data = file(base_path('.env'))) {
+            foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
+
+                $rowValues = explode('=', $line);
+
+                if (strlen($line) !== 0) {
+                    if (strpos($key, $rowValues[0]) !== false) {
+                        return $rowValues[1];
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
