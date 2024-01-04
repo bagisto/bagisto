@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Податкова ставка',
                     'title'        => 'Податкові ставки',
 
+                    'import' => [
+                        'duplicate-error'  => 'Ідентифікатор повинен бути унікальним, дубльований ідентифікатор :identifier в рядку :position.',
+                        'enough-row-error' => 'Файл не має достатньо рядків',
+                        'import-btn'       => 'Імпорт',
+                        'title'            => 'Завантажити',
+                        'upload-error'     => 'Файл повинен бути файлом типу: xls, xlsx, csv.',
+                        'upload-success'   => 'Ставка податку успішно завантажена',
+                        'validation'       => 'Дозволений тип: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Ідентифікатор',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Дозволений тип :',
         'csv'              => 'CSV',
-        'duplicate-error'  => 'Ідентифікатор повинен бути унікальним, дубльований ідентифікатор :identifier на рядку :position.',
         'download'         => 'Завантажити',
-        'enough-row-error' => 'Файл не містить достатньо рядків',
         'export'           => 'Експорт',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Файл',
-        'format'           => 'Вибрати формат',
-        'import'           => 'Імпорт',
-        'illegal-format'   => 'Помилка! Цей формат або не підтримується, або це недійсний формат',
         'no-records'       => 'Нічого експортувати',
-        'upload'           => 'Завантажити',
-        'upload-error'     => 'Файл повинен бути файлом типу: xls, xlsx, csv.',
-        'upload-success'   => ':name Успішно завантажено',
         'xls'              => 'XLS',
     ],
 
