@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Tasa de Impuestos',
                     'title'        => 'Tasas de Impuestos',
 
+                    'import' => [
+                        'duplicate-error'  => 'El identificador debe ser único, identificador duplicado :identifier en la fila :position.',
+                        'enough-row-error' => 'El archivo no tiene suficientes filas',
+                        'import-btn'       => 'Importar',
+                        'title'            => 'Subir',
+                        'upload-error'     => 'El archivo debe ser de tipo: xls, xlsx, csv.',
+                        'upload-success'   => 'Tasa de impuesto cargada con éxito',
+                        'validation'       => 'Tipo permitido: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'country'    => 'País',
                         'delete'     => 'Eliminar',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Tipos permitidos:',
         'csv'              => 'CSV',
         'download'         => 'Descargar',
-        'duplicate-error'  => 'El identificador debe ser único, identificador duplicado :identifier en la fila :position.',
-        'enough-row-error' => 'El archivo no tiene suficientes filas',
         'export'           => 'Exportar',
-        'file'             => 'Archivo',
-        'file-type'        => 'csv, xls, xlsx.',
-        'format'           => 'Seleccionar Formato',
-        'illegal-format'   => 'Error! Este tipo de formato no es compatible o es un formato ilegal',
-        'import'           => 'Importar',
         'no-records'       => 'Nada que exportar',
-        'upload'           => 'Subir',
-        'upload-error'     => 'El archivo debe ser de tipo: xls, xlsx, csv.',
-        'upload-success'   => ':name cargado exitosamente',
         'xls'              => 'XLS',
     ],
 

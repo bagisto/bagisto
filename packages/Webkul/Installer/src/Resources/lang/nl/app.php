@@ -290,17 +290,17 @@ return [
                     'name'  => 'Diensteninhoud',
 
                     'title' => [
-                        'free-shipping'     => 'Gratis verzending',
-                        'product-replace'   => 'Product vervangen',
-                        'emi-available'     => 'EMI beschikbaar',
-                        'time-support'      => '24/7 ondersteuning',
+                        'free-shipping'   => 'Gratis verzending',
+                        'product-replace' => 'Product vervangen',
+                        'emi-available'   => 'EMI beschikbaar',
+                        'time-support'    => '24/7 ondersteuning',
                     ],
 
                     'description' => [
-                        'free-shipping-info'     => 'Geniet van gratis verzending op alle bestellingen',
-                        'product-replace-info'   => 'Eenvoudige productvervanging beschikbaar!',
-                        'emi-available-info'     => 'Geen kosten EMI beschikbaar op alle belangrijke creditcards',
-                        'time-support-info'      => 'Toegewijde 24/7 ondersteuning via chat en e-mail',
+                        'free-shipping-info'   => 'Geniet van gratis verzending op alle bestellingen',
+                        'product-replace-info' => 'Eenvoudige productvervanging beschikbaar!',
+                        'emi-available-info'   => 'Geen kosten EMI beschikbaar op alle belangrijke creditcards',
+                        'time-support-info'    => 'Toegewijde 24/7 ondersteuning via chat en e-mail',
                     ],
                 ],
             ],

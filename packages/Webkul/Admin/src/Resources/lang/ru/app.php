@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Налоговая ставка',
                     'title'        => 'Налоговые ставки',
 
+                    'import' => [
+                        'duplicate-error'  => 'Идентификатор должен быть уникальным, дублирующийся идентификатор :identifier в строке :position.',
+                        'enough-row-error' => 'Файл не содержит достаточно строк',
+                        'import-btn'       => 'Импорт',
+                        'title'            => 'Загрузка',
+                        'upload-error'     => 'Файл должен быть файлом типа: xls, xlsx, csv.',
+                        'upload-success'   => 'Ставка налога успешно загружена',
+                        'validation'       => 'Разрешенный тип: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Идентификатор',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Разрешенный тип :',
         'csv'              => 'CSV',
         'download'         => 'Скачать',
-        'duplicate-error'  => 'Идентификатор должен быть уникальным, дублирующийся идентификатор :identifier в строке :position.',
-        'enough-row-error' => 'Файл не содержит достаточного количества строк',
         'export'           => 'Экспорт',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Файл',
-        'format'           => 'Выберите формат',
-        'import'           => 'Импорт',
-        'illegal-format'   => 'Ошибка! Этот формат не поддерживается или имеет недопустимый формат',
         'no-records'       => 'Нет данных для экспорта',
-        'upload'           => 'Загрузить',
-        'upload-error'     => 'Файл должен быть в формате: xls, xlsx, csv.',
-        'upload-success'   => ':name успешно загружен',
         'xls'              => 'XLS',
     ],
 

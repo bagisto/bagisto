@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
+                    'import' => [
+                        'duplicate-error'  => '識別子はユニークでなければなりません、行:positionで重複する識別子 :identifier。',
+                        'enough-row-error' => 'ファイルに十分な行がありません',
+                        'import-btn'       => 'インポート',
+                        'title'            => 'アップロード',
+                        'upload-error'     => 'ファイルの種類は: xls、xlsx、csvでなければなりません。',
+                        'upload-success'   => '税率が正常にアップロードされました',
+                        'validation'       => '許可されたタイプ: xls、xlsx、csv。',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => '識別子',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => '許可されるタイプ：',
         'csv'              => 'CSV',
         'download'         => 'ダウンロード',
-        'duplicate-error'  => '識別子は一意である必要があり、行 :position で重複する識別子 :identifier があります。',
-        'enough-row-error' => 'ファイルに十分な行がありません',
         'export'           => 'エクスポート',
-        'file-type'        => 'csv、xls、xlsx。',
-        'file'             => 'ファイル',
-        'format'           => 'フォーマットを選択',
-        'import'           => 'インポート',
-        'illegal-format'   => 'エラー！このフォーマットの種類はサポートされていないか、不正なフォーマットです',
         'no-records'       => 'エクスポート対象がありません',
-        'upload'           => 'アップロード',
-        'upload-error'     => 'ファイルは次のタイプのファイルである必要があります：xls、xlsx、csv。',
-        'upload-success'   => ':name が正常にアップロードされました',
         'xls'              => 'XLS',
     ],
 
