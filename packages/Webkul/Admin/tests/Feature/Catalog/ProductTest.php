@@ -42,7 +42,7 @@ it('should return the create page products', function () {
     postJson(route('admin.catalog.products.store'), [
         'type'                => $type = fake()->randomElement(['simple', 'configurable', 'virtual', 'downloadable', 'grouped', 'bundle']),
         'attribute_family_id' => 1,
-        'sku'                 => $sku = fake()->slug(),
+        'sku'                 => $sku = fake()->uuid(),
     ])
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
