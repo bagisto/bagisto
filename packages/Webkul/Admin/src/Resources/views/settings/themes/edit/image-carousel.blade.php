@@ -138,10 +138,10 @@
                             class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                             v-else
                         >
-                            <img    
-                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
-                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                                alt="add-product-to-store"
+                            <img
+                                class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
+                                src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
+                                alt="@lang('admin::app.settings.themes.edit.slider')"
                             >
             
                             <div class="flex flex-col gap-1.5 items-center">

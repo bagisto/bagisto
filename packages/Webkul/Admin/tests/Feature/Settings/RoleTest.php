@@ -52,10 +52,11 @@ it('should store the newly created roles', function () {
 });
 
 it('should returns the edit page of roles', function () {
+    // Arrange
+    $role = Role::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $role = Role::factory()->create();
 
     putJson(route('admin.settings.roles.edit', $role->id), [
         'name'            => $name = fake()->name(),
@@ -71,10 +72,11 @@ it('should returns the edit page of roles', function () {
 });
 
 it('should update the existing role', function () {
+    // Arrange
+    $role = Role::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $role = Role::factory()->create();
 
     putJson(route('admin.settings.roles.update', $role->id), [
         'name'            => $name = fake()->name(),
@@ -90,10 +92,11 @@ it('should update the existing role', function () {
 });
 
 it('should delete the existing role', function () {
+    // Arrange
+    $role = Role::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $role = Role::factory()->create();
 
     deleteJson(route('admin.settings.roles.delete', $role->id))
         ->assertOk()

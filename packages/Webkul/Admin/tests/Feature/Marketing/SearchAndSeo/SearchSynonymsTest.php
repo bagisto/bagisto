@@ -42,10 +42,11 @@ it('should store the newly created search synonyms', function () {
 });
 
 it('should update the search synonyms', function () {
+    // Arrange
+    $searchsynonym = SearchSynonym::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchsynonym = SearchSynonym::factory()->create();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update'), [
         'id'    => $searchsynonym->id,
@@ -63,10 +64,11 @@ it('should update the search synonyms', function () {
 });
 
 it('should delete the search synonyms', function () {
+    // Arrange
+    $searchsynonym = SearchSynonym::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchsynonym = SearchSynonym::factory()->create();
 
     deleteJson(route('admin.marketing.search_seo.search_synonyms.delete', $searchsynonym->id))
         ->assertOk()
@@ -78,10 +80,11 @@ it('should delete the search synonyms', function () {
 });
 
 it('should mass delete the search synonyms', function () {
+    // Arrange
+    $searchsynonyms = SearchSynonym::factory()->count(2)->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchsynonyms = SearchSynonym::factory()->count(2)->create();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.mass_delete'), [
         'indices' => $searchsynonyms->pluck('id')->toArray(),

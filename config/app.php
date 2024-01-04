@@ -241,7 +241,6 @@ return [
         'Cart'         => Webkul\Checkout\Facades\Cart::class,
         'Concord'      => Konekt\Concord\Facades\Concord::class,
         'Core'         => Webkul\Core\Facades\Core::class,
-        'Datagrid'     => Webkul\Ui\DataGrid\Facades\DataGrid::class,
         'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
         'Helper'       => Konekt\Concord\Facades\Helper::class,
         'Image'        => Intervention\Image\Facades\Image::class,

@@ -67,6 +67,7 @@ class SearchSynonymDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.search_synonyms.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.edit'),
                 'method' => 'GET',
@@ -79,6 +80,7 @@ class SearchSynonymDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.search_synonyms.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.delete'),
                 'method' => 'DELETE',

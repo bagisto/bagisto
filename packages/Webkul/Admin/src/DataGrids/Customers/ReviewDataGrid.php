@@ -144,6 +144,7 @@ class ReviewDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('customers.reviews.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.customers.reviews.index.datagrid.edit'),
                 'method' => 'GET',
@@ -155,6 +156,7 @@ class ReviewDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('customers.reviews.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
                 'method' => 'DELETE',

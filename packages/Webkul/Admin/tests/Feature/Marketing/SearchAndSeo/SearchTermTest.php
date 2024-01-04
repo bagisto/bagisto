@@ -46,10 +46,11 @@ it('should store the newly created search term', function () {
 });
 
 it('should update the search term', function () {
+    // Arrange
+    $searchTerm = SearchTerm::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchTerm = SearchTerm::factory()->create();
 
     putJson(route('admin.marketing.search_seo.search_terms.update'), [
         'id'         => $searchTerm->id,
@@ -69,10 +70,11 @@ it('should update the search term', function () {
 });
 
 it('should delete the search term', function () {
+    // Arrange
+    $searchTerm = SearchTerm::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchTerm = SearchTerm::factory()->create();
 
     deleteJson(route('admin.marketing.search_seo.search_terms.delete', $searchTerm->id))
         ->assertOk()
@@ -84,10 +86,11 @@ it('should delete the search term', function () {
 });
 
 it('should mass delete the search term', function () {
+    // Arrange
+    $searchTerms = SearchTerm::factory()->count(2)->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $searchTerms = SearchTerm::factory()->count(2)->create();
 
     postJson(route('admin.marketing.search_seo.search_terms.mass_delete'), [
         'indices' => $searchTerms->pluck('id')->toArray(),
