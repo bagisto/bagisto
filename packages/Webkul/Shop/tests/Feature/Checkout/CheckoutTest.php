@@ -688,3 +688,116 @@ it('should store the orders of configurable product for guest user', function ()
         'product_id' => $childProduct->id,
     ]);
 });
+
+
+it('should store the orders of virtual product for guest user', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'featured' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getVirtualProductFactory()
+        ->create();
+
+    $cartItem = CartItem::factory()->create([
+        'base_total_weight' => 1,
+        'total_weight'	    => 1,
+        'product_id'        => $product->id,
+        'quantity'          => 1,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'	        => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'base_grand_total'	    => $price = $product->price,
+            'base_sub_total'        => $price,
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'	        => $price,
+            'sub_total'	            => $price,
+            'is_guest'              => 1,
+        ]),
+    ]);
+
+    CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
+
+    $cartPayment = new CartPayment;
+    $cartPayment->method = $paymentMethod = 'cashondelivery';
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->cart_id = $cart->id;
+    $cartPayment->save();
+
+    $cartTemp = new \stdClass();
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertDatabaseHas('cart', ['is_active' => 0]);
+
+    $this->assertDatabaseHas('addresses', [
+        'address_type' => 'cart_billing',
+        'cart_id'      => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('orders', [
+        'status'          => 'pending',
+        'grand_total'     => $price,
+        'cart_id'         => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('order_items', [
+        'qty_ordered'  => $quantity = $cartItem->quantity,
+        'qty_shipped'  => 0,
+        'qty_invoiced' => 0,
+        'qty_canceled' => 0,
+        'qty_refunded' => 0,
+        'price'        => $price,
+        'type'         => $product->type,
+        'product_id'   => $product->id,
+    ]);
+
+    $this->assertDatabaseHas('cart_payment', [
+        'method'  => $paymentMethod,
+        'cart_id' => $cart->id,
+    ]);
+
+    $this->assertDatabaseHas('order_payment', ['method'  => $paymentMethod]);
+
+    $this->assertDatabaseHas('product_ordered_inventories', [
+        'qty'        => $quantity,
+        'product_id' => $product->id,
+    ]);
+
+    $this->assertDatabaseHas('product_inventory_indices', [
+        'qty'        => $product->inventory_source_qty(1) - $quantity,
+        'product_id' => $product->id,
+    ]);
+});
