@@ -28,61 +28,18 @@
             </div>
         </div>
 
-        <!-- Table Information -->
-        <div class="overflow-x-auto">
-            <template v-if="tickets?.length">
-                <x-admin::table>
-                    <x-admin::table.thead class="text-sm font-medium bg-gray-800 dark:bg-white">
-                        <x-admin::table.thead.tr>
-                            <!-- Name -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.name')
-                            </x-admin::table.th>
-
-                            <!-- Price -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.price')
-                            </x-admin::table.th>
-
-                            <!-- Qty -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.qty')
-                            </x-admin::table.th>
-
-                            <!-- Special Price -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.special-price')
-                            </x-admin::table.th>
-
-                            <!-- Valid From -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-from')
-                            </x-admin::table.th>
-
-                            <!-- Valid Until -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.valid-until')
-                            </x-admin::table.th>
-
-                            <!-- Description -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.description')
-                            </x-admin::table.th>
-
-                            <!-- Action tables heading -->
-                            <x-admin::table.th>
-                                @lang('booking::app.admin.catalog.products.edit.type.booking.event.action')
-                            </x-admin::table.th>
-                        </x-admin::table.thead.tr>
-                    </x-admin::table.thead>
-
-                    <x-admin::table.tbody.tr v-for="(element, index) in tickets">
-                        <!-- Name-->
-                        <x-admin::table.td>
-                            <p
-                                class="bg-gray-800 dark:text-white"
-                                v-text="element.name"
-                            >
+         <!-- Table Information -->
+         <div class="overflow-x-auto">
+            <template
+                v-if="tickets?.length" 
+                v-for="(element, index) in tickets"
+            >
+                <div class="grid border-b border-slate-300 dark:border-gray-800 last:border-b-0">
+                    <div class="flex gap-2.5 justify-between py-3 cursor-pointer">
+                        <div class="grid gap-1.5 place-content-start">
+                            <!-- Name-->
+                            <p class="text-gray-600 dark:text-gray-300" >
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.name') - @{{ element.name }}
                             </p>
 
                             <!-- Hidden Field For Name -->
@@ -91,14 +48,13 @@
                                 :name="'booking[tickets][ticket_' + index + '][' + currentLocaleCode + '][name]'"
                                 :value="element.name"
                             />
-                        </x-admin::table.td>
 
-                        <!-- Price -->
-                        <x-admin::table.td>
+                            <!-- Price -->
                             <p
-                                class="bg-gray-800 dark:text-white"
+                                class="text-gray-600 dark:text-gray-300"
                                 v-text="element.price"
                             >
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.price') - @{{ element.price }}
                             </p>
 
                             <!-- Hidden Field For Price -->
@@ -107,14 +63,10 @@
                                 :name="'booking[tickets][ticket_' + index + '][price]'"
                                 :value="element.price"
                             />
-                        </x-admin::table.td>
 
-                        <!-- Qty -->
-                        <x-admin::table.td>
-                            <p
-                                v-text="element.qty"
-                                class="bg-gray-800 dark:text-white"
-                            >
+                             <!-- Qty -->
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.qty') - @{{ element.qty }}
                             </p>
 
                             <!-- Hidden Field for Quantity -->
@@ -123,14 +75,10 @@
                                 :name="'booking[tickets][ticket_' + index + '][qty]'"
                                 :value="element.qty"
                             />
-                        </x-admin::table.td>
 
-                        <!-- Special Price -->
-                        <x-admin::table.td>
-                            <p
-                                class="bg-gray-800 dark:text-white"
-                                v-text="element.special_price"
-                            >
+                            <!-- Special Price -->
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.special-price') - @{{ element.special_price }}
                             </p>
 
                             <!-- Hidden Field For Special Price -->
@@ -139,14 +87,10 @@
                                 :name="'booking[tickets][ticket_' + index + '][special_price]'"
                                 :value="element.special_price"
                             />
-                        </x-admin::table.td>
 
-                        <!-- Valid From -->
-                        <x-admin::table.td>
-                            <p
-                                class="bg-gray-800 dark:text-white"
-                                v-text="element.special_price_from"
-                            >
+                            <!-- Valid From -->
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.special-price-from') - @{{ element.special_price_from }}
                             </p>
 
                             <!-- Hidden Field for Special Price From -->
@@ -155,14 +99,10 @@
                                 :name="'booking[tickets][ticket_' + index + '][special_price_from]'"
                                 :value="element.special_price_from"
                             />
-                        </x-admin::table.td>
 
-                        <!-- Valid Until -->
-                        <x-admin::table.td>
-                            <p
-                                class="bg-gray-800 dark:text-white"
-                                v-text="element.special_price_to"
-                            >
+                            <!-- Valid Until -->
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.special-price-to') - @{{ element.special_price_to }}
                             </p>
 
                             <!-- Hidden Field for Special Price To -->
@@ -171,14 +111,10 @@
                                 :name="'booking[tickets][ticket_' + index + '][special_price_to]'"
                                 :value="element.special_price_to"
                             />
-                        </x-admin::table.td>
 
-                        <!-- Description -->
-                        <x-admin::table.td>
-                            <p
-                                class="bg-gray-800 dark:text-white"
-                                v-text="element.description"
-                            >
+                            <!-- Description -->
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.description-n') - @{{ element.description }}
                             </p>
 
                             <!-- Hidden Field For Description -->
@@ -187,29 +123,32 @@
                                 :name="'booking[tickets][ticket_' + index + '][' + currentLocaleCode + '][description]'"
                                 :value="element.description"
                             />
-                        </x-admin::table.td>
-
-                        <!-- Actions button -->
-                        <x-admin::table.td class="!px-0">
-                            <span
-                                class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="flex gap-x-5 items-center place-content-start text-right">
+                            <p
+                                class="text-blue-600 cursor-pointer transition-all hover:underline"
                                 @click="edit(element)"
                             >
-                            </span>
-
-                            <span
-                                class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.edit')
+                            </p>
+                            
+                            <p
+                                class="text-red-600 cursor-pointer transition-all hover:underline"
                                 @click="remove(element.id)"
                             >
-                            </span>
-                        </x-admin::table.td>
-                    </x-admin::table.tbody.tr>
-                </x-admin::table>
+                                @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.delete')
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </template>
 
-            <template v-else>
-                <v-empty-info type="event"></v-empty-info>
-            </template>
+            <!-- For Empty Illustration -->
+            <div v-else>
+                <v-empty-info ::type="event"></v-empty-info>
+            </div>
         </div>
 
         <!-- Add Drawe Form -->

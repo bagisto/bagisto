@@ -209,9 +209,18 @@ return [
                             'status'                   => 'Status',
 
                             'tickets'                  => [
-                                'description' => 'There is no tickets available.',
-                                'add'         => 'Add Tickets',
-                                'title'       => 'Tickets',
+                                'add'                => 'Add Tickets',
+                                'delete'             => 'Delete',
+                                'description'        => 'Description',
+                                'description-n'      => 'There is no tickets available.',
+                                'edit'               => 'Edit',
+                                'name'               => 'Name',
+                                'price'              => 'Price',
+                                'qty'                => 'Quantity',
+                                'special-price-from' => 'Special Price From',
+                                'special-price-to'   => 'Special Price To',
+                                'special-price'      => 'Special Price',
+                                'title'              => 'Tickets',
                             ],
 
                             'type'                     => [
