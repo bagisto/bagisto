@@ -16,8 +16,8 @@ afterEach(function () {
     /**
      * Clean up all the records.
      */
-    // ProductModel::query()->delete();
-    // Attribute::query()->whereNotBetween('id', [1, 28])->delete();
+    ProductModel::query()->delete();
+    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
 });
 
 it('it should return the product index page', function () {
