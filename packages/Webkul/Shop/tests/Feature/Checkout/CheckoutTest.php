@@ -35,7 +35,7 @@ afterEach(function () {
     DB::table('product_inventory_indices')->truncate();
 });
 
-it('should add product items to the cart', function () {
+it('should display the cart items from the cart', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -397,7 +397,7 @@ it('should store the payment method for guest user', function () {
         ->assertJsonPath('cart.shipping_address.cart_id', $cartId);
 });
 
-it('should store the orders of simple product for guest user', function () {
+it('should place a simple product order for a guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -523,7 +523,7 @@ it('should store the orders of simple product for guest user', function () {
     ]);
 });
 
-it('should store the orders of simple product for customer', function () {
+it('should place a simple product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -651,7 +651,7 @@ it('should store the orders of simple product for customer', function () {
     ]);
 });
 
-it('should store the orders of configurable product for guest user', function () {
+it('should place a configurable product order for a guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -817,7 +817,7 @@ it('should store the orders of configurable product for guest user', function ()
     ]);
 });
 
-it('should store the orders of configurable product for customer', function () {
+it('should place a configurable product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -985,7 +985,7 @@ it('should store the orders of configurable product for customer', function () {
     ]);
 });
 
-it('should store the orders of virtual product for guest user', function () {
+it('should place a virtual product order for a guest user', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1097,7 +1097,7 @@ it('should store the orders of virtual product for guest user', function () {
     ]);
 });
 
-it('should store the orders of virtual product for customer', function () {
+it('should place a virtual product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1211,7 +1211,7 @@ it('should store the orders of virtual product for customer', function () {
     ]);
 });
 
-it('should store the orders of downloadable product for customer', function () {
+it('should place a downloadable product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
