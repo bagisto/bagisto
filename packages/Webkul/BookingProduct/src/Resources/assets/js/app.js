@@ -3,16 +3,6 @@
  */
 import.meta.glob(["../images/**"]);
 
-
-/**
- * We are defining all the global rules here and configuring
- * all the `vee-validate` settings.
- */
-import { configure, defineRule } from "vee-validate";
-import { localize } from "@vee-validate/i18n";
-import en from "@vee-validate/i18n/dist/locale/en.json";
-import * as AllRules from '@vee-validate/rules';
-
 /**
  * Registration of all global validators.
  */
@@ -71,13 +61,3 @@ configure({
     validateOnInput: true,
     validateOnChange: true,
 });
-
-
-/**
- * Global plugins registration.
- */
-import Flatpickr from "./plugins/flatpickr";
-
-[
-    Flatpickr,
-].forEach((plugin) => window.app.use(plugin));
