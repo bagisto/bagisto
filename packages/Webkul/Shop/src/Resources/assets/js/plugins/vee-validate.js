@@ -2,8 +2,8 @@
  * We are defining all the global rules here and configuring
  * all the `vee-validate` settings.
  */
-import { configure, defineRule } from "vee-validate";
-import { localize } from "@vee-validate/i18n";
+import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
+import { localize, setLocale } from "@vee-validate/i18n";
 import ar from "@vee-validate/i18n/dist/locale/ar.json";
 import bn from "@vee-validate/i18n/dist/locale/bn.json";
 import de from "@vee-validate/i18n/dist/locale/de.json";
@@ -26,7 +26,16 @@ import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
 import * as AllRules from "@vee-validate/rules";
 
 export default {
-    install: (app, options) => {
+    install: (app) => {
+        /**
+         * Global components registration;
+         */
+        app.component("VForm", Form);
+        app.component("VField", Field);
+        app.component("VErrorMessage", ErrorMessage);
+
+        window.addEventListener("load", () => setLocale(document.documentElement.attributes.lang.value));
+
         /**
          * Registration of all global validators.
          */
@@ -182,8 +191,7 @@ export default {
                     messages: {
                         ...it.messages,
                         phone: "Questo {field} deve essere un numero di telefono valido",
-                        address:
-                            "Questo {field} deve essere un indirizzo valido",
+                        address: "Questo {field} deve essere un indirizzo valido",
                     },
                 },
 
@@ -228,8 +236,7 @@ export default {
                     messages: {
                         ...ru.messages,
                         phone: "Это {field} должно быть действительным номером телефона",
-                        address:
-                            "Это {field} должно быть действительным адресом",
+                        address: "Это {field} должно быть действительным адресом",
                     },
                 },
 

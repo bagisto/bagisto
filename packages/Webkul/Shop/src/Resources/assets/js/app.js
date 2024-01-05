@@ -8,9 +8,6 @@ import.meta.glob(["../images/**", "../fonts/**"]);
  */
 import { createApp } from "vue/dist/vue.esm-bundler";
 
-import { Field, Form, ErrorMessage } from "vee-validate";
-import { setLocale } from "@vee-validate/i18n";
-
 /**
  * Main root application registry.
  */
@@ -91,20 +88,11 @@ import 'flatpickr/dist/flatpickr.css';
 window.Flatpickr = Flatpickr;
 
 /**
- * Global components registration;
- */
-app.component("VForm", Form);
-app.component("VField", Field);
-app.component("VErrorMessage", ErrorMessage);
-
-/**
  * Load event, the purpose of using the event is to mount the application
  * after all of our `Vue` components which is present in blade file have
  * been registered in the app. No matter what `app.mount()` should be
  * called in the last.
  */
 window.addEventListener("load", function (event) {
-    setLocale(document.documentElement.attributes.lang.value);
-
     app.mount("#app");
 });
