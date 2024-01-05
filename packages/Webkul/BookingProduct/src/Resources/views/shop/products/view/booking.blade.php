@@ -5,7 +5,10 @@
     <v-booking-information></v-booking-information>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-booking-information-template">
+        <script
+            type="text/x-template"
+            id="v-booking-information-template"
+        >
             @if ($bookingProduct->location)
                 <div class="grid grid-cols-2 gap-2.5 py-4">
                     <div class="flex gap-3">
@@ -25,7 +28,7 @@
                                 target="_blank"
                                 class="text-blue-600"
                             >
-                                View on Map
+                                @lang('booking::app.shop.products.view-on-map')
                             </a>
                         </div>
                     </div>
@@ -42,6 +45,7 @@
                                         @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration])
                                     </span>
                                 @endif
+
                                 @break
                             @case('appointment')
                                 <span class="icon-calendar font-bold"></span>
@@ -51,6 +55,7 @@
                             
                                     @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->appointment_slot->duration])
                                 </span>
+
                                 @break
                             @case('event')
                                 <span class="icon-calendar font-bold"></span>
@@ -58,8 +63,8 @@
                                 <span class="text-[#6E6E6E]">
                                     @lang('booking::app.shop.products.event-on') :
                                 </span>
-                            @break
 
+                                @break
                             @case('table')
                                 <span class="icon-calendar font-bold"></span>
                             
@@ -68,13 +73,16 @@
                             
                                     @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
                                 </span>
-                            @break
+
+                                @break
                         @endswitch
                     </div>
                 </div>
             @endif
 
-            @include ('booking::shop.products.view.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
+            <div class="w-full max-w-[470px] mt-5">
+                @include ('booking::shop.products.view.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
+            </div>
         </script>
 
         <script type="module">

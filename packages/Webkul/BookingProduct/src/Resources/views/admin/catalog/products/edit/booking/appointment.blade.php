@@ -5,7 +5,7 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
 
 
-@push('scripts')
+@pushOnce('scripts')
     <script
         type="text/x-template"
         id="v-appointment-booking-template"
@@ -22,6 +22,7 @@
                 required="required|min_value:1"
                 v-model="appointment_booking.duration"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
             >
             </x-admin::form.control-group.control>
 
@@ -43,6 +44,7 @@
                 required="required|min_value:1"
                 v-model="appointment_booking.break_time"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
             >
             </x-admin::form.control-group.control>
 
@@ -64,6 +66,7 @@
                 rules="required"
                 v-model="appointment_booking.same_slot_all_days"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
             >
                 <option value="1">
                     @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
@@ -80,7 +83,7 @@
             </x-admin::form.control-group.error>
         </x-admin::form.control-group>
 
-        <!-- Slots Component -->
+        <!-- Slots Vue Component -->
         <v-slots
             :booking-product="appointment_booking"
             :booking-type="'appointment_slot'"
@@ -110,4 +113,4 @@
             },
         });
     </script>
-@endpush
+@endpushOnce

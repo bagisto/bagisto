@@ -16,10 +16,12 @@
                     <x-shop::form.control-group.control
                         type="date"
                         name="booking[date]"
+                        class="py-4"
                         minDate="{{ $bookingProduct->available_from }}"
                         maxDate="{{ $bookingProduct->available_to }}"
                         rules="required"
                         :label="trans('booking::app.shop.products.date')"
+                        :placeholder="trans('YYYY-MM-DD')"
                         @change="getAvailableSlots"
                     >
                     </x-shop::form.control-group.control>
@@ -38,6 +40,7 @@
                     <x-shop::form.control-group.control
                         type="select"
                         name="booking[slot]"
+                        class="py-4"
                         rules="required"
                         :label="trans('booking::app.shop.products.slot')"
                         :placeholder="trans('booking::app.shop.products.slot')"

@@ -188,7 +188,7 @@
                         <div class="grid py-2 border-b border-slate-300 dark:border-gray-800 last:border-b-0">
                             <div
                                 class="text-base text-gray-800 dark:text-white font-semibold"
-                                v-text="'@lang('booking::app.admin.catalog.products.edit.type.booking.modal.slot.week')'.replace(':day', item.day.charAt(0).toUpperCase() + item.day.slice(1))"
+                                v-text="item.day.charAt(0).toUpperCase() + item.day.slice(1)"
                             >
                             </div>
 

@@ -1,11 +1,14 @@
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-empty-info-template">
-        <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 ">
+    <script
+        type="text/x-template"
+        id="v-empty-info-template"
+    >
+        <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5">
             <img
                 src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                 class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
             >
-            
+
             <div class="flex flex-col gap-2 items-center">
                 <p
                     class="text-base text-gray-400 font-semibold"

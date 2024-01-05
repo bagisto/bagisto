@@ -1,7 +1,10 @@
 <v-rental-slots :bookingProduct = "{{ $bookingProduct }}"></v-rental-slots>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-rental-slots-template">
+    <script
+        type="text/x-template"
+        id="v-rental-slots-template"
+    >
         <x-shop::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
@@ -15,7 +18,7 @@
                     <!-- Radio Button Selector -->
                     <template v-if="renting_type != 'daily' && sub_renting_type == 'daily_hourly'">
                         <x-shop::form.control-group.label class="required w-full">
-                            @lang('Choose Rent Option')
+                            @lang('booking::app.shop.products.choose-rent-option')
                         </x-shop::form.control-group.label>
 
                         <div class="grid grid-cols-2 gap-2.5">
@@ -38,7 +41,7 @@
                                     class="text-[#6E6E6E] cursor-pointer"
                                     for="booking[daily]"
                                 >
-                                    @lang('Daily')
+                                    @lang('booking::app.shop.products.daily-basis')
                                 </label>
                             </span>
 
@@ -61,7 +64,7 @@
                                     class="text-[#6E6E6E] cursor-pointer"
                                     for="booking[hourly]"
                                 >
-                                    @lang('Hourly')
+                                    @lang('booking::app.shop.products.hourly-basis')
                                 </label>
                             </span>
                         </div>
@@ -127,7 +130,7 @@
                         </div>
 
                         <div v-if="parseInt(slots[selected_slot] && slots[selected_slot]?.slots?.length)">
-                            <label class="label-style required">
+                            <label class="required">
                                 @lang('booking::app.shop.products.select-rent-time')
                             </label>
 
@@ -190,7 +193,7 @@
                     </div>
 
                     <div v-else>
-                        <label class="label-style required">
+                        <label class="required">
                             @lang('booking::app.shop.products.select-date')
                         </label>
 
@@ -282,7 +285,6 @@
                         params: { date }
                     })
                         .then((response) => {
-                            console.log(response);
                             this.selected_slot = '';
                             
                             this.slot_from = '';

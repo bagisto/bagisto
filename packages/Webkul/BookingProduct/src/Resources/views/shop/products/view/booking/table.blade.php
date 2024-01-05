@@ -1,16 +1,17 @@
 @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\TableSlot')
 
-<div class="booking-info-row">
+<div>
     <span class="icon-calendar font-bold"></span>
 
-    <span class="title">
+    <span>
         @lang('booking::app.shop.products.today-availability')
     </span>
 
-    <span class="value">
+    <span>
         {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
     </span>
 
+    <!-- Toggler Vue Component -->
     <v-toggler></v-toggler>
 </div>
 
@@ -43,16 +44,17 @@
                     <p
                         class="text-sm font-medium"
                         v-text="day.name"
-                    ></p>
+                    >
+                    </p>
 
                     <p class="text-sm">
-                        <div v-if="day.slots && day.slots?.length">
+                        <template v-if="day.slots && day.slots?.length">
                             <div v-for="slot in day.slots">
                                 @{{ slot.from }} - @{{ slot.to }}
                             </div>
-                        </div>
+                        </template>
 
-                        <div v-else class="text-danger">
+                        <div v-else class="label-canceled">
                             @lang('booking::app.shop.products.closed')
                         </div>
                     </p>

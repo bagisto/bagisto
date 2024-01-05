@@ -19,8 +19,9 @@
                 type="select"
                 name="booking[price_type]"
                 rules="required"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')"
                 v-model="table_booking.price_type"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.charged-per.title')"
             >
                 @foreach (['guest', 'table'] as $item)
                     <option value="{{ $item }}">
@@ -48,8 +49,9 @@
                 type="text"
                 name="booking[guest_limit]"
                 rules="required|min_value:1"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit')"
                 v-model="table_booking.guest_limit"
+                :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.guest-limit')"
             >
             </x-admin::form.control-group.control>
 
@@ -71,6 +73,7 @@
                 value="{{ $bookingProduct ? $bookingProduct->qty : 0 }}"
                 rules="required|min_value:1"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.guest-capacity')"
             >
             </x-admin::form.control-group.control>
 
@@ -92,6 +95,7 @@
                 v-model="table_booking.duration"
                 rules="required|min_value:1"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.slot-duration')"
             >
             </x-admin::form.control-group.control>
 
@@ -113,6 +117,7 @@
                 v-model="table_booking.break_time"
                 rules="required|min_value:1"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.break-duration')"
             >
             </x-admin::form.control-group.control>
 
@@ -134,6 +139,7 @@
                 v-model="table_booking.prevent_scheduling_before"
                 rules="required|min_value:1"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.prevent-scheduling-before')"
             >
             </x-admin::form.control-group.control>
 
@@ -172,7 +178,7 @@
             </x-admin::form.control-group.error>
         </x-admin::form.control-group>
 
-        <!-- Slots Component -->
+        <!-- Slots Vue Component -->
         <v-slots
             :booking-product="table_booking"
             :booking-type="'table_slot'"

@@ -5,11 +5,11 @@
     <div>
         <span class="icon-calendar font-bold"></span>
 
-        <span class="title">
+        <span>
             @lang('booking::app.shop.products.today-availability')
         </span>
 
-        <span class="value">
+        <span>
             {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
         </span>
     </div>
@@ -46,9 +46,10 @@
             >
                 <template v-for="day in days">
                     <p
-                        class="text-sm font-medium"
+                        class="text-sm text-gray font-medium"
                         v-text="day.name"
-                    ></p>
+                    >
+                    </p>
 
                     <p class="text-sm">
                         <div v-if="day.slots && day.slots?.length">

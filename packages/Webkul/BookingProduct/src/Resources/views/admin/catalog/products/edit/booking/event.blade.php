@@ -29,10 +29,10 @@
         </div>
 
         <!-- Table Information -->
-        <div class="mt-4 overflow-x-auto">
+        <div class="overflow-x-auto">
             <template v-if="tickets?.length">
                 <x-admin::table>
-                    <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
+                    <x-admin::table.thead class="text-sm font-medium bg-gray-800 dark:bg-white">
                         <x-admin::table.thead.tr>
                             <!-- Name -->
                             <x-admin::table.th>
@@ -80,11 +80,12 @@
                         <!-- Name-->
                         <x-admin::table.td>
                             <p
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                                 v-text="element.name"
                             >
                             </p>
 
+                            <!-- Hidden Field For Name -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][' + currentLocaleCode + '][name]'"
@@ -95,11 +96,12 @@
                         <!-- Price -->
                         <x-admin::table.td>
                             <p
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                                 v-text="element.price"
                             >
                             </p>
 
+                            <!-- Hidden Field For Price -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][price]'"
@@ -111,10 +113,11 @@
                         <x-admin::table.td>
                             <p
                                 v-text="element.qty"
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                             >
                             </p>
 
+                            <!-- Hidden Field for Quantity -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][qty]'"
@@ -125,11 +128,12 @@
                         <!-- Special Price -->
                         <x-admin::table.td>
                             <p
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                                 v-text="element.special_price"
                             >
                             </p>
 
+                            <!-- Hidden Field For Special Price -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][special_price]'"
@@ -140,11 +144,12 @@
                         <!-- Valid From -->
                         <x-admin::table.td>
                             <p
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                                 v-text="element.special_price_from"
                             >
                             </p>
 
+                            <!-- Hidden Field for Special Price From -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][special_price_from]'"
@@ -155,11 +160,12 @@
                         <!-- Valid Until -->
                         <x-admin::table.td>
                             <p
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                                 v-text="element.special_price_to"
                             >
                             </p>
 
+                            <!-- Hidden Field for Special Price To -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][special_price_to]'"
@@ -170,11 +176,12 @@
                         <!-- Description -->
                         <x-admin::table.td>
                             <p
-                                class="dark:text-white"
+                                class="bg-gray-800 dark:text-white"
                                 v-text="element.description"
                             >
                             </p>
 
+                            <!-- Hidden Field For Description -->
                             <input
                                 type="hidden"
                                 :name="'booking[tickets][ticket_' + index + '][' + currentLocaleCode + '][description]'"
@@ -186,13 +193,13 @@
                         <x-admin::table.td class="!px-0">
                             <span
                                 class="icon-edit p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="editModal(element)"
+                                @click="edit(element)"
                             >
                             </span>
 
                             <span
                                 class="icon-delete p-1.5 rounded-md text-2xl leading-none cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                @click="removeOption(element.id)"
+                                @click="remove(element.id)"
                             >
                             </span>
                         </x-admin::table.td>
@@ -426,7 +433,6 @@
 
             methods: {
                 store(params) {
-                    console.log(params);
                     if (! params.id) {
                             this.optionRowCount++;
                             params.id = 'option_' + this.optionRowCount;
@@ -446,13 +452,13 @@
                     this.$refs.drawerform.toggle();
                 },
 
-                editModal(values) {
+                edit(values) {
                     this.$refs.modelForm.setValues(values);
 
                     this.$refs.drawerform.toggle();
                 },
 
-                removeOption(id) {
+                remove(id) {
                     this.tickets = this.tickets.filter(option => option.id !== id);
                 },
             }

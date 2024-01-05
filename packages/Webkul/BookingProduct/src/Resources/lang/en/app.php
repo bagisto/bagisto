@@ -42,6 +42,7 @@ return [
             'total-price'              => 'Total Price',
             'total-tickets'            => 'Total Tickets',
             'tuesday'                  => 'Tuesday',
+            'view-on-map'              => 'View on Map',
             'wednesday'                => 'Wednesday',
         ],
 
@@ -197,8 +198,11 @@ return [
                             ],
 
                             'slots'                    => [
-                                'description' => 'There is no slots available.',
                                 'add'         => 'Add Slots',
+                                'delete'      => 'Delete',
+                                'description' => 'There is no slots available.',
+                                'edit'        => 'Edit',
+                                'save'        => 'Save',
                                 'title'       => 'Slots',
                             ],
 

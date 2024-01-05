@@ -21,6 +21,7 @@
                 rules="required"
                 v-model="rental_booking.renting_type"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
             >
                 @foreach (['daily', 'hourly', 'daily_hourly'] as $item)
                     <option value="{{ $item }}">
@@ -50,6 +51,7 @@
                 rules="required"
                 v-model="rental_booking.daily_price"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
             >
             </x-admin::form.control-group.control>
 
@@ -74,6 +76,7 @@
                 rules="required"
                 v-model="rental_booking.hourly_price"
                 :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
             >
             </x-admin::form.control-group.control>
 
@@ -114,7 +117,7 @@
             </x-admin::form.control-group>
         </div>
 
-        <!-- Slots Component -->
+        <!-- Slots Vue Component -->
         <v-slots
             :booking-product="rental_booking"
             :booking-type="'rental_slot'"
