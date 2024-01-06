@@ -40,8 +40,6 @@ class CurrencyTableSeeder extends Seeder
 
         DB::table('currencies')->delete();
 
-        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
-
         $defaultCurrency = $parameters['default_currency'] ?? config('app.currency');
 
         $currencies = $parameters['allowed_currencies'] ?? [$defaultCurrency];
@@ -51,7 +49,7 @@ class CurrencyTableSeeder extends Seeder
                 [
                     'id'     => $key + 1,
                     'code'   => $currency,
-                    'name'   => trans('installer::app.seeders.core.currencies.' . $currency, [], $defaultLocale),
+                    'name'   => trans('installer::app.seeders.core.currencies.' . $currency, [], $defaultCurrency),
                     'symbol' => $this->currencySymbols[$currency],
                 ],
             ]);
