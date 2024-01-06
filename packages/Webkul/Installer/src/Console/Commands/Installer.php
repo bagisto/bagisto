@@ -222,9 +222,9 @@ class Installer extends Command
 
         return [
             'default_locale'     => $defaultLocale,
-            'allowed_locales'    => $allowedLocales,
+            'allowed_locales'    => array_keys($allowedLocales),
             'default_currency'   => $defaultCurrency,
-            'allowed_currencies' => $allowedCurrencies,
+            'allowed_currencies' => array_keys($allowedCurrencies),
         ];
     }
 
