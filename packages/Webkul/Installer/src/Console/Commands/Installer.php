@@ -165,13 +165,13 @@ class Installer extends Command
     {
         $this->updateEnvVariable(
             'APP_NAME',
-            'Please enter the <bg=green>application name</>',
+            'Please enter the <bg=black;fg=white;options=bold>application name</>',
             env('APP_NAME', 'Bagisto')
         );
 
         $this->updateEnvVariable(
             'APP_URL',
-            'Please enter the <bg=green>application URL</>',
+            'Please enter the <bg=black;fg=white;options=bold>application URL</>',
             env('APP_URL', 'http://localhost:8000')
         );
 
@@ -182,37 +182,43 @@ class Installer extends Command
 
         $this->info('Your Default Timezone is ' . date_default_timezone_get());
 
+        do {
+            $allowedLocales = $this->allowedChoice(
+                'Please choose the <bg=black;fg=white;options=bold>allowed locales</> for your channels',
+                $this->locales,
+                ['en' => $this->locales['en']],
+                10
+            );
+        
+            if (empty($allowedLocales)) {
+                $this->error('At least one locale is required. Please choose again.');
+            }
+        } while (empty($allowedLocales));
+
+        do {
+            $allowedCurrencies = $this->allowedChoice(
+                'Please choose the <bg=black;fg=white;options=bold>allowed currencies</> for your channels',
+                $this->currencies,
+                ['USD' => $this->currencies['USD']],
+                10
+            );
+        
+            if (empty($allowedCurrencies)) {
+                $this->error('At least one currency is required. Please choose again.');
+            }
+        } while (empty($allowedCurrencies));
+
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
-            'Please select the <bg=green>default application locale</>',
-            $this->locales
+            'Please select the <bg=black;fg=white;options=bold>default application locale</>',
+            $allowedLocales
         );
 
         $defaultCurrency = $this->updateEnvChoice(
             'APP_CURRENCY',
-            'Please select the <bg=green>default currency</>',
-            $this->currencies
+            'Please select the <bg=black;fg=white;options=bold>default currency</>',
+            $allowedCurrencies
         );
-
-        $allowedLocales = $this->allowedChoice(
-            'Please choose the <bg=green>allowed locales</> for your channels',
-            $this->locales
-        );
-
-        $allowedCurrencies = $this->allowedChoice(
-            'Please choose the <bg=green>allowed currencies</> for your channels',
-            $this->currencies
-        );
-
-        $allowedLocales = array_values(array_unique(array_merge(
-            [$defaultLocale],
-            array_keys($allowedLocales)
-        )));
-
-        $allowedCurrencies = array_values(array_unique(array_merge(
-            [$defaultCurrency ?? 'USD'],
-            array_keys($allowedCurrencies)
-        )));
 
         return [
             'default_locale'     => $defaultLocale,
@@ -229,42 +235,42 @@ class Installer extends Command
     {
         $databaseDetails = [
             'DB_CONNECTION' => select(
-                'Please select the <bg=green>database connection</>',
+                'Please select the <bg=black;fg=white;options=bold>database connection</>',
                 ['mysql', 'pgsql', 'sqlsrv']
             ),
 
             'DB_HOST'       => text(
-                label: 'Please enter the <bg=green>database host</>',
+                label: 'Please enter the <bg=black;fg=white;options=bold>database host</>',
                 default: env('DB_HOST', '127.0.0.1'),
                 required: true
             ),
 
             'DB_PORT'       => text(
-                label: 'Please enter the <bg=green>database port</>',
+                label: 'Please enter the <bg=black;fg=white;options=bold>database port</>',
                 default: env('DB_PORT', '3306'),
                 required: true
             ),
 
             'DB_DATABASE' => text(
-                label: 'Please enter the <bg=green>database name</>',
+                label: 'Please enter the <bg=black;fg=white;options=bold>database name</>',
                 default: env('DB_DATABASE', ''),
                 required: true
             ),
 
             'DB_PREFIX' => text(
-                label: 'Please enter the <bg=green>database prefix</>',
+                label: 'Please enter the <bg=black;fg=white;options=bold>database prefix</>',
                 default: env('DB_PREFIX', ''),
                 hint: 'or press enter to continue'
             ),
 
             'DB_USERNAME' => text(
-                label: 'Please enter your <bg=green>database username</>',
+                label: 'Please enter your <bg=black;fg=white;options=bold>database username</>',
                 default: env('DB_USERNAME', ''),
                 required: true
             ),
 
             'DB_PASSWORD' => password(
-                label: 'Please enter your <bg=green>database password</>',
+                label: 'Please enter your <bg=black;fg=white;options=bold>database password</>',
                 required: true
             ),
         ];
@@ -292,13 +298,13 @@ class Installer extends Command
     protected function createAdminCredentials()
     {
         $adminName = text(
-            label: 'Enter the <bg=green>name of the admin user</>',
+            label: 'Enter the <bg=black;fg=white;options=bold>name of the admin user</>',
             default: 'Example',
             required: true
         );
 
         $adminEmail = text(
-            label: 'Enter the <bg=green>email address of the admin user</>',
+            label: 'Enter the <bg=black;fg=white;options=bold>email address of the admin user</>',
             default: 'admin@example.com',
             validate: fn (string $value) => match (true) {
                 ! filter_var($value, FILTER_VALIDATE_EMAIL) => 'The email address you entered is not valid please try again.',
@@ -307,7 +313,7 @@ class Installer extends Command
         );
 
         $adminPassword = text(
-            label: 'Configure the <bg=green>password</> for the admin user',
+            label: 'Configure the <bg=black;fg=white;options=bold>password</> for the admin user',
             default: 'admin123',
             required: true
         );
@@ -422,11 +428,13 @@ class Installer extends Command
     /**
      * Function for getting allowed choices based on the list of options.
      */
-    protected function allowedChoice(string $question, array $choices)
+    protected function allowedChoice(string $question, array $choices, array $defaultSelected, int $defaultScroll = 5)
     {
         $selectedValues = multiselect(
             label: $question,
             options: array_values($choices),
+            default: $defaultSelected,
+            scroll: $defaultScroll,
         );
 
         $selectedChoices = [];
