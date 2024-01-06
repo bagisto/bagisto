@@ -7,10 +7,11 @@
     <div class="flex justify-center items-center h-[100vh]">
         <div class="flex flex-col gap-5 items-center">
             <!-- Logo -->
-            <img 
-                class="w-max" 
-                src="{{ bagisto_asset('images/logo.svg') }}" 
-                alt="Bagisto Logo"
+            <img
+                src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                width="131"
+                height="29"
+                alt="{{ config('app.name') }}"
             >
 
             <div class="flex flex-col min-w-[300px] bg-white dark:bg-gray-900 rounded-md box-shadow">
