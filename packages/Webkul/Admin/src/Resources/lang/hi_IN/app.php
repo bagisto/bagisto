@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'पासवर्ड रीसेट करें',
                 'subject'        => 'पासवर्ड रीसेट ईमेल',
             ],
+            'registration' => [
+                'description'  => 'सिस्टम में एक नया ग्राहक पंजीकृत हो गया है।',
+                'name'         => 'ग्राहक का नाम: :customerName',
+                'subject'      => 'नया ग्राहक पंजीकरण',
+            ],
         ],
 
         'orders' => [

@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Resetuj hasło',
                 'subject'        => 'E-mail resetowania hasła',
             ],
+            'registration' => [
+                'description'  => 'Nowy klient zarejestrował się w systemie.',
+                'name'         => 'Imię klienta: :customerName',
+                'subject'      => 'Nowa Rejestracja Klienta',
+            ],
         ],
 
         'orders' => [

@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'パスワードをリセット',
                 'subject'        => 'パスワードリセットメール',
             ],
+            'registration' => [
+                'description'  => '新しいお客様がシステムに登録されました。',
+                'name'         => 'お客様の名前： :customerName',
+                'subject'      => '新規お客様登録',
+            ],
         ],
 
         'orders' => [

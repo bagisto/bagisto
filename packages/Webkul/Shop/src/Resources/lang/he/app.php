@@ -845,16 +845,6 @@ return [
                 'password'                => 'סיסמה',
             ],
 
-            'admin' => [
-                'registration' => [
-                    'dear'         => 'יקר מנהל',
-                    'description'  => 'לקוח חדש נרשם למערכת.',
-                    'name'         => 'שם הלקוח: :customerName',
-                    'subject'      => 'רישום לקוח חדש',
-                    'thanks'       => 'תודה רבה.',
-                ],
-            ],
-
             'forgot-password' => [
                 'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשה לאיפוס סיסמה עבור החשבון שלך.',
                 'greeting'       => 'שכחת סיסמה!',

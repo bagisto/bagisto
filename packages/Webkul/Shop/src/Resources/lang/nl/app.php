@@ -844,16 +844,6 @@ return [
                 'password'                => 'Wachtwoord',
             ],
 
-            'admin' => [
-                'registration' => [
-                    'dear'         => 'Beste beheerder',
-                    'description'  => 'Een nieuwe klant heeft zich geregistreerd in het systeem.',
-                    'name'         => 'Naam van de klant: :customerName',
-                    'subject'      => 'Nieuwe Klantregistratie',
-                    'thanks'       => 'Dank je wel.',
-                ],
-            ],
-
             'forgot-password' => [
                 'description'    => 'Je ontvangt deze e-mail omdat we een verzoek hebben ontvangen om je wachtwoord opnieuw in te stellen voor je account.',
                 'greeting'       => 'Wachtwoord vergeten!',

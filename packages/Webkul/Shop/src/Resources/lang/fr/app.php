@@ -845,16 +845,6 @@ return [
                 'password'                => 'Mot de passe',
             ],
 
-            'admin' => [
-                'registration' => [
-                    'dear'         => 'Cher administrateur',
-                    'description'  => 'Un nouveau client s\'est inscrit dans le système.',
-                    'name'         => 'Nom du client : :customerName',
-                    'subject'      => 'Nouvelle inscription client',
-                    'thanks'       => 'Merci beaucoup.',
-                ],
-            ],
-
             'forgot-password' => [
                 'description'    => 'Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.',
                 'greeting'       => 'Mot de passe oublié !',

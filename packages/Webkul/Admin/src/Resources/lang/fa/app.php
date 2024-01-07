@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'بازیابی رمز عبور',
                 'subject'        => 'ایمیل بازیابی رمز عبور',
             ],
+            'registration' => [
+                'description'  => 'یک مشتری جدید در سیستم ثبت نام کرده است.',
+                'name'         => 'نام مشتری: :customerName',
+                'subject'      => 'ثبت نام مشتری جدید',
+            ],
         ],
 
         'orders' => [

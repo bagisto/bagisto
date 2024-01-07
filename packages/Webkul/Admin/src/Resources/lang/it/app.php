@@ -3658,6 +3658,11 @@ return [
                 'reset-password' => 'Ripristina Password',
                 'subject'        => 'Email di Ripristino Password',
             ],
+            'registration' => [
+                'description'  => 'Un nuovo cliente si è registrato nel sistema.',
+                'name'         => 'Nome del cliente: :customerName',
+                'subject'      => 'Nuova Registrazione Cliente',
+            ],
         ],
 
         'orders' => [

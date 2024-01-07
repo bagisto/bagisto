@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Şifreyi Sıfırla',
                 'subject'        => 'Şifre Sıfırlama E-postası',
             ],
+            'registration' => [
+                'description'  => 'Sistemimize yeni bir müşteri kaydoldu.',
+                'name'         => 'Müşteri Adı: :customerName',
+                'subject'      => 'Yeni Müşteri Kaydı',
+            ],
         ],
 
         'orders' => [

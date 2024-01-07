@@ -845,16 +845,6 @@ return [
                 'username-email'          => '密码',
             ],
 
-            'admin' => [
-                'registration' => [
-                    'dear'         => '尊敬的管理员',
-                    'description'  => '系统中有新客户注册。',
-                    'name'         => '客户姓名： :customerName',
-                    'subject'      => '新客户注册',
-                    'thanks'       => '谢谢。',
-                ],
-            ],
-
             'forgot-password' => [
                 'description'    => '您收到此电子邮件，因为我们收到了有关您帐户的密码重置请求。',
                 'greeting'       => '忘记密码！',

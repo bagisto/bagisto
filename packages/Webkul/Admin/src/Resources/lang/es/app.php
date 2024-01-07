@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Passwort zurücksetzen',
                 'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
             ],
+            'registration' => [
+                'description'  => 'Ein neuer Kunde hat sich im System registriert.',
+                'name'         => 'Kundenname: :customerName',
+                'subject'      => 'Neue Kundenanmeldung',
+            ],
         ],
 
         'orders' => [

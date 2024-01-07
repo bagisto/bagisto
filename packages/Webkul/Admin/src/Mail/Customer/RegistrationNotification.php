@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Mail\Customer;
+namespace Webkul\Admin\Mail\Customer;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -10,6 +10,8 @@ class RegistrationNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $adminName;
+
     /**
      * Create a new mailable instance.
      *
@@ -17,8 +19,9 @@ class RegistrationNotification extends Mailable
      * @return void
      */
     public function __construct(
-        public $customer,
+        public $customer
     ) {
+        $this->adminName = core()->getAdminEmailDetails()['name'];
     }
 
     /**
@@ -31,8 +34,8 @@ class RegistrationNotification extends Mailable
     public function build()
     {
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->customer->email)
-            ->subject(trans('shop::app.emails.customers.registration.subject'))
-            ->view('shop::emails.customers.registration');
+            ->to(core()->getAdminEmailDetails()['email'])
+            ->subject(trans('admin::app.emails.admin.registration.subject'))
+            ->view('admin::emails.admin.notify-admin-about-registration');
     }
 }

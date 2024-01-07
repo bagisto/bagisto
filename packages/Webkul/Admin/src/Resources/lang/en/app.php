@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Reset Password',
                 'subject'        => 'Reset Password Email',
             ],
+            'registration' => [
+                'description'  => 'A new customer has registered in the system.',
+                'name'         => 'Customer Name: :customerName',
+                'subject'      => 'New Customer Registration',
+            ],
         ],
 
         'orders' => [

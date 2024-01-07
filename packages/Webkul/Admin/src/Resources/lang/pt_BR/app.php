@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Redefinir Senha',
                 'subject'        => 'Email de Redefinição de Senha',
             ],
+            'registration' => [
+                'description'  => 'Um novo cliente se registrou no sistema.',
+                'name'         => 'Nome do Cliente: :customerName',
+                'subject'      => 'Novo Registro de Cliente',
+            ],
         ],
 
         'orders' => [

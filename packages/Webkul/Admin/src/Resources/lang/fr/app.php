@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Réinitialiser le mot de passe',
                 'subject'        => 'E-mail de réinitialisation de mot de passe',
             ],
+            'registration' => [
+                'description'  => 'Un nouveau client s\'est inscrit dans le système.',
+                'name'         => 'Nom du client : :customerName',
+                'subject'      => 'Nouvelle inscription client',
+            ],
         ],
 
         'orders' => [

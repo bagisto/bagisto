@@ -3651,6 +3651,11 @@ return [
                 'reset-password' => 'איפוס סיסמה',
                 'subject'        => 'איפוס סיסמה באמצעות אימייל',
             ],
+            'registration' => [
+                'description'  => 'לקוח חדש נרשם למערכת.',
+                'name'         => 'שם הלקוח: :customerName',
+                'subject'      => 'רישום לקוח חדש',
+            ],
         ],
 
         'orders' => [

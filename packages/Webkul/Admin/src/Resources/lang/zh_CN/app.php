@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => '重置密码',
                 'subject'        => '重置密码电子邮件',
             ],
+            'registration' => [
+                'description'  => '系统中有新客户注册。',
+                'name'         => '客户姓名： :customerName',
+                'subject'      => '新客户注册',
+            ],
         ],
 
         'orders' => [

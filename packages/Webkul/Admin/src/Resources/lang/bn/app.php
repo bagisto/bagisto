@@ -3658,6 +3658,11 @@ return [
                 'reset-password' => 'পাসওয়ার্ড রিসেট',
                 'subject'        => 'পাসওয়ার্ড রিসেট ইমেইল',
             ],
+            'registration' => [
+                'description'  => 'নতুন একজন গ্রাহক সিস্টেমে নিবন্ধিত হয়েছে।',
+                'name'         => 'গ্রাহকের নাম: :customerName',
+                'subject'      => 'নতুন গ্রাহক নিবন্ধন',
+            ],
         ],
 
         'orders' => [

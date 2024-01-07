@@ -3659,6 +3659,11 @@ return [
                 'reset-password' => 'Wachtwoord opnieuw instellen',
                 'subject'        => 'E-mail wachtwoord resetten',
             ],
+            'registration' => [
+                'description'  => 'Een nieuwe klant heeft zich geregistreerd in het systeem.',
+                'name'         => 'Naam van de klant: :customerName',
+                'subject'      => 'Nieuwe Klantregistratie',
+            ],
         ],
 
         'orders' => [

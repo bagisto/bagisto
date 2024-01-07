@@ -845,16 +845,6 @@ return [
                 'password'                => 'Passwort',
             ],
 
-            'admin' => [
-                'registration' => [
-                    'dear'         => 'Lieber Administrator',
-                    'description'  => 'Ein neuer Kunde hat sich im System registriert.',
-                    'name'         => 'Kundenname: :customerName',
-                    'subject'      => 'Neue Kundenanmeldung',
-                    'thanks'       => 'Vielen Dank.',
-                ],
-            ],
-
             'forgot-password' => [
                 'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
                 'greeting'       => 'Passwort vergessen!',

@@ -3657,6 +3657,11 @@ return [
                 'reset-password' => 'إعادة تعيين كلمة المرور',
                 'subject'        => 'رسالة إعادة تعيين كلمة المرور',
             ],
+            'registration' => [
+                'description'  => 'تم تسجيل عميل جديد في النظام.',
+                'name'         => 'اسم العميل: :customerName',
+                'subject'      => 'تسجيل عميل جديد',
+            ],
         ],
 
         'orders' => [
