@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'מספר הזמנה',
-                'order'      => 'הזמנה',
-                'order-date' => 'תאריך הזמנה',
-                'title'      => 'הזמנות',
-                'total'      => 'סכום כולל',
+                'order-id'    => 'מספר הזמנה',
+                'order'       => 'הזמנה',
+                'order-date'  => 'תאריך הזמנה',
+                'title'       => 'הזמנות',
+                'total'       => 'סך הכל',
+                'action-view' => 'צפה',
+                'action'      => 'פעולה',
+                'empty-order' => 'עדיין לא הזמנת מוצר כלשהו',
 
                 'status' => [
                     'title' => 'סטטוס',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'ממתין לתשלום',
                     ],
                 ],
-
-                'action'      => 'פעולה',
-                'empty-order' => 'טרם ביצעת הזמנה',
 
                 'view' => [
                     'billing-address'    => 'כתובת לחיוב',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'חשבון',
-                'bagisto'       => 'בַּגִּיסְטוֹ',
-                'cart'          => 'עגלה',
-                'compare'       => 'השוואה',
-                'dropdown-text' => 'ניהול עגלה, הזמנות ורשימת משאלות',
-                'logout'        => 'התנתק',
-                'orders'        => 'הזמנות',
-                'profile'       => 'פרופיל',
-                'sign-in'       => 'התחבר',
-                'sign-up'       => 'הרשם',
-                'search-text'   => 'חפש מוצרים כאן',
-                'search'        => 'חיפוש',
-                'title'         => 'חשבון',
-                'welcome'       => 'ברוך הבא',
-                'welcome-guest' => 'ברוך הבא אורח',
-                'wishlist'      => 'רשימת משאלות',
+                'account'           => 'חשבון',
+                'bagisto'           => 'בַּגִּיסְטוֹ',
+                'cart'              => 'עגלה',
+                'compare'           => 'השוואה',
+                'dropdown-text'     => 'ניהול עגלה, הזמנות ורשימת משאלות',
+                'logout'            => 'התנתק',
+                'no-category-found' => 'לא נמצאה קטגוריה.',
+                'orders'            => 'הזמנות',
+                'profile'           => 'פרופיל',
+                'search'            => 'חיפוש',
+                'search-text'       => 'חפש מוצרים כאן',
+                'sign-in'           => 'התחבר',
+                'sign-up'           => 'הרשם',
+                'title'             => 'חשבון',
+                'welcome'           => 'ברוך הבא',
+                'welcome-guest'     => 'ברוך הבא אורח',
+                'wishlist'          => 'רשימת משאלות',
             ],
 
             'footer' => [
@@ -514,17 +515,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'קבצים מצורפים',
+                'cancel'           => 'ביטול',
                 'comment'          => 'תגובה',
                 'customer-review'  => 'ביקורות לקוחות',
-                'cancel'           => 'ביטול',
                 'empty-review'     => 'לא נמצאו ביקורות, היה הראשון לכתוב ביקורת על מוצר זה',
                 'failed-to-upload' => 'התמונה נכשלה בהעלאה',
                 'load-more'        => 'טען עוד',
                 'name'             => 'שם',
                 'rating'           => 'דירוג',
-                'success'          => 'ביקורת נשלחה בהצלחה.',
                 'submit-review'    => 'שלח ביקורת',
+                'success'          => 'ביקורת נשלחה בהצלחה.',
                 'title'            => 'כותרת',
+                'translate'        => 'תרגום',
+                'translating'      => 'מתרגם...',
                 'write-a-review'   => 'כתוב ביקורת',
             ],
 
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'סה"כ',
                 'update-cart'              => 'עדכון עגלת הקניות',
                 'view-cart'                => 'צפה בעגלת הקניות',
+
+                'cross-sell' => [
+                    'title' => 'אפשרויות נוספות',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +741,6 @@ return [
                     'shipping-address' => 'כתובת למשלוח',
                     'telephone'        => 'טלפון',
                 ],
-            ],
-
-            'coupon' => [
-                'discount'        => 'הנחת קופון',
-                'code'            => 'קוד קופון',
-                'applied'         => 'הקופון הוחל',
-                'applied-coupon'  => 'הקופון הוחל',
-                'apply'           => 'החל קופון',
-                'remove'          => 'הסר קופון',
-                'apply-issue'     => 'לא ניתן להחיל את קוד הקופון.',
-                'sub-total'       => 'תת סך הכל',
-                'button-title'    => 'החל',
-                'enter-your-code' => 'הזן את קוד הקופון שלך',
-                'subtotal'        => 'תת סך הכל',
             ],
 
             'index' => [

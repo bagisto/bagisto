@@ -14,6 +14,8 @@
     $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
+<input type="hidden" name="keys[]" value="{{ json_encode($item) }}">
+
 <x-admin::form.control-group>
     @if ($field['type'] == 'depends')
         @include('admin::configuration.dependent-field-type')
@@ -21,15 +23,24 @@
         <!-- Title of the input field -->
         <div class="flex justify-between">
             <x-admin::form.control-group.label
-                :for="$name" :class="$isRequired"
-            >
-                @lang($field['title'])
-            </x-admin::form.control-group.label>
-
-            <x-admin::form.control-group.label
                 :for="$name"
             >
-                <span class="flex">{{ $channelLocaleInfo }}</span>
+                {!! __($field['title']) . ( __($field['title']) ? '<span class="'.$isRequired.'"></span>' : '') !!}
+
+                @if (
+                    ! empty($field['channel_based'])
+                    && $channels->count() > 1
+                )
+                    <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                        {{ $currentChannel->name }}
+                    </span>
+                @endif
+
+                @if (! empty($field['locale_based']))
+                    <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                        {{ $currentLocale->name }}
+                    </span>
+                @endif
             </x-admin::form.control-group.label>
         </div>
 
@@ -131,12 +142,8 @@
                     @endforeach
                 @else
                     @foreach ($field['options'] as $option)
-                        @php
-                            $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
-                        @endphp
-
                         <option
-                            value="{{ $value }}"
+                            value="{{ $option['value'] ?? 0 }}"
                             {{ $value == $selectedOption ? 'selected' : ''}}
                         >
                             @lang($option['title'])
@@ -149,34 +156,41 @@
         @elseif ($field['type'] == 'multiselect')
             @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
-            <x-admin::form.control-group.control
-                type="select"
-                :name="$name"
-                :id="$name"
-                :rules="$validations"
-                :label="trans($field['title'])"
+            <v-field
+                name="{{ $name }}[]"
+                id="{{ $name }}"
+                rules="{{ $validations }}"
+                label="{{ trans($field['title']) }}"
                 multiple
             >
-                @if (isset($field['repository']))
-                    @foreach ($value as $key => $option)
+                <select
+                    name="{{ $name }}[]"
+                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                    :class="[errors['{{ $name }}[]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    multiple
+                >
+                    @if (isset($field['repository']))
+                        @foreach ($value as $key => $option)
+                            <option 
+                                value="{{ $key }}"
+                                {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}
+                            >
+                                {{ trans($value[$key]) }}
+                            </option>
+                        @endforeach
+                    @else
+                        @foreach ($field['options'] as $option)
+                            <option 
+                                value="{{ $value = $option['value'] ?? 0 }}"
+                                {{ in_array($value, explode(',', $selectedOption)) ? 'selected' : ''}}
+                            >
+                                @lang($option['title'])
+                            </option>
+                         @endforeach
+                    @endif
+                </select>
+            </v-field>
 
-                        <option value="{{ $key }}" {{ in_array($key, explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            @lang($value[$key])
-                        </option>
-
-                    @endforeach
-                @else
-                    @foreach ($field['options'] as $option)
-                        @php
-                            $value = ! isset($option['value']) ? null : ( $value = ! $option['value'] ? 0 : $option['value'] );
-                        @endphp
-
-                        <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            @lang($option['title'])
-                        </option>
-                    @endforeach
-                @endif
-            </x-admin::form.control-group.control>
 
         <!-- Boolean/Switch input -->
         @elseif ($field['type'] == 'boolean')
@@ -184,24 +198,20 @@
                 $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? '');
             @endphp
 
-            <!-- Hidden Fild for unseleted Switch button -->
-            <x-admin::form.control-group.control
-                type="hidden"
-                :name="$name"
-                value="0"
-            >
-            </x-admin::form.control-group.control>
+            <input type="hidden" name="{{ $name }}" value="0" />
 
-            <x-admin::form.control-group.control
-                type="switch"
-                :name="$name"
-                :value="(bool) $selectedOption"
-                :id="$name"
-                :rules="$validations"
-                :label="trans($field['title'])"
-                :checked="(bool) $selectedOption"
-            >
-            </x-admin::form.control-group.control>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input  
+                    type="checkbox"
+                    name="{{ $name }}"
+                    value="1"
+                    id="{{ $name }}"
+                    class="sr-only peer"
+                    {{ $selectedOption ? 'checked' : '' }}
+                >
+
+                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
 
         @elseif ($field['type'] == 'image')
 
@@ -234,7 +244,7 @@
             </div>
 
             @if ($result)
-                <x-admin::form.control-group class="flex gap-[5px] w-max  mt-[5px] cursor-pointer select-none">
+                <x-admin::form.control-group class="flex gap-1.5 w-max mt-1.5 cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
@@ -247,7 +257,7 @@
 
                     <x-admin::form.control-group.label
                         :for="$name.'[delete]'"
-                        class="!text-[14px] !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
+                        class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
@@ -279,7 +289,7 @@
             </x-admin::form.control-group.control>
 
             @if ($result)
-                <div class="flex gap-[10px] cursor-pointer">
+                <div class="flex gap-2.5 cursor-pointer">
                     <x-admin::form.control-group.control
                         type="checkbox"
                         :name="$name.'[delete]'"
@@ -369,7 +379,7 @@
 
     @if (isset($field['info']))
         <label
-            class="block leading-[20px] text-[12px] text-gray-600 dark:text-gray-300 font-medium"
+            class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
         >
             {!! trans($field['info']) !!}
         </label>

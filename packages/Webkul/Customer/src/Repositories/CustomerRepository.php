@@ -37,11 +37,9 @@ class CustomerRepository extends Repository
      */
     public function getCurrentGroup()
     {
-        if ($customer = auth()->guard()->user()) {
-            return $customer->group;
-        }
+        $customer = auth()->guard()->user();
 
-        return core()->getGuestCustomerGroup();
+        return $customer->group ?? core()->getGuestCustomerGroup();
     }
 
     /**
@@ -143,7 +141,7 @@ class CustomerRepository extends Repository
     /**
      * Get customers count by date.
      */
-    public function getCustomersCountByDate(Carbon $from = null, Carbon $to = null): ?int
+    public function getCustomersCountByDate(?Carbon $from = null, ?Carbon $to = null): ?int
     {
         if ($from && $to) {
             return $this->count([['created_at', '>=', $from], ['created_at', '<=', $to]]);

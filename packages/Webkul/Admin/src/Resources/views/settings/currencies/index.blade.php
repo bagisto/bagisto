@@ -6,12 +6,12 @@
     {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
     <v-currencies>
-        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.currencies.index.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Create currency Button -->
                 @if (bouncer()->hasPermission('settings.currencies.create'))
                     <button
@@ -35,18 +35,18 @@
             type="text/x-template"
             id="v-currencies-template"
         >
-            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+                <p class="text-xl text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.currencies.index.title')
                 </p>
 
-                <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-2.5 items-center">
                     <!-- Create currency Button -->
                     @if (bouncer()->hasPermission('settings.currencies.create'))
                         <button
                             type="button"
                             class="primary-button"
-                            @click="id=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                            @click="selectedCurrencies=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
                         >
                             @lang('admin::app.settings.currencies.index.create-btn')
                         </button>
@@ -58,57 +58,12 @@
                 :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
             >
-                @php
-                    $hasPermission = bouncer()->hasPermission('settings.currencies.edit') || bouncer()->hasPermission('settings.currencies.delete');
-                @endphp
-
-                <!-- DataGrid Header -->
-                <template #header="{ columns, records, sortPage, applied}">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '4' : '3' }} grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
-                        <div
-                            class="flex gap-[10px] cursor-pointer"
-                            v-for="(columnGroup, index) in ['id', 'code', 'name']"
-                        >
-                            <p class="text-gray-600 dark:text-gray-300">
-                                <span class="[&>*]:after:content-['_/_']">
-                                    <span
-                                        class="after:content-['/'] last:after:content-['']"
-                                        :class="{
-                                            'text-gray-800 dark:text-white font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
-                                        }"
-                                        @click="
-                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
-                                        "
-                                    >
-                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
-                                    </span>
-                                </span>
-
-                                <!-- Filter Arrow Icon -->
-                                <i
-                                    class="ltr:ml-[5px] rtl:mr-[5px] text-[16px] text-gray-800 dark:text-white align-text-bottom"
-                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
-                                    v-if="columnGroup.includes(applied.sort.column)"
-                                ></i>
-                            </p>
-                        </div>
-
-                        <!-- Actions -->
-                        @if ($hasPermission)
-                            <p class="flex gap-[10px] justify-end">
-                                @lang('admin::app.components.datagrid.table.actions')
-                            </p>
-                        @endif
-                    </div>
-                </template>
-
                 <!-- DataGrid Body -->
                 <template #body="{ columns, records, performAction }">
                     <div
                         v-for="record in records"
-                        class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
-                        :style="'grid-template-columns: repeat(' + (record.actions.length ? 4 : 3) + ', minmax(0, 1fr));'"
+                        class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                        :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                     >
                         <!-- Id -->
                         <p v-text="record.id"></p>
@@ -121,21 +76,25 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.actions.find(action => action.title === 'Edit')?.url)">
-                                <span
-                                    :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
+                            @if (bouncer()->hasPermission('settings.currencies.edit'))
+                                <a @click="selectedCurrencies=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                    <span
+                                        :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
 
-                            <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
-                                <span
-                                    :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                >
-                                </span>
-                            </a>
+                            @if (bouncer()->hasPermission('settings.currencies.delete'))
+                                <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
+                                    <span
+                                        :class="record.actions.find(action => action.index === 'delete')?.icon"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                    >
+                                    </span>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </template>
@@ -152,130 +111,130 @@
                     ref="currencyCreateForm"
                 >
                     <x-admin::modal ref="currencyUpdateOrCreateModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
-                                v-if="id"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
+                                v-if="selectedCurrencies"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
 
                             <p
-                                class="text-[18px] text-gray-800 dark:text-white font-bold"
+                                class="text-lg text-gray-800 dark:text-white font-bold"
                                 v-else
                             >
                                 @lang('admin::app.settings.currencies.index.create.title')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+                            {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="id"
+                                v-model="selectedCurrency.id"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <!-- Code -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.currencies.index.create.code')
+                                </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="id"
-                                    v-model="selectedCurrency.id"
+                                    type="text"
+                                    name="code"
+                                    :value="old('code')"
+                                    rules="required"
+                                    v-model="selectedCurrency.code"
+                                    :label="trans('admin::app.settings.currencies.index.create.code')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.code')"
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <!-- Code -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.currencies.index.create.code')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="code"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="code"
-                                        :value="old('code')"
-                                        rules="required"
-                                        v-model="selectedCurrency.code"
-                                        :label="trans('admin::app.settings.currencies.index.create.code')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Name -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.currencies.index.create.name')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="name"
+                                    :value="old('name')"
+                                    rules="required"
+                                    v-model="selectedCurrency.name"
+                                    :label="trans('admin::app.settings.currencies.index.create.name')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.name')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.currencies.index.create.name')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        :value="old('name')"
-                                        rules="required"
-                                        v-model="selectedCurrency.name"
-                                        :label="trans('admin::app.settings.currencies.index.create.name')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Symbol -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.symbol')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="symbol"
+                                    :value="old('symbol')"
+                                    v-model="selectedCurrency.symbol"
+                                    :label="trans('admin::app.settings.currencies.index.create.symbol')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.symbol')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Symbol -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.currencies.index.create.symbol')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="symbol"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="symbol"
-                                        :value="old('symbol')"
-                                        v-model="selectedCurrency.symbol"
-                                        :label="trans('admin::app.settings.currencies.index.create.symbol')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.symbol')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                            <!-- Decimal -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.decimal')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="symbol"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="decimal"
+                                    :value="old('decimal')"
+                                    v-model="selectedCurrency.decimal"
+                                    :label="trans('admin::app.settings.currencies.index.create.decimal')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                <!-- Decimal -->
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.currencies.index.create.decimal')
-                                    </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="decimal"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="decimal"
-                                        :value="old('decimal')"
-                                        v-model="selectedCurrency.decimal"
-                                        :label="trans('admin::app.settings.currencies.index.create.decimal')"
-                                        :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="decimal"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
-                            </div>
+                            {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                         </x-slot:content>
 
+                        <!-- Modal Footer -->
                         <x-slot:footer>
-                            <!-- Save Button -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                <button
                                     type="submit"
                                     class="primary-button"
@@ -296,7 +255,25 @@
                 data() {
                     return {
                         selectedCurrency: {},
+
+                        selectedCurrencies: 0,
                     }
+                },
+
+                computed: {
+                    gridsCount() {
+                        let count = this.$refs.datagrid.available.columns.length;
+
+                        if (this.$refs.datagrid.available.actions.length) {
+                            ++count;
+                        }
+
+                        if (this.$refs.datagrid.available.massActions.length) {
+                            ++count;
+                        }
+
+                        return count;
+                    },
                 },
 
                 methods: {

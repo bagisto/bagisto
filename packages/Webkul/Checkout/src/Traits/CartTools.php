@@ -253,13 +253,17 @@ trait CartTools
             ]);
         }
 
-        $result = $this->cartItemRepository->delete($itemId);
+        $cart = $cart->fresh();
 
         if (! $cart->items->count()) {
             $this->cartRepository->delete($cart->id);
         } else {
+            $this->cartItemRepository->delete($itemId);
+
             $this->collectTotals();
         }
+
+        $this->resetCart();
 
         return true;
     }

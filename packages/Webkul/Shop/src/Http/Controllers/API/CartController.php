@@ -10,6 +10,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\CartResource;
+use Webkul\Shop\Http\Resources\ProductResource;
 
 class CartController extends APIController
 {
@@ -94,7 +95,7 @@ class CartController extends APIController
             }
         } catch (\Exception $exception) {
             return new JsonResource([
-                'redirect_uri' => route('shop.product_or_category.index', $product->product->url_key),
+                'redirect_uri' => route('shop.product_or_category.index', $product->url_key),
                 'message'      => $exception->getMessage(),
             ]);
         }
@@ -199,6 +200,11 @@ class CartController extends APIController
                         ]);
                     }
                 }
+
+                return (new JsonResource([
+                    'data'     => new CartResource(Cart::getCart()),
+                    'message'  => trans('Coupon not found.'),
+                ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } catch (\Exception $e) {
             return (new JsonResource([
@@ -219,5 +225,24 @@ class CartController extends APIController
             'data'     => new CartResource(Cart::getCart()),
             'message'  => trans('shop::app.checkout.cart.coupon.remove'),
         ]);
+    }
+
+    /**
+     * Cross-sell product listings.
+     *
+     * @return \Illuminate\Http\Resources\Json\JsonResource::collection
+     */
+    public function crossSellProducts()
+    {
+        $productIds = Cart::getCart()->items->pluck('product_id')->toArray();
+
+        $products = $this->productRepository
+            ->select('products.*', 'product_cross_sells.child_id')
+            ->join('product_cross_sells', 'products.id', '=', 'product_cross_sells.child_id')
+            ->whereIn('product_cross_sells.parent_id', $productIds)
+            ->groupBy('product_cross_sells.child_id')
+            ->paginate();
+
+        return ProductResource::collection($products);
     }
 }

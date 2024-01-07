@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'ඇණවුමේ අංකය',
-                'order'      => 'ඇණවුම',
-                'order-date' => 'ඇණවුමේ දිනය',
-                'title'      => 'ඇණවුම්',
-                'total'      => 'මුළු',
+                'order-id'    => 'ඇණවුම් හරහා හඳුනා ගත් හැඳුනුම්පත',
+                'order'       => 'ඇණවුම',
+                'order-date'  => 'ඇණවුම් දිනය',
+                'title'       => 'ඇණවුම්',
+                'total'       => 'මාතික්',
+                'action-view' => 'දදන්',
+                'action'      => 'කาර්වාස',
+                'empty-order' => 'ඔබට තවත් නිශ්චල කර නොමැත',
 
                 'status' => [
                     'title' => 'තත්ත්වය',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'අපහසු ගෙවීම',
                     ],
                 ],
-
-                'action'      => 'ක්‍රියාව',
-                'empty-order' => 'ඔබට තවත් නිශ්චල කර නොමැත',
 
                 'view' => [
                     'billing-address'    => 'ගෙවීමේ ලිපිනය',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'ගිණුම',
-                'bagisto'       => 'බගිස්ටෝ',
-                'compare'       => 'සංස්ථාගත කරන්න',
-                'cart'          => 'කර්තෘ',
-                'dropdown-text' => 'කර්තෘ, ඇණවුම්, සහ උපාංග කළමනාකරණ කරන්න',
-                'logout'        => 'ඉවත් වන්න',
-                'orders'        => 'ඇණවුම්',
-                'profile'       => 'සැකසුම',
-                'sign-in'       => 'පිවිසීම',
-                'sign-up'       => 'ලියාපදිංචිය',
-                'search-text'   => 'උදා: උදාමාන්ද්‍ර',
-                'search'        => 'සෙවුම',
-                'title'         => 'ගිණුම',
-                'welcome'       => 'ස්වයං',
-                'welcome-guest' => 'උරුම පරිසරය',
-                'wishlist'      => 'පෙරනිම',
+                'account'           => 'ගිණුම',
+                'bagisto'           => 'බගිස්ටෝ',
+                'cart'              => 'කර්තෘ',
+                'compare'           => 'සංස්ථාගත කරන්න',
+                'dropdown-text'     => 'කර්තෘ, ඇණවුම්, සහ උපාංග කළමනාකරණ කරන්න',
+                'logout'            => 'ඉවත් වන්න',
+                'no-category-found' => 'කිසිදු කාණ්ඩයක් හමු නොවීය.',
+                'orders'            => 'ඇණවුම්',
+                'profile'           => 'සැකසුම',
+                'search'            => 'සෙවුම',
+                'search-text'       => 'උදා: උදාමාන්ද්‍ර',
+                'sign-in'           => 'පිවිසීම',
+                'sign-up'           => 'ලියාපදිංචිය',
+                'title'             => 'ගිණුම',
+                'welcome'           => 'ස්වයං',
+                'welcome-guest'     => 'උරුම පරිසරය',
+                'wishlist'          => 'පෙරනිම',
             ],
 
             'footer' => [
@@ -514,17 +515,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'ඇටැක්මෙන්ට්',
+                'cancel'           => 'අවලංගු කරන්න',
                 'comment'          => 'අදහස',
                 'customer-review'  => 'මෙම අයිතමය සඳහා ප්‍රභේදයන්',
-                'cancel'           => 'අවලංගු කරන්න',
                 'empty-review'     => 'අදහසක් නොමැත, මෙම අයිතමය සඳහා පළමු අයිතමයක් අරන්න',
                 'failed-to-upload' => 'පින්තූරය උඩුගත කිරීම අසාර්ථකයි',
                 'load-more'        => 'අලවන්න',
                 'name'             => 'නම',
                 'rating'           => 'තක්ෂේනාරය',
-                'success'          => 'අදහස සාර්ථකව යවන ලදි.',
                 'submit-review'    => 'අදහස යවන්න',
+                'success'          => 'අදහස සාර්ථකව යවන ලදි.',
                 'title'            => 'ශීර්ෂය',
+                'translate'        => 'සිංහලයට පරිවර්තකයක්',
+                'translating'      => 'පරිවර්තක කිරීමට...',
                 'write-a-review'   => 'අදහස ලියන්න',
             ],
 
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'එකතු',
                 'update-cart'              => 'කර්තෘ යළි කරන්න',
                 'view-cart'                => 'කර්තෘ බලන්න',
+
+                'cross-sell' => [
+                    'title' => 'තවත් තෝරාගැනීමේ',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +741,6 @@ return [
                     'shipping-address' => 'බෙහෙත් ලිපිනය',
                     'telephone'        => 'දුරකථන',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'කෝපනය සාර්ථකව අදිනය',
-                'applied-coupon'  => 'අදින කෝපනය',
-                'apply'           => 'කෝපනය කරන්න',
-                'apply-issue'     => 'කෝපන කේතය අදින නැත.',
-                'button-title'    => 'යොමුවන්',
-                'code'            => 'කෝපන කේතය',
-                'discount'        => 'කෝපන වටාන',
-                'enter-your-code' => 'කේතය ඇතුල් කරන්න',
-                'remove'          => 'කෝපනය ඉවත් කරන්න',
-                'sub-total'       => 'උපකරණය',
-                'subtotal'        => 'උපකරණය',
             ],
 
             'index' => [

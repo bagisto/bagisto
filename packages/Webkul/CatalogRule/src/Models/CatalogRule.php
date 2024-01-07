@@ -2,13 +2,18 @@
 
 namespace Webkul\CatalogRule\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Admin\Database\Factories\CatalogRuleFactory;
 use Webkul\CatalogRule\Contracts\CatalogRule as CatalogRuleContract;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 
 class CatalogRule extends Model implements CatalogRuleContract
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
@@ -57,5 +62,13 @@ class CatalogRule extends Model implements CatalogRuleContract
     public function catalog_rule_product_prices()
     {
         return $this->hasMany(CatalogRuleProductPriceProxy::modelClass());
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return CatalogRuleFactory::new();
     }
 }

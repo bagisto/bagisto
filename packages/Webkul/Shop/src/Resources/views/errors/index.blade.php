@@ -16,7 +16,7 @@
     </canvas>
 
     {{-- Error page Information --}}
-	<div class="container absolute left-[50%] top-0 px-[60px] max-lg:px-[30px] max-sm:px-[15px] -translate-x-[50%]">
+	<div class="container absolute left-1/2 top-0 px-[60px] max-lg:px-8 max-sm:px-4 -translate-x-1/2">
 		<div class="grid w-full h-[100vh]">
 			<div class="wrapper-404 max-868:!text-[294px] max-md:!text-[140px]">
 				<div class="glow-404">
@@ -27,18 +27,21 @@
                     {{ $errorCode }}
                 </div>
 
-				<div class="absolute left-[50%] top-[74%] -translate-x-[50%] -translate-y-[50%] text-center mt-[40px] max-868:w-full">
-					<h1 class="text-[30px] font-semibold">
+				<div class="absolute left-1/2 top-[74%] -translate-x-1/2 -translate-y-1/2 text-center mt-10 max-868:w-full">
+					<h1 class="text-3xl font-semibold">
                         @lang("admin::app.errors.{$errorCode}.title")
                     </h1>
 
-					<p class="text-[18px] text-[#6E6E6E] mt-[15px]">
-                        @lang("admin::app.errors.{$errorCode}.description")
+					<p class="text-lg text-[#6E6E6E] mt-4">
+                        {{ 
+                            $errorCode === 503 && core()->getCurrentChannel()->maintenance_mode_text != ""
+                            ? core()->getCurrentChannel()->maintenance_mode_text : trans("admin::app.errors.{$errorCode}.description")
+                        }}
                     </p>
 
 					<a 
                         href="{{ route('shop.home.index') }}"
-						class="block w-max mt-[30px] m-auto py-[15px] px-[40px] bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+						class="block w-max mt-8 m-auto py-4 px-10 bg-navyBlue rounded-[45px] text-white text-base font-medium text-center cursor-pointer max-sm:text-sm max-sm:px-6 max-sm:mb-10"
                     >
 						@lang('shop::app.errors.go-to-home') 
                     </a>

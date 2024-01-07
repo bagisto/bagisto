@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Numer zamówienia',
-                'order'      => 'Zamówienie',
-                'order-date' => 'Data zamówienia',
-                'title'      => 'Zamówienia',
-                'total'      => 'Suma',
+                'order-id'    => 'ID zamówienia',
+                'order'       => 'Zamówienie',
+                'order-date'  => 'Data zamówienia',
+                'title'       => 'Zamówienia',
+                'total'       => 'Razem',
+                'action-view' => 'Zobacz',
+                'action'      => 'Akcja',
+                'empty-order' => 'Nie zamówiłeś jeszcze żadnego produktu',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Oczekuje na płatność',
                     ],
                 ],
-
-                'action'      => 'Działanie',
-                'empty-order' => 'Nie zamówiłeś jeszcze żadnego produktu',
 
                 'view' => [
                     'billing-address'    => 'Adres rozliczeniowy',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'bagisto'       => 'Bagisto',
-                'account'       => 'Konto',
-                'compare'       => 'Porównaj',
-                'cart'          => 'Koszyk',
-                'dropdown-text' => 'Zarządzaj koszykiem, zamówieniami i listą życzeń',
-                'logout'        => 'Wyloguj się',
-                'orders'        => 'Zamówienia',
-                'profile'       => 'Profil',
-                'sign-in'       => 'Zaloguj się',
-                'sign-up'       => 'Zarejestruj się',
-                'search-text'   => 'Szukaj produktów tutaj',
-                'search'        => 'Szukaj',
-                'title'         => 'Konto',
-                'welcome'       => 'Witaj',
-                'welcome-guest' => 'Witaj, Gościu',
-                'wishlist'      => 'Lista życzeń',
+                'account'           => 'Konto',
+                'bagisto'           => 'Bagisto',
+                'cart'              => 'Koszyk',
+                'compare'           => 'Porównaj',
+                'dropdown-text'     => 'Zarządzaj koszykiem, zamówieniami i listą życzeń',
+                'logout'            => 'Wyloguj się',
+                'no-category-found' => 'Nie znaleziono kategorii.',
+                'orders'            => 'Zamówienia',
+                'profile'           => 'Profil',
+                'search'            => 'Szukaj',
+                'search-text'       => 'Szukaj produktów tutaj',
+                'sign-in'           => 'Zaloguj się',
+                'sign-up'           => 'Zarejestruj się',
+                'title'             => 'Konto',
+                'welcome'           => 'Witaj',
+                'welcome-guest'     => 'Witaj, Gościu',
+                'wishlist'          => 'Lista życzeń',
             ],
 
             'footer' => [
@@ -514,17 +515,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Załączniki',
+                'cancel'           => 'Anuluj',
                 'comment'          => 'Komentarz',
                 'customer-review'  => 'Recenzje klientów',
-                'cancel'           => 'Anuluj',
                 'empty-review'     => 'Nie znaleziono recenzji, bądź pierwszym, który oceni ten produkt',
                 'failed-to-upload' => 'Nie udało się przesłać obrazka',
                 'load-more'        => 'Wczytaj więcej',
                 'name'             => 'Imię',
                 'rating'           => 'Ocena',
-                'success'          => 'Recenzja została pomyślnie przesłana.',
                 'submit-review'    => 'Prześlij recenzję',
+                'success'          => 'Recenzja została pomyślnie przesłana.',
                 'title'            => 'Tytuł',
+                'translate'        => 'Tłumaczyć',
+                'translating'      => 'Tłumaczenie...',
                 'write-a-review'   => 'Napisz recenzję',
             ],
 
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'Suma',
                 'update-cart'              => 'Aktualizuj koszyk',
                 'view-cart'                => 'Zobacz koszyk',
+
+                'cross-sell' => [
+                    'title' => 'Więcej opcji',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +741,6 @@ return [
                     'shipping-address' => 'Adres dostawy',
                     'telephone'        => 'Numer telefonu',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'Zastosowano kod kuponu',
-                'applied-coupon'  => 'Zastosowany kod kuponu',
-                'apply'           => 'Zastosuj kod kuponu',
-                'apply-issue'     => 'Kod kuponu nie może być zastosowany',
-                'button-title'    => 'Zastosuj',
-                'code'            => 'Kod kuponu',
-                'discount'        => 'Rabat z kodu kuponu',
-                'enter-your-code' => 'Wprowadź swój kod',
-                'remove'          => 'Usuń kupon',
-                'sub-total'       => 'Suma częściowa',
-                'subtotal'        => 'Suma częściowa',
             ],
 
             'index' => [

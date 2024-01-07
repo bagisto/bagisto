@@ -302,7 +302,7 @@ return [
         'icon'       => '',
     ], [
         'key'        => 'settings.themes',
-        'name'       => 'Themes',
+        'name'       => 'admin::app.components.layouts.sidebar.themes',
         'route'      => 'admin.settings.themes.index',
         'sort'       => 8,
         'icon'       => '',

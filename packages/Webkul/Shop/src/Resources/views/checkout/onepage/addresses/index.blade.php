@@ -16,7 +16,7 @@
         </template>
         
         <template v-else>
-            <div class="mt-[30px]">
+            <div class="mt-8 mb-7">
                 @include('shop::checkout.onepage.addresses.billing')
 
                 @include('shop::checkout.onepage.addresses.shipping')
@@ -25,7 +25,7 @@
     </script>
 
     <script type="module">
-         app.component('v-checkout-addresses', {
+        app.component('v-checkout-addresses', {
             template: '#v-checkout-addresses-template',
 
             props: ['haveStockableItems'],
@@ -56,7 +56,10 @@
                         },
                     },
 
-                    addresses: [],
+                    addresses: {
+                        billing: [],
+                        shipping: [],
+                    },
 
                     countries: [],
 
@@ -67,7 +70,7 @@
                     isCustomer: "{{ auth()->guard('customer')->check() }}",
 
                     isTempAddress: false,
-                }
+                };
             }, 
             
             created() {
@@ -105,19 +108,25 @@
                     if (this.isCustomer) {
                         this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
                             .then(response => {
-                                this.addresses = response.data.data.map((address, index) => {
-                                    let isDefault = address.default_address ? address.default_address : index === 0;
+                                this.addresses.billing = response.data.data.map((address, index, row) => {
+                                    if (! this.forms.billing.address.address_id) {
+                                        let isDefault = address.default_address ? address.default_address : index === 0;
 
-                                    if (isDefault) {
-                                        this.forms.billing.address.address_id = address.id;
+                                        if (isDefault) {
+                                            this.forms.billing.address.address_id = address.id;
 
-                                        this.forms.shipping.address.address_id = address.id;
+                                            this.forms.shipping.address.address_id = address.id;
+                                        }
+                                    }
+
+                                    if (! this.forms.billing.isUsedForShipping) {
+                                        this.forms.shipping.address.address_id = row[row.length - 1].id;
                                     }
 
                                     return {
                                         ...address,
                                         isSaved: true,
-                                        isDefault: isDefault
+                                        isDefault: typeof isDefault === 'undefined' ? false : isDefault,
                                     };
                                 });
 
@@ -159,7 +168,7 @@
 
                         this.isTempAddress = true;
 
-                        this.addresses.push({
+                        this.addresses.billing.push({
                             ...this.forms.billing.address,
                             isSaved: false,
                         });
@@ -192,7 +201,7 @@
 
                         this.isTempAddress = true;
                         
-                        this.addresses.push({
+                        this.addresses.shipping.push({
                             ...this.forms.shipping.address,
                             isSaved: false,
                         });
@@ -212,6 +221,8 @@
                 },
 
                 store() {
+                    this.$refs.storeAddress.isLoading = true;
+
                     if (this.haveStockableItems) {
                         this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
                         
@@ -234,6 +245,10 @@
                             },
                         })
                         .then(response => {
+                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                            this.$parent.$refs.vCartSummary.canPlaceOrder = false;
+
                             if (response.data.data.payment_methods) {
                                 this.$parent.$refs.vPaymentMethod.payment_methods = response.data.data.payment_methods;
                                 
@@ -255,9 +270,11 @@
                             ) {
                                 this.getCustomerAddresses();
                             }
+
+                            this.$refs.storeAddress.isLoading = false;
                         })
-                        .catch(error => {                 
-                            console.log(error);
+                        .catch(error => {
+                            this.$refs.storeAddress.isLoading = false;
                         });
                 },
 

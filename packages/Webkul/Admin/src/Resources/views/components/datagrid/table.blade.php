@@ -7,7 +7,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-table-template">
         <div class="w-full">
-            <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white dark:bg-gray-900 overflow-hidden">
+            <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
                 <slot name="header">
                     <template v-if="$parent.isLoading">
                         <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.head>
@@ -15,7 +15,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid gap-[10px] min-h-[47px] px-[16px] py-[10px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
+                            class="row grid gap-2.5 min-h-[47px] px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold items-center"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -31,7 +31,7 @@
                                     >
 
                                     <span
-                                        class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                        class="icon-uncheckbox cursor-pointer rounded-md text-2xl"
                                         :class="[
                                             $parent.applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600 ' : (
                                                 $parent.applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
@@ -45,14 +45,14 @@
                             <!-- Columns -->
                             <p
                                 v-for="column in $parent.available.columns"
-                                class="flex gap-[5px] items-center break-words"
+                                class="flex gap-1.5 items-center break-words"
                                 :class="{'cursor-pointer select-none hover:text-gray-800 dark:hover:text-white': column.sortable}"
                                 @click="$parent.sortPage(column)"
                             >
                                 @{{ column.label }}
 
                                 <i
-                                    class="text-[16px] text-gray-600 dark:text-gray-300 align-text-bottom"
+                                    class="text-base  text-gray-600 dark:text-gray-300 align-text-bottom"
                                     :class="[$parent.applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="column.index == $parent.applied.sort.column"
                                 ></i>
@@ -77,7 +77,7 @@
                     <template v-else>
                         <template v-if="$parent.available.records.length">
                             <div
-                                class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row grid gap-2.5 items-center px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="record in $parent.available.records"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                             >
@@ -94,7 +94,7 @@
                                             @change="$parent.setCurrentSelectionMode"
                                         >
 
-                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-[6px] text-[24px]">
+                                        <span class="icon-uncheckbox peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer rounded-md text-2xl">
                                         </span>
                                     </label>
                                 </p>
@@ -122,7 +122,7 @@
                                     v-if="$parent.available.actions.length"
                                 >
                                     <span
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                         :class="action.icon"
                                         v-text="!action.icon ? action.title : ''"
                                         v-for="action in record.actions"
@@ -134,7 +134,7 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid px-[16px] py-[16px] border-b-[1px] dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center">
+                            <div class="row grid px-4 py-4 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 text-center">
                                 <p>
                                     @lang('admin::app.components.datagrid.table.no-records-available')
                                 </p>

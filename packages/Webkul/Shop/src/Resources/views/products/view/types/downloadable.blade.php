@@ -2,14 +2,14 @@
     {!! view_render_event('bagisto.shop.products.view.downloadable.before', ['product' => $product]) !!}
 
     @if ($product->downloadable_samples->count())
-        <div class="sample-list mb-[25px] mt-[30px]">
-            <label class="mb-[15px] font-medium">
+        <div class="sample-list mb-6 mt-8">
+            <label class="flex mb-3 font-medium">
                 @lang('shop::app.products.view.type.downloadable.samples')
             </label>
 
             <ul>
                 @foreach ($product->downloadable_samples as $sample)
-                    <li class="mb-[5px]">
+                    <li class="mb-2">
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" 
                             class="text-[#0A49A7]"
@@ -24,13 +24,13 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <label class="flex mt-[30px] mb-[15px] font-medium">
+        <label class="flex mt-8 mb-4 font-medium">
             @lang('shop::app.products.view.type.downloadable.links')
         </label>
 
-        <div class="grid gap-[15px]">
+        <div class="grid gap-4">
             @foreach ($product->downloadable_links as $link)
-                <div class="select-none flex gap-x-[15px]">
+                <div class="select-none flex gap-x-4">
                     <div class="flex">
                         <v-field
                             type="checkbox"
@@ -44,30 +44,30 @@
                         </v-field>
                         
                         <label
-                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                            class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="{{ $link->id }}"
                         ></label>
                         
                         <label
                             for="{{ $link->id }}"
-                            class="ml-1 cursor-pointer"
+                            class="ltr:ml-1 rtl:mr-1 cursor-pointer"
                         >
                             {{ $link->title . ' + ' . core()->currency($link->price) }}
                         </label>
-
-                        @if (
-                            $link->sample_file
-                            || $link->sample_url
-                        )
-                            <a 
-                                href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
-                                target="_blank"
-                                class="text-[#0A49A7] ml-2"
-                            >
-                                @lang('shop::app.products.view.type.downloadable.sample')
-                            </a>
-                        @endif
                     </div>
+
+                    @if (
+                        $link->sample_file
+                        || $link->sample_url
+                    )
+                        <a 
+                            href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
+                            target="_blank"
+                            class="text-[#0A49A7]"
+                        >
+                            @lang('shop::app.products.view.type.downloadable.sample')
+                        </a>
+                    @endif
                 </div>
             @endforeach
 
@@ -76,7 +76,7 @@
                 v-slot="{ message }"
             >
                 <p
-                    class="mt-1 text-red-500 text-xs italic"
+                    class="text-red-500 text-xs italic"
                     v-text="message"
                 >
                 </p>

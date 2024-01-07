@@ -16,26 +16,26 @@
 
 <!-- Features -->
 @if ($customization)
-    <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
-        <div class="flex gap-[25px] justify-center max-lg:flex-wrap">
-                @foreach ($customization->options['services'] as $service)
-                    <div class="flex items-center gap-[20px] bg-white">
-                        <span
-                            class="{{$service['service_icon']}} flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-[42px] text-navyBlue p-[10px]"
-                            role="presentation"
-                        ></span>
+    <div class="container mt-20 max-lg:px-8 max-sm:mt-8">
+        <div class="flex gap-6 justify-center max-lg:flex-wrap">
+            @foreach ($customization->options['services'] as $service)
+                <div class="flex items-center gap-5 bg-white">
+                    <span
+                        class="{{$service['service_icon']}} flex items-center justify-center w-[60px] h-[60px] bg-white border border-black rounded-full text-4xl text-navyBlue p-2.5"
+                        role="presentation"
+                    ></span>
 
-                        <div class="">
-                            <!-- Service Title -->
-                            <p class="text-[16px] font-medium font-dmserif">{{$service['title']}}</p>
+                    <div class="">
+                        <!-- Service Title -->
+                        <p class="text-base font-medium font-dmserif">{{$service['title']}}</p>
 
-                            <!-- Service Description -->
-                            <p class="text-[14px] font-medium mt-[10px] text-[#6E6E6E] max-w-[217px]">
-                                {{$service['description']}}
-                            </p>
-                        </div>
+                        <!-- Service Description -->
+                        <p class="text-sm font-medium mt-2.5 text-[#6E6E6E] max-w-[217px]">
+                            {{$service['description']}}
+                        </p>
                     </div>
-                @endforeach
+                </div>
+            @endforeach
         </div>
     </div>
 @endif

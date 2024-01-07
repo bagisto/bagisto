@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Bestelnummer',
-                'order'      => 'Bestelling',
-                'order-date' => 'Besteldatum',
-                'title'      => 'Bestellingen',
-                'total'      => 'Totaal',
+                'order-id'    => 'Bestel-ID',
+                'order'       => 'Bestelling',
+                'order-date'  => 'Besteldatum',
+                'title'       => 'Bestellingen',
+                'total'       => 'Totaal',
+                'action-view' => 'Bekijken',
+                'action'      => 'Actie',
+                'empty-order' => 'U heeft nog geen product besteld',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'In Afwachting van Betaling',
                     ],
                 ],
-
-                'action'      => 'Actie',
-                'empty-order' => 'U heeft nog geen product besteld',
 
                 'view' => [
                     'billing-address'    => 'Factuuradres',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'bagisto'       => 'Bagisto',
-                'account'       => 'Account',
-                'compare'       => 'Vergelijken',
-                'cart'          => 'Winkelwagen',
-                'dropdown-text' => 'Beheer Winkelwagen, Bestellingen en Verlanglijst',
-                'logout'        => 'Uitloggen',
-                'orders'        => 'Bestellingen',
-                'profile'       => 'Profiel',
-                'sign-in'       => 'Inloggen',
-                'sign-up'       => 'Aanmelden',
-                'search-text'   => 'Zoek hier producten',
-                'search'        => 'Zoeken',
-                'title'         => 'Account',
-                'welcome'       => 'Welkom',
-                'welcome-guest' => 'Welkom Gast',
-                'wishlist'      => 'Verlanglijst',
+                'account'           => 'Account',
+                'bagisto'           => 'Bagisto',
+                'cart'              => 'Winkelwagen',
+                'compare'           => 'Vergelijken',
+                'dropdown-text'     => 'Beheer Winkelwagen, Bestellingen en Verlanglijst',
+                'logout'            => 'Uitloggen',
+                'no-category-found' => 'Geen categorie gevonden.',
+                'orders'            => 'Bestellingen',
+                'profile'           => 'Profiel',
+                'search'            => 'Zoeken',
+                'search-text'       => 'Zoek hier producten',
+                'sign-in'           => 'Inloggen',
+                'sign-up'           => 'Aanmelden',
+                'title'             => 'Account',
+                'welcome'           => 'Welkom',
+                'welcome-guest'     => 'Welkom Gast',
+                'wishlist'          => 'Verlanglijst',
             ],
 
             'footer' => [
@@ -514,17 +515,19 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Bijlagen',
+                'cancel'           => 'Annuleren',
                 'comment'          => 'Opmerking',
                 'customer-review'  => 'Klantbeoordelingen',
-                'cancel'           => 'Annuleren',
                 'empty-review'     => 'Geen beoordeling gevonden, wees de eerste om dit product te beoordelen',
                 'failed-to-upload' => 'Het uploaden van de afbeelding is mislukt',
                 'load-more'        => 'Meer laden',
                 'name'             => 'Naam',
                 'rating'           => 'Beoordeling',
-                'success'          => 'Beoordeling succesvol ingediend.',
                 'submit-review'    => 'Beoordeling indienen',
+                'success'          => 'Beoordeling succesvol ingediend.',
                 'title'            => 'Titel',
+                'translate'        => 'Vertalen',
+                'translating'      => 'Vertalen...',
                 'write-a-review'   => 'Schrijf een beoordeling',
             ],
 
@@ -588,10 +591,11 @@ return [
     ],
 
     'compare'  => [
-        'product-compare'    => 'Producten Vergelijken',
+        'already-added'      => 'Item is al toegevoegd aan de vergelijkingslijst',
         'delete-all'         => 'Alles Verwijderen',
         'empty-text'         => 'Je hebt geen items in je vergelijkingslijst',
         'item-add-success'   => 'Item succesvol toegevoegd aan de vergelijkingslijst',
+        'product-compare'    => 'Producten Vergelijken',
         'remove-success'     => 'Item succesvol verwijderd.',
         'remove-all-success' => 'Alle items succesvol verwijderd.',
         'remove-error'       => 'Er is iets misgegaan, probeer het later opnieuw.',
@@ -646,6 +650,10 @@ return [
                 'total'                    => 'Totaal',
                 'update-cart'              => 'Winkelwagen bijwerken',
                 'view-cart'                => 'Bekijk winkelwagen',
+
+                'cross-sell' => [
+                    'title' => 'Meer keuzes',
+                ],
             ],
 
             'coupon'   => [
@@ -733,20 +741,6 @@ return [
                     'shipping-address' => 'Verzendadres',
                     'telephone'        => 'Telefoonnummer',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'Coupon toegepast',
-                'applied-coupon'  => 'Toegepaste coupon',
-                'apply'           => 'Coupon toepassen',
-                'apply-issue'     => 'Couponcode kan niet worden toegepast.',
-                'button-title'    => 'Toepassen',
-                'code'            => 'Couponcode',
-                'discount'        => 'Kortingsbon',
-                'enter-your-code' => 'Voer uw code in',
-                'remove'          => 'Coupon verwijderen',
-                'sub-total'       => 'Subtotaal',
-                'subtotal'        => 'Subtotaal',
             ],
 
             'index' => [

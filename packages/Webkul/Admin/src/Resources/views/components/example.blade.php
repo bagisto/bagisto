@@ -1,12 +1,3 @@
-<!--Flash message -->
-<x-flash-group></x-flash-group>
-
-<x-panel>
-    <x-slot:header>Panel Title</x-slot:header>
-
-    <x-slot:body>Panel Body</x-slot:body>
-</x-panel>
-
 <!-- Form Control Group -->
 
 <!-- Type Text -->
@@ -57,7 +48,7 @@
         </option>
     </x-admin::form.control-group.control>
 
-    <x-admin::form.control-group.error 
+    <x-admin::form.control-group.error
         control-name="column"
     >
     </x-admin::form.control-group.error>
@@ -234,21 +225,21 @@
 <x-admin::seo/>
 
 <!-- Star Rating Component -->
-<x-admin::star-rating 
+<x-admin::star-rating
     :is-editable="false"
     :value="$review->rating"
 >
 </x-admin::star-rating>
 
 <!-- Exportdatagrid Component-->
-<x-admin::datagrid.export 
+<x-admin::datagrid.export
     src=""
 >
 </x-admin::datagrid.export>
 
 <!-- Datagrid Component -->
-<x-admin::datagrid 
-    :src="route('admin.sales.orders.index')" 
+<x-admin::datagrid
+    :src="route('admin.sales.orders.index')"
     :isMultiRow="true"
 >
 </x-admin::datagrid>
@@ -270,16 +261,40 @@
 >
 </x-admin::media.videos>
 
-<!-- Tree Component -->
+<!-- Radio Tree Component -->
+<x-admin::tree.view
+    input-type="radio"
+    name-field="parent_id"
+    value-field="id"
+    id-field="id"
+    :items="json_encode($availableItems)"
+    :value="$savedValue"
+    :fallback-locale="config('app.fallback_locale')"
+>
+</x-admin::tree.view>
 
+<!-- Checkbox Tree Component | Individual -->
 <x-admin::tree.view
     input-type="checkbox"
-    name-field="categories"
-    id-field="id"
-    value-field="id"
-    ::items="categories"
-    :value="json_encode($product->categories->pluck('id'))"
-    behavior="no"
+    selection-type="hierarchical"
+    name-field="parent_id"
+    value-field="key"
+    id-field="key"
+    :items="json_encode($availableItems)"
+    :value="json_encode($savedValues)"
+    :fallback-locale="config('app.fallback_locale')"
+>
+</x-admin::tree.view>
+
+<!-- Checkbox Tree Component | Hierarchical -->
+<x-admin::tree.view
+    input-type="checkbox"
+    selection-type="hierarchical"
+    name-field="parent_id"
+    value-field="key"
+    id-field="key"
+    :items="json_encode($availableItems)"
+    :value="json_encode($savedValues)"
     :fallback-locale="config('app.fallback_locale')"
 >
 </x-admin::tree.view>

@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Bestellnummer',
-                'order'      => 'Bestellung',
-                'order-date' => 'Bestelldatum',
-                'title'      => 'Bestellungen',
-                'total'      => 'Gesamt',
+                'order-id'    => 'Bestell-ID',
+                'order'       => 'Bestellung',
+                'order-date'  => 'Bestelldatum',
+                'title'       => 'Bestellungen',
+                'total'       => 'Gesamt',
+                'action-view' => 'Ansehen',
+                'action'      => 'Aktion',
+                'empty-order' => 'Sie haben noch kein Produkt bestellt',
 
                 'status' => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Zahlung ausstehend',
                     ],
                 ],
-
-                'action'      => 'Aktion',
-                'empty-order' => 'Sie haben bisher kein Produkt bestellt',
 
                 'view' => [
                     'billing-address'    => 'Rechnungsadresse',
@@ -266,7 +266,7 @@ return [
                 ],
             ],
 
-            'reviews'    => [
+            'reviews' => [
                 'empty-review' => 'Sie haben bisher kein Produkt bewertet',
                 'title'        => 'Bewertungen',
             ],
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'Konto',
-                'bagisto'       => 'Bagisto',
-                'compare'       => 'Vergleichen',
-                'cart'          => 'Warenkorb',
-                'dropdown-text' => 'Warenkorb, Bestellungen & Wunschliste verwalten',
-                'logout'        => 'Abmelden',
-                'orders'        => 'Bestellungen',
-                'profile'       => 'Profil',
-                'sign-in'       => 'Anmelden',
-                'sign-up'       => 'Registrieren',
-                'search-text'   => 'Produkte hier suchen',
-                'search'        => 'Suche',
-                'title'         => 'Konto',
-                'welcome'       => 'Willkommen',
-                'welcome-guest' => 'Willkommen Gast',
-                'wishlist'      => 'Wunschliste',
+                'account'           => 'Konto',
+                'bagisto'           => 'Bagisto',
+                'cart'              => 'Warenkorb',
+                'compare'           => 'Vergleichen',
+                'dropdown-text'     => 'Warenkorb, Bestellungen & Wunschliste verwalten',
+                'logout'            => 'Abmelden',
+                'no-category-found' => 'Keine Kategorie gefunden.',
+                'orders'            => 'Bestellungen',
+                'profile'           => 'Profil',
+                'search'            => 'Suche',
+                'search-text'       => 'Produkte hier suchen',
+                'sign-in'           => 'Anmelden',
+                'sign-up'           => 'Registrieren',
+                'title'             => 'Konto',
+                'welcome'           => 'Willkommen',
+                'welcome-guest'     => 'Willkommen Gast',
+                'wishlist'          => 'Wunschliste',
             ],
 
             'footer' => [
@@ -514,18 +515,20 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Anhänge',
+                'cancel'           => 'Abbrechen',
                 'comment'          => 'Kommentar',
                 'customer-review'  => 'Kundenbewertungen',
-                'cancel'           => 'Abbrechen',
                 'empty-review'     => 'Keine Bewertungen gefunden, sei der erste, der dieses Produkt bewertet',
                 'failed-to-upload' => 'Das Bild konnte nicht hochgeladen werden',
                 'load-more'        => 'Mehr laden',
-                'rating'           => 'Bewertung',
-                'success'          => 'Bewertung erfolgreich übermittelt.',
-                'submit-review'    => 'Bewertung absenden',
-                'title'            => 'Titel',
-                'write-a-review'   => 'Eine Bewertung schreiben',
                 'name'             => 'Name',
+                'rating'           => 'Bewertung',
+                'submit-review'    => 'Bewertung absenden',
+                'success'          => 'Bewertung erfolgreich übermittelt.',
+                'title'            => 'Titel',
+                'translate'        => 'Übersetzen',
+                'translating'      => 'Übersetzung läuft...',
+                'write-a-review'   => 'Eine Bewertung schreiben',
             ],
 
             'add-to-cart'            => 'In den Warenkorb legen',
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'Gesamt',
                 'update-cart'              => 'Warenkorb aktualisieren',
                 'view-cart'                => 'Warenkorb anzeigen',
+
+                'cross-sell' => [
+                    'title' => 'Mehr Auswahlmöglichkeiten',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +741,6 @@ return [
                     'shipping-address' => 'Lieferadresse',
                     'telephone'        => 'Telefon',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'Gutschein angewendet',
-                'applied-coupon'  => 'Angewendeter Gutschein',
-                'apply'           => 'Gutschein anwenden',
-                'apply-issue'     => 'Der Gutscheincode kann nicht angewendet werden.',
-                'button-title'    => 'Anwenden',
-                'code'            => 'Gutscheincode',
-                'discount'        => 'Gutscheinrabatt',
-                'enter-your-code' => 'Geben Sie Ihren Code ein',
-                'remove'          => 'Gutschein entfernen',
-                'sub-total'       => 'Zwischensumme',
-                'subtotal'        => 'Zwischensumme',
             ],
 
             'index' => [

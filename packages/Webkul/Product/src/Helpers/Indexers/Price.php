@@ -15,6 +15,13 @@ class Price extends AbstractIndexer
     private $batchSize;
 
     /**
+     * Channels
+     *
+     * @var array
+     */
+    protected $channels;
+
+    /**
      * Customer Groups
      *
      * @var array
@@ -77,6 +84,7 @@ class Price extends AbstractIndexer
     {
         while (true) {
             $paginator = $this->productRepository
+                ->distinct()
                 ->select('products.*')
                 ->with([
                     'variants',
@@ -97,9 +105,11 @@ class Price extends AbstractIndexer
                     $join->on('products.id', '=', 'special_price_to_pav.product_id')
                         ->where('special_price_to_pav.attribute_id', self::SPECIAL_PRICE_TO_ATTRIBUTE_ID);
                 })
+                ->leftJoin('catalog_rule_product_prices', 'products.id', '=', 'catalog_rule_product_prices.product_id')
                 ->where(function ($query) {
                     return $query->orWhere('special_price_from_pav.date_value', Carbon::now()->format('Y-m-d'))
-                        ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'));
+                        ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'))
+                        ->orWhere('catalog_rule_product_prices.rule_date', Carbon::now()->subDays(1)->format('Y-m-d'));
                 })
                 ->cursorPaginate($this->batchSize);
 
@@ -128,29 +138,35 @@ class Price extends AbstractIndexer
             $indexer = $this->getTypeIndexer($product)
                 ->setProduct($product);
 
-            foreach ($this->getCustomerGroups() as $customerGroup) {
-                $customerGroupIndex = $product->price_indices
-                    ->where('customer_group_id', $customerGroup->id)
-                    ->where('product_id', $product->id)
-                    ->first();
+            foreach ($this->getChannels() as $channel) {
+                foreach ($this->getCustomerGroups() as $customerGroup) {
+                    $customerGroupIndex = $product->price_indices
+                        ->where('channel_id', $channel->id)
+                        ->where('customer_group_id', $customerGroup->id)
+                        ->where('product_id', $product->id)
+                        ->first();
 
-                $newIndex = $indexer->setCustomerGroup($customerGroup)->getIndices();
+                    $newIndex = $indexer
+                        ->setChannel($channel)
+                        ->setCustomerGroup($customerGroup)
+                        ->getIndices();
 
-                if ($customerGroupIndex) {
-                    $oldIndex = collect($customerGroupIndex->toArray())
-                        ->except('id', 'created_at', 'updated_at')
-                        ->toArray();
+                    if ($customerGroupIndex) {
+                        $oldIndex = collect($customerGroupIndex->toArray())
+                            ->except('id', 'created_at', 'updated_at')
+                            ->toArray();
 
-                    $isIndexChanged = $this->isIndexChanged(
-                        $oldIndex,
-                        $newIndex
-                    );
+                        $isIndexChanged = $this->isIndexChanged(
+                            $oldIndex,
+                            $newIndex
+                        );
 
-                    if ($isIndexChanged) {
-                        $this->productPriceIndexRepository->update($newIndex, $customerGroupIndex->id);
+                        if ($isIndexChanged) {
+                            $this->productPriceIndexRepository->update($newIndex, $customerGroupIndex->id);
+                        }
+                    } else {
+                        $newIndices[] = $newIndex;
                     }
-                } else {
-                    $newIndices[] = $newIndex;
                 }
             }
         }
@@ -182,6 +198,20 @@ class Price extends AbstractIndexer
         }
 
         return $typeIndexers[$product->type] = $product->getTypeInstance()->getPriceIndexer();
+    }
+
+    /**
+     * Returns all customer groups
+     *
+     * @return Collection
+     */
+    public function getChannels()
+    {
+        if ($this->channels) {
+            return $this->channels;
+        }
+
+        return $this->channels = core()->getAllChannels();
     }
 
     /**

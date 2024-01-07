@@ -10,6 +10,7 @@ class RegistrationNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+
     public $adminName;
 
     /**
@@ -18,6 +19,7 @@ class RegistrationNotification extends Mailable
      * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @return void
      */
+  
     public function __construct(
         public $customer
     ) {

@@ -26,7 +26,7 @@
             </a>
 
             <span
-                class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 ltr:left-2.5 rtl:right-2.5 bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
                 aria-label="@lang('shop::components.carousel.previous')"
                 tabindex="0"
@@ -36,7 +36,7 @@
             </span>
 
             <span
-                class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                class="icon-arrow-right text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-2.5 bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 role="button"
                 aria-label="@lang('shop::components.carousel.next')"
                 tabindex="0"
@@ -53,6 +53,8 @@
 
             data() {
                 return {
+                    autoPlayInterval: null,
+
                     currentIndex: 1,
 
                     images: @json($options['images'] ?? []),
@@ -86,15 +88,17 @@
                     }
 
                     slides[this.currentIndex - 1].style.display = 'block';
+
+                    this.play();
                 },
 
                 play() {
-                    let self = this;
+                    clearInterval(this.autoPlayInterval);
 
-                    setInterval(() => {
+                    this.autoPlayInterval = setInterval(() => {
                         this.navigate(this.currentIndex += 1);
                     }, 5000);
-                }
+                },
             }
         });
     </script>
@@ -102,9 +106,9 @@
     <style>
         .fade {
             -webkit-animation-name: fade;
-            -webkit-animation-duration: 1.5s;
+            -webkit-animation-duration: 2.5s;
             animation-name: fade;
-            animation-duration: 1.5s;
+            animation-duration: 2.5s;
         }
 
         @-webkit-keyframes fade {

@@ -5,11 +5,11 @@
     </x-slot:title>
 
     <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.settings.roles.index.title')
         </p>
         
-        <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
             <!-- Add Role Button -->
             @if (bouncer()->hasPermission('settings.roles.create')) 
                 <a 

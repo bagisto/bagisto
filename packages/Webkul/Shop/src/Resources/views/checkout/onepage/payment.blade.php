@@ -8,7 +8,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-payment-method-template">
-        <div class="mt-[30px] mb-[30px]">
+        <div class="mb-7">
             <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
                 <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method/>
@@ -16,17 +16,17 @@
     
             <template v-if="isShowPaymentMethod">
                 <div>
-                    <x-shop::accordion>
-                        <x-slot:header>
+                    <x-shop::accordion class="!border-b-0">
+                        <x-slot:header class="!p-0">
                             <div class="flex justify-between items-center">
-                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                                <h2 class="text-2xl font-medium max-sm:text-xl">
                                     @lang('shop::app.checkout.onepage.payment.payment-method')
                                 </h2>
                             </div>
                         </x-slot:header>
         
-                        <x-slot:content>
-                            <div class="flex flex-wrap gap-[29px] mt-[30px]">
+                        <x-slot:content class="!p-0 mt-8">
+                            <div class="flex flex-wrap gap-7">
                                 <div 
                                     class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
                                     v-for="(payment, index) in payment_methods"
@@ -45,31 +45,30 @@
         
                                     <label 
                                         :for="payment.method" 
-                                        class="absolute ltr:right-[20px] rtl:left-[20px] top-[20px] icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="absolute ltr:right-5 rtl:left-5 top-5 icon-radio-unselect text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     >
                                     </label>
 
                                     <label 
                                         :for="payment.method" 
-                                        class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
+                                        class="w-[190px] p-5 block border border-[#E9E9E9] rounded-xl max-sm:w-full cursor-pointer"
                                     >
-
                                         <img
                                             class="max-w-[55px] max-h-[45px]"
-                                            :src="paymentImages[payment.method] || '{{ bagisto_asset('images/paypal.png') }}'"
+                                            :src="payment.image"
                                             width="55"
                                             height="55"
                                             :alt="payment.method_title"
                                             :title="payment.method_title"
-                                        >
-                                        
-                                        <p class="text-[14px] font-semibold mt-[5px]">
+                                        />
+
+                                        <p class="text-sm font-semibold mt-1.5">
                                             @{{ payment.method_title }}
                                         </p>
                                         
-                                        <p class="text-[12px] font-medium mt-[10px]">
+                                        <p class="text-xs font-medium mt-2.5">
                                             @{{ payment.description }}
-                                        </p>
+                                        </p> 
                                     </label>
 
                                     {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}
@@ -92,11 +91,6 @@
             data() {
                 return {
                     paymentMethods: [],
-
-                    paymentImages: {
-                        moneytransfer: "{{ bagisto_asset('images/money-transfer.png') }}",
-                        cashondelivery: "{{ bagisto_asset('images/cash-on-delivery.png') }}",
-                    },
 
                     isShowPaymentMethod: false,
 

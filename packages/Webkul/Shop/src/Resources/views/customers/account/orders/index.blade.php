@@ -11,7 +11,7 @@
 
     <div class="flex justify-between items-center">
         <div class="">
-            <h2 class="text-[26px] font-medium">
+            <h2 class="text-2xl font-medium">
                 @lang('shop::app.customers.account.orders.title')
             </h2>
         </div>

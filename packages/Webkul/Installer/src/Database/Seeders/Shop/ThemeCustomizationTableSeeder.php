@@ -31,6 +31,8 @@ class ThemeCustomizationTableSeeder extends Seeder
 
         $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
+        $appUrl = config('app.url');
+
         DB::table('theme_customizations')
             ->insert([
                 [
@@ -237,7 +239,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                         'options'                => json_encode([
                             'html' => '<div class="section-title"> <h2>' . trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale) . '</h2> </div> <div class="container section-gap"> <div class="collection-card-wrapper"> <div class="single-collection-card"> <img src="" data-src="' . $this->storeFileIfExists('theme/8', 'static/' . $locale . '/8.webp', 'static/en/8.webp') . '" class="lazy" width="615" height="600" alt="' . trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale) . '"> <h3 class="overlay-text">' . trans('installer::app.seeders.shop.theme-customizations.game-container.content.sub-title-1', [], $locale) . '</h3> </div> <div class="single-collection-card"> <img src="" data-src="' . $this->storeFileIfExists('theme/8', 'static/' . $locale . '/9.webp', 'static/en/9.webp') . '" class="lazy" width="615" height="600" alt="' . trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale) . '"> <h3 class="overlay-text"> ' . trans('installer::app.seeders.shop.theme-customizations.game-container.content.sub-title-2', [], $locale) . ' </h3> </div> </div> </div>',
 
-                            'css'  => '.section-title,.section-title h2{font-weight:400;font-family:DM Serif Display}.section-title{margin-top:80px;padding-left:15px;padding-right:15px;text-align:center;line-height:90px}.section-title h2{font-size:70px;color:#060c3b;max-width:595px;margin:auto}.collection-card-wrapper{display:flex;flex-wrap:wrap;justify-content:center;gap:30px}.collection-card-wrapper .single-collection-card{position:relative}.collection-card-wrapper .single-collection-card img{border-radius:16px;background-color:#f5f5f5;max-width:100%;height:auto;text-indent:-9999px}.collection-card-wrapper .single-collection-card .overlay-text{font-size:50px;font-weight:400;max-width:234px;font-style:italic;color:#060c3b;font-family:DM Serif Display;position:absolute;bottom:30px;left:30px;margin:0}@media (max-width:1024px){.section-title{padding:0 30px}}@media (max-width:991px){.collection-card-wrapper{flex-wrap:wrap}}@media (max-width:525px){.collection-card-wrapper .single-collection-card img{max-width:calc(100vw - 30px)}.collection-card-wrapper .single-collection-card .overlay-text{font-size:30px}.container{padding:0 30px;margin-top:20px}.section-title{margin-top:30px}.section-title h2{font-size:30px;line-height:normal}}',
+                            'css'  => '.section-title,.section-title h2{font-weight:400;font-family:DM Serif Display}.section-title{margin-top:80px;padding-left:15px;padding-right:15px;text-align:center;line-height:90px}.section-title h2{font-size:70px;color:#060c3b;max-width:595px;margin:auto}.collection-card-wrapper{display:flex;flex-wrap:wrap;justify-content:center;gap:30px}.collection-card-wrapper .single-collection-card{position:relative}.collection-card-wrapper .single-collection-card img{border-radius:16px;background-color:#f5f5f5;max-width:100%;height:auto;text-indent:-9999px}.collection-card-wrapper .single-collection-card .overlay-text{font-size:50px;font-weight:400;max-width:234px;font-style:italic;color:#060c3b;font-family:DM Serif Display;position:absolute;bottom:30px;left:30px;margin:0}@media (max-width:1024px){.section-title{padding:0 30px}}@media (max-width:991px){.collection-card-wrapper{flex-wrap:wrap}}@media (max-width:525px){.collection-card-wrapper .single-collection-card .overlay-text{font-size:30px}.container{padding:0 30px;margin-top:20px}.section-title{margin-top:30px}.section-title h2{font-size:30px;line-height:normal}}',
                         ]),
                     ], [
                         'theme_customization_id' => 9,
@@ -263,27 +265,27 @@ class ThemeCustomizationTableSeeder extends Seeder
                         'options'                => json_encode([
                             'column_1' => [
                                 [
-                                    'url'        => 'http://localhost/page/about-us',
+                                    'url'        => $appUrl . '/page/about-us',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.about-us', [], $locale),
                                     'sort_order' => 1,
                                 ], [
-                                    'url'        => 'http://localhost/page/contact-us',
+                                    'url'        => $appUrl . '/page/contact-us',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.contact-us', [], $locale),
                                     'sort_order' => 2,
                                 ], [
-                                    'url'        => 'http://localhost/page/customer-service',
+                                    'url'        => $appUrl . '/page/customer-service',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.customer-service', [], $locale),
                                     'sort_order' => 3,
                                 ], [
-                                    'url'        => 'http://localhost/page/whats-new',
+                                    'url'        => $appUrl . '/page/whats-new',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.whats-new', [], $locale),
                                     'sort_order' => 4,
                                 ], [
-                                    'url'        => 'http://localhost/page/terms-of-use',
+                                    'url'        => $appUrl . '/page/terms-of-use',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.terms-of-use', [], $locale),
                                     'sort_order' => 5,
                                 ], [
-                                    'url'        => 'http://localhost/page/terms-conditions',
+                                    'url'        => $appUrl . '/page/terms-conditions',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.terms-conditions', [], $locale),
                                     'sort_order' => 6,
                                 ],
@@ -291,23 +293,23 @@ class ThemeCustomizationTableSeeder extends Seeder
 
                             'column_2' => [
                                 [
-                                    'url'        => 'http://localhost/page/privacy-policy',
+                                    'url'        => $appUrl . '/page/privacy-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.privacy-policy', [], $locale),
                                     'sort_order' => 1,
                                 ], [
-                                    'url'        => 'http://localhost/page/payment-policy',
+                                    'url'        => $appUrl . '/page/payment-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.payment-policy', [], $locale),
                                     'sort_order' => 2,
                                 ], [
-                                    'url'        => 'http://localhost/page/shipping-policy',
+                                    'url'        => $appUrl . '/page/shipping-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.shipping-policy', [], $locale),
                                     'sort_order' => 3,
                                 ], [
-                                    'url'        => 'http://localhost/page/refund-policy',
+                                    'url'        => $appUrl . '/page/refund-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.refund-policy', [], $locale),
                                     'sort_order' => 4,
                                 ], [
-                                    'url'        => 'http://localhost/page/return-policy',
+                                    'url'        => $appUrl . '/page/return-policy',
                                     'title'      => trans('installer::app.seeders.shop.theme-customizations.footer-links.options.return-policy', [], $locale),
                                     'sort_order' => 5,
                                 ],
@@ -315,7 +317,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                         ]),
                     ], [
                         'theme_customization_id' => 12,
-                        'locale'                 => config('app.locale'),
+                        'locale'                 => $locale,
                         'options'                => json_encode([
                             'services' => [
                                 [

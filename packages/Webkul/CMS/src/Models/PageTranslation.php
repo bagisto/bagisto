@@ -2,11 +2,16 @@
 
 namespace Webkul\CMS\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\CMS\Contracts\PageTranslation as PageTranslationContract;
+use Webkul\CMS\Database\Factories\PageTranslationFactory;
 
 class PageTranslation extends Model implements PageTranslationContract
 {
+    use HasFactory;
+
     /**
      * Table associated with the model.
      *
@@ -26,4 +31,12 @@ class PageTranslation extends Model implements PageTranslationContract
         'locale',
         'cms_page_id',
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return PageTranslationFactory::new();
+    }
 }

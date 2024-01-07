@@ -339,26 +339,6 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * Return the product id attribute.
-     *
-     * @return int
-     */
-    public function getProductIdAttribute()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Return the product attribute.
-     *
-     * @return self
-     */
-    public function getProductAttribute()
-    {
-        return $this;
-    }
-
-    /**
      * The images that belong to the product.
      *
      * @return string
@@ -378,7 +358,6 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-
         if (! method_exists(static::class, $key)
             && ! in_array($key, [
                 'pivot',

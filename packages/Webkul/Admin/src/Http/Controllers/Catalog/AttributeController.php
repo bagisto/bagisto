@@ -64,9 +64,7 @@ class AttributeController extends Controller
 
         $requestData = request()->all();
 
-        if (! $requestData['default_value']) {
-            $requestData['default_value'] = null;
-        }
+        $requestData['default_value'] ??= null;
 
         Event::dispatch('catalog.attribute.create.before');
 

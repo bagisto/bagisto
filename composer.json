@@ -36,6 +36,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",
         "maatwebsite/excel": "^3.1.46",
+        "openai-php/laravel": "^0.7.8",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "predis/predis": "^2.2",
         "prettus/l5-repository": "^2.6",
@@ -106,12 +107,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi",
-            "Webkul\\Installer\\Events\\ComposerEvents::postCreateProject"
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate --ansi"
         ]
     },
     "extra": {

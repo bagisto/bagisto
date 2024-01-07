@@ -4,22 +4,22 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-footer-links-template">
         <div>
-            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white dark:bg-gray-900 rounded box-shadow">
+            <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+                <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                    <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                         <!-- Add Links-->
-                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
-                            <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                        <div class="flex gap-x-2.5 justify-between items-center mb-2.5">
+                            <div class="flex flex-col gap-1">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.themes.edit.footer-link')
                                 </p>
 
-                                <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                                <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                                     @lang('admin::app.settings.themes.edit.footer-link-description')
                                 </p>
                             </div>
             
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 <div
                                     class="secondary-button"
                                     @click="isUpdating=false;$refs.addLinksModal.toggle()"
@@ -36,7 +36,7 @@
                         >
                             <!-- Information -->
                             <div 
-                                class="grid border-b-[1px] last:border-b-0 border-slate-300 dark:border-gray-800"
+                                class="grid border-b last:border-b-0 border-slate-300 dark:border-gray-800"
                                 v-for="(link, key) in footerLink"
                             >
                                 <!-- Hidden Input -->
@@ -45,9 +45,9 @@
                                 <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][title]'" :value="link.title"> 
                                 <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'" :value="link.sort_order"> 
                                 
-                                <div class="flex gap-[10px] justify-between py-5 cursor-pointer">
-                                    <div class="flex gap-[10px] ">
-                                        <div class="grid gap-[6px] place-content-start">
+                                <div class="flex gap-2.5 justify-between py-5 cursor-pointer">
+                                    <div class="flex gap-2.5">
+                                        <div class="grid gap-1.5 place-content-start">
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 <div> 
                                                     @lang('admin::app.settings.themes.edit.column'): 
@@ -99,18 +99,18 @@
                                     </div>
 
                                     <!-- Actions -->
-                                    <div class="grid gap-[4px] place-content-start text-right">
-                                        <div class="flex gap-x-[20px] items-center">
+                                    <div class="grid gap-1 place-content-start text-right">
+                                        <div class="flex gap-x-5 items-center">
                                             <p 
                                                 class="text-blue-600 cursor-pointer transition-all hover:underline"
-                                                @click="edit(link)"
+                                                @click="edit(link, key)"
                                             > 
                                                 @lang('admin::app.settings.themes.edit.edit')
                                             </p>
 
                                             <p 
                                                 class="text-red-600 cursor-pointer transition-all hover:underline"
-                                                @click="remove(link)"
+                                                @click="remove(link, key)"
                                             > 
                                                 @lang('admin::app.settings.themes.edit.delete')
                                             </p>
@@ -121,17 +121,17 @@
                         </div>
 
                         <div   
-                            v-else
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] "
+                            v-if="isFooterLinksEmpty"
+                            class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                         >
                             <img
-                                class="w-[120px] h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                                class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
                                 src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
-                                alt="add-product-to-store"
+                                alt="@lang('admin::app.settings.themes.edit.footer-link')"
                             >
             
-                            <div class="flex flex-col gap-[5px] items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">
+                            <div class="flex flex-col gap-1.5 items-center">
+                                <p class="text-base text-gray-400 font-semibold">
                                     @lang('admin::app.settings.themes.edit.footer-link')
                                     
                                 </p>
@@ -140,19 +140,15 @@
                                     @lang('admin::app.settings.themes.edit.footer-link-description')
                                 </p>
                             </div>
-            
-                            <div class="secondary-button">
-                                @lang('admin::app.settings.themes.edit.add-footer-link-btn')
-                            </div>
                         </div>
                     </div>
                 </div>
             
                 <!-- General -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
-                            <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                 @lang('admin::app.settings.themes.edit.general')
                             </p>
                         </x-slot:header>
@@ -160,7 +156,7 @@
                         <x-slot:content>
                             <input type="hidden" name="type" value="footer_links">
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
@@ -169,7 +165,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -183,7 +179,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
                                 </x-admin::form.control-group.label>
@@ -192,7 +188,7 @@
                                     type="text"
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -225,7 +221,7 @@
                                 <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group>
+                            <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
@@ -249,7 +245,7 @@
                                     </v-field>
                         
                                     <label
-                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-[2px] after:ltr:left-[2px] after:rtl:right-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-9 h-5 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:ltr:translate-x-full peer-checked:after:rtl:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:ltr:left-0.5 after:rtl:right-0.5 peer-focus:outline-none after:border after:rounded-full after:h-4 after:w-4 after:transition-all"
                                         for="status"
                                     ></label>
                                 </label>
@@ -272,107 +268,112 @@
             >
                 <form @submit="handleSubmit($event, updateOrCreate)">
                     <x-admin::modal ref="addLinksModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.footer-link-form-title')
                             </p>
                         </x-slot:header>
 
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.column')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="key"
+                            >
+                            </x-admin::form.control-group.control>
+                            
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.column')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="column"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.column')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.column')"
-                                        ::disabled="isUpdating"
-                                    >
-                                        <option value="column_1">1</option>
-                                        <option value="column_2">2</option>
-                                        <option value="column_3">3</option>
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="column"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.column')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.column')"
+                                    ::disabled="isUpdating"
+                                >
+                                    <option value="column_1">1</option>
+                                    <option value="column_2">2</option>
+                                    <option value="column_3">3</option>
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="column"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="column"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.footer-title')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.footer-title')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="title"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.footer-title')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="title"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.themes.edit.footer-title')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="title"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="title"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.url')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.url')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="url"
-                                        rules="required|url"
-                                        :label="trans('admin::app.settings.themes.edit.url')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.url')"
-                                        ::disabled="isUpdating"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="url"
+                                    rules="required|url"
+                                    :label="trans('admin::app.settings.themes.edit.url')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.url')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="url"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="url"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.themes.edit.sort-order')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.themes.edit.sort-order')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="sort_order"
-                                        rules="required|numeric"
-                                        :label="trans('admin::app.settings.themes.edit.sort-order')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="sort_order"
+                                    rules="required|numeric"
+                                    :label="trans('admin::app.settings.themes.edit.sort-order')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </div>
+                                <x-admin::form.control-group.error
+                                    control-name="sort_order"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </x-slot:content>
 
+                        <!-- Modal Footer -->
                         <x-slot:footer>
-                            <div class="flex gap-x-[10px] items-center">
-                                <!-- Save Button -->
+                            <div class="flex gap-x-2.5 items-center">
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="px-3 py-1.5 bg-blue-600 border border-blue-700 rounded-md text-gray-50 font-semibold cursor-pointer"
                                 >
                                     @lang('admin::app.settings.themes.edit.save-btn')
                                 </button>
@@ -425,45 +426,32 @@
 
             methods: {
                 updateOrCreate(params) {
-                    let updatedFooterLinks = this.footerLinks[params.column].map((item) => {
-                        if (item.url === params.url) {
-                            return params;
-                        }
-
-                        return item;
-                    });
-
-                    this.footerLinks[params.column] = updatedFooterLinks;
-
-                    if (! updatedFooterLinks.some((item) => item.url === params.url)) {
-                        if (!this.footerLinks.hasOwnProperty(params.column)) {
-                            this.footerLinks[params.column] = []; 
-                        }
-                        
+                    if (params.key != null) {
+                        Object.keys(this.footerLinks).forEach(key => {
+                            this.footerLinks[params.column][params.key] = params;
+                        });
+                    } else {
                         this.footerLinks[params.column].push(params);
                     }
 
                     this.$refs.addLinksModal.toggle();
                 },
 
-                remove(footerLink) {
-                    if (
-                        this.footerLinks.hasOwnProperty(footerLink.column) 
-                        && Array.isArray(this.footerLinks[footerLink.column])
-                        && this.footerLinks[footerLink.column].length > 0
-                    ) {
-                        this.footerLinks[footerLink.column].splice(0, 1);
-                    }
-
-                    if (this.isFooterLinksEmpty) {
-                        this.isShowIllustrator = true;
-                    }
+                remove(footerLink, key) {
+                    this.$emitter.emit('open-confirm-modal', {
+                        agree: () => {
+                            this.footerLinks[footerLink.column].splice(key, 1);
+                        }
+                    });
                 },
 
-                edit(footerLink) {
+                edit(footerLink, key) {
                     this.isUpdating = true;
 
-                    this.$refs.footerLinkUpdateOrCreateModal.setValues(footerLink);
+                    this.$refs.footerLinkUpdateOrCreateModal.setValues({
+                        ...footerLink, 
+                        key,
+                    });
 
                     this.$refs.addLinksModal.toggle();
                 },

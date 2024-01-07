@@ -109,19 +109,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the products of specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function products($id)
-    {
-        if (request()->ajax()) {
-            return app(ProductDataGrid::class)->toJson();
-        }
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
@@ -161,14 +148,17 @@ class CategoryController extends Controller
             Event::dispatch('catalog.category.delete.after', $id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category',
-                ])]);
+                'message' => trans('admin::app.catalog.categories.delete-success', [
+                    'name' => trans('admin::app.catalog.categories.category'),
+                ]),
+            ]);
         } catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.categories.delete-failed', [
+                    'name' => trans('admin::app.catalog.categories.category'),
+                ]),
+            ], 500);
         }
-
-        return new JsonResponse([
-            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category',
-            ])], 500);
     }
 
     /**

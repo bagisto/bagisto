@@ -17,6 +17,13 @@ abstract class AbstractType
     protected $product;
 
     /**
+     * Channel instance.
+     *
+     * @var \Webkul\Core\Contracts\Channel
+     */
+    protected $channel;
+
+    /**
      * Customer Group instance.
      *
      * @var \Webkul\Customer\Contracts\CustomerGroup
@@ -49,6 +56,19 @@ abstract class AbstractType
     }
 
     /**
+     * Set channel
+     *
+     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @return \Webkul\Product\Helpers\Indexers\Price\AbstractPriceIndex
+     */
+    public function setChannel($channel)
+    {
+        $this->channel = $channel;
+
+        return $this;
+    }
+
+    /**
      * Set customer group
      *
      * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
@@ -74,6 +94,7 @@ abstract class AbstractType
             'max_price'         => $minPrice ?? 0,
             'regular_max_price' => $this->product->price ?? 0,
             'product_id'        => $this->product->id,
+            'channel_id'        => $this->channel->id,
             'customer_group_id' => $this->customerGroup->id,
         ];
     }
@@ -199,7 +220,7 @@ abstract class AbstractType
     {
         return $this->product->catalog_rule_prices
             ->where('customer_group_id', $this->customerGroup->id)
-            ->where('channel_id', core()->getCurrentChannel()->id)
+            ->where('channel_id', $this->channel->id)
             ->where('rule_date', Carbon::now()->format('Y-m-d'))
             ->first();
     }

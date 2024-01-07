@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Sipariş ID',
-                'order'      => 'Sipariş',
-                'order-date' => 'Sipariş Tarihi',
-                'title'      => 'Siparişler',
-                'total'      => 'Toplam',
+                'order-id'    => 'Pedido ID',
+                'order'       => 'Pedido',
+                'order-date'  => 'Pedido Tarihi',
+                'title'       => 'Pedidos',
+                'total'       => 'Toplam',
+                'action-view' => 'Görüntüle',
+                'action'      => 'İşlem',
+                'empty-order' => 'Son bir ürümüyü pedido yapmadınız',
 
                 'status' => [
                     'title' => 'Durum',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Ödeme Bekliyor',
                     ],
                 ],
-
-                'action'      => 'Eylem',
-                'empty-order' => 'Henüz hiçbir ürün sipariş etmediniz',
 
                 'view' => [
                     'billing-address'    => 'Fatura Adresi',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'Hesap',
-                'bagisto'       => 'Bagisto',
-                'compare'       => 'Karşılaştır',
-                'cart'          => 'Sepet',
-                'dropdown-text' => 'Sepeti Yönet, Siparişleri ve İstek Listesini Görüntüle',
-                'logout'        => 'Çıkış Yap',
-                'orders'        => 'Siparişler',
-                'profile'       => 'Profil',
-                'sign-in'       => 'Giriş Yap',
-                'sign-up'       => 'Kaydol',
-                'search-text'   => 'Ürünleri burada ara',
-                'search'        => 'Ara',
-                'title'         => 'Hesap',
-                'welcome'       => 'Hoş geldiniz',
-                'welcome-guest' => 'Hoş geldiniz Misafir',
-                'wishlist'      => 'İstek Listesi',
+                'account'           => 'Hesap',
+                'bagisto'           => 'Bagisto',
+                'cart'              => 'Sepet',
+                'compare'           => 'Karşılaştır',
+                'dropdown-text'     => 'Sepeti Yönet, Siparişleri ve İstek Listesini Görüntüle',
+                'logout'            => 'Çıkış Yap',
+                'no-category-found' => 'Kategori bulunamadı.',
+                'orders'            => 'Siparişler',
+                'profile'           => 'Profil',
+                'search'            => 'Ara',
+                'search-text'       => 'Ürünleri burada ara',
+                'sign-in'           => 'Giriş Yap',
+                'sign-up'           => 'Kaydol',
+                'title'             => 'Hesap',
+                'welcome'           => 'Hoş geldiniz',
+                'welcome-guest'     => 'Hoş geldiniz Misafir',
+                'wishlist'          => 'İstek Listesi',
             ],
 
             'footer' => [
@@ -514,18 +515,21 @@ return [
 
             'reviews' => [
                 'attachments'       => 'Ekler',
+                'cancel'            => 'İptal',
                 'comment'           => 'Yorum',
                 'customer-review'   => 'Müşteri Yorumları',
-                'cancel'            => 'İptal',
                 'empty-review'      => 'Henüz yorum bulunamadı, ilk yorumu siz yapın',
                 'failed-to-upload'  => 'Resim yüklemesi başarısız oldu',
                 'load-more'         => 'Daha Fazla Yükle',
                 'name'              => 'Adı',
                 'rating'            => 'Derecelendirme',
-                'success'           => 'Yorum başarıyla gönderildi.',
                 'submit-review'     => 'Yorumu Gönder',
+                'success'           => 'Yorum başarıyla gönderildi.',
                 'title'             => 'Başlık',
+                'translate'         => 'Çevir',
+                'translating'       => 'Çevriliyor...',
                 'write-a-review'    => 'Yorum Yazın',
+
             ],
 
             'add-to-cart'            => 'Sepete Ekle',
@@ -647,6 +651,10 @@ return [
                 'total'                    => 'Toplam',
                 'update-cart'              => 'Sepeti Güncelle',
                 'view-cart'                => 'Sepeti Görüntüle',
+
+                'cross-sell' => [
+                    'title' => 'Daha fazla seçenek',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +742,6 @@ return [
                     'shipping-address' => 'Teslimat Adresi',
                     'telephone'        => 'Telefon',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'Kupon Uygulandı',
-                'applied-coupon'  => 'Uygulanan Kupon',
-                'apply'           => 'Kuponu Uygula',
-                'apply-issue'     => 'Kupon kodu uygulanamıyor.',
-                'button-title'    => 'Uygula',
-                'code'            => 'Kupon Kodu',
-                'discount'        => 'Kupon İndirimi',
-                'enter-your-code' => 'Kodunuzu girin',
-                'remove'          => 'Kuponu Kaldır',
-                'sub-total'       => 'Ara Toplam',
-                'subtotal'        => 'Ara Toplam',
             ],
 
             'index' => [

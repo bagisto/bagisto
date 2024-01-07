@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'Order ID',
-                'order'      => 'Order',
-                'order-date' => 'Order Date',
-                'title'      => 'Orders',
-                'total'      => 'Total',
+                'order-id'    => 'Order ID',
+                'order'       => 'Order',
+                'order-date'  => 'Order Date',
+                'title'       => 'Orders',
+                'total'       => 'Total',
+                'action-view' => 'View',
+                'action'      => 'Action',
+                'empty-order' => 'You have not ordered any product yet',
 
                 'status'        => [
                     'title' => 'Status',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'Pending Payment',
                     ],
                 ],
-
-                'action'      => 'Action',
-                'empty-order' => 'You have not ordered any product yet',
 
                 'view' => [
                     'billing-address'    => 'Billing Address',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'Account',
-                'bagisto'       => 'Bagisto',
-                'compare'       => 'Compare',
-                'cart'          => 'Cart',
-                'dropdown-text' => 'Manage Cart, Orders & Wishlist',
-                'logout'        => 'Logout',
-                'orders'        => 'Orders',
-                'profile'       => 'Profile',
-                'sign-in'       => 'Sign In',
-                'sign-up'       => 'Sign Up',
-                'search-text'   => 'Search products here',
-                'search'        => 'Search',
-                'title'         => 'Account',
-                'welcome'       => 'Welcome',
-                'welcome-guest' => 'Welcome Guest',
-                'wishlist'      => 'Wishlist',
+                'account'           => 'Account',
+                'bagisto'           => 'Bagisto',
+                'cart'              => 'Cart',
+                'compare'           => 'Compare',
+                'dropdown-text'     => 'Manage Cart, Orders & Wishlist',
+                'logout'            => 'Logout',
+                'no-category-found' => 'No category found.',
+                'orders'            => 'Orders',
+                'profile'           => 'Profile',
+                'search'            => 'Search',
+                'search-text'       => 'Search products here',
+                'sign-in'           => 'Sign In',
+                'sign-up'           => 'Sign Up',
+                'title'             => 'Account',
+                'welcome'           => 'Welcome',
+                'welcome-guest'     => 'Welcome Guest',
+                'wishlist'          => 'Wishlist',
             ],
 
             'footer' => [
@@ -514,18 +515,20 @@ return [
 
             'reviews' => [
                 'attachments'      => 'Attachments',
+                'cancel'           => 'Cancel',
                 'comment'          => 'Comment',
                 'customer-review'  => 'Customer Reviews',
-                'cancel'           => 'Cancel',
                 'empty-review'     => 'No Review found, be the first to review this product',
                 'failed-to-upload' => 'The image failed to upload',
                 'load-more'        => 'Load More',
-                'rating'           => 'Rating',
-                'success'          => 'Review submitted successfully.',
-                'submit-review'    => 'Submit Review',
-                'title'            => 'Title',
-                'write-a-review'   => 'Write a Review',
                 'name'             => 'Name',
+                'rating'           => 'Rating',
+                'submit-review'    => 'Submit Review',
+                'success'          => 'Review submitted successfully.',
+                'title'            => 'Title',
+                'translate'        => 'Translate',
+                'translating'      => 'Translating...',
+                'write-a-review'   => 'Write a Review',
             ],
 
             'add-to-cart'            => 'Add To Cart',
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'Total',
                 'update-cart'              => 'Update Cart',
                 'view-cart'                => 'View Cart',
+
+                'cross-sell' => [
+                    'title' => 'More choices',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +741,6 @@ return [
                     'shipping-address' => 'Shipping Address',
                     'telephone'        => 'Telephone',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'Coupon Applied',
-                'applied-coupon'  => 'Applied Coupon',
-                'apply'           => 'Apply Coupon',
-                'apply-issue'     => 'Coupon code can\'t be applied.',
-                'button-title'    => 'Apply',
-                'code'            => 'Coupon Code',
-                'discount'        => 'Coupon Discount',
-                'enter-your-code' => 'Enter your code',
-                'remove'          => 'Remove Coupon',
-                'sub-total'       => 'Subtotal',
-                'subtotal'        => 'Subtotal',
             ],
 
             'index' => [

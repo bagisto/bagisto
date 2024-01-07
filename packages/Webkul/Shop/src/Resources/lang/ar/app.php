@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => 'رقم الطلب',
-                'order'      => 'الطلب',
-                'order-date' => 'تاريخ الطلب',
-                'title'      => 'الطلبات',
-                'total'      => 'الإجمالي',
+                'order-id'    => 'معرف الطلب',
+                'order'       => 'طلب',
+                'order-date'  => 'تاريخ الطلب',
+                'title'       => 'الطلبات',
+                'total'       => 'الإجمالي',
+                'action-view' => 'عرض',
+                'action'      => 'إجراء',
+                'empty-order' => 'لم تقم بطلب أي منتج حتى الآن',
 
                 'status'        => [
                     'title' => 'الحالة',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => 'معلق على الدفع',
                     ],
                 ],
-
-                'action'        => 'الإجراء',
-                'empty-order'   => 'لم تقم بطلب أي منتج بعد',
 
                 'view' => [
                     'billing-address'    => 'عنوان الفواتير',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'الحساب',
-                'bagisto'       => 'باغيستو',
-                'compare'       => 'قارن',
-                'cart'          => 'العربة',
-                'dropdown-text' => 'إدارة العربة والطلبات والقائمة المفضلة',
-                'logout'        => 'تسجيل الخروج',
-                'orders'        => 'الطلبات',
-                'profile'       => 'الملف الشخصي',
-                'sign-in'       => 'تسجيل الدخول',
-                'sign-up'       => 'سجل',
-                'search-text'   => 'ابحث عن المنتجات هنا',
-                'search'        => 'بحث',
-                'title'         => 'الحساب',
-                'welcome'       => 'مرحبًا',
-                'welcome-guest' => 'مرحبًا بكم زائرًا',
-                'wishlist'      => 'قائمة المفضلة',
+                'account'           => 'الحساب',
+                'bagisto'           => 'باغيستو',
+                'cart'              => 'العربة',
+                'compare'           => 'قارن',
+                'dropdown-text'     => 'إدارة العربة والطلبات والقائمة المفضلة',
+                'logout'            => 'تسجيل الخروج',
+                'no-category-found' => 'لم يتم العثور على فئة.',
+                'orders'            => 'الطلبات',
+                'profile'           => 'الملف الشخصي',
+                'search'            => 'بحث',
+                'search-text'       => 'ابحث عن المنتجات هنا',
+                'sign-in'           => 'تسجيل الدخول',
+                'sign-up'           => 'سجل',
+                'title'             => 'الحساب',
+                'welcome'           => 'مرحبًا',
+                'welcome-guest'     => 'مرحبًا بكم زائرًا',
+                'wishlist'          => 'قائمة المفضلة',
             ],
 
             'footer' => [
@@ -514,18 +515,20 @@ return [
 
             'reviews' => [
                 'attachments'      => 'المرفقات',
+                'cancel'           => 'إلغاء',
                 'comment'          => 'التعليق',
                 'customer-review'  => 'آراء العملاء',
-                'cancel'           => 'إلغاء',
                 'empty-review'     => 'لم يتم العثور على مراجعات، كن أول من يراجع هذا المنتج',
                 'failed-to-upload' => 'فشل تحميل الصورة',
                 'load-more'        => 'تحميل المزيد',
-                'rating'           => 'التقييم',
-                'success'          => 'تم إرسال المراجعة بنجاح.',
-                'submit-review'    => 'إرسال المراجعة',
-                'title'            => 'العنوان',
-                'write-a-review'   => 'كتابة مراجعة',
                 'name'             => 'الاسم',
+                'rating'           => 'التقييم',
+                'submit-review'    => 'إرسال المراجعة',
+                'success'          => 'تم إرسال المراجعة بنجاح.',
+                'title'            => 'العنوان',
+                'translate'        => 'ترجمة',
+                'translating'      => 'جار الترجمة...',
+                'write-a-review'   => 'كتابة مراجعة',
             ],
 
             'add-to-cart'            => 'أضف إلى السلة',
@@ -647,6 +650,10 @@ return [
                 'total'                    => 'المجموع',
                 'update-cart'              => 'تحديث عربة التسوق',
                 'view-cart'                => 'عرض عربة التسوق',
+
+                'cross-sell' => [
+                    'title' => 'المزيد من الخيارات',
+                ],
             ],
 
             'coupon'   => [
@@ -734,20 +741,6 @@ return [
                     'shipping-address' => 'عنوان الشحن',
                     'telephone'        => 'رقم الهاتف',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'تم تطبيق الكوبون',
-                'applied-coupon'  => 'الكوبون المُطبق',
-                'apply'           => 'تطبيق الكوبون',
-                'apply-issue'     => 'لا يمكن تطبيق كود الكوبون.',
-                'button-title'    => 'تطبيق',
-                'code'            => 'كود الكوبون',
-                'discount'        => 'خصم الكوبون',
-                'enter-your-code' => 'أدخل كودك',
-                'remove'          => 'إزالة الكوبون',
-                'sub-total'       => 'المجموع الفرعي',
-                'subtotal'        => 'المجموع الفرعي',
             ],
 
             'index' => [

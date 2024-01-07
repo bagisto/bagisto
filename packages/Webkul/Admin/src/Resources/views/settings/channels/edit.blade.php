@@ -22,11 +22,11 @@
         {!! view_render_event('admin.settings.channels.edit.edit_form_controls.before') !!}
 
         <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.channels.edit.title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
@@ -44,20 +44,20 @@
             </div>
         </div>
 
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Component -->
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.general.before') !!}
 
                 <!-- General Information -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
 
                     <!-- Code -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.code')
                         </x-admin::form.control-group.label>
@@ -80,7 +80,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Name -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.name')
                         </x-admin::form.control-group.label>
@@ -103,7 +103,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Description -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.description')
                         </x-admin::form.control-group.label>
@@ -125,13 +125,13 @@
                     </x-admin::form.control-group>
 
                     <!-- Inventory Sources -->
-                    <div class="mb-[10px]">
-                        <p class="required block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium">
+                    <div class="mb-4">
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.inventory-sources')
-                        </p>
+                        </x-admin::form.control-group.label>
                 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                            <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="inventory_sources[]"
@@ -144,14 +144,12 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.label
-                                    :for="'inventory_sources_' . $inventorySource->id"
-                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                <label
+                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    for="inventory_sources_{{ $inventorySource->id }}"
                                 >
-                                    <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
-                                        {{ $inventorySource->name }}
-                                    </span>
-                                </x-admin::form.control-group.label>
+                                    {{ $inventorySource->name }}
+                                </label>
                             </x-admin::form.control-group>
 
                         @endforeach
@@ -163,7 +161,7 @@
                     </div>
 
                     <!-- Root Category -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.root-category')
                         </x-admin::form.control-group.label>
@@ -190,7 +188,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Host Name -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.hostname')
                         </x-admin::form.control-group.label>
@@ -217,13 +215,13 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.design.before') !!}
 
                 <!-- Logo and Design -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.edit.design')
                     </p>
 
                     <!-- Theme Selector -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.theme')
                         </x-admin::form.control-group.label>
@@ -255,7 +253,7 @@
 
                     <div class="flex justify-between">
                         <!-- Logo -->
-                        <div class="flex flex-col w-[40%]">
+                        <div class="flex flex-col w-2/5">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.channels.edit.logo')
@@ -270,13 +268,13 @@
                                 </x-admin::media.images>
                             </x-admin::form.control-group>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.settings.channels.edit.logo-size')
                             </p>
                         </div>
 
                         <!-- Favicon -->
-                        <div class="flex flex-col w-[40%]">
+                        <div class="flex flex-col w-2/5">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.channels.edit.favicon')
@@ -295,7 +293,7 @@
                                 </x-admin::media.images>
                             </x-admin::form.control-group>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300">
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.settings.channels.edit.favicon-size')
                             </p>
                         </div>
@@ -307,8 +305,8 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.seo.before') !!}
 
                 <!-- Home Page SEO -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold mb-[16px]">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold mb-4">
                         @lang('admin::app.settings.channels.edit.seo')
                     </p>
 
@@ -316,7 +314,7 @@
                     <x-admin::seo/>
 
                     <!-- Meta Title -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.seo-title')
                         </x-admin::form.control-group.label>
@@ -333,14 +331,14 @@
                         </x-admin::form.control-group.control>
 
                         <x-admin::form.control-group.error
-                            control-name="seo_title"
+                            :control-name="$locale . '[seo_title]'"
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
                     <!-- Meta Keywords -->
-                    <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label class="required">
+                    <x-admin::form.control-group>
+                        <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.seo-keywords')
                         </x-admin::form.control-group.label>
 
@@ -353,15 +351,10 @@
                             :placeholder="trans('admin::app.settings.channels.edit.seo-keywords')"
                         >
                         </x-admin::form.control-group.control>
-
-                        <x-admin::form.control-group.error
-                            control-name="seo_keywords"
-                        >
-                        </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
                     <!-- Meta Description -->
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="!mb-0">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.seo-description')
                         </x-admin::form.control-group.label>
@@ -378,7 +371,7 @@
                         </x-admin::form.control-group.control>
 
                         <x-admin::form.control-group.error
-                            control-name="seo_description"
+                            :control-name="$locale . '[seo_description]'"
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
@@ -389,7 +382,7 @@
             </div>
 
             <!-- Right Compoenent -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.before') !!}
 
@@ -397,7 +390,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                 @lang('admin::app.settings.channels.edit.currencies-and-locales')
                             </p>
                         </div>
@@ -405,15 +398,15 @@
             
                     <x-slot:content>
                         <!-- Locales Checkboxes -->
-                        <div class="mb-[10px]">
-                            <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
+                        <div class="mb-4">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.locales') 
-                            </p>
+                            </x-admin::form.control-group.label>
 
                             @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
                             
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="locales[]"
@@ -426,14 +419,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
-                                        :for="'locales_' . $locale->id"
-                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="locales_{{ $locale->id }}"
                                     >
-                                        <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
-                                            {{ $locale->name }} 
-                                        </span>
-                                    </x-admin::form.control-group.label>
+                                        {{ $locale->name }} 
+                                    </label>
                                 </x-admin::form.control-group>
                             @endforeach
 
@@ -444,7 +435,7 @@
                         </div>
 
                         <!-- Default Locale Selector -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-4">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.default-locale')
                             </x-admin::form.control-group.label>
@@ -471,15 +462,15 @@
                         </x-admin::form.control-group>
 
                         <!-- Currencies Checkboxes -->
-                        <div class="mb-[10px]">
-                            <p class="required block leading-[24px] text-gray-800 dark:text-white font-medium">
+                        <div class="mb-4">
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.currencies')
-                            </p>
+                            </x-admin::form.control-group.label>
                         
                             @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
 
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         name="currencies[]"
@@ -492,14 +483,12 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.label
-                                        :for="'currencies_' . $currency->id"
-                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="currencies_{{ $currency->id }}"
                                     >
-                                        <span class="text-gray-600 dark:text-gray-300 font-semibold cursor-pointer">
-                                            {{ $currency->name }} 
-                                        </span>
-                                    </x-admin::form.control-group.label>
+                                        {{ $currency->name }} 
+                                    </label>
                                 </x-admin::form.control-group>
                             @endforeach
 
@@ -510,7 +499,7 @@
                         </div>
 
                         <!-- Default Currency Selector -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required"> 
                                 @lang('admin::app.settings.channels.edit.default-currency')
                             </x-admin::form.control-group.label>
@@ -546,7 +535,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <div class="flex items-center justify-between">
-                            <p class="p-[10px] text-gray-800 dark:text-white text-[16px] font-semibold">
+                            <p class="p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
                                 @lang('admin::app.settings.channels.edit.maintenance-mode')
                             </p>
                         </div>
@@ -554,14 +543,14 @@
             
                     <x-slot:content>
                         <!-- Maintenance Mode Text -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.edit.maintenance-mode-text')
                             </x-admin::form.control-group.label>
                             
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="maintenance_mode_text"
+                                name="{{ $locale->code }}[maintenance_mode_text]"
                                 :value="old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? $channel->maintenance_mode_text)"
                                 id="maintenance-mode-text"
                                 :label="trans('admin::app.settings.channels.edit.maintenance-mode-text')"
@@ -576,7 +565,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Allowed API's -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.settings.channels.edit.allowed-ips')
                             </x-admin::form.control-group.label>
@@ -598,7 +587,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Maintenance Mode Switcher -->
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.edit.status')
                             </x-admin::form.control-group.label>

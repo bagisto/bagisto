@@ -132,11 +132,14 @@ return [
             ],
 
             'orders' => [
-                'order-id'   => '注文ID',
-                'order'      => '注文',
-                'order-date' => '注文日',
-                'title'      => '注文',
-                'total'      => '合計',
+                'order-id'    => '注文ID',
+                'order'       => '注文',
+                'order-date'  => '注文日',
+                'title'       => '注文',
+                'total'       => '合計',
+                'action-view' => '表示',
+                'action'      => 'アクション',
+                'empty-order' => 'まだ製品を注文していません',
 
                 'status' => [
                     'title' => 'ステータス',
@@ -151,9 +154,6 @@ return [
                         'pending-payment' => '支払い保留',
                     ],
                 ],
-
-                'action'      => 'アクション',
-                'empty-order' => 'まだ製品を注文していません',
 
                 'view' => [
                     'billing-address'    => '請求先住所',
@@ -321,22 +321,23 @@ return [
 
         'layouts' => [
             'header' => [
-                'account'       => 'アカウント',
-                'bagisto'       => 'バギスト',
-                'compare'       => '比較',
-                'cart'          => 'カート',
-                'dropdown-text' => 'カート、注文、ウィッシュリストの管理',
-                'logout'        => 'ログアウト',
-                'orders'        => '注文',
-                'profile'       => 'プロフィール',
-                'sign-in'       => 'サインイン',
-                'sign-up'       => '新規登録',
-                'search-text'   => 'ここで製品を検索',
-                'search'        => '検索',
-                'title'         => 'アカウント',
-                'welcome'       => 'ようこそ',
-                'welcome-guest' => 'ゲストさん、ようこそ',
-                'wishlist'      => 'ウィッシュリスト',
+                'account'           => 'アカウント',
+                'bagisto'           => 'バギスト',
+                'cart'              => 'カート',
+                'compare'           => '比較',
+                'dropdown-text'     => 'カート、注文、ウィッシュリストの管理',
+                'logout'            => 'ログアウト',
+                'no-category-found' => 'カテゴリが見つかりませんでした。',
+                'orders'            => '注文',
+                'profile'           => 'プロフィール',
+                'search'            => '検索',
+                'search-text'       => 'ここで製品を検索',
+                'sign-in'           => 'サインイン',
+                'sign-up'           => '新規登録',
+                'title'             => 'アカウント',
+                'welcome'           => 'ようこそ',
+                'welcome-guest'     => 'ゲストさん、ようこそ',
+                'wishlist'          => 'ウィッシュリスト',
             ],
 
             'footer' => [
@@ -514,17 +515,19 @@ return [
 
             'reviews' => [
                 'attachments'      => '添付ファイル',
+                'cancel'           => 'キャンセル',
                 'comment'          => 'コメント',
                 'customer-review'  => 'カスタマーレビュー',
-                'cancel'           => 'キャンセル',
                 'empty-review'     => 'レビューが見つかりません。最初のレビューを投稿してください',
                 'failed-to-upload' => '画像のアップロードに失敗しました',
                 'load-more'        => 'さらに読み込む',
                 'name'             => '名前',
                 'rating'           => '評価',
-                'success'          => 'レビューが正常に送信されました。',
                 'submit-review'    => 'レビューを送信',
+                'success'          => 'レビューが正常に送信されました。',
                 'title'            => 'タイトル',
+                'translate'        => '翻訳',
+                'translating'      => '翻訳中...',
                 'write-a-review'   => 'レビューを書く',
             ],
 
@@ -572,6 +575,19 @@ return [
     'search' => [
         'title'   => ':queryの検索結果',
         'results' => '検索結果',
+
+        'images' => [
+            'index' => [
+                'something-went-wrong' => '問題が発生しました。後でもう一度お試しください。',
+                'size-limit-error'     => 'サイズ制限エラー',
+                'search'               => '検索',
+                'only-images-allowed'  => '画像のみ (.jpeg、.jpg、.png など) が許可されています。',
+            ],
+
+            'results' => [
+                'analysed-keywords' => '分析されたキーワード:',
+            ],
+        ],
     ],
 
     'compare' => [
@@ -604,6 +620,7 @@ return [
             'missing-options'           => 'この製品にはオプションがありません。',
             'missing-links'             => 'この製品にはダウンロードリンクがありません。',
             'minimum-order-message'     => '最小注文金額は :amount です',
+            'paypal-payment-cancelled'  => 'PayPalの支払いがキャンセルされました。',
             'qty-missing'               => '少なくとも1つの製品は1以上の数量を持つ必要があります。',
             'return-to-shop'            => 'ショップに戻る',
             'rule-applied'              => 'カートルールが適用されました',
@@ -649,6 +666,10 @@ return [
                 'remove'          => 'クーポンを削除',
                 'success-apply'   => 'クーポンコードが正常に適用されました。',
                 'subtotal'        => '小計',
+
+                'cross-sell' => [
+                    'title' => 'さらなる選択肢',
+                ],
             ],
 
             'mini-cart' => [
@@ -720,20 +741,6 @@ return [
                     'shipping-address' => '配送先住所',
                     'telephone'        => '電話番号',
                 ],
-            ],
-
-            'coupon' => [
-                'applied'         => 'クーポンが適用されました',
-                'applied-coupon'  => '適用されたクーポン',
-                'apply'           => 'クーポンを適用',
-                'apply-issue'     => 'クーポンコードは適用できません。',
-                'button-title'    => '適用',
-                'code'            => 'クーポンコード',
-                'discount'        => 'クーポン割引',
-                'enter-your-code' => 'コードを入力してください',
-                'remove'          => 'クーポンを削除',
-                'sub-total'       => '小計',
-                'subtotal'        => '小計',
             ],
 
             'index' => [
