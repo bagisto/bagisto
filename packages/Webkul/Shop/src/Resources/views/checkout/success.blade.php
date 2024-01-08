@@ -6,12 +6,16 @@
 
 	<div class="container mt-8 px-[60px] max-lg:px-8">
 		<div class="grid gap-y-5 place-items-center">
+			{{ view_render_event('bagisto.shop.checkout.success.image.before', ['order' => $order]) }}
+
 			<img 
 				class="" 
 				src="{{ bagisto_asset('images/thank-you.png') }}" 
 				alt="thankyou" 
 				title=""
 			>
+
+			{{ view_render_event('bagisto.shop.checkout.success.image.after', ['order' => $order]) }}
 
 			<p class="text-xl">
 				@if (auth()->guard('customer')->user())
@@ -35,7 +39,7 @@
 				@endif
 			</p>
 
-			{{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
+			{{ view_render_event('bagisto.shop.checkout.success.continue-shopping.before', ['order' => $order]) }}
 
 			<a href="{{ route('shop.home.index') }}">
 				<div class="block w-max mx-auto m-auto py-3 px-11 bg-navyBlue rounded-2xl text-white text-basefont-medium text-center cursor-pointer">
@@ -43,7 +47,7 @@
 				</div> 
 			</a>
 			
-			{{ view_render_event('bagisto.shop.checkout.continue-shopping.after', ['order' => $order]) }}
+			{{ view_render_event('bagisto.shop.checkout.success.continue-shopping.after', ['order' => $order]) }}
 		</div>
 	</div>
 </x-shop::layouts>

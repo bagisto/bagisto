@@ -19,7 +19,20 @@ window.app = createApp({
     methods: {
         onSubmit() {},
 
-        onInvalidSubmit() {},
+        onInvalidSubmit({ values, errors, results }) {
+            setTimeout(() => {
+                const errorKeys = Object.entries(errors)
+                    .map(([key, value]) => ({ key, value }))
+                    .filter(error => error["value"].length);
+        
+                let firstErrorElement = document.querySelector('[name="' + errorKeys[0]["key"] + '"]');
+        
+                firstErrorElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }, 100);
+        },
     },
 });
 

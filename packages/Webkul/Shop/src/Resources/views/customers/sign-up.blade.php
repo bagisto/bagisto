@@ -16,6 +16,8 @@
     </x-slot>
 
 	<div class="container mt-20 max-1180:px-5">
+        {!! view_render_event('bagisto.shop.customers.sign-up.logo.before') !!}
+
         <!-- Company Logo -->
         <div class="flex gap-x-14 items-center max-[1180px]:gap-x-9">
             <a
@@ -31,6 +33,8 @@
                 >
             </a>
         </div>
+
+        {!! view_render_event('bagisto.shop.customers.sign-up.logo.before') !!}
 
         <!-- Form Container -->
 		<div
@@ -72,7 +76,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.first_name.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form.first_name.after') !!}
 
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
@@ -98,7 +102,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.last_name.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form.last_name.after') !!}
 
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
@@ -124,7 +128,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.email.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form.email.after') !!}
 
                     <x-shop::form.control-group class="mb-6">
                         <x-shop::form.control-group.label class="required">
@@ -151,7 +155,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.password.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form.password.after') !!}
 
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
@@ -177,7 +181,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form.password_confirmation.after') !!}
 
 
                     @if (core()->getConfigData('customer.captcha.credentials.status'))
@@ -210,7 +214,7 @@
                         </div>
                     @endif
 
-                    {!! view_render_event('bagisto.shop.customers.signup_form_controls.newsletter_subscription.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.signup_form.newsletter_subscription.after') !!}
 
                     <div class="flex gap-9 flex-wrap items-center mt-8">
                         <button

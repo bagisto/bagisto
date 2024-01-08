@@ -153,9 +153,12 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer">
+                <label
+                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer select-none"
+                    for="{{ $attribute->code . '_' . $option->id }}"
+                >
                     {{ $option->admin_name }}
-                </p>
+                </label>
             </div>
         @endforeach
 

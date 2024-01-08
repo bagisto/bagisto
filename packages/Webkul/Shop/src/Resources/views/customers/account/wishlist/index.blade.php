@@ -32,6 +32,8 @@
                             @lang('shop::app.customers.account.wishlist.page-title')
                         </h2>
 
+                        {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.before') !!}
+
                         <div
                             class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9]"
                             @click="removeAll"
@@ -40,6 +42,8 @@
                             <span class="icon-bin text-2xl"></span>
                             @lang('shop::app.customers.account.wishlist.delete-all')
                         </div>
+
+                        {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.after') !!}
                     </div>
 
                     <div 
@@ -53,6 +57,8 @@
                                 <div class="flex gap-x-2.5 justify-between pb-5 border-b border-[#E9E9E9]">
                                     <div class="flex gap-x-5">
                                         <div class="">
+                                            {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}
+
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <img 
@@ -60,6 +66,8 @@
                                                     :src="item.product.base_image.small_image_url" 
                                                 /> 
                                             </a>
+
+                                            {!! view_render_event('bagisto.shop.customers.account.wishlist.image.after') !!}
                                         </div>
 
                                         <div class="grid gap-y-2.5">
@@ -114,6 +122,8 @@
                                                 >
                                                 </p>
 
+                                                {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.before') !!}
+
                                                 <!--Wishlist Item removed button-->
                                                 <a 
                                                     class="flex justify-end text-base text-[#0A49A7] cursor-pointer" 
@@ -121,7 +131,11 @@
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.remove')
                                                 </a>
+
+                                                {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.after') !!}
                                             </div>
+
+                                            {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.before') !!}
 
                                             <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
@@ -141,6 +155,8 @@
                                                 >
                                                 </x-shop::button>
                                             </div>
+
+                                            {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.after') !!}
                                         </div>
                                     </div>
 
