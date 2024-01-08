@@ -32,6 +32,7 @@ import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
 import Flatpickr from "./plugins/flatpickr";
 import VeeValidate from "./plugins/vee-validate";
+import Draggable from "./plugins/draggable";
 
 [
     Admin,
@@ -40,14 +41,10 @@ import VeeValidate from "./plugins/vee-validate";
     Emitter,
     Flatpickr,
     VeeValidate,
+    Draggable,
 ].forEach((plugin) => app.use(plugin));
 
-/**
- * Global components registration;
- */
-import Draggable from 'vuedraggable';
 
-app.component("draggable", Draggable);
 
 /**
  * Global directives.
