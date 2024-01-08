@@ -80,12 +80,15 @@ import Axios from "./plugins/axios";
 import Emitter from "./plugins/emitter";
 import Shop from "./plugins/shop";
 import VeeValidate from "./plugins/vee-validate";
+import Flatpickr from "./plugins/flatpickr";
 
-[Axios, Emitter, Shop, VeeValidate].forEach((plugin) => app.use(plugin));
-
-import Flatpickr from "flatpickr";
-import 'flatpickr/dist/flatpickr.css';
-window.Flatpickr = Flatpickr;
+[
+    Axios,
+    Emitter, 
+    Shop, 
+    VeeValidate, 
+    Flatpickr,
+].forEach((plugin) => app.use(plugin));
 
 /**
  * Load event, the purpose of using the event is to mount the application
