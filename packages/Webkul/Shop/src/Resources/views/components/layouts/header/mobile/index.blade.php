@@ -25,7 +25,7 @@
                         <a href="{{ route('shop.home.index') }}">
                             <img
                                 src="{{ bagisto_asset('images/logo.svg') }}"
-                                alt="Bagisto"
+                                alt="{{ config('app.name') }}"
                                 width="131"
                                 height="29"
                             >
@@ -134,7 +134,8 @@
                 <img
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                     alt="{{ config('app.name') }}"
-                    style="height: 30px"
+                    width="131"
+                    height="29"
                 >
             </a>
         </div>

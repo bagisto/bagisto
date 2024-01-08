@@ -17,7 +17,7 @@
                 <img
                     class="w-max" 
                     src="{{ bagisto_asset('images/logo.svg') }}"
-                    alt="Bagisto Logo"
+                    alt="{{ config('app.name') }}"
                 />
             @endif
 
