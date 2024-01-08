@@ -7,7 +7,7 @@
     <div class="flex justify-center items-center h-[100vh]">
         <div class="flex flex-col gap-5 items-center">
             <!-- Logo -->            
-            @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
+            @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="w-[110px] h-10"
                     src="{{ Storage::url($logo) }}"
