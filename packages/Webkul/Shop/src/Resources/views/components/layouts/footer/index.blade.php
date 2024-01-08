@@ -42,6 +42,8 @@
             @endif
         </div>
         
+        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
+
         <!-- News Letter subscription -->
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-2.5">
@@ -91,12 +93,18 @@
                 </x-shop::form>
             </div>
         @endif
+        
+        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
     </div>
 
     <div class="flex justify-between  px-[60px] py-3.5 bg-[#F1EADF]">
+        {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
+
         <p class="text-sm text-[#4D4D4D]">
             @lang('shop::app.components.layouts.footer.footer-text')
         </p>
+
+        {!! view_render_event('bagisto.shop.layout.footer.footer_text.after') !!}
     </div>
 </footer>
 

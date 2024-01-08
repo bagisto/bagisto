@@ -12,6 +12,8 @@
     <div class="w-full flex justify-between items-center">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
+            {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.before') !!}
+
             <x-shop::drawer
                 position="left"
                 width="80%"
@@ -126,6 +128,10 @@
                 <x-slot:footer></x-slot:footer>
             </x-shop::drawer>
 
+            {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.after') !!}
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.mobile.logo.before') !!}
+
             <a
                 href="{{ route('shop.home.index') }}"
                 class="max-h-[30px]"
@@ -138,11 +144,15 @@
                     height="29"
                 >
             </a>
+            
+            {!! view_render_event('bagisto.shop.components.layouts.header.mobile.logo.after') !!}
         </div>
 
         <!-- Right Navigation -->
         <div>
             <div class="flex items-center gap-x-5">
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.before') !!}
+
                 @if($showCompare)
                     <a
                         href="{{ route('shop.compare.index') }}"
@@ -152,7 +162,13 @@
                     </a>
                 @endif
 
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.after') !!}
+
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.before') !!}
+
                 @include('shop::checkout.cart.mini-cart')
+
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                     <x-slot:toggle>
@@ -257,6 +273,8 @@
         </div>
     </div>
 
+    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.before') !!}
+
     <!-- Serach Catalog Form -->
     <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
         <label 
@@ -285,12 +303,16 @@
             @endif
         </div>
     </form>
+
+    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.after') !!}
 </div>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mobile-category-template">
         <div>
             <template v-for="(category) in categories">
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.before') !!}
+
                 <div class="flex justify-between items-center border border-b border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                     <a
                         :href="category.url"
@@ -363,6 +385,8 @@
                         @lang('shop::app.components.layouts.header.no-category-found')
                     </span>
                 </div>
+
+                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.category.after') !!}
             </template>
         </div>
     </script>

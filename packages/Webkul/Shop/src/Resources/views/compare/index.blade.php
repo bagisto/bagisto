@@ -13,9 +13,13 @@
 
     <!-- Breadcrumb -->
     <div class="flex justify-center mt-5 max-lg:hidden">
+        {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
+
 		<div class="flex gap-x-2.5 items-center">
             <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
+
+        {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.after') !!}
 	</div>
 
     <!-- Compare Component -->
@@ -32,14 +36,20 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-compare-template">
             <div>
-
-                {!! view_render_event('bagisto.shop.customers.account.compare.view.before') !!}
+                {!! view_render_event('bagisto.shop.customers.account.compare.before') !!}
 
                 <div v-if="! isLoading">
                     <div class="flex justify-between items-center">
+
+                        {!! view_render_event('bagisto.shop.customers.account.compare.title.before') !!}
+
                         <h1 class="text-2xl font-medium">
                             @lang('shop::app.compare.title')
                         </h1>
+
+                        {!! view_render_event('bagisto.shop.customers.account.compare.title.after') !!}
+
+                        {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
                         <div
                             class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal whitespace-nowrap"
@@ -49,6 +59,8 @@
                             <span class="icon-bin text-2xl"></span>
                             @lang('shop::app.compare.delete-all')
                         </div>
+
+                        {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.after') !!}
                     </div>
 
                     <div
@@ -56,16 +68,20 @@
                         v-if="items.length"
                     >
                         <template v-for="attribute in comparableAttributes">
-                            <!---- Product Card -->
+                            <!-- Product Card -->
                             <div
                                 class="flex items-center max-w-full border-b border-[#E9E9E9]"
                                 v-if="attribute.code == 'product'"
                             >
+                                {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
+
                                 <div class="min-w-[304px] max-w-full max-sm:hidden">
                                     <p class="text-sm font-medium">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.after') !!}
 
                                 <div class="flex gap-3 ltr:border-l-[1px] rtl:border-r-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
@@ -82,7 +98,9 @@
                                 </div>
                             </div>
 
-                            <!---- Comparable Attributes -->
+                            {!! view_render_event('bagisto.shop.customers.account.compare.comparable_attribute.before') !!}
+
+                            <!-- Comparable Attributes -->
                             <div
                                 class="flex items-center max-w-full border-b border-[#E9E9E9] last:border-none"
                                 v-else
@@ -110,6 +128,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.customers.account.compare.comparable_attribute.after') !!}
                         </template>
                     </div>
 
@@ -139,8 +159,7 @@
                     </x-shop::shimmer.compare>
                 </div>
 
-                {!! view_render_event('bagisto.shop.customers.account.compare.view.after') !!}
-
+                {!! view_render_event('bagisto.shop.customers.account.compare.after') !!}
             </div>
         </script>
 

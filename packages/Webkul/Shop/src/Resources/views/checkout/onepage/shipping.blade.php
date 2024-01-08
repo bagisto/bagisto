@@ -16,6 +16,8 @@
             </template>
 
             <template v-if="isShowShippingMethod">
+                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.before') !!}
+
                 <x-shop::accordion class="!border-b-0">
                     <x-slot:header class="!p-0">
                         <div class="flex justify-between items-center">
@@ -31,7 +33,7 @@
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
                             >
-                                {!! view_render_event('bagisto.shop.checkout.shipping-method.before') !!}
+                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.before') !!}
 
                                 <div v-for="rate in shippingMethod.rates">
                                     <input 
@@ -65,12 +67,13 @@
                                     </label>
                                 </div>
 
-                                {!! view_render_event('bagisto.shop.checkout.shipping-method.after') !!}
-
+                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.after') !!}
                             </div>
                         </div>
                     </x-slot:content>
                 </x-shop::accordion>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.after') !!}
             </template>
         </div>
     </script>

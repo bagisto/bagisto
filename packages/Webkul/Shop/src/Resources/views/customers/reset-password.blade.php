@@ -16,6 +16,8 @@
     </x-slot>
 
     <div class="container mt-20 max-1180:px-5">
+        {!! view_render_event('bagisto.shop.customers.reset_password.logo.before') !!}
+        
         <!-- Company Logo -->
         <div class="flex gap-x-14 items-center max-[1180px]:gap-x-9">
             <a
@@ -31,6 +33,8 @@
                 >
             </a>
         </div>
+
+        {!! view_render_event('bagisto.shop.customers.reset_password.logo.after') !!}
 
         <!-- Form Container -->
         <div
@@ -129,6 +133,8 @@
 
                     {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.after') !!}
 
+                    {!! view_render_event('bagisto.shop.customers.reset_password.submit_button.before') !!}
+
                     <div class="flex gap-9 flex-wrap mt-8 items-center">
                         <button
                             class="primary-button block w-full max-w-[374px] py-4 px-11 m-0 ltr:ml-0 rtl:mr-0 mx-auto rounded-2xl text-base text-center"
@@ -138,6 +144,7 @@
                         </button>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.customers.reset_password.submit_button.after') !!}
                 </x-shop::form>
             </div>
 
