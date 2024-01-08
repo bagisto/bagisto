@@ -13,10 +13,10 @@
 
         <!-- Logo -->
         <a href="{{ route('admin.dashboard.index') }}">
-            @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
+            @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="w-[110px] h-10"
-                    src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}"
+                    src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
             @else
@@ -145,10 +145,10 @@
     <!-- Drawer Header -->
     <x-slot:header>
         <div class="flex justify-between items-center">
-            @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
+            @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="w-[110px] h-10"
-                    src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}"
+                    src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
             @else
