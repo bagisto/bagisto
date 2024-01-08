@@ -4,141 +4,289 @@ return [
     'admin' => [
         'catalog' => [
             'products' => [
-                'booking'                   => 'Информация о записи',
-                'booking-type'              => 'Тип записи',
-                'default'                   => 'По умолчанию',
-                'appointment-booking'       => 'Запись на прием',
-                'event-booking'             => 'Забронировать событие',
-                'rental-booking'            => 'Забронировать аренду',
-                'table-booking'             => 'Забронировать столик',
-                'slot-duration'             => 'Длина слота (в минутах)',
-                'break-time'                => 'Перерыв между слотами (в минутах)',
-                'available-every-week'      => 'Доступно каждую неделю',
-                'yes'                       => 'Да',
-                'no'                        => 'Нет',
-                'available-from'            => 'Доступно с',
-                'available-to'              => 'Доступно по',
-                'same-slot-all-days'        => 'Один слот на все дни',
-                'slot-has-quantity'         => 'У слота уже есть запись',
-                'slots'                     => 'Слоты',
-                'from'                      => 'От',
-                'to'                        => 'До',
-                'qty'                       => 'Кол-во',
-                'add-slot'                  => 'Добавить слот',
-                'sunday'                    => 'Воскресенье',
-                'monday'                    => 'Понедельник',
-                'tuesday'                   => 'Вторник',
-                'wednesday'                 => 'Среда',
-                'thursday'                  => 'Четверг',
-                'friday'                    => 'Пятница',
-                'saturday'                  => 'Суббота',
-                'renting-type'              => 'Тип аренды',
-                'daily'                     => 'Посуточная оплата',
-                'hourly'                    => 'Почасовая оплата',
-                'daily-hourly'              => 'Оба типа оплаты (Почасово и посуточно)',
-                'daily-price'               => 'Цена за день',
-                'hourly-price'              => 'Цена за час',
-                'location'                  => 'Расположение',
-                'show-location'             => 'Показать расположение',
-                'event-start-date'          => 'Дата начала события',
-                'event-end-date'            => 'Дата окончания события',
-                'tickets'                   => 'Билеты',
-                'add-ticket'                => 'Добавить билет',
-                'name'                      => 'Имя',
-                'price'                     => 'Цена',
-                'quantity'                  => 'Количество',
-                'description'               => 'Описание',
-                'special-price'             => 'Специальная цена',
-                'special-price-from'        => 'Действительно с',
-                'special-price-to'          => 'Действительно до',
-                'charged-per'               => 'Взимается за',
-                'guest'                     => 'Гость',
-                'table'                     => 'Стол',
-                'prevent-scheduling-before' => 'Запретить планирование заранее',
-                'guest-limit'               => 'Лимит количества гостей за столом',
-                'guest-capacity'            => 'Количество гостей',
-                'type'                      => 'Тип',
-                'many-bookings-for-one-day' => 'Много броней на один день',
-                'one-booking-for-many-days' => 'Одна бронь на много дней',
-                'day'                       => 'День',
-                'status'                    => 'Статус',
-                'open'                      => 'Открыть',
-                'close'                     => 'Закрыть',
-                'time-error'                => 'Время окончания должно быть позже времени начала.',
+                'edit' => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration'         => 'Перерыв между слотами (мин)',
+                            'slot-duration'          => 'Длительность слота (мин)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Нет',
+                                'title' => 'Тот же слот на все дни',
+                                'yes'   => 'Да',
+                            ],
+                        ],
+
+                        'default'     => [
+                            'break-duration' => 'Перерыв между слотами (мин)',
+                            'close'          => 'Закрыть',
+                            'delete'         => 'Удалить',
+                            'description'    => 'Информация о бронировании',
+                            'edit'           => 'Редактировать',
+                            'many'           => 'Много',
+
+                            'modal'          => [
+                                'slot' => [
+                                    'close'      => 'Закрыть',
+                                    'day'        => 'День',
+                                    'edit-title' => 'Редактировать слоты',
+                                    'friday'     => 'Пятница',
+                                    'from-day'   => 'С дня',
+                                    'from'       => 'С',
+                                    'monday'     => 'Понедельник',
+                                    'open'       => 'Открыть',
+                                    'saturday'   => 'Суббота',
+                                    'save'       => 'Сохранить слот',
+                                    'select'     => 'Выбрать',
+                                    'status'     => 'Статус',
+                                    'sunday'     => 'Воскресенье',
+                                    'thursday'   => 'Четверг',
+                                    'time'       => 'Время',
+                                    'title'      => 'Добавить слоты',
+                                    'to'         => 'До',
+                                    'tuesday'    => 'Вторник',
+                                    'wednesday'  => 'Среда',
+                                    'week'       => ':day',
+                                ],
+                            ],
+
+                            'one'            => 'Один',
+                            'open'           => 'Открыть',
+                            'slot-duration'  => 'Длительность слота (мин)',
+                            'title'          => 'По умолчанию',
+                        ],
+
+                        'event'       => [
+                            'add'               => 'Добавить билеты',
+                            'delete'            => 'Удалить',
+                            'description-info'  => 'Нет доступных билетов.',
+                            'description'       => 'Описание',
+                            'edit'              => 'Редактировать',
+
+                            'modal'             => [
+                                'ticket' => [
+                                    'save' => 'Сохранить билеты',
+                                ],
+                            ],
+
+                            'name'               => 'Имя',
+                            'price'              => 'Цена',
+                            'qty'                => 'Количество',
+                            'special-price-from' => 'Спец. цена от',
+                            'special-price-to'   => 'Спец. цена до',
+                            'special-price'      => 'Спец. цена',
+                            'title'              => 'Билеты',
+                        ],
+
+                        'empty-info'  => [
+                            'tickets' => [
+                                'add' => 'Добавить билеты',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Добавить слоты',
+                                'delete'      => 'Удалить',
+                                'description' => 'Доступные слоты с продолжительностью времени.',
+                            ],
+                        ],
+
+                        'rental'      => [
+                            'daily_hourly'           => 'Избранный (ежедневно и почасово)',
+                            'daily-price'            => 'Цена за день',
+                            'daily'                  => 'Ежедневно',
+                            'hourly-price'           => 'Цена за час',
+                            'hourly'                 => 'Почасово',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Нет',
+                                'title' => 'Тот же слот на все дни',
+                                'yes'   => 'Да',
+                            ],
+
+                            'title'                  => 'Тип аренды',
+                        ],
+
+                        'slots'       => [
+                            'add'              => 'Добавить слоты',
+                            'delete'           => 'Удалить',
+                            'description-info' => 'Доступные слоты с продолжительностью времени.',
+                            'description'      => 'Нет доступных слотов.',
+                            'edit'             => 'Редактировать',
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'    => 'Пятница',
+                                    'from'      => 'От',
+                                    'monday'    => 'Понедельник',
+                                    'saturday'  => 'Суббота',
+                                    'sunday'    => 'Воскресенье',
+                                    'thursday'  => 'Четверг',
+                                    'to'        => 'До',
+                                    'tuesday'   => 'Вторник',
+                                    'wednesday' => 'Среда',
+                                ],
+                            ],
+
+                            'save'  => 'Сохранить',
+                            'title' => 'Слоты',
+                        ],
+
+                        'table'       => [
+                            'break-duration'            => 'Перерыв между слотами (мин)',
+
+                            'charged-per'               => [
+                                'guest' => 'Гость',
+                                'table' => 'Стол',
+                                'title' => 'Оплачивается за',
+                            ],
+
+                            'guest-capacity'            => 'Вместимость гостей',
+                            'guest-limit'               => 'Лимит гостей за столом',
+                            'prevent-scheduling-before' => 'Предотвратить запись до',
+                            'slot-duration'             => 'Длительность слота (мин)',
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'Нет',
+                                'title' => 'Тот же слот на все дни',
+                                'yes'   => 'Да',
+                            ],
+                        ],
+                    ],
+
+                    'types'   => [
+                        'booking' => [
+                            'available-from'       => 'Доступно от',
+                            'available-to'         => 'Доступно до',
+
+                            'available-every-week' => [
+                                'no'    => 'Нет',
+                                'title' => 'Доступно каждую неделю',
+                                'yes'   => 'Да',
+                            ],
+
+                            'location'             => 'Местоположение',
+                            'qty'                  => 'Количество',
+
+                            'type'                 => [
+                                'appointment' => 'Прием',
+                                'default'     => 'По умолчанию',
+                                'event'       => 'Событие',
+                                'many'        => 'Много',
+                                'one'         => 'Один',
+                                'rental'      => 'Аренда',
+                                'table'       => 'Стол',
+                                'title'       => 'Тип',
+                            ],
+
+                            'title'                => 'Тип бронирования',
+                        ],
+                    ],
+
+                    'index'   => [
+                        'booking' => 'Бронирование',
+                    ],
+                ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
-                'title'         => 'Брони',
-                'table-view'    => 'Табличный вид',
-                'calender-view' => 'Просмотр календаря',
-            ],
-        ],
+                'index' => [
+                    'datagrid' => [
+                        'created-date' => 'Дата создания',
+                        'from'         => 'От',
+                        'id'           => 'ИД',
+                        'order-id'     => 'Номер заказа',
+                        'qty'          => 'Кол-во',
+                        'to'           => 'До',
+                    ],
 
-        'datagrid' => [
-            'from' => 'От',
-            'to'   => 'До',
+                    'title' => 'Товары для бронирования',
+                ],
+
+                'title' => 'Товары для бронирования',
+            ],
         ],
     ],
 
-    'shop' => [
+    'shop'  => [
         'products' => [
-            'booking-information'      => 'Информация о записи',
-            'location'                 => 'Расположение',
-            'contact'                  => 'Связь',
-            'email'                    => 'Электронная почта',
-            'slot-duration'            => 'Длина слота',
-            'slot-duration-in-minutes' => ':minutes минут',
-            'today-availability'       => 'Доступно на сегодня',
-            'slots-for-all-days'       => 'Показать все дни',
-            'sunday'                   => 'Воскресенье',
-            'monday'                   => 'Понедельник',
-            'tuesday'                  => 'Вторник',
-            'wednesday'                => 'Среда',
-            'thursday'                 => 'Четверг',
-            'friday'                   => 'Пятница',
-            'saturday'                 => 'Суббота',
-            'closed'                   => 'Закрыто',
-            'book-an-appointment'      => 'Записать на прием',
-            'date'                     => 'Дата',
-            'slot'                     => 'Слот',
-            'no-slots-available'       => 'Нет доступных слотов',
-            'rent-an-item'             => 'Арендовать',
-            'choose-rent-option'       => 'Выберите тип аренды',
-            'daily-basis'              => 'Посуточная оплата',
-            'hourly-basis'             => 'Почасовая оплата',
-            'select-time-slot'         => 'Выберите временной слот',
-            'select-slot'              => 'Выберите слот',
-            'select-date'              => 'Выберите дату',
-            'select-rent-time'         => 'Выберите время аренды',
-            'from'                     => 'С',
-            'to'                       => 'По',
-            'book-a-table'             => 'Забронировать столик',
-            'special-notes'            => 'Особые пожелания/замечания',
-            'event-on'                 => 'Событие включено',
-            'book-your-ticket'         => 'Забронируйте ваш билет',
-            'per-ticket-price'         => ':price за билет',
-            'number-of-tickets'        => 'Число билетов',
-            'total-tickets'            => 'Всего билетов',
-            'base-price'               => 'Основная цена',
-            'total-price'              => 'Полная цена',
-            'base-price-info'          => '(Будет применено к каждому типу билетов для каждого количества)',
-        ],
+            'booking' => [
+                'closed'           => 'Закрыто',
 
-        'cart' => [
-            'renting_type' => 'Тип аренды',
-            'daily'        => 'Посуточная',
-            'hourly'       => 'Почасовая',
-            'event-ticket' => 'Билет на событие',
-            'event-from'   => 'Событие C',
-            'event-till'   => 'Событие По',
-            'rent-type'    => 'Тип аренды',
-            'rent-from'    => 'Аренда C',
-            'rent-till'    => 'Аренда По',
-            'booking-from' => 'Бронь С',
-            'booking-till' => 'Бронь По',
-            'special-note' => 'Особые пожелания/замечания',
+                'cart'             => [
+                    'booking-from' => 'Бронирование от',
+                    'booking-till' => 'Бронирование до',
+                    'daily'        => 'Ежедневно',
+                    'event-from'   => 'Событие с',
+                    'event-ticket' => 'Билет на событие',
+                    'event-till'   => 'Событие до',
+
+                    'integrity'    => [
+                        'missing_options'        => 'Отсутствуют опции для этого продукта.',
+                        'select_hourly_duration' => 'Выберите продолжительность слота в один час.',
+                    ],
+
+                    'rent-from'    => 'Аренда от',
+                    'rent-till'    => 'Аренда до',
+                    'rent-type'    => 'Тип аренды',
+                    'renting_type' => 'Тип аренды',
+                    'special-note' => 'Особые пожелания/заметки',
+                ],
+
+                'per-ticket-price' => ':price За билет',
+            ],
+
+            'view'    => [
+                'types'   => [
+                    'booking' => [
+                        'event-on'                 => 'Событие на',
+                        'location'                 => 'Местоположение',
+                        'slot-duration-in-minutes' => ':minutes Минут',
+                        'slot-duration'            => 'Продолжительность слота',
+                        'view-on-map'              => 'Посмотреть на карте',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => 'Закрыто',
+                        'today-availability' => 'Доступность сегодня',
+                    ],
+
+                    'event'       => [
+                        'book-your-ticket' => 'Забронируйте свой билет',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Выберите вариант аренды',
+                        'daily-basis'        => 'Ежедневно',
+                        'from'               => 'От',
+                        'hourly-basis'       => 'Почасовая оплата',
+                        'rent-an-item'       => 'Арендовать предмет',
+                        'select-date'        => 'Выбрать дату',
+                        'select-rent-time'   => 'Выбрать время аренды',
+                        'select-slot'        => 'Выбрать слот',
+                        'slot'               => 'Слот',
+                        'to'                 => 'К',
+                    ],
+
+                    'slots'       => [
+                        'book-an-appointment' => 'Записаться на прием',
+                        'date'                => 'Дата',
+                        'no-slots-available'  => 'Нет доступных слотов',
+                        'title'               => 'Слот',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'       => 'Забронировать стол',
+                        'closed'             => 'Закрыто',
+                        'slots-for-all-days' => 'Показать для всех дней',
+                        'special-notes'      => 'Особые пожелания/заметки',
+                        'today-availability' => 'Доступность сегодня',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

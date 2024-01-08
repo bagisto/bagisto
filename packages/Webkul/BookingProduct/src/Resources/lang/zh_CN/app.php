@@ -4,141 +4,289 @@ return [
     'admin' => [
         'catalog' => [
             'products' => [
-                'booking'                   => '预订信息',
-                'booking-type'              => '预订类型',
-                'default'                   => '默认',
-                'appointment-booking'       => '预约',
-                'event-booking'             => '活动预订',
-                'rental-booking'            => '租赁预订',
-                'table-booking'             => '订座电话',
-                'slot-duration'             => '插入持续时间 (分钟)',
-                'break-time'                => '休息时间黑白插槽 (分钟)',
-                'available-every-week'      => '每周可用',
-                'yes'                       => 'Yes',
-                'no'                        => 'No',
-                'available-from'            => '可用从',
-                'available-to'              => '可用到',
-                'same-slot-all-days'        => '同一时段全天',
-                'slot-has-quantity'         => '插槽有数量',
-                'slots'                     => '插槽',
-                'from'                      => '从',
-                'to'                        => '到',
-                'qty'                       => '数量',
-                'add-slot'                  => '添加插槽',
-                'sunday'                    => '星期天',
-                'monday'                    => '星期一',
-                'tuesday'                   => '星期二',
-                'wednesday'                 => '星期三',
-                'thursday'                  => '星期四',
-                'friday'                    => '星期五',
-                'saturday'                  => '星期六',
-                'renting-type'              => '租赁类型',
-                'daily'                     => '每日基础',
-                'hourly'                    => '每小时基础',
-                'daily-hourly'              => '两者(每日和每小时)',
-                'daily-price'               => '每日价格',
-                'hourly-price'              => '每小时价格',
-                'location'                  => '位置',
-                'show-location'             => '显示位置',
-                'event-start-date'          => '事件开始日期',
-                'event-end-date'            => '事件结束日期',
-                'tickets'                   => '门票',
-                'add-ticket'                => '添加票证',
-                'name'                      => '名称',
-                'price'                     => '价格',
-                'quantity'                  => '数量',
-                'description'               => '描述',
-                'special-price'             => '特殊价格',
-                'special-price-from'        => '有效期从',
-                'special-price-to'          => '有效期至',
-                'charged-per'               => '每次收费',
-                'guest'                     => '访客',
-                'table'                     => '桌',
-                'prevent-scheduling-before' => '阻止之前的调度',
-                'guest-limit'               => '每桌客人限制',
-                'guest-capacity'            => '客人容量',
-                'type'                      => '类型',
-                'many-bookings-for-one-day' => '一日多预订',
-                'one-booking-for-many-days' => '一票多日',
-                'day'                       => '日',
-                'status'                    => '状态',
-                'open'                      => '开门',
-                'close'                     => '关门',
-                'time-error'                => '这个时间必须大于开始时间.',
+                'edit' => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration'         => 'Slot之间的休息时间（分钟）',
+                            'slot-duration'          => 'Slot持续时间（分钟）',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => '否',
+                                'title' => '所有天都相同的Slot',
+                                'yes'   => '是',
+                            ],
+                        ],
+
+                        'default'     => [
+                            'break-duration' => 'Slot之间的休息时间（分钟）',
+                            'close'          => '关闭',
+                            'delete'         => '删除',
+                            'description'    => '预订信息',
+                            'edit'           => '编辑',
+                            'many'           => '多',
+
+                            'modal'          => [
+                                'slot' => [
+                                    'close'      => '关闭',
+                                    'day'        => '天',
+                                    'edit-title' => '编辑Slots',
+                                    'friday'     => '星期五',
+                                    'from-day'   => '从天开始',
+                                    'from'       => '从',
+                                    'monday'     => '星期一',
+                                    'open'       => '打开',
+                                    'saturday'   => '星期六',
+                                    'save'       => '保存Slot',
+                                    'select'     => '选择',
+                                    'status'     => '状态',
+                                    'sunday'     => '星期天',
+                                    'thursday'   => '星期四',
+                                    'time'       => '时间',
+                                    'title'      => '添加Slots',
+                                    'to'         => '到',
+                                    'tuesday'    => '星期二',
+                                    'wednesday'  => '星期三',
+                                    'week'       => ':day',
+                                ],
+                            ],
+
+                            'one'            => '一',
+                            'open'           => '打开',
+                            'slot-duration'  => 'Slot持续时间（分钟）',
+                            'title'          => '默认',
+                        ],
+
+                        'event'       => [
+                            'add'                => '添加门票',
+                            'delete'             => '删除',
+                            'description-info'   => '没有可用的门票。',
+                            'description'        => '描述',
+                            'edit'               => '编辑',
+
+                            'modal'              => [
+                                'ticket' => [
+                                    'save' => '保存门票',
+                                ],
+                            ],
+
+                            'name'               => '名称',
+                            'price'              => '价格',
+                            'qty'                => '数量',
+                            'special-price-from' => '特价从',
+                            'special-price-to'   => '特价到',
+                            'special-price'      => '特价',
+                            'title'              => '门票',
+                        ],
+
+                        'empty-info'  => [
+                            'tickets' => [
+                                'add' => '添加门票',
+                            ],
+
+                            'slots'   => [
+                                'add'         => '添加Slots',
+                                'delete'      => '删除',
+                                'description' => '具有时间持续时间的可用Slots。',
+                            ],
+                        ],
+
+                        'rental'      => [
+                            'daily_hourly'           => '每日和每小时基础',
+                            'daily-price'            => '每日价格',
+                            'daily'                  => '每日基础',
+                            'hourly-price'           => '每小时价格',
+                            'hourly'                 => '每小时基础',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => '否',
+                                'title' => '所有天都相同的Slot',
+                                'yes'   => '是',
+                            ],
+
+                            'title'                  => '租赁类型',
+                        ],
+
+                        'slots'       => [
+                            'add'              => '添加Slots',
+                            'delete'           => '删除',
+                            'description-info' => '具有时间持续时间的可用Slots。',
+                            'description'      => '没有可用的Slots。',
+                            'edit'             => '编辑',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'    => '星期五',
+                                    'from'      => '从',
+                                    'monday'    => '星期一',
+                                    'saturday'  => '星期六',
+                                    'sunday'    => '星期天',
+                                    'thursday'  => '星期四',
+                                    'to'        => '到',
+                                    'tuesday'   => '星期二',
+                                    'wednesday' => '星期三',
+                                ],
+                            ],
+
+                            'save'             => '保存',
+                            'title'            => 'Slots',
+                        ],
+
+                        'table'       => [
+                            'break-duration'            => 'Slot之间的休息时间（分钟）',
+
+                            'charged-per'               => [
+                                'guest' => '客人',
+                                'table' => '桌子',
+                                'title' => '每个收费',
+                            ],
+
+                            'guest-capacity'            => '客人容量',
+                            'guest-limit'               => '每桌客人限制',
+                            'prevent-scheduling-before' => '在预订之前防止安排',
+                            'slot-duration'             => 'Slot持续时间（分钟）',
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => '否',
+                                'title' => '所有天都相同的Slot',
+                                'yes'   => '是',
+                            ],
+                        ],
+                    ],
+
+                    'types'   => [
+                        'booking' => [
+                            'available-from'       => '从可用',
+                            'available-to'         => '到可用',
+
+                            'available-every-week' => [
+                                'no'    => '否',
+                                'title' => '每周都可用',
+                                'yes'   => '是',
+                            ],
+
+                            'location'             => '位置',
+                            'qty'                  => '数量',
+
+                            'type'                 => [
+                                'appointment' => '预约',
+                                'default'     => '默认',
+                                'event'       => '事件',
+                                'many'        => '多',
+                                'one'         => '一',
+                                'rental'      => '租赁',
+                                'table'       => '桌子',
+                                'title'       => '类型',
+                            ],
+
+                            'title'                => '预订类型',
+                        ],
+                    ],
+
+                    'index'   => [
+                        'booking' => '预订',
+                    ],
+                ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
-                'title'         => '预订信息',
-                'table-view'    => '表視圖',
-                'calender-view' => '日曆視圖',
-            ],
-        ],
+                'index' => [
+                    'datagrid' => [
+                        'created-date' => '创建日期',
+                        'from'         => '从',
+                        'id'           => 'ID',
+                        'order-id'     => '订单ID',
+                        'qty'          => '数量',
+                        'to'           => '到',
+                    ],
 
-        'datagrid' => [
-            'from' => '从',
-            'to'   => '到',
+                    'title'    => '预订产品',
+                ],
+
+                'title' => '预订产品',
+            ],
         ],
     ],
 
-    'shop' => [
+    'shop'  => [
         'products' => [
-            'booking-information'      => '预订信息',
-            'location'                 => '位置',
-            'contact'                  => '联系',
-            'email'                    => '电子邮件',
-            'slot-duration'            => '插槽周期',
-            'slot-duration-in-minutes' => ':minutes 分钟',
-            'today-availability'       => '今天的可用性',
-            'slots-for-all-days'       => '全天显示',
-            'sunday'                   => '星期天',
-            'monday'                   => '星期一',
-            'tuesday'                  => '星期二',
-            'wednesday'                => '星期三',
-            'thursday'                 => '星期四',
-            'friday'                   => '星期五',
-            'saturday'                 => '星期六',
-            'closed'                   => '已关门',
-            'book-an-appointment'      => '预约',
-            'date'                     => '日期',
-            'slot'                     => '插槽',
-            'no-slots-available'       => '没有可用的插槽',
-            'rent-an-item'             => '租一个项目',
-            'choose-rent-option'       => '选择租金选项',
-            'daily-basis'              => '每日基础',
-            'hourly-basis'             => '每小时基础',
-            'select-time-slot'         => '选择时间段',
-            'select-slot'              => '选择插槽',
-            'select-date'              => '选择日期',
-            'select-rent-time'         => '选择租用时间',
-            'from'                     => '从',
-            'to'                       => '到',
-            'book-a-table'             => '预订座位',
-            'special-notes'            => '特殊要求/注意事项',
-            'event-on'                 => '活动开启',
-            'book-your-ticket'         => '订票',
-            'per-ticket-price'         => '每张票 :price',
-            'number-of-tickets'        => '票数',
-            'total-tickets'            => '总票数',
-            'base-price'               => '基本价格',
-            'total-price'              => '总价',
-            'base-price-info'          => '(这将适用于每种数量的每种类型的票)',
-        ],
+            'booking' => [
+                'closed'           => '已关闭',
 
-        'cart' => [
-            'renting_type' => '租金类型',
-            'daily'        => '每日',
-            'hourly'       => '每小时',
-            'event-ticket' => '活动门票',
-            'event-from'   => '事件从',
-            'event-till'   => '活动截止日期',
-            'rent-type'    => '租金类型',
-            'rent-from'    => '租自',
-            'rent-till'    => '租到',
-            'booking-from' => '预订从',
-            'booking-till' => '预订截止',
-            'special-note' => '特殊要求/注意事项',
+                'cart'             => [
+                    'booking-from' => '预订从',
+                    'booking-till' => '预订至',
+                    'daily'        => '每日',
+                    'event-from'   => '活动开始于',
+                    'event-ticket' => '活动门票',
+                    'event-till'   => '活动结束于',
+
+                    'integrity'    => [
+                        'missing_options'        => '该产品缺少选项。',
+                        'select_hourly_duration' => '选择一个小时的时间段。',
+                    ],
+
+                    'rent-from'    => '租赁从',
+                    'rent-till'    => '租赁至',
+                    'rent-type'    => '租赁类型',
+                    'renting_type' => '租赁类型',
+                    'special-note' => '特殊要求/备注',
+                ],
+
+                'per-ticket-price' => ':price 每张票',
+            ],
+
+            'view'    => [
+                'types'   => [
+                    'booking' => [
+                        'event-on'                 => '活动时间',
+                        'location'                 => '地点',
+                        'slot-duration-in-minutes' => ':minutes 分钟',
+                        'slot-duration'            => '时间段',
+                        'view-on-map'              => '在地图上查看',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => '已关闭',
+                        'today-availability' => '今日可预订',
+                    ],
+
+                    'event'       => [
+                        'book-your-ticket' => '预订您的门票',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => '选择租赁选项',
+                        'daily-basis'        => '按日计费',
+                        'from'               => '从',
+                        'hourly-basis'       => '按小时计费',
+                        'rent-an-item'       => '租赁物品',
+                        'select-date'        => '选择日期',
+                        'select-rent-time'   => '选择租赁时间',
+                        'select-slot'        => '选择时间段',
+                        'slot'               => '时间段',
+                        'to'                 => '至',
+                    ],
+
+                    'slots'       => [
+                        'book-an-appointment' => '预订约会',
+                        'date'                => '日期',
+                        'no-slots-available'  => '没有可用时间段',
+                        'title'               => '时间段',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'       => '预订桌位',
+                        'closed'             => '已关闭',
+                        'slots-for-all-days' => '显示所有日期',
+                        'special-notes'      => '特殊要求/备注',
+                        'today-availability' => '今日可用',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

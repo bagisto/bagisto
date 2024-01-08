@@ -4,141 +4,289 @@ return [
     'admin' => [
         'catalog' => [
             'products' => [
-                'booking'                   => 'বুকিং তথ্য',
-                'booking-type'              => 'বুকিং টাইপ',
-                'default'                   => 'ডিফল্ট',
-                'appointment-booking'       => 'অ্যাপয়েন্টমেন্ট বুকিং',
-                'event-booking'             => 'ইভেন্ট বুকিং',
-                'rental-booking'            => 'ভাড়া বুকিং',
-                'table-booking'             => 'টেবিল বুকিং',
-                'slot-duration'             => 'স্লটের সময়কাল (মিনিট)',
-                'break-time'                => 'বিরতির সময় b/w স্লট (মিনিট)',
-                'available-every-week'      => 'প্রতি সপ্তাহে পাওয়া যায়',
-                'yes'                       => 'হ্যাঁ',
-                'no'                        => 'না',
-                'available-from'            => 'থেকে পাওয়া যায়',
-                'available-to'              => 'কার্যকর',
-                'same-slot-all-days'        => 'সারাদিন একই স্লট',
-                'slot-has-quantity'         => 'স্লটে পরিমাণ আছে',
-                'slots'                     => 'স্লট',
-                'from'                      => 'থেকে',
-                'to'                        => 'প্রতি',
-                'qty'                       => 'পরিমাণ',
-                'add-slot'                  => 'স্লট যোগ করুন',
-                'sunday'                    => 'রবিবার',
-                'monday'                    => 'সোমবার',
-                'tuesday'                   => 'মঙ্গলবার',
-                'wednesday'                 => 'বুধবার',
-                'thursday'                  => 'বৃহস্পতিবার',
-                'friday'                    => 'শুক্রবার',
-                'saturday'                  => 'শনিবার',
-                'renting-type'              => 'ভাড়ার ধরন',
-                'daily'                     => 'দৈনিক ভিত্তিতে',
-                'hourly'                    => 'ঘন্টার ভিত্তিতে',
-                'daily-hourly'              => 'উভয়ই (দৈনিক এবং ঘন্টাভিত্তিক)',
-                'daily-price'               => 'দৈনিক মূল্য',
-                'hourly-price'              => 'ঘণ্টায় মূল্য',
-                'location'                  => 'অবস্থান',
-                'show-location'             => 'অবস্থান দেখান',
-                'event-start-date'          => 'ইভেন্ট শুরুর তারিখ',
-                'event-end-date'            => 'ইভেন্টের শেষ তারিখ',
-                'tickets'                   => 'টিকিট',
-                'add-ticket'                => 'টিকিট যোগ করুন',
-                'name'                      => 'নাম',
-                'price'                     => 'দাম',
-                'quantity'                  => 'পরিমাণ',
-                'description'               => 'বর্ণনা',
-                'special-price'             => 'বিশেষ মূল্য',
-                'special-price-from'        => 'বৈধ হবে',
-                'special-price-to'          => 'বৈধতার সীমা',
-                'charged-per'               => 'প্রতি চার্জ',
-                'guest'                     => 'অতিথি',
-                'table'                     => 'টেবিল',
-                'prevent-scheduling-before' => 'আগে শিডিউল করা প্রতিরোধ করুন',
-                'guest-limit'               => 'টেবিল প্রতি অতিথি সীমা',
-                'guest-capacity'            => 'গেস্ট ক্যাপাসিটি',
-                'type'                      => 'টাইপ',
-                'many-bookings-for-one-day' => 'একদিনের জন্য অনেক বুকিং',
-                'one-booking-for-many-days' => 'অনেক দিনের জন্য এক বুকিং',
-                'day'                       => 'দিন',
-                'status'                    => 'স্ট্যাটাস',
-                'open'                      => 'খোলা',
-                'close'                     => 'বন্ধ',
-                'time-error'                => 'সময়ের থেকে সময়ের চেয়ে বড় হতে হবে।',
+                'edit'  => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration'         => 'স্লটের মধ্যে বিরতি সময় (মিনিট)',
+                            'slot-duration'          => 'স্লট সময়কাল (মিনিট)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'না',
+                                'title' => 'সমস্ত দিনের জন্য একই স্লট',
+                                'yes'   => 'হ্যাঁ',
+                            ],
+                        ],
+
+                        'default'     => [
+                            'break-duration' => 'স্লটের মধ্যে বিরতি সময় (মিনিট)',
+                            'close'          => 'বন্ধ',
+                            'delete'         => 'মুছে ফেলুন',
+                            'description'    => 'বুকিং তথ্য',
+                            'edit'           => 'সম্পাদনা করুন',
+                            'many'           => 'অনেক',
+
+                            'modal'          => [
+                                'slot' => [
+                                    'close'      => 'বন্ধ',
+                                    'day'        => 'দিন',
+                                    'edit-title' => 'স্লট সম্পাদনা করুন',
+                                    'friday'     => 'শুক্রবার',
+                                    'from-day'   => 'থেকে দিন',
+                                    'from'       => 'থেকে',
+                                    'monday'     => 'সোমবার',
+                                    'open'       => 'খোলা',
+                                    'saturday'   => 'শনিবার',
+                                    'save'       => 'স্লট সংরক্ষণ করুন',
+                                    'select'     => 'নির্বাচন করুন',
+                                    'status'     => 'অবস্থা',
+                                    'sunday'     => 'রবিবার',
+                                    'thursday'   => 'বৃহস্পতিবার',
+                                    'time'       => 'সময়',
+                                    'title'      => 'স্লট যোগ করুন',
+                                    'to'         => 'পর্যন্ত',
+                                    'tuesday'    => 'মঙ্গলবার',
+                                    'wednesday'  => 'বুধবার',
+                                    'week'       => ':day',
+                                ],
+                            ],
+
+                            'one'            => 'এক',
+                            'open'           => 'খোলা',
+                            'slot-duration'  => 'স্লট সময়কাল (মিনিট)',
+                            'title'          => 'ডিফল্ট',
+                        ],
+
+                        'event'       => [
+                            'add'                => 'টিকেট যোগ করুন',
+                            'delete'             => 'মুছে ফেলুন',
+                            'description-info'   => 'কোন টিকেট উপলব্ধ নেই।',
+                            'description'        => 'বর্ণনা',
+                            'edit'               => 'সম্পাদনা করুন',
+
+                            'modal' => [
+                                'ticket' => [
+                                    'save' => 'টিকেট সংরক্ষণ করুন',
+                                ],
+                            ],
+
+                            'name'               => 'নাম',
+                            'price'              => 'মূল্য',
+                            'qty'                => 'পরিমাণ',
+                            'special-price-from' => 'বিশেষ মূল্য থেকে',
+                            'special-price-to'   => 'বিশেষ মূল্য পর্যন্ত',
+                            'special-price'      => 'বিশেষ মূল্য',
+                            'title'              => 'টিকেট',
+                        ],
+
+                        'empty-info'  => [
+                            'tickets' => [
+                                'add' => 'টিকেট যোগ করুন',
+                            ],
+
+                            'slots' => [
+                                'add'         => 'স্লট যোগ করুন',
+                                'delete'      => 'মুছে ফেলুন',
+                                'description' => 'সময় মেয়াদ সহ উপলব্ধ স্লট।',
+                            ],
+                        ],
+
+                        'rental'      => [
+                            'daily_hourly'           => 'দৈনিক এবং প্রতি ঘণ্টায় উভয়',
+                            'daily-price'            => 'দৈনিক মূল্য',
+                            'daily'                  => 'দৈনিক ভিত্তিতে',
+                            'hourly-price'           => 'প্রতি ঘণ্টার মূল্য',
+                            'hourly'                 => 'প্রতি ঘণ্টা ভিত্তিতে',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'না',
+                                'title' => 'সমস্ত দিনের জন্য একই স্লট',
+                                'yes'   => 'হ্যাঁ',
+                            ],
+
+                            'title' => 'ভাড়ার ধরণ',
+                        ],
+
+                        'slots'       => [
+                            'add'              => 'স্লট যোগ করুন',
+                            'delete'           => 'মুছে ফেলুন',
+                            'description-info' => 'সময় মেয়াদ সহ উপলব্ধ স্লট।',
+                            'description'      => 'কোন স্লট উপলব্ধ নেই।',
+                            'edit'             => 'সম্পাদনা করুন',
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'     => 'শুক্রবার',
+                                    'from'       => 'থেকে',
+                                    'monday'     => 'সোমবার',
+                                    'saturday'   => 'শনিবার',
+                                    'sunday'     => 'রবিবার',
+                                    'thursday'   => 'বৃহস্পতিবার',
+                                    'to'         => 'পর্যন্ত',
+                                    'tuesday'    => 'মঙ্গলবার',
+                                    'wednesday'  => 'বুধবার',
+                                ],
+                            ],
+
+                            'save'  => 'সংরক্ষণ করুন',
+                            'title' => 'স্লট',
+                        ],
+
+                        'table'       => [
+                            'break-duration'            => 'স্লটের মধ্যে বিরতি সময় (মিনিট)',
+
+                            'charged-per'               => [
+                                'guest' => 'অতিথি',
+                                'table' => 'টেবিল',
+                                'title' => 'প্রতি চার্জ',
+                            ],
+
+                            'guest-capacity'            => 'অতিথি ধারণক্ষমতা',
+                            'guest-limit'               => 'প্রতি টেবিলে অতিথির সীমা',
+                            'prevent-scheduling-before' => 'পূর্বে শিডিউলিং প্রতিরোধ করুন',
+                            'slot-duration'             => 'স্লট সময়কাল (মিনিট)',
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'না',
+                                'title' => 'সমস্ত দিনের জন্য একই স্লট',
+                                'yes'   => 'হ্যাঁ',
+                            ],
+                        ],
+                    ],
+
+                    'types'   => [
+                        'booking' => [
+                            'available-from'       => 'থেকে উপলব্ধ',
+                            'available-to'         => 'পর্যন্ত উপলব্ধ',
+
+                            'available-every-week' => [
+                                'no'    => 'না',
+                                'title' => 'প্রতি সপ্তাহে উপলব্ধ',
+                                'yes'   => 'হ্যাঁ',
+                            ],
+
+                            'location'             => 'লোকেশন',
+                            'qty'                  => 'পরিমাণ',
+
+                            'type'                 => [
+                                'appointment' => 'অ্যাপয়েন্টমেন্ট',
+                                'default'     => 'ডিফল্ট',
+                                'event'       => 'ইভেন্ট',
+                                'many'        => 'বহু',
+                                'one'         => 'এক',
+                                'rental'      => 'ভাড়া',
+                                'table'       => 'টেবিল',
+                                'title'       => 'ধরণ',
+                            ],
+
+                            'title'                => 'বুকিং প্রকার',
+                        ],
+                    ],
+                ],
+
+                'index' => [
+                    'booking' => 'বুকিং',
+                ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
-                'title'         => 'বুকিং',
-                'table-view'    => 'টেবিল ভিউ',
-                'calender-view' => 'ক্যালেন্ডার ভিউ',
-            ],
-        ],
+                'index' => [
+                    'datagrid' => [
+                        'created-date' => 'তৈরির তারিখ',
+                        'from'         => 'থেকে',
+                        'id'           => 'আইডি',
+                        'order-id'     => 'অর্ডার আইডি',
+                        'qty'          => 'পরিমাণ',
+                        'to'           => 'পর্যন্ত',
+                    ],
 
-        'datagrid' => [
-            'from' => 'থেকে',
-            'to'   => 'প্রতি',
+                    'title'    => 'বুকিং প্রোডাক্ট',
+                ],
+
+                'title' => 'বুকিং প্রোডাক্ট',
+            ],
         ],
     ],
 
-    'shop' => [
+    'shop'  => [
         'products' => [
-            'booking-information'      => 'বুকিং তথ্য',
-            'location'                 => 'অবস্থান',
-            'contact'                  => 'যোগাযোগ',
-            'email'                    => 'ইমেইল',
-            'slot-duration'            => 'স্লট সময়কাল',
-            'slot-duration-in-minutes' => ':minutes মিনিট',
-            'today-availability'       => 'আজ প্রাপ্যতা',
-            'slots-for-all-days'       => 'সমস্ত দিনের জন্য দেখান',
-            'sunday'                   => 'রবিবার',
-            'monday'                   => 'সোমবার',
-            'tuesday'                  => 'মঙ্গলবার',
-            'wednesday'                => 'বুধবার',
-            'thursday'                 => 'বৃহস্পতিবার',
-            'friday'                   => 'শুক্রবার',
-            'saturday'                 => 'শনিবার',
-            'closed'                   => 'বন্ধ',
-            'book-an-appointment'      => 'সাক্ষাৎকার লিপিবদ্ধ করুন',
-            'date'                     => 'তারিখ',
-            'slot'                     => 'স্লট',
-            'no-slots-available'       => 'কোন স্লট উপলব্ধ',
-            'rent-an-item'             => 'একটি আইটেম ভাড়া',
-            'choose-rent-option'       => 'ভাড়ার বিকল্প বেছে নিন',
-            'daily-basis'              => 'দৈনিক ভিত্তিতে',
-            'hourly-basis'             => 'ঘন্টার ভিত্তিতে',
-            'select-time-slot'         => 'সময় স্লট নির্বাচন করুন',
-            'select-slot'              => 'স্লট নির্বাচন করুন',
-            'select-date'              => 'তারিখ নির্বাচন করুন',
-            'select-rent-time'         => 'ভাড়ার সময় নির্বাচন করুন',
-            'from'                     => 'থেকে',
-            'to'                       => 'প্রতি',
-            'book-a-table'             => 'একটি টেবিল বুক করুন',
-            'special-notes'            => 'বিশেষ অনুরোধ/নোট',
-            'event-on'                 => 'ইভেন্ট চালু',
-            'book-your-ticket'         => 'আপনার টিকিট বুক করুন',
-            'per-ticket-price'         => ':price টিকিট প্রতি',
-            'number-of-tickets'        => 'টিকিটের সংখ্যা',
-            'total-tickets'            => 'মোট টিকিট',
-            'base-price'               => 'মুলদাম',
-            'total-price'              => 'মোট দাম',
-            'base-price-info'          => '(এটি প্রতিটি পরিমাণের জন্য প্রতিটি ধরণের টিকিটের ক্ষেত্রে প্রযোজ্য হবে)',
-        ],
+            'booking' => [
+                'closed' => 'বন্ধ',
 
-        'cart' => [
-            'renting_type' => 'ভাড়ার ধরন',
-            'daily'        => 'দৈনিক',
-            'hourly'       => 'ঘণ্টায়',
-            'event-ticket' => 'ইভেন্ট টিকেট',
-            'event-from'   => 'ইভেন্ট থেকে',
-            'event-till'   => 'ইভেন্ট টিল',
-            'rent-type'    => 'ভাড়ার ধরন',
-            'rent-from'    => 'থেকে ভাড়া',
-            'rent-till'    => 'পর্যন্ত ভাড়া',
-            'booking-from' => 'থেকে বুকিং',
-            'booking-till' => 'পর্যন্ত বুকিং',
-            'special-note' => 'বিশেষ অনুরোধ/নোট',
+                'cart' => [
+                    'booking-from' => 'থেকে বুকিং',
+                    'booking-till' => 'পর্যন্ত বুকিং',
+                    'daily'        => 'দৈনিক',
+                    'event-from'   => 'ইভেন্ট থেকে',
+                    'event-ticket' => 'ইভেন্ট টিকিট',
+                    'event-till'   => 'ইভেন্ট পর্যন্ত',
+
+                    'integrity'    => [
+                        'missing_options'        => 'এই পণ্যের জন্য অপশন অনুপস্থিত।',
+                        'select_hourly_duration' => 'এক ঘন্টা মেয়াদের স্লট নির্বাচন করুন।',
+                    ],
+
+                    'rent-from'    => 'থেকে ভাড়া',
+                    'rent-till'    => 'পর্যন্ত ভাড়া',
+                    'rent-type'    => 'ভাড়ার ধরণ',
+                    'renting_type' => 'ভাড়ার ধরণ',
+                    'special-note' => 'বিশেষ অনুরোধ/নোট',
+                ],
+
+                'per-ticket-price' => ':price প্রতি টিকিট',
+            ],
+
+            'view'    => [
+                'types'   => [
+                    'booking' => [
+                        'event-on'                 => 'ইভেন্ট অন',
+                        'location'                 => 'লোকেশন',
+                        'slot-duration-in-minutes' => ':minutes মিনিট',
+                        'slot-duration'            => 'স্লট সময়কাল',
+                        'view-on-map'              => 'মানচিত্রে দেখুন',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => 'বন্ধ',
+                        'today-availability' => 'আজকের উপলব্ধতা',
+                    ],
+
+                    'event'       => [
+                        'book-your-ticket' => 'আপনার টিকিট বুক করুন',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option'       => 'ভাড়ার অপশন নির্বাচন করুন',
+                        'daily-basis'              => 'দৈনিক ভিত্তিতে',
+                        'from'                     => 'থেকে',
+                        'hourly-basis'             => 'প্রতি ঘন্টায়',
+                        'rent-an-item'             => 'একটি আইটেম ভাড়া নিন',
+                        'select-date'              => 'তারিখ নির্বাচন করুন',
+                        'select-rent-time'         => 'ভাড়ার সময় নির্বাচন করুন',
+                        'select-slot'              => 'স্লট নির্বাচন করুন',
+                        'slot'                     => 'স্লট',
+                        'to'                       => 'পর্যন্ত',
+                    ],
+
+                    'slots'       => [
+                        'book-an-appointment' => 'একটি অ্যাপয়েন্টমেন্ট বুক করুন',
+                        'date'                => 'তারিখ',
+                        'no-slots-available'  => 'কোনও স্লট উপলব্ধ নেই',
+                        'title'               => 'স্লট',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'       => 'একটি টেবিল বুক করুন',
+                        'closed'             => 'বন্ধ',
+                        'slots-for-all-days' => 'সমস্ত দিনের জন্য দেখান',
+                        'special-notes'      => 'বিশেষ অনুরোধ/নোট',
+                        'today-availability' => 'আজকের উপলব্ধতা',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

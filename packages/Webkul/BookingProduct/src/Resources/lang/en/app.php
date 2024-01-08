@@ -96,6 +96,7 @@ return [
                             'daily'                  => 'Daily Basis',
                             'hourly-price'           => 'Hourly Price',
                             'hourly'                 => 'Hourly Basis',
+
                             'same-slot-for-all-days' => [
                                 'no'    => 'No',
                                 'title' => 'Same Slot For All days',
@@ -154,19 +155,19 @@ return [
 
                     'types'   => [
                         'booking' => [
-                            'available-from' => 'Available From',
-                            'available-to'   => 'Available To',
+                            'available-from'       => 'Available From',
+                            'available-to'         => 'Available To',
 
-                            'available-every-week'      => [
+                            'available-every-week' => [
                                 'no'    => 'No',
                                 'title' => 'Available Every Week',
                                 'yes'   => 'Yes',
                             ],
 
-                            'location' => 'Location',
-                            'qty'      => 'Qty',
+                            'location'             => 'Location',
+                            'qty'                  => 'Qty',
 
-                            'type' => [
+                            'type'                 => [
                                 'appointment' => 'Appointment',
                                 'default'     => 'Default',
                                 'event'       => 'Event',
@@ -177,7 +178,7 @@ return [
                                 'title'       => 'Type',
                             ],
 
-                            'title' => 'Booking Type',
+                            'title'                => 'Booking Type',
                         ],
                     ],
                 ],
@@ -237,7 +238,7 @@ return [
             ],
 
             'view'    => [
-                'types' => [
+                'types'   => [
                     'booking' => [
                         'event-on'                 => 'Event On',
                         'location'                 => 'Location',
@@ -253,11 +254,11 @@ return [
                         'today-availability' => 'Today Availability',
                     ],
 
-                    'event' => [
+                    'event'       => [
                         'book-your-ticket' => 'Book Your Ticket',
                     ],
 
-                    'rental' => [
+                    'rental'      => [
                         'choose-rent-option'       => 'Choose Rent Option',
                         'daily-basis'              => 'Daily Basis',
                         'from'                     => 'From',
@@ -270,14 +271,14 @@ return [
                         'to'                       => 'To',
                     ],
 
-                    'slots' => [
-                        'book-an-appointment'      => 'Book an Appointment',
-                        'date'                     => 'Date',
-                        'no-slots-available'       => 'No slots available',
+                    'slots'       => [
+                        'book-an-appointment'       => 'Book an Appointment',
+                        'date'                      => 'Date',
+                        'no-slots-available'        => 'No slots available',
                         'title'                     => 'Slot',
                     ],
 
-                    'table' => [
+                    'table'       => [
                         'book-a-table'             => 'Book a Table',
                         'closed'                   => 'Closed',
                         'slots-for-all-days'       => 'Show for all days',

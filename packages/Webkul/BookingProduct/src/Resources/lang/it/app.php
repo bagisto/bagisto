@@ -4,141 +4,289 @@ return [
     'admin' => [
         'catalog' => [
             'products' => [
-                'booking'                   => 'Informazioni Prenotazione',
-                'booking-type'              => 'Prenotazione Tipo',
-                'default'                   => 'Predefinita',
-                'appointment-booking'       => 'Prenotazione Appuntamento',
-                'event-booking'             => 'Prenotazione Evento',
-                'rental-booking'            => 'Prenotazione Noleggio',
-                'table-booking'             => 'Prenotazione Tavolo',
-                'slot-duration'             => 'Durata Slot (Min)',
-                'break-time'                => 'pausa fra fessura',
-                'available-every-week'      => 'Disponibiità Ogni Settimana',
-                'yes'                       => 'Sì',
-                'no'                        => 'No',
-                'available-from'            => 'Disponibile Da',
-                'available-to'              => 'Disponibile Fino A',
-                'same-slot-all-days'        => 'Stesso Slot tutti i giorni',
-                'slot-has-quantity'         => 'Slot ha quantità',
-                'slots'                     => 'Slot',
-                'no-slots-available'        => 'senza slot disponibili',
-                'from'                      => 'Da',
-                'to'                        => 'A',
-                'qty'                       => 'Q.tà',
-                'add-slot'                  => 'Aggiungi Slot',
-                'sunday'                    => 'Domenica',
-                'monday'                    => 'Lunedì',
-                'tuesday'                   => 'Martedì',
-                'wednesday'                 => 'Mercoledì',
-                'thursday'                  => 'Giovedì',
-                'friday'                    => 'Venerdì',
-                'saturday'                  => 'Sabato',
-                'renting-type'              => 'Tipo di noleggio',
-                'daily'                     => 'Base Giornaliera',
-                'hourly'                    => 'Base Oraria',
-                'daily-hourly'              => 'Entrambe (Base Giornaliera e Oraria)',
-                'daily-price'               => 'Prezzo al giorno',
-                'hourly-price'              => 'Prezzo all\'ora',
-                'location'                  => 'Posizione',
-                'show-location'             => 'Mostra Posizione',
-                'event-start-date'          => 'Data Inizio Evento',
-                'event-end-date'            => 'Data Fine Evento',
-                'tickets'                   => 'Biglietti',
-                'add-ticket'                => 'Aggungi Biglietto',
-                'name'                      => 'Nome',
-                'price'                     => 'Prezzo',
-                'quantity'                  => 'Quantità',
-                'description'               => 'Descrizione',
-                'special-price'             => 'prezzo speciale',
-                'special-price-from'        => 'prezzo speciale d',
-                'special-price-to'          => 'prezzo speciale a',
-                'charged-per'               => 'addebitato per',
-                'guest'                     => 'Ospite',
-                'table'                     => 'Tavolo',
-                'prevent-scheduling-before' => 'Previeni Scheduling Prima',
-                'guest-limit'               => 'Limite Ospiti per Tavolo',
-                'guest-capacity'            => 'Capacità Ospiti',
-                'type'                      => 'Tipo',
-                'many-bookings-for-one-day' => 'Diverse prenotazioni di un giorno',
-                'one-booking-for-many-days' => 'Una prenotazione per diversi giorni',
-                'day'                       => 'Giorno',
-                'status'                    => 'Stato',
-                'open'                      => 'Aperto',
-                'close'                     => 'Chiuso',
-                'time-error'                => 'The to time must be greater than the from time.',
+                'edit' => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration' => 'Tempo di pausa tra gli slot (minuti)',
+                            'slot-duration'  => 'Durata dello slot (minuti)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Stesso slot per tutti i giorni',
+                                'yes'   => 'Sì',
+                            ],
+                        ],
+
+                        'default' => [
+                            'break-duration' => 'Tempo di pausa tra gli slot (minuti)',
+                            'close'          => 'Chiudi',
+                            'delete'         => 'Elimina',
+                            'description'    => 'Informazioni prenotazione',
+                            'edit'           => 'Modifica',
+                            'many'           => 'Molti',
+
+                            'modal' => [
+                                'slot' => [
+                                    'close'      => 'Chiudi',
+                                    'day'        => 'Giorno',
+                                    'edit-title' => 'Modifica slot',
+                                    'friday'     => 'Venerdì',
+                                    'from-day'   => 'Dal giorno',
+                                    'from'       => 'Da',
+                                    'monday'     => 'Lunedì',
+                                    'open'       => 'Aperto',
+                                    'saturday'   => 'Sabato',
+                                    'save'       => 'Salva slot',
+                                    'select'     => 'Seleziona',
+                                    'status'     => 'Stato',
+                                    'sunday'     => 'Domenica',
+                                    'thursday'   => 'Giovedì',
+                                    'time'       => 'Ora',
+                                    'title'      => 'Aggiungi slot',
+                                    'to'         => 'A',
+                                    'tuesday'    => 'Martedì',
+                                    'wednesday'  => 'Mercoledì',
+                                    'week'       => ':giorno',
+                                ],
+                            ],
+
+                            'one'           => 'Uno',
+                            'open'          => 'Apri',
+                            'slot-duration' => 'Durata dello slot (minuti)',
+                            'title'         => 'Predefinito',
+                        ],
+
+                        'event' => [
+                            'add'              => 'Aggiungi biglietti',
+                            'delete'           => 'Elimina',
+                            'description-info' => 'Non ci sono biglietti disponibili.',
+                            'description'      => 'Descrizione',
+                            'edit'             => 'Modifica',
+
+                            'modal' => [
+                                'ticket' => [
+                                    'save' => 'Salva biglietti',
+                                ],
+                            ],
+
+                            'name'               => 'Nome',
+                            'price'              => 'Prezzo',
+                            'qty'                => 'Quantità',
+                            'special-price-from' => 'Prezzo speciale da',
+                            'special-price-to'   => 'Prezzo speciale a',
+                            'special-price'      => 'Prezzo speciale',
+                            'title'              => 'Biglietti',
+                        ],
+
+                        'empty-info' => [
+                            'tickets' => [
+                                'add' => 'Aggiungi biglietti',
+                            ],
+
+                            'slots' => [
+                                'add'         => 'Aggiungi slot',
+                                'delete'      => 'Elimina',
+                                'description' => 'Slot disponibili con durata temporale.',
+                            ],
+                        ],
+
+                        'rental' => [
+                            'daily_hourly' => 'Entrambi (Giornaliero ed orario)',
+                            'daily-price'  => 'Prezzo giornaliero',
+                            'daily'        => 'Base giornaliera',
+                            'hourly-price' => 'Prezzo orario',
+                            'hourly'       => 'Base oraria',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Stesso slot per tutti i giorni',
+                                'yes'   => 'Sì',
+                            ],
+
+                            'title' => 'Tipo di noleggio',
+                        ],
+
+                        'slots' => [
+                            'add'              => 'Aggiungi slot',
+                            'delete'           => 'Elimina',
+                            'description-info' => 'Slot disponibili con durata temporale.',
+                            'description'      => 'Non ci sono slot disponibili.',
+                            'edit'             => 'Modifica',
+
+                            'modal' => [
+                                'slot' => [
+                                    'friday'    => 'Venerdì',
+                                    'from'      => 'Da',
+                                    'monday'    => 'Lunedì',
+                                    'saturday'  => 'Sabato',
+                                    'sunday'    => 'Domenica',
+                                    'thursday'  => 'Giovedì',
+                                    'to'        => 'A',
+                                    'tuesday'   => 'Martedì',
+                                    'wednesday' => 'Mercoledì',
+                                ],
+                            ],
+
+                            'save'  => 'Salva',
+                            'title' => 'Slot',
+                        ],
+
+                        'table' => [
+                            'break-duration' => 'Tempo di pausa tra gli slot (minuti)',
+
+                            'charged-per' => [
+                                'guest' => 'Ospite',
+                                'table' => 'Tavolo',
+                                'title' => 'Addebitato per',
+                            ],
+
+                            'guest-capacity'            => 'Capacità ospiti',
+                            'guest-limit'               => 'Limite ospiti per tavolo',
+                            'prevent-scheduling-before' => 'Evita programmazione prima di',
+                            'slot-duration'             => 'Durata dello slot (minuti)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'No',
+                                'title' => 'Stesso slot per tutti i giorni',
+                                'yes'   => 'Sì',
+                            ],
+                        ],
+                    ],
+
+                    'types' => [
+                        'booking' => [
+                            'available-from' => 'Disponibile da',
+                            'available-to'   => 'Disponibile fino a',
+
+                            'available-every-week' => [
+                                'no'    => 'No',
+                                'title' => 'Disponibile ogni settimana',
+                                'yes'   => 'Sì',
+                            ],
+
+                            'location' => 'Posizione',
+                            'qty'      => 'Quantità',
+
+                            'type' => [
+                                'appointment' => 'Appuntamento',
+                                'default'     => 'Predefinito',
+                                'event'       => 'Evento',
+                                'many'        => 'Molti',
+                                'one'         => 'Uno',
+                                'rental'      => 'Noleggio',
+                                'table'       => 'Tavolo',
+                                'title'       => 'Tipo',
+                            ],
+
+                            'title' => 'Tipo di prenotazione',
+                        ],
+                    ],
+
+                    'index' => [
+                        'booking' => 'Prenotazione',
+                    ],
+                ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
-                'title'         => 'Informazioni Prenotazione',
-                'table-view'    => 'Vista tabella',
-                'calender-view' => 'Vista Calendario',
-            ],
-        ],
+                'index' => [
+                    'datagrid' => [
+                        'created-date' => 'Data di Creazione',
+                        'from'         => 'Da',
+                        'id'           => 'ID',
+                        'order-id'     => 'ID Ordine',
+                        'qty'          => 'Quantità',
+                        'to'           => 'A',
+                    ],
 
-        'datagrid' => [
-            'from' => 'Da',
-            'to'   => 'A',
+                    'title' => 'Prodotto Prenotazioni',
+                ],
+
+                'title' => 'Prodotto Prenotazioni',
+            ],
         ],
     ],
 
-    'shop' => [
+    'shop'  => [
         'products' => [
-            'booking-information'      => 'Informazioni sulla prenotazione',
-            'location'                 => 'Posizione',
-            'contact'                  => 'Contatto',
-            'email'                    => 'e-mail',
-            'slot-duration'            => ':minutes Minuti',
-            'slot-duration-in-minutes' => ':minutes Minuti',
-            'today-availability'       => 'Disponibilità odierna',
-            'slots-for-all-days'       => 'Mostra per tutti i giorni',
-            'sunday'                   => 'Domenica',
-            'monday'                   => 'Lunedì',
-            'tuesday'                  => 'Martedì',
-            'wednesday'                => 'Mercoledì',
-            'thursday'                 => 'Giovedì',
-            'friday'                   => 'Venerdì',
-            'saturday'                 => 'Sabato',
-            'closed'                   => 'Chiuso',
-            'book-an-appointment'      => 'Prenota un Appuntamento',
-            'date'                     => 'Data',
-            'slot'                     => 'fessura',
-            'rent-an-item'             => 'Noleggia un Articolo',
-            'choose-rent-option'       => 'Scegli una opzione di noleggio',
-            'daily-basis'              => 'Base Giornaliera',
-            'hourly-basis'             => 'Base Oraria',
-            'select-time-slot'         => 'Seleziona slot di tempo',
-            'select-slot'              => 'Seleziona Slot',
-            'select-date'              => 'Seleziona data',
-            'select-rent-time'         => 'Seleziona Periodo di Noleggio',
-            'from'                     => 'Da',
-            'to'                       => 'A',
-            'book-a-table'             => 'Prenota un Tavolo',
-            'special-notes'            => 'Richieste/Note Speciali',
-            'event-on'                 => 'Evento del',
-            'book-your-ticket'         => 'Prenota il tuo Biglietto',
-            'per-ticket-price'         => ':price per Biglietto',
-            'number-of-tickets'        => 'Numero di Biglietti',
-            'total-tickets'            => 'Totale Biglietti',
-            'base-price'               => 'Prezzo Base',
-            'total-price'              => 'Prezzo Totale',
-            'base-price-info'          => '(Questo si applicherà ad ogni tipo di biglietto per ciascuna quantità)',
-        ],
+            'booking' => [
+                'closed'           => 'Chiuso',
 
-        'cart' => [
-            'renting_type' => 'Tipo Noleggio',
-            'daily'        => 'Giornaliero',
-            'hourly'       => 'Orario',
-            'event-ticket' => 'Biglietto Evento',
-            'event-from'   => 'Evento dal',
-            'event-till'   => 'Evento al',
-            'rent-type'    => 'Tipo Noleggio',
-            'rent-from'    => 'Noleggio Da',
-            'rent-till'    => 'Noleggio A',
-            'booking-from' => 'Prenotazione Da',
-            'booking-till' => 'Prenotazione A',
-            'special-note' => 'Richieste/Note Speciali',
+                'cart'             => [
+                    'booking-from' => 'Prenotazione Da',
+                    'booking-till' => 'Prenotazione Fino A',
+                    'daily'        => 'Giornaliero',
+                    'event-from'   => 'Evento Da',
+                    'event-ticket' => 'Biglietto Evento',
+                    'event-till'   => 'Evento Fino A',
+
+                    'integrity'    => [
+                        'missing_options'        => 'Opzioni mancanti per questo prodotto.',
+                        'select_hourly_duration' => 'Seleziona una durata dello slot di un\'ora.',
+                    ],
+
+                    'rent-from'    => 'Affitto Da',
+                    'rent-till'    => 'Affitto Fino A',
+                    'rent-type'    => 'Tipo di Affitto',
+                    'renting_type' => 'Tipo di Affitto',
+                    'special-note' => 'Richieste Speciali/Note',
+                ],
+
+                'per-ticket-price' => ':price Per Biglietto',
+            ],
+
+            'view'    => [
+                'types'   => [
+                    'booking' => [
+                        'event-on'                 => 'Evento Il',
+                        'location'                 => 'Posizione',
+                        'slot-duration-in-minutes' => ':minutes Minuti',
+                        'slot-duration'            => 'Durata dello Slot',
+                        'view-on-map'              => 'Visualizza sulla Mappa',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => 'Chiuso',
+                        'today-availability' => 'Disponibilità Oggi',
+                    ],
+
+                    'event'       => [
+                        'book-your-ticket' => 'Prenota Il Tuo Biglietto',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Scegli Opzione di Affitto',
+                        'daily-basis'        => 'Base Giornaliera',
+                        'from'               => 'Da',
+                        'hourly-basis'       => 'Base Oraria',
+                        'rent-an-item'       => 'Affitta un Oggetto',
+                        'select-date'        => 'Seleziona data',
+                        'select-rent-time'   => 'Seleziona Orario Affitto',
+                        'select-slot'        => 'Seleziona Slot',
+                        'slot'               => 'Slot',
+                        'to'                 => 'A',
+                    ],
+
+                    'slots'       => [
+                        'book-an-appointment' => 'Prenota un Appuntamento',
+                        'date'                => 'Data',
+                        'no-slots-available'  => 'Nessuno slot disponibile',
+                        'title'               => 'Slot',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'       => 'Prenota un Tavolo',
+                        'closed'             => 'Chiuso',
+                        'slots-for-all-days' => 'Mostra per tutti i giorni',
+                        'special-notes'      => 'Richieste Speciali/Note',
+                        'today-availability' => 'Disponibilità Oggi',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

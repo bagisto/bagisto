@@ -4,141 +4,289 @@ return [
     'admin' => [
         'catalog' => [
             'products' => [
-                'booking'                   => 'Boekingsinformatie',
-                'booking-type'              => 'Boekingstype',
-                'default'                   => 'Standaard',
-                'appointment-booking'       => 'Afspraak boeken',
-                'event-booking'             => 'Evenement boeken',
-                'rental-booking'            => 'Verhuur boeken',
-                'table-booking'             => 'Tafel reserveren',
-                'slot-duration'             => 'Slotduur (minuten)',
-                'break-time'                => 'Break Time b/w Slots (minuten)',
-                'available-every-week'      => 'Elke week beschikbaar',
-                'yes'                       => 'Ja',
-                'no'                        => 'Nee',
-                'available-from'            => 'Beschikbaar van',
-                'available-to'              => 'Beschikbaar voor',
-                'same-slot-all-days'        => 'Zelfde slot alle dagen',
-                'slot-has-quantity'         => 'Slot heeft hoeveelheid',
-                'slots'                     => 'Slots',
-                'from'                      => 'Van',
-                'to'                        => 'To',
-                'qty'                       => 'Qty',
-                'add-slot'                  => 'Slot toevoegen',
-                'sunday'                    => 'Slot toevoegen',
-                'monday'                    => 'maandag',
-                'tuesday'                   => 'dinsdag',
-                'wednesday'                 => 'woensdag',
-                'thursday'                  => 'donderdag',
-                'friday'                    => 'vrijdag',
-                'saturday'                  => 'zaterdag',
-                'renting-type'              => 'Type verhuur',
-                'daily'                     => 'Dagelijks',
-                'hourly'                    => 'Uurbasis',
-                'daily-hourly'              => 'Beide (dagelijkse en uurbasis)',
-                'daily-price'               => 'Dagelijkse prijs',
-                'hourly-price'              => 'Prijs per uur',
-                'location'                  => 'Plaats',
-                'show-location'             => 'Locatie tonen',
-                'event-start-date'          => 'Begindatum evenement',
-                'event-end-date'            => 'Einddatum evenement',
-                'tickets'                   => 'Kaartjes',
-                'add-ticket'                => 'Ticket toevoegen',
-                'name'                      => 'Naam',
-                'price'                     => 'Prijs',
-                'quantity'                  => 'Aantal stuks',
-                'description'               => 'Beschrijving',
-                'special-price'             => 'Special Price',
-                'special-price-from'        => 'Valid From',
-                'special-price-to'          => 'Valid Until',
-                'charged-per'               => 'In rekening gebracht per',
-                'guest'                     => 'Gast',
-                'table'                     => 'Tafel',
-                'prevent-scheduling-before' => 'Voorkom plannen voor',
-                'guest-limit'               => 'Gastlimiet per tafel',
-                'guest-capacity'            => 'Gastcapaciteit',
-                'type'                      => 'Type',
-                'many-bookings-for-one-day' => 'Veel boekingen voor één dag',
-                'one-booking-for-many-days' => 'Eén boeking voor vele dagen',
-                'day'                       => 'Dag',
-                'status'                    => 'Toestand',
-                'open'                      => 'Open',
-                'close'                     => 'Dichtbij',
-                'time-error'                => 'The to time must be greater than the from time.',
+                'edit' => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration' => 'Pauzeduur tussen slots (minuten)',
+                            'slot-duration'  => 'Slotduur (minuten)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Nee',
+                                'title' => 'Hetzelfde slot voor alle dagen',
+                                'yes'   => 'Ja',
+                            ],
+                        ],
+
+                        'default'     => [
+                            'break-duration' => 'Pauzeduur tussen slots (minuten)',
+                            'close'          => 'Sluiten',
+                            'delete'         => 'Verwijderen',
+                            'description'    => 'Boekingsinformatie',
+                            'edit'           => 'Bewerken',
+                            'many'           => 'Vele',
+
+                            'modal'          => [
+                                'slot' => [
+                                    'close'      => 'Sluiten',
+                                    'day'        => 'Dag',
+                                    'edit-title' => 'Slots bewerken',
+                                    'friday'     => 'Vrijdag',
+                                    'from-day'   => 'Vanaf dag',
+                                    'from'       => 'Van',
+                                    'monday'     => 'Maandag',
+                                    'open'       => 'Openen',
+                                    'saturday'   => 'Zaterdag',
+                                    'save'       => 'Slot opslaan',
+                                    'select'     => 'Selecteren',
+                                    'status'     => 'Status',
+                                    'sunday'     => 'Zondag',
+                                    'thursday'   => 'Donderdag',
+                                    'time'       => 'Tijd',
+                                    'title'      => 'Slots toevoegen',
+                                    'to'         => 'Tot',
+                                    'tuesday'    => 'Dinsdag',
+                                    'wednesday'  => 'Woensdag',
+                                    'week'       => ':day',
+                                ],
+                            ],
+
+                            'one'            => 'Een',
+                            'open'           => 'Openen',
+                            'slot-duration'  => 'Slotduur (minuten)',
+                            'title'          => 'Standaard',
+                        ],
+
+                        'event'       => [
+                            'add'                => 'Tickets toevoegen',
+                            'delete'             => 'Verwijderen',
+                            'description-info'   => 'Er zijn geen tickets beschikbaar.',
+                            'description'        => 'Beschrijving',
+                            'edit'               => 'Bewerken',
+
+                            'modal'              => [
+                                'ticket' => [
+                                    'save' => 'Tickets opslaan',
+                                ],
+                            ],
+
+                            'name'               => 'Naam',
+                            'price'              => 'Prijs',
+                            'qty'                => 'Hoeveelheid',
+                            'special-price-from' => 'Speciale prijs van',
+                            'special-price-to'   => 'Speciale prijs tot',
+                            'special-price'      => 'Speciale prijs',
+                            'title'              => 'Tickets',
+                        ],
+
+                        'empty-info'  => [
+                            'tickets' => [
+                                'add' => 'Tickets toevoegen',
+                            ],
+
+                            'slots'   => [
+                                'add'         => 'Slots toevoegen',
+                                'delete'      => 'Verwijderen',
+                                'description' => 'Beschikbare slots met tijdsduur.',
+                            ],
+                        ],
+
+                        'rental'      => [
+                            'daily_hourly'           => 'Beide (dagelijks en per uur)',
+                            'daily-price'            => 'Dagprijs',
+                            'daily'                  => 'Dagelijkse basis',
+                            'hourly-price'           => 'Uurprijs',
+                            'hourly'                 => 'Uurlijkse basis',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Nee',
+                                'title' => 'Hetzelfde slot voor alle dagen',
+                                'yes'   => 'Ja',
+                            ],
+
+                            'title'                  => 'Verhuurtype',
+                        ],
+
+                        'slots'       => [
+                            'add'              => 'Slots toevoegen',
+                            'delete'           => 'Verwijderen',
+                            'description-info' => 'Beschikbare slots met tijdsduur.',
+                            'description'      => 'Er zijn geen slots beschikbaar.',
+                            'edit'             => 'Bewerken',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'    => 'Vrijdag',
+                                    'from'      => 'Van',
+                                    'monday'    => 'Maandag',
+                                    'saturday'  => 'Zaterdag',
+                                    'sunday'    => 'Zondag',
+                                    'thursday'  => 'Donderdag',
+                                    'to'        => 'Tot',
+                                    'tuesday'   => 'Dinsdag',
+                                    'wednesday' => 'Woensdag',
+                                ],
+                            ],
+
+                            'save'             => 'Opslaan',
+                            'title'            => 'Slots',
+                        ],
+
+                        'table'       => [
+                            'break-duration'            => 'Pauzeduur tussen slots (minuten)',
+
+                            'charged-per'               => [
+                                'guest' => 'Gast',
+                                'table' => 'Tafel',
+                                'title' => 'In rekening brengen per',
+                            ],
+
+                            'guest-capacity'            => 'Gastcapaciteit',
+                            'guest-limit'               => 'Gastlimiet per tafel',
+                            'prevent-scheduling-before' => 'Voorkom planning voor',
+                            'slot-duration'             => 'Slotduur (minuten)',
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'Nee',
+                                'title' => 'Hetzelfde slot voor alle dagen',
+                                'yes'   => 'Ja',
+                            ],
+                        ],
+                    ],
+
+                    'types'   => [
+                        'booking' => [
+                            'available-from'       => 'Beschikbaar vanaf',
+                            'available-to'         => 'Beschikbaar tot',
+
+                            'available-every-week' => [
+                                'no'    => 'Nee',
+                                'title' => 'Elke week beschikbaar',
+                                'yes'   => 'Ja',
+                            ],
+
+                            'location'             => 'Locatie',
+                            'qty'                  => 'Aantal',
+
+                            'type'                 => [
+                                'appointment' => 'Afspraak',
+                                'default'     => 'Standaard',
+                                'event'       => 'Evenement',
+                                'many'        => 'Vele',
+                                'one'         => 'Een',
+                                'rental'      => 'Verhuur',
+                                'table'       => 'Tafel',
+                                'title'       => 'Type',
+                            ],
+
+                            'title'                => 'Boekingstype',
+                        ],
+                    ],
+
+                    'index'   => [
+                        'booking' => 'Boeking',
+                    ],
+                ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
-                'title'         => 'Boekingsinformatie',
-                'table-view'    => 'Kalenderweergave',
-                'calender-view' => 'Kalenderweergave',
-            ],
-        ],
+                'index' => [
+                    'datagrid' => [
+                        'created-date' => 'Aanmaakdatum',
+                        'from'         => 'Van',
+                        'id'           => 'ID',
+                        'order-id'     => 'Bestel-ID',
+                        'qty'          => 'Aantal',
+                        'to'           => 'Tot',
+                    ],
 
-        'datagrid' => [
-            'from' => 'Van',
-            'to'   => 'To',
+                    'title'    => 'Boekingsproducten',
+                ],
+
+                'title' => 'Boekingsproducten',
+            ],
         ],
     ],
 
-    'shop' => [
+    'shop'  => [
         'products' => [
-            'booking-information'      => 'Boekingsinformatie',
-            'location'                 => 'Plaats',
-            'contact'                  => 'Contact',
-            'email'                    => 'Email',
-            'slot-duration'            => 'Slot Duur',
-            'slot-duration-in-minutes' => ':minutes Minutes',
-            'today-availability'       => 'Beschikbaarheid vandaag',
-            'slots-for-all-days'       => 'Show voor alle dagen',
-            'sunday'                   => 'Sunday',
-            'monday'                   => 'maandag',
-            'tuesday'                  => 'dinsdag',
-            'wednesday'                => 'woensdag',
-            'thursday'                 => 'donderdag',
-            'friday'                   => 'vrijdag',
-            'saturday'                 => 'zaterdag',
-            'closed'                   => 'Gesloten',
-            'book-an-appointment'      => 'Een afspraak maken',
-            'date'                     => 'Datum',
-            'slot'                     => 'Sleuf',
-            'no-slots-available'       => 'No slots available',
-            'rent-an-item'             => 'Huur een item',
-            'choose-rent-option'       => 'Kies Huuroptie',
-            'daily-basis'              => 'Dagelijks',
-            'hourly-basis'             => 'Uurbasis',
-            'select-time-slot'         => 'Selecteer tijdslot',
-            'select-slot'              => 'Selecteer Slot',
-            'select-date'              => 'Selecteer een datum',
-            'select-rent-time'         => 'Selecteer Huurtijd',
-            'from'                     => 'Van',
-            'to'                       => 'Naar',
-            'book-a-table'             => 'Een tafel reserveren',
-            'special-notes'            => 'Speciaal verzoek / opmerkingen',
-            'event-on'                 => 'Evenement aan',
-            'book-your-ticket'         => 'Boek uw ticket',
-            'per-ticket-price'         => ':price Per Ticket',
-            'number-of-tickets'        => 'Aantal tickets',
-            'total-tickets'            => 'Totaal aantal tickets',
-            'base-price'               => 'Basisprijs',
-            'total-price'              => 'Totale prijs',
-            'base-price-info'          => '(Dit is van toepassing op elk type ticket voor elke hoeveelheid)',
-        ],
+            'booking' => [
+                'closed'           => 'Gesloten',
 
-        'cart' => [
-            'renting_type' => 'Huurtype',
-            'daily'        => 'Dagelijks',
-            'hourly'       => 'Elk uur',
-            'event-ticket' => 'Evenement Ticket',
-            'event-from'   => 'Evenement van',
-            'event-till'   => 'Evenement tot',
-            'rent-type'    => 'Huurtype',
-            'rent-from'    => 'Huur van',
-            'rent-till'    => 'Huur tot',
-            'booking-from' => 'Boeking van',
-            'booking-till' => 'Boeking tot',
-            'special-note' => 'Speciaal verzoek / opmerkingen',
+                'cart'             => [
+                    'booking-from' => 'Boeking Van',
+                    'booking-till' => 'Boeking Tot',
+                    'daily'        => 'Dagelijks',
+                    'event-from'   => 'Evenement Van',
+                    'event-ticket' => 'Evenement Ticket',
+                    'event-till'   => 'Evenement Tot',
+
+                    'integrity'    => [
+                        'missing_options'        => 'Opties ontbreken voor dit product.',
+                        'select_hourly_duration' => 'Selecteer een duur van één uur.',
+                    ],
+
+                    'rent-from'    => 'Huur Van',
+                    'rent-till'    => 'Huur Tot',
+                    'rent-type'    => 'Huurtype',
+                    'renting_type' => 'Huurtype',
+                    'special-note' => 'Speciale Verzoeken/Notities',
+                ],
+
+                'per-ticket-price' => ':price Per Ticket',
+            ],
+
+            'view'   => [
+                'types'   => [
+                    'booking' => [
+                        'event-on'                 => 'Evenement Op',
+                        'location'                 => 'Locatie',
+                        'slot-duration-in-minutes' => ':minutes Minuten',
+                        'slot-duration'            => 'Slotduur',
+                        'view-on-map'              => 'Bekijken op Kaart',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => 'Gesloten',
+                        'today-availability' => 'Vandaag Beschikbaarheid',
+                    ],
+
+                    'event'       => [
+                        'book-your-ticket' => 'Boek Uw Ticket',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Kies Verhuuroptie',
+                        'daily-basis'        => 'Dagelijkse Basis',
+                        'from'               => 'Van',
+                        'hourly-basis'       => 'Uurlijkse Basis',
+                        'rent-an-item'       => 'Verhuur een Item',
+                        'select-date'        => 'Selecteer datum',
+                        'select-rent-time'   => 'Selecteer Verhuurtijd',
+                        'select-slot'        => 'Selecteer Slot',
+                        'slot'               => 'Slot',
+                        'to'                 => 'Tot',
+                    ],
+
+                    'slots'       => [
+                        'book-an-appointment' => 'Boek een Afspraak',
+                        'date'                => 'Datum',
+                        'no-slots-available'  => 'Geen slots beschikbaar',
+                        'title'               => 'Slot',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'       => 'Boek een Tafel',
+                        'closed'             => 'Gesloten',
+                        'slots-for-all-days' => 'Toon voor alle dagen',
+                        'special-notes'      => 'Speciale Verzoeken/Notities',
+                        'today-availability' => 'Vandaag Beschikbaarheid',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

@@ -4,141 +4,289 @@ return [
     'admin' => [
         'catalog' => [
             'products' => [
-                'booking'                   => 'Rezervasyon Bilgileri',
-                'booking-type'              => 'Rezervasyon Türü',
-                'default'                   => 'Varsayılan',
-                'appointment-booking'       => 'Randevu Rezervasyonu',
-                'event-booking'             => 'Etkinlik Rezervasyonu',
-                'rental-booking'            => 'Kiralık Rezervasyon',
-                'table-booking'             => 'Masa Rezervasyonu',
-                'slot-duration'             => 'Slot Süresi (Dk)',
-                'break-time'                => 'Mola Süresi s/b Slot (Dk)',
-                'available-every-week'      => 'Her Hafta Mevcut',
-                'yes'                       => 'Evet',
-                'no'                        => 'Hayır',
-                'available-from'            => 'Mevcut',
-                'available-to'              => 'Mevcut',
-                'same-slot-all-days'        => 'Tüm Günler Aynı Slot',
-                'slot-has-quantity'         => 'Slot Miktarı var',
-                'slots'                     => 'Slotlar',
-                'from'                      => 'İtibaren',
-                'to'                        => 'İle',
-                'qty'                       => 'Miktar',
-                'add-slot'                  => 'Slot Ekle',
-                'sunday'                    => 'Pazar',
-                'monday'                    => 'Pazartesi',
-                'tuesday'                   => 'Salı',
-                'wednesday'                 => 'Çarşamba',
-                'thursday'                  => 'Perşembe',
-                'friday'                    => 'Cuma',
-                'saturday'                  => 'Cumartesi',
-                'renting-type'              => 'Kiralama Türü',
-                'daily'                     => 'Günlük Bazında',
-                'hourly'                    => 'Saatlik Bazında',
-                'daily-hourly'              => 'Her ikisi (Günlük ve Saatlik)',
-                'daily-price'               => 'Günlük Fiyat',
-                'hourly-price'              => 'Saatlik Fiyat',
-                'location'                  => 'Konum',
-                'show-location'             => 'Konumu Göster',
-                'event-start-date'          => 'Etkinlik Başlangıç Tarihi',
-                'event-end-date'            => 'Etkinlik Bitiş Tarihi',
-                'tickets'                   => 'Biletler',
-                'add-ticket'                => 'Bilet Ekle',
-                'name'                      => 'İsim',
-                'price'                     => 'Fiyat',
-                'quantity'                  => 'Miktar',
-                'description'               => 'Açıklama',
-                'special-price'             => 'Özel Fiyat',
-                'special-price-from'        => 'Kadar Geçerli',
-                'special-price-to'          => 'Geçerlilik Tarihi',
-                'charged-per'               => 'Ücretli',
-                'guest'                     => 'Misafir',
-                'table'                     => 'Masa',
-                'prevent-scheduling-before' => 'Önceden Planlamayı Önle',
-                'guest-limit'               => 'Masa Başına Misafir Limiti',
-                'guest-capacity'            => 'Misafir Kapasitesi',
-                'type'                      => 'Tür',
-                'many-bookings-for-one-day' => 'Bir Gün İçin Birçok Rezervasyon',
-                'one-booking-for-many-days' => 'Birçok Gün İçin Bir Rezervasyon',
-                'day'                       => 'Gün',
-                'status'                    => 'Durum',
-                'open'                      => 'Açık',
-                'close'                     => 'Kapalı',
-                'time-error'                => 'Gidiş zamanı, başlangıç zamanından daha büyük olmalıdır.',
+                'edit' => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration'         => 'Slotlar Arası Ara Süresi (Dakika)',
+                            'slot-duration'          => 'Slot Süresi (Dakika)',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Hayır',
+                                'title' => 'Tüm Günler için Aynı Slot',
+                                'yes'   => 'Evet',
+                            ],
+                        ],
+
+                        'default'     => [
+                            'break-duration' => 'Slotlar Arası Ara Süresi (Dakika)',
+                            'close'          => 'Kapat',
+                            'delete'         => 'Sil',
+                            'description'    => 'Rezervasyon Bilgisi',
+                            'edit'           => 'Düzenle',
+                            'many'           => 'Çoklu',
+
+                            'modal'          => [
+                                'slot' => [
+                                    'close'      => 'Kapat',
+                                    'day'        => 'Gün',
+                                    'edit-title' => 'Slotları Düzenle',
+                                    'friday'     => 'Cuma',
+                                    'from-day'   => 'Başlangıç Günü',
+                                    'from'       => 'Başlangıç',
+                                    'monday'     => 'Pazartesi',
+                                    'open'       => 'Açık',
+                                    'saturday'   => 'Cumartesi',
+                                    'save'       => 'Slotu Kaydet',
+                                    'select'     => 'Seç',
+                                    'status'     => 'Durum',
+                                    'sunday'     => 'Pazar',
+                                    'thursday'   => 'Perşembe',
+                                    'time'       => 'Saat',
+                                    'title'      => 'Slot Ekle',
+                                    'to'         => 'Bitiş',
+                                    'tuesday'    => 'Salı',
+                                    'wednesday'  => 'Çarşamba',
+                                    'week'       => ':day',
+                                ],
+                            ],
+
+                            'one'            => 'Bir',
+                            'open'           => 'Açık',
+                            'slot-duration'  => 'Slot Süresi (Dakika)',
+                            'title'          => 'Varsayılan',
+                        ],
+
+                        'event'       => [
+                            'add'                => 'Bilet Ekle',
+                            'delete'             => 'Sil',
+                            'description-info'   => 'Mevcut bilet yok.',
+                            'description'        => 'Açıklama',
+                            'edit'               => 'Düzenle',
+
+                            'modal'              => [
+                                'ticket' => [
+                                    'save' => 'Biletleri Kaydet',
+                                ],
+                            ],
+
+                            'name'               => 'Ad',
+                            'price'              => 'Fiyat',
+                            'qty'                => 'Miktar',
+                            'special-price-from' => 'Özel Fiyat Başlangıcı',
+                            'special-price-to'   => 'Özel Fiyat Bitişi',
+                            'special-price'      => 'Özel Fiyat',
+                            'title'              => 'Biletler',
+                        ],
+
+                        'empty-info'  => [
+                            'tickets' => [
+                                'add' => 'Bilet Ekle',
+                            ],
+
+                            'slots' => [
+                                'add'         => 'Slot Ekle',
+                                'delete'      => 'Sil',
+                                'description' => 'Zaman Süresi ile Mevcut Slotlar.',
+                            ],
+                        ],
+
+                        'rental'      => [
+                            'daily_hourly'           => 'Her İkisi (Günlük ve Saatlik Bazda)',
+                            'daily-price'            => 'Günlük Fiyat',
+                            'daily'                  => 'Günlük Bazda',
+                            'hourly-price'           => 'Saatlik Fiyat',
+                            'hourly'                 => 'Saatlik Bazda',
+
+                            'same-slot-for-all-days' => [
+                                'no'    => 'Hayır',
+                                'title' => 'Tüm Günler için Aynı Slot',
+                                'yes'   => 'Evet',
+                            ],
+
+                            'title'                  => 'Kiralama Türü',
+                        ],
+
+                        'slots'       => [
+                            'add'              => 'Slot Ekle',
+                            'delete'           => 'Sil',
+                            'description-info' => 'Zaman Süresi ile Mevcut Slotlar.',
+                            'description'      => 'Mevcut slot yok.',
+                            'edit'             => 'Düzenle',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'    => 'Cuma',
+                                    'from'      => 'Başlangıç',
+                                    'monday'    => 'Pazartesi',
+                                    'saturday'  => 'Cumartesi',
+                                    'sunday'    => 'Pazar',
+                                    'thursday'  => 'Perşembe',
+                                    'to'        => 'Bitiş',
+                                    'tuesday'   => 'Salı',
+                                    'wednesday' => 'Çarşamba',
+                                ],
+                            ],
+
+                            'save'             => 'Kaydet',
+                            'title'            => 'Slotlar',
+                        ],
+
+                        'table'       => [
+                            'break-duration'            => 'Slotlar Arası Ara Süresi (Dakika)',
+
+                            'charged-per'               => [
+                                'guest' => 'Misafir',
+                                'table' => 'Masa',
+                                'title' => 'Başına Ücret Alınan',
+                            ],
+
+                            'guest-capacity'            => 'Misafir Kapasitesi',
+                            'guest-limit'               => 'Masa Başına Misafir Limiti',
+                            'prevent-scheduling-before' => 'Önceki Zamanlama Önleniyor',
+                            'slot-duration'             => 'Slot Süresi (Dakika)',
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'Hayır',
+                                'title' => 'Tüm Günler için Aynı Slot',
+                                'yes'   => 'Evet',
+                            ],
+                        ],
+
+                        'types'       => [
+                            'booking' => [
+                                'available-from'       => 'Şuradan Mevcut',
+                                'available-to'         => 'Şuraya Kadar Mevcut',
+
+                                'available-every-week' => [
+                                    'no'    => 'Hayır',
+                                    'title' => 'Her Hafta Mevcut',
+                                    'yes'   => 'Evet',
+                                ],
+
+                                'location'             => 'Konum',
+                                'qty'                  => 'Adet',
+
+                                'type'                 => [
+                                    'appointment' => 'Randevu',
+                                    'default'     => 'Varsayılan',
+                                    'event'       => 'Etkinlik',
+                                    'many'        => 'Çoklu',
+                                    'one'         => 'Bir',
+                                    'rental'      => 'Kiralama',
+                                    'table'       => 'Masa',
+                                    'title'       => 'Tür',
+                                ],
+
+                                'title'                => 'Rezervasyon Türü',
+                            ],
+                        ],
+
+                        'index'       => [
+                            'booking' => 'Rezervasyon',
+                        ],
+                    ],
+                ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
-                'title'         => 'Rezervasyonlar',
-                'table-view'    => 'Tablo görünümü',
-                'calender-view' => 'Takvim Görünümü',
-            ],
-        ],
+                'index' => [
+                    'datagrid' => [
+                        'created-date' => 'Oluşturulma Tarihi',
+                        'from'         => 'Başlangıç',
+                        'id'           => 'ID',
+                        'order-id'     => 'Sipariş ID',
+                        'qty'          => 'MKT',
+                        'to'           => 'Bitiş',
+                    ],
 
-        'datagrid' => [
-            'from' => 'İtibaren',
-            'to'   => 'İle',
+                    'title'    => 'Rezervasyon Ürünü',
+                ],
+
+                'title' => 'Rezervasyon Ürünü',
+            ],
         ],
     ],
 
-    'shop' => [
+    'shop'  => [
         'products' => [
-            'booking-information'      => 'Rezervasyon bilgileri',
-            'location'                 => 'Konum',
-            'contact'                  => 'İletişim',
-            'email'                    => 'Email',
-            'slot-duration'            => 'Slot Süresi',
-            'slot-duration-in-minutes' => ':minutes Dakika',
-            'today-availability'       => 'Bugün Kullanılabilirlik',
-            'slots-for-all-days'       => 'Tüm günler için göster',
-            'sunday'                   => 'Pazar',
-            'monday'                   => 'Pazartesi',
-            'tuesday'                  => 'Salı',
-            'wednesday'                => 'Çarşamba',
-            'thursday'                 => 'Perşembe',
-            'friday'                   => 'Cuma',
-            'saturday'                 => 'Cumartesi',
-            'closed'                   => 'Kapalı',
-            'book-an-appointment'      => 'Randevu Al',
-            'date'                     => 'Tarih',
-            'slot'                     => 'Slot',
-            'no-slots-available'       => 'No slots available',
-            'rent-an-item'             => 'Eşya Kiralama',
-            'choose-rent-option'       => 'Kiralama Seçeneğini Seçin',
-            'daily-basis'              => 'Günlük Bazında',
-            'hourly-basis'             => 'Saatlik Bazında',
-            'select-time-slot'         => 'Zaman aralığı seçin',
-            'select-slot'              => 'Slot Seç',
-            'select-date'              => 'Tarih Seç',
-            'select-rent-time'         => 'Kiralama Süresini Seçin',
-            'from'                     => 'İtibaren',
-            'to'                       => 'İle',
-            'book-a-table'             => 'Bir masa rezervasyonu',
-            'special-notes'            => 'Özel İstek/Notlar',
-            'event-on'                 => 'Etkinlik Açık',
-            'book-your-ticket'         => 'Biletinizi Ayırtın',
-            'per-ticket-price'         => 'Bilet Başına :price',
-            'number-of-tickets'        => 'Bilet Sayısı',
-            'total-tickets'            => 'Toplam Biletler',
-            'base-price'               => 'Taban Fiyat',
-            'total-price'              => 'Toplam Fiyat',
-            'base-price-info'          => '(Bu, her miktar için her bilet türü için geçerli olacaktır.)',
-        ],
+            'booking' => [
+                'closed'           => 'Closed',
 
-        'cart' => [
-            'renting_type' => 'Kira Türü',
-            'daily'        => 'Günlük',
-            'hourly'       => 'Saatlik',
-            'event-ticket' => 'Etkinlik Bileti',
-            'event-from'   => 'Etkinlik Kimden',
-            'event-till'   => 'Etkinlik Sonu',
-            'rent-type'    => 'Kira Türü',
-            'rent-from'    => 'Kiralık',
-            'rent-till'    => 'Kiraya Kadar',
-            'booking-from' => 'Rezervasyon',
-            'booking-till' => 'Rezervasyon',
-            'special-note' => 'Özel İstek/Notlar',
+                'cart'             => [
+                    'booking-from' => 'Booking From',
+                    'booking-till' => 'Booking Till',
+                    'daily'        => 'Daily',
+                    'event-from'   => 'Event From',
+                    'event-ticket' => 'Event Ticket',
+                    'event-till'   => 'Event Till',
+
+                    'integrity'    => [
+                        'missing_options'        => 'Options are missing for this product.',
+                        'select_hourly_duration' => 'Select a slot duration of one hour.',
+                    ],
+
+                    'rent-from'    => 'Rent From',
+                    'rent-till'    => 'Rent Till',
+                    'rent-type'    => 'Rent Type',
+                    'renting_type' => 'Rent Type',
+                    'special-note' => 'Special Request/Notes',
+                ],
+
+                'per-ticket-price' => ':price Per Ticket',
+            ],
+
+            'view'    => [
+                'types'   => [
+                    'booking' => [
+                        'event-on'                 => 'Event On',
+                        'location'                 => 'Location',
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'slot-duration'            => 'Slot Duration',
+                        'view-on-map'              => 'View on Map',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => 'Closed',
+                        'today-availability' => 'Today Availability',
+                    ],
+
+                    'event'       => [
+                        'book-your-ticket' => 'Book Your Ticket',
+                    ],
+
+                    'rental'      => [
+                        'choose-rent-option' => 'Choose Rent Option',
+                        'daily-basis'        => 'Daily Basis',
+                        'from'               => 'From',
+                        'hourly-basis'       => 'Hourly Basis',
+                        'rent-an-item'       => 'Rent an Item',
+                        'select-date'        => 'Select date',
+                        'select-rent-time'   => 'Select Rent Time',
+                        'select-slot'        => 'Select Slot',
+                        'slot'               => 'Slot',
+                        'to'                 => 'To',
+                    ],
+
+                    'slots'       => [
+                        'book-an-appointment' => 'Book an Appointment',
+                        'date'                => 'Date',
+                        'no-slots-available'  => 'No slots available',
+                        'title'               => 'Slot',
+                    ],
+
+                    'table'       => [
+                        'book-a-table'       => 'Book a Table',
+                        'closed'             => 'Closed',
+                        'slots-for-all-days' => 'Show for all days',
+                        'special-notes'      => 'Special Request/Notes',
+                        'today-availability' => 'Today Availability',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
