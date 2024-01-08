@@ -1,4 +1,8 @@
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.before') !!}
+
 <div class="flex justify-between items-center w-full py-3 px-16 border border-t-0 border-b border-l-0 border-r-0">
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
+
     <!-- Currency Switcher -->
     <x-shop::dropdown>
         <!-- Dropdown Toggler -->
@@ -24,9 +28,13 @@
         </x-slot:content>
     </x-shop::dropdown>
 
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
+
     <p class="text-xs font-medium">
         Get UPTO 40% OFF on your 1st order <a href="{{ route('shop.home.index') }}" class="underline">SHOP NOW</a>
     </p>
+
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
 
     <!-- Locales Switcher -->
     <x-shop::dropdown position="bottom-right">
@@ -64,6 +72,8 @@
             <v-locale-switcher></v-locale-switcher>
         </x-slot:content>
     </x-shop::dropdown>
+
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.after') !!}
 </div>
 
 @pushOnce('scripts')
@@ -141,3 +151,5 @@
         });
     </script>
 @endPushOnce
+
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.after') !!}

@@ -1,3 +1,5 @@
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
+
 <div class="w-full flex justify-between min-h-[78px] px-[60px] border border-t-0 border-b border-l-0 border-r-0 max-1180:px-8">
     <!--
         This section will provide categories for the first, second, and third levels. If
@@ -5,6 +7,8 @@
     -->
     <!-- Left Nagivation Section -->
     <div class="flex items-center gap-x-10 max-[1180px]:gap-x-5">
+        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.before') !!}
+
         <a
             href="{{ route('shop.home.index') }}"
             aria-label="@lang('shop::app.components.layouts.header.bagisto')"
@@ -13,9 +17,13 @@
                 src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                 width="131"
                 height="29"
-                alt="Bagisto"
+                alt="{{ config('app.name') }}"
             >
         </a>
+
+        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.after') !!}
+
+        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.before') !!}
 
         <v-desktop-category>
             <div class="flex gap-5 items-center">
@@ -33,10 +41,15 @@
                 ></span>
             </div>
         </v-desktop-category>
+
+        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.after') !!}
     </div>
 
     <!-- Right Nagivation Section -->
     <div class="flex gap-x-9 items-center max-lg:gap-x-8 max-[1100px]:gap-x-6">
+
+        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.search_bar.before') !!}
+
         <!-- Search Bar Container -->
         <div class="relative w-full">
             <form
@@ -72,8 +85,13 @@
             </form>
         </div>
 
+        {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.search_bar.after') !!}
+
         <!-- Right Navigation Links -->
         <div class="flex gap-x-8 mt-1.5 max-lg:gap-x-8 max-[1100px]:gap-x-6">
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.before') !!}
+
             <!-- Compare -->
             @if(core()->getConfigData('general.content.shop.compare_option'))
                 <a
@@ -87,8 +105,16 @@
                 </a>
             @endif
 
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.after') !!}
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.before') !!}
+
             <!-- Mini cart -->
             @include('shop::checkout.cart.mini-cart')
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.after') !!}
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.before') !!}
 
             <!-- user profile -->
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
@@ -195,6 +221,8 @@
                     </x-slot:content>
                 @endauth
             </x-shop::dropdown>
+
+            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.after') !!}
         </div>
     </div>
 </div>
@@ -318,3 +346,5 @@
         });
     </script>
 @endPushOnce
+
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.after') !!}
