@@ -173,9 +173,8 @@
         <v-field
             as="select"
             name="{{ $name }}"
-            v-slot="{ errors }"
-            :class="[errors.length ? 'border border-red-500' : '']"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full py-2.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400']) }}
+            :class="[errors && errors['{{ $name }}'] ? 'border !border-red-600 hover:border-red-600' : '']"
+            {{ $attributes->except([])->merge(['class' => 'flex flex-col w-full py-2.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400 dark:hover:border-gray-400']) }}
             multiple
         >
             {{ $slot }}
