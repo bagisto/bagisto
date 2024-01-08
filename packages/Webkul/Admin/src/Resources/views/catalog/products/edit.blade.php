@@ -158,7 +158,7 @@
                                 @foreach ($customAttributes as $attribute)
                                     {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
 
-                                    <x-admin::form.control-group>
+                                    <x-admin::form.control-group class="last:!mb-0">
                                         <x-admin::form.control-group.label>
                                             {!! $attribute->admin_name . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
 
@@ -183,7 +183,9 @@
                                             'product'   => $product,
                                         ])
             
-                                        <x-admin::form.control-group.error :control-name="$attribute->code"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error
+                                            :control-name="$attribute->code . (in_array($attribute->type, ['multiselect', 'checkbox']) ? '[]' : '')"
+                                        ></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
                                     {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
