@@ -10,7 +10,7 @@
         id="v-event-booking-template"
     >
         <!-- Tickets Component -->
-        <div class="flex gap-5 justify-between p-4">
+        <div class="flex gap-5 justify-between py-4">
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
                     @lang('booking::app.admin.catalog.products.edit.booking.event.title')
@@ -50,10 +50,7 @@
                             />
 
                             <!-- Price -->
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="element.price"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @lang('booking::app.admin.catalog.products.edit.booking.event.price') - @{{ element.price }}
                             </p>
 
@@ -65,7 +62,7 @@
                             />
 
                              <!-- Qty -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300" v-if="element.qty">
                                 @lang('booking::app.admin.catalog.products.edit.booking.event.qty') - @{{ element.qty }}
                             </p>
 
@@ -77,7 +74,7 @@
                             />
 
                             <!-- Special Price -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300" v-if="element.special_price">
                                 @lang('booking::app.admin.catalog.products.edit.booking.event.special-price') - @{{ element.special_price }}
                             </p>
 
@@ -89,7 +86,7 @@
                             />
 
                             <!-- Valid From -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300" v-if="element.special_price_from">
                                 @lang('booking::app.admin.catalog.products.edit.booking.event.special-price-from') - @{{ element.special_price_from }}
                             </p>
 
@@ -101,7 +98,7 @@
                             />
 
                             <!-- Valid Until -->
-                            <p class="text-gray-600 dark:text-gray-300">
+                            <p class="text-gray-600 dark:text-gray-300" v-if="element.special_price_to">
                                 @lang('booking::app.admin.catalog.products.edit.booking.event.special-price-to') - @{{ element.special_price_to }}
                             </p>
 
@@ -114,7 +111,7 @@
 
                             <!-- Description -->
                             <p class="text-gray-600 dark:text-gray-300">
-                                @lang('booking::app.admin.catalog.products.edit.booking.event.description-info') - @{{ element.description }}
+                                @lang('booking::app.admin.catalog.products.edit.booking.event.description') - @{{ element.description }}
                             </p>
 
                             <!-- Hidden Field For Description -->
@@ -291,10 +288,10 @@
                                 <x-booking::form.control-group.control
                                     type="datetime"
                                     name="special_price_from"
-                                    {{-- :rules="'required_if:!value,date,required|after:' . $dateMin" --}}
+                                    :rules="'required_if:!value,date,required|after:' . $dateMin"
                                     :label="trans('booking::app.admin.catalog.products.edit.booking.event.valid-from')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.booking.event.valid-from')"
-                                    ref="special_price_from"
+                                    v-model="special_price_from"
                                 >
                                 </x-booking::form.control-group.control>
 
@@ -313,7 +310,7 @@
                                 <x-admin::form.control-group.control
                                     type="datetime"
                                     name="special_price_to"
-                                    {{-- :rules="'after:special_price_from'" --}}
+                                    :rules="'after:special_price_from'"
                                     :label="trans('booking::app.admin.catalog.products.edit.booking.event.valid-until')"
                                     :placeholder="trans('booking::app.admin.catalog.products.edit.booking.event.valid-until')"
                                     ref="special_price_to"

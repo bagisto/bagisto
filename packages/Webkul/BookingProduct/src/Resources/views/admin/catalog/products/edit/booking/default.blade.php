@@ -84,7 +84,7 @@
         <div class="flex gap-5 justify-between py-4">
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-800 dark:text-white font-semibold">
-                    @lang('booking::app.admin.catalog.products.edit.booking.default.slots.title')
+                    @lang('booking::app.admin.catalog.products.edit.booking.default.slot-title')
                 </p>
             </div>
 
@@ -97,7 +97,7 @@
                     class="secondary-button"
                     @click="$refs.drawerform.toggle()"
                 >
-                    @lang('booking::app.admin.catalog.products.edit.booking.default.slots.add')
+                    @lang('booking::app.admin.catalog.products.edit.booking.default.slot-add')
                 </div>
             </div>
         </div>
@@ -396,7 +396,7 @@
                                 <!-- TO Day -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('booking::app.admin.catalog.products.edit.booking.modal.slot.to')
+                                        @lang('booking::app.admin.catalog.products.edit.booking.default.modal.slot.to')
                                     </x-admin::form.control-group.label>
                     
                                     <x-admin::form.control-group.control

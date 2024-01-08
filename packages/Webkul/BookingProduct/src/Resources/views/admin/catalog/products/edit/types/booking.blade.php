@@ -134,10 +134,14 @@
                         @lang('booking::app.admin.catalog.products.edit.types.booking.available-from')
                     </x-admin::form.control-group.label>
 
+                    @php
+                        $dateMin = \Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59');
+                    @endphp
+
                     <x-admin::form.control-group.control
                         type="datetime"
                         name="booking[available_from]"
-                        rules="required|after:{{\Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59')}}"
+                        :rules="'required|after:' . $dateMin"
                         rules="required"
                         v-model="booking.available_from"
                         :label="trans('booking::app.admin.catalog.products.edit.types.booking.available-from')"
@@ -200,6 +204,27 @@
         </script>
 
         <script type="module">
+            defineRule('required_if', (value, { condition = true } = {}) => {
+                if (condition) {
+                    if (value === null || value === undefined || value === '') {
+                        return false;
+                    }
+                }
+                return true;
+            });
+
+            defineRule('after', (value, [target]) => {
+                console.log(value, target);
+                if (!value || !target) {
+                    return false;
+                }
+
+                const valueDate = new Date(value);
+                const targetDate = new Date(target);
+
+                return valueDate > targetDate;
+            });
+
             app.component('v-booking-information', {
                 template: '#v-booking-information-template',
 

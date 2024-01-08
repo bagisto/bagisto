@@ -52,6 +52,8 @@ return [
 
                             'one'            => 'One',
                             'open'           => 'Open',
+                            'slot-add'       => 'Add Slots',
+                            'slot-title'     => 'Slots',
                             'slot-duration'  => 'Slot Duration (Mins)',
                             'title'          => 'Default',
                         ],
@@ -76,6 +78,8 @@ return [
                             'special-price-to'   => 'Special Price To',
                             'special-price'      => 'Special Price',
                             'title'              => 'Tickets',
+                            'valid-from'         => 'Valid From',
+                            'valid-until'        => 'Valid Until',
                         ],
 
                         'empty-info'  => [

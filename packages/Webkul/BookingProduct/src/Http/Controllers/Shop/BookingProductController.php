@@ -23,23 +23,8 @@ class BookingProductController extends Controller
      *
      * @return void
      */
-    public function __construct(
-        protected BookingProductRepository $bookingProductRepository,
-        protected DefaultSlotHelper $defaultSlotHelper,
-        protected AppointmentSlotHelper $appointmentSlotHelper,
-        protected RentalSlotHelper $rentalSlotHelper,
-        protected EventTicketHelper $eventTicketHelper,
-        protected TableSlotHelper $tableSlotHelper
-    ) {
-        $this->bookingHelpers['default'] = $defaultSlotHelper;
-
-        $this->bookingHelpers['appointment'] = $appointmentSlotHelper;
-
-        $this->bookingHelpers['rental'] = $rentalSlotHelper;
-
-        $this->bookingHelpers['event'] = $eventTicketHelper;
-
-        $this->bookingHelpers['table'] = $tableSlotHelper;
+    public function __construct(protected BookingProductRepository $bookingProductRepository)
+    {
     }
 
     /**
