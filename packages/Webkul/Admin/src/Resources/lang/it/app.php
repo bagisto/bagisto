@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Aliquota Fiscale',
                     'title'        => 'Aliquote Fiscali',
 
+                    'import' => [
+                        'duplicate-error'  => 'L\'identificatore deve essere unico, identificatore duplicato :identifier alla riga :position.',
+                        'enough-row-error' => 'Il file non ha abbastanza righe',
+                        'import-btn'       => 'Importa',
+                        'title'            => 'Carica',
+                        'upload-error'     => 'Il file deve essere di tipo: xls, xlsx, csv.',
+                        'upload-success'   => 'Tasso di imposta caricato con successo',
+                        'validation'       => 'Tipo consentito: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificatore',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Tipo Consentito:',
         'csv'              => 'CSV',
         'download'         => 'Scarica',
-        'duplicate-error'  => 'L\'identificatore deve essere unico, identificatore duplicato :identifier alla riga :position.',
-        'enough-row-error' => 'Il file non ha abbastanza righe',
         'export'           => 'Esporta',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'File',
-        'format'           => 'Seleziona Formato',
-        'import'           => 'Importa',
-        'illegal-format'   => 'Errore! Questo tipo di formato non è supportato o è un formato non valido',
         'no-records'       => 'Niente da esportare',
-        'upload'           => 'Carica',
-        'upload-error'     => 'Il file deve essere di tipo: xls, xlsx, csv.',
-        'upload-success'   => ':name Caricato con successo',
         'xls'              => 'XLS',
     ],
 

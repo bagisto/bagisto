@@ -1,21 +1,19 @@
 <v-datagrid-export {{ $attributes }}>
-    <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
-        <p class="transparent-button text-base hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
-            @lang('admin::app.export.export')
-        </p>
+    <div class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
+        @lang('admin::app.export.export')
     </div>
 </v-datagrid-export>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-export-template">
-        <div class="p-1.5 items-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md">
+        <div>
             <!-- Modal Component -->
             <x-admin::modal ref="exportModal">
                 <!-- Modal Toggle -->
                 <x-slot:toggle>
-                    <p class="transparent-button text-base hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
+                    <div class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
                         @lang('admin::app.export.export')
-                    </p>
+                    </div>
                 </x-slot:toggle>
 
                 <!-- Modal Header -->

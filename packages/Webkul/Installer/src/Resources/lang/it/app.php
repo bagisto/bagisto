@@ -290,17 +290,17 @@ return [
                     'name'  => 'Contenuto dei servizi',
 
                     'title' => [
-                        'free-shipping'     => 'Spedizione gratuita',
-                        'product-replace'   => 'Sostituzione del prodotto',
-                        'emi-available'     => 'EMI disponibile',
-                        'time-support'      => 'Supporto 24/7',
+                        'free-shipping'   => 'Spedizione gratuita',
+                        'product-replace' => 'Sostituzione del prodotto',
+                        'emi-available'   => 'EMI disponibile',
+                        'time-support'    => 'Supporto 24/7',
                     ],
 
                     'description' => [
-                        'free-shipping-info'     => 'Goditi la spedizione gratuita su tutti gli ordini',
-                        'product-replace-info'   => 'Sostituzione facile del prodotto disponibile!',
-                        'emi-available-info'     => 'EMI senza costi disponibile su tutte le principali carte di credito',
-                        'time-support-info'      => 'Supporto dedicato 24/7 tramite chat ed e-mail',
+                        'free-shipping-info'   => 'Goditi la spedizione gratuita su tutti gli ordini',
+                        'product-replace-info' => 'Sostituzione facile del prodotto disponibile!',
+                        'emi-available-info'   => 'EMI senza costi disponibile su tutte le principali carte di credito',
+                        'time-support-info'    => 'Supporto dedicato 24/7 tramite chat ed e-mail',
                     ],
                 ],
             ],
