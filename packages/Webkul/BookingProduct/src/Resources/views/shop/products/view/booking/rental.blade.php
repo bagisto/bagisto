@@ -12,13 +12,13 @@
             <form @submit="handleSubmit($event, handleBillingAddressForm)">
                 <div class="grid grid-cols-1 gap-2.5">
                     <div>
-                        @lang('booking::app.shop.products.rent-an-item')
+                        @lang('booking::app.shop.products.view.booking.rental.rent-an-item')
                     </div>
 
                     <!-- Radio Button Selector -->
                     <template v-if="renting_type != 'daily' && sub_renting_type == 'daily_hourly'">
                         <x-shop::form.control-group.label class="required w-full">
-                            @lang('booking::app.shop.products.choose-rent-option')
+                            @lang('booking::app.shop.products.view.booking.rental.choose-rent-option')
                         </x-shop::form.control-group.label>
 
                         <div class="grid grid-cols-2 gap-2.5">
@@ -41,7 +41,7 @@
                                     class="text-[#6E6E6E] cursor-pointer"
                                     for="booking[daily]"
                                 >
-                                    @lang('booking::app.shop.products.daily-basis')
+                                    @lang('booking::app.shop.products.view.booking.rental.daily-basis')
                                 </label>
                             </span>
 
@@ -64,7 +64,7 @@
                                     class="text-[#6E6E6E] cursor-pointer"
                                     for="booking[hourly]"
                                 >
-                                    @lang('booking::app.shop.products.hourly-basis')
+                                    @lang('booking::app.shop.products.view.booking.rental.hourly-basis')
                                 </label>
                             </span>
                         </div>
@@ -73,13 +73,13 @@
                     <div v-if="renting_type != 'daily' && sub_renting_type == 'hourly'">
                         <div>
                             <label class="required">
-                                @lang('booking::app.shop.products.select-slot')
+                                @lang('booking::app.shop.products.view.booking.rental.select-slot')
                             </label>
 
                             <div class="flex gap-2.5">
                                 <x-shop::form.control-group class="w-full">
                                     <x-shop::form.control-group.label class="hidden">
-                                        @lang('booking::app.shop.products.select-date')
+                                        @lang('booking::app.shop.products.view.booking.rental.select-date')
                                     </x-shop::form.control-group.label>
 
                                     <x-shop::form.control-group.control
@@ -87,8 +87,8 @@
                                         name="booking[date]"
                                         rules="required"
                                         data-min-date="today"
-                                        :label="trans('booking::app.shop.products.select-date')"
-                                        :placeholder="trans('booking::app.shop.products.select-date')"
+                                        :label="trans('booking::app.shop.products.view.booking.rental.select-date')"
+                                        :placeholder="trans('booking::app.shop.products.view.booking.rental.select-date')"
                                         @change="dateSelected($event)"
                                     >
                                     </x-shop::form.control-group.control>
@@ -101,7 +101,7 @@
 
                                 <x-shop::form.control-group class="w-full !mb-0">
                                     <x-shop::form.control-group.label class="hidden">
-                                        @lang('booking::app.shop.products.select-slot')
+                                        @lang('booking::app.shop.products.view.booking.rental.select-slot')
                                     </x-shop::form.control-group.label>
 
                                     <x-shop::form.control-group.control
@@ -110,8 +110,8 @@
                                         class="!mb-1"
                                         rules="required"
                                         v-model="selected_slot"
-                                        :label="trans('booking::app.shop.products.select-date')"
-                                        :placeholder="trans('booking::app.shop.products.select-date')"
+                                        :label="trans('booking::app.shop.products.view.booking.rental.select-date')"
+                                        :placeholder="trans('booking::app.shop.products.view.booking.rental.select-date')"
                                     >
                                         <option
                                             v-for="(slot, index) in slots"
@@ -131,13 +131,13 @@
 
                         <div v-if="parseInt(slots[selected_slot] && slots[selected_slot]?.slots?.length)">
                             <label class="required">
-                                @lang('booking::app.shop.products.select-rent-time')
+                                @lang('booking::app.shop.products.view.booking.rental.select-rent-time')
                             </label>
 
                             <div class="flex gap-2.5">
                                 <x-shop::form.control-group class="w-full !mb-0">
                                     <x-shop::form.control-group.label class="hidden">
-                                        @lang('booking::app.shop.products.select-date')
+                                        @lang('booking::app.shop.products.view.booking.rental.select-date')
                                     </x-shop::form.control-group.label>
 
                                     <x-shop::form.control-group.control
@@ -145,8 +145,8 @@
                                         name="booking[slot][from]"
                                         rules="required"
                                         v-model="slot_from"
-                                        :label="trans('booking::app.shop.products.select-date')"
-                                        :placeholder="trans('booking::app.shop.products.select-date')"
+                                        :label="trans('booking::app.shop.products.view.booking.rental.select-date')"
+                                        :placeholder="trans('booking::app.shop.products.view.booking.rental.select-date')"
                                     >
                                         <option
                                             v-for="slot in slots[selected_slot]?.slots"
@@ -164,15 +164,15 @@
 
                                 <x-shop::form.control-group class="w-full !mb-0">
                                     <x-shop::form.control-group.label class="hidden">
-                                        @lang('booking::app.shop.products.slot')
+                                        @lang('booking::app.shop.products.view.booking.rental.slot')
                                     </x-shop::form.control-group.label>
 
                                     <x-shop::form.control-group.control
                                         type="select"
                                         name="booking[slot][to]"
                                         rules="required"
-                                        :label="trans('booking::app.shop.products.slot')"
-                                        :placeholder="trans('booking::app.shop.products.slot')"
+                                        :label="trans('booking::app.shop.products.view.booking.rental.slot')"
+                                        :placeholder="trans('booking::app.shop.products.view.booking.rental.slot')"
                                     >
                                         <option
                                             v-for="slot in slots[selected_slot]?.slots"
@@ -194,13 +194,13 @@
 
                     <div v-else>
                         <label class="required">
-                            @lang('booking::app.shop.products.select-date')
+                            @lang('booking::app.shop.products.view.booking.rental.select-date')
                         </label>
 
                         <div class="flex gap-2.5">
                             <x-shop::form.control-group class="w-full">
                                 <x-shop::form.control-group.label class="hidden">
-                                    @lang('booking::app.shop.products.from')
+                                    @lang('booking::app.shop.products.view.booking.rental.from')
                                 </x-shop::form.control-group.label>
         
                                 <x-shop::form.control-group.control
@@ -210,8 +210,8 @@
                                     v-model="date_from"
                                     ref="date_from"
                                     data-min-date="today"
-                                    :label="trans('booking::app.shop.products.from')"
-                                    :placeholder="trans('booking::app.shop.products.from')"
+                                    :label="trans('booking::app.shop.products.view.booking.rental.from')"
+                                    :placeholder="trans('booking::app.shop.products.view.booking.rental.from')"
                                     @change="dateSelected($event)"
                                 >
                                 </x-shop::form.control-group.control>
@@ -224,7 +224,7 @@
 
                             <x-shop::form.control-group class="w-full">
                                 <x-shop::form.control-group.label class="hidden">
-                                    @lang('booking::app.shop.products.to')
+                                    @lang('booking::app.shop.products.view.booking.rental.to')
                                 </x-shop::form.control-group.label>
         
                                 <x-shop::form.control-group.control
@@ -234,8 +234,8 @@
                                     v-model="date_from"
                                     ref="date_from"
                                     data-min-date="today"
-                                    :label="trans('booking::app.shop.products.to')"
-                                    :placeholder="trans('booking::app.shop.products.to')"
+                                    :label="trans('booking::app.shop.products.view.booking.rental.to')"
+                                    :placeholder="trans('booking::app.shop.products.view.booking.rental.to')"
                                     @change="dateSelected($event)"
                                 >
                                 </x-shop::form.control-group.control>

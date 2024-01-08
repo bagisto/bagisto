@@ -12,7 +12,7 @@
         <!-- Renting Type -->
         <x-admin::form.control-group class="w-full">
             <x-admin::form.control-group.label class="required">
-                @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')
+                @lang('booking::app.admin.catalog.products.edit.booking.rental.title')
             </x-admin::form.control-group.label>
 
             <x-admin::form.control-group.control
@@ -20,12 +20,12 @@
                 name="booking[renting_type]"
                 rules="required"
                 v-model="rental_booking.renting_type"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
-                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.title')"
+                :label="trans('booking::app.admin.catalog.products.edit.booking.rental.title')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.booking.rental.title')"
             >
                 @foreach (['daily', 'hourly', 'daily_hourly'] as $item)
                     <option value="{{ $item }}">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.' . $item)
+                        @lang('booking::app.admin.catalog.products.edit.booking.rental.' . $item)
                     </option>
                 @endforeach
             </x-admin::form.control-group.control>
@@ -42,7 +42,7 @@
             v-if="rental_booking.renting_type == 'daily' || rental_booking.renting_type == 'daily_hourly'"
         >
             <x-admin::form.control-group.label class="required">
-                @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')
+                @lang('booking::app.admin.catalog.products.edit.booking.rental.daily-price')
             </x-admin::form.control-group.label>
 
             <x-admin::form.control-group.control
@@ -50,8 +50,8 @@
                 name="booking[daily_price]"
                 rules="required"
                 v-model="rental_booking.daily_price"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
-                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.daily-price')"
+                :label="trans('booking::app.admin.catalog.products.edit.booking.rental.daily-price')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.booking.rental.daily-price')"
             >
             </x-admin::form.control-group.control>
 
@@ -67,7 +67,7 @@
             v-if="rental_booking.renting_type == 'hourly' || rental_booking.renting_type == 'daily_hourly'"
         >
             <x-admin::form.control-group.label class="required">
-                @lang('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')
+                @lang('booking::app.admin.catalog.products.edit.booking.rental.hourly-price')
             </x-admin::form.control-group.label>
 
             <x-admin::form.control-group.control
@@ -75,8 +75,8 @@
                 name="booking[hourly_price]"
                 rules="required"
                 v-model="rental_booking.hourly_price"
-                :label="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
-                :placeholder="trans('booking::app.admin.catalog.products.edit.type.booking.renting-type.hourly-price')"
+                :label="trans('booking::app.admin.catalog.products.edit.booking.rental.hourly-price')"
+                :placeholder="trans('booking::app.admin.catalog.products.edit.booking.rental.hourly-price')"
             >
             </x-admin::form.control-group.control>
 
@@ -90,7 +90,7 @@
             <!-- Same Slot For All -->
             <x-admin::form.control-group class="w-full">
                 <x-admin::form.control-group.label class="required">
-                    @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')
+                    @lang('booking::app.admin.catalog.products.edit.booking.rental.same-slot-for-all-days.title')
                 </x-admin::form.control-group.label>
 
                 <x-admin::form.control-group.control
@@ -98,15 +98,15 @@
                     name="booking[same_slot_all_days]"
                     rules="required"
                     v-model="rental_booking.same_slot_all_days"
-                    :label="trans('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.title')"
+                    :label="trans('booking::app.admin.catalog.products.edit.booking.rental.same-slot-for-all-days.title')"
                     @change="slots.one=[];slots.many=[];"
                 >
                     <option value="1">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.yes')
+                        @lang('booking::app.admin.catalog.products.edit.booking.rental.same-slot-for-all-days.yes')
                     </option>
 
                     <option value="0">
-                        @lang('booking::app.admin.catalog.products.edit.type.booking.same-slot-for-all-days.no')
+                        @lang('booking::app.admin.catalog.products.edit.booking.rental.same-slot-for-all-days.no')
                     </option>
                 </x-admin::form.control-group.control>
 

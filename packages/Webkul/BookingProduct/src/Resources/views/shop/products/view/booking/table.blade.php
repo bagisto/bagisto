@@ -4,7 +4,7 @@
     <span class="icon-calendar font-bold"></span>
 
     <span>
-        @lang('booking::app.shop.products.today-availability')
+        @lang('booking::app.shop.products.view.booking.table.today-availability')
     </span>
 
     <span>
@@ -26,7 +26,7 @@
                 class="flex gap-x-[15px] items-center text-base cursor-pointer"
                 @click="showDaysAvailability = ! showDaysAvailability"
             >
-                @lang('booking::app.shop.products.slots-for-all-days')
+                @lang('booking::app.shop.products.view.booking.table.slots-for-all-days')
 
                 <span
                     class="text-2xl"
@@ -55,7 +55,7 @@
                         </template>
 
                         <div v-else class="label-canceled">
-                            @lang('booking::app.shop.products.closed')
+                            @lang('booking::app.shop.products.view.booking.table.closed')
                         </div>
                     </p>
                 </template>
@@ -80,21 +80,21 @@
 
 @include ('booking::shop.products.view.booking.slots', [
     'bookingProduct' => $bookingProduct, 
-    'title' => trans('booking::app.shop.products.book-a-table')
+    'title' => trans('booking::app.shop.products.view.booking.table.book-a-table')
 ])
 
 <!-- Notes -->
 <x-shop::form.control-group class="w-full">
     <x-shop::form.control-group.label class="required">
-        @lang('booking::app.shop.products.special-notes')
+        @lang('booking::app.shop.products.view.booking.table.special-notes')
     </x-shop::form.control-group.label>
 
     <x-shop::form.control-group.control
         type="textarea"
         name="booking[note]"
         rules="required"
-        :label="trans('booking::app.shop.products.special-notes')"
-        :placeholder="trans('booking::app.shop.products.special-notes')"
+        :label="trans('booking::app.shop.products.view.booking.table.special-notes')"
+        :placeholder="trans('booking::app.shop.products.view.booking.table.special-notes')"
     >
     </x-shop::form.control-group.control>
 

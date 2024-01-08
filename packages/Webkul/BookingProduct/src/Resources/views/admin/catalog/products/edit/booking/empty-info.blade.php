@@ -14,18 +14,18 @@
                     class="text-base text-gray-400 font-semibold"
                     v-if="type == 'event'"
                 >
-                    @lang('booking::app.admin.catalog.products.edit.type.booking.tickets.add')
+                    @lang('booking::app.admin.catalog.products.edit.booking.empty-info.tickets.add')
                 </p>
 
                 <p
                     class="text-base text-gray-400 font-semibold"
                     v-else
                 >
-                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.add')
+                    @lang('booking::app.admin.catalog.products.edit.booking.empty-info.slots.add')
                 </p>
 
                 <p class="text-gray-400">
-                    @lang('booking::app.admin.catalog.products.edit.type.booking.slots.description')
+                    @lang('booking::app.admin.catalog.products.edit.booking.empty-info.slots.description')
                 </p>
             </div>
         </div>

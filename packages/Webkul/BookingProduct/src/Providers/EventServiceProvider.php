@@ -36,8 +36,8 @@ class EventServiceProvider extends ServiceProvider
         });
 
         Event::listen('bagisto.shop.products.short_description.after', static function (ViewRenderEventManager $viewRenderEventManager) {
-            if (View::exists('booking::shop.products.view.booking')) {
-                $viewRenderEventManager->addTemplate('booking::shop.products.view.booking');
+            if (View::exists('booking::shop.products.view.types.booking')) {
+                $viewRenderEventManager->addTemplate('booking::shop.products.view.types.booking');
             }
         });
     }

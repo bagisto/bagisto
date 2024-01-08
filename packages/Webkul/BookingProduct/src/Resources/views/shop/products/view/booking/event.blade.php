@@ -9,46 +9,49 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-event-tickets-template">
-        <div class="book-slots">
-            <label>
-                @lang('booking::app.shop.products.book-your-ticket')
-            </label>
+        <div class="py-2.5">
+            @lang('booking::app.shop.products.view.booking.event.book-your-ticket')
+        </div>
 
-            <div v-for="(ticket, index) in tickets">
-                <div class="ticket-info">
-                    <div v-text="ticket.name"></div>
+        <div
+            class="grid grid-cols-2 gap-2.5 py-2.5"
+            v-for="(ticket, index) in tickets"
+        >
+            <div class="ticket-info">
+                <div v-text="ticket.name"></div>
 
-                    <div v-if="ticket.original_formatted_price">
-                        <span
-                            class="mr-1.5 line-through"
-                            v-text="ticket.original_formatted_price"
-                        >
-                        </span>
+                <div v-if="ticket.original_formatted_price">
+                    <span
+                        class="mr-1.5 line-through"
+                        v-text="ticket.original_formatted_price"
+                    >
+                    </span>
 
-                        <span
-                            class="text-lg"
-                            v-text="ticket.formatted_price_text"
-                        >
-                        </span>
-                    </div>
-
-                    <div
-                        v-else
+                    <span
+                        class="text-lg"
                         v-text="ticket.formatted_price_text"
                     >
-                    </div>
+                    </span>
                 </div>
 
+                <div
+                    v-else
+                    v-text="ticket.formatted_price_text"
+                >
+                </div>
+
+                <div v-text="ticket.description"></div>
+            </div>
+
+            <div class="place-items-end">
                 <x-shop::quantity-changer
                     ::name="'booking[qty][' + ticket.id + ']'"
                     rules="required|numeric|min_value:0"
                     ::value="defaultQty"
                     ::min-quantity="defaultQty"
-                    class="gap-x-2.5 w-28 max-h-9 py-1.5 px-3.5 rounded-[10px]"
+                    class="secondary-button w-28 max-w-full"
                 >
                 </x-shop::quantity-changer>
-                
-                <div v-text="ticket.description"></div>
             </div>
         </div>
     </script>

@@ -6,7 +6,7 @@
         <span class="icon-calendar font-bold"></span>
 
         <span>
-            @lang('booking::app.shop.products.today-availability')
+            @lang('booking::app.shop.products.view.booking.appointment.today-availability')
         </span>
 
         <span>
@@ -59,7 +59,7 @@
                         </div>
 
                         <div v-else class="text-danger">
-                            @lang('booking::app.shop.products.closed')
+                            @lang('booking::app.shop.products.view.booking.appointment.closed')
                         </div>
                     </p>
                 </template>

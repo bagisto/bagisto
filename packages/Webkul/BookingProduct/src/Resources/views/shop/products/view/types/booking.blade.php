@@ -16,7 +16,7 @@
 
                         <div class="grid grid-cols-1 gap-2.5 text-sm font-medium text-[#6E6E6E]">
                             <div>
-                                @lang('booking::app.shop.products.location')
+                                @lang('booking::app.shop.products.view.types.booking.location')
                             </div>
 
                             <div>
@@ -28,7 +28,7 @@
                                 target="_blank"
                                 class="text-blue-600"
                             >
-                                @lang('booking::app.shop.products.view-on-map')
+                                @lang('booking::app.shop.products.view.types.booking.view-on-map')
                             </a>
                         </div>
                     </div>
@@ -40,9 +40,9 @@
                                     <span class="icon-calendar font-bold"></span>
                             
                                     <span class="text-[#6E6E6E]">
-                                        @lang('booking::app.shop.products.slot-duration') :
+                                        @lang('booking::app.shop.products.view.types.booking.slot-duration') :
                             
-                                        @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration])
+                                        @lang('booking::app.shop.products.view.types.booking.slot-duration-in-minutes', ['minutes' => $bookingProduct->default_slot->duration])
                                     </span>
                                 @endif
 
@@ -51,9 +51,9 @@
                                 <span class="icon-calendar font-bold"></span>
                             
                                 <span class="text-[#6E6E6E]">
-                                    @lang('booking::app.shop.products.slot-duration') :
+                                    @lang('booking::app.shop.products.view.types.booking.slot-duration') :
                             
-                                    @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->appointment_slot->duration])
+                                    @lang('booking::app.shop.products.view.types.booking.slot-duration-in-minutes', ['minutes' => $bookingProduct->appointment_slot->duration])
                                 </span>
 
                                 @break
@@ -61,7 +61,7 @@
                                 <span class="icon-calendar font-bold"></span>
                             
                                 <span class="text-[#6E6E6E]">
-                                    @lang('booking::app.shop.products.event-on') :
+                                    @lang('booking::app.shop.products.view.types.booking.event-on') :
                                 </span>
 
                                 @break
@@ -69,9 +69,9 @@
                                 <span class="icon-calendar font-bold"></span>
                             
                                 <span class="text-[#6E6E6E]">
-                                    @lang('booking::app.shop.products.slot-duration') :
+                                    @lang('booking::app.shop.products.view.types.booking.slot-duration') :
                             
-                                    @lang('booking::app.shop.products.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
+                                    @lang('booking::app.shop.products.view.types.booking.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
                                 </span>
 
                                 @break

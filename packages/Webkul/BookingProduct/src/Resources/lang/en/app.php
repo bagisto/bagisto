@@ -1,144 +1,31 @@
 <?php
 
 return [
-    'shop' => [
-        'products' => [
-            'base-price-info'          => '(This will be apply to each type of ticket for each quantity)',
-            'base-price'               => 'Base Price',
-            'book-a-table'             => 'Book a Table',
-            'book-an-appointment'      => 'Book an Appointment',
-            'book-your-ticket'         => 'Book Your Ticket',
-            'booking-information'      => 'Booking Information',
-            'choose-rent-option'       => 'Choose Rent Option',
-            'closed'                   => 'Closed',
-            'contact'                  => 'Contact',
-            'daily-basis'              => 'Daily Basis',
-            'date'                     => 'Date',
-            'email'                    => 'Email',
-            'event-on'                 => 'Event On',
-            'friday'                   => 'Friday',
-            'from'                     => 'From',
-            'hourly-basis'             => 'Hourly Basis',
-            'location'                 => 'Location',
-            'monday'                   => 'Monday',
-            'no-slots-available'       => 'No slots available',
-            'number-of-tickets'        => 'Number of Tickets',
-            'per-ticket-price'         => ':price Per Ticket',
-            'rent-an-item'             => 'Rent an Item',
-            'saturday'                 => 'Saturday',
-            'select-date'              => 'Select date',
-            'select-rent-time'         => 'Select Rent Time',
-            'select-slot'              => 'Select Slot',
-            'select-time-slot'         => 'Select time slot',
-            'slot-duration-in-minutes' => ':minutes Minutes',
-            'slot-duration'            => 'Slot Duration',
-            'slot'                     => 'Slot',
-            'slots-for-all-days'       => 'Show for all days',
-            'special-notes'            => 'Special Request/Notes',
-            'sunday'                   => 'Sunday',
-            'thursday'                 => 'Thursday',
-            'to'                       => 'To',
-            'today-availability'       => 'Today Availability',
-            'total-price'              => 'Total Price',
-            'total-tickets'            => 'Total Tickets',
-            'tuesday'                  => 'Tuesday',
-            'view-on-map'              => 'View on Map',
-            'wednesday'                => 'Wednesday',
-        ],
-
-        'cart' => [
-            'booking-from' => 'Booking From',
-            'booking-till' => 'Booking Till',
-            'daily'        => 'Daily',
-            'event-from'   => 'Event From',
-            'event-ticket' => 'Event Ticket',
-            'event-till'   => 'Event Till',
-
-            'event'        => [
-                'expired'  => 'This event has been expired.',
-            ],
-
-            'hourly'       => 'Hourly',
-
-            'integrity'    => [
-                'missing_fields'         => 'Some required fields missing for this product.',
-                'missing_links'          => 'Downloadable links are missing for this product.',
-                'missing_options'        => 'Options are missing for this product.',
-                'qty_impossible'         => 'Cannot add more than one of these products to cart.',
-                'qty_missing'            => 'Atleast one product should have more than 1 quantity.',
-                'select_hourly_duration' => 'Select a slot duration of one hour.',
-            ],
-
-            'quantity'     => [
-                'error'             => 'Cannot update the item(s) at the moment, please try again later.',
-                'illegal'           => 'Quantity cannot be lesser than one.',
-                'inventory_warning' => 'The requested quantity is not available, please try again later.',
-                'quantity'          => 'Quantity',
-                'success'           => 'Cart Item(s) successfully updated.',
-            ],
-
-            'rent-from'    => 'Rent From',
-            'rent-till'    => 'Rent Till',
-            'rent-type'    => 'Rent Type',
-            'renting_type' => 'Rent Type',
-            'special-note' => 'Special Request/Notes',
-        ],
-    ],
-
     'admin' => [
         'catalog' => [
             'products' => [
-                'edit' => [
-                    'type' => [
-                        'booking' => [
-                            'available-every-week'      => [
+                'edit'  => [
+                    'booking' => [
+                        'appointment' => [
+                            'break-duration'         => 'Break Time b/w Slots (Mins)',
+                            'slot-duration'          => 'Slot Duration (Mins)',
+
+                            'same-slot-for-all-days' => [
                                 'no'    => 'No',
-                                'title' => 'Available Every Week',
+                                'title' => 'Same Slot For All days',
                                 'yes'   => 'Yes',
                             ],
+                        ],
 
-                            'action'                    => 'Actions',
-                            'available-from'            => 'Available From',
-                            'available-to'              => 'Available To',
-                            'booking_type'              => 'Booking Type',
-                            'break-duration'            => 'Break Time b/w Slots (Mins)',
+                        'default'     => [
+                            'break-duration' => 'Break Time b/w Slots (Mins)',
+                            'close'          => 'Close',
+                            'delete'         => 'Delete',
+                            'description'    => 'Booking Information',
+                            'edit'           => 'Edit',
+                            'many'           => 'Many',
 
-                            'charged-per'               => [
-                                'guest'  => 'Guest',
-                                'table'  => 'Table',
-                                'title'  => 'Charged Per',
-                            ],
-
-                            'default'                   => [
-                                'close'  => 'Close',
-                                'delete' => 'Delete',
-                                'edit'   => 'Edit',
-                                'many'   => 'Many',
-                                'one'    => 'One',
-                                'open'   => 'Open',
-                                'title'  => 'Default',
-                            ],
-
-                            'event'                     => [
-                                'action'             => 'Actions',
-                                'description'        => 'Description',
-                                'name'               => 'Name',
-                                'price'              => 'Price',
-                                'qty'                => 'QTY',
-                                'special-price-from' => 'Special Price From',
-                                'special-price-to'   => 'Special Price To',
-                                'special-price'      => 'Special Price',
-                                'valid-from'         => 'Valid From',
-                                'valid-until'        => 'Valid Until',
-                            ],
-
-                            'from-day'                  => 'From Day',
-                            'from'                      => 'From',
-                            'guest-capacity'            => 'Guest Capacity',
-                            'guest-limit'               => 'Guest Limit Per Table',
-                            'location'                  => 'Location',
-
-                            'modal'                     => [
+                            'modal'          => [
                                 'slot' => [
                                     'close'      => 'Close',
                                     'day'        => 'Day',
@@ -161,69 +48,125 @@ return [
                                     'wednesday'  => 'Wednesday',
                                     'week'       => ':day',
                                 ],
+                            ],
 
-                                'ticket'                => [
-                                    'description'        => 'Description',
-                                    'name'               => 'Name',
-                                    'price'              => 'Price',
-                                    'qty'                => 'Quantity',
-                                    'save'               => 'Save Tickets',
-                                    'special-price-from' => 'Special Price From',
-                                    'special-price-to'   => 'Special Price To',
-                                    'special-price'      => 'Special Price',
-                                    'title'              => 'Add Tickets',
-                                    'valid-from'         => 'Valid From',
-                                    'valid-until'        => 'Valid Until',
+                            'one'            => 'One',
+                            'open'           => 'Open',
+                            'slot-duration'  => 'Slot Duration (Mins)',
+                            'title'          => 'Default',
+                        ],
+
+                        'event'       => [
+                            'add'                => 'Add Tickets',
+                            'delete'             => 'Delete',
+                            'description-info'   => 'There is no tickets available.',
+                            'description'        => 'Description',
+                            'edit'               => 'Edit',
+
+                            'modal'              => [
+                                'ticket' => [
+                                    'save' => 'Save Tickets',
                                 ],
                             ],
 
-                            'prevent-scheduling-before' => 'Prevent Scheduling Before',
-                            'qty'                       => 'Qty',
+                            'name'               => 'Name',
+                            'price'              => 'Price',
+                            'qty'                => 'Quantity',
+                            'special-price-from' => 'Special Price From',
+                            'special-price-to'   => 'Special Price To',
+                            'special-price'      => 'Special Price',
+                            'title'              => 'Tickets',
+                        ],
 
-                            'renting-type'              => [
-                                'daily_hourly' => 'Both (Daily and Hourly Basis)',
-                                'daily-price'  => 'Daily Price',
-                                'daily'        => 'Daily Basis',
-                                'hourly-price' => 'Hourly Price',
-                                'hourly'       => 'Hourly Basis',
-                                'title'        => 'Renting Type',
+                        'empty-info'  => [
+                            'tickets' => [
+                                'add' => 'Add Tickets',
                             ],
 
-                            'slot-duration'            => 'Slot Duration (Mins)',
+                            'slots'   => [
+                                'add'         => 'Add Slots',
+                                'delete'      => 'Delete',
+                                'description' => 'Available Slots with time Duration.',
+                            ],
+                        ],
 
-                            'same-slot-for-all-days'   => [
+                        'rental'      => [
+                            'daily_hourly'           => 'Both (Daily and Hourly Basis)',
+                            'daily-price'            => 'Daily Price',
+                            'daily'                  => 'Daily Basis',
+                            'hourly-price'           => 'Hourly Price',
+                            'hourly'                 => 'Hourly Basis',
+                            'same-slot-for-all-days' => [
                                 'no'    => 'No',
                                 'title' => 'Same Slot For All days',
                                 'yes'   => 'Yes',
                             ],
 
-                            'slots'                    => [
-                                'add'         => 'Add Slots',
-                                'delete'      => 'Delete',
-                                'description' => 'There is no slots available.',
-                                'edit'        => 'Edit',
-                                'save'        => 'Save',
-                                'title'       => 'Slots',
+                            'title'                  => 'Renting Type',
+                        ],
+
+                        'slots'       => [
+                            'add'              => 'Add Slots',
+                            'delete'           => 'Delete',
+                            'description-info' => 'Available Slots with time Duration.',
+                            'description'      => 'There is no slots available.',
+                            'edit'             => 'Edit',
+
+                            'modal'            => [
+                                'slot' => [
+                                    'friday'     => 'Friday',
+                                    'from'       => 'From',
+                                    'monday'     => 'Monday',
+                                    'saturday'   => 'Saturday',
+                                    'sunday'     => 'Sunday',
+                                    'thursday'   => 'Thursday',
+                                    'to'         => 'To',
+                                    'tuesday'    => 'Tuesday',
+                                    'wednesday'  => 'Wednesday',
+                                ],
                             ],
 
-                            'status'                   => 'Status',
+                            'save'             => 'Save',
+                            'title'            => 'Slots',
+                        ],
 
-                            'tickets'                  => [
-                                'add'                => 'Add Tickets',
-                                'delete'             => 'Delete',
-                                'description'        => 'Description',
-                                'description-n'      => 'There is no tickets available.',
-                                'edit'               => 'Edit',
-                                'name'               => 'Name',
-                                'price'              => 'Price',
-                                'qty'                => 'Quantity',
-                                'special-price-from' => 'Special Price From',
-                                'special-price-to'   => 'Special Price To',
-                                'special-price'      => 'Special Price',
-                                'title'              => 'Tickets',
+                        'table'       => [
+                            'break-duration'            => 'Break Time b/w Slots (Mins)',
+
+                            'charged-per'               => [
+                                'guest'  => 'Guest',
+                                'table'  => 'Table',
+                                'title'  => 'Charged Per',
                             ],
 
-                            'type'                     => [
+                            'guest-capacity'            => 'Guest Capacity',
+                            'guest-limit'               => 'Guest Limit Per Table',
+                            'prevent-scheduling-before' => 'Prevent Scheduling Before',
+                            'slot-duration'             => 'Slot Duration (Mins)',
+
+                            'same-slot-for-all-days'    => [
+                                'no'    => 'No',
+                                'title' => 'Same Slot For All days',
+                                'yes'   => 'Yes',
+                            ],
+                        ],
+                    ],
+
+                    'types'   => [
+                        'booking' => [
+                            'available-from' => 'Available From',
+                            'available-to'   => 'Available To',
+
+                            'available-every-week'      => [
+                                'no'    => 'No',
+                                'title' => 'Available Every Week',
+                                'yes'   => 'Yes',
+                            ],
+
+                            'location' => 'Location',
+                            'qty'      => 'Qty',
+
+                            'type' => [
                                 'appointment' => 'Appointment',
                                 'default'     => 'Default',
                                 'event'       => 'Event',
@@ -234,27 +177,18 @@ return [
                                 'title'       => 'Type',
                             ],
 
-                            'table'                    => [
-                                'form' => ':from',
-                                'to'   => ':to',
-                            ],
-
-                            'title'                    => 'Booking Information',
-                            'to-day'                   => 'To Day',
-                            'to'                       => 'To',
+                            'title' => 'Booking Type',
                         ],
                     ],
                 ],
 
                 'index' => [
-                    'create' => [
-                        'booking' => 'Booking',
-                    ],
+                    'booking' => 'Booking',
                 ],
             ],
         ],
 
-        'sales' => [
+        'sales'   => [
             'bookings' => [
                 'index' => [
                     'datagrid' => [
@@ -266,10 +200,91 @@ return [
                         'to'           => 'To',
                     ],
 
-                    'title' => 'Bookings Product',
+                    'title'    => 'Bookings Product',
                 ],
 
                 'title' => 'Bookings Product',
+            ],
+        ],
+    ],
+
+    'shop'  => [
+        'products' => [
+            'booking' => [
+                'closed'           => 'Closed',
+
+                'cart'             => [
+                    'booking-from' => 'Booking From',
+                    'booking-till' => 'Booking Till',
+                    'daily'        => 'Daily',
+                    'event-from'   => 'Event From',
+                    'event-ticket' => 'Event Ticket',
+                    'event-till'   => 'Event Till',
+
+                    'integrity'    => [
+                        'missing_options'        => 'Options are missing for this product.',
+                        'select_hourly_duration' => 'Select a slot duration of one hour.',
+                    ],
+
+                    'rent-from'    => 'Rent From',
+                    'rent-till'    => 'Rent Till',
+                    'rent-type'    => 'Rent Type',
+                    'renting_type' => 'Rent Type',
+                    'special-note' => 'Special Request/Notes',
+                ],
+
+                'per-ticket-price' => ':price Per Ticket',
+            ],
+
+            'view'    => [
+                'types' => [
+                    'booking' => [
+                        'event-on'                 => 'Event On',
+                        'location'                 => 'Location',
+                        'slot-duration-in-minutes' => ':minutes Minutes',
+                        'slot-duration'            => 'Slot Duration',
+                        'view-on-map'              => 'View on Map',
+                    ],
+                ],
+
+                'booking' => [
+                    'appointment' => [
+                        'closed'             => 'Closed',
+                        'today-availability' => 'Today Availability',
+                    ],
+
+                    'event' => [
+                        'book-your-ticket' => 'Book Your Ticket',
+                    ],
+
+                    'rental' => [
+                        'choose-rent-option'       => 'Choose Rent Option',
+                        'daily-basis'              => 'Daily Basis',
+                        'from'                     => 'From',
+                        'hourly-basis'             => 'Hourly Basis',
+                        'rent-an-item'             => 'Rent an Item',
+                        'select-date'              => 'Select date',
+                        'select-rent-time'         => 'Select Rent Time',
+                        'select-slot'              => 'Select Slot',
+                        'slot'                     => 'Slot',
+                        'to'                       => 'To',
+                    ],
+
+                    'slots' => [
+                        'book-an-appointment'      => 'Book an Appointment',
+                        'date'                     => 'Date',
+                        'no-slots-available'       => 'No slots available',
+                        'title'                     => 'Slot',
+                    ],
+
+                    'table' => [
+                        'book-a-table'             => 'Book a Table',
+                        'closed'                   => 'Closed',
+                        'slots-for-all-days'       => 'Show for all days',
+                        'special-notes'            => 'Special Request/Notes',
+                        'today-availability'       => 'Today Availability',
+                    ],
+                ],
             ],
         ],
     ],

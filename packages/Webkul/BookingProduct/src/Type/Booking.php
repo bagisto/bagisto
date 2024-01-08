@@ -118,7 +118,7 @@ class Booking extends Virtual
             ! isset($data['booking'])
             || ! count($data['booking'])
         ) {
-            return trans('booking::app.shop.cart.integrity.missing_options');
+            return trans('booking::app.shop.products.booking.cart.integrity.missing_options');
         }
 
         $products = [];
@@ -131,7 +131,7 @@ class Booking extends Virtual
                 $hours = floor($time / 60) / 60;
 
                 if ($hours > 1) {
-                    return trans('booking::app.shop.cart.integrity.select_hourly_duration');
+                    return trans('booking::app.shop.products.booking.cart.integrity.select_hourly_duration');
                 }
             }
 

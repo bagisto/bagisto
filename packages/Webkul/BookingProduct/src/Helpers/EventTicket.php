@@ -61,7 +61,7 @@ class EventTicket extends Booking
             $tickets[$index]['id'] = $ticket->id;
             $tickets[$index]['converted_price'] = core()->convertPrice($price);
             $tickets[$index]['formatted_price'] = $formattedPrice = core()->currency($price);
-            $tickets[$index]['formatted_price_text'] = trans('booking::app.shop.products.per-ticket-price', ['price' => $formattedPrice]);
+            $tickets[$index]['formatted_price_text'] = trans('booking::app.shop.products.booking.per-ticket-price', ['price' => $formattedPrice]);
         }
 
         return $tickets;
