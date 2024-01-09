@@ -290,17 +290,17 @@ return [
                     'name'  => 'सेवाओं की सामग्री',
 
                     'title' => [
-                        'free-shipping'     => 'मुफ्त शिपिंग',
-                        'product-replace'   => 'उत्पाद बदलें',
-                        'emi-available'     => 'EMI उपलब्ध',
-                        'time-support'      => '24/7 समर्थन',
+                        'free-shipping'   => 'मुफ्त शिपिंग',
+                        'product-replace' => 'उत्पाद बदलें',
+                        'emi-available'   => 'EMI उपलब्ध',
+                        'time-support'    => '24/7 समर्थन',
                     ],
 
                     'description' => [
-                        'free-shipping-info'     => 'सभी आदेशों पर मुफ्त शिपिंग का आनंद लें',
-                        'product-replace-info'   => 'आसान उत्पाद बदलाव उपलब्ध!',
-                        'emi-available-info'     => 'सभी प्रमुख क्रेडिट कार्डों पर बिना लागत EMI उपलब्ध',
-                        'time-support-info'      => 'चैट और ईमेल के माध्यम से समर्पित 24/7 समर्थन',
+                        'free-shipping-info'   => 'सभी आदेशों पर मुफ्त शिपिंग का आनंद लें',
+                        'product-replace-info' => 'आसान उत्पाद बदलाव उपलब्ध!',
+                        'emi-available-info'   => 'सभी प्रमुख क्रेडिट कार्डों पर बिना लागत EMI उपलब्ध',
+                        'time-support-info'    => 'चैट और ईमेल के माध्यम से समर्पित 24/7 समर्थन',
                     ],
                 ],
             ],

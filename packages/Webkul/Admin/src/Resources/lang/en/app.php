@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Tax Rate',
                     'title'        => 'Tax Rates',
 
+                    'import' => [
+                        'duplicate-error'  => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
+                        'enough-row-error' => 'file has not enough rows',
+                        'import-btn'       => 'Import',
+                        'title'            => 'Upload',
+                        'upload-error'     => 'The file must be a file of type: xls, xlsx, csv.',
+                        'upload-success'   => 'Tax Rate Uploaded successfully',
+                        'validation'       => 'Allowed Type : xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'country'    => 'Country',
                         'delete'     => 'Delete',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Allowed Type :',
         'csv'              => 'CSV',
         'download'         => 'Download',
-        'duplicate-error'  => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
-        'enough-row-error' => 'file has not enough rows',
         'export'           => 'Export',
-        'file'             => 'File',
-        'file-type'        => 'csv, xls, xlsx.',
-        'format'           => 'Select Format',
-        'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
-        'import'           => 'Import',
         'no-records'       => 'Nothing to export',
-        'upload'           => 'Upload',
-        'upload-error'     => 'The file must be a file of type: xls, xlsx, csv.',
-        'upload-success'   => ':name Uploaded successfully',
         'xls'              => 'XLS',
     ],
 

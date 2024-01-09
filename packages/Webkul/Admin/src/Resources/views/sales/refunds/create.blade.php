@@ -52,7 +52,7 @@
                                         <!-- Refund Submit Button -->
                                         <button
                                             type="submit"
-                                            class="mr-11 primary-button"
+                                            class="ltr:mr-11 rtl:ml-11 primary-button"
                                             >
                                             @lang('admin::app.sales.refunds.create.refund-btn')
                                         </button>

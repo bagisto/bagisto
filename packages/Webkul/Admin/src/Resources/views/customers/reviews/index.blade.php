@@ -180,9 +180,9 @@
 
                             <div class="flex gap-1.5 place-content-end items-center self-center">
                                 <!-- Review Delete Button -->
-                                <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
+                                <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
                                     <span
-                                        :class="record.actions.find(action => action.index === 'action_2')?.icon"
+                                        :class="record.actions.find(action => action.index === 'delete')?.icon"
                                         class="text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"
                                     >
                                     </span>
@@ -190,8 +190,8 @@
 
                                 <!-- View Button -->
                                 <a
-                                    v-if="record.actions.find(action => action.index === 'action_1')"
-                                    @click="edit(record.actions.find(action => action.index === 'action_1')?.url)"
+                                    v-if="record.actions.find(action => action.index === 'edit')"
+                                    @click="edit(record.actions.find(action => action.index === 'edit')?.url)"
                                 >
                                     <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
                                     </span>
@@ -227,7 +227,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
-                                    <button class="mr-11 primary-button">
+                                    <button class="ltr:mr-11 rtl:ml-11 primary-button">
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>

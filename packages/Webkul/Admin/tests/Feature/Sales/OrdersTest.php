@@ -47,9 +47,6 @@ it('should return the view page of order', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act And Assert
-    $this->loginAsAdmin();
-
     $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
@@ -73,6 +70,9 @@ it('should return the view page of order', function () {
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
+
+    // Act And Assert
+    $this->loginAsAdmin();
 
     get(route('admin.sales.orders.view', $order->id))
         ->assertOk()
@@ -99,9 +99,6 @@ it('should cancel the order', function () {
         ->getSimpleProductFactory()
         ->create();
 
-    // Act and Assert
-    $this->loginAsAdmin();
-
     $customer = Customer::factory()->create();
 
     $order = Order::factory()->create([
@@ -126,7 +123,9 @@ it('should cancel the order', function () {
         'order_id' => $order->id,
     ]);
 
-    // Assert
+    // Act and Assert
+    $this->loginAsAdmin();
+
     postJson(route('admin.sales.orders.cancel', $order->id))
         ->assertRedirect(route('admin.sales.orders.view', $order->id))
         ->isRedirection();
@@ -138,6 +137,9 @@ it('should cancel the order', function () {
 });
 
 it('should comment to the order', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -176,9 +178,6 @@ it('should comment to the order', function () {
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
-
-    // Act and Assert
-    $this->loginAsAdmin();
 
     postJson(route('admin.sales.orders.comment', $order->id), [
         'comment' => $comment = fake()->word(),
@@ -193,6 +192,9 @@ it('should comment to the order', function () {
 });
 
 it('should search the order', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -231,9 +233,6 @@ it('should search the order', function () {
     OrderPayment::factory()->create([
         'order_id' => $order->id,
     ]);
-
-    // Act and Assert
-    $this->loginAsAdmin();
 
     get(route('admin.sales.orders.search'), [
         'query' => fake()->randomElement(['pending', 'completed', 'processing']),

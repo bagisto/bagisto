@@ -10,6 +10,8 @@
             </x-slot:header>
         
             <x-slot:content class="!p-0 mt-8">
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
+
                 <v-form 
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
@@ -125,6 +127,8 @@
                     <template v-if="meta.valid">
                         <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.billing.length">
                             <div class="flex justify-end mt-4">
+                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.before') !!}
+
                                 <x-shop::button
                                     class="primary-button py-3 px-11 rounded-2xl"
                                     :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
@@ -133,6 +137,8 @@
                                     @click="store"
                                 >
                                 </x-shop::button>
+
+                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.after') !!}
                             </div>
                         </div>
                     </template>
@@ -150,6 +156,8 @@
                         </div>
                     </template> 
                 </v-form>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
             </x-slot:content>
         </x-shop::accordion>
     </template>
@@ -178,7 +186,7 @@
                     </a>
                 </div>
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.before') !!}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
 
                 <!-- Billing address form -->
                 <x-shop::form
@@ -186,6 +194,8 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, handleBillingAddressForm)">
+                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
+
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label>
                                 @lang('shop::app.checkout.onepage.addresses.billing.company-name')
@@ -206,7 +216,7 @@
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.company_name.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.company_name.after') !!}
 
                         <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group>
@@ -230,8 +240,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.first_name.after') !!}
-
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.first_name.after') !!}
 
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-0 required">
@@ -254,7 +263,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.last_name.after') !!}
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.last_name.after') !!}
                         </div>
     
                         <x-shop::form.control-group>
@@ -278,7 +287,7 @@
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.email.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.email.after') !!}
     
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
@@ -315,7 +324,7 @@
                             @endif
                         </x-shop::form.control-group>
     
-                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.address1.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.address1.after') !!}
 
                         <div class="grid grid-cols-2 gap-x-5">
                             <x-shop::form.control-group
@@ -347,7 +356,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.country.after') !!}
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.country.after') !!}
     
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
@@ -390,8 +399,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.state.after') !!}
-
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.state.after') !!}
                         </div>
     
                         <div class="grid grid-cols-2 gap-x-5">
@@ -416,7 +424,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.city.after') !!}
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.city.after') !!}
         
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
@@ -439,8 +447,7 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.postcode.after') !!}
-
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.postcode.after') !!}
                         </div>
 
                         <x-shop::form.control-group>
@@ -464,7 +471,7 @@
                             </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.phone.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
 
                         <div class="grid gap-2.5 pb-4">
                             @auth('customer')
@@ -498,11 +505,12 @@
                                 @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                             </button>
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.after') !!}
                     </form>
                 </x-shop::form>
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.billing_address.after') !!}
-
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
             </x-slot:content>
         </x-shop::accordion>
     </template>

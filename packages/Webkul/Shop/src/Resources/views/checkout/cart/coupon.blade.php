@@ -12,6 +12,8 @@
                 @{{ isCouponApplied ? "@lang('shop::app.checkout.cart.coupon.applied')" : "@lang('shop::app.checkout.cart.coupon.discount')" }}
             </p>
 
+            {!! view_render_event('bagisto.shop.checkout.cart.coupon.before') !!}
+
             <p class="text-base font-medium max-sm:text-sm">
                 <!-- Apply Coupon Form -->
                 <x-shop::form
@@ -20,6 +22,8 @@
                 >
                     <!-- Apply coupon form -->
                     <form @submit="handleSubmit($event, applyCoupon)">
+                        {!! view_render_event('bagisto.shop.checkout.cart.coupon.coupon_form_controls.before') !!}
+
                         <!-- Apply coupon modal -->
                         <x-shop::modal ref="couponModel">
                             <!-- Modal Toggler -->
@@ -87,6 +91,8 @@
                                 </div>
                             </x-slot:footer>
                         </x-shop::modal>
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.coupon.coupon_form_controls.after') !!}
                     </form>
                 </x-shop::form>
 
@@ -110,6 +116,8 @@
                     </span>
                 </div>
             </p>
+
+            {!! view_render_event('bagisto.shop.checkout.cart.coupon.after') !!}
         </div>
     </script>
 

@@ -20,6 +20,8 @@ class Refund extends Base
             }
 
             $this->prepareMail($refund, new RefundedNotification($refund));
+
+            $refund->query()->update(['email_sent' => 1]);
         } catch (\Exception $e) {
             report($e);
         }

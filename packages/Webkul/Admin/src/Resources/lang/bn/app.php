@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'কর হার',
                     'title'        => 'কর হার',
 
+                    'import' => [
+                        'duplicate-error'  => 'পুনরায় চিহ্নিত অবশ্যই অদ্বিতীয়, সারি: অবস্থানে চিহ্নিত অদ্বিতীয় হতে হবে।',
+                        'enough-row-error' => 'ফাইলে যথেষ্ট সারি নেই',
+                        'import-btn'       => 'আমদানি',
+                        'title'            => 'আপলোড',
+                        'upload-error'     => 'ফাইল একটি ধরন: xls, xlsx, csv হতে হবে।',
+                        'upload-success'   => 'কর হার সফলভাবে আপলোড হয়েছে',
+                        'validation'       => 'অনুমোদিত প্রকার: xls, xlsx, csv।',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'আইডি',
                         'identifier' => 'সনাক্তক',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'অনুমোদিত প্রকার :',
         'csv'              => 'CSV',
         'download'         => 'ডাউনলোড',
-        'duplicate-error'  => 'পরিচিতকে অদ্বিতীয় করতে হবে, নকল পরিচিতক :identifier সারি :position তে।',
         'export'           => 'পর্যাপন্ন করুন',
-        'enough-row-error' => 'ফাইলটির যথেষ্ট সারি নেই',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'ফাইল',
-        'format'           => 'স্বরূপ নির্বাচন করুন',
-        'import'           => 'আমদানি করুন',
-        'illegal-format'   => 'ত্যাগের তুহিন ফরম্যাটটি সমর্থিত নয় বা তা অবৈধ ফরম্যাট।',
         'no-records'       => 'পর্যাপন্ন কিছু নেই',
-        'upload'           => 'আপলোড',
-        'upload-error'     => 'ফাইলটি একটি প্রকারের ফাইল হতে হবে: xls, xlsx, csv।',
-        'upload-success'   => ':name সফলভাবে আপলোড হয়েছে',
         'xls'              => 'XLS',
     ],
 

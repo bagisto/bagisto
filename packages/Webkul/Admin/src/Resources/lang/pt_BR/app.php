@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Taxa de Imposto',
                     'title'        => 'Taxas de Imposto',
 
+                    'import' => [
+                        'duplicate-error'  => 'O identificador deve ser único, identificador duplicado :identifier na linha :position.',
+                        'enough-row-error' => 'O arquivo não tem linhas suficientes',
+                        'import-btn'       => 'Importar',
+                        'title'            => 'Upload',
+                        'upload-error'     => 'O arquivo deve ser do tipo: xls, xlsx, csv.',
+                        'upload-success'   => 'Taxa de imposto carregada com sucesso',
+                        'validation'       => 'Tipo permitido: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Identificador',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Type autorisé :',
         'csv'              => 'CSV',
         'download'         => 'Télécharger',
-        'duplicate-error'  => 'L\'identifiant doit être unique, l\'identifiant en double :identifier à la ligne :position.',
-        'enough-row-error' => 'Le fichier n\'a pas assez de lignes',
         'export'           => 'Exporter',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Fichier',
-        'format'           => 'Sélectionner le format',
-        'import'           => 'Importer',
-        'illegal-format'   => 'Erreur ! Ce type de format n\'est pas pris en charge ou son format est illégal',
         'no-records'       => 'Rien à exporter',
-        'upload'           => 'Téléverser',
-        'upload-error'     => 'Le fichier doit être un fichier de type : xls, xlsx, csv.',
-        'upload-success'   => ':name téléversé avec succès',
         'xls'              => 'XLS',
     ],
 

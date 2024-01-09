@@ -59,7 +59,7 @@
                                 @if (bouncer()->hasPermission('customers.groups.edit'))
                                     <a @click="selectedGroups=1; editModal(record)">
                                         <span
-                                            :class="record.actions.find(action => action.index === 'action_1')?.icon"
+                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             :title="record.actions.find(action => action.title === '@lang('admin::app.customers.groups.index.datagrid.edit')')?.title"
                                         >
@@ -68,9 +68,9 @@
                                 @endif
 
                                 @if (bouncer()->hasPermission('customers.groups.delete'))
-                                    <a @click="performAction(record.actions.find(action => action.index === 'action_2'))">
+                                    <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
                                         <span
-                                            :class="record.actions.find(action => action.index === 'action_2')?.icon"
+                                            :class="record.actions.find(action => action.index === 'delete')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                             :title="record.actions.find(action => action.title === '@lang('admin::app.customers.groups.index.datagrid.delete')')?.title"
                                         >

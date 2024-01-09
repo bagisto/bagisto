@@ -48,10 +48,11 @@ it('should store the newly created url', function () {
 });
 
 it('should update the existing url rewrite', function () {
+    // Arrange
+    $urlRewrite = URLRewrite::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $urlRewrite = URLRewrite::factory()->create();
 
     putJson(route('admin.marketing.search_seo.url_rewrites.update'), [
         'id'             => $urlRewrite->id,
@@ -75,10 +76,11 @@ it('should update the existing url rewrite', function () {
 });
 
 it('should delete the existing url rewrite', function () {
+    // Arrange
+    $urlRewrite = URLRewrite::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $urlRewrite = URLRewrite::factory()->create();
 
     deleteJson(route('admin.marketing.search_seo.url_rewrites.delete', $urlRewrite->id))
         ->assertOk()
@@ -90,10 +92,11 @@ it('should delete the existing url rewrite', function () {
 });
 
 it('should mass delete the exising url rewrites', function () {
+    // Arrange
+    $urlRewrites = URLRewrite::factory()->count(2)->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $urlRewrites = URLRewrite::factory()->count(2)->create();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.mass_delete'), [
         'indices' => $urlRewrites->pluck('id')->toArray(),

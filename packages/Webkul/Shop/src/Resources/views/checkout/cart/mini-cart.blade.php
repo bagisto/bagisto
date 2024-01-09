@@ -9,9 +9,13 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mini-cart-template">
+        {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.before') !!}
+
         <x-shop::drawer>
             <!-- Drawer Toggler -->
             <x-slot:toggle>
+                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
+
                 <span class="relative">
                     <span
                         class="icon-cart text-2xl cursor-pointer"
@@ -27,10 +31,14 @@
                         @{{ cart.items_qty }}
                     </span>
                 </span>
+
+                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.after') !!}
             </x-slot:toggle>
 
             <!-- Drawer Header -->
             <x-slot:header>
+                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
+
                 <div class="flex justify-between items-center">
                     <p class="text-2xl font-medium">
                         @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
@@ -40,10 +48,14 @@
                 <p class="text-base">
                     @lang('shop::app.checkout.cart.mini-cart.offer-on-orders')
                 </p>
+
+                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.after') !!}
             </x-slot:header>
 
             <!-- Drawer Content -->
             <x-slot:content>
+                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.before') !!}
+
                 <!-- Cart Item Listing -->
                 <div 
                     class="grid gap-12 mt-9" 
@@ -54,6 +66,8 @@
                         v-for="item in cart?.items"
                     >
                         <!-- Cart Item Image -->
+                        {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.image.before') !!}
+
                         <div class="">
                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                 <img
@@ -63,9 +77,14 @@
                             </a>
                         </div>
 
+                        {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.image.after') !!}
+
                         <!-- Cart Item Information -->
                         <div class="grid flex-1 gap-y-2.5 place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.before') !!}
+
                                 <a  class="max-w-4/5" :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
                                     <p
                                         class="text-base font-medium"
@@ -74,11 +93,16 @@
                                     </p>
                                 </a>
 
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.name.after') !!}
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.before') !!}
                                 <p
                                     class="text-lg"
                                     v-text="item.formatted_price"
                                 >
                                 </p>
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.price.after') !!}
                             </div>
 
                             <!-- Cart Item Options Container -->
@@ -86,6 +110,9 @@
                                 class="grid gap-x-2.5 gap-y-1.5 select-none"
                                 v-if="item.options.length"
                             >
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.product_details.before') !!}
+
                                 <!-- Details Toggler -->
                                 <div class="">
                                     <p
@@ -112,11 +139,13 @@
                                             @{{ option.option_label }}
                                         </p>
                                     </div>
-
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.product_details.after') !!}
                             </div>
 
                             <div class="flex gap-5 items-center flex-wrap">
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.before') !!}
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
@@ -127,6 +156,10 @@
                                 >
                                 </x-shop::quantity-changer>
 
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.after') !!}
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.remove_button.before') !!}
+                                
                                 <!-- Cart Item Remove Button -->
                                 <button
                                     type="button"
@@ -135,6 +168,8 @@
                                 >
                                     @lang('shop::app.checkout.cart.mini-cart.remove')
                                 </button>
+
+                                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.remove_button.after') !!}
                             </div>
                         </div>
                     </div>
@@ -153,12 +188,16 @@
                         </p>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.after') !!}
             </x-slot:content>
 
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
                     <div class="flex justify-between items-center mt-8 mb-8 px-6 pb-2 border-b border-[#E9E9E9]">
+                        {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
+
                         <p class="text-sm font-medium text-[#6E6E6E]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
@@ -169,6 +208,8 @@
                             v-text="cart.formatted_grand_total"
                         >
                         </p>
+
+                        {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.after') !!}
                         
                         <div
                             v-else
@@ -202,8 +243,12 @@
                         </div>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.checkout.mini-cart.action.before') !!}
+
                     <!-- Cart Action Container -->
                     <div class="grid gap-2.5 px-6">
+                        {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.before') !!}
+
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
                             class="block w-full mx-auto py-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer max-sm:px-5"
@@ -211,15 +256,21 @@
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
 
+                        {!! view_render_event('bagisto.shop.checkout.mini-cart.continue_to_checkout.after') !!}
+
                         <div class="block text-base text-center font-medium cursor-pointer">
                             <a href="{{ route('shop.checkout.cart.index') }}">
                                 @lang('shop::app.checkout.cart.mini-cart.view-cart')
                             </a>
                         </div>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.checkout.mini-cart.action.after') !!}
                 </div>
             </x-slot:footer>
         </x-shop::drawer>
+
+        {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.after') !!}
     </script>
 
     <script type="module">

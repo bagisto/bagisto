@@ -349,7 +349,7 @@ it('should return the products with most visits reporting stats', function () {
 
 it('should return the last search terms reporting stats', function () {
     // Arrange
-    $product = (new ProductFaker([
+    (new ProductFaker([
         'attributes' => [
             5 => 'new',
         ],
@@ -408,9 +408,7 @@ it('should return top search terms reporting stats', function () {
 });
 
 it('should return the downloadable response for product stats', function () {
-    // Act and Assert
-    $this->loginAsAdmin();
-
+    // Arrange
     $period = fake()->randomElement(['day', 'month', 'year']);
 
     $start = Carbon::now();
@@ -422,6 +420,9 @@ it('should return the downloadable response for product stats', function () {
     } else {
         $end = $start->copy()->addYear();
     }
+
+    // Act and Assert
+    $this->loginAsAdmin();
 
     get(route('admin.reporting.products.export', [
         'start'  => $start->toDateString(),

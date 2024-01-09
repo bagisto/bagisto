@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'Steuersatz',
                     'title'        => 'Steuersätze',
 
+                    'import' => [
+                        'duplicate-error'  => 'Kennung muss eindeutig sein, doppelte Kennung :identifier in Zeile :position.',
+                        'enough-row-error' => 'Die Datei enthält nicht genügend Zeilen',
+                        'import-btn'       => 'Importieren',
+                        'title'            => 'Hochladen',
+                        'upload-error'     => 'Die Datei muss vom Typ sein: xls, xlsx, csv.',
+                        'upload-success'   => 'Steuersatz erfolgreich hochgeladen',
+                        'validation'       => 'Erlaubter Typ: xls, xlsx, csv.',
+                    ],
+
                     'datagrid' => [
                         'id'         => 'ID',
                         'identifier' => 'Bezeichner',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'Zulässiger Typ :',
         'csv'              => 'CSV',
         'download'         => 'Herunterladen',
-        'duplicate-error'  => 'Der Identifier muss eindeutig sein, doppelter Identifier :identifier in Zeile :position.',
-        'enough-row-error' => 'Datei hat nicht genügend Zeilen',
         'export'           => 'Exportieren',
-        'file-type'        => 'csv, xls, xlsx.',
-        'file'             => 'Datei',
-        'format'           => 'Format auswählen',
-        'import'           => 'Importieren',
-        'illegal-format'   => 'Fehler! Dieser Typ von Format wird entweder nicht unterstützt oder ist ein illegales Format.',
         'no-records'       => 'Nichts zu exportieren',
-        'upload'           => 'Hochladen',
-        'upload-error'     => 'Die Datei muss ein Dateityp sein: xls, xlsx, csv.',
-        'upload-success'   => ':name erfolgreich hochgeladen',
         'xls'              => 'XLS',
     ],
 

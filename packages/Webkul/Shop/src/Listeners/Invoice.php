@@ -14,10 +14,6 @@ class Invoice extends Base
      */
     public function afterCreated($invoice)
     {
-        if ($invoice->email_sent) {
-            return;
-        }
-
         try {
             if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_invoice')) {
                 return;
@@ -25,11 +21,7 @@ class Invoice extends Base
 
             $this->prepareMail($invoice, new InvoicedNotification($invoice));
 
-            unset($invoice->email);
-
-            $invoice->email_sent = true;
-
-            $invoice->save();
+            $invoice->query()->update(['email_sent' => 1]);
         } catch (\Exception $e) {
             report($e);
         }

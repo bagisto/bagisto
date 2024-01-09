@@ -16,6 +16,8 @@
     
             <template v-if="isShowPaymentMethod">
                 <div>
+                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.before') !!}
+
                     <x-shop::accordion class="!border-b-0">
                         <x-slot:header class="!p-0">
                             <div class="flex justify-between items-center">
@@ -53,6 +55,9 @@
                                         :for="payment.method" 
                                         class="w-[190px] p-5 block border border-[#E9E9E9] rounded-xl max-sm:w-full cursor-pointer"
                                     >
+
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
+
                                         <img
                                             class="max-w-[55px] max-h-[45px]"
                                             :src="payment.image"
@@ -62,13 +67,23 @@
                                             :title="payment.method_title"
                                         />
 
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.after') !!}
+
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.before') !!}
+
                                         <p class="text-sm font-semibold mt-1.5">
                                             @{{ payment.method_title }}
                                         </p>
                                         
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.title.after') !!}
+
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.before') !!}
+
                                         <p class="text-xs font-medium mt-2.5">
                                             @{{ payment.description }}
                                         </p> 
+
+                                        {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.description.after') !!}
                                     </label>
 
                                     {!! view_render_event('bagisto.shop.checkout.payment-method.after') !!}
@@ -79,6 +94,8 @@
                             </div>
                         </x-slot:content>
                     </x-shop::accordion>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.index.payment_method.accordion.before') !!}
                 </div>
             </template>
         </div>

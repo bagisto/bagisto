@@ -54,10 +54,11 @@ it('should store the newly create email template', function () {
 });
 
 it('should edit the email template', function () {
+    // Arrange
+    $emailTemplate = Template::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $emailTemplate = Template::factory()->create();
 
     get(route('admin.marketing.communications.email_templates.edit', $emailTemplate->id))
         ->assertOk()
@@ -67,10 +68,11 @@ it('should edit the email template', function () {
 });
 
 it('should update the existing the template', function () {
+    // Arrange
+    $emailTemplate = Template::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $emailTemplate = Template::factory()->create();
 
     putJson(route('admin.marketing.communications.email_templates.update', $emailTemplate->id), [
         'name'    => $emailTemplate->name,
@@ -88,10 +90,11 @@ it('should update the existing the template', function () {
 });
 
 it('should delete the specified email template', function () {
+    // Arrange
+    $emailTemplate = Template::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $emailTemplate = Template::factory()->create();
 
     deleteJson(route('admin.marketing.communications.email_templates.delete', $emailTemplate->id))
         ->assertOk()

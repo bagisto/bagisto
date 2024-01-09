@@ -42,10 +42,11 @@ it('should store the newly created currencies', function () {
 });
 
 it('should return the currencies for edit', function () {
+    // Arrange
+    $currency = Currency::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $currency = Currency::factory()->create();
 
     get(route('admin.settings.currencies.edit', $currency->id))
         ->assertOk()
@@ -55,10 +56,11 @@ it('should return the currencies for edit', function () {
 });
 
 it('should update the specified currency', function () {
+    // Arrange
+    $currency = Currency::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $currency = Currency::factory()->create();
 
     putJson(route('admin.settings.currencies.update'), [
         'id'   => $currency->id,
@@ -75,10 +77,11 @@ it('should update the specified currency', function () {
 });
 
 it('should delete the currencie', function () {
+    // Arrange
+    $currency = Currency::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $currency = Currency::factory()->create();
 
     deleteJson(route('admin.settings.currencies.delete', $currency->id))
         ->assertOk()

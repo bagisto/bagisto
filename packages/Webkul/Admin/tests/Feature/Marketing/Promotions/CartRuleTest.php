@@ -70,10 +70,11 @@ it('should store the newly created cart rule', function () {
 });
 
 it('should copy the existing cart rule', function () {
+    // Arrange
+    $cartRule = CartRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cartRule = CartRule::factory()->create();
 
     get(route('admin.marketing.promotions.cart_rules.copy', $cartRule->id))
         ->assertOk()
@@ -82,10 +83,11 @@ it('should copy the existing cart rule', function () {
 });
 
 it('should update the existing cart rule', function () {
+    // Arrange
+    $cartRule = CartRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cartRule = CartRule::factory()->create();
 
     get(route('admin.marketing.promotions.cart_rules.edit', $cartRule->id))
         ->assertOk()
@@ -94,10 +96,11 @@ it('should update the existing cart rule', function () {
 });
 
 it('should update the cart rule', function () {
+    // Arrange
+    $cartRule = CartRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cartRule = CartRule::factory()->create();
 
     putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id), [
         'name'        => $name = fake()->name(),
@@ -130,10 +133,11 @@ it('should update the cart rule', function () {
 });
 
 it('should delete the cart rules', function () {
+    // Arrange
+    $cartRule = CartRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $cartRule = CartRule::factory()->create();
 
     deleteJson(route('admin.marketing.promotions.cart_rules.delete', $cartRule->id))
         ->assertOk()

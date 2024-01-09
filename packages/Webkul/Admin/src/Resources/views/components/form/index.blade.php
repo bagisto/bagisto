@@ -24,6 +24,7 @@
         method="{{ $method === 'GET' ? 'GET' : 'POST' }}"
         :initial-errors="{{ json_encode($errors->getMessages()) }}"
         v-slot="{ meta, errors, setValues }"
+        @invalid-submit="onInvalidSubmit"
         {{ $attributes }}
     >
         @unless(in_array($method, ['HEAD', 'GET', 'OPTIONS']))

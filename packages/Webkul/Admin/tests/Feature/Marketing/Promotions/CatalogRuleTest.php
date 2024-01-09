@@ -71,10 +71,11 @@ it('should store the newly created catalog rule', function () {
 });
 
 it('should returns the edit page of catalog rules', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $catalogRule = CatalogRule::factory()->create();
 
     get(route('admin.marketing.promotions.catalog_rules.edit', $catalogRule->id))
         ->assertOk()
@@ -83,10 +84,11 @@ it('should returns the edit page of catalog rules', function () {
 });
 
 it('should update the catalog rule', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $catalogRule = CatalogRule::factory()->create();
 
     putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id), [
         'name'        => $catalogRule->name,
@@ -118,10 +120,11 @@ it('should update the catalog rule', function () {
 });
 
 it('should delete a specific catalog rule', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->create();
+
     // Act and Assert
     $this->loginAsAdmin();
-
-    $catalogRule = CatalogRule::factory()->create();
 
     deleteJson(route('admin.marketing.promotions.catalog_rules.delete', $catalogRule->id))
         ->assertOk()

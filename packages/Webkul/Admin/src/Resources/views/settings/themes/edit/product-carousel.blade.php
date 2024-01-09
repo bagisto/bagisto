@@ -185,7 +185,7 @@
                         <img
                             class="w-[120px] h-[120px] p-2 dark:invert dark:mix-blend-exclusion"
                             src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
-                            alt="add-product-to-store"
+                            alt="@lang('admin::app.settings.themes.edit.product-carousel')"
                         >
         
                         <div class="flex flex-col gap-1.5 items-center">

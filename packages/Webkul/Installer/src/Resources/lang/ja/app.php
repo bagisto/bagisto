@@ -290,17 +290,17 @@ return [
                     'name'  => 'サービスコンテンツ',
 
                     'title' => [
-                        'free-shipping'     => '送料無料',
-                        'product-replace'   => '製品の交換',
-                        'emi-available'     => 'EMI利用可能',
-                        'time-support'      => '24/7サポート',
+                        'free-shipping'   => '送料無料',
+                        'product-replace' => '製品の交換',
+                        'emi-available'   => 'EMI利用可能',
+                        'time-support'    => '24/7サポート',
                     ],
 
                     'description' => [
-                        'free-shipping-info'     => 'すべての注文で送料無料をお楽しみください',
-                        'product-replace-info'   => '簡単な製品交換が可能です！',
-                        'emi-available-info'     => 'すべての主要クレジットカードで費用のかからないEMIが利用可能です',
-                        'time-support-info'      => 'チャットやメールでの専用24/7サポート',
+                        'free-shipping-info'   => 'すべての注文で送料無料をお楽しみください',
+                        'product-replace-info' => '簡単な製品交換が可能です！',
+                        'emi-available-info'   => 'すべての主要クレジットカードで費用のかからないEMIが利用可能です',
+                        'time-support-info'    => 'チャットやメールでの専用24/7サポート',
                     ],
                 ],
             ],

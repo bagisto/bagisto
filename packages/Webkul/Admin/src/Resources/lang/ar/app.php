@@ -2414,6 +2414,16 @@ return [
                     'tax-rate'     => 'سعر الضريبة',
                     'title'        => 'أسعار الضرائب',
 
+                    'import' => [
+                        'duplicate-error'  => 'يجب أن يكون المعرف فريدًا ، معرف مكرر :identifier في الصف :position.',
+                        'enough-row-error' => 'الملف لا يحتوي على عدد كافٍ من الصفوف',
+                        'import-btn'       => 'استيراد',
+                        'title'            => 'تحميل',
+                        'upload-error'     => 'يجب أن يكون الملف من النوع: xls، xlsx، csv.',
+                        'upload-success'   => 'تم تحميل معدل الضريبة بنجاح',
+                        'validation'       => 'الأنواع المسموح بها: xls، xlsx، csv.',
+                    ],
+
                     'datagrid' => [
                         'country'    => 'البلد',
                         'delete'     => 'حذف',
@@ -3722,21 +3732,10 @@ return [
     ],
 
     'export' => [
-        'allowed-type'     => 'الأنواع المسموح بها:',
         'csv'              => 'CSV',
         'download'         => 'تحميل',
-        'duplicate-error'  => 'يجب أن يكون المعرف فريدًا، تكرار المعرف ":identifier" في الصف :position.',
-        'enough-row-error' => 'الملف ليس لديه ما يكفي من الصفوف',
         'export'           => 'تصدير',
-        'file'             => 'ملف',
-        'file-type'        => 'csv، xls، xlsx.',
-        'format'           => 'اختر التنسيق',
-        'illegal-format'   => 'خطأ! هذا النوع من التنسيق غير مدعوم أو يعتبر تنسيقًا غير قانوني',
-        'import'           => 'استيراد',
         'no-records'       => 'لا يوجد شيء للتصدير',
-        'upload'           => 'تحميل',
-        'upload-error'     => 'يجب أن يكون الملف من نوع: xls، xlsx، csv.',
-        'upload-success'   => 'تم تحميل الملف ":name" بنجاح',
         'xls'              => 'XLS',
     ],
 
