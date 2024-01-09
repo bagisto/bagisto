@@ -79,11 +79,16 @@ abstract class Payment
         return core()->getConfigData('sales.payment_methods.' . $this->getCode() . '.' . $field);
     }
 
+    /**
+     * Abstract method to get the redirect URL.
+     *
+     * @return string The redirect URL.
+     */    
     abstract public function getRedirectUrl();
 
     /**
      * Assign cart
-     *
+     * 
      * @var void
      */
     public function setCart()
