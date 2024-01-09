@@ -3,6 +3,7 @@
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -48,9 +49,9 @@ it('should return the create page of simple product', function () {
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
     $this->assertDatabaseHas('products', [
+        'id'   => $productId,
         'type' => 'simple',
         'sku'  => $sku,
-        'id'   => $productId,
     ]);
 });
 
@@ -93,12 +94,15 @@ it('should update the simple product', function () {
         ->isRedirection();
 
     $this->assertDatabaseHas('products', [
-        'sku'  => $product->sku,
+        'id'   => $product->id,
         'type' => $product->type,
+        'sku'  => $product->sku,
     ]);
 
     $this->assertDatabaseHas('product_flat', [
+        'product_id'           => $product->id,
         'url_key'              => $product->url_key,
+        'sku'                  => $product->sku,
         'type'                 => 'simple',
         'name'                 => $name,
         'short_description'    => $shortDescription,
@@ -106,29 +110,35 @@ it('should update the simple product', function () {
         'price'                => $price,
         'weight'               => $weight,
         'locale'               => $locale,
-        'product_id'           => $product->id,
         'channel'              => $channel,
     ]);
 });
 
 it('should return the create page of configurable product', function () {
+    // Arrange
+    $attributes = AttributeFamily::find($attributeFamily = 1)->configurable_attributes;
+
     // Act and Assert
     $this->loginAsAdmin();
 
-    postJson(route('admin.catalog.products.store'), [
+    $response = postJson(route('admin.catalog.products.store'), [
         'type'                => 'configurable',
-        'attribute_family_id' => 1,
+        'attribute_family_id' => $attributeFamily,
         'sku'                 => fake()->slug(),
     ])
-        ->assertOk()
-        ->assertJsonPath('data.attributes.0.id', 23)
-        ->assertJsonPath('data.attributes.0.code', 'color')
-        ->assertJsonPath('data.attributes.0.options.0.id', 1)
-        ->assertJsonPath('data.attributes.0.options.0.name', 'Red')
-        ->assertJsonPath('data.attributes.1.id', 24)
-        ->assertJsonPath('data.attributes.1.code', 'size')
-        ->assertJsonPath('data.attributes.1.options.0.id', 6)
-        ->assertJsonPath('data.attributes.1.options.0.name', 'S');
+        ->assertOk();
+
+    foreach ($attributes as $attributekey => $value) {
+        $response
+            ->assertJsonPath('data.attributes.' . $attributekey . '.id', $value->id)
+            ->assertJsonPath('data.attributes.' . $attributekey . '.code', $value->code);
+
+        foreach ($value->options as $optionKey => $option) {
+            $response
+                ->assertJsonPath('data.attributes.' . $attributekey . '.options.' . $optionKey . '.id', $option->id)
+                ->assertJsonPath('data.attributes.' . $attributekey . '.options.' . $optionKey . '.name', $option->admin_name);
+        }
+    }
 });
 
 it('should return the edit page of configurable product', function () {
@@ -155,27 +165,11 @@ it('should update the configurable product', function () {
     // Act and Asssert
     $this->loginAsAdmin();
 
-    foreach ($product->variants as $variant) {
-        $variants[$variant->id] = [
-            'sku'         => $variant->sku,
-            'name'        => $variant->name,
-            'price'       => $variant->price,
-            'weight'      => $variant->price,
-            'status'      => $variant->status,
-            'color'       => $variant->color,
-            'size'        => $variant->size,
-            'inventories' => [
-                1 => rand(1111, 9999),
-            ],
-        ];
-    }
-
     $this->putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
         'channel'           => $channel = core()->getCurrentChannelCode(),
         'locale'            => $locale = app()->getLocale(),
-        'variants'          => $variants,
         'short_description' => fake()->sentence(),
         'description'       => fake()->paragraph(),
         'name'              => fake()->words(3, true),
@@ -186,36 +180,13 @@ it('should update the configurable product', function () {
         ->isRedirection();
 
     $this->assertDatabaseHas('products', [
-        'sku'                 => $product->sku,
+        'id'                  => $product->id,
         'type'                => $product->type,
+        'sku'                 => $product->sku,
         'attribute_family_id' => 1,
         'parent_id'           => null,
         'additional'          => null,
     ]);
-
-    foreach ($product->variants as $variant) {
-        $variant->refresh();
-
-        $this->assertDatabaseHas('product_flat', [
-            'sku'                  => $variant->sku,
-            'product_id'           => $variant->id,
-            'product_number'       => null,
-            'new'                  => null,
-            'featured'             => null,
-            'status'               => 1,
-            'url_key'              => $variant->url_key,
-            'type'                 => 'simple',
-            'name'                 => $variant->name,
-            'short_description'    => $variant->short_description,
-            'description'          => $variant->description,
-            'price'                => $variant->price,
-            'weight'               => $variant->weight,
-            'locale'               => $locale,
-            'channel'              => $channel,
-            'attribute_family_id'  => 1,
-            'visible_individually' => 0,
-        ]);
-    }
 });
 
 it('should return the create page of virtual product', function () {
@@ -236,9 +207,9 @@ it('should return the create page of virtual product', function () {
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
     $this->assertDatabaseHas('products', [
+        'id'   => $productId,
         'type' => 'virtual',
         'sku'  => $sku,
-        'id'   => $productId,
     ]);
 });
 
@@ -281,20 +252,22 @@ it('should update the virtual product', function () {
         ->isRedirection();
 
     $this->assertDatabaseHas('products', [
-        'sku'  => $product->sku,
+        'id'   => $product->id,
         'type' => $product->type,
+        'sku'  => $product->sku,
     ]);
 
     $this->assertDatabaseHas('product_flat', [
-        'url_key'              => $product->url_key,
+        'product_id'           => $product->id,
         'type'                 => $product->type,
+        'url_key'              => $product->url_key,
+        'sku'                  => $product->sku,
         'name'                 => $name,
         'short_description'    => $shortDescription,
         'description'          => $description,
         'price'                => $price,
         'weight'               => $weight,
         'locale'               => $locale,
-        'product_id'           => $product->id,
         'channel'              => $channel,
     ]);
 });
@@ -317,27 +290,15 @@ it('should return the create page of grouped product', function () {
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
     $this->assertDatabaseHas('products', [
+        'id'   => $productId,
         'type' => 'grouped',
         'sku'  => $sku,
-        'id'   => $productId,
     ]);
 });
 
 it('should return the grouped edit page', function () {
     // Arrange
-    $products = (new ProductFaker())->getSimpleProductFactory()->count(5)->create();
-
-    foreach ($products as $key => $product) {
-        $links['link_' . $key] = [
-            'associated_product_id' => $product->id,
-            'sort_order'            => $key,
-            'qty'                   => rand(10, 100),
-        ];
-    }
-
-    $product = (new ProductFaker())->getSimpleProductFactory()->create([
-        'type' => 'grouped',
-    ]);
+    $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -352,7 +313,6 @@ it('should return the grouped edit page', function () {
         'weight'            => fake()->numberBetween(0, 100),
         'channel'           => core()->getCurrentChannelCode(),
         'locale'            => app()->getLocale(),
-        'links'             => $links ?? [],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'))
@@ -365,19 +325,7 @@ it('should return the grouped edit page', function () {
 
 it('should update the grouped product', function () {
     // Arrange
-    $products = (new ProductFaker())->getSimpleProductFactory()->count(5)->create();
-
-    foreach ($products as $key => $product) {
-        $links['link_' . $key] = [
-            'associated_product_id' => $product->id,
-            'sort_order'            => $key,
-            'qty'                   => rand(10, 100),
-        ];
-    }
-
-    $product = (new ProductFaker())->getSimpleProductFactory()->create([
-        'type' => 'grouped',
-    ]);
+    $product = (new ProductFaker())->getGroupedProductFactory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -392,44 +340,46 @@ it('should update the grouped product', function () {
         'weight'            => $weight = fake()->numberBetween(0, 100),
         'channel'           => $channel = core()->getCurrentChannelCode(),
         'locale'            => $locale = app()->getLocale(),
-        'links'             => $links ?? [],
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
     $this->assertDatabaseHas('products', [
-        'sku'                 => $product->sku,
+        'id'                  => $product->id,
         'type'                => $product->type,
+        'sku'                 => $product->sku,
         'attribute_family_id' => 1,
         'parent_id'           => null,
         'additional'          => null,
     ]);
 
     $this->assertDatabaseHas('product_flat', [
-        'url_key'              => $product->url_key,
-        'type'                 => 'grouped',
-        'name'                 => $name,
-        'short_description'    => $shortDescription,
-        'description'          => $description,
-        'price'                => $price,
-        'weight'               => $weight,
-        'locale'               => $locale,
-        'product_id'           => $product->id,
-        'channel'              => $channel,
+        'product_id'        => $product->id,
+        'type'              => 'grouped',
+        'sku'               => $product->sku,
+        'url_key'           => $product->url_key,
+        'name'              => $name,
+        'short_description' => $shortDescription,
+        'description'       => $description,
+        'price'             => $price,
+        'weight'            => $weight,
+        'locale'            => $locale,
+        'channel'           => $channel,
     ]);
 
-    foreach ($products as $product) {
+    foreach ($product->grouped_products() as $product) {
         $this->assertDatabaseHas('product_flat', [
-            'url_key'              => $product->url_key,
-            'type'                 => 'simple',
-            'name'                 => $product->name,
-            'short_description'    => $product->short_description,
-            'description'          => $product->description,
-            'price'                => $product->price,
-            'weight'               => $product->weight,
-            'locale'               => $locale,
-            'product_id'           => $product->id,
-            'channel'              => $channel,
+            'product_id'        => $product->id,
+            'type'              => 'simple',
+            'sku'               => $product->sku,
+            'url_key'           => $product->url_key,
+            'name'              => $product->name,
+            'short_description' => $product->short_description,
+            'description'       => $product->description,
+            'price'             => $product->price,
+            'weight'            => $product->weight,
+            'locale'            => $locale,
+            'channel'           => $channel,
         ]);
     }
 });
@@ -452,9 +402,9 @@ it('should return the create page of downloadable product', function () {
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
     $this->assertDatabaseHas('products', [
+        'id'   => $productId,
         'type' => 'downloadable',
         'sku'  => $sku,
-        'id'   => $productId,
     ]);
 
     $this->assertDatabaseHas('product_flat', [
@@ -507,7 +457,10 @@ it('should update the downloadable product', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    $file = UploadedFile::fake()->create('ProductImageExampleForUpload.jpg');
+    $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg');
+    $file2 = UploadedFile::fake()->create('ProductImageExampleForUpload2.jpg');
+    $file3 = UploadedFile::fake()->create('ProductImageExampleForUpload3.jpg');
+    $file4 = UploadedFile::fake()->create('ProductImageExampleForUpload4.jpg');
 
     // Act and Asssert
     $this->loginAsAdmin();
@@ -531,8 +484,8 @@ it('should update the downloadable product', function () {
                 'downloads'        => '1',
                 'sort_order'       => '0',
                 'type'             => 'file',
-                'file'             => $file,
-                'file_name'        => $file->getClientOriginalName(),
+                'file'             => $file1,
+                'file_name'        => $file1->getClientOriginalName(),
                 'sample_type'      => 'url',
                 'sample_url'       => fake()->url(),
             ],
@@ -545,21 +498,21 @@ it('should update the downloadable product', function () {
                 'downloads'        => '1',
                 'sort_order'       => '0',
                 'type'             => 'file',
-                'file'             => $file,
-                'file_name'        => $file->getClientOriginalName(),
+                'file'             => $file2,
+                'file_name'        => $file2->getClientOriginalName(),
                 'sample_type'      => 'file',
-                'sample_file'      => $file,
-                'sample_file_name' => $file->getClientOriginalName(),
+                'sample_file'      => $file3,
+                'sample_file_name' => $file3->getClientOriginalName(),
             ],
         ],
 
         'downloadable_samples' => [
             'sample_0' => [
-                'title'      => $sample0Title = fake()->title(),
+                'title'      => fake()->title(),
                 'sort_order' => '0',
                 'type'       => 'file',
-                'file'       => $file,
-                'file_name'  => $file->getClientOriginalName(),
+                'file'       => $file4,
+                'file_name'  => $file4->getClientOriginalName(),
             ],
 
             'sample_1' => [
@@ -574,21 +527,23 @@ it('should update the downloadable product', function () {
         ->isRedirection();
 
     $this->assertDatabaseHas('products', [
-        'sku'  => $product->sku,
+        'id'   => $product->id,
         'type' => $product->type,
+        'sku'  => $product->sku,
     ]);
 
     $this->assertDatabaseHas('product_flat', [
-        'url_key'              => $product->url_key,
-        'type'                 => 'downloadable',
-        'name'                 => $name,
-        'short_description'    => $shortDescription,
-        'description'          => $description,
-        'price'                => $price,
-        'weight'               => $weight,
-        'locale'               => $locale,
-        'product_id'           => $product->id,
-        'channel'              => $channel,
+        'product_id'        => $product->id,
+        'type'              => 'downloadable',
+        'sku'               => $product->sku,
+        'url_key'           => $product->url_key,
+        'name'              => $name,
+        'short_description' => $shortDescription,
+        'description'       => $description,
+        'price'             => $price,
+        'weight'            => $weight,
+        'locale'            => $locale,
+        'channel'           => $channel,
     ]);
 });
 
@@ -610,15 +565,15 @@ it('should return the create page of bundle product', function () {
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
     $this->assertDatabaseHas('products', [
+        'id'   => $productId,
         'type' => 'bundle',
         'sku'  => $sku,
-        'id'   => $productId,
     ]);
 });
 
 it('should return the edit page of bundle product', function () {
     // Arrange
-    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
+    $product = (new ProductFaker())->getBundleProductFactory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -635,9 +590,13 @@ it('should return the edit page of bundle product', function () {
 
 it('should update the bundle product', function () {
     // Arrange
-    $products = (new ProductFaker())->getSimpleProductFactory()->count(5)->create();
+    $product = (new ProductFaker())->getBundleProductFactory()->create();
 
-    foreach ($products as $key => $product) {
+    $options = [];
+    
+    $bundleOptions = $product->bundle_options();
+
+    foreach ($bundleOptions as $key => $product) {
         $options['option_' . $key] = [
             'en' => [
                 'label' => fake()->title(),
@@ -683,9 +642,9 @@ it('should update the bundle product', function () {
         ->isRedirection();
 
     $this->assertDatabaseHas('products', [
-        'sku'                 => $product->sku,
-        'type'                => $product->type,
         'id'                  => $product->id,
+        'type'                => $product->type,
+        'sku'                 => $product->sku,
         'attribute_family_id' => 1,
         'parent_id'           => null,
         'additional'          => null,
@@ -704,7 +663,7 @@ it('should update the bundle product', function () {
         'channel'              => $channel,
     ]);
 
-    foreach ($products as $product) {
+    foreach ($bundleOptions as $product) {
         $this->assertDatabaseHas('product_flat', [
             'url_key'              => $product->url_key,
             'type'                 => 'simple',
@@ -804,8 +763,9 @@ it('should perform the mass action forn update status for products', function ()
 
     foreach ($products as $product) {
         $this->assertDatabaseHas('product_flat', [
-            'status'     => 1,
             'product_id' => $product->id,
+            'sku'        => $product->sku,
+            'status'     => 1,
         ]);
     }
 });

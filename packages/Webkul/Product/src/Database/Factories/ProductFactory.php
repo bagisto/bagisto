@@ -21,8 +21,11 @@ class ProductFactory extends Factory
      */
     protected $states = [
         'simple',
+        'configurable',
         'virtual',
+        'grouped',
         'downloadable',
+        'bundle',
     ];
 
     /**
@@ -61,6 +64,18 @@ class ProductFactory extends Factory
     }
 
     /**
+     * Grouped state.
+     */
+    public function grouped(): ProductFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'grouped',
+            ];
+        });
+    }
+
+    /**
      * Configurable state.
      */
     public function configurable(): ProductFactory
@@ -80,6 +95,18 @@ class ProductFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => 'downloadable',
+            ];
+        });
+    }
+
+    /**
+     * Bundle state.
+     */
+    public function bundle(): ProductFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'type' => 'bundle',
             ];
         });
     }
