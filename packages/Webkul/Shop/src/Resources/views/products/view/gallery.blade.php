@@ -162,7 +162,7 @@
 
         computed: {
             lengthOfMedia() {
-                if(this.media.images.length) {
+                if (this.media.images.length) {
                     return [...this.media.images, ...this.media.videos].length > 5;
                 }
             }
