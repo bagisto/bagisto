@@ -9,13 +9,6 @@ use Webkul\DataGrid\DataGrid;
 class BookingDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'order_id';
-
-    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder

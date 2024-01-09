@@ -54,21 +54,19 @@ class Booking
     public function __construct(
         protected BookingProductRepository $bookingProductRepository,
         protected BookingRepository $bookingRepository,
-        BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
-        BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
-        BookingProductEventTicketRepository $bookingProductEventTicketRepository,
-        BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
-        BookingProductTableSlotRepository $bookingProductTableSlotRepository,
+        protected BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
+        protected BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
+        protected BookingProductEventTicketRepository $bookingProductEventTicketRepository,
+        protected BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
+        protected BookingProductTableSlotRepository $bookingProductTableSlotRepository,
     ) {
-        $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
-
-        $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
-
-        $this->typeRepositories['event'] = $bookingProductEventTicketRepository;
-
-        $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
-
-        $this->typeRepositories['table'] = $bookingProductTableSlotRepository;
+        $this->typeRepositories = [
+            'default'     => $this->bookingProductDefaultSlotRepository,
+            'event'       => $this->bookingProductEventTicketRepository,
+            'appointment' => $this->bookingProductAppointmentSlotRepository,
+            'table'       => $this->bookingProductTableSlotRepository,
+            'rental'      => $this->bookingProductRentalSlotRepository,
+        ];
     }
 
     /**
