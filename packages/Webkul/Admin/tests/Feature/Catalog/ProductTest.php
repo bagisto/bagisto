@@ -508,10 +508,10 @@ it('should update the downloadable product', function () {
     ]))->getDownloadableProductFactory()->create();
 
     $file = UploadedFile::fake()->create('ProductImageExampleForUpload.jpg');
-    
+
     // Act and Asssert
     $this->loginAsAdmin();
-    
+
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku'                => $product->sku,
         'url_key'            => $product->url_key,
@@ -533,10 +533,10 @@ it('should update the downloadable product', function () {
                 'type'             => 'file',
                 'file'             => $file,
                 'file_name'        => $file->getClientOriginalName(),
-                "sample_type"      => "url",
-                "sample_url"       => fake()->url(),
+                'sample_type'      => 'url',
+                'sample_url'       => fake()->url(),
             ],
-            
+
             'link_1' => [
                 'en' => [
                     'title' => fake()->title,
@@ -554,19 +554,19 @@ it('should update the downloadable product', function () {
         ],
 
         'downloadable_samples' => [
-            "sample_0" => [
-                "title"      => $sample0Title = fake()->title(),
-                "sort_order" => "0",
-                "type"       => "file",
+            'sample_0' => [
+                'title'      => $sample0Title = fake()->title(),
+                'sort_order' => '0',
+                'type'       => 'file',
                 'file'       => $file,
                 'file_name'  => $file->getClientOriginalName(),
             ],
 
-            "sample_1" => [
-                "title"      => fake()->title(),
-                "sort_order" => "1",
-                "type"       => "url",
-                "url"        => fake()->url(),
+            'sample_1' => [
+                'title'      => fake()->title(),
+                'sort_order' => '1',
+                'type'       => 'url',
+                'url'        => fake()->url(),
             ],
         ],
     ])
