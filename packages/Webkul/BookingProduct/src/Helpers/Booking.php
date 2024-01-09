@@ -226,24 +226,22 @@ class Booking
     {
         $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
 
-        if (
-            ! is_array($bookingProductSlot->slots)
-            || ! count($bookingProductSlot->slots)
-        ) {
+        if (empty($bookingProductSlot->slots)) {
             return [];
         }
 
-        $currentTime = Carbon::now();
-
         $requestedDate = Carbon::createFromTimeString($date . ' 00:00:00');
 
-        $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-            ? Carbon::createFromTimeString($bookingProduct->available_from)
-            : Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+        $currentTime = Carbon::now();
 
-        $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-            ? Carbon::createFromTimeString($bookingProduct->available_to)
-            : Carbon::createFromTimeString('2080-01-01 00:00:00');
+        $availableFrom = Carbon::createFromTimeString($currentTime->format('Y-m-d 00:00:00'));
+
+        $availableTo = Carbon::createFromTimeString('2080-01-01 00:00:00');
+
+        if (! $bookingProduct->available_every_week && $bookingProduct->available_from) {
+            $availableFrom = Carbon::createFromTimeString($bookingProduct->available_from);
+            $availableTo = Carbon::createFromTimeString($bookingProduct->available_to);
+        }
 
         $timeDurations = $bookingProductSlot->same_slot_all_days
             ? $bookingProductSlot->slots
@@ -264,25 +262,24 @@ class Booking
 
             $startDayTime = Carbon::createFromTimeString($requestedDate->format('Y-m-d') . ' 00:00:00');
             $startDayTime->addMinutes(($fromChunks[0] * 60) + $fromChunks[1]);
-            $tempStartDayTime = clone $startDayTime;
 
-            $endDayTime = Carbon::createFromTimeString($requestedDate->format('Y-m-d') . ' 00:00:00');
-            $endDayTime->addMinutes(($toChunks[0] * 60) + $toChunks[1]);
+            $endDayTime = Carbon::createFromTimeString($requestedDate->format('Y-m-d') . ' 00:00:00')
+                ->addMinutes(($toChunks[0] * 60) + $toChunks[1]);
 
             $isFirstIteration = true;
 
             while (1) {
-                $from = clone $tempStartDayTime;
-                $tempStartDayTime->addMinutes($bookingProductSlot->duration);
+                $from = clone $startDayTime;
+                $startDayTime->addMinutes($bookingProductSlot->duration);
 
                 if ($isFirstIteration) {
                     $isFirstIteration = false;
                 } else {
                     $from->modify('+' . $bookingProductSlot->break_time . ' minutes');
-                    $tempStartDayTime->modify('+' . $bookingProductSlot->break_time . ' minutes');
+                    $startDayTime->modify('+' . $bookingProductSlot->break_time . ' minutes');
                 }
 
-                $to = clone $tempStartDayTime;
+                $to = clone $startDayTime;
 
                 if (
                     ($startDayTime <= $from
@@ -394,7 +391,7 @@ class Booking
             ->where('bookings.to', $timestamps[1])
             ->first();
 
-        return ! is_null($result->total_qty_booked) ? $result->total_qty_booked : 0;
+        return $result->total_qty_booked ?? 0;
     }
 
     /**
@@ -432,7 +429,6 @@ class Booking
                 ];
 
                 break;
-
             case 'rental':
                 $rentingType = $data['booking']['renting_type'] ?? $bookingProduct->rental_slot->renting_type;
 
@@ -463,32 +459,33 @@ class Booking
                 ];
 
                 break;
-
             case 'table':
                 $timestamps = explode('-', $data['booking']['slot']);
 
-                $data['attributes'] = [
+                $attributes = [
                     [
                         'attribute_name' => trans('booking::app.shop.products.booking.cart.booking-from'),
                         'option_id'      => 0,
-                        'option_label'   => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
-                    ], [
+                        'option_label'   => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
+                    ],
+                    [
                         'attribute_name' => trans('booking::app.shop.products.booking.cart.booking-till'),
                         'option_id'      => 0,
-                        'option_label'   => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
+                        'option_label'   => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
                     ],
                 ];
 
-                if ($data['booking']['note'] != '') {
-                    $data['attributes'][2] = [
+                if ($data['booking']['note'] !== '') {
+                    $attributes[] = [
                         'attribute_name' => trans('booking::app.shop.products.booking.cart.special-note'),
                         'option_id'      => 0,
                         'option_label'   => $data['booking']['note'],
                     ];
                 }
 
-                break;
+                $data['attributes'] = $attributes;
 
+                break;
             default:
                 $timestamps = explode('-', $data['booking']['slot']);
 

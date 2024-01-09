@@ -34,7 +34,7 @@ class EventTicket extends Booking
     public function getTickets($bookingProduct)
     {
         if (! $bookingProduct->event_tickets()->count()) {
-            return;
+            return [];
         }
 
         return $this->formatPrice($bookingProduct->event_tickets);

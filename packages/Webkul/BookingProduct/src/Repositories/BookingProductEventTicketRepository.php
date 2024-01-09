@@ -29,31 +29,10 @@ class BookingProductEventTicketRepository extends Repository
         $previousTicketIds = $bookingProduct->event_tickets()->pluck('id');
 
         if (isset($data['tickets'])) {
-            foreach ($data['tickets'] as $ticketId => $ticketInputs) {
-
-                if (
-                    ! array_key_exists('special_price', $ticketInputs)
-                    || empty($ticketInputs['special_price'])
-                    || $ticketInputs['special_price'] === '0.0000'
-                ) {
-                    $ticketInputs['special_price'] = null;
-                }
-
-                if (
-                    ! array_key_exists('special_price_from', $ticketInputs)
-                    || empty($ticketInputs['special_price_from'])
-                    || $ticketInputs['special_price_from'] === '0000-00-00 00:00:00'
-                ) {
-                    $ticketInputs['special_price_from'] = null;
-                }
-
-                if (
-                    ! array_key_exists('special_price_to', $ticketInputs)
-                    || empty($ticketInputs['special_price_to'])
-                    || $ticketInputs['special_price_to'] === '0000-00-00 00:00:00'
-                ) {
-                    $ticketInputs['special_price_to'] = null;
-                }
+            foreach ($data['tickets'] as $ticketId => &$ticketInputs) {
+                $this->sanitizeInput('special_price', $ticketInputs);
+                $this->sanitizeInput('special_price_from', $ticketInputs);
+                $this->sanitizeInput('special_price_to', $ticketInputs);
 
                 if (Str::contains($ticketId, 'ticket_')) {
                     $ticket = $this->create(array_merge([
@@ -76,6 +55,21 @@ class BookingProductEventTicketRepository extends Repository
 
         foreach ($previousTicketIds as $previousTicketId) {
             $this->delete($previousTicketId);
+        }
+    }
+
+    // Function to sanitize the inputs
+    private function sanitizeInput($fieldName, &$inputs)
+    {
+        $fieldValue = $inputs[$fieldName] ?? null;
+
+        if (
+            ! isset($fieldValue)
+            || empty($fieldValue)
+            || $fieldValue === '0.0000'
+            || $fieldValue === '0000-00-00 00:00:00'
+        ) {
+            $inputs[$fieldName] = null;
         }
     }
 }

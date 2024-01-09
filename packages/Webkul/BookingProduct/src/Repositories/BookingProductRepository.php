@@ -19,24 +19,22 @@ class BookingProductRepository extends Repository
      * @return void
      */
     public function __construct(
-        BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
-        BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
-        BookingProductEventTicketRepository $bookingProductEventTicketRepository,
-        BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
-        BookingProductTableSlotRepository $bookingProductTableSlotRepository,
+        protected BookingProductDefaultSlotRepository $bookingProductDefaultSlotRepository,
+        protected BookingProductAppointmentSlotRepository $bookingProductAppointmentSlotRepository,
+        protected BookingProductEventTicketRepository $bookingProductEventTicketRepository,
+        protected BookingProductRentalSlotRepository $bookingProductRentalSlotRepository,
+        protected BookingProductTableSlotRepository $bookingProductTableSlotRepository,
         Container $container
     ) {
         parent::__construct($container);
 
-        $this->typeRepositories['default'] = $bookingProductDefaultSlotRepository;
-
-        $this->typeRepositories['appointment'] = $bookingProductAppointmentSlotRepository;
-
-        $this->typeRepositories['event'] = $bookingProductEventTicketRepository;
-
-        $this->typeRepositories['rental'] = $bookingProductRentalSlotRepository;
-
-        $this->typeRepositories['table'] = $bookingProductTableSlotRepository;
+        $this->typeRepositories = [
+            'default'     => $bookingProductDefaultSlotRepository,
+            'appointment' => $bookingProductAppointmentSlotRepository,
+            'event'       => $bookingProductEventTicketRepository,
+            'rental'      => $bookingProductRentalSlotRepository,
+            'table'       => $bookingProductTableSlotRepository,
+        ];
     }
 
     /**
