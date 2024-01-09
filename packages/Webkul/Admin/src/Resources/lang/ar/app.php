@@ -2978,8 +2978,8 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'تعيين خيارات Magic AI.',
-                    'title' => 'Magic AI',
+                    'info'  => 'تعيين خيارات الذكاء الاصطناعي السحري.',
+                    'title' => 'الذكاء الاصطناعي السحري',
 
                     'settings' => [
                         'api-key'      => 'مفتاح API',

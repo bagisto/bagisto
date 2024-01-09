@@ -2979,7 +2979,7 @@ return [
 
                 'magic-ai' => [
                     'info'  => 'Встановіть параметри Magic AI.',
-                    'title' => 'Magic AI',
+                    'title' => 'Магія ШІ',
 
                     'settings' => [
                         'title'        => 'Загальні налаштування',
