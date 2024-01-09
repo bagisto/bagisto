@@ -25,6 +25,8 @@ import uk from "@vee-validate/i18n/dist/locale/uk.json";
 import zh_CN from "@vee-validate/i18n/dist/locale/zh_CN.json";
 import * as AllRules from "@vee-validate/rules";
 
+window.defineRule = defineRule;
+
 export default {
     install: (app) => {
         /**
