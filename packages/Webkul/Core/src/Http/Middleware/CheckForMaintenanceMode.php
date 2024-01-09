@@ -4,12 +4,12 @@ namespace Webkul\Core\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Original;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as BaseCheckForMaintenanceMode;
 use Illuminate\Routing\Route;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Webkul\Installer\Helpers\DatabaseManager;
 
-class CheckForMaintenanceMode extends Original
+class CheckForMaintenanceMode extends BaseCheckForMaintenanceMode
 {
     /**
      * The application implementation.
@@ -50,7 +50,7 @@ class CheckForMaintenanceMode extends Original
         $this->app = $app;
 
         /* adding exception for admin routes */
-        $this->except[] = env('APP_ADMIN_URL', 'admin') . '*';
+        $this->except[] = config('app.admin_url') . '*';
 
         if ($this->databaseManager->isInstalled()) {
             /* exclude ips */
