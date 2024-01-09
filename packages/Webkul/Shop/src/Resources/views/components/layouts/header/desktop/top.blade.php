@@ -37,7 +37,7 @@
     {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
 
     <!-- Locales Switcher -->
-    <x-shop::dropdown position="bottom-right">
+    <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
         <x-slot:toggle>
             <!-- Dropdown Toggler -->
             <div

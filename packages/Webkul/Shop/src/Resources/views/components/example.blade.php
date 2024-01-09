@@ -348,10 +348,17 @@
 </x-shop::layouts>
 
 <!-- label class -->
+
 <div class="label-canceled"></div>
+
 <div class="label-info"></div>
+
 <div class="label-completed"></div>
+
 <div class="label-closed"></div>
+
 <div class="label-processing"></div>
+
 <div class="label-pending"></div>
+
 <div class="label-canceled"></div>
