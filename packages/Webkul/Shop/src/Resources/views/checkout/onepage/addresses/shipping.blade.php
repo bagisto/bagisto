@@ -12,11 +12,15 @@
             </x-slot:header>
         
             <x-slot:content class="!p-0 mt-8">
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
+
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
                     <form @submit="handleSubmit($event, store)">
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
+
                         <div class="grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
@@ -101,6 +105,8 @@
 
                         <template v-if="meta.valid">
                             <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.shipping.length">
+                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.before') !!}
+
                                 <div class="flex justify-end mt-4">
                                     <x-shop::button
                                         class="primary-button py-3 px-11 rounded-2xl"
@@ -111,6 +117,8 @@
                                     >
                                     </x-shop::button>
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.after') !!}
                             </div>
                         </template>
     
@@ -125,9 +133,13 @@
                                     </button>
                                 </div>
                             </div>
-                        </template> 
+                        </template>
+                        
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!}
                     </form>
                 </x-shop::form>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
             </x-slot:content>
         </x-shop::accordion>
 

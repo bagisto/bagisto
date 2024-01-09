@@ -17,6 +17,8 @@
         {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
     </x-slot>
 
+    {!! view_render_event('bagisto.shop.categories.view.banner_path.before') !!}
+
     <!-- Hero Image -->
     @if ($category->banner_path)
         <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
@@ -32,6 +34,10 @@
         </div>
     @endif
 
+    {!! view_render_event('bagisto.shop.categories.view.banner_path.after') !!}
+
+    {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
+
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
             <div class="container mt-8 px-[60px] max-lg:px-8 max-sm:px-4">
@@ -39,6 +45,8 @@
             </div>
         @endif
     @endif
+        
+    {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
 
     @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
         <!-- Category Vue Component -->
@@ -76,6 +84,8 @@
                             </template>
 
                             <!-- Product Card Listing -->
+                            {!! view_render_event('bagisto.shop.categories.view.list.product_card.before') !!}
+
                             <template v-else>
                                 <template v-if="products.length">
                                     <x-shop::products.card
@@ -102,6 +112,8 @@
                                     </div>
                                 </template>
                             </template>
+
+                            {!! view_render_event('bagisto.shop.categories.view.list.product_card.after') !!}
                         </div>
 
                         <!-- Product Grid Card Container -->
@@ -112,6 +124,8 @@
                                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                                 </div>
                             </template>
+
+                            {!! view_render_event('bagisto.shop.categories.view.grid.product_card.before') !!}
 
                             <!-- Product Card Listing -->
                             <template v-else>
@@ -142,7 +156,11 @@
                                     </div>
                                 </template>
                             </template>
+
+                            {!! view_render_event('bagisto.shop.categories.view.grid.product_card.after') !!}
                         </div>
+
+                        {!! view_render_event('bagisto.shop.categories.view.load_more_button.before') !!}
 
                         <!-- Load More Button -->
                         <button
@@ -164,6 +182,8 @@
                                 alt="Loading"
                             />
                         </button>
+
+                        {!! view_render_event('bagisto.shop.categories.view.grid.load_more_button.after') !!}
                     </div>
                 </div>
             </div>

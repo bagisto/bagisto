@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.shop.checkout.addresses.before') !!}
+{!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
 
 <v-checkout-addresses 
     ref="vCheckoutAddress"
@@ -6,7 +6,7 @@
 >
 </v-checkout-addresses>
 
-{!! view_render_event('bagisto.shop.checkout.addresses.after') !!}
+{!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-checkout-addresses-template">
@@ -17,9 +17,17 @@
         
         <template v-else>
             <div class="mt-8 mb-7">
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.before') !!}
+
                 @include('shop::checkout.onepage.addresses.billing')
 
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.after') !!}
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
+
                 @include('shop::checkout.onepage.addresses.shipping')
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!}
             </div>
         </template>
     </script>

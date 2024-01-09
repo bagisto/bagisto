@@ -111,6 +111,10 @@
         @break
 
     @case('multiselect')
+        @php
+            $selectedOption = old($attribute->code) ?: explode(',', $product[$attribute->code]);
+        @endphp
+
         <x-admin::form.control-group.control
             type="multiselect"
             :name="$attribute->code . '[]'"
@@ -118,10 +122,6 @@
             ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
         >
-            @php
-                $selectedOption = old($attribute->code) ?: explode(',', $product[$attribute->code]);
-            @endphp
-
             @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
                 <option
                     value="{{ $option->id }}"
@@ -140,7 +140,7 @@
         @endphp
 
         @foreach ($attribute->options as $option)
-            <div class="flex gap-2.5 py-2.5 items-center">
+            <div class="flex gap-2.5 mb-2 last:!mb-0 items-center">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :name="$attribute->code . '[]'"
@@ -153,9 +153,12 @@
                 >
                 </x-admin::form.control-group.control>
 
-                <p class="text-gray-600 dark:text-gray-300 font-semibold">
+                <label
+                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer select-none"
+                    for="{{ $attribute->code . '_' . $option->id }}"
+                >
                     {{ $option->admin_name }}
-                </p>
+                </label>
             </div>
         @endforeach
 
