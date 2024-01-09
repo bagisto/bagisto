@@ -83,12 +83,12 @@ abstract class Payment
      * Abstract method to get the redirect URL.
      *
      * @return string The redirect URL.
-     */    
+     */
     abstract public function getRedirectUrl();
 
     /**
      * Assign cart
-     * 
+     *
      * @var void
      */
     public function setCart()
