@@ -13,26 +13,34 @@ use Webkul\BookingProduct\Repositories\BookingProductRepository;
 
 class BookingProductController extends Controller
 {
-    /**
-     * @return array
-     */
-    protected $bookingHelpers = [];
+    protected array $bookingHelpers = [];
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(protected BookingProductRepository $bookingProductRepository)
-    {
+    public function __construct(
+        protected BookingProductRepository $bookingProductRepository,
+        protected DefaultSlotHelper $defaultSlotHelper,
+        protected AppointmentSlotHelper $appointmentSlotHelper,
+        protected RentalSlotHelper $rentalSlotHelper,
+        protected EventTicketHelper $eventTicketHelper,
+        protected TableSlotHelper $tableSlotHelper
+    ) {
+        $this->bookingHelpers = [
+            'default'     => $this->defaultSlotHelper,
+            'appointment' => $this->appointmentSlotHelper,
+            'rental'      => $this->rentalSlotHelper,
+            'event'       => $this->eventTicketHelper,
+            'table'       => $this->tableSlotHelper,
+        ];
     }
 
     /**
      * Get available slots for the given product and the date.
-     *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index(int $id)
+    public function index(int $id): JsonResource
     {
         $bookingProduct = $this->bookingProductRepository->find($id);
 
