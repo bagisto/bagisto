@@ -238,7 +238,7 @@ class CartController extends APIController
 
         if (! $cart) {
             return new JsonResource([
-                'data' => []
+                'data' => [],
             ]);
         }
 
