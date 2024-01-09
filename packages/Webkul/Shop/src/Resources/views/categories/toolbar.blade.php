@@ -11,6 +11,8 @@
         <div>
             <!-- Desktop Toolbar -->
             <div class="flex justify-between max-md:hidden">
+                {!! view_render_event('bagisto.shop.categories.toolbar.filter.before') !!}
+
                 <!-- Product Sorting Filters -->
                 <x-shop::dropdown position="bottom-left">
                     <x-slot:toggle>
@@ -36,6 +38,10 @@
                         </x-shop::dropdown.menu.item>
                     </x-slot:menu>
                 </x-shop::dropdown>
+
+                {!! view_render_event('bagisto.shop.categories.toolbar.filter.after') !!}
+
+                {!! view_render_event('bagisto.shop.categories.toolbar.pagination.before') !!}
 
                 <!-- Product Pagination Limit -->
                 <div class="flex gap-10 items-center">
@@ -88,6 +94,8 @@
                         </span>
                     </div>
                 </div>
+
+                {!! view_render_event('bagisto.shop.categories.toolbar.pagination.after') !!}
             </div>
 
             <!-- Modile Toolbar -->

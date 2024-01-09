@@ -171,28 +171,34 @@
 
                                         <!-- Channel Code -->
                                         <p class="text-gray-600 dark:text-gray-300">
-                                            {{ optional($order)->channel_name }}
+                                            {{ $order?->channel_name }}
                                         </p>                                        
                                     </div>
 
                                     <!-- Order Address Details -->
-                                    <div class="flex flex-col gap-1.5">
-                                        <p class="text-base text-gray-800 dark:text-white">
-                                            {{ $order->billingAddress->name }}
-                                        </p>
+                                    @if($order->billingAddress)
+                                        <div class="flex flex-col gap-1.5">
+                                            <p class="text-base text-gray-800 dark:text-white">
+                                                {{ $order->billingAddress->name }}
+                                            </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            {{ $order->billingAddress->email }}
-                                        </p>
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                {{ $order->billingAddress->email }}
+                                            </p>
 
-                                        <p class="text-gray-600 dark:text-gray-300">
-                                            {{ optional($order->billingAddress)->address1 }},
-
-                                            {{ optional($order->billingAddress)->city }},
-
-                                            {{ optional($order->billingAddress)->state }}
-                                        </p>                                        
-                                    </div>
+                                            <p class="text-gray-600 dark:text-gray-300">
+                                                {{
+                                                    collect([
+                                                        $order->billingAddress->address1,
+                                                        $order->billingAddress->city,
+                                                        $order->billingAddress->state,
+                                                    ])
+                                                    ->filter(fn ($string) =>! empty($string))
+                                                    ->join(', ')
+                                                }}
+                                            </p>                                        
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <a 

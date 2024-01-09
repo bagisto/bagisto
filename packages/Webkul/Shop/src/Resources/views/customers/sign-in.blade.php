@@ -16,6 +16,8 @@
     </x-slot>
 
     <div class="container mt-20 max-1180:px-5">
+        {!! view_render_event('bagisto.shop.customers.login.logo.before') !!}
+
         <!-- Company Logo -->
         <div class="flex gap-x-14 items-center max-[1180px]:gap-x-9">
             <a
@@ -24,13 +26,15 @@
                 aria-label="@lang('shop::app.customers.login-form.bagisto')"
             >
                 <img
-                    src="{{ bagisto_asset('images/logo.svg') }}"
-                    alt="Bagisto "
+                    src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                    alt="{{ config('app.name') }}"
                     width="131"
                     height="29"
                 >
             </a>
         </div>
+
+        {!! view_render_event('bagisto.shop.customers.login.logo.after') !!}
 
         <!-- Form Container -->
         <div

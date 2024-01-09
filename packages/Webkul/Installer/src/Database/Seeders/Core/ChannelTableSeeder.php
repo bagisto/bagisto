@@ -63,7 +63,7 @@ class ChannelTableSeeder extends Seeder
 
         $locales = DB::table('locales')->get();
 
-        foreach ($currencies as $locale) {
+        foreach ($locales as $locale) {
             DB::table('channel_locales')->insert([
                 [
                     'channel_id' => 1,

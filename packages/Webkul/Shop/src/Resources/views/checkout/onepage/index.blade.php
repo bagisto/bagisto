@@ -15,6 +15,8 @@
         @lang('shop::app.checkout.onepage.index.checkout')
     </x-slot>
 
+    {!! view_render_event('bagisto.shop.checkout.onepage.header.before') !!}
+
     <!-- Page Header -->
     <div class="lex flex-wrap">
         <div class="w-full flex justify-between px-[60px] py-4 border border-t-0 border-b border-l-0 border-r-0 max-lg:px-8 max-sm:px-4">
@@ -25,8 +27,8 @@
                     aria-label="@lang('shop::checkout.onepage.index.bagisto')"
                 >
                     <img
-                        src="{{ bagisto_asset('images/logo.svg') }}"
-                        alt="Bagisto "
+                        src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                        alt="{{ config('app.name') }}"
                         width="131"
                         height="29"
                     >
@@ -35,9 +37,16 @@
         </div>
     </div>
 
+    {!! view_render_event('bagisto.shop.checkout.onepage.header.after') !!}
+
     <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
+
         <!-- Breadcrumbs -->
         <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
         <v-checkout>
             <!-- Shimmer Effect -->
@@ -52,12 +61,23 @@
                     class="overflow-y-auto"
                     ref="scrollBottom"
                 >
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
+
                     @include('shop::checkout.onepage.addresses.index')
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.before') !!}
 
                     @include('shop::checkout.onepage.shipping')
 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
+
                     @include('shop::checkout.onepage.payment')
 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
                 </div>
                 
                 @include('shop::checkout.onepage.summary')

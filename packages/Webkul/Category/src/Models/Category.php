@@ -93,7 +93,7 @@ class Category extends TranslatableModel implements CategoryContract
             return url($categoryTranslation->slug);
         }
 
-        return url($this->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->slug);
+        return url($this->translate(core()->getDefaultLocaleCodeFromDefaultChannel())?->slug);
     }
 
     /**
