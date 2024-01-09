@@ -508,10 +508,10 @@ it('should update the downloadable product', function () {
     ]))->getDownloadableProductFactory()->create();
 
     $file = UploadedFile::fake()->create('ProductImageExampleForUpload.jpg');
-
+    
     // Act and Asssert
     $this->loginAsAdmin();
-
+    
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku'                => $product->sku,
         'url_key'            => $product->url_key,
@@ -523,6 +523,20 @@ it('should update the downloadable product', function () {
         'channel'            => $channel = core()->getCurrentChannelCode(),
         'locale'             => $locale = app()->getLocale(),
         'downloadable_links' => [
+            'link_0' => [
+                'en' => [
+                    'title' => fake()->title,
+                ],
+                'price'            => rand(10, 250),
+                'downloads'        => '1',
+                'sort_order'       => '0',
+                'type'             => 'file',
+                'file'             => $file,
+                'file_name'        => $file->getClientOriginalName(),
+                "sample_type"      => "url",
+                "sample_url"       => fake()->url(),
+            ],
+            
             'link_1' => [
                 'en' => [
                     'title' => fake()->title,
@@ -536,6 +550,23 @@ it('should update the downloadable product', function () {
                 'sample_type'      => 'file',
                 'sample_file'      => $file,
                 'sample_file_name' => $file->getClientOriginalName(),
+            ],
+        ],
+
+        'downloadable_samples' => [
+            "sample_0" => [
+                "title"      => $sample0Title = fake()->title(),
+                "sort_order" => "0",
+                "type"       => "file",
+                'file'       => $file,
+                'file_name'  => $file->getClientOriginalName(),
+            ],
+
+            "sample_1" => [
+                "title"      => fake()->title(),
+                "sort_order" => "1",
+                "type"       => "url",
+                "url"        => fake()->url(),
             ],
         ],
     ])
@@ -732,7 +763,7 @@ it('should upload link the product upload link', function () {
         'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
     ])
         ->assertOk()
-        ->assertJsonPath('file_name', $file->name);
+        ->assertJsonPath('file_name', $file->getClientOriginalName());
 
     if (Storage::disk('private')->exists($response['file'])) {
         Storage::disk('private')->delete($response['file']);
