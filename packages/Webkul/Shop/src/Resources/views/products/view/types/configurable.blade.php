@@ -439,7 +439,7 @@
 
                             priceElement.innerHTML = this.config.regular.formatted_price;
 
-                            this.$emitter.emit('configurable-variant-selected-event', 0)
+                            this.$emitter.emit('configurable-variant-selected-event', 0);
                         }
                     },
 
@@ -464,7 +464,7 @@
                             this.$parent.$parent.$refs.gallery.media.images =  { ...galleryImages };
                         }
 
-                        this.$emitter.emit('configurable-variant-update-images-event', galleryImages)
+                        this.$emitter.emit('configurable-variant-update-images-event', galleryImages);
                     },
                 }
             });
