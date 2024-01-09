@@ -211,13 +211,13 @@ class Installer extends Command
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
             'Please select the <bg=black;fg=white;options=bold>default application locale</>',
-            $allowedLocales
+            $this->locales
         );
 
         $defaultCurrency = $this->updateEnvChoice(
             'APP_CURRENCY',
             'Please select the <bg=black;fg=white;options=bold>default currency</>',
-            $allowedCurrencies
+            $this->currencies
         );
 
         return [
