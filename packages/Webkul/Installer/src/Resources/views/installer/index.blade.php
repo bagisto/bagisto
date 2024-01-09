@@ -1202,6 +1202,7 @@
                         const preventUnload = (event) => {
                             event.preventDefault();
                         };
+
                         window.addEventListener('beforeunload', preventUnload);
                     },
 
