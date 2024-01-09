@@ -434,7 +434,6 @@
                             }
 
                             this.$emitter.emit('configurable-variant-selected-event',this.simpleProduct);
-
                         } else {
                             priceLabelElement.style.display = 'inline-block';
 
@@ -464,6 +463,8 @@
                         if (galleryImages.length) {
                             this.$parent.$parent.$refs.gallery.media.images =  { ...galleryImages };
                         }
+
+                        this.$emitter.emit('configurable-variant-update-images-event', galleryImages)
                     },
                 }
             });
