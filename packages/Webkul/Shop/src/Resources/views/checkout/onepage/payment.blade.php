@@ -123,6 +123,8 @@
                         .then(response => {
                             this.$parent.$refs.vCartSummary.selectedPaymentMethod = selectedPaymentMethod;
 
+                            this.$emitter.emit('after-payment-method-selected', selectedPaymentMethod);
+
                             if (response.data.cart) {
                                 this.$parent.$refs.vCartSummary.canPlaceOrder = true;
                             }
