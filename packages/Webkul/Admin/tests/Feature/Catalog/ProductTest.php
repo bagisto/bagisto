@@ -17,8 +17,8 @@ afterEach(function () {
     /**
      * Clean up all the records.
      */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
+    // ProductModel::query()->delete();
+    // Attribute::query()->whereNotBetween('id', [1, 28])->delete();
 });
 
 it('it should return the product index page', function () {
@@ -100,17 +100,17 @@ it('should update the simple product', function () {
     ]);
 
     $this->assertDatabaseHas('product_flat', [
-        'product_id'           => $product->id,
-        'url_key'              => $product->url_key,
-        'sku'                  => $product->sku,
-        'type'                 => 'simple',
-        'name'                 => $name,
-        'short_description'    => $shortDescription,
-        'description'          => $description,
-        'price'                => $price,
-        'weight'               => $weight,
-        'locale'               => $locale,
-        'channel'              => $channel,
+        'product_id'        => $product->id,
+        'url_key'           => $product->url_key,
+        'sku'               => $product->sku,
+        'type'              => 'simple',
+        'name'              => $name,
+        'short_description' => $shortDescription,
+        'description'       => $description,
+        'price'             => $price,
+        'weight'            => $weight,
+        'locale'            => $locale,
+        'channel'           => $channel,
     ]);
 });
 
@@ -170,11 +170,11 @@ it('should update the configurable product', function () {
         'url_key'           => $product->url_key,
         'channel'           => core()->getCurrentChannelCode(),
         'locale'            => app()->getLocale(),
-        'short_description' => fake()->sentence(),
-        'description'       => fake()->paragraph(),
-        'name'              => fake()->words(3, true),
-        'price'             => fake()->randomFloat(2, 1, 1000),
-        'weight'            => fake()->numberBetween(0, 100),
+        'short_description' => $shortDescription = fake()->sentence(),
+        'description'       => $description = fake()->paragraph(),
+        'name'              => $name = fake()->words(3, true),
+        'price'             => $price = fake()->randomFloat(2, 1, 1000),
+        'weight'            => $weight = fake()->numberBetween(0, 100),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
@@ -187,74 +187,75 @@ it('should update the configurable product', function () {
         'parent_id'           => null,
         'additional'          => null,
     ]);
+
+    $this->assertDatabaseHas('product_flat', [
+        'product_id'        => $product->id,
+        'type'              => 'configurable',
+        'sku'               => $product->sku,
+        'short_description' => $shortDescription,
+        'description'       => $description,
+        'name'              => $name,
+        'price'             => $price,
+        'weight'            => $weight,
+    ]);
 });
 
 it('should update the configurable product variants', function () {
     // Arrange
     $product = (new ProductFaker())->getConfigurableProductFactory()->create();
 
-    // Act and Asssert
-    $this->loginAsAdmin();
+    $attributeOptions = collect(AttributeFamily::find(1)->configurable_attributes)
+        ->flatMap(function ($attribute) {
+            return [
+                $attribute->code => collect($attribute->options)->pluck('label')->all(),
+            ];
+        })->all();
+
+    $variants = [];
 
     foreach ($product->variants as $variant) {
         $variants[$variant->id] = [
-            'sku'         => $variant->sku,
-            'name'        => $variant->name,
-            'price'       => $variant->price,
-            'weight'      => $variant->price,
-            'status'      => $variant->status,
-            'color'       => $variant->color,
-            'size'        => $variant->size,
+            'sku'         => fake()->uuid(),
+            'name'        => fake()->words(3, true),
+            'price'       => fake()->randomFloat(2, 1, 1000),
+            'weight'      => fake()->numberBetween(0, 100),
+            'status'      => fake()->boolean(),
+            'color'       => fake()->randomElement($attributeOptions['color']),
+            'size'        => fake()->randomElement($attributeOptions['size']),
             'inventories' => [
                 1 => rand(1111, 9999),
             ],
         ];
     }
 
+    // Act and Asssert
+    $this->loginAsAdmin();
+
     $this->putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
         'channel'           => $channel = core()->getCurrentChannelCode(),
         'locale'            => $locale = app()->getLocale(),
+        'short_description' => $product->short_description,
+        'description'       => $product->description,
+        'name'              => $product->name,
+        'price'             => $product->price,
+        'weight'            => $product->weight,
         'variants'          => $variants,
-        'short_description' => fake()->sentence(),
-        'description'       => fake()->paragraph(),
-        'name'              => fake()->words(3, true),
-        'price'             => fake()->randomFloat(2, 1, 1000),
-        'weight'            => fake()->numberBetween(0, 100),
     ])
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'sku'                 => $product->sku,
-        'type'                => $product->type,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
-    ]);
-
-    foreach ($product->variants as $variant) {
-        $variant->refresh();
-
+    foreach ($variants as $productId => $variant) {
         $this->assertDatabaseHas('product_flat', [
-            'sku'                  => $variant->sku,
-            'product_id'           => $variant->id,
-            'product_number'       => null,
-            'new'                  => null,
-            'featured'             => null,
-            'status'               => 1,
-            'url_key'              => $variant->url_key,
-            'type'                 => 'simple',
-            'name'                 => $variant->name,
-            'short_description'    => $variant->short_description,
-            'description'          => $variant->description,
-            'price'                => $variant->price,
-            'weight'               => $variant->weight,
-            'locale'               => $locale,
-            'channel'              => $channel,
-            'attribute_family_id'  => 1,
-            'visible_individually' => 0,
+            'product_id' => $productId,
+            'type'       => 'simple',
+            'sku'        => $variant['sku'],
+            'name'       => $variant['name'],
+            'price'      => $variant['price'],
+            'weight'     => $variant['weight'],
+            'locale'     => $locale,
+            'channel'    => $channel,
         ]);
     }
 });
@@ -328,17 +329,17 @@ it('should update the virtual product', function () {
     ]);
 
     $this->assertDatabaseHas('product_flat', [
-        'product_id'           => $product->id,
-        'type'                 => $product->type,
-        'url_key'              => $product->url_key,
-        'sku'                  => $product->sku,
-        'name'                 => $name,
-        'short_description'    => $shortDescription,
-        'description'          => $description,
-        'price'                => $price,
-        'weight'               => $weight,
-        'locale'               => $locale,
-        'channel'              => $channel,
+        'product_id'        => $product->id,
+        'type'              => $product->type,
+        'url_key'           => $product->url_key,
+        'sku'               => $product->sku,
+        'name'              => $name,
+        'short_description' => $shortDescription,
+        'description'       => $description,
+        'price'             => $price,
+        'weight'            => $weight,
+        'locale'            => $locale,
+        'channel'           => $channel,
     ]);
 });
 
@@ -436,20 +437,53 @@ it('should update the grouped product', function () {
         'locale'            => $locale,
         'channel'           => $channel,
     ]);
+});
 
-    foreach ($product->grouped_products() as $product) {
-        $this->assertDatabaseHas('product_flat', [
-            'product_id'        => $product->id,
-            'type'              => 'simple',
-            'sku'               => $product->sku,
-            'url_key'           => $product->url_key,
-            'name'              => $product->name,
-            'short_description' => $product->short_description,
-            'description'       => $product->description,
-            'price'             => $product->price,
-            'weight'            => $product->weight,
-            'locale'            => $locale,
-            'channel'           => $channel,
+it('should update the grouped product options', function () {
+    // Arrange
+    $product = (new ProductFaker())->getGroupedProductFactory()->create();
+
+    $links = [];
+
+    foreach ($product->grouped_products()->get() as $key => $simpleProduct) {
+        $links[$simpleProduct->id]['associated_product_id'] = $simpleProduct->associated_product_id;
+        $links[$simpleProduct->id]['sort_order'] = $key;
+        $links[$simpleProduct->id]['qty'] = rand(10, 100);
+    }
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'sku'               => $product->sku,
+        'url_key'           => $product->url_key,
+        'short_description' => $product->short_description,
+        'description'       => $product->description,
+        'name'              => $product->name,
+        'price'             => $product->price,
+        'weight'            => $product->weight,
+        'channel'           => $product->channel,
+        'links'             => $links,
+        'locale'            => app()->getLocale(),
+    ])
+        ->assertRedirect(route('admin.catalog.products.index'))
+        ->isRedirection();
+
+    $this->assertDatabaseHas('products', [
+        'id'                  => $product->id,
+        'type'                => $product->type,
+        'sku'                 => $product->sku,
+        'attribute_family_id' => 1,
+        'parent_id'           => null,
+        'additional'          => null,
+    ]);
+
+    foreach ($links as $key => $link) {
+        $this->assertDatabaseHas('product_grouped_products', [
+            'product_id'            => $product->id,
+            'associated_product_id' => $link['associated_product_id'],
+            'qty'                   => $link['qty'],
+            'sort_order'            => $link['sort_order'],
         ]);
     }
 });
@@ -527,11 +561,6 @@ it('should update the downloadable product', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg');
-    $file2 = UploadedFile::fake()->create('ProductImageExampleForUpload2.jpg');
-    $file3 = UploadedFile::fake()->create('ProductImageExampleForUpload3.jpg');
-    $file4 = UploadedFile::fake()->create('ProductImageExampleForUpload4.jpg');
-
     // Act and Asssert
     $this->loginAsAdmin();
 
@@ -554,7 +583,7 @@ it('should update the downloadable product', function () {
                 'downloads'        => '1',
                 'sort_order'       => '0',
                 'type'             => 'file',
-                'file'             => $file1,
+                'file'             => $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg'),
                 'file_name'        => $file1->getClientOriginalName(),
                 'sample_type'      => 'url',
                 'sample_url'       => fake()->url(),
@@ -566,12 +595,12 @@ it('should update the downloadable product', function () {
                 ],
                 'price'            => rand(10, 250),
                 'downloads'        => '1',
-                'sort_order'       => '0',
+                'sort_order'       => '1',
                 'type'             => 'file',
-                'file'             => $file2,
+                'file'             => $file2 = UploadedFile::fake()->create('ProductImageExampleForUpload2.jpg'),
                 'file_name'        => $file2->getClientOriginalName(),
                 'sample_type'      => 'file',
-                'sample_file'      => $file3,
+                'sample_file'      => $file3 = UploadedFile::fake()->create('ProductImageExampleForUpload3.jpg'),
                 'sample_file_name' => $file3->getClientOriginalName(),
             ],
         ],
@@ -581,7 +610,7 @@ it('should update the downloadable product', function () {
                 'title'      => fake()->title(),
                 'sort_order' => '0',
                 'type'       => 'file',
-                'file'       => $file4,
+                'file'       => $file4 = UploadedFile::fake()->create('ProductImageExampleForUpload4.jpg'),
                 'file_name'  => $file4->getClientOriginalName(),
             ],
 
@@ -719,32 +748,32 @@ it('should update the bundle product', function () {
     ]);
 
     $this->assertDatabaseHas('product_flat', [
-        'url_key'              => $product->url_key,
-        'type'                 => 'bundle',
-        'name'                 => $name,
-        'short_description'    => $shortDescription,
-        'description'          => $description,
-        'price'                => $price,
-        'weight'               => $weight,
-        'locale'               => $locale,
-        'product_id'           => $product->id,
-        'channel'              => $channel,
+        'url_key'           => $product->url_key,
+        'type'              => 'bundle',
+        'name'              => $name,
+        'short_description' => $shortDescription,
+        'description'       => $description,
+        'price'             => $price,
+        'weight'            => $weight,
+        'locale'            => $locale,
+        'product_id'        => $product->id,
+        'channel'           => $channel,
     ]);
 
     foreach ($bundleOptions as $product) {
         $product->refresh();
 
         $this->assertDatabaseHas('product_flat', [
-            'url_key'              => $product->url_key,
-            'type'                 => 'simple',
-            'name'                 => $product->name,
-            'short_description'    => $product->short_description,
-            'description'          => $product->description,
-            'price'                => $product->price,
-            'weight'               => $product->weight,
-            'locale'               => $locale,
-            'product_id'           => $product->id,
-            'channel'              => $channel,
+            'url_key'           => $product->url_key,
+            'type'              => 'simple',
+            'name'              => $product->name,
+            'short_description' => $product->short_description,
+            'description'       => $product->description,
+            'price'             => $product->price,
+            'weight'            => $product->weight,
+            'locale'            => $locale,
+            'product_id'        => $product->id,
+            'channel'           => $channel,
         ]);
     }
 });
