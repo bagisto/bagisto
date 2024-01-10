@@ -167,14 +167,14 @@
 
                         @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                             @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                <x-shop::form.control-group.control
+                                <x-admin::form.control-group.control
                                     type="text"
                                     name="address{{ $i }}[]"
                                     id="address{{ $i }}[]"
                                     :label="trans('admin::app.customers.addresses.create.street-address')"
                                     :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                                 >
-                                </x-shop::form.control-group.control>
+                                </x-admin::form.control-group.control>
                             @endfor
                         @endif
 
