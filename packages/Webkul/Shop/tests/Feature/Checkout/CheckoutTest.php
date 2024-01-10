@@ -488,7 +488,7 @@ it('should place a simple product order for a guest user', function () {
     ]);
 
     $this->assertDatabaseHas('orders', [
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
         'shipping_method' => 'free_free',
         'grand_total'     => $price,
         'cart_id'         => $cart->id,
@@ -616,7 +616,7 @@ it('should place a simple product order for a customer', function () {
     ]);
 
     $this->assertDatabaseHas('orders', [
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
         'shipping_method' => 'free_free',
         'grand_total'     => $price,
         'cart_id'         => $cart->id,
@@ -785,7 +785,7 @@ it('should place a configurable product order for a guest user', function () {
         'shipping_method' => 'free_free',
         'grand_total'     => $childProduct->price,
         'cart_id'         => $cart->id,
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
     ]);
 
     $this->assertDatabaseHas('order_items', [
@@ -953,7 +953,7 @@ it('should place a configurable product order for a customer', function () {
         'shipping_method' => 'free_free',
         'grand_total'     => $childProduct->price,
         'cart_id'         => $cart->id,
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
     ]);
 
     $this->assertDatabaseHas('order_items', [
@@ -1063,7 +1063,7 @@ it('should place a virtual product order for a guest user', function () {
     ]);
 
     $this->assertDatabaseHas('orders', [
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
         'grand_total'     => $price,
         'cart_id'         => $cart->id,
     ]);
@@ -1177,7 +1177,7 @@ it('should place a virtual product order for a customer', function () {
     ]);
 
     $this->assertDatabaseHas('orders', [
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
         'grand_total'     => $price,
         'cart_id'         => $cart->id,
     ]);
@@ -1331,7 +1331,7 @@ it('should place a downloadable product order for a customer', function () {
     ]);
 
     $this->assertDatabaseHas('orders', [
-        'status'          => 'pending',
+        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
         'grand_total'     => $price,
         'cart_id'         => $cart->id,
     ]);

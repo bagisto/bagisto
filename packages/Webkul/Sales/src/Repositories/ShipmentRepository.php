@@ -127,7 +127,7 @@ class ShipmentRepository extends Repository
             if (isset($orderState)) {
                 $this->orderRepository->updateOrderStatus($order, $orderState);
             } elseif ($order->hasOpenInvoice()) {
-                $this->orderRepository->updateOrderStatus($order, 'pending_payment');
+                $this->orderRepository->updateOrderStatus($order, \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT);
             } else {
                 $this->orderRepository->updateOrderStatus($order);
             }

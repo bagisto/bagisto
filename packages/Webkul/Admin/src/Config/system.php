@@ -1054,13 +1054,13 @@ return [
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
-                        'value' => 'pending',
+                        'value' => \Webkul\Sales\Models\Order::STATUS_PENDING,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending-payment',
-                        'value' => 'pending_payment',
+                        'value' => \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.processing',
-                        'value' => 'processing',
+                        'value' => \Webkul\Sales\Models\Order::STATUS_PROCESSING,
                     ],
                 ],
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',

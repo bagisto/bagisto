@@ -161,7 +161,7 @@ class CustomerController extends Controller
         try {
             if (Hash::check(request()->input('password'), $customerRepository->password)) {
 
-                if ($customerRepository->orders->whereIn('status', ['pending', 'processing'])->first()) {
+                if ($customerRepository->orders->whereIn('status', [\Webkul\Sales\Models\Order::STATUS_PENDING, \Webkul\Sales\Models\Order::STATUS_PROCESSING])->first()) {
                     session()->flash('error', trans('shop::app.customers.account.profile.order-pending'));
 
                     return redirect()->route('shop.customers.account.profile.index');

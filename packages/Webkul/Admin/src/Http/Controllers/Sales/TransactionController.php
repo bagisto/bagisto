@@ -110,9 +110,9 @@ class TransactionController extends Controller
             $shipments = $this->shipmentRepository->where('order_id', $invoice->order_id)->first();
 
             if (isset($shipments)) {
-                $this->orderRepository->updateOrderStatus($order, 'completed');
+                $this->orderRepository->updateOrderStatus($order, \Webkul\Sales\Models\Order::STATUS_COMPLETED);
             } else {
-                $this->orderRepository->updateOrderStatus($order, 'processing');
+                $this->orderRepository->updateOrderStatus($order, \Webkul\Sales\Models\Order::STATUS_PROCESSING);
             }
 
             $this->invoiceRepository->updateState($invoice, 'paid');

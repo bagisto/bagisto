@@ -153,7 +153,7 @@ class CustomerDataGrid extends DataGrid
             'sortable'    => false,
             'closure'     => function ($row) {
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
-                    return $q->whereNotIn('status', ['canceled', 'closed'])
+                    return $q->whereNotIn('status', [\Webkul\Sales\Models\Order::STATUS_CANCELED, \Webkul\Sales\Models\Order::STATUS_CLOSED])
                         ->where('customer_id', $row->customer_id);
                 })->sum('base_grand_total_invoiced');
             },
