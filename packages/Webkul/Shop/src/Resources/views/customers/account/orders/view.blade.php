@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
-    </x-slot:title>
+    </x-slot>
     
     <!-- Breadcrumbs -->
     @section('breadcrumbs')

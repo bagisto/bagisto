@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.roles.create.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.roles.create.before') !!}
 

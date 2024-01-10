@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.inventory-sources.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
 

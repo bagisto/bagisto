@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.account.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     <x-admin::form 
         :action="route('admin.account.update')"

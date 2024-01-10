@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.marketing.communications.templates.create.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.marketing.communications.templates.create.before') !!}
 

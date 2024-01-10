@@ -7,7 +7,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.cms.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     <x-admin::form
         :action="route('admin.cms.update', $page->id)"

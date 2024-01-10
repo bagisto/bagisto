@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.create.title')
-    </x-slot:title>
+    </x-slot>
 
     <v-create-taxrate></v-create-taxrate>
 
