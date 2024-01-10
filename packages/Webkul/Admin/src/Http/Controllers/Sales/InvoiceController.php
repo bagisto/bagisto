@@ -3,12 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Sales\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\Listeners\Invoice as ShopInvoiceListener;
 
 class InvoiceController extends Controller
 {
@@ -22,7 +22,6 @@ class InvoiceController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository,
-        protected ShopInvoiceListener $shopInvoiceListener,
     ) {
     }
 
@@ -127,7 +126,7 @@ class InvoiceController extends Controller
 
         $invoice->email = request()->input('email');
 
-        $this->shopInvoiceListener->afterCreated($invoice);
+        Event::dispatch('sales.invoice.save.after', $invoice);
 
         session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 
