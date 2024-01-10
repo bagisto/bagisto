@@ -90,6 +90,8 @@ class ThemeController extends Controller
 
         Event::dispatch('theme_customization.update.before', $id);
 
+        $data['status'] = request()->input('status') == 'on';
+
         $theme = $this->themeCustomizationRepository->update($data, $id);
 
         Event::dispatch('theme_customization.update.after', $theme);

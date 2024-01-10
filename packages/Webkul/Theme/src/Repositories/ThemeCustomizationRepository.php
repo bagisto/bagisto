@@ -34,8 +34,6 @@ class ThemeCustomizationRepository extends Repository
             $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
         }
 
-        $data['status'] = request()->input('status') == 'on';
-
         if (in_array($data['type'], ['image_carousel', 'services_content'])) {
             unset($data[$locale]['options']);
         }
