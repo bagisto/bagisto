@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.families.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     <!-- Input Form -->
     <x-admin::form

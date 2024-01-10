@@ -4,7 +4,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.refunds.view.title', ['refund_id' => $refund->id])
-    </x-slot:title>
+    </x-slot>
 
     <!-- Page Header -->
     <div class="grid pt-3">

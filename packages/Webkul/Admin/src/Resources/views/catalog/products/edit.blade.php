@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.products.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
