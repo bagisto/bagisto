@@ -32,9 +32,9 @@ class ThemeCustomizationRepository extends Repository
             Storage::delete(str_replace('storage/', '', $slider['image']));
         }
 
+        $options = [];
+        
         if (isset($imageOptions['options'])) {
-            $options = [];
-
             foreach ($imageOptions['options'] as $image) {
 
                 if (isset($image['service_icon'])) {
@@ -61,17 +61,18 @@ class ThemeCustomizationRepository extends Repository
                     $options['images'][] = [
                         'image' => 'storage/' . $path,
                         'link'  => $image['link'],
+                        'title' => $image['title'],
                     ];
                 } else {
                     $options['images'][] = $image;
                 }
             }
-
-            $translatedModel = $theme->translate(core()->getRequestedLocaleCode());
-
-            $translatedModel->options = $options ?? [];
-
-            $translatedModel->save();
         }
+        
+        $translatedModel = $theme->translate(core()->getRequestedLocaleCode());
+
+        $translatedModel->options = $options;
+
+        $translatedModel->save();
     }
 }

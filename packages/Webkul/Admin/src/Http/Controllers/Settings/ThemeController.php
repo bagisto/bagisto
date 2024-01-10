@@ -102,7 +102,7 @@ class ThemeController extends Controller
 
         $data['status'] = request()->input('status') == 'on';
 
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+        if (in_array($data['type'], ['services_content'])) {
             unset($data[$locale]['options']);
         }
 
@@ -114,7 +114,7 @@ class ThemeController extends Controller
             $this->themeCustomizationRepository->uploadImage(
                 $data[$locale],
                 $theme,
-                request()->input('deleted_sliders', []),
+                request()->input("{$locale}.deleted_sliders", [])
             );
         }
 
