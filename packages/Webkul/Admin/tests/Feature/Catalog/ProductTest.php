@@ -17,8 +17,8 @@ afterEach(function () {
     /**
      * Clean up all the records.
      */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
+    // ProductModel::query()->delete();
+    // Attribute::query()->whereNotBetween('id', [1, 28])->delete();
 });
 
 it('it should return the product index page', function () {
@@ -168,8 +168,8 @@ it('should update the configurable product', function () {
     $this->putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
-        'channel'           => $channel = core()->getCurrentChannelCode(),
-        'locale'            => $locale = app()->getLocale(),
+        'channel'           => core()->getCurrentChannelCode(),
+        'locale'            => app()->getLocale(),
         'short_description' => fake()->sentence(),
         'description'       => fake()->paragraph(),
         'name'              => fake()->words(3, true),
@@ -187,6 +187,76 @@ it('should update the configurable product', function () {
         'parent_id'           => null,
         'additional'          => null,
     ]);
+});
+
+it('should update the configurable product variants', function () {
+    // Arrange
+    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    foreach ($product->variants as $variant) {
+        $variants[$variant->id] = [
+            'sku'         => $variant->sku,
+            'name'        => $variant->name,
+            'price'       => $variant->price,
+            'weight'      => $variant->price,
+            'status'      => $variant->status,
+            'color'       => $variant->color,
+            'size'        => $variant->size,
+            'inventories' => [
+                1 => rand(1111, 9999),
+            ],
+        ];
+    }
+
+    $this->putJson(route('admin.catalog.products.update', $product->id), [
+        'sku'               => $product->sku,
+        'url_key'           => $product->url_key,
+        'channel'           => $channel = core()->getCurrentChannelCode(),
+        'locale'            => $locale = app()->getLocale(),
+        'variants'          => $variants,
+        'short_description' => fake()->sentence(),
+        'description'       => fake()->paragraph(),
+        'name'              => fake()->words(3, true),
+        'price'             => fake()->randomFloat(2, 1, 1000),
+        'weight'            => fake()->numberBetween(0, 100),
+    ])
+        ->assertRedirect(route('admin.catalog.products.index'))
+        ->isRedirection();
+
+    $this->assertDatabaseHas('products', [
+        'sku'                 => $product->sku,
+        'type'                => $product->type,
+        'attribute_family_id' => 1,
+        'parent_id'           => null,
+        'additional'          => null,
+    ]);
+
+    foreach ($product->variants as $variant) {
+        $variant->refresh();
+
+        $this->assertDatabaseHas('product_flat', [
+            'sku'                  => $variant->sku,
+            'product_id'           => $variant->id,
+            'product_number'       => null,
+            'new'                  => null,
+            'featured'             => null,
+            'status'               => 1,
+            'url_key'              => $variant->url_key,
+            'type'                 => 'simple',
+            'name'                 => $variant->name,
+            'short_description'    => $variant->short_description,
+            'description'          => $variant->description,
+            'price'                => $variant->price,
+            'weight'               => $variant->weight,
+            'locale'               => $locale,
+            'channel'              => $channel,
+            'attribute_family_id'  => 1,
+            'visible_individually' => 0,
+        ]);
+    }
 });
 
 it('should return the create page of virtual product', function () {
@@ -593,30 +663,28 @@ it('should update the bundle product', function () {
     $product = (new ProductFaker())->getBundleProductFactory()->create();
 
     $options = [];
-    
+
     $bundleOptions = $product->bundle_options();
 
-    foreach ($bundleOptions as $key => $product) {
-        $options['option_' . $key] = [
+    foreach ($bundleOptions as $key => $option) {
+        $products = [];
+
+        foreach ($option->bundle_option_products as $key => $bundleOption) {
+            $products[$option->id]['product_id'] = $bundleOption->product_id;
+            $products[$option->id]['sort_order'] = $key;
+            $products[$option->id]['qty'] = 1;
+        }
+
+        $options[$option->id] = [
             'en' => [
-                'label' => fake()->title(),
+                'label' => fake()->words(3, true),
             ],
             'type'        => fake()->randomElement(['select', 'radio', 'checkbox', 'multiselect']),
             'is_required' => '1',
             'sort_order'  => $key,
-            'products'    => [
-                'product_' . $key => [
-                    'product_id' => $product->id,
-                    'sort_order' => $key,
-                    'qty'        => rand(10, 100),
-                ],
-            ],
+            'products'    => $products,
         ];
     }
-
-    $product = (new ProductFaker())->getSimpleProductFactory()->create([
-        'type' => 'bundle',
-    ]);
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -664,6 +732,8 @@ it('should update the bundle product', function () {
     ]);
 
     foreach ($bundleOptions as $product) {
+        $product->refresh();
+
         $this->assertDatabaseHas('product_flat', [
             'url_key'              => $product->url_key,
             'type'                 => 'simple',
