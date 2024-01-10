@@ -433,10 +433,13 @@
                                 regularPriceElement.style.display = 'inline-block';
                             }
 
+                            this.$emitter.emit('configurable-variant-selected-event',this.simpleProduct);
                         } else {
                             priceLabelElement.style.display = 'inline-block';
 
                             priceElement.innerHTML = this.config.regular.formatted_price;
+
+                            this.$emitter.emit('configurable-variant-selected-event', 0);
                         }
                     },
 
@@ -460,6 +463,8 @@
                         if (galleryImages.length) {
                             this.$parent.$parent.$refs.gallery.media.images =  { ...galleryImages };
                         }
+
+                        this.$emitter.emit('configurable-variant-update-images-event', galleryImages);
                     },
                 }
             });
