@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.categories.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <v-tax-categories>
         <div class="flex justify-between items-center">

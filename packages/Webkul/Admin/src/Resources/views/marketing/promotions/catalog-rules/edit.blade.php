@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.promotions.catalog-rules.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before') !!}
 

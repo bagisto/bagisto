@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
-    </x-slot:title>
+    </x-slot>
 
     @php
         $order = $invoice->order;

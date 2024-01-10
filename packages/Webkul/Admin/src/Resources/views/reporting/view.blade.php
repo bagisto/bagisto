@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.reporting.' . $entity . '.index.' . request()->query('type'))
-    </x-slot:title>
+    </x-slot>
 
     <v-reporting-stats-table>
         <!-- Shimmer -->

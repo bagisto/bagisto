@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.categories.create.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.catalog.categories.create.before') !!}
 

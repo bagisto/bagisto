@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id])  
-    </x-slot:title>
+    </x-slot>
 
     @php $order = $shipment->order; @endphp
 

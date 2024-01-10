@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.categories.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     @php
         $currentLocale = core()->getRequestedLocale();

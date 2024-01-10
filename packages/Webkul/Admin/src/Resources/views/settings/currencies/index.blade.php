@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.settings.currencies.index.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
