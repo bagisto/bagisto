@@ -1112,7 +1112,7 @@
                                     @lang('installer::app.installer.index.installation-completed.title-info')
                                 </p>
 
-                                <div class="flex gap-4 items-center">
+                                <div class="flex justify-between items-center max-w-[288px]">
                                     <a
                                         href="{{ URL('/admin/login')}}"
                                         class="px-3 py-1.5 bg-white border border-blue-700 rounded-md text-blue-600 font-semibold cursor-pointer hover:opacity-90"
