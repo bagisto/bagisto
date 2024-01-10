@@ -164,7 +164,7 @@
                                     'label-active': record.status === 1,
                                 }"
                             >
-                                @{{ record.status ? 'Active' : 'Inactive' }}
+                                @{{ record.status ? '@lang('admin::app.customers.customers.index.datagrid.active')' : '@lang('admin::app.customers.customers.index.datagrid.inactive')' }}
                             </span>
 
                             <span
@@ -172,7 +172,7 @@
                                     'label-canceled': record.is_suspended === 1,
                                 }"
                             >
-                                @{{ record.is_suspended ?  'Suspended' : '' }}
+                                @{{ record.is_suspended ?  '@lang('admin::app.customers.customers.index.datagrid.suspended')' : '' }}
                             </span>
                         </div>
 

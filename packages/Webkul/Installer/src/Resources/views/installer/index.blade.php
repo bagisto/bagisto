@@ -1198,6 +1198,14 @@
                         }
                     },
 
+                    mounted() {
+                        const preventUnload = (event) => {
+                            event.preventDefault();
+                        };
+
+                        window.addEventListener('beforeunload', preventUnload);
+                    },
+
                     methods: {
                         FormSubmit(params, { setErrors }) {
                             const stepActions = {
