@@ -340,7 +340,7 @@
 <!-- Page Title -->
 <x-slot:title>
     @lang('Title')
-</x-slot:title>
+</x-slot>
 
 <!-- Page Layout -->
 <x-shop::layouts>

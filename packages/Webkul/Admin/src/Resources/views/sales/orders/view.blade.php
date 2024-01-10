@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
-    </x-slot:title>
+    </x-slot>
 
     <!-- Header -->
     <div class="grid">

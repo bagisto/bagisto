@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.search-seo.search-terms.index.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.marketing.search_seo.search_terms.create.before') !!}
 

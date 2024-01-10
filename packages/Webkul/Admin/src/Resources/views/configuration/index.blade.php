@@ -2,7 +2,7 @@
     <!-- Title of the page. -->
     <x-slot:title>
         @lang('admin::app.configuration.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <!-- Heading of the page -->
     <div class="flex justify-between items-center mb-7">

@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.products.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="text-xl text-gray-800 dark:text-white font-bold">
