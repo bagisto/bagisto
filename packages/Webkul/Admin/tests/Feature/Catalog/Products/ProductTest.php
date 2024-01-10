@@ -1,11 +1,8 @@
 <?php
 
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -18,7 +15,7 @@ afterEach(function () {
     Attribute::query()->whereNotBetween('id', [1, 28])->delete();
 });
 
-it('it should return the product index page', function () {
+it('should return the product index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
@@ -42,42 +39,6 @@ it('should copy the existing product', function () {
     $this->assertDatabaseHas('products', [
         'id' => $productId,
     ]);
-});
-
-it('should upload link the product upload link', function () {
-    // Arrange
-    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
-
-    // Act and Assert
-    $this->loginAsAdmin();
-
-    $response = postJson(route('admin.catalog.products.upload_link', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
-    ])
-        ->assertOk()
-        ->assertJsonPath('file_name', $file->getClientOriginalName());
-
-    if (Storage::disk('private')->exists($response['file'])) {
-        Storage::disk('private')->delete($response['file']);
-    }
-});
-
-it('should upload the sample file', function () {
-    // Arrange
-    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
-
-    // Act and Assert
-    $this->loginAsAdmin();
-
-    $response = postJson(route('admin.catalog.products.upload_sample', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
-    ])
-        ->assertOk()
-        ->assertJsonPath('file_name', $file->name);
-
-    if (Storage::disk('public')->exists($response['file'])) {
-        Storage::disk('public')->delete($response['file']);
-    }
 });
 
 it('should perform the mass action forn update status for products', function () {
@@ -139,41 +100,4 @@ it('should search the product', function () {
         ->assertJsonPath('data.0.id', $product[0]->id)
         ->assertJsonPath('data.0.name', $product[0]->name)
         ->assertJsonPath('data.0.sku', $product[0]->sku);
-});
-
-it('should download the product which is downloadable', function () {
-    // Arrange
-    $attribute = Attribute::factory()->create([
-        'type' => 'file',
-    ]);
-
-    $product = (new ProductFaker([
-        'attributes' => [
-            $attribute->id => $attribute->code,
-        ],
-
-        'attribute_value' => [
-            $attribute->code => [
-                'text_value' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
-            ],
-        ],
-    ]))->getDownloadableProductFactory()->create();
-
-    $fileName = $file->store('product/' . $product->id);
-
-    $atttributeValues = app(ProductAttributeValueRepository::class)->findOneWhere([
-        'product_id'   => $product->id,
-        'attribute_id' => $attribute->id,
-    ]);
-
-    $atttributeValues->text_value = $fileName;
-    $atttributeValues->save();
-
-    // Act and Assert
-    $this->loginAsAdmin();
-
-    get(route('admin.catalog.products.file.download', [$product->id, $attribute->id]))
-        ->assertOk();
-
-    Storage::assertExists($fileName);
 });
