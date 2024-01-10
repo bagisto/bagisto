@@ -126,7 +126,7 @@ class InvoiceController extends Controller
 
         $invoice->email = request()->input('email');
 
-        Event::dispatch('sales.invoice.save.after', $invoice);
+        Event::dispatch('sales.invoice.sendDuplicateInvoice.after', $invoice);
 
         session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 

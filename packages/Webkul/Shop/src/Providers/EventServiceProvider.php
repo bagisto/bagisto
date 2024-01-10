@@ -44,6 +44,10 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Shop\Listeners\Invoice@afterCreated',
         ],
 
+        'sales.invoice.sendDuplicateInvoice.after' => [
+            'Webkul\Shop\Listeners\Invoice@afterCreated',
+        ],
+
         'sales.shipment.save.after' => [
             'Webkul\Shop\Listeners\Shipment@afterCreated',
         ],
