@@ -25,7 +25,7 @@
         rel="stylesheet"
     />
 
-    @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon', core()->getCurrentChannelCode()))
+    @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon'))
         <link
             type="image/x-icon"
             href="{{ Storage::url($favicon) }}"

@@ -2978,8 +2978,8 @@ return [
                 ],
 
                 'magic-ai' => [
-                    'info'  => 'Magic AI seçeneklerini ayarlayın.',
-                    'title' => 'Magic AI',
+                    'info'  => 'Sihirli AI seçeneklerini ayarla.',
+                    'title' => 'Sihirli AI',
 
                     'settings' => [
                         'title'        => 'Genel Ayarlar',
