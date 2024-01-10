@@ -6,7 +6,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.catalog.attributes.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     <!-- Edit Attributes Vue Components -->
     <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>

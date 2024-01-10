@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.customers.groups.index.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('admin.customers.groups.create.before') !!}
 

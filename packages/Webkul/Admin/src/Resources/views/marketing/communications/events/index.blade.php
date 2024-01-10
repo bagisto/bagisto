@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.events.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <v-events>
         <div class="flex gap-4 justify-between max-sm:flex-wrap">

@@ -3,7 +3,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.roles.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.roles.edit.before') !!}
 

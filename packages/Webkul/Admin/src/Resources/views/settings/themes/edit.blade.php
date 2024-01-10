@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.settings.themes.edit.title')
-    </x-slot:title>
+    </x-slot>
    
     @php
         $channels = core()->getAllChannels();
