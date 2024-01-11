@@ -62,13 +62,21 @@ it('should show the dashboard over all stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -138,13 +146,21 @@ it('should show the dashboard today stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -217,13 +233,21 @@ it('should show the dashboard stock threshold products stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -292,13 +316,21 @@ it('should show the dashboard total sales stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -396,13 +428,21 @@ it('should show the dashboard top selling products stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -468,13 +508,21 @@ it('should show the dashboard top customers stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,

@@ -57,13 +57,21 @@ it('should store the shimpment to the order', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -145,13 +153,21 @@ it('should return the view page of shipments', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,

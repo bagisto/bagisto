@@ -3,7 +3,6 @@
 namespace Webkul\Checkout\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 
 class CartItemFactory extends Factory
@@ -20,11 +19,10 @@ class CartItemFactory extends Factory
      */
     public function definition(): array
     {
-        $now = date('Y-m-d H:i:s');
+        $now = now();
 
         return [
             'quantity'   => 1,
-            'cart_id'    => Cart::factory(),
             'created_at' => $now,
             'updated_at' => $now,
         ];
