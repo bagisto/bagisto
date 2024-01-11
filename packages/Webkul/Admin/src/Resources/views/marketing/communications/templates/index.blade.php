@@ -10,7 +10,7 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-            @if (bouncer()->hasPermission('marketing.communications.email-templates.create'))
+            @if (bouncer()->hasPermission('marketing.communications.email_templates.create'))
                 <a href="{{ route('admin.marketing.communications.email_templates.create') }}">
                     <div class="primary-button">
                         @lang('admin::app.marketing.communications.templates.index.create-btn')

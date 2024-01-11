@@ -9,7 +9,7 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-            @if (bouncer()->hasPermission('marketing.promotions.cart-rules.create'))
+            @if (bouncer()->hasPermission('marketing.promotions.cart_rules.create'))
                 <a 
                     href="{{ route('admin.marketing.promotions.cart_rules.create') }}"
                     class="primary-button"
