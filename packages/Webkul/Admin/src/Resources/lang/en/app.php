@@ -2249,6 +2249,26 @@ return [
             ],
         ],
 
+        'data-transfer' => [
+            'imports' => [
+                'index' => [
+                    'button-title' => 'Create Import',
+                    'title'        => 'Imports',
+
+                    'datagrid' => [
+                        'actions' => 'Actions',
+                        'delete'  => 'Delete',
+                        'edit'    => 'Edit',
+                        'id'      => 'ID',
+                    ],
+
+                    'create' => [
+                        'title' => 'Create Import',
+                    ],
+                ],
+            ],
+        ],
+
         'exchange-rates' => [
             'index' => [
                 'create-btn'    => 'Create Exchange Rate',
@@ -3466,11 +3486,13 @@ return [
                 'currencies'               => 'Currencies',
                 'customers'                => 'Customers',
                 'dashboard'                => 'Dashboard',
+                'data-transfer'            => 'Data Transfer',
                 'discount'                 => 'Discount',
                 'email-templates'          => 'Email Templates',
                 'events'                   => 'Events',
                 'exchange-rates'           => 'Exchange Rates',
                 'groups'                   => 'Groups',
+                'imports'                  => 'Imports',
                 'inventory-sources'        => 'Inventory Sources',
                 'invoices'                 => 'Invoices',
                 'locales'                  => 'Locales',
@@ -3659,7 +3681,7 @@ return [
         'communications'           => 'Communications',
         'configure'                => 'Configure',
         'copy'                     => 'Copy',
-        'create'                   => 'Add',
+        'create'                   => 'Create',
         'currencies'               => 'Currencies',
         'customers'                => 'Customers',
         'dashboard'                => 'Dashboard',
@@ -3698,6 +3720,8 @@ return [
         'url-rewrites'             => 'URL Rewrites',
         'users'                    => 'Users',
         'view'                     => 'View',
+        'data-transfer'            => 'Data Transfer',
+        'imports'                  => 'Imports',
     ],
 
     'errors' => [
