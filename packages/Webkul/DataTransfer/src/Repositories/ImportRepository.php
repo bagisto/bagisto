@@ -2,8 +2,8 @@
 
 namespace Webkul\DataTransfer\Repositories;
 
-use Webkul\DataTransfer\Contracts\Import;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\DataTransfer\Contracts\Import;
 
 class ImportRepository extends Repository
 {

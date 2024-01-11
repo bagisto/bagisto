@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings\DataTransfer;
 
-use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Settings\DataTransfer\ImportDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\DataTransfer\Repositories\ImportRepository;

@@ -2,8 +2,8 @@
 
 namespace Webkul\DataTransfer\Repositories;
 
-use Webkul\DataTransfer\Contracts\ImportBatch;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\DataTransfer\Contracts\ImportBatch;
 
 class ImportBatchRepository extends Repository
 {

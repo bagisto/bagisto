@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\Settings\DataTransfer\ImportController;
 use Webkul\Admin\Http\Controllers\Settings\ChannelController;
 use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
+use Webkul\Admin\Http\Controllers\Settings\DataTransfer\ImportController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
