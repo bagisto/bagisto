@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\Settings\DataTransfer\ImportController;
 use Webkul\Admin\Http\Controllers\Settings\ChannelController;
 use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
@@ -180,6 +181,20 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.themes.delete');
+        });
+
+        /**
+         * Data Transfer routes.
+         */
+        Route::prefix('data-transfer')->group(function () {
+            /**
+             * Import routes.
+             */
+            Route::controller(ImportController::class)->prefix('imports')->group(function () {
+                Route::get('', 'index')->name('admin.settings.data_transfer.imports.index');
+
+                Route::get('create', 'create')->name('admin.settings.data_transfer.imports.create');
+            });
         });
     });
 });
