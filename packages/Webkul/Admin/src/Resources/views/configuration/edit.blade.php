@@ -16,7 +16,7 @@
                 @endif
             @endforeach
         @endif
-    </x-slot:title>
+    </x-slot>
 
     <!-- Configuration form fields -->
     <x-admin::form 

@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.families.create.title')
-    </x-slot:title>
+    </x-slot>
 
     <!-- Input Form -->
     <x-admin::form :action="route('admin.catalog.families.store')">

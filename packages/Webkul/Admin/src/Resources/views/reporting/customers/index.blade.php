@@ -1,7 +1,7 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.reporting.customers.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <!-- Page Header -->
     <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">

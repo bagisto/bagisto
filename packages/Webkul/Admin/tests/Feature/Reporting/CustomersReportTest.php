@@ -145,13 +145,21 @@ it('should return the customers with most orders stats report', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -177,8 +185,8 @@ it('should return the customers with most orders stats report', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -212,13 +220,21 @@ it('should return the customers with most sales stats report', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -244,8 +260,8 @@ it('should return the customers with most sales stats report', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert

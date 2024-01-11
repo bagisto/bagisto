@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.categories.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <v-tax-categories>
         <div class="flex justify-between items-center">
@@ -320,9 +320,9 @@
 
                                 this.$refs.taxCategory.toggle();
                             })
-                            .catch(error => [
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
-                            ]);
+                            .catch(error => this.$emitter.emit('add-flash', { 
+                                type: 'error', message: error.response.data.message 
+                            }));
                     },
                 },
             });

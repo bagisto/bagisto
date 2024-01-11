@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.users.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <v-users>
         <div class="flex justify-between items-center">
@@ -535,9 +535,9 @@
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
                             })
-                            .catch(error => [
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
-                            ]);
+                            .catch(error => this.$emitter.emit('add-flash', { 
+                                type: 'error', message: error.response.data.message 
+                            }));
                     },
 
                     UserConfirmModal() {
