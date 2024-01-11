@@ -182,14 +182,14 @@ it('should update the downloadable product', function () {
                 'en' => [
                     'title' => fake()->title,
                 ],
-                'price'            => rand(10, 250),
-                'downloads'        => '1',
-                'sort_order'       => '0',
-                'type'             => 'file',
-                'file'             => $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg'),
-                'file_name'        => $file1->getClientOriginalName(),
-                'sample_type'      => 'url',
-                'sample_url'       => fake()->url(),
+                'price'       => rand(10, 250),
+                'downloads'   => '1',
+                'sort_order'  => '0',
+                'type'        => 'file',
+                'file'        => $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg'),
+                'file_name'   => $file1->getClientOriginalName(),
+                'sample_type' => 'url',
+                'sample_url'  => fake()->url(),
             ],
 
             'link_1' => [

@@ -173,8 +173,8 @@ it('should returns the purchase funnel stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -357,8 +357,8 @@ it('should returns the average sale stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -660,8 +660,8 @@ it('should returns the top payment methods stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -735,8 +735,8 @@ it('should return the view page of sales stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert

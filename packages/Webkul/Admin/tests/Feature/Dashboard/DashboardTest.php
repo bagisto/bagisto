@@ -112,8 +112,8 @@ it('should show the dashboard over all stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assertd
@@ -196,8 +196,8 @@ it('should show the dashboard today stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -283,8 +283,8 @@ it('should show the dashboard stock threshold products stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -366,8 +366,8 @@ it('should show the dashboard total sales stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -476,8 +476,8 @@ it('should show the dashboard top selling products stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -556,8 +556,8 @@ it('should show the dashboard top customers stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert

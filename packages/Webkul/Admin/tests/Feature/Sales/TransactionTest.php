@@ -202,9 +202,9 @@ it('should view the transaction', function () {
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'increment_id'  => app(InvoiceSequencer::class)->resolveGeneratorClass(),
-        'state'         => 'paid',
+        'order_id'     => $order->id,
+        'increment_id' => app(InvoiceSequencer::class)->resolveGeneratorClass(),
+        'state'        => 'paid',
     ])->create();
 
     $transaction = OrderTransaction::create([

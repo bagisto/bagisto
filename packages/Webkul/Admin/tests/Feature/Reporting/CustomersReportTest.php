@@ -185,8 +185,8 @@ it('should return the customers with most orders stats report', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -260,8 +260,8 @@ it('should return the customers with most sales stats report', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert

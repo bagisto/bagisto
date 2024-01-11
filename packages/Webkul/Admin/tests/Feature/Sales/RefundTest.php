@@ -175,14 +175,6 @@ it('should return the order refunded data', function () {
         }
     }
 
-    $summary = [
-        'subtotal'    => ['price' => 0],
-        'discount'    => ['price' => 0],
-        'tax'         => ['price' => 0],
-        'shipping'    => ['price' => 0],
-        'grand_total' => ['price' => 0],
-    ];
-
     foreach ($items as $orderItemId => $qty) {
         $orderItem = app(OrderItemRepository::class)->find($orderItemId);
 

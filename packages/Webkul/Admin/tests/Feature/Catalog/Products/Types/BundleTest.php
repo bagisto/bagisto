@@ -76,7 +76,7 @@ it('should update the bundle product', function () {
         }
 
         $options[$option->id] = [
-            'en' => [
+            app()->getLocale() => [
                 'label' => fake()->words(3, true),
             ],
             'type'        => fake()->randomElement(['select', 'radio', 'checkbox', 'multiselect']),

@@ -178,8 +178,8 @@ it('should return the view page of the invoice', function () {
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -260,8 +260,8 @@ it('should send duplicate mail to provided email address', function () {
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
