@@ -19,12 +19,10 @@ class CartItemFactory extends Factory
      */
     public function definition(): array
     {
-        $now = now();
-
         return [
             'quantity'   => 1,
-            'created_at' => $now,
-            'updated_at' => $now,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 

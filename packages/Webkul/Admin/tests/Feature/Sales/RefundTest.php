@@ -9,7 +9,6 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 use Webkul\Sales\Models\Refund;
-use Webkul\Sales\Repositories\OrderItemRepository;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -176,7 +175,7 @@ it('should return the order refunded data', function () {
     }
 
     foreach ($items as $orderItemId => $qty) {
-        $orderItem = app(OrderItemRepository::class)->find($orderItemId);
+        $orderItem = OrderItem::find($orderItemId);
 
         $summary['subtotal']['price'] += $orderItem->base_price * $qty;
 
