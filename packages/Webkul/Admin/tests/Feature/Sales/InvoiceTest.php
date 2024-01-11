@@ -243,7 +243,7 @@ it('should send duplicate mail to provided email address', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.send_duplicate', $invoice->id), [
+    postJson(route('admin.sales.invoices.send_duplicate_email', $invoice->id), [
         'email' => fake()->email(),
     ])
         ->assertRedirect(route('admin.sales.invoices.view', $invoice->id))
