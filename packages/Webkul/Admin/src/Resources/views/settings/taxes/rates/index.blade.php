@@ -21,7 +21,7 @@
             <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
 
             <!-- Create New Tax Rate Button -->
-            @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
+            @if (bouncer()->hasPermission('settings.taxes.tax_rates.create'))
                 <a href="{{ route('admin.settings.taxes.rates.create') }}" class="primary-button">
                     @lang('admin::app.settings.taxes.rates.index.button-title')
                 </a>

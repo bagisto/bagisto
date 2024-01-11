@@ -9,7 +9,7 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
-            @if (bouncer()->hasPermission('marketing.promotions.catalog-rules.create'))
+            @if (bouncer()->hasPermission('marketing.promotions.catalog_rules.create'))
                 <a 
                     href="{{ route('admin.marketing.promotions.catalog_rules.create') }}"
                     class="primary-button"

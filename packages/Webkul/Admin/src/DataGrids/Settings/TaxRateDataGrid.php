@@ -123,7 +123,7 @@ class TaxRateDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('settings.taxes.tax-rates.edit')) {
+        if (bouncer()->hasPermission('settings.taxes.tax_rates.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.taxes.rates.index.datagrid.edit'),
@@ -134,7 +134,7 @@ class TaxRateDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('settings.taxes.tax-rates.delete')) {
+        if (bouncer()->hasPermission('settings.taxes.tax_rates.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.settings.taxes.rates.index.datagrid.delete'),

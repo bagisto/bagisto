@@ -191,7 +191,7 @@ class CartRuleDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.promotions.cart-rules.edit')) {
+        if (bouncer()->hasPermission('marketing.promotions.cart_rules.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.edit'),
@@ -202,7 +202,7 @@ class CartRuleDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.promotions.cart-rules.copy')) {
+        if (bouncer()->hasPermission('marketing.promotions.cart_rules.copy')) {
             $this->addAction([
                 'icon'   => 'icon-copy',
                 'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy'),
@@ -213,7 +213,7 @@ class CartRuleDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.promotions.cart-rules.delete')) {
+        if (bouncer()->hasPermission('marketing.promotions.cart_rules.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.delete'),
