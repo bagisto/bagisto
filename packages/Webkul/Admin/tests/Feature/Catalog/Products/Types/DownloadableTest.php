@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Models\ProductAttributeValue;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -130,10 +130,8 @@ it('should download the product which is downloadable', function () {
 
     $fileName = $file->store('product/' . $product->id);
 
-    $atttributeValues = app(ProductAttributeValueRepository::class)->findOneWhere([
-        'product_id'   => $product->id,
-        'attribute_id' => $attribute->id,
-    ]);
+    $atttributeValues = ProductAttributeValue::where('product_id', $product->id)
+        ->where('attribute_id', $attribute->id)->first();
 
     $atttributeValues->text_value = $fileName;
     $atttributeValues->save();
