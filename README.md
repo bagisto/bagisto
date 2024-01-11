@@ -74,6 +74,14 @@ Vue Storefront 2 integration for Bagisto: [https://github.com/bagisto/vuestorefr
 
 Develop and deploy your next headless commerce storefronts with Next JS and Bagisto: [https://github.com/bagisto/nextjs-commerce](https://github.com/bagisto/nextjs-commerce)
 
+# Open Source Mobile eCommerce
+
+Revolutionize Your Online Store with Bagisto's Open Source eCommerce Mobile 
+
+![enter image description here](https://raw.githubusercontent.com/bagisto/temp-media/master/git-hub-banner.png)
+
+Mobile eCommerce powered by Flutter & Laravel: https://github.com/bagisto/opensource-ecommerce-mobile-app
+
 # AI Powered eCommerce
 
 You can integrate popular large language models like GPT, BERT, Llama etc. to build [AI-powered eCommerce](https://bagisto.com/en/extensions/laravel-chatbot-using-openai-chatgpt-llm/) applications with bagisto. Some of the popular use cases where you can make use of LLMs to build AI apps are chatbots, automated product descriptions, customer support, search and recommendations. 
