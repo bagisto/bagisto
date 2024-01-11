@@ -116,7 +116,7 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function sendDuplicate(Request $request, $id)
+    public function sendDuplicateEmail(Request $request, $id)
     {
         $request->validate([
             'email' => 'required|email',
