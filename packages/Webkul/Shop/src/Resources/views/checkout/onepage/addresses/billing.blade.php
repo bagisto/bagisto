@@ -346,7 +346,7 @@
                                     v-if="! haveStates('billing')"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                                >
+                                />
 
                                 <x-shop::form.control-group.control
                                     type="select"
@@ -427,7 +427,7 @@
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
                             />
     
-                            <x-shop::form.control-group.error control-name="billing[phone]" >
+                            <x-shop::form.control-group.error control-name="billing[phone]" />
                         </x-shop::form.control-group>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}

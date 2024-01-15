@@ -99,7 +99,6 @@
                         <!-- Dropdown Content -->
                         <x-slot:menu>
                             <x-shop::dropdown.menu.item
-                                {{-- class="w-full" --}}
                                 v-for="option in column.options.params.options"
                                 v-text="option.label"
                                 @click="filterPage(option.value, column)"

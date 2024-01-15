@@ -192,7 +192,7 @@
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                             />
                         
-                            <x-shop::form.control-group.error control-name="shipping[company_name]" >
+                            <x-shop::form.control-group.error control-name="shipping[company_name]" />
                         </x-shop::form.control-group>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.company_name.after') !!}

@@ -1,10 +1,10 @@
 <x-shop::layouts.account>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.customers.account.profile.edit-profile')
     </x-slot>
 
-    {{-- Breadcrumbs --}}
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile.edit" />
     @endSection
@@ -15,7 +15,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.profile.edit.before', ['customer' => $customer]) !!}
 
-    {{-- Profile Edit Form --}}
+    <!-- Profile Edit Form -->
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
         enctype="multipart/form-data"
