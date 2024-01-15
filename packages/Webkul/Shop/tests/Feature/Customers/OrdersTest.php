@@ -3,7 +3,6 @@
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
-use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Invoice;
@@ -97,7 +96,7 @@ it('should view the order', function () {
         ->assertSeeText(trans('shop::app.customers.account.orders.view.information.product-name'))
         ->assertSeeText(trans('shop::app.customers.account.orders.view.information.total-due'))
         ->assertSeeText(trans('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id]));
-}); 
+});
 
 it('should cancel the customer order', function () {
     // Arrange
@@ -160,11 +159,11 @@ it('should cancel the customer order', function () {
         'id'     => $order->id,
         'status' => 'canceled',
     ]);
-}); 
+});
 
 it('should print the order invoice', function () {
-     // Arrange
-     $product = (new ProductFaker([
+    // Arrange
+    $product = (new ProductFaker([
         'attributes' => [
             5 => 'new',
         ],
@@ -229,4 +228,4 @@ it('should print the order invoice', function () {
 
     getJson(route('shop.customers.account.orders.print-invoice', $invoice->id))
         ->assertDownload('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
-}); 
+});

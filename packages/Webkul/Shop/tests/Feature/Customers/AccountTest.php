@@ -71,11 +71,12 @@ it('should update the customer', function () {
 });
 
 it('should delete the customer account', function () {
-    // Act and Assert
+    // Arrange
     $customer = Customer::factory()->create([
         'password' => Hash::make('admin123'),
     ]);
 
+    // Act and Assert
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.customers.account.profile.destroy'), [
@@ -113,15 +114,16 @@ it('should shows the reviews of customer', function () {
         ],
     ]))->getSimpleProductFactory()->create();
 
-    // Act
-    $customer = $this->loginAsCustomer();
+    $customer = Customer::factory()->create();
 
     $productReview = ProductReview::factory()->create([
         'product_id'  => $product->id,
         'customer_id' => $customer->id,
     ]);
 
-    // Assert
+    // Act and Assert
+    $customer = $this->loginAsCustomer($customer);
+
     get(route('shop.customers.account.reviews.index'))
         ->assertOk()
         ->assertSeeText(trans('shop::app.customers.account.reviews.title'))
@@ -130,12 +132,15 @@ it('should shows the reviews of customer', function () {
 });
 
 it('should returns the address page of the customer', function () {
-    // Act and Assert
-    $customer = $this->loginAsCustomer();
+    // Arrange
+    $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
         'customer_id' => $customer->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
 
     get(route('shop.customers.account.addresses.index'))
         ->assertOk()
@@ -199,12 +204,15 @@ it('should store the customer address', function () {
 });
 
 it('should edit the customer address', function () {
-    // Act and Assert
-    $customer = $this->loginAsCustomer();
+    // Arrange
+    $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
         'customer_id' => $customer->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
 
     get(route('shop.customers.account.addresses.edit', $customerAddress->id))
         ->assertOk()
@@ -214,12 +222,14 @@ it('should edit the customer address', function () {
 });
 
 it('should update the customer address', function () {
-    // Act and Assert
-    $customer = $this->loginAsCustomer();
+    $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
         'customer_id' => $customer->id,
     ]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
 
     putJson(route('shop.customers.account.addresses.update', $customerAddress->id), [
         'customer_id'     => $customer->id,
@@ -253,13 +263,16 @@ it('should update the customer address', function () {
 });
 
 it('should set default address for the customer', function () {
-    // Act and assert
-    $customer = $this->loginAsCustomer();
+    // Arrange
+    $customer = Customer::factory()->create();
 
     $customerAddresses = CustomerAddress::factory()->create([
         'customer_id'     => $customer->id,
         'default_address' => 0,
     ]);
+
+    // Act and assert
+    $this->loginAsCustomer($customer);
 
     patchJson(route('shop.customers.account.addresses.update.default', $customerAddresses->id))
         ->assertRedirect();
@@ -271,13 +284,15 @@ it('should set default address for the customer', function () {
 });
 
 it('should delete the cusomter address', function () {
-    // Act and assert
-    $customer = $this->loginAsCustomer();
+    $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
         'customer_id'     => $customer->id,
         'default_address' => 0,
     ]);
+
+    // Act and assert
+    $this->loginAsCustomer($customer);
 
     deleteJson(route('shop.customers.account.addresses.delete', $customerAddress->id))
         ->assertRedirect();
