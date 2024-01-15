@@ -229,7 +229,7 @@
                                         :label="trans('admin::app.sales.refunds.create.refund-shipping')"
                                     />
 
-                                    <x-admin::form.control-group.error control-name="refund[shipping]" >
+                                    <x-admin::form.control-group.error control-name="refund[shipping]" />
                                 </x-admin::form.control-group>
 
                                 <!-- Adjustment Refund -->

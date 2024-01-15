@@ -509,7 +509,7 @@
                                                     </option>
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.error control-name="end_other_rules" >
+                                                <x-admin::form.control-group.error control-name="end_other_rules" />
                                             </x-admin::form.control-group>
                                         </div>
                                     </div>

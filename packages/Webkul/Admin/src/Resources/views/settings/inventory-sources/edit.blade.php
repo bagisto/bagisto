@@ -282,7 +282,7 @@
                                         />
                                     </template>
 
-                                    <x-admin::form.control-group.error control-name="state" >
+                                    <x-admin::form.control-group.error control-name="state" />
                                 </x-admin::form.control-group>
 
                                 <!-- City -->

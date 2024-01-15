@@ -192,7 +192,7 @@
                                     :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
                                 />
 
-                                <x-admin::form.control-group.error control-name="term" >
+                                <x-admin::form.control-group.error control-name="term" />
                             </x-admin::form.control-group>
 
                             <template v-if="selectedSitemap">

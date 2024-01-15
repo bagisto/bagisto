@@ -464,7 +464,7 @@
                                                 rules="required"
                                                 v-model="selectedLink.sample_url"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.url')"
-                                            >
+                                            />
                     
                                             <x-admin::form.control-group.error control-name="sample_url" />
                                         </x-admin::form.control-group>
@@ -672,7 +672,7 @@
                                         rules="required"
                                         v-model="selectedSample.title"
                                         :label="trans('admin::app.catalog.products.edit.types.downloadable.samples.update-create.name')"
-                                    >
+                                    />
             
                                     <x-admin::form.control-group.error control-name="title" />
                                 </x-admin::form.control-group>
@@ -764,7 +764,7 @@
                                                 rules="required"
                                                 v-model="selectedSample.url"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.samples.update-create.url')"
-                                            >
+                                            />
                     
                                             <x-admin::form.control-group.error control-name="url" />
                                         </x-admin::form.control-group>
