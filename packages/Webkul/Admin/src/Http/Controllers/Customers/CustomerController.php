@@ -179,7 +179,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function login_as_customer($id)
+    public function loginAsCustomer($id)
     {
         $customer = $this->customerRepository->findOrFail($id);
 
