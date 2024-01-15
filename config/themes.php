@@ -12,7 +12,7 @@ return [
 
     'default' => 'default',
 
-    'themes' => [
+    'shop' => [
         'default' => [
             'name'        => 'Default',
             'assets_path' => 'public/themes/shop/default',
@@ -37,7 +37,7 @@ return [
 
     'admin-default' => 'default',
 
-    'admin-themes' => [
+    'admin' => [
         'default' => [
             'name'        => 'Default',
             'assets_path' => 'public/themes/admin/default',

@@ -72,7 +72,7 @@ class Themes
      */
     public function getChannelThemes()
     {
-        $themes = config('themes.themes', []);
+        $themes = config('themes.shop', []);
 
         $channelThemes = [];
 
@@ -120,9 +120,9 @@ class Themes
         $parentThemes = [];
 
         if (Str::contains(request()->url(), config('app.admin_url') . '/')) {
-            $themes = config('themes.admin-themes', []);
+            $themes = config('themes.admin', []);
         } else {
-            $themes = config('themes.themes', []);
+            $themes = config('themes.shop', []);
         }
 
         foreach ($themes as $code => $data) {
