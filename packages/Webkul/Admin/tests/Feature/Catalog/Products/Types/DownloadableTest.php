@@ -251,7 +251,7 @@ it('should update the downloadable product', function () {
 
 it('should delete a downloadable product', function () {
     // Arrange
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
