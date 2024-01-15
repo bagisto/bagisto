@@ -50,19 +50,17 @@
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        name="code"
                                         class="py-5 px-6"
+                                        name="code"
+                                        v-model="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
-                                        v-model="code"
-                                    >
-                                    </x-shop::form.control-group.control>
+                                    />
 
                                     <x-shop::form.control-group.error
                                         class="flex"
                                         control-name="code"
-                                    >
-                                    </x-shop::form.control-group.error>
+                                    />
                                 </x-shop::form.control-group>
                             </x-slot:content>
 

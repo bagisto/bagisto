@@ -149,12 +149,11 @@
 
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
+                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-1.5 px-3.5 rounded-[54px]"
                                     name="quantity"
                                     ::value="item?.quantity"
-                                    class="gap-x-2.5 max-w-[150px] max-h-9 py-1.5 px-3.5 rounded-[54px]"
                                     @change="updateItem($event, item)"
-                                >
-                                </x-shop::quantity-changer>
+                                />
 
                                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.after') !!}
 

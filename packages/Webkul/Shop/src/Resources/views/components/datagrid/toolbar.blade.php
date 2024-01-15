@@ -133,8 +133,7 @@
                         v-for="perPageOption in available.meta.per_page_options"
                         v-text="perPageOption"
                         @click="changePerPageOption(perPageOption)"
-                    >
-                    </x-shop::dropdown.menu.item>
+                    />
                 </x-slot:menu>
             </x-shop::dropdown>
 
@@ -158,7 +157,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <x-shop::datagrid.filters></x-shop::datagrid.filters>
+                    <x-shop::datagrid.filters />
                 </x-slot:content>
             </x-shop::drawer>
         </div>

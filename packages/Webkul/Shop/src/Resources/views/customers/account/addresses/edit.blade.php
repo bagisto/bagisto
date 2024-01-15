@@ -7,7 +7,10 @@
 
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="addresses.edit" :entity="$address"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs
+            name="addresses.edit"
+            :entity="$address"
+        />
     @endSection
 
     <h2 class="mb-8 text-2xl font-medium">
@@ -36,13 +39,9 @@
                 :value="old('company_name') ?? $address->company_name"
                 :label="trans('shop::app.customers.account.addresses.company-name')"
                 :placeholder="trans('shop::app.customers.account.addresses.company-name')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="company_name"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="company_name" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.company_name.after', ['address' => $address]) !!}
@@ -55,17 +54,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="first_name"
-                :value="old('first_name') ?? $address->first_name"
                 rules="required"
+                :value="old('first_name') ?? $address->first_name"
                 :label="trans('shop::app.customers.account.addresses.first-name')"
                 :placeholder="trans('shop::app.customers.account.addresses.first-name')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="first_name"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="first_name" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.first_name.after', ['address' => $address]) !!}
@@ -78,17 +73,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="last_name"
-                :value="old('last_name') ?? $address->last_name"
                 rules="required"
+                :value="old('last_name') ?? $address->last_name"
                 :label="trans('shop::app.customers.account.addresses.last-name')"
                 :placeholder="trans('shop::app.customers.account.addresses.last-name')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="last_name"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="last_name" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.last_name.after', ['address' => $address]) !!}
@@ -104,13 +95,9 @@
                 :value="old('vat_id') ?? $address->vat_id"
                 :label="trans('shop::app.customers.account.addresses.vat-id')"
                 :placeholder="trans('shop::app.customers.account.addresses.vat-id')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="vat_id"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="vat_id" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.vat_id.after', ['address' => $address]) !!}
@@ -123,17 +110,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="address1[]"
-                :value="old('address1') ?? $address->address1"
                 rules="required|address"
+                :value="old('address1') ?? $address->address1"
                 :label="trans('shop::app.customers.account.addresses.street-address')"
                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="address1[]"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="address1[]" />
         </x-shop::form.control-group>
 
         @if (
@@ -147,8 +130,7 @@
                     :value="old('address{{$i}}[]', $address->{'address'.$i})"
                     :label="trans('shop::app.customers.account.addresses.street-address')"
                     :placeholder="trans('shop::app.customers.account.addresses.street-address')"
-                >
-                </x-shop::form.control-group.control>
+                />
             @endfor
         @endif
 
@@ -181,10 +163,7 @@
                 @endforeach
             </x-shop::form.control-group.control>
 
-            <x-shop::form.control-group.error
-                control-name="country"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="country" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.country.after', ['address' => $address]) !!}
@@ -197,17 +176,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="state"
-                :value="old('state') ?? $address->state"
                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                :value="old('state') ?? $address->state"
                 :label="trans('shop::app.customers.account.addresses.state')"
                 :placeholder="trans('shop::app.customers.account.addresses.state')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="state"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="state" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.state.after', ['address' => $address]) !!}
@@ -220,17 +195,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="city"
-                :value="old('city') ?? $address->city"
                 rules="required"
+                :value="old('city') ?? $address->city"
                 :label="trans('shop::app.customers.account.addresses.city')"
                 :placeholder="trans('shop::app.customers.account.addresses.city')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="city"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="city" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.city.after', ['address' => $address]) !!}
@@ -243,17 +214,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="postcode"
-                :value="old('postal-code') ?? $address->postcode"
                 rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|numeric "
+                :value="old('postal-code') ?? $address->postcode"
                 :label="trans('shop::app.customers.account.addresses.post-code')"
                 :placeholder="trans('shop::app.customers.account.addresses.post-code')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="postcode"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="postcode" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.postcode.after', ['address' => $address]) !!}
@@ -266,17 +233,13 @@
             <x-shop::form.control-group.control
                 type="text"
                 name="phone"
-                :value="old('phone') ?? $address->phone"
                 rules="required|integer"
+                :value="old('phone') ?? $address->phone"
                 :label="trans('shop::app.customers.account.addresses.phone')"
                 :placeholder="trans('shop::app.customers.account.addresses.phone')"
-            >
-            </x-shop::form.control-group.control>
+            />
 
-            <x-shop::form.control-group.error
-                control-name="phone"
-            >
-            </x-shop::form.control-group.error>
+            <x-shop::form.control-group.error control-name="phone" />
         </x-shop::form.control-group>
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.phone.after', ['address' => $address]) !!}

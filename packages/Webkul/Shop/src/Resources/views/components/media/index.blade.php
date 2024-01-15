@@ -1,7 +1,7 @@
 <v-media {{ $attributes }} >
     <x-shop::media.images.lazy
         class="w-[284px] h-[284px] mb-4 rounded-xl"
-    ></x-shop::media.images.lazy>
+    />
 </v-media>
 
 @pushOnce('scripts')
@@ -53,9 +53,9 @@
 
                     <v-field
                         type="file"
-                        :name="name"
-                        id="file-input"
                         class="hidden"
+                        id="file-input"
+                        :name="name"
                         :accept="acceptedTypes"
                         :rules="appliedRules"
                         :multiple="isMultiple"

@@ -6,7 +6,7 @@
 
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="profile" />
     @endSection
 
     <div class="flex justify-between items-center">
@@ -132,8 +132,7 @@
                         <x-shop::form.control-group.error
                             class=" text-left"
                             control-name="password"
-                        >
-                        </x-shop::form.control-group.error>
+                        />
                     </x-shop::form.control-group>
                 </x-slot:content>
 

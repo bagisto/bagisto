@@ -206,8 +206,7 @@
                                     method="DELETE"
                                     action="{{ route('shop.customer.session.destroy') }}"
                                     id="customerLogout"
-                                >
-                                </x-shop::form>
+                                />
 
                                 <a
                                     class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"

@@ -6,7 +6,10 @@
     
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="orders.view" :entity="$order"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs
+            name="orders.view"
+            :entity="$order"
+        />
     @endSection
 
     <div class="flex justify-between items-center">

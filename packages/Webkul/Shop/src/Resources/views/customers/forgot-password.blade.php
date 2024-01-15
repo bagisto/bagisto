@@ -59,23 +59,19 @@
                             @lang('shop::app.customers.login-form.email')
                         </x-shop::form.control-group.label>
 
-                        <x-shop::form.control-group.control
+                        <x-shop::form.-group.control
                             type="email"
-                            name="email"
                             class="!p-[20px_25px] rounded-lg"
-                            value=""
+                            name="email"
                             rules="required|email"
+                            value=""
                             :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
                             aria-label="@lang('shop::app.customers.login-form.email')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="email"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="email" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.email.after') !!}

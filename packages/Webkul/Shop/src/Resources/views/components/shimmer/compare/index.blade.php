@@ -17,7 +17,7 @@
             <x-shop::shimmer.products.cards.grid
                 class="min-w-[311px] max-w-[311px] pt-0 ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0"
                 count="3"
-            ></x-shop::shimmer.products.cards.grid>
+            />
         </div>
     </div>
 
@@ -25,5 +25,5 @@
     <x-shop::shimmer.compare.attribute
         :attributeCount="$attributeCount"
         :productCount="$productCount"
-    ></x-shop::shimmer.compare.attribute>
+    />
 </div>

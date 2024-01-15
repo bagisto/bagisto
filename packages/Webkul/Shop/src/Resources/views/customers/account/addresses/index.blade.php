@@ -6,7 +6,7 @@
     
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="addresses"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="addresses" />
     @endSection
     <div class="flex justify-between items-center">
         <div class="">

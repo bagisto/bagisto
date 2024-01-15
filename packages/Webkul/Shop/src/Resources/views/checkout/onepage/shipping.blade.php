@@ -2,7 +2,7 @@
 
 <v-shipping-method ref="vShippingMethod">
     <!-- Shipping Method Shimmer Effect -->
-    <x-shop::shimmer.checkout.onepage.shipping-method/>
+    <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-method>
 
 {!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
@@ -12,7 +12,7 @@
         <div class="mb-7">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
-                <x-shop::shimmer.checkout.onepage.shipping-method/>
+                <x-shop::shimmer.checkout.onepage.shipping-method />
             </template>
 
             <template v-if="isShowShippingMethod">

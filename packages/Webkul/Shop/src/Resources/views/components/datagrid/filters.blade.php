@@ -39,8 +39,7 @@
                             v-for="option in column.options"
                             v-text="option.label"
                             @click="filterPage(option.value, column)"
-                        >
-                        </x-shop::dropdown.menu.item>
+                        />
                     </x-slot:menu>
                 </x-shop::dropdown>
             </div>
@@ -104,8 +103,7 @@
                                 v-for="option in column.options.params.options"
                                 v-text="option.label"
                                 @click="filterPage(option.value, column)"
-                            >
-                            </x-shop::dropdown.menu.item>
+                            />
                         </x-slot:menu>
                     </x-shop::dropdown>
                 </div>

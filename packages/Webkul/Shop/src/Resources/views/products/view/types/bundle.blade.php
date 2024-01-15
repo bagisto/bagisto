@@ -249,8 +249,7 @@
                         ::value="productQty"
                         class="gap-x-4 w-max rounded-xl py-2.5 px-4 mt-5 !border-[#E9E9E9]"
                         @change="qtyUpdated($event)"
-                    >
-                    </x-shop::quantity-changer>
+                    />
                 </div>
             </div>
         </script>

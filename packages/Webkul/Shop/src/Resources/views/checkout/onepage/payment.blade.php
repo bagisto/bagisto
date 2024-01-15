@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.checkout.payment.method.before') !!}
 
 <v-payment-method ref="vPaymentMethod">
-    <x-shop::shimmer.checkout.onepage.payment-method/>
+    <x-shop::shimmer.checkout.onepage.payment-method />
 </v-payment-method>
 
 {!! view_render_event('bagisto.shop.checkout.payment.method.after') !!}
@@ -11,7 +11,7 @@
         <div class="mb-7">
             <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
                 <!-- Payment Method shimmer Effect -->
-                <x-shop::shimmer.checkout.onepage.payment-method/>
+                <x-shop::shimmer.checkout.onepage.payment-method />
             </template>
     
             <template v-if="isShowPaymentMethod">

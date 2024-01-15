@@ -13,7 +13,7 @@
     <script type="text/x-template" id="v-cart-summary-template">
         <template v-if="isCartLoading">
             <!-- onepage Summary Shimmer Effect -->
-            <x-shop::shimmer.checkout.onepage.cart-summary/>
+            <x-shop::shimmer.checkout.onepage.cart-summary />
         </template>
 
         <template v-else>
@@ -179,8 +179,7 @@
                             :loading="false"
                             ref="placeOrder"
                             @click="placeOrder"
-                        >
-                        </x-shop::button>
+                        />
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.after') !!}
                     </div>
