@@ -25,7 +25,7 @@
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content class="!p-0 mt-8">
                         <div class="flex flex-wrap gap-8">
@@ -70,7 +70,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.after') !!}
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-shop::accordion>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.after') !!}

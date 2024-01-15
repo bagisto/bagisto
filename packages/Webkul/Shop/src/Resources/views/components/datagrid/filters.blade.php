@@ -31,7 +31,7 @@
 
                             <span class="icon-arrow-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
@@ -40,7 +40,7 @@
                             v-text="option.label"
                             @click="filterPage(option.value, column)"
                         />
-                    </x-slot:menu>
+                    </x-slot>
                 </x-shop::dropdown>
             </div>
 
@@ -94,7 +94,7 @@
 
                                 <span class="icon-arrow-down text-2xl"></span>
                             </button>
-                        </x-slot:toggle>
+                        </x-slot>
 
                         <!-- Dropdown Content -->
                         <x-slot:menu>
@@ -104,7 +104,7 @@
                                 v-text="option.label"
                                 @click="filterPage(option.value, column)"
                             />
-                        </x-slot:menu>
+                        </x-slot>
                     </x-shop::dropdown>
                 </div>
 
@@ -401,7 +401,7 @@
 
                     <span class="icon-arrow-down text-2xl"></span>
                 </button>
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Dropdown Content -->
             <x-slot:menu>
@@ -447,7 +447,7 @@
                         </ul>
                     </div>
                 </div>
-            </x-slot:menu>
+            </x-slot>
         </x-shop::dropdown>
     </script>
 

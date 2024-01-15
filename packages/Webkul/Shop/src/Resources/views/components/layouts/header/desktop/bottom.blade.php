@@ -125,7 +125,7 @@
                         aria-label="@lang('shop::app.components.layouts.header.profile')"
                         tabindex="0"
                     ></span>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Guest Dropdown -->
                 @guest('customer')
@@ -157,7 +157,7 @@
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 @endguest
 
                 <!-- Customers Dropdown -->
@@ -217,7 +217,7 @@
                                 </a>
                             @endauth
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 @endauth
             </x-shop::dropdown>
 

@@ -36,14 +36,14 @@
                                 >
                                     @lang('shop::app.checkout.cart.coupon.apply')
                                 </span>
-                            </x-slot:toggle>
+                            </x-slot>
 
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <h2 class="text-2xl font-medium max-sm:text-xl">
                                     @lang('shop::app.checkout.cart.coupon.apply')
                                 </h2>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -62,7 +62,7 @@
                                         control-name="code"
                                     />
                                 </x-shop::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -87,7 +87,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-shop::modal>
 
                         {!! view_render_event('bagisto.shop.checkout.cart.coupon.coupon_form_controls.after') !!}

@@ -33,7 +33,7 @@
                 </span>
 
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.after') !!}
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Drawer Header -->
             <x-slot:header>
@@ -50,7 +50,7 @@
                 </p>
 
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.after') !!}
-            </x-slot:header>
+            </x-slot>
 
             <!-- Drawer Content -->
             <x-slot:content>
@@ -189,7 +189,7 @@
                 </div>
 
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.after') !!}
-            </x-slot:content>
+            </x-slot>
 
             <!-- Drawer Footer -->
             <x-slot:footer>
@@ -266,7 +266,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.action.after') !!}
                 </div>
-            </x-slot:footer>
+            </x-slot>
         </x-shop::drawer>
 
         {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.after') !!}

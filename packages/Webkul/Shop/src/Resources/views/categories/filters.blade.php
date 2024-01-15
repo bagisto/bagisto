@@ -33,7 +33,7 @@
 
                 @lang('shop::app.categories.filters.filter')
             </div>
-        </x-slot:toggle>
+        </x-slot>
 
         <!-- Drawer Header -->
         <x-slot:header>
@@ -49,7 +49,7 @@
                     @lang('shop::app.categories.filters.clear-all')
                 </p>
             </div>
-        </x-slot:header>
+        </x-slot>
 
         <!-- Drawer Content -->
         <x-slot:content>
@@ -61,7 +61,7 @@
                 <!-- Category Filter Shimmer Effect -->
                 <x-shop::shimmer.categories.filters />
             </v-filters>
-        </x-slot:content>
+        </x-slot>
     </x-shop::drawer>
 
     <!-- Seperator -->
@@ -83,7 +83,7 @@
 
                 @lang('shop::app.categories.filters.sort')
             </div>
-        </x-slot:toggle>
+        </x-slot>
 
         <!-- Drawer Header -->
         <x-slot:header>
@@ -92,12 +92,12 @@
                     @lang('shop::app.categories.filters.sort')
                 </p>
             </div>
-        </x-slot:header>
+        </x-slot>
 
         <!-- Drawer Content -->
         <x-slot:content>
             @include('shop::categories.toolbar')
-        </x-slot:content>
+        </x-slot>
     </x-shop::drawer>
 </div>
 
@@ -155,7 +155,7 @@
                         >
                         </p>
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <!-- Filter Item Content -->
                 <x-slot:content class="!p-0">
@@ -210,7 +210,7 @@
                             </div>
                         </li>
                     </ul>
-                </x-slot:content>
+                </x-slot>
             </x-shop::accordion>
         </template>
     </script>

@@ -7,7 +7,7 @@
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
                     </h2>
                 </div>
-            </x-slot:header>
+            </x-slot>
         
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
@@ -157,7 +157,7 @@
                 </v-form>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
     </template>
 
@@ -169,7 +169,7 @@
                         @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
                     </h2>
                 </div>
-            </x-slot:header>
+            </x-slot>
         
             <x-slot:content class="!p-0 mt-8">
                 <div>
@@ -470,7 +470,7 @@
                 </x-shop::form>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
     </template>
 </div>

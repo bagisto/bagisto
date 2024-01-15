@@ -22,7 +22,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu class="border-gray-300 !p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)]">
@@ -79,7 +79,7 @@
                                 </a>
                             </li>
                         </template>
-                    </x-slot:menu>
+                    </x-slot>
                 </x-shop::dropdown>
 
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
@@ -125,7 +125,7 @@
 
                         <span class="icon-arrow-down text-2xl"></span>
                     </button>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Dropdown Content -->
                 <x-slot:menu>
@@ -134,7 +134,7 @@
                         v-text="perPageOption"
                         @click="changePerPageOption(perPageOption)"
                     />
-                </x-slot:menu>
+                </x-slot>
             </x-shop::dropdown>
 
             <!-- Filters Activation Button -->
@@ -150,15 +150,15 @@
                             @lang('shop::app.components.datagrid.toolbar.filter.title')
                         </span>
                     </button>
-                </x-slot:toggle>
+                </x-slot>
 
                 <x-slot:header class="border-b border-[#E9E9E9]">
                     @lang('shop::app.components.datagrid.filters.title')
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <x-shop::datagrid.filters />
-                </x-slot:content>
+                </x-slot>
             </x-shop::drawer>
         </div>
     </div>

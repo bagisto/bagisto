@@ -229,52 +229,52 @@
 <x-shop::accordion>
     <x-slot:header>
         Accordion Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Accordion Content
-    </x-slot:content>
+    </x-slot>
 </x-shop::accordion>
 
 <!-- modal -->
 <x-shop::modal>
     <x-slot:toggle>
         Modal Toggle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:header>
         Modal Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Modal Content
-    </x-slot:content>
+    </x-slot>
 </x-shop::modal>
 
 <!-- drawer -->
 <x-shop::drawer>
     <x-slot:toggle>
         Drawer Toggle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:header>
         Drawer Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Drawer Content
-    </x-slot:content>
+    </x-slot>
 </x-shop::drawer>
 
 <!-- dropdown -->
 <x-shop::dropdown>
     <x-slot:toggle>
         Toogle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:content>
         Content
-    </x-slot:content>
+    </x-slot>
 </x-shop::dropdown>
 
 <!--Range Slider -->

@@ -9,7 +9,7 @@
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
-            </x-slot:header>
+            </x-slot>
         
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
@@ -139,7 +139,7 @@
                 </x-shop::form>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.after') !!}
@@ -153,7 +153,7 @@
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
-            </x-slot:header>
+            </x-slot>
         
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.before') !!}
@@ -467,7 +467,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.after') !!}
 
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
     </template>
 </div>

@@ -20,7 +20,7 @@
             >
                 <x-slot:toggle>
                     <span class="icon-hamburger text-2xl cursor-pointer"></span>
-                </x-slot:toggle>
+                </x-slot>
 
                 <x-slot:header>
                     <div class="flex justify-between items-center">
@@ -33,7 +33,7 @@
                             >
                         </a>
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <!-- Account Profile Hero Section -->
@@ -83,12 +83,12 @@
                                         role="presentation"
                                     ></span>
                                 </div>
-                            </x-slot:toggle>
+                            </x-slot>
 
                             <!-- Dropdown Content -->
                             <x-slot:content class="!p-0">
                                 <v-currency-switcher></v-currency-switcher>
-                            </x-slot:content>
+                            </x-slot>
                         </x-shop::dropdown>
 
                         <x-shop::dropdown position="top-right">
@@ -115,17 +115,17 @@
                                         role="presentation"
                                     ></span>
                                 </div>
-                            </x-slot:toggle>
+                            </x-slot>
 
                             <!-- Dropdown Content -->
                             <x-slot:content class="!p-0">
                                 <v-locale-switcher></v-locale-switcher>
-                            </x-slot:content>
+                            </x-slot>
                         </x-shop::dropdown>
                     </div>
-                </x-slot:content>
+                </x-slot>
 
-                <x-slot:footer></x-slot:footer>
+                <x-slot:footer></x-slot>
             </x-shop::drawer>
 
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.after') !!}
@@ -173,7 +173,7 @@
                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                     <x-slot:toggle>
                         <span class="icon-users text-2xl cursor-pointer"></span>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Guest Dropdown -->
                     @guest('customer')
@@ -205,7 +205,7 @@
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     @endguest
 
                     <!-- Customers Dropdown -->
@@ -265,7 +265,7 @@
                                     </a>
                                 @endauth
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     @endauth
                 </x-shop::dropdown>
             </div>

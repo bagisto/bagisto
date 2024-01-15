@@ -25,7 +25,7 @@
                                     @lang('shop::app.checkout.onepage.payment.payment-method')
                                 </h2>
                             </div>
-                        </x-slot:header>
+                        </x-slot>
         
                         <x-slot:content class="!p-0 mt-8">
                             <div class="flex flex-wrap gap-7">
@@ -92,7 +92,7 @@
                                     {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}
                                 </div>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     </x-shop::accordion>
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.index.payment_method.accordion.before') !!}

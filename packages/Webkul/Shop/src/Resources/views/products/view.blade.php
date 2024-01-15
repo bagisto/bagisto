@@ -156,13 +156,13 @@
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
                 </p>
-            </x-slot:header>
+            </x-slot>
 
             <x-slot:content>
                 <div class="text-[#7D7D7D] text-lg max-1180:text-sm mb-5">
                     {!! $product->description !!}
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
 
         <!-- Additional Information Accordion -->
@@ -171,7 +171,7 @@
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.additional-information')
                 </p>
-            </x-slot:header>
+            </x-slot>
 
             <x-slot:content>
                 <div class="container mt-5 mb-5 max-1180:px-5">
@@ -205,7 +205,7 @@
                         @endforeach
                     </p>
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
 
         <!-- Reviews Accordion -->
@@ -214,11 +214,11 @@
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
                 </p>
-            </x-slot:header>
+            </x-slot>
 
             <x-slot:content>
                 @include('shop::products.view.reviews')
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
     </div>
 
