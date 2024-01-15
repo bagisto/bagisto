@@ -268,8 +268,7 @@
             name="{{ $name }}"
             ::class="[errors && errors['{{ $name }}'] ? 'border !border-red-600 hover:border-red-600' : '']"
             {{ $attributes }}
-        >
-        </x-admin::media.images>
+        />
 
         @break
 

@@ -152,13 +152,12 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="qty"
-                                        v-model="selectedPrice.qty"
                                         rules="required|numeric|min_value:1"
+                                        v-model="selectedPrice.qty"
                                         :label="trans('admin::app.catalog.products.edit.price.group.create.qty')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
         
-                                    <x-admin::form.control-group.error control-name="qty"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="qty" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="flex-1">
@@ -169,8 +168,8 @@
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="value_type"
-                                        v-model="selectedPrice.value_type"
                                         rules="required"
+                                        v-model="selectedPrice.value_type"
                                         :label="trans('admin::app.catalog.products.edit.price.group.create.price-type')"
                                     >
                                         <option value="fixed">
@@ -182,7 +181,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
         
-                                    <x-admin::form.control-group.error control-name="value_type"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="value_type" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="flex-1">
@@ -193,13 +192,12 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="value"
-                                        v-model="selectedPrice.value"
                                         ::rules="{required: true, decimal: true, min_value: 0, ...(selectedPrice.value_type === 'discount' ? {max_value: 100} : {})}"
+                                        v-model="selectedPrice.value"
                                         :label="trans('admin::app.catalog.products.edit.price.group.create.price')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
         
-                                    <x-admin::form.control-group.error control-name="value"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="value" />
                                 </x-admin::form.control-group>
                             </div>
 

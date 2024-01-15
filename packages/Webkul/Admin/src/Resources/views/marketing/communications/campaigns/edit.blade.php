@@ -61,17 +61,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                :value="old('name') ?: $campaign->name"
                                 rules="required"
+                                :value="old('name') ?: $campaign->name"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.name')"
                                 :placeholder="trans('admin::app.marketing.communications.campaigns.edit.name')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error 
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
                         <!-- Subject -->
@@ -83,17 +79,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="subject"
-                                :value="old('subject') ?: $campaign->subject"
                                 rules="required"
+                                :value="old('subject') ?: $campaign->subject"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.subject')"
                                 :placeholder="trans('admin::app.marketing.communications.campaigns.edit.subject')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="subject"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="subject" />
                         </x-admin::form.control-group>
 
                          <!-- Event -->
@@ -106,8 +98,8 @@
                                 
                             <x-admin::form.control-group.control
                                 type="select"
-                                name="marketing_event_id"
                                 class="cursor-pointer"
+                                name="marketing_event_id"
                                 :value="$selectedOption"
                                 rules="required"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.event')"
@@ -122,10 +114,7 @@
                                 @endforeach
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="marketing_event_id"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="marketing_event_id" />
                         </x-admin::form.control-group>
 
                         <!-- Email Template -->
@@ -138,10 +127,10 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
+                                class="cursor-pointer"
                                 name="marketing_template_id"
                                 rules="required"
                                 :value="$selectedOption"
-                                class="cursor-pointer"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.email-template')"
                             >
                                 @foreach ($templates as $template)
@@ -154,16 +143,12 @@
                                 @endforeach
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="marketing_template_id"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="marketing_template_id" />
                         </x-admin::form.control-group>
                     </div>
                 </div>
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.edit.card.general.after') !!}
-
             </div>
 
              <!-- Right Section -->
@@ -190,10 +175,10 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
+                                class="cursor-pointer mb-1"
                                 name="channel_id"
                                 rules="required"
                                 :value="$selectedOption"
-                                class="cursor-pointer mb-1"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.channel')"
                             >
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
@@ -206,10 +191,7 @@
                                 @endforeach
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="channel_id"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
                         <!-- Customer Group -->
@@ -222,10 +204,10 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
+                                class="cursor-pointer mb-1"
                                 name="customer_group_id"
                                 rules="required"
                                 :value="$campaign->customer_group_id"
-                                class="cursor-pointer mb-1"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.customer-group')"
                             >
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
@@ -238,10 +220,7 @@
                                 @endforeach
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="customer_group_id"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="customer_group_id" />
                         </x-admin::form.control-group>
 
                         <!-- Status -->
@@ -258,13 +237,9 @@
                                 :value="1"
                                 :checked="(boolean) $selectedOption"
                                 :label="trans('admin::app.marketing.communications.campaigns.edit.status')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>

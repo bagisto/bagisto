@@ -57,17 +57,13 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="identifier"
-                                    value="{{ old('identifier') ?: $taxRate->identifier }}"
                                     rules="required"
+                                    value="{{ old('identifier') ?: $taxRate->identifier }}"
                                     :label="trans('admin::app.settings.taxes.rates.edit.identifier')"
                                     :placeholder="trans('admin::app.settings.taxes.rates.edit.identifier')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="identifier"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="identifier" />
                             </x-admin::form.control-group>
 
                             <!-- Country -->
@@ -79,11 +75,11 @@
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="country"
-                                    value="{{ old('country') }}"
                                     rules="required"
+                                    value="{{ old('country') }}"
+                                    v-model="country"
                                     :label="trans('admin::app.settings.taxes.rates.edit.country')"
                                     :placeholder="trans('admin::app.settings.taxes.rates.edit.country')"
-                                    v-model="country"
                                 >
                                     <option value="">
                                         @lang('admin::app.settings.taxes.rates.edit.select-country')
@@ -96,10 +92,7 @@
                                     @endforeach
                                 </x-admin::form.control-group.control>
                 
-                                <x-admin::form.control-group.error
-                                    control-name="country"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="country" />
                             </x-admin::form.control-group>
                 
                             <!-- State -->
@@ -113,11 +106,11 @@
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="state"
-                                        value="{{ old('state') }}"
                                         rules="required"
+                                        value="{{ old('state') }}"
+                                        v-model="state"
                                         :label="trans('admin::app.settings.taxes.rates.edit.state')"
                                         :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
-                                        v-model="state"
                                     >
                                         <option value="">
                                             @lang('admin::app.settings.taxes.rates.edit.select-state')
@@ -131,10 +124,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="state"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="state" />
                                 </template>
 
                                 <!-- Country Have not States -->
@@ -149,13 +139,9 @@
                                         value="{{ old('state') }}"
                                         :label="trans('admin::app.settings.taxes.rates.edit.state')"
                                         :placeholder="trans('admin::app.settings.taxes.rates.edit.state')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="state"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="state" />
                                 </template>
                             </x-admin::form.control-group>
 
@@ -168,17 +154,13 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="tax_rate"
-                                    value="{{ old('tax_rate') ?: $taxRate->tax_rate }}"
                                     rules="required"
+                                    value="{{ old('tax_rate') ?: $taxRate->tax_rate }}"
                                     :label="trans('admin::app.settings.taxes.rates.edit.tax-rate')"
                                     :placeholder="trans('admin::app.settings.taxes.rates.edit.tax-rate')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="tax_rate"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="tax_rate" />
                             </x-admin::form.control-group>
                         </div>
                     </div>
@@ -203,8 +185,7 @@
                                         type="hidden"
                                         name="is_zip"
                                         value="{{ $taxRate->is_zip }}"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
     
                                     <!-- Zip From -->
                                     <x-admin::form.control-group>
@@ -215,18 +196,16 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="zip_from"
-                                            value="{{ old('zip_form') ?: $taxRate->zip_from }}"
                                             rules="required"
+                                            value="{{ old('zip_form') ?: $taxRate->zip_from }}"
                                             :label="trans('admin::app.settings.taxes.rates.edit.zip-from')"
                                             :placeholder="trans('admin::app.settings.taxes.rates.edit.zip-from')"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
+                                        />
+
                                         <x-admin::form.control-group.error
                                             class="mt-1"
                                             control-name="zip_from"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        />
                                     </x-admin::form.control-group>
     
                                     <!-- Zip To -->
@@ -242,14 +221,12 @@
                                             rules="required"
                                             :label="trans('admin::app.settings.taxes.rates.edit.zip-to')"
                                             :placeholder="trans('admin::app.settings.taxes.rates.edit.zip-to')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
     
                                         <x-admin::form.control-group.error
                                             class="mt-1"
                                             control-name="zip_to"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        />
                                     </x-admin::form.control-group>
     
                                 @else
@@ -265,13 +242,9 @@
                                             value="{{ old('zip_code') ?: $taxRate->zip_code }}"
                                             :label="trans('admin::app.settings.taxes.rates.edit.zip-code')"
                                             :placeholder="trans('admin::app.settings.taxes.rates.edit.zip-code')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
     
-                                        <x-admin::form.control-group.error
-                                            control-name="zip_code"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="zip_code" />
                                     </x-admin::form.control-group>
                                 @endif
                             </x-slot:content>

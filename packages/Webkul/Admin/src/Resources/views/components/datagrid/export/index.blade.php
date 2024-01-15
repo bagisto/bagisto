@@ -32,8 +32,13 @@
                                 name="format"
                                 v-model="format"
                             >
-                                <option value="xls">@lang('admin::app.export.xls')</option>
-                                <option value="csv">@lang('admin::app.export.csv')</option>
+                                <option value="xls">
+                                    @lang('admin::app.export.xls')
+                                </option>
+
+                                <option value="csv">
+                                    @lang('admin::app.export.csv')
+                                </option>
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
                     </x-admin::form>

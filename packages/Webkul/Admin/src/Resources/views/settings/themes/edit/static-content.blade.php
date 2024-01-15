@@ -130,10 +130,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
@@ -153,10 +150,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="sort_order"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.eror control-name="sort_order" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
@@ -175,7 +169,7 @@
                                 @endforeach 
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="!mb-0">
@@ -207,10 +201,7 @@
                                 ></label>
                             </label>
                             
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>

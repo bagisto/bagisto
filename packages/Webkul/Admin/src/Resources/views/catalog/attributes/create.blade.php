@@ -74,17 +74,13 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="admin_name"
-                                    :value="old('admin_name')"
                                     rules="required"
+                                    :value="old('admin_name')"
                                     :label="trans('admin::app.catalog.attributes.create.admin')"
                                     :placeholder="trans('admin::app.catalog.attributes.create.admin')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="admin_name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="admin_name" />
                             </x-admin::form.control-group>
 
                             <!-- Locales Inputs -->
@@ -99,8 +95,7 @@
                                         :name="$locale->code . '[name]'"
                                         :value="old($locale->code . '[name]')"
                                         :placeholder="$locale->name"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
                                 </x-admin::form.control-group>
                             @endforeach
                         </div>
@@ -140,8 +135,8 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="swatch_type"
                                             id="swatchType"
+                                            name="swatch_type"
                                             :value="old('swatch_type')"
                                             v-model="swatchType"
                                             @change="showSwatch=true"
@@ -156,8 +151,7 @@
                                         <x-admin::form.control-group.error
                                             class="mt-3"
                                             control-name="admin"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        />
                                     </x-admin::form.control-group>
 
                                     <div class="w-full mb-2.5">
@@ -169,11 +163,11 @@
                                         <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
                                             <input
                                                 type="checkbox"
-                                                name="empty_option"
-                                                id="empty_option"
-                                                for="empty_option"
                                                 class="hidden peer"
+                                                id="empty_option"
+                                                name="empty_option"
                                                 v-model="isNullOptionChecked"
+                                                for="empty_option"
                                                 @click="$refs.addOptionsRow.toggle()"
                                             />
 
@@ -198,7 +192,7 @@
                                     <x-admin::table>
                                         <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
-                                                <x-admin::table.th class="!p-0"></x-admin::table.th>
+                                                <x-admin::table.th class="!p-0" />
 
                                                 <!-- Swatch Select -->
                                                 <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
@@ -218,7 +212,7 @@
                                                 @endforeach
 
                                                 <!-- Action tables heading -->
-                                                <x-admin::table.th></x-admin::table.th>
+                                                <x-admin::table.th />
                                             </x-admin::table.thead.tr>
                                         </x-admin::table.thead>
 
@@ -250,14 +244,14 @@
                                                         <div v-if="swatchType == 'image'">
                                                             <img
                                                                 src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                                                                :ref="'image_' + element.params.id"
                                                                 class="h-[50px] w-[50px] dark:invert dark:mix-blend-exclusion"
+                                                                :ref="'image_' + element.params.id"
                                                             />
 
                                                             <input
                                                                 type="file"
-                                                                :name="'options[' + element.id + '][swatch_value]'"
                                                                 class="hidden"
+                                                                :name="'options[' + element.id + '][swatch_value]'"
                                                                 :ref="'imageInput_' + element.id"
                                                             />
                                                         </div>
@@ -377,27 +371,24 @@
                                     <v-field
                                         type="text"
                                         name="code"
-                                        value="{{ old('code') }}"
-                                        label="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                         rules="required"
+                                        value="{{ old('code') }}"
                                         v-slot="{ field }"
+                                        label="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                     >
                                         <input
                                             type="text"
-                                            name="slug"
                                             id="code"
-                                            v-bind="field"
                                             :class="[errors['{{ 'code' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:focus:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            name="slug"
+                                            v-bind="field"
                                             placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
                                             v-code
                                         >
                                     </v-field>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute Type -->
@@ -408,13 +399,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="select"
+                                        id="type"
+                                        class="cursor-pointer"
                                         name="type"
                                         rules="required"
                                         :value="old('type')"
-                                        id="type"
-                                        class="cursor-pointer"
-                                        :label="trans('admin::app.catalog.attributes.create.type')"
                                         v-model="attributeType"
+                                        :label="trans('admin::app.catalog.attributes.create.type')"
                                         @change="swatchAttribute=true"
                                     >
                                         <!-- Here! All Needed types are defined -->
@@ -428,10 +419,7 @@
                                         @endforeach
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="type"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
 
                                 <!-- Textarea Switcher -->
@@ -445,8 +433,7 @@
                                         name="enable_wysiwyg"
                                         value="1"
                                         :label="trans('admin::app.catalog.attributes.create.enable-wysiwyg')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
                                 </x-admin::form.control-group>
 
                                 <!-- Default Value -->
@@ -459,8 +446,7 @@
                                         type="text"
                                         name="default_value"
                                         :label="trans('admin::app.catalog.attributes.create.default-value')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
                                 </x-admin::form.control-group>
                             </div>
                         </div>
@@ -475,22 +461,20 @@
 
                             <x-slot:content>
                                 <!-- Input Validation -->
-                                <x-admin::form.control-group
-                                    v-if="swatchAttribute && (attributeType == 'text')"
-                                >
+                                <x-admin::form.control-group v-if="swatchAttribute && (attributeType == 'text')">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.input-validation')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="select"
+                                        class="cursor-pointer"
+                                        id="validation"
                                         name="validation"
                                         :value="old('validation')"
-                                        id="validation"
-                                        class="cursor-pointer"
-                                        refs="validation"
-                                        :label="trans('admin::app.catalog.attributes.create.input-validation')"
                                         v-model="validationType"
+                                        :label="trans('admin::app.catalog.attributes.create.input-validation')"
+                                        refs="validation"
                                         @change="inputValidation=true"
                                     >
                                         <!-- Here! All Needed types are defined -->
@@ -501,10 +485,7 @@
                                         @endforeach
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="validation"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="validation" />
                                 </x-admin::form.control-group>
 
                                 <!-- REGEX -->
@@ -518,25 +499,20 @@
                                         name="regex"
                                         :value="old('regex')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.regex')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="regex"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="regex" />
                                 </x-admin::form.control-group>
 
                                 <!-- Is Required -->
                                  <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="is_required"
                                         id="is_required"
-                                        for="is_required"
+                                        name="is_required"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="is_required"
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -550,12 +526,11 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="is_unique"
                                         id="is_unique"
-                                        for="is_unique"
+                                        name="is_unique"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="is_unique"
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -580,12 +555,11 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="value_per_locale"
                                         id="value_per_locale"
-                                        for="value_per_locale"
+                                        name="value_per_locale"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="value_per_locale"
+                                    />
                 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -599,12 +573,11 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="value_per_channel"
                                         id="value_per_channel"
-                                        for="value_per_channel"
+                                        name="value_per_channel"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="value_per_channel"
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -618,12 +591,11 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="is_configurable"
                                         id="is_configurable"
-                                        for="is_configurable"
+                                        name="is_configurable"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="is_configurable"
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -637,12 +609,11 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="is_visible_on_front"
                                         id="is_visible_on_front"
-                                        for="is_visible_on_front"
+                                        name="is_visible_on_front"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="is_visible_on_front"
+                                    />
                                   
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -656,12 +627,11 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="is_comparable"
                                         id="is_comparable"
-                                        for="is_comparable"
+                                        name="is_comparable"
                                         value="1"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        for="is_comparable"
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -675,8 +645,8 @@
                                 <div class="flex gap-2.5 items-center !mb-0">
                                     <input
                                         type="checkbox"
-                                        class="hidden peer"
                                         id="is_filterable"
+                                        class="hidden peer"
                                         name="is_filterable"
                                         value="1"
                                         :disabled="attributeType == 'price' ||  attributeType == 'checkbox'
@@ -746,21 +716,16 @@
                                         type="image"
                                         name="swatch_value"
                                         :placeholder="trans('admin::app.catalog.attributes.create.image')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
                                     <div class="hidden">
                                         <x-admin::media.images
                                             name="swatch_value"
                                             ::uploaded-images='swatchValue.image'
-                                        >
-                                        </x-admin::media.images>
+                                        />
                                     </div>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="swatch_value"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="swatch_value" />
                                 </x-admin::form.control-group>
 
                                 <!-- Color Input -->
@@ -776,13 +741,9 @@
                                         type="color"
                                         name="swatch_value"
                                         :placeholder="trans('admin::app.catalog.attributes.create.color')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="swatch_value"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="swatch_value" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -791,8 +752,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="id"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <!-- Admin Input -->
                                 <x-admin::form.control-group class="w-full mb-2.5">
@@ -806,13 +766,9 @@
                                         ::rules="{ 'required' : ! isNullOptionChecked }"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.admin')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="admin_name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="admin_name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Locales Input -->
@@ -828,13 +784,9 @@
                                             ::rules="{ '{{core()->getDefaultLocaleCodeFromDefaultChannel() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }"
                                             :label="$locale->name"
                                             :placeholder="$locale->name"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            :control-name="$locale->code"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error :control-name="$locale->code" />
                                     </x-admin::form.control-group>
                                 @endforeach
                             </div>

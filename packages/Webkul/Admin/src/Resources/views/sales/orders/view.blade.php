@@ -287,19 +287,15 @@
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.control
                                         type="textarea"
-                                        name="comment" 
                                         id="comment"
+                                        name="comment" 
                                         rules="required"
                                         :label="trans('admin::app.sales.orders.view.comments')"
                                         :placeholder="trans('admin::app.sales.orders.view.write-your-comment')"
                                         rows="3"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="comment"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="comment" />
                                 </x-admin::form.control-group>
                             </div>
 

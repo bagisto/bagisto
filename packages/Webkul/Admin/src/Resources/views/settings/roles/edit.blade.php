@@ -64,22 +64,25 @@
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.roles.edit.permissions')
                                 </x-admin::form.control-group.label>
+
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    name="permission_type"
                                     id="permission_type"
+                                    name="permission_type"
+                                    v-model="permission_type"
                                     :label="trans('admin::app.settings.roles.edit.permissions')"
                                     :placeholder="trans('admin::app.settings.roles.edit.permissions')"
-                                    v-model="permission_type"
                                 >
-                                    <option value="custom">@lang('admin::app.settings.roles.edit.custom')</option>
-                                    <option value="all">@lang('admin::app.settings.roles.edit.all')</option>
+                                    <option value="custom">
+                                        @lang('admin::app.settings.roles.edit.custom')
+                                    </option>
+
+                                    <option value="all">
+                                        @lang('admin::app.settings.roles.edit.all')
+                                    </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="permission_type"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="permission_type" />
                             </x-admin::form.control-group>
                             
                             <!-- Tree structure -->
@@ -91,8 +94,7 @@
                                     :items="json_encode($acl->items)"
                                     :value="json_encode($role->permissions)"
                                     :fallback-locale="config('app.fallback_locale')"
-                                >
-                                </x-admin::tree.view>
+                                />
                             </div>
                         </div>
 
@@ -123,19 +125,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="name"
-                                        value="{{ old('name') ?: $role->name }}"
                                         id="name"
+                                        name="name"
                                         rules="required"
+                                        value="{{ old('name') ?: $role->name }}"
                                         :label="trans('admin::app.settings.roles.edit.name')"
                                         :placeholder="trans('admin::app.settings.roles.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Description -->
@@ -146,19 +144,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="textarea"
-                                        name="description"
-                                        value="{{ old('description') ?: $role->description }}"
                                         id="description"
+                                        name="description"
                                         rules="required"
+                                        value="{{ old('description') ?: $role->description }}"
                                         :label="trans('admin::app.settings.roles.edit.description')"
                                         :placeholder="trans('admin::app.settings.roles.edit.description')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="description"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="description" />
                                 </x-admin::form.control-group>
                             </x-slot:content>
                         </x-admin::accordion>

@@ -80,18 +80,14 @@
     
                                 <x-admin::form.control-group.control
                                     type="email"
-                                    name="email"
                                     id="email"
+                                    name="email"
                                     rules="required|email"
                                     :value="$invoice->order->customer_email"
                                     :label="trans('admin::app.sales.invoices.view.email')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
     
-                                <x-admin::form.control-group.error
-                                    control-name="email"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="email" />
                             </x-admin::form.control-group>
                         </x-slot:content>
         

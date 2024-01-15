@@ -53,7 +53,7 @@
                                         <button
                                             type="submit"
                                             class="ltr:mr-11 rtl:ml-11 primary-button"
-                                            >
+                                        >
                                             @lang('admin::app.sales.refunds.create.refund-btn')
                                         </button>
                                     @endif
@@ -143,18 +143,14 @@
                                                     <x-admin::form.control-group class="!mb-0">
                                                         <x-admin::form.control-group.control
                                                             type="text"
-                                                            name="refund[items][{{ $item->id }}]"
                                                             id="refund[items][{{ $item->id }}]"
+                                                            name="refund[items][{{ $item->id }}]"
                                                             :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
-                                                            :label="trans('admin::app.sales.refunds.create.qty-to-refund')"
                                                             v-model="refund.items[{{ $item->id }}]"
-                                                        >
-                                                        </x-admin::form.control-group.control>
+                                                            :label="trans('admin::app.sales.refunds.create.qty-to-refund')"
+                                                        />
                             
-                                                        <x-admin::form.control-group.error
-                                                            control-name="refund[items][{{ $item->id }}]"
-                                                        >
-                                                        </x-admin::form.control-group.error>
+                                                        <x-admin::form.control-group.error control-name="refund[items][{{ $item->id }}]" />
                                                     </x-admin::form.control-group>
                                                 </div>
 
@@ -226,18 +222,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="refund[shipping]" 
                                         id="refund[shipping]"
+                                        name="refund[shipping]" 
                                         :rules="'required|min_value:0|max_value:' . $order->base_shipping_invoiced - $order->base_shipping_refunded"
                                         v-model="refund.summary.shipping.price"
                                         :label="trans('admin::app.sales.refunds.create.refund-shipping')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="refund[shipping]"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="refund[shipping]" >
                                 </x-admin::form.control-group>
 
                                 <!-- Adjustment Refund -->
@@ -248,18 +240,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="refund[adjustment_refund]"
                                         id="refund[adjustment_refund]" 
+                                        name="refund[adjustment_refund]"
                                         value="0"
                                         rules="required|min_value:0"
                                         :label="trans('admin::app.sales.refunds.create.adjustment-refund')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="refund[adjustment_refund]"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="refund[adjustment_refund]" />
                                 </x-admin::form.control-group>
 
                                 <!-- Adjustment Fee -->
@@ -270,18 +258,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="refund[adjustment_fee]"
                                         id="refund[adjustment_fee]" 
-                                        value="0"
+                                        name="refund[adjustment_fee]"
                                         rules="required|min_value:0"
+                                        value="0"
                                         :label="trans('admin::app.sales.refunds.create.adjustment-fee')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="refund[adjustment_fee]"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="refund[adjustment_fee]" />
                                 </x-admin::form.control-group>
                             </div>
 

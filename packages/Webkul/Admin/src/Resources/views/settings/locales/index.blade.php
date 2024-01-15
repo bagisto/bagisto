@@ -130,8 +130,7 @@
                                 type="hidden"
                                 name="id"
                                 v-model="locale.id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -140,20 +139,16 @@
 
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="code"
                                     id="code"
+                                    name="code"
                                     rules="required"
+                                    v-model="locale.code"
                                     :label="trans('admin::app.settings.locales.index.create.code')"
                                     :placeholder="trans('admin::app.settings.locales.index.create.code')"
-                                    v-model="locale.code"
                                     ::disabled="locale.id"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="code"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="code" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -163,19 +158,15 @@
 
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="name"
                                     id="name"
+                                    name="name"
                                     rules="required"
+                                    v-model="locale.name"
                                     :label="trans('admin::app.settings.locales.index.create.name')"
                                     :placeholder="trans('admin::app.settings.locales.index.create.name')"
-                                    v-model="locale.name"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -185,26 +176,33 @@
 
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    name="direction"
                                     id="direction"
+                                    name="direction"
                                     rules="required"
-                                    :label="trans('admin::app.settings.locales.index.create.direction')"
                                     v-model="locale.direction"
+                                    :label="trans('admin::app.settings.locales.index.create.direction')"
                                 >
                                     <!-- Default Option -->
                                     <option value="">
                                         @lang('admin::app.settings.locales.index.create.select-direction')
                                     </option>
 
-                                    <option value="ltr" selected title="Text direction left to right">LTR</option>
+                                    <option
+                                        value="ltr"
+                                        selected title="Text direction left to right"
+                                    >
+                                        LTR
+                                    </option>
 
-                                    <option value="rtl" title="Text direction right to left">RTL</option>
+                                    <option
+                                        value="rtl"
+                                        title="Text direction right to left"
+                                    >
+                                        RTL
+                                    </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="direction"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="direction" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -216,20 +214,15 @@
                                     <x-admin::media.images
                                         name="logo_path"
                                         ::uploaded-images='locale.image'
-                                    >
-                                    </x-admin::media.images>
+                                    />
                                 </div>
 
                                 <v-media-images
                                     name="logo_path"
                                     :uploaded-images='locale.image'
-                                >
-                                </v-media-images>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="logo_path"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="logo_path" />
                             </x-admin::form.control-group>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300">

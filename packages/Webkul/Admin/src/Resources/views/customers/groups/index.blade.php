@@ -106,7 +106,6 @@
                                     <span v-else>
                                         @lang('admin::app.customers.groups.index.create.title')
                                     </span>
-
                                 </p>
                             </x-slot:header>
 
@@ -120,24 +119,18 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="id"
-                                    >
-                                    </x-admin::form.control-group.control>
-
+                                    />
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="code"
                                         id="code"
+                                        name="code"
                                         rules="required"
                                         :label="trans('admin::app.customers.groups.index.create.code')"
                                         :placeholder="trans('admin::app.customers.groups.index.create.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group>
@@ -147,18 +140,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="name"
                                         id="last_name"
+                                        name="name"
                                         rules="required"
                                         :label="trans('admin::app.customers.groups.index.create.name')"
                                         :placeholder="trans('admin::app.customers.groups.index.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
                             </x-slot:content>
 

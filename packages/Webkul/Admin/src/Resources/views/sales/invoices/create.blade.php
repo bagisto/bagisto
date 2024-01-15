@@ -109,20 +109,16 @@
         
                                             <x-admin::form.control-group.control
                                                 type="text"
-                                                :name="'invoice[items][' . $item->id . ']'"
-                                                :id="'invoice[items][' . $item->id . ']'"
-                                                :value="$item->qty_to_invoice"
-                                                rules="required|numeric|min:0" 
                                                 class="!w-[100px]"
+                                                :id="'invoice[items][' . $item->id . ']'"
+                                                :name="'invoice[items][' . $item->id . ']'"
+                                                rules="required|numeric|min:0" 
+                                                :value="$item->qty_to_invoice"
                                                 label="Qty to invoiced"
                                                 placeholder="Qty to invoiced"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
         
-                                            <x-admin::form.control-group.error
-                                                :control-name="'invoice[items][' . $item->id . ']'"
-                                            >
-                                            </x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
                                         </x-admin::form.control-group>
                                     </div>
                                 @endif
@@ -132,12 +128,11 @@
                             <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
-                                    name="can_create_transaction"
                                     id="can_create_transaction"
-                                    for="can_create_transaction"
+                                    name="can_create_transaction"
                                     value="1"
-                                >
-                                </x-admin::form.control-group.control>
+                                    for="can_create_transaction"
+                                />
 
                                 <x-admin::form.control-group.label
                                     for="can_create_transaction"

@@ -38,15 +38,14 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="prompt"
                                 class="h-[180px]"
+                                name="prompt"
                                 rules="required"
                                 v-model="ai.prompt"
                                 :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="prompt" />
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
@@ -81,11 +80,10 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="content"
                                 class="h-[180px]"
+                                name="content"
                                 v-model="ai.content"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <span class="text-xs text-gray-500">
                                 @lang('admin::app.components.tinymce.ai-generation.generated-content-info')

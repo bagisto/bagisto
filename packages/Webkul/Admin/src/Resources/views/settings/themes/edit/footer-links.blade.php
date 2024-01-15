@@ -40,11 +40,30 @@
                                 v-for="(link, key) in footerLink"
                             >
                                 <!-- Hidden Input -->
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + ']'" :value="link.column"> 
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][url]'" :value="link.url"> 
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][title]'" :value="link.title"> 
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'" :value="link.sort_order"> 
-                                
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + ']'"
+                                    :value="link.column"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][url]'"
+                                    :value="link.url"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][title]'"
+                                    :value="link.title"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'"
+                                    :value="link.sort_order"
+                                />
+ 
                                 <div class="flex gap-2.5 justify-between py-5 cursor-pointer">
                                     <div class="flex gap-2.5">
                                         <div class="grid gap-1.5 place-content-start">
@@ -173,10 +192,7 @@
                                 >
                                 </v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -196,10 +212,7 @@
                                 >
                                 </v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="sort_order"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -218,7 +231,7 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="channel_id" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="!mb-0">
@@ -250,10 +263,7 @@
                                     ></label>
                                 </label>
 
-                                <x-admin::form.control-group.error
-                                    control-name="status"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="status" />
                             </x-admin::form.control-group>
                         </x-slot:content>
                     </x-admin::accordion>
@@ -280,8 +290,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="key"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                             
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -301,10 +310,7 @@
                                     <option value="column_3">3</option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="column"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="column" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -318,13 +324,9 @@
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.footer-title')"
                                     :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="title"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="title" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -338,13 +340,9 @@
                                     rules="required|url"
                                     :label="trans('admin::app.settings.themes.edit.url')"
                                     :placeholder="trans('admin::app.settings.themes.edit.url')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="url"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="url" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -358,13 +356,9 @@
                                     rules="required|numeric"
                                     :label="trans('admin::app.settings.themes.edit.sort-order')"
                                     :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="sort_order"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
                         </x-slot:content>
 

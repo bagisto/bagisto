@@ -4,6 +4,7 @@
         @lang('admin::app.account.edit.title')
     </x-slot>
 
+    <!-- Input Form -->
     <x-admin::form 
         :action="route('admin.account.update')"
         enctype="multipart/form-data"
@@ -50,8 +51,7 @@
                         <x-admin::media.images
                             name="image"
                             :uploaded-images="$user->image ? [['id' => 'image', 'url' => $user->image_url]] : []"
-                        >
-                        </x-admin::media.images>
+                        />
                     </x-admin::form.control-group>
 
                     <p class="mb-4 text-xs text-gray-600 dark:text-gray-300">
@@ -67,17 +67,13 @@
                         <x-admin::form.control-group.control
                             type="text"
                             name="name"
-                            :value="old('name') ?: $user->name"
                             rules="required"
+                            :value="old('name') ?: $user->name"
                             :label="trans('admin::app.account.edit.name')"
                             :placeholder="trans('admin::app.account.edit.name')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="name"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="name" />
                     </x-admin::form.control-group>
 
                     <!-- Email -->
@@ -89,17 +85,13 @@
                         <x-admin::form.control-group.control
                             type="email"
                             name="email"
-                            :value="old('email') ?: $user->email"
-                            rules="required"
                             id="email"
+                            rules="required"
+                            :value="old('email') ?: $user->email"
                             :label="trans('admin::app.account.edit.email')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error 
-                            control-name="email"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="email" />
                     </x-admin::form.control-group>
                 </div>
              </div>
@@ -127,13 +119,9 @@
                                 rules="required|min:6"
                                 :label="trans('admin::app.account.edit.current-password')"
                                 :placeholder="trans('admin::app.account.edit.current-password')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="current_password"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="current_password" />
                         </x-admin::form.control-group>
 
                         <!-- Password -->
@@ -146,15 +134,11 @@
                                 type="password"
                                 name="password"
                                 rules="min:6"
-                                ref="password"
                                 :placeholder="trans('admin::app.account.edit.password')"
-                            >
-                            </x-admin::form.control-group.control>
+                                ref="password"
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="password"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="password" />
                         </x-admin::form.control-group>
 
                         <!-- Confirm Password -->
@@ -169,13 +153,9 @@
                                 rules="confirmed:@password"
                                 :label="trans('admin::app.account.edit.confirm-password')"
                                 :placeholder="trans('admin::app.account.edit.confirm-password')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error 
-                                control-name="password_confirmation"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="password_confirmation" />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>

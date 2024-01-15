@@ -136,8 +136,7 @@
                                 type="hidden"
                                 name="id"
                                 v-model="selectedCurrency.id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Code -->
                             <x-admin::form.control-group>
@@ -148,18 +147,14 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="code"
-                                    :value="old('code')"
                                     rules="required"
+                                    :value="old('code')"
                                     v-model="selectedCurrency.code"
                                     :label="trans('admin::app.settings.currencies.index.create.code')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.code')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="code"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="code" />
                             </x-admin::form.control-group>
 
                             <!-- Name -->
@@ -171,18 +166,14 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="name"
-                                    :value="old('name')"
                                     rules="required"
+                                    :value="old('name')"
                                     v-model="selectedCurrency.name"
                                     :label="trans('admin::app.settings.currencies.index.create.name')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <!-- Symbol -->
@@ -198,13 +189,9 @@
                                     v-model="selectedCurrency.symbol"
                                     :label="trans('admin::app.settings.currencies.index.create.symbol')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.symbol')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="symbol"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="symbol" />
                             </x-admin::form.control-group>
 
                             <!-- Decimal -->
@@ -220,13 +207,9 @@
                                     v-model="selectedCurrency.decimal"
                                     :label="trans('admin::app.settings.currencies.index.create.decimal')"
                                     :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="decimal"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="decimal" />
                             </x-admin::form.control-group>
 
                             {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}

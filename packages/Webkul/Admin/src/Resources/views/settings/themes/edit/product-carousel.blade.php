@@ -35,10 +35,7 @@
                         >
                         </v-field>
 
-                        <x-admin::form.control-group.error
-                            control-name="{{ $currentLocale->code }}[options][title]"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][title]" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group>
@@ -72,10 +69,7 @@
                             </select>
                         </v-field>
 
-                        <x-admin::form.control-group.error
-                            control-name="{{ $currentLocale->code }}[options][filters][sort]"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][filters][sort]" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group>
@@ -105,10 +99,7 @@
                             </select>
                         </v-field>
 
-                        <x-admin::form.control-group.error
-                            control-name="{{ $currentLocale->code }}[options][filters][limit]"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][filters][limit]" />
                     </x-admin::form.control-group>
 
                     <span class="block w-full mb-4 mt-4 border-b dark:border-gray-800"></span>
@@ -230,10 +221,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
@@ -253,10 +241,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="sort_order"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
@@ -275,7 +260,7 @@
                                 @endforeach 
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
                         <!-- Status -->
@@ -308,10 +293,7 @@
                                 ></label>
                             </label>
 
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>
@@ -345,13 +327,9 @@
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.key-input')"
                                     :placeholder="trans('admin::app.settings.themes.edit.key-input')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="key"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="key" />
                             </x-admin::form.control-group>
 
                             <!-- Value -->
@@ -366,13 +344,9 @@
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.value-input')"
                                     :placeholder="trans('admin::app.settings.themes.edit.value-input')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="value"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="value" />
                             </x-admin::form.control-group>
                         </x-slot:content>
 

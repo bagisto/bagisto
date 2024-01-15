@@ -296,12 +296,11 @@
 
                                                         <x-admin::form.control-group.control
                                                             type="text"
-                                                            name="price"
                                                             class="ltr:pl-8 rtl:pr-8"
+                                                            name="price"
                                                             ::rules="{required: true, decimal: true, min_value: 0}"
                                                             :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
-                                                        >
-                                                        </x-admin::form.control-group.control>
+                                                        />
                                                     </div>
                                                 </x-admin::form.control-group>
 
@@ -310,7 +309,7 @@
                                                 </button>
                                             </div>
                     
-                                            <x-admin::form.control-group.error control-name="price"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="price" />
                                         </div>
                                     </template>
 
@@ -381,11 +380,10 @@
                                                         <x-admin::form.control-group.control
                                                             type="text"
                                                             name="weight"
-                                                            value="0"
                                                             ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                            value="0"
                                                             :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
-                                                        >
-                                                        </x-admin::form.control-group.control>
+                                                        />
                                                     </div>
                                                 </x-admin::form.control-group>
 
@@ -394,7 +392,7 @@
                                                 </button>
                                             </div>
                     
-                                            <x-admin::form.control-group.error control-name="weight"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="weight" />
                                         </div>
                                     </template>
 
@@ -412,7 +410,7 @@
                                                             name="name"
                                                             ::rules="{ required: true }"
                                                             :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.name')"
-                                                        ></x-admin::form.control-group.control>
+                                                        />
                                                     </div>
                                                 </x-admin::form.control-group>
 
@@ -421,7 +419,7 @@
                                                 </button>
                                             </div>
                     
-                                            <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="name" />
                                         </div>
                                     </template>
 
@@ -440,8 +438,13 @@
                                                             ::rules="{ required: true }"
                                                             :label="trans('admin::app.catalog.products.edit.types.configurable.mass-edit.status')"
                                                         >
-                                                            <option value="1">@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')</option>
-                                                            <option value="0">@lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')</option>g
+                                                            <option value="1">
+                                                                @lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')
+                                                            </option>
+
+                                                            <option value="0">
+                                                                @lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')
+                                                            </option>
                                                         </x-admin::form.control-group.control>
                                                     </div>
                                                 </x-admin::form.control-group>
@@ -451,7 +454,7 @@
                                                 </button>
                                             </div>
                     
-                                            <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="name" />
                                         </div>
                                     </template>
                                 </form>
@@ -484,11 +487,11 @@
 
                                             <v-field
                                                 type="text"
-                                                :name="'variants[' + variant.id + ']'"
-                                                v-model="variant.price"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-8 rtl:pr-8 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[' + variant.id + ']'"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
+                                                v-model="variant.price"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
                                             >
                                             </v-field>
@@ -512,11 +515,11 @@
                                         <div class="relative">
                                             <v-field
                                                 type="text"
-                                                :name="'variants[' + variant.id + ']'"
-                                                v-model="variant.weight"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                v-model="variant.weight"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
                                             >
                                             </v-field>
@@ -540,15 +543,20 @@
                                         <div class="relative">
                                             <v-field
                                                 as="select"
-                                                :name="'variants[' + variant.id + ']'"
-                                                v-model="variant.status"
                                                 class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                v-model="variant.status"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')"
                                             >
-                                                <option value="1">@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')</option>
-                                                <option value="0">@lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')</option>
+                                                <option value="1">
+                                                    @lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')
+                                                </option>
+
+                                                <option value="0">
+                                                    @lang('admin::app.catalog.products.edit.types.configurable.edit.disabled')
+                                                </option>
                                             </v-field>
                                         </div>
 
@@ -576,11 +584,11 @@
                                         <div class="relative">
                                             <v-field
                                                 type="text"
-                                                :name="'variants[' + variant.id + ']'"
-                                                v-model="variant.name"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                v-model="variant.name"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-name')"
                                             >
                                             </v-field>
@@ -612,11 +620,11 @@
 
                                                 <v-field
                                                     type="text"
-                                                    :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
-                                                    v-model="variant.inventories[inventorySource.id]"
                                                     class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                     :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                    :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
                                                     rules="required|numeric|min:0"
+                                                    v-model="variant.inventories[inventorySource.id]"
                                                     :label="inventorySource.name"
                                                 >
                                                 </v-field>
@@ -647,11 +655,11 @@
                                         <div class="relative">
                                             <v-field
                                                 type="text"
-                                                :name="'variants[' + variant.id + ']'"
-                                                v-model="variant.sku"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                 :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                v-model="variant.sku"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-sku')"
                                                 v-slugify
                                             >
@@ -677,7 +685,7 @@
                                         class="mt-2.5"
                                         v-bind:allow-multiple="true"
                                         :uploaded-images="variant.temp_images"
-                                    ></v-media-images>
+                                    />
                                 </template>
                             </div>
                         </x-slot:content>
@@ -694,18 +702,42 @@
             <!-- Information -->
             <div class="flex gap-2.5">
                 <!-- Form Hidden Fields -->
-                <input type="hidden" :name="'variants[' + variant.id + '][sku]'" :value="variant.sku"/>
+                <input
+                    type="hidden"
+                    :name="'variants[' + variant.id + '][sku]'"
+                    :value="variant.sku"
+                />
 
-                <input type="hidden" :name="'variants[' + variant.id + '][name]'" :value="variant.name"/>
+                <input
+                    type="hidden"
+                    :name="'variants[' + variant.id + '][name]'"
+                    :value="variant.name"
+                />
 
-                <input type="hidden" :name="'variants[' + variant.id + '][price]'" :value="variant.price"/>
+                <input
+                    type="hidden"
+                    :name="'variants[' + variant.id + '][price]'"
+                    :value="variant.price"
+                />
 
-                <input type="hidden" :name="'variants[' + variant.id + '][weight]'" :value="variant.weight"/>
+                <input
+                    type="hidden"
+                    :name="'variants[' + variant.id + '][weight]'"
+                    :value="variant.weight"
+                />
 
-                <input type="hidden" :name="'variants[' + variant.id + '][status]'" :value="variant.status"/>
+                <input
+                    type="hidden"
+                    :name="'variants[' + variant.id + '][status]'"
+                    :value="variant.status"
+                />
 
                 <template v-for="attribute in attributes">
-                    <input type="hidden" :name="'variants[' + variant.id + '][' + attribute.code + ']'" :value="variant[attribute.code]"/>
+                    <input
+                        type="hidden"
+                        :name="'variants[' + variant.id + '][' + attribute.code + ']'"
+                        :value="variant[attribute.code]"
+                    />
                 </template>
 
                 <template v-for="inventorySource in inventorySources">
@@ -866,8 +898,7 @@
                                             type="hidden"
                                             name="id"
                                             ::value="variant.id"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
@@ -880,10 +911,9 @@
                                                 ::value="variant.name"
                                                 rules="required"
                                                 :label="trans('admin::app.catalog.products.edit.types.configurable.edit.name')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
                 
-                                            <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="name" />
                                         </x-admin::form.control-group>
 
                                         <x-admin::form.control-group>
@@ -894,13 +924,12 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="sku"
-                                                ::value="variant.sku"
                                                 rules="required"
+                                                ::value="variant.sku"
                                                 :label="trans('admin::app.catalog.products.edit.types.configurable.edit.sku')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
                 
-                                            <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="sku" />
                                         </x-admin::form.control-group>
 
                                         <div class="flex gap-4 mb-2.5">
@@ -912,13 +941,12 @@
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="price"
-                                                    ::value="variant.price"
                                                     ::rules="{required: true, decimal: true, min_value: 0}"
+                                                    ::value="variant.price"
                                                     :label="trans('admin::app.catalog.products.edit.types.configurable.edit.price')"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                />
                     
-                                                <x-admin::form.control-group.error control-name="price"></x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="price" />
                                             </x-admin::form.control-group>
 
                                             <x-admin::form.control-group class="flex-1">
@@ -929,8 +957,8 @@
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="status"
-                                                    ::value="variant.status"
                                                     rules="required"
+                                                    ::value="variant.status"
                                                     :label="trans('admin::app.catalog.products.edit.types.configurable.edit.status')"
                                                 >
                                                     <option value="1">
@@ -942,7 +970,7 @@
                                                     </option>
                                                 </x-admin::form.control-group.control>
                     
-                                                <x-admin::form.control-group.error control-name="status"></x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="status" />
                                             </x-admin::form.control-group>
                                         </div>
 
@@ -954,13 +982,12 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="weight"
-                                                ::value="variant.weight"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
+                                                ::value="variant.weight"
                                                 :label="trans('admin::app.catalog.products.edit.types.configurable.edit.weight')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
                 
-                                            <x-admin::form.control-group.error control-name="weight"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="weight" />
                                         </x-admin::form.control-group>
 
                                         <!-- Inventories -->
@@ -980,11 +1007,11 @@
 
                                                     <v-field
                                                         type="text"
-                                                        :name="'inventories[' + inventorySource.id + ']'"
-                                                        v-model="variant.inventories[inventorySource.id]"
                                                         class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
                                                         :class="[errors['inventories[' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                        :name="'inventories[' + inventorySource.id + ']'"
                                                         rules="numeric|min:0"
+                                                        v-model="variant.inventories[inventorySource.id]"
                                                         :label="inventorySource.name"
                                                     >
                                                     </v-field>
@@ -1013,7 +1040,7 @@
                                                 name="images"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="variant.images"
-                                            ></v-media-images>
+                                            />
                                         </div>
 
                                         <!-- Actions -->

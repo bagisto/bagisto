@@ -147,8 +147,7 @@
                                 type="hidden"
                                 name="id"
                                 v-model="selectedExchangeRate.id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Currency Code -->
                             <x-admin::form.control-group>
@@ -161,8 +160,7 @@
                                     name="base_currency"
                                     disabled
                                     :value="core()->getBaseCurrencyCode()"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
                             </x-admin::form.control-group>
 
                             <!-- Target Currency -->
@@ -190,13 +188,9 @@
                                     >
                                         @{{ currency.name }}
                                     </option>
-
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="target_currency"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="target_currency" />
                             </x-admin::form.control-group>
 
                             <!-- Rate -->
@@ -208,18 +202,14 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="rate"
-                                    :value="old('rate')"
                                     rules="required"
+                                    :value="old('rate')"
                                     v-model="selectedExchangeRate.rate"
                                     :label="trans('admin::app.settings.exchange-rates.index.create.rate')"
                                     :placeholder="trans('admin::app.settings.exchange-rates.index.create.rate')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="rate"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="rate" />
                             </x-admin::form.control-group>
                         </x-slot:content>
 

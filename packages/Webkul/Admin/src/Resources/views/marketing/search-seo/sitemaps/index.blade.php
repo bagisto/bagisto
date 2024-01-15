@@ -142,8 +142,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- File Name -->
                             <x-admin::form.control-group>
@@ -154,17 +153,13 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="file_name"
-                                    :value="old('file_name')"
                                     rules="required"
+                                    :value="old('file_name')"
                                     :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
                                     :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="file_name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="file_name" />
 
                                 <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
@@ -181,17 +176,13 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="path"
-                                    :value="old('path')"
                                     rules="required"
+                                    :value="old('path')"
                                     :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
                                     :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="path"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="path" />
 
                                 <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')

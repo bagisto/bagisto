@@ -69,13 +69,9 @@
                                         id="file"
                                         name="file"
                                         ref="importFile"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="file"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="file" />
                                 </x-admin::form.control-group>
 
                                 <p class="text-xs text-gray-600 dark:text-gray-300">  

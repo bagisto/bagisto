@@ -169,8 +169,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Entity Type -->
                             <x-admin::form.control-group>
@@ -197,7 +196,7 @@
                                     </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="entity_type"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="entity_type" />
                             </x-admin::form.control-group>
 
                             <!-- Request Path -->
@@ -215,10 +214,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="request_path"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="request_path" />
                             </x-admin::form.control-group>
 
                             <!-- Target Path -->
@@ -236,10 +232,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="target_path"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="target_path" />
                             </x-admin::form.control-group>
 
                             <!-- Redirect Type -->
@@ -263,7 +256,7 @@
                                     </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="redirect_type"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="redirect_type" />
                             </x-admin::form.control-group>
 
                             <!-- Locales -->
@@ -283,7 +276,7 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="locale"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="locale" />
                             </x-admin::form.control-group>
                         </x-slot:content>
 

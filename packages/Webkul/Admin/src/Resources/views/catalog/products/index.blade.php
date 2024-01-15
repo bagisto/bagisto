@@ -324,7 +324,7 @@
                                             @endforeach
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="type" />
                                     </x-admin::form.control-group>
 
                                     <!-- Attribute Family Id -->
@@ -346,7 +346,7 @@
                                             @endforeach
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="attribute_family_id"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="attribute_family_id" />
                                     </x-admin::form.control-group>
 
                                     <!-- SKU -->
@@ -360,10 +360,9 @@
                                             name="sku"
                                             ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
                                             :label="trans('admin::app.catalog.products.index.create.sku')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="sku" />
                                     </x-admin::form.control-group>
 
                                     {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}

@@ -56,20 +56,16 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="content"
-                                value="{{ old('content') ?: $template->content }}"
-                                rules="required"
                                 id="content"
+                                name="content"
+                                rules="required"
+                                value="{{ old('content') ?: $template->content }}"
                                 :label="trans('admin::app.marketing.communications.templates.edit.content')"
                                 :placeholder="trans('admin::app.marketing.communications.templates.edit.content')"
                                 :tinymce="true"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="content"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="content" />
                         </x-admin::form.control-group>
                     </div>
                 </div>
@@ -101,20 +97,17 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.templates.edit.name')
                                     </x-admin::form.control-group.label>
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
-                                        value="{{ old('name') ?: $template->name }}"
                                         rules="required"
+                                        value="{{ old('name') ?: $template->name }}"
                                         :label="trans('admin::app.marketing.communications.templates.edit.name')"
                                         :placeholder="trans('admin::app.marketing.communications.templates.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Template Status -->
@@ -141,10 +134,7 @@
                                         @endforeach
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="status"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="status" />
                                 </x-admin::form.control-group>
                             </div>
                         </x-slot:content>
@@ -155,7 +145,6 @@
 
             </div>
         </div>
-
 
         {!! view_render_event('bagisto.admin.marketing.communications.templates.edit.edit_form_controls.before') !!}
 

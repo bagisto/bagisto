@@ -68,14 +68,16 @@
                                         :placeholder="trans('admin::app.settings.roles.create.permissions')"
                                         v-model="permission_type"
                                     >
-                                        <option value="custom">@lang('admin::app.settings.roles.create.custom')</option>
-                                        <option value="all">@lang('admin::app.settings.roles.create.all')</option>
+                                        <option value="custom">
+                                            @lang('admin::app.settings.roles.create.custom')
+                                        </option>
+
+                                        <option value="all">
+                                            @lang('admin::app.settings.roles.create.all')
+                                        </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="permission_type"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="permission_type" />
                                 </x-admin::form.control-group>
 
                                 <div v-if="permission_type == 'custom'">
@@ -85,8 +87,7 @@
                                         id-field="key"
                                         :items="json_encode($acl->items)"
                                         :fallback-locale="config('app.fallback_locale')"
-                                    >
-                                    </x-admin::tree.view>
+                                    />
                                 </div>
                             </div>
 
@@ -116,19 +117,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="name"
-                                            value="{{ old('name') }}"
                                             id="name"
+                                            name="name"
                                             rules="required"
+                                            value="{{ old('name') }}"
                                             :label="trans('admin::app.settings.roles.create.name')"
                                             :placeholder="trans('admin::app.settings.roles.create.name')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="name"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="name" />
                                     </x-admin::form.control-group>
 
                                     <!-- Description -->
@@ -139,19 +136,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="textarea"
-                                            name="description"
-                                            :value="old('description')"
                                             id="description"
+                                            name="description"
                                             rules="required"
+                                            :value="old('description')"
                                             :label="trans('admin::app.settings.roles.create.description')"
                                             :placeholder="trans('admin::app.settings.roles.create.description')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="description"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="description" />
                                     </x-admin::form.control-group>
                                 </x-slot:content>
                             </x-admin::accordion>

@@ -33,12 +33,11 @@
                 type="text"
                 :name="'inventories[' . $inventorySource->id . ']'"
                 :rules="'numeric|min:0'"
-                :label="$inventorySource->name"
                 :value="$qty"
-            >
-            </x-admin::form.control-group.control>
+                :label="$inventorySource->name"
+            />
 
-            <x-admin::form.control-group.error :control-name="'inventories[' . $inventorySource->id . ']'"></x-admin::form.control-group.error>
+            <x-admin::form.control-group.error :control-name="'inventories[' . $inventorySource->id . ']'" />
         </x-admin::form.control-group>
     @endforeach
 </v-inventories>

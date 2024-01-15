@@ -71,20 +71,16 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="code"
+                                rules="required"
                                 value="{{ old('code') ?? $attributeFamily->code }}"
                                 disabled="disabled"
-                                rules="required"
                                 :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.edit.enter-code')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <input type="hidden" name="code" value="{{ $attributeFamily->code }}"/>
 
-                            <x-admin::form.control-group.error
-                                control-name="code"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="!mb-0">
@@ -95,24 +91,19 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                value="{{ old('name') ?? $attributeFamily->name }}"
                                 rules="required"
+                                value="{{ old('name') ?? $attributeFamily->name }}"
                                 :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.edit.enter-name')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>
             </div>
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.after', ['attributeFamily' => $attributeFamily]) !!}
-
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.families.edit.edit_form_control.after', ['attributeFamily' => $attributeFamily]) !!}
@@ -355,10 +346,9 @@
                                         rules="required"
                                         :label="trans('admin::app.catalog.families.edit.code')"
                                         :placeholder="trans('admin::app.catalog.families.edit.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group>
@@ -372,10 +362,9 @@
                                         rules="required"
                                         :label="trans('admin::app.catalog.families.edit.name')"
                                         :placeholder="trans('admin::app.catalog.families.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="mb-4">
@@ -403,7 +392,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="column"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="column" />
                                 </x-admin::form.control-group>
                             </x-slot:content>
 

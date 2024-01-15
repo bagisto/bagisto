@@ -189,10 +189,7 @@
                                     placeholder="@lang('admin::app.settings.themes.edit.name')"
                                 ></v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -212,10 +209,7 @@
                                 >
                                 </v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="sort_order"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -234,7 +228,7 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="channel_id" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="!mb-0">
@@ -266,10 +260,7 @@
                                     ></label>
                                 </label>
 
-                                <x-admin::form.control-group.error
-                                    control-name="status"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="status" />
                             </x-admin::form.control-group>
 
                         </x-slot:content>
@@ -306,13 +297,9 @@
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
                                     :placeholder="trans('admin::app.settings.themes.edit.title')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="{{ $currentLocale->code }}[title]"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[title]" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -324,8 +311,7 @@
                                     type="text"
                                     name="{{ $currentLocale->code }}[link]"
                                     :placeholder="trans('admin::app.settings.themes.edit.link')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -338,13 +324,9 @@
                                     name="slider_image"
                                     rules="required"
                                     :is-multiple="false"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="slider_image"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="slider_image" />
                             </x-admin::form.control-group>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300">

@@ -61,17 +61,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="code"
-                                value="{{ old('code') }}"
                                 rules="required"
+                                value="{{ old('code') }}"
                                 :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-code')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="code"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="!mb-0">
@@ -82,17 +78,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                value="{{ old('name') }}"
                                 rules="required"
+                                value="{{ old('name') }}"
                                 :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-name')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>
@@ -100,7 +92,7 @@
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.families.create.create_form_controls.after') !!}
-        
+
     </x-admin::form>
 
     @pushOnce('scripts')
@@ -349,10 +341,9 @@
                                         rules="required"
                                         :label="trans('admin::app.catalog.families.create.code')"
                                         :placeholder="trans('admin::app.catalog.families.create.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <!-- Group Name -->
@@ -367,10 +358,9 @@
                                         rules="required"
                                         :label="trans('admin::app.catalog.families.create.name')"
                                         :placeholder="trans('admin::app.catalog.families.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Select Group Type -->
@@ -399,7 +389,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="column"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="column" /> 
                                 </x-admin::form.control-group>
                             </x-slot:content>
 

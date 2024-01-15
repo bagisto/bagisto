@@ -56,8 +56,7 @@
                         type="hidden"
                         name="locale"
                         value="all"
-                    >
-                    </x-admin::form.control-group.control>
+                    />
 
                     <!-- Name -->
                     <x-admin::form.control-group>
@@ -68,27 +67,24 @@
                         <v-field
                             type="text"
                             name="name"
-                            value="{{ old('name') }}"
-                            label="{{ trans('admin::app.catalog.categories.create.name') }}"
                             rules="required"
+                            value="{{ old('name') }}"
                             v-slot="{ field }"
+                            label="{{ trans('admin::app.catalog.categories.create.name') }}"
                         >
                             <input
                                 type="text"
-                                name="name"
                                 id="name"
-                                v-bind="field"
                                 :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                name="name"
+                                v-bind="field"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.name') }}"
                                 v-slugify-target:slug="setValues"
                             >
                         </v-field>
 
-                        <x-admin::form.control-group.error
-                            control-name="name"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="name" />
                     </x-admin::form.control-group>
 
                     <div>
@@ -101,13 +97,12 @@
                         <div class="flex flex-col gap-3">
                             <x-admin::tree.view
                                 input-type="radio"
+                                id-field="id"
                                 name-field="parent_id"
                                 value-field="id"
-                                id-field="id"
                                 :items="json_encode($categories)"
                                 :fallback-locale="config('app.fallback_locale')"
-                            >
-                            </x-admin::tree.view>
+                            />
                         </div>
                     </div>
                 </div>
@@ -131,27 +126,23 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="description"
                                 id="description"
                                 class="description"
-                                :value="old('description')"
+                                name="description"
                                 ::rules="{ 'required' : isDescriptionRequired}"
+                                :value="old('description')"
                                 :label="trans('admin::app.catalog.categories.create.description')"
                                 :tinymce="true"
                                 :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="description"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="description" />
                         </x-admin::form.control-group>
                     </v-description>
 
-                    <div class="flex gap-12">
+                    <div class="flex pt-5">
                         <!-- Add Logo -->
-                        <div class="flex flex-col gap-2 w-2/5 mt-5">
+                        <div class="flex flex-col gap-2 w-2/5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.logo')
                             </p>
@@ -160,11 +151,11 @@
                                 @lang('admin::app.catalog.categories.create.logo-size')
                             </p>
 
-                            <x-admin::media.images name="logo_path"></x-admin::media.images>
+                            <x-admin::media.images name="logo_path" />
                         </div>
 
                         <!-- Add Banner -->
-                        <div class="flex flex-col gap-2 w-2/5 mt-5">
+                        <div class="flex flex-col gap-2 w-3/5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.create.banner')
                             </p>
@@ -176,8 +167,7 @@
                             <x-admin::media.images
                                 name="banner_path"
                                 width="220px"
-                            >
-                            </x-admin::media.images>
+                            />
                         </div>
                     </div>
                 </div>
@@ -204,13 +194,12 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="meta_title"
                                 id="meta_title"
+                                name="meta_title"
                                 :value="old('meta_title')"
                                 :label="trans('admin::app.catalog.categories.create.meta-title')"
                                 :placeholder="trans('admin::app.catalog.categories.create.meta-title')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
 
                         <!-- Slug -->
@@ -222,27 +211,24 @@
                             <v-field
                                 type="text"
                                 name="slug"
+                                rules="required"
                                 value="{{ old('slug') }}"
                                 label="{{ trans('admin::app.catalog.categories.create.slug') }}"
-                                rules="required"
                                 v-slot="{ field }"
                             >
                                 <input
                                     type="text"
-                                    name="slug"
                                     id="slug"
-                                    v-bind="field"
                                     :class="[errors['{{ 'slug' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    name="slug"
+                                    v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                     v-slugify-target:slug
                                 >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="slug"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="slug" />
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
@@ -257,8 +243,7 @@
                                 :value="old('meta_keywords')"
                                 :label="trans('admin::app.catalog.categories.create.meta-keywords')"
                                 :placeholder="trans('admin::app.catalog.categories.create.meta-keywords')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
 
                         <!-- Meta Description -->
@@ -269,19 +254,17 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="meta_description"
                                 id="meta_description"
+                                name="meta_description"
                                 :value="old('meta_description')"
                                 :label="trans('admin::app.catalog.categories.create.meta-description')"
                                 :placeholder="trans('admin::app.catalog.categories.create.meta-description')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
                     </div>
                 </div>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.seo.after') !!}
-
             </div>
 
             <!-- Right Section -->
@@ -307,17 +290,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="position"
-                                :value="old('position')"
                                 rules="required"
+                                :value="old('position')"
                                 :label="trans('admin::app.catalog.categories.create.position')"
                                 :placeholder="trans('admin::app.catalog.categories.create.enter-position')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="position"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="position" />
                         </x-admin::form.control-group>
 
                         <!-- Display Mode  -->
@@ -328,9 +307,9 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
-                                name="display_mode"
                                 id="display_mode"
                                 class="cursor-pointer"
+                                name="display_mode"
                                 rules="required"
                                 value="products_and_description"
                                 :label="trans('admin::app.catalog.categories.create.display-mode')"
@@ -349,10 +328,7 @@
                                 </option>
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="display_mode"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="display_mode" />
                         </x-admin::form.control-group>
 
                         <!-- Visible in menu -->
@@ -363,12 +339,11 @@
 
                             <x-admin::form.control-group.control
                                 type="switch"
-                                name="status"
                                 class="cursor-pointer"
+                                name="status"
                                 value="1"
                                 :label="trans('admin::app.catalog.categories.create.visible-in-menu')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>
@@ -390,14 +365,13 @@
                             <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none last:!mb-0">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
-                                    name="attributes[]"
                                     :id="$attribute->name ?? $attribute->admin_name"
-                                    :value="$attribute->id"
+                                    name="attributes[]"
                                     rules="required"
-                                    :for="$attribute->name ?? $attribute->admin_name"
+                                    :value="$attribute->id"
                                     :label="trans('admin::app.catalog.categories.create.filterable-attributes')"
-                                >
-                                </x-admin::form.control-group.control>
+                                    :for="$attribute->name ?? $attribute->admin_name"
+                                />
 
                                 <label
                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -408,10 +382,7 @@
                             </x-admin::form.control-group>
                         @endforeach
 
-                        <x-admin::form.control-group.error
-                            control-name="attributes[]"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="attributes[]" />
                     </x-slot:content>
                 </x-admin::accordion>
 

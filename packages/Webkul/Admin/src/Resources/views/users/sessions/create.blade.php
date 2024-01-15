@@ -37,19 +37,15 @@
 
                             <x-admin::form.control-group.control 
                                 type="email" 
-                                name="email" 
-                                id="email"
                                 class="w-[254px] max-w-full" 
+                                id="email"
+                                name="email" 
                                 rules="required|email" 
                                 :label="trans('admin::app.users.sessions.email')"
                                 :placeholder="trans('admin::app.users.sessions.email')"
-                                >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error 
-                                control-name="email"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="email" />
                         </x-admin::form.control-group>
 
                         <!-- Password -->
@@ -60,14 +56,13 @@
                     
                             <x-admin::form.control-group.control 
                                 type="password" 
-                                name="password" 
-                                id="password"
                                 class="w-[254px] max-w-full ltr:pr-10 rtl:pl-10" 
+                                id="password"
+                                name="password" 
                                 rules="required|min:6" 
                                 :label="trans('admin::app.users.sessions.password')"
                                 :placeholder="trans('admin::app.users.sessions.password')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                     
                             <span 
                                 class="icon-view text-2xl cursor-pointer absolute top-[42px] -translate-y-2/4 ltr:right-2 rtl:left-2"
@@ -78,10 +73,7 @@
                             >
                             </span>
                     
-                            <x-admin::form.control-group.error 
-                                control-name="password"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="password" />
                         </x-admin::form.control-group>
                     </div>
 

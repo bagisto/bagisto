@@ -250,13 +250,12 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="title"
-                                        v-model="selectedLink.title"
                                         rules="required"
+                                        v-model="selectedLink.title"
                                         :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
             
-                                    <x-admin::form.control-group.error control-name="title"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="title" />
                                 </x-admin::form.control-group>
 
                                 <div class="flex gap-4">
@@ -268,13 +267,12 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="price"
-                                            v-model="selectedLink.price"
                                             rules="required|decimal|min_value:0"
+                                            v-model="selectedLink.price"
                                             :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.price')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
                 
-                                        <x-admin::form.control-group.error control-name="price"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="price" />
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="flex-1">
@@ -285,13 +283,12 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="downloads"
-                                            v-model="selectedLink.downloads"
                                             rules="required|numeric|min_value:1"
+                                            v-model="selectedLink.downloads"
                                             :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.downloads')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
                 
-                                        <x-admin::form.control-group.error control-name="downloads"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="downloads" />
                                     </x-admin::form.control-group>
                                 </div>
 
@@ -304,8 +301,8 @@
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="type"
-                                            v-model="selectedLink.type"
                                             rules="required"
+                                            v-model="selectedLink.type"
                                             :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.file-type')"
                                         >
                                             <option value="file">
@@ -317,7 +314,7 @@
                                             </option>
                                         </x-admin::form.control-group.control>
             
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="type" />
                                     </x-admin::form.control-group>
 
                                     <!-- If Type is File -->
@@ -333,42 +330,39 @@
                                                 rules="required"
                                                 v-model="selectedLink.file"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.file')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="file_name"
                                                 v-model="selectedLink.file_name"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="file_url"
                                                 v-model="selectedLink.file_url"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <input
                                                 type="file"
-                                                name="file"
                                                 class="flex w-full min-h-[39px] py-1 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                                name="file"
                                                 ref="file"
                                                 @change="uploadFile('file')"
                                             />
 
                                             <a
                                                 :href="selectedLink.sample_file_url"
-                                                target="_blank"
                                                 class="text-blue-600 break-all transition-all hover:underline"
+                                                target="_blank"
                                                 v-if="selectedLink.file_url"
                                             >
                                                 @{{ selectedLink.file_name }}
                                             </a>
                     
-                                            <x-admin::form.control-group.error control-name="file"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="file" />
                                         </x-admin::form.control-group>
                                     </template>
 
@@ -382,13 +376,12 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="url"
-                                                v-model="selectedLink.url"
                                                 rules="required"
+                                                v-model="selectedLink.url"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.url')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
                     
-                                            <x-admin::form.control-group.error control-name="url"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="url" />
                                         </x-admin::form.control-group>
                                     </template>
                                 </div>
@@ -425,22 +418,19 @@
                                                 type="hidden"
                                                 name="sample_file"
                                                 v-model="selectedLink.sample_file"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="sample_file_name"
                                                 v-model="selectedLink.sample_file_name"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="sample_file_url"
                                                 v-model="selectedLink.sample_file_url"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <input
                                                 type="file"
@@ -471,13 +461,12 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="sample_url"
-                                                v-model="selectedLink.sample_url"
                                                 rules="required"
+                                                v-model="selectedLink.sample_url"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.url')"
                                             >
-                                            </x-admin::form.control-group.control>
                     
-                                            <x-admin::form.control-group.error control-name="sample_url"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="sample_url" />
                                         </x-admin::form.control-group>
                                     </template>
                                 </div>
@@ -680,13 +669,12 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="title"
-                                        v-model="selectedSample.title"
                                         rules="required"
+                                        v-model="selectedSample.title"
                                         :label="trans('admin::app.catalog.products.edit.types.downloadable.samples.update-create.name')"
                                     >
-                                    </x-admin::form.control-group.control>
             
-                                    <x-admin::form.control-group.error control-name="title"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="title" />
                                 </x-admin::form.control-group>
 
                                 <div class="flex gap-4">
@@ -711,7 +699,7 @@
                                             </option>
                                         </x-admin::form.control-group.control>
             
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="type" />
                                     </x-admin::form.control-group>
 
                                     <!-- If Type is File -->
@@ -727,22 +715,19 @@
                                                 rules="required"
                                                 v-model="selectedSample.file"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.samples.update-create.file')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="file_name"
                                                 v-model="selectedSample.file_name"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <x-admin::form.control-group.control
                                                 type="hidden"
                                                 name="file_url"
                                                 v-model="selectedSample.file_url"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
                                             <input
                                                 type="file"
@@ -762,7 +747,7 @@
                                                 @{{ selectedSample.file_name }}
                                             </a>
                     
-                                            <x-admin::form.control-group.error control-name="file"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="file" />
                                         </x-admin::form.control-group>
                                     </template>
 
@@ -776,13 +761,12 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="url"
-                                                v-model="selectedSample.url"
                                                 rules="required"
+                                                v-model="selectedSample.url"
                                                 :label="trans('admin::app.catalog.products.edit.types.downloadable.samples.update-create.url')"
                                             >
-                                            </x-admin::form.control-group.control>
                     
-                                            <x-admin::form.control-group.error control-name="url"></x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="url" />
                                         </x-admin::form.control-group>
                                     </template>
                                 </div>
