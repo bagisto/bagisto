@@ -59,7 +59,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.catalog.families.edit.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                 
                     <!-- Panel Content -->
                     <x-slot:content>
@@ -99,7 +99,7 @@
 
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
             </div>
 
@@ -331,7 +331,7 @@
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.catalog.families.edit.add-group-title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -394,7 +394,7 @@
 
                                     <x-admin::form.control-group.error control-name="column" />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -406,7 +406,7 @@
                                         @lang('admin::app.catalog.families.edit.add-group-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

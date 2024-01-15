@@ -114,7 +114,7 @@
                                         @lang('admin::app.settings.roles.edit.general')
                                     </p>
                                 </div>
-                            </x-slot:header>
+                            </x-slot>
 
                             <x-slot:content>
                                 <!-- Name -->
@@ -154,7 +154,7 @@
 
                                     <x-admin::form.control-group.error control-name="description" />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
 
                         {!! view_render_event('bagisto.admin.settings.roles.edit.card.accordion.general.after') !!}

@@ -113,7 +113,7 @@
                             >
                                 @lang('admin::app.catalog.products.edit.price.group.create.update-title')
                             </p>    
-                        </x-slot:header>
+                        </x-slot>
         
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -202,7 +202,7 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
-                        </x-slot:content>
+                        </x-slot>
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -224,7 +224,7 @@
                                     @lang('admin::app.catalog.products.edit.price.group.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

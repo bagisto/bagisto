@@ -113,7 +113,7 @@
                                 @lang('admin::app.sales.transactions.index.view.title')
                             </p>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
                     <!-- Drawer Content -->
                     <x-slot:content>
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::drawer>
             </div>
         </script>

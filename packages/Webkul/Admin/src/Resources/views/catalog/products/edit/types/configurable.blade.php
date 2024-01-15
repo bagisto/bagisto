@@ -96,7 +96,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.configurable.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
         
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -134,7 +134,7 @@
                                     </p>
                                 </v-error-message>
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -147,7 +147,7 @@
                                     @lang('admin::app.catalog.products.edit.types.configurable.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>
@@ -181,7 +181,7 @@
 
                         <i class="icon-sort-down text-2xl text-blue-600"></i>
                     </button>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Dropdown Content -->
                 <x-slot:content class="px-0 py-4">
@@ -218,7 +218,7 @@
                             </div>
                         </label>
                     </template>
-                </x-slot:content>
+                </x-slot>
             </x-admin::dropdown>
 
             <!-- Actions Selector -->
@@ -233,7 +233,7 @@
 
                         <i class="icon-sort-down text-2xl text-blue-600"></i>
                     </button>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Dropdown Content -->
                 <x-slot:menu>
@@ -243,7 +243,7 @@
                     >
                         @{{ type.title }}
                     </x-admin::dropdown.menu.item>
-                </x-slot:menu>
+                </x-slot>
             </x-admin::dropdown>
 
             <!-- Edit Drawer -->
@@ -271,7 +271,7 @@
                                     @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
                                 </button>
                             </div>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Drawer Content -->
                         <x-slot:content class="p-4">
@@ -688,7 +688,7 @@
                                     />
                                 </template>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
@@ -890,7 +890,7 @@
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
                                             </button>
                                         </div>
-                                    </x-slot:header>
+                                    </x-slot>
 
                                     <!-- Drawer Content -->
                                     <x-slot:content>
@@ -1058,7 +1058,7 @@
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.edit-link-title')
                                             </a>
                                         </div>
-                                    </x-slot:content>
+                                    </x-slot>
                                 </x-admin::drawer>
                             </form>
                         </x-admin::form>

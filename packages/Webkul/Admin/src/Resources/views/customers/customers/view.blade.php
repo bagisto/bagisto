@@ -593,7 +593,7 @@
                         <!--Customer Edit Component -->
                        @include('admin::customers.customers.edit', ['groups' => $groups])
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="grid gap-y-2.5">
@@ -621,7 +621,7 @@
                             @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->name ?? 'N/A'])
                         </p>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion> 
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
@@ -636,7 +636,7 @@
                             @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     @if (count($customer->addresses))
@@ -751,7 +751,7 @@
                             </div>
                         </div>
                     @endif
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion>
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.after') !!}

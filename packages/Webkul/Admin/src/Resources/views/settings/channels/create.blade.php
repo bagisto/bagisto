@@ -347,7 +347,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.settings.channels.create.currencies-and-locales')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
             
                     <x-slot:content>
                         <!-- Locale Checkboxes  -->
@@ -467,7 +467,7 @@
 
                             <x-admin::form.control-group.error control-name="base_currency_id" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.currencies_and_locales.after') !!}
@@ -482,7 +482,7 @@
                                 @lang('admin::app.settings.channels.create.settings')
                             </p>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
             
                     <x-slot:content>
                         <!-- Maintenance Mode Text  -->
@@ -536,7 +536,7 @@
 
                             <x-admin::form.control-group.error control-name="is_maintenance_on" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.settings.after') !!}

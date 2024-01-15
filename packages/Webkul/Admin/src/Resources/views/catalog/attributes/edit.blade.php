@@ -506,7 +506,7 @@
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.validations')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <x-slot:content>
                                 <!-- Input Validation -->
@@ -602,7 +602,7 @@
                                         :value="$attribute->is_unique"
                                     />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
 
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.validations.after', ['attribute' => $attribute]) !!}
@@ -615,7 +615,7 @@
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.edit.configuration')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
@@ -787,7 +787,7 @@
                                         :value="(boolean) $selectedOption"
                                     />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
 
                         {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordian.configuration.configuration.after', ['attribute' => $attribute]) !!}
@@ -815,7 +815,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content !-->
                         <x-slot:content>
@@ -914,7 +914,7 @@
                                     </x-admin::form.control-group>
                                 @endforeach
                             </div>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer !-->
                         <x-slot:footer>
@@ -925,7 +925,7 @@
                             >
                                 @lang('admin::app.catalog.attributes.edit.option.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

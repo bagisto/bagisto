@@ -163,7 +163,7 @@
                         <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.marketing.communications.campaigns.create.setting')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                     
                     <x-slot:content>
                         <!-- Channel -->
@@ -244,7 +244,7 @@
 
                             <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.marketing.communications.campaigns.create.card.accordion.setting.after') !!}

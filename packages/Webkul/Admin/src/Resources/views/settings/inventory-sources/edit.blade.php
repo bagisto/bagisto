@@ -359,7 +359,7 @@
                                             @lang('admin::app.settings.inventory-sources.edit.settings')
                                         </p>
                                     </div>
-                                </x-slot:header>
+                                </x-slot>
                             
                                 <x-slot:content>
                                     <!-- Latitute -->
@@ -442,7 +442,7 @@
 
                                         <x-admin::form.control-group.error control-name="status" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.after') !!}

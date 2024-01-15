@@ -236,7 +236,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Drawer Content -->
                         <x-slot:content class="!p-0">
@@ -471,7 +471,7 @@
                                     </template>
                                 </div>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     </x-admin::drawer>
                 </form>
             </x-admin::form>
@@ -655,7 +655,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Drawer Content -->
                         <x-slot:content class="!p-0">
@@ -771,7 +771,7 @@
                                     </template>
                                 </div>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     </x-admin::drawer>
                 </form>
             </x-admin::form>

@@ -42,7 +42,7 @@
                         <p class="text-lg text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.customers.addresses.create.title')
                         </p>    
-                    </x-slot:header>
+                    </x-slot>
     
                     <!-- Modal Content -->
                     <x-slot:content>
@@ -310,7 +310,7 @@
                         </div>
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
-                    </x-slot:content>
+                    </x-slot>
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
@@ -323,7 +323,7 @@
                                 @lang('admin::app.customers.addresses.create.save-btn-title') 
                             </button>
                         </div>
-                    </x-slot:footer>
+                    </x-slot>
                 </x-admin::modal>
 
                 {!! view_render_event('admin.customers.addresses.create.create_form_controls.after') !!}

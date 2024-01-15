@@ -108,7 +108,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                 
                     <x-slot:content>
                         <input type="hidden" name="type" value="static_content">
@@ -203,7 +203,7 @@
                             
                             <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
             </div>
         </div>

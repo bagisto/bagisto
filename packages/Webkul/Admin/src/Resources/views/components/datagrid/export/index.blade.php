@@ -14,14 +14,14 @@
                     <div class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
                         @lang('admin::app.export.export')
                     </div>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Modal Header -->
                 <x-slot:header>
                     <p class="text-lg text-gray-800 dark:text-white font-bold">
                         @lang('admin::app.export.download')
                     </p>
-                </x-slot:header>
+                </x-slot>
 
                 <!-- Modal Content -->
                 <x-slot:content>
@@ -42,7 +42,7 @@
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
                     </x-admin::form>
-                </x-slot:content>
+                </x-slot>
 
                 <!-- Modal Footer -->
                 <x-slot:footer>
@@ -53,7 +53,7 @@
                     >
                         @lang('admin::app.export.export')
                     </button>
-                </x-slot:footer>
+                </x-slot>
             </x-admin::modal>
         </div>
     </script>

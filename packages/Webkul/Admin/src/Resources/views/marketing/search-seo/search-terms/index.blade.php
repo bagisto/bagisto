@@ -168,7 +168,7 @@
                             >
                                 @lang('admin::app.marketing.search-seo.search-terms.index.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -284,7 +284,7 @@
 
                                 <x-admin::form.control-group.error control-name="locale" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -292,7 +292,7 @@
                             <button class="primary-button">
                                 @lang('admin::app.marketing.search-seo.search-terms.index.create.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

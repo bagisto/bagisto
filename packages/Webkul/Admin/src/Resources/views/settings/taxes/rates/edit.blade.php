@@ -176,7 +176,7 @@
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.settings.taxes.rates.edit.basic-settings')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
                         
                             <x-slot:content>
                                 @if ($taxRate->is_zip)
@@ -247,7 +247,7 @@
                                         <x-admin::form.control-group.error control-name="zip_code" />
                                     </x-admin::form.control-group>
                                 @endif
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
 
                         {!! view_render_event('admin.settings.taxes.rates.edit.card.accordion.basic_settings.after') !!}

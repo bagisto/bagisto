@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
@@ -316,7 +316,7 @@
                                 </div>
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::drawer>
             </x-admin::form>
         </div>

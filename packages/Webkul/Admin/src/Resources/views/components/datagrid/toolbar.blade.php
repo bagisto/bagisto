@@ -25,7 +25,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                         </template>
-                    </x-slot:menu>
+                    </x-slot>
                 </x-admin::dropdown>
 
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
@@ -151,7 +151,7 @@
                         <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white dark:bg-gray-900 shadow">
                         </div>
                     </div>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Drawer Header -->
                 <x-slot:header>
@@ -160,12 +160,12 @@
                             @lang('admin::app.components.datagrid.filters.title')
                         </p>
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <!-- Drawer Content -->
                 <x-slot:content class="!p-5">
                     <x-admin::datagrid.filters></x-admin::datagrid.filters>
-                </x-slot:content>
+                </x-slot>
             </x-admin::drawer>
 
             <div class="flex items-center gap-x-2">
@@ -180,7 +180,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
@@ -190,7 +190,7 @@
                             @click="changePerPageOption(perPageOption)"
                         >
                         </x-admin::dropdown.menu.item>
-                    </x-slot:menu>
+                    </x-slot>
                 </x-admin::dropdown>
 
                 <p class="whitespace-nowrap text-gray-600 dark:text-gray-300 max-sm:hidden">per page</p>

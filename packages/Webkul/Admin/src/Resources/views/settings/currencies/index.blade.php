@@ -126,7 +126,7 @@
                             >
                                 @lang('admin::app.settings.currencies.index.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -213,7 +213,7 @@
                             </x-admin::form.control-group>
 
                             {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -225,7 +225,7 @@
                                     @lang('admin::app.settings.currencies.index.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

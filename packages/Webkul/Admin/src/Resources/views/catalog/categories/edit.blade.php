@@ -63,7 +63,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
@@ -75,7 +75,7 @@
                                 {{ $locale->name }}
                             </a>
                         @endforeach
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::dropdown>
             </div>
         </div>
@@ -322,7 +322,7 @@
                         <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.edit.settings')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <!-- Position -->
@@ -401,7 +401,7 @@
                                 :checked="(boolean) $selectedValue"
                             />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.after', ['category' => $category]) !!}
@@ -414,7 +414,7 @@
                         <p class="required p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     @php $selectedaAtributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
 
@@ -442,7 +442,7 @@
                         @endforeach
 
                         <x-admin::form.control-group.error control-name="attributes[]" />
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.after', ['category' => $category]) !!}

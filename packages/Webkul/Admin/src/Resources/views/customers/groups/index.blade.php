@@ -107,7 +107,7 @@
                                         @lang('admin::app.customers.groups.index.create.title')
                                     </span>
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -149,7 +149,7 @@
 
                                     <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -161,7 +161,7 @@
                                         @lang('admin::app.customers.groups.index.create.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

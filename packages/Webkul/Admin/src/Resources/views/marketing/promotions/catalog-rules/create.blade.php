@@ -261,7 +261,7 @@
                                     <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.settings')
                                     </p>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <x-admin::form.control-group>
@@ -358,7 +358,7 @@
 
                                         <x-admin::form.control-group.error control-name="status" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.card.accordion.settings.after') !!}
@@ -371,7 +371,7 @@
                                     <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                         @lang('admin::app.marketing.promotions.catalog-rules.create.marketing-time')
                                     </p>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <div class="flex gap-4">
@@ -409,7 +409,7 @@
                                             <x-admin::form.control-group.error control-name="ends_till" />
                                         </x-admin::form.control-group>
                                     </div>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.card.accordion.marketing_time.after') !!}

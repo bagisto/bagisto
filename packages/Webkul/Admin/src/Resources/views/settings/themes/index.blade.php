@@ -60,7 +60,7 @@
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.create.title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -140,7 +140,7 @@
 
                                     <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
@@ -152,7 +152,7 @@
                                         @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

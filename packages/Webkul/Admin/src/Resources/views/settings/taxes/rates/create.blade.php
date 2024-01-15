@@ -176,7 +176,7 @@
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.settings.taxes.rates.create.settings')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
                         
                             <x-slot:content>
                                 <!-- Enable Zip Range -->
@@ -251,7 +251,7 @@
                                         <x-admin::form.control-group.error control-name="zip_to" />
                                     </x-admin::form.control-group>
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
                     </div>
                 </div>

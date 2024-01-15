@@ -70,7 +70,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
@@ -82,7 +82,7 @@
                                 {{ $locale->name }}
                             </a>
                         @endforeach
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::dropdown>
             </div>
         </div>
@@ -223,7 +223,7 @@
                                 @lang('admin::app.cms.create.general')
                             </p>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <x-admin::form.control-group>
@@ -272,7 +272,7 @@
                         @endforeach
                         
                         <x-admin::form.control-group.error control-name="channels[]" />
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.after', ['page' => $page]) !!}

@@ -120,7 +120,7 @@
                                     @lang('admin::app.settings.locales.index.create.title')
                                 </span>
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -230,7 +230,7 @@
                             </p>
 
                             {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -242,7 +242,7 @@
                                     @lang('admin::app.settings.locales.index.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
 
                     {!! view_render_event('admin.settings.locales.create_form_controls.after') !!}

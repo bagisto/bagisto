@@ -298,7 +298,7 @@
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -399,7 +399,7 @@
 
                                     {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -421,7 +421,7 @@
                                         @lang('admin::app.catalog.products.index.create.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

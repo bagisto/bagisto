@@ -230,7 +230,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Drawer Content -->
                             <x-slot:content>
@@ -391,7 +391,7 @@
                                         </div>
                                     </div>                                    
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::drawer>
                     </form>
                 </x-admin::form>

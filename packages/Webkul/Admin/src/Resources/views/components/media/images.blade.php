@@ -140,7 +140,7 @@
                                         </span>
                                     </p>
                                 </template>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -271,7 +271,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -325,7 +325,7 @@
                                         </button>
                                     </template>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

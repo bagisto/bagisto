@@ -168,7 +168,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.cms.create.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <x-admin::form.control-group>
@@ -216,7 +216,7 @@
                         @endforeach
 
                         <x-admin::form.control-group.error control-name="channels[]" />
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.accordion.general.after') !!}

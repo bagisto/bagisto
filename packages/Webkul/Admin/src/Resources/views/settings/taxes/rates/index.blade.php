@@ -59,7 +59,7 @@
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.taxes.rates.index.import.title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -77,7 +77,7 @@
                                 <p class="text-xs text-gray-600 dark:text-gray-300">  
                                     @lang('admin::app.settings.taxes.rates.index.import.validation') 
                                 </p>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -89,7 +89,7 @@
                                         @lang('admin::app.settings.taxes.rates.index.import.import-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

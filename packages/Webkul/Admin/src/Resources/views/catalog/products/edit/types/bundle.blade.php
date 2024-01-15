@@ -94,7 +94,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
         
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -171,7 +171,7 @@
                                     <x-admin::form.control-group.error control-name="is_required" />
                                 </x-admin::form.control-group>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -184,7 +184,7 @@
                                     @lang('admin::app.catalog.products.edit.types.bundle.update-create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

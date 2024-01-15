@@ -531,7 +531,7 @@
                                     <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.settings')
                                     </p>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <x-admin::form.control-group>
@@ -633,7 +633,7 @@
 
                                         <x-admin::form.control-group.error control-name="status" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.accordion.settings.after') !!}
@@ -646,7 +646,7 @@
                                     <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.edit.marketing-time')
                                     </p>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <x-admin::form.control-group>
@@ -682,7 +682,7 @@
 
                                         <x-admin::form.control-group.error control-name="ends_till" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.accordion.marketing_time.after') !!}

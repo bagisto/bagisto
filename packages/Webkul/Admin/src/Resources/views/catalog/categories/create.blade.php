@@ -278,7 +278,7 @@
                         <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <!-- Position -->
@@ -345,7 +345,7 @@
                                 :label="trans('admin::app.catalog.categories.create.visible-in-menu')"
                             />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.settings.after') !!}
@@ -358,7 +358,7 @@
                         <p class="required p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.create.filterable-attributes')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         @foreach ($attributes as $attribute)
@@ -383,7 +383,7 @@
                         @endforeach
 
                         <x-admin::form.control-group.error control-name="attributes[]" />
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.create.card.accordion.filterable_attributes.after') !!}

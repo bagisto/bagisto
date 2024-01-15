@@ -88,7 +88,7 @@
                                     @lang('admin::app.marketing.communications.templates.edit.general')
                                 </p>
                             </div>
-                        </x-slot:header>
+                        </x-slot>
 
                         <x-slot:content>
                             <div class="w-full mb-2.5">
@@ -137,7 +137,7 @@
                                     <x-admin::form.control-group.error control-name="status" />
                                 </x-admin::form.control-group>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
                     </x-admin::accordion>
                 </div>
                 

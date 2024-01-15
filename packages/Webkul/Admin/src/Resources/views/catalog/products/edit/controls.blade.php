@@ -33,7 +33,7 @@
         >
             <x-slot:currency :class="'dark:text-gray-300 ' . ($attribute->code == 'price' ? 'bg-gray-50 dark:bg-gray-900 text-xl' : '')">
                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
-            </x-slot:currency>
+            </x-slot>
         </x-admin::form.control-group.control>
 
         @break

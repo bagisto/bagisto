@@ -373,7 +373,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.customer')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <div class="{{ $order->billing_address ? 'pb-4' : '' }}">
@@ -430,7 +430,7 @@
 
                             {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
                         @endif
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion> 
 
                 <!-- Order Information -->
@@ -439,7 +439,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.order-information')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <div class="flex w-full gap-5 justify-start">
@@ -482,7 +482,7 @@
                                 {!! view_render_event('sales.order.channel_name.after', ['order' => $order]) !!}
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion> 
 
                 <!-- Payment and Shipping Information-->
@@ -491,7 +491,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.payment-and-shipping')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <div>
@@ -553,7 +553,7 @@
 
                             {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
                         @endif
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion> 
 
                 <!-- Invoice Information-->
@@ -562,7 +562,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.invoices') ({{ count($order->invoices) }})
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         @forelse ($order->invoices as $index => $invoice)
@@ -602,7 +602,7 @@
                                 @lang('admin::app.sales.orders.view.no-invoice-found')
                             </p>
                         @endforelse
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion> 
 
                 <!-- Shipment Information-->
@@ -611,7 +611,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.shipments') ({{ count($order->shipments) }})
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         @forelse ($order->shipments as $shipment)
@@ -642,7 +642,7 @@
                                 @lang('admin::app.sales.orders.view.no-shipment-found')
                             </p>
                         @endforelse
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion> 
 
                 <!-- Refund Information-->
@@ -651,7 +651,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.orders.view.refund')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         @forelse ($order->refunds as $refund)
@@ -700,7 +700,7 @@
                                 @lang('admin::app.sales.orders.view.no-refund-found')
                             </p>
                         @endforelse
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion> 
             </div>
 

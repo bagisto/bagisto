@@ -69,7 +69,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -89,7 +89,7 @@
     
                                 <x-admin::form.control-group.error control-name="email" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -101,7 +101,7 @@
                                     @lang('admin::app.sales.invoices.view.send')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </x-admin::form>
             </div>
@@ -278,7 +278,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.invoices.view.customer')
                     </p>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="flex flex-col {{ $order->billing_address ? 'pb-4' : ''}}">
@@ -328,7 +328,7 @@
                             {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
                         @endif
                     @endif
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion> 
             
             <!-- component 2 -->
@@ -337,7 +337,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.invoices.view.order-information') 
                     </p>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="flex w-full gap-5 justify-start">
@@ -384,7 +384,7 @@
                             {!! view_render_event('sales.invoice.channel_name.after', ['order' => $order]) !!}
                         </div>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion>
         </div>
     </div>

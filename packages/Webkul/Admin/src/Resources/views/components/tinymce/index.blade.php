@@ -26,7 +26,7 @@
 
                             @lang('admin::app.components.tinymce.ai-generation.title')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <!-- Modal Content -->
                     <x-slot:content>
@@ -89,7 +89,7 @@
                                 @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
                             </span>
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
@@ -103,7 +103,7 @@
                                 @lang('admin::app.components.tinymce.ai-generation.apply')
                             </button>
                         </div>
-                    </x-slot:footer>
+                    </x-slot>
                 </x-admin::modal>
             </form>
         </x-admin::form>

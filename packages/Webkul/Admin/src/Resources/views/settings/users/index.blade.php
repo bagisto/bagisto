@@ -199,7 +199,7 @@
                                 @lang('admin::app.settings.users.index.create.title')
                             </p>
 
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -365,7 +365,7 @@
                                     @lang('admin::app.settings.users.index.create.upload-image-info')
                                 </p>
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -377,7 +377,7 @@
                                     @lang('admin::app.settings.users.index.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>
@@ -397,7 +397,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('Confirm Password Before DELETE')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -418,7 +418,7 @@
 
                                 <x-admin::form.control-group.error control-name="password" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -430,7 +430,7 @@
                                     @lang('Confirm Delete This Account')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

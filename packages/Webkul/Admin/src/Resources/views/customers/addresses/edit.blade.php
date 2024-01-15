@@ -51,7 +51,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.customers.addresses.edit.title')
                             </p>    
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -330,7 +330,7 @@
                             </div>
 
                             {!! view_render_event('bagisto.admin.customers.edit.after') !!}
-                        </x-slot:content>
+                        </x-slot>
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -343,7 +343,7 @@
                                     @lang('admin::app.customers.addresses.edit.save-btn-title') 
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
 

@@ -132,52 +132,52 @@
 <x-admin::accordion title="Test Accordion">
     <x-slot:header>
         Accordion Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Accordion Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::accordion>
 
 <!-- Modal Component -->
 <x-admin::modal>
     <x-slot:toggle>
         Modal Toggle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:header>
         Modal Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Modal Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::modal>
 
 <!-- Drawer Component -->
 <x-admin::drawer>
     <x-slot:toggle>
         Drawer Toggle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:header>
         Drawer Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Drawer Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::drawer>
 
 <!-- Dropdown Component-->
 <x-admin::dropdown>
     <x-slot:toggle>
         Toogle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:content>
         Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::dropdown>
 
 <!-- Tinymce Component -->

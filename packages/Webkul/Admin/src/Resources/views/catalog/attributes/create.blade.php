@@ -457,7 +457,7 @@
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.create.validations')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <x-slot:content>
                                 <!-- Input Validation -->
@@ -539,7 +539,7 @@
                                         @lang('admin::app.catalog.attributes.edit.is-unique')
                                     </label>
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
 
                         <!-- Configurations -->
@@ -548,7 +548,7 @@
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.create.configuration')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <x-slot:content>
                                 <!-- Value Per Locale -->
@@ -664,7 +664,7 @@
                                         @lang('admin::app.catalog.attributes.create.is-filterable')
                                     </label>
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::accordion>
                     </div>
 
@@ -695,7 +695,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content !-->
                         <x-slot:content>
@@ -790,7 +790,7 @@
                                     </x-admin::form.control-group>
                                 @endforeach
                             </div>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer !-->
                         <x-slot:footer>
@@ -800,7 +800,7 @@
                             >
                                 @lang('admin::app.catalog.attributes.create.option.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

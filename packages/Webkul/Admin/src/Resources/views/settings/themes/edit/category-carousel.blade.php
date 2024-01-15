@@ -175,7 +175,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                 
                     <x-slot:content>
                         <input type="hidden" name="type" value="category_carousel">
@@ -270,7 +270,7 @@
 
                             <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
             </div>
 
@@ -286,7 +286,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.create-filter')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -323,7 +323,7 @@
 
                                 <x-admin::form.control-group.error control-name="value" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -335,7 +335,7 @@
                                     @lang('admin::app.settings.themes.edit.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

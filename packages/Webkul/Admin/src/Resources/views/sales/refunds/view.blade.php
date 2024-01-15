@@ -214,7 +214,7 @@
                         <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                             @lang('admin::app.sales.refunds.view.account-information')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                 
                     <x-slot:content>
                         <!-- Account Info -->
@@ -256,7 +256,7 @@
 
                             @include ('admin::sales.address', ['address' => $order->shipping_address])
                         @endif
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
             @endif
             
@@ -266,7 +266,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.refunds.view.order-information')
                     </p>
-                </x-slot:header>
+                </x-slot>
             
                 <x-slot:content>
                     <div class="flex w-full gap-2.5">
@@ -303,7 +303,7 @@
                             </p>
                         </div>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion>
 
              <!-- Payment Information -->
@@ -312,7 +312,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.refunds.view.payment-information')
                     </p>
-                </x-slot:header>
+                </x-slot>
             
                 <x-slot:content>
                     <div class="flex w-full gap-2.5">
@@ -346,7 +346,7 @@
                             </p>
                         </div>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion>
         </div>
     </div>

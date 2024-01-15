@@ -103,7 +103,7 @@
                         <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.account.edit.change-password')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                      <!-- Change Account Password -->
                     <x-slot:content>
@@ -157,7 +157,7 @@
 
                             <x-admin::form.control-group.error control-name="password_confirmation" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
              </div>
         </div>
