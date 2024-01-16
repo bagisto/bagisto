@@ -84,12 +84,12 @@ class Customer extends Base
      */
     public function afterNoteCreated($note)
     {
-        if (! request()->has('customer_notified')) {
+        if (! $note->customer_notified) {
             return;
         }
 
         try {
-            Mail::send(new NoteNotification($note, request()->input('note', 'email')));
+            Mail::queue(new NoteNotification($note));
         } catch (\Exception $e) {
             session()->flash('warning', $e->getMessage());
         }
