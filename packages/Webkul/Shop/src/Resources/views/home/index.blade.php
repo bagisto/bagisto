@@ -26,7 +26,7 @@
         @switch ($customization->type)
             @case ($customization::IMAGE_CAROUSEL)
                 <!-- Image Carousel -->
-                <x-shop::carousel :options="$data"></x-shop::carousel>
+                <x-shop::carousel :options="$data" />
 
                 @break
             @case ($customization::STATIC_CONTENT)
@@ -47,8 +47,7 @@
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.categories.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.home.index')"
-                >
-                </x-shop::categories.carousel>
+                />
 
                 @break
             @case ($customization::PRODUCT_CAROUSEL)
@@ -57,8 +56,7 @@
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
-                >
-                </x-shop::products.carousel>
+                />
 
                 @break
         @endswitch

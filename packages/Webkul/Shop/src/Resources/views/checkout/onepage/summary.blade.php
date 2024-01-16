@@ -162,7 +162,7 @@
                     <div v-if="selectedPaymentMethod?.method == 'paypal_smart_button'">
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
 
-                        <v-paypal-smart-button></v-paypal-smart-button>
+                        <v-paypal-smart-button />
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
                     </div>

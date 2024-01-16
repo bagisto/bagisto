@@ -151,8 +151,7 @@
                         :datagrid-id="available.id"
                         :column="column"
                         @select-option="filterPage($event, column)"
-                    >
-                    </v-datagrid-searchable-dropdown>
+                    />
                 </div>
 
                 <div class="mb-4 flex gap-2 flex-wrap">

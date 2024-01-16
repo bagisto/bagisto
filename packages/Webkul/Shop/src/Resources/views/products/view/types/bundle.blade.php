@@ -1,7 +1,7 @@
 @if ($product->type == 'bundle')
     {!! view_render_event('bagisto.shop.products.view.bundle-options.before', ['product' => $product]) !!}
 
-    <v-product-bundle-options :errors="errors"></v-product-bundle-options>
+    <v-product-bundle-options :errors="errors" />
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.after', ['product' => $product]) !!}
 
