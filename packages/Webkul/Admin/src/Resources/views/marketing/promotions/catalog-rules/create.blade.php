@@ -7,7 +7,7 @@
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.before') !!}
 
     <!-- Create Catalog form -->
-    <v-catalog-rule-create-form></v-catalog-rule-create-form>
+    <v-catalog-rule-create-form />
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.after') !!}
 

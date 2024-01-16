@@ -7,7 +7,7 @@
     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.before') !!}
 
     <!-- Create Inventory -->
-    <v-inventory-create-form></v-inventory-create-form>
+    <v-inventory-create-form />
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.after') !!}
 

@@ -7,7 +7,7 @@
     {!! view_render_event('bagisto.admin.settings.roles.create.before') !!}
 
     <!-- Create Role for -->
-    <v-create-user-role></v-create-user-role>
+    <v-create-user-role />
 
     {!! view_render_event('bagisto.admin.settings.roles.create.after') !!}
 

@@ -36,7 +36,7 @@
             </x-admin::dropdown>
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.cms.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.cms.index') }}" />
 
             <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('cms.create'))
@@ -52,7 +52,7 @@
 
     {!! view_render_event('bagisto.admin.cms.pages.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.cms.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.cms.index') }}" />
     
     {!! view_render_event('bagisto.admin.cms.pages.list.after') !!}
 

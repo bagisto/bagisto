@@ -11,7 +11,7 @@
 
     {!! view_render_event('admin.customers.reviews.edit.before') !!}
 
-    <v-review-edit-drawer></v-review-edit-drawer>
+    <v-review-edit-drawer />
 
     {!! view_render_event('admin.customers.groups.edit.after') !!}
 

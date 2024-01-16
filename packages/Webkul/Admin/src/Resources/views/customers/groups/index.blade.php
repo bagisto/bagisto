@@ -6,7 +6,7 @@
 
     {!! view_render_event('admin.customers.groups.create.before') !!}
 
-    <v-create-group></v-create-group>
+    <v-create-group />
 
     {!! view_render_event('admin.customers.groups.create.after') !!}
 

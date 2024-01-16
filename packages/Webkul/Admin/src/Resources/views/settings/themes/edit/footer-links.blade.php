@@ -1,5 +1,5 @@
 <!-- Todays Details Vue Component -->
-<v-footer-links></v-footer-links>
+<v-footer-links />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-footer-links-template">

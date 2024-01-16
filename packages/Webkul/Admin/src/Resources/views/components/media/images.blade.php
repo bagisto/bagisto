@@ -16,7 +16,7 @@
     height="{{ $height }}"
     :errors="errors"
 >
-    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded"></x-admin::shimmer.image>
+    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded" />
 </v-media-images>
 
 @pushOnce('scripts')
@@ -92,7 +92,7 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
-                        ></v-media-image-item>
+                        />
                     </template>
                 </draggable>
 

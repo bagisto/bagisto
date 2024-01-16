@@ -10,7 +10,7 @@
 
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}" />
 
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
@@ -102,7 +102,7 @@
 
             <!-- Datagrid Head Shimmer -->
             <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
             </template>
         </template>
 
@@ -255,7 +255,7 @@
 
             <!-- Datagrid Body Shimmer -->
             <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>

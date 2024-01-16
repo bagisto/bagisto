@@ -1,8 +1,8 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.downloadable.before', ['product' => $product]) !!}
 
-<v-downloadable-links :errors="errors"></v-downloadable-links>
+<v-downloadable-links :errors="errors" />
 
-<v-downloadable-samples :errors="errors"></v-downloadable-samples>
+<v-downloadable-samples :errors="errors" />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.downloadable.after', ['product' => $product]) !!}
 

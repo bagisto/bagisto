@@ -6,7 +6,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.before') !!}
 
-    <v-cart-rule-edit-form></v-cart-rule-edit-form>
+    <v-cart-rule-edit-form />
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.after') !!}
 
@@ -226,7 +226,7 @@
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.general.after') !!}
 
                             <!-- component for auto generate coupon code -->
-                            <v-create-coupon-form v-if="parseInt(useAutoGeneration) && parseInt(couponType)"></v-create-coupon-form>
+                            <v-create-coupon-form v-if="parseInt(useAutoGeneration) && parseInt(couponType)" />
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.edit.card.conditions.before') !!}
 

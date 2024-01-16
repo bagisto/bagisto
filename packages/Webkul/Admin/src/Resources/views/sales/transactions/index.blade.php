@@ -12,11 +12,11 @@
         <div class="flex gap-x-2.5 items-center">
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.transactions.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.sales.transactions.index') }}" />
         </div>
     </div>
 
-    <v-transaction-drawer></v-transaction-drawer>
+    <v-transaction-drawer />
 
     <!-- Transaction View Component -->
     @pushOnce('scripts')

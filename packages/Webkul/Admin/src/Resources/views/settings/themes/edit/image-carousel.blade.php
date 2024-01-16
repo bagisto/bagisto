@@ -1,5 +1,5 @@
 <!-- Image-Carousel Component -->
-<v-image-carousel></v-image-carousel>
+<v-image-carousel />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-image-carousel-template">

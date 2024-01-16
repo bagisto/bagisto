@@ -1,4 +1,4 @@
-<v-tinymce {{ $attributes }}></v-tinymce>
+<v-tinymce {{ $attributes }} />
 
 @pushOnce('scripts')
     <!--

@@ -5,10 +5,10 @@
 
 @if ($inputType == 'checkbox')
     <!-- Tree Checkbox Component -->
-    <x-admin::tree.checkbox></x-admin::tree.checkbox>
+    <x-admin::tree.checkbox />
 @else
     <!-- Tree Radio Component -->
-    <x-admin::tree.radio></x-admin::tree.radio>
+    <x-admin::tree.radio />
 @endif
 
 <v-tree-view

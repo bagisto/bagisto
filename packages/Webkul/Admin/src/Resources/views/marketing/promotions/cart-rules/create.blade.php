@@ -6,7 +6,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.before') !!}
 
-    <v-cart-rule-create-form></v-cart-rule-create-form>
+    <v-cart-rule-create-form />
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.after') !!}
 

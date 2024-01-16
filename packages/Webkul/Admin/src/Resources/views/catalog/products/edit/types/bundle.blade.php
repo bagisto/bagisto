@@ -4,7 +4,7 @@
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.before', ['product' => $product]) !!}
 
-<v-bundle-options :errors="errors"></v-bundle-options>
+<v-bundle-options :errors="errors" />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.after', ['product' => $product]) !!}
 
@@ -48,7 +48,7 @@
                     :errors="errors"
                     @onEdit="selectedOption = $event; $refs.updateCreateOptionModal.open()"
                     @onRemove="removeOption($event)"
-                ></v-bundle-option-item>
+                />
             </div>
 
             <!-- For Empty Option -->

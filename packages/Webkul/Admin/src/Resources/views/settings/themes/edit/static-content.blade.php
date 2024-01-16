@@ -1,5 +1,5 @@
 <!-- Static-Content Component -->
-<v-static-content></v-static-content>
+<v-static-content />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-static-content-template">

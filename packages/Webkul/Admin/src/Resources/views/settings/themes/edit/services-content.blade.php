@@ -1,5 +1,5 @@
 <!-- Todays Details Vue Component -->
-<v-services-content></v-services-content>
+<v-services-content />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-services-content-template">

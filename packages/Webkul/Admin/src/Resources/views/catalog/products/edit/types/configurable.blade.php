@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.before', ['product' => $product]) !!}
 
-<v-product-variations :errors="errors"></v-product-variations>
+<v-product-variations :errors="errors" />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
 
@@ -49,7 +49,7 @@
                         :attributes="superAttributes"
                         @onRemoved="removeVariant"
                         :errors="errors"
-                    ></v-product-variation-item>
+                    />
                 </div>
             </template>
 
@@ -360,7 +360,7 @@
                                                 class="mb-2.5"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="updateTypes[selectedType].images"
-                                            ></v-media-images>
+                                            />
 
                                             <button class="secondary-button">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')

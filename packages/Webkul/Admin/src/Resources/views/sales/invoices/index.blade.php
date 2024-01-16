@@ -11,10 +11,10 @@
 
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.invoices.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.sales.invoices.index') }}" />
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.sales.invoices.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.sales.invoices.index') }}" />
 
 </x-admin::layouts>

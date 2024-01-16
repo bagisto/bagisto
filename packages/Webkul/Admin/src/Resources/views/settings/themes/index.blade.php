@@ -29,7 +29,7 @@
     
     {!! view_render_event('bagisto.admin.settings.themes.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.settings.themes.index')"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.themes.index')" />
 
     {!! view_render_event('bagisto.admin.settings.themes.list.after') !!}
 

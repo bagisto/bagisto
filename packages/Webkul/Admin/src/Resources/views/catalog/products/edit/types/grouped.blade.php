@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.grouped.before', ['product' => $product]) !!}
 
-<v-group-products :errors="errors"></v-group-products>
+<v-group-products :errors="errors" />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.grouped.after', ['product' => $product]) !!}
 
@@ -164,7 +164,7 @@
                 ::added-product-ids="addedProductIds"
                 ::query-params="{type: 'simple'}"
                 @onProductAdded="addSelected($event)"
-            ></x-admin::products.search>
+            />
         </div>
     </script>
 

@@ -8,7 +8,7 @@
     {!! view_render_event('bagisto.admin.settings.roles.edit.before') !!}
 
     <!-- Edit Role for  -->
-    <v-edit-user-role></v-edit-user-role>
+    <v-edit-user-role />
 
     {!! view_render_event('bagisto.admin.settings.roles.edit.after') !!}
 

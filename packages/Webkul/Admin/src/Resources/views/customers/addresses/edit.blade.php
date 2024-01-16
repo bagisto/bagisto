@@ -1,4 +1,4 @@
-<v-edit-customer-address address="{{ $address }}"></v-edit-customer-address>
+<v-edit-customer-address address="{{ $address }}" />
 
 @pushOnce('scripts')
     <!-- Customer Address Form -->

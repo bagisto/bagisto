@@ -18,7 +18,7 @@
             </v-tax-rates-import>
 
             <!-- Tax Rate Export -->
-            <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}" />
 
             <!-- Create New Tax Rate Button -->
             @if (bouncer()->hasPermission('settings.taxes.tax_rates.create'))
@@ -32,8 +32,7 @@
     <x-admin::datagrid 
         :src="route('admin.settings.taxes.rates.index')" 
         ref="datagrid"
-    >
-    </x-admin::datagrid>
+    />
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-tax-rates-import-template">

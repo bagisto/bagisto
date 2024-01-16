@@ -1,5 +1,5 @@
 <!-- Category Carousel Component -->
-<v-category-carousel></v-category-carousel>
+<v-category-carousel />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-category-carousel-template">

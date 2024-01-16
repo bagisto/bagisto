@@ -7,7 +7,7 @@
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before') !!}
 
     <!-- edit Catalog form -->
-    <v-catalog-rule-edit-form></v-catalog-rule-edit-form>
+    <v-catalog-rule-edit-form />
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.after') !!}
 

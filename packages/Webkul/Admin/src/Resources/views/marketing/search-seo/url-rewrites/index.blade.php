@@ -125,7 +125,7 @@
 
                     <!-- Datagrid Body Shimmer -->
                     <template v-else>
-                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body />
                     </template>
                 </template>
             </x-admin::datagrid>

@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <v-theme-customizer :errors="errors"></v-theme-customizer>
+        <v-theme-customizer :errors="errors" />
     </x-admin::form>
 
     @pushOnce('scripts')
