@@ -24,12 +24,11 @@
 
         <!-- Static content -->
         @switch ($customization->type)
-            <!-- Image Carousel -->
             @case ($customization::IMAGE_CAROUSEL)
+                <!-- Image Carousel -->
                 <x-shop::carousel :options="$data"></x-shop::carousel>
 
                 @break
-
             @case ($customization::STATIC_CONTENT)
                 <!-- push style -->
                 @push ('styles')
@@ -42,7 +41,6 @@
                 {!! $data['html'] !!}
 
                 @break
-
             @case ($customization::CATEGORY_CAROUSEL)
                 <!-- Categories carousel -->
                 <x-shop::categories.carousel
@@ -53,7 +51,6 @@
                 </x-shop::categories.carousel>
 
                 @break
-
             @case ($customization::PRODUCT_CAROUSEL)
                 <!-- Product Carousel -->
                 <x-shop::products.carousel

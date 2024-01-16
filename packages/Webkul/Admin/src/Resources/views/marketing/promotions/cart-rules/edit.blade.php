@@ -395,10 +395,9 @@
                                                     id="discount_step"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.edit.buy-x-quantity')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.buy-x-quantity')"
-                                                >
+                                                />
 
                                                 <x-admin::form.control-group.error control-name="discount_step" />
-                                                
                                             </x-admin::form.control-group>
                                         </div>
                                     </div>
@@ -1256,7 +1255,6 @@
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.code-suffix')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.code-suffix')"
                                         />
-                                        
 
                                         <x-admin::form.control-group.error control-name="code_suffix" />
                                     </x-admin::form.control-group>
