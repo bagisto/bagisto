@@ -34,7 +34,7 @@ class CustomerAddressFactory extends Factory
             'city'            => $this->faker->city,
             'postcode'        => $this->faker->postcode,
             'phone'           => $this->faker->e164PhoneNumber,
-            'default_address' => $this->faker->randomElement([0, 1]),
+            'default_address' => $this->faker->boolean,
             'address_type'    => CustomerAddress::ADDRESS_TYPE,
         ];
     }
