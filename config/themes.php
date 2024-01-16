@@ -10,7 +10,7 @@ return [
     |
     */
 
-    'default' => 'default',
+    'shop-default' => 'default',
 
     'shop' => [
         'default' => [
