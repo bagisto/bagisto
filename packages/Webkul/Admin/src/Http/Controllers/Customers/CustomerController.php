@@ -202,15 +202,15 @@ class CustomerController extends Controller
             'note' => 'string|required',
         ]);
 
+        Event::dispatch('customer.note.create.before', $id);
+
         $customerNote = $this->customerNoteRepository->create([
             'customer_id'       => $id,
             'note'              => request()->input('note'),
             'customer_notified' => request()->input('customer_notified', 0),
         ]);
 
-        if (request()->has('customer_notified')) {
-            Event::dispatch('customer.note-created.after', $customerNote);
-        }
+        Event::dispatch('customer.note.create.after', $customerNote);
 
         session()->flash('success', trans('admin::app.customers.customers.view.note-created-success'));
 
