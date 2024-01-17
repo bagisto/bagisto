@@ -13,10 +13,14 @@ class Import extends Model implements ImportContract
      * @var array
      */
     protected $fillable = [
-        'entity',
+        'type',
         'action',
-        'summary',
+        'validation_strategy',
+        'validation_strategy',
+        'allowed_errors',
+        'field_separator',
         'file_path',
+        'images_directory_path',
         'error_file_path',
         'started_at',
         'completed_at',

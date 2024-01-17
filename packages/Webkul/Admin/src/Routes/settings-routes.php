@@ -194,6 +194,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
                 Route::get('', 'index')->name('admin.settings.data_transfer.imports.index');
 
                 Route::get('create', 'create')->name('admin.settings.data_transfer.imports.create');
+
+                Route::post('create', 'store')->name('admin.settings.data_transfer.imports.store');
+
+                Route::get('validate/{id}', 'validateImport')->name('admin.settings.data_transfer.imports.validate');
+
+                Route::get('start/{id}', 'start')->name('admin.settings.data_transfer.imports.start');
             });
         });
     });

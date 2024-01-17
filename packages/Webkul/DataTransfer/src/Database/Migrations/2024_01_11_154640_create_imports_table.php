@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('imports', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('entity');
+            $table->string('type');
             $table->string('action');
-            $table->string('summary')->nullable();
-            $table->string('file_path')->nullable();
+            $table->string('validation_strategy');
+            $table->integer('allowed_errors')->default(0);
+            $table->string('field_separator');
+            $table->string('file_path');
+            $table->string('images_directory_path')->nullable();
             $table->string('error_file_path')->nullable();
 
             $table->datetime('started_at')->nullable();

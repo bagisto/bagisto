@@ -32,4 +32,14 @@ class ImportBatch extends Model implements ImportBatchContract
     protected $casts = [
         'data' => 'array',
     ];
+
+    /**
+     * Get the import that owns the import batch.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function import()
+    {
+        return $this->belongsTo(ImportProxy::modelClass());
+    }
 }
