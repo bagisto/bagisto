@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use OpenAI\Laravel\Facades\OpenAI;
+use GuzzleHttp\Client;
 
 class MagicAIController extends Controller
 {
@@ -12,34 +13,59 @@ class MagicAIController extends Controller
      */
     public function content(): JsonResponse
     {
-        config([
-            'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
-            'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-        ]);
-
         $this->validate(request(), [
+            'model'  => 'required',
             'prompt' => 'required',
         ]);
 
         try {
-            $result = OpenAI::chat()->create([
-                'model'    => 'gpt-3.5-turbo',
-                'messages' => [
-                    [
-                        'role'    => 'user',
-                        'content' => request()->input('prompt'),
+            if (request()->input('model') == 'gpt-3.5-turbo') {
+                config([
+                    'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
+                    'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
+                ]);
+
+                $result = OpenAI::chat()->create([
+                    'model'    => 'gpt-3.5-turbo',
+                    'messages' => [
+                        [
+                            'role'    => 'user',
+                            'content' => request()->input('prompt'),
+                        ],
                     ],
-                ],
+                ]);
+
+                $response = $result->choices[0]->message->content;
+            } else {
+                $httpClient = new Client();
+
+                $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain') . '/api/generate';
+
+                $result = $httpClient->request('POST', $endpoint, [
+                    'headers' => [
+                        'Accept' => 'application/json',
+                    ],
+                    'json'    => [
+                        'model'  => request()->input('model'),
+                        'prompt' => request()->input('prompt'),
+                        'raw'    => true,
+                        'stream' => false,
+                    ],
+                ]);
+
+                $result = json_decode($result->getBody()->getContents(), true);
+
+                $response = $result['response'];
+            }
+
+            return new JsonResponse([
+                'content' => $response,
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage(),
             ], 500);
         }
-
-        return new JsonResponse([
-            'content' => $result->choices[0]->message->content,
-        ]);
     }
 
     /**
