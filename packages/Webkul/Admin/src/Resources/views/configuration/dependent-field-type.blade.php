@@ -21,7 +21,7 @@
         validations="{{ $validations }}"
         label="@lang($field['title'])"
         options="{{ json_decode($field['options']) }}"
-        info="{{ json_encode($field['info'] ?? '') }}"
+        info="{{ trans($field['info'] ?? '') }}"
         depend="{{ $dependName }}"
         depend-result="{{ $dependSelectedOption }}"
         channel_locale="{{ $channelLocaleInfo }}"
@@ -181,6 +181,14 @@
                 />
             </v-field>
 
+            <label
+                v-if="isRequire"
+                class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
+                :for="`${name}-info`"
+                v-text="info"
+            >
+            </label>
+
             <v-error-message
                 :name="name"
                 v-slot="{ message }"
@@ -302,25 +310,6 @@
                         event.target.type === 'checkbox' 
                         ? event.target.checked
                         : this.validations.split(',').slice(1).includes(event.target.value);
-
-                    let elements = document.getElementsByName(this.name);
-
-                    if (elements.length > 0) {
-                        let labels = Array.from(document.querySelectorAll('label'));
-
-                        labels.forEach((label) => {
-                            if (label.attributes.for && label.attributes.for.value == `${this.name}-info`) {
-                                let associatedElement = document.getElementById(`${this.name}-info`);
-                                
-                                if (
-                                    ! associatedElement 
-                                    || ! document.body.contains(associatedElement)
-                                ) {
-                                    label.style.display = 'none';
-                                }
-                            }
-                        });
-                    } 
 
                     this.updateValidations();
                 },
