@@ -2,10 +2,10 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenAI\Laravel\Facades\OpenAI;
-use GuzzleHttp\Client;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -108,7 +108,6 @@ class ReviewController extends APIController
         Translation:
         ";
 
-
         try {
             if (($model = core()->getConfigData('general.magic_ai.review_translation.model')) == 'gpt-3.5-turbo') {
                 config([
@@ -129,9 +128,9 @@ class ReviewController extends APIController
                 $response = $result->choices[0]->message->content;
             } else {
                 $httpClient = new Client();
-    
+
                 $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain') . '/api/generate';
-    
+
                 $result = $httpClient->request('POST', $endpoint, [
                     'headers' => [
                         'Accept' => 'application/json',
@@ -143,12 +142,12 @@ class ReviewController extends APIController
                         'stream' => false,
                     ],
                 ]);
-    
+
                 $result = json_decode($result->getBody()->getContents(), true);
 
                 $response = $result['response'];
             }
-    
+
             return new JsonResponse([
                 'content' => $response,
             ]);

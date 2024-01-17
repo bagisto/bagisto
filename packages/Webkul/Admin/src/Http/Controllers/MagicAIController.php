@@ -2,9 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use OpenAI\Laravel\Facades\OpenAI;
-use GuzzleHttp\Client;
 
 class MagicAIController extends Controller
 {
