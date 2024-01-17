@@ -121,9 +121,12 @@
         id="v-required-if-template"
     >
         <div>
-            <div class="flex justify-between">
+            <div
+                v-if="isRequire"
+                class="flex justify-between mt-4"
+            >
                 <label
-                    class="block leading-6 text-xs text-gray-800 dark:text-white font-medium"
+                    class="flex gap-1 items-center mb-1.5 text-xs text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
@@ -131,7 +134,7 @@
                 </label>
 
                 <label
-                    class="block leading-6 text-xs text-gray-800 dark:text-white font-medium"
+                    class="flex gap-1 items-center mb-1.5 text-xs text-gray-800 dark:text-white font-medium"
                     :for="name"
                 >
                     @{{ channel_locale }}
@@ -156,12 +159,12 @@
                         v-for='option in this.options'
                         :value="option.value"
                         :text="option.title"
-                    >
-                    </option>
+                    ></option>
                 </select>
             </v-field>
 
             <v-field 
+                v-if="isRequire"
                 :name="name"
                 v-slot="{ field, errorMessage }"
                 :id="name"
@@ -169,7 +172,6 @@
                 :rules="appliedRules"
                 v-model="value"
                 :label="label"
-                v-else
             >
                 <input 
                     type="text"
@@ -178,6 +180,16 @@
                     class="w-full appearance-none py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 />
             </v-field>
+
+            <v-error-message
+                :name="name"
+                v-slot="{ message }"
+            >
+                <p
+                    class="mt-1 text-red-600 text-xs italic"
+                    v-text="message"
+                ></p>
+            </v-error-message>
         </div>
     </script>
     
@@ -272,33 +284,54 @@
             },
 
             mounted() {
-                this.isRequire = this.dependSavedValue ? true : false;
-
                 this.updateValidations();
 
                 const dependElement = document.getElementById(this.depend);
 
                 if (dependElement) {
-                    dependElement.addEventListener('change', (e) => {
-                        this.dependSavedValue = !this.dependSavedValue;
-                        this.dependSavedValue = this.dependSavedValue ? 1 : 0;
-                        this.isRequire = this.dependSavedValue ? true : false;
-
-                        this.updateValidations();
-                    });
+                    dependElement.addEventListener('change', this.handleEvent);
+                    dependElement.addEventListener('load', this.handleEvent);
                 }
+
+                dependElement.dispatchEvent(new Event('change'));
             },
 
             methods: {
+                handleEvent(event) {
+                    this.isRequire = 
+                        event.target.type === 'checkbox' 
+                        ? event.target.checked
+                        : this.validations.split(',').slice(1).includes(event.target.value);
+
+                    let elements = document.getElementsByName(this.name);
+
+                    if (elements.length > 0) {
+                        let labels = Array.from(document.querySelectorAll('label'));
+
+                        labels.forEach((label) => {
+                            if (label.attributes.for && label.attributes.for.value == `${this.name}-info`) {
+                                let associatedElement = document.getElementById(`${this.name}-info`);
+                                
+                                if (
+                                    ! associatedElement 
+                                    || ! document.body.contains(associatedElement)
+                                ) {
+                                    label.style.display = 'none';
+                                }
+                            }
+                        });
+                    } 
+
+                    this.updateValidations();
+                },
+
                 updateValidations() {
                     this.appliedRules = this.validations.split('|').filter(validation => !this.validations.includes('required_if'));
 
                     if (this.isRequire) {
                         this.appliedRules.push('required');
                     } else {
-                        this.appliedRules = this.appliedRules.filter((value) => {
-                            return value !== 'required';
-                        });
+                        this.appliedRules = this.appliedRules.filter(value => value !== 'required');
                     }
 
                     this.appliedRules = this.appliedRules.join('|');

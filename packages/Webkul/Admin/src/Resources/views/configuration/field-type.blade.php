@@ -17,7 +17,7 @@
 <input type="hidden" name="keys[]" value="{{ json_encode($item) }}">
 
 <x-admin::form.control-group>
-    @if ($field['type'] == 'depends')
+    @if (! empty($field['depends']))
         @include('admin::configuration.dependent-field-type')
     @else
         <!-- Title of the input field -->
@@ -375,21 +375,21 @@
             </v-state>
         @endif
 
+        <!-- Input field validaitons error message -->
+        <x-admin::form.control-group.error
+            :control-name="$name"
+        >
+        </x-admin::form.control-group.error>
     @endif
 
     @if (isset($field['info']))
         <label
             class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
+            for="{{ $name }}-info"
         >
             {!! trans($field['info']) !!}
         </label>
     @endif
-
-    <!-- Input field validaitons error message -->
-    <x-admin::form.control-group.error
-        :control-name="$name"
-    >
-    </x-admin::form.control-group.error>
 </x-admin::form.control-group>
 
 @if ($field['type'] == 'country')

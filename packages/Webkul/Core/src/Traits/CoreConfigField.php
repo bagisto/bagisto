@@ -60,7 +60,7 @@ trait CoreConfigField
      */
     public function getDependentFieldOrValue($field, $fieldOrValue = 'field')
     {
-        $depends = explode(':', $field['depend']);
+        $depends = explode(':', $field['depends']);
 
         return $fieldOrValue === 'field'
             ? current($depends) : end($depends);
