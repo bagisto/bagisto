@@ -43,7 +43,7 @@ class CatalogRuleRepository extends Repository
     {
         $data = array_merge($data, [
             'starts_from' => ! empty($data['starts_from']) ? $data['starts_from'] : null,
-            'ends_till'   => ! empty($data['ends_till']) ? $data['ends_till']: null,
+            'ends_till'   => ! empty($data['ends_till']) ? $data['ends_till'] : null,
             'status'      => isset($data['status']),
         ]);
 
