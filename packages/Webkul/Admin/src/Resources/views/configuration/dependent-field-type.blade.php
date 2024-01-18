@@ -287,7 +287,7 @@
 
                     value: this.result,
 
-                    dependSavedValue: parseInt(this.dependResult)
+                    dependSavedValue: parseInt(this.dependResult),
                 };
             },
 
@@ -298,7 +298,6 @@
 
                 if (dependElement) {
                     dependElement.addEventListener('change', this.handleEvent);
-                    dependElement.addEventListener('load', this.handleEvent);
                 }
 
                 dependElement.dispatchEvent(new Event('change'));
