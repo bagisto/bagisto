@@ -80,7 +80,7 @@ class Cart
      * Set cart model to the variable for reuse
      *
      * @param \Webkul\Checkout\Contracts\Cart
-     * @return  void
+     * @return void
      */
     public function setCart($cart)
     {
@@ -90,7 +90,7 @@ class Cart
     /**
      * Reset cart
      *
-     * @return  void
+     * @return void
      */
     public function resetCart()
     {
