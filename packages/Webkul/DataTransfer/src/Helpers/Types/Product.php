@@ -25,9 +25,9 @@ class Product extends AbstractType
     const ERROR_INVALID_ATTRIBUTE_FAMILY_CODE = 'attribute_family_code_not_found';
 
     /**
-     * @var array
+     * Error message templates
      */
-    protected $messageTemplates = [
+    protected array $messageTemplates = [
         self::ERROR_INVALID_TYPE                  => 'Product type is invalid or not supported',
         self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'Product with specified SKU not found',
         self::ERROR_DUPLICATE_URL_KEY             => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
@@ -36,15 +36,13 @@ class Product extends AbstractType
 
     /**
      * Permanent entity columns
-     *
-     * @var string[]
      */
-    protected $permanentAttributes = ['sku'];
+    protected array $permanentAttributes = ['sku'];
 
     /**
-     * @var string
+     * Permanent entity columns
      */
-    protected $masterAttributeCode = 'sku';
+    protected string $masterAttributeCode = 'sku';
 
     /**
      * Permanent entity columns
@@ -69,17 +67,13 @@ class Product extends AbstractType
 
     /**
      * Permanent entity columns
-     *
-     * @var array
      */
-    protected $urlKeys = [];
+    protected array $urlKeys = [];
 
     /**
      * Permanent entity columns
-     *
-     * @var string[]
      */
-    protected $validColumnNames = [
+    protected array $validColumnNames = [
         'locale',
         'type',
         'attribute_family_code',
@@ -141,8 +135,6 @@ class Product extends AbstractType
 
     /**
      * Retrieve valid column names
-     *
-     * @return array
      */
     public function getValidColumnNames(): array
     {
@@ -152,7 +144,7 @@ class Product extends AbstractType
     /**
      * Save validated batches
      */
-    protected function saveValidatedBatches(): void
+    protected function saveValidatedBatches(): self
     {
         $source = $this->getSource();
 
@@ -175,12 +167,12 @@ class Product extends AbstractType
         $this->checkForDuplicateUrlKeys();
 
         parent::saveValidatedBatches();
+
+        return $this;
     }
 
     /**
      * Check that url_keys are not assigned to other products in DB
-     *
-     * @return void
      */
     protected function checkForDuplicateUrlKeys(): void
     {
@@ -410,7 +402,6 @@ class Product extends AbstractType
      * Add row as skipped
      *
      * @param  int|null  $rowNumber
-     * @param  string  $errorCode
      * @param  string|null  $columnName
      * @param  string|null  $errorMessage
      * @return $this

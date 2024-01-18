@@ -57,11 +57,13 @@ abstract class AbstractType
     protected $errorHelper;
 
     /**
-     * @var \Webkul\DataTransfer\Contracts\Import
+     * Import instance.
      */
-    protected $import;
+    protected ImportContract $import;
 
     /**
+     * Source instance.
+     * 
      * @var \Webkul\DataTransfer\Helpers\Source
      */
     protected $source;
@@ -202,6 +204,13 @@ abstract class AbstractType
         $batchRows = [];
 
         $source->rewind();
+
+        /**
+         * Clean previous saved batches
+         */
+        $this->importBatchRepository->deleteWhere([
+            'import_id' => $this->import->id,
+        ]);
 
         while (
             $source->valid()

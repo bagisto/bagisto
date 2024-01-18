@@ -2,48 +2,39 @@
 
 namespace Webkul\DataTransfer\Helpers;
 
-use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use League\Csv\Reader;
 
 class Source
 {
     /**
-     * @var \League\Csv\Reader
+     * CSV reader
      */
-    protected $reader;
+    protected Reader $reader;
 
     /**
-     * @var array
+     * Column names
      */
-    protected $columnNames = [];
+    protected array $columnNames = [];
 
     /**
      * Quantity of columns
-     *
-     * @var int
      */
-    protected $totalColumns = 0;
+    protected int $totalColumns = 0;
 
     /**
      * Current row
-     *
-     * @var array
      */
-    protected $currentRowData = [];
+    protected array $currentRowData = [];
 
     /**
      * Current row number
-     *
-     * -1 means "out of bounds"
-     *
-     * @var int
      */
-    protected $currentRowNumber = -1;
+    protected int $currentRowNumber = -1;
 
     /**
-     * @var bool
+     * Flag to indicate that wrong quote was found
      */
-    protected $foundWrongQuoteFlag = false;
+    protected bool $foundWrongQuoteFlag = false;
 
     /**
      * @return void
@@ -70,10 +61,8 @@ class Source
 
     /**
      * Return the key of the current element (\Iterator interface)
-     *
-     * @return int -1 if out of bounds, 0 or more otherwise
      */
-    public function getCurrentRowNumber()
+    public function getCurrentRowNumber(): int
     {
         return $this->currentRowNumber;
     }
@@ -89,7 +78,7 @@ class Source
     /**
      * Read next line from CSV-file
      */
-    public function current(): array|bool
+    public function current(): array
     {
         $row = $this->currentRowData;
 
@@ -106,10 +95,8 @@ class Source
 
     /**
      * Read next line from CSV-file
-     *
-     * @return array|bool
      */
-    public function next()
+    public function next(): void
     {
         $this->currentRowNumber++;
 
@@ -126,10 +113,8 @@ class Source
 
     /**
      * Read next line from CSV-file
-     *
-     * @return array|bool
      */
-    protected function getNextRow()
+    protected function getNextRow(): array
     {
         $parsed = $this->reader->fetchOne($this->currentRowNumber);
 
@@ -150,10 +135,8 @@ class Source
 
     /**
      * Rewind the \Iterator to the first element (\Iterator interface)
-     *
-     * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->currentRowNumber = -1;
 
@@ -194,20 +177,16 @@ class Source
 
     /**
      * Column names getter.
-     *
-     * @return array
      */
-    public function getColumnNames()
+    public function getColumnNames(): array
     {
         return $this->columnNames;
     }
 
     /**
      * Column names getter.
-     *
-     * @return int
      */
-    public function getTotalColumns()
+    public function getTotalColumns(): int
     {
         return $this->columnNames;
     }

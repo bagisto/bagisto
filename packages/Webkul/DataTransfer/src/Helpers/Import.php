@@ -15,10 +15,8 @@ class Import
 
     /**
      * Import instance.
-     * 
-     * @var \Webkul\DataTransfer\Contracts\Import
      */
-    protected $import;
+    protected ImportContract $import;
 
     /**
      * Error helper instance.
