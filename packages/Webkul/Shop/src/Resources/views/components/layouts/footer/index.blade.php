@@ -101,7 +101,7 @@
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
 
         <p class="text-sm text-[#4D4D4D]">
-            @lang('shop::app.components.layouts.footer.footer-text')
+            @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
         </p>
 
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.after') !!}

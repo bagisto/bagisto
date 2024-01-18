@@ -606,7 +606,7 @@ return [
                 ],
 
                 'images' => [
-                    'info'  => 'Die Bildauflösung sollte etwa 609px x 560px betragen',
+                    'info'  => 'Die Bildauflösung sollte etwa 560px X 609px sein',
                     'title' => 'Bilder',
                 ],
 

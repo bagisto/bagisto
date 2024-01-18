@@ -606,8 +606,8 @@ return [
                 ],
 
                 'images' => [
+                    'info'  => 'Resim çözünürlüğü 560px X 609px gibi olmalıdır',
                     'title' => 'Resimler',
-                    'info'  => 'Resim çözünürlüğü 609 piksel X 560 piksel gibi olmalıdır',
                 ],
 
                 'videos' => [
