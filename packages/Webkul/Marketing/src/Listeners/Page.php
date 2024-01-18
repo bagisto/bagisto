@@ -73,7 +73,7 @@ class Page
             return;
         }
 
-        $currentURLKey = request()->input($locale . '.url_key');
+        $currentURLKey = request()->input($locale.'.url_key');
 
         if ($translations['url_key'] === $currentURLKey) {
             return;

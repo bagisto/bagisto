@@ -20,7 +20,7 @@ class CatalogRuleFactory extends Factory
     public function definition()
     {
         $startsFrom = $this->faker->dateTimeBetween('now', '+30 days');
-        $endsTill = $this->faker->dateTimeBetween($startsFrom, $startsFrom->format('Y-m-d') . ' +30 days');
+        $endsTill = $this->faker->dateTimeBetween($startsFrom, $startsFrom->format('Y-m-d').' +30 days');
 
         return [
             'starts_from'     => $this->faker->dateTimeThisMonth,

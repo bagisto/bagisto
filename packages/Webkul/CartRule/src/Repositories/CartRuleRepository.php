@@ -266,21 +266,21 @@ class CartRuleRepository extends Repository
             }
 
             $attributes[2]['children'][] = [
-                'key'     => 'product|' . $attribute->code,
+                'key'     => 'product|'.$attribute->code,
                 'type'    => $attribute->type,
                 'label'   => $attribute->name,
                 'options' => $options,
             ];
 
             $attributes[2]['children'][] = [
-                'key'     => 'product|children::' . $attribute->code,
+                'key'     => 'product|children::'.$attribute->code,
                 'type'    => $attribute->type,
                 'label'   => trans('admin::app.marketing.promotions.cart-rules.create.attribute-name-children-only', ['attribute_name' => $attribute->name]),
                 'options' => $options,
             ];
 
             $attributes[2]['children'][] = [
-                'key'     => 'product|parent::' . $attribute->code,
+                'key'     => 'product|parent::'.$attribute->code,
                 'type'    => $attribute->type,
                 'label'   => trans('admin::app.marketing.promotions.cart-rules.create.attribute-name-parent-only', ['attribute_name' => $attribute->name]),
                 'options' => $options,

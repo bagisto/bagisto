@@ -437,7 +437,7 @@ class Cart
         $cartPayment = new CartPayment;
 
         $cartPayment->method = $payment['method'];
-        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $payment['method'] . '.title');
+        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$payment['method'].'.title');
         $cartPayment->cart_id = $cart->id;
         $cartPayment->save();
 
@@ -800,7 +800,7 @@ class Cart
         if ($this->getCart()->haveStockableItems()) {
             $finalData = array_merge($finalData, [
                 'shipping_method'               => $data['selected_shipping_rate']['method'],
-                'shipping_title'                => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],
+                'shipping_title'                => $data['selected_shipping_rate']['carrier_title'].' - '.$data['selected_shipping_rate']['method_title'],
                 'shipping_description'          => $data['selected_shipping_rate']['method_description'],
                 'shipping_amount'               => $data['selected_shipping_rate']['price'],
                 'base_shipping_amount'          => $data['selected_shipping_rate']['base_price'],

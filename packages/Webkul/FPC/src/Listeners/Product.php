@@ -62,7 +62,7 @@ class Product
         $products = $this->getAllRelatedProducts($product);
 
         foreach ($products as $product) {
-            $urls[] = '/' . $product->url_key;
+            $urls[] = '/'.$product->url_key;
         }
 
         return $urls;

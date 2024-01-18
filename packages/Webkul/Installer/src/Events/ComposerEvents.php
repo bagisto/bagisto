@@ -15,6 +15,6 @@ class ComposerEvents
     {
         $output = new ConsoleOutput();
 
-        $output->writeln(file_get_contents(__DIR__ . '/../Templates/on-boarding.php'));
+        $output->writeln(file_get_contents(__DIR__.'/../Templates/on-boarding.php'));
     }
 }

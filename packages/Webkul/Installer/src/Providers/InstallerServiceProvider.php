@@ -27,11 +27,11 @@ class InstallerServiceProvider extends ServiceProvider
     {
         $router->middlewareGroup('install', [CanInstall::class]);
 
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'installer');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'installer');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'installer');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'installer');
 
         $router->aliasMiddleware('installer_locale', Locale::class);
 

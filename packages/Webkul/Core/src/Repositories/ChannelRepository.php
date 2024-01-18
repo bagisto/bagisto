@@ -83,7 +83,7 @@ class ChannelRepository extends Repository
     public function uploadImages($data, $channel, $type = 'logo')
     {
         if (request()->hasFile($type)) {
-            $channel->{$type} = current(request()->file($type))->store('channel/' . $channel->id);
+            $channel->{$type} = current(request()->file($type))->store('channel/'.$channel->id);
 
             $channel->save();
         } else {

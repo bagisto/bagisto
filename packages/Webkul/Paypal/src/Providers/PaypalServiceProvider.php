@@ -13,9 +13,9 @@ class PaypalServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__ . '/../Http/routes.php';
+        include __DIR__.'/../Http/routes.php';
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'paypal');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'paypal');
 
         $this->app->register(EventServiceProvider::class);
     }
@@ -38,7 +38,7 @@ class PaypalServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/paymentmethods.php', 'payment_methods'
+            dirname(__DIR__).'/Config/paymentmethods.php', 'payment_methods'
         );
     }
 }

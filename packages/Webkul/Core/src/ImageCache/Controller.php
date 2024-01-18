@@ -128,7 +128,7 @@ class Controller extends ImageCacheController
          */
         return new IlluminateResponse($content, $statusCode, [
             'Content-Type'   => $mime,
-            'Cache-Control'  => 'max-age=' . $maxAge . ', public',
+            'Cache-Control'  => 'max-age='.$maxAge.', public',
             'Content-Length' => strlen($content),
             'Etag'           => $eTag,
         ]);
