@@ -67,7 +67,7 @@ class CartRuleRepository extends Repository
                 'usage_limit'        => $data['uses_per_coupon'] ?? 0,
                 'usage_per_customer' => $data['usage_per_customer'] ?? 0,
                 'is_primary'         => 1,
-                'expired_at'         => $data['ends_till'] ?: null,
+                'expired_at'         => ! empty($data['ends_till']) ? $data['ends_till'] : null,
             ]);
         }
 
