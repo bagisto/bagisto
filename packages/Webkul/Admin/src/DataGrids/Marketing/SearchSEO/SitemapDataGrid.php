@@ -63,7 +63,7 @@ class SitemapDataGrid extends DataGrid
             'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
-                return Storage::url($row->path . '/' . $row->file_name);
+                return Storage::url($row->path.'/'.$row->file_name);
             },
         ]);
     }

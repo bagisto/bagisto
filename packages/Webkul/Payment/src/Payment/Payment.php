@@ -76,7 +76,7 @@ abstract class Payment
      */
     public function getConfigData($field)
     {
-        return core()->getConfigData('sales.payment_methods.' . $this->getCode() . '.' . $field);
+        return core()->getConfigData('sales.payment_methods.'.$this->getCode().'.'.$field);
     }
 
     /**

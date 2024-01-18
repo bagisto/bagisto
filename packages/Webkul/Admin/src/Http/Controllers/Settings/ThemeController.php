@@ -51,7 +51,7 @@ class ThemeController extends Controller
             'name'       => 'required',
             'sort_order' => 'required|numeric',
             'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
-            'channel_id' => 'required|in:' . implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
         ]);
 
         Event::dispatch('theme_customization.create.before');
@@ -139,7 +139,7 @@ class ThemeController extends Controller
 
         $theme?->delete();
 
-        Storage::deleteDirectory('theme/' . $theme->id);
+        Storage::deleteDirectory('theme/'.$theme->id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 

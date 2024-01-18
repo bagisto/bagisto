@@ -179,7 +179,7 @@ abstract class AbstractType
                 || $attribute->type === 'file'
             ) {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/' . $product->id)
+                    ? request()->file($attribute->code)->store('product/'.$product->id)
                     : $data[$attribute->code];
             }
 
@@ -288,7 +288,7 @@ abstract class AbstractType
 
         $copiedProduct = $this->product
             ->replicate()
-            ->fill(['sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6)]);
+            ->fill(['sku' => 'temporary-sku-'.substr(md5(microtime()), 0, 6)]);
 
         $copiedProduct->save();
 
@@ -399,11 +399,11 @@ abstract class AbstractType
     {
         $path = explode('/', $media->path);
 
-        $copiedMedia->path = 'product/' . $product->id . '/' . end($path);
+        $copiedMedia->path = 'product/'.$product->id.'/'.end($path);
 
         $copiedMedia->save();
 
-        Storage::makeDirectory('product/' . $product->id);
+        Storage::makeDirectory('product/'.$product->id);
 
         Storage::copy($media->path, $copiedMedia->path);
     }
@@ -1063,7 +1063,7 @@ abstract class AbstractType
         $offerLines = trans('shop::app.products.type.abstract.offers', [
             'qty'      => $customerGroupPrice->qty,
             'price'    => core()->currency($price),
-            'discount' => '<span>' . $discount . '%</span>',
+            'discount' => '<span>'.$discount.'%</span>',
         ]);
 
         return $offerLines;

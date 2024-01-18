@@ -27,10 +27,10 @@ class ConfigurationForm extends FormRequest
             $data = json_decode($item, true);
 
             return collect($data['fields'])->mapWithKeys(function ($field) use ($data) {
-                $key = $data['key'] . '.' . $field['name'];
+                $key = $data['key'].'.'.$field['name'];
 
                 // Check delete key exist in the request
-                if (! $this->has($key . '.delete')) {
+                if (! $this->has($key.'.delete')) {
                     $validation = isset($field['validation']) && $field['validation'] ? $field['validation'] : 'nullable';
 
                     return [$key => $validation];

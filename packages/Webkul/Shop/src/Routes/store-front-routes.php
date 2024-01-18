@@ -20,7 +20,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Fallback route.
      */
-    Route::fallback(ProductsCategoriesProxyController::class . '@index')
+    Route::fallback(ProductsCategoriesProxyController::class.'@index')
         ->name('shop.product_or_category.index')
         ->middleware('cacheResponse');
 

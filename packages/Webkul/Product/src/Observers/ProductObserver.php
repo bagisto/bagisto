@@ -14,6 +14,6 @@ class ProductObserver
      */
     public function deleted($product)
     {
-        Storage::deleteDirectory('product/' . $product->id);
+        Storage::deleteDirectory('product/'.$product->id);
     }
 }

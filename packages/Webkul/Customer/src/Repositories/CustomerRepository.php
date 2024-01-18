@@ -75,8 +75,8 @@ class CustomerRepository extends Repository
             $request = request();
 
             foreach ($data[$type] as $imageId => $image) {
-                $file = $type . '.' . $imageId;
-                $dir = 'customer/' . $customer->id;
+                $file = $type.'.'.$imageId;
+                $dir = 'customer/'.$customer->id;
 
                 if ($request->hasFile($file)) {
                     if ($customer->{$type}) {

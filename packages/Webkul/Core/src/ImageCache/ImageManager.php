@@ -41,8 +41,8 @@ class ImageManager extends BaseImageManager
             'http' => [
                 'method'           => 'GET',
                 'protocol_version' => 1.1, // force use HTTP 1.1 for service mesh environment with envoy
-                'header'           => "Accept-language: en\r\n" .
-                "Domain: $domain\r\n" .
+                'header'           => "Accept-language: en\r\n".
+                "Domain: $domain\r\n".
                 "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36\r\n",
             ],
         ];
@@ -54,7 +54,7 @@ class ImageManager extends BaseImageManager
         }
 
         throw new NotReadableException(
-            'Unable to init from given url (' . $url . ').'
+            'Unable to init from given url ('.$url.').'
         );
     }
 

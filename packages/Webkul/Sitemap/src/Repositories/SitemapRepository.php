@@ -43,7 +43,7 @@ class SitemapRepository extends Repository
     {
         $sitemap = $this->find($id);
 
-        Storage::delete($sitemap->path . '/' . $sitemap->file_name);
+        Storage::delete($sitemap->path.'/'.$sitemap->file_name);
 
         $sitemap = parent::update($attributes, $id);
 
@@ -63,6 +63,6 @@ class SitemapRepository extends Repository
             ->add(Category::all())
             ->add(Product::all())
             ->add(Page::all())
-            ->writeToDisk('public', $sitemap->path . '/' . $sitemap->file_name);
+            ->writeToDisk('public', $sitemap->path.'/'.$sitemap->file_name);
     }
 }

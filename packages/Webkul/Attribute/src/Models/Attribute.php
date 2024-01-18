@@ -113,7 +113,7 @@ class Attribute extends TranslatableModel implements AttributeContract
             $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
 
             if ($retVal) {
-                $validations[] = 'size:' . $retVal;
+                $validations[] = 'size:'.$retVal;
             }
         }
 
@@ -121,17 +121,17 @@ class Attribute extends TranslatableModel implements AttributeContract
             $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
 
             if ($retVal) {
-                $validations[] = 'size:' . $retVal . ', mimes: ["image/bmp", "image/jpeg", "image/jpg", "image/png", "image/webp"]';
+                $validations[] = 'size:'.$retVal.', mimes: ["image/bmp", "image/jpeg", "image/jpg", "image/png", "image/webp"]';
             }
         }
 
         if ($this->validation == 'regex') {
-            $validations[] = 'regex: ' . $this->regex;
+            $validations[] = 'regex: '.$this->regex;
         } elseif ($this->validation) {
-            $validations[] = $this->validation . ': true';
+            $validations[] = $this->validation.': true';
         }
 
-        $validations = '{ ' . implode(', ', array_filter($validations)) . ' }';
+        $validations = '{ '.implode(', ', array_filter($validations)).' }';
 
         return $validations;
     }

@@ -82,7 +82,7 @@ it('should upload link the product upload link', function () {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.upload_link', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
+        'file' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
     ])
         ->assertOk()
         ->assertJsonPath('file_name', $file->getClientOriginalName());
@@ -100,7 +100,7 @@ it('should upload the sample file', function () {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.upload_sample', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
+        'file' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
     ])
         ->assertOk()
         ->assertJsonPath('file_name', $file->name);
@@ -123,12 +123,12 @@ it('should download the product which is downloadable', function () {
 
         'attribute_value' => [
             $attribute->code => [
-                'text_value' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
+                'text_value' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
             ],
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    $fileName = $file->store('product/' . $product->id);
+    $fileName = $file->store('product/'.$product->id);
 
     $atttributeValues = ProductAttributeValue::where('product_id', $product->id)
         ->where('attribute_id', $attribute->id)->first();

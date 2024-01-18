@@ -351,7 +351,7 @@ it('should print/download the invoice', function () {
         'state'         => 'paid',
     ])->create();
 
-    $fileName = 'invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf';
+    $fileName = 'invoice-'.$invoice->created_at->format('d-m-Y').'.pdf';
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -359,5 +359,5 @@ it('should print/download the invoice', function () {
     get(route('admin.sales.invoices.print', $invoice->id))
         ->assertOk()
         ->assertHeader('Content-Type', 'application/pdf')
-        ->assertHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        ->assertHeader('Content-Disposition', 'attachment; filename="'.$fileName.'"');
 });
