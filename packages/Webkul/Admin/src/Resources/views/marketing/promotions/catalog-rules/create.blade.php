@@ -501,10 +501,6 @@
                         this.$root.onSubmit(e)
                     },
 
-                    onSubmit(e) {
-                        this.$root.onSubmit(e)
-                    },
-
                     redirectBack(fallbackUrl) {
                         this.$root.redirectBack(fallbackUrl)
                     }

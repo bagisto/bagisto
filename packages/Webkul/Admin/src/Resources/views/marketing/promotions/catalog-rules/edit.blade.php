@@ -516,10 +516,6 @@
                         this.$root.onSubmit(e)
                     },
 
-                    onSubmit(e) {
-                        this.$root.onSubmit(e)
-                    },
-
                     redirectBack(fallbackUrl) {
                         this.$root.redirectBack(fallbackUrl)
                     }
@@ -897,7 +893,6 @@
                         });
 
                         if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
-                            this.condition.operator = '{}';
 
                             this.condition.value = this.condition.value == '' && this.condition.value != undefined
                                     ? []
