@@ -3,8 +3,8 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\MagicAI\Facades\MagicAI;
 
 class OnepageController extends Controller
 {
@@ -94,12 +94,12 @@ class OnepageController extends Controller
 
             try {
                 $model = core()->getConfigData('general.magic_ai.checkout_message.model');
-    
+
                 $response = MagicAI::setModel($model)
                     ->setTemperature(0)
                     ->setPrompt($this->getCheckoutPrompt($order))
                     ->ask();
-                
+
                 $order->checkout_message = $response;
             } catch (\Exception $e) {
             }

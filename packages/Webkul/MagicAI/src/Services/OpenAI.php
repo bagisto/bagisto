@@ -14,8 +14,7 @@ class OpenAI
         protected string $prompt,
         protected float $temperature,
         protected bool $stream = false
-    )
-    {
+    ) {
         $this->setConfig();
     }
 

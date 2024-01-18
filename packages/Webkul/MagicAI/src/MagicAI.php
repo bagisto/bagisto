@@ -2,8 +2,8 @@
 
 namespace Webkul\MagicAI;
 
-use Webkul\MagicAI\Services\OpenAI;
 use Webkul\MagicAI\Services\Ollama;
+use Webkul\MagicAI\Services\OpenAI;
 
 class MagicAI
 {
