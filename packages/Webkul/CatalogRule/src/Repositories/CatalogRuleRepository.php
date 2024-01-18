@@ -132,7 +132,7 @@ class CatalogRuleRepository extends Repository
             }
 
             $attributes[0]['children'][] = [
-                'key'     => 'product|' . $attribute->code,
+                'key'     => 'product|'.$attribute->code,
                 'type'    => $attribute->type,
                 'label'   => $attribute->name,
                 'options' => $options,

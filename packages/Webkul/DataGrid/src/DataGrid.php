@@ -228,7 +228,7 @@ abstract class DataGrid
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
                             ->filter(fn ($column) => $column->searchable && $column->type !== ColumnTypeEnum::BOOLEAN->value)
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%' . $value . '%'));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%'));
                     }
                 });
             } else {
@@ -257,7 +257,7 @@ abstract class DataGrid
                     default:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%' . $value . '%');
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
                             }
                         });
 
@@ -334,7 +334,7 @@ abstract class DataGrid
      */
     public function setExportFile($records, $format = 'csv')
     {
-        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36) . '.' . $format);
+        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
     }
 
     /**
@@ -378,7 +378,7 @@ abstract class DataGrid
                 $getUrl = $action->url;
 
                 $record->actions[] = [
-                    'index'  => ! empty($action->index) ? $action->index : 'action_' . $index + 1,
+                    'index'  => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
                     'icon'   => $action->icon,
                     'title'  => $action->title,
                     'method' => $action->method,

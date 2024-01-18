@@ -28,8 +28,8 @@ class CategoryRequest extends FormRequest
 
         if ($id = request('id')) {
             return [
-                $locale . '.slug' => ['required', new ProductCategoryUniqueSlug('category_translations', $id)],
-                $locale . '.name' => 'required',
+                $locale.'.slug'   => ['required', new ProductCategoryUniqueSlug('category_translations', $id)],
+                $locale.'.name'   => 'required',
                 'image.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
             ];
         }

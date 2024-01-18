@@ -40,9 +40,9 @@ class CatalogRuleProduct
 
         $rows = [];
 
-        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from . ' 00:00:01') : null;
+        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from.' 00:00:01') : null;
 
-        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till . ' 23:59:59') : null;
+        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till.' 23:59:59') : null;
 
         $channelIds = $rule->channels->pluck('id');
 
@@ -221,15 +221,15 @@ class CatalogRuleProduct
             return $query;
         }
 
-        $query->leftJoin('product_attribute_values as ' . 'pav_' . $attribute->code, function ($qb) use ($attribute) {
-            $qb->where('pav_' . $attribute->code . '.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
-                ->where('pav_' . $attribute->code . '.locale', $attribute->value_per_locale ? app()->getLocale() : null);
+        $query->leftJoin('product_attribute_values as '.'pav_'.$attribute->code, function ($qb) use ($attribute) {
+            $qb->where('pav_'.$attribute->code.'.channel', $attribute->value_per_channel ? core()->getDefaultChannelCode() : null)
+                ->where('pav_'.$attribute->code.'.locale', $attribute->value_per_locale ? app()->getLocale() : null);
 
-            $qb->on('products.id', 'pav_' . $attribute->code . '.product_id')
-                ->where('pav_' . $attribute->code . '.attribute_id', $attribute->id);
+            $qb->on('products.id', 'pav_'.$attribute->code.'.product_id')
+                ->where('pav_'.$attribute->code.'.attribute_id', $attribute->id);
         });
 
-        $query->addSelect('pav_' . $attribute->code . '.' . $attribute->column_name . ' as ' . $attribute->code);
+        $query->addSelect('pav_'.$attribute->code.'.'.$attribute->column_name.' as '.$attribute->code);
 
         return $query;
     }

@@ -111,25 +111,25 @@ class OrderDataGrid extends DataGrid
             'closure'    => function ($row) {
                 switch ($row->status) {
                     case 'processing':
-                        return '<p class="label-processing">' . trans('shop::app.customers.account.orders.status.options.processing') . '</p>';
+                        return '<p class="label-processing">'.trans('shop::app.customers.account.orders.status.options.processing').'</p>';
 
                     case 'completed':
-                        return '<p class="label-active">' . trans('shop::app.customers.account.orders.status.options.completed') . '</p>';
+                        return '<p class="label-active">'.trans('shop::app.customers.account.orders.status.options.completed').'</p>';
 
                     case 'canceled':
-                        return '<p class="label-canceled">' . trans('shop::app.customers.account.orders.status.options.canceled') . '</p>';
+                        return '<p class="label-canceled">'.trans('shop::app.customers.account.orders.status.options.canceled').'</p>';
 
                     case 'closed':
-                        return '<p class="label-closed">' . trans('shop::app.customers.account.orders.status.options.closed') . '</p>';
+                        return '<p class="label-closed">'.trans('shop::app.customers.account.orders.status.options.closed').'</p>';
 
                     case 'pending':
-                        return '<p class="label-pending">' . trans('shop::app.customers.account.orders.status.options.pending') . '</p>';
+                        return '<p class="label-pending">'.trans('shop::app.customers.account.orders.status.options.pending').'</p>';
 
                     case 'pending_payment':
-                        return '<p class="label-pending">' . trans('shop::app.customers.account.orders.status.options.pending-payment') . '</p>';
+                        return '<p class="label-pending">'.trans('shop::app.customers.account.orders.status.options.pending-payment').'</p>';
 
                     case 'fraud':
-                        return '<p class="label-canceled">' . trans('shop::app.customers.account.orders.status.options.fraud') . '</p>';
+                        return '<p class="label-canceled">'.trans('shop::app.customers.account.orders.status.options.fraud').'</p>';
                 }
             },
         ]);

@@ -24,7 +24,7 @@ class Review
      */
     public function afterUpdate($review)
     {
-        ResponseCache::forget('/' . $review->product->url_key);
+        ResponseCache::forget('/'.$review->product->url_key);
     }
 
     /**
@@ -37,6 +37,6 @@ class Review
     {
         $review = $this->productReviewRepository->find($reviewId);
 
-        ResponseCache::forget('/' . $review->product->url_key);
+        ResponseCache::forget('/'.$review->product->url_key);
     }
 }

@@ -66,7 +66,7 @@ class BagistoPublish extends Command
     {
         $this->line('');
         $this->line('-----------------------------------------');
-        $this->info('Publishing ' . $provider['name']);
+        $this->info('Publishing '.$provider['name']);
         $this->line('-----------------------------------------');
 
         $this->call('vendor:publish', [

@@ -30,6 +30,71 @@
 
                     <!-- Modal Content -->
                     <x-slot:content>
+                        <!-- LLM Model -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.components.tinymce.ai-generation.model')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="model"
+                                rules="required"
+                                v-model="ai.model"
+                                :label="trans('admin::app.components.tinymce.ai-generation.model')"
+                            >
+                                <option value="gpt-3.5-turbo">
+                                    @lang('admin::app.components.tinymce.ai-generation.gpt-3-5-turbo')
+                                </option>
+
+                                <option value="llama2">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama2')
+                                </option>
+
+                                <option value="mistral">
+                                    @lang('admin::app.components.tinymce.ai-generation.mistral')
+                                </option>
+
+                                <option value="dolphin-phi">
+                                    @lang('admin::app.components.tinymce.ai-generation.dolphin-phi')
+                                </option>
+
+                                <option value="phi">
+                                    @lang('admin::app.components.tinymce.ai-generation.phi')
+                                </option>
+
+                                <option value="starling-lm">
+                                    @lang('admin::app.components.tinymce.ai-generation.starling-lm')
+                                </option>
+
+                                <option value="llama2-uncensored">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama2-uncensored')
+                                </option>
+
+                                <option value="llama2:13b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama2:13b')
+                                </option>
+
+                                <option value="llama2:70b">
+                                    @lang('admin::app.components.tinymce.ai-generation.llama2:70b')
+                                </option>
+
+                                <option value="orca-mini">
+                                    @lang('admin::app.components.tinymce.ai-generation.orca-mini')
+                                </option>
+
+                                <option value="vicuna">
+                                    @lang('admin::app.components.tinymce.ai-generation.vicuna')
+                                </option>
+
+                                <option value="llava">
+                                    @lang('admin::app.components.tinymce.ai-generation.llava')
+                                </option>
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error control-name="model"></x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
                         <!-- Prompt -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -127,6 +192,8 @@
 
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.content_generation.enabled') }}"),
+
+                        model: null,
 
                         prompt: null,
 
@@ -295,7 +362,10 @@
                 generate(params, { resetForm, resetField, setErrors }) {
                     this.isLoading = true;
 
-                    this.$axios.post("{{ route('admin.magic_ai.content') }}", { prompt: params['prompt'] })
+                    this.$axios.post("{{ route('admin.magic_ai.content') }}", {
+                        prompt: params['prompt'],
+                        model: params['model']
+                    })
                         .then(response => {
                             this.isLoading = false;
 

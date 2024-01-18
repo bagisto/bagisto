@@ -17,7 +17,7 @@ abstract class Paypal extends Payment
     {
         return sprintf('https://www.%spaypal.com/cgi-bin/webscr%s',
             $this->getConfigData('sandbox') ? 'sandbox.' : '',
-            $params ? '?' . http_build_query($params) : ''
+            $params ? '?'.http_build_query($params) : ''
         );
     }
 

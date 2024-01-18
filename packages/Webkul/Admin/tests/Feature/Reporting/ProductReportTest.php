@@ -456,7 +456,7 @@ it('should return the downloadable response for product stats', function () {
         'type'   => 'total-sold-quantities',
     ]))
         ->assertOk()
-        ->assertDownload('total-sold-quantities.' . $format);
+        ->assertDownload('total-sold-quantities.'.$format);
 });
 
 it('should return the product view page', function () {

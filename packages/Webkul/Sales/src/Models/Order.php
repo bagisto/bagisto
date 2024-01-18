@@ -88,7 +88,7 @@ class Order extends Model implements OrderContract
      */
     public function getCustomerFullNameAttribute(): string
     {
-        return $this->customer_first_name . ' ' . $this->customer_last_name;
+        return $this->customer_first_name.' '.$this->customer_last_name;
     }
 
     /**

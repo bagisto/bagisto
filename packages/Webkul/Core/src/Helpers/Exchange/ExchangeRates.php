@@ -24,7 +24,7 @@ class ExchangeRates extends ExchangeRate
     /**
      * Create a new helper instance.
      *
-     * @return  void
+     * @return void
      */
     public function __construct(
         protected CurrencyRepository $currencyRepository,

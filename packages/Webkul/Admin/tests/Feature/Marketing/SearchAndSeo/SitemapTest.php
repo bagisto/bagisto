@@ -29,7 +29,7 @@ it('should store the newly created sitemap', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
-        'file_name' => $fileName = strtolower(fake()->word()) . '.xml',
+        'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path'      => $filePath = '/',
     ])
         ->assertOk()
@@ -50,7 +50,7 @@ it('should update the sitemap', function () {
 
     putJson(route('admin.marketing.search_seo.sitemaps.update'), [
         'id'        => $sitemap->id,
-        'file_name' => $fileName = strtolower(fake()->word()) . '.xml',
+        'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path'      => $sitemap->path,
     ])
         ->assertOk()
