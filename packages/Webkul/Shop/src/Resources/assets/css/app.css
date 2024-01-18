@@ -343,6 +343,10 @@
         background-position-y: 50%;
     }
 
+    [dir="rtl"] .custom-select {
+        background-position-x: calc(100% - (100% - 10px));
+    }
+
     * {
         @apply box-border font-poppins;
     }
@@ -365,6 +369,38 @@
 
     .direction-rtl {
         direction: rtl;
+    }
+    
+    .label-pending,
+    .label-processing,
+    .label-closed,
+    .label-canceled,
+    .label-info,
+    .label-completed,
+    .label-active {
+        @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
+    }
+
+	.label-pending {
+		@apply bg-yellow-500;
+	}
+
+	.label-processing,
+	.label-completed,
+    .label-active {
+		@apply bg-darkGreen;
+	}
+
+	.label-closed {
+		@apply bg-darkBlue;
+	}
+
+    .label-canceled {
+        @apply bg-darkPink;
+    }
+
+    .label-info {
+        @apply bg-slate-400;
     }
 
     .primary-button {

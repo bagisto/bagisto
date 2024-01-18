@@ -139,8 +139,10 @@
                 deep: true,
 
                 handler(newImages, oldImages) {
-                    if (JSON.stringify(newImages) !== JSON.stringify(oldImages)) {
-                        this.baseFile.path = newImages[this.activeIndex].large_image_url;
+                    let selectedImage = newImages?.[this.activeIndex];
+
+                    if (JSON.stringify(newImages) !== JSON.stringify(oldImages) && selectedImage?.large_image_url) {
+                        this.baseFile.path = selectedImage.large_image_url;
                     }
                 },
             },
@@ -160,7 +162,9 @@
 
         computed: {
             lengthOfMedia() {
-                return [...this.media.images, ...this.media.videos].length > 5;
+                if (this.media.images.length) {
+                    return [...this.media.images, ...this.media.videos].length > 5;
+                }
             }
         },
 

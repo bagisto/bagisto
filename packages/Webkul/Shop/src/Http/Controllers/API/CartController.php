@@ -234,7 +234,15 @@ class CartController extends APIController
      */
     public function crossSellProducts()
     {
-        $productIds = Cart::getCart()->items->pluck('product_id')->toArray();
+        $cart = Cart::getCart();
+
+        if (! $cart) {
+            return new JsonResource([
+                'data' => [],
+            ]);
+        }
+
+        $productIds = $cart->items->pluck('product_id')->toArray();
 
         $products = $this->productRepository
             ->select('products.*', 'product_cross_sells.child_id')

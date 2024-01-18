@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.customers.customers.view.title')
-    </x-slot:title>
+    </x-slot>
 
     <div class="grid">
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">

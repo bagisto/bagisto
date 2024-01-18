@@ -8,7 +8,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.channels.edit.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.channels.edit.before') !!}
 
@@ -238,7 +238,7 @@
                                 @lang('admin::app.settings.channels.create.select-theme')
                             </option>
 
-                            @foreach (config('themes.themes') as $themeCode => $theme)
+                            @foreach (config('themes.shop') as $themeCode => $theme)
                                 <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
                                     {{ $theme['name'] }}
                                 </option>

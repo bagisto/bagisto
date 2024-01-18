@@ -3,7 +3,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.channels.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <div class="flex justify-between items-center">
         <p class="text-xl text-gray-800 dark:text-white font-bold">

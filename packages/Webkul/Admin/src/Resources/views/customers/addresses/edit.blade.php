@@ -105,7 +105,7 @@
                             <div class="flex gap-4 max-sm:flex-wrap">
                                 <!-- First Name -->
                                 <x-admin::form.control-group class="w-full">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.addresses.edit.first-name')
                                     </x-admin::form.control-group.label>
 
@@ -127,7 +127,7 @@
 
                                 <!-- Last Name -->
                                 <x-admin::form.control-group class="w-full">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.addresses.edit.last-name')
                                     </x-admin::form.control-group.label>
 
@@ -150,7 +150,7 @@
 
                             <!-- Street Address -->
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.addresses.edit.street-address')
                                 </x-admin::form.control-group.label>
 
@@ -173,7 +173,7 @@
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                                 @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                    <x-shop::form.control-group.control
+                                    <x-admin::form.control-group.control
                                         type="text"
                                         name="address{{ $i }}[]"
                                         id="address{{ $i }}[]"
@@ -181,7 +181,7 @@
                                         :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                                         v-model="addressData.address{{ $i }}"
                                     >
-                                    </x-shop::form.control-group.control>
+                                    </x-admin::form.control-group.control>
                                 @endfor
                             @endif
 
@@ -211,7 +211,7 @@
                             <div class="flex gap-4 max-sm:flex-wrap">
                                 <!-- City -->
                                 <x-admin::form.control-group class="w-full">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.addresses.edit.city')
                                     </x-admin::form.control-group.label>
 
@@ -233,7 +233,7 @@
 
                                 <!-- PostCode -->
                                 <x-admin::form.control-group class="w-full">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.addresses.edit.post-code')
                                     </x-admin::form.control-group.label>
 
@@ -328,10 +328,10 @@
                                 </x-admin::form.control-group>
                             </div>
 
-                            <div class="flex gap-4 max-sm:flex-wrap items-center">
+                            <div class="flex gap-4 max-sm:flex-wrap">
                                 <!--Phone number -->
-                                <x-admin::form.control-group class="w-full !mb-0">
-                                    <x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="w-full">
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.addresses.edit.phone')
                                     </x-admin::form.control-group.label>
 
@@ -352,29 +352,26 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Default Address -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 w-full">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        name="default_address"
-                                        id="default_address"
-                                        v-model="addressData.default_address"
-                                        :label="trans('admin::app.customers.addresses.edit.default-address')"
-                                        ::checked="addressData.default_address"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <div class="w-full mt-8">
+                                    <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="default_address"
+                                            id="default_address"
+                                            v-model="addressData.default_address"
+                                            :label="trans('admin::app.customers.addresses.edit.default-address')"
+                                            ::checked="addressData.default_address"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                    <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                        for="default_address"
-                                    >
-                                        @lang('admin::app.customers.addresses.create.default-address')
-                                    </label>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="default_address"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                        <label
+                                            class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                            for="default_address"
+                                        >
+                                            @lang('admin::app.customers.addresses.create.default-address')
+                                        </label>
+                                    </x-admin::form.control-group>
+                                </div>
                             </div>
 
                             {!! view_render_event('bagisto.admin.customers.edit.after') !!}

@@ -29,21 +29,21 @@ it('should store the newly created url', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.store'), [
-        'entity_type'    => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
-        'request_path'   => $requestPath = fake()->url(),
-        'target_path'    => $targetPath = fake()->url(),
-        'redirect_type'  => $redirecType = fake()->randomElement([302, 301]),
-        'locale'         => $localeCode = core()->getCurrentLocale()->code,
+        'entity_type'   => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
+        'request_path'  => $requestPath = fake()->url(),
+        'target_path'   => $targetPath = fake()->url(),
+        'redirect_type' => $redirecType = fake()->randomElement([302, 301]),
+        'locale'        => $localeCode = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.create.success'));
 
     $this->assertDatabaseHas('url_rewrites', [
-        'entity_type'    => $entityType,
-        'request_path'   => $requestPath,
-        'target_path'    => $targetPath,
-        'redirect_type'  => $redirecType,
-        'locale'         => $localeCode,
+        'entity_type'   => $entityType,
+        'request_path'  => $requestPath,
+        'target_path'   => $targetPath,
+        'redirect_type' => $redirecType,
+        'locale'        => $localeCode,
     ]);
 });
 
@@ -55,23 +55,23 @@ it('should update the existing url rewrite', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.url_rewrites.update'), [
-        'id'             => $urlRewrite->id,
-        'entity_type'    => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
-        'request_path'   => $requestPath = fake()->url(),
-        'target_path'    => $targetPath = fake()->url(),
-        'redirect_type'  => $redirecType = fake()->randomElement([302, 301]),
-        'locale'         => $localeCode = core()->getCurrentLocale()->code,
+        'id'            => $urlRewrite->id,
+        'entity_type'   => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
+        'request_path'  => $requestPath = fake()->url(),
+        'target_path'   => $targetPath = fake()->url(),
+        'redirect_type' => $redirecType = fake()->randomElement([302, 301]),
+        'locale'        => $localeCode = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.edit.success'));
 
     $this->assertDatabaseHas('url_rewrites', [
-        'id'             => $urlRewrite->id,
-        'entity_type'    => $entityType,
-        'request_path'   => $requestPath,
-        'target_path'    => $targetPath,
-        'redirect_type'  => $redirecType,
-        'locale'         => $localeCode,
+        'id'            => $urlRewrite->id,
+        'entity_type'   => $entityType,
+        'request_path'  => $requestPath,
+        'target_path'   => $targetPath,
+        'redirect_type' => $redirecType,
+        'locale'        => $localeCode,
     ]);
 });
 

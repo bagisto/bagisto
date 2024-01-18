@@ -9,7 +9,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.compare.title')
-    </x-slot:title>
+    </x-slot>
 
     <!-- Breadcrumb -->
     <div class="flex justify-center mt-5 max-lg:hidden">

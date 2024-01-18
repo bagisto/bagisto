@@ -70,13 +70,21 @@ it('should return the product reporting stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -100,8 +108,8 @@ it('should return the product reporting stats', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -168,13 +176,21 @@ it('should return the top selling products by revenue reporting stats', function
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -232,13 +248,21 @@ it('should return the top selling products by quantity reporting stats', functio
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -262,8 +286,8 @@ it('should return the top selling products by quantity reporting stats', functio
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -466,13 +490,21 @@ it('should returns the report the product', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -496,8 +528,8 @@ it('should returns the report the product', function () {
     ]);
 
     Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert

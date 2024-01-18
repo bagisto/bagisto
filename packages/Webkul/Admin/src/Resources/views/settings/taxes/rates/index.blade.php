@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.rates.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="text-xl text-gray-800 dark:text-white font-bold">
@@ -21,7 +21,7 @@
             <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
 
             <!-- Create New Tax Rate Button -->
-            @if (bouncer()->hasPermission('settings.taxes.tax-rates.create'))
+            @if (bouncer()->hasPermission('settings.taxes.tax_rates.create'))
                 <a href="{{ route('admin.settings.taxes.rates.create') }}" class="primary-button">
                     @lang('admin::app.settings.taxes.rates.index.button-title')
                 </a>

@@ -105,6 +105,8 @@
                         })
                         .then(response => {
                             this.$parent.getOrderSummary();
+                            
+                            this.$emitter.emit('after-shipping-method-selected', selectedShippingMethod);
 
                             this.$parent.$refs.vPaymentMethod.payment_methods = response.data.payment_methods;
                                 

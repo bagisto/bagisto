@@ -22,7 +22,6 @@
         method="PUT"
         :action="route('shop.customers.account.addresses.update',  $address->id)"
     >
-
         {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.before', ['address' => $address]) !!}
 
         <x-shop::form.control-group>

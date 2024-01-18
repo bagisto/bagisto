@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.subscribers.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
         <p class="text-xl text-gray-800 dark:text-white font-bold">
@@ -217,7 +217,7 @@
                             resetForm();
                         })
                         .catch(error => {
-                            if (error.response.status ==422) {
+                            if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }
                         });
@@ -230,9 +230,9 @@
 
                                 this.$refs.groupCreateModal.toggle();
                             })
-                            .catch(error => [
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
-                            ]);
+                            .catch(error => this.$emitter.emit('add-flash', { 
+                                type: 'error', message: error.response.data.message 
+                            }));
                     }
                 }
             })

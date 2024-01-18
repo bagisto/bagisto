@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <x-slot:title>
         @lang('admin::app.settings.taxes.categories.index.title')
-    </x-slot:title>
+    </x-slot>
 
     <v-tax-categories>
         <div class="flex justify-between items-center">
@@ -13,7 +13,7 @@
             <div class="flex gap-x-2.5 items-center">
                 <div class="flex gap-x-2.5 items-center">
                     <!-- Create Tax Category Button -->
-                    @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
+                    @if (bouncer()->hasPermission('settings.taxes.tax_categories.create'))
                         <button
                             type="button"
                             class="primary-button"
@@ -39,7 +39,7 @@
                 <div class="flex gap-x-2.5 items-center">
                     <div class="flex gap-x-2.5 items-center">
                         <!-- Create Tax Category Button -->
-                        @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
+                        @if (bouncer()->hasPermission('settings.taxes.tax_categories.create'))
                             <button
                                 type="button"
                                 class="primary-button"
@@ -75,7 +75,7 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            @if (bouncer()->hasPermission('settings.taxes.tax-categories.edit'))
+                            @if (bouncer()->hasPermission('settings.taxes.tax_categories.edit'))
                                 <a @click="selectedTaxCategories=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.index === 'edit')?.icon"
@@ -85,7 +85,7 @@
                                 </a>
                             @endif
 
-                            @if (bouncer()->hasPermission('settings.taxes.tax-categories.delete'))
+                            @if (bouncer()->hasPermission('settings.taxes.tax_categories.delete'))
                                 <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
                                     <span
                                         :class="record.actions.find(action => action.index === 'delete')?.icon"
@@ -320,9 +320,9 @@
 
                                 this.$refs.taxCategory.toggle();
                             })
-                            .catch(error => [
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
-                            ]);
+                            .catch(error => this.$emitter.emit('add-flash', { 
+                                type: 'error', message: error.response.data.message 
+                            }));
                     },
                 },
             });

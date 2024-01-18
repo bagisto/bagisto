@@ -9,7 +9,6 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 use Webkul\Sales\Models\Refund;
-use Webkul\Sales\Repositories\OrderItemRepository;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -52,10 +51,21 @@ it('should store the create page of refunds', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => CartItem::factory()->create([
-            'product_id' => $product->id,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -118,10 +128,21 @@ it('should return the order refunded data', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => CartItem::factory()->create([
-            'product_id' => $product->id,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -153,16 +174,8 @@ it('should return the order refunded data', function () {
         }
     }
 
-    $summary = [
-        'subtotal'    => ['price' => 0],
-        'discount'    => ['price' => 0],
-        'tax'         => ['price' => 0],
-        'shipping'    => ['price' => 0],
-        'grand_total' => ['price' => 0],
-    ];
-
     foreach ($items as $orderItemId => $qty) {
-        $orderItem = app(OrderItemRepository::class)->find($orderItemId);
+        $orderItem = OrderItem::find($orderItemId);
 
         $summary['subtotal']['price'] += $orderItem->base_price * $qty;
 
@@ -201,10 +214,21 @@ it('should return the view page of refund', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => CartItem::factory()->create([
-            'product_id' => $product->id,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,

@@ -2,7 +2,7 @@
     <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.exchange-rates.index.title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.exchange_rates.create.before') !!}
 
@@ -302,9 +302,9 @@
 
                                 this.$refs.exchangeRateUpdateOrCreateModal.toggle();
                             })
-                            .catch(error => [
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
-                            ]);
+                            .catch(error => this.$emitter.emit('add-flash', { 
+                                type: 'error', message: error.response.data.message 
+                            }));
                     },
 
                     resetForm() {
