@@ -200,7 +200,7 @@ class AttributeController extends Controller
      * Get super attributes of product.
      *
      * @param  int  $id
-     * @return  \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function productSuperAttributes($id)
     {

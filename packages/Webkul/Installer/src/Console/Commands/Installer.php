@@ -122,7 +122,7 @@ class Installer extends Command
     /**
      *  Checking .env file and if not found then create .env file.
      *
-     *  @return ?array
+     * @return ?array
      */
     protected function checkForEnvFile()
     {
