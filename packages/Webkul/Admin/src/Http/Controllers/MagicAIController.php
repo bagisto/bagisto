@@ -2,9 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
-use OpenAI\Laravel\Facades\OpenAI;
+use Webkul\MagicAI\Facades\MagicAI;
 
 class MagicAIController extends Controller
 {
@@ -19,44 +18,9 @@ class MagicAIController extends Controller
         ]);
 
         try {
-            if (request()->input('model') == 'gpt-3.5-turbo') {
-                config([
-                    'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
-                    'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-                ]);
-
-                $result = OpenAI::chat()->create([
-                    'model'    => 'gpt-3.5-turbo',
-                    'messages' => [
-                        [
-                            'role'    => 'user',
-                            'content' => request()->input('prompt'),
-                        ],
-                    ],
-                ]);
-
-                $response = $result->choices[0]->message->content;
-            } else {
-                $httpClient = new Client();
-
-                $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain') . '/api/generate';
-
-                $result = $httpClient->request('POST', $endpoint, [
-                    'headers' => [
-                        'Accept' => 'application/json',
-                    ],
-                    'json'    => [
-                        'model'  => request()->input('model'),
-                        'prompt' => request()->input('prompt'),
-                        'raw'    => true,
-                        'stream' => false,
-                    ],
-                ]);
-
-                $result = json_decode($result->getBody()->getContents(), true);
-
-                $response = $result['response'];
-            }
+            $response = MagicAI::setModel(request()->input('model'))
+                ->setPrompt(request()->input('prompt'))
+                ->ask();
 
             return new JsonResponse([
                 'content' => $response,
@@ -87,20 +51,15 @@ class MagicAIController extends Controller
         ]);
 
         try {
-            $result = OpenAI::images()->create([
-                'model'           => request()->input('model'),
-                'prompt'          => request()->input('prompt'),
-                'n'               => intval(request()->input('n') ?? 1),
-                'size'            => request()->input('size'),
-                'quality'         => request()->input('quality') ?? 'standard',
-                'response_format' => 'b64_json',
+            $options = request()->only([
+                'n',
+                'size',
+                'quality',
             ]);
 
-            $images = [];
-
-            foreach ($result->data as $image) {
-                $images[]['url'] = 'data:image/png;base64,' . $image->b64_json;
-            }
+            $images = MagicAI::setModel(request()->input('model'))
+                ->setPrompt(request()->input('prompt'))
+                ->images($options);
 
             return new JsonResponse([
                 'images' => $images,

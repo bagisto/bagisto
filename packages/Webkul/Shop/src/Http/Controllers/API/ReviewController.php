@@ -2,10 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use OpenAI\Laravel\Facades\OpenAI;
+use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -109,44 +108,11 @@ class ReviewController extends APIController
         ";
 
         try {
-            if (($model = core()->getConfigData('general.magic_ai.review_translation.model')) == 'gpt-3.5-turbo') {
-                config([
-                    'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
-                    'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-                ]);
+            $model = core()->getConfigData('general.magic_ai.review_translation.model');
 
-                $result = OpenAI::chat()->create([
-                    'model'    => 'gpt-3.5-turbo',
-                    'messages' => [
-                        [
-                            'role'    => 'user',
-                            'content' => $prompt,
-                        ],
-                    ],
-                ]);
-
-                $response = $result->choices[0]->message->content;
-            } else {
-                $httpClient = new Client();
-
-                $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain') . '/api/generate';
-
-                $result = $httpClient->request('POST', $endpoint, [
-                    'headers' => [
-                        'Accept' => 'application/json',
-                    ],
-                    'json'    => [
-                        'model'  => $model,
-                        'prompt' => $prompt,
-                        'raw'    => true,
-                        'stream' => false,
-                    ],
-                ]);
-
-                $result = json_decode($result->getBody()->getContents(), true);
-
-                $response = $result['response'];
-            }
+            $response = MagicAI::setModel($model)
+                ->setPrompt($prompt)
+                ->ask();
 
             return new JsonResponse([
                 'content' => $response,

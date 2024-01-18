@@ -3,7 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use OpenAI\Laravel\Facades\OpenAI;
+use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Checkout\Facades\Cart;
 
 class OnepageController extends Controller
@@ -93,45 +93,14 @@ class OnepageController extends Controller
         ) {
 
             try {
-                if (($model = core()->getConfigData('general.magic_ai.checkout_message.model')) == 'gpt-3.5-turbo') {
-                    config([
-                        'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
-                        'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-                    ]);
-
-                    $result = OpenAI::chat()->create([
-                        'model'       => 'gpt-3.5-turbo',
-                        'temperature' => 0,
-                        'messages'    => [
-                            [
-                                'role'    => 'user',
-                                'content' => $this->getCheckoutPrompt($order),
-                            ],
-                        ],
-                    ]);
-
-                    $order->checkout_message = $result->choices[0]->message->content;
-                } else {
-                    $httpClient = new Client();
-
-                    $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain') . '/api/generate';
-
-                    $result = $httpClient->request('POST', $endpoint, [
-                        'headers' => [
-                            'Accept' => 'application/json',
-                        ],
-                        'json'    => [
-                            'model'  => $model,
-                            'prompt' => $this->getCheckoutPrompt($order),
-                            'raw'    => true,
-                            'stream' => false,
-                        ],
-                    ]);
-
-                    $result = json_decode($result->getBody()->getContents(), true);
-
-                    $order->checkout_message = $result['response'];
-                }
+                $model = core()->getConfigData('general.magic_ai.checkout_message.model');
+    
+                $response = MagicAI::setModel($model)
+                    ->setTemperature(0)
+                    ->setPrompt($this->getCheckoutPrompt($order))
+                    ->ask();
+                
+                $order->checkout_message = $response;
             } catch (\Exception $e) {
             }
         }
