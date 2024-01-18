@@ -3,7 +3,7 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use OpenAI\Laravel\Facades\OpenAI;
+use Webkul\MagicAI\Facades\MagicAI;
 
 class MagicAIController extends Controller
 {
@@ -12,34 +12,24 @@ class MagicAIController extends Controller
      */
     public function content(): JsonResponse
     {
-        config([
-            'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
-            'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-        ]);
-
         $this->validate(request(), [
+            'model'  => 'required',
             'prompt' => 'required',
         ]);
 
         try {
-            $result = OpenAI::chat()->create([
-                'model'    => 'gpt-3.5-turbo',
-                'messages' => [
-                    [
-                        'role'    => 'user',
-                        'content' => request()->input('prompt'),
-                    ],
-                ],
+            $response = MagicAI::setModel(request()->input('model'))
+                ->setPrompt(request()->input('prompt'))
+                ->ask();
+
+            return new JsonResponse([
+                'content' => $response,
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage(),
             ], 500);
         }
-
-        return new JsonResponse([
-            'content' => $result->choices[0]->message->content,
-        ]);
     }
 
     /**
@@ -61,20 +51,15 @@ class MagicAIController extends Controller
         ]);
 
         try {
-            $result = OpenAI::images()->create([
-                'model'           => request()->input('model'),
-                'prompt'          => request()->input('prompt'),
-                'n'               => intval(request()->input('n') ?? 1),
-                'size'            => request()->input('size'),
-                'quality'         => request()->input('quality') ?? 'standard',
-                'response_format' => 'b64_json',
+            $options = request()->only([
+                'n',
+                'size',
+                'quality',
             ]);
 
-            $images = [];
-
-            foreach ($result->data as $image) {
-                $images[]['url'] = 'data:image/png;base64,' . $image->b64_json;
-            }
+            $images = MagicAI::setModel(request()->input('model'))
+                ->setPrompt(request()->input('prompt'))
+                ->images($options);
 
             return new JsonResponse([
                 'images' => $images,
