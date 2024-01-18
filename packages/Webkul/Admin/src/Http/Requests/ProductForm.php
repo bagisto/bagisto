@@ -52,11 +52,11 @@ class ProductForm extends FormRequest
         $maxVideoFileSize = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048';
 
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
-            'sku'                => ['required', 'unique:products,sku,' . $this->id, new Slug],
+            'sku'                => ['required', 'unique:products,sku,'.$this->id, new Slug],
             'url_key'            => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*'     => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*' => ['nullable', 'integer'],
-            'videos.files.*'     => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:' . $maxVideoFileSize],
+            'videos.files.*'     => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:'.$maxVideoFileSize],
             'videos.positions.*' => ['nullable', 'integer'],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
@@ -67,7 +67,7 @@ class ProductForm extends FormRequest
             foreach (request()->images['files'] as $key => $file) {
                 if (Str::contains($key, 'image_')) {
                     $this->rules = array_merge($this->rules, [
-                        'images.files.' . $key => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
+                        'images.files.'.$key => ['required', 'mimes:bmp,jpeg,jpg,png,webp'],
                     ]);
                 }
             }
@@ -96,7 +96,7 @@ class ProductForm extends FormRequest
                 if ($attribute->validation === 'decimal') {
                     $validations[] = new Decimal;
                 } elseif ($attribute->validation === 'regex') {
-                    $validations[] = 'regex:' . $attribute->regex;
+                    $validations[] = 'regex:'.$attribute->regex;
                 } else {
                     $validations[] = $attribute->validation;
                 }

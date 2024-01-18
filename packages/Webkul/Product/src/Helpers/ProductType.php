@@ -15,7 +15,7 @@ class ProductType
     public static function hasVariants(string $typeKey): bool
     {
         /** @var AbstractType $type */
-        $type = app(config('product_types.' . $typeKey . '.class'));
+        $type = app(config('product_types.'.$typeKey.'.class'));
 
         return $type->hasVariants();
     }

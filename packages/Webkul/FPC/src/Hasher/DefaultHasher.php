@@ -12,7 +12,7 @@ class DefaultHasher extends BaseDefaultHasher
      */
     protected function getNormalizedRequestUri(Request $request): string
     {
-        return $request->getBaseUrl() . $request->getPathInfo();
+        return $request->getBaseUrl().$request->getPathInfo();
     }
 
     /**
@@ -25,9 +25,9 @@ class DefaultHasher extends BaseDefaultHasher
         }
 
         $cacheNameSuffix = core()->getCurrentChannel()->code
-            . '-' . core()->getCurrentLocale()->code
-            . '-' . core()->getCurrentCurrency()->code
-            . '-' . $this->cacheProfile->useCacheNameSuffix($request);
+            .'-'.core()->getCurrentLocale()->code
+            .'-'.core()->getCurrentCurrency()->code
+            .'-'.$this->cacheProfile->useCacheNameSuffix($request);
 
         return $cacheNameSuffix;
     }

@@ -9,7 +9,7 @@ use Webkul\Admin\Http\Controllers\Customers\ReviewController;
 /**
  * Customers routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '/customers'], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/customers'], function () {
     Route::prefix('customers')->group(function () {
         /**
          * Customer management routes.

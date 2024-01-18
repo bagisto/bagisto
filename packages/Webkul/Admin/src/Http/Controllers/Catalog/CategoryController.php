@@ -288,7 +288,7 @@ class CategoryController extends Controller
                     $query->on('categories.id', '=', 'category_translations.category_id')
                         ->where('category_translations.locale', app()->getLocale());
                 })
-                ->where('category_translations.name', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->where('category_translations.name', 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(10);
 

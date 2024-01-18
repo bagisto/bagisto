@@ -115,7 +115,7 @@ class TaxRateController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'identifier' => 'required|string|unique:tax_rates,identifier,' . $id,
+            'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
             'is_zip'     => 'sometimes',
             'zip_code'   => 'nullable',
             'zip_from'   => 'nullable|required_with:is_zip',
@@ -271,7 +271,7 @@ class TaxRateController extends Controller
 
                         foreach ($errorMsg as $key => $msg) {
                             $msg = str_replace('.', '', $msg);
-                            $message[] = $msg . ' at Row ' . $key . '.';
+                            $message[] = $msg.' at Row '.$key.'.';
                         }
 
                         return new JsonResponse([

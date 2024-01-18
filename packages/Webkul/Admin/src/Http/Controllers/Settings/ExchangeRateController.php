@@ -87,7 +87,7 @@ class ExchangeRateController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . request()->id],
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,'.request()->id],
             'rate'            => 'required|numeric',
         ]);
 
@@ -113,7 +113,7 @@ class ExchangeRateController extends Controller
     public function updateRates()
     {
         try {
-            app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
+            app(config('services.exchange_api.'.config('services.exchange_api.default').'.class'))->updateRates();
 
             session()->flash('success', trans('admin::app.settings.exchange-rates.index.update-success'));
         } catch (\Exception $e) {

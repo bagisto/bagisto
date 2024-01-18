@@ -33,13 +33,13 @@ it('should return the create page of configurable product', function () {
 
     foreach ($attributes as $attributekey => $value) {
         $response
-            ->assertJsonPath('data.attributes.' . $attributekey . '.id', $value->id)
-            ->assertJsonPath('data.attributes.' . $attributekey . '.code', $value->code);
+            ->assertJsonPath('data.attributes.'.$attributekey.'.id', $value->id)
+            ->assertJsonPath('data.attributes.'.$attributekey.'.code', $value->code);
 
         foreach ($value->options as $optionKey => $option) {
             $response
-                ->assertJsonPath('data.attributes.' . $attributekey . '.options.' . $optionKey . '.id', $option->id)
-                ->assertJsonPath('data.attributes.' . $attributekey . '.options.' . $optionKey . '.name', $option->admin_name);
+                ->assertJsonPath('data.attributes.'.$attributekey.'.options.'.$optionKey.'.id', $option->id)
+                ->assertJsonPath('data.attributes.'.$attributekey.'.options.'.$optionKey.'.name', $option->admin_name);
         }
     }
 });

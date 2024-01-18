@@ -47,7 +47,7 @@ class ThemeCustomizationRepository extends Repository
                 } elseif ($image['image'] instanceof UploadedFile) {
                     $manager = new ImageManager();
 
-                    $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
+                    $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
 
                     Storage::put($path, $manager->make($image['image'])->encode('webp'));
 
@@ -59,7 +59,7 @@ class ThemeCustomizationRepository extends Repository
                     }
 
                     $options['images'][] = [
-                        'image' => 'storage/' . $path,
+                        'image' => 'storage/'.$path,
                         'link'  => $image['link'],
                     ];
                 } else {

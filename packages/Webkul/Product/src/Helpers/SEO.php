@@ -171,7 +171,7 @@ class SEO
         if (core()->getConfigData('catalog.rich_snippets.categories.show_search_input_field')) {
             $data['potentialAction'] = [
                 '@type'       => 'SearchAction',
-                'target'      => config('app.url') . '/search/?term={search_term_string}',
+                'target'      => config('app.url').'/search/?term={search_term_string}',
                 'query-input' => 'required name=search_term_string',
             ];
         }

@@ -39,7 +39,7 @@ class DeleteIndex implements ShouldQueue
 
         foreach (core()->getAllChannels() as $channel) {
             foreach ($channel->locales as $locale) {
-                $index = 'products_' . $channel->code . '_' . $locale->code . '_index';
+                $index = 'products_'.$channel->code.'_'.$locale->code.'_index';
 
                 $removeIndices[$index][] = $this->productId;
             }

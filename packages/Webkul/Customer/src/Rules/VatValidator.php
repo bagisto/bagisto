@@ -58,7 +58,7 @@ class VatValidator
             return false;
         }
 
-        return preg_match('/^' . self::$pattern_expression[$country] . '$/', $number) > 0;
+        return preg_match('/^'.self::$pattern_expression[$country].'$/', $number) > 0;
     }
 
     private function vatCleaner(string $vatNumber): string

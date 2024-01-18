@@ -112,7 +112,7 @@ class Customer extends Authenticatable implements CustomerContract
      */
     public function getNameAttribute(): string
     {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return ucfirst($this->first_name).' '.ucfirst($this->last_name);
     }
 
     /**

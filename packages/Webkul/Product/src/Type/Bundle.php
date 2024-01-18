@@ -399,11 +399,11 @@ class Bundle extends AbstractType
                     $bundleOptionQuantities[$option->id] = $qty;
                 }
 
-                $label = $qty . ' x ' . $optionProduct->product->name;
+                $label = $qty.' x '.$optionProduct->product->name;
 
                 $price = $optionProduct->product->getTypeInstance()->getMinimalPrice();
                 if ($price != 0) {
-                    $label .= ' ' . core()->currency($price);
+                    $label .= ' '.core()->currency($price);
                 }
 
                 $labels[] = $label;
