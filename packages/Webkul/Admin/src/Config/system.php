@@ -148,7 +148,7 @@ return [
                 'channel_based' => true,
             ], [
                 'name'          => 'api_domain',
-                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.ollama-api-domain',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.llm-api-domain',
                 'type'          => 'text',
                 'channel_based' => true,
             ],
