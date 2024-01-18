@@ -76,6 +76,7 @@
             "Webkul\\FPC\\": "packages/Webkul/FPC/src",
             "Webkul\\Installer\\": "packages/Webkul/Installer/src",
             "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
+            "Webkul\\MagicAI\\": "packages/Webkul/MagicAI/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",

@@ -4,7 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use OpenAI\Laravel\Facades\OpenAI;
+use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -92,11 +92,6 @@ class ReviewController extends APIController
      */
     public function translate($id, $reviewId): JsonResponse
     {
-        config([
-            'openai.api_key'      => core()->getConfigData('general.magic_ai.settings.api_key'),
-            'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-        ]);
-
         $review = $this->productReviewRepository->find($reviewId);
 
         $currentLocale = core()->getCurrentLocale();
@@ -113,23 +108,19 @@ class ReviewController extends APIController
         ";
 
         try {
-            $result = OpenAI::chat()->create([
-                'model'    => 'gpt-3.5-turbo',
-                'messages' => [
-                    [
-                        'role'    => 'user',
-                        'content' => $prompt,
-                    ],
-                ],
+            $model = core()->getConfigData('general.magic_ai.review_translation.model');
+
+            $response = MagicAI::setModel($model)
+                ->setPrompt($prompt)
+                ->ask();
+
+            return new JsonResponse([
+                'content' => $response,
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage(),
             ], 500);
         }
-
-        return new JsonResponse([
-            'content' => $result->choices[0]->message->content,
-        ]);
     }
 }
