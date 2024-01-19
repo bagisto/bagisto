@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Customer\Models\CompareItem;
-use Webkul\Customer\Models\Customer as CustomerModel;
+use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 
@@ -15,7 +15,7 @@ afterEach(function () {
     /**
      * Cleaning up rows which are created.
      */
-    CustomerModel::query()->delete();
+    Customer::query()->delete();
     CompareItem::query()->delete();
     SubscribersList::query()->delete();
     Product::query()->delete();

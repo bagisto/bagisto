@@ -87,7 +87,7 @@ it('should update the inventory sources', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.inventory_sources.update', $inventorySources->id), [
-        'code'           => $code = strtolower(fake()->word),
+        'code'           => $code = strtolower(fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/')),
         'name'           => $name = fake()->name(),
         'priority'       => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),

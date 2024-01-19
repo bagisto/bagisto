@@ -4,16 +4,16 @@ namespace Webkul\Core\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Webkul\CartRule\Models\CartRule;
+use Webkul\CartRule\Models\CartRuleCustomer;
 
-class CartRuleFactory extends Factory
+class CartRuleCustomerGroupFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CartRule::class;
+    protected $model = CartRuleCustomer::class;
 
     /**
      * Define the model's default state.
@@ -41,35 +41,5 @@ class CartRuleFactory extends Factory
             'status'                    => '1',
             'conditions'                => null,
         ];
-    }
-
-    /**
-     * Indicate that the user is guest.
-     */
-    public function guest(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return 1;
-        });
-    }
-
-    /**
-     * Indicate that the user is general.
-     */
-    public function general(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return 2;
-        });
-    }
-
-    /**
-     * Indicate that the user is wholesaler.
-     */
-    public function wholesale(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return 3;
-        });
     }
 }

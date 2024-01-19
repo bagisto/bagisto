@@ -17,7 +17,7 @@ class CatalogRuleFactory extends Factory
     /**
      * Define the model's default state.
      */
-    public function definition()
+    public function definition(): array
     {
         $startsFrom = $this->faker->dateTimeBetween('now', '+30 days');
         $endsTill = $this->faker->dateTimeBetween($startsFrom, $startsFrom->format('Y-m-d').' +30 days');
@@ -31,18 +31,5 @@ class CatalogRuleFactory extends Factory
             'action_type'     => 'by_percent',
             'discount_amount' => rand(1, 50),
         ];
-    }
-
-    /**
-     * Configure the factory
-     *
-     * @return static
-     */
-    public function configure()
-    {
-        return $this->afterCreating(function (CatalogRule $catalogRule) {
-            $catalogRule->channels()->sync([1]);
-            $catalogRule->customer_groups()->sync([1, 2, 3]);
-        });
     }
 }
