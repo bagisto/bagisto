@@ -375,12 +375,12 @@ return [
                 'name'       => 'no_of_related_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-related-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ], [
                 'name'       => 'no_of_up_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-up-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -393,7 +393,7 @@ return [
                 'name'       => 'no_of_cross_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.cart-view-page.allow-no-of-cross-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
