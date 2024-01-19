@@ -482,4 +482,3 @@ class Installer extends Command
         return false;
     }
 }
-
