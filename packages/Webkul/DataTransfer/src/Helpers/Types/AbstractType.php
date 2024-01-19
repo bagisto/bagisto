@@ -2,7 +2,12 @@
 
 namespace Webkul\DataTransfer\Helpers\Types;
 
+use Illuminate\Support\Facades\Bus;
+use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
+use Webkul\DataTransfer\Jobs\ImportBatch;
+use Webkul\DataTransfer\Jobs\ImportCompleted;
+use Webkul\DataTransfer\Repositories\ImportRepository;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
 abstract class AbstractType
@@ -41,17 +46,19 @@ abstract class AbstractType
         self::ERROR_CODE_COLUMN_NAME_INVALID        => 'Invalid column names: "%s".',
         self::ERROR_CODE_ATTRIBUTE_NOT_VALID        => "Please correct the value for attribute '%s'.",
         self::ERROR_CODE_DUPLICATE_UNIQUE_ATTRIBUTE => "Duplicate Unique Attribute for '%s'.",
-        self::ERROR_CODE_ILLEGAL_CHARACTERS         => "Illegal character used for attribute %s.",
+        self::ERROR_CODE_ILLEGAL_CHARACTERS         => 'Illegal character used for attribute %s.',
         self::ERROR_CODE_INVALID_ATTRIBUTE          => 'Header contains invalid attribute(s): "%s".',
-        self::ERROR_CODE_WRONG_QUOTES               => "Curly quotes used instead of straight quotes.",
-        self::ERROR_CODE_COLUMNS_NUMBER             => "Number of columns does not correspond to the number of rows in the header.",
+        self::ERROR_CODE_WRONG_QUOTES               => 'Curly quotes used instead of straight quotes.',
+        self::ERROR_CODE_COLUMNS_NUMBER             => 'Number of columns does not correspond to the number of rows in the header.',
         self::ERROR_INVALID_ATTRIBUTE_TYPE          => 'Value for attribute \'%s\' contains an incorrect value.',
-        self::ERROR_INVALID_ATTRIBUTE_OPTION        => "Value for attribute %s contains an incorrect value. See acceptable values specified in Admin settings."
+        self::ERROR_INVALID_ATTRIBUTE_OPTION        => 'Value for attribute %s contains an incorrect value. See acceptable values specified in Admin settings.',
     ];
+
+    public const BATCH_SIZE = 100;
 
     /**
      * Error helper instance.
-     * 
+     *
      * @var \Webkul\DataTransfer\Helpers\Error
      */
     protected $errorHelper;
@@ -63,7 +70,7 @@ abstract class AbstractType
 
     /**
      * Source instance.
-     * 
+     *
      * @var \Webkul\DataTransfer\Helpers\Source
      */
     protected $source;
@@ -89,19 +96,41 @@ abstract class AbstractType
     protected int $processedRowsCount = 0;
 
     /**
-     * Number of items to save to the db in one query
+     * Number of created items
      */
-    protected int $batchSize = 100;
+    protected int $createdItemsCount = 0;
+
+    /**
+     * Number of updated items
+     */
+    protected int $updatedItemsCount = 0;
+
+    /**
+     * Number of deleted items
+     */
+    protected int $deletedItemsCount = 0;
 
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\DataTransfer\Repositories\ImportBatchRepository  $importBatchRepository
      * @return void
      */
-    public function __construct(protected ImportBatchRepository $importBatchRepository)
+    public function __construct(
+        protected ImportRepository $importRepository,
+        protected ImportBatchRepository $importBatchRepository
+    )
     {
     }
+
+    /**
+     * Validate data row
+     */
+    abstract public function validateRow(array $rowData, int $rowNumber): bool;
+
+    /**
+     * Import data rows
+     */
+    abstract public function importBatch(ImportBatchContract $importBatchContract): bool;
 
     /**
      * Initialize Product error templates
@@ -125,7 +154,7 @@ abstract class AbstractType
 
     /**
      * Import instance.
-     * 
+     *
      * @param  \Webkul\DataTransfer\Helpers\Source  $errorHelper
      */
     public function setSource($source)
@@ -137,7 +166,7 @@ abstract class AbstractType
 
     /**
      * Import instance.
-     * 
+     *
      * @param  \Webkul\DataTransfer\Helpers\Error  $errorHelper
      */
     public function setErrorHelper($errorHelper): self
@@ -151,7 +180,7 @@ abstract class AbstractType
 
     /**
      * Import instance.
-     * 
+     *
      * @return \Webkul\DataTransfer\Helpers\Source
      */
     public function getSource()
@@ -195,6 +224,32 @@ abstract class AbstractType
     }
 
     /**
+     * Start the import process
+     */
+    public function importData(): bool
+    {
+        $batches = [];
+
+        foreach ($this->import->batches as $batch) {
+            $batches[] = new ImportBatch($batch);
+        }
+
+        $batches[] = new ImportCompleted($this->import);
+
+        $batch = Bus::batch($batches)
+            ->name('Import ' . $this->import->type)
+            ->dispatch();
+
+        $import = $this->importRepository->update([
+            'batch_id' => $batch->id,
+        ], $this->import->id);
+
+        $this->setImport($import);
+
+        return true;
+    }
+
+    /**
      * Save validated batches
      */
     protected function saveValidatedBatches(): self
@@ -217,7 +272,7 @@ abstract class AbstractType
             || count($batchRows)
         ) {
             if (
-                count($batchRows) == $this->batchSize
+                count($batchRows) == self::BATCH_SIZE
                 || ! $source->valid()
             ) {
                 $this->importBatchRepository->create([
@@ -258,11 +313,8 @@ abstract class AbstractType
 
     /**
      * Add error with corresponding current data source row number.
-     *
-     * @param  string  $columnName
-     * @param  string  $message
      */
-    public function addRowError(string $code, int $rowNumber, $columnName = null, $message = null): self
+    public function addRowError(string $code, int $rowNumber, ?string $columnName = null, ?string $message = null): self
     {
         $this->errorHelper->addError(
             $code,
@@ -280,5 +332,29 @@ abstract class AbstractType
     public function getProcessedRowsCount(): int
     {
         return $this->processedRowsCount;
+    }
+
+    /**
+     * Returns number of created items count
+     */
+    public function getCreatedItemsCount(): int
+    {
+        return $this->createdItemsCount;
+    }
+
+    /**
+     * Returns number of updated items count
+     */
+    public function getUpdatedItemsCount(): int
+    {
+        return $this->updatedItemsCount;
+    }
+
+    /**
+     * Returns number of deleted items count
+     */
+    public function getDeletedItemsCount(): int
+    {
+        return $this->deletedItemsCount;
     }
 }

@@ -3,11 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Settings\DataTransfer;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Str;
 use Webkul\Admin\DataGrids\Settings\DataTransfer\ImportDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\DataTransfer\Repositories\ImportRepository;
 use Webkul\DataTransfer\Helpers\Import;
+use Webkul\DataTransfer\Repositories\ImportRepository;
 
 class ImportController extends Controller
 {
@@ -19,8 +18,7 @@ class ImportController extends Controller
     public function __construct(
         protected ImportRepository $importRepository,
         protected Import $importHelper
-    )
-    {
+    ) {
     }
 
     /**
@@ -49,7 +47,7 @@ class ImportController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function store()
@@ -67,12 +65,12 @@ class ImportController extends Controller
 
         $import = $this->importRepository->create(
             array_merge([
-                    'file_path' => request()->file('file')->storeAs(
-                        'imports',
-                        time() . '-' .request()->file('file')->getClientOriginalName(),
-                        'private'
-                    )
-                ],
+                'file_path' => request()->file('file')->storeAs(
+                    'imports',
+                    time() . '-' . request()->file('file')->getClientOriginalName(),
+                    'private'
+                ),
+            ],
                 request()->only([
                     'type',
                     'action',
@@ -99,7 +97,9 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->find($id);
 
-        $isValid = $this->importHelper->validate($import);
+        $isValid = $this->importHelper
+            ->setImport($import)
+            ->validate();
 
         return new JsonResponse([
             'is_valid'             => $isValid,
@@ -115,5 +115,12 @@ class ImportController extends Controller
      */
     public function start(int $id): JsonResponse
     {
+        $import = $this->importRepository->find($id);
+
+        $this->importHelper
+            ->setImport($import)
+            ->start();
+
+        return new JsonResponse([]);
     }
 }

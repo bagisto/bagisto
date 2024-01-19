@@ -21,7 +21,7 @@ class Category extends AbstractType
 
     /**
      * Validates row
-     * 
+     *
      * @return void
      */
     public function validateRow()

@@ -67,13 +67,8 @@ class Error
 
     /**
      * Add error message.
-     * 
-     * @param  string  $code
-     * @param  string|null  $row
-     * @param  string|null  $column
-     * @param  string|null  $message
      */
-    public function addError($code, $rowNumber = null, $columnName = null, $message = null): self
+    public function addError(string $code, ?int $rowNumber = null, ?string $columnName = null, ?string $message = null): self
     {
         if ($this->isErrorAlreadyAdded($rowNumber, $code, $columnName)) {
             return $this;
@@ -91,17 +86,13 @@ class Error
 
         $this->errorsCount++;
 
-        return $this;        
+        return $this;
     }
 
     /**
      * Check if error is already added for the row, code and column.
-     * 
-     * @param  integer|null  $rowNumber
-     * @param  string  $code
-     * @param  string|null  $columnName
      */
-    public function isErrorAlreadyAdded($rowNumber, $code, $columnName): bool
+    public function isErrorAlreadyAdded(?int $rowNumber, string $code, ?string $columnName): bool
     {
         return collect($this->items[$rowNumber] ?? [])
             ->where('code', $code)
@@ -111,10 +102,8 @@ class Error
 
     /**
      * Add specific row to invalid list via row number
-     *
-     * @param  integer|null  $rowNumber
      */
-    protected function addRowToInvalid($rowNumber): self
+    protected function addRowToInvalid(?int $rowNumber): self
     {
         if (is_null($rowNumber)) {
             return $this;
@@ -123,16 +112,14 @@ class Error
         if (! in_array($rowNumber, $this->invalidRows)) {
             $this->invalidRows[] = $rowNumber;
         }
-        
+
         return $this;
     }
 
     /**
      * Add specific row to invalid list via row number
-     *
-     * @param  integer|null  $rowNumber
      */
-    public function addRowToSkip($rowNumber): self
+    public function addRowToSkip(?int $rowNumber): self
     {
         if (is_null($rowNumber)) {
             return $this;
@@ -163,13 +150,8 @@ class Error
 
     /**
      * Build an error message via code, message and column name
-     *
-     * @param string $code
-     * @param string $message
-     * @param string $columnName
-     * @return string
      */
-    protected function getErrorMessage($code, $message, $columnName): string
+    protected function getErrorMessage(?string $code, ?string $message, ?string $columnName): string
     {
         if (
             empty($message)

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('file_path');
             $table->string('images_directory_path')->nullable();
             $table->string('error_file_path')->nullable();
+            $table->json('summary')->nullable();
+            $table->string('batch_id')->nullable();
 
             $table->datetime('started_at')->nullable();
             $table->datetime('completed_at')->nullable();

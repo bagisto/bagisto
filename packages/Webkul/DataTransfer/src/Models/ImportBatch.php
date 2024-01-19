@@ -21,6 +21,8 @@ class ImportBatch extends Model implements ImportBatchContract
      */
     protected $fillable = [
         'data',
+        'summary',
+        'is_processed',
         'import_id',
     ];
 
@@ -30,7 +32,8 @@ class ImportBatch extends Model implements ImportBatchContract
      * @var array
      */
     protected $casts = [
-        'data' => 'array',
+        'summary' => 'array',
+        'data'    => 'array',
     ];
 
     /**

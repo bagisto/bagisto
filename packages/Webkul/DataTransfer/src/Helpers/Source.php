@@ -37,13 +37,14 @@ class Source
     protected bool $foundWrongQuoteFlag = false;
 
     /**
+     * Create a new helper instance.
+     *
      * @return void
      */
     public function __construct(
         string $filePath,
         string $delimiter = ','
-    )
-    {
+    ) {
         try {
             $this->reader = Reader::createFromPath(storage_path($filePath), 'r');
 
@@ -72,7 +73,7 @@ class Source
      */
     public function valid(): bool
     {
-        return -1 !== $this->currentRowNumber;
+        return $this->currentRowNumber !== -1;
     }
 
     /**
@@ -102,7 +103,7 @@ class Source
 
         $row = $this->getNextRow();
 
-        if (false === $row || [] === $row) {
+        if ($row === false || $row === []) {
             $this->currentRowData = [];
 
             $this->currentRowNumber = -1;
@@ -148,11 +149,11 @@ class Source
     /**
      * Seeks to a position (Seekable interface)
      *
-     * @param int $position The position to seek to 0 or more
      * @return void
+     *
      * @throws \OutOfBoundsException
      */
-    public function seek($position)
+    public function seek(int $position)
     {
         if ($position == $this->currentRowNumber) {
             return;

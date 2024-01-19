@@ -3,6 +3,7 @@
 namespace Webkul\DataTransfer\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 
 class Import extends Model implements ImportContract
@@ -22,6 +23,8 @@ class Import extends Model implements ImportContract
         'file_path',
         'images_directory_path',
         'error_file_path',
+        'summary',
+        'batch_id',
         'started_at',
         'completed_at',
     ];
@@ -32,7 +35,16 @@ class Import extends Model implements ImportContract
      * @var array
      */
     protected $casts = [
+        'summary'      => 'array',
         'started_at'   => 'datetime',
         'completed_at' => 'datetime',
     ];
+
+    /**
+     * Get the options.
+     */
+    public function batches(): HasMany
+    {
+        return $this->hasMany(ImportBatchProxy::modelClass());
+    }
 }

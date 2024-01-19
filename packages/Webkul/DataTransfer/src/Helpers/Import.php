@@ -3,6 +3,7 @@
 namespace Webkul\DataTransfer\Helpers;
 
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
+use Webkul\DataTransfer\Repositories\ImportRepository;
 use Webkul\DataTransfer\Helpers\Types\AbstractType;
 
 class Import
@@ -20,23 +21,36 @@ class Import
 
     /**
      * Error helper instance.
-     * 
+     *
      * @var \Webkul\DataTransfer\Helpers\Error
      */
     protected $typeImporter;
 
     /**
-     * Create a new controller instance.
+     * Create a new helper instance.
      *
      * @return void
      */
-    public function __construct(protected Error $errorHelper)
+    public function __construct(
+        protected ImportRepository $importRepository,
+        protected Error $errorHelper
+    )
     {
     }
 
     /**
      * Import instance.
-     * 
+     */
+    public function setImport(ImportContract $import): self
+    {
+        $this->import = $import;
+
+        return $this;
+    }
+
+    /**
+     * Import instance.
+     *
      * @return \Webkul\DataTransfer\Helpers\Error
      */
     public function getErrorHelper()
@@ -47,20 +61,18 @@ class Import
     /**
      * Validates import and returns validation result
      */
-    public function validate(ImportContract $import): bool
+    public function validate(): bool
     {
-        $this->import = $import;
-
         $this->errorHelper->initValidationStrategy(
-            $import->validation_strategy,
-            $import->allowed_errors
+            $this->import->validation_strategy,
+            $this->import->allowed_errors
         );
 
         try {
             $typeImporter = $this->getTypeImporter()->setSource(
                 new Source(
-                    $import->file_path,
-                    $import->field_separator,
+                    $this->import->file_path,
+                    $this->import->field_separator,
                 )
             );
 
@@ -83,6 +95,37 @@ class Import
         }
 
         return true;
+    }
+
+    /**
+     * Starts import process
+     */
+    public function start(): bool
+    {
+        $import = $this->importRepository->update([
+            'started_at' => now(),
+            'summary'    => [],
+        ], $this->import->id);
+
+        $this->setImport($import);
+
+        $typeImporter = $this->getTypeImporter();
+
+        $typeImporter->importData();
+
+        return false;
+    }
+
+    /**
+     * Start the import process
+     */
+    public function completed(): void
+    {
+        $import = $this->importRepository->update([
+            'completed_at' => now(),
+        ], $this->import->id);
+
+        $this->setImport($import);
     }
 
     /**
