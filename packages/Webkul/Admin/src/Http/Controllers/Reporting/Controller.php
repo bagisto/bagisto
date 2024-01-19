@@ -64,6 +64,6 @@ class Controller extends BaseController
     {
         $stats = $this->reportingHelper->{$this->typeFunctions[request()->query('type')]}('table');
 
-        return Excel::download(new ReportingExport($stats), request()->query('type') . '.' . request()->query('format'));
+        return Excel::download(new ReportingExport($stats), request()->query('type').'.'.request()->query('format'));
     }
 }

@@ -91,7 +91,7 @@ class TaxCategoryController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'code'        => 'required|string|unique:tax_categories,code,' . $id,
+            'code'        => 'required|string|unique:tax_categories,code,'.$id,
             'name'        => 'required|string',
             'description' => 'required|string',
             'taxrates'    => 'array|required',

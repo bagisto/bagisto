@@ -24,7 +24,7 @@ class Page
      */
     public function afterUpdate($page)
     {
-        ResponseCache::forget('/page/' . $page->url_key);
+        ResponseCache::forget('/page/'.$page->url_key);
     }
 
     /**
@@ -37,6 +37,6 @@ class Page
     {
         $page = $this->pageRepository->find($pageId);
 
-        ResponseCache::forget('/page/' . $page->url_key);
+        ResponseCache::forget('/page/'.$page->url_key);
     }
 }

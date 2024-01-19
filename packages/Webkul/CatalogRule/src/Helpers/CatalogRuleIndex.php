@@ -51,9 +51,9 @@ class CatalogRuleIndex
     {
         $this->cleanRuleIndices($rule);
 
-        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from . ' 00:00:01') : null;
+        $startsFrom = $rule->starts_from ? Carbon::createFromTimeString($rule->starts_from.' 00:00:01') : null;
 
-        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till . ' 23:59:59') : null;
+        $endsTill = $rule->ends_till ? Carbon::createFromTimeString($rule->ends_till.' 23:59:59') : null;
 
         if (
             (

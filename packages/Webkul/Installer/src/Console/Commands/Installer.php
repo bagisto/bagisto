@@ -180,7 +180,7 @@ class Installer extends Command
             date_default_timezone_get()
         );
 
-        $this->info('Your Default Timezone is ' . date_default_timezone_get());
+        $this->info('Your Default Timezone is '.date_default_timezone_get());
 
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
@@ -333,9 +333,9 @@ class Installer extends Command
             $this->info('-----------------------------');
             $this->info('Congratulations!');
             $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to ' . env('APP_URL') . '/admin' . ' and authenticate with:');
-            $this->info('Email: ' . $adminEmail);
-            $this->info('Password: ' . $adminPassword);
+            $this->info('Go to '.env('APP_URL').'/admin'.' and authenticate with:');
+            $this->info('Email: '.$adminEmail);
+            $this->info('Password: '.$adminPassword);
             $this->info('Cheers!');
 
             Event::dispatch('bagisto.installed');
@@ -452,7 +452,7 @@ class Installer extends Command
 
         // Check if $value contains spaces, and if so, add double quotes
         if (preg_match('/\s/', $value)) {
-            $value = '"' . $value . '"';
+            $value = '"'.$value.'"';
         }
 
         $data = preg_replace("/$key=(.*)/", "$key=$value", $data);

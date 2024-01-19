@@ -17,13 +17,13 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
+        Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'admin');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'admin');
 
-        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'admin');
+        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'admin');
 
         $this->composeView();
 
@@ -50,17 +50,17 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php',
+            dirname(__DIR__).'/Config/menu.php',
             'menu.admin'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/acl.php',
+            dirname(__DIR__).'/Config/acl.php',
             'acl'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php',
+            dirname(__DIR__).'/Config/system.php',
             'core'
         );
     }

@@ -44,7 +44,7 @@ class Themes
      */
     public function __construct()
     {
-        if (! Str::contains(request()->url(), config('app.admin_url') . '/')) {
+        if (! Str::contains(request()->url(), config('app.admin_url').'/')) {
             $this->defaultThemeCode = Config::get('themes.admin-default', null);
         } else {
             $this->defaultThemeCode = Config::get('themes.shop-default', null);
@@ -118,7 +118,7 @@ class Themes
     {
         $parentThemes = [];
 
-        if (Str::contains(request()->url(), config('app.admin_url') . '/')) {
+        if (Str::contains(request()->url(), config('app.admin_url').'/')) {
             $themes = config('themes.admin', []);
         } else {
             $themes = config('themes.shop', []);
@@ -256,7 +256,7 @@ class Themes
             throw new ViterNotFound($namespace);
         }
 
-        $viteUrl = trim($viters[$namespace]['package_assets_directory'], '/') . '/' . $url;
+        $viteUrl = trim($viters[$namespace]['package_assets_directory'], '/').'/'.$url;
 
         return Vite::useHotFile($viters[$namespace]['hot_file'])
             ->useBuildDirectory($viters[$namespace]['build_directory'])

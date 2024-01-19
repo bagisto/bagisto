@@ -98,7 +98,7 @@ class LocaleRepository extends Repository
             if ($image instanceof UploadedFile) {
                 $locale->logo_path = $image->storeAs(
                     'locales',
-                    $locale->code . '.' . $image->getClientOriginalExtension()
+                    $locale->code.'.'.$image->getClientOriginalExtension()
                 );
 
                 $locale->save();

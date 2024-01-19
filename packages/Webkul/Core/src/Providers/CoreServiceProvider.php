@@ -22,17 +22,17 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__ . '/../Http/helpers.php';
+        include __DIR__.'/../Http/helpers.php';
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'core');
 
         $this->publishes([
-            dirname(__DIR__) . '/Config/concord.php'       => config_path('concord.php'),
-            dirname(__DIR__) . '/Config/repository.php'    => config_path('repository.php'),
-            dirname(__DIR__) . '/Config/visitor.php'       => config_path('visitor.php'),
-            dirname(__DIR__) . '/Config/elasticsearch.php' => config_path('elasticsearch.php'),
+            dirname(__DIR__).'/Config/concord.php'       => config_path('concord.php'),
+            dirname(__DIR__).'/Config/repository.php'    => config_path('repository.php'),
+            dirname(__DIR__).'/Config/visitor.php'       => config_path('visitor.php'),
+            dirname(__DIR__).'/Config/elasticsearch.php' => config_path('elasticsearch.php'),
         ]);
 
         $this->app->register(EventServiceProvider::class);
@@ -41,7 +41,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->bind(ExceptionHandler::class, Handler::class);
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'core');
 
         Event::listen('bagisto.shop.layout.body.after', static function (ViewRenderEventManager $viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('core::blade.tracer.style');
@@ -68,7 +68,7 @@ class CoreServiceProvider extends ServiceProvider
             /**
              * Route to access template applied image file
              */
-            $this->app['router']->get(config('imagecache.route') . '/{template}/{filename}', [
+            $this->app['router']->get(config('imagecache.route').'/{template}/{filename}', [
                 'uses' => 'Webkul\Core\ImageCache\Controller@getResponse',
                 'as'   => 'imagecache',
             ])->where(['filename' => $filenamePattern]);

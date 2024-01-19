@@ -25,7 +25,7 @@ class Ollama
     {
         $httpClient = new Client();
 
-        $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain') . '/api/generate';
+        $endpoint = core()->getConfigData('general.magic_ai.settings.api_domain').'/api/generate';
 
         $result = $httpClient->request('POST', $endpoint, [
             'headers' => [

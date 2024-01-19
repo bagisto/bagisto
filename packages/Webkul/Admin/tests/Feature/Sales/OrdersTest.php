@@ -87,7 +87,7 @@ it('should return the view page of order', function () {
 
     get(route('admin.sales.orders.view', $order->id))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.sales.orders.view.' . $order->status))
+        ->assertSeeText(trans('admin::app.sales.orders.view.'.$order->status))
         ->assertSeeText(trans('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id]))
         ->assertSeeText(trans('admin::app.sales.orders.view.summary-tax'))
         ->assertSeeText(trans('admin::app.sales.orders.view.summary-grand-total'))

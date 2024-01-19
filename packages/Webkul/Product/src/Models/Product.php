@@ -327,7 +327,7 @@ class Product extends Model implements ProductContract
             return $this->typeInstance;
         }
 
-        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+        $this->typeInstance = app(config('product_types.'.$this->type.'.class'));
 
         if (! $this->typeInstance instanceof AbstractType) {
             throw new Exception("Please ensure the product type '{$this->type}' is configured in your application.");

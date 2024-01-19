@@ -73,7 +73,7 @@ class Category
             return;
         }
 
-        $currentURLKey = request()->input($locale . '.slug');
+        $currentURLKey = request()->input($locale.'.slug');
 
         if ($translations['slug'] === $currentURLKey) {
             return;

@@ -123,16 +123,16 @@ class OnepageController extends Controller
         foreach ($order->items as $item) {
             $products .= "Name: $item->name\n";
             $products .= "Qty: $item->qty_ordered\n";
-            $products .= 'Price: ' . core()->formatPrice($item->total) . "\n\n";
+            $products .= 'Price: '.core()->formatPrice($item->total)."\n\n";
         }
 
         $prompt .= "\n\nProduct Details:\n $products";
 
         $prompt .= "Customer Details:\n $order->customer_full_name \n\n";
 
-        $prompt .= "Current Locale:\n " . core()->getCurrentLocale()->name . "\n\n";
+        $prompt .= "Current Locale:\n ".core()->getCurrentLocale()->name."\n\n";
 
-        $prompt .= "Store Name:\n" . core()->getCurrentChannel()->name;
+        $prompt .= "Store Name:\n".core()->getCurrentChannel()->name;
 
         return $prompt;
     }

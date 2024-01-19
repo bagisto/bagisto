@@ -20,7 +20,7 @@ class SitemapFactory extends Factory
     public function definition()
     {
         return [
-            'file_name' => strtolower(fake()->word()) . '.xml',
+            'file_name' => strtolower(fake()->word()).'.xml',
             'path'      => '/',
         ];
     }

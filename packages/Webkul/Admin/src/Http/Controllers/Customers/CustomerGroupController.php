@@ -71,7 +71,7 @@ class CustomerGroupController extends Controller
         $id = request()->input('id');
 
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code,' . $id, new Code],
+            'code' => ['required', 'unique:customer_groups,code,'.$id, new Code],
             'name' => 'required',
         ]);
 

@@ -411,7 +411,7 @@ class Reporting
             $records = $records->map(function ($paymentMethod) {
                 $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
-                $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
+                $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.'.$paymentMethod->method.'.title');
 
                 return $paymentMethod;
             });
@@ -447,7 +447,7 @@ class Reporting
 
             $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
-            $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
+            $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.'.$paymentMethod->method.'.title');
         });
 
         return $paymentMethods;
@@ -982,8 +982,8 @@ class Reporting
     public function getDateRange(): array
     {
         return [
-            'previous' => $this->saleReporting->getLastStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getLastEndDate()->format('d M Y'),
-            'current'  => $this->saleReporting->getStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getEndDate()->format('d M Y'),
+            'previous' => $this->saleReporting->getLastStartDate()->format('d M Y').' - '.$this->saleReporting->getLastEndDate()->format('d M Y'),
+            'current'  => $this->saleReporting->getStartDate()->format('d M Y').' - '.$this->saleReporting->getEndDate()->format('d M Y'),
         ];
     }
 
