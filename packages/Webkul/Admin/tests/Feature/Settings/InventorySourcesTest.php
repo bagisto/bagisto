@@ -96,7 +96,7 @@ it('should update the inventory sources', function () {
         'longitude'      => fake()->longitude(),
         'contact_name'   => fake()->unique()->regexify('[A-Z0-9]{10}'),
         'street'         => fake()->streetName(),
-        'country'        => fake()->country(),
+        'country'        => preg_replace("/[^a-zA-Z0-9\s]/", '', fake()->country()),
         'state'          => fake()->state(),
         'city'           => fake()->city(),
         'postcode'       => fake()->postcode(),

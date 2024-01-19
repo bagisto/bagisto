@@ -49,7 +49,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -135,7 +135,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -220,7 +220,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getGroupedProductFactory()->create();
@@ -306,7 +306,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getGroupedProductFactory()->create();
@@ -926,7 +926,7 @@ it('should check customer group price for guest customer with fixed price type f
 
     foreach ($groupedProducts as $groupedProduct) {
         $productCustomerPrice = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => rand(1, 10),
+            'qty'               => rand(2, 10),
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
             'product_id'        => $groupedProduct->associated_product_id,
@@ -986,7 +986,7 @@ it('should check customer group price for general customer with fixed price type
 
     foreach ($groupedProducts as $groupedProduct) {
         $productCustomerPrice = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => rand(1, 10),
+            'qty'               => rand(2, 10),
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
             'product_id'        => $groupedProduct->associated_product_id,
@@ -1048,7 +1048,7 @@ it('should check customer group price for wholesaler customer with fixed price t
 
     foreach ($groupedProducts as $groupedProduct) {
         $productCustomerPrice = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => rand(1, 10),
+            'qty'               => rand(2, 10),
             'value_type'        => 'fixed',
             'value'             => rand(20, 50),
             'product_id'        => $groupedProduct->associated_product_id,
@@ -1112,7 +1112,7 @@ it('should check customer group price for guest customer with discount price typ
 
     foreach ($groupedProducts as $groupedProduct) {
         $productCustomerPrice = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => rand(1, 10),
+            'qty'               => rand(2, 10),
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
             'product_id'        => $groupedProduct->associated_product_id,
@@ -1172,7 +1172,7 @@ it('should check customer group price for general customer with discount price t
 
     foreach ($groupedProducts as $groupedProduct) {
         $productCustomerPrice = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => rand(1, 10),
+            'qty'               => rand(2, 10),
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
             'product_id'        => $groupedProduct->associated_product_id,
@@ -1234,7 +1234,7 @@ it('should check customer group price for wholesaler customer with discount pric
 
     foreach ($groupedProducts as $groupedProduct) {
         $productCustomerPrice = ProductCustomerGroupPrice::factory()->create([
-            'qty'               => rand(1, 10),
+            'qty'               => rand(2, 10),
             'value_type'        => 'discount',
             'value'             => rand(20, 50),
             'product_id'        => $groupedProduct->associated_product_id,

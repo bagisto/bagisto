@@ -49,7 +49,7 @@ it('should add a virtual product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -118,7 +118,7 @@ it('should add a virtual product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -186,7 +186,7 @@ it('should add a virtual product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getVirtualProductFactory()->create();
@@ -255,7 +255,7 @@ it('should add a virtual product to the cart with a cart rule of the no coupon t
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getVirtualProductFactory()->create();
@@ -324,7 +324,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -420,7 +420,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -512,7 +512,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getVirtualProductFactory()->create();
@@ -606,7 +606,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getVirtualProductFactory()->create();

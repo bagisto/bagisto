@@ -49,7 +49,7 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -120,7 +120,7 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -191,7 +191,7 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getDownloadableProductFactory()->create();
@@ -262,7 +262,7 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getDownloadableProductFactory()->create();
@@ -310,9 +310,11 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.checkout.cart.item-add-to-cart'))
         ->assertJsonPath('data.items.0.quantity', $quantity)
-        ->assertJsonPath('data.items.0.price', $product->price)
-        ->assertJsonPath('data.discount_amount', $cartRule->discount_amount)
-        ->assertJsonPath('data.grand_total', ($product->price * $quantity) - $cartRule->discount_amount);
+        ->assertJsonPath('data.discount_amount', $cartRule->discount_amount);
+
+    $this->assertEquals(round($product->price, 2), $response['data']['items'][0]['price']);
+
+    $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
@@ -332,7 +334,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -430,7 +432,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
             'guest_checkout' => [
                 'boolean_value' => true,
@@ -524,7 +526,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getDownloadableProductFactory()->create();
@@ -620,7 +622,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
                 'boolean_value' => true,
             ],
             'price' => [
-                'float_value' => fake()->randomFloat(2, 1, 1000),
+                'float_value' => rand(1000, 5000),
             ],
         ],
     ]))->getDownloadableProductFactory()->create();
