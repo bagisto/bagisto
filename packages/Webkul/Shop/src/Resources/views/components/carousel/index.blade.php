@@ -1,6 +1,6 @@
 @props(['options'])
 
-<v-carousel>
+<v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
     <div class="shimmer w-full aspect-[2.743/1]">
     </div>
 </v-carousel>
@@ -51,13 +51,13 @@
         app.component("v-carousel", {
             template: '#v-carousel-template',
 
+            props: ['images'],
+
             data() {
                 return {
                     autoPlayInterval: null,
 
                     currentIndex: 1,
-
-                    images: @json($options['images'] ?? []),
                 };
             },
 
