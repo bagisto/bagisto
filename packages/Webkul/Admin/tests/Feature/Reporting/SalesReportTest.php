@@ -57,13 +57,21 @@ it('should returns the sales stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -125,13 +133,21 @@ it('should returns the purchase funnel stats', function () {
 
     visitor()->visit($customer);
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -157,8 +173,8 @@ it('should returns the purchase funnel stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -227,13 +243,21 @@ it('should returns the total orders stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -293,13 +317,21 @@ it('should returns the average sale stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -325,8 +357,8 @@ it('should returns the average sale stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -361,13 +393,21 @@ it('should returns the shipping collected stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -427,15 +467,26 @@ it('should returns the tax collected stats', function () {
 
     $customer = Customer::factory()->create();
 
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
     $order = Order::factory()->create([
         'base_tax_amount_invoiced' => $taxInvoiced = rand(0, 50),
-        'cart_id'                  => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-        ])->id,
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'cart_id'                  => $cartId,
+        'customer_id'              => $customer->id,
+        'customer_email'           => $customer->email,
+        'customer_first_name'      => $customer->first_name,
+        'customer_last_name'       => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -491,16 +542,27 @@ it('should returns the refunds stats', function () {
 
     $customer = Customer::factory()->create();
 
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
     $order = Order::factory()->create([
         'base_tax_amount_invoiced'  => $taxInvoiced = rand(20, 50),
         'base_grand_total_refunded' => $grantTotalRefunded = $taxInvoiced - 10,
-        'cart_id'                   => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-        ])->id,
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'cart_id'                   => $cartId,
+        'customer_id'               => $customer->id,
+        'customer_email'            => $customer->email,
+        'customer_first_name'       => $customer->first_name,
+        'customer_last_name'        => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -556,16 +618,27 @@ it('should returns the top payment methods stats', function () {
 
     $customer = Customer::factory()->create();
 
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
     $order = Order::factory()->create([
         'base_tax_amount_invoiced'  => $taxInvoiced = rand(20, 50),
-        'base_grand_total_refunded' => $grantTotalRefunded = $taxInvoiced - 10,
-        'cart_id'                   => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-        ])->id,
-        'customer_id'         => $customer->id,
-        'customer_email'      => $customer->email,
-        'customer_first_name' => $customer->first_name,
-        'customer_last_name'  => $customer->last_name,
+        'base_grand_total_refunded' => $taxInvoiced - 10,
+        'cart_id'                   => $cartId,
+        'customer_id'               => $customer->id,
+        'customer_email'            => $customer->email,
+        'customer_first_name'       => $customer->first_name,
+        'customer_last_name'        => $customer->last_name,
     ]);
 
     OrderItem::factory()->create([
@@ -587,8 +660,8 @@ it('should returns the top payment methods stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -622,13 +695,21 @@ it('should return the view page of sales stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -654,8 +735,8 @@ it('should return the view page of sales stats', function () {
     ]);
 
     Invoice::factory()->create([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ]);
 
     // Act and Assert
@@ -686,13 +767,21 @@ it('should export the sales stats', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -745,5 +834,5 @@ it('should export the sales stats', function () {
         'type'   => 'total-sales',
     ]))
         ->assertOk()
-        ->assertDownload('total-sales.' . $format);
+        ->assertDownload('total-sales.'.$format);
 });

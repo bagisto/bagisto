@@ -79,7 +79,7 @@ class EnvironmentManager
 
         foreach ($envDBParams as $key => $value) {
             if (preg_match('/\s/', $value)) {
-                $value = '"' . $value . '"';
+                $value = '"'.$value.'"';
             }
 
             $data = preg_replace("/$key=(.*)/", "$key=$value", $data);

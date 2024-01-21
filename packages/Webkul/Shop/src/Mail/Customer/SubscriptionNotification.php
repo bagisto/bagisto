@@ -31,7 +31,7 @@ class SubscriptionNotification extends Mailable
             ->to($this->customer->email)
             ->subject(trans('shop::app.emails.customers.subscribed.subject'))
             ->view('shop::emails.customers.subscribed', [
-                'fullName' => $this->customer->first_name . ' ' . $this->customer->last_name,
+                'fullName' => $this->customer->first_name.' '.$this->customer->last_name,
             ]);
     }
 }

@@ -208,6 +208,7 @@ return [
         Webkul\FPC\Providers\FPCServiceProvider::class,
         Webkul\Installer\Providers\InstallerServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
+        Webkul\MagicAI\Providers\MagicAIServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Models\ProductAttributeValue;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -82,7 +82,7 @@ it('should upload link the product upload link', function () {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.upload_link', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
+        'file' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
     ])
         ->assertOk()
         ->assertJsonPath('file_name', $file->getClientOriginalName());
@@ -100,7 +100,7 @@ it('should upload the sample file', function () {
     $this->loginAsAdmin();
 
     $response = postJson(route('admin.catalog.products.upload_sample', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
+        'file' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
     ])
         ->assertOk()
         ->assertJsonPath('file_name', $file->name);
@@ -123,17 +123,15 @@ it('should download the product which is downloadable', function () {
 
         'attribute_value' => [
             $attribute->code => [
-                'text_value' => $file = UploadedFile::fake()->create(fake()->word() . '.pdf', 100),
+                'text_value' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
             ],
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    $fileName = $file->store('product/' . $product->id);
+    $fileName = $file->store('product/'.$product->id);
 
-    $atttributeValues = app(ProductAttributeValueRepository::class)->findOneWhere([
-        'product_id'   => $product->id,
-        'attribute_id' => $attribute->id,
-    ]);
+    $atttributeValues = ProductAttributeValue::where('product_id', $product->id)
+        ->where('attribute_id', $attribute->id)->first();
 
     $atttributeValues->text_value = $fileName;
     $atttributeValues->save();
@@ -184,14 +182,14 @@ it('should update the downloadable product', function () {
                 'en' => [
                     'title' => fake()->title,
                 ],
-                'price'            => rand(10, 250),
-                'downloads'        => '1',
-                'sort_order'       => '0',
-                'type'             => 'file',
-                'file'             => $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg'),
-                'file_name'        => $file1->getClientOriginalName(),
-                'sample_type'      => 'url',
-                'sample_url'       => fake()->url(),
+                'price'       => rand(10, 250),
+                'downloads'   => '1',
+                'sort_order'  => '0',
+                'type'        => 'file',
+                'file'        => $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg'),
+                'file_name'   => $file1->getClientOriginalName(),
+                'sample_type' => 'url',
+                'sample_url'  => fake()->url(),
             ],
 
             'link_1' => [
@@ -253,7 +251,7 @@ it('should update the downloadable product', function () {
 
 it('should delete a downloadable product', function () {
     // Arrange
-    $product = (new ProductFaker())->getSimpleProductFactory()->create();
+    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();

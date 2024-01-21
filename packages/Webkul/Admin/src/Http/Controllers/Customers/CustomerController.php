@@ -116,9 +116,9 @@ class CustomerController extends Controller
             'first_name'    => 'string|required',
             'last_name'     => 'string|required',
             'gender'        => 'required',
-            'email'         => 'required|unique:customers,email,' . $id,
+            'email'         => 'required|unique:customers,email,'.$id,
             'date_of_birth' => 'date|before:today',
-            'phone'         => 'unique:customers,phone,' . $id,
+            'phone'         => 'unique:customers,phone,'.$id,
         ]);
 
         Event::dispatch('customer.update.before', $id);
@@ -179,7 +179,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function login_as_customer($id)
+    public function loginAsCustomer($id)
     {
         $customer = $this->customerRepository->findOrFail($id);
 
@@ -202,15 +202,15 @@ class CustomerController extends Controller
             'note' => 'string|required',
         ]);
 
+        Event::dispatch('customer.note.create.before', $id);
+
         $customerNote = $this->customerNoteRepository->create([
             'customer_id'       => $id,
             'note'              => request()->input('note'),
             'customer_notified' => request()->input('customer_notified', 0),
         ]);
 
-        if (request()->has('customer_notified')) {
-            Event::dispatch('customer.note-created.after', $customerNote);
-        }
+        Event::dispatch('customer.note.create.after', $customerNote);
 
         session()->flash('success', trans('admin::app.customers.customers.view.note-created-success'));
 
@@ -246,8 +246,8 @@ class CustomerController extends Controller
     public function search()
     {
         $customers = $this->customerRepository->scopeQuery(function ($query) {
-            return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
-                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
+            return $query->where('email', 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere(DB::raw('CONCAT('.DB::getTablePrefix().'first_name, " ", '.DB::getTablePrefix().'last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(10);
 

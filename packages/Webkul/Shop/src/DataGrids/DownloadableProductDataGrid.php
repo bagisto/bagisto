@@ -19,7 +19,7 @@ class DownloadableProductDataGrid extends DataGrid
             ->leftJoin('orders', 'downloadable_link_purchased.order_id', '=', 'orders.id')
             ->leftJoin('invoices', 'downloadable_link_purchased.order_id', '=', 'invoices.order_id')
             ->addSelect('downloadable_link_purchased.*', 'invoices.state as invoice_state', 'orders.increment_id')
-            ->addSelect(DB::raw('(' . DB::getTablePrefix() . 'downloadable_link_purchased.download_bought - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_canceled - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_used) as remaining_downloads'))
+            ->addSelect(DB::raw('('.DB::getTablePrefix().'downloadable_link_purchased.download_bought - '.DB::getTablePrefix().'downloadable_link_purchased.download_canceled - '.DB::getTablePrefix().'downloadable_link_purchased.download_used) as remaining_downloads'))
             ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
         $this->addFilter('increment_id', 'orders.increment_id');
@@ -61,7 +61,7 @@ class DownloadableProductDataGrid extends DataGrid
                     return $value->product_name;
                 }
 
-                return $value->product_name . ' ' . '<a href="' . route('shop.customer.downloadable_products.download', $value->id) . '" target="_blank">' . $value->name . '</a>';
+                return $value->product_name.' '.'<a href="'.route('shop.customer.downloadable_products.download', $value->id).'" target="_blank">'.$value->name.'</a>';
             },
         ]);
 
@@ -83,11 +83,11 @@ class DownloadableProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'pending') {
-                    return '<span class="badge badge-md badge-warning">' . trans('shop::app.customer.account.downloadable_products.pending') . '</span>';
+                    return '<span class="badge badge-md badge-warning">'.trans('shop::app.customer.account.downloadable_products.pending').'</span>';
                 } elseif ($value->status == 'available') {
-                    return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.downloadable_products.available') . '</span>';
+                    return '<span class="badge badge-md badge-success">'.trans('shop::app.customer.account.downloadable_products.available').'</span>';
                 } elseif ($value->status == 'expired') {
-                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.downloadable_products.expired') . '</span>';
+                    return '<span class="badge badge-md badge-danger">'.trans('shop::app.customer.account.downloadable_products.expired').'</span>';
                 }
             },
         ]);

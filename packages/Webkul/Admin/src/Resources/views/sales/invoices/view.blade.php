@@ -61,7 +61,7 @@
                     @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                 </button>
 
-                <x-admin::form :action="route('admin.sales.invoices.send_duplicate', $invoice->id)">
+                <x-admin::form :action="route('admin.sales.invoices.send_duplicate_email', $invoice->id)">
                     <!-- Create Group Modal -->
                     <x-admin::modal ref="groupCreateModal">
                         <!-- Modal Header -->

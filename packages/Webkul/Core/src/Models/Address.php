@@ -96,7 +96,7 @@ abstract class Address extends Model implements AddressContract
      */
     public function getNameAttribute(): string
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     /**

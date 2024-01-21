@@ -5,9 +5,6 @@
             "operators": {
                 "=>": "align"
             }
-        },
-        "concat_space": {
-            "spacing": "one"
         }
     }
 }

@@ -112,7 +112,7 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'          => ['required', 'unique:attributes,code,' . $id, new Code],
+            'code'          => ['required', 'unique:attributes,code,'.$id, new Code],
             'admin_name'    => 'required',
             'type'          => 'required',
             'default_value' => 'integer',
@@ -200,7 +200,7 @@ class AttributeController extends Controller
      * Get super attributes of product.
      *
      * @param  int  $id
-     * @return  \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function productSuperAttributes($id)
     {

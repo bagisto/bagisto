@@ -101,7 +101,7 @@ class OrderRepository extends Repository
 
             /* storing log for errors */
             Log::error(
-                'OrderRepository:createOrderIfNotThenRetry: ' . $e->getMessage(),
+                'OrderRepository:createOrderIfNotThenRetry: '.$e->getMessage(),
                 ['data' => $data]
             );
 

@@ -9,7 +9,7 @@ use Webkul\Admin\Http\Controllers\Customers\ReviewController;
 /**
  * Customers routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '/customers'], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url').'/customers'], function () {
     Route::prefix('customers')->group(function () {
         /**
          * Customer management routes.
@@ -25,7 +25,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
             Route::get('search', 'search')->name('admin.customers.customers.search');
 
-            Route::get('login-as-customer/{id}', 'login_as_customer')->name('admin.customers.customers.login_as_customer');
+            Route::get('login-as-customer/{id}', 'loginAsCustomer')->name('admin.customers.customers.login_as_customer');
 
             Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 

@@ -130,7 +130,7 @@ class CoreConfigRepository extends Repository
         static $recursiveArrayData = [];
 
         foreach ($formData as $form => $formValue) {
-            $value = $method . '.' . $form;
+            $value = $method.'.'.$form;
 
             if (is_array($formValue)) {
                 $dim = $this->countDim($formValue);
@@ -150,7 +150,7 @@ class CoreConfigRepository extends Repository
                 $recursiveArrayData[$key] = $value;
             } else {
                 foreach ($value as $key1 => $val) {
-                    $recursiveArrayData[$key . '.' . $key1] = $val;
+                    $recursiveArrayData[$key.'.'.$key1] = $val;
                 }
             }
         }

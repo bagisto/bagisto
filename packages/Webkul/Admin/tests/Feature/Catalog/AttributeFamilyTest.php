@@ -79,12 +79,12 @@ it('should store newly created attribute family', function () {
 
 it('should return edit page of attribute families', function () {
     // Arrange
-    $AttributeFamily = AttributeFamilyModel::factory()->create();
+    $attributeFamily = AttributeFamilyModel::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    get(route('admin.catalog.families.edit', $AttributeFamily->id))
+    get(route('admin.catalog.families.edit', $attributeFamily->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.families.edit.title'))
         ->assertSeeText(trans('admin::app.catalog.families.edit.back-btn'));

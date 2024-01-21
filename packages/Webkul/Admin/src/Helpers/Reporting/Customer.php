@@ -121,7 +121,7 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT(' . $tablePrefix . 'orders.customer_first_name, " ", ' . $tablePrefix . 'orders.customer_last_name) as full_name'),
+                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
                 DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) as total'),
                 DB::raw('COUNT(*) as orders')
             )
@@ -146,7 +146,7 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT(' . $tablePrefix . 'orders.customer_first_name, " ", ' . $tablePrefix . 'orders.customer_last_name) as full_name'),
+                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
                 DB::raw('COUNT(*) as orders')
             )
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
@@ -171,13 +171,13 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'customers.id as id',
                 'customers.email as email',
-                DB::raw('CONCAT(' . $tablePrefix . 'customers.first_name, " ", ' . $tablePrefix . 'customers.last_name) as full_name'),
+                DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name'),
                 DB::raw('COUNT(*) as reviews')
             )
             ->whereBetween('product_reviews.created_at', [$this->startDate, $this->endDate])
             ->where('product_reviews.status', 'approved')
             ->whereNotNull('customer_id')
-            ->groupBy(DB::raw('CONCAT(email, "-", ' . $tablePrefix . 'customers.id)'))
+            ->groupBy(DB::raw('CONCAT(email, "-", '.$tablePrefix.'customers.id)'))
             ->orderByDesc('reviews')
             ->limit($limit)
             ->get();

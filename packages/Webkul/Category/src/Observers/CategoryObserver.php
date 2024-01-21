@@ -15,7 +15,7 @@ class CategoryObserver
      */
     public function deleted($category)
     {
-        Storage::deleteDirectory('category/' . $category->id);
+        Storage::deleteDirectory('category/'.$category->id);
     }
 
     /**

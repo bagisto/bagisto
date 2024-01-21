@@ -41,11 +41,11 @@ it('should store the newly created channels', function () {
     postJson(route('admin.settings.channels.store'), [
         'code'              => $code = fake()->unique()->word(),
         'theme'             => $code,
-        'hostname'          => $hostName = 'http://' . fake()->ipv4(),
+        'hostname'          => $hostName = 'http://'.fake()->ipv4(),
         'root_category_id'  => 1,
         'default_locale_id' => 1,
         'base_currency_id'  => 1,
-        'name'              => $name = fake()->name(),
+        'name'              => fake()->name(),
         'description'       => substr(fake()->paragraph, 0, 50),
         'inventory_sources' => [1],
         'locales'           => [1],
@@ -88,7 +88,7 @@ it('should update the existing channel', function () {
     putJson(route('admin.settings.channels.update', $channel->id), [
         'code'              => $code = fake()->unique()->word(),
 
-        'en'  => [
+        app()->getLocale()  => [
             'name'            => fake()->name(),
             'seo_title'       => fake()->title(),
             'seo_description' => substr(fake()->paragraph(), 0, 50),
@@ -96,7 +96,7 @@ it('should update the existing channel', function () {
             'description'     => substr(fake()->paragraph, 0, 50),
         ],
 
-        'hostname'          => 'http://' . fake()->ipv4(),
+        'hostname'          => 'http://'.fake()->ipv4(),
         'root_category_id'  => 1,
         'default_locale_id' => 1,
         'base_currency_id'  => 1,

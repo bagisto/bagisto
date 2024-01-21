@@ -54,13 +54,21 @@ it('should store the invoice', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -130,13 +138,21 @@ it('should return the view page of the invoice', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -162,8 +178,8 @@ it('should return the view page of the invoice', function () {
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -194,13 +210,21 @@ it('should send duplicate mail to provided email address', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -236,14 +260,14 @@ it('should send duplicate mail to provided email address', function () {
     ]);
 
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    postJson(route('admin.sales.invoices.send_duplicate', $invoice->id), [
+    postJson(route('admin.sales.invoices.send_duplicate_email', $invoice->id), [
         'email' => fake()->email(),
     ])
         ->assertRedirect(route('admin.sales.invoices.view', $invoice->id))
@@ -273,13 +297,21 @@ it('should print/download the invoice', function () {
 
     $customer = Customer::factory()->create();
 
-    $order = Order::factory()->create([
-        'cart_id' => $cartId = CartItem::factory()->create([
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'type'       => $product->type,
-            'name'       => $product->name,
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
         ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
         'customer_id'         => $customer->id,
         'customer_email'      => $customer->email,
         'customer_first_name' => $customer->first_name,
@@ -319,7 +351,7 @@ it('should print/download the invoice', function () {
         'state'         => 'paid',
     ])->create();
 
-    $fileName = 'invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf';
+    $fileName = 'invoice-'.$invoice->created_at->format('d-m-Y').'.pdf';
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -327,5 +359,5 @@ it('should print/download the invoice', function () {
     get(route('admin.sales.invoices.print', $invoice->id))
         ->assertOk()
         ->assertHeader('Content-Type', 'application/pdf')
-        ->assertHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        ->assertHeader('Content-Disposition', 'attachment; filename="'.$fileName.'"');
 });

@@ -76,7 +76,7 @@ class CurrencyController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Rules\Code],
+            'code' => ['required', 'unique:currencies,code,'.$id, new \Webkul\Core\Rules\Code],
             'name' => 'required',
         ]);
 

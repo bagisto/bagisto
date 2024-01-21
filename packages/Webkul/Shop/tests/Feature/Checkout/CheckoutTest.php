@@ -460,7 +460,7 @@ it('should place a simple product order for a guest user', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
@@ -588,7 +588,7 @@ it('should place a simple product order for a customer', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
@@ -759,7 +759,7 @@ it('should place a configurable product order for a guest user', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
@@ -927,7 +927,7 @@ it('should place a configurable product order for a customer', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
@@ -1040,7 +1040,7 @@ it('should place a virtual product order for a guest user', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
@@ -1154,7 +1154,7 @@ it('should place a virtual product order for a customer', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
@@ -1306,7 +1306,7 @@ it('should place a downloadable product order for a customer', function () {
 
     $cartPayment = new CartPayment;
     $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $paymentMethod . '.title');
+    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
     $cartPayment->cart_id = $cart->id;
     $cartPayment->save();
 
