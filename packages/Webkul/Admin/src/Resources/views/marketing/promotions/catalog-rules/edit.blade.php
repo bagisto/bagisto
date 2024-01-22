@@ -355,7 +355,7 @@
                                     <!-- Customer Groups -->
                                     <div class="mb-4">
                                         <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.channels')
+                                            @lang('admin::app.marketing.promotions.catalog-rules.edit.customer-groups')
                                         </x-admin::form.control-group.label>
 
                                         @php($selectedOptionIds = old('customer_groups') ?: $catalogRule->customer_groups->pluck('id')->toArray())
