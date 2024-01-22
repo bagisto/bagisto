@@ -271,7 +271,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/orders.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -355,7 +355,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/settings/invoice.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -474,7 +474,7 @@
                             <!-- Placeholder Image -->
                             <img
                                 src="{{ bagisto_asset('images/empty-placeholders/reviews.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                             />
 
                             <div class="flex flex-col items-center">
@@ -742,7 +742,7 @@
                         <div class="flex gap-5 items-center py-2.5">
                             <img
                                 src="{{ bagisto_asset('images/settings/address.svg') }}"
-                                class="w-20 h-20 border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
+                                class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                             >
 
                             <div class="flex flex-col gap-1.5">
