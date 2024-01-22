@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Models\CatalogRule;
 
 class CatalogRuleFactory extends Factory
@@ -31,5 +32,15 @@ class CatalogRuleFactory extends Factory
             'action_type'     => 'by_percent',
             'discount_amount' => rand(1, 50),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (CatalogRule $catalogRule) {
+            Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
+        });
     }
 }

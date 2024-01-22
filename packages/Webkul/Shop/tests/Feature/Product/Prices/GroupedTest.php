@@ -3,6 +3,7 @@
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\CartRule\Models\CartRuleCustomer;
+use Webkul\CatalogRule\Models\CatalogRule;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
@@ -30,6 +31,7 @@ afterEach(function () {
     TaxMap::query()->delete();
     TaxCategory::query()->delete();
     CartRuleCustomer::query()->delete();
+    CatalogRule::query()->delete();
 });
 
 it('should add a grouped product to the cart with a cart rule of the no coupon type for all customer group type', function () {
@@ -1262,4 +1264,660 @@ it('should check customer group price for wholesaler customer with discount pric
         ->assertJsonPath('data.items_count', 4);
 
     $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for percentage price for grouped product for guest customer into cart', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([1]);
+    })->create([
+        'status'     => 1,
+        'sort_order' => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    $data = [
+        'quantities' => [],
+        'prices'     => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => '',
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for percentage price for grouped product for general customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([2]);
+    })->create([
+        'status'     => 1,
+        'sort_order' => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    $data = [
+        'quantities' => [],
+        'prices'     => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => '',
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for percentage price for grouped product for wholesaler customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([3]);
+    })->create([
+        'status'     => 1,
+        'sort_order' => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    $data = [
+        'quantities' => [],
+        'prices'     => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = ($groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * $catalogRule->discount_amount / 100)) * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => '',
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for fixed price for grouped product for guest customer into cart', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([1]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    $data = [
+        'quantities' => [],
+        'prices'     => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => '',
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for fixed price for grouped product for general customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([2]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    $data = [
+        'quantities' => [],
+        'prices'     => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => '',
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for fixed price for grouped product for wholesaler customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([3]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    $data = [
+        'quantities' => [],
+        'prices'     => [],
+    ];
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $data['quantities'][$groupedProduct->associated_product_id] = $groupedProduct->qty;
+
+        $data['prices'][] = ($groupedProduct->associated_product->price - $catalogRule->discount_amount) * $groupedProduct->qty;
+    }
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    $response = postJson(route('shop.api.checkout.cart.store'), [
+        'product_id' => $product->id,
+        'quantity'   => '',
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'qty'        => $data['quantities'],
+    ])
+        ->assertOk()
+        ->assertJsonPath('data.items_count', 4)
+        ->assertJsonPath('data.items_qty', array_sum($data['quantities']));
+
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+    $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should check discount price if catalog rule applied for fixed price for grouped product for guest customer', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([1]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $this->assertDatabaseHas('catalog_rule_product_prices', [
+            'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
+            'customer_group_id' => 1,
+            'catalog_rule_id'   => $catalogRule->id,
+            'product_id'        => $groupedProduct->associated_product->id,
+        ]);
+    }
+});
+
+it('should check discount price if catalog rule applied for fixed price for grouped product for general customer', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([2]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $this->assertDatabaseHas('catalog_rule_product_prices', [
+            'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
+            'customer_group_id' => 2,
+            'catalog_rule_id'   => $catalogRule->id,
+            'product_id'        => $groupedProduct->associated_product->id,
+        ]);
+    }
+});
+
+it('should check discount price if catalog rule applied for fixed price for grouped product for wholesaler customer', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([3]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $this->assertDatabaseHas('catalog_rule_product_prices', [
+            'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
+            'customer_group_id' => 3,
+            'catalog_rule_id'   => $catalogRule->id,
+            'product_id'        => $groupedProduct->associated_product->id,
+        ]);
+    }
+});
+
+it('should check discount price if catalog rule applied for precentage price for grouped product for guest customer', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([1]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $this->assertDatabaseHas('catalog_rule_product_prices', [
+            'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
+            'customer_group_id' => 1,
+            'catalog_rule_id'   => $catalogRule->id,
+            'product_id'        => $groupedProduct->associated_product->id,
+        ]);
+    }
+});
+
+it('should check discount price if catalog rule applied for percentage price for grouped product for general customer', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([2]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $this->assertDatabaseHas('catalog_rule_product_prices', [
+            'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
+            'customer_group_id' => 2,
+            'catalog_rule_id'   => $catalogRule->id,
+            'product_id'        => $groupedProduct->associated_product->id,
+        ]);
+    }
+});
+
+it('should check discount price if catalog rule applied for percentage price for grouped product for wholesaler customer', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([3]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getGroupedProductFactory()->create();
+
+    $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    foreach ($groupedProducts as $groupedProduct) {
+        $this->assertDatabaseHas('catalog_rule_product_prices', [
+            'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
+            'customer_group_id' => 3,
+            'catalog_rule_id'   => $catalogRule->id,
+            'product_id'        => $groupedProduct->associated_product->id,
+        ]);
+    }
 });
