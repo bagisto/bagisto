@@ -180,7 +180,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                control-name="description"
+                                control-name="{{ $currentLocale->code }}[description]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
