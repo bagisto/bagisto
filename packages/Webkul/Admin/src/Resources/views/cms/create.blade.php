@@ -57,21 +57,17 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
-                            name="html_content"
-                            :value="old('html_content')"
                             id="content"
+                            name="html_content"
                             rules="required"
+                            :value="old('html_content')"
                             :label="trans('admin::app.cms.create.content')"
                             :placeholder="trans('admin::app.cms.create.content')"
                             :tinymce="true"
                             :prompt="core()->getConfigData('general.magic_ai.content_generation.cms_page_content_prompt')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="html_content"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="html_content" />
                     </x-admin::form.control-group>
                 </div>
 
@@ -95,18 +91,14 @@
 
                         <x-admin::form.control-group.control
                             type="text"
+                            id="meta_title"
                             name="meta_title"
                             :value="old('meta_title')"
-                            id="meta_title"
                             :label="trans('admin::app.cms.create.meta-title')"
                             :placeholder="trans('admin::app.cms.create.meta-title')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="meta_title"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="meta_title" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group>
@@ -116,19 +108,15 @@
 
                         <x-admin::form.control-group.control
                             type="text"
-                            name="url_key"
-                            :value="old('url_key')"
                             id="url_key"
+                            name="url_key"
                             rules="required"
+                            :value="old('url_key')"
                             :label="trans('admin::app.cms.create.url-key')"
                             :placeholder="trans('admin::app.cms.create.url-key')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="url_key"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="url_key" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group>
@@ -138,18 +126,14 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
+                            id="meta_keywords"
                             name="meta_keywords"
                             :value="old('meta_keywords')"
-                            id="meta_keywords"
                             :label="trans('admin::app.cms.create.meta-keywords')"
                             :placeholder="trans('admin::app.cms.create.meta-keywords')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="meta_keywords"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="meta_keywords" />
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group class="!mb-0">
@@ -159,18 +143,14 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
+                            id="meta_description"
                             name="meta_description"
                             :value="old('meta_description')"
-                            id="meta_description"
                             :label="trans('admin::app.cms.create.meta-description')"
                             :placeholder="trans('admin::app.cms.create.meta-description')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="meta_description"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="meta_description" />
                     </x-admin::form.control-group>
                 </div>
 
@@ -188,7 +168,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.cms.create.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <x-admin::form.control-group>
@@ -198,19 +178,15 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="page_title"
-                                :value="old('page_title')"
                                 id="page_title"
+                                name="page_title"
                                 rules="required"
+                                :value="old('page_title')"
                                 :label="trans('admin::app.cms.create.page-title')"
                                 :placeholder="trans('admin::app.cms.create.page-title')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="page_title"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="page_title" />
                         </x-admin::form.control-group>
 
                         <!-- Select Channels -->
@@ -222,14 +198,13 @@
                             <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2 last:!mb-0 select-none">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
-                                    name="channels[]"
-                                    :value="$channel->id"
                                     :id="'channels_' . $channel->id"
-                                    :for="'channels_' . $channel->id"
+                                    name="channels[]"
                                     rules="required"
+                                    :value="$channel->id"
+                                    :for="'channels_' . $channel->id"
                                     :label="trans('admin::app.cms.create.channels')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <label
                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -240,11 +215,8 @@
                             </x-admin::form.control-group>
                         @endforeach
 
-                        <x-admin::form.control-group.error
-                            control-name="channels[]"
-                        >
-                        </x-admin::form.control-group.error>
-                    </x-slot:content>
+                        <x-admin::form.control-group.error control-name="channels[]" />
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.cms.pages.create.card.accordion.general.after') !!}

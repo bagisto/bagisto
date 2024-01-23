@@ -59,21 +59,17 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            name="first_name"
                             class="!p-[20px_25px] rounded-lg"
-                            :value="old('first_name')"
+                            name="first_name"
                             rules="required"
+                            :value="old('first_name')"
                             :label="trans('shop::app.customers.signup-form.first-name')"
                             :placeholder="trans('shop::app.customers.signup-form.first-name')"
                             aria-label="@lang('shop::app.customers.signup-form.first-name')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="first_name"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="first_name" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.first_name.after') !!}
@@ -85,21 +81,17 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            name="last_name"
                             class="!p-[20px_25px] rounded-lg"
-                            :value="old('last_name')"
+                            name="last_name"
                             rules="required"
+                            :value="old('last_name')"
                             :label="trans('shop::app.customers.signup-form.last-name')"
                             :placeholder="trans('shop::app.customers.signup-form.last-name')"
                             :aria-label="trans('shop::app.customers.signup-form.last-name')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="last_name"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="last_name" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.last_name.after') !!}
@@ -111,21 +103,17 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            name="email"
                             class="!p-[20px_25px] rounded-lg"
-                            :value="old('email')"
+                            name="email"
                             rules="required|email"
+                            :value="old('email')"
                             :label="trans('shop::app.customers.signup-form.email')"
                             placeholder="email@example.com"
                             aria-label="@lang('shop::app.customers.signup-form.email')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="email"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="email" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.email.after') !!}
@@ -137,22 +125,18 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            name="password"
                             class="!p-[20px_25px] rounded-lg"
-                            :value="old('password')"
+                            name="password"
                             rules="required|min:6"
-                            ref="password"
+                            :value="old('password')"
                             :label="trans('shop::app.customers.signup-form.password')"
                             :placeholder="trans('shop::app.customers.signup-form.password')"
+                            ref="password"
                             aria-label="@lang('shop::app.customers.signup-form.password')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="password"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="password" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.password.after') !!}
@@ -164,21 +148,17 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            name="password_confirmation"
                             class="!p-[20px_25px] rounded-lg"
-                            value=""
+                            name="password_confirmation"
                             rules="confirmed:@password"
+                            value=""
                             :label="trans('shop::app.customers.signup-form.password')"
                             :placeholder="trans('shop::app.customers.signup-form.confirm-pass')"
                             aria-label="@lang('shop::app.customers.signup-form.confirm-pass')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="password_confirmation"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="password_confirmation" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.signup_form.password_confirmation.after') !!}

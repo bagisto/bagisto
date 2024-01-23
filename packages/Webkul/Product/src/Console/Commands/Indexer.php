@@ -71,6 +71,6 @@ class Indexer extends Command
 
         $end = microtime(true);
 
-        echo 'The code took ' . ($end - $start) . " seconds to complete.\n";
+        echo 'The code took '.($end - $start)." seconds to complete.\n";
     }
 }

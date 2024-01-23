@@ -10,7 +10,7 @@
 
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}" />
 
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
@@ -102,7 +102,7 @@
 
             <!-- Datagrid Head Shimmer -->
             <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
             </template>
         </template>
 
@@ -255,7 +255,7 @@
 
             <!-- Datagrid Body Shimmer -->
             <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>
@@ -298,7 +298,7 @@
                                 >
                                     @lang('admin::app.catalog.products.index.create.configurable-attributes')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -324,7 +324,7 @@
                                             @endforeach
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="type" />
                                     </x-admin::form.control-group>
 
                                     <!-- Attribute Family Id -->
@@ -346,7 +346,7 @@
                                             @endforeach
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="attribute_family_id"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="attribute_family_id" />
                                     </x-admin::form.control-group>
 
                                     <!-- SKU -->
@@ -360,10 +360,9 @@
                                             name="sku"
                                             ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
                                             :label="trans('admin::app.catalog.products.index.create.sku')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="sku" />
                                     </x-admin::form.control-group>
 
                                     {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
@@ -400,7 +399,7 @@
 
                                     {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -422,7 +421,7 @@
                                         @lang('admin::app.catalog.products.index.create.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

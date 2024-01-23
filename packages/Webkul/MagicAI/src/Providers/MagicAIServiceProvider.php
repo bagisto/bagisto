@@ -14,7 +14,7 @@ class MagicAIServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        include __DIR__ . '/../Http/helpers.php';
+        include __DIR__.'/../Http/helpers.php';
     }
 
     /**

@@ -96,11 +96,11 @@ class OrderTransactionsDataGrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status == 'paid') {
-                    return '<p class="label-active">' . trans('admin::app.sales.invoices.index.datagrid.paid') . '</p>';
+                    return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';
                 } elseif ($value->status == 'pending') {
-                    return '<p class="label-pending">' . trans('admin::app.sales.invoices.index.datagrid.pending') . '</p>';
+                    return '<p class="label-pending">'.trans('admin::app.sales.invoices.index.datagrid.pending').'</p>';
                 } elseif ($value->status == 'cancelled') {
-                    return '<p class="label-cancel">' . trans('admin::app.sales.invoices.index.datagrid.overdue') . '</p>';
+                    return '<p class="label-cancel">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p>';
                 }
 
                 return $value->state;

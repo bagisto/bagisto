@@ -44,13 +44,13 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
 
         <!-- Breadcrumbs -->
-        <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="checkout" />
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
         <v-checkout>
             <!-- Shimmer Effect -->
-            <x-shop::shimmer.checkout.onepage/>
+            <x-shop::shimmer.checkout.onepage />
         </v-checkout>
     </div>
 

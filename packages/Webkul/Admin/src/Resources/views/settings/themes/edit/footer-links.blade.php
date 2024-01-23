@@ -1,5 +1,5 @@
 <!-- Todays Details Vue Component -->
-<v-footer-links></v-footer-links>
+<v-footer-links />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-footer-links-template">
@@ -40,11 +40,30 @@
                                 v-for="(link, key) in footerLink"
                             >
                                 <!-- Hidden Input -->
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + ']'" :value="link.column"> 
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][url]'" :value="link.url"> 
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][title]'" :value="link.title"> 
-                                <input type="hidden" :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'" :value="link.sort_order"> 
-                                
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + ']'"
+                                    :value="link.column"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][url]'"
+                                    :value="link.url"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][title]'"
+                                    :value="link.title"
+                                />
+
+                                <input
+                                    type="hidden"
+                                    :name="'{{ $currentLocale->code }}[options][' + link.column + '][' + key + '][sort_order]'"
+                                    :value="link.sort_order"
+                                />
+ 
                                 <div class="flex gap-2.5 justify-between py-5 cursor-pointer">
                                     <div class="flex gap-2.5">
                                         <div class="grid gap-1.5 place-content-start">
@@ -151,7 +170,7 @@
                             <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                 @lang('admin::app.settings.themes.edit.general')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
                     
                         <x-slot:content>
                             <input type="hidden" name="type" value="footer_links">
@@ -173,10 +192,7 @@
                                 >
                                 </v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -196,10 +212,7 @@
                                 >
                                 </v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="sort_order"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -218,7 +231,7 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="channel_id" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="!mb-0">
@@ -250,12 +263,9 @@
                                     ></label>
                                 </label>
 
-                                <x-admin::form.control-group.error
-                                    control-name="status"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="status" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
                     </x-admin::accordion>
                 </div>
             </div>
@@ -273,15 +283,14 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.footer-link-form-title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="key"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                             
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
@@ -301,10 +310,7 @@
                                     <option value="column_3">3</option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="column"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="column" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -318,13 +324,9 @@
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.footer-title')"
                                     :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="title"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="title" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -338,13 +340,9 @@
                                     rules="required|url"
                                     :label="trans('admin::app.settings.themes.edit.url')"
                                     :placeholder="trans('admin::app.settings.themes.edit.url')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="url"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="url" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
@@ -358,15 +356,11 @@
                                     rules="required|numeric"
                                     :label="trans('admin::app.settings.themes.edit.sort-order')"
                                     :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="sort_order"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -378,7 +372,7 @@
                                     @lang('admin::app.settings.themes.edit.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

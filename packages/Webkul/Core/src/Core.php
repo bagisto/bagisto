@@ -152,8 +152,8 @@ class Core
 
         $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
             $hostname,
-            'http://' . $hostname,
-            'https://' . $hostname,
+            'http://'.$hostname,
+            'https://'.$hostname,
         ])->first();
 
         if (! $this->currentChannel) {
@@ -551,7 +551,7 @@ class Core
     {
         $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
 
-        $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
@@ -920,7 +920,7 @@ class Core
             }
 
             foreach ($coreData['fields'] as $field) {
-                $name = $coreData['key'] . '.' . $field['name'];
+                $name = $coreData['key'].'.'.$field['name'];
 
                 if ($name == $fieldName) {
                     return $field;

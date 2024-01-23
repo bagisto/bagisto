@@ -125,7 +125,7 @@
 
                     <!-- Datagrid Body Shimmer -->
                     <template v-else>
-                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body />
                     </template>
                 </template>
             </x-admin::datagrid>
@@ -161,7 +161,7 @@
                             >
                                 @lang('admin::app.marketing.search-seo.url-rewrites.index.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -169,8 +169,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Entity Type -->
                             <x-admin::form.control-group>
@@ -197,7 +196,7 @@
                                     </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="entity_type"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="entity_type" />
                             </x-admin::form.control-group>
 
                             <!-- Request Path -->
@@ -215,10 +214,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="request_path"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="request_path" />
                             </x-admin::form.control-group>
 
                             <!-- Target Path -->
@@ -236,10 +232,7 @@
                                 >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="target_path"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="target_path" />
                             </x-admin::form.control-group>
 
                             <!-- Redirect Type -->
@@ -263,7 +256,7 @@
                                     </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="redirect_type"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="redirect_type" />
                             </x-admin::form.control-group>
 
                             <!-- Locales -->
@@ -283,16 +276,16 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="locale"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="locale" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <button class="primary-button">
                                 @lang('admin::app.marketing.search-seo.url-rewrites.index.create.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

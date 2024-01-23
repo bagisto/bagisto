@@ -65,7 +65,7 @@ class OpenAI
         $images = [];
 
         foreach ($result->data as $image) {
-            $images[]['url'] = 'data:image/png;base64,' . $image->b64_json;
+            $images[]['url'] = 'data:image/png;base64,'.$image->b64_json;
         }
 
         return $images;

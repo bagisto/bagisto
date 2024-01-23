@@ -6,7 +6,7 @@
     $whatsappURL = 'whatsapp://send?' . http_build_query($text);
 @endphp
 
-<v-whatsapp-share></v-whatsapp-share>
+<v-whatsapp-share />
 
 @push('scripts')
     <script type="text/x-template" id="v-whatsapp-share-template">

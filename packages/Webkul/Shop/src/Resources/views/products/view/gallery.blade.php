@@ -103,8 +103,7 @@
                 ::src="image.large_image_url"
                 class="min-w-[450px] max-sm:min-w-full w-[490px]"
                 v-for="image in media.images"
-            >
-            </x-shop::media.images.lazy>
+            />
         </div>
     </script>
 

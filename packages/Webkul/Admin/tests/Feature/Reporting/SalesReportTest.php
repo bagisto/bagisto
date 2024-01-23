@@ -834,5 +834,5 @@ it('should export the sales stats', function () {
         'type'   => 'total-sales',
     ]))
         ->assertOk()
-        ->assertDownload('total-sales.' . $format);
+        ->assertDownload('total-sales.'.$format);
 });

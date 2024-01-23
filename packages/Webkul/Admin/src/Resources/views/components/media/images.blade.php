@@ -16,7 +16,7 @@
     height="{{ $height }}"
     :errors="errors"
 >
-    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded"></x-admin::shimmer.image>
+    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded" />
 </v-media-images>
 
 @pushOnce('scripts')
@@ -92,7 +92,7 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
-                        ></v-media-image-item>
+                        />
                     </template>
                 </draggable>
 
@@ -140,7 +140,7 @@
                                         </span>
                                     </p>
                                 </template>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -154,13 +154,12 @@
                                         <x-admin::form.control-group.control
                                             type="textarea"
                                             name="prompt"
-                                            v-model="ai.prompt"
                                             rules="required"
+                                            v-model="ai.prompt"
                                             :label="trans('admin::app.components.media.images.ai-generation.prompt')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="prompt" />
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group>
@@ -171,19 +170,20 @@
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="model"
-                                            v-model="ai.model"
                                             rules="required"
+                                            v-model="ai.model"
                                             :label="trans('admin::app.components.media.images.ai-generation.model')"
                                         >
                                             <option value="dall-e-2">
                                                 @lang('admin::app.components.media.images.ai-generation.dall-e-2')
                                             </option>
+
                                             <option value="dall-e-3">
                                                 @lang('admin::app.components.media.images.ai-generation.dall-e-3')
                                             </option>
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="model"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="model" />
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group v-if="ai.model == 'dall-e-2'">
@@ -194,13 +194,12 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="n"
-                                            v-model="ai.n"
                                             rules="required"
+                                            v-model="ai.n"
                                             :label="trans('admin::app.components.media.images.ai-generation.number-of-images')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error control-name="n"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="n" />
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group>
@@ -211,8 +210,8 @@
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="size"
-                                            v-model="ai.size"
                                             rules="required"
+                                            v-model="ai.size"
                                             :label="trans('admin::app.components.media.images.ai-generation.size')"
                                         >
                                             <option value="1024x1024">
@@ -228,7 +227,7 @@
                                             </option>
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="size"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="size" />
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group v-if="ai.model == 'dall-e-3'">
@@ -239,8 +238,8 @@
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="quality"
-                                            v-model="ai.quality"
                                             rules="required"
+                                            v-model="ai.quality"
                                             :label="trans('admin::app.components.media.images.ai-generation.quality')"
                                         >
                                             <option value="standard">
@@ -252,7 +251,7 @@
                                             </option>
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="quality"></x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="quality" />
                                     </x-admin::form.control-group>
                                 </div>
 
@@ -272,7 +271,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -326,7 +325,7 @@
                                         </button>
                                     </template>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

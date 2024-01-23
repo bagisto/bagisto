@@ -6,13 +6,13 @@
 
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="wishlist"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="wishlist" />
     @endSection
 
     <!-- Wishlist Vue Component -->
     <v-wishlist-products>
         <!-- Wishlist Shimmer Effect -->
-        <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
+        <x-shop::shimmer.customers.account.wishlist :count="4" />
     </v-wishlist-products>
 
     @pushOnce('scripts')
@@ -20,7 +20,7 @@
             <div>
                 <!-- Wishlist Shimmer Effect -->
                 <template v-if="isLoading">
-                    <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
+                    <x-shop::shimmer.customers.account.wishlist :count="4" />
                 </template>
 
                 {!! view_render_event('bagisto.shop.customers.account.wishlist.list.before') !!}
@@ -142,8 +142,7 @@
                                                     name="quantity"
                                                     class="flex gap-x-2.5 items-center max-h-10 py-1.5 px-3.5 border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
-                                                >
-                                                </x-shop::quantity-changer>
+                                                />
 
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <x-shop::button
@@ -152,8 +151,7 @@
                                                     :loading="false"
                                                     ref="moveToCart"
                                                     @click="moveToCart(item.id,index)"
-                                                >
-                                                </x-shop::button>
+                                                />
                                             </div>
 
                                             {!! view_render_event('bagisto.shop.customers.account.wishlist.perform_actions.after') !!}

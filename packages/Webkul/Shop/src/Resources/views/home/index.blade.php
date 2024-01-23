@@ -3,7 +3,7 @@
 @endphp
 
 
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push ('meta')
     <meta name="title" content="{{ $channel->home_seo['meta_title'] ?? '' }}" />
 
@@ -13,55 +13,50 @@
 @endPush
 
 <x-shop::layouts>
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
     
-    {{-- Loop over the theme customization --}}
+    <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options)
 
-        {{-- Static content --}}
+        <!-- Static content -->
         @switch ($customization->type)
-            {{-- Image Carousel --}}
             @case ($customization::IMAGE_CAROUSEL)
-                <x-shop::carousel :options="$data"></x-shop::carousel>
+                <!-- Image Carousel -->
+                <x-shop::carousel :options="$data" />
 
                 @break
-
             @case ($customization::STATIC_CONTENT)
-                {{-- push style --}}
+                <!-- push style -->
                 @push ('styles')
                     <style>
                         {{ $data['css'] }}
                     </style>
                 @endpush
 
-                {{-- render html --}}
+                <!-- render html -->
                 {!! $data['html'] !!}
 
                 @break
-
             @case ($customization::CATEGORY_CAROUSEL)
-                {{-- Categories carousel --}}
+                <!-- Categories carousel -->
                 <x-shop::categories.carousel
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.categories.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.home.index')"
-                >
-                </x-shop::categories.carousel>
+                />
 
                 @break
-
             @case ($customization::PRODUCT_CAROUSEL)
-                {{-- Product Carousel --}}
+                <!-- Product Carousel -->
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
-                >
-                </x-shop::products.carousel>
+                />
 
                 @break
         @endswitch

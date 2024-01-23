@@ -96,7 +96,7 @@ class SitemapController extends Controller
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
-        Storage::delete($sitemap->path . '/' . $sitemap->file_name);
+        Storage::delete($sitemap->path.'/'.$sitemap->file_name);
 
         try {
             Event::dispatch('marketing.search_seo.sitemap.delete.before', $id);

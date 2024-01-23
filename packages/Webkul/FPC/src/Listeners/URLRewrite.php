@@ -24,7 +24,7 @@ class URLRewrite
      */
     public function afterUpdate($urlRewrite)
     {
-        ResponseCache::forget('/' . $urlRewrite->request_path);
+        ResponseCache::forget('/'.$urlRewrite->request_path);
     }
 
     /**
@@ -37,6 +37,6 @@ class URLRewrite
     {
         $urlRewrite = $this->urlRewriteRepository->find($urlRewriteId);
 
-        ResponseCache::forget('/' . $urlRewrite->request_path);
+        ResponseCache::forget('/'.$urlRewrite->request_path);
     }
 }

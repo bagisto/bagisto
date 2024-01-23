@@ -28,7 +28,7 @@ class ElasticSearchRepository
      */
     public function getIndexName()
     {
-        return 'products_' . core()->getRequestedChannelCode() . '_' . core()->getRequestedLocaleCode() . '_index';
+        return 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCode().'_index';
     }
 
     /**
@@ -125,7 +125,7 @@ class ElasticSearchRepository
 
                 return [
                     'range' => [
-                        $attribute->code . '_' . $customerGroup->id => [
+                        $attribute->code.'_'.$customerGroup->id => [
                             'gte' => core()->convertToBasePrice(current($range)),
                             'lte' => core()->convertToBasePrice(end($range)),
                         ],
@@ -136,7 +136,7 @@ class ElasticSearchRepository
                 $synonyms = $this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]);
 
                 $synonyms = array_map(function ($synonym) {
-                    return '"' . $synonym . '"';
+                    return '"'.$synonym.'"';
                 }, $synonyms);
 
                 return [
@@ -150,7 +150,7 @@ class ElasticSearchRepository
                 $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);
 
                 if ($attribute->is_configurable) {
-                    $filter[]['terms']['ca_' . $attribute->code] = explode(',', $params[$attribute->code]);
+                    $filter[]['terms']['ca_'.$attribute->code] = explode(',', $params[$attribute->code]);
                 }
 
                 return $filter;

@@ -18,7 +18,7 @@
             </v-tax-rates-import>
 
             <!-- Tax Rate Export -->
-            <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.settings.taxes.rates.index') }}" />
 
             <!-- Create New Tax Rate Button -->
             @if (bouncer()->hasPermission('settings.taxes.tax_rates.create'))
@@ -32,8 +32,7 @@
     <x-admin::datagrid 
         :src="route('admin.settings.taxes.rates.index')" 
         ref="datagrid"
-    >
-    </x-admin::datagrid>
+    />
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-tax-rates-import-template">
@@ -59,7 +58,7 @@
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.taxes.rates.index.import.title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -69,19 +68,15 @@
                                         id="file"
                                         name="file"
                                         ref="importFile"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="file"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="file" />
                                 </x-admin::form.control-group>
 
                                 <p class="text-xs text-gray-600 dark:text-gray-300">  
                                     @lang('admin::app.settings.taxes.rates.index.import.validation') 
                                 </p>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -93,7 +88,7 @@
                                         @lang('admin::app.settings.taxes.rates.index.import.import-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

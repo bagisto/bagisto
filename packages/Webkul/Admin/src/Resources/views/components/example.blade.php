@@ -9,17 +9,13 @@
     <x-admin::form.control-group.control
         type="text"
         name="name"
-        :value=""
         rules="required"
+        :value=""
         label="name"
         placeholder="name"
-    >
-    </x-admin::form.control-group.control>
+    />
 
-    <x-admin::form.control-group.error
-        control-name="name"
-    >
-    </x-admin::form.control-group.error>
+    <x-admin::form.control-group.error control-name="name" />    
 </x-admin::form.control-group>
 
 <!-- Type Select -->
@@ -48,22 +44,18 @@
         </option>
     </x-admin::form.control-group.control>
 
-    <x-admin::form.control-group.error
-        control-name="column"
-    >
-    </x-admin::form.control-group.error>
+    <x-admin::form.control-group.error control-name="column" />
 </x-admin::form.control-group>
 
 <!--Type Checkbox -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.control
         type="checkbox"
-        name="is_unique"
         id="is_unique"
-        for="is_unique"
+        name="is_unique"
         value="1"
-    >
-    </x-admin::form.control-group.control>
+        for="is_unique"
+    />
 
     <x-admin::form.control-group.label
         for="is_unique"
@@ -76,12 +68,11 @@
 <x-admin::form.control-group>
     <x-admin::form.control-group.control
         type="radio"
-        name="is_unique"
         id="is_unique"
-        for="is_unique"
+        name="is_unique"
         value="1"
-    >
-    </x-admin::form.control-group.control>
+        for="is_unique"
+    />
 
     <x-admin::form.control-group.label
         for="is_unique"
@@ -100,17 +91,13 @@
         <x-admin::form.control-group.control
             type="email"
             name="email"
-            value=""
             rules="required|email"
+            value=""
             label="Email"
             placeholder="email@example.com"
-        >
-        </x-admin::form.control-group.control>
+        />
 
-        <x-admin::form.control-group.error
-            control-name="email"
-        >
-        </x-admin::form.control-group.error>
+        <x-admin::form.control-group.error control-name="email" />
     </x-admin::form.control-group>
 </x-admin::form>
 
@@ -128,17 +115,13 @@
             <x-admin::form.control-group.control
                 type="email"
                 name="email"
-                :value="old('email')"
                 rules="required"
+                :value="old('email')"
                 label="Email"
                 placeholder="email@example.com"
-            >
-            </x-admin::form.control-group.control>
+            />
 
-            <x-admin::form.control-group.error
-                control-name="email"
-            >
-            </x-admin::form.control-group.error>
+            <x-admin::form.control-group.error control-name="email" />
         </x-admin::form.control-group>
 
         <button>Submit</button>
@@ -149,52 +132,52 @@
 <x-admin::accordion title="Test Accordion">
     <x-slot:header>
         Accordion Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Accordion Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::accordion>
 
 <!-- Modal Component -->
 <x-admin::modal>
     <x-slot:toggle>
         Modal Toggle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:header>
         Modal Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Modal Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::modal>
 
 <!-- Drawer Component -->
 <x-admin::drawer>
     <x-slot:toggle>
         Drawer Toggle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:header>
         Drawer Header
-    </x-slot:header>
+    </x-slot>
 
     <x-slot:content>
         Drawer Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::drawer>
 
 <!-- Dropdown Component-->
 <x-admin::dropdown>
     <x-slot:toggle>
         Toogle
-    </x-slot:toggle>
+    </x-slot>
 
     <x-slot:content>
         Content
-    </x-slot:content>
+    </x-slot>
 </x-admin::dropdown>
 
 <!-- Tinymce Component -->
@@ -205,44 +188,37 @@
 
     <x-admin::form.control-group.control
         type="textarea"
-        name="html_content"
-        :value="old('html_content')"
         id="content"
+        name="html_content"
         rules="required"
+        :value="old('html_content')"
         label="Content"
         placeholder="Content"
         :tinymce="true"
-    >
-    </x-admin::form.control-group.control>
+    />
 
-    <x-admin::form.control-group.error
-        control-name="html_content"
-    >
-    </x-admin::form.control-group.error>
+    <x-admin::form.control-group.error control-name="html_content" />
 </x-admin::form.control-group>
 
 <!-- SEO Title & Description Blade Componnet -->
-<x-admin::seo/>
+<x-admin::seo />
 
 <!-- Star Rating Component -->
 <x-admin::star-rating
     :is-editable="false"
     :value="$review->rating"
->
-</x-admin::star-rating>
+/>
 
 <!-- Exportdatagrid Component-->
 <x-admin::datagrid.export
     src=""
->
-</x-admin::datagrid.export>
+/>
 
 <!-- Datagrid Component -->
 <x-admin::datagrid
     :src="route('admin.sales.orders.index')"
     :isMultiRow="true"
->
-</x-admin::datagrid>
+/>
 
 <!-- Image Blade Component -->
 <x-admin::media.images
@@ -250,16 +226,14 @@
     allow-multiple="true"
     show-placeholders="true"
     :uploaded-images="$product->images"
->
-</x-admin::media.images>
+/>
 
 <!-- Video Blade Component -->
 <x-admin::media.videos
     name="videos[files]"
     :allow-multiple="true"
     :uploaded-videos="$product->videos"
->
-</x-admin::media.videos>
+/>
 
 <!-- Radio Tree Component -->
 <x-admin::tree.view
@@ -270,8 +244,7 @@
     :items="json_encode($availableItems)"
     :value="$savedValue"
     :fallback-locale="config('app.fallback_locale')"
->
-</x-admin::tree.view>
+/>
 
 <!-- Checkbox Tree Component | Individual -->
 <x-admin::tree.view
@@ -283,8 +256,7 @@
     :items="json_encode($availableItems)"
     :value="json_encode($savedValues)"
     :fallback-locale="config('app.fallback_locale')"
->
-</x-admin::tree.view>
+/>
 
 <!-- Checkbox Tree Component | Hierarchical -->
 <x-admin::tree.view
@@ -296,5 +268,4 @@
     :items="json_encode($availableItems)"
     :value="json_encode($savedValues)"
     :fallback-locale="config('app.fallback_locale')"
->
-</x-admin::tree.view>
+/>

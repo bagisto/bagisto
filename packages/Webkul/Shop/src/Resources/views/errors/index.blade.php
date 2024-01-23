@@ -3,19 +3,19 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang("admin::app.errors.{$errorCode}.title")
     </x-slot>
 
-    {{-- cursor movement canvas line --}}
+    <!-- cursor movement canvas line -->
     <canvas 
         resize="true"
         id="canvas-wd"
     >
     </canvas>
 
-    {{-- Error page Information --}}
+    <!-- Error page Information -->
 	<div class="container absolute left-1/2 top-0 px-[60px] max-lg:px-8 max-sm:px-4 -translate-x-1/2">
 		<div class="grid w-full h-[100vh]">
 			<div class="wrapper-404 max-868:!text-[294px] max-md:!text-[140px]">

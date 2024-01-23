@@ -101,10 +101,10 @@ class ThemeDatagrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return '<p class="label-processing">' . trans('admin::app.settings.themes.index.datagrid.active') . '</p>';
+                    return '<p class="label-processing">'.trans('admin::app.settings.themes.index.datagrid.active').'</p>';
                 }
 
-                return '<p class="label-pending">' . trans('admin::app.settings.themes.index.datagrid.inactive') . '</p>';
+                return '<p class="label-pending">'.trans('admin::app.settings.themes.index.datagrid.inactive').'</p>';
             },
         ]);
     }

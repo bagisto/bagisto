@@ -55,14 +55,14 @@ class Dashboard
                 'increment_id'               => $order->id,
                 'status'                     => $order->status,
                 'status_label'               => $order->status_label,
-                'payment_method'             => core()->getConfigData('sales.payment_methods.' . $order->payment->method . '.title'),
+                'payment_method'             => core()->getConfigData('sales.payment_methods.'.$order->payment->method.'.title'),
                 'base_grand_total'           => $order->base_grand_total,
                 'formatted_base_grand_total' => core()->formatPrice($order->base_grand_total),
                 'channel_name'               => $order->channel_name,
                 'customer_email'             => $order->customer_email,
                 'customer_name'              => $order->customer_full_name,
                 'image'                      => view('admin::sales.orders.images', compact('order'))->render(),
-                'billing_address'            => $order?->billing_address->city . ($order?->billing_address->country ? ', ' . core()->country_name($order?->billing_address->country) : ''),
+                'billing_address'            => $order?->billing_address->city.($order?->billing_address->country ? ', '.core()->country_name($order?->billing_address->country) : ''),
                 'created_at'                 => $order->created_at->format('d M Y, H:i:s'),
             ];
         });
@@ -170,6 +170,6 @@ class Dashboard
      */
     public function getDateRange(): string
     {
-        return $this->getStartDate()->format('d M') . ' - ' . $this->getEndDate()->format('d M');
+        return $this->getStartDate()->format('d M').' - '.$this->getEndDate()->format('d M');
     }
 }

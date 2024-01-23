@@ -129,7 +129,7 @@ class CartRuleController extends Controller
             if ($cartRule->coupon_type) {
                 if ($cartRule->cart_rule_coupon) {
                     $this->validate(request(), [
-                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,' . $cartRule->cart_rule_coupon->id,
+                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,'.$cartRule->cart_rule_coupon->id,
                     ]);
                 } else {
                     $this->validate(request(), [

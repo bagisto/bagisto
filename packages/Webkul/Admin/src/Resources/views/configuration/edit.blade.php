@@ -66,7 +66,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
@@ -78,7 +78,7 @@
                                 {{ $channel->name }}
                             </a>
                         @endforeach
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::dropdown>
 
                 <!-- Locale Switcher -->
@@ -97,11 +97,11 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
-                        @foreach ($currentChannel->locales as $locale)
+                        @foreach ($currentChannel->locales->sortBy('name') as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
                                 class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
@@ -109,7 +109,7 @@
                                 {{ $locale->name }}
                             </a>
                         @endforeach
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::dropdown>
             </div>
         </div>

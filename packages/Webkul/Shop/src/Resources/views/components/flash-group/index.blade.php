@@ -13,7 +13,7 @@
             leave-to-class="ltr:translate-x-full rtl:-translate-x-full"
             class='grid gap-2.5 fixed z-[1001] top-5 ltr:right-5 rtl:left-5 justify-items-end'
         >
-            <x-shop::flash-group.item></x-shop::flash-group.item>
+            <x-shop::flash-group.item />
         </transition-group>
     </script>
 

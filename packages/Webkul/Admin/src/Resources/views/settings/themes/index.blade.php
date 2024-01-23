@@ -29,7 +29,7 @@
     
     {!! view_render_event('bagisto.admin.settings.themes.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.settings.themes.index')"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.themes.index')" />
 
     {!! view_render_event('bagisto.admin.settings.themes.list.after') !!}
 
@@ -60,7 +60,7 @@
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.create.title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
@@ -76,10 +76,9 @@
                                         rules="required"
                                         :label="trans('admin::app.settings.themes.create.name')"
                                         :placeholder="trans('admin::app.settings.themes.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Sort Order -->
@@ -94,10 +93,9 @@
                                         rules="required|numeric"
                                         :label="trans('admin::app.settings.themes.create.sort-order')"
                                         :placeholder="trans('admin::app.settings.themes.create.sort-order')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="sort_order"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="sort_order" />
                                 </x-admin::form.control-group>
 
                                 <!-- Type -->
@@ -120,7 +118,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
 
                                 <!-- Channels -->
@@ -140,9 +138,9 @@
                                         @endforeach 
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
@@ -154,7 +152,7 @@
                                         @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

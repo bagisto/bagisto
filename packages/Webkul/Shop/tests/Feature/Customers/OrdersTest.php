@@ -227,5 +227,5 @@ it('should print the order invoice', function () {
     $this->loginAsCustomer($customer);
 
     getJson(route('shop.customers.account.orders.print-invoice', $invoice->id))
-        ->assertDownload('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+        ->assertDownload('invoice-'.$invoice->created_at->format('d-m-Y').'.pdf');
 });

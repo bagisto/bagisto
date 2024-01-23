@@ -15,7 +15,7 @@ trait CoreConfigField
         $nameField = '';
 
         foreach (explode('.', $key) as $key => $field) {
-            $nameField .= $key === 0 ? $field : '[' . $field . ']';
+            $nameField .= $key === 0 ? $field : '['.$field.']';
         }
 
         return $nameField;
@@ -115,6 +115,6 @@ trait CoreConfigField
             $info[] = $locale;
         }
 
-        return ! empty($info) ? '[' . implode(' - ', $info) . ']' : '';
+        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
     }
 }
