@@ -8,29 +8,33 @@ use Webkul\Checkout\Facades\Cart;
 class CashOnDelivery extends Payment
 {
     /**
-     * Payment method code
+     * Payment method code.
      *
      * @var string
      */
     protected $code = 'cashondelivery';
 
     /**
-     * Return cashondelivery redirect url
+     * Get redirect url.
      *
      * @return string
      */
     public function getRedirectUrl()
     {
-
     }
 
+    /**
+     * Is available.
+     *
+     * @return bool
+     */
     public function isAvailable()
     {
         return $this->cart->haveStockableItems() && $this->getConfigData('active');
     }
 
     /**
-     * Returns payment method image
+     * Get payment method image.
      *
      * @return array
      */
