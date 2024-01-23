@@ -38,9 +38,13 @@ it('should store the newly created roles', function () {
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+            ],
+        ],
     ]);
 });
 
@@ -58,9 +62,13 @@ it('should returns the edit page of roles', function () {
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+            ],
+        ],
     ]);
 });
 
@@ -78,9 +86,13 @@ it('should update the existing role', function () {
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+            ],
+        ],
     ]);
 });
 

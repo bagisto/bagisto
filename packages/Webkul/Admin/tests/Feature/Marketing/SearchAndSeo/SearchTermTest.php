@@ -30,11 +30,15 @@ it('should store the newly created search term', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.create.success'));
 
-    $this->assertDatabaseHas('search_terms', [
-        'term'         => $term,
-        'redirect_url' => $url,
-        'channel_id'   => $channelId,
-        'locale'       => $locale,
+    $this->assertModelWise([
+        SearchTerm::class => [
+            [
+                'term'         => $term,
+                'redirect_url' => $url,
+                'channel_id'   => $channelId,
+                'locale'       => $locale,
+            ],
+        ],
     ]);
 });
 
@@ -54,11 +58,15 @@ it('should update the search term', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.edit.success'));
 
-    $this->assertDatabaseHas('search_terms', [
-        'id'         => $searchTerm->id,
-        'term'       => $term,
-        'channel_id' => $channelId,
-        'locale'     => $locale,
+    $this->assertModelWise([
+        SearchTerm::class => [
+            [
+                'id'         => $searchTerm->id,
+                'term'       => $term,
+                'channel_id' => $channelId,
+                'locale'     => $locale,
+            ],
+        ],
     ]);
 });
 

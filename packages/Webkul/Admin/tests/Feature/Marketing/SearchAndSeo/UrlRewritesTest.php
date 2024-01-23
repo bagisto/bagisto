@@ -31,12 +31,16 @@ it('should store the newly created url', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.create.success'));
 
-    $this->assertDatabaseHas('url_rewrites', [
-        'entity_type'   => $entityType,
-        'request_path'  => $requestPath,
-        'target_path'   => $targetPath,
-        'redirect_type' => $redirecType,
-        'locale'        => $localeCode,
+    $this->assertModelWise([
+        URLRewrite::class => [
+            [
+                'entity_type'   => $entityType,
+                'request_path'  => $requestPath,
+                'target_path'   => $targetPath,
+                'redirect_type' => $redirecType,
+                'locale'        => $localeCode,
+            ],
+        ],
     ]);
 });
 
@@ -58,13 +62,17 @@ it('should update the existing url rewrite', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.edit.success'));
 
-    $this->assertDatabaseHas('url_rewrites', [
-        'id'            => $urlRewrite->id,
-        'entity_type'   => $entityType,
-        'request_path'  => $requestPath,
-        'target_path'   => $targetPath,
-        'redirect_type' => $redirecType,
-        'locale'        => $localeCode,
+    $this->assertModelWise([
+        URLRewrite::class => [
+            [
+                'id'            => $urlRewrite->id,
+                'entity_type'   => $entityType,
+                'request_path'  => $requestPath,
+                'target_path'   => $targetPath,
+                'redirect_type' => $redirecType,
+                'locale'        => $localeCode,
+            ],
+        ],
     ]);
 });
 

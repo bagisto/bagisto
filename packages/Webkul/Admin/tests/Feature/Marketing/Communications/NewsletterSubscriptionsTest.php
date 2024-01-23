@@ -43,9 +43,13 @@ it('should update the subscriber', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.edit.success'));
 
-    $this->assertDatabaseHas('subscribers_list', [
-        'id'            => $subscriber->id,
-        'is_subscribed' => $isSubscribed,
+    $this->assertModelWise([
+        SubscribersList::class => [
+            [
+                'id'            => $subscriber->id,
+                'is_subscribed' => $isSubscribed,
+            ],
+        ],
     ]);
 });
 

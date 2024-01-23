@@ -28,9 +28,13 @@ it('should store the newly created locale', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.create-success'));
 
-    $this->assertDatabaseHas('locales', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        Locale::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 
@@ -62,9 +66,13 @@ it('should update the specified locale', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.update-success'));
 
-    $this->assertDatabaseHas('locales', [
-        'code' => $locale->code,
-        'name' => $name,
+    $this->assertModelWise([
+        Locale::class => [
+            [
+                'code' => $locale->code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 

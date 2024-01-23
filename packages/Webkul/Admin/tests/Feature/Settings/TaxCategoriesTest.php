@@ -31,10 +31,14 @@ it('should store the tax category', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.taxes.categories.index.create-success'));
 
-    $this->assertDatabaseHas('tax_categories', [
-        'code'        => $code,
-        'name'        => $name,
-        'description' => $description,
+    $this->assertModelWise([
+        TaxCategory::class => [
+            [
+                'code'        => $code,
+                'name'        => $name,
+                'description' => $description,
+            ],
+        ],
     ]);
 });
 
@@ -69,10 +73,14 @@ it('should update the tax category', function () {
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.settings.taxes.categories.index.update-success'));
 
-    $this->assertDatabaseHas('tax_categories', [
-        'code'        => $code,
-        'name'        => $name,
-        'description' => $description,
+    $this->assertModelWise([
+        TaxCategory::class => [
+            [
+                'code'        => $code,
+                'name'        => $name,
+                'description' => $description,
+            ],
+        ],
     ]);
 });
 

@@ -55,10 +55,14 @@ it('should store the newly created cart rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('cart_rules', [
-        'name'        => $name,
-        'description' => $description,
-        'action_type' => $actionType,
+    $this->assertModelWise([
+        CartRule::class => [
+            [
+                'name'        => $name,
+                'description' => $description,
+                'action_type' => $actionType,
+            ],
+        ],
     ]);
 });
 
@@ -127,10 +131,14 @@ it('should update the cart rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('cart_rules', [
-        'name'        => $name,
-        'description' => $description,
-        'action_type' => $actionType,
+    $this->assertModelWise([
+        CartRule::class => [
+            [
+                'name'        => $name,
+                'description' => $description,
+                'action_type' => $actionType,
+            ],
+        ],
     ]);
 });
 

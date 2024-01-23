@@ -112,10 +112,14 @@ it('should store the shimpment to the order', function () {
         ->assertRedirect(route('admin.sales.orders.view', $order->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('shipments', [
-        'order_id'      => $order->id,
-        'carrier_title' => $carrierTitle,
-        'track_number'  => $trackNumber,
+    $this->assertModelWise([
+        Shipment::class => [
+            [
+                'order_id'      => $order->id,
+                'carrier_title' => $carrierTitle,
+                'track_number'  => $trackNumber,
+            ],
+        ],
     ]);
 });
 

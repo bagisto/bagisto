@@ -54,12 +54,16 @@ it('should store the newly created catalog rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('catalog_rules', [
-        'action_type'     => 'by_percent',
-        'description'     => $description,
-        'discount_amount' => 0,
-        'name'            => $name,
-        'status'          => 1,
+    $this->assertModelWise([
+        CatalogRule::class => [
+            [
+                'action_type'     => 'by_percent',
+                'description'     => $description,
+                'discount_amount' => 0,
+                'name'            => $name,
+                'status'          => 1,
+            ],
+        ],
     ]);
 });
 
@@ -110,11 +114,15 @@ it('should update the catalog rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('catalog_rules', [
-        'id'          => $catalogRule->id,
-        'name'        => $catalogRule->name,
-        'description' => $catalogRule->description,
-        'action_type' => 'by_percent',
+    $this->assertModelWise([
+        CatalogRule::class => [
+            [
+                'id'          => $catalogRule->id,
+                'name'        => $catalogRule->name,
+                'description' => $catalogRule->description,
+                'action_type' => 'by_percent',
+            ],
+        ],
     ]);
 });
 

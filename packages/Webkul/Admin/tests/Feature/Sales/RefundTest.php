@@ -92,9 +92,13 @@ it('should store the create page of refunds', function () {
         ->assertRedirect(route('admin.sales.refunds.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('refunds', [
-        'state'    => 'refunded',
-        'order_id' => $order->id,
+    $this->assertModelWise([
+        Refund::class => [
+            [
+                'state'    => 'refunded',
+                'order_id' => $order->id,
+            ],
+        ],
     ]);
 });
 

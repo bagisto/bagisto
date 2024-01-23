@@ -32,10 +32,14 @@ it('should store the newly created user/admin', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.create-success'));
 
-    $this->assertDatabaseHas('admins', [
-        'name'    => $name,
-        'role_id' => 1,
-        'email'   => $email,
+    $this->assertModelWise([
+        Admin::class => [
+            [
+                'name'    => $name,
+                'role_id' => 1,
+                'email'   => $email,
+            ],
+        ],
     ]);
 });
 
@@ -72,11 +76,15 @@ it('should update the existing user/admin', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.update-success'));
 
-    $this->assertDatabaseHas('admins', [
-        'id'      => $user->id,
-        'name'    => $user->name,
-        'role_id' => 1,
-        'email'   => $email,
+    $this->assertModelWise([
+        Admin::class => [
+            [
+                'id'      => $user->id,
+                'name'    => $user->name,
+                'role_id' => 1,
+                'email'   => $email,
+            ],
+        ],
     ]);
 });
 

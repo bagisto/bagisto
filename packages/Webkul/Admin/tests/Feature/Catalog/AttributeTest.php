@@ -69,11 +69,15 @@ it('should store newly created attribute', function () {
         ->assertRedirectToRoute('admin.catalog.attributes.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attributes', [
-        'admin_name'    => $name,
-        'code'          => $code,
-        'type'          => 'text',
-        'default_value' => 1,
+    $this->assertModelWise([
+        Attribute::class => [
+            [
+                'admin_name'    => $name,
+                'code'          => $code,
+                'type'          => 'text',
+                'default_value' => 1,
+            ],
+        ],
     ]);
 });
 
@@ -106,11 +110,15 @@ it('should update an attribute', function () {
         ->assertRedirectToRoute('admin.catalog.attributes.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attributes', [
-        'admin_name'    => $updatedName,
-        'code'          => $attribute->code,
-        'type'          => $attribute->type,
-        'default_value' => 1,
+    $this->assertModelWise([
+        Attribute::class => [
+            [
+                'admin_name'    => $updatedName,
+                'code'          => $attribute->code,
+                'type'          => $attribute->type,
+                'default_value' => 1,
+            ],
+        ],
     ]);
 });
 
@@ -143,8 +151,12 @@ it('should not destroy an attribute if it is not user-defined', function () {
         ->assertBadRequest()
         ->assertSeeText(trans('admin::app.catalog.attributes.user-define-error'));
 
-    $this->assertDatabaseHas('attributes', [
-        'id' => $attribute->id,
+    $this->assertModelWise([
+        Attribute::class => [
+            [
+                'id' => $attribute->id,
+            ],
+        ],
     ]);
 });
 

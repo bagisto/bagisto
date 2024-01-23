@@ -28,9 +28,13 @@ it('should store the newly created customers group', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.create.success'));
 
-    $this->assertDatabaseHas('customer_groups', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        CustomerGroup::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 
@@ -49,10 +53,14 @@ it('should update the existing customers group', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.edit.success'));
 
-    $this->assertDatabaseHas('customer_groups', [
-        'name' => $name,
-        'code' => $customerGroup->code,
-        'id'   => $customerGroup->id,
+    $this->assertModelWise([
+        CustomerGroup::class => [
+            [
+                'name' => $name,
+                'code' => $customerGroup->code,
+                'id'   => $customerGroup->id,
+            ],
+        ],
     ]);
 });
 

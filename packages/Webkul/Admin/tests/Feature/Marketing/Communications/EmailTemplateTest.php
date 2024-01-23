@@ -39,10 +39,14 @@ it('should store the newly create email template', function () {
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_templates', [
-        'name'    => $name,
-        'status'  => $status,
-        'content' => $content,
+    $this->assertModelWise([
+        Template::class => [
+            [
+                'name'    => $name,
+                'status'  => $status,
+                'content' => $content,
+            ],
+        ],
     ]);
 });
 
@@ -75,10 +79,14 @@ it('should update the existing the template', function () {
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_templates', [
-        'name'    => $emailTemplate->name,
-        'status'  => $status,
-        'content' => $content,
+    $this->assertModelWise([
+        Template::class => [
+            [
+                'name'    => $emailTemplate->name,
+                'status'  => $status,
+                'content' => $content,
+            ],
+        ],
     ]);
 });
 

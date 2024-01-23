@@ -32,9 +32,13 @@ it('should store the newly created exchange rates', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.create-success'));
 
-    $this->assertDatabaseHas('currency_exchange_rates', [
-        'rate'            => $rate,
-        'target_currency' => $currency->id,
+    $this->assertModelWise([
+        CurrencyExchangeRate::class => [
+            [
+                'rate'            => $rate,
+                'target_currency' => $currency->id,
+            ],
+        ],
     ]);
 });
 

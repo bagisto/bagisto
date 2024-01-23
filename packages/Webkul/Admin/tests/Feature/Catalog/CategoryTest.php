@@ -1,5 +1,7 @@
 <?php
 
+use Webkul\Category\Models\Category;
+use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Faker\Helpers\Category as CategoryFaker;
 
 use function Pest\Laravel\deleteJson;
@@ -56,10 +58,14 @@ it('should create a category', function () {
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('category_translations', [
-        'slug'        => $slug,
-        'name'        => $name,
-        'description' => $description,
+    $this->assertModelWise([
+        CategoryTranslation::class => [
+            [
+                'slug'        => $slug,
+                'name'        => $name,
+                'description' => $description,
+            ],
+        ],
     ]);
 });
 
@@ -82,10 +88,14 @@ it('should update a category', function () {
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('category_translations', [
-        'name'        => $name,
-        'slug'        => $category->slug,
-        'description' => $description,
+    $this->assertModelWise([
+        CategoryTranslation::class => [
+            [
+                'name'        => $name,
+                'slug'        => $category->slug,
+                'description' => $description,
+            ],
+        ],
     ]);
 });
 
@@ -140,9 +150,13 @@ it('should update mass categories', function () {
         ->assertSeeText(trans('admin::app.catalog.categories.update-success'));
 
     foreach ($categories as $category) {
-        $this->assertDatabaseHas('categories', [
-            'id'     => $category->id,
-            'status' => 1,
+        $this->assertModelWise([
+            Category::class => [
+                [
+                    'id'     => $category->id,
+                    'status' => 1,
+                ],
+            ],
         ]);
     }
 });
