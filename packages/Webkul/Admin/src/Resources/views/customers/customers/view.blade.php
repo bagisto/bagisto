@@ -424,8 +424,7 @@
                                         <x-admin::star-rating 
                                             :is-editable="false"
                                             :value="$review->rating"
-                                        >
-                                        </x-admin::star-rating>
+                                        />
                                     </div>
 
                                     <p class="text-gray-600 dark:text-gray-300">
@@ -505,19 +504,15 @@
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="note" 
                                 id="note"
+                                name="note" 
                                 rules="required"
                                 :label="trans('admin::app.customers.customers.view.note')"
                                 :placeholder="trans('admin::app.customers.customers.view.note-placeholder')"
                                 rows="3"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="note"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="note" />
                         </x-admin::form.control-group>
 
                         <div class="flex justify-between items-center">
@@ -598,7 +593,7 @@
                         <!--Customer Edit Component -->
                        @include('admin::customers.customers.edit', ['groups' => $groups])
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="grid gap-y-2.5">
@@ -626,7 +621,7 @@
                             @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->name ?? 'N/A'])
                         </p>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion> 
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
@@ -641,7 +636,7 @@
                             @lang('admin::app.customers.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     @if (count($customer->addresses))
@@ -756,7 +751,7 @@
                             </div>
                         </div>
                     @endif
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion>
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.after') !!}

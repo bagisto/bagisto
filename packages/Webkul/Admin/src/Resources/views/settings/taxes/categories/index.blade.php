@@ -121,7 +121,7 @@
                                     @lang('admin::app.settings.taxes.categories.index.create.title')
                                 </span>
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -135,24 +135,19 @@
                                     type="hidden"
                                     name="id"
                                     v-model="selectedTaxRates.id"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="code"
                                     id="code"
+                                    name="code"
                                     rules="required"
+                                    v-model="selectedTaxRates.code"
                                     :label="trans('admin::app.settings.taxes.categories.index.create.code')"
                                     :placeholder="trans('admin::app.settings.taxes.categories.index.create.code')"
-                                    v-model="selectedTaxRates.code"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="code"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="code" />
                             </x-admin::form.control-group>
 
                             <!-- Name -->
@@ -163,19 +158,15 @@
 
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="name"
                                     id="name"
+                                    name="name"
                                     rules="required"
+                                    v-model="selectedTaxRates.name"
                                     :label="trans('admin::app.settings.taxes.categories.index.create.name')"
                                     :placeholder="trans('admin::app.settings.taxes.categories.index.create.name')"
-                                    v-model="selectedTaxRates.name"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <!-- Description -->
@@ -186,19 +177,15 @@
 
                                 <x-admin::form.control-group.control
                                     type="textarea"
-                                    name="description"
                                     id="description"
+                                    name="description"
                                     rules="required"
+                                    v-model="selectedTaxRates.description"
                                     :label="trans('admin::app.settings.taxes.categories.index.create.description')"
                                     :placeholder="trans('admin::app.settings.taxes.categories.index.create.description')"
-                                    v-model="selectedTaxRates.description"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="description"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="description" />
                             </x-admin::form.control-group>
 
                             <!-- Select Tax Rates -->
@@ -236,7 +223,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -248,7 +235,7 @@
                                     @lang('admin::app.settings.taxes.categories.index.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

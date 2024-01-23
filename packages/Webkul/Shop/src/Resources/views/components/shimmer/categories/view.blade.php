@@ -2,24 +2,24 @@
     <div class="flex gap-10 md:mt-10 items-start max-lg:gap-5">
         <!-- Desktop Filter Shimmer Effect -->
         <div class="max-md:hidden">
-            <x-shop::shimmer.categories.filters/>
+            <x-shop::shimmer.categories.filters />
         </div>
 
         <div class="flex-1">
             <!-- Desktop Toolbar Shimmer Effect -->
             <div class="max-md:hidden">
-                <x-shop::shimmer.categories.toolbar/>
+                <x-shop::shimmer.categories.toolbar />
             </div>
 
             <!-- Product Card Container -->
             @if(request()->query('mode') =='list')
                 <div class="grid grid-cols-1 gap-6 mt-8">
-                    <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
+                    <x-shop::shimmer.products.cards.list count="12" />
                 </div>
             @else
                 <div class="grid grid-cols-3 gap-8 mt-8 max-sm:mt-5 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
                     <!-- Product Card Shimmer Effect -->
-                    <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid> 
+                    <x-shop::shimmer.products.cards.grid count="12" />
                 </div> 
             @endif
 

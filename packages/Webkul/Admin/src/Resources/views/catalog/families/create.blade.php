@@ -49,7 +49,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.catalog.families.create.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                 
                     <!-- Panel Content -->
                     <x-slot:content>
@@ -61,17 +61,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="code"
-                                value="{{ old('code') }}"
                                 rules="required"
+                                value="{{ old('code') }}"
                                 :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-code')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="code"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="!mb-0">
@@ -82,25 +78,21 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                value="{{ old('name') }}"
                                 rules="required"
+                                value="{{ old('name') }}"
                                 :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-name')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
             </div>
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.families.create.create_form_controls.after') !!}
-        
+
     </x-admin::form>
 
     @pushOnce('scripts')
@@ -333,7 +325,7 @@
                                 <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.catalog.families.create.add-group-title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!--Model Content -->
                             <x-slot:content>
@@ -349,10 +341,9 @@
                                         rules="required"
                                         :label="trans('admin::app.catalog.families.create.code')"
                                         :placeholder="trans('admin::app.catalog.families.create.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="code"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <!-- Group Name -->
@@ -367,10 +358,9 @@
                                         rules="required"
                                         :label="trans('admin::app.catalog.families.create.name')"
                                         :placeholder="trans('admin::app.catalog.families.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Select Group Type -->
@@ -399,9 +389,9 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error control-name="column"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="column" /> 
                                 </x-admin::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Model Footer -->
                             <x-slot:footer>
@@ -414,7 +404,7 @@
                                         @lang('admin::app.catalog.families.create.add-group-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>

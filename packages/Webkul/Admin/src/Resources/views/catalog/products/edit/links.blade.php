@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.links.before', ['product' => $product]) !!}
     
-<v-product-links></v-product-links>
+<v-product-links />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.links.before', ['product' => $product]) !!}
 
@@ -135,7 +135,7 @@
                 ref="productSearch"
                 ::added-product-ids="addedProductIds"
                 @onProductAdded="addSelected($event)"
-            ></x-admin::products.search>
+            />
         </div>
     </script>
 

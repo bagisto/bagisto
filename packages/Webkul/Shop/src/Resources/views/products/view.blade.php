@@ -55,12 +55,15 @@
 
     <!-- Breadcrumbs -->
     <div class="flex justify-center max-lg:hidden">
-        <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs
+            name="product"
+            :entity="$product"
+        />
     </div>
 
     <!-- Product Information Vue Component -->
     <v-product :product-id="{{ $product->id }}">
-        <x-shop::shimmer.products.view/>
+        <x-shop::shimmer.products.view />
     </v-product>
 
     <!-- Information Section -->
@@ -153,13 +156,13 @@
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.description')
                 </p>
-            </x-slot:header>
+            </x-slot>
 
             <x-slot:content>
                 <div class="text-[#7D7D7D] text-lg max-1180:text-sm mb-5">
                     {!! $product->description !!}
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
 
         <!-- Additional Information Accordion -->
@@ -168,7 +171,7 @@
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.additional-information')
                 </p>
-            </x-slot:header>
+            </x-slot>
 
             <x-slot:content>
                 <div class="container mt-5 mb-5 max-1180:px-5">
@@ -202,7 +205,7 @@
                         @endforeach
                     </p>
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
 
         <!-- Reviews Accordion -->
@@ -211,11 +214,11 @@
                 <p class="text-base font-medium 1180:hidden">
                     @lang('shop::app.products.view.review')
                 </p>
-            </x-slot:header>
+            </x-slot>
 
             <x-slot:content>
                 @include('shop::products.view.reviews')
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
     </div>
 
@@ -223,15 +226,13 @@
     <x-shop::products.carousel
         :title="trans('shop::app.products.view.related-product-title')"
         :src="route('shop.api.products.related.index', ['id' => $product->id])"
-    >
-    </x-shop::products.carousel>
+    />
 
     <!-- Upsell Products -->
     <x-shop::products.carousel
         :title="trans('shop::app.products.view.up-sell-title')"
         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
-    >
-    </x-shop::products.carousel>
+    />
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 
@@ -299,8 +300,7 @@
                                     <x-shop::products.star-rating 
                                         :value="$avgRatings"
                                         :is-editable=false
-                                    >
-                                    </x-shop::products.star-rating>
+                                    />
 
                                     <div class="flex gap-4 items-center">
                                         <p class="text-[#6E6E6E] text-sm">
@@ -366,8 +366,7 @@
                                             name="quantity"
                                             value="1"
                                             class="gap-x-4 py-4 px-7 rounded-xl"
-                                        >
-                                        </x-shop::quantity-changer>
+                                        />
                                     @endif
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
@@ -383,8 +382,7 @@
                                         :title="trans('shop::app.products.view.add-to-cart')"
                                         :disabled="! $product->isSaleable(1)"
                                         ref="addToCartButton"
-                                    >
-                                    </x-shop::button>
+                                    />
 
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
                                 </div>
@@ -402,8 +400,7 @@
                                         :loading="false"
                                         ref="buyNowButton"
                                         @click="is_buy_now=1;"
-                                    >
-                                    </x-shop::button>
+                                    />
                                 @endif
 
                                 {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}

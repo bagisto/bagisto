@@ -67,7 +67,7 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
-                        ></v-media-video-item>
+                        />
                     </template>
                 </draggable>
             </div>

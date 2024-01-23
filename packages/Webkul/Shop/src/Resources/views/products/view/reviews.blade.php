@@ -2,7 +2,7 @@
 
 <v-product-reviews :product-id="{{ $product->id }}">
     <div class="container max-1180:px-5">
-        <x-shop::shimmer.products.reviews/>
+        <x-shop::shimmer.products.reviews />
     </div>
 </v-product-reviews>
 
@@ -31,19 +31,17 @@
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    name="attachments"
                                     class="!p-0 !mb-0"
-                                    ref="reviewImages"
+                                    name="attachments"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
-                                >
-                                </x-shop::form.control-group.control>
+                                    ref="reviewImages"
+                                />
 
                                 <x-shop::form.control-group.error
                                     class="mt-4"
                                     control-name="attachments"
-                                >
-                                </x-shop::form.control-group.error>
+                                />
                             </x-shop::form.control-group>
                         </div>
                         
@@ -55,17 +53,13 @@
 
                                 <x-shop::products.star-rating
                                     name="rating"
-                                    :value="old('rating') ?? 5"
-                                    :disabled="false"
                                     rules="required"
+                                    :value="old('rating') ?? 5"
                                     :label="trans('shop::app.products.view.reviews.rating')"
-                                >
-                                </x-shop::products.star-rating>
+                                    :disabled="false"
+                                />
 
-                                <x-shop::form.control-group.error
-                                    control-name="rating"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="rating" />
                             </x-shop::form.control-group>
 
                             @if (
@@ -80,17 +74,13 @@
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="name"
-                                        :value="old('name')"
                                         rules="required"
+                                        :value="old('name')"
                                         :label="trans('shop::app.products.view.reviews.name')"
                                         :placeholder="trans('shop::app.products.view.reviews.name')"
-                                    >
-                                    </x-shop::form.control-group.control>
+                                    />
 
-                                    <x-shop::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-shop::form.control-group.error>
+                                    <x-shop::form.control-group.error control-name="name" />
                                 </x-shop::form.control-group>
                             @endif
 
@@ -102,17 +92,13 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="title"
-                                    :value="old('title')"
                                     rules="required"
+                                    :value="old('title')"
                                     :label="trans('shop::app.products.view.reviews.title')"
                                     :placeholder="trans('shop::app.products.view.reviews.title')"
-                                >
-                                </x-shop::form.control-group.control>
+                                />
 
-                                <x-shop::form.control-group.error
-                                    control-name="title"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="title" />
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group>
@@ -122,19 +108,15 @@
 
                                 <x-shop::form.control-group.control
                                     type="textarea"
-                                    rows="12"
                                     name="comment"
-                                    :value="old('comment')"
                                     rules="required"
+                                    :value="old('comment')"
                                     :label="trans('shop::app.products.view.reviews.comment')"
                                     :placeholder="trans('shop::app.products.view.reviews.comment')"
-                                >
-                                </x-shop::form.control-group.control>
+                                    rows="12"
+                                />
 
-                                <x-shop::form.control-group.error
-                                    control-name="comment"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="comment" />
                             </x-shop::form.control-group>
 
 
@@ -163,7 +145,7 @@
             <div v-else>
                 <!-- Review Container Shimmer Effect -->
                 <template v-if="isLoading">
-                    <x-shop::shimmer.products.reviews/>
+                    <x-shop::shimmer.products.reviews />
                 </template>
 
                 <template v-else>
@@ -193,7 +175,7 @@
                         <div class="flex gap-4 justify-between items-center max-w-[365px] mt-8 max-sm:flex-wrap">
                             <p class="text-3xl font-medium max-sm:text-base">{{ number_format($avgRatings, 1) }}</p>
 
-                            <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
+                            <x-shop::products.star-rating :value="$avgRatings" />
 
                             <p class="text-xs text-[#858585]">
                                 (@{{ meta.total }} @lang('shop::app.products.view.reviews.customer-review'))
@@ -284,8 +266,7 @@
                         <x-shop::products.star-rating 
                             ::name="review.name" 
                             ::value="review.rating"
-                        >
-                        </x-shop::products.star-rating>
+                        />
                     </div>
                 </div>
 

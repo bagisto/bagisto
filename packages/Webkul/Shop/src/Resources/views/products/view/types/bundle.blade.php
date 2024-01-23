@@ -1,7 +1,7 @@
 @if ($product->type == 'bundle')
     {!! view_render_event('bagisto.shop.products.view.bundle-options.before', ['product' => $product]) !!}
 
-    <v-product-bundle-options :errors="errors"></v-product-bundle-options>
+    <v-product-bundle-options :errors="errors" />
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.after', ['product' => $product]) !!}
 
@@ -249,8 +249,7 @@
                         ::value="productQty"
                         class="gap-x-4 w-max rounded-xl py-2.5 px-4 mt-5 !border-[#E9E9E9]"
                         @change="qtyUpdated($event)"
-                    >
-                    </x-shop::quantity-changer>
+                    />
                 </div>
             </div>
         </script>

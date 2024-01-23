@@ -25,7 +25,7 @@
 
     {!! view_render_event('bagisto.settings.channels.list.before') !!}
     
-    <x-admin::datagrid src="{{ route('admin.settings.channels.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.settings.channels.index') }}" />
 
     {!! view_render_event('bagisto.settings.channels.list.after') !!}
 

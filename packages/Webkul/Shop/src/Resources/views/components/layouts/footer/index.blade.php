@@ -66,22 +66,17 @@
                     <label for="organic-search" class="sr-only">Search</label>
 
                     <div class="relative w-full">
+                        <x-shop::form.control-group.control
+                            type="email"
+                            class="blockw-[420px] max-w-full px-5 py-5 p-28 bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-xl text-xs font-medium max-1060:w-full"
+                            name="email"
+                            rules="required|email"
+                            label="Email"
+                            :aria-label="trans('shop::app.components.layouts.footer.email')"
+                            placeholder="email@example.com"
+                        />
 
-                    <x-shop::form.control-group.control
-                        type="email"
-                        name="email"
-                        class="blockw-[420px] max-w-full px-5 py-5 p-28 bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-xl text-xs font-medium max-1060:w-full"
-                        rules="required|email"
-                        label="Email"
-                        :aria-label="trans('shop::app.components.layouts.footer.email')"
-                        placeholder="email@example.com"
-                    >
-                    </x-shop::form.control-group.control>
-
-                    <x-shop::form.control-group.error
-                        control-name="email"
-                    >
-                    </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="email" />
 
                         <button
                             type="submit"

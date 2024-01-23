@@ -27,7 +27,7 @@
                         width="291"
                         height="300"
                         ::alt="product.name"
-                    ></x-shop::media.images.lazy>
+                    />
                 </a>
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.after') !!}
@@ -141,7 +141,7 @@
                         width="291"
                         height="300"
                         ::alt="product.name"
-                    ></x-shop::media.images.lazy>
+                    />
                 </a>
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.after') !!}
@@ -240,8 +240,7 @@
                     <x-shop::products.star-rating 
                         ::value="product && product.avg_ratings ? product.avg_ratings : 0"
                         :is-editable=false
-                    >
-                    </x-shop::products.star-rating>
+                    />
                 </p>
 
                 {!! view_render_event('bagisto.shop.components.products.card.average_ratings.after') !!}
@@ -255,8 +254,7 @@
                     ::disabled="! product.is_saleable"
                     ref="addToCartButton"
                     @click="addToCart()"
-                >
-                </x-shop::button>
+                />
 
                 {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
             </div> 

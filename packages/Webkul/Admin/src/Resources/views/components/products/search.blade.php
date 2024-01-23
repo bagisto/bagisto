@@ -35,7 +35,7 @@
                         <span class="icon-search text-2xl absolute ltr:right-3 rtl:left-3 top-1.5 flex items-center pointer-events-none"></span>
                     </div>
                 </div>
-            </x-slot:header>
+            </x-slot>
 
             <!-- Drawer Content -->
             <x-slot:content class="!p-0">
@@ -130,7 +130,7 @@
                         </p>
                     </div>
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-admin::drawer>
     </script>
 

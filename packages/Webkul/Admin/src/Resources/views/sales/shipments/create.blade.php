@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
@@ -64,17 +64,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="shipment[carrier_title]" 
                                         id="shipment[carrier_title]" 
+                                        name="shipment[carrier_title]" 
                                         :label="trans('admin::app.sales.shipments.create.carrier-name')"
                                         :placeholder="trans('admin::app.sales.shipments.create.carrier-name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="carrier_name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="carrier_name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Tracking Number -->
@@ -85,17 +81,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="shipment[track_number]"
                                         id="shipment[track_number]"
+                                        name="shipment[track_number]"
                                         :label="trans('admin::app.sales.shipments.create.tracking-number')"
                                         :placeholder="trans('admin::app.sales.shipments.create.tracking-number')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="shipment[track_number]"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="shipment[track_number]" />
                                 </x-admin::form.control-group>
                             </div>
                             
@@ -107,12 +99,12 @@
 
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    name="shipment[source]" 
                                     id="shipment[source]" 
+                                    name="shipment[source]" 
                                     rules="required"
+                                    v-model="source"
                                     :label="trans('admin::app.sales.shipments.create.source')"
                                     :placeholder="trans('admin::app.sales.shipments.create.source')"
-                                    v-model="source"
                                     @change="onSourceChange"
                                 >
                                     @foreach ($order->channel->inventory_sources as $inventorySource)
@@ -122,10 +114,7 @@
                                     @endforeach
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="shipment[source]"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="shipment[source]" />
                             </x-admin::form.control-group>
 
                             <div class="grid">
@@ -233,22 +222,18 @@
                                                     <x-admin::form.control-group class="!mb-0">
                                                         <x-admin::form.control-group.control
                                                             type="text"
-                                                            :name="$inputName" 
-                                                            :id="$inputName" 
-                                                            :value="$item->qty_to_ship"
-                                                            :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
                                                             class="!w-[100px]"
+                                                            :id="$inputName" 
+                                                            :name="$inputName" 
+                                                            :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
+                                                            :value="$item->qty_to_ship"
                                                             :label="trans('admin::app.sales.shipments.create.qty-to-ship')"
                                                             data-original-quantity="{{ $item->qty_to_ship }}"
                                                             ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
                                                             :ref="$inputName"
-                                                        >
-                                                        </x-admin::form.control-group.control>
+                                                        />
                             
-                                                        <x-admin::form.control-group.error
-                                                            :control-name="$inputName"
-                                                        >
-                                                        </x-admin::form.control-group.error>
+                                                        <x-admin::form.control-group.error :control-name="$inputName" />
                                                     </x-admin::form.control-group>
                                                 </div>
                                             </div>
@@ -257,7 +242,7 @@
                                 @endforeach
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::drawer>
             </x-admin::form>
         </div>

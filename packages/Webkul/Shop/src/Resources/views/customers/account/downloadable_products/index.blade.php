@@ -6,7 +6,7 @@
 
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="downloadable-products"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="downloadable-products" />
     @endSection
 
     <div class="flex-auto">

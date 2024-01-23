@@ -34,8 +34,7 @@
                         type="hidden"
                         name="token"
                         :value="$token"       
-                    >
-                    </x-admin::form.control-group.control>
+                    />
 
                     <div class="p-4 border-y dark:border-gray-800">
                         <!-- Email -->
@@ -46,19 +45,15 @@
 
                             <x-admin::form.control-group.control
                                 type="email"
-                                name="email" 
-                                id="email"
                                 class="w-[254px] max-w-full" 
+                                id="email"
+                                name="email" 
                                 rules="required|email" 
                                 :label="trans('admin::app.users.reset-password.email')"
                                 :placeholder="trans('admin::app.users.reset-password.email')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="email"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="email" />
                         </x-admin::form.control-group>
                         
                         <!-- Password -->
@@ -69,20 +64,16 @@
 
                             <x-admin::form.control-group.control
                                 type="password"
-                                name="password" 
-                                id="password"
                                 class="w-[254px] max-w-full" 
-                                ref="password"
+                                id="password"
+                                name="password" 
                                 rules="required|min:6" 
                                 :label="trans('admin::app.users.reset-password.password')"
                                 :placeholder="trans('admin::app.users.reset-password.password')"
-                            >
-                            </x-admin::form.control-group.control>
+                                ref="password"
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="password"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="password" />
                         </x-admin::form.control-group>
 
                         <!-- Confirm Password -->
@@ -93,20 +84,16 @@
 
                             <x-admin::form.control-group.control
                                 type="password"
-                                name="password_confirmation"
-                                id="password_confirmation"
                                 class="w-[254px] max-w-full" 
-                                ref="password"
+                                id="password_confirmation"
+                                name="password_confirmation"
                                 rules="confirmed:@password" 
                                 :label="trans('admin::app.users.reset-password.confirm-password')"
                                 :placeholder="trans('admin::app.users.reset-password.confirm-password')"
-                            >
-                            </x-admin::form.control-group.control>
+                                ref="password"
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="password_confirmation"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="password_confirmation" />
                         </x-admin::form.control-group>
                     </div>
 

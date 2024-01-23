@@ -1,5 +1,5 @@
 <!-- Todays Details Vue Component -->
-<v-services-content></v-services-content>
+<v-services-content />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-services-content-template">
@@ -161,7 +161,7 @@
                             <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                 @lang('admin::app.settings.themes.edit.services-content.general')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
                     
                         <x-slot:content>
                             <input
@@ -187,10 +187,7 @@
                                     placeholder="@lang('admin::app.settings.themes.edit.services-content.name')"
                                 ></v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <!-- Short Order -->
@@ -211,10 +208,7 @@
                                 >
                                 </v-field>
 
-                                <x-admin::form.control-group.error
-                                    control-name="sort_order"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="sort_order" />
                             </x-admin::form.control-group>
 
                             <!-- Channels -->
@@ -234,7 +228,7 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="channel_id" />
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="!mb-0">
@@ -266,13 +260,10 @@
                                     ></label>
                                 </label>
 
-                                <x-admin::form.control-group.error
-                                    control-name="status"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="status" />
                             </x-admin::form.control-group>
 
-                        </x-slot:content>
+                        </x-slot>
                     </x-admin::accordion>
                 </div>
             </div>
@@ -292,7 +283,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.settings.themes.edit.services-content.update-service')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -309,13 +300,9 @@
                                     v-model="selectedService.title"
                                     :label="trans('admin::app.settings.themes.edit.services-content.title')"
                                     :placeholder="trans('admin::app.settings.themes.edit.services-content.title')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="{{ $currentLocale->code }}[title]"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[title]" />
                             </x-admin::form.control-group>
 
                             <!-- Description -->
@@ -330,13 +317,9 @@
                                     v-model="selectedService.description"
                                     :label="trans('admin::app.settings.themes.edit.services-content.description')"
                                     :placeholder="trans('admin::app.settings.themes.edit.services-content.description')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="{{ $currentLocale->code }}[description]"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[description]" />
                             </x-admin::form.control-group>
 
                             <!-- Services Icon -->
@@ -352,15 +335,11 @@
                                     v-model="selectedService.service_icon"
                                     :label="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
                                     :placeholder="trans('admin::app.settings.themes.edit.services-content.service-icon-class')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="{{ $currentLocale->code }}[service_icon]"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[service_icon]" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -372,7 +351,7 @@
                                     @lang('admin::app.settings.themes.edit.services-content.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

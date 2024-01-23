@@ -6,7 +6,7 @@
 </div>
 
 <!-- Rating Shimmer -->
-<x-shop::shimmer.products.reviews.ratings/>
+<x-shop::shimmer.products.reviews.ratings />
 
 <!-- Ratings By Individual Stars Shimmer -->
 <div class="flex gap-x-5 items-center">
@@ -23,5 +23,5 @@
 
 <div class="grid grid-cols-[1fr_1fr] mt-14 gap-5 max-1060:grid-cols-[1fr]">
     <!-- Review Card Shimmer -->
-    <x-shop::shimmer.products.reviews.card count="12"></x-shop::shimmer.products.reviews.card>
+    <x-shop::shimmer.products.reviews.card count="12" />
 </div>

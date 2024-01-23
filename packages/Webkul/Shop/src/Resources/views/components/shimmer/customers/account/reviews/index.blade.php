@@ -11,8 +11,7 @@
             <x-shop::media.images.lazy
                 class="max-w-[128px] max-h-[146px] min-w-[128px] w-[128px] h-[146px] rounded-xl" 
                 alt="Review Image"                   
-            >
-            </x-shop::media.images.lazy>
+            />
 
             <div class="w-full">
                 <div class="flex justify-between">

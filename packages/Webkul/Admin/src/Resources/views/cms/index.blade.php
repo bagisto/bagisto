@@ -14,7 +14,7 @@
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
                     <span class="flex icon-setting p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
-                </x-slot:toggle>
+                </x-slot>
 
                 <x-slot:content class="w-[174px] max-w-full !p-2 border dark:border-gray-800 rounded z-10 bg-white dark:bg-gray-900 shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
                     <div class="grid gap-0.5">
@@ -32,11 +32,11 @@
                             </p>
                         </div>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::dropdown>
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.cms.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.cms.index') }}" />
 
             <!-- Create New Pages Button -->
             @if (bouncer()->hasPermission('cms.create'))
@@ -52,7 +52,7 @@
 
     {!! view_render_event('bagisto.admin.cms.pages.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.cms.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.cms.index') }}" />
     
     {!! view_render_event('bagisto.admin.cms.pages.list.after') !!}
 
