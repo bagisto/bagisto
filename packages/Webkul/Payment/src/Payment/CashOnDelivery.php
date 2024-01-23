@@ -29,6 +29,10 @@ class CashOnDelivery extends Payment
      */
     public function isAvailable()
     {
+        if (! $this->cart) {
+            $this->setCart();
+        }
+
         return $this->getConfigData('active') && $this->cart?->haveStockableItems();
     }
 
