@@ -3,7 +3,6 @@
 namespace Webkul\Payment\Payment;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Checkout\Facades\Cart;
 
 class CashOnDelivery extends Payment
 {
