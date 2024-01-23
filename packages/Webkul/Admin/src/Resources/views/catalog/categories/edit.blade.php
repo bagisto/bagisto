@@ -175,7 +175,7 @@
                                 :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
                             />
 
-                            <x-admin::form.control-group.error control-name="description" />
+                            <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[description]" />
                         </x-admin::form.control-group>
                     </v-description>
 
