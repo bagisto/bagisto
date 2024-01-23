@@ -1,16 +1,7 @@
 <?php
 
-use Webkul\Customer\Models\Customer;
-
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Customer::query()->delete();
-});
 
 it('returns a successful response', function () {
     // Act & Assert

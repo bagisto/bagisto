@@ -2,14 +2,10 @@
 
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
-use Webkul\CartRule\Models\CartRuleCustomer;
 use Webkul\CatalogRule\Models\CatalogRule;
-use Webkul\Checkout\Models\Cart;
-use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductCustomerGroupPrice;
 use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
@@ -17,23 +13,6 @@ use Webkul\Tax\Models\TaxRate;
 
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    // Clean up the rows which are creating while testing.
-    CartRule::query()->delete();
-    CartRuleCoupon::query()->delete();
-    CartRuleCustomer::query()->delete();
-    Cart::query()->delete();
-    CartItem::query()->delete();
-    Customer::query()->delete();
-    CustomerAddress::query()->delete();
-    Product::query()->delete();
-    ProductCustomerGroupPrice::query()->delete();
-    TaxCategory::query()->delete();
-    TaxMap::query()->delete();
-    TaxRate::query()->delete();
-    CatalogRule::query()->delete();
-});
 
 it('should add a configurable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
     // Arrange

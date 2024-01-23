@@ -3,16 +3,10 @@
 use Webkul\Customer\Models\Customer as ModelsCustomer;
 use Webkul\Customer\Models\Wishlist;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    Product::query()->delete();
-    Wishlist::query()->delete();
-});
 
 it('should returns the wishlist index page', function () {
     // Arrange

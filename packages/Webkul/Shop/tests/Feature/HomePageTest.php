@@ -3,23 +3,11 @@
 use Illuminate\Support\Str;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Customer\Models\CompareItem;
-use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Customer::query()->delete();
-    CompareItem::query()->delete();
-    SubscribersList::query()->delete();
-    Product::query()->delete();
-});
 
 it('returns a successful response', function () {
     // Act & Assert
