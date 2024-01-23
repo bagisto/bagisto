@@ -4,24 +4,11 @@ namespace Webkul\Admin\Tests;
 
 use Tests\TestCase;
 use Webkul\Admin\Tests\Concerns\AdminSweeper;
-use Webkul\User\Contracts\Admin as AdminContract;
-use Webkul\User\Models\Admin as AdminModel;
+use Webkul\Admin\Tests\Concerns\AdminTestBench;
 
 class AdminTestCase extends TestCase
 {
-    use AdminSweeper;
-
-    /**
-     * Login as customer.
-     */
-    public function loginAsAdmin(?AdminContract $admin = null): AdminContract
-    {
-        $admin = $admin ?? AdminModel::factory()->create();
-
-        $this->actingAs($admin, 'admin');
-
-        return $admin;
-    }
+    use AdminSweeper, AdminTestBench;
 
     /**
      * Tear down.
