@@ -202,8 +202,12 @@
         </v-field>
 
         <label
-            class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+             {{ 
+                $attributes
+                    ->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])
+                    ->merge(['class' => 'icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600'])
+                    ->merge(['class' => $attributes->get('disabled') ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'])
+            }}
         >
         </label>
 
