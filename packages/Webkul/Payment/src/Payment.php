@@ -3,7 +3,6 @@
 namespace Webkul\Payment;
 
 use Illuminate\Support\Facades\Config;
-use Webkul\Checkout\Facades\Cart;
 
 class Payment
 {
