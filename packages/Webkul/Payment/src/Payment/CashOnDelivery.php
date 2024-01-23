@@ -3,6 +3,7 @@
 namespace Webkul\Payment\Payment;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Checkout\Facades\Cart;
 
 class CashOnDelivery extends Payment
 {
@@ -21,6 +22,11 @@ class CashOnDelivery extends Payment
     public function getRedirectUrl()
     {
 
+    }
+
+    public function isAvailable()
+    {
+        return (Cart::getCart()->haveStockableItems() && $this->getConfigData('active')) ? true : false;
     }
 
     /**

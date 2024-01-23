@@ -32,10 +32,6 @@ class Payment
             $paymentMethod = app($paymentMethodConfig['class']);
 
             if ($paymentMethod->isAvailable()) {
-                if (! Cart::getCart()->haveStockableItems() && $paymentMethod->getCode() == 'cashondelivery') {
-                    continue;
-                }
-
                 $paymentMethods[] = [
                     'method'       => $paymentMethod->getCode(),
                     'method_title' => $paymentMethod->getTitle(),
