@@ -5,6 +5,7 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderComment;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
@@ -141,9 +142,13 @@ it('should cancel the order', function () {
         ->assertRedirect(route('admin.sales.orders.view', $order->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('orders', [
-        'id'     => $order->id,
-        'status' => 'canceled',
+    $this->assertModelWise([
+        Order::class => [
+            [
+                'id'     => $order->id,
+                'status' => 'canceled',
+            ],
+        ],
     ]);
 });
 
@@ -207,9 +212,13 @@ it('should comment to the order', function () {
         ->assertRedirect(route('admin.sales.orders.view', $order->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('order_comments', [
-        'order_id' => $order->id,
-        'comment'  => $comment,
+    $this->assertModelWise([
+        OrderComment::class => [
+            [
+                'order_id' => $order->id,
+                'comment'  => $comment,
+            ],
+        ],
     ]);
 });
 

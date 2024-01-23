@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\CMS\Models\Page;
+use Webkul\CMS\Models\PageTranslation;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -57,10 +58,14 @@ it('should store newly created cms pages', function () {
         ->assertRedirect(route('admin.cms.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('cms_page_translations', [
-        'url_key'      => $slug,
-        'page_title'   => $pageTitle,
-        'html_content' => $htmlContent,
+    $this->assertModelWise([
+        PageTranslation::class => [
+            [
+                'url_key'      => $slug,
+                'page_title'   => $pageTitle,
+                'html_content' => $htmlContent,
+            ],
+        ],
     ]);
 });
 
@@ -102,10 +107,14 @@ it('should update the cms page', function () {
         ->assertRedirect(route('admin.cms.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('cms_page_translations', [
-        'url_key'      => $cms->url_key,
-        'page_title'   => $pageTitle,
-        'html_content' => $htmlContent,
+    $this->assertModelWise([
+        PageTranslation::class => [
+            [
+                'url_key'      => $cms->url_key,
+                'page_title'   => $pageTitle,
+                'html_content' => $htmlContent,
+            ],
+        ],
     ]);
 });
 

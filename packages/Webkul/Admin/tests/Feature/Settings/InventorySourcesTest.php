@@ -49,12 +49,16 @@ it('should store the newly created inventory sources', function () {
         ->assertRedirect(route('admin.settings.inventory_sources.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('inventory_sources', [
-        'code'           => $code,
-        'name'           => $name,
-        'priority'       => $priority,
-        'contact_email'  => $contactEmail,
-        'contact_number' => $contactNumber,
+    $this->assertModelWise([
+        InventorySource::class => [
+            [
+                'code'           => $code,
+                'name'           => $name,
+                'priority'       => $priority,
+                'contact_email'  => $contactEmail,
+                'contact_number' => $contactNumber,
+            ],
+        ],
     ]);
 });
 
@@ -97,12 +101,16 @@ it('should update the inventory sources', function () {
         ->assertRedirect(route('admin.settings.inventory_sources.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('inventory_sources', [
-        'code'           => $code,
-        'name'           => $name,
-        'priority'       => $priority,
-        'contact_email'  => $contactEmail,
-        'contact_number' => $contactNumber,
+    $this->assertModelWise([
+        InventorySource::class => [
+            [
+                'code'           => $code,
+                'name'           => $name,
+                'priority'       => $priority,
+                'contact_email'  => $contactEmail,
+                'contact_number' => $contactNumber,
+            ],
+        ],
     ]);
 });
 

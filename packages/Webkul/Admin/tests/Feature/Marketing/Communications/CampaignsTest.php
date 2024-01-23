@@ -43,10 +43,14 @@ it('should store the newly created compaigns', function () {
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_campaigns', [
-        'name'                  => $name,
-        'subject'               => $subject,
-        'marketing_template_id' => $emailTemplate->id,
+    $this->assertModelWise([
+        Campaign::class => [
+            [
+                'name'                  => $name,
+                'subject'               => $subject,
+                'marketing_template_id' => $emailTemplate->id,
+            ],
+        ],
     ]);
 });
 
@@ -78,11 +82,15 @@ it('should update specified the compaigns', function () {
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_campaigns', [
-        'id'                    => $campaign->id,
-        'name'                  => $campaign->name,
-        'subject'               => $subject,
-        'marketing_template_id' => $campaign->marketing_template_id,
+    $this->assertModelWise([
+        Campaign::class => [
+            [
+                'id'                    => $campaign->id,
+                'name'                  => $campaign->name,
+                'subject'               => $subject,
+                'marketing_template_id' => $campaign->marketing_template_id,
+            ],
+        ],
     ]);
 });
 

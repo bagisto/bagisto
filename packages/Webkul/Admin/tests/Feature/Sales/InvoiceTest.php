@@ -100,10 +100,14 @@ it('should store the invoice', function () {
         ->assertRedirect(route('admin.sales.orders.view', $invoice->order_id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('invoices', [
-        'id'       => $invoice->id,
-        'order_id' => $invoice->order_id,
-        'state'    => $invoice->state,
+    $this->assertModelWise([
+        Invoice::class => [
+            [
+                'id'       => $invoice->id,
+                'order_id' => $invoice->order_id,
+                'state'    => $invoice->state,
+            ],
+        ],
     ]);
 });
 
@@ -260,9 +264,13 @@ it('should send duplicate mail to provided email address', function () {
         ->assertRedirect(route('admin.sales.invoices.view', $invoice->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('invoices', [
-        'id'         => $invoice->id,
-        'email_sent' => 1,
+    $this->assertModelWise([
+        Invoice::class => [
+            [
+                'id'         => $invoice->id,
+                'email_sent' => 1,
+            ],
+        ],
     ]);
 });
 

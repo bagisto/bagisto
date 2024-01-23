@@ -77,9 +77,13 @@ it('should update the status of the review', function () {
         ->assertRedirect(route('admin.customers.customers.review.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('product_reviews', [
-        'id'     => $review->id,
-        'status' => $status,
+    $this->assertModelWise([
+        ProductReview::class => [
+            [
+                'id'     => $review->id,
+                'status' => $status,
+            ],
+        ],
     ]);
 });
 
@@ -185,9 +189,14 @@ it('should mass update the product review', function () {
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-update-success'));
 
     foreach ($reviews as $review) {
-        $this->assertDatabaseHas('product_reviews', [
-            'id'     => $review->id,
-            'status' => $review->status,
+
+        $this->assertModelWise([
+            ProductReview::class => [
+                [
+                    'id'     => $review->id,
+                    'status' => $review->status,
+                ],
+            ],
         ]);
     }
 });

@@ -62,9 +62,13 @@ it('should store newly created attribute family', function () {
         ->assertRedirectToRoute('admin.catalog.families.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attribute_families', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        AttributeFamilyModel::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 
@@ -95,9 +99,13 @@ it('should update the existing attribute families', function () {
         ->assertRedirectToRoute('admin.catalog.families.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attribute_families', [
-        'code' => $updatedCode,
-        'name' => $attributeFamily->name,
+    $this->assertModelWise([
+        AttributeFamilyModel::class => [
+            [
+                'code' => $updatedCode,
+                'name' => $attributeFamily->name,
+            ],
+        ],
     ]);
 });
 
@@ -125,7 +133,11 @@ it('should not be able to delete the attribute family if the attribute family is
         ->assertBadRequest()
         ->assertSeeText(trans('admin::app.catalog.families.last-delete-error'));
 
-    $this->assertDatabaseHas('attribute_families', [
-        'id' => $attributeFamilyId,
+    $this->assertModelWise([
+        AttributeFamilyModel::class => [
+            [
+                'id' => $attributeFamilyId,
+            ],
+        ],
     ]);
 });

@@ -112,10 +112,14 @@ it('should store the order transaction', function () {
         ->assertRedirect(route('admin.sales.transactions.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('order_transactions', [
-        'status'     => 'paid',
-        'invoice_id' => $invoice->id,
-        'order_id'   => $order->id,
+    $this->assertModelWise([
+        OrderTransaction::class => [
+            [
+                'status'     => 'paid',
+                'invoice_id' => $invoice->id,
+                'order_id'   => $order->id,
+            ],
+        ],
     ]);
 });
 

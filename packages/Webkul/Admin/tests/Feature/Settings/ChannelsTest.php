@@ -51,10 +51,14 @@ it('should store the newly created channels', function () {
         ->assertRedirect(route('admin.settings.channels.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('channels', [
-        'code'     => $code,
-        'theme'    => $code,
-        'hostname' => $hostName,
+    $this->assertModelWise([
+        Channel::class => [
+            [
+                'code'     => $code,
+                'theme'    => $code,
+                'hostname' => $hostName,
+            ],
+        ],
     ]);
 });
 
@@ -101,11 +105,15 @@ it('should update the existing channel', function () {
         ->assertRedirect(route('admin.settings.channels.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('channels', [
-        'code'              => $code,
-        'base_currency_id'  => 1,
-        'root_category_id'  => 1,
-        'default_locale_id' => 1,
+    $this->assertModelWise([
+        Channel::class => [
+            [
+                'code'              => $code,
+                'base_currency_id'  => 1,
+                'root_category_id'  => 1,
+                'default_locale_id' => 1,
+            ],
+        ],
     ]);
 });
 
