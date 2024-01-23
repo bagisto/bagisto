@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Event::query()->whereNot('id', 1)->delete();
-});
-
 it('should return the events index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

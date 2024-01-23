@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    InventorySource::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the inventory sources index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -87,7 +80,7 @@ it('should update the inventory sources', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.inventory_sources.update', $inventorySources->id), [
-        'code'           => $code = strtolower(fake()->word),
+        'code'           => $code = strtolower(fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/')),
         'name'           => $name = fake()->name(),
         'priority'       => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),
@@ -96,7 +89,7 @@ it('should update the inventory sources', function () {
         'longitude'      => fake()->longitude(),
         'contact_name'   => fake()->unique()->regexify('[A-Z0-9]{10}'),
         'street'         => fake()->streetName(),
-        'country'        => fake()->country(),
+        'country'        => preg_replace("/[^a-zA-Z0-9\s]/", '', fake()->country()),
         'state'          => fake()->state(),
         'city'           => fake()->city(),
         'postcode'       => fake()->postcode(),

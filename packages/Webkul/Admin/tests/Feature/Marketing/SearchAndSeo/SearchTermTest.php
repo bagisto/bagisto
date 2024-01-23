@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    SearchTerm::query()->delete();
-});
-
 it('should show the search terms index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

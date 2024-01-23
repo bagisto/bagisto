@@ -1,39 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
-use Webkul\Product\Models\ProductInventory;
-use Webkul\Product\Models\ProductOrderedInventory;
-use Webkul\Sales\Models\Order;
-use Webkul\Sales\Models\OrderItem;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Cleaing up the rows which are createing while testing.
-     */
-    Cart::query()->delete();
-    CartItem::query()->delete();
-    CartPayment::query()->delete();
-    CartShippingRate::query()->delete();
-    CustomerAddress::query()->delete();
-    Order::query()->delete();
-    OrderItem::query()->delete();
-    ProductOrderedInventory::query()->delete();
-    ProductInventory::query()->delete();
-    Product::query()->delete();
-    DB::table('product_ordered_inventories')->truncate();
-    DB::table('product_inventory_indices')->truncate();
-});
 
 it('should display the cart items from the cart', function () {
     // Arrange

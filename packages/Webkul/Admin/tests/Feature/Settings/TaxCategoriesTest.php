@@ -8,14 +8,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    TaxRate::query()->delete();
-    TaxCategory::query()->delete();
-});
-
 it('should returns the tax category index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

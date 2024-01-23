@@ -7,15 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CustomerGroup::query()
-        ->whereNotBetween('id', [1, 3])
-        ->delete();
-});
-
 it('should return the listing page of customer groups', function () {
     // Act and Assert
     $this->loginAsAdmin();

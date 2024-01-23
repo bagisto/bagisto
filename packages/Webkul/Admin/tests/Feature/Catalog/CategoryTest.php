@@ -1,6 +1,5 @@
 <?php
 
-use Webkul\Category\Models\Category;
 use Webkul\Faker\Helpers\Category as CategoryFaker;
 
 use function Pest\Laravel\deleteJson;
@@ -8,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Clean categories, excluding ID 1 (i.e., the root category). A fresh instance will always have ID 1.
-     */
-    Category::query()->whereNot('id', 1)->delete();
-});
 
 it('should show category page', function () {
     // Act & Assert

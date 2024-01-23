@@ -1,18 +1,18 @@
 <?php
 
-namespace Webkul\Tax\Database\Factories;
+namespace Webkul\Product\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Tax\Models\TaxMap;
+use Webkul\Product\Models\ProductCustomerGroupPrice;
 
-class TaxMapFactory extends Factory
+class ProductCustomerGroupPriceFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = TaxMap::class;
+    protected $model = ProductCustomerGroupPrice::class;
 
     /**
      * Define the model's default state.

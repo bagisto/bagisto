@@ -8,15 +8,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Page::query()
-        ->whereNotBetween('id', [1, 11])
-        ->delete();
-});
-
 it('should returns the cms page', function () {
     // Act and Assert
     $this->loginAsAdmin();

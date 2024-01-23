@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    SearchSynonym::query()->delete();
-});
-
 it('should show the search synonyms index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Hash;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 
 use function Pest\Laravel\deleteJson;
@@ -12,13 +11,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\patchJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-// Clean up the rows which are creating while testing.
-afterEach(function () {
-    Customer::query()->delete();
-    ProductReview::query()->delete();
-    Product::query()->delete();
-});
 
 it('should returns the profile page', function () {
     // Act and Assert

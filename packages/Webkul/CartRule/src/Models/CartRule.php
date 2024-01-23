@@ -14,6 +14,11 @@ class CartRule extends Model implements CartRuleContract
 {
     use HasFactory;
 
+    /**
+     * Add fillable property to the model.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'description',
@@ -39,6 +44,11 @@ class CartRule extends Model implements CartRuleContract
         'sort_order',
     ];
 
+    /**
+     * Cast the conditions to the array.
+     *
+     * @var array
+     */
     protected $casts = [
         'conditions' => 'array',
     ];

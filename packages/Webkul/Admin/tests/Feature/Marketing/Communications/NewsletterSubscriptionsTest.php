@@ -6,13 +6,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    SubscribersList::query()->delete();
-});
-
 it('should return the subscription index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

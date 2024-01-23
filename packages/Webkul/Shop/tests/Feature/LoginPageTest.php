@@ -1,18 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
-use Webkul\Customer\Models\Customer as CustomerModel;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CustomerModel::query()->delete();
-});
 
 it('returns a successful response', function () {
     // Act & Assert

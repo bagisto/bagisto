@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Template::query()->delete();
-});
-
 it('should return the email template index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
