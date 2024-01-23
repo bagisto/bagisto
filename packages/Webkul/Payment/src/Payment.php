@@ -3,6 +3,7 @@
 namespace Webkul\Payment;
 
 use Illuminate\Support\Facades\Config;
+use Webkul\Checkout\Facades\Cart;
 
 class Payment
 {
@@ -31,6 +32,10 @@ class Payment
             $paymentMethod = app($paymentMethodConfig['class']);
 
             if ($paymentMethod->isAvailable()) {
+                if (! Cart::getCart()->haveStockableItems() && $paymentMethod->getCode() == 'cashondelivery') {
+                    continue;
+                }
+
                 $paymentMethods[] = [
                     'method'       => $paymentMethod->getCode(),
                     'method_title' => $paymentMethod->getTitle(),
