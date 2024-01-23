@@ -1,4 +1,4 @@
-<v-tinymce {{ $attributes }}></v-tinymce>
+<v-tinymce {{ $attributes }} />
 
 @pushOnce('scripts')
     <!--
@@ -26,7 +26,7 @@
 
                             @lang('admin::app.components.tinymce.ai-generation.title')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <!-- Modal Content -->
                     <x-slot:content>
@@ -103,15 +103,14 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="prompt"
                                 class="h-[180px]"
+                                name="prompt"
                                 rules="required"
                                 v-model="ai.prompt"
                                 :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="prompt" />
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
@@ -146,17 +145,16 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="content"
                                 class="h-[180px]"
+                                name="content"
                                 v-model="ai.content"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <span class="text-xs text-gray-500">
                                 @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
                             </span>
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
@@ -170,7 +168,7 @@
                                 @lang('admin::app.components.tinymce.ai-generation.apply')
                             </button>
                         </div>
-                    </x-slot:footer>
+                    </x-slot>
                 </x-admin::modal>
             </form>
         </x-admin::form>

@@ -22,7 +22,7 @@
 
     {!! view_render_event('admin.marketing.communications.templates.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.marketing.communications.email_templates.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.marketing.communications.email_templates.index') }}" />
 
     {!! view_render_event('admin.marketing.communications.templates.list.after') !!}
 

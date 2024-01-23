@@ -16,7 +16,7 @@
         {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
 
 		<div class="flex gap-x-2.5 items-center">
-            <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
+            <x-shop::breadcrumbs name="compare" />
 		</div>
 
         {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.after') !!}
@@ -26,10 +26,7 @@
     <div class="container px-[60px] max-lg:px-8 max-sm:px-4 mt-8">
         <v-compare>
             <!---- Shimmer Effect -->
-            <x-shop::shimmer.compare
-                :attributeCount="count($comparableAttributes)"
-            >
-            </x-shop::shimmer.compare>
+            <x-shop::shimmer.compare :attributeCount="count($comparableAttributes)" />
         </v-compare>
     </div>
 
@@ -93,7 +90,7 @@
                                             @click="remove(product.id)"
                                         ></span>
 
-                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0"></x-shop::products.card>
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 ltr:pr-0 rtl:pl-0 p-5 max-sm:ltr:pl-0 max-sm:rtl:pr-0" />
                                     </div>
                                 </div>
                             </div>
@@ -153,10 +150,7 @@
 
                 <div v-else>
                     <!---- Shimmer Effect -->
-                    <x-shop::shimmer.compare
-                        :attributeCount="count($comparableAttributes)"
-                    >
-                    </x-shop::shimmer.compare>
+                    <x-shop::shimmer.compare :attributeCount="count($comparableAttributes)" />
                 </div>
 
                 {!! view_render_event('bagisto.shop.customers.account.compare.after') !!}

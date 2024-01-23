@@ -20,8 +20,7 @@
         allow-multiple="true"
         show-placeholders="true"
         :uploaded-images="$product->images"
-    >
-    </x-admin::media.images>
+    />
 </div>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.images.after', ['product' => $product]) !!}

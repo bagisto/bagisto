@@ -6,13 +6,13 @@
 
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="reviews"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="reviews" />
     @endSection
 
     <!-- Reviews Vue Component -->
     <v-product-reviews>
         <!-- Reviews Shimmer Effect -->
-        <x-shop::shimmer.customers.account.reviews :count="4"></x-shop::shimmer.customers.account.reviews>
+        <x-shop::shimmer.customers.account.reviews :count="4" />
     </v-product-reviews>
 
     @pushOnce('scripts')
@@ -20,7 +20,7 @@
             <div>
                 <!-- Reviews Shimmer Effect -->
                 <template v-if="isLoading">
-                    <x-shop::shimmer.customers.account.reviews :count="4"></x-shop::shimmer.customers.account.reviews>
+                    <x-shop::shimmer.customers.account.reviews :count="4" />
                 </template>
 
                 {!! view_render_event('bagisto.shop.customers.account.reviews.list.before', ['reviews' => $reviews]) !!}
@@ -48,8 +48,7 @@
                                                     class="max-w-[128px] max-h-[146px] min-w-[128px] w-[128px] h-[146px] rounded-xl" 
                                                     src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                     alt="Review Image"                   
-                                                >
-                                                </x-shop::media.images.lazy>
+                                                />
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.image.after', ['reviews' => $reviews]) !!}
                 

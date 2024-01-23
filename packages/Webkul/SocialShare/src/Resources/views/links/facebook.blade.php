@@ -4,7 +4,7 @@
     $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
 @endphp
 
-<v-facebook-share></v-facebook-share>
+<v-facebook-share />
 
 @push('scripts')
     <script type="text/x-template" id="v-facebook-share-template">
