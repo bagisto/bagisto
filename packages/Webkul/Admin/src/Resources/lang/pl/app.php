@@ -606,8 +606,8 @@ return [
                 ],
 
                 'images' => [
+                    'info'  => 'A resolução da imagem deve ser de cerca de 560px X 609px',
                     'title' => 'Obrazy',
-                    'info'  => 'Rozmiar obrazu powinien wynosić około 609px X 560px',
                 ],
 
                 'videos' => [

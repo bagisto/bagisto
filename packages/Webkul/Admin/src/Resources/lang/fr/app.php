@@ -606,7 +606,7 @@ return [
                 ],
 
                 'images' => [
-                    'info'  => "La résolution de l'image doit être de l'ordre de 609x560 pixels.",
+                    'info'  => 'La résolution de l\'image devrait être de 560px X 609px',
                     'title' => 'Images',
                 ],
 

@@ -606,7 +606,7 @@ return [
                 ],
 
                 'images' => [
-                    'info'  => 'La resolución de la imagen debe ser de aproximadamente 609px x 560px',
+                    'info'  => 'La resolución de la imagen debe ser de alrededor de 560px X 609px',
                     'title' => 'Imágenes',
                 ],
 
