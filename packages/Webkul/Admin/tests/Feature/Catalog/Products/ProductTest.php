@@ -1,19 +1,9 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the product index page', function () {
     // Act and Assert

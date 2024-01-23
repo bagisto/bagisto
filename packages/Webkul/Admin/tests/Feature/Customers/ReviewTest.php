@@ -2,21 +2,12 @@
 
 use Illuminate\Support\Arr;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    ProductReview::query()->delete();
-    Product::query()->delete();
-});
 
 it('should returns the review page', function () {
     // Act and Assert

@@ -1,20 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
-use Webkul\Customer\Models\Customer as CustomerModel;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CustomerModel::query()->delete();
-});
 
 it('should returns the customers page', function () {
     // Act and Assert

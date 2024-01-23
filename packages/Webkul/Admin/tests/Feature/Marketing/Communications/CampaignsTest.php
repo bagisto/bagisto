@@ -8,14 +8,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Campaign::query()->delete();
-    Template::query()->delete();
-});
-
 it('should return the compaign index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

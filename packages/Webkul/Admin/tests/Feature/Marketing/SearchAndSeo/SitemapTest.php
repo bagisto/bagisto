@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Sitemap::query()->delete();
-});
-
 it('should show the sitemap index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

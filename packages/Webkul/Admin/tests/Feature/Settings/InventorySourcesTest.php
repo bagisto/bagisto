@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    InventorySource::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the inventory sources index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

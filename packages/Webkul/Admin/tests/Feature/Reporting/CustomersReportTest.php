@@ -2,10 +2,8 @@
 
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Core\Models\Visit;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
@@ -14,21 +12,6 @@ use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
 use function Pest\Laravel\get;
-
-afterEach(function () {
-    // Cleaning up the row which are creating.
-    Customer::query()->delete();
-    OrderAddress::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Product::query()->delete();
-    Invoice::query()->delete();
-    Customer::query()->delete();
-    ProductReview::query()->delete();
-    Visit::query()->delete();
-});
 
 it('should return the index page of customers reporting', function () {
     // Act and Assert

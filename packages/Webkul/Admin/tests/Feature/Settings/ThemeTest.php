@@ -7,10 +7,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-afterEach(function () {
-    ThemeCustomization::query()->whereNotBetween('id', [1, 12])->delete();
-});
-
 it('should returns the theme index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

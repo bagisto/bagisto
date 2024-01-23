@@ -7,14 +7,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Currency::query()->whereNot('id', 1)->delete();
-    CurrencyExchangeRate::query()->delete();
-});
-
 it('should returns the exchange rate index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

@@ -4,23 +4,12 @@ use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    // Cleaning up the row  which are creating
-    Customer::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Product::query()->delete();
-});
 
 it('should return the index page of Orders page', function () {
     // Act and Assert

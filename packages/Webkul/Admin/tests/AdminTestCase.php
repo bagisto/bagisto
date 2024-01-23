@@ -16,8 +16,8 @@ class AdminTestCase extends TestCase
      */
     protected function tearDown(): void
     {
-        parent::tearDown();
-
         $this->cleanAll();
+
+        parent::tearDown();
     }
 }

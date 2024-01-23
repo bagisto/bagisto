@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    URLRewrite::query()->delete();
-});
-
 it('should show the url rewrite index page', function () {
     // Act and Assert
     $this->loginAsAdmin();

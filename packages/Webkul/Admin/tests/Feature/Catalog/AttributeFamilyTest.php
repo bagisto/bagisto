@@ -8,15 +8,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Clean attribute families, excluding ID 1 (i.e., the default attribut family). A fresh instance will always have ID 1.
-     */
-    AttributeFamilyModel::query()
-        ->whereNot('id', 1)
-        ->delete();
-});
-
 it('should return attribute family listing page', function () {
     // Act and Assert
     $this->loginAsAdmin();
