@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Models\Locale;
 
 use function Pest\Laravel\deleteJson;
@@ -38,6 +39,20 @@ it('should store the newly created locale', function () {
     ]);
 });
 
+it('should not store the new locale if the file has been tampered with', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code'      => fake()->locale(),
+        'name'      => fake()->name(),
+        'logo_path' => [
+            UploadedFile::fake()->image('tampered.php'),
+        ],
+    ])
+        ->assertUnprocessable();
+});
+
 it('should return the locale for edit', function () {
     // Arrange
     $locale = Locale::factory()->create();
@@ -74,6 +89,23 @@ it('should update the specified locale', function () {
             ],
         ],
     ]);
+});
+
+it('should not update the specified locale if the file has been tampered with', function () {
+    // Arrange
+    $locale = Locale::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id'        => $locale->id,
+        'name'      => fake()->name(),
+        'logo_path' => [
+            UploadedFile::fake()->image('tampered.php'),
+        ],
+    ])
+        ->assertUnprocessable();
 });
 
 it('should delete the locale', function () {
