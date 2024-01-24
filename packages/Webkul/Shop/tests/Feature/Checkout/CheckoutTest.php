@@ -488,7 +488,7 @@ it('should place a simple product order for a guest user', function () {
     ]);
 
     $this->assertDatabaseHas('orders', [
-        'status'          => \Webkul\Sales\Models\Order::STATUS_PENDING,
+        'status'          => Order::STATUS_PENDING,
         'shipping_method' => 'free_free',
         'grand_total'     => $price,
         'cart_id'         => $cart->id,

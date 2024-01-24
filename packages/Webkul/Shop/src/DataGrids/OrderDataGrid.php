@@ -4,6 +4,7 @@ namespace Webkul\Shop\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Order;
 
 class OrderDataGrid extends DataGrid
 {
@@ -76,31 +77,31 @@ class OrderDataGrid extends DataGrid
                     'options' => [
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.processing'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_PROCESSING,
+                            'value'  => Order::STATUS_PROCESSING,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.completed'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_COMPLETED,
+                            'value'  => Order::STATUS_COMPLETED,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.canceled'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_CANCELED,
+                            'value'  => Order::STATUS_CANCELED,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.closed'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_CLOSED,
+                            'value'  => Order::STATUS_CLOSED,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.pending'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_PENDING,
+                            'value'  => Order::STATUS_PENDING,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.pending-payment'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT,
+                            'value'  => Order::STATUS_PENDING_PAYMENT,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.fraud'),
-                            'value'  => \Webkul\Sales\Models\Order::STATUS_FRAUD,
+                            'value'  => Order::STATUS_FRAUD,
                         ],
                     ],
                 ],
@@ -110,25 +111,25 @@ class OrderDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 switch ($row->status) {
-                    case \Webkul\Sales\Models\Order::STATUS_PROCESSING:
+                    case Order::STATUS_PROCESSING:
                         return '<p class="label-processing">' . trans('shop::app.customers.account.orders.status.options.processing') . '</p>';
 
-                    case \Webkul\Sales\Models\Order::STATUS_COMPLETED:
+                    case Order::STATUS_COMPLETED:
                         return '<p class="label-active">' . trans('shop::app.customers.account.orders.status.options.completed') . '</p>';
 
-                    case \Webkul\Sales\Models\Order::STATUS_CANCELED:
+                    case Order::STATUS_CANCELED:
                         return '<p class="label-canceled">' . trans('shop::app.customers.account.orders.status.options.canceled') . '</p>';
 
-                    case \Webkul\Sales\Models\Order::STATUS_CLOSED:
+                    case Order::STATUS_CLOSED:
                         return '<p class="label-closed">' . trans('shop::app.customers.account.orders.status.options.closed') . '</p>';
 
-                    case \Webkul\Sales\Models\Order::STATUS_PENDING:
+                    case Order::STATUS_PENDING:
                         return '<p class="label-pending">' . trans('shop::app.customers.account.orders.status.options.pending') . '</p>';
 
-                    case \Webkul\Sales\Models\Order::STATUS_PENDING_PAYMENT:
+                    case Order::STATUS_PENDING_PAYMENT:
                         return '<p class="label-pending">' . trans('shop::app.customers.account.orders.status.options.pending-payment') . '</p>';
 
-                    case \Webkul\Sales\Models\Order::STATUS_FRAUD:
+                    case Order::STATUS_FRAUD:
                         return '<p class="label-canceled">' . trans('shop::app.customers.account.orders.status.options.fraud') . '</p>';
                 }
             },
