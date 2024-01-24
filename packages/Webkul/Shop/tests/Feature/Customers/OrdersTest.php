@@ -142,9 +142,13 @@ it('should cancel the customer order', function () {
     postJson(route('shop.customers.account.orders.cancel', $order->id))
         ->assertRedirect();
 
-    $this->assertDatabaseHas('orders', [
-        'id'     => $order->id,
-        'status' => 'canceled',
+    $this->assertModelWise([
+        Order::class => [
+            [
+                'id'     => $order->id,
+                'status' => 'canceled',
+            ],
+        ],
     ]);
 });
 

@@ -51,14 +51,18 @@ it('should update the customer', function () {
     ])
         ->assertRedirect(route('shop.customers.account.profile.index'));
 
-    $this->assertDatabaseHas('customers', [
-        'first_name'        => $firstName,
-        'last_name'         => $lastName,
-        'gender'            => $gender,
-        'email'             => $customer->email,
-        'status'            => 1,
-        'customer_group_id' => 2,
-        'phone'             => $phone,
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'first_name'        => $firstName,
+                'last_name'         => $lastName,
+                'gender'            => $gender,
+                'email'             => $customer->email,
+                'status'            => 1,
+                'customer_group_id' => 2,
+                'phone'             => $phone,
+            ],
+        ],
     ]);
 });
 
@@ -181,17 +185,21 @@ it('should store the customer address', function () {
     ])
         ->assertRedirect(route('shop.customers.account.addresses.index'));
 
-    $this->assertDatabaseHas('addresses', [
-        'customer_id'     => $customer->id,
-        'company_name'    => $companyName,
-        'first_name'      => $firstName,
-        'last_name'       => $lastName,
-        'country'         => $countryCode,
-        'state'           => $state,
-        'city'            => $city,
-        'postcode'        => $postCode,
-        'phone'           => $phoneNumber,
-        'address_type'    => $addressType,
+    $this->assertModelWise([
+        CustomerAddress::class => [
+            [
+                'customer_id'  => $customer->id,
+                'company_name' => $companyName,
+                'first_name'   => $firstName,
+                'last_name'    => $lastName,
+                'country'      => $countryCode,
+                'state'        => $state,
+                'city'         => $city,
+                'postcode'     => $postCode,
+                'phone'        => $phoneNumber,
+                'address_type' => $addressType,
+            ],
+        ],
     ]);
 });
 
@@ -239,18 +247,22 @@ it('should update the customer address', function () {
     ])
         ->assertRedirect(route('shop.customers.account.addresses.index'));
 
-    $this->assertDatabaseHas('addresses', [
-        'customer_id'     => $customer->id,
-        'company_name'    => $companyName,
-        'first_name'      => $firstName,
-        'last_name'       => $lastName,
-        'country'         => $customerAddress->country,
-        'state'           => $customerAddress->state,
-        'city'            => $customerAddress->city,
-        'postcode'        => $postCode,
-        'phone'           => $customerAddress->phone,
-        'default_address' => $customerAddress->default_address,
-        'address_type'    => $customerAddress->address_type,
+    $this->assertModelWise([
+        CustomerAddress::class => [
+            [
+                'customer_id'     => $customer->id,
+                'company_name'    => $companyName,
+                'first_name'      => $firstName,
+                'last_name'       => $lastName,
+                'country'         => $customerAddress->country,
+                'state'           => $customerAddress->state,
+                'city'            => $customerAddress->city,
+                'postcode'        => $postCode,
+                'phone'           => $customerAddress->phone,
+                'default_address' => $customerAddress->default_address,
+                'address_type'    => $customerAddress->address_type,
+            ],
+        ],
     ]);
 });
 
@@ -269,9 +281,13 @@ it('should set default address for the customer', function () {
     patchJson(route('shop.customers.account.addresses.update.default', $customerAddresses->id))
         ->assertRedirect();
 
-    $this->assertDatabaseHas('addresses', [
-        'customer_id'     => $customer->id,
-        'default_address' => 1,
+    $this->assertModelWise([
+        CustomerAddress::class => [
+            [
+                'customer_id'     => $customer->id,
+                'default_address' => 1,
+            ],
+        ],
     ]);
 });
 

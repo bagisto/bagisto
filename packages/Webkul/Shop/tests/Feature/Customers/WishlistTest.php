@@ -93,8 +93,12 @@ it('should returns all the wishlisted items', function () {
         ->assertOk();
 
     foreach ($wishLists as $wishList) {
-        $this->assertDatabaseHas('wishlist_items', [
-            'id' => $wishList->id,
+        $this->assertModelWise([
+            Wishlist::class => [
+                [
+                    'id' => $wishList->id,
+                ],
+            ],
         ]);
     }
 });

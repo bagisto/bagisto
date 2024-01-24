@@ -3,6 +3,7 @@
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\CatalogRule\Models\CatalogRule;
+use Webkul\CatalogRule\Models\CatalogRuleProductPrice;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
@@ -1661,11 +1662,15 @@ it('should check discount price if catalog rule applied for fixed price for grou
     $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
 
     foreach ($groupedProducts as $groupedProduct) {
-        $this->assertDatabaseHas('catalog_rule_product_prices', [
-            'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
-            'customer_group_id' => 1,
-            'catalog_rule_id'   => $catalogRule->id,
-            'product_id'        => $groupedProduct->associated_product->id,
+        $this->assertModelWise([
+            CatalogRuleProductPrice::class => [
+                [
+                    'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
+                    'customer_group_id' => 1,
+                    'catalog_rule_id'   => $catalogRule->id,
+                    'product_id'        => $groupedProduct->associated_product->id,
+                ],
+            ],
         ]);
     }
 });
@@ -1709,11 +1714,15 @@ it('should check discount price if catalog rule applied for fixed price for grou
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
-        $this->assertDatabaseHas('catalog_rule_product_prices', [
-            'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
-            'customer_group_id' => 2,
-            'catalog_rule_id'   => $catalogRule->id,
-            'product_id'        => $groupedProduct->associated_product->id,
+        $this->assertModelWise([
+            CatalogRuleProductPrice::class => [
+                [
+                    'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
+                    'customer_group_id' => 2,
+                    'catalog_rule_id'   => $catalogRule->id,
+                    'product_id'        => $groupedProduct->associated_product->id,
+                ],
+            ],
         ]);
     }
 });
@@ -1757,11 +1766,15 @@ it('should check discount price if catalog rule applied for fixed price for grou
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
-        $this->assertDatabaseHas('catalog_rule_product_prices', [
-            'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
-            'customer_group_id' => 3,
-            'catalog_rule_id'   => $catalogRule->id,
-            'product_id'        => $groupedProduct->associated_product->id,
+        $this->assertModelWise([
+            CatalogRuleProductPrice::class => [
+                [
+                    'price'             => $groupedProduct->associated_product->price - $catalogRule->discount_amount,
+                    'customer_group_id' => 3,
+                    'catalog_rule_id'   => $catalogRule->id,
+                    'product_id'        => $groupedProduct->associated_product->id,
+                ],
+            ],
         ]);
     }
 });
@@ -1799,11 +1812,15 @@ it('should check discount price if catalog rule applied for precentage price for
     $groupedProducts = $product->grouped_products()->with(['associated_product'])->get();
 
     foreach ($groupedProducts as $groupedProduct) {
-        $this->assertDatabaseHas('catalog_rule_product_prices', [
-            'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
-            'customer_group_id' => 1,
-            'catalog_rule_id'   => $catalogRule->id,
-            'product_id'        => $groupedProduct->associated_product->id,
+        $this->assertModelWise([
+            CatalogRuleProductPrice::class => [
+                [
+                    'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
+                    'customer_group_id' => 1,
+                    'catalog_rule_id'   => $catalogRule->id,
+                    'product_id'        => $groupedProduct->associated_product->id,
+                ],
+            ],
         ]);
     }
 });
@@ -1846,11 +1863,15 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
-        $this->assertDatabaseHas('catalog_rule_product_prices', [
-            'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
-            'customer_group_id' => 2,
-            'catalog_rule_id'   => $catalogRule->id,
-            'product_id'        => $groupedProduct->associated_product->id,
+        $this->assertModelWise([
+            CatalogRuleProductPrice::class => [
+                [
+                    'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
+                    'customer_group_id' => 2,
+                    'catalog_rule_id'   => $catalogRule->id,
+                    'product_id'        => $groupedProduct->associated_product->id,
+                ],
+            ],
         ]);
     }
 });
@@ -1893,11 +1914,15 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->loginAsCustomer($customer);
 
     foreach ($groupedProducts as $groupedProduct) {
-        $this->assertDatabaseHas('catalog_rule_product_prices', [
-            'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
-            'customer_group_id' => 3,
-            'catalog_rule_id'   => $catalogRule->id,
-            'product_id'        => $groupedProduct->associated_product->id,
+        $this->assertModelWise([
+            CatalogRuleProductPrice::class => [
+                [
+                    'price'             => $groupedProduct->associated_product->price - ($groupedProduct->associated_product->price * ($catalogRule->discount_amount / 100)),
+                    'customer_group_id' => 3,
+                    'catalog_rule_id'   => $catalogRule->id,
+                    'product_id'        => $groupedProduct->associated_product->id,
+                ],
+            ],
         ]);
     }
 });
