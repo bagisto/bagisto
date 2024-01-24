@@ -20,7 +20,25 @@ return new class extends Migration
             $table->string('logo_path')->after('direction')->nullable();
         });
 
-        DB::table('locales')->whereNull('logo_path')->update(['logo_path'=> DB::raw('CONCAT("locales/", code, ".png")')]);
+        $connection = config('database.default');
+
+        $driver = config("database.connections.{$connection}.driver");
+
+        switch ($driver) {
+            case 'mysql':
+                DB::table('locales')->whereNull('logo_path')->update(['logo_path'=> DB::raw('CONCAT("locales/", code, ".png")')]);
+
+                break;
+
+            case 'sqlite':
+                DB::table('locales')
+                    ->whereNull('logo_path')
+                    ->update([
+                        'logo_path' => DB::raw('("locales/" || code || ".png")'),
+                    ]);
+
+                break;
+        }
     }
 
     /**

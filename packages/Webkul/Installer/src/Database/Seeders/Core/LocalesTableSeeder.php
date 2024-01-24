@@ -42,7 +42,7 @@ class LocalesTableSeeder extends Seeder
                     'id'        => $key + 1,
                     'code'      => $locale,
                     'name'      => trans('installer::app.seeders.core.locales.'.$locale, [], $defaultLocale),
-                    'direction' => in_array($locale, ['ar', 'fa', 'he']) ? 'RTL' : 'LTR',
+                    'direction' => in_array($locale, ['ar', 'fa', 'he']) ? 'rtl' : 'ltr',
                     'logo_path' => $logoPath,
                 ],
             ]);

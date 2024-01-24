@@ -15,7 +15,13 @@ class AttributeFamilyTableSeeder extends Seeder
      */
     public function run($parameters = [])
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $connection = config('database.default');
+
+        $driver = config("database.connections.{$connection}.driver");
+
+        if ($driver !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
 
         DB::table('attribute_families')->delete();
 
@@ -31,6 +37,8 @@ class AttributeFamilyTableSeeder extends Seeder
             ],
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if ($driver !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
     }
 }
