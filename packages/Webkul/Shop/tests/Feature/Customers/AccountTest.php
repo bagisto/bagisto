@@ -51,14 +51,18 @@ it('should update the customer', function () {
     ])
         ->assertRedirect(route('shop.customers.account.profile.index'));
 
-    $this->assertDatabaseHas('customers', [
-        'first_name'        => $firstName,
-        'last_name'         => $lastName,
-        'gender'            => $gender,
-        'email'             => $customer->email,
-        'status'            => 1,
-        'customer_group_id' => 2,
-        'phone'             => $phone,
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'first_name'        => $firstName,
+                'last_name'         => $lastName,
+                'gender'            => $gender,
+                'email'             => $customer->email,
+                'status'            => 1,
+                'customer_group_id' => 2,
+                'phone'             => $phone,
+            ],
+        ],
     ]);
 });
 

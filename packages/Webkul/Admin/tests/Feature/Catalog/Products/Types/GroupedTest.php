@@ -3,6 +3,7 @@
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Models\ProductGroupedProduct;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -145,21 +146,29 @@ it('should update the grouped product options', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'                  => $product->id,
-        'type'                => $product->type,
-        'sku'                 => $product->sku,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'sku'                 => $product->sku,
+                'attribute_family_id' => 1,
+                'parent_id'           => null,
+                'additional'          => null,
+            ],
+        ],
     ]);
 
     foreach ($links as $key => $link) {
-        $this->assertDatabaseHas('product_grouped_products', [
-            'product_id'            => $product->id,
-            'associated_product_id' => $link['associated_product_id'],
-            'qty'                   => $link['qty'],
-            'sort_order'            => $link['sort_order'],
+        $this->assertModelWise([
+            ProductGroupedProduct::class => [
+                [
+                    'product_id'            => $product->id,
+                    'associated_product_id' => $link['associated_product_id'],
+                    'qty'                   => $link['qty'],
+                    'sort_order'            => $link['sort_order'],
+                ],
+            ],
         ]);
     }
 });
