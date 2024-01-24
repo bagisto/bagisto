@@ -127,9 +127,13 @@ it('should store the subscription of the shop', function () {
     ])
         ->assertRedirect();
 
-    $this->assertDatabaseHas('subscribers_list', [
-        'email'         => $email,
-        'is_subscribed' => 1,
+    $this->assertModelWise([
+        SubscribersList::class => [
+            [
+                'email'         => $email,
+                'is_subscribed' => 1,
+            ],
+        ],
     ]);
 });
 
