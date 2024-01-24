@@ -2,6 +2,8 @@
 
 namespace Webkul\MagicAI\Services;
 
+use Illuminate\Support\Arr;
+use OpenAI as TempOpenAI;
 use OpenAI\Laravel\Facades\OpenAI as BaseOpenAI;
 
 class OpenAI
@@ -34,6 +36,56 @@ class OpenAI
      */
     public function ask(): string
     {
+        $client = TempOpenAI::factory()
+            ->withBaseUri('http://192.168.15.22:1234/v1') // default: api.openai.com/v1
+            // ->withStreamHandler(fn ($request) => $client->send($request, [
+            //     'stream' => true // Allows to provide a custom stream handler for the http client.
+            // ]))
+            ->make();
+
+        // $response = $client->completions()->createStreamed([
+        //     'model'       => $this->model,
+        //     'temperature' => $this->temperature,
+        //     'messages'    => [
+        //         [
+        //             'role'    => 'user',
+        //             'content' => $this->prompt,
+        //         ],
+        //     ],
+        // ]);
+
+        // $stream = $client->chat()->createStreamed([
+        //     'model'      => $this->model,
+        //     'messages'    => [
+        //         [
+        //             'role'    => 'user',
+        //             'content' => $this->prompt,
+        //         ],
+        //     ],
+        // ]);
+
+        $stream = $client->chat()->createStreamed([
+            'model'    => $this->model,
+            'messages' => [
+                [
+                    'role'    => 'user',
+                    'content' => $this->prompt,
+                ],
+            ],
+        ]);
+
+        foreach ($stream as $response) {
+            $choice = Arr::first($response->choices);
+
+            if (empty($choice->delta->content)) {
+                continue;
+            }
+
+            echo $choice->delta->content;
+        }
+
+        exit;
+
         $result = BaseOpenAI::chat()->create([
             'model'       => $this->model,
             'temperature' => $this->temperature,

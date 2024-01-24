@@ -6,12 +6,25 @@ use Webkul\Product\Repositories\ProductRepository;
 
 class SKUStorage
 {
+    /**
+     * Delimiter for SKU information
+     */
     private const DELIMITER = '|';
 
     /**
      * Items contains SKU as key and product information as value
      */
     protected array $items = [];
+
+    /**
+     * Columns which will be selected from database
+     */
+    protected array $selectColumns = [
+        'id',
+        'type',
+        'sku',
+        'attribute_family_id',
+    ];
 
     /**
      * Create a new helper instance.
@@ -27,15 +40,28 @@ class SKUStorage
      */
     public function init(): void
     {
-        $products = $this->productRepository->all([
-            'id',
-            'type',
-            'sku',
-            'attribute_family_id',
-        ]);
+        $this->items = [];
+
+        $this->load();
+    }
+
+    /**
+     * Load the SKU
+     */
+    public function load(array $skus = []): void
+    {
+        if (empty($skus)) {
+            $products = $this->productRepository->all($this->selectColumns);
+        } else {
+            $products = $this->productRepository->findWhereIn('sku', $skus, $this->selectColumns);
+        }
 
         foreach ($products as $product) {
-            $this->set($product->sku, $product->toArray());
+            $this->set($product->sku, [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'attribute_family_id' => $product->attribute_family_id,
+            ]);
         }
     }
 
@@ -77,5 +103,13 @@ class SKUStorage
             'type'                => $data[1],
             'attribute_family_id' => $data[2],
         ];
+    }
+
+    /**
+     * Is storage is empty
+     */
+    public function isEmpty(): int
+    {
+        return empty($this->items);
     }
 }

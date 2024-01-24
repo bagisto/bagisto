@@ -20,9 +20,9 @@ class ImportBatch extends Model implements ImportBatchContract
      * @var array
      */
     protected $fillable = [
+        'state',
         'data',
         'summary',
-        'is_processed',
         'import_id',
     ];
 

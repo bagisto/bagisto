@@ -3,28 +3,44 @@
 namespace Webkul\DataTransfer\Helpers\Types;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Types\Product\SKUStorage;
-use Webkul\DataTransfer\Repositories\ImportRepository;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
 class Product extends AbstractType
 {
+    /**
+     * Error code for invalid product type
+     */
     const ERROR_INVALID_TYPE = 'invalid_product_type';
 
+    /**
+     * Error code for non existing SKU
+     */
     const ERROR_SKU_NOT_FOUND_FOR_DELETE = 'sku_not_found_to_delete';
 
+    /**
+     * Error code for duplicate url key
+     */
     const ERROR_DUPLICATE_URL_KEY = 'duplicated_url_key';
 
+    /**
+     * Error code for invalid attribute family code
+     */
     const ERROR_INVALID_ATTRIBUTE_FAMILY_CODE = 'attribute_family_code_not_found';
 
     /**
@@ -36,6 +52,11 @@ class Product extends AbstractType
         self::ERROR_DUPLICATE_URL_KEY             => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
         self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
     ];
+
+    /**
+     * Resource link needed
+     */
+    protected bool $linkNeeded = true;
 
     /**
      * Permanent entity columns
@@ -66,7 +87,21 @@ class Product extends AbstractType
      *
      * @var array
      */
-    protected $productTypeFamilyAttributes = [];
+    protected $typeFamilyAttributes = [];
+
+    /**
+     * Permanent entity columns
+     *
+     * @var array
+     */
+    protected $typeFamilyValidationRules = [];
+
+    /**
+     * Permanent entity columns
+     *
+     * @var array
+     */
+    protected $categories = [];
 
     /**
      * Permanent entity columns
@@ -82,7 +117,7 @@ class Product extends AbstractType
         'attribute_family_code',
         'categories',
         'tax_category_name',
-        'qty',
+        'inventories',
         'related_skus',
         'cross_sell_skus',
         'up_sell_skus',
@@ -96,26 +131,23 @@ class Product extends AbstractType
      * @return void
      */
     public function __construct(
-        protected ImportRepository $importRepository,
         protected ImportBatchRepository $importBatchRepository,
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository,
+        protected CategoryRepository $categoryRepository,
+        protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
+        protected ProductInventoryRepository $productInventoryRepository,
         protected SKUStorage $skuStorage
     ) {
-        parent::__construct(
-            $importRepository,
-            $importBatchRepository
-        );
+        parent::__construct($importBatchRepository);
 
         $this->initAttributes();
-
-        $this->initSKUs();
     }
 
     /**
-     * Save validated batches
+     * Load all attributes and families to use later
      */
     protected function initAttributes(): void
     {
@@ -126,14 +158,6 @@ class Product extends AbstractType
         foreach ($this->attributes as $key => $attribute) {
             $this->validColumnNames[] = $attribute->code;
         }
-    }
-
-    /**
-     * Save validated batches
-     */
-    protected function initSKUs(): void
-    {
-        $this->skuStorage->init();
     }
 
     /**
@@ -165,6 +189,8 @@ class Product extends AbstractType
 
         $source->rewind();
 
+        $this->skuStorage->init();
+
         while ($source->valid()) {
             try {
                 $rowData = $source->current();
@@ -191,25 +217,44 @@ class Product extends AbstractType
      */
     public function importBatch(ImportBatchContract $batch): bool
     {
+        Event::dispatch('data_transfer.imports.batch.import.before', $batch);
+
+        /**
+         * Load SKU storage with batch skus
+         */
+        $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
+
         $products = [];
 
+        $categories = [];
+
         $attributes = [];
+
+        $inventories = [];
 
         foreach ($batch->data as $rowData) {
             $this->prepareProducts($rowData, $products);
 
+            $this->prepareCategories($rowData, $categories);
+
             $this->prepareAttributeValues($rowData, $attributes);
+
+            $this->prepareInventories($rowData, $inventories);
         }
 
         $this->saveProducts($products);
 
+        $this->saveCategories($categories);
+
         $this->saveAttributeValues($attributes);
+
+        $this->saveInventories($inventories);
 
         /**
          * Update import batch summary
          */
         $this->importBatchRepository->update([
-            'is_processed' => true,
+            'state' => 'processing',
 
             'summary'      => [
                 'created' => $this->getCreatedItemsCount(),
@@ -218,24 +263,45 @@ class Product extends AbstractType
             ],
         ], $batch->id);
 
-        /**
-         * Update import summary
-         */
-        $import = $this->importRepository->update([
-            'summary' => [
-                'created' => ($this->import->summary['created'] ?? 0) + $this->getCreatedItemsCount(),
-                'updated' => ($this->import->summary['updated'] ?? 0) + $this->getUpdatedItemsCount(),
-                'deleted' => ($this->import->summary['deleted'] ?? 0) + $this->getDeletedItemsCount(),
-            ],
-        ], $this->import->id);
+        Event::dispatch('data_transfer.imports.batch.import.after', $batch);
 
-        $this->setImport($import);
-        
         return true;
     }
 
     /**
-     * Save products
+     * Start the import product links process
+     */
+    public function importLinksBatch(ImportBatchContract $batch): bool
+    {
+        Event::dispatch('data_transfer.imports.batch.linking.before', $batch);
+
+        /**
+         * Load SKU storage with batch skus
+         */
+        $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
+
+        $links = [];
+
+        foreach ($batch->data as $rowData) {
+            $this->prepareLinks($rowData, $links);
+        }
+
+        $this->saveLinks($links);
+
+        /**
+         * Update import batch summary
+         */
+        $this->importBatchRepository->update([
+            'state' => 'completed',
+        ], $batch->id);
+
+        Event::dispatch('data_transfer.imports.batch.linking.after', $batch);
+
+        return true;
+    }
+
+    /**
+     * Prepare products
      */
     public function prepareProducts(array $rowData, array &$products): void
     {
@@ -282,7 +348,7 @@ class Product extends AbstractType
             /**
              * Update the sku storage with newly created products
              */
-            $products = $this->productRepository->findWhereIn(
+            $newProducts = $this->productRepository->findWhereIn(
                 'sku',
                 array_keys($products['insert']),
                 [
@@ -293,10 +359,65 @@ class Product extends AbstractType
                 ]
             );
 
-            foreach ($products as $product) {
-                $this->skuStorage->set($product->sku, $product->toArray());
+            foreach ($newProducts as $product) {
+                $this->skuStorage->set($product->sku, [
+                    'id'                  => $product->id,
+                    'type'                => $product->type,
+                    'attribute_family_id' => $product->attribute_family_id,
+                ]);
             }
         }
+    }
+
+    /**
+     * Prepare categories
+     */
+    public function prepareCategories(array $rowData, array &$categories): void
+    {
+        $names = explode('/', $rowData['categories']);
+
+        $categoryIds = [];
+
+        foreach ($names as $name) {
+            if (isset($this->categories[$name])) {
+                $categoryIds = array_merge($categoryIds, $this->categories[$name]);
+
+                continue;
+            }
+
+            $this->categories[$name] = $this->categoryRepository
+                ->whereTranslation('name', $name)
+                ->pluck('id')
+                ->toArray();
+
+            $categoryIds = array_merge($categoryIds, $this->categories[$name]);
+        }
+
+        $categories[$rowData['sku']] = $categoryIds;
+    }
+
+    /**
+     * Save categories
+     */
+    public function saveCategories(array $categories): void
+    {
+        $productCategories = [];
+
+        foreach ($categories as $sku => $categoryIds) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach ($categoryIds as $categoryId) {
+                $productCategories[] = [
+                    'product_id'  => $product['id'],
+                    'category_id' => $categoryId,
+                ];
+            }
+        }
+
+        DB::table('product_categories')->upsert(
+            $productCategories,
+            ['product_id', 'category_id'],
+        );
     }
 
     /**
@@ -360,6 +481,135 @@ class Product extends AbstractType
     }
 
     /**
+     * Prepare links
+     */
+    public function prepareLinks(array $rowData, array &$links): void
+    {
+        $linkTableMapping = [
+            'related'    => 'product_relations',
+            'cross_sell' => 'product_cross_sells',
+            'up_sell'    => 'product_up_sells',
+        ];
+
+        foreach ($linkTableMapping as $type => $table) {
+            if (! empty($rowData[$type . '_skus'])) {
+                foreach (explode(',', $rowData[$type . '_skus']) as $sku) {
+                    $links[$table][$rowData['sku']][] = $sku;
+                }
+            }
+        }
+    }
+
+    /**
+     * Save links
+     */
+    public function saveLinks(array $links): void
+    {
+        $notLoadedSkus = [];
+
+        foreach (array_unique(Arr::flatten($links)) as $sku) {
+            if ($this->skuStorage->has($sku)) {
+                continue;
+            }
+
+            $notLoadedSkus[] = $sku;
+        }
+
+        /**
+         * Load not loaded SKUs to the sku storage
+         */
+        if (! empty($notLoadedSkus)) {
+            $this->skuStorage->load($notLoadedSkus);
+        }
+
+        foreach ($links as $table => $linksData) {
+            $productLinks = [];
+
+            foreach ($linksData as $sku => $linkedSkus) {
+                $product = $this->skuStorage->get($sku);
+
+                foreach ($linkedSkus as $linkedSku) {
+                    $linkedProduct = $this->skuStorage->get($linkedSku);
+
+                    if (! $linkedProduct) {
+                        continue;
+                    }
+
+                    $productLinks[] = [
+                        'parent_id' => $product['id'],
+                        'child_id'  => $linkedProduct['id'],
+                    ];
+                }
+            }
+
+            DB::table($table)->upsert(
+                $productLinks,
+                ['parent_id', 'child_id'],
+            );
+        }
+    }
+
+    /**
+     * Prepare inventories
+     */
+    public function prepareInventories(array $rowData, array &$inventories): void
+    {
+        if (empty($rowData['inventories'])) {
+            return;
+        }
+
+        $inventorySources = explode(',', $rowData['inventories']);
+
+        foreach ($inventorySources as $inventorySource) {
+            [$inventorySource, $qty] = explode('=', $inventorySource);
+
+            $inventories[$rowData['sku']][] = [
+                'source' => $inventorySource,
+                'qty'    => $qty,
+            ];
+        }
+    }
+
+    /**
+     * Save inventories
+     */
+    public function saveInventories(array $inventories): void
+    {
+        if (empty($inventories)) {
+            return;
+        }
+
+        $inventorySources = $this->inventorySourceRepository
+            ->findWhereIn('code', Arr::flatten(Arr::pluck($inventories, '*.source')));
+
+        $productInventories = [];
+
+        foreach ($inventories as $sku => $skuInventories) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach ($skuInventories as $inventory) {
+                $inventorySource = $inventorySources->where('code', $inventory['source'])->first();
+
+                if (! $inventorySource) {
+                    continue;
+                }
+
+                $productInventories[] = [
+                    'inventory_source_id' => $inventorySource->id,
+                    'product_id'          => $product['id'],
+                    'qty'                 => $inventory['qty'],
+                    'vendor_id'           => 0,
+                ];
+            }
+        }
+
+        $this->productInventoryRepository->upsert(
+            $productInventories,
+            ['product_id', 'inventory_source_id', 'vendor_id']
+        );
+    }
+
+    /**
      * Validates row
      */
     public function validateRow(array $rowData, int $rowNumber): bool
@@ -415,10 +665,14 @@ class Product extends AbstractType
             return false;
         }
 
+        if (! isset($this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']])) {
+            $this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']] = $this->getValidationRules($rowData);
+        }
+
         /**
          * Validate product attributes
          */
-        $validator = Validator::make($rowData, $this->getValidationRules($rowData));
+        $validator = Validator::make($rowData, $this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']]);
 
         if ($validator->fails()) {
             $failedAttributes = $validator->failed();
@@ -502,20 +756,21 @@ class Product extends AbstractType
                 $validations[] = new Decimal;
             }
 
-            if ($attribute->is_unique) {
-                array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
-                    $count = $this->productAttributeValueRepository
-                        ->leftJoin('products', 'product_attribute_values.product_id', 'products.id')
-                        ->where($attribute->column_name, $rowData[$attribute->code])
-                        ->where('attribute_id', '=', $attribute->id)
-                        ->where('products.sku', '!=', $rowData['sku'])
-                        ->count('product_attribute_values.id');
+            // if ($attribute->is_unique) {
+            //     array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
+            //         $product = $this->skuStorage->get($rowData['sku']);
 
-                    if ($count) {
-                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
-                    }
-                });
-            }
+            //         $count = $this->productAttributeValueRepository
+            //             ->where($attribute->column_name, $rowData[$attribute->code])
+            //             ->where('attribute_id', '=', $attribute->id)
+            //             ->where('product_attribute_values.product_id', '!=', $product['id'])
+            //             ->count('product_attribute_values.id');
+
+            //         if ($count) {
+            //             $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
+            //         }
+            //     });
+            // }
 
             $rules[$attribute->code] = $validations;
         }
@@ -529,6 +784,7 @@ class Product extends AbstractType
     protected function checkForDuplicateUrlKeys(): void
     {
         $products = $this->productRepository
+            ->resetScope()
             ->select('products.id', 'product_attribute_values.text_value as url_key', 'products.sku')
             ->leftJoin('product_attribute_values', 'products.id', 'product_attribute_values.product_id')
             ->leftJoin('attributes', 'product_attribute_values.attribute_id', 'attributes.id')
@@ -556,8 +812,8 @@ class Product extends AbstractType
      */
     public function getProductTypeFamilyAttributes(string $type, string $attributeFamilyCode): mixed
     {
-        if (isset($this->productTypeFamilyAttributes[$type][$attributeFamilyCode])) {
-            return $this->productTypeFamilyAttributes[$type][$attributeFamilyCode];
+        if (isset($this->typeFamilyAttributes[$type][$attributeFamilyCode])) {
+            return $this->typeFamilyAttributes[$type][$attributeFamilyCode];
         }
 
         $attributeFamily = $this->attributeFamilies->where('code', $attributeFamilyCode)->first();
@@ -567,7 +823,7 @@ class Product extends AbstractType
             'attribute_family_id' => $attributeFamily->id,
         ]);
 
-        return $this->productTypeFamilyAttributes[$type][$attributeFamilyCode] = $product->getEditableAttributes();
+        return $this->typeFamilyAttributes[$type][$attributeFamilyCode] = $product->getEditableAttributes();
     }
 
     /**

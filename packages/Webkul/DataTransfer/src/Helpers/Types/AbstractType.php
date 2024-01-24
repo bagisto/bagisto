@@ -3,37 +3,76 @@
 namespace Webkul\DataTransfer\Helpers\Types;
 
 use Illuminate\Support\Facades\Bus;
-use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
+use Illuminate\Support\Facades\Event;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
+use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Jobs\ImportBatch;
 use Webkul\DataTransfer\Jobs\ImportCompleted;
-use Webkul\DataTransfer\Repositories\ImportRepository;
+use Webkul\DataTransfer\Jobs\ImportLinkBatch;
+use Webkul\DataTransfer\Jobs\ImportLinking;
+use Webkul\DataTransfer\Jobs\ImportStarted;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
 abstract class AbstractType
 {
+    /**
+     * Error code for system exception.
+     */
     public const ERROR_CODE_SYSTEM_EXCEPTION = 'system_exception';
 
+    /**
+     * Error code for column not found.
+     */
     public const ERROR_CODE_COLUMN_NOT_FOUND = 'column_not_found';
 
+    /**
+     * Error code for column empty header.
+     */
     public const ERROR_CODE_COLUMN_EMPTY_HEADER = 'column_empty_header';
 
+    /**
+     * Error code for column name invalid.
+     */
     public const ERROR_CODE_COLUMN_NAME_INVALID = 'column_came_invalid';
 
+    /**
+     * Error code for attribute not valid.
+     */
     public const ERROR_CODE_ATTRIBUTE_NOT_VALID = 'attribute_not_valid';
 
+    /**
+     * Error code for duplicate unique attribute.
+     */
     public const ERROR_CODE_DUPLICATE_UNIQUE_ATTRIBUTE = 'duplicate_unique_attribute';
 
+    /**
+     * Error code for illegal characters.
+     */
     public const ERROR_CODE_ILLEGAL_CHARACTERS = 'illegal_Characters';
 
+    /**
+     * Error code for invalid attribute.
+     */
     public const ERROR_CODE_INVALID_ATTRIBUTE = 'invalid_attribute_name';
 
+    /**
+     * Error code for wrong quotes.
+     */
     public const ERROR_CODE_WRONG_QUOTES = 'wrong_quotes';
 
+    /**
+     * Error code for wrong columns number.
+     */
     public const ERROR_CODE_COLUMNS_NUMBER = 'wrong_columns_number';
 
+    /**
+     * Error code for invalid attribute type.
+     */
     public const ERROR_INVALID_ATTRIBUTE_TYPE = 'invalid_attribute_type';
 
+    /**
+     * Error code for invalid attribute option.
+     */
     public const ERROR_INVALID_ATTRIBUTE_OPTION = 'absent_attribute_option';
 
     /**
@@ -54,7 +93,7 @@ abstract class AbstractType
         self::ERROR_INVALID_ATTRIBUTE_OPTION        => 'Value for attribute %s contains an incorrect value. See acceptable values specified in Admin settings.',
     ];
 
-    public const BATCH_SIZE = 100;
+    public const BATCH_SIZE = 50;
 
     /**
      * Error helper instance.
@@ -74,6 +113,11 @@ abstract class AbstractType
      * @var \Webkul\DataTransfer\Helpers\Source
      */
     protected $source;
+
+    /**
+     * Resource link needed
+     */
+    protected bool $linkNeeded = false;
 
     /**
      * Valid column names
@@ -115,10 +159,7 @@ abstract class AbstractType
      *
      * @return void
      */
-    public function __construct(
-        protected ImportRepository $importRepository,
-        protected ImportBatchRepository $importBatchRepository
-    )
+    public function __construct(protected ImportBatchRepository $importBatchRepository)
     {
     }
 
@@ -193,6 +234,8 @@ abstract class AbstractType
      */
     public function validateData(): void
     {
+        Event::dispatch('data_transfer.imports.validate.before', $this->import);
+
         $errors = [];
 
         $absentColumns = array_diff($this->permanentAttributes, $this->getSource()->getColumnNames());
@@ -221,32 +264,8 @@ abstract class AbstractType
         if (! $this->errorHelper->getErrorsCount()) {
             $this->saveValidatedBatches();
         }
-    }
 
-    /**
-     * Start the import process
-     */
-    public function importData(): bool
-    {
-        $batches = [];
-
-        foreach ($this->import->batches as $batch) {
-            $batches[] = new ImportBatch($batch);
-        }
-
-        $batches[] = new ImportCompleted($this->import);
-
-        $batch = Bus::batch($batches)
-            ->name('Import ' . $this->import->type)
-            ->dispatch();
-
-        $import = $this->importRepository->update([
-            'batch_id' => $batch->id,
-        ], $this->import->id);
-
-        $this->setImport($import);
-
-        return true;
+        Event::dispatch('data_transfer.imports.validate.after', $this->import);
     }
 
     /**
@@ -297,6 +316,54 @@ abstract class AbstractType
         }
 
         return $this;
+    }
+
+    /**
+     * Start the import process
+     */
+    public function importData(?int $importBatchId = null): bool
+    {
+        if ($importBatchId) {
+            $batch = $this->importBatchRepository->find($importBatchId);
+
+            $this->importBatch($batch);
+
+            return true;
+        }
+
+        $importBatches = [];
+
+        $importLinkBatches = [];
+
+        foreach ($this->import->batches as $batch) {
+            $importBatches[] = new ImportBatch($batch);
+
+            $importLinkBatches[] = new ImportLinkBatch($batch);
+        }
+
+        Bus::chain([
+            new ImportStarted($this->import),
+            Bus::batch($importBatches),
+
+            new ImportLinking($this->import),
+            Bus::batch($importLinkBatches),
+
+            new ImportCompleted($this->import),
+        ])->dispatch();
+
+        return true;
+    }
+
+    /**
+     * Link resource data.
+     */
+    public function linkData(?int $importBatchId = null): bool
+    {
+        $batch = $this->importBatchRepository->find($importBatchId);
+
+        $this->importLinksBatch($batch);
+
+        return true;
     }
 
     /**

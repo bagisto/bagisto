@@ -362,16 +362,62 @@
                 generate(params, { resetForm, resetField, setErrors }) {
                     this.isLoading = true;
 
+                    const eventSource = new EventSource("{{ route('admin.magic_ai.content') }}");
+
+                    var self = this;
+
+                    eventSource.onmessage = function (event) {
+                        const data = event.data;
+
+                        console.log('Received:', data);
+
+                        self.isLoading = false;
+
+                        self.ai.content += data;
+
+                        // Handle the received data (e.g., update the UI)
+                    };
+
+                    eventSource.onerror = function (error) {
+                        // Handle errors (e.g., connection lost)
+                        console.error('Error:', error);
+                    };
+                    
+                    return;
+
+
+
                     this.$axios.post("{{ route('admin.magic_ai.content') }}", {
                         prompt: params['prompt'],
                         model: params['model']
+                    }, {
+                        headers: {
+                            'Accept': 'text/event-stream',
+                            'Content-Type': 'text/event-stream'
+                        }
                     })
-                        .then(response => {
+                        .then(async response => {
+                            console.log(response);
+
+                            const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+
+                            while (true) {
+                                const {value, done} = await reader.read();
+
+                                if (done) break;
+
+                                console.log('Received', value);
+                            }
+
+                            return;
+
                             this.isLoading = false;
 
                             this.ai.content = response.data.content;
                         })
                         .catch(error => {
+                            console.log(error);
+
                             this.isLoading = false;
 
                             if (error.response.status == 422) {

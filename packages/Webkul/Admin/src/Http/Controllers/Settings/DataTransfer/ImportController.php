@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings\DataTransfer;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Settings\DataTransfer\ImportDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\DataTransfer\Helpers\Import;
@@ -61,7 +62,7 @@ class ImportController extends Controller
             'file'                => 'required|mimes:csv',
         ]);
 
-        Event::dispatch('settings.data_transfer.imports.create.before');
+        Event::dispatch('data_transfer.imports.create.before');
 
         $import = $this->importRepository->create(
             array_merge([
@@ -83,11 +84,23 @@ class ImportController extends Controller
             )
         );
 
-        Event::dispatch('settings.data_transfer.imports.create.before', $import);
+        Event::dispatch('data_transfer.imports.create.before', $import);
 
         session()->flash('success', trans('admin::app.settings.data-transfer.import.create.create-success'));
 
         return redirect()->route('admin.settings.data_transfer.imports.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function import(int $id)
+    {
+        $import = $this->importRepository->find($id);
+
+        return view('admin::settings.data-transfer.imports.import', compact('import'));
     }
 
     /**
@@ -101,12 +114,14 @@ class ImportController extends Controller
             ->setImport($import)
             ->validate();
 
+        $import = $this->importHelper->getImport();
+
         return new JsonResponse([
             'is_valid'             => $isValid,
-            'processed_rows_count' => $this->importHelper->getProcessedRowsCount(),
-            'invalid_rows_count'   => $this->importHelper->getErrorHelper()->getInvalidRowsCount(),
-            'errors_count'         => $this->importHelper->getErrorHelper()->getErrorsCount(),
-            'errors'               => $this->importHelper->getErrorHelper()->getAllErrors(),
+            'processed_rows_count' => $import->processed_rows_count,
+            'invalid_rows_count'   => $import->invalid_rows_count,
+            'errors_count'         => $import->errors_count,
+            'errors'               => $import->errors,
         ]);
     }
 

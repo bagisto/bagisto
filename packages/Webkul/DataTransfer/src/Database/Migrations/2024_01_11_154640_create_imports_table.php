@@ -13,16 +13,21 @@ return new class extends Migration
     {
         Schema::create('imports', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('state')->default('pending');
+            $table->boolean('process_in_queue')->default(1);
             $table->string('type');
             $table->string('action');
             $table->string('validation_strategy');
             $table->integer('allowed_errors')->default(0);
+            $table->integer('processed_rows_count')->default(0);
+            $table->integer('invalid_rows_count')->default(0);
+            $table->integer('errors_count')->default(0);
+            $table->json('errors')->nullable();
             $table->string('field_separator');
             $table->string('file_path');
             $table->string('images_directory_path')->nullable();
             $table->string('error_file_path')->nullable();
             $table->json('summary')->nullable();
-            $table->string('batch_id')->nullable();
 
             $table->datetime('started_at')->nullable();
             $table->datetime('completed_at')->nullable();

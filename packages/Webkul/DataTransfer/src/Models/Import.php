@@ -14,17 +14,22 @@ class Import extends Model implements ImportContract
      * @var array
      */
     protected $fillable = [
+        'state',
+        'process_in_queue',
         'type',
         'action',
         'validation_strategy',
         'validation_strategy',
         'allowed_errors',
+        'processed_rows_count',
+        'invalid_rows_count',
+        'errors_count',
+        'errors',
         'field_separator',
         'file_path',
         'images_directory_path',
         'error_file_path',
         'summary',
-        'batch_id',
         'started_at',
         'completed_at',
     ];

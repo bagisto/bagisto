@@ -4,15 +4,6 @@ namespace Webkul\DataTransfer\Helpers;
 
 class Error
 {
-    const VALIDATION_STRATEGY_SKIP_ERRORS = 'skip-errors';
-
-    const VALIDATION_STRATEGY_STOP_ON_ERROR = 'stop-on-errors';
-
-    /**
-     * Validation strategy
-     */
-    protected string $validationStrategy;
-
     /**
      * Error Items
      */
@@ -42,18 +33,6 @@ class Error
      * Error message template
      */
     protected array $messageTemplate = [];
-
-    /**
-     * Initialize validation strategy.
-     */
-    public function initValidationStrategy(string $validationStrategy, int $allowedErrors): self
-    {
-        $this->validationStrategy = $validationStrategy;
-
-        $this->allowedErrors = $allowedErrors;
-
-        return $this;
-    }
 
     /**
      * Add error message template
@@ -180,23 +159,6 @@ class Error
     public function getInvalidRowsCount(): int
     {
         return count($this->invalidRows);
-    }
-
-    /**
-     * Check if error limit has been exceeded
-     */
-    public function isErrorLimitExceeded(): bool
-    {
-        $errorsCount = $this->getErrorsCount();
-
-        if (
-            $this->validationStrategy == self::VALIDATION_STRATEGY_STOP_ON_ERROR
-            && $errorsCount > $this->allowedErrors
-        ) {
-            return true;
-        }
-
-        return false;
     }
 
     /**

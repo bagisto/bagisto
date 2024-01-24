@@ -2,14 +2,15 @@
 
 namespace Webkul\DataTransfer\Helpers;
 
-use League\Csv\Reader;
+use Illuminate\Support\Facades\Storage;
+use Webkul\DataTransfer\Helpers\Types\AbstractType;
 
 class Source
 {
     /**
      * CSV reader
      */
-    protected Reader $reader;
+    protected mixed $reader;
 
     /**
      * Column names
@@ -43,16 +44,12 @@ class Source
      */
     public function __construct(
         string $filePath,
-        string $delimiter = ','
+        protected string $delimiter = ','
     ) {
         try {
-            $this->reader = Reader::createFromPath(storage_path($filePath), 'r');
+            $this->reader = fopen(Storage::disk('private')->path($filePath), 'r');
 
-            $this->reader->setHeaderOffset(0);
-
-            $this->reader->setDelimiter($delimiter);
-
-            $this->columnNames = $this->reader->getHeader();
+            $this->columnNames = fgetcsv($this->reader, 4096, $delimiter);
 
             $this->totalColumns = count($this->columnNames);
         } catch (\Exception $e) {
@@ -117,7 +114,7 @@ class Source
      */
     protected function getNextRow(): array
     {
-        $parsed = $this->reader->fetchOne($this->currentRowNumber);
+        $parsed = fgetcsv($this->reader, 4096, $this->delimiter);
 
         if (is_array($parsed) && count($parsed) != $this->totalColumns) {
             foreach ($parsed as $element) {
@@ -139,41 +136,15 @@ class Source
      */
     public function rewind(): void
     {
-        $this->currentRowNumber = -1;
+        rewind($this->reader);
+
+        $this->currentRowNumber = 0;
 
         $this->currentRowData = [];
 
+        $this->getNextRow();
+
         $this->next();
-    }
-
-    /**
-     * Seeks to a position (Seekable interface)
-     *
-     * @return void
-     *
-     * @throws \OutOfBoundsException
-     */
-    public function seek(int $position)
-    {
-        if ($position == $this->currentRowNumber) {
-            return;
-        }
-
-        if (! $position || $position < $this->currentRowNumber) {
-            $this->rewind();
-        }
-
-        if ($position > 0) {
-            do {
-                $this->next();
-
-                if ($this->currentRowNumber == $position) {
-                    return;
-                }
-            } while ($this->currentRowNumber != -1);
-        }
-
-        throw new \OutOfBoundsException('Please correct the seek position.');
     }
 
     /**

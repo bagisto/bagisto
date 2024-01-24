@@ -2288,6 +2288,11 @@ return [
                     'validate-btn'        => 'Validate',
                     'validation-strategy' => 'Validation Strategy',
                 ],
+
+                'import' => [
+                    'button-title' => 'Validate',
+                    'title'        => 'Import',
+                ],
             ],
         ],
 
