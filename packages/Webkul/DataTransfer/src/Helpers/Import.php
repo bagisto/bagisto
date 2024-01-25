@@ -5,6 +5,7 @@ namespace Webkul\DataTransfer\Helpers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
+use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Types\AbstractType;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\DataTransfer\Repositories\ImportRepository;
@@ -12,14 +13,39 @@ use Webkul\DataTransfer\Repositories\ImportRepository;
 class Import
 {
     /**
+     * Import state for pending import
+     */
+    public const STATE_PENDING = 'pending';
+
+    /**
+     * Import state for validated import
+     */
+    public const STATE_VALIDATED = 'validated';
+
+    /**
+     * Import state for processing import
+     */
+    public const STATE_PROCESSING = 'processing';
+
+    /**
+     * Import state for linking import
+     */
+    public const STATE_LINKING = 'linking';
+
+    /**
+     * Import state for completed import
+     */
+    public const STATE_COMPLETED = 'completed';
+
+    /**
      * Validation strategy for skipping the error during the import process
      */
-    const VALIDATION_STRATEGY_SKIP_ERRORS = 'skip-errors';
+    public const VALIDATION_STRATEGY_SKIP_ERRORS = 'skip-errors';
 
     /**
      * Validation strategy for stopping the import process on error
      */
-    const VALIDATION_STRATEGY_STOP_ON_ERROR = 'stop-on-errors';
+    public const VALIDATION_STRATEGY_STOP_ON_ERROR = 'stop-on-errors';
 
     /**
      * Action constant for updating/creating for the resource
@@ -112,7 +138,7 @@ class Import
         }
 
         $import = $this->importRepository->update([
-            'state'                => 'validated',
+            'state'                => self::STATE_VALIDATED,
             'processed_rows_count' => $this->getProcessedRowsCount(),
             'invalid_rows_count'   => $this->errorHelper->getInvalidRowsCount(),
             'errors_count'         => $this->errorHelper->getErrorsCount(),
@@ -158,17 +184,57 @@ class Import
     /**
      * Starts import process
      */
-    public function start(?int $importBatchId = null): bool
+    public function start(?ImportBatchContract $importBatch = null): bool
     {
-        if ($this->process_in_queue) {
+        DB::beginTransaction();
 
+        try {
+            $typeImporter = $this->getTypeImporter();
+
+            $typeImporter->importData($importBatch);
+        } catch (\Exception $e) {
+            /**
+             * Rollback transaction
+             */
+            DB::rollBack();
+
+            throw $e;
+        } finally {
+            /**
+             * Commit transaction
+             */
+            DB::commit();
         }
 
-        $typeImporter = $this->getTypeImporter();
+        return true;
+    }
 
-        $typeImporter->importData($importBatchId);
+    /**
+     * Link import resources
+     */
+    public function link(ImportBatchContract $importBatch): bool
+    {
+        DB::beginTransaction();
 
-        return false;
+        try {
+            $typeImporter = $this->getTypeImporter();
+
+            $typeImporter->linkData($importBatch);
+        } catch (\Exception $e) {
+            /**
+             * Rollback transaction
+             */
+            DB::rollBack();
+
+            throw $e;
+        } finally {
+            /**
+             * Commit transaction
+             */
+            DB::commit();
+        }
+
+        return true;
     }
 
     /**
@@ -177,7 +243,7 @@ class Import
     public function started(): void
     {
         $import = $this->importRepository->update([
-            'state'      => 'processing',
+            'state'      => self::STATE_PROCESSING,
             'started_at' => now(),
             'summary'    => [],
         ], $this->import->id);
@@ -193,7 +259,7 @@ class Import
     public function linking(): void
     {
         $import = $this->importRepository->update([
-            'state' => 'linking',
+            'state' => self::STATE_LINKING,
         ], $this->import->id);
 
         $this->setImport($import);
@@ -217,7 +283,7 @@ class Import
             ->toArray();
 
         $import = $this->importRepository->update([
-            'state'        => 'completed',
+            'state'        => self::STATE_COMPLETED,
             'summary'      => $summary,
             'completed_at' => now(),
         ], $this->import->id);
@@ -225,6 +291,46 @@ class Import
         $this->setImport($import);
 
         Event::dispatch('data_transfer.imports.completed', $import);
+    }
+
+    /**
+     * Returns import stats
+     */
+    public function stats(string $state): array
+    {
+        $total = $this->import->batches->count();
+
+        $completed = $this->import->batches->where('state', $state)->count();
+
+        $progress = $total
+            ? round($completed / $total * 100)
+            : 0;
+
+        $summary = $this->importBatchRepository
+            ->select(
+                DB::raw('SUM(json_unquote(json_extract(summary, \'$."created"\'))) AS created'),
+                DB::raw('SUM(json_unquote(json_extract(summary, \'$."updated"\'))) AS updated'),
+                DB::raw('SUM(json_unquote(json_extract(summary, \'$."deleted"\'))) AS deleted'),
+            )
+            ->where('import_id', $this->import->id)
+            ->where('state', $state)
+            ->groupBy('import_id')
+            ->first()
+            ?->toArray();
+            
+        return [
+            'batches'  => [
+                'total'     => $total,
+                'completed' => $completed,
+                'remaining' => $total - $completed,
+            ],
+            'progress' => $progress,
+            'summary'  => $summary ?? [
+                'created' => 0,
+                'updated' => 0,
+                'deleted' => 0,
+            ],
+        ];
     }
 
     /**

@@ -2290,8 +2290,8 @@ return [
                 ],
 
                 'import' => [
-                    'button-title' => 'Validate',
-                    'title'        => 'Import',
+                    'title'    => 'Import',
+                    'validate' => 'Validate',
                 ],
             ],
         ],

@@ -98,9 +98,21 @@ class ImportController extends Controller
      */
     public function import(int $id)
     {
-        $import = $this->importRepository->find($id);
+        $import = $this->importRepository->findOrFail($id);
 
-        return view('admin::settings.data-transfer.imports.import', compact('import'));
+        $isValid = $this->importHelper
+                ->setImport($import)
+                ->isValid();
+
+        $state = $import->state == Import::STATE_LINKING
+            ? Import::STATE_COMPLETED
+            : Import::STATE_PROCESSING;
+
+        $stats = $this->importHelper->stats($state);
+
+        $import->unsetRelations();
+
+        return view('admin::settings.data-transfer.imports.import', compact('import', 'isValid', 'stats'));
     }
 
     /**
@@ -108,7 +120,7 @@ class ImportController extends Controller
      */
     public function validateImport(int $id): JsonResponse
     {
-        $import = $this->importRepository->find($id);
+        $import = $this->importRepository->findOrFail($id);
 
         $isValid = $this->importHelper
             ->setImport($import)
@@ -117,11 +129,8 @@ class ImportController extends Controller
         $import = $this->importHelper->getImport();
 
         return new JsonResponse([
-            'is_valid'             => $isValid,
-            'processed_rows_count' => $import->processed_rows_count,
-            'invalid_rows_count'   => $import->invalid_rows_count,
-            'errors_count'         => $import->errors_count,
-            'errors'               => $import->errors,
+            'is_valid' => $isValid,
+            'import'   => $import->unsetRelations(),
         ]);
     }
 
@@ -130,12 +139,134 @@ class ImportController extends Controller
      */
     public function start(int $id): JsonResponse
     {
-        $import = $this->importRepository->find($id);
+        $import = $this->importRepository->findOrFail($id);
 
-        $this->importHelper
+        if (! $import->processed_rows_count) {
+            return new JsonResponse([
+                'message' => 'There are no resources to import.',
+            ], 400);
+        }
+
+        $this->importHelper->setImport($import);
+
+        if (! $this->importHelper->isValid()) {
+            return new JsonResponse([
+                'message' => 'Import is not valid.',
+            ], 400);
+        }
+
+        /**
+         * Set the import state to processing
+         */
+        if ($import->state == Import::STATE_VALIDATED) {
+            $this->importHelper->started();
+        }
+
+        /**
+         * Get the first pending batch to import
+         */
+        $importBatch = $import->batches->where('state', Import::STATE_PENDING)->first();
+
+        if ($importBatch) {
+            /**
+             * Start the import process
+             */
+            try {
+                if ($import->process_in_queue) {
+                    $this->importHelper->start();
+                } else {
+                    $this->importHelper->start($importBatch);
+                }
+            } catch (\Exception $e) {
+                return new JsonResponse([
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+    
+        } else {
+            $this->importHelper->linking();
+        }
+
+        return new JsonResponse([
+            'import' => $this->importHelper->getImport()->unsetRelations(),
+            'stats'  => $this->importHelper->stats(Import::STATE_PROCESSING),
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function link(int $id): JsonResponse
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        if (! $import->processed_rows_count) {
+            return new JsonResponse([
+                'message' => 'There are no resources to import.',
+            ], 400);
+        }
+
+        $this->importHelper->setImport($import);
+
+        if (! $this->importHelper->isValid()) {
+            return new JsonResponse([
+                'message' => 'Import is not valid.',
+            ], 400);
+        }
+
+        /**
+         * Set the import state to linking
+         */
+        if ($import->state == Import::STATE_PROCESSING) {
+            $this->importHelper->linking();
+        }
+
+        /**
+         * Get the first processing batch to link
+         */
+        $importBatch = $import->batches->where('state', Import::STATE_PROCESSING)->first();
+
+        /**
+         * Set the import state to linking/completed
+         */
+        if ($importBatch) {
+            /**
+             * Start the resource linking process
+             */
+            try {
+                $this->importHelper->link($importBatch);
+            } catch (\Exception $e) {
+                return new JsonResponse([
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+        } else {
+            /**
+             * Set the import state to completed
+             */
+            $this->importHelper->completed();
+        }
+
+        return new JsonResponse([
+            'import' => $this->importHelper->getImport()->unsetRelations(),
+            'stats'  => $this->importHelper->stats(Import::STATE_COMPLETED),
+        ]);
+    }
+
+    /**
+     * Returns import stats
+     */
+    public function stats(int $id, string $state = Import::STATE_PROCESSING): JsonResponse
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        $stats = $this->importHelper
             ->setImport($import)
-            ->start();
+            ->stats($state);
 
-        return new JsonResponse([]);
+        return new JsonResponse([
+            'import' => $import->unsetRelations(),
+            'stats'  => $stats,
+        ]);
     }
 }

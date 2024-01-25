@@ -254,7 +254,7 @@ class Product extends AbstractType
          * Update import batch summary
          */
         $this->importBatchRepository->update([
-            'state' => 'processing',
+            'state' => Import::STATE_PROCESSING,
 
             'summary'      => [
                 'created' => $this->getCreatedItemsCount(),
@@ -292,7 +292,7 @@ class Product extends AbstractType
          * Update import batch summary
          */
         $this->importBatchRepository->update([
-            'state' => 'completed',
+            'state' => Import::STATE_COMPLETED,
         ], $batch->id);
 
         Event::dispatch('data_transfer.imports.batch.linking.after', $batch);
@@ -756,21 +756,21 @@ class Product extends AbstractType
                 $validations[] = new Decimal;
             }
 
-            // if ($attribute->is_unique) {
-            //     array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
-            //         $product = $this->skuStorage->get($rowData['sku']);
+            if ($attribute->is_unique) {
+                array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
+                    $product = $this->skuStorage->get($rowData['sku']);
 
-            //         $count = $this->productAttributeValueRepository
-            //             ->where($attribute->column_name, $rowData[$attribute->code])
-            //             ->where('attribute_id', '=', $attribute->id)
-            //             ->where('product_attribute_values.product_id', '!=', $product['id'])
-            //             ->count('product_attribute_values.id');
+                    $count = $this->productAttributeValueRepository
+                        ->where($attribute->column_name, $rowData[$attribute->code])
+                        ->where('attribute_id', '=', $attribute->id)
+                        ->where('product_attribute_values.product_id', '!=', $product['id'])
+                        ->count('product_attribute_values.id');
 
-            //         if ($count) {
-            //             $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
-            //         }
-            //     });
-            // }
+                    if ($count) {
+                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
+                    }
+                });
+            }
 
             $rules[$attribute->code] = $validations;
         }

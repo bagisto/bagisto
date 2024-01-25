@@ -10,7 +10,6 @@ use Webkul\DataTransfer\Jobs\ImportBatch;
 use Webkul\DataTransfer\Jobs\ImportCompleted;
 use Webkul\DataTransfer\Jobs\ImportLinkBatch;
 use Webkul\DataTransfer\Jobs\ImportLinking;
-use Webkul\DataTransfer\Jobs\ImportStarted;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
 abstract class AbstractType
@@ -321,12 +320,10 @@ abstract class AbstractType
     /**
      * Start the import process
      */
-    public function importData(?int $importBatchId = null): bool
+    public function importData(?ImportBatchContract $importBatch = null): bool
     {
-        if ($importBatchId) {
-            $batch = $this->importBatchRepository->find($importBatchId);
-
-            $this->importBatch($batch);
+        if ($importBatch) {
+            $this->importBatch($importBatch);
 
             return true;
         }
@@ -342,7 +339,6 @@ abstract class AbstractType
         }
 
         Bus::chain([
-            new ImportStarted($this->import),
             Bus::batch($importBatches),
 
             new ImportLinking($this->import),
@@ -357,11 +353,9 @@ abstract class AbstractType
     /**
      * Link resource data.
      */
-    public function linkData(?int $importBatchId = null): bool
+    public function linkData(ImportBatchContract $importBatch): bool
     {
-        $batch = $this->importBatchRepository->find($importBatchId);
-
-        $this->importLinksBatch($batch);
+        $this->importLinksBatch($importBatch);
 
         return true;
     }
