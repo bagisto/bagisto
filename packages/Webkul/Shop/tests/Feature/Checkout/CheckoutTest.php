@@ -13,135 +13,7 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
-use function Pest\Laravel\deleteJson;
-use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-it('should display the cart items from the cart', function () {
-    // Arrange
-    $product = (new ProductFaker([
-        'attributes' => [
-            5  => 'new',
-            26 => 'guest_checkout',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $cartItem = CartItem::factory()->create([
-        'quantity'          => 1,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'name'              => $product->name,
-        'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
-        'cart_id'           => $cartId = Cart::factory()->create([
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price = $product->price,
-            'base_grand_total'	     => $price,
-            'sub_total'	            => $price,
-            'base_sub_total'        => $price,
-            'is_guest'              => 1,
-        ])->id,
-    ]);
-
-    $cartTemp = new \stdClass();
-    $cartTemp->id = $cartId;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
-    get(route('shop.api.checkout.cart.index'))
-        ->assertOk()
-        ->assertJsonPath('data.id', $cartId)
-        ->assertJsonPath('data.items_qty', 1)
-        ->assertJsonPath('data.items.0.id', $cartItem->id)
-        ->assertJsonPath('data.items.0.type', $product->type)
-        ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.haveStockableItems', true);
-});
-
-it('should remove product items to the cart', function () {
-    // Arrange
-    $product = (new ProductFaker([
-        'attributes' => [
-            5  => 'new',
-            26 => 'guest_checkout',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $cartItem = CartItem::factory()->create([
-        'quantity'          => 1,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'name'              => $product->name,
-        'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
-        'cart_id'           => $cartId = Cart::factory()->create([
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price = $product->price,
-            'base_grand_total'      => $price,
-            'sub_total'	            => $price,
-            'base_sub_total'        => $price,
-            'is_guest'              => 1,
-        ])->id,
-    ]);
-
-    $cartTemp = new \stdClass();
-    $cartTemp->id = $cartId;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
-    deleteJson(route('shop.api.checkout.cart.destroy', [
-        'cart_item_id' => $cartItem->id,
-    ]))
-        ->assertOk()
-        ->assertJsonPath('data', null)
-        ->assertJsonPath('message', trans('shop::app.checkout.cart.success-remove'));
-
-    $this->assertDatabaseMissing('cart_items', [
-        'id' => $cartItem->id,
-    ]);
-});
 
 it('should store the guest user address for cart billing/shipping for guest user', function () {
     // Arrange
@@ -466,23 +338,27 @@ it('should place a simple product order for a guest user', function () {
                 'cart_id'         => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Cart::class => [
             [
                 'is_active' => 0,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -495,23 +371,27 @@ it('should place a simple product order for a guest user', function () {
                 'product_id'   => $product->id,
             ],
         ],
+
         CartPayment::class => [
             [
                 'method'  => $paymentMethod,
                 'cart_id' => $cart->id,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method'   => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'qty'        => $quantity,
                 'product_id' => $product->id,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $product->inventory_source_qty(1) - $quantity,
@@ -608,18 +488,21 @@ it('should place a simple product order for a customer', function () {
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'status'          => 'pending',
@@ -628,6 +511,7 @@ it('should place a simple product order for a customer', function () {
                 'cart_id'         => $cart->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -640,23 +524,27 @@ it('should place a simple product order for a customer', function () {
                 'product_id'   => $product->id,
             ],
         ],
+
         CartPayment::class => [
             [
                 'method'  => $paymentMethod,
                 'cart_id' => $cart->id,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'qty'        => $quantity,
                 'product_id' => $product->id,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $product->inventory_source_qty(1) - $quantity,
@@ -790,18 +678,21 @@ it('should place a configurable product order for a guest user', function () {
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'shipping_method' => 'free_free',
@@ -810,6 +701,7 @@ it('should place a configurable product order for a guest user', function () {
                 'status'          => 'pending',
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -822,23 +714,27 @@ it('should place a configurable product order for a guest user', function () {
                 'type'         => $product->type,
             ],
         ],
+
         CartPayment::class => [
             [
                 'cart_id' => $cart->id,
                 'method'  => $paymentMethod,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'product_id' => $childProduct->id,
                 'qty'        => $quantity,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $childProduct->inventory_source_qty(1) - $quantity,
@@ -975,18 +871,21 @@ it('should place a configurable product order for a customer', function () {
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'shipping_method' => 'free_free',
@@ -995,6 +894,7 @@ it('should place a configurable product order for a customer', function () {
                 'status'          => 'pending',
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -1007,23 +907,27 @@ it('should place a configurable product order for a customer', function () {
                 'type'         => $product->type,
             ],
         ],
+
         CartPayment::class => [
             [
                 'cart_id' => $cart->id,
                 'method'  => $paymentMethod,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method' => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'product_id' => $childProduct->id,
                 'qty'        => $quantity,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $childProduct->inventory_source_qty(1) - $quantity,
@@ -1109,12 +1013,14 @@ it('should place a virtual product order for a guest user', function () {
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => 'cart_billing',
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'status'      => 'pending',
@@ -1122,6 +1028,7 @@ it('should place a virtual product order for a guest user', function () {
                 'cart_id'     => $cart->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -1134,23 +1041,27 @@ it('should place a virtual product order for a guest user', function () {
                 'product_id'   => $product->id,
             ],
         ],
+
         CartPayment::class => [
             [
                 'method'  => $paymentMethod,
                 'cart_id' => $cart->id,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method' => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'qty'        => $quantity,
                 'product_id' => $product->id,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $product->inventory_source_qty(1) - $quantity,
@@ -1239,12 +1150,14 @@ it('should place a virtual product order for a customer', function () {
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => 'cart_billing',
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'status'      => 'pending',
@@ -1252,6 +1165,7 @@ it('should place a virtual product order for a customer', function () {
                 'cart_id'     => $cart->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -1264,23 +1178,27 @@ it('should place a virtual product order for a customer', function () {
                 'product_id'   => $product->id,
             ],
         ],
+
         CartPayment::class => [
             [
                 'method'  => $paymentMethod,
                 'cart_id' => $cart->id,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'qty'        => $quantity,
                 'product_id' => $product->id,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $product->inventory_source_qty(1) - $quantity,
@@ -1394,18 +1312,21 @@ it('should place a downloadable product order for a customer', function () {
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'status'          => 'pending',
@@ -1413,6 +1334,7 @@ it('should place a downloadable product order for a customer', function () {
                 'cart_id'         => $cart->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $cartItem->quantity,
@@ -1425,17 +1347,20 @@ it('should place a downloadable product order for a customer', function () {
                 'product_id'   => $product->id,
             ],
         ],
+
         CartPayment::class => [
             [
                 'method'  => $paymentMethod,
                 'cart_id' => $cart->id,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => 0,
@@ -2063,18 +1988,21 @@ it('should place order with two products with simple and configurable product ty
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'shipping_method'   => 'free_free',
@@ -2087,6 +2015,7 @@ it('should place order with two products with simple and configurable product ty
                 'is_guest'          => 0,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -2099,6 +2028,7 @@ it('should place order with two products with simple and configurable product ty
                 'type'         => $configurableProduct->type,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => $quantity = $cartItem->quantity,
@@ -2111,35 +2041,41 @@ it('should place order with two products with simple and configurable product ty
                 'type'         => $simpleProduct->type,
             ],
         ],
+
         CartPayment::class => [
             [
                 'cart_id' => $cart->id,
                 'method'  => $paymentMethod,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method' => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'product_id' => $childProduct->id,
                 'qty'        => $quantity,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'product_id' => $simpleProduct->id,
                 'qty'        => $quantity,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $childProduct->inventory_source_qty(1) - $quantity,
                 'product_id' => $childProduct->id,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $simpleProduct->inventory_source_qty(1) - $quantity,
@@ -2291,18 +2227,21 @@ it('should place order with two products with simple and grouped product type', 
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'shipping_method'   => 'free_free',
@@ -2322,6 +2261,7 @@ it('should place order with two products with simple and grouped product type', 
                 'method'  => $paymentMethod,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method' => $paymentMethod,
@@ -2344,6 +2284,7 @@ it('should place order with two products with simple and grouped product type', 
                     'product_id' => $bundleProduct->associated_product->id,
                 ],
             ],
+
             OrderItem::class => [
                 [
                     'qty_ordered'  => $bundleProduct->qty,
@@ -2366,12 +2307,14 @@ it('should place order with two products with simple and grouped product type', 
                 'qty'        => 1,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $simpleProduct->inventory_source_qty(1) - 1,
                 'product_id' => $simpleProduct->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => 1,
@@ -2538,18 +2481,21 @@ it('should place order with two products with simple and downloadable product ty
                 'is_active' => 0,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $billingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         CustomerAddress::class => [
             [
                 'address_type' => $shippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
+
         Order::class => [
             [
                 'status'          => 'pending',
@@ -2557,6 +2503,7 @@ it('should place order with two products with simple and downloadable product ty
                 'cart_id'         => $cart->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => 1,
@@ -2569,6 +2516,7 @@ it('should place order with two products with simple and downloadable product ty
                 'product_id'   => $downloadableProduct->id,
             ],
         ],
+
         OrderItem::class => [
             [
                 'qty_ordered'  => 1,
@@ -2581,23 +2529,27 @@ it('should place order with two products with simple and downloadable product ty
                 'product_id'   => $simpleProduct->id,
             ],
         ],
+
         CartPayment::class => [
             [
                 'method'  => $paymentMethod,
                 'cart_id' => $cart->id,
             ],
         ],
+
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
             ],
         ],
+
         ProductOrderedInventory::class => [
             [
                 'product_id' => $simpleProduct->id,
                 'qty'        => 1,
             ],
         ],
+
         ProductInventoryIndex::class => [
             [
                 'qty'        => $simpleProduct->inventory_source_qty(1) - 1,
