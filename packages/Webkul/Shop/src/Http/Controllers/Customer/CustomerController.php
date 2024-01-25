@@ -10,6 +10,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
+use Webkul\Sales\Models\Order;
 
 class CustomerController extends Controller
 {
@@ -161,7 +162,7 @@ class CustomerController extends Controller
         try {
             if (Hash::check(request()->input('password'), $customerRepository->password)) {
 
-                if ($customerRepository->orders->whereIn('status', ['pending', 'processing'])->first()) {
+                if ($customerRepository->orders->whereIn('status', [Order::STATUS_PENDING, Order::STATUS_PROCESSING])->first()) {
                     session()->flash('error', trans('shop::app.customers.account.profile.order-pending'));
 
                     return redirect()->route('shop.customers.account.profile.index');

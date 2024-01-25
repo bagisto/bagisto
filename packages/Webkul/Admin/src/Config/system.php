@@ -1,5 +1,7 @@
 <?php
 
+use Webkul\Sales\Models\Order;
+
 return [
     /**
      * General.
@@ -1147,13 +1149,13 @@ return [
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
-                        'value' => 'pending',
+                        'value' => Order::STATUS_PENDING,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending-payment',
-                        'value' => 'pending_payment',
+                        'value' => Order::STATUS_PENDING_PAYMENT,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.processing',
-                        'value' => 'processing',
+                        'value' => Order::STATUS_PROCESSING,
                     ],
                 ],
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',
