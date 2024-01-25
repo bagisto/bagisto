@@ -4,8 +4,8 @@ namespace Webkul\Admin\DataGrids\Customers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Models\Order;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class CustomerDataGrid extends DataGrid
 {
