@@ -92,10 +92,21 @@
 
                             @{{ importResource.errors_count }}
                         </p>
+
+                        <div class="flex gap-2 place-items-start">
+                            <i class="icon-information bg-red-200 text-red-600 text-2xl rounded-full"></i>
+
+                            <div class="grid gap-2">
+                                <p v-for="error in importResource.errors">
+                                    @{{ error[0].message }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <button
                         class="primary-button place-self-start"
+                        v-if="isValid"
                         @click="start"
                     >
                         @lang('admin::app.settings.data-transfer.imports.import.title')

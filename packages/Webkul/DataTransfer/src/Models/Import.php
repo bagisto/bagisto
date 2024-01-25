@@ -41,6 +41,7 @@ class Import extends Model implements ImportContract
      */
     protected $casts = [
         'summary'      => 'array',
+        'errors'       => 'array',
         'started_at'   => 'datetime',
         'completed_at' => 'datetime',
     ];
