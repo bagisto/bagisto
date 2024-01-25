@@ -332,7 +332,7 @@ it('should place a simple product order for a guest user', function () {
     $this->assertModelWise([
         Order::class => [
             [
-                'status'          => 'pending',
+                'status'          => Order::STATUS_PENDING,
                 'shipping_method' => 'free_free',
                 'grand_total'     => $price,
                 'cart_id'         => $cart->id,
@@ -505,7 +505,7 @@ it('should place a simple product order for a customer', function () {
 
         Order::class => [
             [
-                'status'          => 'pending',
+                'status'          => Order::STATUS_PENDING,
                 'shipping_method' => 'free_free',
                 'grand_total'     => $price,
                 'cart_id'         => $cart->id,
@@ -698,7 +698,7 @@ it('should place a configurable product order for a guest user', function () {
                 'shipping_method' => 'free_free',
                 'grand_total'     => $childProduct->price,
                 'cart_id'         => $cart->id,
-                'status'          => 'pending',
+                'status'          => Order::STATUS_PENDING,
             ],
         ],
 
@@ -891,7 +891,7 @@ it('should place a configurable product order for a customer', function () {
                 'shipping_method' => 'free_free',
                 'grand_total'     => $childProduct->price,
                 'cart_id'         => $cart->id,
-                'status'          => 'pending',
+                'status'          => Order::STATUS_PENDING,
             ],
         ],
 
@@ -1023,7 +1023,7 @@ it('should place a virtual product order for a guest user', function () {
 
         Order::class => [
             [
-                'status'      => 'pending',
+                'status'      => Order::STATUS_PENDING,
                 'grand_total' => $price,
                 'cart_id'     => $cart->id,
             ],
@@ -1160,7 +1160,7 @@ it('should place a virtual product order for a customer', function () {
 
         Order::class => [
             [
-                'status'      => 'pending',
+                'status'      => Order::STATUS_PENDING,
                 'grand_total' => $price,
                 'cart_id'     => $cart->id,
             ],
@@ -1329,9 +1329,9 @@ it('should place a downloadable product order for a customer', function () {
 
         Order::class => [
             [
-                'status'          => 'pending',
-                'grand_total'     => $price,
-                'cart_id'         => $cart->id,
+                'status'      => Order::STATUS_PENDING,
+                'grand_total' => $price,
+                'cart_id'     => $cart->id,
             ],
         ],
 
@@ -2008,7 +2008,7 @@ it('should place order with two products with simple and configurable product ty
                 'shipping_method'   => 'free_free',
                 'grand_total'       => $childProduct->price + $simpleProduct->price,
                 'cart_id'           => $cart->id,
-                'status'            => 'pending',
+                'status'            => Order::STATUS_PENDING,
                 'total_item_count'  => 2,
                 'total_qty_ordered' => 2,
                 'customer_id'       => $customer->id,
@@ -2247,7 +2247,7 @@ it('should place order with two products with simple and grouped product type', 
                 'shipping_method'   => 'free_free',
                 'grand_total'       => array_sum($data['grand_total']),
                 'cart_id'           => $cart->id,
-                'status'            => 'pending',
+                'status'            => Order::STATUS_PENDING,
                 'total_item_count'  => 5,
                 'total_qty_ordered' => array_sum($data['qty']),
                 'customer_id'       => $customer->id,
@@ -2498,9 +2498,9 @@ it('should place order with two products with simple and downloadable product ty
 
         Order::class => [
             [
-                'status'          => 'pending',
-                'grand_total'     => $price,
-                'cart_id'         => $cart->id,
+                'status'      => Order::STATUS_PENDING,
+                'grand_total' => $price,
+                'cart_id'     => $cart->id,
             ],
         ],
 
@@ -2539,7 +2539,7 @@ it('should place order with two products with simple and downloadable product ty
 
         OrderPayment::class => [
             [
-                'method'  => $paymentMethod,
+                'method' => $paymentMethod,
             ],
         ],
 

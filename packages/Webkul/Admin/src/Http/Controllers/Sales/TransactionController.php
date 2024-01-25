@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
@@ -110,9 +111,9 @@ class TransactionController extends Controller
             $shipments = $this->shipmentRepository->where('order_id', $invoice->order_id)->first();
 
             if (isset($shipments)) {
-                $this->orderRepository->updateOrderStatus($order, 'completed');
+                $this->orderRepository->updateOrderStatus($order, Order::STATUS_COMPLETED);
             } else {
-                $this->orderRepository->updateOrderStatus($order, 'processing');
+                $this->orderRepository->updateOrderStatus($order, Order::STATUS_PROCESSING);
             }
 
             $this->invoiceRepository->updateState($invoice, 'paid');

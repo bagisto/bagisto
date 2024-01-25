@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Sales;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Repositories\OrderRepository;
 
@@ -67,38 +68,38 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.status'),
             'type'       => 'checkbox',
             'options'    => [
-                'processing'      => trans('admin::app.sales.orders.index.datagrid.processing'),
-                'completed'       => trans('admin::app.sales.orders.index.datagrid.completed'),
-                'canceled'        => trans('admin::app.sales.orders.index.datagrid.canceled'),
-                'closed'          => trans('admin::app.sales.orders.index.datagrid.closed'),
-                'pending'         => trans('admin::app.sales.orders.index.datagrid.pending'),
-                'pending_payment' => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
-                'fraud'           => trans('admin::app.sales.orders.index.datagrid.fraud'),
+                Order::STATUS_PROCESSING      => trans('admin::app.sales.orders.index.datagrid.processing'),
+                Order::STATUS_COMPLETED       => trans('admin::app.sales.orders.index.datagrid.completed'),
+                Order::STATUS_CANCELED        => trans('admin::app.sales.orders.index.datagrid.canceled'),
+                Order::STATUS_CLOSED          => trans('admin::app.sales.orders.index.datagrid.closed'),
+                Order::STATUS_PENDING         => trans('admin::app.sales.orders.index.datagrid.pending'),
+                Order::STATUS_PENDING_PAYMENT => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
+                Order::STATUS_FRAUD           => trans('admin::app.sales.orders.index.datagrid.fraud'),
             ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
                 switch ($row->status) {
-                    case 'processing':
+                    case Order::STATUS_PROCESSING:
                         return '<p class="label-processing">'.trans('admin::app.sales.orders.index.datagrid.processing').'</p>';
 
-                    case 'completed':
+                    case Order::STATUS_COMPLETED:
                         return '<p class="label-active">'.trans('admin::app.sales.orders.index.datagrid.completed').'</p>';
 
-                    case 'canceled':
+                    case Order::STATUS_CANCELED:
                         return '<p class="label-canceled">'.trans('admin::app.sales.orders.index.datagrid.canceled').'</p>';
 
-                    case 'closed':
+                    case Order::STATUS_CLOSED:
                         return '<p class="label-closed">'.trans('admin::app.sales.orders.index.datagrid.closed').'</p>';
 
-                    case 'pending':
+                    case Order::STATUS_PENDING:
                         return '<p class="label-pending">'.trans('admin::app.sales.orders.index.datagrid.pending').'</p>';
 
-                    case 'pending_payment':
+                    case Order::STATUS_PENDING_PAYMENT:
                         return '<p class="label-pending">'.trans('admin::app.sales.orders.index.datagrid.pending-payment').'</p>';
 
-                    case 'fraud':
+                    case Order::STATUS_FRAUD:
                         return '<p class="label-canceled">'.trans('admin::app.sales.orders.index.datagrid.fraud').'</p>';
                 }
             },

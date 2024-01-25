@@ -344,7 +344,7 @@
                                         <p class="text-sm">-</p>
 
                                         <p class="text-sm">
-                                            @if($order->status !== 'canceled')
+                                            @if($order->status !== \Webkul\Sales\Models\Order::STATUS_CANCELED)
                                                 {{ core()->formatPrice($order->total_due, $order->order_currency_code) }}
                                             @else
                                                 {{ core()->formatPrice(0.00, $order->order_currency_code) }}
