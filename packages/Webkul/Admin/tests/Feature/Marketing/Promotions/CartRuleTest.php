@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CartRule::query()->delete();
-});
-
 it('should returns the cart rule page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -62,16 +55,23 @@ it('should store the newly created cart rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('cart_rules', [
-        'name'        => $name,
-        'description' => $description,
-        'action_type' => $actionType,
+    $this->assertModelWise([
+        CartRule::class => [
+            [
+                'name'        => $name,
+                'description' => $description,
+                'action_type' => $actionType,
+            ],
+        ],
     ]);
 });
 
 it('should copy the existing cart rule', function () {
     // Arrange
-    $cartRule = CartRule::factory()->create();
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -84,7 +84,10 @@ it('should copy the existing cart rule', function () {
 
 it('should update the existing cart rule', function () {
     // Arrange
-    $cartRule = CartRule::factory()->create();
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -97,7 +100,10 @@ it('should update the existing cart rule', function () {
 
 it('should update the cart rule', function () {
     // Arrange
-    $cartRule = CartRule::factory()->create();
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -125,16 +131,23 @@ it('should update the cart rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('cart_rules', [
-        'name'        => $name,
-        'description' => $description,
-        'action_type' => $actionType,
+    $this->assertModelWise([
+        CartRule::class => [
+            [
+                'name'        => $name,
+                'description' => $description,
+                'action_type' => $actionType,
+            ],
+        ],
     ]);
 });
 
 it('should delete the cart rules', function () {
     // Arrange
-    $cartRule = CartRule::factory()->create();
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();

@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Currency::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the currencies index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -35,9 +28,13 @@ it('should store the newly created currencies', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-success'));
 
-    $this->assertDatabaseHas('currencies', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        Currency::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 
@@ -70,9 +67,13 @@ it('should update the specified currency', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.update-success'));
 
-    $this->assertDatabaseHas('currencies', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        Currency::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 

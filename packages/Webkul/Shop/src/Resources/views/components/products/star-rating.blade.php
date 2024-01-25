@@ -10,7 +10,7 @@
     value="{{ $value }}"
     disabled="{{ $disabled }}"
 >
-    <x-shop::shimmer.products.reviews.ratings/>
+    <x-shop::shimmer.products.reviews.ratings />
 </v-star-rating>
 
 @pushOnce("scripts")

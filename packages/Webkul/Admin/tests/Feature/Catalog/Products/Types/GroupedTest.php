@@ -1,21 +1,14 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Models\ProductGroupedProduct;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the create page of grouped product', function () {
     // Arrange
@@ -34,10 +27,14 @@ it('should return the create page of grouped product', function () {
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
-    $this->assertDatabaseHas('products', [
-        'id'   => $productId,
-        'type' => 'grouped',
-        'sku'  => $sku,
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'   => $productId,
+                'type' => 'grouped',
+                'sku'  => $sku,
+            ],
+        ],
     ]);
 });
 
@@ -89,27 +86,33 @@ it('should update the grouped product', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'                  => $product->id,
-        'type'                => $product->type,
-        'sku'                 => $product->sku,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
-    ]);
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'sku'                 => $product->sku,
+                'attribute_family_id' => 1,
+                'parent_id'           => null,
+                'additional'          => null,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'product_id'        => $product->id,
-        'type'              => 'grouped',
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
-        'name'              => $name,
-        'short_description' => $shortDescription,
-        'description'       => $description,
-        'price'             => $price,
-        'weight'            => $weight,
-        'locale'            => $locale,
-        'channel'           => $channel,
+        ProductFlat::class => [
+            [
+                'product_id'        => $product->id,
+                'type'              => 'grouped',
+                'sku'               => $product->sku,
+                'url_key'           => $product->url_key,
+                'name'              => $name,
+                'short_description' => $shortDescription,
+                'description'       => $description,
+                'price'             => $price,
+                'weight'            => $weight,
+                'locale'            => $locale,
+                'channel'           => $channel,
+            ],
+        ],
     ]);
 });
 
@@ -143,21 +146,29 @@ it('should update the grouped product options', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'                  => $product->id,
-        'type'                => $product->type,
-        'sku'                 => $product->sku,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'sku'                 => $product->sku,
+                'attribute_family_id' => 1,
+                'parent_id'           => null,
+                'additional'          => null,
+            ],
+        ],
     ]);
 
     foreach ($links as $key => $link) {
-        $this->assertDatabaseHas('product_grouped_products', [
-            'product_id'            => $product->id,
-            'associated_product_id' => $link['associated_product_id'],
-            'qty'                   => $link['qty'],
-            'sort_order'            => $link['sort_order'],
+        $this->assertModelWise([
+            ProductGroupedProduct::class => [
+                [
+                    'product_id'            => $product->id,
+                    'associated_product_id' => $link['associated_product_id'],
+                    'qty'                   => $link['qty'],
+                    'sort_order'            => $link['sort_order'],
+                ],
+            ],
         ]);
     }
 });

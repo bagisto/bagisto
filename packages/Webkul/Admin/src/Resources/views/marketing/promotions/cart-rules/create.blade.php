@@ -6,7 +6,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.before') !!}
 
-    <v-cart-rule-create-form></v-cart-rule-create-form>
+    <v-cart-rule-create-form />
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.after') !!}
 
@@ -69,19 +69,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="name"
-                                        :value="old('name')"
                                         id="name"
+                                        name="name"
                                         rules="required"
+                                        :value="old('name')"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.name')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group>
@@ -91,19 +87,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="textarea"
+                                        class="text-gray-600 dark:text-gray-300"
+                                        id="description"
                                         name="description"
                                         :value="old('description')"
-                                        id="description"
-                                        class="text-gray-600 dark:text-gray-300"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.description')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.description')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="description"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="description" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group>
@@ -129,10 +121,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="coupon_type"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="coupon_type" />
                                 </x-admin::form.control-group>
 
                                 <template v-if="parseInt(couponType)">
@@ -143,12 +132,12 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="use_auto_generation"
                                             id="use_auto_generation"
+                                            name="use_auto_generation"
                                             rules="required"
+                                            v-model="useAutoGeneration"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.auto-generate-coupon')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.auto-generate-coupon')"
-                                            v-model="useAutoGeneration"
                                         >
                                             <option value="0">
                                                 @lang('admin::app.marketing.promotions.cart-rules.create.no')
@@ -159,32 +148,24 @@
                                             </option>
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="use_auto_generation"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="use_auto_generation" />
                                     </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group v-if="! parseInt(useAutoGeneration)"
-                                    >
+                                    <x-admin::form.control-group v-if="! parseInt(useAutoGeneration)">
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.promotions.cart-rules.create.coupon-code')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="coupon_code"
                                             id="coupon_code"
+                                            name="coupon_code"
                                             rules="required"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.coupon-code')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.coupon-code')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="coupon_code"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="coupon_code" />
                                     </x-admin::form.control-group>
                                     
                                     <x-admin::form.control-group>
@@ -194,18 +175,14 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="uses_per_coupon"
                                             id="uses_per_coupon"
+                                            name="uses_per_coupon"
                                             rules="numeric"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.uses-per-coupon')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.uses-per-coupon')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="uses_per_coupon"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="uses_per_coupon" />
                                     </x-admin::form.control-group>
                                 </template>
 
@@ -216,17 +193,13 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="usage_per_customer"
                                         id="usage_per_customer"
+                                        name="usage_per_customer"
                                         :label="trans('admin::app.marketing.promotions.cart-rules.create.uses-per-customer')"
                                         :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.uses-per-customer')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="usage_per_customer"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="usage_per_customer" />
                                 </x-admin::form.control-group>
 
                                 <p class="text-sm text-gray-500">
@@ -252,12 +225,12 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="condition_type"
-                                            id="condition_type"
                                             class="ltr:pr-10 rtl:pl-10"
+                                            id="condition_type"
+                                            name="condition_type"
+                                            v-model="conditionType"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.condition-type')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.condition-type')"
-                                            v-model="conditionType"
                                         >
                                             <option value="1">
                                                 @lang('admin::app.marketing.promotions.cart-rules.create.all-conditions-true')
@@ -268,10 +241,7 @@
                                             </option>
                                         </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="condition_type"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="condition_type" />
                                     </x-admin::form.control-group>
                                 </div>
 
@@ -281,8 +251,7 @@
                                     :key="index"
                                     :index="index"
                                     @onRemoveCondition="removeCondition($event)">
-                                >
-                                </v-cart-rule-condition-item>
+                                />
 
                                 <div
                                     class="secondary-button max-w-max mt-4"
@@ -313,12 +282,12 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="select"
-                                                    name="action_type"
                                                     id="action_type"
+                                                    name="action_type"
                                                     rules="required"
+                                                    v-model="actionType"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.action-type')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.action-type')"
-                                                    v-model="actionType"
                                                 >
                                                     <option
                                                         value="by_percent"
@@ -349,10 +318,7 @@
                                                     </option>
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="action_type"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="action_type" />
                                             </x-admin::form.control-group>
                                         </div>
 
@@ -364,19 +330,15 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
-                                                    name="discount_amount"
-                                                    :value="old('discount_amount', 0)"
                                                     id="discount_amount"
+                                                    name="discount_amount"
                                                     rules="required"
+                                                    :value="old('discount_amount', 0)"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.discount-amount')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.discount-amount')"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                />
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="discount_amount"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="discount_amount" />
                                             </x-admin::form.control-group>
                                         </div>
                                     </div>
@@ -390,18 +352,14 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
+                                                    id="discount_quantity"
                                                     name="discount_quantity"
                                                     :value="old('discount_quantity', 0)"
-                                                    id="discount_quantity"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.maximum-quantity-allowed-to-be-discounted')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.maximum-quantity-allowed-to-be-discounted')"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                />
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="discount_quantity"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="discount_quantity" />
                                             </x-admin::form.control-group>
                                         </div>
 
@@ -413,18 +371,14 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
+                                                    id="discount_step"
                                                     name="discount_step"
                                                     :value="old('discount_step', 0)"
-                                                    id="discount_step"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.buy-x-quantity')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.buy-x-quantity')"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                />
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="discount_step"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="discount_step" />
                                             </x-admin::form.control-group>
                                         </div>
                                     </div>
@@ -438,9 +392,9 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="select"
+                                                    id="apply_to_shipping"
                                                     name="apply_to_shipping"
                                                     :value="old('apply_to_shipping', 0)"
-                                                    id="apply_to_shipping"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.apply-to-shipping')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.apply-to-shipping')"
                                                 >
@@ -459,10 +413,7 @@
                                                     </option>
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="apply_to_shipping"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="apply_to_shipping" />
                                             </x-admin::form.control-group>
                                         </div>
 
@@ -474,9 +425,9 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="select"
+                                                    id="free_shipping"
                                                     name="free_shipping"
                                                     :value="old('free_shipping', 0)"
-                                                    id="free_shipping"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.free-shipping')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.free-shipping')"
                                                 >
@@ -495,10 +446,7 @@
                                                     </option>
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="free_shipping"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="free_shipping" />
                                             </x-admin::form.control-group>
                                         </div>
                                     </div>
@@ -512,10 +460,10 @@
 
                                                 <x-admin::form.control-group.control
                                                     type="select"
+                                                    class="!w-1/2 max-sm:!w-full"
+                                                    id="end_other_rules"
                                                     name="end_other_rules"
                                                     :value="old('end_other_rules', 0)"
-                                                    id="end_other_rules"
-                                                    class="!w-1/2 max-sm:!w-full"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.end-of-other-rules')"
                                                     :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.end-of-other-rules')"
                                                 >
@@ -534,10 +482,7 @@
                                                     </option>
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="end_other_rules"
-                                                >
-                                                </x-admin::form.control-group.error>
+                                                <x-admin::form.control-group.error control-name="end_other_rules" />
                                             </x-admin::form.control-group>
                                         </div>
                                     </div>
@@ -559,7 +504,7 @@
                                     <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.create.settings')
                                     </p>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <x-admin::form.control-group>
@@ -569,18 +514,14 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="sort_order"
                                             name="sort_order"
                                             :value="old('sort_order')"
-                                            id="sort_order"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.priority')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.priority')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="sort_order"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="sort_order" />
                                     </x-admin::form.control-group>
 
                                     <!-- channels -->
@@ -593,15 +534,14 @@
                                             <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
+                                                    :id="'channel_' . '_' . $channel->id"
                                                     name="channels[]"
                                                     :value="$channel->id"
-                                                    :id="'channel_' . '_' . $channel->id"
-                                                    :for="'channel_' . '_' . $channel->id"
                                                     rules="required"
+                                                    :for="'channel_' . '_' . $channel->id"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.channels')"
                                                     :checked="in_array($channel->id, old('channels', []))"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                />
 
                                                 <label
                                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -612,10 +552,7 @@
                                             </x-admin::form.control-group>
                                         @endforeach
 
-                                        <x-admin::form.control-group.error
-                                            control-name="channels[]"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="channels[]" />
                                     </div>
 
                                     <!-- Customer Grous -->
@@ -628,15 +565,14 @@
                                             <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
-                                                    name="customer_groups[]"
-                                                    :value="$customerGroup->id"
                                                     :id="'customer_group_' . '_' . $customerGroup->id"
-                                                    :for="'customer_group_' . '_' . $customerGroup->id"
+                                                    name="customer_groups[]"
                                                     rules="required"
+                                                    :value="$customerGroup->id"
+                                                    :for="'customer_group_' . '_' . $customerGroup->id"
                                                     :label="trans('admin::app.marketing.promotions.cart-rules.create.customer-groups')"
                                                     :checked="in_array($customerGroup->id, old('customer_groups', []))"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                />
 
                                                 <label
                                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -647,10 +583,7 @@
                                             </x-admin::form.control-group>
                                         @endforeach
 
-                                        <x-admin::form.control-group.error
-                                            control-name="customer_groups[]"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="customer_groups[]" />
                                     </div>
 
                                     <!-- Status -->
@@ -665,15 +598,11 @@
                                             value="1"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.status')"
                                             :checked="(boolean) old('status')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="status"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="status" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.card.accordion.settings.after') !!}
@@ -686,7 +615,7 @@
                                     <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                         @lang('admin::app.marketing.promotions.cart-rules.create.marketing-time')
                                     </p>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <x-admin::form.control-group>
@@ -697,17 +626,13 @@
                                         <x-admin::form.control-group.control
                                             type="datetime"
                                             name="starts_from"
-                                            :value="old('starts_from')"
                                             id="starts_from"
+                                            :value="old('starts_from')"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.from')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.from')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="starts_from"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="starts_from" />
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="!mb-0">
@@ -717,20 +642,16 @@
 
                                         <x-admin::form.control-group.control
                                             type="datetime"
+                                            id="ends_till"
                                             name="ends_till"
                                             :value="old('ends_till')"
-                                            id="ends_till"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.create.to')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.create.to')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="ends_till"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="ends_till" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.card.accordion.marketing_time.after') !!}

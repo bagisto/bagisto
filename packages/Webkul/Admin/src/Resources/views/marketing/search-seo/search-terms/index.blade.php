@@ -67,10 +67,10 @@
                                 <label :for="`mass_action_select_record_${record[available.meta.primary_column]}`">
                                     <input
                                         type="checkbox"
+                                        :id="`mass_action_select_record_${record[available.meta.primary_column]}`"
                                         class="peer hidden"
                                         :name="`mass_action_select_record_${record[available.meta.primary_column]}`"
                                         :value="record[available.meta.primary_column]"
-                                        :id="`mass_action_select_record_${record[available.meta.primary_column]}`"
                                         v-model="applied.massActions.indices"
                                         @change="setCurrentSelectionMode"
                                     >
@@ -132,7 +132,7 @@
 
                     <!-- Datagrid Body Shimmer -->
                     <template v-else>
-                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body />
                     </template>
                 </template>
             </x-admin::datagrid>
@@ -168,7 +168,7 @@
                             >
                                 @lang('admin::app.marketing.search-seo.search-terms.index.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -176,8 +176,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Search Term -->
                             <x-admin::form.control-group>
@@ -191,13 +190,9 @@
                                     rules="required"
                                     :label="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
                                     :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.search-query')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="term"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="term" />
                             </x-admin::form.control-group>
 
                             <template v-if="selectedSitemap">
@@ -213,13 +208,9 @@
                                         rules="required"
                                         :label="trans('admin::app.marketing.search-seo.search-terms.index.create.results')"
                                         :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.results')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="results"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="results" />
                                 </x-admin::form.control-group>
 
                                 <!-- Uses -->
@@ -234,13 +225,9 @@
                                         rules="required"
                                         :label="trans('admin::app.marketing.search-seo.search-terms.index.create.uses')"
                                         :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.uses')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="uses"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="uses" />
                                 </x-admin::form.control-group>
                             </template>
 
@@ -255,8 +242,7 @@
                                     name="redirect_url"
                                     :label="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
                                     :placeholder="trans('admin::app.marketing.search-seo.search-terms.index.create.redirect-url')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
                             </x-admin::form.control-group>
 
                             <!-- Channels -->
@@ -276,7 +262,7 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="channel_id" />
                             </x-admin::form.control-group>
 
                             <!-- Channels -->
@@ -296,9 +282,9 @@
                                     @endforeach 
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="locale"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="locale" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -306,7 +292,7 @@
                             <button class="primary-button">
                                 @lang('admin::app.marketing.search-seo.search-terms.index.create.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

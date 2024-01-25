@@ -5,7 +5,7 @@
     ]);
 @endphp
 
-<v-twitter-share></v-twitter-share>
+<v-twitter-share />
 
 @push('scripts')
     <script type="text/x-template" id="v-twitter-share-template">

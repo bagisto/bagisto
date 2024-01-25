@@ -52,7 +52,7 @@
         <!-- Category Vue Component -->
         <v-category>
             <!-- Category Shimmer Effect -->
-            <x-shop::shimmer.categories.view/>
+            <x-shop::shimmer.categories.view />
         </v-category>
     @endif
 
@@ -80,7 +80,7 @@
                         >
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
+                                <x-shop::shimmer.products.cards.list count="12" />
                             </template>
 
                             <!-- Product Card Listing -->
@@ -91,8 +91,7 @@
                                     <x-shop::products.card
                                         ::mode="'list'"
                                         v-for="product in products"
-                                    >
-                                    </x-shop::products.card>
+                                    />
                                 </template>
 
                                 <!-- Empty Products Container -->
@@ -121,7 +120,7 @@
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
                                 <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-4">
-                                    <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
+                                    <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
                             </template>
 
@@ -134,8 +133,7 @@
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
-                                        >
-                                        </x-shop::products.card>
+                                        />
                                     </div>
                                 </template>
 

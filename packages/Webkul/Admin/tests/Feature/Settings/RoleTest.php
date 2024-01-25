@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Role::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the role index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -45,9 +38,13 @@ it('should store the newly created roles', function () {
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+            ],
+        ],
     ]);
 });
 
@@ -65,9 +62,13 @@ it('should returns the edit page of roles', function () {
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+            ],
+        ],
     ]);
 });
 
@@ -85,9 +86,13 @@ it('should update the existing role', function () {
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+            ],
+        ],
     ]);
 });
 

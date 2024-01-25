@@ -5,7 +5,6 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Sales\Generators\InvoiceSequencer;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
@@ -16,19 +15,6 @@ use Webkul\Sales\Models\OrderTransaction;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    // Cleaning up the row which are creating.
-    Customer::query()->delete();
-    OrderAddress::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Product::query()->delete();
-    Invoice::query()->delete();
-    CustomerAddress::query()->delete();
-});
 
 it('should return the index page of transactions', function () {
     // Act and Assert
@@ -126,10 +112,14 @@ it('should store the order transaction', function () {
         ->assertRedirect(route('admin.sales.transactions.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('order_transactions', [
-        'status'     => 'paid',
-        'invoice_id' => $invoice->id,
-        'order_id'   => $order->id,
+    $this->assertModelWise([
+        OrderTransaction::class => [
+            [
+                'status'     => 'paid',
+                'invoice_id' => $invoice->id,
+                'order_id'   => $order->id,
+            ],
+        ],
     ]);
 });
 

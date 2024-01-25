@@ -90,7 +90,7 @@
                         {{ substr($admin->name, 0, 1) }}
                     </button>
                 @endif
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Admin Dropdown -->
             <x-slot:content class="!p-0">
@@ -131,7 +131,7 @@
                         @lang('admin::app.components.layouts.header.logout')
                     </a>
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-admin::dropdown>
     </div>
 </header>
@@ -159,7 +159,7 @@
                 />
             @endif
         </div>
-    </x-slot:header>
+    </x-slot>
 
     <!-- Drawer Content -->
     <x-slot:content class="p-4">
@@ -195,7 +195,7 @@
                 @endforeach
             </nav>
         </div>
-    </x-slot:content>
+    </x-slot>
 </x-admin::drawer>
 
 @pushOnce('scripts')
@@ -549,7 +549,7 @@
                     >
                     </span>
                 </span>
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Notification Content -->
             <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
@@ -605,7 +605,7 @@
                         @lang('admin::app.notifications.read-all')
                     </a>
                 </div>
-            </x-slot:content>
+            </x-slot>
         </x-admin::dropdown>
     </script>
 

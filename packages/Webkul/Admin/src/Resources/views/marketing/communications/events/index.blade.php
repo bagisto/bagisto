@@ -136,7 +136,7 @@
                             >
                                 @lang('admin::app.settings.users.index.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -145,8 +145,7 @@
                                 type="hidden"
                                 name="id"
                                 v-model="selectedEvents.id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Event Name -->
                             <x-admin::form.control-group>
@@ -157,18 +156,14 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="name"
-                                    :value="old('name')"
                                     rules="required"
+                                    :value="old('name')"
                                     v-model="selectedEvents.name"
                                     :label="trans('admin::app.marketing.communications.events.index.create.name')"
                                     :placeholder="trans('admin::app.marketing.communications.events.index.create.name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <!-- Event Description -->
@@ -179,20 +174,16 @@
 
                                 <x-admin::form.control-group.control
                                     type="textarea"
-                                    name="description"
-                                    :value="old('description')"
-                                    rules="required"
-                                    id="description"
                                     class="h-[100px]"
+                                    id="description"
+                                    name="description"
+                                    rules="required"
+                                    :value="old('description')"
                                     v-model="selectedEvents.description"
                                     :label="trans('admin::app.marketing.communications.events.index.create.description')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="description"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="description" />
                             </x-admin::form.control-group>
 
                             <!-- Event Date -->
@@ -203,29 +194,25 @@
 
                                 <x-admin::form.control-group.control
                                     type="date"
-                                    name="date"
-                                    :value="old('date')"
-                                    rules="required"
                                     class="cursor-pointer"
+                                    name="date"
+                                    rules="required"
+                                    :value="old('date')"
                                     v-model="selectedEvents.date"
                                     :label="trans('admin::app.marketing.communications.events.index.create.date')"
                                     :placeholder="trans('admin::app.marketing.communications.events.index.create.date')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="date"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="date" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <button class="primary-button">
                                 @lang('admin::app.marketing.communications.events.index.create.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
 
                     {!! view_render_event('bagisto.admin.marketing.communications.events.create_form_controls.after') !!}

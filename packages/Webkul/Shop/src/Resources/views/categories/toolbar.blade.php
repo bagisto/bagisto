@@ -25,7 +25,7 @@
                                 role="presentation"
                             ></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
                 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
@@ -36,7 +36,7 @@
                         >
                             @{{ sort.title }}
                         </x-shop::dropdown.menu.item>
-                    </x-slot:menu>
+                    </x-slot>
                 </x-shop::dropdown>
 
                 {!! view_render_event('bagisto.shop.categories.toolbar.filter.after') !!}
@@ -57,7 +57,7 @@
                                     role="presentation"
                                 ></span>
                             </button>
-                        </x-slot:toggle>
+                        </x-slot>
                     
                         <!-- Dropdown Content -->
                         <x-slot:menu>
@@ -68,7 +68,7 @@
                             >
                                 @{{ limit }}
                             </x-shop::dropdown.menu.item>
-                        </x-slot:menu>
+                        </x-slot>
                     </x-shop::dropdown>
 
                     <!-- Listing Mode Switcher -->

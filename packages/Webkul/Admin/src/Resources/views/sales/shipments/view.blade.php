@@ -97,7 +97,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.customer')
                     </p>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="flex flex-col pb-4">
@@ -141,7 +141,7 @@
 
                         @endif
                     @endif
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion> 
          
             <!-- component 2 -->
@@ -150,7 +150,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.order-information')
                     </p>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="flex w-full gap-5 justify-start">
@@ -196,7 +196,7 @@
                             </p>
                         </div>
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion>
 
             <!-- Component 3 -->
@@ -205,7 +205,7 @@
                     <p class="text-gray-600 dark:text-gray-300 text-base  p-2.5 font-semibold">
                         @lang('admin::app.sales.shipments.view.payment-and-shipping')
                     </p>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <div class="pb-4">
@@ -283,7 +283,7 @@
                             </p>
                         @endif
                     </div>
-                </x-slot:content>
+                </x-slot>
             </x-admin::accordion> 
         </div>
     </div>

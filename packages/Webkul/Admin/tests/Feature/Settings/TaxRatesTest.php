@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    TaxRate::query()->delete();
-});
-
 it('should returns the tax rate index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -46,10 +39,14 @@ it('should store the newly created tax rates', function () {
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
 
-    $this->assertDAtabaseHas('tax_rates', [
-        'identifier' => $identifier,
-        'country'    => $country,
-        'tax_rate'   => $taxRate,
+    $this->assertModelWise([
+        TaxRate::class => [
+            [
+                'identifier' => $identifier,
+                'country'    => $country,
+                'tax_rate'   => $taxRate,
+            ],
+        ],
     ]);
 });
 
@@ -81,10 +78,14 @@ it('should update the tax rate', function () {
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('tax_rates', [
-        'identifier' => $identifier,
-        'country'    => $country,
-        'tax_rate'   => $taxRate->tax_rate,
+    $this->assertModelWise([
+        TaxRate::class => [
+            [
+                'identifier' => $identifier,
+                'country'    => $country,
+                'tax_rate'   => $taxRate->tax_rate,
+            ],
+        ],
     ]);
 });
 

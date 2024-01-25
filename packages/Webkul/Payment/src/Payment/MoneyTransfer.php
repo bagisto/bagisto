@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Storage;
 class MoneyTransfer extends Payment
 {
     /**
-     * Payment method code
+     * Payment method code.
      *
      * @var string
      */
     protected $code = 'moneytransfer';
 
     /**
-     * Return moneytransfer redirect url
+     * Get redirect url.
      *
      * @return string
      */
@@ -24,7 +24,7 @@ class MoneyTransfer extends Payment
     }
 
     /**
-     * Returns payment method additional information
+     * Returns payment method additional information.
      *
      * @return array
      */
@@ -41,9 +41,9 @@ class MoneyTransfer extends Payment
     }
 
     /**
-     * Returns payment method image
+     * Returns payment method image.
      *
-     * @return array
+     * @return string
      */
     public function getImage()
     {

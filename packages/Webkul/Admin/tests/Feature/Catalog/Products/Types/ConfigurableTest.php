@@ -1,21 +1,13 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the create page of configurable product', function () {
     // Arrange
@@ -82,24 +74,30 @@ it('should update the configurable product', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'                  => $product->id,
-        'type'                => $product->type,
-        'sku'                 => $product->sku,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
-    ]);
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'sku'                 => $product->sku,
+                'attribute_family_id' => 1,
+                'parent_id'           => null,
+                'additional'          => null,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'product_id'        => $product->id,
-        'type'              => 'configurable',
-        'sku'               => $product->sku,
-        'short_description' => $shortDescription,
-        'description'       => $description,
-        'name'              => $name,
-        'price'             => $price,
-        'weight'            => $weight,
+        ProductFlat::class => [
+            [
+                'product_id'        => $product->id,
+                'type'              => 'configurable',
+                'sku'               => $product->sku,
+                'short_description' => $shortDescription,
+                'description'       => $description,
+                'name'              => $name,
+                'price'             => $price,
+                'weight'            => $weight,
+            ],
+        ],
     ]);
 });
 
@@ -150,15 +148,19 @@ it('should update the configurable product variants', function () {
         ->isRedirection();
 
     foreach ($variants as $productId => $variant) {
-        $this->assertDatabaseHas('product_flat', [
-            'product_id' => $productId,
-            'type'       => 'simple',
-            'sku'        => $variant['sku'],
-            'name'       => $variant['name'],
-            'price'      => $variant['price'],
-            'weight'     => $variant['weight'],
-            'locale'     => $locale,
-            'channel'    => $channel,
+        $this->assertModelWise([
+            ProductFlat::class => [
+                [
+                    'product_id' => $productId,
+                    'type'       => 'simple',
+                    'sku'        => $variant['sku'],
+                    'name'       => $variant['name'],
+                    'price'      => $variant['price'],
+                    'weight'     => $variant['weight'],
+                    'locale'     => $locale,
+                    'channel'    => $channel,
+                ],
+            ],
         ]);
     }
 });

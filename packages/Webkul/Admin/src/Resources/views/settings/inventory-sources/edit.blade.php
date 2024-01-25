@@ -7,7 +7,7 @@
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
 
     <!-- Create Inventory -->
-    <v-inventory-edit-form></v-inventory-edit-form>
+    <v-inventory-edit-form />
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}
 
@@ -73,19 +73,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="code"
-                                        :value="old('code') ?? $inventorySource->code"
                                         id="code"
+                                        name="code"
                                         rules="required"
+                                        :value="old('code') ?? $inventorySource->code"
                                         :label="trans('admin::app.settings.inventory-sources.edit.code')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <!-- Name -->
@@ -96,19 +92,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="name"
-                                        :value="old('name') ?? $inventorySource->name"
                                         id="name"
+                                        name="name"
                                         rules="required"
+                                        :value="old('name') ?? $inventorySource->name"
                                         :label="trans('admin::app.settings.inventory-sources.edit.name')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Description -->
@@ -119,19 +111,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="textarea"
+                                        class="text-gray-600 dark:text-gray-300"
+                                        id="description"
                                         name="description"
                                         :value="old('description') ?? $inventorySource->description"
-                                        id="description"
-                                        class="text-gray-600 dark:text-gray-300"
                                         :label="trans('admin::app.settings.inventory-sources.edit.description')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.description')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="description"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="description" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -154,18 +142,14 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="contact_name"
-                                        :value="old('contact_name') ?? $inventorySource->contact_name"
                                         id="contact_name"
                                         rules="required"
+                                        :value="old('contact_name') ?? $inventorySource->contact_name"
                                         :label="trans('admin::app.settings.inventory-sources.edit.contact-name')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.contact-name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Email -->
@@ -176,19 +160,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="email"
-                                        name="contact_email"
-                                        :value="old('contact_email') ?? $inventorySource->contact_email"
                                         id="contact_email"
+                                        name="contact_email"
                                         rules="required|email"
+                                        :value="old('contact_email') ?? $inventorySource->contact_email"
                                         :label="trans('admin::app.settings.inventory-sources.edit.contact-email')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.contact-email')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_email"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_email" />
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Number -->
@@ -199,19 +179,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="contact_number"
-                                        :value="old('contact_number') ?? $inventorySource->contact_number"
                                         id="contact_number"
+                                        name="contact_number"
                                         rules="required"
+                                        :value="old('contact_number') ?? $inventorySource->contact_number"
                                         :label="trans('admin::app.settings.inventory-sources.edit.contact-number')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.contact-number')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_number"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_number" />
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Fax -->
@@ -222,18 +198,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
+                                        id="contact_fax"
                                         name="contact_fax"
                                         :value="old('contact_fax') ?? $inventorySource->contact_fax"
-                                        id="contact_fax"
                                         :label="trans('admin::app.settings.inventory-sources.edit.contact-fax')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.contact-fax')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_fax"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_fax" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -255,12 +227,12 @@
                     
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="country"
                                         id="country"
+                                        name="country"
                                         rules="required"
+                                        v-model="country"
                                         :label="trans('admin::app.settings.inventory-sources.edit.country')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.country')"
-                                        v-model="country"
                                     >
                                         @foreach (core()->countries() as $country)
                                             <option value="{{ $country->code }}">
@@ -269,10 +241,7 @@
                                         @endforeach
                                     </x-admin::form.control-group.control>
                     
-                                    <x-admin::form.control-group.error
-                                        control-name="country"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="country" />
                                 </x-admin::form.control-group>
 
                                 <!-- State -->
@@ -284,12 +253,12 @@
                                     <template v-if="haveStates()">
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="state"
                                             id="state"
+                                            name="state"
                                             rules="required"
+                                            v-model="state"
                                             :label="trans('admin::app.settings.inventory-sources.edit.state')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.state')"
-                                            v-model="state"
                                         >
                                             <option 
                                                 v-for='(state, index) in countryStates[country]'
@@ -303,21 +272,17 @@
                                     <template v-else>
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="state"
-                                            :value="old('state') ?? $inventorySource->code"
                                             id="state"
+                                            name="state"
                                             rules="required"
+                                            :value="old('state') ?? $inventorySource->code"
+                                            v-model="state"
                                             :label="trans('admin::app.settings.inventory-sources.edit.state')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.state')"
-                                            v-model="state"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
                                     </template>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="state"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="state" />
                                 </x-admin::form.control-group>
 
                                 <!-- City -->
@@ -328,19 +293,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="city"
-                                        :value="old('city') ?? $inventorySource->city"
                                         id="city"
+                                        name="city"
                                         rules="required"
+                                        :value="old('city') ?? $inventorySource->city"
                                         :label="trans('admin::app.settings.inventory-sources.edit.city')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.city')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="city"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="city" />
                                 </x-admin::form.control-group>
 
                                 <!-- Street -->
@@ -352,18 +313,14 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="street"
-                                        :value="old('street') ?? $inventorySource->street"
                                         id="street"
                                         rules="required"
+                                        :value="old('street') ?? $inventorySource->street"
                                         :label="trans('admin::app.settings.inventory-sources.edit.street')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.street')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="street"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="street" />
                                 </x-admin::form.control-group>
 
                                 <!-- Post Code -->
@@ -374,19 +331,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="postcode"
-                                        :value="old('postcode') ?? $inventorySource->postcode"
                                         id="postcode"
+                                        name="postcode"
                                         rules="required"
+                                        :value="old('postcode') ?? $inventorySource->postcode"
                                         :label="trans('admin::app.settings.inventory-sources.edit.postcode')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.edit.postcode')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="postcode"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="postcode" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -406,7 +359,7 @@
                                             @lang('admin::app.settings.inventory-sources.edit.settings')
                                         </p>
                                     </div>
-                                </x-slot:header>
+                                </x-slot>
                             
                                 <x-slot:content>
                                     <!-- Latitute -->
@@ -417,18 +370,14 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="latitude"
                                             name="latitude"
                                             :value="old('latitude') ?? $inventorySource->latitude"
-                                            id="latitude"
                                             :label="trans('admin::app.settings.inventory-sources.edit.latitude')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.latitude')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="latitude"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="latitude" />
                                     </x-admin::form.control-group>
 
                                     <!-- Longitude -->
@@ -439,18 +388,14 @@
     
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="longitude"
                                             name="longitude"
                                             :value="old('longitude') ?? $inventorySource->longitude"
-                                            id="longitude"
                                             :label="trans('admin::app.settings.inventory-sources.edit.longitude')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.longitude')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
     
-                                        <x-admin::form.control-group.error
-                                            control-name="longitude"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="longitude" />
                                     </x-admin::form.control-group>
 
                                     <!-- Priority -->
@@ -461,18 +406,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="priority"
                                             name="priority"
                                             :value="old('priority') ?? $inventorySource->priority"
-                                            id="priority"
                                             :label="trans('admin::app.settings.inventory-sources.edit.priority')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.priority')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="priority"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="priority" />
+                                        
                                     </x-admin::form.control-group>
 
                                     <!-- Status -->
@@ -487,8 +429,7 @@
                                             type="hidden"
                                             name="status"
                                             value="0"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
                                         <x-admin::form.control-group.control
                                             type="switch"
@@ -497,15 +438,11 @@
                                             :label="trans('admin::app.settings.inventory-sources.edit.status')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.status')"
                                             :checked="(bool) $selectedValue"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="status"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="status" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.card.accordion.settings.after') !!}

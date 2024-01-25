@@ -6,7 +6,7 @@
     
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="addresses"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="addresses" />
     @endSection
     <div class="flex justify-between items-center">
         <div class="">
@@ -54,7 +54,7 @@
                             <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
                                     <button class="icon-more px-1.5 py-1 rounded-md text-2xl text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
-                                </x-slot:toggle>
+                                </x-slot>
 
                                 <x-slot:menu>
                                     <x-shop::dropdown.menu.item>
@@ -113,7 +113,7 @@
                                             </button>
                                         </a>
                                     </x-shop::dropdown.menu.item>
-                                </x-slot:menu>
+                                </x-slot>
                             </x-shop::dropdown>
                         </div>
                     </div>

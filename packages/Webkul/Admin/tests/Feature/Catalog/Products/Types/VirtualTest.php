@@ -1,19 +1,11 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the create page of virtual product', function () {
     // Arrange
@@ -32,10 +24,14 @@ it('should return the create page of virtual product', function () {
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
-    $this->assertDatabaseHas('products', [
-        'id'   => $productId,
-        'type' => 'virtual',
-        'sku'  => $sku,
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'   => $productId,
+                'type' => 'virtual',
+                'sku'  => $sku,
+            ],
+        ],
     ]);
 });
 
@@ -77,24 +73,30 @@ it('should update the virtual product', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'   => $product->id,
-        'type' => $product->type,
-        'sku'  => $product->sku,
-    ]);
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'   => $product->id,
+                'type' => $product->type,
+                'sku'  => $product->sku,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'product_id'        => $product->id,
-        'type'              => $product->type,
-        'url_key'           => $product->url_key,
-        'sku'               => $product->sku,
-        'name'              => $name,
-        'short_description' => $shortDescription,
-        'description'       => $description,
-        'price'             => $price,
-        'weight'            => $weight,
-        'locale'            => $locale,
-        'channel'           => $channel,
+        ProductFlat::class => [
+            [
+                'product_id'        => $product->id,
+                'type'              => $product->type,
+                'url_key'           => $product->url_key,
+                'sku'               => $product->sku,
+                'name'              => $name,
+                'short_description' => $shortDescription,
+                'description'       => $description,
+                'price'             => $price,
+                'weight'            => $weight,
+                'locale'            => $locale,
+                'channel'           => $channel,
+            ],
+        ],
     ]);
 });
 

@@ -1,18 +1,12 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Models\Locale;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Locale::query()->whereNot('id', 1)->delete();
-});
 
 it('should returns the locale index page', function () {
     // Act and Assert
@@ -35,10 +29,28 @@ it('should store the newly created locale', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.create-success'));
 
-    $this->assertDatabaseHas('locales', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        Locale::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
+});
+
+it('should not store the new locale if the file has been tampered with', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'), [
+        'code'      => fake()->locale(),
+        'name'      => fake()->name(),
+        'logo_path' => [
+            UploadedFile::fake()->image('tampered.php'),
+        ],
+    ])
+        ->assertUnprocessable();
 });
 
 it('should return the locale for edit', function () {
@@ -69,10 +81,31 @@ it('should update the specified locale', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.update-success'));
 
-    $this->assertDatabaseHas('locales', [
-        'code' => $locale->code,
-        'name' => $name,
+    $this->assertModelWise([
+        Locale::class => [
+            [
+                'code' => $locale->code,
+                'name' => $name,
+            ],
+        ],
     ]);
+});
+
+it('should not update the specified locale if the file has been tampered with', function () {
+    // Arrange
+    $locale = Locale::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id'        => $locale->id,
+        'name'      => fake()->name(),
+        'logo_path' => [
+            UploadedFile::fake()->image('tampered.php'),
+        ],
+    ])
+        ->assertUnprocessable();
 });
 
 it('should delete the locale', function () {

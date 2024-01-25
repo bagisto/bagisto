@@ -199,7 +199,7 @@
                                 @lang('admin::app.settings.users.index.create.title')
                             </p>
 
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -213,24 +213,19 @@
                                     type="hidden"
                                     name="id"
                                     v-model="data.user.id"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="name"
                                     id="name"
+                                    name="name"
                                     rules="required"
+                                    v-model="data.user.name"
                                     :label="trans('admin::app.settings.users.index.create.name')"
                                     :placeholder="trans('admin::app.settings.users.index.create.name')"
-                                    v-model="data.user.name"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <!-- Email -->
@@ -241,19 +236,15 @@
 
                                 <x-admin::form.control-group.control
                                     type="email"
-                                    name="email"
                                     id="email"
+                                    name="email"
                                     rules="required|email"
+                                    v-model="data.user.email"
                                     :label="trans('admin::app.settings.users.index.create.email')"
                                     placeholder="email@example.com"
-                                    v-model="data.user.email"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="email"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="email" />
                             </x-admin::form.control-group>
 
                             <div class="flex gap-4">
@@ -265,20 +256,16 @@
 
                                     <x-admin::form.control-group.control
                                         type="password"
-                                        name="password"
                                         id="password"
-                                        ref="password"
+                                        name="password"
                                         rules="min:6"
+                                        v-model="data.user.password"
                                         :label="trans('admin::app.settings.users.index.create.password')"
                                         :placeholder="trans('admin::app.settings.users.index.create.password')"
-                                        v-model="data.user.password"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        ref="password"
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="password"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="password" />
                                 </x-admin::form.control-group>
 
                                 <!-- Confirm Password -->
@@ -289,19 +276,15 @@
 
                                     <x-admin::form.control-group.control
                                         type="password"
-                                        name="password_confirmation"
                                         id="password_confirmation"
+                                        name="password_confirmation"
                                         rules="confirmed:@password"
+                                        v-model="data.user.password_confirmation"
                                         :label="trans('admin::app.settings.users.index.create.password')"
                                         :placeholder="trans('admin::app.settings.users.index.create.confirm-password')"
-                                        v-model="data.user.password_confirmation"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="password_confirmation"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="password_confirmation" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -335,10 +318,7 @@
                                         </select>
                                     </v-field>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="role_id"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="role_id" />
                                 </x-admin::form.control-group>
 
                                 <template v-if="currentUserId != data.user.id">
@@ -352,16 +332,12 @@
                                                 type="switch"
                                                 name="status"
                                                 :value="1"
+                                                v-model="data.user.status"
                                                 :label="trans('admin::app.settings.users.index.create.status')"
                                                 ::checked="data.user.status"
-                                                v-model="data.user.status"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                            />
 
-                                            <x-admin::form.control-group.error
-                                                control-name="status"
-                                            >
-                                            </x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="status" />
                                         </div>
                                     </x-admin::form.control-group>
                                 </template>
@@ -376,8 +352,7 @@
                                     <x-admin::media.images
                                         name="image"
                                         ::uploaded-images='data.images'
-                                    >
-                                    </x-admin::media.images>
+                                    />
                                 </div>
 
                                 <v-media-images
@@ -390,7 +365,7 @@
                                     @lang('admin::app.settings.users.index.create.upload-image-info')
                                 </p>
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -402,7 +377,7 @@
                                     @lang('admin::app.settings.users.index.create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>
@@ -422,8 +397,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('Confirm Password Before DELETE')
                             </p>
-
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -435,20 +409,16 @@
 
                                 <x-admin::form.control-group.control
                                     type="password"
-                                    name="password"
                                     id="password"
+                                    name="password"
                                     rules="required"
                                     :label="trans('Password')"
                                     :placeholder="trans('Password')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="password"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="password" />
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -460,7 +430,7 @@
                                     @lang('Confirm Delete This Account')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

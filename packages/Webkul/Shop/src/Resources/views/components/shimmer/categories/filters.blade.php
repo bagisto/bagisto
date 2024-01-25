@@ -12,7 +12,7 @@
         </div>
 
         <div class="z-10 bg-white rounded-lg">
-            <x-shop::shimmer.range-slider/>
+            <x-shop::shimmer.range-slider />
         </div>
     </div>
 

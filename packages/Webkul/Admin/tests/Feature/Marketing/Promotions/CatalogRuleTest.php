@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CatalogRule::query()->delete();
-});
-
 it('should returns the catalog rule page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -61,18 +54,25 @@ it('should store the newly created catalog rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('catalog_rules', [
-        'action_type'     => 'by_percent',
-        'description'     => $description,
-        'discount_amount' => 0,
-        'name'            => $name,
-        'status'          => 1,
+    $this->assertModelWise([
+        CatalogRule::class => [
+            [
+                'action_type'     => 'by_percent',
+                'description'     => $description,
+                'discount_amount' => 0,
+                'name'            => $name,
+                'status'          => 1,
+            ],
+        ],
     ]);
 });
 
 it('should returns the edit page of catalog rules', function () {
     // Arrange
-    $catalogRule = CatalogRule::factory()->create();
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+        $catalogRule->customer_groups()->sync([1, 2, 3]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -85,7 +85,10 @@ it('should returns the edit page of catalog rules', function () {
 
 it('should update the catalog rule', function () {
     // Arrange
-    $catalogRule = CatalogRule::factory()->create();
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+        $catalogRule->customer_groups()->sync([1, 2, 3]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -111,17 +114,24 @@ it('should update the catalog rule', function () {
         ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('catalog_rules', [
-        'id'          => $catalogRule->id,
-        'name'        => $catalogRule->name,
-        'description' => $catalogRule->description,
-        'action_type' => 'by_percent',
+    $this->assertModelWise([
+        CatalogRule::class => [
+            [
+                'id'          => $catalogRule->id,
+                'name'        => $catalogRule->name,
+                'description' => $catalogRule->description,
+                'action_type' => 'by_percent',
+            ],
+        ],
     ]);
 });
 
 it('should delete a specific catalog rule', function () {
     // Arrange
-    $catalogRule = CatalogRule::factory()->create();
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+        $catalogRule->customer_groups()->sync([1, 2, 3]);
+    })->create();
 
     // Act and Assert
     $this->loginAsAdmin();

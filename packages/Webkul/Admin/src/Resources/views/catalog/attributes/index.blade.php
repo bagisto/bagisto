@@ -22,7 +22,7 @@
 
     {!! view_render_event('bagisto.admin.catalog.attributes.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.catalog.attributes.index')"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.catalog.attributes.index')" />
 
     {!! view_render_event('bagisto.admin.catalog.attributes.list.after') !!}
 

@@ -6,13 +6,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    SubscribersList::query()->delete();
-});
-
 it('should return the subscription index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -50,9 +43,13 @@ it('should update the subscriber', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.edit.success'));
 
-    $this->assertDatabaseHas('subscribers_list', [
-        'id'            => $subscriber->id,
-        'is_subscribed' => $isSubscribed,
+    $this->assertModelWise([
+        SubscribersList::class => [
+            [
+                'id'            => $subscriber->id,
+                'is_subscribed' => $isSubscribed,
+            ],
+        ],
     ]);
 });
 

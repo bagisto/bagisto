@@ -78,16 +78,6 @@ class Customer extends Authenticatable implements CustomerContract
     protected $appends = ['image_url'];
 
     /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Webkul\Customer\Database\Factories\CustomerFactory
-     */
-    protected static function newFactory()
-    {
-        return CustomerFactory::new();
-    }
-
-    /**
      * Send the password reset notification.
      *
      * @param  string  $token
@@ -286,5 +276,15 @@ class Customer extends Authenticatable implements CustomerContract
     public function subscription()
     {
         return $this->hasOne(SubscribersListProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Webkul\Customer\Database\Factories\CustomerFactory
+     */
+    protected static function newFactory()
+    {
+        return CustomerFactory::new();
     }
 }

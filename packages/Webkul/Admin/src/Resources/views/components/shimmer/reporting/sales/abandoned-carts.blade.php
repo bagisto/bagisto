@@ -37,6 +37,6 @@
         <div class="shimmer w-[150px] h-[17px] mb-4"></div>
 
         <!-- Progress Bar Shimmer -->
-        <x-admin::shimmer.reporting.progress-bar/>
+        <x-admin::shimmer.reporting.progress-bar />
     </div>
 </div>

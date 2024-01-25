@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Event::query()->whereNot('id', 1)->delete();
-});
-
 it('should return the events index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -36,10 +29,14 @@ it('should store the newly create event', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.create.success'));
 
-    $this->assertDatabaseHas('marketing_events', [
-        'name'        => $name,
-        'description' => $description,
-        'date'        => $date,
+    $this->assertModelWise([
+        Event::class => [
+            [
+                'name'        => $name,
+                'description' => $description,
+                'date'        => $date,
+            ],
+        ],
     ]);
 });
 
@@ -74,11 +71,15 @@ it('should update the existing the events', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.edit.success'));
 
-    $this->assertDatabaseHas('marketing_events', [
-        'id'          => $event->id,
-        'name'        => $event->name,
-        'description' => $description,
-        'date'        => $date,
+    $this->assertModelWise([
+        Event::class => [
+            [
+                'id'          => $event->id,
+                'name'        => $event->name,
+                'description' => $description,
+                'date'        => $date,
+            ],
+        ],
     ]);
 });
 

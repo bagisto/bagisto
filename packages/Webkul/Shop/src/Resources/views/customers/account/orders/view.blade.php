@@ -6,7 +6,10 @@
     
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="orders.view" :entity="$order"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs
+            name="orders.view"
+            :entity="$order"
+        />
     @endSection
 
     <div class="flex justify-between items-center">
@@ -159,24 +162,34 @@
                                         class="px-6 py-4 text-black font-medium"
                                         data-value= "@lang('shop::app.customers.account.orders.view.information.item-status')"
                                     >
-                                        <span >
-                                           {{__('shop::app.customers.account.orders.view.information.item-ordered', ['qty_ordered' => $item->qty_ordered])}}
+                                        <span>
+                                            @if($item->qty_ordered)
+                                                @lang('shop::app.customers.account.orders.view.information.item-ordered', ['qty_ordered' => $item->qty_ordered])
+                                            @endif
                                         </span>
 
                                         <span>
-                                            {{ $item->qty_invoiced ? __('shop::app.customers.account.orders.view.information.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                            @if($item->qty_invoiced)
+                                                @lang('shop::app.customers.account.orders.view.information.item-invoice', ['qty_invoiced' => $item->qty_invoiced])
+                                            @endif
                                         </span>
 
                                         <span>
-                                            {{ $item->qty_shipped ? __('shop::app.customers.account.orders.view.information.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+                                            @if($item->qty_shipped)
+                                                @lang('shop::app.customers.account.orders.view.information.item-shipped', ['qty_shipped' => $item->qty_shipped])
+                                            @endif
                                         </span>
 
                                         <span>
-                                            {{ $item->qty_refunded ? __('shop::app.customers.account.orders.view.information.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+                                            @if($item->qty_refunded)
+                                                @lang('shop::app.customers.account.orders.view.information.item-refunded', ['qty_refunded' => $item->qty_refunded])
+                                            @endif
                                         </span>
 
                                         <span>
-                                            {{ $item->qty_canceled ? __('shop::app.customers.account.orders.view.information.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
+                                            @if($item->qty_canceled)
+                                                @lang('shop::app.customers.account.orders.view.information.item-canceled', ['qty_canceled' => $item->qty_canceled])
+                                            @endif
                                         </span>
                                     </td>
 
@@ -560,8 +573,7 @@
             @endif
 
             @if ($order->shipments->count())
-                <x-shop::tabs.item title="{{__('shop::app.customers.account.orders.view.shipments.shipments') }}">
-                    
+                <x-shop::tabs.item title="{{ trans('shop::app.customers.account.orders.view.shipments.shipments') }}">
                     @foreach ($order->shipments as $shipment)
                         <div>
                             <label class="text-base font-medium">
@@ -635,7 +647,6 @@
                             </table>
                         </div>
                     @endforeach
-
                 </x-shop::tabs.item>
             @endif
 

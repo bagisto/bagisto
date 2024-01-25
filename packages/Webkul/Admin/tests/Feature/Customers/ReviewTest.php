@@ -2,21 +2,12 @@
 
 use Illuminate\Support\Arr;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    ProductReview::query()->delete();
-    Product::query()->delete();
-});
 
 it('should returns the review page', function () {
     // Act and Assert
@@ -86,9 +77,13 @@ it('should update the status of the review', function () {
         ->assertRedirect(route('admin.customers.customers.review.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('product_reviews', [
-        'id'     => $review->id,
-        'status' => $status,
+    $this->assertModelWise([
+        ProductReview::class => [
+            [
+                'id'     => $review->id,
+                'status' => $status,
+            ],
+        ],
     ]);
 });
 
@@ -194,9 +189,14 @@ it('should mass update the product review', function () {
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-update-success'));
 
     foreach ($reviews as $review) {
-        $this->assertDatabaseHas('product_reviews', [
-            'id'     => $review->id,
-            'status' => $review->status,
+
+        $this->assertModelWise([
+            ProductReview::class => [
+                [
+                    'id'     => $review->id,
+                    'status' => $review->status,
+                ],
+            ],
         ]);
     }
 });
