@@ -17,6 +17,14 @@ class ChannelTableSeeder extends Seeder
     {
         DB::table('channels')->delete();
 
+        DB::table('channel_translations')->delete();
+
+        DB::table('channel_currencies')->delete();
+
+        DB::table('channel_locales')->delete();
+
+        DB::table('channel_inventory_sources')->delete();
+
         DB::table('channels')->insert([
             [
                 'id'                => 1,

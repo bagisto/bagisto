@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
-use Webkul\Sales\Models\Order;
 
 class TransactionController extends Controller
 {

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Sales\Models\Order;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
-use Webkul\Sales\Models\Order;
 
 class CustomerController extends Controller
 {
