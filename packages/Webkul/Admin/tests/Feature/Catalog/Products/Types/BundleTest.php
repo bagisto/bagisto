@@ -1,21 +1,13 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the create page of bundle product', function () {
     // Arrange
@@ -34,10 +26,14 @@ it('should return the create page of bundle product', function () {
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
-    $this->assertDatabaseHas('products', [
-        'id'   => $productId,
-        'type' => 'bundle',
-        'sku'  => $sku,
+    $this->assertModelWise([
+        ProductModel::class => [
+            [
+                'id'   => $productId,
+                'type' => 'bundle',
+                'sku'  => $sku,
+            ],
+        ],
     ]);
 });
 
@@ -109,42 +105,52 @@ it('should update the bundle product', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'                  => $product->id,
-        'type'                => $product->type,
-        'sku'                 => $product->sku,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
-    ]);
+    $this->assertModelWise([
+        ProductModel::class => [
+            [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'sku'                 => $product->sku,
+                'attribute_family_id' => 1,
+                'parent_id'           => null,
+                'additional'          => null,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'url_key'           => $product->url_key,
-        'type'              => 'bundle',
-        'name'              => $name,
-        'short_description' => $shortDescription,
-        'description'       => $description,
-        'price'             => $price,
-        'weight'            => $weight,
-        'locale'            => $locale,
-        'product_id'        => $product->id,
-        'channel'           => $channel,
+        ProductFlat::class => [
+            [
+                'url_key'           => $product->url_key,
+                'type'              => 'bundle',
+                'name'              => $name,
+                'short_description' => $shortDescription,
+                'description'       => $description,
+                'price'             => $price,
+                'weight'            => $weight,
+                'locale'            => $locale,
+                'product_id'        => $product->id,
+                'channel'           => $channel,
+            ],
+        ],
     ]);
 
     foreach ($bundleOptions as $product) {
         $product->refresh();
 
-        $this->assertDatabaseHas('product_flat', [
-            'url_key'           => $product->url_key,
-            'type'              => 'simple',
-            'name'              => $product->name,
-            'short_description' => $product->short_description,
-            'description'       => $product->description,
-            'price'             => $product->price,
-            'weight'            => $product->weight,
-            'locale'            => $locale,
-            'product_id'        => $product->id,
-            'channel'           => $channel,
+        $this->assertModelWise([
+            ProductFlat::class => [
+                [
+                    'url_key'           => $product->url_key,
+                    'type'              => 'simple',
+                    'name'              => $product->name,
+                    'short_description' => $product->short_description,
+                    'description'       => $product->description,
+                    'price'             => $product->price,
+                    'weight'            => $product->weight,
+                    'locale'            => $locale,
+                    'product_id'        => $product->id,
+                    'channel'           => $channel,
+                ],
+            ],
         ]);
     }
 });

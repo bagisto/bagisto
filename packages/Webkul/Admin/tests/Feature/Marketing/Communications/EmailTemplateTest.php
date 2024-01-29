@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Template::query()->delete();
-});
-
 it('should return the email template index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -46,10 +39,14 @@ it('should store the newly create email template', function () {
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_templates', [
-        'name'    => $name,
-        'status'  => $status,
-        'content' => $content,
+    $this->assertModelWise([
+        Template::class => [
+            [
+                'name'    => $name,
+                'status'  => $status,
+                'content' => $content,
+            ],
+        ],
     ]);
 });
 
@@ -82,10 +79,14 @@ it('should update the existing the template', function () {
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_templates', [
-        'name'    => $emailTemplate->name,
-        'status'  => $status,
-        'content' => $content,
+    $this->assertModelWise([
+        Template::class => [
+            [
+                'name'    => $emailTemplate->name,
+                'status'  => $status,
+                'content' => $content,
+            ],
+        ],
     ]);
 });
 

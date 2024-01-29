@@ -18,7 +18,7 @@
         <div class="shimmer w-[120px] h-5"></div>
 
         <!-- Graph Shimmer -->
-        <x-admin::shimmer.reporting.graph/>
+        <x-admin::shimmer.reporting.graph />
 
         <!-- Date Range -->
         <div class="flex gap-5 justify-center">

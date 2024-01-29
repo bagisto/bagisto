@@ -52,8 +52,7 @@
                         type="hidden"
                         name="token"
                         :value="$token"
-                    >
-                    </x-shop::form.control-group.control>
+                    />
 
                     {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.before') !!}
 
@@ -64,22 +63,18 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            name="email"
                             class="!p-[20px_25px] rounded-lg"
-                            :value="old('email')"
                             id="email"
+                            name="email"
                             rules="required|email"
+                            :value="old('email')"
                             :label="trans('shop::app.customers.reset-password.email')"
                             placeholder="email@example.com"
                             aria-label="@lang('shop::app.customers.reset-password.email')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="email"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="email" />
                     </x-shop::form.control-group>
 
                     <x-shop::form.control-group class="mb-6">
@@ -89,22 +84,18 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            name="password"
                             class="!p-[20px_25px] rounded-lg"
-                            value=""
-                            ref="password"
+                            name="password"
                             rules="required|min:6"
+                            value=""
                             :label="trans('shop::app.customers.reset-password.password')"
                             :placeholder="trans('shop::app.customers.reset-password.password')"
+                            ref="password"
                             aria-label="@lang('shop::app.customers.reset-password.password')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="password"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="password" />
                     </x-shop::form.control-group>
 
                     <x-shop::form.control-group class="mb-6">
@@ -114,21 +105,17 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            name="password_confirmation"
                             class="!p-[20px_25px] rounded-lg"
-                            value=""
+                            name="password_confirmation"
                             rules="confirmed:@password"
+                            value=""
                             :label="trans('shop::app.customers.reset-password.confirm-password')"
                             :placeholder="trans('shop::app.customers.reset-password.confirm-password')"
                             aria-label="@lang('shop::app.customers.reset-password.confirm-password')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="password"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="password" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.reset_password_form_controls.after') !!}

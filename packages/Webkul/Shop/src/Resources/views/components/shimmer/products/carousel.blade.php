@@ -19,8 +19,7 @@
         <x-shop::shimmer.products.cards.grid
             class="min-w-[291px]"
             :count="4"
-        >
-        </x-shop::shimmer.products.cards.grid>
+        />
     </div>
 
     @if ($navigationLink)

@@ -7,14 +7,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Currency::query()->whereNot('id', 1)->delete();
-    CurrencyExchangeRate::query()->delete();
-});
-
 it('should returns the exchange rate index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -40,9 +32,13 @@ it('should store the newly created exchange rates', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.create-success'));
 
-    $this->assertDatabaseHas('currency_exchange_rates', [
-        'rate'            => $rate,
-        'target_currency' => $currency->id,
+    $this->assertModelWise([
+        CurrencyExchangeRate::class => [
+            [
+                'rate'            => $rate,
+                'target_currency' => $currency->id,
+            ],
+        ],
     ]);
 });
 

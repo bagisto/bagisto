@@ -5,6 +5,15 @@ namespace Webkul\Core\Traits;
 trait CoreConfigField
 {
     /**
+     * Laravel to Vee Validation mappings.
+     *
+     * @var array
+     */
+    protected $veeValidateMappings = [
+        'min'=> 'min_value',
+    ];
+
+    /**
      * Get name field for forms in configuration page.
      *
      * @param  string  $key
@@ -29,7 +38,13 @@ trait CoreConfigField
      */
     public function getValidations($field)
     {
-        return $field['validation'] ?? '';
+        $field['validation'] = $field['validation'] ?? '';
+
+        foreach ($this->veeValidateMappings as $laravelRule => $veeValidateRule) {
+            $field['validation'] = str_replace($laravelRule, $veeValidateRule, $field['validation']);
+        }
+
+        return $field['validation'];
     }
 
     /**

@@ -2,7 +2,7 @@
 
 <v-shipping-method ref="vShippingMethod">
     <!-- Shipping Method Shimmer Effect -->
-    <x-shop::shimmer.checkout.onepage.shipping-method/>
+    <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-method>
 
 {!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
@@ -12,7 +12,7 @@
         <div class="mb-7">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
-                <x-shop::shimmer.checkout.onepage.shipping-method/>
+                <x-shop::shimmer.checkout.onepage.shipping-method />
             </template>
 
             <template v-if="isShowShippingMethod">
@@ -25,7 +25,7 @@
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content class="!p-0 mt-8">
                         <div class="flex flex-wrap gap-8">
@@ -70,7 +70,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.after') !!}
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-shop::accordion>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.after') !!}

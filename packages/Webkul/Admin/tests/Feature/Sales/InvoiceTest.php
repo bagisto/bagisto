@@ -5,7 +5,6 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
@@ -14,18 +13,6 @@ use Webkul\Sales\Models\OrderPayment;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    // Cleaning up the row  which are creating
-    Customer::query()->delete();
-    OrderAddress::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Invoice::query()->delete();
-    Product::query()->delete();
-});
 
 it('should returns the invoice index page', function () {
     // Act and Assert
@@ -113,10 +100,14 @@ it('should store the invoice', function () {
         ->assertRedirect(route('admin.sales.orders.view', $invoice->order_id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('invoices', [
-        'id'       => $invoice->id,
-        'order_id' => $invoice->order_id,
-        'state'    => $invoice->state,
+    $this->assertModelWise([
+        Invoice::class => [
+            [
+                'id'       => $invoice->id,
+                'order_id' => $invoice->order_id,
+                'state'    => $invoice->state,
+            ],
+        ],
     ]);
 });
 
@@ -273,9 +264,13 @@ it('should send duplicate mail to provided email address', function () {
         ->assertRedirect(route('admin.sales.invoices.view', $invoice->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('invoices', [
-        'id'         => $invoice->id,
-        'email_sent' => 1,
+    $this->assertModelWise([
+        Invoice::class => [
+            [
+                'id'         => $invoice->id,
+                'email_sent' => 1,
+            ],
+        ],
     ]);
 });
 

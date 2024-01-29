@@ -21,7 +21,7 @@
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.settings.inventory_sources.index')"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.inventory_sources.index')" />
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.list.after') !!}
 

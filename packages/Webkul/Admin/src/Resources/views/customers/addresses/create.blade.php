@@ -42,7 +42,7 @@
                         <p class="text-lg text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.customers.addresses.create.title')
                         </p>    
-                    </x-slot:header>
+                    </x-slot>
     
                     <!-- Modal Content -->
                     <x-slot:content>
@@ -53,8 +53,7 @@
                                 type="hidden"
                                 name="customer_id"
                                 :value="$customer->id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
 
                         <div class="flex gap-4 max-sm:flex-wrap">
@@ -69,13 +68,9 @@
                                     name="company_name"
                                     :label="trans('admin::app.customers.addresses.create.company-name')"
                                     :placeholder="trans('admin::app.customers.addresses.create.company-name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="company_name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="company_name" />
                             </x-admin::form.control-group>
 
                             <!-- Vat Id -->
@@ -89,13 +84,9 @@
                                     name="vat_id"
                                     :label="trans('admin::app.customers.addresses.create.vat-id')"
                                     :placeholder="trans('admin::app.customers.addresses.create.vat-id')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="vat_id"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="vat_id" />
                             </x-admin::form.control-group>
                         </div>
 
@@ -112,13 +103,9 @@
                                     rules="required"
                                     :label="trans('admin::app.customers.addresses.create.first-name')"
                                     :placeholder="trans('admin::app.customers.addresses.create.first-name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="first_name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="first_name" />
                             </x-admin::form.control-group>
 
                             <!-- Last Name -->
@@ -133,13 +120,9 @@
                                     rules="required"
                                     :label="trans('admin::app.customers.addresses.create.last-name')"
                                     :placeholder="trans('admin::app.customers.addresses.create.last-name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="last_name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="last_name" />
                             </x-admin::form.control-group>
                         </div>
 
@@ -151,30 +134,25 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="address1[]"
                                 id="address1[]"
+                                name="address1[]"
                                 rules="required"
                                 :label="trans('admin::app.customers.addresses.create.street-address')"
                                 :placeholder="trans('admin::app.customers.addresses.create.street-address')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="address1[]"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="address1[]" />
                         </x-admin::form.control-group>
 
                         @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                             @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="address{{ $i }}[]"
                                     id="address{{ $i }}[]"
+                                    name="address{{ $i }}[]"
                                     :label="trans('admin::app.customers.addresses.create.street-address')"
                                     :placeholder="trans('admin::app.customers.addresses.create.street-address')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
                             @endfor
                         @endif
 
@@ -183,17 +161,13 @@
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    ::name="'address1[' + index + ']'"
                                     ::id="'address_' + index"
+                                    ::name="'address1[' + index + ']'"
                                     :label="trans('admin::app.customers.addresses.create.street-address')"
                                     :placeholder="trans('admin::app.customers.addresses.create.street-address')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
                         
-                                <x-admin::form.control-group.error
-                                    ::control-name="'address1[' + index + ']'"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error ::control-name="'address1[' + index + ']'" />
                             </x-admin::form.control-group>
                         </div>
 
@@ -210,13 +184,9 @@
                                     rules="required"
                                     :label="trans('admin::app.customers.addresses.create.city')"
                                     :placeholder="trans('admin::app.customers.addresses.create.city')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="city"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="city" />
                             </x-admin::form.control-group>
 
                             <!-- PostCode -->
@@ -231,13 +201,9 @@
                                     rules="required|integer"
                                     :label="trans('admin::app.customers.addresses.create.post-code')"
                                     :placeholder="trans('admin::app.customers.addresses.create.post-code')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="postcode"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="postcode" />
                             </x-admin::form.control-group>
                         </div>
 
@@ -252,18 +218,15 @@
                                     type="select"
                                     name="country"
                                     rules="required"
-                                    :label="trans('admin::app.customers.addresses.create.country')"
                                     v-model="country"
+                                    :label="trans('admin::app.customers.addresses.create.country')"
                                 >
                                     @foreach (core()->countries() as $country)
                                         <option value="{{ $country->code }}">{{ $country->name }}</option>
                                     @endforeach
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="country"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="country" />
                             </x-admin::form.control-group>
 
                             <!-- State Name -->
@@ -275,12 +238,12 @@
                                 <template v-if="haveStates()">
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="state"
                                         id="state"
+                                        name="state"
                                         rules="required"
+                                        v-model="state"
                                         :label="trans('admin::app.customers.addresses.create.state')"
                                         :placeholder="trans('admin::app.customers.addresses.create.state')"
-                                        v-model="state"
                                     >
                                         <option 
                                             v-for='(state, index) in countryStates[country]'
@@ -298,14 +261,10 @@
                                         rules="required"
                                         :label="trans('admin::app.customers.addresses.create.state')"
                                         :placeholder="trans('admin::app.customers.addresses.create.state')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
                                 </template>
 
-                                <x-admin::form.control-group.error
-                                    control-name="state"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="state" />
                             </x-admin::form.control-group>
                         </div>
 
@@ -322,13 +281,9 @@
                                     rules="required|integer"
                                     :label="trans('admin::app.customers.addresses.create.phone')"
                                     :placeholder="trans('admin::app.customers.addresses.create.phone')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="phone"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="phone" />
                             </x-admin::form.control-group>
 
                             <!-- Default Address -->
@@ -336,14 +291,13 @@
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
+                                        id="default_address"
                                         name="default_address"
                                         :value="1"
-                                        id="default_address"
                                         for="default_address"
                                         :label="trans('admin::app.customers.addresses.create.default-address')"
                                         :checked="false"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -356,7 +310,7 @@
                         </div>
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
-                    </x-slot:content>
+                    </x-slot>
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
@@ -369,7 +323,7 @@
                                 @lang('admin::app.customers.addresses.create.save-btn-title') 
                             </button>
                         </div>
-                    </x-slot:footer>
+                    </x-slot>
                 </x-admin::modal>
 
                 {!! view_render_event('admin.customers.addresses.create.create_form_controls.after') !!}

@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    SearchSynonym::query()->delete();
-});
-
 it('should show the search synonyms index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -35,9 +28,13 @@ it('should store the newly created search synonyms', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.create.success'));
 
-    $this->assertDatabaseHas('search_synonyms', [
-        'terms' => $term,
-        'name'  => $name,
+    $this->assertModelWise([
+        SearchSynonym::class => [
+            [
+                'terms' => $term,
+                'name'  => $name,
+            ],
+        ],
     ]);
 });
 
@@ -56,10 +53,14 @@ it('should update the search synonyms', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.edit.success'));
 
-    $this->assertDatabaseHas('search_synonyms', [
-        'id'    => $searchsynonym->id,
-        'terms' => $term,
-        'name'  => $searchsynonym->name,
+    $this->assertModelWise([
+        SearchSynonym::class => [
+            [
+                'id'    => $searchsynonym->id,
+                'terms' => $term,
+                'name'  => $searchsynonym->name,
+            ],
+        ],
     ]);
 });
 

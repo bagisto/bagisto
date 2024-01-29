@@ -73,7 +73,7 @@
         </v-field>
 
         @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
-            <x-shop::tinymce :selector="'textarea#' . $attributes->get('id')"></x-shop::tinymce>
+            <x-shop::tinymce :selector="'textarea#' . $attributes->get('id')" />
         @endif
 
         @break
@@ -229,8 +229,7 @@
             name="{{ $name }}"
             ::class="[errors && errors['{{ $name }}'] ? 'border !border-red-500' : '']"
             {{ $attributes }}
-        >
-        </x-shop::media>
+        />
 
         @break
 

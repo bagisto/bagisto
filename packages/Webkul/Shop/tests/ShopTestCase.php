@@ -3,20 +3,21 @@
 namespace Webkul\Shop\Tests;
 
 use Tests\TestCase;
-use Webkul\Customer\Contracts\Customer as CustomerContract;
-use Webkul\Faker\Helpers\Customer as CustomerFaker;
+use Webkul\Core\Tests\Concerns\CoreAssertions;
+use Webkul\Shop\Tests\Concerns\ShopSweeper;
+use Webkul\Shop\Tests\Concerns\ShopTestBench;
 
 class ShopTestCase extends TestCase
 {
+    use CoreAssertions, ShopSweeper, ShopTestBench;
+
     /**
-     * Login as customer.
+     * Tear down.
      */
-    public function loginAsCustomer(?CustomerContract $customer = null): CustomerContract
+    protected function tearDown(): void
     {
-        $customer = $customer ?? (new CustomerFaker())->factory()->create();
+        $this->cleanAll();
 
-        $this->actingAs($customer);
-
-        return $customer;
+        parent::tearDown();
     }
 }

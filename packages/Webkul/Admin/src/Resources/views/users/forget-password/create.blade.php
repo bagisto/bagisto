@@ -39,22 +39,19 @@
 
                             <x-admin::form.control-group.control
                                 type="email"
-                                name="email" 
-                                :value="old('email')"
-                                id="email"
                                 class="w-[254px] max-w-full" 
+                                id="email"
+                                name="email" 
                                 rules="required|email" 
+                                :value="old('email')"
                                 :label="trans('admin::app.users.forget-password.create.email')"
                                 :placeholder="trans('admin::app.users.forget-password.create.email')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="email"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="email" />
                         </x-admin::form.control-group>
                     </div>
+
                     <div class="flex justify-between items-center p-4">
                         <!-- Back to Sign In link -->
                         <a 

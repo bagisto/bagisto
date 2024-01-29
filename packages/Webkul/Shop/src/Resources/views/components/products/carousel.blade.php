@@ -3,7 +3,7 @@
     title="{{ $title }}"
     navigation-link="{{ $navigationLink ?? '' }}"
 >
-    <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false"></x-shop::shimmer.products.carousel>
+    <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false" />
 </v-products-carousel>
 
 @pushOnce('scripts')
@@ -40,8 +40,7 @@
                 <x-shop::products.card
                     class="min-w-[291px]"
                     v-for="product in products"
-                >
-                </x-shop::products.card>
+                />
             </div>
 
             <a
@@ -55,7 +54,7 @@
 
         <!-- Product Card Listing -->
         <template v-if="isLoading">
-            <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false"></x-shop::shimmer.products.carousel>
+            <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false" />
         </template>
     </script>
 

@@ -10,7 +10,7 @@
             <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
                 <slot name="header">
                     <template v-if="$parent.isLoading">
-                        <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.head>
+                        <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow" />
                     </template>
 
                     <template v-else>
@@ -71,7 +71,7 @@
 
                 <slot name="body">
                     <template v-if="$parent.isLoading">
-                        <x-admin::shimmer.datagrid.table.body :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body :isMultiRow="$isMultiRow" />
                     </template>
 
                     <template v-else>

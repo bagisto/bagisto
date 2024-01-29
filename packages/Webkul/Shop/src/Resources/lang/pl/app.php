@@ -346,7 +346,7 @@ return [
                 'contact-us'             => 'Kontakt',
                 'currency'               => 'Waluta',
                 'email'                  => 'Email',
-                'footer-text'            => '© Prawa autorskie 2010 - 2023, Webkul Software (Zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
+                'footer-text'            => '© Prawa autorskie 2010 - :current_year, Webkul Software (zarejestrowane w Indiach). Wszelkie prawa zastrzeżone.',
                 'locale'                 => 'Lokalizacja',
                 'newsletter-text'        => 'Bądź gotów na nasz zabawny biuletyn!',
                 'order-return'           => 'Zamówienia i zwroty',

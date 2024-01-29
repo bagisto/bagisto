@@ -36,7 +36,7 @@
                     >
                         <!-- Product Item -->
                         <img
-                            v-if="item.images.length"
+                            v-if="item.images?.length"
                             class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded overflow-hidden"
                             :src="item.images[0]?.url"
                         />

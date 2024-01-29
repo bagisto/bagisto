@@ -64,19 +64,15 @@
 
                         <x-admin::form.control-group.control
                             type="text"
-                            name="code"
-                            :value="old('code') ?? $channel->code"
                             id="code"
+                            name="code"
                             rules="required"
+                            :value="old('code') ?? $channel->code"
                             :label="trans('admin::app.settings.channels.edit.code')"
                             :placeholder="trans('admin::app.settings.channels.edit.code')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="code"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="code" />
                     </x-admin::form.control-group>
 
                     <!-- Name -->
@@ -87,19 +83,15 @@
 
                         <x-admin::form.control-group.control
                             type="text"
-                            :name="$locale . '[name]'"
-                            :value="old('name') ?? $channel->name"
                             :id="$locale . '[name]'"
+                            :name="$locale . '[name]'"
                             rules="required"
+                            :value="old('name') ?? $channel->name"
                             :label="trans('admin::app.settings.channels.edit.name')"
                             :placeholder="trans('admin::app.settings.channels.edit.name')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            :control-name="$locale . '[name]'"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error :control-name="$locale . '[name]'" />
                     </x-admin::form.control-group>
 
                     <!-- Description -->
@@ -110,18 +102,14 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
+                            id="description"
                             name="description"
                             :value="old('description') ?? $channel->description"
-                            id="description"
                             :label="trans('admin::app.settings.channels.edit.description')"
                             :placeholder="trans('admin::app.settings.channels.edit.description')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="description"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="description" />
                     </x-admin::form.control-group>
 
                     <!-- Inventory Sources -->
@@ -134,15 +122,14 @@
                             <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
-                                    name="inventory_sources[]"
-                                    :value="$inventorySource->id" 
                                     :id="'inventory_sources_' . $inventorySource->id"
-                                    :for="'inventory_sources_' . $inventorySource->id"
+                                    name="inventory_sources[]"
                                     rules="required"
+                                    :value="$inventorySource->id" 
+                                    :for="'inventory_sources_' . $inventorySource->id"
                                     :label="trans('admin::app.settings.channels.edit.inventory-sources')"
                                     :checked="in_array($inventorySource->id, old('inventory_sources') ?? $channel->inventory_sources->pluck('id')->toArray())"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <label
                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -151,13 +138,9 @@
                                     {{ $inventorySource->name }}
                                 </label>
                             </x-admin::form.control-group>
-
                         @endforeach
 
-                        <x-admin::form.control-group.error
-                            control-name="inventory_sources[]"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="inventory_sources[]" />
                     </div>
 
                     <!-- Root Category -->
@@ -168,10 +151,10 @@
 
                         <x-admin::form.control-group.control
                             type="select"
-                            name="root_category_id"
-                            :value="old('root_category_id') ?? $channel->root_category_id"
                             id="root_category_id"
+                            name="root_category_id"
                             rules="required"
+                            :value="old('root_category_id') ?? $channel->root_category_id"
                             :label="trans('admin::app.settings.channels.edit.root-category')"
                         >
                             @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
@@ -181,10 +164,7 @@
                             @endforeach
                         </x-admin::form.control-group.control>
 
-                        <x-admin::form.control-group.error
-                            control-name="root_category_id"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="root_category_id" />
                     </x-admin::form.control-group>
 
                     <!-- Host Name -->
@@ -195,18 +175,14 @@
 
                         <x-admin::form.control-group.control
                             type="text"
+                            id="hostname"
                             name="hostname"
                             :value="old('hostname') ?? $channel->hostname"
-                            id="hostname"
                             :label="trans('admin::app.settings.channels.edit.hostname')"
                             :placeholder="trans('admin::app.settings.channels.edit.hostname-placeholder')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            control-name="hostname"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="hostname" />
                     </x-admin::form.control-group>
                 </div>
 
@@ -228,9 +204,9 @@
 
                         <x-admin::form.control-group.control
                             type="select"
+                            id="theme"
                             name="theme"
                             :value="old('theme') ?? $channel->theme"
-                            id="theme"
                             :label="trans('admin::app.settings.channels.edit.theme')"
                         >
                             <!-- Default Option -->
@@ -245,10 +221,7 @@
                             @endforeach
                         </x-admin::form.control-group.control>
 
-                        <x-admin::form.control-group.error
-                            control-name="theme"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="theme" />
                     </x-admin::form.control-group>
 
                     <div class="flex justify-between">
@@ -264,8 +237,7 @@
                                     width="110px"
                                     height="110px"
                                     :uploaded-images="$channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : []"
-                                >
-                                </x-admin::media.images>
+                                />
                             </x-admin::form.control-group>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300">
@@ -289,8 +261,7 @@
                                     width="110px"
                                     height="110px"
                                     :uploaded-images="$channel->favicon ? [['id' => 'logo_path', 'url' => $channel->favicon_url]] : []"
-                                >
-                                </x-admin::media.images>
+                                />
                             </x-admin::form.control-group>
 
                             <p class="text-xs text-gray-600 dark:text-gray-300">
@@ -327,13 +298,9 @@
                             rules="required"
                             :label="trans('admin::app.settings.channels.edit.seo-title')"
                             :placeholder="trans('admin::app.settings.channels.edit.seo-title')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            :control-name="$locale . '[seo_title]'"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error :control-name="$locale . '[seo_title]'" />
                     </x-admin::form.control-group>
 
                     <!-- Meta Keywords -->
@@ -344,13 +311,12 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
+                            id="seo_keywords"
                             :name="$locale . '[seo_keywords]'"
                             :value="old($locale)['seo_keywords'] ?? $seo['meta_keywords']"
-                            id="seo_keywords"
                             :label="trans('admin::app.settings.channels.edit.seo-keywords')"
                             :placeholder="trans('admin::app.settings.channels.edit.seo-keywords')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
                     </x-admin::form.control-group>
 
                     <!-- Meta Description -->
@@ -361,19 +327,15 @@
 
                         <x-admin::form.control-group.control
                             type="textarea"
-                            :name="$locale . '[seo_description]'"
-                            :value="old($locale)['seo_description'] ?? $seo['meta_description']"
                             id="meta_description"
+                            :name="$locale . '[seo_description]'"
                             rules="required"
+                            :value="old($locale)['seo_description'] ?? $seo['meta_description']"
                             :label="trans('admin::app.settings.channels.edit.seo-description')"
                             :placeholder="trans('admin::app.settings.channels.edit.seo-description')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
-                        <x-admin::form.control-group.error
-                            :control-name="$locale . '[seo_description]'"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error :control-name="$locale . '[seo_description]'" />
                     </x-admin::form.control-group>
                 </div>
 
@@ -394,7 +356,7 @@
                                 @lang('admin::app.settings.channels.edit.currencies-and-locales')
                             </p>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
             
                     <x-slot:content>
                         <!-- Locales Checkboxes -->
@@ -409,15 +371,14 @@
                                 <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="locales[]"
-                                        :value="$locale->id"
                                         :id="'locales_' . $locale->id" 
-                                        :for="'locales_' . $locale->id" 
-                                        :checked="in_array($locale->id, $selectedLocalesId)"
+                                        name="locales[]"
                                         rules="required"
+                                        :value="$locale->id"
+                                        :for="'locales_' . $locale->id" 
                                         :label="trans('admin::app.settings.channels.edit.locales')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                        :checked="in_array($locale->id, $selectedLocalesId)"
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -428,10 +389,7 @@
                                 </x-admin::form.control-group>
                             @endforeach
 
-                            <x-admin::form.control-group.error
-                                control-name="locales[]" 
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="locales[]" />
                         </div>
 
                         <!-- Default Locale Selector -->
@@ -442,10 +400,10 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
-                                name="default_locale_id"
-                                :value="old('default_locale_id') ?? $channel->default_locale_id"
                                 id="default_locale_id"
+                                name="default_locale_id"
                                 rules="required"
+                                :value="old('default_locale_id') ?? $channel->default_locale_id"
                                 :label="trans('admin::app.settings.channels.edit.default-locale')"
                             >
                                 @foreach (core()->getAllLocales() as $locale)
@@ -455,10 +413,7 @@
                                 @endforeach
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="default_locale_id"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="default_locale_id" />
                         </x-admin::form.control-group>
 
                         <!-- Currencies Checkboxes -->
@@ -473,15 +428,14 @@
                                 <x-admin::form.control-group class="flex items-center gap-2.5 !mb-2">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
-                                        name="currencies[]"
-                                        :value="$currency->id" 
                                         :id="'currencies_' . $currency->id"
-                                        :for="'currencies_' . $currency->id"
+                                        name="currencies[]"
                                         rules="required"
+                                        :value="$currency->id" 
+                                        :for="'currencies_' . $currency->id"
                                         :label="trans('admin::app.settings.channels.edit.currencies')"
                                         :checked="in_array($currency->id, $selectedCurrenciesId)"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
                                     <label
                                         class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -492,10 +446,7 @@
                                 </x-admin::form.control-group>
                             @endforeach
 
-                            <x-admin::form.control-group.error
-                                control-name="currencies[]"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="currencies[]" />
                         </div>
 
                         <!-- Default Currency Selector -->
@@ -506,10 +457,10 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
-                                name="base_currency_id"
-                                :value="old('base_currency_id') ?? $channel->base_currency_id"
                                 id="base_currency_id"
+                                name="base_currency_id"
                                 rules="required"
+                                :value="old('base_currency_id') ?? $channel->base_currency_id"
                                 :label="trans('admin::app.settings.channels.edit.default-currency')"
                             >
                                 @foreach (core()->getAllCurrencies() as $currency)
@@ -519,12 +470,9 @@
                                 @endforeach
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="base_currency_id"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="base_currency_id" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.after') !!}
@@ -539,7 +487,7 @@
                                 @lang('admin::app.settings.channels.edit.maintenance-mode')
                             </p>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
             
                     <x-slot:content>
                         <!-- Maintenance Mode Text -->
@@ -550,18 +498,14 @@
                             
                             <x-admin::form.control-group.control
                                 type="text"
+                                id="maintenance-mode-text"
                                 name="{{ $locale->code }}[maintenance_mode_text]"
                                 :value="old('maintenance_mode_text') ?? ($channel->translate($locale)['maintenance_mode_text'] ?? $channel->maintenance_mode_text)"
-                                id="maintenance-mode-text"
                                 :label="trans('admin::app.settings.channels.edit.maintenance-mode-text')"
                                 :placeholder="trans('admin::app.settings.channels.edit.maintenance-mode-text')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         
-                            <x-admin::form.control-group.error
-                                control-name="maintenance_mode_text"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="maintenance_mode_text" />
                         </x-admin::form.control-group>
 
                         <!-- Allowed API's -->
@@ -572,18 +516,14 @@
                             
                             <x-admin::form.control-group.control
                                 type="text"
+                                id="allowed-ips"
                                 name="allowed_ips"
                                 :value="old('allowed_ips') ?? $channel->allowed_ips"
-                                id="allowed-ips"
                                 :label="trans('admin::app.settings.channels.edit.allowed-ips')"
                                 :placeholder="trans('admin::app.settings.channels.edit.allowed-ips')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                             
-                            <x-admin::form.control-group.error
-                                control-name="allowed_ips"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="allowed_ips" />
                         </x-admin::form.control-group>
 
                         <!-- Maintenance Mode Switcher -->
@@ -598,15 +538,11 @@
                                 :value="1"
                                 :label="trans('admin::app.settings.channels.edit.status')"
                                 :checked="(boolean) $channel->is_maintenance_on"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="is_maintenance_on"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="is_maintenance_on" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.settings.after') !!}

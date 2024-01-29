@@ -63,7 +63,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
@@ -75,7 +75,7 @@
                                 {{ $locale->name }}
                             </a>
                         @endforeach
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::dropdown>
             </div>
         </div>
@@ -119,10 +119,7 @@
                             >
                         </v-field>
 
-                        <x-admin::form.control-group.error
-                            control-name="{{ $currentLocale->code}}[name]"
-                        >
-                        </x-admin::form.control-group.error>
+                        <x-admin::form.control-group.error control-name="{{ $currentLocale->code}}[name]" />
                     </x-admin::form.control-group>
 
                     @if ($categories->count())
@@ -168,27 +165,23 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="{{ $currentLocale->code }}[description]"
                                 id="description"
                                 class="description"
-                                :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
+                                name="{{ $currentLocale->code }}[description]"
                                 ::rules="{ 'required' : isDescriptionRequired}"
+                                :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.description')"
                                 :tinymce="true"
                                 :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="description"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[description]" />
                         </x-admin::form.control-group>
                     </v-description>
 
-                    <div class="flex gap-12">
+                    <div class="flex pt-5">
                         <!-- Add Logo -->
-                        <div class="flex flex-col gap-2 w-2/5 mt-5">
+                        <div class="flex flex-col gap-2 w-2/5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.logo')
                             </p>
@@ -200,12 +193,11 @@
                             <x-admin::media.images
                                 name="logo_path"
                                 :uploaded-images="$category->logo_path ? [['id' => 'logo_path', 'url' => $category->logo_url]] : []"
-                            >
-                            </x-admin::media.images>
+                            />
                         </div>
 
                         <!-- Add Banner -->
-                        <div class="flex flex-col gap-2 w-2/5 mt-5">
+                        <div class="flex flex-col gap-2 w-3/5">
                             <p class="text-gray-800 dark:text-white font-medium">
                                 @lang('admin::app.catalog.categories.edit.banner')
                             </p>
@@ -218,8 +210,7 @@
                                 name="banner_path"
                                 :uploaded-images="$category->banner_path ? [['id' => 'banner_path', 'url' => $category->banner_url]] : []"
                                 width="220px"
-                            >
-                            </x-admin::media.images>
+                            />
                         </div>
                     </div>
                 </div>
@@ -246,13 +237,13 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="{{ $currentLocale->code }}[meta_title]"
                                 id="meta_title"
+                                name="{{ $currentLocale->code }}[meta_title]"
                                 :value="old($currentLocale->code)['meta_title'] ?? ($category->translate($currentLocale->code)['meta_title'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.meta-title')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.meta-title')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
+                            
                         </x-admin::form.control-group>
 
                         <!-- Slug -->
@@ -264,27 +255,24 @@
                             <v-field
                                 type="text"
                                 name="{{$currentLocale->code}}[slug]"
+                                rules="required"
                                 value="{{ old($currentLocale->code)['slug'] ?? ($category->translate($currentLocale->code)['slug'] ?? '') }}"
                                 label="{{ trans('admin::app.catalog.categories.edit.slug') }}"
-                                rules="required"
                                 v-slot="{ field }"
                             >
                                 <input
                                     type="text"
-                                    name="{{$currentLocale->code}}[slug]"
                                     id="{{$currentLocale->code}}[slug]"
-                                    v-bind="field"
+                                    name="{{$currentLocale->code}}[slug]"
                                     :class="[errors['{{$currentLocale->code}}[slug]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                    v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                     v-slugify-target:slug
                                 >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="{{$currentLocale->code}}[slug]"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="{{$currentLocale->code}}[slug]" />
                         </x-admin::form.control-group>
 
                         <!-- Meta Keywords -->
@@ -299,8 +287,7 @@
                                 :value="old($currentLocale->code)['meta_keywords'] ?? ($category->translate($currentLocale->code)['meta_keywords'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.meta-keywords')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.meta-keywords')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
 
                         <!-- Meta Description -->
@@ -311,13 +298,12 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="{{ $currentLocale->code }}[meta_description]"
                                 id="meta_description"
+                                name="{{ $currentLocale->code }}[meta_description]"
                                 :value="old($currentLocale->code)['meta_description'] ?? ($category->translate($currentLocale->code)['meta_description'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.meta-description')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.meta-description')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
                     </div>
                 </div>
@@ -336,7 +322,7 @@
                         <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.edit.settings')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <x-slot:content>
                         <!-- Position -->
@@ -348,17 +334,13 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="position"
-                                :value="old('position') ?: $category->position"
                                 rules="required"
+                                :value="old('position') ?: $category->position"
                                 :label="trans('admin::app.catalog.categories.edit.position')"
                                 :placeholder="trans('admin::app.catalog.categories.edit.enter-position')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error
-                                control-name="position"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="position" />
                         </x-admin::form.control-group>
 
                         <!-- Display Mode  -->
@@ -371,9 +353,9 @@
 
                             <x-admin::form.control-group.control
                                 type="select"
-                                name="display_mode"
                                 id="display_mode"
                                 class="cursor-pointer"
+                                name="display_mode"
                                 rules="required"
                                 :value="$selectedValue"
                                 :label="trans('admin::app.catalog.categories.edit.display-mode')"
@@ -391,10 +373,7 @@
                                 </option>
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
-                                control-name="display_mode"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="display_mode" />
                         </x-admin::form.control-group>
 
                         <!-- Visible in menu -->
@@ -408,23 +387,21 @@
                             <!-- Visible in menu Hidden field -->
                             <x-admin::form.control-group.control
                                 type="hidden"
-                                name="status"
                                 class="cursor-pointer"
+                                name="status"
                                 :checked="(boolean) $selectedValue"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <x-admin::form.control-group.control
                                 type="switch"
-                                name="status"
                                 class="cursor-pointer"
+                                name="status"
                                 value="1"
                                 :label="trans('admin::app.catalog.categories.edit.visible-in-menu')"
                                 :checked="(boolean) $selectedValue"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.after', ['category' => $category]) !!}
@@ -437,7 +414,7 @@
                         <p class="required p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     @php $selectedaAtributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
 
@@ -446,15 +423,14 @@
                             <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 last:!mb-0">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
-                                    name="attributes[]"
-                                    :value="$attribute->id"
                                     :id="$attribute->name ?? $attribute->admin_name"
-                                    :for="$attribute->name ?? $attribute->admin_name"
+                                    name="attributes[]"
                                     rules="required"
+                                    :value="$attribute->id"
+                                    :for="$attribute->name ?? $attribute->admin_name"
                                     :label="trans('admin::app.catalog.categories.edit.filterable-attributes')"
                                     :checked="in_array($attribute->id, $selectedaAtributes)"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
                                 <label
                                     class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
@@ -465,15 +441,11 @@
                             </x-admin::form.control-group>
                         @endforeach
 
-                        <x-admin::form.control-group.error
-                            control-name="attributes[]"
-                        >
-                        </x-admin::form.control-group.error>
-                    </x-slot:content>
+                        <x-admin::form.control-group.error control-name="attributes[]" />
+                    </x-slot>
                 </x-admin::accordion>
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.filterable_attributes.after', ['category' => $category]) !!}
-
             </div>
         </div>
 

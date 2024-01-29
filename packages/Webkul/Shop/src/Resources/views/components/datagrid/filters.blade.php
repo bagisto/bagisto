@@ -31,7 +31,7 @@
 
                             <span class="icon-arrow-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
@@ -39,9 +39,8 @@
                             v-for="option in column.options"
                             v-text="option.label"
                             @click="filterPage(option.value, column)"
-                        >
-                        </x-shop::dropdown.menu.item>
-                    </x-slot:menu>
+                        />
+                    </x-slot>
                 </x-shop::dropdown>
             </div>
 
@@ -95,18 +94,16 @@
 
                                 <span class="icon-arrow-down text-2xl"></span>
                             </button>
-                        </x-slot:toggle>
+                        </x-slot>
 
                         <!-- Dropdown Content -->
                         <x-slot:menu>
                             <x-shop::dropdown.menu.item
-                                {{-- class="w-full" --}}
                                 v-for="option in column.options.params.options"
                                 v-text="option.label"
                                 @click="filterPage(option.value, column)"
-                            >
-                            </x-shop::dropdown.menu.item>
-                        </x-slot:menu>
+                            />
+                        </x-slot>
                     </x-shop::dropdown>
                 </div>
 
@@ -154,8 +151,7 @@
                         :datagrid-id="available.id"
                         :column="column"
                         @select-option="filterPage($event, column)"
-                    >
-                    </v-datagrid-searchable-dropdown>
+                    />
                 </div>
 
                 <div class="mb-4 flex gap-2 flex-wrap">
@@ -403,7 +399,7 @@
 
                     <span class="icon-arrow-down text-2xl"></span>
                 </button>
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Dropdown Content -->
             <x-slot:menu>
@@ -449,7 +445,7 @@
                         </ul>
                     </div>
                 </div>
-            </x-slot:menu>
+            </x-slot>
         </x-shop::dropdown>
     </script>
 

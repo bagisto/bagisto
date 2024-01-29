@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Customers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderRepository;
 
 class CustomerDataGrid extends DataGrid
@@ -153,7 +154,7 @@ class CustomerDataGrid extends DataGrid
             'sortable'    => false,
             'closure'     => function ($row) {
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
-                    return $q->whereNotIn('status', ['canceled', 'closed'])
+                    return $q->whereNotIn('status', [Order::STATUS_CANCELED, Order::STATUS_CLOSED])
                         ->where('customer_id', $row->customer_id);
                 })->sum('base_grand_total_invoiced');
             },

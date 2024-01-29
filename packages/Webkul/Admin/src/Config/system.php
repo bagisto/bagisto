@@ -1,5 +1,7 @@
 <?php
 
+use Webkul\Sales\Models\Order;
+
 return [
     /**
      * General.
@@ -375,12 +377,12 @@ return [
                 'name'       => 'no_of_related_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-related-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ], [
                 'name'       => 'no_of_up_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-up-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -393,7 +395,7 @@ return [
                 'name'       => 'no_of_cross_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.cart-view-page.allow-no-of-cross-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -1147,13 +1149,13 @@ return [
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
-                        'value' => 'pending',
+                        'value' => Order::STATUS_PENDING,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending-payment',
-                        'value' => 'pending_payment',
+                        'value' => Order::STATUS_PENDING_PAYMENT,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.processing',
-                        'value' => 'processing',
+                        'value' => Order::STATUS_PROCESSING,
                     ],
                 ],
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',

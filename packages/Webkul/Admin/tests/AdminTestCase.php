@@ -3,20 +3,21 @@
 namespace Webkul\Admin\Tests;
 
 use Tests\TestCase;
-use Webkul\User\Contracts\Admin as AdminContract;
-use Webkul\User\Models\Admin as AdminModel;
+use Webkul\Admin\Tests\Concerns\AdminSweeper;
+use Webkul\Admin\Tests\Concerns\AdminTestBench;
+use Webkul\Core\Tests\Concerns\CoreAssertions;
 
 class AdminTestCase extends TestCase
 {
+    use AdminSweeper, AdminTestBench, CoreAssertions;
+
     /**
-     * Login as customer.
+     * Tear down.
      */
-    public function loginAsAdmin(?AdminContract $admin = null): AdminContract
+    protected function tearDown(): void
     {
-        $admin = $admin ?? AdminModel::factory()->create();
+        $this->cleanAll();
 
-        $this->actingAs($admin, 'admin');
-
-        return $admin;
+        parent::tearDown();
     }
 }

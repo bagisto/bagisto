@@ -198,12 +198,16 @@
                 {{ $attributes->except(['rules', 'label', ':label']) }}
             />
 
-            <v-checkbox-handler :field="field" checked="{{ $attributes->get('checked') }}"></v-checkbox-handler>
+            <v-checkbox-handler :field="field" checked="{{ $attributes->get('checked') }}" />
         </v-field>
 
         <label
-            class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600  cursor-pointer"
-            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+             {{ 
+                $attributes
+                    ->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])
+                    ->merge(['class' => 'icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-blue-600'])
+                    ->merge(['class' => $attributes->get('disabled') ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'])
+            }}
         >
         </label>
 
@@ -252,7 +256,7 @@
                     {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label']) }}
                 />
                 
-                <v-checkbox-handler class="hidden" :field="field" checked="{{ $attributes->get('checked') }}"></v-checkbox-handler>
+                <v-checkbox-handler class="hidden" :field="field" checked="{{ $attributes->get('checked') }}" />
             </v-field>
 
             <label
@@ -268,8 +272,7 @@
             name="{{ $name }}"
             ::class="[errors && errors['{{ $name }}'] ? 'border !border-red-600 hover:border-red-600' : '']"
             {{ $attributes }}
-        >
-        </x-admin::media.images>
+        />
 
         @break
 

@@ -3,7 +3,7 @@
     :key='flash.uid'
     :flash="flash"
     @onRemove="remove($event)"
-></v-flash-item>
+/>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-flash-item-template">

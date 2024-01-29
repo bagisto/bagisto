@@ -3,9 +3,7 @@
 namespace Webkul\Tax\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
-use Webkul\Tax\Models\TaxRate;
 
 class TaxMapFactory extends Factory
 {
@@ -21,9 +19,6 @@ class TaxMapFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'tax_category_id' => TaxCategory::factory(),
-            'tax_rate_id'     => TaxRate::factory(),
-        ];
+        return [];
     }
 }

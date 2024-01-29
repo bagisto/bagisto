@@ -1,19 +1,11 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Contracts\ProductFlat;
+use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the product index page', function () {
     // Act and Assert
@@ -36,8 +28,12 @@ it('should copy the existing product', function () {
         ->assertRedirect(route('admin.catalog.products.edit', $productId = $product->id + 1))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id' => $productId,
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id' => $productId,
+            ],
+        ],
     ]);
 });
 
@@ -56,10 +52,14 @@ it('should perform the mass action forn update status for products', function ()
         ->assertJsonPath('message', trans('admin::app.catalog.products.index.datagrid.mass-update-success'));
 
     foreach ($products as $product) {
-        $this->assertDatabaseHas('product_flat', [
-            'product_id' => $product->id,
-            'sku'        => $product->sku,
-            'status'     => 1,
+        $this->assertModelWise([
+            ProductFlat::class => [
+                [
+                    'product_id' => $product->id,
+                    'sku'        => $product->sku,
+                    'status'     => 1,
+                ],
+            ],
         ]);
     }
 });

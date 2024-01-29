@@ -36,35 +36,33 @@
                                 >
                                     @lang('shop::app.checkout.cart.coupon.apply')
                                 </span>
-                            </x-slot:toggle>
+                            </x-slot>
 
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <h2 class="text-2xl font-medium max-sm:text-xl">
                                     @lang('shop::app.checkout.cart.coupon.apply')
                                 </h2>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Modal Content -->
                             <x-slot:content>
                                 <x-shop::form.control-group class="!mb-0">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        name="code"
                                         class="py-5 px-6"
+                                        name="code"
+                                        v-model="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.cart.coupon.enter-your-code')"
-                                        v-model="code"
-                                    >
-                                    </x-shop::form.control-group.control>
+                                    />
 
                                     <x-shop::form.control-group.error
                                         class="flex"
                                         control-name="code"
-                                    >
-                                    </x-shop::form.control-group.error>
+                                    />
                                 </x-shop::form.control-group>
-                            </x-slot:content>
+                            </x-slot>
 
                             <!-- Modal Footer -->
                             <x-slot:footer>
@@ -89,7 +87,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-shop::modal>
 
                         {!! view_render_event('bagisto.shop.checkout.cart.coupon.coupon_form_controls.after') !!}

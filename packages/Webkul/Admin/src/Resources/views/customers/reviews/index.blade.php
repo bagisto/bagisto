@@ -11,7 +11,7 @@
 
     {!! view_render_event('admin.customers.reviews.edit.before') !!}
 
-    <v-review-edit-drawer></v-review-edit-drawer>
+    <v-review-edit-drawer />
 
     {!! view_render_event('admin.customers.groups.edit.after') !!}
 
@@ -45,9 +45,9 @@
                                     >
                                         <input 
                                             type="checkbox" 
-                                            name="mass_action_select_all_records"
                                             id="mass_action_select_all_records"
                                             class="hidden peer"
+                                            name="mass_action_select_all_records"
                                             :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
                                             @change="selectAllRecords"
                                         >
@@ -95,7 +95,7 @@
 
                     <!-- Datagrid Head Shimmer -->
                     <template v-else>
-                        <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+                        <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
                     </template>
                 </template>
 
@@ -110,10 +110,10 @@
                                 @if ($hasPermission)
                                     <input 
                                         type="checkbox" 
-                                        :name="`mass_action_select_record_${record.product_review_id}`"
                                         :id="`mass_action_select_record_${record.product_review_id}`"
-                                        :value="record.product_review_id"
                                         class="hidden peer"
+                                        :name="`mass_action_select_record_${record.product_review_id}`"
+                                        :value="record.product_review_id"
                                         v-model="applied.massActions.indices"
                                         @change="setCurrentSelectionMode"
                                     >
@@ -130,6 +130,7 @@
                                         v-text="record.customer_full_name"
                                     >
                                     </p>
+
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
                                         v-text="record.product_name"
@@ -146,8 +147,7 @@
                                     <x-admin::star-rating 
                                         :is-editable="false"
                                         ::value="record.rating"
-                                    >
-                                    </x-admin::star-rating>
+                                    />
                                 </div>
 
                                 <p
@@ -193,8 +193,7 @@
                                     v-if="record.actions.find(action => action.index === 'edit')"
                                     @click="edit(record.actions.find(action => action.index === 'edit')?.url)"
                                 >
-                                    <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
-                                    </span>
+                                    <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 rounded-md cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800"></span>
                                 </a>
                             </div>
                         </div>
@@ -202,7 +201,7 @@
 
                     <!-- Datagrid Body Shimmer -->
                     <template v-else>
-                        <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
                     </template>
                 </template>
             </x-admin::datagrid>
@@ -231,7 +230,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:header>
+                            </x-slot>
 
                             <!-- Drawer Content -->
                             <x-slot:content>
@@ -286,24 +285,25 @@
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="w-full">
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="id"
-                                            ::value="review.id"
                                             rules="required"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                            ::value="review.id"
+                                        />
 
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.reviews.index.edit.status')
                                             </x-admin::form.control-group.label>
+
                                             <x-admin::form.control-group.control
                                                 type="select"
                                                 name="status"
-                                                ::value="review.status"
                                                 rules="required"
+                                                ::value="review.status"
                                             >
                                                 <option value="approved" >
                                                     @lang('admin::app.customers.reviews.index.edit.approved')
@@ -318,10 +318,7 @@
                                                 </option>
                                             </x-admin::form.control-group.control>
                 
-                                            <x-admin::form.control-group.error
-                                                control-name="status"
-                                            >
-                                            </x-admin::form.control-group.error>
+                                            <x-admin::form.control-group.error control-name="status" />
                                         </x-admin::form.control-group>
                                     </div>
                 
@@ -334,8 +331,7 @@
                                             <x-admin::star-rating 
                                                 :is-editable="false"
                                                 ::value="review.rating"
-                                            >
-                                            </x-admin::star-rating>
+                                            />
                                         </div>
                                     </div>
                 
@@ -374,9 +370,9 @@
                                         <div class="flex flex-wrap gap-4">
                                             <div v-for="image in review.images" :key="image.id">
                                                 <img
-                                                    v-if="image.type === 'image'"
-                                                    class="h-[60px] w-[60px] rounded"
                                                     :src="image.url"
+                                                    class="h-[60px] w-[60px] rounded"
+                                                    v-if="image.type === 'image'"
                                                     alt="Image"
                                                 />
 
@@ -395,7 +391,7 @@
                                         </div>
                                     </div>                                    
                                 </div>
-                            </x-slot:content>
+                            </x-slot>
                         </x-admin::drawer>
                     </form>
                 </x-admin::form>

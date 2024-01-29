@@ -4,21 +4,14 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
-});
 
 it('should return the create page of downloadable product', function () {
     // Arrange
@@ -37,23 +30,29 @@ it('should return the create page of downloadable product', function () {
         ->assertOk()
         ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
 
-    $this->assertDatabaseHas('products', [
-        'id'   => $productId,
-        'type' => 'downloadable',
-        'sku'  => $sku,
-    ]);
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'   => $productId,
+                'type' => 'downloadable',
+                'sku'  => $sku,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'url_key'           => $product->url_key,
-        'type'              => 'simple',
-        'name'              => $product->name,
-        'short_description' => $product->short_description,
-        'description'       => $product->description,
-        'price'             => $product->price,
-        'weight'            => $product->weight,
-        'locale'            => app()->getLocale(),
-        'product_id'        => $product->id,
-        'channel'           => core()->getCurrentChannelCode(),
+        ProductFlat::class => [
+            [
+                'url_key'           => $product->url_key,
+                'type'              => 'simple',
+                'name'              => $product->name,
+                'short_description' => $product->short_description,
+                'description'       => $product->description,
+                'price'             => $product->price,
+                'weight'            => $product->weight,
+                'locale'            => app()->getLocale(),
+                'product_id'        => $product->id,
+                'channel'           => core()->getCurrentChannelCode(),
+            ],
+        ],
     ]);
 });
 
@@ -228,24 +227,30 @@ it('should update the downloadable product', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'   => $product->id,
-        'type' => $product->type,
-        'sku'  => $product->sku,
-    ]);
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'   => $product->id,
+                'type' => $product->type,
+                'sku'  => $product->sku,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'product_id'        => $product->id,
-        'type'              => 'downloadable',
-        'sku'               => $product->sku,
-        'url_key'           => $product->url_key,
-        'name'              => $name,
-        'short_description' => $shortDescription,
-        'description'       => $description,
-        'price'             => $price,
-        'weight'            => $weight,
-        'locale'            => $locale,
-        'channel'           => $channel,
+        ProductFlat::class => [
+            [
+                'product_id'        => $product->id,
+                'type'              => 'downloadable',
+                'sku'               => $product->sku,
+                'url_key'           => $product->url_key,
+                'name'              => $name,
+                'short_description' => $shortDescription,
+                'description'       => $description,
+                'price'             => $price,
+                'weight'            => $weight,
+                'locale'            => $locale,
+                'channel'           => $channel,
+            ],
+        ],
     ]);
 });
 

@@ -48,76 +48,70 @@
         @if ($field['type'] == 'text')
             <x-admin::form.control-group.control
                 type="text"
+                :id="$name"
                 :name="$name"
                 :value="old($nameKey) ?? (core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) : ($field['default_value'] ?? ''))"
-                :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
-            >
-            </x-admin::form.control-group.control>
+            />
 
         <!-- Password input -->
         @elseif ($field['type'] == 'password')
             <x-admin::form.control-group.control
                 type="password"
-                :name="$name"
-                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :label="trans($field['title'])"
-            >
-            </x-admin::form.control-group.control>
+            />
 
         <!-- Number input -->
         @elseif ($field['type'] == 'number')
             <x-admin::form.control-group.control
                 type="number"
-                :name="$name"
-                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :label="trans($field['title'])"
                 :min="$field['name'] == 'minimum_order_amount'"
-            >
-            </x-admin::form.control-group.control>
+            />
 
         <!-- Color Input -->
         @elseif ($field['type'] == 'color')
             <x-admin::form.control-group.control
                 type="color"
-                :name="$name"
-                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :label="trans($field['title'])"
-            >
-            </x-admin::form.control-group.control>
+            />
 
         <!-- Textarea Input -->
         @elseif ($field['type'] == 'textarea')
             <x-admin::form.control-group.control
                 type="textarea"
-                :name="$name"
-                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
                 class="text-gray-600 dark:text-gray-300"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
+                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
                 :label="trans($field['title'])"
-            >
-            </x-admin::form.control-group.control>
+            />
 
         <!-- Textarea Input -->
         @elseif ($field['type'] == 'editor')
             <!-- (@suraj-webkul) TODO Change textarea to tiny mce -->
             <x-admin::form.control-group.control
                 type="textarea"
-                :name="$name"
-                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
+                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
                 :label="trans($field['title'])"
-            >
-            </x-admin::form.control-group.control>
+            />
 
         <!-- Select input -->
         @elseif ($field['type'] == 'select')
@@ -125,10 +119,10 @@
 
             <x-admin::form.control-group.control
                 type="select"
-                :name="$name"
-                :value="$selectedOption"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
+                :value="$selectedOption"
                 :label="trans($field['title'])"
             >
                 @if (isset($field['repository']))
@@ -235,25 +229,23 @@
 
                 <x-admin::form.control-group.control
                     type="file"
-                    :name="$name"
                     :id="$name"
+                    :name="$name"
                     :rules="$validations"
                     :label="trans($field['title'])"
-                >
-                </x-admin::form.control-group.control>
+                />
             </div>
 
             @if ($result)
                 <x-admin::form.control-group class="flex gap-1.5 w-max mt-1.5 cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
-                        :name="$name.'[delete]'"
-                        :id="$name.'[delete]'"
-                        value="1"
                         class="hidden peer"
+                        :id="$name.'[delete]'"
+                        :name="$name.'[delete]'"
+                        value="1"
                         :for="$name.'[delete]'"
-                    >
-                    </x-admin::form.control-group.control>
+                    />
 
                     <x-admin::form.control-group.label
                         :for="$name.'[delete]'"
@@ -281,23 +273,21 @@
 
             <x-admin::form.control-group.control
                 type="file"
-                :name="$name"
                 :id="$name"
+                :name="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
-            >
-            </x-admin::form.control-group.control>
+            />
 
             @if ($result)
                 <div class="flex gap-2.5 cursor-pointer">
                     <x-admin::form.control-group.control
                         type="checkbox"
-                        :name="$name.'[delete]'"
-                        :id="$name.'[delete]'"
-                        value="1"
                         class="hidden peer"
-                    >
-                    </x-admin::form.control-group.control>
+                        :id="$name.'[delete]'"
+                        :name="$name.'[delete]'"
+                        value="1"
+                    />
 
                     <x-admin::form.control-group.label
                         class="cursor-pointer"
@@ -315,15 +305,17 @@
                     <x-admin::form.control-group class="flex">
                         <x-admin::form.control-group.control
                             type="select"
-                            :name="$name"
-                            :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                             :id="$name"
+                            :name="$name"
                             :rules="$validations"
+                            :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                             :label="trans($field['title'])"
                             @change="changeCountry($event.target.value)"
                         >
                             @foreach (core()->countries() as $country)
-                                <option value="{{ $country->code }}">{{ $country->name }}</option>
+                                <option value="{{ $country->code }}">
+                                    {{ $country->name }}
+                                </option>
                             @endforeach
                         </x-admin::form.control-group.control>
                     </x-admin::form.control-group>
@@ -341,10 +333,10 @@
                             <x-admin::form.control-group class="flex">
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    :name="$name"
-                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :id="$name"
+                                    :name="$name"
                                     :rules="$validations"
+                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :label="trans($field['title'])"
                                 >
                                     <option
@@ -361,13 +353,12 @@
                             <x-admin::form.control-group class="flex">
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    :name="$name"
-                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :id="$name"
+                                    :name="$name"
                                     :rules="$validations"
+                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :label="trans($field['title'])"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
                             </x-admin::form.control-group>
                         </template>
                     </div>

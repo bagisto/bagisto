@@ -7,15 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CustomerGroup::query()
-        ->whereNotBetween('id', [1, 3])
-        ->delete();
-});
-
 it('should return the listing page of customer groups', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -37,9 +28,13 @@ it('should store the newly created customers group', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.create.success'));
 
-    $this->assertDatabaseHas('customer_groups', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        CustomerGroup::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 
@@ -58,10 +53,14 @@ it('should update the existing customers group', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.edit.success'));
 
-    $this->assertDatabaseHas('customer_groups', [
-        'name' => $name,
-        'code' => $customerGroup->code,
-        'id'   => $customerGroup->id,
+    $this->assertModelWise([
+        CustomerGroup::class => [
+            [
+                'name' => $name,
+                'code' => $customerGroup->code,
+                'id'   => $customerGroup->id,
+            ],
+        ],
     ]);
 });
 

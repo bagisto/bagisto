@@ -6,7 +6,7 @@
     <x-shop::shimmer.categories.carousel
         :count="8"
         :navigation-link="$navigationLink ?? false"
-    ></x-shop::shimmer.categories.carousel>
+    />
 </v-categories-carousel>
 
 @pushOnce('scripts')
@@ -33,7 +33,7 @@
                                     height="110"
                                     class="w-[110px] h-[110px] rounded-full"
                                     ::alt="category.name"
-                                ></x-shop::media.images.lazy>
+                                />
                             </template>
                         </a>
 
@@ -75,8 +75,7 @@
             <x-shop::shimmer.categories.carousel
                 :count="8"
                 :navigation-link="$navigationLink ?? false"
-            >
-            </x-shop::shimmer.categories.carousel>
+            />
         </template>
     </script>
 

@@ -7,10 +7,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-afterEach(function () {
-    ThemeCustomization::query()->whereNotBetween('id', [1, 12])->delete();
-});
-
 it('should returns the theme index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -39,11 +35,15 @@ it('should store the newly created theme', function () {
         ->assertOk()
         ->assertJsonPath('redirect_url', route('admin.settings.themes.edit', $lastThemeId));
 
-    $this->assertDatabaseHas('theme_customizations', [
-        'id'         => $lastThemeId,
-        'type'       => $type,
-        'name'       => $name,
-        'channel_id' => $channelId,
+    $this->assertModelWise([
+        ThemeCustomization::class => [
+            [
+                'id'         => $lastThemeId,
+                'type'       => $type,
+                'name'       => $name,
+                'channel_id' => $channelId,
+            ],
+        ],
     ]);
 });
 
@@ -135,10 +135,14 @@ it('should update the theme customizations', function () {
         ->assertRedirect(route('admin.settings.themes.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('theme_customizations', [
-        'id'   => $theme->id,
-        'type' => $theme->type,
-        'name' => $name,
+    $this->assertModelWise([
+        ThemeCustomization::class => [
+            [
+                'id'   => $theme->id,
+                'type' => $theme->type,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 

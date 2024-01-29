@@ -1,26 +1,10 @@
 <?php
 
-use Webkul\Category\Models\Category as CategoryModel;
 use Webkul\Faker\Helpers\Category as CategoryFaker;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Helpers\Toolbar;
-use Webkul\Product\Models\Product as ProductModel;
 
 use function Pest\Laravel\getJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    ProductModel::query()->delete();
-
-    /**
-     * Clean categories, excluding ID 1 (i.e., the root category). A fresh instance will always have ID 1.
-     */
-    CategoryModel::query()
-        ->whereNot('id', 1)
-        ->delete();
-});
 
 it('returns paginated category products', function () {
     // Arrange

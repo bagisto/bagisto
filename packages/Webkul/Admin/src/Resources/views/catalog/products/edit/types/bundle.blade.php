@@ -4,7 +4,7 @@
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.before', ['product' => $product]) !!}
 
-<v-bundle-options :errors="errors"></v-bundle-options>
+<v-bundle-options :errors="errors" />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.after', ['product' => $product]) !!}
 
@@ -48,7 +48,7 @@
                     :errors="errors"
                     @onEdit="selectedOption = $event; $refs.updateCreateOptionModal.open()"
                     @onRemove="removeOption($event)"
-                ></v-bundle-option-item>
+                />
             </div>
 
             <!-- For Empty Option -->
@@ -94,7 +94,7 @@
                             <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
         
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -109,10 +109,9 @@
                                     rules="required"
                                     v-model="selectedOption.label"
                                     :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
         
-                                <x-admin::form.control-group.error control-name="label"></x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="label" />
                             </x-admin::form.control-group>
 
                             <div class="flex gap-4">
@@ -145,7 +144,7 @@
                                         </option>
                                     </x-admin::form.control-group.control>
         
-                                    <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="flex-1">
@@ -169,10 +168,10 @@
                                         </option>
                                     </x-admin::form.control-group.control>
         
-                                    <x-admin::form.control-group.error control-name="is_required"></x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="is_required" />
                                 </x-admin::form.control-group>
                             </div>
-                        </x-slot:content>
+                        </x-slot>
         
                         <!-- Modal Footer -->
                         <x-slot:footer>
@@ -185,7 +184,7 @@
                                     @lang('admin::app.catalog.products.edit.types.bundle.update-create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>
@@ -196,13 +195,29 @@
         <!-- Panel -->
         <div>
             <!-- Hidden Inputs -->
-            <input type="hidden" :name="'bundle_options[' + option.id + '][{{$currentLocale->code}}][label]'" :value="option.label"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][{{$currentLocale->code}}][label]'"
+                :value="option.label"
+            />
 
-            <input type="hidden" :name="'bundle_options[' + option.id + '][type]'" :value="option.type"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][type]'"
+                :value="option.type"
+            />
 
-            <input type="hidden" :name="'bundle_options[' + option.id + '][is_required]'" :value="option.is_required"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][is_required]'"
+                :value="option.is_required"
+            />
 
-            <input type="hidden" :name="'bundle_options[' + option.id + '][sort_order]'" :value="index"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][sort_order]'"
+                :value="index"
+            />
 
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
@@ -270,9 +285,9 @@
                                 <div>
                                     <input
                                         :type="[option.type == 'checkbox' || option.type == 'multiselect' ? 'checkbox' : 'radio']"
-                                        :name="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
-                                        class="sr-only peer"
                                         :id="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
+                                        class="sr-only peer"
+                                        :name="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
                                         :value="element.is_default"
                                         :checked="element.is_default"
                                         @change="updateIsDefault(element)"
@@ -398,7 +413,7 @@
                 ::added-product-ids="addedProductIds"
                 ::query-params="{type: 'simple'}"
                 @onProductAdded="addSelected($event)"
-            ></x-admin::products.search>
+            />
         </div>
     </script>
 

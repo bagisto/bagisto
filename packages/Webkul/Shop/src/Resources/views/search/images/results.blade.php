@@ -1,7 +1,7 @@
 <v-image-search-result-component>
     <div class="mt-8 p-5 border border-gray-200 rounded-lg">
         <div class="flex gap-12">
-            <x-shop::media.images.lazy class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-sm"></x-shop::media.images.lazy>
+            <x-shop::media.images.lazy class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-sm" />
              
             <div class="flex flex-col gap-4">
                 <span class="shimmer w-[200px] h-10"></span>
