@@ -11,6 +11,8 @@ class DataTransferServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'data_transfer');
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 

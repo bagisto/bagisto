@@ -2,8 +2,10 @@
 
 namespace Webkul\DataTransfer\Helpers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Types\AbstractType;
@@ -142,7 +144,8 @@ class Import
             'processed_rows_count' => $this->getProcessedRowsCount(),
             'invalid_rows_count'   => $this->errorHelper->getInvalidRowsCount(),
             'errors_count'         => $this->errorHelper->getErrorsCount(),
-            'errors'               => $this->errorHelper->getAllErrors(),
+            'errors'               => $this->getFormattedErrors(),
+            'error_file_path'      => $this->uploadErrorReport(),
         ], $this->import->id);
 
         $this->setImport($import);
@@ -317,7 +320,7 @@ class Import
             ->groupBy('import_id')
             ->first()
             ?->toArray();
-            
+
         return [
             'batches'  => [
                 'total'     => $total,
@@ -331,6 +334,83 @@ class Import
                 'deleted' => 0,
             ],
         ];
+    }
+
+    /**
+     * Return all error grouped by error code
+     */
+    public function getFormattedErrors(): array
+    {
+        $errors = [];
+
+        foreach ($this->errorHelper->getAllErrorsGroupedByCode() as $groupedErrors) {
+            foreach ($groupedErrors as $errorMessage => $rowNumbers) {
+                if (! empty($rowNumbers)) {
+                    $errors[] = 'Row(s) ' . implode(', ', $rowNumbers) . ': ' . $errorMessage;
+                } else {
+                    $errors[] = $errorMessage;
+                }
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * Uploads error report and save the path to the database
+     */
+    public function uploadErrorReport(): ?string
+    {
+        /**
+         * Return null if there are no errors
+         */
+        if (! $this->errorHelper->getErrorsCount()) {
+            return null;
+        }
+
+        $errorReportPath = 'imports/' . time() . '-error-report.csv';
+
+        $handle = fopen(Storage::disk('private')->path($errorReportPath), 'a');
+
+        $source = $this->getTypeImporter()->getSource();
+
+        $columns = array_merge($source->getColumnNames(), [
+            'error',
+        ]);
+
+        fputcsv($handle, $columns, $this->import->field_separator);
+
+        $source->rewind();
+
+        $errors = $this->errorHelper->getAllErrors();
+
+        while ($source->valid()) {
+            try {
+                $rowData = $source->current();
+            } catch (\InvalidArgumentException $e) {
+                $source->next();
+
+                continue;
+            }
+
+            $rowNumber = $source->getCurrentRowNumber();
+
+            $rowErrors = [];
+
+            if (isset($errors[$rowNumber])) {
+                $rowErrors = Arr::pluck($errors[$rowNumber], 'message');
+            }
+
+            $rowData[] = implode('|', $rowErrors);
+
+            fputcsv($handle, $rowData, $this->import->field_separator);
+
+            $source->next();
+        }
+
+        fclose($handle);
+
+        return $errorReportPath;
     }
 
     /**

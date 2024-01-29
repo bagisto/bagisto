@@ -197,6 +197,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::post('create', 'store')->name('admin.settings.data_transfer.imports.store');
 
+                Route::get('edit/{id}', 'edit')->name('admin.settings.data_transfer.imports.edit');
+
+                Route::put('update/{id}', 'update')->name('admin.settings.data_transfer.imports.update');
+
+                Route::delete('destroy/{id}', 'destroy')->name('admin.settings.data_transfer.imports.delete');
+
                 Route::get('import/{id}', 'import')->name('admin.settings.data_transfer.imports.import');
 
                 Route::get('validate/{id}', 'validateImport')->name('admin.settings.data_transfer.imports.validate');
@@ -206,6 +212,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
                 Route::get('link/{id}', 'link')->name('admin.settings.data_transfer.imports.link');
 
                 Route::get('stats/{id}/{state?}', 'stats')->name('admin.settings.data_transfer.imports.stats');
+
+                Route::get('download/{id}', 'download')->name('admin.settings.data_transfer.imports.download');
+
+                Route::get('download-error-report/{id}', 'downloadErrorReport')->name('admin.settings.data_transfer.imports.download_error_report');
             });
         });
     });

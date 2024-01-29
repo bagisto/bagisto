@@ -32,22 +32,7 @@ abstract class AbstractType
     /**
      * Error code for column name invalid.
      */
-    public const ERROR_CODE_COLUMN_NAME_INVALID = 'column_came_invalid';
-
-    /**
-     * Error code for attribute not valid.
-     */
-    public const ERROR_CODE_ATTRIBUTE_NOT_VALID = 'attribute_not_valid';
-
-    /**
-     * Error code for duplicate unique attribute.
-     */
-    public const ERROR_CODE_DUPLICATE_UNIQUE_ATTRIBUTE = 'duplicate_unique_attribute';
-
-    /**
-     * Error code for illegal characters.
-     */
-    public const ERROR_CODE_ILLEGAL_CHARACTERS = 'illegal_Characters';
+    public const ERROR_CODE_COLUMN_NAME_INVALID = 'column_name_invalid';
 
     /**
      * Error code for invalid attribute.
@@ -65,31 +50,16 @@ abstract class AbstractType
     public const ERROR_CODE_COLUMNS_NUMBER = 'wrong_columns_number';
 
     /**
-     * Error code for invalid attribute type.
-     */
-    public const ERROR_INVALID_ATTRIBUTE_TYPE = 'invalid_attribute_type';
-
-    /**
-     * Error code for invalid attribute option.
-     */
-    public const ERROR_INVALID_ATTRIBUTE_OPTION = 'absent_attribute_option';
-
-    /**
      * Error message templates.
      */
-    protected array $errorMessageTemplates = [
-        self::ERROR_CODE_SYSTEM_EXCEPTION           => 'An unexpected system error occurred.',
-        self::ERROR_CODE_COLUMN_NOT_FOUND           => 'Required columns not found: %s.',
-        self::ERROR_CODE_COLUMN_EMPTY_HEADER        => 'Columns number "%s" have empty headers.',
-        self::ERROR_CODE_COLUMN_NAME_INVALID        => 'Invalid column names: "%s".',
-        self::ERROR_CODE_ATTRIBUTE_NOT_VALID        => "Please correct the value for attribute '%s'.",
-        self::ERROR_CODE_DUPLICATE_UNIQUE_ATTRIBUTE => "Duplicate Unique Attribute for '%s'.",
-        self::ERROR_CODE_ILLEGAL_CHARACTERS         => 'Illegal character used for attribute %s.',
-        self::ERROR_CODE_INVALID_ATTRIBUTE          => 'Header contains invalid attribute(s): "%s".',
-        self::ERROR_CODE_WRONG_QUOTES               => 'Curly quotes used instead of straight quotes.',
-        self::ERROR_CODE_COLUMNS_NUMBER             => 'Number of columns does not correspond to the number of rows in the header.',
-        self::ERROR_INVALID_ATTRIBUTE_TYPE          => 'Value for attribute \'%s\' contains an incorrect value.',
-        self::ERROR_INVALID_ATTRIBUTE_OPTION        => 'Value for attribute %s contains an incorrect value. See acceptable values specified in Admin settings.',
+    protected array $errorMessages = [
+        self::ERROR_CODE_SYSTEM_EXCEPTION    => 'data_transfer::app.validation.errors.system',
+        self::ERROR_CODE_COLUMN_NOT_FOUND    => 'data_transfer::app.validation.errors.column-not-found',
+        self::ERROR_CODE_COLUMN_EMPTY_HEADER => 'data_transfer::app.validation.errors.column-empty-headers',
+        self::ERROR_CODE_COLUMN_NAME_INVALID => 'data_transfer::app.validation.errors.column-name-invalid',
+        self::ERROR_CODE_INVALID_ATTRIBUTE   => 'data_transfer::app.validation.errors.invalid-attribute',
+        self::ERROR_CODE_WRONG_QUOTES        => 'data_transfer::app.validation.errors.wrong-quotes',
+        self::ERROR_CODE_COLUMNS_NUMBER      => 'data_transfer::app.validation.errors.column-numbers',
     ];
 
     public const BATCH_SIZE = 50;
@@ -173,12 +143,12 @@ abstract class AbstractType
     abstract public function importBatch(ImportBatchContract $importBatchContract): bool;
 
     /**
-     * Initialize Product error templates
+     * Initialize Product error messages
      */
-    protected function initErrorTemplates(): void
+    protected function initErrorMessages(): void
     {
-        foreach ($this->errorMessageTemplates as $errorCode => $template) {
-            $this->errorHelper->addErrorMessageTemplate($errorCode, $template);
+        foreach ($this->errorMessages as $errorCode => $message) {
+            $this->errorHelper->addErrorMessage($errorCode, trans($message));
         }
     }
 
@@ -213,7 +183,7 @@ abstract class AbstractType
     {
         $this->errorHelper = $errorHelper;
 
-        $this->initErrorTemplates();
+        $this->initErrorMessages();
 
         return $this;
     }

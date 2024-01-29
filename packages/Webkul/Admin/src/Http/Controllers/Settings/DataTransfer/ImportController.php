@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Controllers\Settings\DataTransfer;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Settings\DataTransfer\ImportDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\DataTransfer\Helpers\Import;
@@ -65,13 +66,14 @@ class ImportController extends Controller
         Event::dispatch('data_transfer.imports.create.before');
 
         $import = $this->importRepository->create(
-            array_merge([
-                'file_path' => request()->file('file')->storeAs(
-                    'imports',
-                    time() . '-' . request()->file('file')->getClientOriginalName(),
-                    'private'
-                ),
-            ],
+            array_merge(
+                [
+                    'file_path' => request()->file('file')->storeAs(
+                        'imports',
+                        time() . '-' . request()->file('file')->getClientOriginalName(),
+                        'private'
+                    ),
+                ],
                 request()->only([
                     'type',
                     'action',
@@ -86,7 +88,73 @@ class ImportController extends Controller
 
         Event::dispatch('data_transfer.imports.create.before', $import);
 
-        session()->flash('success', trans('admin::app.settings.data-transfer.import.create.create-success'));
+        session()->flash('success', trans('admin::app.settings.data-transfer.imports.create-success'));
+
+        return redirect()->route('admin.settings.data_transfer.imports.index');
+    }
+
+    /**
+     * Show the form for editing a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        return view('admin::settings.data-transfer.imports.edit', compact('import'));
+    }
+
+    /**
+     * Update a resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(int $id)
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        $this->validate(request(), [
+            'type'                => 'required|in:category,product,customer',
+            'action'              => 'required:in:append,replace,delete',
+            'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
+            'allowed_errors'      => 'required|integer|min:0',
+            'field_separator'     => 'required',
+            'file'                => 'required|mimes:csv',
+        ]);
+
+        Event::dispatch('data_transfer.imports.update.before');
+
+        $import = $this->importRepository->update(
+            array_merge(
+                [
+                    'file_path'            => request()->file('file')->storeAs(
+                        'imports',
+                        time() . '-' . request()->file('file')->getClientOriginalName(),
+                        'private'
+                    ),
+                    'state'                => 'pending',
+                    'processed_rows_count' => 0,
+                    'invalid_rows_count'   => 0,
+                    'errors_count'         => 0,
+                    'errors'               => null,
+                    'error_file_path'      => null,
+                ],
+                request()->only([
+                    'type',
+                    'action',
+                    'validation_strategy',
+                    'validation_strategy',
+                    'allowed_errors',
+                    'field_separator',
+                    'images_directory_path',
+                ])
+            ), $import->id
+        );
+
+        Event::dispatch('data_transfer.imports.update.before', $import);
+
+        session()->flash('success', trans('admin::app.settings.data-transfer.imports.update-success'));
 
         return redirect()->route('admin.settings.data_transfer.imports.index');
     }
@@ -101,8 +169,8 @@ class ImportController extends Controller
         $import = $this->importRepository->findOrFail($id);
 
         $isValid = $this->importHelper
-                ->setImport($import)
-                ->isValid();
+            ->setImport($import)
+            ->isValid();
 
         $state = $import->state == Import::STATE_LINKING
             ? Import::STATE_COMPLETED
@@ -121,7 +189,7 @@ class ImportController extends Controller
     public function validateImport(int $id): JsonResponse
     {
         $import = $this->importRepository->findOrFail($id);
-
+        
         $isValid = $this->importHelper
             ->setImport($import)
             ->validate();
@@ -143,7 +211,7 @@ class ImportController extends Controller
 
         if (! $import->processed_rows_count) {
             return new JsonResponse([
-                'message' => 'There are no resources to import.',
+                'message' => trans('admin::app.settings.data-transfer.imports.nothing-to-import'),
             ], 400);
         }
 
@@ -151,7 +219,13 @@ class ImportController extends Controller
 
         if (! $this->importHelper->isValid()) {
             return new JsonResponse([
-                'message' => 'Import is not valid.',
+                'message' => trans('admin::app.settings.data-transfer.imports.not-valid'),
+            ], 400);
+        }
+
+        if (config('queue.default') == 'sync') {
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.data-transfer.imports.setup-queue-error'),
             ], 400);
         }
 
@@ -182,7 +256,7 @@ class ImportController extends Controller
                     'message' => $e->getMessage(),
                 ], 400);
             }
-    
+
         } else {
             $this->importHelper->linking();
         }
@@ -202,7 +276,7 @@ class ImportController extends Controller
 
         if (! $import->processed_rows_count) {
             return new JsonResponse([
-                'message' => 'There are no resources to import.',
+                'message' => trans('admin::app.settings.data-transfer.imports.nothing-to-import'),
             ], 400);
         }
 
@@ -210,7 +284,7 @@ class ImportController extends Controller
 
         if (! $this->importHelper->isValid()) {
             return new JsonResponse([
-                'message' => 'Import is not valid.',
+                'message' => trans('admin::app.settings.data-transfer.imports.not-valid'),
             ], 400);
         }
 
@@ -268,5 +342,25 @@ class ImportController extends Controller
             'import' => $import->unsetRelations(),
             'stats'  => $stats,
         ]);
+    }
+
+    /**
+     * Download import error report
+     */
+    public function download(int $id)
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        return Storage::disk('private')->download($import->file_path);
+    }
+
+    /**
+     * Download import error report
+     */
+    public function downloadErrorReport(int $id)
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        return Storage::disk('private')->download($import->error_file_path);
     }
 }

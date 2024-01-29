@@ -46,11 +46,15 @@ class Product extends AbstractType
     /**
      * Error message templates
      */
-    protected array $messageTemplates = [
-        self::ERROR_INVALID_TYPE                  => 'Product type is invalid or not supported',
-        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'Product with specified SKU not found',
-        self::ERROR_DUPLICATE_URL_KEY             => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
-        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
+    protected array $messages = [
+        // self::ERROR_INVALID_TYPE                  => 'Product type is invalid or not supported',
+        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.validation.errors.products.invalid-type',
+        // self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'Product with specified SKU not found',
+        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.validation.errors.products.sku-not-found',
+        // self::ERROR_DUPLICATE_URL_KEY             => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
+        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.validation.errors.products.duplicate-url-key',
+        // self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
+        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.validation.errors.products.invalid-attribute-family',
     ];
 
     /**
@@ -163,13 +167,13 @@ class Product extends AbstractType
     /**
      * Initialize Product error templates
      */
-    protected function initErrorTemplates(): void
+    protected function initErrorMessages(): void
     {
-        foreach ($this->messageTemplates as $errorCode => $template) {
-            $this->errorHelper->addErrorMessageTemplate($errorCode, $template);
+        foreach ($this->messages as $errorCode => $message) {
+            $this->errorHelper->addErrorMessage($errorCode, trans($message));
         }
 
-        parent::initErrorTemplates();
+        parent::initErrorMessages();
     }
 
     /**
@@ -249,6 +253,10 @@ class Product extends AbstractType
         $this->saveAttributeValues($attributes);
 
         $this->saveInventories($inventories);
+
+        /**
+         * Save product images
+         */
 
         /**
          * Update import batch summary
@@ -374,7 +382,11 @@ class Product extends AbstractType
      */
     public function prepareCategories(array $rowData, array &$categories): void
     {
-        $names = explode('/', $rowData['categories']);
+        if (empty($rowData['categories'])) {
+            return;
+        }
+
+        $names = explode('/', $rowData['categories'] ?? '');
 
         $categoryIds = [];
 
@@ -401,6 +413,10 @@ class Product extends AbstractType
      */
     public function saveCategories(array $categories): void
     {
+        if ( empty($categories)) {
+            return;
+        }
+
         $productCategories = [];
 
         foreach ($categories as $sku => $categoryIds) {
@@ -493,7 +509,7 @@ class Product extends AbstractType
 
         foreach ($linkTableMapping as $type => $table) {
             if (! empty($rowData[$type . '_skus'])) {
-                foreach (explode(',', $rowData[$type . '_skus']) as $sku) {
+                foreach (explode(',', $rowData[$type . '_skus'] ?? '') as $sku) {
                     $links[$table][$rowData['sku']][] = $sku;
                 }
             }
@@ -558,10 +574,10 @@ class Product extends AbstractType
             return;
         }
 
-        $inventorySources = explode(',', $rowData['inventories']);
+        $inventorySources = explode(',', $rowData['inventories'] ?? '');
 
         foreach ($inventorySources as $inventorySource) {
-            [$inventorySource, $qty] = explode('=', $inventorySource);
+            [$inventorySource, $qty] = explode('=', $inventorySource ?? '');
 
             $inventories[$rowData['sku']][] = [
                 'source' => $inventorySource,
@@ -697,7 +713,7 @@ class Product extends AbstractType
             ];
         } else {
             $message = sprintf(
-                $this->messageTemplates[self::ERROR_DUPLICATE_URL_KEY],
+                trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
                 'url_key',
                 $this->urlKeys[$rowData['url_key']]['sku']
             );
@@ -724,10 +740,7 @@ class Product extends AbstractType
         $attributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
 
         foreach ($attributes as $attribute) {
-            if (
-                in_array($attribute->code, ['sku', 'url_key'])
-                || $attribute->type == 'boolean'
-            ) {
+            if (in_array($attribute->code, ['sku', 'url_key'])) {
                 continue;
             }
 
@@ -799,7 +812,7 @@ class Product extends AbstractType
                 self::ERROR_DUPLICATE_URL_KEY,
                 'url_key',
                 sprintf(
-                    $this->messageTemplates[self::ERROR_DUPLICATE_URL_KEY],
+                    trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
                     $product->url_key,
                     $product->sku
                 )

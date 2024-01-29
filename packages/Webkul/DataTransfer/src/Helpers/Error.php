@@ -37,7 +37,7 @@ class Error
     /**
      * Add error message template
      */
-    public function addErrorMessageTemplate(string $code, string $template): self
+    public function addErrorMessage(string $code, string $template): self
     {
         $this->messageTemplate[$code] = $template;
 
@@ -120,14 +120,6 @@ class Error
     }
 
     /**
-     * Get all errors from an import process
-     */
-    public function getAllErrors(): array
-    {
-        return $this->items;
-    }
-
-    /**
      * Build an error message via code, message and column name
      */
     protected function getErrorMessage(?string $code, ?string $message, ?string $columnName): string
@@ -167,5 +159,33 @@ class Error
     public function getErrorsCount(): int
     {
         return $this->errorsCount;
+    }
+
+    /**
+     * Get all errors from an import process
+     */
+    public function getAllErrors(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * Return all errors grouped by code
+     */
+    public function getAllErrorsGroupedByCode(): array
+    {
+        $errors = [];
+
+        foreach ($this->items as $rowNumber => $rowErrors) {
+            foreach ($rowErrors as $error) {
+                if ($rowNumber === '') {
+                    $errors[$error['code']][$error['message']] = null;
+                } else {
+                    $errors[$error['code']][$error['message']][] = $rowNumber;
+                }
+            }
+        }
+
+        return $errors;
     }
 }
