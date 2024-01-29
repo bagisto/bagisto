@@ -685,7 +685,7 @@
                 <!-- Environment Configuration .ENV -->
                 <div
                     class="w-full max-w-[568px] bg-white rounded-lg shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
-                    {{-- v-if="currentStep == 'envConfiguration'" --}}
+                    v-if="currentStep == 'envConfiguration'"
                 >
                     <x-installer::form
                         v-slot="{ meta, errors, handleSubmit }"
