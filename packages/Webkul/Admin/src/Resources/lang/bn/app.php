@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => 'পিছনে যান',
-                    'bundle'                  => 'বান্ডল',
-                    'configurable'            => 'কনফিগারেবল',
                     'configurable-attributes' => 'কনফিগারেবল গুণগুলি',
                     'create-btn'              => 'পণ্য তৈরি করুন',
-                    'downloadable'            => 'ডাউনলোডযোগ্য',
                     'family'                  => 'পরিবার',
-                    'grouped'                 => 'গ্রুপ করা',
                     'save-btn'                => 'পণ্য সংরক্ষণ করুন',
-                    'simple'                  => 'সাধারণ',
                     'sku'                     => 'SKU',
                     'title'                   => 'নতুন পণ্য তৈরি করুন',
                     'type'                    => 'প্রকার',
-                    'virtual'                 => 'ভার্চুয়াল',
                 ],
 
                 'datagrid'   => [

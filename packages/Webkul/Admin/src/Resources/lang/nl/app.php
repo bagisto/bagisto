@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => 'Terug',
-                    'bundle'                  => 'Bundel',
-                    'configurable'            => 'Configureerbaar',
                     'configurable-attributes' => 'Configureerbare Eigenschappen',
                     'create-btn'              => 'Product aanmaken',
-                    'downloadable'            => 'Downloadbaar',
                     'family'                  => 'Familie',
-                    'grouped'                 => 'Gegroepeerd',
                     'save-btn'                => 'Product Opslaan',
-                    'simple'                  => 'Eenvoudig',
                     'sku'                     => 'SKU',
                     'title'                   => 'Nieuw Product aanmaken',
                     'type'                    => 'Type',
-                    'virtual'                 => 'Virtueel',
                 ],
 
                 'datagrid'   => [

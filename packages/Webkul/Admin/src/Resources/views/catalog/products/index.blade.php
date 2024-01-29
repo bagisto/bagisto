@@ -319,7 +319,7 @@
                                         >
                                             @foreach(config('product_types') as $key => $type)
                                                 <option value="{{ $key }}">
-                                                    @lang('admin::app.catalog.products.index.create.' . $key)
+                                                    @lang($type['name'])
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>

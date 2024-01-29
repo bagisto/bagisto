@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'ආපසු',
-                    'bundle'                  => 'බන්ඩල්',
-                    'configurable'            => 'ස්ථාන සැකසුම්',
                     'configurable-attributes' => 'ස්ථාන සැකසුම් ගුණ',
                     'create-btn'              => 'නව නිෂ්පාදනයක්',
-                    'downloadable'            => 'බාගුල්',
                     'family'                  => 'පවුර',
-                    'grouped'                 => 'කාණ්ඩායම් කුලු',
                     'save-btn'                => 'නිෂ්පාදනය සුරකින්න',
-                    'simple'                  => 'සරුප',
                     'sku'                     => 'SKU',
                     'title'                   => 'නව නිෂ්පාදනයක්',
                     'type'                    => 'වර්ගය',
-                    'virtual'                 => 'වෘත්තාක',
                 ],
 
                 'datagrid' => [

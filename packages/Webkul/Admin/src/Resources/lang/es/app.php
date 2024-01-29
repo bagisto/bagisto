@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'Volver',
-                    'bundle'                  => 'Paquete',
-                    'configurable'            => 'Configurable',
                     'configurable-attributes' => 'Atributos Configurables',
                     'create-btn'              => 'Crear producto',
-                    'downloadable'            => 'Descargable',
                     'family'                  => 'Familia',
-                    'grouped'                 => 'Agrupado',
                     'save-btn'                => 'Guardar producto',
-                    'simple'                  => 'Simple',
                     'sku'                     => 'SKU',
                     'title'                   => 'Crear nuevo producto',
                     'type'                    => 'Tipo',
-                    'virtual'                 => 'Virtual',
                 ],
 
                 'datagrid' => [

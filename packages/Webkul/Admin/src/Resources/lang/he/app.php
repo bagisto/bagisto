@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'חזור',
-                    'bundle'                  => 'ארגון',
-                    'configurable'            => 'ניתן להגדרה',
                     'configurable-attributes' => 'מאפיינים להגדרה',
                     'create-btn'              => 'צור מוצר',
-                    'downloadable'            => 'ניתן להורדה',
                     'family'                  => 'משפחה',
-                    'grouped'                 => 'קבוצה',
                     'save-btn'                => 'שמור מוצר',
-                    'simple'                  => 'פשוט',
                     'sku'                     => 'SKU',
                     'title'                   => 'צור מוצר חדש',
                     'type'                    => 'סוג',
-                    'virtual'                 => 'וירטואלי',
                 ],
 
                 'datagrid' => [

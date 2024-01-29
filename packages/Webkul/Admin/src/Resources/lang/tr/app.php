@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => 'Geri',
-                    'bundle'                  => 'Paket',
-                    'configurable'            => 'Yapılandırılabilir',
                     'configurable-attributes' => 'Yapılandırılabilir Özellikler',
                     'create-btn'              => 'Ürün Oluştur',
-                    'downloadable'            => 'İndirilebilir',
                     'family'                  => 'Aile',
-                    'grouped'                 => 'Gruplu',
                     'save-btn'                => 'Ürünü Kaydet',
-                    'simple'                  => 'Basit',
                     'sku'                     => 'SKU',
                     'title'                   => 'Yeni Ürün Oluştur',
                     'type'                    => 'Tür',
-                    'virtual'                 => 'Sanal',
                 ],
 
                 'datagrid'   => [

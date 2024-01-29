@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => '返回',
-                    'bundle'                  => '捆绑',
-                    'configurable'            => '可配置',
                     'configurable-attributes' => '可配置属性',
                     'create-btn'              => '创建产品',
-                    'downloadable'            => '可下载',
                     'family'                  => '家庭',
-                    'grouped'                 => '分组',
                     'save-btn'                => '保存产品',
-                    'simple'                  => '简单',
                     'sku'                     => 'SKU',
                     'title'                   => '创建新产品',
                     'type'                    => '类型',
-                    'virtual'                 => '虚拟',
                 ],
 
                 'datagrid'   => [
