@@ -476,14 +476,16 @@ return [
         'sort'   => 4,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -493,14 +495,16 @@ return [
         'sort'   => 5,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -510,14 +514,16 @@ return [
         'sort'   => 6,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
