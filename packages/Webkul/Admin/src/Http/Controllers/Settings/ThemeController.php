@@ -110,7 +110,7 @@ class ThemeController extends Controller
 
         $theme = $this->themeCustomizationRepository->update($data, $id);
 
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+        if (isset($data[$locale]) && in_array($data['type'], ['image_carousel', 'services_content'])) {
             $this->themeCustomizationRepository->uploadImage(
                 $data[$locale],
                 $theme,
