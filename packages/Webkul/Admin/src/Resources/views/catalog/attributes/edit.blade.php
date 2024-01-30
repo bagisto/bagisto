@@ -621,15 +621,16 @@
                                 <!-- Value Per Locale -->
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
                                     @php
-                                        $selectedOption = old('value_per_locale') ?? $attribute->value_per_locale
+                                        $valuePerLocale = old('value_per_locale') ?? $attribute->value_per_locale;
                                     @endphp
 
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="value_per_locale"
                                         name="value_per_locale"
-                                        :checked="(boolean) $selectedOption"
-                                        :disabled="(boolean) $selectedOption"
+                                        :value="$valuePerLocale"
+                                        :checked="(boolean) $valuePerLocale"
+                                        :disabled="(boolean) $valuePerLocale"
                                     />
 
                                     <label
@@ -641,22 +642,23 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="value_per_locale"
-                                        :value="(boolean) $selectedOption"
+                                        :value="(boolean) $valuePerLocale"
                                     />
                                 </x-admin::form.control-group>
 
                                 <!-- Value Per Channel -->
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 opacity-70 select-none">
                                     @php
-                                        $selectedOption = old('value_per_channel') ?? $attribute->value_per_channel
+                                        $valuePerChannel = old('value_per_channel') ?? $attribute->value_per_channel
                                     @endphp
 
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="value_per_channel"
                                         name="value_per_channel"
-                                        :checked="(boolean) $selectedOption"
-                                        :disabled="(boolean) $selectedOption"
+                                        :value="$valuePerChannel"
+                                        :checked="(boolean) $valuePerChannel"
+                                        :disabled="(boolean) $valuePerChannel"
                                     />
 
                                     <label
@@ -668,23 +670,23 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="value_per_channel"
-                                        :value="(boolean) $selectedOption"
+                                        :value="(boolean) $valuePerChannel"
                                     />
                                 </x-admin::form.control-group>
 
                                 <!-- Use in Layered -->
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
-                                        $selectedOption = $attribute->is_filterable ?? old('is_filterable')
+                                        $isFilterable = old('is_filterable') ?? $attribute->is_filterable;
                                     @endphp
 
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_filterable"
                                         name="is_filterable"
-                                        value="1"
+                                        :value="$isFilterable"
                                         for="is_filterable"
-                                        :checked="(boolean) $selectedOption"
+                                        :checked="(boolean) $isFilterable"
                                     />
 
                                     <label
@@ -697,23 +699,23 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_filterable"
-                                        :value="(boolean) $selectedOption"
+                                        :value="(boolean) $isFilterable"
                                     />
                                 </x-admin::form.control-group>
 
                                 <!-- Use to create configuable product -->
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
-                                        $selectedOption = $attribute->is_configurable ?? old('is_configurable')
+                                        $isConfigurable = old('is_configurable') ?? $attribute->is_configurable;
                                     @endphp
 
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_configurable"
                                         name="is_configurable"
-                                        value="1"
+                                        :value="$isConfigurable"
                                         for="is_configurable"
-                                        :checked="(boolean) $selectedOption"
+                                        :checked="(boolean) $isConfigurable"
                                     />
 
                                     <label
@@ -726,14 +728,14 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_configurable"
-                                        :value="(boolean) $selectedOption"
+                                        :value="(boolean) $isConfigurable"
                                     />
-/                                </x-admin::form.control-group>
+                                </x-admin::form.control-group>
 
                                 <!-- Visible On Product View Page On Fornt End -->
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
                                     @php
-                                        $selectedOption = $attribute->is_visible_on_front ?? old('is_visible_on_front');
+                                        $isVisibleOnFront = old('is_visible_on_front') ?? $attribute->is_visible_on_front;
                                     @endphp
 
                                     <x-admin::form.control-group.control
@@ -741,8 +743,8 @@
                                         id="is_visible_on_front"
                                         name="is_visible_on_front"
                                         for="is_visible_on_front"
-                                        value="1"
-                                        :checked="(boolean) $selectedOption"
+                                        :value="$isVisibleOnFront"
+                                        :checked="(boolean) $isVisibleOnFront"
                                     />
 
                                     <label
@@ -755,23 +757,23 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_visible_on_front"
-                                        :value="(boolean) $selectedOption"
+                                        :value="(boolean) $isVisibleOnFront"
                                     />
                                 </x-admin::form.control-group>
 
                                 <!-- Attribute is Comparable -->
                                 <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0 select-none">
                                     @php
-                                        $selectedOption = old('is_comparable') ?? $attribute->is_comparable
+                                        $isComparable = old('is_comparable') ?? $attribute->is_comparable
                                     @endphp
 
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_comparable"
                                         name="is_comparable"
-                                        value="1"
+                                        :value="$isComparable"
                                         for="is_comparable"
-                                        :checked="(boolean) $selectedOption"
+                                        :checked="(boolean) $isComparable"
                                     />
 
                                     <label
@@ -784,7 +786,7 @@
                                     <x-admin::form.control-group.control
                                         type="hidden"
                                         name="is_comparable"
-                                        :value="(boolean) $selectedOption"
+                                        :value="(boolean) $isComparable"
                                     />
                                 </x-admin::form.control-group>
                             </x-slot>
