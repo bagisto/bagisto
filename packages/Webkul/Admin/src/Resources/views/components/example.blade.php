@@ -1,133 +1,3 @@
-<!-- Form Control Group -->
-
-<!-- Type Text -->
-<x-admin::form.control-group>
-    <x-admin::form.control-group.label class="required">
-        @lang('name')
-    </x-admin::form.control-group.label>
-
-    <x-admin::form.control-group.control
-        type="text"
-        name="name"
-        rules="required"
-        :value=""
-        label="name"
-        placeholder="name"
-    />
-
-    <x-admin::form.control-group.error control-name="name" />    
-</x-admin::form.control-group>
-
-<!-- Type Select -->
-<x-admin::form.control-group>
-    <x-admin::form.control-group.label>
-        @lang('admin::app.catalog.families.create.column')
-    </x-admin::form.control-group.label>
-
-    <x-admin::form.control-group.control
-        type="select"
-        name="column"
-        rules="required"
-        :label="trans('admin::app.catalog.families.create.column')"
-    >
-        <!-- Default Option -->
-        <option value="">
-            @lang('admin::app.catalog.families.create.select-group')
-        </option>
-
-        <option value="1">
-            @lang('admin::app.catalog.families.create.main-column')
-        </option>
-
-        <option value="2">
-            @lang('admin::app.catalog.families.create.right-column')
-        </option>
-    </x-admin::form.control-group.control>
-
-    <x-admin::form.control-group.error control-name="column" />
-</x-admin::form.control-group>
-
-<!--Type Checkbox -->
-<x-admin::form.control-group>
-    <x-admin::form.control-group.control
-        type="checkbox"
-        id="is_unique"
-        name="is_unique"
-        value="1"
-        for="is_unique"
-    />
-
-    <x-admin::form.control-group.label
-        for="is_unique"
-    >
-        @lang('admin::app.catalog.attributes.edit.is-unique')
-    </x-admin::form.control-group.label>
-</x-admin::form.control-group>
-
-<!--Type Radio -->
-<x-admin::form.control-group>
-    <x-admin::form.control-group.control
-        type="radio"
-        id="is_unique"
-        name="is_unique"
-        value="1"
-        for="is_unique"
-    />
-
-    <x-admin::form.control-group.label
-        for="is_unique"
-    >
-        @lang('admin::app.catalog.attributes.edit.is-unique')
-    </x-admin::form.control-group.label>
-</x-admin::form.control-group>
-
-<!-- basic/traditional form  -->
-<x-admin::form action="">
-    <x-admin::form.control-group>
-        <x-admin::form.control-group.label>
-            Email
-        </x-admin::form.control-group.label>
-
-        <x-admin::form.control-group.control
-            type="email"
-            name="email"
-            rules="required|email"
-            value=""
-            label="Email"
-            placeholder="email@example.com"
-        />
-
-        <x-admin::form.control-group.error control-name="email" />
-    </x-admin::form.control-group>
-</x-admin::form>
-
-<!-- customized/ajax form -->
-<x-admin::form
-    v-slot="{ meta, errors, handleSubmit }"
-    as="div"
->
-    <form @submit="handleSubmit($event, callMethodInComponent)">
-        <x-admin::form.control-group>
-            <x-admin::form.control-group.label>
-                Email
-            </x-admin::form.control-group.label>
-
-            <x-admin::form.control-group.control
-                type="email"
-                name="email"
-                rules="required"
-                :value="old('email')"
-                label="Email"
-                placeholder="email@example.com"
-            />
-
-            <x-admin::form.control-group.error control-name="email" />
-        </x-admin::form.control-group>
-
-        <button>Submit</button>
-    </form>
-</x-admin::form>
-
 <!-- Accordion Component -->
 <x-admin::accordion title="Test Accordion">
     <x-slot:header>
@@ -139,20 +9,35 @@
     </x-slot>
 </x-admin::accordion>
 
-<!-- Modal Component -->
-<x-admin::modal>
-    <x-slot:toggle>
-        Modal Toggle
-    </x-slot>
+<!--
+    Chart | Bar Chart Component
 
-    <x-slot:header>
-        Modal Header
-    </x-slot>
+    Note: To use charts, you need to require the Chart.js library.
+-->
+<x-admin::charts.bar
+    ::labels="chartLabels"
+    ::datasets="chartDatasets"
+/>
 
-    <x-slot:content>
-        Modal Content
-    </x-slot>
-</x-admin::modal>
+<!--
+    Chart | Line Chart Component
+
+    Note: To use charts, you need to require the Chart.js library.
+-->
+<x-admin::charts.line
+    ::labels="chartLabels"
+    ::datasets="chartDatasets"
+/>
+
+<!-- Datagrid Component -->
+<x-admin::datagrid
+    :src="route('admin.sales.orders.index')"
+/>
+
+<!-- Datagrid | Export Component-->
+<x-admin::datagrid.export
+    :src="route('admin.sales.orders.index')"
+/>
 
 <!-- Drawer Component -->
 <x-admin::drawer>
@@ -180,6 +65,412 @@
     </x-slot>
 </x-admin::dropdown>
 
+<!-- Flash Group Component-->
+<x-admin::flash-group />
+
+<!-- Flat Picker | Date Component -->
+<x-admin::flat-picker.date ::allow-input="false">
+    <input
+        value=""
+        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+        type="date"
+        name="created_at"
+        placeholder="Created At"
+        @change=""
+    />
+</x-admin::flat-picker.date>
+
+<!-- Flat Picker | Datetime Component -->
+<x-admin::flat-picker.datetime ::allow-input="false">
+    <input
+        value=""
+        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+        type="datetime-local"
+        name="created_at"
+        placeholder="Created At"
+        @change=""
+    />
+</x-admin::flat-picker.datetime>
+
+<!-- Form Control Group | Text Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label class="required">
+        Name
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="text"
+        name="name"
+        rules="required"
+        :value=""
+        label="Name"
+        placeholder="Name"
+    />
+
+    <x-admin::form.control-group.error control-name="name" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Price Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label class="required">
+        Price
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="price"
+        name="price"
+        value="2.00"
+        rules="required"
+        label="Price"
+        placeholder="Price"
+    />
+
+    <x-admin::form.control-group.error control-name="price" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | File Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label class="required">
+        File Upload
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="file"
+        id="file"
+        name="file"
+    />
+
+    <x-admin::form.control-group.error control-name="file" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Color Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Color
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="color"
+        name="color"
+        placeholder="Color"
+    />
+
+    <x-admin::form.control-group.error control-name="color" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Textarea Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Description
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="textarea"
+        name="description"
+        value=""
+        label="Description"
+    />
+
+    <x-admin::form.control-group.error control-name="description" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Date Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Date Of Birth
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="date"
+        name="date_of_birth"
+        label="Date Of Birth"
+        placeholder="Date Of Birth"
+    />
+
+    <x-admin::form.control-group.error control-name="date_of_birth" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Datetime Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Date Of Birth
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="datetime"
+        name="date_of_birth"
+        label="Date Of Birth"
+        placeholder="Date Of Birth"
+    />
+
+    <x-admin::form.control-group.error control-name="date_of_birth" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Select Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Customer Group
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="select"
+        name="group"
+        rules="required"
+        label="Customer Group"
+    >
+        <!-- Default Option -->
+        <option value="0">
+            Guest
+        </option>
+
+        <option value="1">
+            Customer
+        </option>
+
+        <option value="2">
+            Wholesaler
+        </option>
+    </x-admin::form.control-group.control>
+
+    <x-admin::form.control-group.error control-name="group" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Multiselect Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Customer Groups
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="multiselect"
+        name="groups"
+        rules="required"
+        label="Customer Group"
+    >
+        <!-- Default Option -->
+        <option value="0">
+            Guest
+        </option>
+
+        <option value="1">
+            Customer
+        </option>
+
+        <option value="2">
+            Wholesaler
+        </option>
+    </x-admin::form.control-group.control>
+
+    <x-admin::form.control-group.error control-name="groups" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Checkbox Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.control
+        type="checkbox"
+        id="is_unique"
+        name="is_unique"
+        value="1"
+        for="is_unique"
+    />
+
+    <x-admin::form.control-group.label
+        for="is_unique"
+    >
+        Is Unique
+    </x-admin::form.control-group.label>
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Radio Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.control
+        type="radio"
+        id="is_unique"
+        name="is_unique"
+        value="1"
+        for="is_unique"
+    />
+
+    <x-admin::form.control-group.label
+        for="is_unique"
+    >
+        Is Unique
+    </x-admin::form.control-group.label>
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Switch Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Status
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="switch"
+        class="cursor-pointer"
+        name="status"
+        value="1"
+        label="Status"
+    />
+
+    <x-admin::form.control-group.error control-name="status" />
+</x-admin::form.control-group>
+
+<!-- Form Control Group | Image Type Component -->
+<x-admin::form.control-group>
+    <x-admin::form.control-group.label>
+        Slider Image
+    </x-admin::form.control-group.label>
+
+    <x-admin::form.control-group.control
+        type="image"
+        name="slider_image"
+        rules="required"
+        :is-multiple="false"
+    />
+
+    <x-admin::form.control-group.error control-name="slider_image" />
+</x-admin::form.control-group>
+
+<!-- Form | Basic/Traditional Component  -->
+<x-admin::form action="">
+    <x-admin::form.control-group>
+        <x-admin::form.control-group.label>
+            Email
+        </x-admin::form.control-group.label>
+
+        <x-admin::form.control-group.control
+            type="email"
+            name="email"
+            rules="required|email"
+            value=""
+            label="Email"
+            placeholder="email@example.com"
+        />
+
+        <x-admin::form.control-group.error control-name="email" />
+    </x-admin::form.control-group>
+</x-admin::form>
+
+<!-- Form | Customized/Ajax Component -->
+<x-admin::form
+    v-slot="{ meta, errors, handleSubmit }"
+    as="div"
+>
+    <form @submit="handleSubmit($event, callMethodInComponent)">
+        <x-admin::form.control-group>
+            <x-admin::form.control-group.label>
+                Email
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="email"
+                name="email"
+                rules="required"
+                :value="old('email')"
+                label="Email"
+                placeholder="email@example.com"
+            />
+
+            <x-admin::form.control-group.error control-name="email" />
+        </x-admin::form.control-group>
+
+        <button>Submit</button>
+    </form>
+</x-admin::form>
+
+<!-- Media | Image Component -->
+<x-admin::media.images
+    name="images[files]"
+    allow-multiple="true"
+    show-placeholders="true"
+    :uploaded-images="$product->images"
+/>
+
+<!-- Media | Video Component -->
+<x-admin::media.videos
+    name="videos[files]"
+    :allow-multiple="true"
+    :uploaded-videos="$product->videos"
+/>
+
+<!-- Modal Component -->
+<x-admin::modal>
+    <x-slot:toggle>
+        Modal Toggle
+    </x-slot>
+
+    <x-slot:header>
+        Modal Header
+    </x-slot>
+
+    <x-slot:content>
+        Modal Content
+    </x-slot>
+</x-admin::modal>
+
+<!-- SEO Componnet -->
+<x-admin::seo />
+
+<!-- Star Rating Component -->
+<x-admin::star-rating
+    :is-editable="false"
+    :value="$review->rating"
+/>
+
+<!-- Table Component -->
+<x-admin::table>
+    <x-admin::table.thead>
+        <x-admin::table.thead.tr>
+            <x-admin::table.th>
+                Heading 1
+            </x-admin::table.th>
+
+            <x-admin::table.th>
+                Heading 2
+            </x-admin::table.th>
+
+            <x-admin::table.th>
+                Heading 3
+            </x-admin::table.th>
+
+            <x-admin::table.th>
+                Heading 4
+            </x-admin::table.th>
+        </x-admin::table.thead.tr>
+    </x-admin::table.thead>
+
+    <x-admin::table.tbody>
+        <x-admin::table.tbody.tr>
+            <x-admin::table.td>
+                Column 1
+            </x-admin::table.td>
+
+            <x-admin::table.td>
+                Column 2
+            </x-admin::table.td>
+
+            <x-admin::table.td>
+                Column 3
+            </x-admin::table.td>
+
+            <x-admin::table.td>
+                Column 4
+            </x-admin::table.td>
+        </x-admin::table.thead.tr>
+    </x-admin::table.tbody>
+</x-admin::table>
+
+<!-- Tabs Component -->
+<x-admin::tabs>
+    <x-admin::tabs.item title="Tab 1">
+        Tab 1 Content
+    </x-admin::tabs.item>
+
+    <x-admin::tabs.item title="Tab 2">
+        Tab 2 Content
+    </x-admin::tabs.item>
+</x-admin::tabs>
+
 <!-- Tinymce Component -->
 <x-admin::form.control-group>
     <x-admin::form.control-group.label>
@@ -200,42 +491,31 @@
     <x-admin::form.control-group.error control-name="html_content" />
 </x-admin::form.control-group>
 
-<!-- SEO Title & Description Blade Componnet -->
-<x-admin::seo />
-
-<!-- Star Rating Component -->
-<x-admin::star-rating
-    :is-editable="false"
-    :value="$review->rating"
+<!-- Tree | Checkbox Individual Component -->
+<x-admin::tree.view
+    input-type="checkbox"
+    selection-type="hierarchical"
+    name-field="parent_id"
+    value-field="key"
+    id-field="key"
+    :items="json_encode($availableItems)"
+    :value="json_encode($savedValues)"
+    :fallback-locale="config('app.fallback_locale')"
 />
 
-<!-- Exportdatagrid Component-->
-<x-admin::datagrid.export
-    src=""
+<!-- Tree | Checkbox Hierarchical Component -->
+<x-admin::tree.view
+    input-type="checkbox"
+    selection-type="hierarchical"
+    name-field="parent_id"
+    value-field="key"
+    id-field="key"
+    :items="json_encode($availableItems)"
+    :value="json_encode($savedValues)"
+    :fallback-locale="config('app.fallback_locale')"
 />
 
-<!-- Datagrid Component -->
-<x-admin::datagrid
-    :src="route('admin.sales.orders.index')"
-    :isMultiRow="true"
-/>
-
-<!-- Image Blade Component -->
-<x-admin::media.images
-    name="images[files]"
-    allow-multiple="true"
-    show-placeholders="true"
-    :uploaded-images="$product->images"
-/>
-
-<!-- Video Blade Component -->
-<x-admin::media.videos
-    name="videos[files]"
-    :allow-multiple="true"
-    :uploaded-videos="$product->videos"
-/>
-
-<!-- Radio Tree Component -->
+<!-- Tree | Radio Component -->
 <x-admin::tree.view
     input-type="radio"
     name-field="parent_id"
@@ -243,29 +523,5 @@
     id-field="id"
     :items="json_encode($availableItems)"
     :value="$savedValue"
-    :fallback-locale="config('app.fallback_locale')"
-/>
-
-<!-- Checkbox Tree Component | Individual -->
-<x-admin::tree.view
-    input-type="checkbox"
-    selection-type="hierarchical"
-    name-field="parent_id"
-    value-field="key"
-    id-field="key"
-    :items="json_encode($availableItems)"
-    :value="json_encode($savedValues)"
-    :fallback-locale="config('app.fallback_locale')"
-/>
-
-<!-- Checkbox Tree Component | Hierarchical -->
-<x-admin::tree.view
-    input-type="checkbox"
-    selection-type="hierarchical"
-    name-field="parent_id"
-    value-field="key"
-    id-field="key"
-    :items="json_encode($availableItems)"
-    :value="json_encode($savedValues)"
     :fallback-locale="config('app.fallback_locale')"
 />
