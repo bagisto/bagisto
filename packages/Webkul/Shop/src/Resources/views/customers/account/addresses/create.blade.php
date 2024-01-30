@@ -148,7 +148,9 @@
                 aria-label="trans('shop::app.customers.account.addresses.country')"
                 :label="trans('shop::app.customers.account.addresses.country')"
             >
-                <option value="">@lang('Select Country')</option>
+                <option value="">
+                    @lang('shop::app.customers.account.addresses.select-country')
+                </option>
 
                 @foreach (core()->countries() as $country)
                     <option 
