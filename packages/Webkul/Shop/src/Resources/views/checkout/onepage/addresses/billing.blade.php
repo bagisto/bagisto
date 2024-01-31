@@ -320,6 +320,10 @@
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                 >
+                                    <option value="">
+                                        @lang('shop::app.checkout.onepage.addresses.billing.select-country')
+                                    </option>
+
                                     <option
                                         v-for="country in countries"
                                         :value="country.code"
@@ -357,7 +361,9 @@
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                 >
-                                    <option value="">@lang('shop::app.checkout.onepage.addresses.billing.select-state')</option>
+                                    <option value="">
+                                        @lang('shop::app.checkout.onepage.addresses.billing.select-state')
+                                    </option>
 
                                     <option 
                                         v-for='(state, index) in states[forms.billing.address.country]' 
