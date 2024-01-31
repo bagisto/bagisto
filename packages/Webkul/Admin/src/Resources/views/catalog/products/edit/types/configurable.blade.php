@@ -1097,9 +1097,7 @@
 
             methods: {
                 addVariant(params, { resetForm }) {
-                    let self = this;
-
-                    let filteredVariants = this.variants.filter(function (variant) {
+                    let filteredVariants = this.variants.filter((variant) => {
                         let matchCount = 0;
 
                         for (let key in params) {
@@ -1108,7 +1106,7 @@
                             }
                         }
 
-                        return matchCount == self.superAttributes.length;
+                        return matchCount == this.superAttributes.length;
                     })
 
                     if (filteredVariants.length) {
@@ -1219,7 +1217,7 @@
 
             computed: {
                 selectedVariants() {
-                    return this.variants.filter(function(variant) {
+                    return this.variants.filter((variant) => {
                         variant.temp_images = [];
 
                         return variant.selected;
@@ -1259,11 +1257,9 @@
                 },
 
                 selectVariantsByAttributeOption(attribute, option) {
-                    let self = this;
+                    let isAttributeOptionChecked = this.isAttributeOptionChecked(attribute, option);
 
-                    let isAttributeOptionChecked = self.isAttributeOptionChecked(attribute, option);
-
-                    this.variants.forEach(function (variant) {
+                    this.variants.forEach((variant) => {
                         if (variant[attribute.code] == option.id) {
                             variant.selected = ! isAttributeOptionChecked;
                         }
@@ -1271,9 +1267,7 @@
                 },
 
                 isAttributeOptionChecked(attribute, option) {
-                    let variants = this.variants.filter(function (variant) {
-                        return variant[attribute.code] == option.id;
-                    });
+                    let variants = this.variants.filter((variant) => variant[attribute.code] == option.id);
 
                     if (! variants.length) {
                         return false;
@@ -1281,7 +1275,7 @@
                     
                     let isSelected = true;
 
-                    variants.forEach(function (variant) {
+                    variants.forEach((variant) => {
                         if (! variant.selected) {
                             isSelected = false;
                         }
@@ -1363,13 +1357,13 @@
                 },
 
                 editPrices(params) {
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         variant.price = params?.price ?? params.variants[variant.id];
                     });
                 },
 
                 editInventories(params) {
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         variant.inventories = {
                             ...variant?.inventories,
                             ...(params?.inventories ?? params.variants[variant.id]),
@@ -1378,41 +1372,42 @@
                 },
 
                 editWeight(params) {
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         variant.weight = params?.weight ?? params.variants[variant.id];
                     });
                 },
 
                 editName(params) {
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         variant.name = params?.name ?? params.variants[variant.id];
                     });
                 },
 
                 editSku(params) {
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         variant.sku = params?.sku ?? params.variants[variant.id];
                     });
                 },
 
                 editStatus(params) {
-                    this.selectedVariants.forEach(function (variant) {
+                    this.selectedVariants.forEach((variant) => {
                         variant.status = params?.status ?? params.variants[variant.id];
                     });
                 },
                 
                 addImages(params) {
                     this.selectedVariants.forEach((variant) => {
-                        if (this.updateTypes.addImages.images.length) {
-                            variant.images = variant.images.concat(this.updateTypes.addImages.images);
+                        let correspondingTempVariant = this.tempSelectedVariants.find(tempVariant => tempVariant.id === variant.id);
 
-                            variant.images.temp_images = [];
+                        let images = [
+                            ...this.updateTypes.addImages.images,
+                            ...(correspondingTempVariant?.temp_images || [])
+                        ];
 
-                            this.updateTypes.addImages.images.forEach(element => {
-                                variant.temp_images.push(element);
-                            });
-                        } else {
-                            variant.images = variant.images.concat(variant.temp_images);
+                        variant.images = variant.images.concat(images);
+
+                        if (images.length) {
+                            variant.temp_images.push(...images);
                         }
 
                         variant.temp_images = [];
@@ -1422,9 +1417,7 @@
                 },
 
                 removeImages() {
-                    this.selectedVariants.forEach(function (variant) {
-                        variant.images = [];
-                    });
+                    this.selectedVariants.forEach((variant) => variant.images = []);
                 },
 
                 removeVariants() {
@@ -1438,7 +1431,7 @@
                 },
 
                 optionName(attribute, optionId) {
-                    return attribute.options.find(function (option) {
+                    return attribute.options.find((option) => {
                         return option.id == optionId;
                     })?.admin_name;
                 },
@@ -1464,7 +1457,7 @@
                 let inventories = {};
                 
                 if (Array.isArray(this.variant.inventories)) {
-                    this.variant.inventories.forEach(function (inventory) {
+                    this.variant.inventories.forEach((inventory) => {
                         inventories[inventory.inventory_source_id] = inventory.qty;
                     });
 
@@ -1496,20 +1489,16 @@
 
             watch: {
                 variant: {
-                    handler: function(newValue) {
-                        let self = this;
-
-                        setTimeout(function() {
-                            self.setFiles();
-                        })
+                    handler(newValue) {
+                        setTimeout(() => this.setFiles());
                     },
                     deep: true
                 }
             },
 
             methods: {
-                optionName: function (attribute, optionId) {
-                    return attribute.options.find(function (option) {
+                optionName(attribute, optionId) {
+                    return attribute.options.find((option) => {
                         return option.id == optionId;
                     })?.admin_name;
                 },
@@ -1521,9 +1510,7 @@
                 },
 
                 setFiles() {
-                    let self = this;
-
-                    this.variant.images.forEach(function (image, index) {
+                    this.variant.images.forEach((image, index) => {
                         if (image.file instanceof File) {
                             image.is_new = 1;
 
@@ -1531,14 +1518,14 @@
 
                             dataTransfer.items.add(image.file);
 
-                            self.$refs[self.$.uid + '_imageInput_' + index][0].files = dataTransfer.files;
+                            this.$refs[this.$.uid + '_imageInput_' + index][0].files = dataTransfer.files;
                         } else {
                             image.is_new = 0;
                         }
                     });
                 },
 
-                remove: function () {
+                remove() {
                     this.$emit('onRemoved', this.variant);
                 },
             }
