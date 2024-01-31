@@ -137,12 +137,14 @@ it('should fail the validation with errors when certain inputs are not provided 
     // Arrange
     $category = (new CategoryFaker())->factory()->create();
 
+    $localeCode = core()->getRequestedLocaleCode();
+
     // Act & Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.categories.update', $category->id))
-        ->assertJsonValidationErrorFor('en.name')
-        ->assertJsonValidationErrorFor('en.slug')
+        ->assertJsonValidationErrorFor($localeCode.'.name')
+        ->assertJsonValidationErrorFor($localeCode.'.slug')
         ->assertJsonValidationErrorFor('position')
         ->assertJsonValidationErrorFor('attributes')
         ->assertUnprocessable();
@@ -152,15 +154,17 @@ it('should fail the validation with errors when certain inputs are not provided 
     // Arrange
     $category = (new CategoryFaker())->factory()->create();
 
+    $localeCode = core()->getRequestedLocaleCode();
+
     // Act & Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.categories.update', $category->id), [
         'display_mode' => 'products_and_description',
     ])
-        ->assertJsonValidationErrorFor('en.name')
-        ->assertJsonValidationErrorFor('en.slug')
-        ->assertJsonValidationErrorFor('en.description')
+        ->assertJsonValidationErrorFor($localeCode.'.name')
+        ->assertJsonValidationErrorFor($localeCode.'.slug')
+        ->assertJsonValidationErrorFor($localeCode.'.description')
         ->assertJsonValidationErrorFor('position')
         ->assertJsonValidationErrorFor('attributes')
         ->assertUnprocessable();
