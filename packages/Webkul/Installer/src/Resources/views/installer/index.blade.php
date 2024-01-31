@@ -4,7 +4,9 @@
     dir="{{ in_array(app()->getLocale(), ['ar', 'fa', 'he']) ? 'rtl' : 'ltr' }}"
 >
     <head>
-        <title>@lang('installer::app.installer.index.title')</title>
+        <title>
+            @lang('installer::app.installer.index.title')
+        </title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,44 +41,47 @@
         $locales = [
             'ar'    => 'arabic',
             'bn'    => 'bengali',
-            'pt_BR' => 'portuguese',
-            'zh_CN' => 'chinese',
-            'nl'    => 'dutch',
-            'en'    => 'english',
-            'fr'    => 'french',
             'de'    => 'german',
+            'en'    => 'english',
+            'es'    => 'spanish',
+            'fa'    => 'persian',
+            'fr'    => 'french',
             'he'    => 'hebrew',
             'hi_IN' => 'hindi',
             'it'    => 'italian',
             'ja'    => 'japanese',
-            'fa'    => 'persian',
+            'nl'    => 'dutch',
             'pl'    => 'polish',
+            'pt_BR' => 'portuguese',
             'ru'    => 'russian',
             'sin'   => 'sinhala',
-            'es'    => 'spanish',
             'tr'    => 'turkish',
             'uk'    => 'ukrainian',
+            'zh_CN' => 'chinese',
         ];
 
         $currencies = [
-            'CNY' => 'chinese-yuan',
             'AED' => 'dirham',
+            'AFN' => 'israeli',
+            'CNY' => 'chinese-yuan',
             'EUR' => 'euro',
+            'GBP' => 'pound',
             'INR' => 'rupee',
             'IRR' => 'iranian',
-            'AFN' => 'israeli',
             'JPY' => 'japanese-yen',
-            'GBP' => 'pound',
             'RUB' => 'russian-ruble',
             'SAR' => 'saudi',
             'TRY' => 'turkish-lira',
-            'USD' => 'usd',
             'UAH' => 'ukrainian-hryvnia',
+            'USD' => 'usd',
         ];
     @endphp
 
     <body>
-        <div id="app" class="container fixed">
+        <div
+            id="app"
+            class="container fixed"
+        >
             <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
                 <!-- Vue Component -->
                 <v-server-requirements />
@@ -251,7 +256,10 @@
 
                 <!-- Right Side Components -->
                 <!-- Start -->
-                <div class="w-full max-w-[568px] bg-white rounded-lg shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300" v-if="currentStep == 'start'">
+                <div
+                    class="w-full max-w-[568px] bg-white rounded-lg shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)] border-[1px] border-gray-300"
+                    v-if="currentStep == 'start'"
+                >
                     <x-installer::form
                         v-slot="{ meta, errors, handleSubmit }"
                         as="div"
@@ -289,10 +297,14 @@
                                                 rules="required"
                                                 :value="app()->getLocale()"
                                                 :label="trans('installer::app.installer.index.start.locale')"
-                                                value="{{ app()->getLocale() }}"
                                                 @change="$refs.multiLocaleForm.submit();"
                                             >
-                                                <option value="" disabled>@lang('installer::app.installer.index.start.select-locale')</option>
+                                                <option
+                                                    value=""
+                                                    disabled
+                                                >
+                                                    @lang('installer::app.installer.index.start.select-locale')
+                                                </option>
 
                                                 @foreach ($locales as $value => $label)
                                                     <option value="{{ $value }}">
@@ -301,10 +313,7 @@
                                                 @endforeach
                                             </x-installer::form.control-group.control>
 
-                                            <x-installer::form.control-group.error
-                                                control-name="locale"
-                                            >
-                                            </x-installer::form.control-group.error>
+                                            <x-installer::form.control-group.error control-name="locale" />
                                         </x-installer::form.control-group>
                                     </div>
                                 </div>
@@ -428,14 +437,16 @@
                                             @lang('installer::app.installer.index.environment-configuration.mysql')
                                         </option>
 
-                                        <option value="pgsql">@lang('installer::app.installer.index.environment-configuration.pgsql')</option>
-                                        <option value="sqlsrv">@lang('installer::app.installer.index.environment-configuration.sqlsrv')</option>
+                                        <option value="pgsql">
+                                            @lang('installer::app.installer.index.environment-configuration.pgsql')
+                                        </option>
+
+                                        <option value="sqlsrv">
+                                            @lang('installer::app.installer.index.environment-configuration.sqlsrv')
+                                        </option>
                                     </x-installer::form.control-group.control>
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_connection"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_connection" />
                                 </x-installer::form.control-group>
 
                                 <!-- Database Hostname-->
@@ -451,13 +462,9 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-hostname')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-hostname')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_hostname"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_hostname" />
                                 </x-installer::form.control-group>
 
                                 <!-- Database Port-->
@@ -473,13 +480,9 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-port')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-port')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_port"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_port" />
                                 </x-installer::form.control-group>
 
                                 <!-- Database name-->
@@ -495,13 +498,9 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-name')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-name')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_name"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_name" />
                                 </x-installer::form.control-group>
 
                                 <!-- Database Prefix-->
@@ -516,13 +515,9 @@
                                         ::value="envData.db_prefix"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-prefix')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-prefix')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_prefix"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_prefix" />
                                 </x-installer::form.control-group>
 
                                 <!-- Database Username-->
@@ -538,18 +533,14 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-username')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-username')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_username"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_username" />
                                 </x-installer::form.control-group>
 
                                 <!-- Database Password-->
                                 <x-installer::form.control-group class="mb-2.5">
-                                    <x-installer::form.control-group.label class="required">
+                                    <x-installer::form.control-group.label>
                                         @lang('installer::app.installer.index.environment-configuration.database-password')
                                     </x-installer::form.control-group.label>
 
@@ -557,16 +548,11 @@
                                         type="password"
                                         name="db_password"
                                         ::value="envData.db_password"
-                                        rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-password')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-password')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="db_password"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="db_password" />
                                 </x-installer::form.control-group>
                             </div>
 
@@ -730,13 +716,9 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.application-name')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.bagisto')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="app_name"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="app_name" />
                                 </x-installer::form.control-group>
 
                                 <!-- Application Default URL -->
@@ -752,13 +734,9 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-url')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.default-url-link')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="app_url"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="app_url" />
                                 </x-installer::form.control-group>
 
                                 <!-- Application Default Timezone -->
@@ -783,7 +761,12 @@
                                         :aria-label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                     >
-                                        <option value="" disabled>Select Timezone</option>
+                                        <option
+                                            value=""
+                                            disabled
+                                        >
+                                            @lang('installer::app.installer.index.environment-configuration.select-timezone')
+                                        </option>
 
                                         @foreach($tzlist as $key => $value)
                                             <option
@@ -795,10 +778,7 @@
                                         @endforeach
                                     </x-installer::form.control-group.control>
 
-                                    <x-installer::form.control-group.error
-                                        control-name="app_timezone"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="app_timezone" />
                                 </x-installer::form.control-group>
 
                                 <div class="p-1.5" :style="warning['container'], warning['message']">
@@ -829,10 +809,7 @@
                                             @endforeach
                                         </x-installer::form.control-group.control>
     
-                                        <x-installer::form.control-group.error
-                                            control-name="app_locale"
-                                        >
-                                        </x-installer::form.control-group.error>
+                                        <x-installer::form.control-group.error control-name="app_locale" />
                                     </x-installer::form.control-group>
 
                                     <!-- Application Default Currency -->
@@ -858,10 +835,7 @@
                                             @endforeach
                                         </x-installer::form.control-group.control>
     
-                                        <x-installer::form.control-group.error
-                                            control-name="app_currency"
-                                        >
-                                        </x-installer::form.control-group.error>
+                                        <x-installer::form.control-group.error control-name="app_currency" />
                                     </x-installer::form.control-group>
                                 </div>
 
@@ -875,27 +849,25 @@
                                         @foreach ($locales as $key => $locale)
                                             <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == config('app.locale')) ? 1: 0;
+                                                    $selectedOption = ($key == config('app.locale'));
                                                 @endphp
 
                                                 <x-installer::form.control-group.control
                                                     type="hidden"
-                                                    name="{{ $key }}"
-                                                    :value="$selectedOption"
-                                                >
-                                                </x-installer::form.control-group.control>
+                                                    :name="$key"
+                                                    :value="(bool) $selectedOption"
+                                                />
 
                                                 <x-installer::form.control-group.control
                                                     type="checkbox"
-                                                    name="{{ $key }}"
-                                                    id="allowed_locale[{{ $key }}]"
-                                                    for="allowed_locale[{{ $key }}]"
+                                                    :id="'allowed_locale[' . $key . ']'"
+                                                    :name="$key"
+                                                    :for="'allowed_locale[' . $key . ']'"
                                                     value="1"
-                                                    :checked="(boolean) $selectedOption"
-                                                    :disabled="(boolean) $selectedOption"
+                                                    :checked="(bool) $selectedOption"
+                                                    :disabled="(bool) $selectedOption"
                                                     @change="pushAllowedLocales"
-                                                >
-                                                </x-installer::form.control-group.control>
+                                                />
 
                                                 <x-installer::form.control-group.label
                                                     for="allowed_locale[{{ $key }}]"
@@ -916,27 +888,25 @@
                                         @foreach ($currencies as $key => $currency)
                                             <x-installer::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
                                                 @php
-                                                    $selectedOption = ($key == config('app.currency')) ? 1 : 0;
+                                                    $selectedOption = $key == config('app.currency');
                                                 @endphp
 
                                                 <x-installer::form.control-group.control
                                                     type="hidden"
-                                                    name="{{ $key }}"
-                                                    :value="$selectedOption"
-                                                >
-                                                </x-installer::form.control-group.control>
+                                                    :name="$key"
+                                                    :value="(bool) $selectedOption"
+                                                />
 
                                                 <x-installer::form.control-group.control
                                                     type="checkbox"
-                                                    name="{{ $key }}"
-                                                    id="currency[{{ $key }}]"
-                                                    for="currency[{{ $key }}]"
+                                                    :id="'currency[' . $key . ']'"
+                                                    :name="$key"
                                                     value="1"
-                                                    :checked="(boolean) $selectedOption"
-                                                    :disabled="(boolean) $selectedOption"
+                                                    :for="'currency[' . $key . ']'"
+                                                    :checked="(bool) $selectedOption"
+                                                    :disabled="(bool) $selectedOption"
                                                     @change="pushAllowedCurrency"
-                                                >
-                                                </x-installer::form.control-group.control>
+                                                />
 
                                                 <x-installer::form.control-group.label
                                                     for="currency[{{ $key }}]"
@@ -994,17 +964,13 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="admin"
-                                        value="Admin"
                                         rules="required"
+                                        value="Admin"
                                         :label="trans('installer::app.installer.index.create-administrator.admin')"
                                         :placeholder="trans('installer::app.installer.index.create-administrator.bagisto')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="admin"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="admin" />
                                 </x-installer::form.control-group>
 
                                 <!-- Email -->
@@ -1016,17 +982,13 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="email"
-                                        value="admin@example.com"
                                         rules="required"
+                                        value="admin@example.com"
                                         :label="trans('installer::app.installer.index.create-administrator.email')"
                                         :placeholder="trans('installer::app.installer.index.create-administrator.email-address')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="email"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="email" />
                                 </x-installer::form.control-group>
 
                                 <!-- Password -->
@@ -1038,16 +1000,12 @@
                                     <x-installer::form.control-group.control
                                         type="password"
                                         name="password"
-                                        :value="old('password')"
                                         rules="required"
+                                        :value="old('password')"
                                         :label="trans('installer::app.installer.index.create-administrator.password')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="password"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="password" />
                                 </x-installer::form.control-group>
 
                                 <!-- Confirm Password -->
@@ -1059,16 +1017,12 @@
                                     <x-installer::form.control-group.control
                                         type="password"
                                         name="confirm_password"
-                                        :value="old('confirm_password')"
                                         rules="required|confirmed:@password"
+                                        :value="old('confirm_password')"
                                         :label="trans('installer::app.installer.index.create-administrator.confirm-password')"
-                                    >
-                                    </x-installer::form.control-group.control>
+                                    />
 
-                                    <x-installer::form.control-group.error
-                                        control-name="confirm_password"
-                                    >
-                                    </x-installer::form.control-group.error>
+                                    <x-installer::form.control-group.error control-name="confirm_password" />
                                 </x-installer::form.control-group>
                             </div>
 
@@ -1112,6 +1066,7 @@
                                     @lang('installer::app.installer.index.installation-completed.title-info')
                                 </p>
 
+                                <!-- Admin & Shop both buttons -->
                                 <div class="flex gap-4 items-center">
                                     <a
                                         href="{{ URL('/admin/login')}}"
