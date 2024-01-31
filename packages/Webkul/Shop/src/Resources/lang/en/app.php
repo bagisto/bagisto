@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => 'Sort By',
-            'options' => [
-                'cheapest-first'  => 'Cheapest First',
-                'expensive-first' => 'Expensive First',
-                'from-a-z'        => 'From A-Z',
-                'from-z-a'        => 'From Z-A',
-                'latest-first'    => 'Newest First',
-                'oldest-first'    => 'Oldest First',
-            ],
         ],
 
         'view' => [
@@ -618,7 +610,6 @@ return [
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
             'missing-fields'            => 'Some required fields missing for this product.',
             'missing-options'           => 'Options are missing for this product.',
-            'missing-links'             => 'Downloadable links are missing for this product.',
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'qty-missing'               => 'At least one product should have more than 1 quantity.',
             'return-to-shop'            => 'Return To Shop',

@@ -91,7 +91,7 @@ class ProductRepository extends Repository
         ])->findOrFail($id);
 
         if ($product->parent_id) {
-            throw new \Exception(trans('admin::app.catalog.products.index.datagrid.variant-already-exist-message'));
+            throw new \Exception(trans('product::app.datagrid.variant-already-exist-message'));
         }
 
         return DB::transaction(function () use ($product) {

@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => 'Şuna göre sırala',
-            'options' => [
-                'cheapest-first'  => 'En Ucuz İlk',
-                'expensive-first' => 'En Pahalı İlk',
-                'from-a-z'        => 'A-Z Sırala',
-                'from-z-a'        => 'Z-A Sırala',
-                'latest-first'    => 'En Yeni İlk',
-                'oldest-first'    => 'En Eski İlk',
-            ],
         ],
 
         'view' => [
@@ -619,7 +611,6 @@ return [
             'inactive'                  => 'Ürün devre dışı bırakıldı ve sepetten kaldırıldı',
             'missing-fields'            => 'Bu ürün için bazı gerekli alanlar eksik',
             'missing-options'           => 'Bu ürün için seçenekler eksik',
-            'missing-links'             => 'Bu ürün için indirilebilir bağlantılar eksik',
             'minimum-order-message'     => 'Minimum sipariş miktarı: :amount',
             'qty-missing'               => 'En az bir ürünün miktarı 1\'den fazla olmalıdır.',
             'return-to-shop'            => 'Alışverişe Geri Dön',

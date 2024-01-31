@@ -13,42 +13,42 @@ class Toolbar
     {
         return collect([
             [
-                'title'    => trans('shop::app.products.sort-by.options.from-a-z'),
+                'title'    => trans('product::app.sort-by.options.from-a-z'),
                 'value'    => 'name-asc',
                 'sort'     => 'name',
                 'order'    => 'asc',
                 'position' => 1,
             ],
             [
-                'title'    => trans('shop::app.products.sort-by.options.from-z-a'),
+                'title'    => trans('product::app.sort-by.options.from-z-a'),
                 'value'    => 'name-desc',
                 'sort'     => 'name',
                 'order'    => 'desc',
                 'position' => 2,
             ],
             [
-                'title'    => trans('shop::app.products.sort-by.options.latest-first'),
+                'title'    => trans('product::app.sort-by.options.latest-first'),
                 'value'    => 'created_at-desc',
                 'sort'     => 'created_at',
                 'order'    => 'desc',
                 'position' => 3,
             ],
             [
-                'title'    => trans('shop::app.products.sort-by.options.oldest-first'),
+                'title'    => trans('product::app.sort-by.options.oldest-first'),
                 'value'    => 'created_at-asc',
                 'sort'     => 'created_at',
                 'order'    => 'asc',
                 'position' => 4,
             ],
             [
-                'title'    => trans('shop::app.products.sort-by.options.cheapest-first'),
+                'title'    => trans('product::app.sort-by.options.cheapest-first'),
                 'value'    => 'price-asc',
                 'sort'     => 'price',
                 'order'    => 'asc',
                 'position' => 5,
             ],
             [
-                'title'    => trans('shop::app.products.sort-by.options.expensive-first'),
+                'title'    => trans('product::app.sort-by.options.expensive-first'),
                 'value'    => 'price-desc',
                 'sort'     => 'price',
                 'order'    => 'desc',

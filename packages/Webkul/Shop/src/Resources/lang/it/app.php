@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => 'Ordina per',
-            'options' => [
-                'cheapest-first'  => 'Meno caro prima',
-                'expensive-first' => 'Più caro prima',
-                'from-a-z'        => 'Da A a Z',
-                'from-z-a'        => 'Da Z a A',
-                'latest-first'    => 'Più recente prima',
-                'oldest-first'    => 'Più vecchio prima',
-            ],
         ],
 
         'view' => [
@@ -618,7 +610,6 @@ return [
             'inactive'                  => 'L\'articolo è stato disattivato e rimosso dal carrello.',
             'missing-fields'            => 'Mancano alcuni campi obbligatori per questo prodotto.',
             'missing-options'           => 'Mancano opzioni per questo prodotto.',
-            'missing-links'             => 'Mancano i link scaricabili per questo prodotto.',
             'minimum-order-message'     => 'L\'importo minimo dell\'ordine è :amount',
             'qty-missing'               => 'Almeno un prodotto deve avere una quantità maggiore di 1.',
             'return-to-shop'            => 'Torna allo shopping',

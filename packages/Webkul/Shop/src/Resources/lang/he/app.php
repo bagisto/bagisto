@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => 'מיין לפי',
-            'options' => [
-                'cheapest-first'  => 'הזול ביותר תחילה',
-                'expensive-first' => 'היקר ביותר תחילה',
-                'from-a-z'        => 'מהמוצרים A-Z',
-                'from-z-a'        => 'מהמוצרים Z-A',
-                'latest-first'    => 'החדש ביותר תחילה',
-                'oldest-first'    => 'הישן ביותר תחילה',
-            ],
         ],
 
         'view' => [
@@ -618,7 +610,6 @@ return [
             'inactive'                  => 'הפריט הושבת ונמחק מהעגלה.',
             'missing-fields'            => 'חלק מהשדות החובה חסרים עבור מוצר זה.',
             'missing-options'           => 'אפשרויות חסרות עבור מוצר זה.',
-            'missing-links'             => 'קישורים להורדה חסרים עבור מוצר זה.',
             'minimum-order-message'     => 'סכום הזמנה מינימלי הוא :amount',
             'qty-missing'               => 'לפחות מוצר אחד צריך להיות בו יותר מכמות 1.',
             'return-to-shop'            => 'חזרה לחנות',

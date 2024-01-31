@@ -23,6 +23,8 @@ class ProductServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'product');
+
         $this->app->register(EventServiceProvider::class);
 
         ProductProxy::observe(ProductObserver::class);

@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => 'عودة',
-                    'bundle'                  => 'مجموعة',
-                    'configurable'            => 'قابل للتكوين',
                     'configurable-attributes' => 'خصائص قابلة للتكوين',
                     'create-btn'              => 'إنشاء منتج',
-                    'downloadable'            => 'قابل للتنزيل',
                     'family'                  => 'عائلة',
-                    'grouped'                 => 'مجموع',
                     'save-btn'                => 'حفظ المنتج',
-                    'simple'                  => 'بسيط',
                     'sku'                     => 'SKU',
                     'title'                   => 'إنشاء منتج جديد',
                     'type'                    => 'النوع',
-                    'virtual'                 => 'افتراضي',
                 ],
 
                 'datagrid'   => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'الحالة',
                     'type'                          => 'النوع',
                     'update-status'                 => 'تحديث الحالة',
-                    'variant-already-exist-message' => 'المتغير بنفس خيارات السمات موجود بالفعل.',
                 ],
             ],
 

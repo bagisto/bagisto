@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => 'वापस जाएं',
-                    'bundle'                  => 'बंडल',
-                    'configurable'            => 'कॉन्फ़िगरेबल',
                     'configurable-attributes' => 'कॉन्फ़िगरेबल गुण',
                     'create-btn'              => 'नया उत्पाद बनाएं',
-                    'downloadable'            => 'डाउनलोड करने योग्य',
                     'family'                  => 'परिवार',
-                    'grouped'                 => 'समूहित',
                     'save-btn'                => 'उत्पाद सहेजें',
-                    'simple'                  => 'साधारण',
                     'sku'                     => 'स्टॉक यूनिट कोड (SKU)',
                     'title'                   => 'नया उत्पाद बनाएं',
                     'type'                    => 'प्रकार',
-                    'virtual'                 => 'आभासी',
                 ],
 
                 'datagrid'   => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'स्थिति',
                     'type'                          => 'प्रकार',
                     'update-status'                 => 'स्थिति अपडेट करें',
-                    'variant-already-exist-message' => 'संविशेषता विकल्पों के साथ समान वेरिएंट पहले से मौजूद है।',
                 ],
             ],
 
