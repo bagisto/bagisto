@@ -20,11 +20,6 @@ class Error
     protected array $skippedRows = [];
 
     /**
-     * Allowed errors
-     */
-    protected int $allowedErrors = 0;
-
-    /**
      * Errors count
      */
     protected int $errorsCount = 0;

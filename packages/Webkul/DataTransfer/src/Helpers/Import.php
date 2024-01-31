@@ -176,7 +176,7 @@ class Import
     {
         if (
             $this->import->validation_strategy == self::VALIDATION_STRATEGY_STOP_ON_ERROR
-            && $this->import->errors_count > $this->import->allowedErrors
+            && $this->import->errors_count > $this->import->allowed_errors
         ) {
             return true;
         }
@@ -217,7 +217,7 @@ class Import
      */
     public function link(ImportBatchContract $importBatch): bool
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         try {
             $typeImporter = $this->getTypeImporter();
@@ -227,14 +227,14 @@ class Import
             /**
              * Rollback transaction
              */
-            DB::rollBack();
+            // DB::rollBack();
 
             throw $e;
         } finally {
             /**
              * Commit transaction
              */
-            DB::commit();
+            // DB::commit();
         }
 
         return true;

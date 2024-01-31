@@ -26,6 +26,22 @@ return new class extends Migration
         Schema::table('product_up_sells', function (Blueprint $table) {
             $table->unique(['parent_id', 'child_id']);
         });
+
+        Schema::table('product_grouped_products', function (Blueprint $table) {
+            $table->unique(['product_id', 'associated_product_id']);
+        });
+
+        Schema::table('product_bundle_option_translations', function (Blueprint $table) {
+            $table->string('label')->change();
+        });
+
+        Schema::table('product_bundle_option_translations', function (Blueprint $table) {
+            $table->unique(['locale', 'label', 'product_bundle_option_id'], 'bundle_option_translations_locale_label_bundle_option_id_unique');
+        });
+
+        Schema::table('product_bundle_option_products', function (Blueprint $table) {
+            $table->unique(['product_id', 'product_bundle_option_id'], 'bundle_option_products_product_id_bundle_option_id_unique');
+        });
     }
 
     /**
@@ -47,6 +63,18 @@ return new class extends Migration
 
         Schema::table('product_up_sells', function (Blueprint $table) {
             $table->dropUnique(['parent_id', 'child_id']);
+        });
+
+        Schema::table('product_grouped_products', function (Blueprint $table) {
+            $table->dropUnique(['product_id', 'associated_product_id']);
+        });
+
+        Schema::table('product_bundle_option_translations', function (Blueprint $table) {
+            $table->dropUnique(['locale', 'label', 'product_bundle_option_id']);
+        });
+
+        Schema::table('product_bundle_option_products', function (Blueprint $table) {
+            $table->dropUnique(['product_id', 'product_bundle_option_id']);
         });
     }
 };

@@ -152,7 +152,7 @@
                         </p>
 
                         <div
-                            class="flex gap-2 place-items-start"
+                            class="flex gap-2 items-center place-items-start"
                             v-if="importResource.errors.length"
                         >
                             <i class="icon-information bg-red-200 text-red-600 text-2xl rounded-full"></i>

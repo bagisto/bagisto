@@ -20,9 +20,42 @@ use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+
 
 class Product extends AbstractType
 {
+    /**
+     * Product type simple
+     */
+    const PRODUCT_TYPE_SIMPLE = 'simple';
+
+    /**
+     * Product type virtual
+     */
+    const PRODUCT_TYPE_VIRTUAL = 'virtual';
+
+    /**
+     * Product type downloadable
+     */
+    const PRODUCT_TYPE_DOWNLOADABLE = 'downloadable';
+
+    /**
+     * Product type configurable
+     */
+    const PRODUCT_TYPE_CONFIGURABLE = 'configurable';
+
+    /**
+     * Product type bundle
+     */
+    const PRODUCT_TYPE_BUNDLE = 'bundle';
+
+    /**
+     * Product type grouped
+     */
+    const PRODUCT_TYPE_GROUPED = 'grouped';
+
     /**
      * Error code for invalid product type
      */
@@ -47,13 +80,9 @@ class Product extends AbstractType
      * Error message templates
      */
     protected array $messages = [
-        // self::ERROR_INVALID_TYPE                  => 'Product type is invalid or not supported',
         self::ERROR_INVALID_TYPE                  => 'data_transfer::app.validation.errors.products.invalid-type',
-        // self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'Product with specified SKU not found',
         self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.validation.errors.products.sku-not-found',
-        // self::ERROR_DUPLICATE_URL_KEY             => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
         self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.validation.errors.products.duplicate-url-key',
-        // self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
         self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.validation.errors.products.invalid-attribute-family',
     ];
 
@@ -74,38 +103,28 @@ class Product extends AbstractType
 
     /**
      * Permanent entity columns
-     *
-     * @var array
      */
-    protected $attributeFamilies = [];
+    protected mixed $attributeFamilies = [];
 
     /**
      * Permanent entity columns
-     *
-     * @var array
      */
-    protected $attributes = [];
+    protected mixed $attributes = [];
 
     /**
      * Permanent entity columns
-     *
-     * @var array
      */
-    protected $typeFamilyAttributes = [];
+    protected array $typeFamilyAttributes = [];
 
     /**
      * Permanent entity columns
-     *
-     * @var array
      */
-    protected $typeFamilyValidationRules = [];
+    protected array $typeFamilyValidationRules = [];
 
     /**
      * Permanent entity columns
-     *
-     * @var array
      */
-    protected $categories = [];
+    protected array $categories = [];
 
     /**
      * Permanent entity columns
@@ -143,6 +162,8 @@ class Product extends AbstractType
         protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository,
+        protected ProductBundleOptionRepository $productBundleOptionRepository,
+        protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected SKUStorage $skuStorage
     ) {
         parent::__construct($importBatchRepository);
@@ -255,10 +276,6 @@ class Product extends AbstractType
         $this->saveInventories($inventories);
 
         /**
-         * Save product images
-         */
-
-        /**
          * Update import batch summary
          */
         $this->importBatchRepository->update([
@@ -290,11 +307,34 @@ class Product extends AbstractType
 
         $links = [];
 
+        $groupAssociations = [];
+
+        $bundleOptions = [];
+
         foreach ($batch->data as $rowData) {
+            /**
+             * Prepare products association for related, cross sell and up sell
+             */
             $this->prepareLinks($rowData, $links);
+
+            /**
+             * Prepare products association for grouped product
+             */
+            $this->prepareGroupAssociations($rowData, $groupAssociations);
+
+            /**
+             * Prepare bundle options
+             */
+            $this->prepareBundleOptions($rowData, $bundleOptions);
         }
 
         $this->saveLinks($links);
+
+        $this->saveGroupAssociations($groupAssociations);
+
+        $this->saveBundleOptions($bundleOptions);
+
+        dd('END HERE');
 
         /**
          * Update import batch summary
@@ -497,75 +537,6 @@ class Product extends AbstractType
     }
 
     /**
-     * Prepare links
-     */
-    public function prepareLinks(array $rowData, array &$links): void
-    {
-        $linkTableMapping = [
-            'related'    => 'product_relations',
-            'cross_sell' => 'product_cross_sells',
-            'up_sell'    => 'product_up_sells',
-        ];
-
-        foreach ($linkTableMapping as $type => $table) {
-            if (! empty($rowData[$type . '_skus'])) {
-                foreach (explode(',', $rowData[$type . '_skus'] ?? '') as $sku) {
-                    $links[$table][$rowData['sku']][] = $sku;
-                }
-            }
-        }
-    }
-
-    /**
-     * Save links
-     */
-    public function saveLinks(array $links): void
-    {
-        $notLoadedSkus = [];
-
-        foreach (array_unique(Arr::flatten($links)) as $sku) {
-            if ($this->skuStorage->has($sku)) {
-                continue;
-            }
-
-            $notLoadedSkus[] = $sku;
-        }
-
-        /**
-         * Load not loaded SKUs to the sku storage
-         */
-        if (! empty($notLoadedSkus)) {
-            $this->skuStorage->load($notLoadedSkus);
-        }
-
-        foreach ($links as $table => $linksData) {
-            $productLinks = [];
-
-            foreach ($linksData as $sku => $linkedSkus) {
-                $product = $this->skuStorage->get($sku);
-
-                foreach ($linkedSkus as $linkedSku) {
-                    $linkedProduct = $this->skuStorage->get($linkedSku);
-
-                    if (! $linkedProduct) {
-                        continue;
-                    }
-
-                    $productLinks[] = [
-                        'parent_id' => $product['id'],
-                        'child_id'  => $linkedProduct['id'],
-                    ];
-                }
-            }
-
-            DB::table($table)->upsert(
-                $productLinks,
-                ['parent_id', 'child_id'],
-            );
-        }
-    }
-
-    /**
      * Prepare inventories
      */
     public function prepareInventories(array $rowData, array &$inventories): void
@@ -623,6 +594,296 @@ class Product extends AbstractType
             $productInventories,
             ['product_id', 'inventory_source_id', 'vendor_id']
         );
+    }
+
+    /**
+     * Prepare links
+     */
+    public function prepareLinks(array $rowData, array &$links): void
+    {
+        $linkTableMapping = [
+            'related'    => 'product_relations',
+            'cross_sell' => 'product_cross_sells',
+            'up_sell'    => 'product_up_sells',
+        ];
+
+        foreach ($linkTableMapping as $type => $table) {
+            if (! empty($rowData[$type . '_skus'])) {
+                foreach (explode(',', $rowData[$type . '_skus'] ?? '') as $sku) {
+                    $links[$table][$rowData['sku']][] = $sku;
+                }
+            }
+        }
+    }
+
+    /**
+     * Save links
+     */
+    public function saveLinks(array $links): void
+    {
+        /**
+         * Load not loaded SKUs to the sku storage
+         */
+        $this->loadUnloadedSKUs(array_unique(Arr::flatten($links)));
+
+        foreach ($links as $table => $linksData) {
+            $productLinks = [];
+
+            foreach ($linksData as $sku => $linkedSkus) {
+                $product = $this->skuStorage->get($sku);
+
+                foreach ($linkedSkus as $linkedSku) {
+                    $linkedProduct = $this->skuStorage->get($linkedSku);
+
+                    if (! $linkedProduct) {
+                        continue;
+                    }
+
+                    $productLinks[] = [
+                        'parent_id' => $product['id'],
+                        'child_id'  => $linkedProduct['id'],
+                    ];
+                }
+            }
+
+            DB::table($table)->upsert(
+                $productLinks,
+                ['parent_id', 'child_id'],
+            );
+        }
+    }
+
+    /**
+     * Prepare group associations
+     */
+    public function prepareGroupAssociations(array $rowData, array &$groupAssociations): void
+    {
+        if (
+            $rowData['type'] != self::PRODUCT_TYPE_GROUPED
+            && empty($rowData['associated_skus'])
+        ) {
+            return;
+        }
+
+        $associatedSkus = explode(',', $rowData['associated_skus']);
+
+        foreach ($associatedSkus as $row) {
+            [$sku, $qty] = explode('=', $row);
+
+            $groupAssociations[$rowData['sku']][$sku] = $qty;
+        }
+    }
+
+    /**
+     * Save links
+     */
+    public function saveGroupAssociations(array $groupAssociations): void
+    {
+        if (empty($groupAssociations)) {
+            return;
+        }
+
+        $skus = array_map('array_keys', $groupAssociations);
+
+        /**
+         * Load not loaded SKUs to the sku storage
+         */
+        $this->loadUnloadedSKUs(array_unique(Arr::flatten($skus)));
+
+        $associatedProducts = [];
+
+        foreach ($groupAssociations as $sku => $associatedSkus) {
+            $product = $this->skuStorage->get($sku);
+
+            $sortOrder = 0;
+
+            foreach ($associatedSkus as $associatedSku => $qty) {
+                $associatedProduct = $this->skuStorage->get($associatedSku);
+
+                if (! $associatedProduct) {
+                    continue;
+                }
+
+                $associatedProducts[] = [
+                    'qty'                   => $qty,
+                    'sort_order'            => $sortOrder++,
+                    'product_id'            => $product['id'],
+                    'associated_product_id' => $associatedProduct['id'],
+                ];
+            }
+        }
+
+        DB::table('product_grouped_products')->upsert(
+            $associatedProducts,
+            ['product_id', 'associated_product_id'],
+        );
+    }
+
+    /**
+     * Prepare bundle options
+     */
+    public function prepareBundleOptions(array $rowData, array &$bundleOptions): void
+    {
+        if (
+            $rowData['type'] != self::PRODUCT_TYPE_BUNDLE
+            && empty($rowData['bundle_options'])
+        ) {
+            return;
+        }
+
+        $options = explode('|', $rowData['bundle_options']);
+
+        $optionSortOrder = 0;
+
+        foreach ($options as $option) {
+            parse_str(str_replace(',', '&', $option), $attributes);
+
+            if (! isset($bundleOptions[$rowData['sku']][$attributes['name']])) {
+                $productSortOrder = 0;
+
+                $bundleOptions[$rowData['sku']][$attributes['name']]['attributes'] = [
+                    'type'        => $attributes['type'],
+                    'is_required' => $attributes['required'],
+                    'sort_order'  => $optionSortOrder++,
+                ];
+            }
+
+            $bundleOptions[$rowData['sku']][$attributes['name']]['skus'][$attributes['sku']] = [
+                'qty'        => $attributes['qty'],
+                'is_default' => $attributes['default'],
+                'sort_order' => $productSortOrder++,
+            ];
+        }
+    }
+
+    /**
+     * Save bundle options
+     */
+    public function saveBundleOptions(array &$bundleOptions): void
+    {
+        /**
+         * Load not loaded SKUs to the sku storage
+         */
+
+        $upsertData = [];
+
+        $existingOptions = $this->getExistingBundleOptions($bundleOptions);
+
+        foreach ($bundleOptions as $sku => $options) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach ($options as $optionName => $option) {
+                $bundleOption = $existingOptions->where('product_id', $product['id'])
+                    ->where('label', $optionName)
+                    ->first();
+
+                if (! $bundleOption) {
+                    $bundleOption = $this->productBundleOptionRepository->create([
+                        'product_id'  => $product['id'],
+                        'type'        => $option['attributes']['type'],
+                        'is_required' => $option['attributes']['is_required'],
+                        'sort_order'  => $option['attributes']['sort_order'],
+                    ]);
+                } else {
+                    $upsertData['options'][] = [
+                        'id'          => $bundleOption->id,
+                        'product_id'  => $product['id'],
+                        'type'        => $option['attributes']['type'],
+                        'is_required' => $option['attributes']['is_required'],
+                        'sort_order'  => $option['attributes']['sort_order'],
+                    ];
+                }
+
+                $upsertData['translations'][] = [
+                    'product_bundle_option_id' => $bundleOption->id,
+                    'label'                    => $optionName,
+                    'locale'                   => 'en',
+                ];
+
+                foreach ($option['skus'] as $associatedSKU => $optionProduct) {
+                    $associatedProduct = $this->skuStorage->get($associatedSKU);
+
+                    $upsertData['products'][] = [
+                        'product_bundle_option_id' => $bundleOption->id,
+                        'product_id'               => $associatedProduct['id'],
+                        'qty'                      => $optionProduct['qty'],
+                        'is_default'               => $optionProduct['is_default'],
+                        'sort_order'               => $optionProduct['sort_order'],
+                    ];
+                }
+            }
+        }
+
+        if (! empty($upsertData['options'])) {
+            $this->productBundleOptionRepository->upsert($upsertData['options'], 'id');
+        }
+
+        if (! empty($upsertData['products'])) {
+            DB::table('product_bundle_option_translations')->upsert(
+                $upsertData['translations'],
+                [
+                    'product_bundle_option_id',
+                    'label',
+                    'locale'
+                ]
+            );
+        }
+
+        if (! empty($upsertData['products'])) {
+            $this->productBundleOptionProductRepository->upsert(
+                $upsertData['products'],
+                [
+                    'product_id',
+                    'product_bundle_option_id',
+                ]
+            );
+        }
+    }
+
+    /**
+     * Save bundle options
+     */
+    public function getExistingBundleOptions(array $bundleOptions): mixed
+    {
+        $queryBuilder = $this->productBundleOptionRepository
+            ->select('product_bundle_options.id', 'label', 'product_id', 'type', 'is_required', 'sort_order')
+            ->leftJoin('product_bundle_option_translations', 'product_bundle_option_translations.product_bundle_option_id', 'product_bundle_options.id');
+
+        foreach ($bundleOptions as $sku => $options) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach ($options as $optionName => $option) {
+                $queryBuilder->orWhere(function($query) use ($product, $optionName) {
+                    $query->where('product_bundle_options.product_id', $product['id'])
+                        ->where('product_bundle_option_translations.label', $optionName);
+                });
+            }
+        }
+
+        return $queryBuilder->get();
+    }
+
+    /**
+     * Save links
+     */
+    public function loadUnloadedSKUs(array $skus): void
+    {
+        $notLoadedSkus = [];
+
+        foreach ($skus as $sku) {
+            if ($this->skuStorage->has($sku)) {
+                continue;
+            }
+
+            $notLoadedSkus[] = $sku;
+        }
+
+        /**
+         * Load not loaded SKUs to the sku storage
+         */
+        if (! empty($notLoadedSkus)) {
+            $this->skuStorage->load($notLoadedSkus);
+        }
     }
 
     /**

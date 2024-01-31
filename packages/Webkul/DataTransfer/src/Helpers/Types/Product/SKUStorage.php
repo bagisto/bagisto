@@ -2,6 +2,7 @@
 
 namespace Webkul\DataTransfer\Helpers\Types\Product;
 
+use Illuminate\Support\Arr;
 use Webkul\Product\Repositories\ProductRepository;
 
 class SKUStorage
@@ -103,6 +104,18 @@ class SKUStorage
             'type'                => $data[1],
             'attribute_family_id' => $data[2],
         ];
+    }
+
+    /**
+     * Return SKU filtered by product type
+     */
+    public function getByType(string $type): ?array
+    {
+        $result = Arr::where($this->items, function (string $row, string $key) use ($type) {
+            return str_contains($row, '|' . $type . '|');
+        });
+
+        return $result;
     }
 
     /**

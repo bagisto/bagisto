@@ -82,8 +82,7 @@
                             name="file"
                             rules="required|mimes:text/csv"
                             :label="trans('admin::app.settings.data-transfer.imports.create.file')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
                         <x-admin::form.control-group.error control-name="file" />
                     </x-admin::form.control-group>
@@ -99,8 +98,7 @@
                             name="images_directory_path"
                             :value="old('images_directory_path')"
                             :placeholder="trans('admin::app.settings.data-transfer.imports.create.images-directory')"
-                        >
-                        </x-admin::form.control-group.control>
+                        />
 
                         <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
                             @lang('admin::app.settings.data-transfer.imports.create.file-info')

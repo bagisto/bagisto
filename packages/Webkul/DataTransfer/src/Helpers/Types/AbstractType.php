@@ -62,7 +62,7 @@ abstract class AbstractType
         self::ERROR_CODE_COLUMNS_NUMBER      => 'data_transfer::app.validation.errors.column-numbers',
     ];
 
-    public const BATCH_SIZE = 50;
+    public const BATCH_SIZE = 4;
 
     /**
      * Error helper instance.
