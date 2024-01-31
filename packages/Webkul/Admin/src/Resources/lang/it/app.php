@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'Indietro',
-                    'bundle'                  => 'Bundle',
-                    'configurable'            => 'Configurabile',
                     'configurable-attributes' => 'Attributi Configurabili',
                     'create-btn'              => 'Crea Prodotto',
-                    'downloadable'            => 'Scaricabile',
                     'family'                  => 'Famiglia',
-                    'grouped'                 => 'Raggruppato',
                     'save-btn'                => 'Salva Prodotto',
-                    'simple'                  => 'Semplice',
                     'sku'                     => 'SKU',
                     'title'                   => 'Crea Nuovo Prodotto',
                     'type'                    => 'Tipo',
-                    'virtual'                 => 'Virtuale',
                 ],
 
                 'datagrid'   => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'Stato',
                     'type'                          => 'Tipo',
                     'update-status'                 => 'Aggiorna Stato',
-                    'variant-already-exist-message' => 'La variante con le stesse opzioni degli attributi esiste già.',
                 ],
             ],
 

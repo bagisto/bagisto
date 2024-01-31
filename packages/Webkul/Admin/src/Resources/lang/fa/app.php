@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'بازگشت',
-                    'bundle'                  => 'پکیج',
-                    'configurable'            => 'پیکربندی‌پذیر',
                     'configurable-attributes' => 'ویژگی‌های پیکربندی‌پذیر',
                     'create-btn'              => 'ایجاد محصول',
-                    'downloadable'            => 'قابل دانلود',
                     'family'                  => 'خانواده',
-                    'grouped'                 => 'گروه‌بندی شده',
                     'save-btn'                => 'ذخیره محصول',
-                    'simple'                  => 'ساده',
                     'sku'                     => 'شناسه SKU',
                     'title'                   => 'ایجاد محصول جدید',
                     'type'                    => 'نوع',
-                    'virtual'                 => 'مجازی',
                 ],
 
                 'datagrid' => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'وضعیت',
                     'type'                          => 'نوع',
                     'update-status'                 => 'به‌روزرسانی وضعیت',
-                    'variant-already-exist-message' => 'واریانت با همان گزینه‌های ویژگی ها از قبل وجود دارد.',
                 ],
             ],
 

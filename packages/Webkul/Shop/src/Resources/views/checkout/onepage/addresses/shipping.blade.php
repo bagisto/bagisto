@@ -307,7 +307,9 @@
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                 >
-                                    <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-country')</option>
+                                    <option value="">
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.select-country')
+                                    </option>
 
                                     <option
                                         v-for="country in countries"

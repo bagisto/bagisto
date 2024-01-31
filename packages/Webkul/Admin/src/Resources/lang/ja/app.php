@@ -518,19 +518,13 @@ return [
 
                 'create'     => [
                     'back-btn'                => '戻る',
-                    'bundle'                  => 'バンドル',
-                    'configurable'            => '設定可能',
                     'configurable-attributes' => '設定可能な属性',
                     'create-btn'              => '製品を作成',
-                    'downloadable'            => 'ダウンロード可能',
                     'family'                  => 'ファミリー',
-                    'grouped'                 => 'グループ化',
                     'save-btn'                => '製品を保存',
-                    'simple'                  => 'シンプル',
                     'sku'                     => 'SKU',
                     'title'                   => '新しい製品を作成',
                     'type'                    => 'タイプ',
-                    'virtual'                 => '仮想',
                 ],
 
                 'datagrid'   => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'ステータス',
                     'type'                          => 'タイプ',
                     'update-status'                 => 'ステータスを更新',
-                    'variant-already-exist-message' => '同じ属性オプションを持つバリアントはすでに存在しています。',
                 ],
             ],
 

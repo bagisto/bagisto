@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'ආපසු',
-                    'bundle'                  => 'බන්ඩල්',
-                    'configurable'            => 'ස්ථාන සැකසුම්',
                     'configurable-attributes' => 'ස්ථාන සැකසුම් ගුණ',
                     'create-btn'              => 'නව නිෂ්පාදනයක්',
-                    'downloadable'            => 'බාගුල්',
                     'family'                  => 'පවුර',
-                    'grouped'                 => 'කාණ්ඩායම් කුලු',
                     'save-btn'                => 'නිෂ්පාදනය සුරකින්න',
-                    'simple'                  => 'සරුප',
                     'sku'                     => 'SKU',
                     'title'                   => 'නව නිෂ්පාදනයක්',
                     'type'                    => 'වර්ගය',
-                    'virtual'                 => 'වෘත්තාක',
                 ],
 
                 'datagrid' => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'තත්ත්වය',
                     'type'                          => 'වර්ගය',
                     'update-status'                 => 'ස්ථාන තත්ත්වය වෙනස් කරන්න',
-                    'variant-already-exist-message' => 'හැඳුනුම්කරු විසින් සමන්විත වීම් සහිත වෙරියන් දැක්වෙයි.',
                 ],
             ],
 

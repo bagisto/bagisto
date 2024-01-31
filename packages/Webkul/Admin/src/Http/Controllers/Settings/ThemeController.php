@@ -47,7 +47,7 @@ class ThemeController extends Controller
             return $this->themeCustomizationRepository->uploadImage(request()->all(), $theme);
         }
 
-        $this->validate(request(), [
+        $validated = $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
             'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
@@ -56,12 +56,7 @@ class ThemeController extends Controller
 
         Event::dispatch('theme_customization.create.before');
 
-        $theme = $this->themeCustomizationRepository->create([
-            'name'       => request()->input('name'),
-            'sort_order' => request()->input('sort_order'),
-            'type'       => request()->input('type'),
-            'channel_id' => request()->input('channel_id'),
-        ]);
+        $theme = $this->themeCustomizationRepository->create($validated);
 
         Event::dispatch('theme_customization.create.after', $theme);
 
@@ -91,32 +86,13 @@ class ThemeController extends Controller
      */
     public function update($id)
     {
-        $locale = core()->getRequestedLocaleCode();
-
         $data = request()->all();
-
-        if ($data['type'] == 'static_content') {
-            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['html']);
-            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
-        }
-
-        $data['status'] = request()->input('status') == 'on';
-
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
-            unset($data[$locale]['options']);
-        }
 
         Event::dispatch('theme_customization.update.before', $id);
 
-        $theme = $this->themeCustomizationRepository->update($data, $id);
+        $data['status'] = request()->input('status') == 'on';
 
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
-            $this->themeCustomizationRepository->uploadImage(
-                $data[$locale],
-                $theme,
-                request()->input('deleted_sliders', []),
-            );
-        }
+        $theme = $this->themeCustomizationRepository->update($data, $id);
 
         Event::dispatch('theme_customization.update.after', $theme);
 

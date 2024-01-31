@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'חזור',
-                    'bundle'                  => 'ארגון',
-                    'configurable'            => 'ניתן להגדרה',
                     'configurable-attributes' => 'מאפיינים להגדרה',
                     'create-btn'              => 'צור מוצר',
-                    'downloadable'            => 'ניתן להורדה',
                     'family'                  => 'משפחה',
-                    'grouped'                 => 'קבוצה',
                     'save-btn'                => 'שמור מוצר',
-                    'simple'                  => 'פשוט',
                     'sku'                     => 'SKU',
                     'title'                   => 'צור מוצר חדש',
                     'type'                    => 'סוג',
-                    'virtual'                 => 'וירטואלי',
                 ],
 
                 'datagrid' => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'מצב',
                     'type'                          => 'סוג',
                     'update-status'                 => 'עדכן מצב',
-                    'variant-already-exist-message' => 'המשתנה עם אותם אפשרויות מאפיינים כבר קיים.',
                 ],
             ],
 

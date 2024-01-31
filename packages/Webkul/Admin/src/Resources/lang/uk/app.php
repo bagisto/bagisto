@@ -518,19 +518,13 @@ return [
 
                 'create' => [
                     'back-btn'                => 'Назад',
-                    'bundle'                  => 'Збирається',
-                    'configurable'            => 'Конфігурований',
                     'configurable-attributes' => 'Атрибути конфігурованого товару',
                     'create-btn'              => 'Створити товар',
-                    'downloadable'            => 'Завантажуваний',
                     'family'                  => 'Сімейство',
-                    'grouped'                 => 'Згрупований',
                     'save-btn'                => 'Зберегти товар',
-                    'simple'                  => 'Простий',
                     'sku'                     => 'Артикул',
                     'title'                   => 'Створити новий товар',
                     'type'                    => 'Тип',
-                    'virtual'                 => 'Віртуальний',
                 ],
 
                 'datagrid' => [
@@ -558,7 +552,6 @@ return [
                     'status'                        => 'Статус',
                     'type'                          => 'Тип',
                     'update-status'                 => 'Оновити статус',
-                    'variant-already-exist-message' => 'Варіант з тими ж самими опціями атрибутів вже існує.',
                 ],
             ],
 
