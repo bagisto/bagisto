@@ -150,7 +150,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.eror control-name="sort_order" />
+                            <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
