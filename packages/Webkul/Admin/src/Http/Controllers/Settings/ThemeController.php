@@ -102,9 +102,9 @@ class ThemeController extends Controller
 
         $data['status'] = request()->input('status') == 'on';
 
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
-            unset($data[$locale]['options']);
-        }
+        // if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+        //     unset($data[$locale]['options']);
+        // }
 
         Event::dispatch('theme_customization.update.before', $id);
 
@@ -114,7 +114,7 @@ class ThemeController extends Controller
             $this->themeCustomizationRepository->uploadImage(
                 $data[$locale],
                 $theme,
-                request()->input('deleted_sliders', []),
+                request()->input("{$locale}.deleted_sliders", []),
             );
         }
 
