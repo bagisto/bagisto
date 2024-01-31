@@ -56,6 +56,17 @@ it('should show create page of attribute', function () {
         ->assertSeeText(trans('admin::app.catalog.attributes.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in attribute', function () {
+    // Act & Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('admin_name')
+        ->assertJsonValidationErrorFor('type')
+        ->assertUnprocessable();
+});
+
 it('should store newly created attribute', function () {
     // Act & Assert
     $this->loginAsAdmin();
@@ -92,6 +103,17 @@ it('should show edit page of attribute', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.attributes.edit.title'))
         ->assertSeeText(trans('admin::app.catalog.attributes.edit.back-btn'));
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in attribute', function () {
+    // Act & Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('admin_name')
+        ->assertJsonValidationErrorFor('type')
+        ->assertUnprocessable();
 });
 
 it('should update an attribute', function () {

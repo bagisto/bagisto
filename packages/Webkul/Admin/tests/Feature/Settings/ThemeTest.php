@@ -85,7 +85,7 @@ it('should update the theme customizations', function () {
                     [
                         'title' => fake()->title(),
                         'link'  => fake()->url(),
-                        'image' => UploadedFile::fake()->create(fake()->word().'.png'),
+                        'image' => UploadedFile::fake()->image(fake()->word().'.png', 640, 480, 'png'),
                     ],
                 ],
             ];

@@ -32,7 +32,7 @@ it('should store the newly created channels', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.channels.store'), [
-        'code'              => $code = fake()->unique()->word(),
+        'code'              => $code = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
         'theme'             => $code,
         'hostname'          => $hostName = 'http://'.fake()->ipv4(),
         'root_category_id'  => 1,
