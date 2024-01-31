@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => 'Sorteer op',
-            'options' => [
-                'cheapest-first'  => 'Goedkoopste eerst',
-                'expensive-first' => 'Duurste eerst',
-                'from-a-z'        => 'Van A tot Z',
-                'from-z-a'        => 'Van Z tot A',
-                'latest-first'    => 'Nieuwste eerst',
-                'oldest-first'    => 'Oudste eerst',
-            ],
         ],
 
         'view' => [
@@ -618,7 +610,6 @@ return [
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
             'missing-fields'            => 'Sommige vereiste velden ontbreken voor dit product.',
             'missing-options'           => 'Opties ontbreken voor dit product.',
-            'missing-links'             => 'Downloadbare links ontbreken voor dit product.',
             'minimum-order-message'     => 'Het minimum bestelbedrag is :amount',
             'qty-missing'               => 'Minstens één product moet meer dan 1 hoeveelheid hebben.',
             'return-to-shop'            => 'Terug naar de winkel',

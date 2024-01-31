@@ -552,7 +552,6 @@ return [
                     'status'                        => 'الحالة',
                     'type'                          => 'النوع',
                     'update-status'                 => 'تحديث الحالة',
-                    'variant-already-exist-message' => 'المتغير بنفس خيارات السمات موجود بالفعل.',
                 ],
             ],
 

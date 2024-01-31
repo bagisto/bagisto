@@ -552,7 +552,6 @@ return [
                     'status'                        => 'Durum',
                     'type'                          => 'Tür',
                     'update-status'                 => 'Durumu Güncelle',
-                    'variant-already-exist-message' => 'Aynı özellik seçeneklerine sahip varyant zaten mevcut.',
                 ],
             ],
 

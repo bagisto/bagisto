@@ -552,7 +552,6 @@ return [
                     'status'                        => 'وضعیت',
                     'type'                          => 'نوع',
                     'update-status'                 => 'به‌روزرسانی وضعیت',
-                    'variant-already-exist-message' => 'واریانت با همان گزینه‌های ویژگی ها از قبل وجود دارد.',
                 ],
             ],
 

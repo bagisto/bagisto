@@ -552,7 +552,6 @@ return [
                     'status'                        => '状态',
                     'type'                          => '类型',
                     'update-status'                 => '更新状态',
-                    'variant-already-exist-message' => '具有相同属性选项的变体已存在。',
                 ],
             ],
 

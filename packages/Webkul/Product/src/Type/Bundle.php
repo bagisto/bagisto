@@ -210,24 +210,23 @@ class Bundle extends AbstractType
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data
-     * @return array
+     * @return array|string
      */
     public function prepareForCart($data)
     {
         $bundleQuantity = parent::handleQuantity((int) $data['quantity']);
-
         if (empty($data['bundle_options'])) {
-            return trans('shop::app.checkout.cart.missing-options');
+            return trans('product::app.checkout.cart.missing-options');
         }
 
         $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
 
         if (empty($data['bundle_options'])) {
-            return trans('shop::app.checkout.cart.missing-options');
+            return trans('product::app.checkout.cart.missing-options');
         }
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.inventory-warning');
+            return trans('product::app.checkout.cart.inventory-warning');
         }
 
         $products = parent::prepareForCart($data);
@@ -237,7 +236,7 @@ class Bundle extends AbstractType
 
             /* need to check each individual quantity as well if don't have then show error */
             if (! $product->getTypeInstance()->haveSufficientQuantity($data['quantity'] * $bundleQuantity)) {
-                return trans('shop::app.checkout.cart.inventory-warning');
+                return trans('product::app.checkout.cart.inventory-warning');
             }
 
             if (! $product->getTypeInstance()->isSaleable()) {
@@ -319,17 +318,10 @@ class Bundle extends AbstractType
      *
      * @param  array  $options1
      * @param  array  $options2
-     * @return bool
+     * @return bool|void
      */
     public function compareOptions($options1, $options2)
     {
-        if (
-            isset($options2['product_id'])
-            && $this->product->id != $options2['product_id']
-        ) {
-            return false;
-        }
-
         if (
             isset($options1['bundle_options'])
             && isset($options2['bundle_options'])
@@ -338,13 +330,7 @@ class Bundle extends AbstractType
                 && $options1['bundle_option_qty'] == $this->getOptionQuantities($options2);
         }
 
-        if (! isset($options1['bundle_options'])) {
-            return false;
-        }
-
-        if (! isset($options2['bundle_options'])) {
-            return false;
-        }
+        return false;
     }
 
     /**

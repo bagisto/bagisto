@@ -552,7 +552,6 @@ return [
                     'status'                        => 'מצב',
                     'type'                          => 'סוג',
                     'update-status'                 => 'עדכן מצב',
-                    'variant-already-exist-message' => 'המשתנה עם אותם אפשרויות מאפיינים כבר קיים.',
                 ],
             ],
 

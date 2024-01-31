@@ -552,7 +552,6 @@ return [
                     'status'                        => 'Статус',
                     'type'                          => 'Тип',
                     'update-status'                 => 'Оновити статус',
-                    'variant-already-exist-message' => 'Варіант з тими ж самими опціями атрибутів вже існує.',
                 ],
             ],
 

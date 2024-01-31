@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => '排序方式',
-            'options' => [
-                'cheapest-first'  => '最便宜的优先',
-                'expensive-first' => '最贵的优先',
-                'from-a-z'        => 'A 到 Z',
-                'from-z-a'        => 'Z 到 A',
-                'latest-first'    => '最新的优先',
-                'oldest-first'    => '最旧的优先',
-            ],
         ],
 
         'view' => [
@@ -618,7 +610,6 @@ return [
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
             'missing-fields'            => '此产品缺少一些必填字段。',
             'missing-options'           => '此产品缺少选项。',
-            'missing-links'             => '此产品缺少可下载链接。',
             'minimum-order-message'     => '最低订单金额为 :amount',
             'qty-missing'               => '至少有一个产品应该有超过 1 个数量。',
             'return-to-shop'            => '返回商店',

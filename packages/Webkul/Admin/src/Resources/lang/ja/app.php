@@ -552,7 +552,6 @@ return [
                     'status'                        => 'ステータス',
                     'type'                          => 'タイプ',
                     'update-status'                 => 'ステータスを更新',
-                    'variant-already-exist-message' => '同じ属性オプションを持つバリアントはすでに存在しています。',
                 ],
             ],
 

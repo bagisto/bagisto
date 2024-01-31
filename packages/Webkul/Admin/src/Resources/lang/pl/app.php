@@ -552,7 +552,6 @@ return [
                     'status'                        => 'Status',
                     'type'                          => 'Typ',
                     'update-status'                 => 'Zaktualizuj status',
-                    'variant-already-exist-message' => 'Wariant o tych samych opcjach atrybutów już istnieje.',
                 ],
             ],
 

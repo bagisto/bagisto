@@ -476,14 +476,6 @@ return [
 
         'sort-by' => [
             'title'   => '並び替え',
-            'options' => [
-                'cheapest-first'  => '最安値順',
-                'expensive-first' => '最高値順',
-                'from-a-z'        => 'A-Z順',
-                'from-z-a'        => 'Z-A順',
-                'latest-first'    => '新しい順',
-                'oldest-first'    => '古い順',
-            ],
         ],
 
         'view' => [
@@ -618,7 +610,6 @@ return [
             'inactive'                  => 'アイテムは無効になり、カートから削除されました。',
             'missing-fields'            => 'この製品にはいくつかの必須フィールドがありません。',
             'missing-options'           => 'この製品にはオプションがありません。',
-            'missing-links'             => 'この製品にはダウンロードリンクがありません。',
             'minimum-order-message'     => '最小注文金額は :amount です',
             'paypal-payment-cancelled'  => 'PayPalの支払いがキャンセルされました。',
             'qty-missing'               => '少なくとも1つの製品は1以上の数量を持つ必要があります。',
