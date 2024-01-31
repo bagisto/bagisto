@@ -252,14 +252,14 @@
                                         :index="index"
                                         @onRemoveCondition="removeCondition($event)">
                                         />
-
+                                    </v-cart-rule-condition-item>
                                         <div
                                             class="secondary-button max-w-max mt-4"
                                             @click="addCondition"
                                         >
                                             @lang('admin::app.marketing.promotions.cart-rules.create.add-condition')
                                         </div>
-                                    </v-cart-rule-condition-item>
+
                                 </div>
 
                                 {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.card.conditions.after') !!}
