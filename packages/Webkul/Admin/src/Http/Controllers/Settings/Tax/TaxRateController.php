@@ -67,7 +67,9 @@ class TaxRateController extends Controller
             'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
-        $data = request()->only([
+        Event::dispatch('tax.rate.create.before');
+
+        $taxRate = $this->taxRateRepository->create(request()->only([
             'identifier',
             'country',
             'state',
@@ -76,15 +78,7 @@ class TaxRateController extends Controller
             'is_zip',
             'zip_from',
             'zip_to',
-        ]);
-
-        if ($data['is_zip'] ?? false) {
-            $data['is_zip'] = 1;
-        }
-
-        Event::dispatch('tax.rate.create.before');
-
-        $taxRate = $this->taxRateRepository->create($data);
+        ]));
 
         Event::dispatch('tax.rate.create.after', $taxRate);
 
@@ -96,10 +90,9 @@ class TaxRateController extends Controller
     /**
      * Show the edit form for the previously created tax rates.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $taxRate = $this->taxRateRepository->findOrFail($id);
 
@@ -109,10 +102,9 @@ class TaxRateController extends Controller
     /**
      * Edit the previous tax rate.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
@@ -126,7 +118,7 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.rate.update.before', $id);
 
-        $data = request()->only([
+        $taxRate = $this->taxRateRepository->update(request()->only([
             'identifier',
             'country',
             'state',
@@ -135,9 +127,7 @@ class TaxRateController extends Controller
             'is_zip',
             'zip_from',
             'zip_to',
-        ]);
-
-        $taxRate = $this->taxRateRepository->update($data, $id);
+        ]), $id);
 
         Event::dispatch('tax.rate.update.after', $taxRate);
 
@@ -148,10 +138,8 @@ class TaxRateController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $this->taxRateRepository->findOrFail($id);
 
@@ -162,14 +150,14 @@ class TaxRateController extends Controller
 
             Event::dispatch('tax.rate.delete.after', $id);
 
-            return new JsonResponse(['message' => trans('admin::app.settings.taxes.rates.delete-success')]);
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.taxes.rates.delete-success'),
+            ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResponse([
-            'message' => trans(
-                'admin::app.settings.taxes.rates.delete-failed'
-            ),
+            'message' => trans('admin::app.settings.taxes.rates.delete-failed'),
         ], 500);
     }
 

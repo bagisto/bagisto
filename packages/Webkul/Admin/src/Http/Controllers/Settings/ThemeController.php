@@ -86,7 +86,17 @@ class ThemeController extends Controller
      */
     public function update($id)
     {
-        $data = request()->all();
+        $locale = request('locale');
+
+        $data = request()->only(
+            'locale',
+            'type',
+            'name',
+            'sort_order',
+            'channel_id',
+            'status',
+            $locale
+        );
 
         Event::dispatch('theme_customization.update.before', $id);
 
