@@ -110,7 +110,7 @@ class ImportDataGrid extends DataGrid
                 if (empty($row->summary)) {
                     return '';
                 }
-                
+
                 $summary = json_decode($row->summary, true);
 
                 $stats = [];

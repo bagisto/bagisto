@@ -189,40 +189,12 @@ class Import
      */
     public function start(?ImportBatchContract $importBatch = null): bool
     {
-        DB::beginTransaction();
-
-        try {
-            $typeImporter = $this->getTypeImporter();
-
-            $typeImporter->importData($importBatch);
-        } catch (\Exception $e) {
-            /**
-             * Rollback transaction
-             */
-            DB::rollBack();
-
-            throw $e;
-        } finally {
-            /**
-             * Commit transaction
-             */
-            DB::commit();
-        }
-
-        return true;
-    }
-
-    /**
-     * Link import resources
-     */
-    public function link(ImportBatchContract $importBatch): bool
-    {
         // DB::beginTransaction();
 
         try {
             $typeImporter = $this->getTypeImporter();
 
-            $typeImporter->linkData($importBatch);
+            $typeImporter->importData($importBatch);
         } catch (\Exception $e) {
             /**
              * Rollback transaction
@@ -235,6 +207,34 @@ class Import
              * Commit transaction
              */
             // DB::commit();
+        }
+
+        return true;
+    }
+
+    /**
+     * Link import resources
+     */
+    public function link(ImportBatchContract $importBatch): bool
+    {
+        DB::beginTransaction();
+
+        try {
+            $typeImporter = $this->getTypeImporter();
+
+            $typeImporter->linkData($importBatch);
+        } catch (\Exception $e) {
+            /**
+             * Rollback transaction
+             */
+            DB::rollBack();
+
+            throw $e;
+        } finally {
+            /**
+             * Commit transaction
+             */
+            DB::commit();
         }
 
         return true;

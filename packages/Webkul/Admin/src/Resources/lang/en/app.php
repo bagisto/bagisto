@@ -2348,7 +2348,7 @@ return [
                     'validating-info'         => 'The data started reading and Validating',
                     'validation-failed-info'  => 'Your import is invalid. Please fix the following errors and try again.',
                     'validation-success-info' => 'Your import is valid. Click on Import to start the import process.',
-                    
+
                 ],
 
                 'not-valid'         => 'Import is invalid',

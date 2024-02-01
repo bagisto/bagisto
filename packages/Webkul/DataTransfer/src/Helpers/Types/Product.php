@@ -5,10 +5,11 @@ namespace Webkul\DataTransfer\Helpers\Types;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
@@ -19,11 +20,11 @@ use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+use Webkul\Product\Repositories\ProductBundleOptionRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductBundleOptionRepository;
-use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
-
+use Webkul\Product\Repositories\ProductFlatRepository;
 
 class Product extends AbstractType
 {
@@ -164,6 +165,7 @@ class Product extends AbstractType
         protected CategoryRepository $categoryRepository,
         protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
+        protected ProductFlatRepository $productFlatRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
@@ -261,6 +263,8 @@ class Product extends AbstractType
 
         $inventories = [];
 
+        $flatData = [];
+
         foreach ($batch->data as $rowData) {
             $this->prepareProducts($rowData, $products);
 
@@ -269,6 +273,8 @@ class Product extends AbstractType
             $this->prepareAttributeValues($rowData, $attributes);
 
             $this->prepareInventories($rowData, $inventories);
+
+            $this->prepareFlatData($rowData, $flatData);
         }
 
         $this->saveProducts($products);
@@ -278,6 +284,8 @@ class Product extends AbstractType
         $this->saveAttributeValues($attributes);
 
         $this->saveInventories($inventories);
+
+        $this->saveFlatData($flatData);
 
         /**
          * Update import batch summary
@@ -466,7 +474,7 @@ class Product extends AbstractType
      */
     public function saveCategories(array $categories): void
     {
-        if ( empty($categories)) {
+        if (empty($categories)) {
             return;
         }
 
@@ -617,6 +625,52 @@ class Product extends AbstractType
     }
 
     /**
+     * Prepare products flat data
+     */
+    public function prepareFlatData(array $rowData, array &$flatData): void
+    {
+        $attributeFamily = $this->attributeFamilies->where('code', $rowData['attribute_family_code'])->first();
+
+        $flatColumns = Schema::getColumnListing('product_flat');
+
+        foreach ($flatColumns as $column) {
+            if (in_array($column, ['id', 'created_at', 'updated_at'])) {
+                continue;
+            }
+
+            $flatData[$rowData['sku']][$column] = $rowData[$column] ?? null;   
+        }
+
+        $flatData[$rowData['sku']]['channel'] = $rowData['channel'] ?? 'default';
+    }
+
+    /**
+     * Save products flat data
+     */
+    public function saveFlatData(array &$flatData): void
+    {
+        $products = [];
+        
+        foreach ($flatData as $sku => $attributes) {
+            $product = $this->skuStorage->get($sku);
+
+            $products[] = array_merge($attributes, [
+                'product_id'          => $product['id'],
+                'attribute_family_id' => $product['attribute_family_id'],
+            ]);
+        }
+
+        $this->productFlatRepository->upsert(
+            $products,
+            [
+                'product_id',
+                'channel',
+                'locale',
+            ],
+        );
+    }
+
+    /**
      * Prepare configurable variants
      */
     public function prepareConfigurableVariants(array $rowData, array &$configurableVariants): void
@@ -678,7 +732,7 @@ class Product extends AbstractType
                     $attributeOption = $superAttributeOptions->where('attribute_id', $attribute->id)
                         ->where('admin_name', $optionLabel)
                         ->first();
-                    
+
                     $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
                     $attributeTypeValues = array_merge($attributeTypeValues, [
@@ -846,10 +900,11 @@ class Product extends AbstractType
     public function saveBundleOptions(array &$bundleOptions): void
     {
         /**
-         * TODO: Implement bundle products sku loading
-         * 
+         * TODO: Implement bundle options products sku loading
+         *
          * Load not loaded SKUs to the sku storage
          */
+
 
         $upsertData = [];
 
@@ -1001,7 +1056,7 @@ class Product extends AbstractType
             $product = $this->skuStorage->get($sku);
 
             foreach ($options as $optionName => $option) {
-                $queryBuilder->orWhere(function($query) use ($product, $optionName) {
+                $queryBuilder->orWhere(function ($query) use ($product, $optionName) {
                     $query->where('product_bundle_options.product_id', $product['id'])
                         ->where('product_bundle_option_translations.label', $optionName);
                 });
@@ -1085,7 +1140,10 @@ class Product extends AbstractType
         /**
          * Check if product type exists
          */
-        if (! config('product_types.' . $rowData['type'])) {
+        if (
+            $rowData['type'] == self::PRODUCT_TYPE_DOWNLOADABLE
+            || ! config('product_types.' . $rowData['type'])
+        ) {
             $this->skipRow($rowNumber, self::ERROR_INVALID_TYPE, 'type');
 
             return false;
@@ -1142,7 +1200,7 @@ class Product extends AbstractType
 
         /**
          * TODO: Needs to be implement
-         * 
+         *
          * Check if configurable super attribute exists in the attribute family
          */
 

@@ -189,7 +189,7 @@ class ImportController extends Controller
     public function validateImport(int $id): JsonResponse
     {
         $import = $this->importRepository->findOrFail($id);
-        
+
         $isValid = $this->importHelper
             ->setImport($import)
             ->validate();
