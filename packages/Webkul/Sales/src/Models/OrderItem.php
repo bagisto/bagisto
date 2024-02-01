@@ -59,11 +59,10 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canShip(): bool
     {
-        if (! $this->isStockable()) {
-            return false;
-        }
-
-        if ($this->qty_to_ship > 0) {
+        if (
+            $this->qty_to_ship > 0
+            && $this->isStockable()
+        ) {
             return true;
         }
 

@@ -21,11 +21,10 @@ class ShipmentItemRepository extends Repository
      */
     public function updateProductInventory($data)
     {
-        if (! $data['product']) {
-            return;
-        }
-
-        if (! $data['product']->manage_stock) {
+        if (
+            ! $data['product']
+            || ! $data['product']->manage_stock
+        ) {
             return;
         }
 

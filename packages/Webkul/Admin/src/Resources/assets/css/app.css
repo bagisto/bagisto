@@ -440,12 +440,15 @@
     .label-closed,
     .label-canceled,
     .label-info,
+    .label-fraud,
+    .label-pending_payment,
     .label-completed,
     .label-active {
         @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
-	.label-pending {
+	.label-pending,
+    .label-pending_payment {
 		@apply bg-yellow-500;
 	}
 
@@ -459,7 +462,8 @@
 		@apply bg-darkBlue;
 	}
 
-    .label-canceled {
+    .label-canceled,
+    .label-fraud {
         @apply bg-darkPink;
     }
 
