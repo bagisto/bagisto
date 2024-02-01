@@ -27,6 +27,24 @@ it('should return the inventory sources create page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.campaigns.create.back-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the inventory sources', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.inventory_sources.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('contact_name')
+        ->assertJsonValidationErrorFor('contact_email')
+        ->assertJsonValidationErrorFor('contact_number')
+        ->assertJsonValidationErrorFor('street')
+        ->assertJsonValidationErrorFor('country')
+        ->assertJsonValidationErrorFor('state')
+        ->assertJsonValidationErrorFor('city')
+        ->assertJsonValidationErrorFor('postcode')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created inventory sources', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -62,7 +80,7 @@ it('should store the newly created inventory sources', function () {
     ]);
 });
 
-it('should return the edit of the inventory_sources', function () {
+it('should return the edit of the inventory sources', function () {
     // Arrange
     $inventorySource = InventorySource::factory()->create();
 
@@ -74,6 +92,27 @@ it('should return the edit of the inventory_sources', function () {
         ->assertSeeText(trans('admin::app.settings.inventory-sources.edit.title'))
         ->assertSeeText(trans('admin::app.settings.inventory-sources.edit.back-btn'))
         ->assertSeeText(trans('admin::app.settings.inventory-sources.edit.save-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when update the inventory sources', function () {
+    // Arrange
+    $inventorySources = InventorySource::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.inventory_sources.update', $inventorySources->id))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('contact_name')
+        ->assertJsonValidationErrorFor('contact_email')
+        ->assertJsonValidationErrorFor('contact_number')
+        ->assertJsonValidationErrorFor('street')
+        ->assertJsonValidationErrorFor('country')
+        ->assertJsonValidationErrorFor('state')
+        ->assertJsonValidationErrorFor('city')
+        ->assertJsonValidationErrorFor('postcode')
+        ->assertUnprocessable();
 });
 
 it('should update the inventory sources', function () {
