@@ -38,10 +38,8 @@ class ReviewController extends Controller
 
     /**
      * Review Details
-     *
-     * @param  int  $id
      */
-    public function edit($id): JsonResponse
+    public function edit(int $id): JsonResponse
     {
         $review = $this->productReviewRepository->with(['images', 'product'])->findOrFail($id);
 
@@ -55,10 +53,9 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         Event::dispatch('customer.review.update.before', $id);
 
@@ -73,13 +70,9 @@ class ReviewController extends Controller
 
     /**
      * Delete the review of the current product
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $this->productReviewRepository->findOrFail($id);
-
         try {
             Event::dispatch('customer.review.delete.before', $id);
 
@@ -87,9 +80,13 @@ class ReviewController extends Controller
 
             Event::dispatch('customer.review.delete.after', $id);
 
-            return new JsonResponse(['message' => trans('admin::app.customers.reviews.index.datagrid.delete-success', ['name' => 'Review'])]);
+            return new JsonResponse([
+                'message' => trans('admin::app.customers.reviews.index.datagrid.delete-success', ['name' => 'Review'])
+            ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])], 500);
+            return new JsonResponse([
+                'message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])
+            ], 500);
         }
     }
 
