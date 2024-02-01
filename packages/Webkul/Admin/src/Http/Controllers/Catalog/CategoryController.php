@@ -173,10 +173,6 @@ class CategoryController extends Controller
         foreach ($categoryIds as $categoryId) {
             $category = $this->categoryRepository->find($categoryId);
 
-            if ($category?->slug == 'root') {
-                continue;
-            }
-
             if (isset($category)) {
                 if (! $this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
