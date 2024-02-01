@@ -29,6 +29,41 @@ it('should show the edit page of compaign', function () {
         ->assertJsonPath('data.is_subscribed', $subscriber->is_subscribed);
 });
 
+it('should fail the validation with errors when certain inputs are not provided when update in news letter subscription', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.subscribers.update'))
+        ->assertJsonValidationErrorFor('id')
+        ->assertJsonValidationErrorFor('is_subscribed')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when is subscribed not passed in update in news letter subscription', function () {
+    // Arrange
+    $subscriber = SubscribersList::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.subscribers.update'), [
+        'id' => $subscriber->id,
+    ])
+        ->assertJsonValidationErrorFor('is_subscribed')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when id is not passed in update in news letter subscription', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.subscribers.update'), [
+        'is_subscribed' => 1,
+    ])
+        ->assertJsonValidationErrorFor('id')
+        ->assertUnprocessable();
+});
+
 it('should update the subscriber', function () {
     // Arrange
     $subscriber = SubscribersList::factory()->create();
@@ -38,7 +73,7 @@ it('should update the subscriber', function () {
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
         'id'            => $subscriber->id,
-        'is_subscribed' => $isSubscribed = fake()->boolean,
+        'is_subscribed' => $isSubscribed = rand(0, 1),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.edit.success'));
