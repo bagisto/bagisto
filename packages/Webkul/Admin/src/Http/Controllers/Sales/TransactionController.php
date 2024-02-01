@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -118,7 +119,7 @@ class TransactionController extends Controller
 
             $this->orderRepository->updateOrderStatus($order, $status);
 
-            $this->invoiceRepository->updateState($invoice, 'paid');
+            $this->invoiceRepository->updateState($invoice, Invoice::STATUS_PAID);
         }
 
         session()->flash('success', trans('admin::app.sales.transactions.index.create.transaction-saved'));
