@@ -17,6 +17,16 @@ it('should show the search synonyms index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the search synonyms', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.search_seo.search_synonyms.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('terms')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created search synonyms', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -36,6 +46,19 @@ it('should store the newly created search synonyms', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when certain field not provided when update the search synonyms', function () {
+    // Arrange
+    $searchsynonym = SearchSynonym::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.search_seo.search_synonyms.update', $searchsynonym->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('terms')
+        ->assertUnprocessable();
 });
 
 it('should update the search synonyms', function () {
