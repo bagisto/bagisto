@@ -21,5 +21,6 @@ class DataTransferServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/importers.php', 'importers');
     }
 }

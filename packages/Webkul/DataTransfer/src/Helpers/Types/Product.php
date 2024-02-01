@@ -82,10 +82,10 @@ class Product extends AbstractType
      * Error message templates
      */
     protected array $messages = [
-        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.validation.errors.products.invalid-type',
-        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.validation.errors.products.sku-not-found',
-        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.validation.errors.products.duplicate-url-key',
-        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.validation.errors.products.invalid-attribute-family',
+        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.importers.products.validation.errors.products.invalid-type',
+        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.importers.products.validation.errors.products.sku-not-found',
+        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.importers.products.validation.errors.products.duplicate-url-key',
+        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.products.invalid-attribute-family',
     ];
 
     /**
@@ -739,8 +739,8 @@ class Product extends AbstractType
                         'product_id'            => $variant['id'],
                         'attribute_id'          => $attribute->id,
                         $attribute->column_name => $attributeOption->id,
-                        'channel'               => $attribute->value_per_channel ? ($rowData['channel'] ?? 'default') : null,
-                        'locale'                => $attribute->value_per_locale ? ($rowData['locale'] ?? 'en') : null,
+                        'channel'               => null,
+                        'locale'                => null,
                     ]);
 
                     $attributeTypeValues['unique_id'] = implode('|', array_filter([
@@ -899,12 +899,20 @@ class Product extends AbstractType
      */
     public function saveBundleOptions(array &$bundleOptions): void
     {
+        if (empty($bundleOptions)) {
+            return;
+        }
+
+        $associatedSkus = [];
+
+        foreach (data_get($bundleOptions, '*.*.skus') as $options) {
+            $associatedSkus = array_merge($associatedSkus, array_keys($options));
+        }
+
         /**
-         * TODO: Implement bundle options products sku loading
-         *
          * Load not loaded SKUs to the sku storage
          */
-
+        $this->loadUnloadedSKUs(array_unique(Arr::flatten($associatedSkus)));
 
         $upsertData = [];
 

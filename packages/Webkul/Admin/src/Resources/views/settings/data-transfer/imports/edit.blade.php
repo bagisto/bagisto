@@ -64,9 +64,9 @@
                             rules="required"
                             :label="trans('admin::app.settings.data-transfer.imports.edit.type')"
                         >
-                            <option value="product">@lang('admin::app.settings.data-transfer.imports.edit.products')</option>
-                            <option value="category">@lang('admin::app.settings.data-transfer.imports.edit.categories')</option>
-                            <option value="customer">@lang('admin::app.settings.data-transfer.imports.edit.customers')</option>
+                            @foreach (config('importers') as $code => $importer)
+                                <option value="{{ $code }}">@lang($importer['title'])</option>
+                            @endforeach
                         </x-admin::form.control-group.control>
 
                         <x-admin::form.control-group.error control-name="type" />

@@ -217,7 +217,7 @@ class Import
      */
     public function link(ImportBatchContract $importBatch): bool
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         try {
             $typeImporter = $this->getTypeImporter();
@@ -227,14 +227,14 @@ class Import
             /**
              * Rollback transaction
              */
-            DB::rollBack();
+            // DB::rollBack();
 
             throw $e;
         } finally {
             /**
              * Commit transaction
              */
-            DB::commit();
+            // DB::commit();
         }
 
         return true;
@@ -419,7 +419,9 @@ class Import
     public function getTypeImporter(): AbstractType
     {
         if (! $this->typeImporter) {
-            $this->typeImporter = app()->make('Webkul\DataTransfer\Helpers\Types\\' . ucfirst($this->import->type))
+            $importerConfig = config('importers.' . $this->import->type);
+
+            $this->typeImporter = app()->make($importerConfig['importer'])
                 ->setImport($this->import)
                 ->setErrorHelper($this->errorHelper);
         }

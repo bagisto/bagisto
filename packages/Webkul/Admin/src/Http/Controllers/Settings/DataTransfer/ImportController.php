@@ -54,8 +54,10 @@ class ImportController extends Controller
      */
     public function store()
     {
+        $importers = array_keys(config('importers'));
+
         $this->validate(request(), [
-            'type'                => 'required|in:category,product,customer',
+            'type'                => 'required|in:' . implode(',', $importers),
             'action'              => 'required:in:append,replace,delete',
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
@@ -112,10 +114,12 @@ class ImportController extends Controller
      */
     public function update(int $id)
     {
+        $importers = array_keys(config('importers'));
+
         $import = $this->importRepository->findOrFail($id);
 
         $this->validate(request(), [
-            'type'                => 'required|in:category,product,customer',
+            'type'                => 'required|in:' . implode(',', $importers),
             'action'              => 'required:in:append,replace,delete',
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
