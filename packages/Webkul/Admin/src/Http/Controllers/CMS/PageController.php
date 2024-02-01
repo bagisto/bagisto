@@ -131,11 +131,11 @@ class PageController extends Controller
     {
         try {
             Event::dispatch('cms.page.delete.before', $id);
-    
+
             $this->pageRepository->delete($id);
-    
+
             Event::dispatch('cms.page.delete.after', $id);
-    
+
             return new JsonResponse(['message' => trans('admin::app.cms.delete-success')]);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => trans('admin::app.cms.no-resource')]);

@@ -20,7 +20,7 @@ class CustomerController extends Controller
     /**
      * Static pagination count.
      *
-     * @var integer
+     * @var int
      */
     public const COUNT = 10;
 

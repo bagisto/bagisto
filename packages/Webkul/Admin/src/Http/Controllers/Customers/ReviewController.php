@@ -81,11 +81,11 @@ class ReviewController extends Controller
             Event::dispatch('customer.review.delete.after', $id);
 
             return new JsonResponse([
-                'message' => trans('admin::app.customers.reviews.index.datagrid.delete-success', ['name' => 'Review'])
+                'message' => trans('admin::app.customers.reviews.index.datagrid.delete-success', ['name' => 'Review']),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])
+                'message' => trans('admin::app.response.delete-failed', ['name' => 'Review']),
             ], 500);
         }
     }
