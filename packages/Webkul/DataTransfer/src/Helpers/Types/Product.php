@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
@@ -137,6 +138,7 @@ class Product extends AbstractType
     protected array $validColumnNames = [
         'locale',
         'type',
+        'parent_sku',
         'attribute_family_code',
         'categories',
         'tax_category_name',
@@ -144,6 +146,7 @@ class Product extends AbstractType
         'related_skus',
         'cross_sell_skus',
         'up_sell_skus',
+        'configurable_variants',
         'bundle_options',
         'associated_skus',
     ];
@@ -157,6 +160,7 @@ class Product extends AbstractType
         protected ImportBatchRepository $importBatchRepository,
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository,
+        protected AttributeOptionRepository $attributeOptionRepository,
         protected CategoryRepository $categoryRepository,
         protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
@@ -305,17 +309,19 @@ class Product extends AbstractType
          */
         $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
 
-        $links = [];
+        $configurableVariants = [];
 
         $groupAssociations = [];
 
         $bundleOptions = [];
 
+        $links = [];
+
         foreach ($batch->data as $rowData) {
             /**
-             * Prepare products association for related, cross sell and up sell
+             * Prepare configurable variants
              */
-            $this->prepareLinks($rowData, $links);
+            $this->prepareConfigurableVariants($rowData, $configurableVariants);
 
             /**
              * Prepare products association for grouped product
@@ -326,13 +332,20 @@ class Product extends AbstractType
              * Prepare bundle options
              */
             $this->prepareBundleOptions($rowData, $bundleOptions);
+
+            /**
+             * Prepare products association for related, cross sell and up sell
+             */
+            $this->prepareLinks($rowData, $links);
         }
 
-        $this->saveLinks($links);
+        $this->saveConfigurableVariants($configurableVariants);
 
         $this->saveGroupAssociations($groupAssociations);
 
         $this->saveBundleOptions($bundleOptions);
+
+        $this->saveLinks($links);
 
         dd('END HERE');
 
@@ -349,7 +362,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Prepare products
+     * Prepare products from current batch
      */
     public function prepareProducts(array $rowData, array &$products): void
     {
@@ -375,7 +388,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Save products
+     * Save products from current batch
      */
     public function saveProducts(array $products): void
     {
@@ -418,7 +431,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Prepare categories
+     * Prepare categories from current batch
      */
     public function prepareCategories(array $rowData, array &$categories): void
     {
@@ -449,7 +462,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Save categories
+     * Save categories from current batch
      */
     public function saveCategories(array $categories): void
     {
@@ -472,12 +485,15 @@ class Product extends AbstractType
 
         DB::table('product_categories')->upsert(
             $productCategories,
-            ['product_id', 'category_id'],
+            [
+                'product_id',
+                'category_id',
+            ],
         );
     }
 
     /**
-     * Save products
+     * Save products from current batch
      */
     public function prepareAttributeValues(array $rowData, array &$attributes): array
     {
@@ -510,7 +526,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Save products
+     * Save products from current batch
      */
     public function saveAttributeValues(array $attributes): void
     {
@@ -533,7 +549,7 @@ class Product extends AbstractType
             }
         }
 
-        $this->productAttributeValueRepository->upsert($attributeValues, ['unique_id']);
+        $this->productAttributeValueRepository->upsert($attributeValues, 'unique_id');
     }
 
     /**
@@ -558,7 +574,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Save inventories
+     * Save inventories from current batch
      */
     public function saveInventories(array $inventories): void
     {
@@ -592,65 +608,130 @@ class Product extends AbstractType
 
         $this->productInventoryRepository->upsert(
             $productInventories,
-            ['product_id', 'inventory_source_id', 'vendor_id']
+            [
+                'product_id',
+                'inventory_source_id',
+                'vendor_id',
+            ],
         );
     }
 
     /**
-     * Prepare links
+     * Prepare configurable variants
      */
-    public function prepareLinks(array $rowData, array &$links): void
+    public function prepareConfigurableVariants(array $rowData, array &$configurableVariants): void
     {
-        $linkTableMapping = [
-            'related'    => 'product_relations',
-            'cross_sell' => 'product_cross_sells',
-            'up_sell'    => 'product_up_sells',
-        ];
+        if (
+            $rowData['type'] != self::PRODUCT_TYPE_CONFIGURABLE
+            && empty($rowData['configurable_variants'])
+        ) {
+            return;
+        }
 
-        foreach ($linkTableMapping as $type => $table) {
-            if (! empty($rowData[$type . '_skus'])) {
-                foreach (explode(',', $rowData[$type . '_skus'] ?? '') as $sku) {
-                    $links[$table][$rowData['sku']][] = $sku;
-                }
-            }
+        $variants = explode('|', $rowData['configurable_variants']);
+
+        foreach ($variants as $variant) {
+            parse_str(str_replace(',', '&', $variant), $variantAttributes);
+
+            $configurableVariants[$rowData['sku']][$variantAttributes['sku']] = Arr::except($variantAttributes, 'sku');
         }
     }
 
     /**
-     * Save links
+     * Save configurable variants from current batch
      */
-    public function saveLinks(array $links): void
+    public function saveConfigurableVariants(array $configurableVariants): void
     {
+        if (empty($configurableVariants)) {
+            return;
+        }
+
+        $variantSkus = array_map('array_keys', $configurableVariants);
+
         /**
          * Load not loaded SKUs to the sku storage
          */
-        $this->loadUnloadedSKUs(array_unique(Arr::flatten($links)));
+        $this->loadUnloadedSKUs(array_unique(Arr::flatten($variantSkus)));
 
-        foreach ($links as $table => $linksData) {
-            $productLinks = [];
+        $superAttributeOptions = $this->getSuperAttributeOptions($configurableVariants);
 
-            foreach ($linksData as $sku => $linkedSkus) {
-                $product = $this->skuStorage->get($sku);
+        $parentAssociations = [];
 
-                foreach ($linkedSkus as $linkedSku) {
-                    $linkedProduct = $this->skuStorage->get($linkedSku);
+        $superAttributes = [];
 
-                    if (! $linkedProduct) {
-                        continue;
-                    }
+        $superAttributeValues = [];
 
-                    $productLinks[] = [
-                        'parent_id' => $product['id'],
-                        'child_id'  => $linkedProduct['id'],
-                    ];
+        foreach ($configurableVariants as $sku => $variants) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach ($variants as $variantSku => $variantSuperAttributes) {
+                $variant = $this->skuStorage->get($variantSku);
+
+                $parentAssociations[] = [
+                    'sku'       => $variantSku,
+                    'parent_id' => $product['id'],
+                ];
+
+                foreach ($variantSuperAttributes as $superAttributeCode => $optionLabel) {
+                    $attribute = $this->attributes->where('code', $superAttributeCode)->first();
+
+                    $attributeOption = $superAttributeOptions->where('attribute_id', $attribute->id)
+                        ->where('admin_name', $optionLabel)
+                        ->first();
+                    
+                    $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
+
+                    $attributeTypeValues = array_merge($attributeTypeValues, [
+                        'product_id'            => $variant['id'],
+                        'attribute_id'          => $attribute->id,
+                        $attribute->column_name => $attributeOption->id,
+                        'channel'               => $attribute->value_per_channel ? ($rowData['channel'] ?? 'default') : null,
+                        'locale'                => $attribute->value_per_locale ? ($rowData['locale'] ?? 'en') : null,
+                    ]);
+
+                    $attributeTypeValues['unique_id'] = implode('|', array_filter([
+                        $attributeTypeValues['channel'],
+                        $attributeTypeValues['locale'],
+                        $attributeTypeValues['product_id'],
+                        $attributeTypeValues['attribute_id'],
+                    ]));
+
+                    $superAttributeValues[] = $attributeTypeValues;
                 }
             }
 
-            DB::table($table)->upsert(
-                $productLinks,
-                ['parent_id', 'child_id'],
-            );
+            $superAttributeCodes = array_keys(current($variants));
+
+            foreach ($superAttributeCodes as $attributeCode) {
+                $attribute = $this->attributes->where('code', $attributeCode)->first();
+
+                $superAttributes[] = [
+                    'product_id'   => $product['id'],
+                    'attribute_id' => $attribute->id,
+                ];
+            }
         }
+
+        /**
+         * Save the variants parent associations
+         */
+        $this->productRepository->upsert($parentAssociations, 'sku');
+
+        /**
+         * Save super attributes associations for configurable products
+         */
+        DB::table('product_super_attributes')->upsert(
+            $superAttributes,
+            [
+                'product_id',
+                'attribute_id',
+            ],
+        );
+
+        /**
+         * Save variants super attributes option values
+         */
+        $this->productAttributeValueRepository->upsert($superAttributeValues, 'unique_id');
     }
 
     /**
@@ -675,7 +756,7 @@ class Product extends AbstractType
     }
 
     /**
-     * Save links
+     * Save links from current batch
      */
     public function saveGroupAssociations(array $groupAssociations): void
     {
@@ -683,12 +764,12 @@ class Product extends AbstractType
             return;
         }
 
-        $skus = array_map('array_keys', $groupAssociations);
+        $associatedSkus = array_map('array_keys', $groupAssociations);
 
         /**
          * Load not loaded SKUs to the sku storage
          */
-        $this->loadUnloadedSKUs(array_unique(Arr::flatten($skus)));
+        $this->loadUnloadedSKUs(array_unique(Arr::flatten($associatedSkus)));
 
         $associatedProducts = [];
 
@@ -715,12 +796,15 @@ class Product extends AbstractType
 
         DB::table('product_grouped_products')->upsert(
             $associatedProducts,
-            ['product_id', 'associated_product_id'],
+            [
+                'product_id',
+                'associated_product_id',
+            ],
         );
     }
 
     /**
-     * Prepare bundle options
+     * Prepare bundle options from current batch
      */
     public function prepareBundleOptions(array $rowData, array &$bundleOptions): void
     {
@@ -757,11 +841,13 @@ class Product extends AbstractType
     }
 
     /**
-     * Save bundle options
+     * Save bundle options from current batch
      */
     public function saveBundleOptions(array &$bundleOptions): void
     {
         /**
+         * TODO: Implement bundle products sku loading
+         * 
          * Load not loaded SKUs to the sku storage
          */
 
@@ -824,8 +910,8 @@ class Product extends AbstractType
                 [
                     'product_bundle_option_id',
                     'label',
-                    'locale'
-                ]
+                    'locale',
+                ],
             );
         }
 
@@ -835,13 +921,75 @@ class Product extends AbstractType
                 [
                     'product_id',
                     'product_bundle_option_id',
-                ]
+                ],
             );
         }
     }
 
     /**
-     * Save bundle options
+     * Prepare links from current batch
+     */
+    public function prepareLinks(array $rowData, array &$links): void
+    {
+        $linkTableMapping = [
+            'related'    => 'product_relations',
+            'cross_sell' => 'product_cross_sells',
+            'up_sell'    => 'product_up_sells',
+        ];
+
+        foreach ($linkTableMapping as $type => $table) {
+            if (empty($rowData[$type . '_skus'])) {
+                continue;
+            }
+
+            foreach (explode(',', $rowData[$type . '_skus'] ?? '') as $sku) {
+                $links[$table][$rowData['sku']][] = $sku;
+            }
+        }
+    }
+
+    /**
+     * Save links from current batch
+     */
+    public function saveLinks(array $links): void
+    {
+        /**
+         * Load not loaded SKUs to the sku storage
+         */
+        $this->loadUnloadedSKUs(array_unique(Arr::flatten($links)));
+
+        foreach ($links as $table => $linksData) {
+            $productLinks = [];
+
+            foreach ($linksData as $sku => $linkedSkus) {
+                $product = $this->skuStorage->get($sku);
+
+                foreach ($linkedSkus as $linkedSku) {
+                    $linkedProduct = $this->skuStorage->get($linkedSku);
+
+                    if (! $linkedProduct) {
+                        continue;
+                    }
+
+                    $productLinks[] = [
+                        'parent_id' => $product['id'],
+                        'child_id'  => $linkedProduct['id'],
+                    ];
+                }
+            }
+
+            DB::table($table)->upsert(
+                $productLinks,
+                [
+                    'parent_id',
+                    'child_id',
+                ],
+            );
+        }
+    }
+
+    /**
+     * Returns existing bundled options of current batch
      */
     public function getExistingBundleOptions(array $bundleOptions): mixed
     {
@@ -861,6 +1009,16 @@ class Product extends AbstractType
         }
 
         return $queryBuilder->get();
+    }
+
+    /**
+     * Returns super attributes options of current batch
+     */
+    public function getSuperAttributeOptions(array $variants): mixed
+    {
+        $optionLabels = array_unique(Arr::flatten($variants));
+
+        return $this->attributeOptionRepository->findWhereIn('admin_name', $optionLabels);
     }
 
     /**
@@ -981,6 +1139,12 @@ class Product extends AbstractType
 
             $this->skipRow($rowNumber, self::ERROR_DUPLICATE_URL_KEY, 'url_key', $message);
         }
+
+        /**
+         * TODO: Needs to be implement
+         * 
+         * Check if configurable super attribute exists in the attribute family
+         */
 
         return ! $this->errorHelper->isRowInvalid($rowNumber);
     }

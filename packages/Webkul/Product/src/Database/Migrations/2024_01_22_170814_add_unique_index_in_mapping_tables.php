@@ -42,6 +42,10 @@ return new class extends Migration
         Schema::table('product_bundle_option_products', function (Blueprint $table) {
             $table->unique(['product_id', 'product_bundle_option_id'], 'bundle_option_products_product_id_bundle_option_id_unique');
         });
+
+        Schema::table('product_super_attributes', function (Blueprint $table) {
+            $table->unique(['product_id', 'attribute_id']);
+        });
     }
 
     /**
