@@ -131,8 +131,8 @@ class TemplateController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.communications.templates.delete-failed', [
-                'name' => 'admin::app.marketing.communications.templates.email-template'
-            ]
-        )], 400);
+                'name' => 'admin::app.marketing.communications.templates.email-template',
+            ]),
+        ], 400);
     }
 }

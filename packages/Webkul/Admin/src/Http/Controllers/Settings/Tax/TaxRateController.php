@@ -214,7 +214,7 @@ class TaxRateController extends Controller
                 foreach ($filtered as $position => $identifier) {
                     $message[] = trans('admin::app.settings.taxes.rates.index.import.duplicate-error', [
                         'identifier' => $identifier,
-                        'position'   => $position
+                        'position'   => $position,
                     ]);
                 }
 

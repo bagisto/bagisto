@@ -152,7 +152,7 @@ class CampaignController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', [
-                'name' => 'admin::app.marketing.communications.campaigns.email-campaign'
+                'name' => 'admin::app.marketing.communications.campaigns.email-campaign',
             ]),
         ], 500);
     }

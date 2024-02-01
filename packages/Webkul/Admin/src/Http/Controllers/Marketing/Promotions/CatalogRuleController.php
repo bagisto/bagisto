@@ -113,8 +113,8 @@ class CatalogRuleController extends Controller
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.marketing.promotions.catalog-rules.delete-failed'
-            )], 400);
+                'message' => trans('admin::app.marketing.promotions.catalog-rules.delete-failed'),
+            ], 400);
         }
     }
 }

@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Illuminate\Http\JsonResponse;
-use PhpParser\Node\Stmt\Catch_;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
@@ -43,7 +42,7 @@ class CartRuleCouponController extends Controller
 
         if (! $id) {
             return new JsonResponse([
-                'message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error')
+                'message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error'),
             ], 400);
         }
 
@@ -58,7 +57,7 @@ class CartRuleCouponController extends Controller
         return new JsonResponse([
             'message' => trans(
                 'admin::app.marketing.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
-            )
+            ),
         ]);
     }
 
@@ -69,13 +68,13 @@ class CartRuleCouponController extends Controller
     {
         try {
             $this->cartRuleCouponRepository->delete($id);
-    
+
             return new JsonResponse([
-                'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.delete-success')
+                'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.delete-success'),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([
-                'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.cart-rule-not-defined-error')
+                'message' => trans('admin::app.marketing.promotions.cart-rules-coupons.cart-rule-not-defined-error'),
             ], 400);
         }
     }
