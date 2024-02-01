@@ -141,8 +141,6 @@ class TaxRateController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
-        $this->taxRateRepository->findOrFail($id);
-
         try {
             Event::dispatch('tax.rate.delete.before', $id);
 
@@ -170,144 +168,145 @@ class TaxRateController extends Controller
     {
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+        if (! in_array(request()->file('file')?->getClientOriginalExtension(), $valid_extension)) {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.taxes.rates.index.import.upload-error'),
             ], 500);
-        } else {
-            try {
-                $excelData = (new DataGridImport)->toArray(request()->file('file'));
+        }
 
-                foreach ($excelData as $data) {
-                    foreach ($data as $column => $uploadData) {
-                        $uploadData['state'] = $uploadData['state'] ?? '';
+        try {
+            $excelData = (new DataGridImport)->toArray(request()->file('file'));
 
-                        if (
-                            ! is_null($uploadData['zip_from'])
-                            && ! is_null($uploadData['zip_to'])
-                        ) {
-                            $uploadData['is_zip'] = 1;
-                        }
+            foreach ($excelData[0] as $column => $uploadData) {
+                $uploadData['state'] = $uploadData['state'] ?? '';
 
-                        $validator = Validator::make($uploadData, [
-                            'identifier' => 'required|string',
-                            'country'    => 'required|string',
-                            'tax_rate'   => 'required|numeric|min:0.0001',
-                            'is_zip'     => 'sometimes',
-                            'zip_code'   => 'nullable',
-                            'zip_from'   => 'nullable|required_with:is_zip',
-                            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
-                        ]);
-
-                        if ($validator->fails()) {
-                            $failedRules[$column + 1] = $validator->errors();
-                        }
-
-                        $identiFier[$column + 1] = $uploadData['identifier'];
-                    }
-
-                    $identiFierCount = array_count_values($identiFier);
-
-                    $filtered = array_filter($identiFier, function ($value) use ($identiFierCount) {
-                        return $identiFierCount[$value] > 1;
-                    });
+                if (
+                    ! is_null($uploadData['zip_from'])
+                    && ! is_null($uploadData['zip_to'])
+                ) {
+                    $uploadData['is_zip'] = 1;
                 }
 
-                if ($filtered) {
-                    foreach ($filtered as $position => $identifier) {
-                        $message[] = trans('admin::app.settings.taxes.rates.index.import.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
+                $validator = Validator::make($uploadData, [
+                    'identifier' => 'required|string',
+                    'country'    => 'required|string',
+                    'tax_rate'   => 'required|numeric|min:0.0001',
+                    'is_zip'     => 'sometimes',
+                    'zip_code'   => 'nullable',
+                    'zip_from'   => 'nullable|required_with:is_zip',
+                    'zip_to'     => 'nullable|required_with:is_zip,zip_from',
+                ]);
+
+                if ($validator->fails()) {
+                    $failedRules[$column + 1] = $validator->errors();
+                }
+
+                $identiFier[$column + 1] = $uploadData['identifier'];
+            }
+
+            $identiFierCount = array_count_values($identiFier);
+
+            $filtered = array_filter($identiFier, function ($value) use ($identiFierCount) {
+                return $identiFierCount[$value] > 1;
+            });
+
+            if ($filtered) {
+                foreach ($filtered as $position => $identifier) {
+                    $message[] = trans('admin::app.settings.taxes.rates.index.import.duplicate-error', [
+                        'identifier' => $identifier,
+                        'position'   => $position
+                    ]);
+                }
+
+                return new JsonResponse([
+                    'message' => implode(' ', $message),
+                ]);
+            } else {
+                $errorMsg = [];
+
+                if (isset($failedRules)) {
+                    foreach ($failedRules as $column => $fail) {
+                        switch ($column) {
+                            case 'identifier':
+                                $errorMsg[$column] = $fail->first('identifier');
+                                break;
+
+                            case 'tax_rate':
+                                $errorMsg[$column] = $fail->first('tax_rate');
+                                break;
+
+                            case 'country':
+                                $errorMsg[$column] = $fail->first('country');
+                                break;
+
+                            case 'state':
+                                $errorMsg[$column] = $fail->first('state');
+                                break;
+
+                            case 'zip_code':
+                                $errorMsg[$column] = $fail->first('zip_code');
+                                break;
+
+                            case 'zip_from':
+                                $errorMsg[$column] = $fail->first('zip_from');
+                                break;
+
+                            case 'zip_to':
+                                $errorMsg[$column] = $fail->first('zip_to');
+                                break;
+                        }
+                    }
+
+                    foreach ($errorMsg as $key => $msg) {
+                        $msg = str_replace('.', '', $msg);
+                        $message[] = $msg.' at Row '.$key.'.';
                     }
 
                     return new JsonResponse([
                         'message' => implode(' ', $message),
                     ]);
                 } else {
-                    $errorMsg = [];
+                    $taxRate = $this->taxRateRepository->get()->toArray();
 
-                    if (isset($failedRules)) {
-                        foreach ($failedRules as $column => $fail) {
-                            switch ($column) {
-                                case 'identifier':
-                                    $errorMsg[$column] = $fail->first('identifier');
-                                    break;
-
-                                case 'tax_rate':
-                                    $errorMsg[$column] = $fail->first('tax_rate');
-                                    break;
-
-                                case 'country':
-                                    $errorMsg[$column] = $fail->first('country');
-                                    break;
-
-                                case 'state':
-                                    $errorMsg[$column] = $fail->first('state');
-                                    break;
-
-                                case 'zip_code':
-                                    $errorMsg[$column] = $fail->first('zip_code');
-                                    break;
-
-                                case 'zip_from':
-                                    $errorMsg[$column] = $fail->first('zip_from');
-                                    break;
-
-                                case 'zip_to':
-                                    $errorMsg[$column] = $fail->first('zip_to');
-                                    break;
-                            }
-                        }
-
-                        foreach ($errorMsg as $key => $msg) {
-                            $msg = str_replace('.', '', $msg);
-                            $message[] = $msg.' at Row '.$key.'.';
-                        }
-
-                        return new JsonResponse([
-                            'message' => implode(' ', $message),
-                        ]);
-                    } else {
-                        $taxRate = $this->taxRateRepository->get()->toArray();
-
-                        foreach ($taxRate as $rate) {
-                            $rateIdentifier[$rate['id']] = $rate['identifier'];
-                        }
-
-                        foreach ($excelData as $data) {
-                            foreach ($data as $column => $uploadData) {
-                                $uploadData['state'] = $uploadData['state'] ?? '';
-
-                                if (
-                                    ! is_null($uploadData['zip_from'])
-                                    && ! is_null($uploadData['zip_to'])
-                                ) {
-                                    $uploadData += ['is_zip' => 1, 'zip_code' => null];
-                                }
-
-                                if (
-                                    isset($rateIdentifier)
-                                    && ($id = array_search($uploadData['identifier'], $rateIdentifier)) !== false
-                                ) {
-                                    $this->taxRateRepository->update($uploadData, $id);
-                                } else {
-                                    $this->taxRateRepository->create($uploadData);
-                                }
-                            }
-                        }
-
-                        return new JsonResponse([
-                            'message' => trans('admin::app.settings.taxes.rates.index.import.upload-success'),
-                        ]);
+                    foreach ($taxRate as $rate) {
+                        $rateIdentifier[$rate['id']] = $rate['identifier'];
                     }
+
+                    foreach ($excelData as $data) {
+                        foreach ($data as $column => $uploadData) {
+                            $uploadData['state'] = $uploadData['state'] ?? '';
+
+                            if (
+                                ! is_null($uploadData['zip_from'])
+                                && ! is_null($uploadData['zip_to'])
+                            ) {
+                                $uploadData += ['is_zip' => 1, 'zip_code' => null];
+                            }
+
+                            if (
+                                isset($rateIdentifier)
+                                && ($id = array_search($uploadData['identifier'], $rateIdentifier)) !== false
+                            ) {
+                                $this->taxRateRepository->update($uploadData, $id);
+                            } else {
+                                $this->taxRateRepository->create($uploadData);
+                            }
+                        }
+                    }
+
+                    return new JsonResponse([
+                        'message' => trans('admin::app.settings.taxes.rates.index.import.upload-success'),
+                    ]);
                 }
-            } catch (\Exception $e) {
-                report($e);
-
-                $failure = new Failure(1, 'rows', [0 => trans('admin::app.settings.taxes.rates.index.import.enough-row-error')]);
-
-                return new JsonResponse([
-                    'message' => $failure->errors()[0],
-                ]);
             }
+        } catch (\Exception $e) {
+            report($e);
+
+            $failure = new Failure(1, 'rows', [0 => trans('admin::app.settings.taxes.rates.index.import.enough-row-error')]);
+
+            return new JsonResponse([
+                'message' => $failure->errors()[0],
+            ], 500);
         }
     }
 }

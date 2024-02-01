@@ -120,8 +120,6 @@ class TaxCategoryController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
-        $this->taxCategoryRepository->findOrFail($id);
-
         try {
             Event::dispatch('tax.category.delete.before', $id);
 

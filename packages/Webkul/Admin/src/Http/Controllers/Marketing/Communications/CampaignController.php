@@ -64,7 +64,7 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.create.before');
 
-        request()['status'] = request()->input('status') ? request()->input('status') : 0;
+        request()['status'] = request()->input('status') ?? 0;
 
         $campaign = $this->campaignRepository->create(request()->only([
             'name',
@@ -86,10 +86,9 @@ class CampaignController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $campaign = $this->campaignRepository->findOrFail($id);
 
@@ -101,10 +100,9 @@ class CampaignController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $this->validate(request(), [
             'name'                  => 'required',
@@ -115,7 +113,7 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.update.before', $id);
 
-        request()['status'] = request()->input('status') ? request()->input('status') : 0;
+        request()['status'] = request()->input('status') ?? 0;
 
         $campaign = $this->campaignRepository->update(request()->only([
             'name',
@@ -136,13 +134,9 @@ class CampaignController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $this->campaignRepository->findOrFail($id);
-
         try {
             Event::dispatch('marketing.campaigns.delete.before', $id);
 
@@ -157,7 +151,9 @@ class CampaignController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', ['name' => 'admin::app.marketing.communications.campaigns.email-campaign']),
+            'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', [
+                'name' => 'admin::app.marketing.communications.campaigns.email-campaign'
+            ]),
         ], 500);
     }
 }

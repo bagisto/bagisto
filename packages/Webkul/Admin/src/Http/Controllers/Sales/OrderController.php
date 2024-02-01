@@ -39,10 +39,9 @@ class OrderController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function view($id)
+    public function view(int $id)
     {
         $order = $this->orderRepository->findOrFail($id);
 
@@ -52,10 +51,9 @@ class OrderController extends Controller
     /**
      * Cancel action for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function cancel($id)
+    public function cancel(int $id)
     {
         $result = $this->orderRepository->cancel($id);
 
@@ -71,22 +69,19 @@ class OrderController extends Controller
     /**
      * Add comment to the order
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function comment($id)
+    public function comment(int $id)
     {
         Event::dispatch('sales.order.comment.create.before');
 
-        $data = array_merge(request()->only([
+        $comment = $this->orderCommentRepository->create(array_merge(request()->only([
             'comment',
             'customer_notified',
         ]), [
             'order_id'          => $id,
             'customer_notified' => request()->has('customer_notified'),
-        ]);
-
-        $comment = $this->orderCommentRepository->create($data);
+        ]));
 
         Event::dispatch('sales.order.comment.create.after', $comment);
 
@@ -102,8 +97,6 @@ class OrderController extends Controller
      */
     public function search()
     {
-        $results = [];
-
         $orders = $this->orderRepository->scopeQuery(function ($query) {
             return $query->where('customer_email', 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('status', 'like', '%'.urldecode(request()->input('query')).'%')

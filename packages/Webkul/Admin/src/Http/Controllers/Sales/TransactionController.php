@@ -127,10 +127,9 @@ class TransactionController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view($id)
+    public function view(int $id)
     {
         $transaction = $this->orderTransactionRepository->findOrFail($id);
 
