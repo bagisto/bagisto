@@ -54,7 +54,7 @@ class SubscriptionController extends Controller
 
             $customer->save();
         }
-        
+
         Event::dispatch('customer.subscription.after', $subscription);
 
         session()->flash('success', trans('shop::app.subscription.subscribe-success'));

@@ -55,7 +55,7 @@ class SubscriptionController extends Controller
     {
         $validatedData = $this->validate(request(), [
             'id'            => 'required',
-            'is_subscribed' => 'required|in:0,1'
+            'is_subscribed' => 'required|in:0,1',
         ]);
 
         $subscriber = $this->subscribersListRepository->findOrFail($validatedData['id']);
