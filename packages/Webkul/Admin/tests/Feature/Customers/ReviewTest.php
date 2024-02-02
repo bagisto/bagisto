@@ -48,6 +48,34 @@ it('should return the edit page of the review', function () {
         ->assertJsonPath('data.comment', $review->comment);
 });
 
+it('should fail the validation with errors for status for review update', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $review = ProductReview::factory()->create([
+        'product_id' => $product->id,
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.customers.review.update', $review->id))
+        ->assertJsonValidationErrorFor('status')
+        ->assertUnprocessable();
+});
+
 it('should update the status of the review', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -74,8 +102,8 @@ it('should update the status of the review', function () {
     putJson(route('admin.customers.customers.review.update', $review->id), [
         'status' => $status = Arr::random(['approved', 'disapproved', 'pending']),
     ])
-        ->assertRedirect(route('admin.customers.customers.review.index'))
-        ->isRedirection();
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.customers.reviews.update-success'));
 
     $this->assertModelWise([
         ProductReview::class => [
@@ -189,7 +217,6 @@ it('should mass update the product review', function () {
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-update-success'));
 
     foreach ($reviews as $review) {
-
         $this->assertModelWise([
             ProductReview::class => [
                 [

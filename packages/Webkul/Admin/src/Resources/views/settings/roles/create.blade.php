@@ -56,7 +56,7 @@
 
                                 <!-- Permission Type -->
                                 <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.create.permissions')
                                     </x-admin::form.control-group.label>
 
@@ -64,6 +64,7 @@
                                         type="select"
                                         name="permission_type"
                                         id="permission_type"
+                                        rules="required"
                                         :label="trans('admin::app.settings.roles.create.permissions')"
                                         :placeholder="trans('admin::app.settings.roles.create.permissions')"
                                         v-model="permission_type"

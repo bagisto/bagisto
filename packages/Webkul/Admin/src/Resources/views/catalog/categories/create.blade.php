@@ -371,6 +371,7 @@
                                     :value="$attribute->id"
                                     :label="trans('admin::app.catalog.categories.create.filterable-attributes')"
                                     :for="$attribute->name ?? $attribute->admin_name"
+                                    :checked="in_array($attribute->id, old('attributes', []))"
                                 />
 
                                 <label

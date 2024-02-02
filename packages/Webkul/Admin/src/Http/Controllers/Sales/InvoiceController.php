@@ -73,6 +73,7 @@ class InvoiceController extends Controller
         }
 
         $this->validate(request(), [
+            'invoice.items'   => 'required|array',
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 

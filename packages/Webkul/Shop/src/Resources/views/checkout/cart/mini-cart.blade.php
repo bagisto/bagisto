@@ -284,7 +284,7 @@
                 }
             },
 
-           mounted() {
+            mounted() {
                 this.getCart();
 
                 /**
@@ -295,9 +295,9 @@
                 this.$emitter.on('update-mini-cart', (cart) => {
                     this.cart = cart;
                 });
-           },
+            },
 
-           methods: {
+            methods: {
                 getCart() {
                     this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                         .then(response => {
@@ -337,7 +337,7 @@
                         })
                         .catch(error => {});
                 },
-            }
+            },
         });
     </script>
 @endpushOnce
