@@ -2,16 +2,16 @@
 
 namespace Webkul\DataTransfer\Helpers\Types;
 
-use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -21,11 +21,7 @@ use Webkul\Core\Rules\Slug;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Types\Product\SKUStorage;
-use Webkul\DataTransfer\Jobs\Import\ImportBatch;
 use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
-use Webkul\DataTransfer\Jobs\Import\IndexBatch as IndexBatchJob;
-use Webkul\DataTransfer\Jobs\Import\Indexing as IndexingJob;
-use Webkul\DataTransfer\Jobs\Import\LinkBatch as LinkBatch;
 use Webkul\DataTransfer\Jobs\Import\Linking as LinkingJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
@@ -33,10 +29,10 @@ use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
 
 class Product extends AbstractType
 {
@@ -790,7 +786,7 @@ class Product extends AbstractType
                 continue;
             }
 
-            $flatData[$rowData['sku']][$column] = $rowData[$column] ?? null;   
+            $flatData[$rowData['sku']][$column] = $rowData[$column] ?? null;
         }
 
         $flatData[$rowData['sku']]['channel'] = $rowData['channel'] ?? 'default';
@@ -802,7 +798,7 @@ class Product extends AbstractType
     public function saveFlatData(array &$flatData): void
     {
         $products = [];
-        
+
         foreach ($flatData as $sku => $attributes) {
             $product = $this->skuStorage->get($sku);
 

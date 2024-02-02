@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
-use Webkul\DataTransfer\Jobs\Import\ImportBatch as ImportBatchJob;
 use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
+use Webkul\DataTransfer\Jobs\Import\ImportBatch as ImportBatchJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
 abstract class AbstractType
