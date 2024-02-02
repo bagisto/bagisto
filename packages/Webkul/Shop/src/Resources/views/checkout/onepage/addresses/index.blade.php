@@ -213,7 +213,10 @@
                                 console.log(error);
                             });
                     } else {
-                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.editAddress)
+                        this.forms.billing.editAddress['address1'] = [this.forms.billing.editAddress.address1];
+                        this.forms.billing.editAddress['address2'] = [this.forms.billing.editAddress.address2 ?? ''];
+
+                        this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.billing.editAddress)
                             .then(response => {
                                 this.forms.billing.isEdit = false;
 
