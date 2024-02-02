@@ -458,6 +458,49 @@ class Product extends AbstractType
                         ...$productIdsToIndex,
                     ];
 
+                    /**
+                     * Get all the parent bundle product ids
+                     */
+                    $parentBundleProductIds = $this->productBundleOptionRepository
+                        ->select('product_bundle_options.product_id')
+                        ->leftJoin('product_bundle_option_products', 'product_bundle_options.id', 'product_bundle_option_products.product_bundle_option_id')
+                        ->whereIn('product_bundle_option_products.product_id', $productIds)
+                        ->pluck('product_id')
+                        ->toArray();
+                    
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$parentBundleProductIds,
+                    ];
+
+                    /**
+                     * Get all the parent grouped product ids
+                     */
+                    $parentGroupedProductIds = $this->productGroupedProductRepository
+                        ->select('product_id')
+                        ->whereIn('associated_product_id', $productIds)
+                        ->pluck('product_id')
+                        ->toArray();
+                    
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$parentGroupedProductIds,
+                    ];
+
+                    /**
+                     * Get all the parent configurable product ids
+                     */
+                    $parentConfigurableProductIds = $this->productRepository->select('parent_id')
+                        ->whereIn('id', $productIds)
+                        ->whereNotNull('parent_id')
+                        ->pluck('parent_id')
+                        ->toArray();
+                    
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$parentConfigurableProductIds,
+                    ];
+
                     break;
 
                 case self::PRODUCT_TYPE_CONFIGURABLE:
@@ -466,6 +509,9 @@ class Product extends AbstractType
                         ...$productIds,
                     ];
 
+                    /**
+                     * Get all configurable product children ids
+                     */
                     $associatedProductIds = $this->productRepository->select('id')
                         ->whereIn('parent_id', $productIds)
                         ->pluck('id')
@@ -484,6 +530,9 @@ class Product extends AbstractType
                         ...$productIds,
                     ];
 
+                    /**
+                     * Get all bundle product associated product ids
+                     */
                     $associatedProductIds = $this->productBundleOptionProductRepository
                         ->select('product_bundle_option_products.product_id')
                         ->leftJoin('product_bundle_options', 'product_bundle_option_products.product_bundle_option_id', 'product_bundle_options.id')
@@ -504,6 +553,9 @@ class Product extends AbstractType
                         ...$productIds,
                     ];
 
+                    /**
+                     * Get all grouped product associated product ids
+                     */
                     $associatedProductIds = $this->productGroupedProductRepository
                         ->select('associated_product_id')
                         ->whereIn('product_id', $productIds)

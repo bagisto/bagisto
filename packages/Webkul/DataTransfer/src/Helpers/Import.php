@@ -265,7 +265,7 @@ class Import
      */
     public function index(ImportBatchContract $importBatch): bool
     {
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $typeImporter = $this->getTypeImporter();
@@ -275,14 +275,14 @@ class Import
             /**
              * Rollback transaction
              */
-            // DB::rollBack();
+            DB::rollBack();
 
             throw $e;
         } finally {
             /**
              * Commit transaction
              */
-            // DB::commit();
+            DB::commit();
         }
 
         return true;
