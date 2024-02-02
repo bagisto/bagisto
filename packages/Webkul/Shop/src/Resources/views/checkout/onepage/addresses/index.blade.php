@@ -48,7 +48,15 @@
                                 isSaved: false,
                             },
 
+                            editAddress: {
+                                address1: [''],
+
+                                isSaved: false,
+                            },
+
                             isNew: false,
+
+                            isEdit: false,
 
                             isUsedForShipping: true,
                         },
@@ -61,6 +69,8 @@
                             },
 
                             isNew: false,
+
+                            isEdit: false,
                         },
                     },
 
@@ -170,7 +180,17 @@
                     this.resetPaymentAndShippingMethod();
                 },
 
-                handleBillingAddressForm() {
+                editNewBillingAddressForm(params) {
+                    this.resetBillingAddressForm();
+
+                    this.forms.billing.isEdit = true;
+
+                    this.forms.billing.editAddress = params;
+
+                    this.resetPaymentAndShippingMethod();
+                },
+
+                handleBillingAddressForm(params) {
                     if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
 
@@ -184,6 +204,18 @@
                         this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
                             .then(response => {
                                 this.forms.billing.isNew = false;
+
+                                this.resetBillingAddressForm();
+                                
+                                this.getCustomerAddresses();
+                            })
+                            .catch(error => {                 
+                                console.log(error);
+                            });
+                    } else {
+                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.editAddress)
+                            .then(response => {
+                                this.forms.billing.isEdit = false;
 
                                 this.resetBillingAddressForm();
                                 
