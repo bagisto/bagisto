@@ -194,6 +194,8 @@
                     }
 
                     this.setPositionByIndex();
+
+                    this.play();
                 },
 
                 navigateByPagination(index) {
@@ -202,6 +204,8 @@
                     this.currentIndex = index;
 
                     this.setPositionByIndex();
+
+                    this.play();
                 },
 
                 play() {
@@ -212,7 +216,7 @@
 
                         this.setPositionByIndex();
                     }, 5000);
-                }
+                },
             },
         });
     </script>
