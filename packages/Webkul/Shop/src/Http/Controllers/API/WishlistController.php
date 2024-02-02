@@ -44,6 +44,10 @@ class WishlistController extends APIController
      */
     public function store(): JsonResource
     {
+        $this->validate(request(), [
+            'product_id' => 'required',
+        ]);
+
         $product = $this->productRepository->find(request()->input('product_id'));
 
         if (! $product) {

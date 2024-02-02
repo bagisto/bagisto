@@ -103,6 +103,15 @@ it('should returns all the wishlisted items', function () {
     }
 });
 
+it('should fails the validation error when product id is not provide when add the products to the wishlist', function () {
+    // Act and Assert
+    $this->loginAsCustomer();
+
+    postJson(route('shop.api.customers.account.wishlist.store'))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should add the products to the wishlist', function () {
     // Arrange
     $product = (new ProductFaker([

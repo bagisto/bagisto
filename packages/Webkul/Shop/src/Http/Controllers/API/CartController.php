@@ -49,6 +49,10 @@ class CartController extends APIController
      */
     public function store(): JsonResource
     {
+        $this->validate(request(), [
+            'product_id' => 'required|exists:products,id',
+        ]);
+
         try {
             $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
 
