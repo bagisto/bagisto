@@ -15,7 +15,6 @@
                 <v-form 
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
-                    ref="billingAddressForm"
                 >
                     <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
