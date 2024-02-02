@@ -143,8 +143,7 @@
                                 :label="trans('admin::app.settings.data-transfer.imports.create.action')"
                             >
                                 <option value="append">@lang('admin::app.settings.data-transfer.imports.create.create-update')</option>
-                                <option value="update">@lang('admin::app.settings.data-transfer.imports.create.replace')</option>
-                                <option value="replace">@lang('admin::app.settings.data-transfer.imports.create.delete')</option>
+                                <option value="delete">@lang('admin::app.settings.data-transfer.imports.create.delete')</option>
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error control-name="action" />

@@ -1419,18 +1419,7 @@ class Product extends AbstractType
         }
 
         $this->validatedRows[$rowNumber] = true;
-
-        /**
-         * If import action is replace than no need for further validation
-         */
-        if ($this->import->action == Import::ACTION_REPLACE) {
-            if (! $this->isSKUExist($rowData['sku'])) {
-                $this->skipRow($rowNumber, self::ERROR_SKU_NOT_FOUND_FOR_DELETE);
-
-                return false;
-            }
-        }
-
+        
         /**
          * If import action is delete than no need for further validation
          */

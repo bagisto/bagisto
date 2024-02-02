@@ -55,7 +55,7 @@ class ImportDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'file_path',
-            'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.file-path'),
+            'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.uploaded-file'),
             'type'       => 'text',
             'searchable' => false,
             'filterable' => false,
@@ -67,7 +67,7 @@ class ImportDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'error_file_path',
-            'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.error-file-path'),
+            'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.error-file'),
             'type'       => 'text',
             'searchable' => false,
             'filterable' => false,

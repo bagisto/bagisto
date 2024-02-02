@@ -4,7 +4,8 @@
 
 @pushOnce('scripts')
 <script type="text/x-template" id="v-product-gallery-template">
-    <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
+    <div>
+        <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
             <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                 <span
@@ -21,8 +22,7 @@
                     ref="swiperContainer"
                     class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
                 >
-
-                                 <img 
+                    <img 
                         :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `image_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(image, index) in media.images"
                         :src="image.small_image_url"
@@ -93,7 +93,6 @@
                         />
                     </video>
                 </div>
-                
             </div>
         </div>
 
@@ -106,7 +105,8 @@
             >
             </x-shop::media.images.lazy>
         </div>
-    </script>
+    </div>
+</script>
 
 <script type="module">
     app.component('v-product-gallery', {

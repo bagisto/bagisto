@@ -58,7 +58,7 @@ class ImportController extends Controller
 
         $this->validate(request(), [
             'type'                => 'required|in:' . implode(',', $importers),
-            'action'              => 'required:in:append,replace,delete',
+            'action'              => 'required:in:append,delete',
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
@@ -120,7 +120,7 @@ class ImportController extends Controller
 
         $this->validate(request(), [
             'type'                => 'required|in:' . implode(',', $importers),
-            'action'              => 'required:in:append,replace,delete',
+            'action'              => 'required:in:append,delete',
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
