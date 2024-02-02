@@ -13,6 +13,17 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+it('should fail the validation with errors when certain inputs are not provided when store in downloadable product', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.store'))
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('attribute_family_id')
+        ->assertJsonValidationErrorFor('sku')
+        ->assertUnprocessable();
+});
+
 it('should return the create page of downloadable product', function () {
     // Arrange
     $product = (new ProductFaker())->getSimpleProductFactory()->create();
@@ -89,6 +100,51 @@ it('should upload link the product upload link', function () {
     if (Storage::disk('private')->exists($response['file'])) {
         Storage::disk('private')->delete($response['file']);
     }
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id))
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('price')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors if certain data is not provided correctly in downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getDownloadableProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'visible_individually' => $unProcessAble = fake()->word(),
+        'status'               => $unProcessAble,
+        'guest_checkout'       => $unProcessAble,
+        'new'                  => $unProcessAble,
+        'featured'             => $unProcessAble,
+    ])
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('price')
+        ->assertJsonValidationErrorFor('visible_individually')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('guest_checkout')
+        ->assertJsonValidationErrorFor('new')
+        ->assertJsonValidationErrorFor('featured')
+        ->assertUnprocessable();
 });
 
 it('should upload the sample file', function () {

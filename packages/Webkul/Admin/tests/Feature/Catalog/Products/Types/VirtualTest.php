@@ -5,7 +5,20 @@ use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
+
+it('should fail the validation with errors when certain inputs are not provided when store in virtual product', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.store'))
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('attribute_family_id')
+        ->assertJsonValidationErrorFor('sku')
+        ->assertUnprocessable();
+});
 
 it('should return the create page of virtual product', function () {
     // Arrange
@@ -42,7 +55,7 @@ it('should return the edit page of virtual product', function () {
     // Act and Asssert
     $this->loginAsAdmin();
 
-    $this->get(route('admin.catalog.products.edit', $product->id))
+    get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'))
         ->assertSeeText(trans('admin::app.account.edit.back-btn'))
@@ -52,6 +65,51 @@ it('should return the edit page of virtual product', function () {
         ->assertSeeText($product->description);
 });
 
+it('should fail the validation with errors when certain inputs are not provided when update in virtual product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getVirtualProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id))
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('price')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors if certain data is not provided correctly in virtual product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getVirtualProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'visible_individually' => $unProcessAble = fake()->word(),
+        'status'               => $unProcessAble,
+        'guest_checkout'       => $unProcessAble,
+        'new'                  => $unProcessAble,
+        'featured'             => $unProcessAble,
+    ])
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('price')
+        ->assertJsonValidationErrorFor('visible_individually')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('guest_checkout')
+        ->assertJsonValidationErrorFor('new')
+        ->assertJsonValidationErrorFor('featured')
+        ->assertUnprocessable();
+});
+
 it('should update the virtual product', function () {
     // Arrange
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
@@ -59,7 +117,7 @@ it('should update the virtual product', function () {
     // Act and Asssert
     $this->loginAsAdmin();
 
-    $this->putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
         'short_description' => $shortDescription = fake()->sentence(),

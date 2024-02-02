@@ -96,6 +96,7 @@
                                 class="cursor-pointer"
                                 name="marketing_event_id"
                                 rules="required"
+                                :value="old('marketing_event_id')"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.event')"
                             >
                                 <!-- Default Option -->
@@ -127,6 +128,7 @@
                                 name="marketing_template_id"
                                 rules="required"
                                 class="cursor-pointer"
+                                :value="old('marketing_template_id')"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.email-template')"
                             >
                                 <!-- Default Option -->
@@ -177,6 +179,7 @@
                                 class="cursor-pointer"
                                 name="channel_id"
                                 rules="required"
+                                :value="old('channel_id')"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.channel')"
                             >
                                 <!-- Default Option -->
@@ -208,6 +211,7 @@
                                 class="cursor-pointer"
                                 name="customer_group_id"
                                 rules="required"
+                                :value="old('customer_group_id')"
                                 :label="trans('admin::app.marketing.communications.campaigns.create.customer-group')"
                             >
                                 <!-- Default Option -->

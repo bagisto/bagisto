@@ -18,13 +18,25 @@ it('should returns the locale index page', function () {
         ->assertSeeText(trans('admin::app.settings.locales.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the locale', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.locales.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('direction')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created locale', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.locales.store'), [
-        'code' => $code = fake()->locale(),
-        'name' => $name = fake()->name(),
+        'code'      => $code = fake()->locale(),
+        'name'      => $name = fake()->name(),
+        'direction' => fake()->randomElement(['ltr', 'rtl']),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.create-success'));
@@ -67,6 +79,22 @@ it('should return the locale for edit', function () {
         ->assertJsonPath('data.name', $locale->name);
 });
 
+it('should fail the validation with errors when certain field not provided when update the locale', function () {
+    // Arrange
+    $locale = Locale::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.locales.update'), [
+        'id'        => $locale->id,
+        'logo_path' => UploadedFile::fake()->image(fake()->word().'.png'),
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('direction')
+        ->assertUnprocessable();
+});
+
 it('should update the specified locale', function () {
     // Arrange
     $locale = Locale::factory()->create();
@@ -75,8 +103,9 @@ it('should update the specified locale', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.locales.update'), [
-        'id'   => $locale->id,
-        'name' => $name = fake()->name(),
+        'id'        => $locale->id,
+        'name'      => $name = fake()->name(),
+        'direction' => fake()->randomElement(['ltr', 'rtl']),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.locales.index.update-success'));

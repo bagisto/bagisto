@@ -152,6 +152,65 @@ it('should cancel the order', function () {
     ]);
 });
 
+it('should give validation error when store the comment to the order', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id' => $product->id,
+        'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    postJson(route('admin.sales.orders.comment', $order->id))
+        ->assertJsonValidationErrorFor('comment')
+        ->assertUnprocessable();
+});
+
 it('should comment to the order', function () {
     // Act and Assert
     $this->loginAsAdmin();

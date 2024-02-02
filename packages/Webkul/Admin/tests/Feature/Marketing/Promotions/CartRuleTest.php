@@ -28,6 +28,20 @@ it('should returns the create page of cart rules', function () {
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the cart rule', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.cart_rules.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('channels')
+        ->assertJsonValidationErrorFor('customer_groups')
+        ->assertJsonValidationErrorFor('coupon_type')
+        ->assertJsonValidationErrorFor('action_type')
+        ->assertJsonValidationErrorFor('discount_amount')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created cart rule', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -96,6 +110,26 @@ it('should update the existing cart rule', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'))
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.save-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when update the cart rule', function () {
+    // Arrange
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('channels')
+        ->assertJsonValidationErrorFor('customer_groups')
+        ->assertJsonValidationErrorFor('coupon_type')
+        ->assertJsonValidationErrorFor('action_type')
+        ->assertJsonValidationErrorFor('discount_amount')
+        ->assertUnprocessable();
 });
 
 it('should update the cart rule', function () {

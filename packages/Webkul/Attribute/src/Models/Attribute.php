@@ -75,14 +75,6 @@ class Attribute extends TranslatableModel implements AttributeContract
     }
 
     /**
-     * Create a new factory instance for the model
-     */
-    protected static function newFactory(): Factory
-    {
-        return AttributeFactory::new();
-    }
-
-    /**
      * Returns attribute value table column based attribute type
      *
      * @return string
@@ -134,5 +126,13 @@ class Attribute extends TranslatableModel implements AttributeContract
         $validations = '{ '.implode(', ', array_filter($validations)).' }';
 
         return $validations;
+    }
+
+    /**
+     * Create a new factory instance for the model
+     */
+    protected static function newFactory(): Factory
+    {
+        return AttributeFactory::new();
     }
 }
