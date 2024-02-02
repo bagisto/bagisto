@@ -25,10 +25,15 @@ use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
 use Webkul\DataTransfer\Jobs\Import\Linking as LinkingJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteElasticSearchIndexJob;
+use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
+use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
+use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
@@ -185,6 +190,7 @@ class Product extends AbstractType
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
+        protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected SKUStorage $skuStorage
     ) {
         parent::__construct($importBatchRepository);
@@ -427,6 +433,99 @@ class Product extends AbstractType
     public function indexBatch(ImportBatchContract $batch): bool
     {
         Event::dispatch('data_transfer.imports.batch.indexing.before', $batch);
+
+        /**
+         * Load SKU storage with batch skus
+         */
+        $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
+
+        $typeProductIds = [];
+
+        foreach ($batch->data as $rowData) {
+            $product = $this->skuStorage->get($rowData['sku']);
+
+            $typeProductIds[$product['type']][] = (int) $product['id'];
+        }
+
+        $productIdsToIndex = [];
+
+        foreach ($typeProductIds as $type => $productIds) {
+            switch ($type) {
+                case self::PRODUCT_TYPE_SIMPLE:
+                case self::PRODUCT_TYPE_VIRTUAL:
+                    $productIdsToIndex = [
+                        ...$productIds,
+                        ...$productIdsToIndex,
+                    ];
+
+                    break;
+
+                case self::PRODUCT_TYPE_CONFIGURABLE:
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$productIds,
+                    ];
+
+                    $associatedProductIds = $this->productRepository->select('id')
+                        ->whereIn('parent_id', $productIds)
+                        ->pluck('id')
+                        ->toArray();
+                    
+                    $productIdsToIndex = [
+                        ...$associatedProductIds,
+                        ...$productIdsToIndex,
+                    ];
+
+                    break;
+
+                case self::PRODUCT_TYPE_BUNDLE:
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$productIds,
+                    ];
+
+                    $associatedProductIds = $this->productBundleOptionProductRepository
+                        ->select('product_bundle_option_products.product_id')
+                        ->leftJoin('product_bundle_options', 'product_bundle_option_products.product_bundle_option_id', 'product_bundle_options.id')
+                        ->whereIn('product_bundle_options.product_id', $productIds)
+                        ->pluck('product_id')
+                        ->toArray();
+                    
+                    $productIdsToIndex = [
+                        ...$associatedProductIds,
+                        ...$productIdsToIndex,
+                    ];
+
+                    break;
+
+                case self::PRODUCT_TYPE_GROUPED:
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$productIds,
+                    ];
+
+                    $associatedProductIds = $this->productGroupedProductRepository
+                        ->select('associated_product_id')
+                        ->whereIn('product_id', $productIds)
+                        ->pluck('associated_product_id')
+                        ->toArray();
+                    
+                    $productIdsToIndex = [
+                        ...$associatedProductIds,
+                        ...$productIdsToIndex,
+                    ];
+
+                    break;
+            }
+        }
+
+        $productIdsToIndex = array_unique($productIdsToIndex);
+
+        Bus::chain([
+            new UpdateCreateInventoryIndexJob($productIdsToIndex),
+            new UpdateCreatePriceIndexJob($productIdsToIndex),
+            new UpdateCreateElasticSearchIndexJob($productIdsToIndex),
+        ])->onConnection('sync')->dispatch();
 
         /**
          * Update import batch summary
@@ -996,7 +1095,7 @@ class Product extends AbstractType
             }
         }
 
-        DB::table('product_grouped_products')->upsert(
+        $this->productGroupedProductRepository->upsert(
             $associatedProducts,
             [
                 'product_id',

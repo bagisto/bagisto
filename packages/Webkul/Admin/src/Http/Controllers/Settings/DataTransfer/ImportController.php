@@ -295,8 +295,6 @@ class ImportController extends Controller
             }
         }
 
-        sleep(5);
-
         return new JsonResponse([
             'import' => $this->importHelper->getImport()->unsetRelations(),
             'stats'  => $this->importHelper->stats(Import::STATE_PROCESSED),
@@ -358,8 +356,6 @@ class ImportController extends Controller
             }
         }
 
-        sleep(5);
-
         return new JsonResponse([
             'import' => $this->importHelper->getImport()->unsetRelations(),
             'stats'  => $this->importHelper->stats(Import::STATE_LINKED),
@@ -419,8 +415,6 @@ class ImportController extends Controller
              */
             $this->importHelper->completed();
         }
-
-        sleep(5);
 
         return new JsonResponse([
             'import' => $this->importHelper->getImport()->unsetRelations(),
