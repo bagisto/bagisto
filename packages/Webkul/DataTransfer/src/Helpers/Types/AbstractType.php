@@ -6,10 +6,8 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
-use Webkul\DataTransfer\Jobs\ImportBatch;
-use Webkul\DataTransfer\Jobs\ImportCompleted;
-use Webkul\DataTransfer\Jobs\ImportLinkBatch;
-use Webkul\DataTransfer\Jobs\ImportLinking;
+use Webkul\DataTransfer\Jobs\Import\ImportBatch as ImportBatchJob;
+use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
 abstract class AbstractType
@@ -65,6 +63,16 @@ abstract class AbstractType
     public const BATCH_SIZE = 50;
 
     /**
+     * Is linking required
+     */
+    protected bool $linkingRequired = false;
+
+    /**
+     * Is indexing required
+     */
+    protected bool $indexingRequired = false;
+
+    /**
      * Error helper instance.
      *
      * @var \Webkul\DataTransfer\Helpers\Error
@@ -84,19 +92,9 @@ abstract class AbstractType
     protected $source;
 
     /**
-     * Resource link needed
-     */
-    protected bool $linkNeeded = false;
-
-    /**
      * Valid column names
      */
     protected array $validColumnNames = [];
-
-    /**
-     * Rows which will be skipped during import
-     */
-    protected array $skippedRows = [];
 
     /**
      * Array of numbers of validated rows as keys and boolean TRUE as values
@@ -300,21 +298,14 @@ abstract class AbstractType
 
         $importBatches = [];
 
-        $importLinkBatches = [];
-
         foreach ($this->import->batches as $batch) {
-            $importBatches[] = new ImportBatch($batch);
-
-            $importLinkBatches[] = new ImportLinkBatch($batch);
+            $importBatches[] = new ImportBatchJob($batch);
         }
 
         Bus::chain([
             Bus::batch($importBatches),
 
-            new ImportLinking($this->import),
-            Bus::batch($importLinkBatches),
-
-            new ImportCompleted($this->import),
+            new CompletedJob($this->import),
         ])->dispatch();
 
         return true;
@@ -325,7 +316,17 @@ abstract class AbstractType
      */
     public function linkData(ImportBatchContract $importBatch): bool
     {
-        $this->importLinksBatch($importBatch);
+        $this->linkBatch($importBatch);
+
+        return true;
+    }
+
+    /**
+     * Index resource data.
+     */
+    public function indexData(ImportBatchContract $importBatch): bool
+    {
+        $this->indexBatch($importBatch);
 
         return true;
     }
@@ -387,5 +388,21 @@ abstract class AbstractType
     public function getDeletedItemsCount(): int
     {
         return $this->deletedItemsCount;
+    }
+
+    /**
+     * Is linking resource required for the import operation
+     */
+    public function isLinkingRequired(): bool
+    {
+        return $this->linkingRequired;
+    }
+
+    /**
+     * Is indexing resource required for the import operation
+     */
+    public function isIndexingRequired(): bool
+    {
+        return $this->indexingRequired;
     }
 }

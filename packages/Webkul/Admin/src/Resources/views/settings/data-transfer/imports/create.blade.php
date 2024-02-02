@@ -232,5 +232,4 @@
 
         {!! view_render_event('admin.settings.roles.create.create_form_controls.after') !!}
     </x-admin::form>
-
 </x-admin::layouts>

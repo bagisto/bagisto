@@ -2,6 +2,11 @@
 
 namespace Webkul\DataTransfer\Helpers\Types;
 
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -16,12 +21,19 @@ use Webkul\Core\Rules\Slug;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Types\Product\SKUStorage;
+use Webkul\DataTransfer\Jobs\Import\ImportBatch;
+use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
+use Webkul\DataTransfer\Jobs\Import\IndexBatch as IndexBatchJob;
+use Webkul\DataTransfer\Jobs\Import\Indexing as IndexingJob;
+use Webkul\DataTransfer\Jobs\Import\LinkBatch as LinkBatch;
+use Webkul\DataTransfer\Jobs\Import\Linking as LinkingJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
@@ -89,11 +101,6 @@ class Product extends AbstractType
     ];
 
     /**
-     * Resource link needed
-     */
-    protected bool $linkNeeded = true;
-
-    /**
      * Permanent entity columns
      */
     protected array $permanentAttributes = ['sku'];
@@ -134,14 +141,25 @@ class Product extends AbstractType
     protected array $urlKeys = [];
 
     /**
+     * Is linking required
+     */
+    protected bool $linkingRequired = true;
+
+    /**
+     * Is indexing required
+     */
+    protected bool $indexingRequired = true;
+
+    /**
      * Permanent entity columns
      */
     protected array $validColumnNames = [
         'locale',
         'type',
-        'parent_sku',
         'attribute_family_code',
+        'parent_sku',
         'categories',
+        'images',
         'tax_category_name',
         'inventories',
         'related_skus',
@@ -167,6 +185,7 @@ class Product extends AbstractType
         protected ProductRepository $productRepository,
         protected ProductFlatRepository $productFlatRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
+        protected ProductImageRepository $productImageRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
@@ -246,6 +265,39 @@ class Product extends AbstractType
     /**
      * Start the import process
      */
+    public function importData(?ImportBatchContract $importBatch = null): bool
+    {
+        if ($importBatch) {
+            $this->importBatch($importBatch);
+
+            return true;
+        }
+
+        $importBatches = [];
+
+        $importLinkBatches = [];
+
+        foreach ($this->import->batches as $batch) {
+            $importBatches[] = new ImportBatchJob($batch);
+
+            $importLinkBatches[] = new LinkBatchJob($batch);
+        }
+
+        Bus::chain([
+            Bus::batch($importBatches),
+
+            new LinkingJob($this->import),
+            Bus::batch($importLinkBatches),
+
+            new CompletedJob($this->import),
+        ])->dispatch();
+
+        return true;
+    }
+
+    /**
+     * Start the import process
+     */
     public function importBatch(ImportBatchContract $batch): bool
     {
         Event::dispatch('data_transfer.imports.batch.import.before', $batch);
@@ -259,9 +311,11 @@ class Product extends AbstractType
 
         $categories = [];
 
-        $attributes = [];
+        $attributeValues = [];
 
         $inventories = [];
+
+        $imagesData = [];
 
         $flatData = [];
 
@@ -270,9 +324,11 @@ class Product extends AbstractType
 
             $this->prepareCategories($rowData, $categories);
 
-            $this->prepareAttributeValues($rowData, $attributes);
+            $this->prepareAttributeValues($rowData, $attributeValues);
 
             $this->prepareInventories($rowData, $inventories);
+
+            $this->prepareImages($rowData, $imagesData);
 
             $this->prepareFlatData($rowData, $flatData);
         }
@@ -281,9 +337,11 @@ class Product extends AbstractType
 
         $this->saveCategories($categories);
 
-        $this->saveAttributeValues($attributes);
+        $this->saveAttributeValues($attributeValues);
 
         $this->saveInventories($inventories);
+
+        $this->saveImages($imagesData);
 
         $this->saveFlatData($flatData);
 
@@ -291,7 +349,7 @@ class Product extends AbstractType
          * Update import batch summary
          */
         $this->importBatchRepository->update([
-            'state' => Import::STATE_PROCESSING,
+            'state' => Import::STATE_PROCESSED,
 
             'summary'      => [
                 'created' => $this->getCreatedItemsCount(),
@@ -306,9 +364,9 @@ class Product extends AbstractType
     }
 
     /**
-     * Start the import product links process
+     * Start the products linking process
      */
-    public function importLinksBatch(ImportBatchContract $batch): bool
+    public function linkBatch(ImportBatchContract $batch): bool
     {
         Event::dispatch('data_transfer.imports.batch.linking.before', $batch);
 
@@ -355,16 +413,33 @@ class Product extends AbstractType
 
         $this->saveLinks($links);
 
-        dd('END HERE');
+        /**
+         * Update import batch summary
+         */
+        $this->importBatchRepository->update([
+            'state' => Import::STATE_LINKED,
+        ], $batch->id);
+
+        Event::dispatch('data_transfer.imports.batch.linking.after', $batch);
+
+        return true;
+    }
+
+    /**
+     * Start the products indexing process
+     */
+    public function indexBatch(ImportBatchContract $batch): bool
+    {
+        Event::dispatch('data_transfer.imports.batch.indexing.before', $batch);
 
         /**
          * Update import batch summary
          */
         $this->importBatchRepository->update([
-            'state' => Import::STATE_COMPLETED,
+            'state' => Import::STATE_INDEXED,
         ], $batch->id);
 
-        Event::dispatch('data_transfer.imports.batch.linking.after', $batch);
+        Event::dispatch('data_transfer.imports.batch.indexing.after', $batch);
 
         return true;
     }
@@ -379,7 +454,7 @@ class Product extends AbstractType
             ->first()->id;
 
         if ($this->isSKUExist($rowData['sku'])) {
-            $products['update'][] = [
+            $products['update'][$rowData['sku']] = [
                 'type'                => $rowData['type'],
                 'sku'                 => $rowData['sku'],
                 'attribute_family_id' => $attributeFamilyId,
@@ -447,6 +522,12 @@ class Product extends AbstractType
             return;
         }
 
+        /**
+         * Reset the sku categories data to prevent
+         * data duplication in case of multiple locales
+         */
+        $categories[$rowData['sku']] = [];
+
         $names = explode('/', $rowData['categories'] ?? '');
 
         $categoryIds = [];
@@ -503,7 +584,7 @@ class Product extends AbstractType
     /**
      * Save products from current batch
      */
-    public function prepareAttributeValues(array $rowData, array &$attributes): array
+    public function prepareAttributeValues(array $rowData, array &$attributeValues): void
     {
         $data = [];
 
@@ -522,25 +603,23 @@ class Product extends AbstractType
 
             $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
-            $attributes[$rowData['sku']][$attribute->id] = array_merge($attributeTypeValues, [
+            $attributeValues[$rowData['sku']][$attribute->id] = array_merge($attributeTypeValues, [
                 'attribute_id'          => $attribute->id,
                 $attribute->column_name => $value,
                 'channel'               => $attribute->value_per_channel ? ($rowData['channel'] ?? 'default') : null,
                 'locale'                => $attribute->value_per_locale ? $rowData['locale'] : null,
             ]);
         }
-
-        return $attributes;
     }
 
     /**
      * Save products from current batch
      */
-    public function saveAttributeValues(array $attributes): void
+    public function saveAttributeValues(array $attributeValues): void
     {
-        $attributeValues = [];
+        $productAttributeValues = [];
 
-        foreach ($attributes as $sku => $skuAttributes) {
+        foreach ($attributeValues as $sku => $skuAttributes) {
             foreach ($skuAttributes as $attribute) {
                 $product = $this->skuStorage->get($sku);
 
@@ -553,15 +632,15 @@ class Product extends AbstractType
                     $attribute['attribute_id'],
                 ]));
 
-                $attributeValues[] = $attribute;
+                $productAttributeValues[] = $attribute;
             }
         }
 
-        $this->productAttributeValueRepository->upsert($attributeValues, 'unique_id');
+        $this->productAttributeValueRepository->upsert($productAttributeValues, 'unique_id');
     }
 
     /**
-     * Prepare inventories
+     * Prepare inventories from current batch
      */
     public function prepareInventories(array $rowData, array &$inventories): void
     {
@@ -622,6 +701,79 @@ class Product extends AbstractType
                 'vendor_id',
             ],
         );
+    }
+
+    /**
+     * Prepare images from current batch
+     */
+    public function prepareImages(array $rowData, array &$imagesData): void
+    {
+        if (empty($rowData['images'])) {
+            return;
+        }
+
+        /**
+         * Skip the image upload if product is already created
+         */
+        if ($this->skuStorage->has($rowData['sku'])) {
+            return;
+        }
+
+        /**
+         * Reset the sku images data to prevent
+         * data duplication in case of multiple locales
+         */
+        $imagesData[$rowData['sku']] = [];
+
+        $imageNames = array_map('trim', explode(',', $rowData['images']));
+
+        foreach ($imageNames as $key => $image) {
+            $path = 'import/' . $this->import->images_directory_path . '/' . $image;
+
+            if (! Storage::disk('local')->has($path)) {
+                continue;
+            }
+
+            $imagesData[$rowData['sku']][] = [
+                'name' => $image,
+                'path' => Storage::disk('local')->path($path),
+            ];
+        }
+    }
+
+    /**
+     * Save images from current batch
+     */
+    public function saveImages(array $imagesData): void
+    {
+        if (empty($imagesData)) {
+            return;
+        }
+
+        $productImages = [];
+
+        foreach ($imagesData as $sku => $images) {
+            $product = $this->skuStorage->get($sku);
+
+            foreach ($images as $key => $image) {
+                $file = new UploadedFile($image['path'], $image['name']);
+
+                $image = (new ImageManager())->make($file)->encode('webp');
+
+                $path = 'product/' . $product['id'] . '/' . Str::random(40) . '.webp';
+
+                $productImages[] = [
+                    'type'       => 'images',
+                    'path'       => $path,
+                    'product_id' => $product['id'],
+                    'position'   => $key + 1,
+                ];
+
+                Storage::put($path, $image);
+            }
+        }
+
+        $this->productImageRepository->insert($productImages);
     }
 
     /**

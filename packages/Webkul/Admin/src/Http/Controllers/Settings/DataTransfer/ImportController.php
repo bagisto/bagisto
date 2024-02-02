@@ -164,6 +164,30 @@ class ImportController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        try {
+            $this->importRepository->delete($id);
+
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.data-transfer.imports.delete-success'),
+            ]);
+        } catch (\Exception $e) {
+        }
+
+        return response()->json([
+            'message' => trans('admin::app.settings.data-transfer.imports.delete-failed'),
+        ], 500);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
@@ -262,12 +286,20 @@ class ImportController extends Controller
             }
 
         } else {
-            $this->importHelper->linking();
+            if ($this->importHelper->isLinkingRequired()) {
+                $this->importHelper->linking();
+            } elseif ($this->importHelper->isIndexingRequired()) {
+                $this->importHelper->indexing();
+            } else {
+                $this->importHelper->completed();
+            }
         }
+
+        sleep(5);
 
         return new JsonResponse([
             'import' => $this->importHelper->getImport()->unsetRelations(),
-            'stats'  => $this->importHelper->stats(Import::STATE_PROCESSING),
+            'stats'  => $this->importHelper->stats(Import::STATE_PROCESSED),
         ]);
     }
 
@@ -295,14 +327,14 @@ class ImportController extends Controller
         /**
          * Set the import state to linking
          */
-        if ($import->state == Import::STATE_PROCESSING) {
+        if ($import->state == Import::STATE_PROCESSED) {
             $this->importHelper->linking();
         }
 
         /**
          * Get the first processing batch to link
          */
-        $importBatch = $import->batches->where('state', Import::STATE_PROCESSING)->first();
+        $importBatch = $import->batches->where('state', Import::STATE_PROCESSED)->first();
 
         /**
          * Set the import state to linking/completed
@@ -319,22 +351,87 @@ class ImportController extends Controller
                 ], 400);
             }
         } else {
+            if ($this->importHelper->isIndexingRequired()) {
+                $this->importHelper->indexing();
+            } else {
+                $this->importHelper->completed();
+            }
+        }
+
+        sleep(5);
+
+        return new JsonResponse([
+            'import' => $this->importHelper->getImport()->unsetRelations(),
+            'stats'  => $this->importHelper->stats(Import::STATE_LINKED),
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function indexData(int $id): JsonResponse
+    {
+        $import = $this->importRepository->findOrFail($id);
+
+        if (! $import->processed_rows_count) {
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.data-transfer.imports.nothing-to-import'),
+            ], 400);
+        }
+
+        $this->importHelper->setImport($import);
+
+        if (! $this->importHelper->isValid()) {
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.data-transfer.imports.not-valid'),
+            ], 400);
+        }
+
+        /**
+         * Set the import state to linking
+         */
+        if ($import->state == Import::STATE_LINKED) {
+            $this->importHelper->indexing();
+        }
+
+        /**
+         * Get the first processing batch to link
+         */
+        $importBatch = $import->batches->where('state', Import::STATE_LINKED)->first();
+
+        /**
+         * Set the import state to linking/completed
+         */
+        if ($importBatch) {
+            /**
+             * Start the resource linking process
+             */
+            try {
+                $this->importHelper->index($importBatch);
+            } catch (\Exception $e) {
+                return new JsonResponse([
+                    'message' => $e->getMessage(),
+                ], 400);
+            }
+        } else {
             /**
              * Set the import state to completed
              */
             $this->importHelper->completed();
         }
 
+        sleep(5);
+
         return new JsonResponse([
             'import' => $this->importHelper->getImport()->unsetRelations(),
-            'stats'  => $this->importHelper->stats(Import::STATE_COMPLETED),
+            'stats'  => $this->importHelper->stats(Import::STATE_INDEXED),
         ]);
     }
 
     /**
      * Returns import stats
      */
-    public function stats(int $id, string $state = Import::STATE_PROCESSING): JsonResponse
+    public function stats(int $id, string $state = Import::STATE_PROCESSED): JsonResponse
     {
         $import = $this->importRepository->findOrFail($id);
 

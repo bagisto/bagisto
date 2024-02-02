@@ -211,6 +211,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('link/{id}', 'link')->name('admin.settings.data_transfer.imports.link');
 
+                Route::get('index/{id}', 'indexData')->name('admin.settings.data_transfer.imports.index_data');
+
                 Route::get('stats/{id}/{state?}', 'stats')->name('admin.settings.data_transfer.imports.stats');
 
                 Route::get('download/{id}', 'download')->name('admin.settings.data_transfer.imports.download');

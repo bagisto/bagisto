@@ -256,7 +256,6 @@
                     </p>
                 </div>
 
-
                 <!-- Linking In Process -->
                 <div
                     class="grid gap-2 w-full p-3 bg-green-50 border border-green-200 rounded-sm"
@@ -267,6 +266,50 @@
                         <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
 
                         @lang('admin::app.settings.data-transfer.imports.import.linking-info')
+                    </p>
+
+                    <div class="w-full bg-green-200 rounded-sm h-5 dark:bg-green-700">
+                        <div
+                            class="bg-green-600 h-5 rounded-sm"
+                            :style="{ 'width': stats.progress + '%' }"
+                        ></div>
+                    </div>
+
+                    <p class="flex gap-2 items-center">
+                        <span class="text-gray-800 font-medium">
+                            @lang('admin::app.settings.data-transfer.imports.import.progress')
+                        </span>
+
+                        @{{ stats.progress }}%
+                    </p>
+
+                    <p class="flex gap-2 items-center">
+                        <span class="text-gray-800 font-medium">
+                            @lang('admin::app.settings.data-transfer.imports.import.total-batches')
+                        </span>
+
+                        @{{ stats.batches.total }}
+                    </p>
+
+                    <p class="flex gap-2 items-center">
+                        <span class="text-gray-800 font-medium">
+                            @lang('admin::app.settings.data-transfer.imports.import.completed-batches')
+                        </span>
+
+                        @{{ stats.batches.completed }}
+                    </p>
+                </div>
+
+                <!-- Indexing In Process -->
+                <div
+                    class="grid gap-2 w-full p-3 bg-green-50 border border-green-200 rounded-sm"
+                    v-else-if="importResource.state == 'indexing'"
+                >
+
+                    <p class="flex gap-2 items-center">
+                        <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
+
+                        @lang('admin::app.settings.data-transfer.imports.import.indexing-info')
                     </p>
 
                     <div class="w-full bg-green-200 rounded-sm h-5 dark:bg-green-700">
@@ -367,7 +410,11 @@
 
                 mounted() {
                     if (this.importResource.process_in_queue) {
-                        if (this.importResource.state == 'processing' || this.importResource.state == 'linking') {
+                        if (
+                            this.importResource.state == 'processing'
+                            || this.importResource.state == 'linking'
+                            || this.importResource.state == 'indexing'
+                        ) {
                             this.getStats();
                         }
                     } else {
@@ -377,6 +424,10 @@
 
                         if (this.importResource.state == 'linking') {
                             this.link();
+                        }
+
+                        if (this.importResource.state == 'indexing') {
+                            this.index();
                         }
                     }
                 },
@@ -412,6 +463,8 @@
                                         this.start();
                                     } else if (this.importResource.state == 'linking') {
                                         this.link();
+                                    } else if (this.importResource.state == 'indexing') {
+                                        this.index();
                                     }
                                 }
                             })
@@ -429,8 +482,26 @@
 
                                 this.stats = response.data.stats;
 
-                                if (this.importResource.state != 'completed') {
+                                if (this.importResource.state == 'linking') {
                                     this.link();
+                                } else if (this.importResource.state == 'indexing') {
+                                    this.index();
+                                }
+                            })
+                            .catch(error => {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            });
+                    },
+
+                    index() {
+                        this.$axios.get("{{ route('admin.settings.data_transfer.imports.index_data', $import->id) }}")
+                            .then((response) => {
+                                this.importResource = response.data.import;
+
+                                this.stats = response.data.stats;
+
+                                if (this.importResource.state == 'indexing') {
+                                    this.index();
                                 }
                             })
                             .catch(error => {
@@ -439,10 +510,12 @@
                     },
 
                     getStats() {
-                        let state = 'processing';
+                        let state = 'processed';
 
                         if (this.importResource.state == 'linking') {
-                            state = 'completed';
+                            state = 'linked';
+                        } else if (this.importResource.state == 'indexing') {
+                            state = 'indexed';
                         }
 
                         this.$axios.get("{{ route('admin.settings.data_transfer.imports.stats', $import->id) }}/" + state)

@@ -30,9 +30,29 @@ class Import
     public const STATE_PROCESSING = 'processing';
 
     /**
+     * Import state for processed import
+     */
+    public const STATE_PROCESSED = 'processed';
+
+    /**
      * Import state for linking import
      */
     public const STATE_LINKING = 'linking';
+
+    /**
+     * Import state for linked import
+     */
+    public const STATE_LINKED = 'linked';
+
+    /**
+     * Import state for indexing import
+     */
+    public const STATE_INDEXING = 'indexing';
+
+    /**
+     * Import state for indexed import
+     */
+    public const STATE_INDEXED = 'indexed';
 
     /**
      * Import state for completed import
@@ -189,7 +209,7 @@ class Import
      */
     public function start(?ImportBatchContract $importBatch = null): bool
     {
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $typeImporter = $this->getTypeImporter();
@@ -199,14 +219,14 @@ class Import
             /**
              * Rollback transaction
              */
-            // DB::rollBack();
+            DB::rollBack();
 
             throw $e;
         } finally {
             /**
              * Commit transaction
              */
-            // DB::commit();
+            DB::commit();
         }
 
         return true;
@@ -217,12 +237,40 @@ class Import
      */
     public function link(ImportBatchContract $importBatch): bool
     {
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $typeImporter = $this->getTypeImporter();
 
             $typeImporter->linkData($importBatch);
+        } catch (\Exception $e) {
+            /**
+             * Rollback transaction
+             */
+            DB::rollBack();
+
+            throw $e;
+        } finally {
+            /**
+             * Commit transaction
+             */
+            DB::commit();
+        }
+
+        return true;
+    }
+
+    /**
+     * Index import resources
+     */
+    public function index(ImportBatchContract $importBatch): bool
+    {
+        // DB::beginTransaction();
+
+        try {
+            $typeImporter = $this->getTypeImporter();
+
+            $typeImporter->indexData($importBatch);
         } catch (\Exception $e) {
             /**
              * Rollback transaction
@@ -268,6 +316,20 @@ class Import
         $this->setImport($import);
 
         Event::dispatch('data_transfer.imports.linking', $import);
+    }
+
+    /**
+     * Started the import indexing process
+     */
+    public function indexing(): void
+    {
+        $import = $this->importRepository->update([
+            'state' => self::STATE_INDEXING,
+        ], $this->import->id);
+
+        $this->setImport($import);
+
+        Event::dispatch('data_transfer.imports.indexing', $import);
     }
 
     /**
@@ -435,5 +497,21 @@ class Import
     public function getProcessedRowsCount(): int
     {
         return $this->getTypeImporter()->getProcessedRowsCount();
+    }
+
+    /**
+     * Is linking resource required for the import operation
+     */
+    public function isLinkingRequired(): bool
+    {
+        return $this->getTypeImporter()->isLinkingRequired();
+    }
+
+    /**
+     * Is indexing resource required for the import operation
+     */
+    public function isIndexingRequired(): bool
+    {
+        return $this->getTypeImporter()->isIndexingRequired();
     }
 }
