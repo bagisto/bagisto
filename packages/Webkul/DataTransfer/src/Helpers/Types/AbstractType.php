@@ -8,6 +8,10 @@ use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
 use Webkul\DataTransfer\Jobs\Import\ImportBatch as ImportBatchJob;
+use Webkul\DataTransfer\Jobs\Import\IndexBatch as IndexBatchJob;
+use Webkul\DataTransfer\Jobs\Import\Indexing as IndexingJob;
+use Webkul\DataTransfer\Jobs\Import\LinkBatch as LinkBatchJob;
+use Webkul\DataTransfer\Jobs\Import\Linking as LinkingJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
 abstract class AbstractType
@@ -296,17 +300,37 @@ abstract class AbstractType
             return true;
         }
 
-        $importBatches = [];
+        $typeBatches = [];
 
         foreach ($this->import->batches as $batch) {
-            $importBatches[] = new ImportBatchJob($batch);
+            $typeBatches['import'][] = new ImportBatchJob($batch);
+
+            if ($this->isLinkingRequired()) {
+                $typeBatches['link'][] = new LinkBatchJob($batch);
+            }
+
+            if ($this->isIndexingRequired()) {
+                $typeBatches['index'][] = new IndexBatchJob($batch);
+            }
         }
 
-        Bus::chain([
-            Bus::batch($importBatches),
+        $chain[] = Bus::batch($typeBatches['import']);
 
-            new CompletedJob($this->import),
-        ])->dispatch();
+        if (! empty($typeBatches['link'])) {
+            $chain[] = new LinkingJob($this->import);
+
+            $chain[] = Bus::batch($typeBatches['link']);
+        }
+
+        if (! empty($typeBatches['index'])) {
+            $chain[] = new IndexingJob($this->import);
+
+            $chain[] = Bus::batch($typeBatches['index']);
+        }
+
+        $chain[] = new CompletedJob($this->import);
+
+        Bus::chain($chain)->dispatch();
 
         return true;
     }

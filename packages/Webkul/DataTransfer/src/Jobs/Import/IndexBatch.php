@@ -32,7 +32,7 @@ class IndexBatch implements ShouldQueue
      */
     public function handle()
     {
-        $indexer = app(ImportHelper::class)
+        $typeImported = app(ImportHelper::class)
             ->setImport($this->importBatch->import)
             ->getTypeImporter();
 

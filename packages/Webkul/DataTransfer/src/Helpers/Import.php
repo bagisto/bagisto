@@ -75,11 +75,6 @@ class Import
     public const ACTION_APPEND = 'append';
 
     /**
-     * Action constant for replace the resource
-     */
-    public const ACTION_REPLACE = 'replace';
-
-    /**
      * Action constant for deleting the resource
      */
     public const ACTION_DELETE = 'delete';
@@ -504,6 +499,10 @@ class Import
      */
     public function isLinkingRequired(): bool
     {
+        if ($this->import->action == self::ACTION_DELETE) {
+            return false;
+        }
+
         return $this->getTypeImporter()->isLinkingRequired();
     }
 

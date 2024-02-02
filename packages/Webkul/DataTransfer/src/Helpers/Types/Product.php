@@ -21,11 +21,8 @@ use Webkul\Core\Rules\Slug;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Types\Product\SKUStorage;
-use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
-use Webkul\DataTransfer\Jobs\Import\Linking as LinkingJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteElasticSearchIndexJob;
 use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
 use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
 use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
@@ -33,8 +30,8 @@ use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
-use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -267,39 +264,6 @@ class Product extends AbstractType
     /**
      * Start the import process
      */
-    public function importData(?ImportBatchContract $importBatch = null): bool
-    {
-        if ($importBatch) {
-            $this->importBatch($importBatch);
-
-            return true;
-        }
-
-        $importBatches = [];
-
-        $importLinkBatches = [];
-
-        foreach ($this->import->batches as $batch) {
-            $importBatches[] = new ImportBatchJob($batch);
-
-            $importLinkBatches[] = new LinkBatchJob($batch);
-        }
-
-        Bus::chain([
-            Bus::batch($importBatches),
-
-            new LinkingJob($this->import),
-            Bus::batch($importLinkBatches),
-
-            new CompletedJob($this->import),
-        ])->dispatch();
-
-        return true;
-    }
-
-    /**
-     * Start the import process
-     */
     public function importBatch(ImportBatchContract $batch): bool
     {
         Event::dispatch('data_transfer.imports.batch.import.before', $batch);
@@ -467,7 +431,7 @@ class Product extends AbstractType
                         ->whereIn('product_bundle_option_products.product_id', $productIds)
                         ->pluck('product_id')
                         ->toArray();
-                    
+
                     $productIdsToIndex = [
                         ...$productIdsToIndex,
                         ...$parentBundleProductIds,
@@ -481,7 +445,7 @@ class Product extends AbstractType
                         ->whereIn('associated_product_id', $productIds)
                         ->pluck('product_id')
                         ->toArray();
-                    
+
                     $productIdsToIndex = [
                         ...$productIdsToIndex,
                         ...$parentGroupedProductIds,
@@ -495,7 +459,7 @@ class Product extends AbstractType
                         ->whereNotNull('parent_id')
                         ->pluck('parent_id')
                         ->toArray();
-                    
+
                     $productIdsToIndex = [
                         ...$productIdsToIndex,
                         ...$parentConfigurableProductIds,
@@ -516,7 +480,7 @@ class Product extends AbstractType
                         ->whereIn('parent_id', $productIds)
                         ->pluck('id')
                         ->toArray();
-                    
+
                     $productIdsToIndex = [
                         ...$associatedProductIds,
                         ...$productIdsToIndex,
@@ -539,7 +503,7 @@ class Product extends AbstractType
                         ->whereIn('product_bundle_options.product_id', $productIds)
                         ->pluck('product_id')
                         ->toArray();
-                    
+
                     $productIdsToIndex = [
                         ...$associatedProductIds,
                         ...$productIdsToIndex,
@@ -561,7 +525,7 @@ class Product extends AbstractType
                         ->whereIn('product_id', $productIds)
                         ->pluck('associated_product_id')
                         ->toArray();
-                    
+
                     $productIdsToIndex = [
                         ...$associatedProductIds,
                         ...$productIdsToIndex,
@@ -1419,7 +1383,7 @@ class Product extends AbstractType
         }
 
         $this->validatedRows[$rowNumber] = true;
-        
+
         /**
          * If import action is delete than no need for further validation
          */
