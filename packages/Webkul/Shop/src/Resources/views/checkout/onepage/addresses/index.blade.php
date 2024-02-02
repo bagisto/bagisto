@@ -48,12 +48,6 @@
                                 isSaved: false,
                             },
 
-                            editAddress: {
-                                address1: [''],
-
-                                isSaved: false,
-                            },
-
                             isNew: false,
 
                             isEdit: false,
@@ -183,15 +177,15 @@
                 editNewBillingAddressForm(params) {
                     this.resetBillingAddressForm();
 
-                    this.forms.billing.isEdit = true;
+                    this.forms.billing.isNew = true;
 
-                    this.forms.billing.editAddress = params;
+                    this.forms.billing.address = params;
 
                     this.resetPaymentAndShippingMethod();
                 },
 
-                handleBillingAddressForm(params) {
-                    if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
+                handleBillingAddressForm() {
+                    if (! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
 
                         this.isTempAddress = true;
@@ -200,8 +194,14 @@
                             ...this.forms.billing.address,
                             isSaved: false,
                         });
-                    } else if (this.forms.billing.isNew && this.forms.billing.address.isSaved) {
-                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
+                    }
+
+                    this.forms.billing.address['address1'] = [this.forms.billing.address.address1];
+
+                    this.forms.billing.address['address2'] = [this.forms.billing.address.address2 ?? ''];
+
+                    if (this.forms.billing.isEdit) {
+                        this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.billing.address)
                             .then(response => {
                                 this.forms.billing.isNew = false;
 
@@ -213,12 +213,9 @@
                                 console.log(error);
                             });
                     } else {
-                        this.forms.billing.editAddress['address1'] = [this.forms.billing.editAddress.address1];
-                        this.forms.billing.editAddress['address2'] = [this.forms.billing.editAddress.address2 ?? ''];
-
-                        this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.billing.editAddress)
+                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
                             .then(response => {
-                                this.forms.billing.isEdit = false;
+                                this.forms.billing.isNew = false;
 
                                 this.resetBillingAddressForm();
                                 
