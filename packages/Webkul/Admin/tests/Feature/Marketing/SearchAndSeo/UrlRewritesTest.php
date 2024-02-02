@@ -17,6 +17,19 @@ it('should show the url rewrite index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the url rewrites', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.search_seo.url_rewrites.store'))
+        ->assertJsonValidationErrorFor('entity_type')
+        ->assertJsonValidationErrorFor('request_path')
+        ->assertJsonValidationErrorFor('target_path')
+        ->assertJsonValidationErrorFor('redirect_type')
+        ->assertJsonValidationErrorFor('locale')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created url', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -42,6 +55,22 @@ it('should store the newly created url', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when certain field not provided when update the url rewrites', function () {
+    // Arrange
+    $urlRewrite = URLRewrite::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.search_seo.url_rewrites.update', $urlRewrite->id))
+        ->assertJsonValidationErrorFor('entity_type')
+        ->assertJsonValidationErrorFor('request_path')
+        ->assertJsonValidationErrorFor('target_path')
+        ->assertJsonValidationErrorFor('redirect_type')
+        ->assertJsonValidationErrorFor('locale')
+        ->assertUnprocessable();
 });
 
 it('should update the existing url rewrite', function () {

@@ -17,6 +17,16 @@ it('should show the sitemap index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store in the sitemap', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.search_seo.sitemaps.store'))
+        ->assertJsonValidationErrorFor('file_name')
+        ->assertJsonValidationErrorFor('path')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created sitemap', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -36,6 +46,19 @@ it('should store the newly created sitemap', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when certain field not provided when update in the sitemap', function () {
+    // Arrange
+    $sitemap = Sitemap::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.search_seo.sitemaps.update', $sitemap->id))
+        ->assertJsonValidationErrorFor('file_name')
+        ->assertJsonValidationErrorFor('path')
+        ->assertUnprocessable();
 });
 
 it('should update the sitemap', function () {

@@ -17,6 +17,16 @@ it('should return the listing page of customer groups', function () {
         ->assertSeeText(trans('admin::app.customers.groups.index.create.create-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in customer groups', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.groups.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created customers group', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -36,6 +46,19 @@ it('should store the newly created customers group', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in customer groups', function () {
+    // Arrange
+    $customerGroup = CustomerGroup::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.groups.update', $customerGroup->id))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
 });
 
 it('should update the existing customers group', function () {

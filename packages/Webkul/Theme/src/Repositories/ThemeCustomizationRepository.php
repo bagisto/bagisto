@@ -50,11 +50,9 @@ class ThemeCustomizationRepository extends Repository
     /**
      * Upload images
      *
-     * @param array data
-     * @param  \Webkul\Theme\Contracts\ThemeCustomization  $name
      * @return void|string
      */
-    public function uploadImage(array $data, $theme)
+    public function uploadImage(array $data, ThemeCustomization $theme)
     {
         $locale = core()->getRequestedLocaleCode();
 
