@@ -466,6 +466,16 @@ class ImportController extends Controller
     /**
      * Download import error report
      */
+    public function downloadSample(string $type)
+    {
+        $importer = config('importers.'.$type);
+
+        return Storage::download($importer['sample_path']);
+    }
+
+    /**
+     * Download import error report
+     */
     public function download(int $id)
     {
         $import = $this->importRepository->findOrFail($id);

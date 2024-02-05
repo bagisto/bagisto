@@ -58,8 +58,9 @@
                         <x-admin::form.control-group.control
                             type="select"
                             name="type"
-                            id="type"
-                            :value="old('type') ?? 'product'"
+                            id="import-type"
+                            :value="old('type') ?? 'products'"
+                            ref="importType"
                             rules="required"
                             :label="trans('admin::app.settings.data-transfer.imports.create.type')"
                         >
@@ -67,6 +68,16 @@
                                 <option value="{{ $code }}">@lang($importer['title'])</option>
                             @endforeach
                         </x-admin::form.control-group.control>
+
+                        <!-- Source Sample Download Links -->
+                        <a
+                            :href="'{{ route('admin.settings.data_transfer.imports.download_sample') }}/' + $refs['importType']?.value"
+                            target="_blank"
+                            id="source-sample-link"
+                            class="text-sm text-blue-600 cursor-pointer transition-all hover:underline mt-1"
+                        >
+                            @lang('admin::app.settings.data-transfer.imports.create.download-sample')
+                        </a>
 
                         <x-admin::form.control-group.error control-name="type" />
                     </x-admin::form.control-group>
