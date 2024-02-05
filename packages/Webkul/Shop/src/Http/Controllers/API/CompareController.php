@@ -53,7 +53,7 @@ class CompareController extends APIController
     public function store()
     {
         $this->validate(request(), [
-            'product_id' => 'required',
+            'product_id' => 'required|integer|exists:products,id',
         ]);
 
         $compareProduct = $this->compareItemRepository->findOneByField([

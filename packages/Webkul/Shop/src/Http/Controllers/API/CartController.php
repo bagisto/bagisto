@@ -50,7 +50,7 @@ class CartController extends APIController
     public function store(): JsonResource
     {
         $this->validate(request(), [
-            'product_id' => 'required|exists:products,id',
+            'product_id' => 'required|integer|exists:products,id',
         ]);
 
         try {
