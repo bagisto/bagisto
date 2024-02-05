@@ -20,6 +20,7 @@ class Kernel extends HttpKernel
         \Webkul\Core\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
+        \App\Http\Middleware\SanitizeStrings::class,
         \Webkul\Core\Http\Middleware\SecureHeaders::class,
         \Webkul\Installer\Http\Middleware\CanInstall::class,
     ];
