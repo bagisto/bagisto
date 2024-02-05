@@ -80,6 +80,8 @@ class ImportController extends Controller
 
         if (! isset($data['process_in_queue'])) {
             $data['process_in_queue'] = false;
+        } else {
+            $data['process_in_queue'] = true;
         }
 
         $import = $this->importRepository->create(
@@ -191,6 +193,10 @@ class ImportController extends Controller
         $import = $this->importRepository->findOrFail($id);
 
         try {
+            Storage::disk('private')->delete($import->file_path);
+
+            Storage::disk('private')->delete($import->error_file_path);
+
             $this->importRepository->delete($id);
 
             return new JsonResponse([
