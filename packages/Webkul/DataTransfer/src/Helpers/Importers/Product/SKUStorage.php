@@ -112,7 +112,7 @@ class SKUStorage
     public function getByType(string $type): ?array
     {
         $result = Arr::where($this->items, function (string $row, string $key) use ($type) {
-            return str_contains($row, '|' . $type . '|');
+            return str_contains($row, '|'.$type.'|');
         });
 
         return $result;

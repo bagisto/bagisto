@@ -65,7 +65,7 @@ class ThemeCustomizationRepository extends Repository
         if (! isset($data[$locale]['options'])) {
             return;
         }
-        
+
         $options = [];
 
         foreach ($data[$locale]['options'] as $image) {

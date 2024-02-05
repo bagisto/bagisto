@@ -286,7 +286,7 @@ class Importer extends AbstractImporter
          */
         if (
             $rowData['type'] == self::PRODUCT_TYPE_DOWNLOADABLE
-            || ! config('product_types.' . $rowData['type'])
+            || ! config('product_types.'.$rowData['type'])
         ) {
             $this->skipRow($rowNumber, self::ERROR_INVALID_TYPE, 'type');
 
@@ -459,7 +459,7 @@ class Importer extends AbstractImporter
                 if ($attribute->validation === 'decimal') {
                     $validations[] = new Decimal;
                 } elseif ($attribute->validation === 'regex') {
-                    $validations[] = 'regex:' . $attribute->regex;
+                    $validations[] = 'regex:'.$attribute->regex;
                 } else {
                     $validations[] = $attribute->validation;
                 }
@@ -1178,7 +1178,7 @@ class Importer extends AbstractImporter
         $imageNames = array_map('trim', explode(',', $rowData['images']));
 
         foreach ($imageNames as $key => $image) {
-            $path = 'import/' . $this->import->images_directory_path . '/' . $image;
+            $path = 'import/'.$this->import->images_directory_path.'/'.$image;
 
             if (! Storage::disk('local')->has($path)) {
                 continue;
@@ -1212,7 +1212,7 @@ class Importer extends AbstractImporter
 
                 $imageDirectory = $this->productImageRepository->getProductDirectory((object) $product);
 
-                $path = $imageDirectory . '/' . Str::random(40) . '.webp';
+                $path = $imageDirectory.'/'.Str::random(40).'.webp';
 
                 $productImages[] = [
                     'type'       => 'images',
@@ -1605,11 +1605,11 @@ class Importer extends AbstractImporter
         ];
 
         foreach ($linkTableMapping as $type => $table) {
-            if (empty($rowData[$type . '_skus'])) {
+            if (empty($rowData[$type.'_skus'])) {
                 continue;
             }
 
-            foreach (explode(',', $rowData[$type . '_skus'] ?? '') as $sku) {
+            foreach (explode(',', $rowData[$type.'_skus'] ?? '') as $sku) {
                 $links[$table][$rowData['sku']][] = $sku;
             }
         }

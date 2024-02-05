@@ -57,7 +57,7 @@ class ImportController extends Controller
         $importers = array_keys(config('importers'));
 
         $this->validate(request(), [
-            'type'                => 'required|in:' . implode(',', $importers),
+            'type'                => 'required|in:'.implode(',', $importers),
             'action'              => 'required:in:append,delete',
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
@@ -87,7 +87,7 @@ class ImportController extends Controller
                 [
                     'file_path' => request()->file('file')->storeAs(
                         'imports',
-                        time() . '-' . request()->file('file')->getClientOriginalName(),
+                        time().'-'.request()->file('file')->getClientOriginalName(),
                         'private'
                     ),
                 ],
@@ -126,7 +126,7 @@ class ImportController extends Controller
         $import = $this->importRepository->findOrFail($id);
 
         $this->validate(request(), [
-            'type'                => 'required|in:' . implode(',', $importers),
+            'type'                => 'required|in:'.implode(',', $importers),
             'action'              => 'required:in:append,delete',
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
@@ -162,7 +162,7 @@ class ImportController extends Controller
 
             $data['file_path'] = request()->file('file')->storeAs(
                 'imports',
-                time() . '-' . request()->file('file')->getClientOriginalName(),
+                time().'-'.request()->file('file')->getClientOriginalName(),
                 'private'
             );
         }

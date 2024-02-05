@@ -52,10 +52,10 @@ class TranslatableModel extends Model
     public function scopeWhereTranslationIn(Builder $query, string $translationField, $value, ?string $locale = null, string $method = 'whereHas')
     {
         return $query->$method('translations', function (Builder $query) use ($translationField, $value, $locale) {
-            $query->whereIn($this->getTranslationsTable() . '.' . $translationField, $value);
+            $query->whereIn($this->getTranslationsTable().'.'.$translationField, $value);
 
             if ($locale) {
-                $query->whereIn($this->getTranslationsTable() . '.' . $this->getLocaleKey(), $locale);
+                $query->whereIn($this->getTranslationsTable().'.'.$this->getLocaleKey(), $locale);
             }
         });
     }

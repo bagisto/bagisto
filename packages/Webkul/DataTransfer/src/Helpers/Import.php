@@ -405,7 +405,7 @@ class Import
         foreach ($this->errorHelper->getAllErrorsGroupedByCode() as $groupedErrors) {
             foreach ($groupedErrors as $errorMessage => $rowNumbers) {
                 if (! empty($rowNumbers)) {
-                    $errors[] = 'Row(s) ' . implode(', ', $rowNumbers) . ': ' . $errorMessage;
+                    $errors[] = 'Row(s) '.implode(', ', $rowNumbers).': '.$errorMessage;
                 } else {
                     $errors[] = $errorMessage;
                 }
@@ -427,7 +427,7 @@ class Import
             return null;
         }
 
-        $errorReportPath = 'imports/' . time() . '-error-report.csv';
+        $errorReportPath = 'imports/'.time().'-error-report.csv';
 
         $handle = fopen(Storage::disk('private')->path($errorReportPath), 'a');
 
@@ -478,7 +478,7 @@ class Import
     public function getTypeImporter(): AbstractImporter
     {
         if (! $this->typeImporter) {
-            $importerConfig = config('importers.' . $this->import->type);
+            $importerConfig = config('importers.'.$this->import->type);
 
             $this->typeImporter = app()->make($importerConfig['importer'])
                 ->setImport($this->import)

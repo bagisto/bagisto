@@ -11,9 +11,9 @@ class DataTransferServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'data_transfer');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'data_transfer');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 
     /**
@@ -21,6 +21,6 @@ class DataTransferServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(dirname(__DIR__) . '/Config/importers.php', 'importers');
+        $this->mergeConfigFrom(dirname(__DIR__).'/Config/importers.php', 'importers');
     }
 }

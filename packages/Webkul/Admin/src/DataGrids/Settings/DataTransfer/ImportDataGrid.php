@@ -61,7 +61,7 @@ class ImportDataGrid extends DataGrid
             'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
-                return '<a href="' . route('admin.settings.data_transfer.imports.download', $row->id) . '" class="text-blue-600 hover:underline cursor-pointer">' . $row->file_path . '<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="text-blue-600 hover:underline cursor-pointer">'.$row->file_path.'<a>';
             },
         ]);
 
@@ -77,7 +77,7 @@ class ImportDataGrid extends DataGrid
                     return '';
                 }
 
-                return '<a href="' . route('admin.settings.data_transfer.imports.download_error_report', $row->id) . '" class="text-blue-600 hover:underline cursor-pointer">' . $row->error_file_path . '<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="text-blue-600 hover:underline cursor-pointer">'.$row->error_file_path.'<a>';
             },
         ]);
 
@@ -116,7 +116,7 @@ class ImportDataGrid extends DataGrid
                 $stats = [];
 
                 foreach ($summary as $type => $value) {
-                    $stats[] = trans('admin::app.settings.data-transfer.imports.index.datagrid.' . $type) . ': ' . $summary[$type];
+                    $stats[] = trans('admin::app.settings.data-transfer.imports.index.datagrid.'.$type).': '.$summary[$type];
                 }
 
                 return implode(', ', $stats);
