@@ -72,6 +72,16 @@ it('should store newly created attribute family', function () {
     ]);
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in attribute family', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.families.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
+});
+
 it('should return edit page of attribute families', function () {
     // Arrange
     $attributeFamily = AttributeFamilyModel::factory()->create();
@@ -83,6 +93,19 @@ it('should return edit page of attribute families', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.families.edit.title'))
         ->assertSeeText(trans('admin::app.catalog.families.edit.back-btn'));
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in attribute family', function () {
+    // Arrange
+    $attributeFamily = AttributeFamilyModel::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.families.update', $attributeFamily->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
 });
 
 it('should update the existing attribute families', function () {

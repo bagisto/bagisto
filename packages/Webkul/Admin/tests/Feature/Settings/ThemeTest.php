@@ -17,6 +17,32 @@ it('should returns the theme index page', function () {
         ->assertSeeText(trans('admin::app.settings.themes.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the theme', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.themes.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('sort_order')
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when correct type not provided when store the theme', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.themes.store'), [
+        'type' => fake()->word(),
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('sort_order')
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created theme', function () {
     // Arrange
     $lastThemeId = ThemeCustomization::factory()->create()->id + 1;
@@ -45,6 +71,21 @@ it('should store the newly created theme', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when correct type not provided when update the theme', function () {
+    // Arrange
+    $theme = ThemeCustomization::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.themes.update', $theme->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('sort_order')
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertUnprocessable();
 });
 
 it('should update the theme customizations', function () {
@@ -85,7 +126,7 @@ it('should update the theme customizations', function () {
                     [
                         'title' => fake()->title(),
                         'link'  => fake()->url(),
-                        'image' => UploadedFile::fake()->create(fake()->word().'.png'),
+                        'image' => UploadedFile::fake()->image(fake()->word().'.png', 640, 480, 'png'),
                     ],
                 ],
             ];

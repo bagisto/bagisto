@@ -137,9 +137,9 @@ class ChannelController extends Controller
             'favicon.*'                        => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
 
             /* seo */
-            $locale.'.seo_title'             => 'nullable',
-            $locale.'.seo_description'       => 'nullable',
-            $locale.'.seo_keywords'          => 'nullable',
+            $locale.'.seo_title'               => 'required|string',
+            $locale.'.seo_description'         => 'required|string',
+            $locale.'.seo_keywords'            => 'required|string',
 
             /* maintenance mode */
             'is_maintenance_on'                => 'boolean',

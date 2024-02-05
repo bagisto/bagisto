@@ -43,6 +43,18 @@ it('should create the new cms page', function () {
         ->assertSeeText(trans('admin::app.account.edit.back-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in cms page', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.cms.store'))
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('page_title')
+        ->assertJsonValidationErrorFor('channels')
+        ->assertJsonValidationErrorFor('html_content')
+        ->assertUnprocessable();
+});
+
 it('should store newly created cms pages', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -80,6 +92,23 @@ it('should show the edit cms page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.cms.edit.title'))
         ->assertSeeText(trans('admin::app.cms.edit.back-btn'));
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in cms page', function () {
+    // Arrange
+    $cms = Page::factory()->hasTranslations()->create();
+
+    $localeCode = core()->getRequestedLocaleCode();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.cms.update', $cms->id))
+        ->assertJsonValidationErrorFor($localeCode.'.url_key')
+        ->assertJsonValidationErrorFor($localeCode.'.page_title')
+        ->assertJsonValidationErrorFor($localeCode.'.html_content')
+        ->assertJsonValidationErrorFor('channels')
+        ->assertUnprocessable();
 });
 
 it('should update the cms page', function () {

@@ -2,7 +2,6 @@
     $channel = core()->getCurrentChannel();
 @endphp
 
-
 <!-- SEO Meta Content -->
 @push ('meta')
     <meta name="title" content="{{ $channel->home_seo['meta_title'] ?? '' }}" />
