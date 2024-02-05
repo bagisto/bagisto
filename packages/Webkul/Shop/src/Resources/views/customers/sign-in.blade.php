@@ -63,21 +63,17 @@
 
                         <x-shop::form.control-group.control
                             type="email"
-                            name="email"
                             class="!p-[20px_25px] rounded-lg"
-                            value=""
+                            name="email"
                             rules="required|email"
+                            value=""
                             :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
                             aria-label="@lang('shop::app.customers.login-form.email')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="email"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="email" />
                     </x-shop::form.control-group>
 
                     <!-- Password -->
@@ -88,22 +84,18 @@
 
                         <x-shop::form.control-group.control
                             type="password"
-                            name="password"
                             class="!p-[20px_25px] rounded-lg"
-                            value=""
                             id="password"
+                            name="password"
                             rules="required|min:6"
+                            value=""
                             :label="trans('shop::app.customers.login-form.password')"
                             :placeholder="trans('shop::app.customers.login-form.password')"
                             aria-label="@lang('shop::app.customers.login-form.password')"
                             aria-required="true"
-                        >
-                        </x-shop::form.control-group.control>
+                        />
 
-                        <x-shop::form.control-group.error
-                            control-name="password"
-                        >
-                        </x-shop::form.control-group.error>
+                        <x-shop::form.control-group.error control-name="password" />
                     </x-shop::form.control-group>
 
                     <div class="flex justify-between">

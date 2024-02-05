@@ -122,7 +122,7 @@ class Installer extends Command
     /**
      *  Checking .env file and if not found then create .env file.
      *
-     *  @return ?array
+     * @return ?array
      */
     protected function checkForEnvFile()
     {
@@ -165,13 +165,13 @@ class Installer extends Command
     {
         $this->updateEnvVariable(
             'APP_NAME',
-            'Please enter the <bg=green>application name</>',
+            'Please enter the application name',
             env('APP_NAME', 'Bagisto')
         );
 
         $this->updateEnvVariable(
             'APP_URL',
-            'Please enter the <bg=green>application URL</>',
+            'Please enter the application URL',
             env('APP_URL', 'http://localhost:8000')
         );
 
@@ -180,27 +180,27 @@ class Installer extends Command
             date_default_timezone_get()
         );
 
-        $this->info('Your Default Timezone is ' . date_default_timezone_get());
+        $this->info('Your Default Timezone is '.date_default_timezone_get());
 
         $defaultLocale = $this->updateEnvChoice(
             'APP_LOCALE',
-            'Please select the <bg=green>default application locale</>',
+            'Please select the default application locale',
             $this->locales
         );
 
         $defaultCurrency = $this->updateEnvChoice(
             'APP_CURRENCY',
-            'Please select the <bg=green>default currency</>',
+            'Please select the default currency',
             $this->currencies
         );
 
         $allowedLocales = $this->allowedChoice(
-            'Please choose the <bg=green>allowed locales</> for your channels',
+            'Please choose the allowed locales for your channels',
             $this->locales
         );
 
         $allowedCurrencies = $this->allowedChoice(
-            'Please choose the <bg=green>allowed currencies</> for your channels',
+            'Please choose the allowed currencies for your channels',
             $this->currencies
         );
 
@@ -229,42 +229,42 @@ class Installer extends Command
     {
         $databaseDetails = [
             'DB_CONNECTION' => select(
-                'Please select the <bg=green>database connection</>',
+                'Please select the database connection',
                 ['mysql', 'pgsql', 'sqlsrv']
             ),
 
             'DB_HOST'       => text(
-                label: 'Please enter the <bg=green>database host</>',
+                label: 'Please enter the database host',
                 default: env('DB_HOST', '127.0.0.1'),
                 required: true
             ),
 
             'DB_PORT'       => text(
-                label: 'Please enter the <bg=green>database port</>',
+                label: 'Please enter the database port',
                 default: env('DB_PORT', '3306'),
                 required: true
             ),
 
             'DB_DATABASE' => text(
-                label: 'Please enter the <bg=green>database name</>',
+                label: 'Please enter the database name',
                 default: env('DB_DATABASE', ''),
                 required: true
             ),
 
             'DB_PREFIX' => text(
-                label: 'Please enter the <bg=green>database prefix</>',
+                label: 'Please enter the database prefix',
                 default: env('DB_PREFIX', ''),
                 hint: 'or press enter to continue'
             ),
 
             'DB_USERNAME' => text(
-                label: 'Please enter your <bg=green>database username</>',
+                label: 'Please enter your database username',
                 default: env('DB_USERNAME', ''),
                 required: true
             ),
 
             'DB_PASSWORD' => password(
-                label: 'Please enter your <bg=green>database password</>',
+                label: 'Please enter your database password',
                 required: true
             ),
         ];
@@ -292,13 +292,13 @@ class Installer extends Command
     protected function createAdminCredentials()
     {
         $adminName = text(
-            label: 'Enter the <bg=green>name of the admin user</>',
+            label: 'Enter the name of the admin user',
             default: 'Example',
             required: true
         );
 
         $adminEmail = text(
-            label: 'Enter the <bg=green>email address of the admin user</>',
+            label: 'Enter the email address of the admin user',
             default: 'admin@example.com',
             validate: fn (string $value) => match (true) {
                 ! filter_var($value, FILTER_VALIDATE_EMAIL) => 'The email address you entered is not valid please try again.',
@@ -307,7 +307,7 @@ class Installer extends Command
         );
 
         $adminPassword = text(
-            label: 'Configure the <bg=green>password</> for the admin user',
+            label: 'Configure the password for the admin user',
             default: 'admin123',
             required: true
         );
@@ -333,9 +333,9 @@ class Installer extends Command
             $this->info('-----------------------------');
             $this->info('Congratulations!');
             $this->info('The installation has been finished and you can now use Bagisto.');
-            $this->info('Go to ' . env('APP_URL') . '/admin' . ' and authenticate with:');
-            $this->info('Email: ' . $adminEmail);
-            $this->info('Password: ' . $adminPassword);
+            $this->info('Go to '.env('APP_URL').'/admin'.' and authenticate with:');
+            $this->info('Email: '.$adminEmail);
+            $this->info('Password: '.$adminPassword);
             $this->info('Cheers!');
 
             Event::dispatch('bagisto.installed');
@@ -452,7 +452,7 @@ class Installer extends Command
 
         // Check if $value contains spaces, and if so, add double quotes
         if (preg_match('/\s/', $value)) {
-            $value = '"' . $value . '"';
+            $value = '"'.$value.'"';
         }
 
         $data = preg_replace("/$key=(.*)/", "$key=$value", $data);

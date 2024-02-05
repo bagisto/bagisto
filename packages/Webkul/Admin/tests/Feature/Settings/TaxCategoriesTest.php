@@ -8,14 +8,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    TaxRate::query()->delete();
-    TaxCategory::query()->delete();
-});
-
 it('should returns the tax category index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -24,6 +16,18 @@ it('should returns the tax category index page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.taxes.categories.index.title'))
         ->assertSeeText(trans('admin::app.settings.taxes.categories.index.create.title'));
+});
+
+it('should fail the validation with errors when certain field not provided when store the tax categories', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.taxes.categories.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('taxrates')
+        ->assertUnprocessable();
 });
 
 it('should store the tax category', function () {
@@ -39,10 +43,14 @@ it('should store the tax category', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.taxes.categories.index.create-success'));
 
-    $this->assertDatabaseHas('tax_categories', [
-        'code'        => $code,
-        'name'        => $name,
-        'description' => $description,
+    $this->assertModelWise([
+        TaxCategory::class => [
+            [
+                'code'        => $code,
+                'name'        => $name,
+                'description' => $description,
+            ],
+        ],
     ]);
 });
 
@@ -58,6 +66,23 @@ it('should returns the edit page of the tax category', function () {
         ->assertJsonPath('data.id', $taxCategory->id)
         ->assertJsonPath('data.code', $taxCategory->code)
         ->assertJsonPath('data.name', $taxCategory->name);
+});
+
+it('should fail the validation with errors when certain field not provided when update the tax categories', function () {
+    // Arrange
+    $taxCategory = TaxCategory::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.taxes.categories.update'), [
+        'id' => $taxCategory->id,
+    ])
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('taxrates')
+        ->assertUnprocessable();
 });
 
 it('should update the tax category', function () {
@@ -77,10 +102,14 @@ it('should update the tax category', function () {
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.settings.taxes.categories.index.update-success'));
 
-    $this->assertDatabaseHas('tax_categories', [
-        'code'        => $code,
-        'name'        => $name,
-        'description' => $description,
+    $this->assertModelWise([
+        TaxCategory::class => [
+            [
+                'code'        => $code,
+                'name'        => $name,
+                'description' => $description,
+            ],
+        ],
     ]);
 });
 

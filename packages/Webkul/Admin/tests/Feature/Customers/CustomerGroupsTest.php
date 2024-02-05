@@ -7,15 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CustomerGroup::query()
-        ->whereNotBetween('id', [1, 3])
-        ->delete();
-});
-
 it('should return the listing page of customer groups', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -24,6 +15,16 @@ it('should return the listing page of customer groups', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.title'))
         ->assertSeeText(trans('admin::app.customers.groups.index.create.create-btn'));
+});
+
+it('should fail the validation with errors when certain inputs are not provided when store in customer groups', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.groups.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
 });
 
 it('should store the newly created customers group', function () {
@@ -37,10 +38,27 @@ it('should store the newly created customers group', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.create.success'));
 
-    $this->assertDatabaseHas('customer_groups', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        CustomerGroup::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in customer groups', function () {
+    // Arrange
+    $customerGroup = CustomerGroup::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.groups.update', $customerGroup->id))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
 });
 
 it('should update the existing customers group', function () {
@@ -58,10 +76,14 @@ it('should update the existing customers group', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.groups.index.edit.success'));
 
-    $this->assertDatabaseHas('customer_groups', [
-        'name' => $name,
-        'code' => $customerGroup->code,
-        'id'   => $customerGroup->id,
+    $this->assertModelWise([
+        CustomerGroup::class => [
+            [
+                'name' => $name,
+                'code' => $customerGroup->code,
+                'id'   => $customerGroup->id,
+            ],
+        ],
     ]);
 });
 

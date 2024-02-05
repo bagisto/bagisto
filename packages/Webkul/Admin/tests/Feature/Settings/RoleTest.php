@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Role::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the role index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -34,6 +27,17 @@ it('should returns the create page of role', function () {
         ->assertSeeText(trans('admin::app.settings.roles.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the roles', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.roles.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('permission_type')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created roles', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -41,13 +45,19 @@ it('should store the newly created roles', function () {
     postJson(route('admin.settings.roles.store'), [
         'name'            => $name = fake()->name(),
         'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
+        'description'     => $description = fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+                'description'     => $description,
+            ],
+        ],
     ]);
 });
 
@@ -61,14 +71,34 @@ it('should returns the edit page of roles', function () {
     putJson(route('admin.settings.roles.edit', $role->id), [
         'name'            => $name = fake()->name(),
         'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
+        'description'     => $description = fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+                'description'     => $description,
+            ],
+        ],
     ]);
+});
+
+it('should fail the validation with errors when certain field not provided when update the roles', function () {
+    // Arrange
+    $role = Role::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.roles.update', $role->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('permission_type')
+        ->assertUnprocessable();
 });
 
 it('should update the existing role', function () {
@@ -81,13 +111,19 @@ it('should update the existing role', function () {
     putJson(route('admin.settings.roles.update', $role->id), [
         'name'            => $name = fake()->name(),
         'permission_type' => $permissionType = fake()->randomElement(['custom', 'all']),
+        'description'     => $description = fake()->sentence(),
     ])
         ->assertRedirect(route('admin.settings.roles.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('roles', [
-        'name'            => $name,
-        'permission_type' => $permissionType,
+    $this->assertModelWise([
+        Role::class => [
+            [
+                'name'            => $name,
+                'permission_type' => $permissionType,
+                'description'     => $description,
+            ],
+        ],
     ]);
 });
 

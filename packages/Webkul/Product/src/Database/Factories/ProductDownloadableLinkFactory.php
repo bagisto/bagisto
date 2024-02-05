@@ -26,7 +26,7 @@ class ProductDownloadableLinkFactory extends Factory
 
         return [
             'url'        => '',
-            'file'       => '/tests/_data/' . $filename,
+            'file'       => '/tests/_data/'.$filename,
             'file_name'  => $filename,
             'type'       => 'file',
             'price'      => 0.0000,

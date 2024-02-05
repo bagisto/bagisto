@@ -48,7 +48,7 @@ class Tree
      * Shortcut method for create a Config with a callback.
      * This will allow you to do things like fire an event on creation.
      *
-     * @param  callable  $callback Callback to use after the Config creation
+     * @param  callable  $callback  Callback to use after the Config creation
      * @return object
      */
     public static function create($callback = null)

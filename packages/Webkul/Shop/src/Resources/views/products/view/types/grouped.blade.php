@@ -27,8 +27,7 @@
                                 :value="$groupedProduct->qty"
                                 class="gap-x-4 py-2.5 px-3 rounded-xl"
                                 @change="updateItem($event)"
-                            >
-                            </x-shop::quantity-changer>
+                            />
                         </div>
                     @endif
                 @endforeach

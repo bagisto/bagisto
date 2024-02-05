@@ -116,7 +116,7 @@
 
                     <!-- Datagrid Body Shimmer -->
                     <template v-else>
-                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body />
                     </template>
                 </template>
             </x-admin::datagrid>
@@ -152,7 +152,7 @@
                             >
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
 
                         <!-- Modal Content -->
                         <x-slot:content>
@@ -160,8 +160,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <!-- Name -->
                             <x-admin::form.control-group>
@@ -175,13 +174,9 @@
                                     rules="required"
                                     :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
                                     :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.name')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
 
-                                <x-admin::form.control-group.error
-                                    control-name="name"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="name" />
                             </x-admin::form.control-group>
 
                             <!-- Terms -->
@@ -196,26 +191,22 @@
                                     rules="required"
                                     :label="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
                                     :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
-                                >
-                                </x-admin::form.control-group.control>
+                                />
+
+                                <x-admin::form.control-group.error control-name="terms" />
 
                                 <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
                                 </p>
-
-                                <x-admin::form.control-group.error
-                                    control-name="terms"
-                                >
-                                </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                        </x-slot:content>
+                        </x-slot>
 
                         <!-- Modal Footer -->
                         <x-slot:footer>
                             <button class="primary-button">
                                 @lang('admin::app.marketing.search-seo.search-synonyms.index.create.save-btn')
                             </button>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>

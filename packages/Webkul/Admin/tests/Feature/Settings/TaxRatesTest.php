@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    TaxRate::query()->delete();
-});
-
 it('should returns the tax rate index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -34,6 +27,17 @@ it('should returns the create page of tax rate', function () {
         ->assertSeeText(trans('admin::app.settings.taxes.rates.create.back-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the tax rates', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.taxes.rates.store'))
+        ->assertJsonValidationErrorFor('identifier')
+        ->assertJsonValidationErrorFor('country')
+        ->assertJsonValidationErrorFor('tax_rate')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created tax rates', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -46,10 +50,14 @@ it('should store the newly created tax rates', function () {
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
 
-    $this->assertDAtabaseHas('tax_rates', [
-        'identifier' => $identifier,
-        'country'    => $country,
-        'tax_rate'   => $taxRate,
+    $this->assertModelWise([
+        TaxRate::class => [
+            [
+                'identifier' => $identifier,
+                'country'    => $country,
+                'tax_rate'   => $taxRate,
+            ],
+        ],
     ]);
 });
 
@@ -64,6 +72,20 @@ it('should returns the edit page of the tax rate', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.taxes.rates.edit.title'))
         ->assertSeeText(trans('admin::app.settings.taxes.rates.edit.back-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when update the tax rates', function () {
+    // Arrange
+    $taxRate = TaxRate::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.taxes.rates.update', $taxRate->id))
+        ->assertJsonValidationErrorFor('identifier')
+        ->assertJsonValidationErrorFor('country')
+        ->assertJsonValidationErrorFor('tax_rate')
+        ->assertUnprocessable();
 });
 
 it('should update the tax rate', function () {
@@ -81,10 +103,14 @@ it('should update the tax rate', function () {
         ->assertRedirect(route('admin.settings.taxes.rates.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('tax_rates', [
-        'identifier' => $identifier,
-        'country'    => $country,
-        'tax_rate'   => $taxRate->tax_rate,
+    $this->assertModelWise([
+        TaxRate::class => [
+            [
+                'identifier' => $identifier,
+                'country'    => $country,
+                'tax_rate'   => $taxRate->tax_rate,
+            ],
+        ],
     ]);
 });
 

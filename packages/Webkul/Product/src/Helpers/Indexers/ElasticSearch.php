@@ -238,7 +238,7 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getIndexName()
     {
-        return 'products_' . $this->channel->code . '_' . $this->locale->code . '_index';
+        return 'products_'.$this->channel->code.'_'.$this->locale->code.'_index';
     }
 
     /**
@@ -278,7 +278,7 @@ class ElasticSearch extends AbstractIndexer
                         $groupPrice = $this->product->getTypeInstance()->getMinimalPrice();
                     }
 
-                    $properties[$attribute->code . '_' . $customerGroup->id] = (float) $groupPrice;
+                    $properties[$attribute->code.'_'.$customerGroup->id] = (float) $groupPrice;
                 }
             } elseif ($attribute->type == 'boolean') {
                 $properties[$attribute->code] = intval($attributeValue?->{$attribute->column_name});
@@ -289,7 +289,7 @@ class ElasticSearch extends AbstractIndexer
 
         foreach ($this->product->super_attributes as $attribute) {
             foreach ($this->product->variants as $variant) {
-                $properties['ca_' . $attribute->code][] = $variant->{$attribute->code};
+                $properties['ca_'.$attribute->code][] = $variant->{$attribute->code};
             }
         }
 

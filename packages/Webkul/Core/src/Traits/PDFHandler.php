@@ -22,7 +22,7 @@ trait PDFHandler
 
         return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
             ->setPaper('a4')
-            ->download($fileName . '.pdf');
+            ->download($fileName.'.pdf');
     }
 
     /**

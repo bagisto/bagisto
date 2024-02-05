@@ -80,9 +80,9 @@ class ProductDataGrid extends DataGrid
                 'product_flat.url_key',
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
-                DB::raw('SUM(DISTINCT ' . $tablePrefix . 'product_inventories.qty) as quantity')
+                DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity')
             )
-            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'product_images.id) as images_count'));
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'));
 
         $queryBuilder->groupBy(
             'product_flat.product_id',
@@ -206,7 +206,7 @@ class ProductDataGrid extends DataGrid
 
                 'params' => [
                     'options' => collect(config('product_types'))
-                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.' . $type['key'])])
+                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.'.$type['key'])])
                         ->values()
                         ->toArray(),
                 ],

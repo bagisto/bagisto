@@ -50,7 +50,7 @@ class CheckForMaintenanceMode extends BaseCheckForMaintenanceMode
         $this->app = $app;
 
         /* adding exception for admin routes */
-        $this->except[] = config('app.admin_url') . '*';
+        $this->except[] = config('app.admin_url').'*';
 
         if ($this->databaseManager->isInstalled()) {
             /* exclude ips */

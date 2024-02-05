@@ -8,5 +8,5 @@
     </div>
     
     <!-- Progress Bar Shimmer -->
-    <x-admin::shimmer.reporting.progress-bar/>
+    <x-admin::shimmer.reporting.progress-bar />
 </div>

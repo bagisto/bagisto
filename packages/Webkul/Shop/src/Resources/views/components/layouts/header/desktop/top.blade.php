@@ -20,12 +20,12 @@
                     role="presentation"
                 ></span>
             </div>
-        </x-slot:toggle>
+        </x-slot>
 
         <!-- Dropdown Content -->
         <x-slot:content class="!p-0">
-            <v-currency-switcher></v-currency-switcher>
-        </x-slot:content>
+            <v-currency-switcher />
+        </x-slot>
     </x-shop::dropdown>
 
     {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
@@ -65,12 +65,12 @@
                     role="presentation"
                 ></span>
             </div>
-        </x-slot:toggle>
+        </x-slot>
     
         <!-- Dropdown Content -->
         <x-slot:content class="!p-0">
-            <v-locale-switcher></v-locale-switcher>
-        </x-slot:content>
+            <v-locale-switcher />
+        </x-slot>
     </x-shop::dropdown>
 
     {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.after') !!}

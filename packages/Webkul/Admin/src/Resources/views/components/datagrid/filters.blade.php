@@ -38,7 +38,7 @@
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
@@ -48,7 +48,7 @@
                             @click="filterPage(option.value, column)"
                         >
                         </x-admin::dropdown.menu.item>
-                    </x-slot:menu>
+                    </x-slot>
                 </x-admin::dropdown>
             </div>
 
@@ -109,7 +109,7 @@
 
                                 <span class="icon-sort-down text-2xl"></span>
                             </button>
-                        </x-slot:toggle>
+                        </x-slot>
 
                         <!-- Dropdown Content -->
                         <x-slot:menu>
@@ -119,7 +119,7 @@
                                 @click="filterPage(option.value, column)"
                             >
                             </x-admin::dropdown.menu.item>
-                        </x-slot:menu>
+                        </x-slot>
                     </x-admin::dropdown>
                 </div>
 
@@ -423,7 +423,7 @@
 
                     <span class="icon-sort-down text-2xl"></span>
                 </button>
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Dropdown Content -->
             <x-slot:menu>
@@ -469,7 +469,7 @@
                         </ul>
                     </div>
                 </div>
-            </x-slot:menu>
+            </x-slot>
         </x-admin::dropdown>
     </script>
 

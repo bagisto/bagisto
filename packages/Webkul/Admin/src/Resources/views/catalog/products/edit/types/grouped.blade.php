@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.grouped.before', ['product' => $product]) !!}
 
-<v-group-products :errors="errors"></v-group-products>
+<v-group-products :errors="errors" />
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.grouped.after', ['product' => $product]) !!}
 
@@ -112,7 +112,19 @@
                                         class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
+                                        label="@lang('admin::app.catalog.products.edit.types.grouped.default-qty')"
                                     ></v-field>
+
+                                    <v-error-message
+                                        :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"
+                                        v-slot="{ message }"
+                                    >
+                                        <p
+                                            class="mt-1 text-red-600 text-xs italic"
+                                            v-text="message"
+                                        >
+                                        </p>
+                                    </v-error-message>
                                 </x-admin::form.control-group>
 
                                 <p
@@ -164,7 +176,7 @@
                 ::added-product-ids="addedProductIds"
                 ::query-params="{type: 'simple'}"
                 @onProductAdded="addSelected($event)"
-            ></x-admin::products.search>
+            />
         </div>
     </script>
 

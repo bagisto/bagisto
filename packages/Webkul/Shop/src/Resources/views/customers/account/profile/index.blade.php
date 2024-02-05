@@ -6,7 +6,7 @@
 
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
-        <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
+        <x-shop::breadcrumbs name="profile" />
     @endSection
 
     <div class="flex justify-between items-center">
@@ -111,13 +111,13 @@
                     >
                         @lang('shop::app.customers.account.profile.delete-profile')
                     </div>
-                </x-slot:toggle>
+                </x-slot>
 
                 <x-slot:header>
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.customers.account.profile.enter-password')
                     </h2>
-                </x-slot:header>
+                </x-slot>
 
                 <x-slot:content>
                     <x-shop::form.control-group class="!mb-0">
@@ -132,10 +132,9 @@
                         <x-shop::form.control-group.error
                             class=" text-left"
                             control-name="password"
-                        >
-                        </x-shop::form.control-group.error>
+                        />
                     </x-shop::form.control-group>
-                </x-slot:content>
+                </x-slot>
 
                 <!-- Modal Footer -->
                 <x-slot:footer>
@@ -145,7 +144,7 @@
                     >
                         @lang('shop::app.customers.account.profile.delete')
                     </button>
-                </x-slot:footer>
+                </x-slot>
             </x-shop::modal>
         </x-shop::form>
 

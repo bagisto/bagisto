@@ -1,20 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
-use Webkul\Customer\Models\Customer as CustomerModel;
+use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerNote;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    CustomerModel::query()->delete();
-});
 
 it('should returns the customers page', function () {
     // Act and Assert
@@ -60,6 +54,18 @@ it('should return the view page of customer', function () {
         ->assertSeeText($customer->name);
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in customer', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.store'))
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('gender')
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
+});
+
 it('should create a new customer', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -73,11 +79,15 @@ it('should create a new customer', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
 
-    $this->assertDatabaseHas('customers', [
-        'first_name' => $fistName,
-        'last_name'  => $lastName,
-        'gender'     => $gender,
-        'email'      => $email,
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'first_name' => $fistName,
+                'last_name'  => $lastName,
+                'gender'     => $gender,
+                'email'      => $email,
+            ],
+        ],
     ]);
 });
 
@@ -113,6 +123,20 @@ it('should login the customer from the admin panel', function () {
         ->isRedirection();
 });
 
+it('should fail the validation with errors for notes', function () {
+    // Arrange
+    $customer = (new CustomerFaker())->factory()->create([
+        'password' => Hash::make('admin123'),
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customer.note.store', $customer->id))
+        ->assertJsonValidationErrorFor('note')
+        ->assertUnprocessable();
+});
+
 it('should store the notes for the customer', function () {
     // Arrange
     $customer = (new CustomerFaker())->factory()->create([
@@ -128,9 +152,30 @@ it('should store the notes for the customer', function () {
         ->assertRedirect(route('admin.customers.customers.view', $customer->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('customer_notes', [
-        'note' => $note,
+    $this->assertModelWise([
+        CustomerNote::class => [
+            [
+                'note' => $note,
+            ],
+        ],
     ]);
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in customer', function () {
+    // Arrange
+    $customer = (new CustomerFaker())->factory()->create([
+        'password' => Hash::make('admin123'),
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.customers.update', $customer->id))
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('gender')
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
 });
 
 it('is should update the the existing customer', function () {
@@ -151,11 +196,15 @@ it('is should update the the existing customer', function () {
         ->assertRedirect(route('admin.customers.customers.view', $customer->id))
         ->isRedirection();
 
-    $this->assertDatabaseHas('customers', [
-        'first_name' => $fistName,
-        'last_name'  => $customer->last_name,
-        'gender'     => $customer->gender,
-        'email'      => $email,
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'first_name' => $fistName,
+                'last_name'  => $customer->last_name,
+                'gender'     => $customer->gender,
+                'email'      => $email,
+            ],
+        ],
     ]);
 });
 
@@ -198,9 +247,13 @@ it('should mass update the customers', function () {
         ->assertSeeText(trans('admin::app.customers.customers.index.datagrid.update-success'));
 
     foreach ($customers as $customer) {
-        $this->assertDatabaseHas('customers', [
-            'id'     => $customer->id,
-            'status' => 1,
+        $this->assertModelWise([
+            Customer::class => [
+                [
+                    'id'     => $customer->id,
+                    'status' => 1,
+                ],
+            ],
         ]);
     }
 });

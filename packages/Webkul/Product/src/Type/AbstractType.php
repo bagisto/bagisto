@@ -179,7 +179,7 @@ abstract class AbstractType
                 || $attribute->type === 'file'
             ) {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
-                    ? request()->file($attribute->code)->store('product/' . $product->id)
+                    ? request()->file($attribute->code)->store('product/'.$product->id)
                     : $data[$attribute->code];
             }
 
@@ -283,12 +283,12 @@ abstract class AbstractType
     public function copy()
     {
         if (! $this->canBeCopied()) {
-            throw new \Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $this->product->type]));
+            throw new \Exception(trans('product::app.response.product-can-not-be-copied', ['type' => $this->product->type]));
         }
 
         $copiedProduct = $this->product
             ->replicate()
-            ->fill(['sku' => 'temporary-sku-' . substr(md5(microtime()), 0, 6)]);
+            ->fill(['sku' => 'temporary-sku-'.substr(md5(microtime()), 0, 6)]);
 
         $copiedProduct->save();
 
@@ -313,10 +313,10 @@ abstract class AbstractType
         $attributesToSkip = config('products.copy.skip_attributes') ?? [];
 
         $copyAttributes = [
-            'name'           => trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]),
-            'url_key'        => trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]),
+            'name'           => trans('product::app.datagrid.copy-of', ['value' => $this->product->name]),
+            'url_key'        => trans('product::app.datagrid.copy-of-slug', ['value' => $this->product->url_key]),
             'sku'            => $product->sku,
-            'product_number' => ! empty($this->product->product_number) ? trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]) : null,
+            'product_number' => ! empty($this->product->product_number) ? trans('product::app.datagrid.copy-of-slug', ['value' => $this->product->product_number]) : null,
             'status'         => 0,
         ];
 
@@ -399,11 +399,11 @@ abstract class AbstractType
     {
         $path = explode('/', $media->path);
 
-        $copiedMedia->path = 'product/' . $product->id . '/' . end($path);
+        $copiedMedia->path = 'product/'.$product->id.'/'.end($path);
 
         $copiedMedia->save();
 
-        Storage::makeDirectory('product/' . $product->id);
+        Storage::makeDirectory('product/'.$product->id);
 
         Storage::copy($media->path, $copiedMedia->path);
     }
@@ -836,7 +836,7 @@ abstract class AbstractType
         $data = $this->getQtyRequest($data);
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.inventory-warning');
+            return trans('product::app.checkout.cart.inventory-warning');
         }
 
         $price = $this->getFinalPrice();
@@ -1060,10 +1060,10 @@ abstract class AbstractType
 
         $discount = number_format((($this->product->price - $price) * 100) / ($this->product->price), 2);
 
-        $offerLines = trans('shop::app.products.type.abstract.offers', [
+        $offerLines = trans('product::app.type.abstract.offers', [
             'qty'      => $customerGroupPrice->qty,
             'price'    => core()->currency($price),
-            'discount' => '<span>' . $discount . '%</span>',
+            'discount' => '<span>'.$discount.'%</span>',
         ]);
 
         return $offerLines;

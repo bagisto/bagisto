@@ -7,7 +7,7 @@
     {!! view_render_event('bagisto.admin.settings.roles.create.before') !!}
 
     <!-- Create Role for -->
-    <v-create-user-role></v-create-user-role>
+    <v-create-user-role />
 
     {!! view_render_event('bagisto.admin.settings.roles.create.after') !!}
 
@@ -56,7 +56,7 @@
 
                                 <!-- Permission Type -->
                                 <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.roles.create.permissions')
                                     </x-admin::form.control-group.label>
 
@@ -64,18 +64,21 @@
                                         type="select"
                                         name="permission_type"
                                         id="permission_type"
+                                        rules="required"
                                         :label="trans('admin::app.settings.roles.create.permissions')"
                                         :placeholder="trans('admin::app.settings.roles.create.permissions')"
                                         v-model="permission_type"
                                     >
-                                        <option value="custom">@lang('admin::app.settings.roles.create.custom')</option>
-                                        <option value="all">@lang('admin::app.settings.roles.create.all')</option>
+                                        <option value="custom">
+                                            @lang('admin::app.settings.roles.create.custom')
+                                        </option>
+
+                                        <option value="all">
+                                            @lang('admin::app.settings.roles.create.all')
+                                        </option>
                                     </x-admin::form.control-group.control>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="permission_type"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="permission_type" />
                                 </x-admin::form.control-group>
 
                                 <div v-if="permission_type == 'custom'">
@@ -85,8 +88,7 @@
                                         id-field="key"
                                         :items="json_encode($acl->items)"
                                         :fallback-locale="config('app.fallback_locale')"
-                                    >
-                                    </x-admin::tree.view>
+                                    />
                                 </div>
                             </div>
 
@@ -105,7 +107,7 @@
                                             @lang('admin::app.settings.roles.create.general')
                                         </p>
                                     </div>
-                                </x-slot:header>
+                                </x-slot>
 
                                 <x-slot:content>
                                     <!-- Name -->
@@ -116,19 +118,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="name"
-                                            value="{{ old('name') }}"
                                             id="name"
+                                            name="name"
                                             rules="required"
+                                            value="{{ old('name') }}"
                                             :label="trans('admin::app.settings.roles.create.name')"
                                             :placeholder="trans('admin::app.settings.roles.create.name')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="name"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="name" />
                                     </x-admin::form.control-group>
 
                                     <!-- Description -->
@@ -139,21 +137,17 @@
 
                                         <x-admin::form.control-group.control
                                             type="textarea"
-                                            name="description"
-                                            :value="old('description')"
                                             id="description"
+                                            name="description"
                                             rules="required"
+                                            :value="old('description')"
                                             :label="trans('admin::app.settings.roles.create.description')"
                                             :placeholder="trans('admin::app.settings.roles.create.description')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="description"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="description" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.settings.roles.create.card.accordion.general.after') !!}

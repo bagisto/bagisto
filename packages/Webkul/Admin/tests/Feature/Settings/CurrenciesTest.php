@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Currency::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the currencies index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -22,6 +15,16 @@ it('should returns the currencies index page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.title'))
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when store the currencies', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.currencies.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
 });
 
 it('should store the newly created currencies', function () {
@@ -35,9 +38,13 @@ it('should store the newly created currencies', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-success'));
 
-    $this->assertDatabaseHas('currencies', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        Currency::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 
@@ -55,6 +62,21 @@ it('should return the currencies for edit', function () {
         ->assertJsonPath('name', $currency->name);
 });
 
+it('should fail the validation with errors when certain field not provided when update the currencies', function () {
+    // Arrange
+    $currency = Currency::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.currencies.update'), [
+        'id'   => $currency->id,
+    ])
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
+});
+
 it('should update the specified currency', function () {
     // Arrange
     $currency = Currency::factory()->create();
@@ -70,9 +92,13 @@ it('should update the specified currency', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.update-success'));
 
-    $this->assertDatabaseHas('currencies', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        Currency::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 

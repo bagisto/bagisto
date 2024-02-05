@@ -54,7 +54,7 @@ class ConfigurationController extends Controller
     {
         $groups = Arr::get(
             $this->configTree->items,
-            request()->route('slug') . '.children.' . request()->route('slug2') . '.children'
+            request()->route('slug').'.children.'.request()->route('slug2').'.children'
         );
 
         if ($groups) {
@@ -126,7 +126,7 @@ class ConfigurationController extends Controller
     {
         $path = request()->route()->parameters()['path'];
 
-        $fileName = 'configuration/' . $path;
+        $fileName = 'configuration/'.$path;
 
         $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 

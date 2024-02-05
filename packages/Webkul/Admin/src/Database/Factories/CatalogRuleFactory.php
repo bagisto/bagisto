@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Event;
 use Webkul\CatalogRule\Models\CatalogRule;
 
 class CatalogRuleFactory extends Factory
@@ -17,10 +18,10 @@ class CatalogRuleFactory extends Factory
     /**
      * Define the model's default state.
      */
-    public function definition()
+    public function definition(): array
     {
         $startsFrom = $this->faker->dateTimeBetween('now', '+30 days');
-        $endsTill = $this->faker->dateTimeBetween($startsFrom, $startsFrom->format('Y-m-d') . ' +30 days');
+        $endsTill = $this->faker->dateTimeBetween($startsFrom, $startsFrom->format('Y-m-d').' +30 days');
 
         return [
             'starts_from'     => $this->faker->dateTimeThisMonth,
@@ -34,15 +35,12 @@ class CatalogRuleFactory extends Factory
     }
 
     /**
-     * Configure the factory
-     *
-     * @return static
+     * Configure the model factory.
      */
-    public function configure()
+    public function configure(): static
     {
         return $this->afterCreating(function (CatalogRule $catalogRule) {
-            $catalogRule->channels()->sync([1]);
-            $catalogRule->customer_groups()->sync([1, 2, 3]);
+            Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
         });
     }
 }

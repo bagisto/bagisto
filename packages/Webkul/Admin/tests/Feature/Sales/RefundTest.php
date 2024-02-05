@@ -4,7 +4,6 @@ use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
@@ -13,17 +12,6 @@ use Webkul\Sales\Models\Refund;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-afterEach(function () {
-    // Cleaning up the row  which are creating
-    Customer::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Product::query()->delete();
-    Refund::query()->delete();
-});
-
 it('should return the refund index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -31,6 +19,142 @@ it('should return the refund index page', function () {
     get(route('admin.sales.refunds.index'))
         ->assertOk()
         ->assertSeeText(trans('admin::app.sales.refunds.index.title'));
+});
+
+it('should faild the validation error when refund items data not provided', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id'   => $product->id,
+        'order_id'     => $order->id,
+        'qty_refunded' => $qty = rand(1, 2),
+        'qty_invoiced' => $qty + 1,
+        'type'         => $product->type,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    foreach ($order->items as $item) {
+        foreach ($order->channel->inventory_sources as $inventorySource) {
+            $items[$item->id] = $inventorySource->id;
+        }
+    }
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.store', $order->id))
+        ->assertJsonValidationErrorFor('refund.items')
+        ->assertUnprocessable();
+});
+
+it('should faild the validation error when refund items data provided with wrong way', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id'   => $product->id,
+        'order_id'     => $order->id,
+        'qty_refunded' => $qty = rand(1, 2),
+        'qty_invoiced' => $qty + 1,
+        'type'         => $product->type,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    foreach ($order->items as $item) {
+        foreach ($order->channel->inventory_sources as $inventorySource) {
+            $items[$item->id] = $inventorySource->id;
+        }
+    }
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.refunds.store', $order->id), [
+        'refund' => [
+            'items' => [
+                fake()->word(),
+            ],
+        ],
+    ])
+        ->assertJsonValidationErrorFor('refund.items.0')
+        ->assertUnprocessable();
 });
 
 it('should store the create page of refunds', function () {
@@ -104,9 +228,13 @@ it('should store the create page of refunds', function () {
         ->assertRedirect(route('admin.sales.refunds.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('refunds', [
-        'state'    => 'refunded',
-        'order_id' => $order->id,
+    $this->assertModelWise([
+        Refund::class => [
+            [
+                'state'    => 'refunded',
+                'order_id' => $order->id,
+            ],
+        ],
     ]);
 });
 

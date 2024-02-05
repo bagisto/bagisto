@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('channel_translations', function (Blueprint $table) {
-            $table->dropColumn('home_page_content');
-            $table->dropColumn('footer_content');
+            $table->dropColumn(['home_page_content', 'footer_content']);
         });
     }
 

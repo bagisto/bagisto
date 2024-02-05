@@ -3,7 +3,6 @@
 use Carbon\Carbon;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
-use Webkul\Core\Models\Visit;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\Wishlist;
 use Webkul\Faker\Helpers\Product as ProductFaker;
@@ -11,29 +10,12 @@ use Webkul\Marketing\Models\SearchTerm;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\InvoiceItem;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
 use function Pest\Laravel\get;
-
-afterEach(function () {
-    // Cleaning up the row which are creating.
-    Customer::query()->delete();
-    OrderAddress::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Product::query()->delete();
-    Invoice::query()->delete();
-    Visit::query()->delete();
-    InvoiceItem::query()->delete();
-    Wishlist::query()->delete();
-    SearchTerm::query()->delete();
-});
 
 it('should returns the reporting product page', function () {
     // Act and Assert
@@ -456,7 +438,7 @@ it('should return the downloadable response for product stats', function () {
         'type'   => 'total-sold-quantities',
     ]))
         ->assertOk()
-        ->assertDownload('total-sold-quantities.' . $format);
+        ->assertDownload('total-sold-quantities.'.$format);
 });
 
 it('should return the product view page', function () {

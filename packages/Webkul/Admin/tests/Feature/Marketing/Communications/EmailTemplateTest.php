@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Template::query()->delete();
-});
-
 it('should return the email template index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -34,6 +27,30 @@ it('should return the create page of email template', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.templates.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in email template', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.email_templates.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('content')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when certain inputs are not provided also status field not provided correctly when store in email template', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.email_templates.store'), [
+        'status' => fake()->word(),
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('content')
+        ->assertUnprocessable();
+});
+
 it('should store the newly create email template', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -46,10 +63,14 @@ it('should store the newly create email template', function () {
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_templates', [
-        'name'    => $name,
-        'status'  => $status,
-        'content' => $content,
+    $this->assertModelWise([
+        Template::class => [
+            [
+                'name'    => $name,
+                'status'  => $status,
+                'content' => $content,
+            ],
+        ],
     ]);
 });
 
@@ -67,6 +88,34 @@ it('should edit the email template', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.templates.create.content'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when update in email template', function () {
+    // Arrange
+    $emailTemplate = Template::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.email_templates.update', $emailTemplate->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('content')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when certain inputs are not provided also status field not provided correctly when update in email template', function () {
+    // Arrange
+    $emailTemplate = Template::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.email_templates.update', $emailTemplate->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('content')
+        ->assertUnprocessable();
+});
+
 it('should update the existing the template', function () {
     // Arrange
     $emailTemplate = Template::factory()->create();
@@ -82,10 +131,14 @@ it('should update the existing the template', function () {
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
 
-    $this->assertDatabaseHas('marketing_templates', [
-        'name'    => $emailTemplate->name,
-        'status'  => $status,
-        'content' => $content,
+    $this->assertModelWise([
+        Template::class => [
+            [
+                'name'    => $emailTemplate->name,
+                'status'  => $status,
+                'content' => $content,
+            ],
+        ],
     ]);
 });
 

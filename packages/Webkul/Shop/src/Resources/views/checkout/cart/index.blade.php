@@ -49,13 +49,13 @@
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.before') !!}
 
             <!-- Breadcrumbs -->
-            <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
+            <x-shop::breadcrumbs name="cart" />
 
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.after') !!}
 
             <v-cart ref="vCart">
                 <!-- Cart Shimmer Effect -->
-                <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
+                <x-shop::shimmer.checkout.cart :count="3" />
             </v-cart>
         </div>
     </div>
@@ -76,7 +76,7 @@
             <div>
                 <!-- Cart Shimmer Effect -->
                 <template v-if="isLoading">
-                    <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
+                    <x-shop::shimmer.checkout.cart :count="3" />
                 </template>
 
                 <!-- Cart Information -->
@@ -186,8 +186,7 @@
                                                 height="110"
                                                 ::key="item.id"
                                                 ::index="item.id"
-                                            >
-                                            </x-shop::media.images.lazy>
+                                            />
                                         </a>
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item_image.after') !!}
@@ -268,12 +267,11 @@
                                             {!! view_render_event('bagisto.shop.checkout.cart.quantity_changer.before') !!}
 
                                             <x-shop::quantity-changer
+                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-1.5 px-3.5 items-center max-w-max"
                                                 name="quantity"
                                                 ::value="item?.quantity"
-                                                class="flex gap-x-2.5 border rounded-[54px] border-navyBlue py-1.5 px-3.5 items-center max-w-max"
                                                 @change="setItemQuantity(item.id, $event)"
-                                            >
-                                            </x-shop::quantity-changer>
+                                            />
 
                                             {!! view_render_event('bagisto.shop.checkout.cart.quantity_changer.after') !!}
                                         </div>
@@ -333,8 +331,7 @@
                                     :loading="false"
                                     ref="updateCart"
                                     @click="update()"
-                                >
-                                </x-shop::button>
+                                />
 
                                 {!! view_render_event('bagisto.shop.checkout.cart.update_cart.after') !!}
                             </div>

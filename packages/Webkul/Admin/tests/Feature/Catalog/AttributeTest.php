@@ -8,15 +8,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Clean attributes, excluding IDs 1 to 28. A fresh instance will always have IDs 1 to 28.
-     */
-    Attribute::query()
-        ->whereNotBetween('id', [1, 28])
-        ->delete();
-});
-
 it('should show attribute page', function () {
     // Act & Assert
     $this->loginAsAdmin();
@@ -65,6 +56,17 @@ it('should show create page of attribute', function () {
         ->assertSeeText(trans('admin::app.catalog.attributes.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in attribute', function () {
+    // Act & Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('admin_name')
+        ->assertJsonValidationErrorFor('type')
+        ->assertUnprocessable();
+});
+
 it('should store newly created attribute', function () {
     // Act & Assert
     $this->loginAsAdmin();
@@ -78,11 +80,15 @@ it('should store newly created attribute', function () {
         ->assertRedirectToRoute('admin.catalog.attributes.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attributes', [
-        'admin_name'    => $name,
-        'code'          => $code,
-        'type'          => 'text',
-        'default_value' => 1,
+    $this->assertModelWise([
+        Attribute::class => [
+            [
+                'admin_name'    => $name,
+                'code'          => $code,
+                'type'          => 'text',
+                'default_value' => 1,
+            ],
+        ],
     ]);
 });
 
@@ -97,6 +103,17 @@ it('should show edit page of attribute', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.attributes.edit.title'))
         ->assertSeeText(trans('admin::app.catalog.attributes.edit.back-btn'));
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in attribute', function () {
+    // Act & Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('admin_name')
+        ->assertJsonValidationErrorFor('type')
+        ->assertUnprocessable();
 });
 
 it('should update an attribute', function () {
@@ -115,11 +132,15 @@ it('should update an attribute', function () {
         ->assertRedirectToRoute('admin.catalog.attributes.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attributes', [
-        'admin_name'    => $updatedName,
-        'code'          => $attribute->code,
-        'type'          => $attribute->type,
-        'default_value' => 1,
+    $this->assertModelWise([
+        Attribute::class => [
+            [
+                'admin_name'    => $updatedName,
+                'code'          => $attribute->code,
+                'type'          => $attribute->type,
+                'default_value' => 1,
+            ],
+        ],
     ]);
 });
 
@@ -152,8 +173,12 @@ it('should not destroy an attribute if it is not user-defined', function () {
         ->assertBadRequest()
         ->assertSeeText(trans('admin::app.catalog.attributes.user-define-error'));
 
-    $this->assertDatabaseHas('attributes', [
-        'id' => $attribute->id,
+    $this->assertModelWise([
+        Attribute::class => [
+            [
+                'id' => $attribute->id,
+            ],
+        ],
     ]);
 });
 

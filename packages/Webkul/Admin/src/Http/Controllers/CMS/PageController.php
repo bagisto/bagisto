@@ -103,13 +103,13 @@ class PageController extends Controller
         $locale = core()->getRequestedLocaleCode();
 
         $this->validate(request(), [
-            $locale . '.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
+            $locale.'.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
                 if (! $this->pageRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
                 }
             }],
-            $locale . '.page_title'   => 'required',
-            $locale . '.html_content' => 'required',
+            $locale.'.page_title'     => 'required',
+            $locale.'.html_content'   => 'required',
             'channels'                => 'required',
         ]);
 

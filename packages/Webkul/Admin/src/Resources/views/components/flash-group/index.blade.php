@@ -13,7 +13,7 @@
             leave-to-class="ltr:translate-x-full rtl:-translate-x-full"
             class='grid gap-2.5 fixed top-5 ltr:right-5 rtl:left-5 z-[10002] justify-items-end'
         >
-            <x-admin::flash-group.item></x-admin::flash-group.item>
+            <x-admin::flash-group.item />
         </transition-group>
     </script>
 

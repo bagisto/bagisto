@@ -1,7 +1,7 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
 
-    <v-product-configurable-options :errors="errors"></v-product-configurable-options>
+    <v-product-configurable-options :errors="errors" />
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.after', ['product' => $product]) !!}
 

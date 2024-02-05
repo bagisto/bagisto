@@ -1,20 +1,24 @@
 <?php
 
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Clean up all the records.
-     */
-    ProductModel::query()->delete();
-    Attribute::query()->whereNotBetween('id', [1, 28])->delete();
+it('should fail the validation with errors when certain inputs are not provided when store in configurable product', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.store'))
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('attribute_family_id')
+        ->assertJsonValidationErrorFor('sku')
+        ->assertUnprocessable();
 });
 
 it('should return the create page of configurable product', function () {
@@ -33,13 +37,13 @@ it('should return the create page of configurable product', function () {
 
     foreach ($attributes as $attributekey => $value) {
         $response
-            ->assertJsonPath('data.attributes.' . $attributekey . '.id', $value->id)
-            ->assertJsonPath('data.attributes.' . $attributekey . '.code', $value->code);
+            ->assertJsonPath('data.attributes.'.$attributekey.'.id', $value->id)
+            ->assertJsonPath('data.attributes.'.$attributekey.'.code', $value->code);
 
         foreach ($value->options as $optionKey => $option) {
             $response
-                ->assertJsonPath('data.attributes.' . $attributekey . '.options.' . $optionKey . '.id', $option->id)
-                ->assertJsonPath('data.attributes.' . $attributekey . '.options.' . $optionKey . '.name', $option->admin_name);
+                ->assertJsonPath('data.attributes.'.$attributekey.'.options.'.$optionKey.'.id', $option->id)
+                ->assertJsonPath('data.attributes.'.$attributekey.'.options.'.$optionKey.'.name', $option->admin_name);
         }
     }
 });
@@ -61,6 +65,49 @@ it('should return the edit page of configurable product', function () {
         ->assertSeeText($product->description);
 });
 
+it('should fail the validation with errors when certain inputs are not provided when update in configurable product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id))
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors if certain data is not provided correctly in configurable product', function () {
+    // Arrange
+    $product = (new ProductFaker())->getConfigurableProductFactory()->create();
+
+    // Act and Asssert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'visible_individually' => $unProcessAble = fake()->word(),
+        'status'               => $unProcessAble,
+        'guest_checkout'       => $unProcessAble,
+        'new'                  => $unProcessAble,
+        'featured'             => $unProcessAble,
+    ])
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('visible_individually')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('guest_checkout')
+        ->assertJsonValidationErrorFor('new')
+        ->assertJsonValidationErrorFor('featured')
+        ->assertUnprocessable();
+});
+
 it('should update the configurable product', function () {
     // Arrange
     $product = (new ProductFaker())->getConfigurableProductFactory()->create();
@@ -68,7 +115,7 @@ it('should update the configurable product', function () {
     // Act and Asssert
     $this->loginAsAdmin();
 
-    $this->putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
         'channel'           => core()->getCurrentChannelCode(),
@@ -82,24 +129,30 @@ it('should update the configurable product', function () {
         ->assertRedirect(route('admin.catalog.products.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('products', [
-        'id'                  => $product->id,
-        'type'                => $product->type,
-        'sku'                 => $product->sku,
-        'attribute_family_id' => 1,
-        'parent_id'           => null,
-        'additional'          => null,
-    ]);
+    $this->assertModelWise([
+        Product::class => [
+            [
+                'id'                  => $product->id,
+                'type'                => $product->type,
+                'sku'                 => $product->sku,
+                'attribute_family_id' => 1,
+                'parent_id'           => null,
+                'additional'          => null,
+            ],
+        ],
 
-    $this->assertDatabaseHas('product_flat', [
-        'product_id'        => $product->id,
-        'type'              => 'configurable',
-        'sku'               => $product->sku,
-        'short_description' => $shortDescription,
-        'description'       => $description,
-        'name'              => $name,
-        'price'             => $price,
-        'weight'            => $weight,
+        ProductFlat::class => [
+            [
+                'product_id'        => $product->id,
+                'type'              => 'configurable',
+                'sku'               => $product->sku,
+                'short_description' => $shortDescription,
+                'description'       => $description,
+                'name'              => $name,
+                'price'             => $price,
+                'weight'            => $weight,
+            ],
+        ],
     ]);
 });
 
@@ -134,7 +187,7 @@ it('should update the configurable product variants', function () {
     // Act and Asssert
     $this->loginAsAdmin();
 
-    $this->putJson(route('admin.catalog.products.update', $product->id), [
+    putJson(route('admin.catalog.products.update', $product->id), [
         'sku'               => $product->sku,
         'url_key'           => $product->url_key,
         'channel'           => $channel = core()->getCurrentChannelCode(),
@@ -150,15 +203,19 @@ it('should update the configurable product variants', function () {
         ->isRedirection();
 
     foreach ($variants as $productId => $variant) {
-        $this->assertDatabaseHas('product_flat', [
-            'product_id' => $productId,
-            'type'       => 'simple',
-            'sku'        => $variant['sku'],
-            'name'       => $variant['name'],
-            'price'      => $variant['price'],
-            'weight'     => $variant['weight'],
-            'locale'     => $locale,
-            'channel'    => $channel,
+        $this->assertModelWise([
+            ProductFlat::class => [
+                [
+                    'product_id' => $productId,
+                    'type'       => 'simple',
+                    'sku'        => $variant['sku'],
+                    'name'       => $variant['name'],
+                    'price'      => $variant['price'],
+                    'weight'     => $variant['weight'],
+                    'locale'     => $locale,
+                    'channel'    => $channel,
+                ],
+            ],
         ]);
     }
 });

@@ -8,15 +8,6 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Clean attribute families, excluding ID 1 (i.e., the default attribut family). A fresh instance will always have ID 1.
-     */
-    AttributeFamilyModel::query()
-        ->whereNot('id', 1)
-        ->delete();
-});
-
 it('should return attribute family listing page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -71,10 +62,24 @@ it('should store newly created attribute family', function () {
         ->assertRedirectToRoute('admin.catalog.families.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attribute_families', [
-        'code' => $code,
-        'name' => $name,
+    $this->assertModelWise([
+        AttributeFamilyModel::class => [
+            [
+                'code' => $code,
+                'name' => $name,
+            ],
+        ],
     ]);
+});
+
+it('should fail the validation with errors when certain inputs are not provided when store in attribute family', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.families.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
 });
 
 it('should return edit page of attribute families', function () {
@@ -88,6 +93,19 @@ it('should return edit page of attribute families', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.families.edit.title'))
         ->assertSeeText(trans('admin::app.catalog.families.edit.back-btn'));
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in attribute family', function () {
+    // Arrange
+    $attributeFamily = AttributeFamilyModel::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.families.update', $attributeFamily->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
 });
 
 it('should update the existing attribute families', function () {
@@ -104,9 +122,13 @@ it('should update the existing attribute families', function () {
         ->assertRedirectToRoute('admin.catalog.families.index')
         ->isRedirection();
 
-    $this->assertDatabaseHas('attribute_families', [
-        'code' => $updatedCode,
-        'name' => $attributeFamily->name,
+    $this->assertModelWise([
+        AttributeFamilyModel::class => [
+            [
+                'code' => $updatedCode,
+                'name' => $attributeFamily->name,
+            ],
+        ],
     ]);
 });
 
@@ -134,7 +156,11 @@ it('should not be able to delete the attribute family if the attribute family is
         ->assertBadRequest()
         ->assertSeeText(trans('admin::app.catalog.families.last-delete-error'));
 
-    $this->assertDatabaseHas('attribute_families', [
-        'id' => $attributeFamilyId,
+    $this->assertModelWise([
+        AttributeFamilyModel::class => [
+            [
+                'id' => $attributeFamilyId,
+            ],
+        ],
     ]);
 });

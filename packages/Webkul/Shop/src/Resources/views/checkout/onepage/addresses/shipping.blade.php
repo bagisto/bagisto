@@ -9,7 +9,7 @@
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
-            </x-slot:header>
+            </x-slot>
         
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
@@ -114,8 +114,7 @@
                                         :loading="false"
                                         ref="storeAddress"
                                         @click="store"
-                                    >
-                                    </x-shop::button>
+                                    />
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.after') !!}
@@ -140,7 +139,7 @@
                 </x-shop::form>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.after') !!}
@@ -154,7 +153,7 @@
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
-            </x-slot:header>
+            </x-slot>
         
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.before') !!}
@@ -188,16 +187,12 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping[company_name]"
+                                v-model="forms.shipping.address.company_name"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
-                                v-model="forms.shipping.address.company_name"
-                            >
-                            </x-shop::form.control-group.control>
+                            />
                         
-                            <x-shop::form.control-group.error
-                                control-name="shipping[company_name]"
-                            >
-                            </x-shop::form.control-group.error>
+                            <x-shop::form.control-group.error control-name="shipping[company_name]" />
                         </x-shop::form.control-group>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.company_name.after') !!}
@@ -212,16 +207,12 @@
                                     type="text"
                                     name="shipping[first_name]"
                                     rules="required"
+                                    v-model="forms.shipping.address.first_name"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
-                                    v-model="forms.shipping.address.first_name"
-                                >
-                                </x-shop::form.control-group.control>
+                                />
                             
-                                <x-shop::form.control-group.error
-                                    control-name="shipping[first_name]"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="shipping[first_name]" />
                             </x-shop::form.control-group>
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.first_name.after') !!}
@@ -235,16 +226,12 @@
                                     type="text"
                                     name="shipping[last_name]"
                                     rules="required"
+                                    v-model="forms.shipping.address.last_name"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
-                                    v-model="forms.shipping.address.last_name"
-                                >
-                                </x-shop::form.control-group.control>
+                                />
                             
-                                <x-shop::form.control-group.error
-                                    control-name="shipping[last_name]"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="shipping[last_name]" />
                             </x-shop::form.control-group>
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.last_name.after') !!}
@@ -260,16 +247,12 @@
                                 type="email"
                                 name="shipping[email]"
                                 rules="required|email"
+                                v-model="forms.shipping.address.email"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.email')"
                                 placeholder="email@example.com"
-                                v-model="forms.shipping.address.email"
-                            >
-                            </x-shop::form.control-group.control>
+                            />
                         
-                            <x-shop::form.control-group.error
-                                control-name="shipping[email]"
-                            >
-                            </x-shop::form.control-group.error>
+                            <x-shop::form.control-group.error control-name="shipping[email]" />
                         </x-shop::form.control-group>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.email.after') !!}
@@ -283,28 +266,25 @@
                                 type="text"
                                 name="shipping[address1][]"
                                 rules="required|address"
+                                v-model="forms.shipping.address.address1[0]"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
-                                v-model="forms.shipping.address.address1[0]"
-                            >
-                            </x-shop::form.control-group.control>
+                            />
 
                             <x-shop::form.control-group.error
                                 class="mb-2"
                                 control-name="shipping[address1][]"
-                            >
-                            </x-shop::form.control-group.error>
+                            />
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                                 @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="shipping[address1][{{ $i }}]"
+                                        v-model="forms.shipping.address.address1[{{$i}}]"
                                         :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                         :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
-                                        v-model="forms.shipping.address.address1[{{$i}}]"
-                                    >
-                                    </x-shop::form.control-group.control>
+                                    />
                                 @endfor
                             @endif
                         </x-shop::form.control-group>
@@ -323,11 +303,13 @@
                                     type="select"
                                     name="shipping[country]"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                                    v-model="forms.shipping.address.country"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
-                                    v-model="forms.shipping.address.country"
                                 >
-                                    <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-country')</option>
+                                    <option value="">
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.select-country')
+                                    </option>
 
                                     <option
                                         v-for="country in countries"
@@ -337,10 +319,7 @@
                                     </option>
                                 </x-shop::form.control-group.control>
                             
-                                <x-shop::form.control-group.error
-                                    control-name="shipping[country]"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="shipping[country]" />
                             </x-shop::form.control-group>
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.country.after') !!}
@@ -354,23 +333,24 @@
                                     type="text"
                                     name="shipping[state]"
                                     rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     v-model="forms.shipping.address.state"
                                     v-if="! haveStates('shipping')"
-                                >
-                                </x-shop::form.control-group.control>
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                />
 
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[state]"
                                     rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     v-model="forms.shipping.address.state"
                                     v-if="haveStates('shipping')"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                 >
-                                    <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-state')</option>
+                                    <option value="">
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.select-state')
+                                    </option>
 
                                     <option 
                                         v-for='(state, index) in states[forms.shipping.address.country]' 
@@ -380,10 +360,7 @@
                                     </option>
                                 </x-shop::form.control-group.control>
                             
-                                <x-shop::form.control-group.error
-                                    control-name="shipping[state]"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="shipping[state]" />
                             </x-shop::form.control-group>
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.state.after') !!}
@@ -400,16 +377,12 @@
                                     type="text"
                                     name="shipping[city]"
                                     rules="required"
+                                    v-model="forms.shipping.address.city"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.city')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.city')"
-                                    v-model="forms.shipping.address.city"
-                                >
-                                </x-shop::form.control-group.control>
+                                />
                             
-                                <x-shop::form.control-group.error
-                                    control-name="shipping[city]"
-                                >
-                                </x-shop::form.control-group.error>
+                                <x-shop::form.control-group.error control-name="shipping[city]" />
                             </x-shop::form.control-group>
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.city.after') !!}
@@ -423,16 +396,12 @@
                                     type="text"
                                     name="shipping[postcode]"
                                     rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                                    v-model="forms.shipping.address.postcode"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
-                                    v-model="forms.shipping.address.postcode"
-                                >
-                                </x-shop::form.control-group.control>
-                            
-                                <x-shop::form.control-group.error
-                                    control-name="shipping[postcode]"
-                                >
-                                </x-shop::form.control-group.error>
+                                />
+
+                                <x-shop::form.control-group.error control-name="shipping[postcode]" />
                             </x-shop::form.control-group>
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.postcode.after') !!}
@@ -448,16 +417,12 @@
                                 type="text"
                                 name="shipping[phone]"
                                 rules="required|numeric"
+                                v-model="forms.shipping.address.phone"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
-                                v-model="forms.shipping.address.phone"
-                            >
-                            </x-shop::form.control-group.control>
+                            />
                         
-                            <x-shop::form.control-group.error
-                                control-name="shipping[phone]"
-                            >
-                            </x-shop::form.control-group.error>
+                            <x-shop::form.control-group.error control-name="shipping[phone]" />
                         </x-shop::form.control-group>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.phone.after') !!}
@@ -504,7 +469,7 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address.after') !!}
 
-            </x-slot:content>
+            </x-slot>
         </x-shop::accordion>
     </template>
 </div>

@@ -7,10 +7,6 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-afterEach(function () {
-    ThemeCustomization::query()->whereNotBetween('id', [1, 12])->delete();
-});
-
 it('should returns the theme index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -19,6 +15,32 @@ it('should returns the theme index page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.themes.index.title'))
         ->assertSeeText(trans('admin::app.settings.themes.index.create-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when store the theme', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.themes.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('sort_order')
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when correct type not provided when store the theme', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.themes.store'), [
+        'type' => fake()->word(),
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('sort_order')
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertUnprocessable();
 });
 
 it('should store the newly created theme', function () {
@@ -39,12 +61,31 @@ it('should store the newly created theme', function () {
         ->assertOk()
         ->assertJsonPath('redirect_url', route('admin.settings.themes.edit', $lastThemeId));
 
-    $this->assertDatabaseHas('theme_customizations', [
-        'id'         => $lastThemeId,
-        'type'       => $type,
-        'name'       => $name,
-        'channel_id' => $channelId,
+    $this->assertModelWise([
+        ThemeCustomization::class => [
+            [
+                'id'         => $lastThemeId,
+                'type'       => $type,
+                'name'       => $name,
+                'channel_id' => $channelId,
+            ],
+        ],
     ]);
+});
+
+it('should fail the validation with errors when correct type not provided when update the theme', function () {
+    // Arrange
+    $theme = ThemeCustomization::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.themes.update', $theme->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('sort_order')
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertUnprocessable();
 });
 
 it('should update the theme customizations', function () {
@@ -85,7 +126,7 @@ it('should update the theme customizations', function () {
                     [
                         'title' => fake()->title(),
                         'link'  => fake()->url(),
-                        'image' => UploadedFile::fake()->create(fake()->word() . '.png'),
+                        'image' => UploadedFile::fake()->image(fake()->word().'.png', 640, 480, 'png'),
                     ],
                 ],
             ];
@@ -135,10 +176,14 @@ it('should update the theme customizations', function () {
         ->assertRedirect(route('admin.settings.themes.index'))
         ->isRedirection();
 
-    $this->assertDatabaseHas('theme_customizations', [
-        'id'   => $theme->id,
-        'type' => $theme->type,
-        'name' => $name,
+    $this->assertModelWise([
+        ThemeCustomization::class => [
+            [
+                'id'   => $theme->id,
+                'type' => $theme->type,
+                'name' => $name,
+            ],
+        ],
     ]);
 });
 

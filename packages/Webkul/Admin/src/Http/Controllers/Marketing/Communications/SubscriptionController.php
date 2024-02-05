@@ -53,27 +53,32 @@ class SubscriptionController extends Controller
      */
     public function update()
     {
-        $subscriber = $this->subscribersListRepository->findOrFail(request()->id);
+        $validatedData = $this->validate(request(), [
+            'id'            => 'required',
+            'is_subscribed' => 'required|in:0,1',
+        ]);
+
+        $subscriber = $this->subscribersListRepository->findOrFail($validatedData['id']);
 
         $customer = $subscriber->customer;
 
-        if (! is_null($customer)) {
-            $customer->subscribed_to_news_letter = request('is_subscribed');
+        if ($customer) {
+            $customer->subscribed_to_news_letter = $validatedData['is_subscribed'];
 
             $customer->save();
         }
 
-        $result = $subscriber->update(request()->only('is_subscribed'));
+        $result = $subscriber->update(['is_subscribed' => $validatedData['is_subscribed']]);
 
         if ($result) {
             return response()->json([
                 'message' => trans('admin::app.marketing.communications.subscribers.index.edit.success'),
             ], 200);
-        } else {
-            return response()->json([
-                'message' => trans('admin::app.marketing.communications.subscribers.index.edit.update-failed'),
-            ], 500);
         }
+
+        return response()->json([
+            'message' => trans('admin::app.marketing.communications.subscribers.index.edit.update-failed'),
+        ], 500);
     }
 
     /**

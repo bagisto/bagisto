@@ -116,9 +116,9 @@ class CustomerController extends Controller
             'first_name'    => 'string|required',
             'last_name'     => 'string|required',
             'gender'        => 'required',
-            'email'         => 'required|unique:customers,email,' . $id,
+            'email'         => 'required|unique:customers,email,'.$id,
             'date_of_birth' => 'date|before:today',
-            'phone'         => 'unique:customers,phone,' . $id,
+            'phone'         => 'unique:customers,phone,'.$id,
         ]);
 
         Event::dispatch('customer.update.before', $id);
@@ -246,8 +246,8 @@ class CustomerController extends Controller
     public function search()
     {
         $customers = $this->customerRepository->scopeQuery(function ($query) {
-            return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
-                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
+            return $query->where('email', 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere(DB::raw('CONCAT('.DB::getTablePrefix().'first_name, " ", '.DB::getTablePrefix().'last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(10);
 

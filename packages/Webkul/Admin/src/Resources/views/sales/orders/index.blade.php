@@ -11,7 +11,7 @@
 
         <div class="flex gap-x-2.5 items-center">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}"></x-admin::datagrid.export>
+            <x-admin::datagrid.export src="{{ route('admin.sales.orders.index') }}" />
         </div>
     </div>
 
@@ -54,7 +54,7 @@
 
             <!-- Datagrid Head Shimmer -->
             <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
             </template>
         </template>
 
@@ -165,7 +165,7 @@
 
             <!-- Datagrid Body Shimmer -->
             <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
             </template>
         </template>
     </x-admin::datagrid>

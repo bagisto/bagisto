@@ -8,13 +8,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Admin::query()->whereNot('id', 1)->delete();
-});
-
 it('should returns the user index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -23,6 +16,31 @@ it('should returns the user index page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.index.title'))
         ->assertSeeText(trans('admin::app.settings.users.index.create.title'));
+});
+
+it('should fail the validation with errors when certain field not provided when store the users', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('role_id')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when confirm password not provided when store the users', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'password' => 'admin123',
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('role_id')
+        ->assertJsonValidationErrorFor('password_confirmation')
+        ->assertUnprocessable();
 });
 
 it('should store the newly created user/admin', function () {
@@ -39,10 +57,14 @@ it('should store the newly created user/admin', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.create-success'));
 
-    $this->assertDatabaseHas('admins', [
-        'name'    => $name,
-        'role_id' => 1,
-        'email'   => $email,
+    $this->assertModelWise([
+        Admin::class => [
+            [
+                'name'    => $name,
+                'role_id' => 1,
+                'email'   => $email,
+            ],
+        ],
     ]);
 });
 
@@ -59,6 +81,24 @@ it('should returns the user and its roles', function () {
         ->assertJsonPath('roles.0.name', 'Administrator')
         ->assertJsonPath('user.id', $user->id)
         ->assertJsonPath('user.email', $user->email);
+});
+
+it('should fail the validation with errors when certain field not provided when update the users', function () {
+    // Arrange
+    $user = Admin::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.users.update'), [
+        'id'       => $user->id,
+        'password' => 'admin123',
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('role_id')
+        ->assertJsonValidationErrorFor('password_confirmation')
+        ->assertUnprocessable();
 });
 
 it('should update the existing user/admin', function () {
@@ -79,11 +119,15 @@ it('should update the existing user/admin', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.update-success'));
 
-    $this->assertDatabaseHas('admins', [
-        'id'      => $user->id,
-        'name'    => $user->name,
-        'role_id' => 1,
-        'email'   => $email,
+    $this->assertModelWise([
+        Admin::class => [
+            [
+                'id'      => $user->id,
+                'name'    => $user->name,
+                'role_id' => 1,
+                'email'   => $email,
+            ],
+        ],
     ]);
 });
 

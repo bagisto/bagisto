@@ -7,13 +7,6 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    SearchTerm::query()->delete();
-});
-
 it('should show the search terms index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -22,6 +15,17 @@ it('should show the search terms index page', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.title'))
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.create-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when store the search term', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.search_seo.search_terms.store'))
+        ->assertJsonValidationErrorFor('term')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('locale')
+        ->assertUnprocessable();
 });
 
 it('should store the newly created search term', function () {
@@ -37,12 +41,30 @@ it('should store the newly created search term', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.create.success'));
 
-    $this->assertDatabaseHas('search_terms', [
-        'term'         => $term,
-        'redirect_url' => $url,
-        'channel_id'   => $channelId,
-        'locale'       => $locale,
+    $this->assertModelWise([
+        SearchTerm::class => [
+            [
+                'term'         => $term,
+                'redirect_url' => $url,
+                'channel_id'   => $channelId,
+                'locale'       => $locale,
+            ],
+        ],
     ]);
+});
+
+it('should fail the validation with errors when certain field not provided when update the search term', function () {
+    // Arrange
+    $searchTerm = SearchTerm::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.search_seo.search_terms.update', $searchTerm->id))
+        ->assertJsonValidationErrorFor('term')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('locale')
+        ->assertUnprocessable();
 });
 
 it('should update the search term', function () {
@@ -61,11 +83,15 @@ it('should update the search term', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.edit.success'));
 
-    $this->assertDatabaseHas('search_terms', [
-        'id'         => $searchTerm->id,
-        'term'       => $term,
-        'channel_id' => $channelId,
-        'locale'     => $locale,
+    $this->assertModelWise([
+        SearchTerm::class => [
+            [
+                'id'         => $searchTerm->id,
+                'term'       => $term,
+                'channel_id' => $channelId,
+                'locale'     => $locale,
+            ],
+        ],
     ]);
 });
 

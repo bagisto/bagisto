@@ -118,12 +118,12 @@ class ChannelController extends Controller
 
         $data = $this->validate(request(), [
             /* general */
-            'code'                             => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Rules\Code],
-            $locale . '.name'                  => 'required',
-            $locale . '.description'           => 'nullable',
+            'code'                             => ['required', 'unique:channels,code,'.$id, new \Webkul\Core\Rules\Code],
+            $locale.'.name'                    => 'required',
+            $locale.'.description'             => 'nullable',
             'inventory_sources'                => 'required|array|min:1',
             'root_category_id'                 => 'required',
-            'hostname'                         => 'unique:channels,hostname,' . $id,
+            'hostname'                         => 'unique:channels,hostname,'.$id,
 
             /* currencies and locales */
             'locales'                          => 'required|array|min:1',
@@ -137,13 +137,13 @@ class ChannelController extends Controller
             'favicon.*'                        => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
 
             /* seo */
-            $locale . '.seo_title'             => 'nullable',
-            $locale . '.seo_description'       => 'nullable',
-            $locale . '.seo_keywords'          => 'nullable',
+            $locale.'.seo_title'               => 'required|string',
+            $locale.'.seo_description'         => 'required|string',
+            $locale.'.seo_keywords'            => 'required|string',
 
             /* maintenance mode */
             'is_maintenance_on'                => 'boolean',
-            $locale . '.maintenance_mode_text' => 'nullable',
+            $locale.'.maintenance_mode_text'   => 'nullable',
             'allowed_ips'                      => 'nullable',
         ]);
 

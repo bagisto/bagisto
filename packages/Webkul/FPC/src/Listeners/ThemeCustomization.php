@@ -28,7 +28,7 @@ class ThemeCustomization
             ResponseCache::clear();
         } else {
             ResponseCache::selectCachedItems()
-                ->forUrls(config('app.url') . '/')
+                ->forUrls(config('app.url').'/')
                 ->forget();
         }
     }
@@ -45,7 +45,7 @@ class ThemeCustomization
             ResponseCache::clear();
         } else {
             ResponseCache::selectCachedItems()
-                ->forUrls(config('app.url') . '/')
+                ->forUrls(config('app.url').'/')
                 ->forget();
         }
     }
@@ -64,7 +64,7 @@ class ThemeCustomization
             ResponseCache::clear();
         } else {
             ResponseCache::selectCachedItems()
-                ->forUrls(config('app.url') . '/')
+                ->forUrls(config('app.url').'/')
                 ->forget();
         }
     }

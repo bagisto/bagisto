@@ -125,7 +125,7 @@
                         aria-label="@lang('shop::app.components.layouts.header.profile')"
                         tabindex="0"
                     ></span>
-                </x-slot:toggle>
+                </x-slot>
 
                 <!-- Guest Dropdown -->
                 @guest('customer')
@@ -157,7 +157,7 @@
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 @endguest
 
                 <!-- Customers Dropdown -->
@@ -206,8 +206,7 @@
                                     method="DELETE"
                                     action="{{ route('shop.customer.session.destroy') }}"
                                     id="customerLogout"
-                                >
-                                </x-shop::form>
+                                />
 
                                 <a
                                     class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
@@ -218,7 +217,7 @@
                                 </a>
                             @endauth
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 @endauth
             </x-shop::dropdown>
 

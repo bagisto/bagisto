@@ -7,24 +7,37 @@ use Illuminate\Support\Facades\Storage;
 class CashOnDelivery extends Payment
 {
     /**
-     * Payment method code
+     * Payment method code.
      *
      * @var string
      */
     protected $code = 'cashondelivery';
 
     /**
-     * Return cashondelivery redirect url
+     * Get redirect url.
      *
      * @return string
      */
     public function getRedirectUrl()
     {
-
     }
 
     /**
-     * Returns payment method image
+     * Is available.
+     *
+     * @return bool
+     */
+    public function isAvailable()
+    {
+        if (! $this->cart) {
+            $this->setCart();
+        }
+
+        return $this->getConfigData('active') && $this->cart?->haveStockableItems();
+    }
+
+    /**
+     * Get payment method image.
      *
      * @return array
      */

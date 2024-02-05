@@ -59,7 +59,10 @@
                 {{ $attributes->except(['rules', 'label', ':label']) }}
             />
 
-            <v-checkbox-handler :field="field" checked="{{ $attributes->get('checked') }}"></v-checkbox-handler>
+            <v-checkbox-handler
+                :field="field"
+                checked="{{ $attributes->get('checked') }}"
+            />
         </v-field>
 
         <label

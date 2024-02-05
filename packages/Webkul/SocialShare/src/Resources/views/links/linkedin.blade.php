@@ -9,7 +9,7 @@
     $linkedinURL = 'https://www.linkedin.com/shareArticle?' . http_build_query($detailes);
 @endphp
 
-<v-linkedin-share></v-linkedin-share>
+<v-linkedin-share />
 
 @push('scripts')
     <script type="text/x-template" id="v-linkedin-share-template">

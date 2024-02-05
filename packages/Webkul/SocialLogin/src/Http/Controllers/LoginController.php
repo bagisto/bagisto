@@ -14,20 +14,12 @@ class LoginController extends Controller
     use DispatchesJobs, ValidatesRequests;
 
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(protected CustomerSocialAccountRepository $customerSocialAccountRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**

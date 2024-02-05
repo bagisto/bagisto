@@ -15,7 +15,7 @@
 </div>
 
 <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
-    <x-admin::shimmer.datagrid.table.head/>
+    <x-admin::shimmer.datagrid.table.head />
 
-    <x-admin::shimmer.datagrid.table.body/>
+    <x-admin::shimmer.datagrid.table.body />
 </div>

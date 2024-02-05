@@ -15,7 +15,7 @@
 
         <div class="shimmer w-[120px] h-5"></div>
     
-        <x-admin::shimmer.reporting.graph :count=15/>
+        <x-admin::shimmer.reporting.graph :count=15 />
 
         <!-- Date Range -->
         <div class="flex gap-5 justify-center">
@@ -32,6 +32,6 @@
 
         <div class="shimmer w-[150px] h-[17px] mb-4"></div>
 
-        <x-admin::shimmer.reporting.progress-bar/>
+        <x-admin::shimmer.reporting.progress-bar />
     </div>
 </div>

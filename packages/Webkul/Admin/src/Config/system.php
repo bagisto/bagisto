@@ -1,5 +1,7 @@
 <?php
 
+use Webkul\Sales\Models\Order;
+
 return [
     /**
      * General.
@@ -375,12 +377,12 @@ return [
                 'name'       => 'no_of_related_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-related-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ], [
                 'name'       => 'no_of_up_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-up-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -393,7 +395,7 @@ return [
                 'name'       => 'no_of_cross_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.cart-view-page.allow-no-of-cross-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -474,14 +476,16 @@ return [
         'sort'   => 4,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -491,14 +495,16 @@ return [
         'sort'   => 5,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -508,14 +514,16 @@ return [
         'sort'   => 6,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -1006,8 +1014,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1034,8 +1042,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1048,8 +1056,8 @@ return [
             ], [
                 'name'          => 'default_rate',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.rate',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1091,8 +1099,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1147,13 +1155,13 @@ return [
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
-                        'value' => 'pending',
+                        'value' => Order::STATUS_PENDING,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending-payment',
-                        'value' => 'pending_payment',
+                        'value' => Order::STATUS_PENDING_PAYMENT,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.processing',
-                        'value' => 'processing',
+                        'value' => Order::STATUS_PROCESSING,
                     ],
                 ],
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',
@@ -1195,8 +1203,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1298,8 +1306,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1320,8 +1328,8 @@ return [
             ], [
                 'name'          => 'business_account',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.business-account',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1367,8 +1375,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1390,8 +1398,8 @@ return [
                 'name'          => 'client_id',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,true',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1399,8 +1407,8 @@ return [
                 'name'          => 'client_secret',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1408,8 +1416,8 @@ return [
                 'name'          => 'accepted_currencies',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,

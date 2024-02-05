@@ -4,7 +4,6 @@ use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Models\Customer;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
@@ -14,18 +13,6 @@ use Webkul\Sales\Models\OrderPayment;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    // Cleaning up the row  which are creating
-    Customer::query()->delete();
-    OrderAddress::query()->delete();
-    Order::query()->delete();
-    OrderPayment::query()->delete();
-    CartItem::query()->delete();
-    Cart::query()->delete();
-    Invoice::query()->delete();
-    Product::query()->delete();
-});
 
 it('should store the index page customers orders', function () {
     // Act and Assert
@@ -155,9 +142,13 @@ it('should cancel the customer order', function () {
     postJson(route('shop.customers.account.orders.cancel', $order->id))
         ->assertRedirect();
 
-    $this->assertDatabaseHas('orders', [
-        'id'     => $order->id,
-        'status' => 'canceled',
+    $this->assertModelWise([
+        Order::class => [
+            [
+                'id'     => $order->id,
+                'status' => 'canceled',
+            ],
+        ],
     ]);
 });
 
@@ -227,5 +218,5 @@ it('should print the order invoice', function () {
     $this->loginAsCustomer($customer);
 
     getJson(route('shop.customers.account.orders.print-invoice', $invoice->id))
-        ->assertDownload('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
+        ->assertDownload('invoice-'.$invoice->created_at->format('d-m-Y').'.pdf');
 });

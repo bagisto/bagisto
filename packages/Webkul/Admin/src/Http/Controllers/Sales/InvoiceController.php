@@ -73,6 +73,7 @@ class InvoiceController extends Controller
         }
 
         $this->validate(request(), [
+            'invoice.items'   => 'required|array',
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 
@@ -145,7 +146,7 @@ class InvoiceController extends Controller
 
         return $this->downloadPDF(
             view('admin::sales.invoices.pdf', compact('invoice'))->render(),
-            'invoice-' . $invoice->created_at->format('d-m-Y')
+            'invoice-'.$invoice->created_at->format('d-m-Y')
         );
     }
 }

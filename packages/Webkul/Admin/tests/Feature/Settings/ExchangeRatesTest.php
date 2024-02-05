@@ -6,14 +6,7 @@ use Webkul\Core\Models\CurrencyExchangeRate;
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    Currency::query()->whereNot('id', 1)->delete();
-    CurrencyExchangeRate::query()->delete();
-});
+use function Pest\Laravel\putJson;
 
 it('should returns the exchange rate index page', function () {
     // Act and Assert
@@ -24,6 +17,16 @@ it('should returns the exchange rate index page', function () {
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.title'))
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.create-btn'))
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.update-rates'));
+});
+
+it('should fail the validation with errors when certain field not provided when store the exchange rates', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.exchange_rates.store'))
+        ->assertJsonValidationErrorFor('target_currency')
+        ->assertJsonValidationErrorFor('rate')
+        ->assertUnprocessable();
 });
 
 it('should store the newly created exchange rates', function () {
@@ -40,9 +43,13 @@ it('should store the newly created exchange rates', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.create-success'));
 
-    $this->assertDatabaseHas('currency_exchange_rates', [
-        'rate'            => $rate,
-        'target_currency' => $currency->id,
+    $this->assertModelWise([
+        CurrencyExchangeRate::class => [
+            [
+                'rate'            => $rate,
+                'target_currency' => $currency->id,
+            ],
+        ],
     ]);
 });
 
@@ -59,6 +66,50 @@ it('should return the exchange rate data for edit', function () {
         ->assertOk()
         ->assertJsonPath('data.exchangeRate.id', $exchangeRate->id)
         ->assertJsonPath('data.exchangeRate.target_currency', $exchangeRate->target_currency);
+});
+
+it('should fail the validation with errors when certain field not provided when update the exchange rates', function () {
+    // Arrange
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.exchange_rates.update'), [
+        'id' => $exchangeRate->id,
+    ])
+        ->assertJsonValidationErrorFor('target_currency')
+        ->assertJsonValidationErrorFor('rate')
+        ->assertUnprocessable();
+});
+
+it('should update the currency exchange rate', function () {
+    // Arrange
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.exchange_rates.update'), [
+        'id'              => $exchangeRate->id,
+        'rate'            => $rate = rand(1, 100),
+        'target_currency' => $exchangeRate->target_currency,
+    ])
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.settings.exchange-rates.index.update-success'));
+
+    $this->assertModelWise([
+        CurrencyExchangeRate::class => [
+            [
+                'rate'            => $rate,
+                'target_currency' => $exchangeRate->target_currency,
+            ],
+        ],
+    ]);
 });
 
 it('should delete the exchange rate', function () {

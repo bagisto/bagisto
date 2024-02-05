@@ -20,25 +20,55 @@ class ThemeCustomizationRepository extends Repository
     }
 
     /**
+     * Update the specified theme
+     *
+     * @param  array  $data
+     * @param  int  $id
+     */
+    public function update($data, $id): ThemeCustomization
+    {
+        $locale = core()->getRequestedLocaleCode();
+
+        if ($data['type'] == 'static_content') {
+            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['html']);
+            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
+        }
+
+        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+            unset($data[$locale]['options']);
+        }
+
+        $theme = parent::update($data, $id);
+
+        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
+            $this->uploadImage(request()->all(), $theme);
+        }
+
+        return $theme;
+    }
+
+    /**
      * Upload images
      *
-     * @param  array  $imageOptions
-     * @param  \Webkul\Shop\Contracts\ThemeCustomization  $theme
-     * @return void
+     * @return void|string
      */
-    public function uploadImage($imageOptions, $theme, $deletedSliderImages = [])
+    public function uploadImage(array $data, ThemeCustomization $theme)
     {
-        foreach ($deletedSliderImages as $slider) {
-            Storage::delete(str_replace('storage/', '', $slider['image']));
+        $locale = core()->getRequestedLocaleCode();
+
+        if (isset($data[$locale]['deleted_sliders'])) {
+            foreach ($data[$locale]['deleted_sliders'] as $slider) {
+                Storage::delete(str_replace('storage/', '', $slider['image']));
+            }
         }
 
-        if (empty($imageOptions['options'])) {
+        if (! isset($data[$locale]['options'])) {
             return;
         }
-
+        
         $options = [];
 
-        foreach ($imageOptions['options'] as $image) {
+        foreach ($data[$locale]['options'] as $image) {
             if (isset($image['service_icon'])) {
                 $options['services'][] = [
                     'service_icon' => $image['service_icon'],
@@ -48,16 +78,16 @@ class ThemeCustomizationRepository extends Repository
             } elseif ($image['image'] instanceof UploadedFile) {
                 $manager = new ImageManager();
 
-                $path = 'theme/' . $theme->id . '/' . Str::random(40) . '.webp';
+                $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
 
                 Storage::put($path, $manager->make($image['image'])->encode('webp'));
 
-                if (($imageOptions['type'] ?? '') == 'static_content') {
+                if (($data['type'] ?? '') == 'static_content') {
                     return Storage::url($path);
                 }
 
                 $options['images'][] = [
-                    'image' => 'storage/' . $path,
+                    'image' => 'storage/'.$path,
                     'link'  => $image['link'],
                 ];
             } else {
@@ -65,10 +95,9 @@ class ThemeCustomizationRepository extends Repository
             }
         }
 
-        $translatedModel = $theme->translate(core()->getRequestedLocaleCode());
-
+        $translatedModel = $theme->translate($locale);
         $translatedModel->options = $options ?? [];
-
+        $translatedModel->theme_customization_id = $theme->id;
         $translatedModel->save();
     }
 }

@@ -1,5 +1,5 @@
 <!-- Static-Content Component -->
-<v-static-content></v-static-content>
+<v-static-content />
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-static-content-template">
@@ -108,7 +108,7 @@
                         <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                             @lang('admin::app.settings.themes.edit.general')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
                 
                     <x-slot:content>
                         <input type="hidden" name="type" value="static_content">
@@ -130,10 +130,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
@@ -153,10 +150,7 @@
                             >
                             </v-field>
 
-                            <x-admin::form.control-group.error
-                                control-name="sort_order"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group>
@@ -175,7 +169,7 @@
                                 @endforeach 
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error control-name="channel_id"></x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="!mb-0">
@@ -207,12 +201,9 @@
                                 ></label>
                             </label>
                             
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="status" />
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
                 </x-admin::accordion>
             </div>
         </div>
@@ -368,7 +359,7 @@
 
                     let formData = new FormData();
 
-                    formData.append('options[image][image]', selectedImage);
+                    formData.append('{{ $currentLocale->code }}[options][][image]', selectedImage);
                     formData.append('id', "{{ $theme->id }}");
                     formData.append('type', "static_content");
 
