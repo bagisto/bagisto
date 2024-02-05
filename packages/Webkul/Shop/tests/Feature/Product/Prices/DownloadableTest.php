@@ -348,7 +348,7 @@ it('should fails the validation error when the certain inputs not provided when 
         'rating'     => '0',
         'links'      => $product->downloadable_links()->pluck('id')->toArray(),
     ]))
-        ->assertJsonValidationErrorFor('product')
+        ->assertJsonValidationErrorFor('product_id')
         ->assertUnprocessable();
 });
 
