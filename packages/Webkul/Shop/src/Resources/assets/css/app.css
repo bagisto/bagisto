@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "velicon";
-    src: url("../fonts/velicon.woff?hhi7p1") format("woff");
+    font-family: "bagisto-shop";
+    src: url("../fonts/bagisto-shop.woff?hhi7p1") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -30,7 +30,7 @@
     [class^="icon-"],
     [class*=" icon-"] {
         /* use !important to prevent issues with browser extensions that change fonts */
-        font-family: "velicon" !important;
+        font-family: "bagisto-shop" !important;
         speak: never;
         font-style: normal;
         font-weight: normal;
@@ -41,6 +41,10 @@
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-edit:before {
+        content: "\e943";
     }
 
     .icon-add-new:before {
@@ -217,6 +221,7 @@
 
     .icon-more:before {
         content: "\e92b";
+        color: #7d7d7d;
     }
 
     .icon-orders:before {
@@ -265,7 +270,7 @@
 
     .icon-sort:before {
         content: "\e937";
-    color: #7d7d7d;
+        color: #7d7d7d;
     }
 
     .icon-star-fill:before {
@@ -311,7 +316,6 @@
     .icon-users:before {
         content: "\e942";
     }
-      
 
     .journal-scroll::-webkit-scrollbar {
         width: 14px;

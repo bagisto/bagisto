@@ -1,12 +1,12 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-708d91fd.css",
+    "file": "assets/app-e6159499.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
-  "src/Resources/assets/fonts/velicon.woff": {
-    "file": "assets/velicon-2b79b97c.woff",
-    "src": "src/Resources/assets/fonts/velicon.woff"
+  "src/Resources/assets/fonts/bagisto-shop.woff": {
+    "file": "assets/bagisto-shop-56e72ed0.woff",
+    "src": "src/Resources/assets/fonts/bagisto-shop.woff"
   },
   "src/Resources/assets/images/cash-on-delivery.png": {
     "file": "assets/cash-on-delivery-73061c49.png",

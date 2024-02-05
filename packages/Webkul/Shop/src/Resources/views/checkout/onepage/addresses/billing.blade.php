@@ -41,7 +41,7 @@
                             </label>
 
                             <span
-                                class="icon-pen absolute ltr:right-3 rtl:left-5 top-5 text-2xl cursor-pointer"
+                                class="icon-edit absolute ltr:right-3 rtl:left-5 top-5 text-2xl cursor-pointer"
                                 @click="editNewBillingAddressForm(address);forms.billing.isEdit=true;"
                             >
                             </span>
@@ -50,7 +50,7 @@
                                 :for="'billing_address_id_' + address.id"
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
-                                <div class="flex justify-between items-center ml-8">
+                                <div class="flex justify-between items-center ml-8 pr-6">
                                     <p class="text-base font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
                                         
@@ -92,7 +92,9 @@
                                     role="presentation"
                                 ></span>
 
-                                <p class="text-base">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
+                                <p class="text-base">
+                                    @lang('shop::app.checkout.onepage.addresses.billing.add-new-address')
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -100,8 +102,7 @@
                     <v-error-message
                         class="text-red-500 text-xs italic"
                         name="billing[address_id]"
-                    >
-                    </v-error-message>
+                    />
 
                     <div 
                         class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
@@ -131,7 +132,12 @@
 
 
                     <template v-if="meta.valid">
-                        <div v-if="! forms.billing.isEdit && ! forms.shipping.isEdit && forms.billing.isUsedForShipping">
+                        <div v-if="
+                            ! forms.billing.isNew 
+                            && ! forms.shipping.isNew 
+                            && forms.billing.isUsedForShipping 
+                            && addresses.billing.length"
+                        >
                             <div class="flex justify-end mt-4">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.before') !!}
 
@@ -149,7 +155,11 @@
                     </template>
 
                     <template v-else>
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
+                        <div v-if="
+                            ! forms.billing.isNew 
+                            && ! forms.shipping.isNew 
+                            && forms.billing.isUsedForShipping"
+                        >
                             <div class="flex justify-end mt-4">
                                 <button
                                     type="submit"
@@ -298,15 +308,13 @@
                             />
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                    <x-shop::form.control-group.control
-                                        type="text"
-                                        name="billing[address1][{{ $i }}]"
-                                        v-model="forms.billing.address.address1[{{$i}}]"
-                                        :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                    />
-                                @endfor
+                                <x-shop::form.control-group.control
+                                    type="text"
+                                    name="billing[address2][]"
+                                    v-model="forms.billing.address.address2"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                />
                             @endif
                         </x-shop::form.control-group>
     

@@ -3,8 +3,7 @@
 <v-checkout-addresses 
     ref="vCheckoutAddress"
     :have-stockable-items="cart.haveStockableItems"
->
-</v-checkout-addresses>
+/>
 
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
@@ -236,16 +235,34 @@
                 },
 
                 handleShippingAddressForm() {
-                    if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
+                    if (! this.forms.shipping.address.isSaved) {
                         this.forms.shipping.isNew = false;
 
                         this.isTempAddress = true;
-                        
+
                         this.addresses.shipping.push({
                             ...this.forms.shipping.address,
                             isSaved: false,
                         });
-                    } else if (this.forms.shipping.isNew && this.forms.shipping.address.isSaved) {
+                    }
+
+                    this.forms.shipping.address['address1'] = [this.forms.shipping.address.address1];
+
+                    this.forms.shipping.address['address2'] = [this.forms.shipping.address.address2 ?? ''];
+
+                    if (this.forms.shipping.isEdit) {
+                        this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.shipping.address)
+                            .then(response => {
+                                this.forms.shipping.isNew = false;
+
+                                this.resetShippingAddressForm();
+                                
+                                this.getCustomerAddresses();
+                            })
+                            .catch(error => {                 
+                                console.log(error);
+                            });
+                    } else {
                         this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
                             .then(response => {
                                 this.forms.shipping.isNew = false;

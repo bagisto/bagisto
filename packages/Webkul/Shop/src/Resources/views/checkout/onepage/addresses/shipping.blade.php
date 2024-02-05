@@ -10,7 +10,7 @@
                     </h2>
                 </div>
             </x-slot>
-        
+
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
 
@@ -266,7 +266,7 @@
                                 type="text"
                                 name="shipping[address1][]"
                                 rules="required|address"
-                                v-model="forms.shipping.address.address1[0]"
+                                v-model="forms.shipping.address.address1"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                             />
@@ -277,15 +277,13 @@
                             />
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                    <x-shop::form.control-group.control
-                                        type="text"
-                                        name="shipping[address1][{{ $i }}]"
-                                        v-model="forms.shipping.address.address1[{{$i}}]"
-                                        :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
-                                        :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
-                                    />
-                                @endfor
+                                <x-shop::form.control-group.control
+                                    type="text"
+                                    name="shipping[address2][]"
+                                    v-model="forms.shipping.address.address2"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
+                                />
                             @endif
                         </x-shop::form.control-group>
 
