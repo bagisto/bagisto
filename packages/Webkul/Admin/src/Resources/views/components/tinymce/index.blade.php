@@ -1,4 +1,4 @@
-<v-tinymce {{ $attributes }}></v-tinymce>
+<v-tinymce {{ $attributes }} />
 
 @pushOnce('scripts')
     <!--
@@ -26,7 +26,7 @@
 
                             @lang('admin::app.components.tinymce.ai-generation.title')
                         </p>
-                    </x-slot:header>
+                    </x-slot>
 
                     <!-- Modal Content -->
                     <x-slot:content>
@@ -103,15 +103,14 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="prompt"
                                 class="h-[180px]"
+                                name="prompt"
                                 rules="required"
                                 v-model="ai.prompt"
                                 :label="trans('admin::app.components.tinymce.ai-generation.prompt')"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
-                            <x-admin::form.control-group.error control-name="prompt"></x-admin::form.control-group.error>
+                            <x-admin::form.control-group.error control-name="prompt" />
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
@@ -146,17 +145,16 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="content"
                                 class="h-[180px]"
+                                name="content"
                                 v-model="ai.content"
-                            >
-                            </x-admin::form.control-group.control>
+                            />
 
                             <span class="text-xs text-gray-500">
                                 @lang('admin::app.components.tinymce.ai-generation.generated-content-info')
                             </span>
                         </x-admin::form.control-group>
-                    </x-slot:content>
+                    </x-slot>
 
                     <!-- Modal Footer -->
                     <x-slot:footer>
@@ -170,7 +168,7 @@
                                 @lang('admin::app.components.tinymce.ai-generation.apply')
                             </button>
                         </div>
-                    </x-slot:footer>
+                    </x-slot>
                 </x-admin::modal>
             </form>
         </x-admin::form>
@@ -362,62 +360,16 @@
                 generate(params, { resetForm, resetField, setErrors }) {
                     this.isLoading = true;
 
-                    const eventSource = new EventSource("{{ route('admin.magic_ai.content') }}");
-
-                    var self = this;
-
-                    eventSource.onmessage = function (event) {
-                        const data = event.data;
-
-                        console.log('Received:', data);
-
-                        self.isLoading = false;
-
-                        self.ai.content += data;
-
-                        // Handle the received data (e.g., update the UI)
-                    };
-
-                    eventSource.onerror = function (error) {
-                        // Handle errors (e.g., connection lost)
-                        console.error('Error:', error);
-                    };
-                    
-                    return;
-
-
-
                     this.$axios.post("{{ route('admin.magic_ai.content') }}", {
                         prompt: params['prompt'],
                         model: params['model']
-                    }, {
-                        headers: {
-                            'Accept': 'text/event-stream',
-                            'Content-Type': 'text/event-stream'
-                        }
                     })
-                        .then(async response => {
-                            console.log(response);
-
-                            const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
-
-                            while (true) {
-                                const {value, done} = await reader.read();
-
-                                if (done) break;
-
-                                console.log('Received', value);
-                            }
-
-                            return;
-
+                        .then(response => {
                             this.isLoading = false;
 
                             this.ai.content = response.data.content;
                         })
                         .catch(error => {
-                            console.log(error);
-
                             this.isLoading = false;
 
                             if (error.response.status == 422) {

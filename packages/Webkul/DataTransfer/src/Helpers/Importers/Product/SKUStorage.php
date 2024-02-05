@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\DataTransfer\Helpers\Types\Product;
+namespace Webkul\DataTransfer\Helpers\Importers\Product;
 
 use Illuminate\Support\Arr;
 use Webkul\Product\Repositories\ProductRepository;
@@ -37,7 +37,7 @@ class SKUStorage
     }
 
     /**
-     * Get SKU information
+     * Initialize storage
      */
     public function init(): void
     {

@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
-use Webkul\DataTransfer\Helpers\Types\AbstractType;
+use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
+use Webkul\DataTransfer\Helpers\Sources\CSV as CSVSource;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\DataTransfer\Repositories\ImportRepository;
 
@@ -137,7 +138,7 @@ class Import
     public function validate(): bool
     {
         try {
-            $source = new Source(
+            $source = new CSVSource(
                 $this->import->file_path,
                 $this->import->field_separator,
             );
@@ -147,7 +148,7 @@ class Import
             $typeImporter->validateData();
         } catch (\Exception $e) {
             $this->errorHelper->addError(
-                AbstractType::ERROR_CODE_SYSTEM_EXCEPTION,
+                AbstractImporter::ERROR_CODE_SYSTEM_EXCEPTION,
                 null,
                 null,
                 $e->getMessage()
@@ -474,7 +475,7 @@ class Import
     /**
      * Validates source file and returns validation result
      */
-    public function getTypeImporter(): AbstractType
+    public function getTypeImporter(): AbstractImporter
     {
         if (! $this->typeImporter) {
             $importerConfig = config('importers.' . $this->import->type);

@@ -17,6 +17,15 @@ return [
 
         'customers' => [
             'title'  => 'Customers',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'Email : \'%s\' is found more than once in the import file.',
+                    'duplicate-phone'        => 'Phone : \'%s\' is found more than once in the import file.',
+                    'invalid-customer-group' => 'Customer group is invalid or not supported',
+                    'email-not-found'        => 'Email : \'%s\' not found in the system.',
+                ],
+            ],
         ],
     ],
 

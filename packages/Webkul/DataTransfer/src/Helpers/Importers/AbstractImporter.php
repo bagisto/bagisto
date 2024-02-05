@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\DataTransfer\Helpers\Types;
+namespace Webkul\DataTransfer\Helpers\Importers;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
@@ -15,7 +15,7 @@ use Webkul\DataTransfer\Jobs\Import\LinkBatch as LinkBatchJob;
 use Webkul\DataTransfer\Jobs\Import\Linking as LinkingJob;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 
-abstract class AbstractType
+abstract class AbstractImporter
 {
     /**
      * Error code for system exception.
@@ -202,6 +202,14 @@ abstract class AbstractType
     }
 
     /**
+     * Retrieve valid column names
+     */
+    public function getValidColumnNames(): array
+    {
+        return $this->validColumnNames;
+    }
+
+    /**
      * Validate data.
      */
     public function validateData(): void
@@ -381,6 +389,35 @@ abstract class AbstractType
         );
 
         return $this;
+    }
+
+    /**
+     * Add row as skipped
+     *
+     * @param  int|null  $rowNumber
+     * @param  string|null  $columnName
+     * @param  string|null  $errorMessage
+     * @return $this
+     */
+    protected function skipRow($rowNumber, string $errorCode, $columnName = null, $errorMessage = null): self
+    {
+        $this->addRowError($errorCode, $rowNumber, $columnName, $errorMessage);
+
+        $this->errorHelper->addRowToSkip($rowNumber);
+
+        return $this;
+    }
+
+    /**
+     * Prepare row data to save into the database
+     */
+    protected function prepareRowForDb(array $rowData): array
+    {
+        $rowData = array_map(function ($value) {
+            return $value === '' ? null : $value;
+        }, $rowData);
+
+        return $rowData;
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace Webkul\DataTransfer\Helpers;
+namespace Webkul\DataTransfer\Helpers\Sources;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\DataTransfer\Helpers\Types\AbstractType;
+use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 
-class Source
+class CSV
 {
     /**
      * CSV reader
@@ -82,9 +82,9 @@ class Source
 
         if (count($row) != $this->totalColumns) {
             if ($this->foundWrongQuoteFlag) {
-                throw new \InvalidArgumentException(AbstractType::ERROR_CODE_WRONG_QUOTES);
+                throw new \InvalidArgumentException(AbstractImporter::ERROR_CODE_WRONG_QUOTES);
             } else {
-                throw new \InvalidArgumentException(AbstractType::ERROR_CODE_COLUMNS_NUMBER);
+                throw new \InvalidArgumentException(AbstractImporter::ERROR_CODE_COLUMNS_NUMBER);
             }
         }
 

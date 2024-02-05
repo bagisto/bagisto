@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\DataTransfer\Helpers\Types;
+namespace Webkul\DataTransfer\Helpers\Importers\Product;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
@@ -20,7 +20,7 @@ use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
-use Webkul\DataTransfer\Helpers\Types\Product\SKUStorage;
+use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteIndexJob;
@@ -37,7 +37,7 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
-class Product extends AbstractType
+class Importer extends AbstractImporter
 {
     /**
      * Product type simple
@@ -93,10 +93,10 @@ class Product extends AbstractType
      * Error message templates
      */
     protected array $messages = [
-        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.importers.products.validation.errors.products.invalid-type',
-        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.importers.products.validation.errors.products.sku-not-found',
-        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.importers.products.validation.errors.products.duplicate-url-key',
-        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.products.invalid-attribute-family',
+        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.importers.products.validation.errors.invalid-type',
+        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
+        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
+        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
     ];
 
     /**
@@ -105,37 +105,37 @@ class Product extends AbstractType
     protected array $permanentAttributes = ['sku'];
 
     /**
-     * Permanent entity columns
+     * Permanent entity column
      */
     protected string $masterAttributeCode = 'sku';
 
     /**
-     * Permanent entity columns
+     * Cached attribute families
      */
     protected mixed $attributeFamilies = [];
 
     /**
-     * Permanent entity columns
+     * Cached attributes
      */
     protected mixed $attributes = [];
 
     /**
-     * Permanent entity columns
+     * Cached product type family attributes
      */
     protected array $typeFamilyAttributes = [];
 
     /**
-     * Permanent entity columns
+     * Product type family validation rules
      */
     protected array $typeFamilyValidationRules = [];
 
     /**
-     * Permanent entity columns
+     * Cached categories
      */
     protected array $categories = [];
 
     /**
-     * Permanent entity columns
+     * Urls keys storage
      */
     protected array $urlKeys = [];
 
@@ -150,7 +150,7 @@ class Product extends AbstractType
     protected bool $indexingRequired = true;
 
     /**
-     * Permanent entity columns
+     * Valid csv columns
      */
     protected array $validColumnNames = [
         'locale',
@@ -220,14 +220,6 @@ class Product extends AbstractType
         }
 
         parent::initErrorMessages();
-    }
-
-    /**
-     * Retrieve valid column names
-     */
-    public function getValidColumnNames(): array
-    {
-        return $this->validColumnNames;
     }
 
     /**
@@ -828,7 +820,7 @@ class Product extends AbstractType
             Storage::deleteDirectory($imageDirectory);
         }
 
-        DeleteIndexJob::dispatch($idsToDelete);
+        DeleteIndexJob::dispatch($idsToDelete)->onConnection('sync');
 
         return true;
     }
@@ -1739,39 +1731,10 @@ class Product extends AbstractType
     }
 
     /**
-     * Prepare row data to save into the database
-     */
-    protected function prepareRowForDb(array $rowData): array
-    {
-        $rowData = array_map(function ($value) {
-            return $value === '' ? null : $value;
-        }, $rowData);
-
-        return $rowData;
-    }
-
-    /**
      * Check if SKU exists
      */
     public function isSKUExist(string $sku): bool
     {
         return $this->skuStorage->has($sku);
-    }
-
-    /**
-     * Add row as skipped
-     *
-     * @param  int|null  $rowNumber
-     * @param  string|null  $columnName
-     * @param  string|null  $errorMessage
-     * @return $this
-     */
-    private function skipRow($rowNumber, string $errorCode, $columnName = null, $errorMessage = null): self
-    {
-        $this->addRowError($errorCode, $rowNumber, $columnName, $errorMessage);
-
-        $this->errorHelper->addRowToSkip($rowNumber);
-
-        return $this;
     }
 }

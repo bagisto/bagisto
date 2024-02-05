@@ -231,6 +231,8 @@ class ImportController extends Controller
 
         $stats = $this->importHelper->stats($state);
 
+        $import->unsetRelations();
+
         return view('admin::settings.data-transfer.imports.import', compact('import', 'isValid', 'stats'));
     }
 
@@ -245,7 +247,7 @@ class ImportController extends Controller
             ->setImport($import)
             ->validate();
 
-        $import = $this->importHelper->getImport();
+        $import = $this->importHelper->getImport()->unsetRelations();
 
         return new JsonResponse([
             'is_valid' => $isValid,
@@ -318,8 +320,8 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'import' => $this->importHelper->getImport(),
             'stats'  => $this->importHelper->stats(Import::STATE_PROCESSED),
+            'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
 
@@ -379,8 +381,8 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'import' => $this->importHelper->getImport(),
             'stats'  => $this->importHelper->stats(Import::STATE_LINKED),
+            'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
 
@@ -439,8 +441,8 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'import' => $this->importHelper->getImport(),
             'stats'  => $this->importHelper->stats(Import::STATE_INDEXED),
+            'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
 
