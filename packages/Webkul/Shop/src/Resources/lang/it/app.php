@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Caro :customer_name',
-        'thanks' => 'Se hai bisogno di assistenza, contattaci a <a href=":link" style=":style">:email</a>.<br/>Grazie!',
+        'dear'      => 'Caro :customer_name',
+        'thanks'    => 'Se hai bisogno di assistenza, contattaci a <a href=":link" style=":style">:email</a>.<br/>Grazie!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Nota - :note',
+                'subject'     => 'Nuovo commento aggiunto',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'Stai ricevendo questa email perché abbiamo ricevuto una richiesta di reset password per il tuo account.',
+                'greeting'       => 'Password dimenticata!',
+                'reset-password' => 'Reimposta password',
+                'subject'        => 'Email di reset password',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Se hai già pagato, ignora questa email.',
+                'please-make-payment'  => 'Effettua il pagamento il prima possibile.',
+                'thanks'               => 'Grazie!',
+                'overdue-invoice'      => 'La tua fattura :invoice è in ritardo di :time.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'Nuova registrazione cliente',
                 'description'             => 'Il tuo account è stato creato con successo e puoi effettuare il login utilizzando il tuo indirizzo email e le tue credenziali password. Una volta effettuato il login, potrai accedere ad altri servizi, tra cui la revisione degli ordini passati, la lista dei desideri e la modifica delle informazioni del tuo account.',
                 'credentials-description' => 'Il tuo account è stato creato. I dettagli del tuo account sono riportati di seguito:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'Password',
             ],
 
-            'forgot-password' => [
-                'description'    => 'Stai ricevendo questa email perché abbiamo ricevuto una richiesta di reset password per il tuo account.',
-                'greeting'       => 'Password dimenticata!',
-                'reset-password' => 'Reimposta password',
-                'subject'        => 'Email di reset password',
-            ],
-
-            'update-password' => [
-                'description' => 'Stai ricevendo questa email perché hai aggiornato la tua password.',
-                'greeting'    => 'Password aggiornata!',
-                'subject'     => 'Password aggiornata',
-            ],
-
-            'verification' => [
-                'description'  => 'Clicca il pulsante qui sotto per verificare il tuo indirizzo email.',
-                'greeting'     => 'Benvenuto!',
-                'subject'      => 'Email di verifica dell\'account',
-                'verify-email' => 'Verifica indirizzo email',
-            ],
-
-            'commented' => [
-                'description' => 'Nota - :note',
-                'subject'     => 'Nuovo commento aggiunto',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Congratulazioni e benvenuto nella nostra community di newsletter! Siamo entusiasti di averti a bordo e di tenerti aggiornato con le ultime notizie, tendenze e offerte esclusive.',
                 'greeting'    => 'Benvenuto nella nostra newsletter!',
                 'subject'     => 'Ti sei iscritto alla nostra newsletter!',
                 'unsubscribe' => 'Annulla iscrizione',
             ],
+
+            'update-password'  => [
+                'description' => 'Stai ricevendo questa email perché hai aggiornato la tua password.',
+                'greeting'    => 'Password aggiornata!',
+                'subject'     => 'Password aggiornata',
+            ],
+
+            'verification'     => [
+                'description'  => 'Clicca il pulsante qui sotto per verificare il tuo indirizzo email.',
+                'greeting'     => 'Benvenuto!',
+                'subject'      => 'Email di verifica dell\'account',
+                'verify-email' => 'Verifica indirizzo email',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Grazie per il tuo ordine :order_id effettuato il :created_at',
                 'subject'  => 'Nuova conferma ordine',

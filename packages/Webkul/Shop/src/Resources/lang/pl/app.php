@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Szanowny :customer_name',
-        'thanks' => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem <a href=":link" style=":style">:email</a>.<br/>Dziękujemy!',
+        'dear'      => 'Szanowny :customer_name',
+        'thanks'    => 'Jeśli potrzebujesz pomocy, skontaktuj się z nami pod adresem <a href=":link" style=":style">:email</a>.<br/>Dziękujemy!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Notatka to - :note',
+                'subject'     => 'Dodano nowy komentarz',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'Otrzymujesz ten e-mail, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta.',
+                'greeting'       => 'Zapomniałeś hasła!',
+                'reset-password' => 'Zresetuj hasło',
+                'subject'        => 'E-mail z resetem hasła',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Jeśli już zapłaciłeś, zignoruj tę wiadomość e-mail.',
+                'please-make-payment'  => 'Proszę dokonać płatności jak najszybciej.',
+                'thanks'               => 'Dzięki!',
+                'overdue-invoice'      => 'Twoja faktura :invoice jest zaległa o :time.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'Rejestracja nowego klienta',
                 'description'             => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
                 'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'Senha',
             ],
 
-            'forgot-password' => [
-                'description'    => 'Otrzymujesz ten e-mail, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta.',
-                'greeting'       => 'Zapomniałeś hasła!',
-                'reset-password' => 'Zresetuj hasło',
-                'subject'        => 'E-mail z resetem hasła',
-            ],
-
-            'update-password' => [
-                'description' => 'Otrzymujesz ten e-mail, ponieważ zaktualizowałeś swoje hasło.',
-                'greeting'    => 'Hasło zostało zaktualizowane!',
-                'subject'     => 'Aktualizacja hasła',
-            ],
-
-            'verification' => [
-                'description'  => 'Proszę kliknąć poniższy przycisk, aby zweryfikować swój adres e-mail.',
-                'greeting'     => 'Witaj!',
-                'subject'      => 'E-mail z weryfikacją konta',
-                'verify-email' => 'Zweryfikuj adres e-mail',
-            ],
-
-            'commented' => [
-                'description' => 'Notatka to - :note',
-                'subject'     => 'Dodano nowy komentarz',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Gratulacje i witamy w naszej społeczności newslettera! Jesteśmy podekscytowani, że jesteś z nami i będziemy Cię informować o najnowszych wiadomościach, trendach i ekskluzywnych ofertach.',
                 'greeting'    => 'Witaj w naszym newsletterze!',
                 'subject'     => 'Zapisano się na nasz newsletter',
                 'unsubscribe' => 'Wypisz się',
             ],
+
+            'update-password'  => [
+                'description' => 'Otrzymujesz ten e-mail, ponieważ zaktualizowałeś swoje hasło.',
+                'greeting'    => 'Hasło zostało zaktualizowane!',
+                'subject'     => 'Aktualizacja hasła',
+            ],
+
+            'verification'     => [
+                'description'  => 'Proszę kliknąć poniższy przycisk, aby zweryfikować swój adres e-mail.',
+                'greeting'     => 'Witaj!',
+                'subject'      => 'E-mail z weryfikacją konta',
+                'verify-email' => 'Zweryfikuj adres e-mail',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Dziękujemy za Twoje zamówienie :order_id złożone :created_at',
                 'subject'  => 'Potwierdzenie nowego zamówienia',

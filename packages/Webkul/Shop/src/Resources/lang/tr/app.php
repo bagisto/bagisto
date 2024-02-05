@@ -817,11 +817,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Sayın :customer_name',
-        'thanks' => 'Herhangi bir yardıma ihtiyacınız varsa lütfen <a href=":link" style=":style">:email</a> adresinden bizimle iletişime geçin.<br/>Teşekkürler!',
+        'dear'      => 'Sayın :customer_name',
+        'thanks'    => 'Herhangi bir yardıma ihtiyacınız varsa lütfen <a href=":link" style=":style">:email</a> adresinden bizimle iletişime geçin.<br/>Teşekkürler!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Not: :note',
+                'subject'     => 'Yeni yorum eklendi',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'Bu e-postayı şifre sıfırlama isteği aldığımız için alıyorsunuz.',
+                'greeting'       => 'Şifremi Unuttum!',
+                'reset-password' => 'Şifre Sıfırla',
+                'subject'        => 'Şifre Sıfırlama E-postası',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Zaten ödendiyseniz, bu e-postayı dikkate almayın.',
+                'please-make-payment'  => 'Lütfen mümkün olan en kısa sürede ödemenizi yapın.',
+                'thanks'               => 'Teşekkürler!',
+                'overdue-invoice'      => ':invoice faturanız :time kadar gecikmiştir.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'Yeni Müşteri Kaydı',
                 'description'             => 'Hesabınız başarıyla oluşturuldu ve şimdi e-posta adresiniz ve parola bilgilerinizle giriş yapabilirsiniz. Giriş yaptıktan sonra, geçmiş siparişleri inceleme, favorileri gözden geçirme ve hesap bilgilerinizi düzenleme gibi diğer hizmetlere erişebilirsiniz.',
                 'credentials-description' => 'Hesabınız oluşturuldu. Hesap detaylarınız aşağıdadır.',
@@ -831,40 +850,28 @@ return [
                 'password'                => 'Şifre',
             ],
 
-            'forgot-password' => [
-                'description'    => 'Bu e-postayı şifre sıfırlama isteği aldığımız için alıyorsunuz.',
-                'greeting'       => 'Şifremi Unuttum!',
-                'reset-password' => 'Şifre Sıfırla',
-                'subject'        => 'Şifre Sıfırlama E-postası',
-            ],
-
-            'update-password' => [
-                'description' => 'Bu e-postayı şifrenizi güncellediğiniz için alıyorsunuz.',
-                'greeting'    => 'Şifre Güncellendi!',
-                'subject'     => 'Şifre Güncelleme',
-            ],
-
-            'verification' => [
-                'description'  => 'E-posta adresinizi doğrulamak için lütfen aşağıdaki düğmeye tıklayın.',
-                'greeting'     => 'Hoş geldiniz!',
-                'subject'      => 'Hesap Doğrulama E-postası',
-                'verify-email' => 'E-posta Adresini Doğrula',
-            ],
-
-            'commented' => [
-                'description' => 'Not: :note',
-                'subject'     => 'Yeni yorum eklendi',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Tebrikler ve bülten topluluğumuza hoş geldiniz! Sizi en son haberler, trendler ve özel tekliflerle güncel tutmaktan heyecan duyuyoruz.',
                 'greeting'    => 'Bültenimize hoş geldiniz!',
                 'subject'     => 'Bültenimize Abone Oldunuz',
                 'unsubscribe' => 'Aboneliği iptal et',
             ],
+
+            'update-password'  => [
+                'description' => 'Bu e-postayı şifrenizi güncellediğiniz için alıyorsunuz.',
+                'greeting'    => 'Şifre Güncellendi!',
+                'subject'     => 'Şifre Güncelleme',
+            ],
+
+            'verification'     => [
+                'description'  => 'E-posta adresinizi doğrulamak için lütfen aşağıdaki düğmeye tıklayın.',
+                'greeting'     => 'Hoş geldiniz!',
+                'subject'      => 'Hesap Doğrulama E-postası',
+                'verify-email' => 'E-posta Adresini Doğrula',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => ':created_at tarihindeki :order_id numaralı siparişiniz için teşekkürler',
                 'subject'  => 'Yeni Sipariş Onayı',

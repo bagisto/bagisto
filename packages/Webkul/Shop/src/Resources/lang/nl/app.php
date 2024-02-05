@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Beste :customer_name',
-        'thanks' => 'Als je hulp nodig hebt, neem dan contact met ons op via <a href=":link" style=":style">:email</a>.<br/>Bedankt!',
+        'dear'      => 'Beste :customer_name',
+        'thanks'    => 'Als je hulp nodig hebt, neem dan contact met ons op via <a href=":link" style=":style">:email</a>.<br/>Bedankt!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Opmerking is - :note',
+                'subject'     => 'Nieuwe opmerking toegevoegd',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'Je ontvangt deze e-mail omdat we een verzoek hebben ontvangen om je wachtwoord opnieuw in te stellen voor je account.',
+                'greeting'       => 'Wachtwoord vergeten!',
+                'reset-password' => 'Wachtwoord opnieuw instellen',
+                'subject'        => 'E-mail voor het opnieuw instellen van het wachtwoord',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Als u al heeft betaald, negeer dan deze e-mail.',
+                'please-make-payment'  => 'Betaal uw factuur zo snel mogelijk.',
+                'thanks'               => 'Dank je!',
+                'overdue-invoice'      => 'Uw factuur :invoice is :time te laat.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'Nieuwe Klantregistratie',
                 'description'             => 'Je account is nu succesvol aangemaakt en je kunt inloggen met je e-mailadres en wachtwoord. Na het inloggen kun je andere diensten gebruiken, waaronder het bekijken van eerdere bestellingen, verlanglijstjes en het bewerken van je accountgegevens.',
                 'credentials-description' => 'Uw account is aangemaakt. Uw accountgegevens staan hieronder:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'Wachtwoord',
             ],
 
-            'forgot-password' => [
-                'description'    => 'Je ontvangt deze e-mail omdat we een verzoek hebben ontvangen om je wachtwoord opnieuw in te stellen voor je account.',
-                'greeting'       => 'Wachtwoord vergeten!',
-                'reset-password' => 'Wachtwoord opnieuw instellen',
-                'subject'        => 'E-mail voor het opnieuw instellen van het wachtwoord',
-            ],
-
-            'update-password' => [
-                'description' => 'Je ontvangt deze e-mail omdat je je wachtwoord hebt bijgewerkt.',
-                'greeting'    => 'Wachtwoord bijgewerkt!',
-                'subject'     => 'Wachtwoord bijgewerkt',
-            ],
-
-            'verification' => [
-                'description'  => 'Klik op de onderstaande knop om je e-mailadres te verifiëren.',
-                'greeting'     => 'Welkom!',
-                'subject'      => 'E-mail voor accountverificatie',
-                'verify-email' => 'E-mailadres verifiëren',
-            ],
-
-            'commented' => [
-                'description' => 'Opmerking is - :note',
-                'subject'     => 'Nieuwe opmerking toegevoegd',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Gefeliciteerd en welkom bij onze nieuwsbriefgemeenschap! We zijn blij dat je meedoet en je op de hoogte houden van het laatste nieuws, trends en exclusieve aanbiedingen.',
                 'greeting'    => 'Welkom bij onze nieuwsbrief!',
                 'subject'     => 'Je! Abonneer je op onze nieuwsbrief',
                 'unsubscribe' => 'Afmelden',
             ],
+
+            'update-password'  => [
+                'description' => 'Je ontvangt deze e-mail omdat je je wachtwoord hebt bijgewerkt.',
+                'greeting'    => 'Wachtwoord bijgewerkt!',
+                'subject'     => 'Wachtwoord bijgewerkt',
+            ],
+
+            'verification'     => [
+                'description'  => 'Klik op de onderstaande knop om je e-mailadres te verifiëren.',
+                'greeting'     => 'Welkom!',
+                'subject'      => 'E-mail voor accountverificatie',
+                'verify-email' => 'E-mailadres verifiëren',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Bedankt voor je bestelling :order_id geplaatst op :created_at',
                 'subject'  => 'Nieuwe Bestelbevestiging',

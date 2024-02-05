@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => '親愛なる :customer_name 様',
-        'thanks' => '何かお手伝いが必要な場合は、<a href=":link" style=":style">:email</a> までお問い合わせください。<br/>ありがとうございます！',
+        'dear'      => '親愛なる :customer_name 様',
+        'thanks'    => '何かお手伝いが必要な場合は、<a href=":link" style=":style">:email</a> までお問い合わせください。<br/>ありがとうございます！',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'ノートは - :note',
+                'subject'     => '新しいコメントが追加されました',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'このメールは、アカウントのパスワードリセットリクエストを受けたためです。',
+                'greeting'       => 'パスワードをお忘れですか？',
+                'reset-password' => 'パスワードをリセット',
+                'subject'        => 'パスワードリセットメール',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+                'please-make-payment'  => 'Please make your payment as soon as possible.',
+                'thanks'               => 'ありがとう！',
+                'overdue-invoice'      => '請求書 :invoice は:time 遅延しています。',
+            ],
+
+            'registration'     => [
                 'subject'                 => '新規顧客登録',
                 'description'             => 'アカウントが正常に作成され、メールアドレスとパスワードの資格情報を使用してログインできるようになりました。ログインすると、過去の注文の確認、ウィッシュリストの表示、アカウント情報の編集など、他のサービスにアクセスできます。',
                 'credentials-description' => 'ご登録いただき、アカウントが作成されました。アカウントの詳細は以下の通りです：',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'パスワード',
             ],
 
-            'forgot-password' => [
-                'description'    => 'このメールは、アカウントのパスワードリセットリクエストを受けたためです。',
-                'greeting'       => 'パスワードをお忘れですか？',
-                'reset-password' => 'パスワードをリセット',
-                'subject'        => 'パスワードリセットメール',
-            ],
-
-            'update-password' => [
-                'description' => 'このメールは、パスワードが更新されたことをお知らせするためです。',
-                'greeting'    => 'パスワードが更新されました！',
-                'subject'     => 'パスワードが更新されました',
-            ],
-
-            'verification' => [
-                'description'  => 'メールアドレスを確認するには、以下のボタンをクリックしてください。',
-                'greeting'     => 'ようこそ！',
-                'subject'      => 'アカウント確認メール',
-                'verify-email' => 'メールアドレスを確認',
-            ],
-
-            'commented' => [
-                'description' => 'ノートは - :note',
-                'subject'     => '新しいコメントが追加されました',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'おめでとうございます！ニュースレターコミュニティへのご参加を歓迎します。最新のニュース、トレンド、独占オファーをお届けし、お楽しみいただけます。',
                 'greeting'    => 'ニュースレターへようこそ！',
                 'subject'     => 'ニュースレターに登録しました',
                 'unsubscribe' => '登録解除',
             ],
+
+            'update-password'  => [
+                'description' => 'このメールは、パスワードが更新されたことをお知らせするためです。',
+                'greeting'    => 'パスワードが更新されました！',
+                'subject'     => 'パスワードが更新されました',
+            ],
+
+            'verification'     => [
+                'description'  => 'メールアドレスを確認するには、以下のボタンをクリックしてください。',
+                'greeting'     => 'ようこそ！',
+                'subject'      => 'アカウント確認メール',
+                'verify-email' => 'メールアドレスを確認',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => ':created_at に注文 :order_id をご注文いただき、ありがとうございます',
                 'subject'  => '新規注文確認',

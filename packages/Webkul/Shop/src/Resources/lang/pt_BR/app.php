@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Prezado(a) :customer_name',
-        'thanks' => 'Se você precisar de qualquer tipo de ajuda, entre em contato conosco em <a href=":link" style=":style">:email</a>.<br/>Obrigado!',
+        'dear'      => 'Prezado(a) :customer_name',
+        'thanks'    => 'Se você precisar de qualquer tipo de ajuda, entre em contato conosco em <a href=":link" style=":style">:email</a>.<br/>Obrigado!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Nota é - :note',
+                'subject'     => 'Novo Comentário Adicionado',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para a sua conta.',
+                'greeting'       => 'Esqueceu a Senha!',
+                'reset-password' => 'Redefinir Senha',
+                'subject'        => 'E-mail de Redefinição de Senha',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Se você já pagou, apenas ignore este e-mail.',
+                'please-make-payment'  => 'Por favor, faça seu pagamento o mais rápido possível.',
+                'thanks'               => 'Obrigado!',
+                'overdue-invoice'      => 'Sua fatura :invoice está atrasada por :time.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'Novo Registro de Cliente',
                 'description'             => 'Sua conta foi criada com sucesso e você pode fazer login usando seu e-mail e senha. Ao fazer o login, você poderá acessar outros serviços, incluindo a revisão de pedidos anteriores, listas de desejos e a edição das informações da sua conta.',
                 'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'Senha',
             ],
 
-            'forgot-password' => [
-                'description'    => 'Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para a sua conta.',
-                'greeting'       => 'Esqueceu a Senha!',
-                'reset-password' => 'Redefinir Senha',
-                'subject'        => 'E-mail de Redefinição de Senha',
-            ],
-
-            'update-password' => [
-                'description' => 'Você está recebendo este e-mail porque você atualizou sua senha.',
-                'greeting'    => 'Senha Atualizada!',
-                'subject'     => 'Senha Atualizada',
-            ],
-
-            'verification' => [
-                'description'  => 'Por favor, clique no botão abaixo para verificar seu endereço de e-mail.',
-                'greeting'     => 'Bem-vindo!',
-                'subject'      => 'E-mail de Verificação de Conta',
-                'verify-email' => 'Verificar Endereço de E-mail',
-            ],
-
-            'commented' => [
-                'description' => 'Nota é - :note',
-                'subject'     => 'Novo Comentário Adicionado',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Parabéns e bem-vindo à nossa comunidade de newsletter! Estamos animados por tê-lo a bordo e mantê-lo atualizado com as últimas notícias, tendências e ofertas exclusivas.',
                 'greeting'    => 'Bem-vindo à nossa newsletter!',
                 'subject'     => 'Você! Inscreva-se na Nossa Newsletter',
                 'unsubscribe' => 'Cancelar Inscrição',
             ],
+
+            'update-password'  => [
+                'description' => 'Você está recebendo este e-mail porque você atualizou sua senha.',
+                'greeting'    => 'Senha Atualizada!',
+                'subject'     => 'Senha Atualizada',
+            ],
+
+            'verification'     => [
+                'description'  => 'Por favor, clique no botão abaixo para verificar seu endereço de e-mail.',
+                'greeting'     => 'Bem-vindo!',
+                'subject'      => 'E-mail de Verificação de Conta',
+                'verify-email' => 'Verificar Endereço de E-mail',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Obrigado pelo seu Pedido :order_id feito em :created_at',
                 'subject'  => 'Confirmação de Novo Pedido',

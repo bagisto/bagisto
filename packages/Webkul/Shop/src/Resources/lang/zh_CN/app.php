@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => '亲爱的 :customer_name',
-        'thanks' => '如果您需要任何帮助，请联系我们：<a href=":link" style=":style">:email</a>。<br/>谢谢！',
+        'dear'      => '亲爱的 :customer_name',
+        'thanks'    => '如果您需要任何帮助，请联系我们：<a href=":link" style=":style">:email</a>。<br/>谢谢！',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => '备注是 - :note',
+                'subject'     => '新增评论',
+            ],
+
+            'forgot-password'  => [
+                'description'    => '您收到此电子邮件，因为我们收到了有关您帐户的密码重置请求。',
+                'greeting'       => '忘记密码！',
+                'reset-password' => '重置密码',
+                'subject'        => '重置密码电子邮件',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => '如果您已经支付，请忽略此电子邮件。',
+                'please-make-payment'  => '请尽快付款。',
+                'thanks'               => '谢谢！',
+                'overdue-invoice'      => '您的发票 :invoice 已经逾期 :time。',
+            ],
+
+            'registration'     => [
                 'subject'                 => '新客户注册',
                 'description'             => '您的帐户已成功创建，您可以使用电子邮件地址和密码凭据登录。登录后，您将能够访问其他服务，包括查看过去的订单、愿望清单和编辑您的帐户信息。',
                 'credentials-description' => '您的账户已创建。您的账户详细信息如下：',
@@ -830,40 +849,28 @@ return [
                 'username-email'          => '密码',
             ],
 
-            'forgot-password' => [
-                'description'    => '您收到此电子邮件，因为我们收到了有关您帐户的密码重置请求。',
-                'greeting'       => '忘记密码！',
-                'reset-password' => '重置密码',
-                'subject'        => '重置密码电子邮件',
-            ],
-
-            'update-password' => [
-                'description' => '您正在收到此电子邮件，因为您已更新您的密码。',
-                'greeting'    => '密码已更新！',
-                'subject'     => '密码已更新',
-            ],
-
-            'verification' => [
-                'description'  => '请单击下面的按钮以验证您的电子邮件地址。',
-                'greeting'     => '欢迎！',
-                'subject'      => '帐户验证电子邮件',
-                'verify-email' => '验证电子邮件地址',
-            ],
-
-            'commented' => [
-                'description' => '备注是 - :note',
-                'subject'     => '新增评论',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => '祝贺您加入我们的新闻通讯社区！我们很高兴您加入我们，随时向您提供最新的新闻、趋势和独家优惠。',
                 'greeting'    => '欢迎加入我们的新闻通讯！',
                 'subject'     => '您！订阅我们的新闻通讯',
                 'unsubscribe' => '取消订阅',
             ],
+
+            'update-password'  => [
+                'description' => '您正在收到此电子邮件，因为您已更新您的密码。',
+                'greeting'    => '密码已更新！',
+                'subject'     => '密码已更新',
+            ],
+
+            'verification'     => [
+                'description'  => '请单击下面的按钮以验证您的电子邮件地址。',
+                'greeting'     => '欢迎！',
+                'subject'      => '帐户验证电子邮件',
+                'verify-email' => '验证电子邮件地址',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => '感谢您的订单 :order_id，下单时间 :created_at',
                 'subject'  => '新订单确认',

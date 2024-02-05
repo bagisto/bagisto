@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'יקר :customer_name',
-        'thanks' => 'אם אתה זקוק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
+        'dear'      => 'יקר :customer_name',
+        'thanks'    => 'אם אתה זקוק לעזרה בכל סוג שהוא, אנא פנה אלינו ב-<a href=":link" style=":style">:email</a>.<br/>תודה!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'ההודעה היא - :note',
+                'subject'     => 'הוספת הערה חדשה',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשה לאיפוס סיסמה עבור החשבון שלך.',
+                'greeting'       => 'שכחת סיסמה!',
+                'reset-password' => 'איפוס סיסמה',
+                'subject'        => 'אימייל איפוס סיסמה',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'אם כבר שילמת, פשוט התעלם מהמייל הזה.',
+                'please-make-payment'  => 'אנא בצע את התשלום שלך בהקדם האפשרי.',
+                'thanks'               => 'תודה!',
+                'overdue-invoice'      => 'חשבונית :invoice שלך מתעכבת ב :time.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'רישום לקוח חדש',
                 'description'             => 'חשבונך נוצר כעת בהצלחה ואתה יכול להתחבר באמצעות כתובת האימייל ופרטי הסיסמה שלך. לאחר ההתחברות, תוכל לגשת לשירותים נוספים, כולל בדיקת הזמנות קודמות, רשימת המשאלות ועריכת פרטי החשבון שלך.',
                 'credentials-description' => 'החשבון שלך נוצר. פרטי החשבון שלך מופיעים למטה:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'סיסמה',
             ],
 
-            'forgot-password' => [
-                'description'    => 'אתה מקבל אימייל זה מכיוון שקיבלנו בקשה לאיפוס סיסמה עבור החשבון שלך.',
-                'greeting'       => 'שכחת סיסמה!',
-                'reset-password' => 'איפוס סיסמה',
-                'subject'        => 'אימייל איפוס סיסמה',
-            ],
-
-            'update-password' => [
-                'description' => 'אתה מקבל אימייל זה מכיוון שעדכנת את הסיסמה שלך.',
-                'greeting'    => 'סיסמה עודכנה בהצלחה!',
-                'subject'     => 'עדכון סיסמה',
-            ],
-
-            'verification' => [
-                'description'  => 'אנא לחץ על הלחצן למטה כדי לאמת את כתובת האימייל שלך.',
-                'greeting'     => 'ברוך הבא!',
-                'subject'      => 'אימייל אימות לחשבון',
-                'verify-email' => 'אמת כתובת אימייל',
-            ],
-
-            'commented' => [
-                'description' => 'ההודעה היא - :note',
-                'subject'     => 'הוספת הערה חדשה',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'מזל טוב וברוך הבא לקהילת הניוזלטר שלנו. תהנה מהעדכונים והדילים האחרונים שלנו!',
                 'greeting'    => 'ברוך הבא לניוזלטר שלנו!',
                 'subject'     => 'הצטרפת לניוזלטר שלנו',
                 'unsubscribe' => 'הסר מהרשימה',
             ],
+
+            'update-password'  => [
+                'description' => 'אתה מקבל אימייל זה מכיוון שעדכנת את הסיסמה שלך.',
+                'greeting'    => 'סיסמה עודכנה בהצלחה!',
+                'subject'     => 'עדכון סיסמה',
+            ],
+
+            'verification'     => [
+                'description'  => 'אנא לחץ על הלחצן למטה כדי לאמת את כתובת האימייל שלך.',
+                'greeting'     => 'ברוך הבא!',
+                'subject'      => 'אימייל אימות לחשבון',
+                'verify-email' => 'אמת כתובת אימייל',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'תודה על ההזמנה שלך :order_id שנעשתה בתאריך :created_at',
                 'subject'  => 'אישור הזמנה חדשה',

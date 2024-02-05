@@ -13,7 +13,7 @@ class InvoicedNotification extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
+     * @param  \Webkul\Sales\Contracts\Invoice  $invoice
      * @param  string  $email
      * @return void
      */

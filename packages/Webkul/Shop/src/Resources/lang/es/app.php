@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Sehr geehrte/r :customer_name',
-        'thanks' => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter <a href=":link" style=":style">:email</a>.<br/>Vielen Dank!',
+        'dear'      => 'Sehr geehrte/r :customer_name',
+        'thanks'    => 'Wenn Sie Hilfe benötigen, kontaktieren Sie uns bitte unter <a href=":link" style=":style">:email</a>.<br/>Vielen Dank!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Notiz lautet - :note',
+                'subject'     => 'Neuer Kommentar hinzugefügt',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
+                'greeting'       => 'Passwort vergessen!',
+                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
+                'reset-password' => 'Passwort zurücksetzen',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Si ya ha pagado, simplemente ignore este correo electrónico.',
+                'please-make-payment'  => 'Por favor, realice su pago lo antes posible.',
+                'thanks'               => '¡Gracias!',
+                'overdue-invoice'      => 'Su factura :invoice está vencida por :time.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'Neue Kundenregistrierung',
                 'description'             => 'Ihr Konto wurde erfolgreich erstellt und Sie können sich mit Ihren E-Mail-Adresse und Passwort anmelden. Nach der Anmeldung können Sie auf weitere Dienste zugreifen, einschließlich der Überprüfung früherer Bestellungen, Wunschlisten und der Bearbeitung Ihrer Kontoinformationen.',
                 'credentials-description' => 'Su cuenta ha sido creada. Los detalles de su cuenta se encuentran a continuación:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'Contraseña',
             ],
 
-            'forgot-password' => [
-                'description'    => 'Sie erhalten diese E-Mail, weil wir eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten haben.',
-                'greeting'       => 'Passwort vergessen!',
-                'subject'        => 'E-Mail zum Zurücksetzen des Passworts',
-                'reset-password' => 'Passwort zurücksetzen',
-            ],
-
-            'update-password' => [
-                'description' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
-                'greeting'    => 'Passwort aktualisiert!',
-                'subject'     => 'Passwort aktualisiert',
-            ],
-
-            'verification' => [
-                'description'  => 'Bitte klicken Sie auf den unten stehenden Button, um Ihre E-Mail-Adresse zu bestätigen.',
-                'greeting'     => 'Willkommen!',
-                'subject'      => 'E-Mail zur Kontoüberprüfung',
-                'verify-email' => 'E-Mail-Adresse bestätigen',
-            ],
-
-            'commented' => [
-                'description' => 'Notiz lautet - :note',
-                'subject'     => 'Neuer Kommentar hinzugefügt',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Herzlichen Glückwunsch und willkommen in unserer Newsletter-Community! Wir freuen uns, Sie an Bord zu haben und Sie mit den neuesten Nachrichten, Trends und exklusiven Angeboten auf dem Laufenden zu halten.',
                 'greeting'    => 'Willkommen bei unserem Newsletter!',
                 'subject'     => 'Sie! Abonnieren Sie unseren Newsletter',
                 'unsubscribe' => 'Abmelden',
             ],
+
+            'update-password'  => [
+                'description' => 'Sie erhalten diese E-Mail, weil Sie Ihr Passwort aktualisiert haben.',
+                'greeting'    => 'Passwort aktualisiert!',
+                'subject'     => 'Passwort aktualisiert',
+            ],
+
+            'verification'     => [
+                'description'  => 'Bitte klicken Sie auf den unten stehenden Button, um Ihre E-Mail-Adresse zu bestätigen.',
+                'greeting'     => 'Willkommen!',
+                'subject'      => 'E-Mail zur Kontoüberprüfung',
+                'verify-email' => 'E-Mail-Adresse bestätigen',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Vielen Dank für Ihre Bestellung :order_id, aufgegeben am :created_at',
                 'subject'  => 'Neue Bestellbestätigung',

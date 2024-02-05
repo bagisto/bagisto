@@ -816,11 +816,30 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Dear :customer_name',
-        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+        'dear'      => 'Dear :customer_name',
+        'thanks'    => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
 
         'customers' => [
-            'registration' => [
+            'commented'        => [
+                'description' => 'Note Is - :note',
+                'subject'     => 'New comment Added',
+            ],
+
+            'forgot-password'  => [
+                'description'    => 'You are receiving this email because we received a password reset request for your account.',
+                'greeting'       => 'Forgot Password!',
+                'reset-password' => 'Reset Password',
+                'subject'        => 'Reset Password Email',
+            ],
+
+            'invoice-reminder' => [
+                'disregard-this-email' => 'If you\'ve already paid, just disregard this email.',
+                'please-make-payment'  => 'Please make your payment as soon as possible.',
+                'thanks'               => 'Thanks!',
+                'overdue-invoice'      => 'Your invoice :invoice is overdue by :time.',
+            ],
+
+            'registration'     => [
                 'subject'                 => 'New Customer Registration',
                 'description'             => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
                 'credentials-description' => 'Your account has been created. Your account details are below:',
@@ -830,40 +849,28 @@ return [
                 'password'                => 'Password',
             ],
 
-            'forgot-password' => [
-                'description'    => 'You are receiving this email because we received a password reset request for your account.',
-                'greeting'       => 'Forgot Password!',
-                'reset-password' => 'Reset Password',
-                'subject'        => 'Reset Password Email',
-            ],
-
-            'update-password' => [
-                'description' => 'You are receiving this email because you have updated your password.',
-                'greeting'    => 'Password Updated!',
-                'subject'     => 'Password Updated',
-            ],
-
-            'verification' => [
-                'description'  => 'Please click the button below to verify your email address.',
-                'greeting'     => 'Welcome!',
-                'subject'      => 'Account Verification Email',
-                'verify-email' => 'Verify Email Address',
-            ],
-
-            'commented' => [
-                'description' => 'Note Is - :note',
-                'subject'     => 'New comment Added',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Congratulations and welcome to our newsletter community! We\'re excited to have you on board and keep you updated with the latest news, trends, and exclusive offers.',
                 'greeting'    => 'Welcome to our newsletter!',
                 'subject'     => 'You! Subscribe to Our Newsletter',
                 'unsubscribe' => 'Unsubscribe',
             ],
+
+            'update-password'  => [
+                'description' => 'You are receiving this email because you have updated your password.',
+                'greeting'    => 'Password Updated!',
+                'subject'     => 'Password Updated',
+            ],
+
+            'verification'     => [
+                'description'  => 'Please click the button below to verify your email address.',
+                'greeting'     => 'Welcome!',
+                'subject'      => 'Account Verification Email',
+                'verify-email' => 'Verify Email Address',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Thanks for your Order :order_id placed on :created_at',
                 'subject'  => 'New Order Confirmation',

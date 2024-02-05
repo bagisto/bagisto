@@ -819,54 +819,61 @@ return [
     ],
 
     'emails' => [
-        'dear'   => 'Cher :customer_name',
-        'thanks' => 'Si vous avez besoin d\'aide de quelque nature que ce soit, veuillez nous contacter à l\'adresse <a href=":link" style=":style">:email</a>.<br/>Merci !',
+        'dear'      => 'Cher :customer_name',
+        'thanks'    => 'Si vous avez besoin d\'aide de quelque nature que ce soit, veuillez nous contacter à l\'adresse <a href=":link" style=":style">:email</a>.<br/>Merci !',
 
         'customers' => [
-            'registration' => [
-                'subject'                 => 'Nouvelle inscription de client',
-                'description'             => 'Votre compte a été créé avec succès et vous pouvez vous connecter en utilisant votre adresse e-mail et vos informations d\'identification par mot de passe. Après vous être connecté, vous pourrez accéder à d\'autres services, y compris la consultation de commandes passées, de listes de souhaits et la modification de vos informations de compte.',
-                'credentials-description' => 'Votre compte a été créé. Les détails de votre compte sont ci-dessous :',
-                'greeting'                => 'Bienvenue et merci de vous être inscrit chez nous !',
-                'sign-in'                 => 'Se connecter',
-                'username-email'          => 'Nom d\'utilisateur/Email',
-                'password'                => 'Mot de passe',
+            'commented'        => [
+                'description' => 'Note : :note',
+                'subject'     => 'Nouveau commentaire ajouté',
             ],
 
-            'forgot-password' => [
+            'forgot-password'  => [
                 'description'    => 'Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.',
                 'greeting'       => 'Mot de passe oublié !',
                 'reset-password' => 'Réinitialiser le mot de passe',
                 'subject'        => 'E-mail de réinitialisation de mot de passe',
             ],
 
-            'update-password' => [
-                'description' => 'Vous recevez cet e-mail car vous avez mis à jour votre mot de passe.',
-                'greeting'    => 'Mot de passe mis à jour !',
-                'subject'     => 'Mot de passe mis à jour',
+            'invoice-reminder' => [
+                'disregard-this-email' => 'Si vous avez déjà payé, ignorez simplement cet e-mail.',
+                'please-make-payment'  => 'Veuillez effectuer votre paiement dès que possible.',
+                'thanks'               => 'Merci !',
+                'overdue-invoice'      => 'Votre facture :invoice est en retard de :time.',
             ],
 
-            'verification' => [
-                'description'  => 'Veuillez cliquer sur le bouton ci-dessous pour vérifier votre adresse e-mail.',
-                'greeting'     => 'Bienvenue !',
-                'subject'      => 'E-mail de vérification du compte',
-                'verify-email' => 'Vérifier l\'adresse e-mail',
+            'registration'     => [
+                'credentials-description' => 'Votre compte a été créé. Les détails de votre compte sont ci-dessous :',
+                'description'             => 'Votre compte a été créé avec succès et vous pouvez vous connecter en utilisant votre adresse e-mail et vos informations d\'identification par mot de passe. Après vous être connecté, vous pourrez accéder à d\'autres services, y compris la consultation de commandes passées, de listes de souhaits et la modification de vos informations de compte.',
+                'greeting'                => 'Bienvenue et merci de vous être inscrit chez nous !',
+                'password'                => 'Mot de passe',
+                'sign-in'                 => 'Se connecter',
+                'subject'                 => 'Nouvelle inscription de client',
+                'username-email'          => 'Nom d\'utilisateur/Email',
             ],
 
-            'commented' => [
-                'description' => 'Note : :note',
-                'subject'     => 'Nouveau commentaire ajouté',
-            ],
-
-            'subscribed' => [
+            'subscribed'       => [
                 'description' => 'Félicitations et bienvenue dans notre communauté de newsletter ! Nous sommes ravis de vous avoir à bord et de vous tenir informé des dernières actualités, tendances et offres exclusives.',
                 'greeting'    => 'Bienvenue à notre newsletter !',
                 'subject'     => 'Vous êtes abonné à notre newsletter',
                 'unsubscribe' => 'Se désabonner',
             ],
+
+            'update-password'  => [
+                'description' => 'Vous recevez cet e-mail car vous avez mis à jour votre mot de passe.',
+                'greeting'    => 'Mot de passe mis à jour !',
+                'subject'     => 'Mot de passe mis à jour',
+            ],
+
+            'verification'     => [
+                'description'  => 'Veuillez cliquer sur le bouton ci-dessous pour vérifier votre adresse e-mail.',
+                'greeting'     => 'Bienvenue !',
+                'subject'      => 'E-mail de vérification du compte',
+                'verify-email' => 'Vérifier l\'adresse e-mail',
+            ],
         ],
 
-        'orders' => [
+        'orders'    => [
             'created' => [
                 'greeting' => 'Merci pour votre commande :order_id passée le :created_at',
                 'title'    => 'Confirmation de commande !',

@@ -5,22 +5,22 @@
         </p>
 
         <p style="font-size: 16px;color: #384860;line-height: 24px;">
-            @lang('shop::app.mail.invoice.reminder.your-invoice-is-overdue', [
+            @lang('shop::app.emails.customers.invoice-reminder.overdue-invoice', [
                 'invoice' => $invoice->increment_id,
                 'time' => $invoice->created_at->diffForHumans()
             ])
         </p>
 
-        <p style="">
-            @lang('shop::app.mail.invoice.reminder.please-make-your-payment-as-soon-as-possible')
+        <p style="font-size: 16px;color: #384860;line-height: 24px;">
+            @lang('shop::app.emails.customers.invoice-reminder.please-make-payment')
         </p>
 
-        <p style="">
-            @lang('shop::app.mail.invoice.reminder.if-you-ve-already-paid-just-disregard-this-email')
+        <p style="font-size: 16px;color: #384860;line-height: 24px;">
+            @lang('shop::app.emails.customers.invoice-reminder.disregard-this-email')
         </p>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            @lang('shop::app.mail.customer.new.thanks')
+            @lang('shop::app.emails.customers.invoice-reminder.thanks')
         </p>
     </div>
 @endcomponent
