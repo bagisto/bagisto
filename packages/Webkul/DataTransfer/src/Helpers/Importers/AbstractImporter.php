@@ -377,21 +377,6 @@ abstract class AbstractImporter
     }
 
     /**
-     * Add error with corresponding current data source row number.
-     */
-    public function addRowError(string $code, int $rowNumber, ?string $columnName = null, ?string $message = null): self
-    {
-        $this->errorHelper->addError(
-            $code,
-            $rowNumber,
-            $columnName,
-            $message
-        );
-
-        return $this;
-    }
-
-    /**
      * Add row as skipped
      *
      * @param  int|null  $rowNumber
@@ -401,7 +386,12 @@ abstract class AbstractImporter
      */
     protected function skipRow($rowNumber, string $errorCode, $columnName = null, $errorMessage = null): self
     {
-        $this->addRowError($errorCode, $rowNumber, $columnName, $errorMessage);
+        $this->errorHelper->addError(
+            $errorCode,
+            $rowNumber,
+            $columnName,
+            $errorMessage
+        );
 
         $this->errorHelper->addRowToSkip($rowNumber);
 
