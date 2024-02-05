@@ -23,6 +23,7 @@ use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Types\Product\SKUStorage;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteIndexJob;
 use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
 use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
 use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
@@ -262,59 +263,292 @@ class Product extends AbstractType
     }
 
     /**
+     * Validates row
+     */
+    public function validateRow(array $rowData, int $rowNumber): bool
+    {
+        /**
+         * If row is already validated than no need for further validation
+         */
+        if (isset($this->validatedRows[$rowNumber])) {
+            return ! $this->errorHelper->isRowInvalid($rowNumber);
+        }
+
+        $this->validatedRows[$rowNumber] = true;
+
+        /**
+         * If import action is delete than no need for further validation
+         */
+        if ($this->import->action == Import::ACTION_DELETE) {
+            if (! $this->isSKUExist($rowData['sku'])) {
+                $this->skipRow($rowNumber, self::ERROR_SKU_NOT_FOUND_FOR_DELETE);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Check if product type exists
+         */
+        if (
+            $rowData['type'] == self::PRODUCT_TYPE_DOWNLOADABLE
+            || ! config('product_types.' . $rowData['type'])
+        ) {
+            $this->skipRow($rowNumber, self::ERROR_INVALID_TYPE, 'type');
+
+            return false;
+        }
+
+        /**
+         * Check if attribute family exists
+         */
+        if (! $this->attributeFamilies->where('code', $rowData['attribute_family_code'])->first()) {
+            $this->skipRow($rowNumber, self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE, 'attribute_family_code');
+
+            return false;
+        }
+
+        if (! isset($this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']])) {
+            $this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']] = $this->getValidationRules($rowData);
+        }
+
+        /**
+         * Validate product attributes
+         */
+        $validator = Validator::make($rowData, $this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']]);
+
+        if ($validator->fails()) {
+            $failedAttributes = $validator->failed();
+
+            foreach ($validator->errors()->getMessages() as $attributeCode => $message) {
+                $errorCode = array_key_first($failedAttributes[$attributeCode] ?? []);
+
+                $this->skipRow($rowNumber, $errorCode, $attributeCode, current($message));
+            }
+        }
+
+        /**
+         * Check if url_key is unique
+         */
+        if (
+            empty($this->urlKeys[$rowData['url_key']])
+            || ($this->urlKeys[$rowData['url_key']]['sku'] == $rowData['sku'])
+        ) {
+            $this->urlKeys[$rowData['url_key']] = [
+                'sku'        => $rowData['sku'],
+                'row_number' => $rowNumber,
+            ];
+        } else {
+            $message = sprintf(
+                trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
+                'url_key',
+                $this->urlKeys[$rowData['url_key']]['sku']
+            );
+
+            $this->skipRow($rowNumber, self::ERROR_DUPLICATE_URL_KEY, 'url_key', $message);
+        }
+
+        /**
+         * TODO
+         *
+         * Check if configurable super attribute exists in the attribute family
+         */
+
+        /**
+         * Bundle, Grouped and Configurable options validation
+         *
+         * 1: Check if bundle option data is valid
+         * 2: Check if grouped products data is valid
+         * 3: Check if grouped products data is valid
+         */
+        $optionsData = [];
+
+        $validationRules = [];
+
+        if ($rowData['type'] == self::PRODUCT_TYPE_BUNDLE) {
+            $validationRules = [
+                'bundle_options.*.name'     => 'required',
+                'bundle_options.*.type'     => 'required|in:select,radio,checkbox,multiselect',
+                'bundle_options.*.required' => 'required|boolean',
+                'bundle_options.*.sku'      => 'required',
+                'bundle_options.*.price'    => ['required', new Decimal],
+                'bundle_options.*.qty'      => 'required|integer',
+                'bundle_options.*.default'  => 'required|boolean',
+            ];
+
+            $options = explode('|', $rowData['bundle_options']);
+
+            foreach ($options as $option) {
+                parse_str(str_replace(',', '&', $option), $attributes);
+
+                $optionsData['bundle_options'][] = $attributes;
+            }
+        } elseif ($rowData['type'] == self::PRODUCT_TYPE_GROUPED) {
+            $validationRules = [
+                'associated_skus.*.sku' => 'required',
+                'associated_skus.*.qty' => 'required|integer',
+            ];
+
+            $associatedSkus = explode(',', $rowData['associated_skus']);
+
+            foreach ($associatedSkus as $row) {
+                [$sku, $qty] = explode('=', $row);
+
+                $optionsData['associated_skus'][] = [
+                    'sku' => $sku ?? '',
+                    'qty' => $qty ?? null,
+                ];
+            }
+        } elseif ($rowData['type'] == self::PRODUCT_TYPE_CONFIGURABLE) {
+            $validationRules = [
+                'configurable_variants.*.sku' => 'required',
+            ];
+
+            $options = explode('|', $rowData['configurable_variants']);
+
+            foreach ($options as $option) {
+                parse_str(str_replace(',', '&', $option), $attributes);
+
+                $optionsData['configurable_variants'][] = $attributes;
+            }
+        }
+
+        if (! empty($optionsData)) {
+            $validator = Validator::make($optionsData, $validationRules);
+
+            if ($validator->fails()) {
+                foreach ($validator->errors()->getMessages() as $attributeCode => $message) {
+                    $failedAttributes = $validator->failed();
+
+                    $errorCode = array_key_first($failedAttributes[$attributeCode] ?? []);
+
+                    $this->skipRow($rowNumber, $errorCode, $attributeCode, current($message));
+                }
+            }
+        }
+
+        return ! $this->errorHelper->isRowInvalid($rowNumber);
+    }
+
+    /**
+     * Prepare validation rules
+     */
+    public function getValidationRules(array $rowData): array
+    {
+        $rules = [
+            'sku'                => ['required', new Slug],
+            'url_key'            => ['required'],
+            'special_price_from' => ['nullable', 'date'],
+            'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
+            'special_price'      => ['nullable', new Decimal, 'lt:price'],
+        ];
+
+        $attributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
+
+        foreach ($attributes as $attribute) {
+            if (in_array($attribute->code, ['sku', 'url_key'])) {
+                continue;
+            }
+
+            $validations = [];
+
+            if (! isset($rules[$attribute->code])) {
+                $validations[] = $attribute->is_required ? 'required' : 'nullable';
+            } else {
+                $validations = $rules[$attribute->code];
+            }
+
+            if (
+                $attribute->type == 'text'
+                && $attribute->validation
+            ) {
+                if ($attribute->validation === 'decimal') {
+                    $validations[] = new Decimal;
+                } elseif ($attribute->validation === 'regex') {
+                    $validations[] = 'regex:' . $attribute->regex;
+                } else {
+                    $validations[] = $attribute->validation;
+                }
+            }
+
+            if ($attribute->type == 'price') {
+                $validations[] = new Decimal;
+            }
+
+            if ($attribute->is_unique) {
+                array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
+                    $product = $this->skuStorage->get($rowData['sku']);
+
+                    $count = $this->productAttributeValueRepository
+                        ->where($attribute->column_name, $rowData[$attribute->code])
+                        ->where('attribute_id', '=', $attribute->id)
+                        ->where('product_attribute_values.product_id', '!=', $product['id'])
+                        ->count('product_attribute_values.id');
+
+                    if ($count) {
+                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
+                    }
+                });
+            }
+
+            $rules[$attribute->code] = $validations;
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Check that url_keys are not assigned to other products in DB
+     */
+    protected function checkForDuplicateUrlKeys(): void
+    {
+        if (empty($this->urlKeys)) {
+            return;
+        }
+
+        $products = $this->productRepository
+            ->resetScope()
+            ->select('products.id', 'product_attribute_values.text_value as url_key', 'products.sku')
+            ->leftJoin('product_attribute_values', 'products.id', 'product_attribute_values.product_id')
+            ->leftJoin('attributes', 'product_attribute_values.attribute_id', 'attributes.id')
+            ->where('attributes.code', 'url_key')
+            ->where('product_attribute_values.text_value', array_keys($this->urlKeys))
+            ->whereNotIn('products.sku', Arr::pluck($this->urlKeys, 'sku'))
+            ->get();
+
+        foreach ($products as $product) {
+            $this->skipRow(
+                $this->urlKeys[$product->url_key]['row_number'],
+                self::ERROR_DUPLICATE_URL_KEY,
+                'url_key',
+                sprintf(
+                    trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
+                    $product->url_key,
+                    $product->sku
+                )
+            );
+        }
+    }
+
+    /**
      * Start the import process
      */
     public function importBatch(ImportBatchContract $batch): bool
     {
         Event::dispatch('data_transfer.imports.batch.import.before', $batch);
 
-        /**
-         * Load SKU storage with batch skus
-         */
-        $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
-
-        $products = [];
-
-        $categories = [];
-
-        $attributeValues = [];
-
-        $inventories = [];
-
-        $imagesData = [];
-
-        $flatData = [];
-
-        foreach ($batch->data as $rowData) {
-            $this->prepareProducts($rowData, $products);
-
-            $this->prepareCategories($rowData, $categories);
-
-            $this->prepareAttributeValues($rowData, $attributeValues);
-
-            $this->prepareInventories($rowData, $inventories);
-
-            $this->prepareImages($rowData, $imagesData);
-
-            $this->prepareFlatData($rowData, $flatData);
+        if ($batch->import->action == Import::ACTION_DELETE) {
+            $this->deleteProducts($batch);
+        } else {
+            $this->saveProductsData($batch);
         }
-
-        $this->saveProducts($products);
-
-        $this->saveCategories($categories);
-
-        $this->saveAttributeValues($attributeValues);
-
-        $this->saveInventories($inventories);
-
-        $this->saveImages($imagesData);
-
-        $this->saveFlatData($flatData);
 
         /**
          * Update import batch summary
          */
-        $this->importBatchRepository->update([
+        $batch = $this->importBatchRepository->update([
             'state' => Import::STATE_PROCESSED,
 
             'summary'      => [
@@ -551,6 +785,119 @@ class Product extends AbstractType
         ], $batch->id);
 
         Event::dispatch('data_transfer.imports.batch.indexing.after', $batch);
+
+        return true;
+    }
+
+    /**
+     * Delete products from current batch
+     */
+    protected function deleteProducts(ImportBatchContract $batch): bool
+    {
+        /**
+         * Load SKU storage with batch skus
+         */
+        $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
+
+        $idsToDelete = [];
+
+        foreach ($batch->data as $rowData) {
+            if (! $this->isSKUExist($rowData['sku'])) {
+                continue;
+            }
+
+            $product = $this->skuStorage->get($rowData['sku']);
+
+            $idsToDelete[] = $product['id'];
+        }
+
+        $this->deletedItemsCount = count($idsToDelete);
+
+        $this->productRepository->deleteWhere([['id', 'IN', $idsToDelete]]);
+
+        /**
+         * Remove product images from the storage
+         */
+        foreach ($idsToDelete as $id) {
+            $imageDirectory = $this->productImageRepository->getProductDirectory((object) ['id' => $id]);
+
+            if (! Storage::exists($imageDirectory)) {
+                continue;
+            }
+
+            Storage::deleteDirectory($imageDirectory);
+        }
+
+        DeleteIndexJob::dispatch($idsToDelete);
+
+        return true;
+    }
+
+    /**
+     * Save products from current batch
+     */
+    protected function saveProductsData(ImportBatchContract $batch): bool
+    {
+        /**
+         * Load SKU storage with batch skus
+         */
+        $this->skuStorage->load(Arr::pluck($batch->data, 'sku'));
+
+        $products = [];
+
+        $categories = [];
+
+        $attributeValues = [];
+
+        $inventories = [];
+
+        $imagesData = [];
+
+        $flatData = [];
+
+        foreach ($batch->data as $rowData) {
+            /**
+             * Prepare products for import
+             */
+            $this->prepareProducts($rowData, $products);
+
+            /**
+             * Prepare product categories to attach with products
+             */
+            $this->prepareCategories($rowData, $categories);
+
+            /**
+             * Prepare products attribute values
+             */
+            $this->prepareAttributeValues($rowData, $attributeValues);
+
+            /**
+             * Prepare products inventories for every inventory source
+             */
+            $this->prepareInventories($rowData, $inventories);
+
+            /**
+             * Prepare products images
+             */
+            $this->prepareImages($rowData, $imagesData);
+
+            /**
+             * Prepare products data for product_flat table
+             */
+            $this->prepareFlatData($rowData, $flatData);
+        }
+
+        $this->saveProducts($products);
+
+        $this->saveCategories($categories);
+
+        $this->saveAttributeValues($attributeValues);
+
+        $this->saveInventories($inventories);
+
+        $this->saveImages($imagesData);
+
+        $this->saveFlatData($flatData);
 
         return true;
     }
@@ -871,7 +1218,9 @@ class Product extends AbstractType
 
                 $image = (new ImageManager())->make($file)->encode('webp');
 
-                $path = 'product/' . $product['id'] . '/' . Str::random(40) . '.webp';
+                $imageDirectory = $this->productImageRepository->getProductDirectory((object) $product);
+
+                $path = $imageDirectory . '/' . Str::random(40) . '.webp';
 
                 $productImages[] = [
                     'type'       => 'images',
@@ -1367,199 +1716,6 @@ class Product extends AbstractType
          */
         if (! empty($notLoadedSkus)) {
             $this->skuStorage->load($notLoadedSkus);
-        }
-    }
-
-    /**
-     * Validates row
-     */
-    public function validateRow(array $rowData, int $rowNumber): bool
-    {
-        /**
-         * If row is already validated than no need for further validation
-         */
-        if (isset($this->validatedRows[$rowNumber])) {
-            return ! $this->errorHelper->isRowInvalid($rowNumber);
-        }
-
-        $this->validatedRows[$rowNumber] = true;
-
-        /**
-         * If import action is delete than no need for further validation
-         */
-        if ($this->import->action == Import::ACTION_DELETE) {
-            if (! $this->isSKUExist($rowData['sku'])) {
-                $this->skipRow($rowNumber, self::ERROR_SKU_NOT_FOUND_FOR_DELETE);
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * Check if product type exists
-         */
-        if (
-            $rowData['type'] == self::PRODUCT_TYPE_DOWNLOADABLE
-            || ! config('product_types.' . $rowData['type'])
-        ) {
-            $this->skipRow($rowNumber, self::ERROR_INVALID_TYPE, 'type');
-
-            return false;
-        }
-
-        /**
-         * Check if attribute family exists
-         */
-        if (! $this->attributeFamilies->where('code', $rowData['attribute_family_code'])->first()) {
-            $this->skipRow($rowNumber, self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE, 'attribute_family_code');
-
-            return false;
-        }
-
-        if (! isset($this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']])) {
-            $this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']] = $this->getValidationRules($rowData);
-        }
-
-        /**
-         * Validate product attributes
-         */
-        $validator = Validator::make($rowData, $this->typeFamilyValidationRules[$rowData['type']][$rowData['attribute_family_code']]);
-
-        if ($validator->fails()) {
-            $failedAttributes = $validator->failed();
-
-            foreach ($validator->errors()->getMessages() as $attributeCode => $message) {
-                $errorCode = array_key_first($failedAttributes[$attributeCode] ?? []);
-
-                $this->skipRow($rowNumber, $errorCode, $attributeCode, current($message));
-            }
-        }
-
-        /**
-         * Check if url_key is unique
-         */
-        if (
-            empty($this->urlKeys[$rowData['url_key']])
-            || ($this->urlKeys[$rowData['url_key']]['sku'] == $rowData['sku'])
-        ) {
-            $this->urlKeys[$rowData['url_key']] = [
-                'sku'        => $rowData['sku'],
-                'row_number' => $rowNumber,
-            ];
-        } else {
-            $message = sprintf(
-                trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
-                'url_key',
-                $this->urlKeys[$rowData['url_key']]['sku']
-            );
-
-            $this->skipRow($rowNumber, self::ERROR_DUPLICATE_URL_KEY, 'url_key', $message);
-        }
-
-        /**
-         * TODO: Needs to be implement
-         *
-         * Check if configurable super attribute exists in the attribute family
-         */
-
-        return ! $this->errorHelper->isRowInvalid($rowNumber);
-    }
-
-    /**
-     * Prepare validation rules
-     */
-    public function getValidationRules(array $rowData): array
-    {
-        $rules = [
-            'sku'                => ['required', new Slug],
-            'url_key'            => ['required'],
-            'special_price_from' => ['nullable', 'date'],
-            'special_price_to'   => ['nullable', 'date', 'after_or_equal:special_price_from'],
-            'special_price'      => ['nullable', new Decimal, 'lt:price'],
-        ];
-
-        $attributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
-
-        foreach ($attributes as $attribute) {
-            if (in_array($attribute->code, ['sku', 'url_key'])) {
-                continue;
-            }
-
-            $validations = [];
-
-            if (! isset($rules[$attribute->code])) {
-                $validations[] = $attribute->is_required ? 'required' : 'nullable';
-            } else {
-                $validations = $rules[$attribute->code];
-            }
-
-            if (
-                $attribute->type == 'text'
-                && $attribute->validation
-            ) {
-                if ($attribute->validation === 'decimal') {
-                    $validations[] = new Decimal;
-                } elseif ($attribute->validation === 'regex') {
-                    $validations[] = 'regex:' . $attribute->regex;
-                } else {
-                    $validations[] = $attribute->validation;
-                }
-            }
-
-            if ($attribute->type == 'price') {
-                $validations[] = new Decimal;
-            }
-
-            if ($attribute->is_unique) {
-                array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
-                    $product = $this->skuStorage->get($rowData['sku']);
-
-                    $count = $this->productAttributeValueRepository
-                        ->where($attribute->column_name, $rowData[$attribute->code])
-                        ->where('attribute_id', '=', $attribute->id)
-                        ->where('product_attribute_values.product_id', '!=', $product['id'])
-                        ->count('product_attribute_values.id');
-
-                    if ($count) {
-                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
-                    }
-                });
-            }
-
-            $rules[$attribute->code] = $validations;
-        }
-
-        return $rules;
-    }
-
-    /**
-     * Check that url_keys are not assigned to other products in DB
-     */
-    protected function checkForDuplicateUrlKeys(): void
-    {
-        $products = $this->productRepository
-            ->resetScope()
-            ->select('products.id', 'product_attribute_values.text_value as url_key', 'products.sku')
-            ->leftJoin('product_attribute_values', 'products.id', 'product_attribute_values.product_id')
-            ->leftJoin('attributes', 'product_attribute_values.attribute_id', 'attributes.id')
-            ->where('attributes.code', 'url_key')
-            ->where('product_attribute_values.text_value', array_keys($this->urlKeys))
-            ->whereNotIn('products.sku', Arr::pluck($this->urlKeys, 'sku'))
-            ->get();
-
-        foreach ($products as $product) {
-            $this->skipRow(
-                $this->urlKeys[$product->url_key]['row_number'],
-                self::ERROR_DUPLICATE_URL_KEY,
-                'url_key',
-                sprintf(
-                    trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
-                    $product->url_key,
-                    $product->sku
-                )
-            );
         }
     }
 

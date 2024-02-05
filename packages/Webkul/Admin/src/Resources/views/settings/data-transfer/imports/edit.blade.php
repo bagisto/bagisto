@@ -74,14 +74,14 @@
 
                     <!-- Images Directory Path -->
                     <x-admin::form.control-group>
-                        <x-admin::form.control-group.label class="required">
+                        <x-admin::form.control-group.label>
                             @lang('admin::app.settings.data-transfer.imports.edit.file')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
                             type="file"
                             name="file"
-                            rules="required|mimes:text/csv"
+                            rules="mimes:text/csv"
                             :label="trans('admin::app.settings.data-transfer.imports.edit.file')"
                         />
 

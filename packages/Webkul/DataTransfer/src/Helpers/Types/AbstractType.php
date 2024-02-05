@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
+use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Jobs\Import\Completed as CompletedJob;
 use Webkul\DataTransfer\Jobs\Import\ImportBatch as ImportBatchJob;
 use Webkul\DataTransfer\Jobs\Import\IndexBatch as IndexBatchJob;
@@ -419,6 +420,10 @@ abstract class AbstractType
      */
     public function isLinkingRequired(): bool
     {
+        if ($this->import->action == Import::ACTION_DELETE) {
+            return false;
+        }
+
         return $this->linkingRequired;
     }
 
@@ -427,6 +432,10 @@ abstract class AbstractType
      */
     public function isIndexingRequired(): bool
     {
+        if ($this->import->action == Import::ACTION_DELETE) {
+            return false;
+        }
+
         return $this->indexingRequired;
     }
 }

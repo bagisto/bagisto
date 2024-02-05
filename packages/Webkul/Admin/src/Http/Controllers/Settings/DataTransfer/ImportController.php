@@ -62,10 +62,25 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'required|mimes:csv',
+            'file'                => 'required|mimes:csv,txt',
         ]);
 
         Event::dispatch('data_transfer.imports.create.before');
+
+        $data = request()->only([
+            'type',
+            'action',
+            'process_in_queue',
+            'validation_strategy',
+            'validation_strategy',
+            'allowed_errors',
+            'field_separator',
+            'images_directory_path',
+        ]);
+
+        if (! isset($data['process_in_queue'])) {
+            $data['process_in_queue'] = false;
+        }
 
         $import = $this->importRepository->create(
             array_merge(
@@ -76,15 +91,7 @@ class ImportController extends Controller
                         'private'
                     ),
                 ],
-                request()->only([
-                    'type',
-                    'action',
-                    'validation_strategy',
-                    'validation_strategy',
-                    'allowed_errors',
-                    'field_separator',
-                    'images_directory_path',
-                ])
+                $data
             )
         );
 
@@ -124,37 +131,47 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'required|mimes:csv',
+            'file'                => 'mimes:csv,txt',
         ]);
 
         Event::dispatch('data_transfer.imports.update.before');
 
-        $import = $this->importRepository->update(
-            array_merge(
-                [
-                    'file_path'            => request()->file('file')->storeAs(
-                        'imports',
-                        time() . '-' . request()->file('file')->getClientOriginalName(),
-                        'private'
-                    ),
-                    'state'                => 'pending',
-                    'processed_rows_count' => 0,
-                    'invalid_rows_count'   => 0,
-                    'errors_count'         => 0,
-                    'errors'               => null,
-                    'error_file_path'      => null,
-                ],
-                request()->only([
-                    'type',
-                    'action',
-                    'validation_strategy',
-                    'validation_strategy',
-                    'allowed_errors',
-                    'field_separator',
-                    'images_directory_path',
-                ])
-            ), $import->id
+        $data = array_merge(
+            request()->only([
+                'type',
+                'action',
+                'process_in_queue',
+                'validation_strategy',
+                'validation_strategy',
+                'allowed_errors',
+                'field_separator',
+                'images_directory_path',
+            ]),
+            [
+                'state'                => 'pending',
+                'processed_rows_count' => 0,
+                'invalid_rows_count'   => 0,
+                'errors_count'         => 0,
+                'errors'               => null,
+                'error_file_path'      => null,
+            ]
         );
+
+        if (request()->file('file') && request()->file('file')->isValid()) {
+            Storage::disk('private')->delete($import->file_path);
+
+            $data['file_path'] = request()->file('file')->storeAs(
+                'imports',
+                time() . '-' . request()->file('file')->getClientOriginalName(),
+                'private'
+            );
+        }
+
+        if (! isset($data['process_in_queue'])) {
+            $data['process_in_queue'] = false;
+        }
+
+        $import = $this->importRepository->update($data, $import->id);
 
         Event::dispatch('data_transfer.imports.update.before', $import);
 
@@ -200,13 +217,19 @@ class ImportController extends Controller
             ->setImport($import)
             ->isValid();
 
-        $state = $import->state == Import::STATE_LINKING
-            ? Import::STATE_COMPLETED
-            : Import::STATE_PROCESSING;
+        if ($import->state == Import::STATE_LINKING) {
+            if ($this->importHelper->isIndexingRequired()) {
+                $state = Import::STATE_INDEXING;
+            } else {
+                $state = Import::STATE_COMPLETED;
+            }
+        } elseif ($import->state == Import::STATE_INDEXING) {
+            $state = Import::STATE_COMPLETED;
+        } else {
+            $state = Import::STATE_COMPLETED;
+        }
 
         $stats = $this->importHelper->stats($state);
-
-        $import->unsetRelations();
 
         return view('admin::settings.data-transfer.imports.import', compact('import', 'isValid', 'stats'));
     }
@@ -226,7 +249,7 @@ class ImportController extends Controller
 
         return new JsonResponse([
             'is_valid' => $isValid,
-            'import'   => $import->unsetRelations(),
+            'import'   => $import,
         ]);
     }
 
@@ -284,7 +307,6 @@ class ImportController extends Controller
                     'message' => $e->getMessage(),
                 ], 400);
             }
-
         } else {
             if ($this->importHelper->isLinkingRequired()) {
                 $this->importHelper->linking();
@@ -296,7 +318,7 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'import' => $this->importHelper->getImport()->unsetRelations(),
+            'import' => $this->importHelper->getImport(),
             'stats'  => $this->importHelper->stats(Import::STATE_PROCESSED),
         ]);
     }
@@ -357,7 +379,7 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'import' => $this->importHelper->getImport()->unsetRelations(),
+            'import' => $this->importHelper->getImport(),
             'stats'  => $this->importHelper->stats(Import::STATE_LINKED),
         ]);
     }
@@ -417,7 +439,7 @@ class ImportController extends Controller
         }
 
         return new JsonResponse([
-            'import' => $this->importHelper->getImport()->unsetRelations(),
+            'import' => $this->importHelper->getImport(),
             'stats'  => $this->importHelper->stats(Import::STATE_INDEXED),
         ]);
     }
@@ -434,7 +456,7 @@ class ImportController extends Controller
             ->stats($state);
 
         return new JsonResponse([
-            'import' => $import->unsetRelations(),
+            'import' => $import,
             'stats'  => $stats,
         ]);
     }

@@ -338,6 +338,7 @@ class Import
                 DB::raw('SUM(json_unquote(json_extract(summary, \'$."updated"\'))) AS updated'),
                 DB::raw('SUM(json_unquote(json_extract(summary, \'$."deleted"\'))) AS deleted'),
             )
+            ->where('import_id', $this->import->id)
             ->groupBy('import_id')
             ->first()
             ->toArray();
@@ -499,10 +500,6 @@ class Import
      */
     public function isLinkingRequired(): bool
     {
-        if ($this->import->action == self::ACTION_DELETE) {
-            return false;
-        }
-
         return $this->getTypeImporter()->isLinkingRequired();
     }
 

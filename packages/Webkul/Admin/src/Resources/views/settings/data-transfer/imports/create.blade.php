@@ -215,7 +215,6 @@
                             <x-admin::form.control-group.control
                                 type="switch"
                                 name="process_in_queue"
-                                :value="1"
                                 id="maintenance-mode-status"
                                 :checked="false"
                             />
