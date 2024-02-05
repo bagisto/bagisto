@@ -2157,7 +2157,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Create Locale',
                 'locale'     => 'Locale',
@@ -2199,7 +2199,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Create Currency',
                 'currency'   => 'Currency',
@@ -2242,30 +2242,9 @@ return [
             ],
         ],
 
-        'data-transfer' => [
+        'data-transfer'     => [
             'imports' => [
-                'index' => [
-                    'button-title' => 'Create Import',
-                    'title'        => 'Imports',
-
-                    'datagrid' => [
-                        'actions'       => 'Actions',
-                        'delete'        => 'Delete',
-                        'edit'          => 'Edit',
-                        'id'            => 'ID',
-                        'state'         => 'State',
-                        'uploaded-file' => 'Uploaded File',
-                        'error-file'    => 'Error File',
-                        'started-at'    => 'Started At',
-                        'completed-at'  => 'Completed At',
-                        'summary'       => 'Summary',
-                        'created'       => 'Created',
-                        'updated'       => 'Updated',
-                        'deleted'       => 'Deleted',
-                    ],
-                ],
-
-                'create' => [
+                'create'            => [
                     'action'              => 'Action',
                     'allowed-errors'      => 'Allowed Errors',
                     'back-btn'            => 'Back',
@@ -2289,7 +2268,7 @@ return [
                     'validation-strategy' => 'Validation Strategy',
                 ],
 
-                'edit' => [
+                'edit'              => [
                     'action'              => 'Action',
                     'allowed-errors'      => 'Allowed Errors',
                     'back-btn'            => 'Back',
@@ -2313,7 +2292,28 @@ return [
                     'validation-strategy' => 'Validation Strategy',
                 ],
 
-                'import' => [
+                'index'             => [
+                    'button-title' => 'Create Import',
+                    'title'        => 'Imports',
+
+                    'datagrid' => [
+                        'actions'       => 'Actions',
+                        'completed-at'  => 'Completed At',
+                        'created'       => 'Created',
+                        'delete'        => 'Delete',
+                        'deleted'       => 'Deleted',
+                        'edit'          => 'Edit',
+                        'error-file'    => 'Error File',
+                        'id'            => 'ID',
+                        'started-at'    => 'Started At',
+                        'state'         => 'State',
+                        'summary'       => 'Summary',
+                        'updated'       => 'Updated',
+                        'uploaded-file' => 'Uploaded File',
+                    ],
+                ],
+
+                'import'            => [
                     'back-btn'                => 'Back',
                     'completed-batches'       => 'Total Batches Completed:',
                     'download-error-report'   => 'Download Full Report',
@@ -2336,20 +2336,19 @@ return [
                     'validating-info'         => 'The data started reading and Validating',
                     'validation-failed-info'  => 'Your import is invalid. Please fix the following errors and try again.',
                     'validation-success-info' => 'Your import is valid. Click on Import to start the import process.',
-
                 ],
 
-                'not-valid'         => 'Import is invalid',
-                'setup-queue-error' => 'Please change your queue driver to "database" or "redis" to start the import process.',
-                'nothing-to-import' => 'There are no resources to import.',
                 'create-success'    => 'Import created successfully.',
-                'delete-success'    => 'Import deleted successfully.',
                 'delete-failed'     => 'Import deletion failed unexpectedly.',
+                'delete-success'    => 'Import deleted successfully.',
+                'not-valid'         => 'Import is invalid',
+                'nothing-to-import' => 'There are no resources to import.',
+                'setup-queue-error' => 'Please change your queue driver to "database" or "redis" to start the import process.',
                 'update-success'    => 'Import updated successfully.',
             ],
         ],
 
-        'exchange-rates' => [
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Create Exchange Rate',
                 'exchange-rate' => 'Exchange Rate',
@@ -2468,7 +2467,7 @@ return [
             'update-success'    => 'Inventory Sources Updated Successfully',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Are You sure you want to delete ?',
