@@ -15,6 +15,68 @@ use Webkul\Sales\Models\OrderPayment;
 
 use function Pest\Laravel\postJson;
 
+it('should fails the certain validation error when store the guest user address for cart billing/shipping for guest user', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cartId = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ])->id,
+    ]);
+
+    $cartTemp = new \stdClass();
+    $cartTemp->id = $cartId;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'))
+        ->assertJsonValidationErrorFor('billing.first_name')
+        ->assertJsonValidationErrorFor('billing.last_name')
+        ->assertJsonValidationErrorFor('billing.email')
+        ->assertJsonValidationErrorFor('billing.address1')
+        ->assertJsonValidationErrorFor('billing.city')
+        ->assertJsonValidationErrorFor('billing.phone')
+        ->assertUnprocessable();
+});
+
 it('should store the guest user address for cart billing/shipping for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -107,6 +169,66 @@ it('should store the guest user address for cart billing/shipping for guest user
         ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
 });
 
+it('should fails the validation error when shipping method not providing when store the shipping method', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cartId = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ])->id,
+    ]);
+
+    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_billing']);
+    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_shipping']);
+
+    $cartTemp = new \stdClass();
+    $cartTemp->id = $cartId;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.shipping_methods.store'))
+        ->assertJsonValidationErrorFor('shipping_method')
+        ->assertUnprocessable();
+});
+
 it('should store the shipping method', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -170,6 +292,67 @@ it('should store the shipping method', function () {
         ->assertJsonPath('payment_methods.1.method', 'cashondelivery')
         ->assertJsonPath('payment_methods.2.method', 'moneytransfer')
         ->assertJsonPath('payment_methods.3.method', 'paypal_standard');
+});
+
+it('should fails the validation error when store the payment method for guest user', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cartId = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+            'shipping_method'       => 'free_free',
+        ])->id,
+    ]);
+
+    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_billing']);
+    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_shipping']);
+
+    $cartTemp = new \stdClass();
+    $cartTemp->id = $cartId;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.payment_methods.store'))
+        ->assertJsonValidationErrorFor('payment')
+        ->assertUnprocessable();
 });
 
 it('should store the payment method for guest user', function () {
