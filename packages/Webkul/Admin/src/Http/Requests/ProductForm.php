@@ -22,7 +22,7 @@ class ProductForm extends FormRequest
     /**
      * Max video upload size.
      *
-     * @var int $maxVideoFileSize
+     * @var int
      */
     protected $maxVideoFileSize;
 
@@ -148,7 +148,7 @@ class ProductForm extends FormRequest
     {
         return [
             'variants.*.sku.unique' => __('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
-            'videos.files.*'        => __('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize])
+            'videos.files.*'        => __('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
         ];
     }
 
