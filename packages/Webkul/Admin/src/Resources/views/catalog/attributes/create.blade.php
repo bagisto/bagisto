@@ -9,7 +9,7 @@
     </x-slot>
 
     <!-- Create Attributes Vue Components -->
-    <v-create-attributes :all-locales="{{ $allLocales->toJson() }}" />
+    <v-create-attributes :all-locales="{{ $allLocales->toJson() }}"></v-create-attributes>
 
     @pushOnce('scripts')
         <script

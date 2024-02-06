@@ -1,13 +1,16 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.downloadable.before', ['product' => $product]) !!}
 
-<v-downloadable-links :errors="errors" />
+<v-downloadable-links :errors="errors"></v-downloadable-links>
 
-<v-downloadable-samples :errors="errors" />
+<v-downloadable-samples :errors="errors"></v-downloadable-samples>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.downloadable.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-downloadable-links-template">
+    <script
+        type="text/x-template"
+        id="v-downloadable-links-template"
+    >
         <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">

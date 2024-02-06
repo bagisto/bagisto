@@ -8,7 +8,10 @@
 </v-create-refund>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-create-refund-template">
+    <script
+        type="text/x-template"
+        id="v-create-refund-template"
+    >
         <div>
             <div
                 class="inline-flex gap-x-2 items-center justify-between w-full max-w-max px-1 py-1.5 text-gray-600 dark:text-gray-300 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"

@@ -1,14 +1,17 @@
 <!-- Customers with Most Sales Vue Component -->
 <v-reporting-customers-with-most-sales>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.customers.most-sales/>
+    <x-admin::shimmer.reporting.customers.most-sales />
 </v-reporting-customers-with-most-sales>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-customers-with-most-sales-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-customers-with-most-sales-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.customers.most-sales/>
+            <x-admin::shimmer.reporting.customers.most-sales />
         </template>
 
         <!-- Customers with Most Sales Section -->

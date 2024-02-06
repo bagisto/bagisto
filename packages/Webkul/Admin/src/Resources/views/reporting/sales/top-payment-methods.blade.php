@@ -1,14 +1,17 @@
 <!-- Top Payment Methods Vue Component -->
 <v-reporting-sales-top-payment-methods>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.top-payment-methods/>
+    <x-admin::shimmer.reporting.sales.top-payment-methods />
 </v-reporting-sales-top-payment-methods>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-top-payment-methods-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-top-payment-methods-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.top-payment-methods/>
+            <x-admin::shimmer.reporting.sales.top-payment-methods />
         </template>
 
         <!-- Top Payment Methods Section -->

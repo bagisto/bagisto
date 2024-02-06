@@ -1,14 +1,17 @@
 <!-- Products with Most Reviews Vue Component -->
 <v-reporting-products-top-search-terms>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.products.top-search-terms/>
+    <x-admin::shimmer.reporting.products.top-search-terms />
 </v-reporting-products-top-search-terms>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-products-top-search-terms-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-products-top-search-terms-template"
+    >
         <template v-if="isLoading">
             <!-- Shimmer -->
-            <x-admin::shimmer.reporting.products.top-search-terms/>
+            <x-admin::shimmer.reporting.products.top-search-terms />
         </template>
 
         <template v-else>

@@ -1,14 +1,17 @@
 <!-- Total Orders Vue Component -->
 <v-reporting-sales-total-orders>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.total-orders/> 
+    <x-admin::shimmer.reporting.sales.total-orders /> 
 </v-reporting-sales-total-orders>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-total-orders-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-total-orders-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.total-orders/> 
+            <x-admin::shimmer.reporting.sales.total-orders /> 
         </template>
 
         <!-- Total Orders Section -->

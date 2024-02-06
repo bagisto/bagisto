@@ -16,7 +16,10 @@
     </v-wishlist-products>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-wishlist-products-template">
+        <script
+            type="text/x-template"
+            id="v-wishlist-products-template"
+        >
             <div>
                 <!-- Wishlist Shimmer Effect -->
                 <template v-if="isLoading">

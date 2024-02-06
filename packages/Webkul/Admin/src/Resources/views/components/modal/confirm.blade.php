@@ -1,7 +1,10 @@
 <v-modal-confirm ref="confirmModal"></v-modal-confirm>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-modal-confirm-template">
+    <script
+        type="text/x-template"
+        id="v-modal-confirm-template"
+    >
         <div>
             <transition
                 tag="div"

@@ -1,7 +1,10 @@
 <v-product-search {{ $attributes }}></v-product-search>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-search-template">
+    <script
+        type="text/x-template"
+        id="v-product-search-template"
+    >
         <!-- Search Drawer -->
         <x-admin::drawer
             ref="searchProductDrawer"

@@ -7,13 +7,16 @@
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.before') !!}
 
     <!-- Create Catalog form -->
-    <v-catalog-rule-create-form />
+    <v-catalog-rule-create-form></v-catalog-rule-create-form>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.create.after') !!}
 
     @pushOnce('scripts')
         <!-- v catalog rule create form template -->
-        <script type="text/x-template" id="v-catalog-rule-create-form-template">
+        <script
+            type="text/x-template"
+            id="v-catalog-rule-create-form-template"
+        >
             <div>
                 <x-admin::form
                     :action="route('admin.marketing.promotions.catalog_rules.store')"
@@ -134,7 +137,8 @@
                                     :key="index"
                                     :index="index"
                                     @onRemoveCondition="removeCondition($event)"
-                                />
+                                >
+                                </v-catalog-rule-condition-item>
 
                                 <div
                                     class="secondary-button max-w-max mt-4"
@@ -550,7 +554,8 @@
                                     :name="`conditions[${index}][value]`"
                                     class="mt-1 text-red-500 text-xs italic"
                                     as="p"
-                                />
+                                >
+                                </v-error-message>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">

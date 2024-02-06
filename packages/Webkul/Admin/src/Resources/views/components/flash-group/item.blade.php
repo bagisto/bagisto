@@ -3,10 +3,14 @@
     :key='flash.uid'
     :flash="flash"
     @onRemove="remove($event)"
-/>
+>
+</v-flash-item>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-flash-item-template">
+    <script
+        type="text/x-template"
+        id="v-flash-item-template"
+    >
         <div
             class="flex gap-12 justify-between w-max p-3 rounded-full"
             :style="typeStyles[flash.type]['container']"

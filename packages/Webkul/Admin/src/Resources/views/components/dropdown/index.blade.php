@@ -27,7 +27,10 @@
 </v-dropdown>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dropdown-template">
+    <script
+        type="text/x-template"
+        id="v-dropdown-template"
+    >
         <div>
             <div
                 class="select-none flex"

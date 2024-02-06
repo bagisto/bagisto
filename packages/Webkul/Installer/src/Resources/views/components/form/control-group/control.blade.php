@@ -62,7 +62,8 @@
             <v-checkbox-handler
                 :field="field"
                 checked="{{ $attributes->get('checked') }}"
-            />
+            >
+            </v-checkbox-handler>
         </v-field>
 
         <label

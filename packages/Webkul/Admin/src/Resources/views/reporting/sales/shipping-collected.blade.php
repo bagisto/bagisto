@@ -1,14 +1,17 @@
 <!-- Shipping Collected Vue Component -->
 <v-reporting-sales-shipping-collected>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.shipping-collected/>
+    <x-admin::shimmer.reporting.sales.shipping-collected />
 </v-reporting-sales-shipping-collected>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-shipping-collected-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-shipping-collected-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.shipping-collected/>
+            <x-admin::shimmer.reporting.sales.shipping-collected />
         </template>
 
         <!-- Shipping Collected Section -->

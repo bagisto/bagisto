@@ -1,8 +1,11 @@
-<v-edit-customer-address address="{{ $address }}" />
+<v-edit-customer-address address="{{ $address }}"></v-edit-customer-address>
 
 @pushOnce('scripts')
     <!-- Customer Address Form -->
-    <script type="text/x-template" id="v-edit-customer-address-template">
+    <script
+        type="text/x-template"
+        id="v-edit-customer-address-template"
+    >
         <div>
             <!-- Address Edit Button -->
             @if (bouncer()->hasPermission('customers.addresses.edit'))

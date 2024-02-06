@@ -7,10 +7,20 @@
 </v-products-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-products-carousel-template">
-        <div class="container mt-20 max-lg:px-8 max-sm:mt-8" v-if="! isLoading && products.length">
+    <script
+        type="text/x-template"
+        id="v-products-carousel-template"
+    >
+        <div
+            class="container mt-20 max-lg:px-8 max-sm:mt-8"
+            v-if="! isLoading && products.length"
+        >
             <div class="flex justify-between">
-                <h2 class="text-3xl font-dmserif max-sm:text-2xl" v-text="title"></h2>
+                <h2
+                    class="text-3xl font-dmserif max-sm:text-2xl"
+                    v-text="title"
+                >
+                </h2>
 
                 <div class="flex gap-8 justify-between items-center">
                     <span

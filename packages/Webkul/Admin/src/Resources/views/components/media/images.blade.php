@@ -92,7 +92,8 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
-                        />
+                        >
+                        </v-media-image-item>
                     </template>
                 </draggable>
 
