@@ -63,8 +63,6 @@
                     :action="route('shop.subscription.store')"
                     class="mt-2.5 rounded max-sm:mt-8"
                 >
-                    <label for="organic-search" class="sr-only">Search</label>
-
                     <div class="relative w-full">
                         <x-shop::form.control-group.control
                             type="email"

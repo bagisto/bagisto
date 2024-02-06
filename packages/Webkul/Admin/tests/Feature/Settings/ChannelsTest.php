@@ -27,12 +27,31 @@ it('should return the create page of channel', function () {
         ->assertSeeText(trans('admin::app.settings.channels.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the channels', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.channels.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('inventory_sources')
+        ->assertJsonValidationErrorFor('root_category_id')
+        ->assertJsonValidationErrorFor('locales')
+        ->assertJsonValidationErrorFor('default_locale_id')
+        ->assertJsonValidationErrorFor('currencies')
+        ->assertJsonValidationErrorFor('base_currency_id')
+        ->assertJsonValidationErrorFor('seo_title')
+        ->assertJsonValidationErrorFor('seo_description')
+        ->assertJsonValidationErrorFor('seo_keywords')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created channels', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.channels.store'), [
-        'code'              => $code = fake()->unique()->word(),
+        'code'              => $code = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
         'theme'             => $code,
         'hostname'          => $hostName = 'http://'.fake()->ipv4(),
         'root_category_id'  => 1,
@@ -73,6 +92,28 @@ it('should returns the edit page of channels', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.channels.edit.title'))
         ->assertSeeText(trans('admin::app.settings.channels.edit.save-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when update the channels', function () {
+    // Arrange
+    $channel = Channel::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.channels.update', $channel->id))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('en.name')
+        ->assertJsonValidationErrorFor('inventory_sources')
+        ->assertJsonValidationErrorFor('root_category_id')
+        ->assertJsonValidationErrorFor('locales')
+        ->assertJsonValidationErrorFor('default_locale_id')
+        ->assertJsonValidationErrorFor('currencies')
+        ->assertJsonValidationErrorFor('base_currency_id')
+        ->assertJsonValidationErrorFor('en.seo_title')
+        ->assertJsonValidationErrorFor('en.seo_description')
+        ->assertJsonValidationErrorFor('en.seo_keywords')
+        ->assertUnprocessable();
 });
 
 it('should update the existing channel', function () {

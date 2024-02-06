@@ -28,6 +28,19 @@ it('should returns the create page of catalog rules', function () {
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.save-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the catalog rule', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.catalog_rules.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('channels')
+        ->assertJsonValidationErrorFor('customer_groups')
+        ->assertJsonValidationErrorFor('action_type')
+        ->assertJsonValidationErrorFor('discount_amount')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created catalog rule', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -81,6 +94,25 @@ it('should returns the edit page of catalog rules', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.title'))
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.save-btn'));
+});
+
+it('should fail the validation with errors when certain field not provided when update the catalog rule', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+        $catalogRule->customer_groups()->sync([1, 2, 3]);
+    })->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('channels')
+        ->assertJsonValidationErrorFor('customer_groups')
+        ->assertJsonValidationErrorFor('action_type')
+        ->assertJsonValidationErrorFor('discount_amount')
+        ->assertUnprocessable();
 });
 
 it('should update the catalog rule', function () {

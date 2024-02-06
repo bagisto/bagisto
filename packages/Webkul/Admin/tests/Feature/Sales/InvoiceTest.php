@@ -23,6 +23,160 @@ it('should returns the invoice index page', function () {
         ->assertSeeText(trans('admin::app.sales.invoices.index.title'));
 });
 
+it('should faild the validation error when the invoice item quantity not provided', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id' => $product->id,
+        'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    OrderAddress::factory()->create([
+        'order_id'     => $order->id,
+        'cart_id'      => $cartId,
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    foreach ($order->items as $item) {
+        $items[$item->id] = $item->qty_to_invoice;
+    }
+
+    $invoice = Invoice::factory([
+        'order_id'      => $order->id,
+        'state'         => 'paid',
+    ])->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $invoice->order_id))
+        ->assertJsonValidationErrorFor('invoice.items')
+        ->assertUnprocessable();
+});
+
+it('should faild the validation error when the invoice item quantity is string', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cartId = Cart::factory()->create([
+            'customer_id'         => $customer->id,
+            'customer_email'      => $customer->email,
+            'customer_first_name' => $customer->first_name,
+            'customer_last_name'  => $customer->last_name,
+        ])->id,
+    ]);
+
+    $order = Order::factory()->create([
+        'cart_id'             => $cartId,
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    OrderItem::factory()->create([
+        'product_id' => $product->id,
+        'order_id'   => $order->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
+    ]);
+
+    OrderAddress::factory()->create([
+        'order_id'     => $order->id,
+        'cart_id'      => $cartId,
+        'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    foreach ($order->items as $item) {
+        $items[$item->id] = $item->qty_to_invoice;
+    }
+
+    $invoice = Invoice::factory([
+        'order_id'      => $order->id,
+        'state'         => 'paid',
+    ])->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.store', $invoice->order_id), [
+        'invoice' => [
+            'items' => [
+                fake()->word(),
+            ],
+        ],
+    ])
+        ->assertJsonValidationErrorFor('invoice.items.0')
+        ->assertUnprocessable();
+});
+
 it('should store the invoice', function () {
     // Arrange
     $product = (new ProductFaker([

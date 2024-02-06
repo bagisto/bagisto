@@ -1355,7 +1355,7 @@ return [
                     'save-btn'       => 'Save',
                     'status'         => 'Status',
                     'title'          => 'Edit Review',
-                    'update-success' => 'Update Successfully',
+                    'update-success' => 'Review Update Successfully',
                 ],
 
                 'datagrid'   => [

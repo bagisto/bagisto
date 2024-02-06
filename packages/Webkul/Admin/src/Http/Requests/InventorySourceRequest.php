@@ -27,10 +27,8 @@ class InventorySourceRequest extends FormRequest
      */
     public function rules()
     {
-        $uniqueCode = 'unique:inventory_sources,code,'.request('id') ?: 'unique:inventory_sources,code';
-
         return [
-            'code'           => ['required', $uniqueCode, new Code],
+            'code'           => ['required', 'unique:inventory_sources,code,'.$this->id, new Code],
             'name'           => ['required'],
             'latitude'       => ['numeric', 'between:-90,90'],
             'longitude'      => ['numeric', 'between:-180,180'],
