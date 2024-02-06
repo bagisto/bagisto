@@ -92,13 +92,19 @@ class Importer extends AbstractImporter
     const ERROR_INVALID_ATTRIBUTE_FAMILY_CODE = 'attribute_family_code_not_found';
 
     /**
+     * Error code for super attribute code not found
+     */
+    const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'attribute_family_code_not_found';
+
+    /**
      * Error message templates
      */
     protected array $messages = [
-        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.importers.products.validation.errors.invalid-type',
-        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
-        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
-        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
+        self::ERROR_INVALID_TYPE                   => 'data_transfer::app.importers.products.validation.errors.invalid-type',
+        self::ERROR_SKU_NOT_FOUND_FOR_DELETE       => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
+        self::ERROR_DUPLICATE_URL_KEY              => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
+        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE  => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
+        self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND => 'data_transfer::app.importers.products.validation.errors.super-attribute-not-found',
     ];
 
     /**
@@ -353,12 +359,6 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * TODO
-         *
-         * Check if configurable super attribute exists in the attribute family
-         */
-
-        /**
          * Additional Validations
          *
          * 1: Check if bundle option data is valid
@@ -446,6 +446,40 @@ class Importer extends AbstractImporter
                     $errorCode = array_key_first($failedAttributes[$attributeCode] ?? []);
 
                     $this->skipRow($rowNumber, $errorCode, $attributeCode, current($message));
+                }
+            }
+        }
+
+        /**
+         * Check if configurable super attribute exists in the attribute family
+         * 
+         * Below is the example of configurable_variants
+         * 
+         * sku=SP-005,color=Yellow,size=M|sku=SP-006,color=Yellow,size=L|sku=SP-007,color=Green,size=M|sku=SP-008,color=Green,size=L
+         */
+        if ($rowData['type'] == self::PRODUCT_TYPE_CONFIGURABLE) {
+            $variants = explode('|', $rowData['configurable_variants']);
+
+            $familyAttributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
+
+            foreach ($variants as $variant) {
+                parse_str(str_replace(',', '&', $variant), $variantAttributes);
+    
+                $configurableVariants = Arr::except($variantAttributes, 'sku');
+
+                foreach ($configurableVariants as $superAttribute => $optionLabel) {
+                    if (! $familyAttributes->where('code', $superAttribute)->first()) {
+                        $this->skipRow(
+                            $rowNumber,
+                            self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND,
+                            'configurable_variants',
+                            sprintf(
+                                trans($this->messages[self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND]),
+                                $superAttribute,
+                                $rowData['attribute_family_code']
+                            )
+                        );
+                    }
                 }
             }
         }

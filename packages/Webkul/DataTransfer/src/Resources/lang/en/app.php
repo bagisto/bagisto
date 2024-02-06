@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
-                    'invalid-attribute-family' => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
-                    'invalid-type'             => 'Product type is invalid or not supported',
-                    'sku-not-found'            => 'Product with specified SKU not found',
+                    'duplicate-url-key'         => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
+                    'invalid-attribute-family'  => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
+                    'super-attribute-not-found' => 'Super attribute with code: \'%s\' not found or does not belong to the attribute family: \'%s\'',
+                    'invalid-type'              => 'Product type is invalid or not supported',
+                    'sku-not-found'             => 'Product with specified SKU not found',
                 ],
             ],
         ],
