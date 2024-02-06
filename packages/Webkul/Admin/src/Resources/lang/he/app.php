@@ -2157,7 +2157,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'צור אזור',
                 'locale'     => 'אזור',
@@ -2199,7 +2199,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'צור מטבע',
                 'currency'   => 'מטבע',
@@ -2242,7 +2242,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create' => [
+                    'action'              => 'פעולה',
+                    'allowed-errors'      => 'שגיאות מותרות',
+                    'back-btn'            => 'חזרה',
+                    'create-update'       => 'יצירה/עדכון',
+                    'delete'              => 'מחיקה',
+                    'download-sample'     => 'הורד דוגמא',
+                    'field-separator'     => 'מפריד שדות',
+                    'file-info-example'   => 'לדוגמה, במקרה של תמונות מוצרים, יש לשים את הקבצים בתיקייה /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'השתמש בנתיב יחסי אל /project-root/storage/import/app, לדוגמה: product-images, import-images.',
+                    'file'                => 'קובץ',
+                    'general'             => 'כללי',
+                    'images-directory'    => 'נתיב תיקיית התמונות',
+                    'process-in-queue'    => 'תהליך בתור',
+                    'results'             => 'תוצאות',
+                    'save-btn'            => 'שמירת יבוא',
+                    'settings'            => 'הגדרות',
+                    'skip-errors'         => 'דילוג על שגיאות',
+                    'stop-on-errors'      => 'עצירה במקרה של שגיאות',
+                    'title'               => 'יצירת יבוא',
+                    'type'                => 'סוג',
+                    'validation-strategy' => 'אסטרטגיית אימות',
+                ],
+
+                'edit' => [
+                    'action'              => 'פעולה',
+                    'allowed-errors'      => 'שגיאות מותרות',
+                    'back-btn'            => 'חזרה',
+                    'create-update'       => 'יצירה/עדכון',
+                    'delete'              => 'מחיקה',
+                    'download-sample'     => 'הורד דוגמא',
+                    'field-separator'     => 'מפריד שדות',
+                    'file-info-example'   => 'לדוגמה, במקרה של תמונות מוצרים, יש לשים את הקבצים בתיקייה /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'השתמש בנתיב יחסי אל /project-root/storage/import/app, לדוגמה: product-images, import-images.',
+                    'file'                => 'קובץ',
+                    'general'             => 'כללי',
+                    'images-directory'    => 'נתיב תיקיית התמונות',
+                    'process-in-queue'    => 'תהליך בתור',
+                    'results'             => 'תוצאות',
+                    'save-btn'            => 'שמירת יבוא',
+                    'settings'            => 'הגדרות',
+                    'skip-errors'         => 'דילוג על שגיאות',
+                    'stop-on-errors'      => 'עצירה במקרה של שגיאות',
+                    'title'               => 'עריכת יבוא',
+                    'type'                => 'סוג',
+                    'validation-strategy' => 'אסטרטגיית אימות',
+                ],
+
+                'index' => [
+                    'button-title' => 'יצירת יבוא',
+                    'title'        => 'ייבואים',
+
+                    'datagrid' => [
+                        'actions'       => 'פעולות',
+                        'completed-at'  => 'הושלם בתאריך',
+                        'created'       => 'נוצר',
+                        'delete'        => 'מחיקה',
+                        'deleted'       => 'נמחק',
+                        'edit'          => 'עריכה',
+                        'error-file'    => 'קובץ שגיאות',
+                        'id'            => 'מזהה',
+                        'started-at'    => 'התחיל בתאריך',
+                        'state'         => 'מצב',
+                        'summary'       => 'סיכום',
+                        'updated'       => 'עודכן',
+                        'uploaded-file' => 'קובץ הועלה',
+                    ],
+                ],
+
+                'import' => [
+                    'back-btn'                => 'חזרה',
+                    'completed-batches'       => 'סך הכל פקודות הושלמו:',
+                    'download-error-report'   => 'הורד דוח מלא',
+                    'edit-btn'                => 'ערוך',
+                    'imported-info'           => 'ברכות! הייבוא שלך הצליח.',
+                    'importing-info'          => 'ייבוא בתהליך',
+                    'indexing-info'           => 'אינדקסציה של משאבים (מחיר, מלאי וחיפוש אלסטי) בתהליך',
+                    'linking-info'            => 'קישורי משאבים בתהליך',
+                    'progress'                => 'התקדמות:',
+                    'title'                   => 'ייבוא',
+                    'total-batches'           => 'סך הכל פקודות:',
+                    'total-created'           => 'סך הכל רשומות שנוצרו:',
+                    'total-deleted'           => 'סך הכל רשומות שנמחקו:',
+                    'total-errors'            => 'סך הכל שגיאות:',
+                    'total-invalid-rows'      => 'סך הכל שורות לא תקינות:',
+                    'total-rows-processed'    => 'סך הכל שורות שעובדו:',
+                    'total-updated'           => 'סך הכל רשומות שעודכנו:',
+                    'validate-info'           => 'לחץ על אימות נתונים כדי לבדוק את הייבוא שלך.',
+                    'validate'                => 'אימות',
+                    'validating-info'         => 'המידע מתחיל לקרוא ולאמת',
+                    'validation-failed-info'  => 'הייבוא שלך אינו תקין. יש לתקן את השגיאות הבאות ולנסות שוב.',
+                    'validation-success-info' => 'הייבוא שלך תקין. לחץ על ייבוא כדי להתחיל בתהליך הייבוא.',
+                ],
+
+                'create-success'    => 'ייבוא נוצר בהצלחה.',
+                'delete-failed'     => 'מחיקת הייבוא נכשלה באופן חד-פעמי.',
+                'delete-success'    => 'ייבוא נמחק בהצלחה.',
+                'not-valid'         => 'הייבוא אינו תקין',
+                'nothing-to-import' => 'אין משאבים לייבוא.',
+                'setup-queue-error' => 'יש לשנות את מנהל התורים שלך ל-"database" או "redis" כדי להתחיל בתהליך הייבוא.',
+                'update-success'    => 'ייבוא עודכן בהצלחה.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'צור שער חליפין',
                 'exchange-rate' => 'שער חליפין',
@@ -2361,7 +2467,7 @@ return [
             'update-success'    => 'מקורות מלאי עודכנו בהצלחה',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'האם אתה בטוח שברצונך למחוק?',
@@ -3486,11 +3592,13 @@ return [
                 'currencies'               => 'מטבעות',
                 'customers'                => 'לקוחות',
                 'dashboard'                => 'לוח בקרה',
+                'data-transfer'            => 'העברת נתונים',
                 'discount'                 => 'הנחה',
                 'email-templates'          => 'תבניות דוא"ל',
                 'events'                   => 'אירועים',
                 'exchange-rates'           => 'שערי חליפין',
                 'groups'                   => 'קבוצות',
+                'imports'                  => 'יבוא',
                 'inventory-sources'        => 'מקורות מלאי',
                 'invoices'                 => 'חשבוניות',
                 'locales'                  => 'אזורים',
@@ -3684,24 +3792,27 @@ return [
         'campaigns'                => 'קמפיינים',
         'cancel'                   => 'ביטול',
         'cart-rules'               => 'חוקי העגלה',
-        'catalog'                  => 'קטלוג',
         'catalog-rules'            => 'חוקי הקטלוג',
+        'catalog'                  => 'קטלוג',
         'categories'               => 'קטגוריות',
         'channels'                 => 'ערוצים',
         'cms'                      => 'CMS',
         'communications'           => 'תקשורת',
         'configure'                => 'הגדר',
         'copy'                     => 'העתק',
-        'create'                   => 'הוסף',
+        'create'                   => 'לִיצוֹר',
         'currencies'               => 'מטבעות',
         'customers'                => 'לקוחות',
         'dashboard'                => 'לוח בקרה',
+        'data-transfer'            => 'העברת נתונים',
         'delete'                   => 'מחיקה',
         'edit'                     => 'ערוך',
         'email-templates'          => 'תבניות אימייל',
         'events'                   => 'אירועים',
         'exchange-rates'           => 'שערי חליפין',
         'groups'                   => 'קבוצות',
+        'import'                   => 'יְבוּא',
+        'imports'                  => 'יבוא',
         'inventory-sources'        => 'מקורות מלאי',
         'invoices'                 => 'חשבוניות',
         'locales'                  => 'אזורים',
