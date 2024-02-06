@@ -604,6 +604,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute 不能大于:max KB。请选择较小的文件。',
                     'title' => '视频',
                     'info'  => '最大视频尺寸应为 :size',
                 ],

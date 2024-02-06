@@ -604,6 +604,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'שגיאה: גודל :attribute לא יכול להיות גדול מ-:max קילובייטים. בבקשה בחר קובץ קטן יותר.',
                     'info'  => 'גודל הווידאו המרבי צריך להיות כמו :size',
                     'title' => 'וידאו',
                 ],
@@ -3642,7 +3643,7 @@ return [
                 ],
             ],
 
-            'videos' => [
+             => [
                 'add-video-btn'     => 'הוסף וידאו',
                 'allowed-types'     => 'mp4, webm, mkv',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',

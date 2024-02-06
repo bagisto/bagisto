@@ -604,6 +604,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute :max kilobayttan büyük olamaz. Lütfen daha küçük bir dosya seçin.',
                     'title' => 'Videolar',
                     'info'  => 'Maksimum video boyutu :size gibi olmalıdır',
                 ],
