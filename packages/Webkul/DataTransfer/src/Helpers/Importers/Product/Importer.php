@@ -32,6 +32,7 @@ use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -196,6 +197,7 @@ class Importer extends AbstractImporter
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected SKUStorage $skuStorage
     ) {
@@ -1024,8 +1026,6 @@ class Importer extends AbstractImporter
                 'customer_group_id' => $customerGroups->where('code', $attributes['group'])->first()?->id,
             ];
         }
-
-        dd($customerGroupPrices);
     }
 
     /**
@@ -1033,6 +1033,25 @@ class Importer extends AbstractImporter
      */
     public function saveCustomerGroupPrices(array $customerGroupPrices): void
     {
+        $productCustomerGroupPrices = [];
+
+        foreach ($customerGroupPrices as $sku => $skuCustomerGroupPrices) {
+            foreach ($skuCustomerGroupPrices as $customerGroupPrices) {
+                $product = $this->skuStorage->get($sku);
+
+                $customerGroupPrices['product_id'] = (int) $product['id'];
+
+                $customerGroupPrices['unique_id'] = implode('|', array_filter([
+                    $customerGroupPrices['qty'],
+                    $customerGroupPrices['product_id'],
+                    $customerGroupPrices['customer_group_id'],
+                ]));
+
+                $productCustomerGroupPrices[$customerGroupPrices['unique_id']] = $customerGroupPrices;
+            }
+        }
+
+        $this->productCustomerGroupPriceRepository->upsert($productCustomerGroupPrices, 'unique_id');
     }
 
     /**
