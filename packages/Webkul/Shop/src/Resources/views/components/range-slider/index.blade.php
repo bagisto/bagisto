@@ -1,7 +1,10 @@
 <v-range-slider {{ $attributes }}></v-range-slider>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-range-slider-template">
+    <script
+        type="text/x-template"
+        id="v-range-slider-template"
+    >
         <div>
             <div class="flex items-center gap-4">
                 <p class="text-sm">

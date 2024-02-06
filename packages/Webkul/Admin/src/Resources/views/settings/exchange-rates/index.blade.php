@@ -34,7 +34,7 @@
         </div>
 
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-exchange-rates>
 
     {!! view_render_event('bagisto.admin.settings.exchange_rates.create.after') !!}

@@ -21,7 +21,7 @@
         </div>
 
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-events>
 
     @pushOnce('scripts')

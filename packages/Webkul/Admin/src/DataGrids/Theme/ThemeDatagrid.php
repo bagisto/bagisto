@@ -19,9 +19,9 @@ class ThemeDatagrid extends DataGrid
             : [core()->getRequestedLocaleCode()];
 
         $queryBuilder = DB::table('theme_customizations')
+            ->distinct()
             ->join('theme_customization_translations', function ($leftJoin) use ($whereInLocales) {
-                $leftJoin->on('theme_customizations.id', '=', 'theme_customization_translations.theme_customization_id')
-                    ->whereIn('theme_customization_translations.locale', $whereInLocales);
+                $leftJoin->whereIn('theme_customization_translations.locale', $whereInLocales);
             })
             ->join('channel_translations', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('theme_customizations.channel_id', '=', 'channel_translations.channel_id')

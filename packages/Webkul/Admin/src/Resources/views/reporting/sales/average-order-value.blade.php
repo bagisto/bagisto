@@ -1,14 +1,17 @@
 <!-- Average Order Value Vue Component -->
 <v-reporting-sales-average-order-value>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.average-order-value/> 
+    <x-admin::shimmer.reporting.sales.average-order-value /> 
 </v-reporting-sales-average-order-value>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-average-order-value-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-average-order-value-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.average-order-value/>
+            <x-admin::shimmer.reporting.sales.average-order-value />
         </template>
 
         <!-- Average Order Value Section -->

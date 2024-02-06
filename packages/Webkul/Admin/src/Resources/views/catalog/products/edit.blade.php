@@ -152,7 +152,7 @@
 
                                 @if ($group->code == 'meta_description')
                                     <!-- SEO Title & Description Blade Componnet -->
-                                    <x-admin::seo/>
+                                    <x-admin::seo />
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)

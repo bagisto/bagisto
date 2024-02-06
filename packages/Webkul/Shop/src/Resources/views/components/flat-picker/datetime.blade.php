@@ -3,7 +3,10 @@
 </v-datetime-picker>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-datetime-picker-template">
+    <script
+        type="text/x-template"
+        id="v-datetime-picker-template"
+    >
         <span class="relative">
             <slot></slot>
 

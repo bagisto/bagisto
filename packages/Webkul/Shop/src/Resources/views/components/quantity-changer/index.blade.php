@@ -11,7 +11,10 @@
 </v-quantity-changer>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-quantity-changer-template">
+    <script
+        type="text/x-template"
+        id="v-quantity-changer-template"
+    >
         <div>
             <span 
                 class="icon-minus text-2xl cursor-pointer"
