@@ -1,14 +1,17 @@
 <!-- Top Customers Vue Component -->
 <v-reporting-customers-top-customer-groups>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.customers.top-customer-groups/>
+    <x-admin::shimmer.reporting.customers.top-customer-groups />
 </v-reporting-customers-top-customer-groups>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-customers-top-customer-groups-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-customers-top-customer-groups-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.customers.top-customer-groups/>
+            <x-admin::shimmer.reporting.customers.top-customer-groups />
         </template>
         
         <!-- Top Customers Section -->

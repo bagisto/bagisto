@@ -1,13 +1,16 @@
 <!-- Refunds Vue Component -->
 <v-reporting-sales-total-refunds>
-    <x-admin::shimmer.reporting.sales.total-refunds/>
+    <x-admin::shimmer.reporting.sales.total-refunds />
 </v-reporting-sales-total-refunds>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-total-refunds-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-total-refunds-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.total-refunds/>
+            <x-admin::shimmer.reporting.sales.total-refunds />
         </template>
 
         <!-- Refunds Section -->

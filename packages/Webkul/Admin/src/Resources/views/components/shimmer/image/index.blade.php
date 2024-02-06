@@ -3,7 +3,10 @@
 </v-shimmer-image>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-shimmer-image-template">
+    <script
+        type="text/x-template"
+        id="v-shimmer-image-template"
+    >
         <div
             class="shimmer"
             v-bind="$attrs"

@@ -7,13 +7,16 @@
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.before') !!}
 
     <!-- edit Catalog form -->
-    <v-catalog-rule-edit-form />
+    <v-catalog-rule-edit-form></v-catalog-rule-edit-form>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.after') !!}
 
     @pushOnce('scripts')
         <!-- v catalog rule edit form template -->
-        <script type="text/x-template" id="v-catalog-rule-edit-form-template">
+        <script
+            type="text/x-template"
+            id="v-catalog-rule-edit-form-template"
+        >
             <div>
                 <x-admin::form
                     :action="route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id)"
@@ -567,7 +570,8 @@
                                     :name="`conditions[${index}][value]`"
                                     class="mt-1 text-red-500 text-xs italic"
                                     as="p"
-                                />
+                                >
+                                </v-error-message>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">

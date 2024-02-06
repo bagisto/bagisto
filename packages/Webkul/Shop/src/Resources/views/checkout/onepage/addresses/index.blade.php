@@ -9,10 +9,13 @@
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-checkout-addresses-template">
+    <script
+        type="text/x-template"
+        id="v-checkout-addresses-template"
+    >
         <template v-if="isAddressLoading">
             <!-- Onepage Shimmer Effect -->
-            <x-shop::shimmer.checkout.onepage.address/>
+            <x-shop::shimmer.checkout.onepage.address />
         </template>
         
         <template v-else>

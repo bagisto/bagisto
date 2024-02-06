@@ -8,12 +8,15 @@
     {!! view_render_event('bagisto.admin.settings.roles.edit.before') !!}
 
     <!-- Edit Role for  -->
-    <v-edit-user-role />
+    <v-edit-user-role></v-edit-user-role>
 
     {!! view_render_event('bagisto.admin.settings.roles.edit.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-edit-user-role-template">
+        <script
+            type="text/x-template"
+            id="v-edit-user-role-template"
+        >
             <div>
                 <x-admin::form
                     method="PUT"

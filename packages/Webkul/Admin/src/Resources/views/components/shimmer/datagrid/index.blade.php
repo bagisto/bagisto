@@ -1,7 +1,7 @@
 @props(['isMultiRow' => false])
 
 <div>
-    <x-admin::shimmer.datagrid.toolbar/>
+    <x-admin::shimmer.datagrid.toolbar />
 
     <div class="flex mt-4">
         <div class="w-full">

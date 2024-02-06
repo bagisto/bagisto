@@ -10,7 +10,10 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-summary-template">
+    <script
+        type="text/x-template"
+        id="v-cart-summary-template"
+    >
         <template v-if="isCartLoading">
             <!-- onepage Summary Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage.cart-summary />
@@ -162,7 +165,7 @@
                     <div v-if="selectedPaymentMethod?.method == 'paypal_smart_button'">
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
 
-                        <v-paypal-smart-button />
+                        <v-paypal-smart-button></v-paypal-smart-button>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
                     </div>

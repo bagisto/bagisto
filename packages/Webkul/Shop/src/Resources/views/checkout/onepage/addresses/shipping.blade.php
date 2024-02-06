@@ -37,7 +37,8 @@
                                     v-model="forms.shipping.address.address_id"
                                     :checked="address.isDefault"
                                     @change="resetPaymentAndShippingMethod"
-                                />
+                                >
+                                </v-field>
                                 
                                 <label 
                                     class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"

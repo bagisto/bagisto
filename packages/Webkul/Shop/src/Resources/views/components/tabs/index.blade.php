@@ -8,7 +8,10 @@
 </v-tabs>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-tabs-template">
+    <script
+        type="text/x-template"
+        id="v-tabs-template"
+    >
         <div>
             <div
                 class="flex gap-8 justify-center pt-5 bg-[#F5F5F5] max-1180:hidden"

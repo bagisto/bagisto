@@ -1,14 +1,17 @@
 <!-- Total Visitors Vue Component -->
 <v-dashboard-total-visitors>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.total-sales/>
+    <x-admin::shimmer.dashboard.total-sales />
 </v-dashboard-total-visitors>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-total-visitors-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-total-visitors-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.total-sales/>
+            <x-admin::shimmer.dashboard.total-sales />
         </template>
 
         <!-- Total Sales Section -->
