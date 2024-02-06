@@ -452,9 +452,9 @@ class Importer extends AbstractImporter
 
         /**
          * Check if configurable super attribute exists in the attribute family
-         * 
+         *
          * Below is the example of configurable_variants
-         * 
+         *
          * sku=SP-005,color=Yellow,size=M|sku=SP-006,color=Yellow,size=L|sku=SP-007,color=Green,size=M|sku=SP-008,color=Green,size=L
          */
         if ($rowData['type'] == self::PRODUCT_TYPE_CONFIGURABLE) {
@@ -464,7 +464,7 @@ class Importer extends AbstractImporter
 
             foreach ($variants as $variant) {
                 parse_str(str_replace(',', '&', $variant), $variantAttributes);
-    
+
                 $configurableVariants = Arr::except($variantAttributes, 'sku');
 
                 foreach ($configurableVariants as $superAttribute => $optionLabel) {
