@@ -177,6 +177,12 @@ class ElasticSearchRepository
 
         $sort = $options['sort'];
 
+        if ($options['sort'] == 'price') {
+            $customerGroup = $this->customerRepository->getCurrentGroup();
+
+            $sort = 'price_'.$customerGroup->id;
+        }
+
         if ($options['sort'] == 'name') {
             $sort .= '.keyword';
         }

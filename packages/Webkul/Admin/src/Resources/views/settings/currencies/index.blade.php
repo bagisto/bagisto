@@ -147,7 +147,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="code"
-                                    rules="required"
+                                    rules="required|min:3|max:3"
                                     :value="old('code')"
                                     v-model="selectedCurrency.code"
                                     :label="trans('admin::app.settings.currencies.index.create.code')"
