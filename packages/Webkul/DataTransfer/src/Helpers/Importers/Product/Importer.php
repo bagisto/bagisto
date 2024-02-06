@@ -1055,10 +1055,10 @@ class Importer extends AbstractImporter
 
             $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
-            $attributeValues[$rowData['sku']][$attribute->id] = array_merge($attributeTypeValues, [
+            $attributeValues[$rowData['sku']][] = array_merge($attributeTypeValues, [
                 'attribute_id'          => $attribute->id,
                 $attribute->column_name => $value,
-                'channel'               => $attribute->value_per_channel ? ($rowData['channel'] ?? 'default') : null,
+                'channel'               => $attribute->value_per_channel ? $rowData['channel'] : null,
                 'locale'                => $attribute->value_per_locale ? $rowData['locale'] : null,
             ]);
         }
@@ -1084,7 +1084,7 @@ class Importer extends AbstractImporter
                     $attribute['attribute_id'],
                 ]));
 
-                $productAttributeValues[] = $attribute;
+                $productAttributeValues[$attribute['unique_id']] = $attribute;
             }
         }
 
@@ -1099,6 +1099,12 @@ class Importer extends AbstractImporter
         if (empty($rowData['inventories'])) {
             return;
         }
+
+        /**
+         * Reset the sku inventories data to prevent
+         * data duplication in case of multiple locales
+         */
+        $inventories[$rowData['sku']] = [];
 
         $inventorySources = explode(',', $rowData['inventories'] ?? '');
 
@@ -1239,15 +1245,22 @@ class Importer extends AbstractImporter
 
         $flatColumns = Schema::getColumnListing('product_flat');
 
+        $data = [];
+
         foreach ($flatColumns as $column) {
             if (in_array($column, ['id', 'created_at', 'updated_at'])) {
                 continue;
             }
 
-            $flatData[$rowData['sku']][$column] = $rowData[$column] ?? null;
+            $data[$column] = $rowData[$column] ?? null;
         }
 
-        $flatData[$rowData['sku']]['channel'] = $rowData['channel'] ?? 'default';
+        $data = array_merge($data, [
+            'locale'  => $rowData['locale'],
+            'channel' => $rowData['channel'],
+        ]);
+
+        $flatData[] = $data;
     }
 
     /**
@@ -1257,8 +1270,8 @@ class Importer extends AbstractImporter
     {
         $products = [];
 
-        foreach ($flatData as $sku => $attributes) {
-            $product = $this->skuStorage->get($sku);
+        foreach ($flatData as $attributes) {
+            $product = $this->skuStorage->get($attributes['sku']);
 
             $products[] = array_merge($attributes, [
                 'product_id'          => $product['id'],
@@ -1482,17 +1495,17 @@ class Importer extends AbstractImporter
         foreach ($options as $option) {
             parse_str(str_replace(',', '&', $option), $attributes);
 
-            if (! isset($bundleOptions[$rowData['sku']][$attributes['name']])) {
+            if (! isset($bundleOptions[$rowData['sku']][$rowData['locale']][$attributes['name']])) {
                 $productSortOrder = 0;
 
-                $bundleOptions[$rowData['sku']][$attributes['name']]['attributes'] = [
+                $bundleOptions[$rowData['sku']][$rowData['locale']][$attributes['name']]['attributes'] = [
                     'type'        => $attributes['type'],
                     'is_required' => $attributes['required'],
                     'sort_order'  => $optionSortOrder++,
                 ];
             }
 
-            $bundleOptions[$rowData['sku']][$attributes['name']]['skus'][$attributes['sku']] = [
+            $bundleOptions[$rowData['sku']][$rowData['locale']][$attributes['name']]['skus'][$attributes['sku']] = [
                 'qty'        => $attributes['qty'],
                 'is_default' => $attributes['default'],
                 'sort_order' => $productSortOrder++,
@@ -1511,7 +1524,7 @@ class Importer extends AbstractImporter
 
         $associatedSkus = [];
 
-        foreach (data_get($bundleOptions, '*.*.skus') as $options) {
+        foreach (data_get($bundleOptions, '*.*.*.skus') as $options) {
             $associatedSkus = array_merge($associatedSkus, array_keys($options));
         }
 
@@ -1524,10 +1537,14 @@ class Importer extends AbstractImporter
 
         $existingOptions = $this->getExistingBundleOptions($bundleOptions);
 
-        foreach ($bundleOptions as $sku => $options) {
+        foreach ($bundleOptions as $sku => $localeOptions) {
             $product = $this->skuStorage->get($sku);
 
-            foreach ($options as $optionName => $option) {
+            $createdUpdatedOptionIds = [];
+
+            foreach (current($localeOptions) as $optionName => $option) {
+                $optionAlreadyCreated = true;
+
                 $bundleOption = $existingOptions->where('product_id', $product['id'])
                     ->where('label', $optionName)
                     ->first();
@@ -1549,11 +1566,7 @@ class Importer extends AbstractImporter
                     ];
                 }
 
-                $upsertData['translations'][] = [
-                    'product_bundle_option_id' => $bundleOption->id,
-                    'label'                    => $optionName,
-                    'locale'                   => 'en',
-                ];
+                $createdUpdatedOptionIds[] = $bundleOption->id;
 
                 foreach ($option['skus'] as $associatedSKU => $optionProduct) {
                     $associatedProduct = $this->skuStorage->get($associatedSKU);
@@ -1564,6 +1577,27 @@ class Importer extends AbstractImporter
                         'qty'                      => $optionProduct['qty'],
                         'is_default'               => $optionProduct['is_default'],
                         'sort_order'               => $optionProduct['sort_order'],
+                    ];
+                }
+            }
+
+            /**
+             * Prepare translation for bundle options
+             */
+            foreach ($localeOptions as $locale => $options) {
+                $key = 0;
+
+                foreach ($options as $optionName => $option) {
+                    $bundleOptionId = $createdUpdatedOptionIds[$key++] ?? null;
+
+                    if (! $bundleOptionId) {
+                        continue;
+                    }
+
+                    $upsertData['translations'][] = [
+                        'product_bundle_option_id' => $bundleOptionId,
+                        'label'                    => $optionName,
+                        'locale'                   => $locale,
                     ];
                 }
             }
@@ -1610,6 +1644,12 @@ class Importer extends AbstractImporter
             if (empty($rowData[$type.'_skus'])) {
                 continue;
             }
+
+            /**
+             * Reset the sku links data to prevent
+             * data duplication in case of multiple locales
+             */
+            $links[$table][$rowData['sku']] = [];
 
             foreach (explode(',', $rowData[$type.'_skus'] ?? '') as $sku) {
                 $links[$table][$rowData['sku']][] = $sku;
@@ -1663,17 +1703,20 @@ class Importer extends AbstractImporter
     public function getExistingBundleOptions(array $bundleOptions): mixed
     {
         $queryBuilder = $this->productBundleOptionRepository
-            ->select('product_bundle_options.id', 'label', 'product_id', 'type', 'is_required', 'sort_order')
+            ->select('product_bundle_options.id', 'label', 'locale', 'product_id', 'type', 'is_required', 'sort_order')
             ->leftJoin('product_bundle_option_translations', 'product_bundle_option_translations.product_bundle_option_id', 'product_bundle_options.id');
 
-        foreach ($bundleOptions as $sku => $options) {
+        foreach ($bundleOptions as $sku => $localeOptions) {
             $product = $this->skuStorage->get($sku);
 
-            foreach ($options as $optionName => $option) {
-                $queryBuilder->orWhere(function ($query) use ($product, $optionName) {
-                    $query->where('product_bundle_options.product_id', $product['id'])
-                        ->where('product_bundle_option_translations.label', $optionName);
-                });
+            foreach ($localeOptions as $locale => $options) {
+                foreach ($options as $optionName => $option) {
+                    $queryBuilder->orWhere(function ($query) use ($product, $optionName, $locale) {
+                        $query->where('product_bundle_options.product_id', $product['id'])
+                            ->where('product_bundle_option_translations.label', $optionName)
+                            ->where('product_bundle_option_translations.locale', $locale);
+                    });
+                }
             }
         }
 
@@ -1738,5 +1781,19 @@ class Importer extends AbstractImporter
     public function isSKUExist(string $sku): bool
     {
         return $this->skuStorage->has($sku);
+    }
+
+    /**
+     * Prepare row data to save into the database
+     */
+    protected function prepareRowForDb(array $rowData): array
+    {
+        $rowData = parent::prepareRowForDb($rowData);
+
+        $rowData['locale'] = $rowData['locale'] ?? app()->getLocale();
+
+        $rowData['channel'] = $rowData['channel'] ?? core()->getDefaultChannelCode();
+
+        return $rowData;
     }
 }
