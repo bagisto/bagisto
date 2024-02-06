@@ -153,6 +153,11 @@ class Importer extends AbstractImporter
     protected array $urlKeys = [];
 
     /**
+     * Urls keys storage
+     */
+    protected array $productFlatColumns = [];
+
+    /**
      * Is linking required
      */
     protected bool $linkingRequired = true;
@@ -1366,7 +1371,7 @@ class Importer extends AbstractImporter
     {
         $attributeFamily = $this->attributeFamilies->where('code', $rowData['attribute_family_code'])->first();
 
-        $flatColumns = Schema::getColumnListing('product_flat');
+        $flatColumns = $this->getProductFlatColumns();
 
         $data = [];
 
@@ -1908,6 +1913,18 @@ class Importer extends AbstractImporter
         }
 
         return $this->customerGroups = $this->customerGroupRepository->all();
+    }
+
+    /**
+     * Retrieve product_flat table columns
+     */
+    protected function getProductFlatColumns(): array
+    {
+        if (! empty($this->productFlatColumns)) {
+            return $this->productFlatColumns;
+        }
+
+        return $this->productFlatColumns = Schema::getColumnListing('product_flat');
     }
 
     /**

@@ -255,11 +255,9 @@ class ImportController extends Controller
             ->setImport($import)
             ->validate();
 
-        $import = $this->importHelper->getImport()->unsetRelations();
-
         return new JsonResponse([
             'is_valid' => $isValid,
-            'import'   => $import,
+            'import'   => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
 
@@ -466,8 +464,8 @@ class ImportController extends Controller
             ->stats($state);
 
         return new JsonResponse([
-            'import' => $import,
             'stats'  => $stats,
+            'import' => $this->importHelper->getImport()->unsetRelations(),
         ]);
     }
 
