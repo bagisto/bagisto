@@ -1,14 +1,17 @@
 <!-- Purchase Funnel Vue Component -->
 <v-reporting-sales-purchase-funnel>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.purchase-funnel/>
+    <x-admin::shimmer.reporting.sales.purchase-funnel />
 </v-reporting-sales-purchase-funnel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-purchase-funnel-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-purchase-funnel-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.purchase-funnel/>
+            <x-admin::shimmer.reporting.sales.purchase-funnel />
         </template>
 
         <!-- Purchase Funnel Section -->

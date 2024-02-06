@@ -9,7 +9,7 @@
     </x-slot>
 
     <!-- Edit Attributes Vue Components -->
-    <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}" />
+    <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>
 
     @pushOnce('scripts')
         <script

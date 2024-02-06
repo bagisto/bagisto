@@ -10,7 +10,10 @@
 </v-categories-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-categories-carousel-template">
+    <script
+        type="text/x-template"
+        id="v-categories-carousel-template"
+    >
         <div class="container mt-14 max-lg:px-8 max-sm:mt-5" v-if="! isLoading && categories?.length">
             <div class="relative">
                 <div

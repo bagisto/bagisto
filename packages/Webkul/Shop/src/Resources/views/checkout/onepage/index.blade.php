@@ -55,7 +55,10 @@
     </div>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-checkout-template">
+        <script
+            type="text/x-template"
+            id="v-checkout-template"
+        >
             <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
                 <div    
                     class="overflow-y-auto"

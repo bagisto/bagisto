@@ -36,7 +36,7 @@
     </div>
 
     <!-- Collapse menu -->
-    <v-sidebar-collapse />
+    <v-sidebar-collapse></v-sidebar-collapse>
 </div>
 
 @pushOnce('scripts')

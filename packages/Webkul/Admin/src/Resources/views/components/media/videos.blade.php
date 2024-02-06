@@ -18,7 +18,10 @@
 </v-media-videos>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-videos-template">
+    <script
+        type="text/x-template"
+        id="v-media-videos-template"
+    >
         <!-- Panel Content -->
         <div class="grid">
             <div class="flex gap-1">
@@ -67,7 +70,8 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
-                        />
+                        >
+                        </v-media-video-item>
                     </template>
                 </draggable>
             </div>

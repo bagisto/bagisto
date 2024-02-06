@@ -1,14 +1,17 @@
 <!-- Top Selling Products By Quantity Vue Component -->
 <v-reporting-product-top-selling-by-quantity>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
+    <x-admin::shimmer.reporting.products.top-selling-by-quantity />
 </v-reporting-product-top-selling-by-quantity>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-product-top-selling-by-quantity-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-product-top-selling-by-quantity-template"
+    >
         <!-- Shimmer --> 
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
+            <x-admin::shimmer.reporting.products.top-selling-by-quantity />
         </template>
         
         <!-- Top Selling Products By Quantity Section -->

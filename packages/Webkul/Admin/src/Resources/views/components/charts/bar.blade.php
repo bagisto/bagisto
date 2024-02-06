@@ -2,7 +2,10 @@
 
 @pushOnce('scripts')
     <!-- SEO Vue Component Template -->
-    <script type="text/x-template" id="v-charts-bar-template">
+    <script
+        type="text/x-template"
+        id="v-charts-bar-template"
+    >
         <canvas
             :id="$.uid + '_chart'"
             class="flex items-end w-full"

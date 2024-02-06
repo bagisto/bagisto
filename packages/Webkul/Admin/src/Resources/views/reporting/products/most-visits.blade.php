@@ -1,14 +1,17 @@
 <!-- Products with Most Visits Vue Component -->
 <v-reporting-products-with-most-visits>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.products.most-visits/>
+    <x-admin::shimmer.reporting.products.most-visits />
 </v-reporting-products-with-most-visits>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-products-with-most-visits-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-products-with-most-visits-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.products.most-visits/>
+            <x-admin::shimmer.reporting.products.most-visits />
         </template>
 
         <!-- Products with Most Visits Section -->

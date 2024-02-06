@@ -25,7 +25,7 @@
         </div>
 
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-currencies>
 
     {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}

@@ -1,14 +1,17 @@
 <!-- Todays Details Vue Component -->
 <v-dashboard-todays-details>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.todays-details/>
+    <x-admin::shimmer.dashboard.todays-details />
 </v-dashboard-todays-details>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-todays-details-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-todays-details-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.todays-details/>
+            <x-admin::shimmer.dashboard.todays-details />
         </template>
 
         <!-- Total Sales Section -->

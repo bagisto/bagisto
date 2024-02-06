@@ -1,12 +1,15 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.before', ['product' => $product]) !!}
 
-<v-product-variations :errors="errors" />
+<v-product-variations :errors="errors"></v-product-variations>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
     <!-- Variations Template -->
-    <script type="text/x-template" id="v-product-variations-template">
+    <script
+        type="text/x-template"
+        id="v-product-variations-template"
+    >
         <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex flex-wrap gap-2.5 justify-between mb-2.5 p-4">
@@ -49,7 +52,8 @@
                         :attributes="superAttributes"
                         @onRemoved="removeVariant"
                         :errors="errors"
-                    />
+                    >
+                    </v-product-variation-item>
                 </div>
             </template>
 
@@ -360,7 +364,8 @@
                                                 class="mb-2.5"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="updateTypes[selectedType].images"
-                                            />
+                                            >
+                                            </v-media-images>
 
                                             <button class="secondary-button">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.mass-edit.apply-to-all-btn')
@@ -685,7 +690,8 @@
                                         class="mt-2.5"
                                         v-bind:allow-multiple="true"
                                         :uploaded-images="variant.temp_images"
-                                    />
+                                    >
+                                    </v-media-images>
                                 </template>
                             </div>
                         </x-slot>
@@ -1040,7 +1046,8 @@
                                                 name="images"
                                                 v-bind:allow-multiple="true"
                                                 :uploaded-images="variant.images"
-                                            />
+                                            >
+                                            </v-media-images>
                                         </div>
 
                                         <!-- Actions -->

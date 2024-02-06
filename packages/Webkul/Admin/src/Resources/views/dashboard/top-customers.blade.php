@@ -1,14 +1,17 @@
 <!-- Top Selling Products Vue Component -->
 <v-dashboard-top-customers>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.top-customers/>
+    <x-admin::shimmer.dashboard.top-customers />
 </v-dashboard-top-customers>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-top-customers-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-top-customers-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.top-customers/>
+            <x-admin::shimmer.dashboard.top-customers />
         </template>
 
         <!-- Total Sales Section -->
