@@ -79,11 +79,15 @@
 
                     let slides = this.$refs.slides;
 
+                    if (! slides) {
+                        return ; 
+                    }
+
                     for (let i = 0; i < slides.length; i++) {
                         if (i == this.currentIndex - 1) {
                             continue;
                         }
-                        
+
                         slides[i].style.display = 'none';
                     }
 
