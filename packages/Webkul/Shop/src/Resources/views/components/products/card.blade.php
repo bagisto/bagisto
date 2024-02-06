@@ -118,7 +118,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.before') !!}
 
                 <!-- Needs to implement that in future -->
-                <div class="hidden flex gap-4 mt-2">
+                <div class="hidden gap-4 mt-2">
                     <span class="block w-[30px] h-[30px] bg-[#B5DCB4] rounded-full cursor-pointer"></span>
 
                     <span class="block w-[30px] h-[30px] bg-[#5C5C5C] rounded-full cursor-pointer"></span>
@@ -223,7 +223,7 @@
                 {!! view_render_event('bagisto.shop.components.products.card.price.after') !!}
 
                 <!-- Needs to implement that in future -->
-                <div class="hidden flex gap-4"> 
+                <div class="hidden gap-4"> 
                     <span class="block w-[30px] h-[30px] rounded-full bg-[#B5DCB4]">
                     </span> 
 
@@ -362,7 +362,7 @@
                             if (response.data.data.redirect_uri) {
                                 window.location.href = response.data.data.redirect_uri;
                             }
-
+                            flex
                             if (response.data.message) {
                                 this.$emitter.emit('update-mini-cart', response.data.data );
 

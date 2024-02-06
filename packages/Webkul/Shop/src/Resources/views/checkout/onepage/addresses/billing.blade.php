@@ -35,13 +35,20 @@
                             />
 
                             <label 
-                                class="icon-radio-unselect absolute ltr:left-5 rtl:right-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-7 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>
 
+                            <label
+                                class="absolute ltr:right-24 rtl:left-24 top-7 label-pending block w-max px-1.5 py-1 cursor-pointer"
+                                v-if="address.default_address"
+                            >
+                                Default Address
+                            </label>
+
                             <span
-                                class="icon-edit absolute ltr:right-3 rtl:left-5 top-5 text-2xl cursor-pointer"
+                                class="icon-edit absolute ltr:right-14 rtl:left-14 top-7 text-2xl cursor-pointer"
                                 @click="editNewBillingAddressForm(address);forms.billing.isEdit=true;"
                             >
                             </span>
@@ -50,7 +57,9 @@
                                 :for="'billing_address_id_' + address.id"
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
-                                <div class="flex justify-between items-center ml-8 pr-6">
+                                <span class="icon-flate-rate text-6xl text-navyBlue"></span>
+
+                                <div class="flex justify-between items-center">
                                     <p class="text-base font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
                                         
@@ -58,7 +67,7 @@
                                     </p>
                                 </div>
 
-                                <p class="mt-6 text-sm text-[#6E6E6E]">
+                                <p class="mt-3 text-sm text-[#6E6E6E]">
                                     <template v-if="typeof address.address1 === 'string'">
                                         @{{ address.address1 }},
                                     </template>
@@ -193,7 +202,7 @@
                         class="flex justify-end"
                         href="javascript:void(0)" 
                         v-if="addresses.billing.length > 0"
-                        @click="forms.billing.isNew = ! forms.billing.isNew"
+                        @click="back"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
 

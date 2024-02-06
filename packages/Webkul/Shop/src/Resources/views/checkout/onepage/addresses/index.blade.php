@@ -96,6 +96,12 @@
             },
 
             methods: {
+                back() {
+                    this.forms.billing.isNew = false;
+
+                    this.resetBillingAddressForm();
+                },
+
                 resetBillingAddressForm() {
                     this.forms.billing.address = {
                         address1: [''],
