@@ -330,12 +330,6 @@ class ProductRepository extends Repository
                     }
                 });
 
-                /**
-                 * This is key! if a product has been filtered down to the same number of attributes that we filtered on,
-                 * we know that it has matched all of the requested filters.
-                 *
-                 * To Do (@devansh): Need to monitor this.
-                 */
                 $qb->groupBy('products.id');
             }
 
