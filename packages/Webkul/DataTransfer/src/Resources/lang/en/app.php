@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'importers' => [
+    'importers'  => [
         'products'  => [
-            'title'  => 'Products',
+            'title'      => 'Products',
 
             'validation' => [
                 'errors' => [
@@ -16,7 +16,7 @@ return [
         ],
 
         'customers' => [
-            'title'  => 'Customers',
+            'title'      => 'Customers',
 
             'validation' => [
                 'errors' => [
