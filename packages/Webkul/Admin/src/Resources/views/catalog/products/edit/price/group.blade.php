@@ -2,13 +2,16 @@
 <span class="block w-full absolute ltr:left-0 rtl:right-0 my-1.5 border border-gray-200"></span>
 
 <v-product-customer-group-price>
-    <x-admin::shimmer.products.edit.group-price/>
+    <x-admin::shimmer.products.edit.group-price />
 </v-product-customer-group-price>
 
 @inject('customerGroupRepository', 'Webkul\Customer\Repositories\CustomerGroupRepository')
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-customer-group-price-template">
+    <script
+        type="text/x-template"
+        id="v-product-customer-group-price-template"
+    >
         <div>
             <!-- Header -->
             <div class="flex items-center justify-between mt-1.5 py-4">

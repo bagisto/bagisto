@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'Klucz URL: \'%s\' został już wygenerowany dla produktu o SKU: \'%s\'.',
-                    'invalid-attribute-family' => 'Nieprawidłowa wartość dla kolumny rodziny atrybutów (rodzina atrybutów nie istnieje?)',
-                    'invalid-type'             => 'Typ produktu jest nieprawidłowy lub nieobsługiwany',
-                    'sku-not-found'            => 'Produkt o podanym SKU nie został znaleziony',
+                    'duplicate-url-key'         => 'Klucz URL: \'%s\' został już wygenerowany dla produktu o SKU: \'%s\'.',
+                    'invalid-attribute-family'  => 'Nieprawidłowa wartość dla kolumny rodziny atrybutów (rodzina atrybutów nie istnieje?)',
+                    'invalid-type'              => 'Typ produktu jest nieprawidłowy lub nieobsługiwany',
+                    'sku-not-found'             => 'Produkt o podanym SKU nie został znaleziony',
+                    'super-attribute-not-found' => 'Superatrybut o kodzie \'%s\' nie został znaleziony lub nie należy do rodziny atrybutów: \'%s\'',
                 ],
             ],
         ],

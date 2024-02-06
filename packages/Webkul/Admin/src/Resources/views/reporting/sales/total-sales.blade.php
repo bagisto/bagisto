@@ -1,14 +1,17 @@
 <!-- Total Sales Stats Vue Component -->
 <v-reporting-sales-total-sales>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.total-sales/>
+    <x-admin::shimmer.reporting.sales.total-sales />
 </v-reporting-sales-total-sales>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-total-sales-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-total-sales-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.total-sales/>
+            <x-admin::shimmer.reporting.sales.total-sales />
         </template>
 
         <!-- Total Sales Section -->

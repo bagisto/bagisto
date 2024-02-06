@@ -35,7 +35,10 @@
     />
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-tax-rates-import-template">
+        <script
+            type="text/x-template"
+            id="v-tax-rates-import-template"
+        >
             <div>
                 <!-- Tax Rate Import Button -->
                 <button

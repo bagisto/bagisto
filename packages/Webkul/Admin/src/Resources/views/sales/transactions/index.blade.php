@@ -20,8 +20,10 @@
 
     <!-- Transaction View Component -->
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-transaction-drawer-template">
-
+        <script
+            type="text/x-template"
+            id="v-transaction-drawer-template"
+        >
             <x-admin::datagrid
                 src="{{ route('admin.sales.transactions.index') }}"
                 :isMultiRow="true"

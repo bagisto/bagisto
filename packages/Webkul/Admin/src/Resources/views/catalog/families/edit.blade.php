@@ -42,7 +42,7 @@
 
             <div class="flex flex-col gap-2 flex-1 bg-white dark:bg-gray-900 rounded box-shadow">
                 <v-family-attributes>
-                    <x-admin::shimmer.families.attributes-panel/>
+                    <x-admin::shimmer.families.attributes-panel />
                 </v-family-attributes>
             </div>
 
@@ -83,6 +83,7 @@
                             <x-admin::form.control-group.error control-name="code" />
                         </x-admin::form.control-group>
 
+                        <!-- Name -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
                                 @lang('admin::app.catalog.families.edit.name')

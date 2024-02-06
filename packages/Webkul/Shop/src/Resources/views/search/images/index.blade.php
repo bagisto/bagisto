@@ -8,7 +8,10 @@
 </v-image-search>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-image-search-template">
+    <script
+        type="text/x-template"
+        id="v-image-search-template"
+    >
         <div>
             <label
                 class="icon-camera flex items-center absolute top-2.5 ltr:right-3 rtl:left-3 ltr:pr-3 rtl:pl-3 text-xl cursor-pointer"

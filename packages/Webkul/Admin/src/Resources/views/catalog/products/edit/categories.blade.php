@@ -13,7 +13,7 @@
     <div class="mb-5 text-sm text-gray-600 dark:text-gray-300">
 
         <v-product-categories>
-            <x-admin::shimmer.tree/>
+            <x-admin::shimmer.tree />
         </v-product-categories>
 
     </div>
@@ -24,10 +24,13 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-categories-template">
+    <script
+        type="text/x-template"
+        id="v-product-categories-template"
+    >
         <div>
             <template v-if="isLoading">
-                <x-admin::shimmer.tree/>
+                <x-admin::shimmer.tree />
             </template>
 
             <template v-else>

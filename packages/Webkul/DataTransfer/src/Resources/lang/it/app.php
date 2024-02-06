@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'La chiave URL: \'%s\' è già stata generata per un elemento con lo SKU: \'%s\'.',
-                    'invalid-attribute-family' => 'Valore non valido per la colonna della famiglia di attributi (la famiglia di attributi non esiste?)',
-                    'invalid-type'             => 'Il tipo di prodotto non è valido o non è supportato',
-                    'sku-not-found'            => 'Prodotto con lo SKU specificato non trovato',
+                    'duplicate-url-key'         => 'La chiave URL: \'%s\' è già stata generata per un elemento con lo SKU: \'%s\'.',
+                    'invalid-attribute-family'  => 'Valore non valido per la colonna della famiglia di attributi (la famiglia di attributi non esiste?)',
+                    'invalid-type'              => 'Il tipo di prodotto non è valido o non è supportato',
+                    'sku-not-found'             => 'Prodotto con lo SKU specificato non trovato',
+                    'super-attribute-not-found' => 'Super attributo con codice: \'%s\' non trovato o non appartiene alla famiglia di attributi: \'%s\'',
                 ],
             ],
         ],

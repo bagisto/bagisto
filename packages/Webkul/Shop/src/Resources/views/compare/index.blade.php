@@ -31,7 +31,10 @@
     </div>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-compare-template">
+        <script
+            type="text/x-template"
+            id="v-compare-template"
+        >
             <div>
                 {!! view_render_event('bagisto.shop.customers.account.compare.before') !!}
 

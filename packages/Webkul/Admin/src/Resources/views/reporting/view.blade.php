@@ -5,11 +5,14 @@
 
     <v-reporting-stats-table>
         <!-- Shimmer -->
-        <x-admin::shimmer.reporting.view/>
+        <x-admin::shimmer.reporting.view />
     </v-reporting-stats-table>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-reporting-stats-table-template">
+        <script
+            type="text/x-template"
+            id="v-reporting-stats-table-template"
+        >
             <div>
                 <!-- Page Header -->
                 <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
@@ -91,9 +94,9 @@
 
                 <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.head/>
+                        <x-admin::shimmer.datagrid.table.head />
 
-                        <x-admin::shimmer.datagrid.table.body/>
+                        <x-admin::shimmer.datagrid.table.body />
                     </template>
 
                     <template v-else>

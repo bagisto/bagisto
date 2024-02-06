@@ -7,7 +7,10 @@
 @inject('toolbar' , 'Webkul\Product\Helpers\Toolbar')
 
 @pushOnce('scripts')
-    <script type="text/x-template" id='v-toolbar-template'>
+    <script
+        type="text/x-template"
+        id='v-toolbar-template'
+    >
         <div>
             <!-- Desktop Toolbar -->
             <div class="flex justify-between max-md:hidden">

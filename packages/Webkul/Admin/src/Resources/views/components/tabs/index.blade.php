@@ -4,7 +4,7 @@
     position="{{ $position }}"
     {{ $attributes }}
 >
-    <x-admin::shimmer.tabs/>
+    <x-admin::shimmer.tabs />
 </v-tabs>
 
 @pushOnce('scripts')

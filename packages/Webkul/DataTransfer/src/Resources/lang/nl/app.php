@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'URL-sleutel: \'%s\' is al gegenereerd voor een item met de SKU: \'%s\'.',
-                    'invalid-attribute-family' => 'Ongeldige waarde voor kolom attribuutfamilie (attribuutfamilie bestaat niet?)',
-                    'invalid-type'             => 'Producttype is ongeldig of wordt niet ondersteund',
-                    'sku-not-found'            => 'Product met de opgegeven SKU niet gevonden',
+                    'duplicate-url-key'         => 'URL-sleutel: \'%s\' is al gegenereerd voor een item met de SKU: \'%s\'.',
+                    'invalid-attribute-family'  => 'Ongeldige waarde voor kolom attribuutfamilie (attribuutfamilie bestaat niet?)',
+                    'invalid-type'              => 'Producttype is ongeldig of wordt niet ondersteund',
+                    'sku-not-found'             => 'Product met de opgegeven SKU niet gevonden',
+                    'super-attribute-not-found' => 'Superattribuut met code: \'%s\' niet gevonden of behoort niet tot de attribuutfamilie: \'%s\'',
                 ],
             ],
         ],

@@ -80,12 +80,15 @@
             </div>
         </div>
 
-        <v-theme-customizer :errors="errors" />
+        <v-theme-customizer :errors="errors"></v-theme-customizer>
     </x-admin::form>
 
     @pushOnce('scripts')
         <!-- Customizer Parent Template-->
-        <script type="text/x-template" id="v-theme-customizer-template">
+        <script
+            type="text/x-template"
+            id="v-theme-customizer-template"
+        >
             <div>
                 <component
                     :errors="errors"

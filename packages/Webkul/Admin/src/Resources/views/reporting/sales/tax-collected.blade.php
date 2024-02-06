@@ -1,14 +1,17 @@
 <!-- Tax Collected Vue Component -->
 <v-reporting-sales-tax-collected>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.tax-collected/>
+    <x-admin::shimmer.reporting.sales.tax-collected />
 </v-reporting-sales-tax-collected>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-tax-collected-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-tax-collected-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.tax-collected/>
+            <x-admin::shimmer.reporting.sales.tax-collected />
         </template>
 
         <!-- Tax Collected Section -->

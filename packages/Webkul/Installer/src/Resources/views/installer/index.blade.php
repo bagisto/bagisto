@@ -84,7 +84,7 @@
         >
             <div class="flex [&amp;>*]:w-[50%] gap-[50px] justify-center items-center">
                 <!-- Vue Component -->
-                <v-server-requirements />
+                <v-server-requirements></v-server-requirements>
             </div>
         </div>
 

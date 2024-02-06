@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'URLキー：\'%s\'はSKU：\'%s\'を持つアイテムにすでに生成されています。',
-                    'invalid-attribute-family' => '属性ファミリー列の値が無効です（属性ファミリーが存在しませんか？）',
-                    'invalid-type'             => '製品タイプが無効またはサポートされていません',
-                    'sku-not-found'            => '指定されたSKUの製品が見つかりません',
+                    'duplicate-url-key'         => 'URLキー：\'%s\'はSKU：\'%s\'を持つアイテムにすでに生成されています。',
+                    'invalid-attribute-family'  => '属性ファミリー列の値が無効です（属性ファミリーが存在しませんか？）',
+                    'invalid-type'              => '製品タイプが無効またはサポートされていません',
+                    'sku-not-found'             => '指定されたSKUの製品が見つかりません',
+                    'super-attribute-not-found' => 'コード%s\'でスーパー属性が見つかりませんでした、または属性ファミリーに属していません: \'%s\'',
                 ],
             ],
         ],

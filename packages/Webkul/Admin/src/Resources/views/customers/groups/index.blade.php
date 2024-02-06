@@ -11,7 +11,10 @@
     {!! view_render_event('admin.customers.groups.create.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-group-template">
+        <script
+            type="text/x-template"
+            id="v-create-group-template"
+        >
             <div>
                 <div class="flex justify-between items-center">
                     <p class="text-xl text-gray-800 dark:text-white font-bold">
