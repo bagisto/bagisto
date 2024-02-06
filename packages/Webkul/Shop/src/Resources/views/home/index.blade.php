@@ -2,7 +2,6 @@
     $channel = core()->getCurrentChannel();
 @endphp
 
-
 <!-- SEO Meta Content -->
 @push ('meta')
     <meta name="title" content="{{ $channel->home_seo['meta_title'] ?? '' }}" />
@@ -31,14 +30,18 @@
                 @break
             @case ($customization::STATIC_CONTENT)
                 <!-- push style -->
-                @push ('styles')
-                    <style>
-                        {{ $data['css'] }}
-                    </style>
-                @endpush
+                @if (! empty($data['css']))
+                    @push ('styles')
+                        <style>
+                            {{ $data['css'] }}
+                        </style>
+                    @endpush
+                @endif
 
                 <!-- render html -->
-                {!! $data['html'] !!}
+                @if (! empty($data['html']))
+                    {!! $data['html'] !!}
+                @endif
 
                 @break
             @case ($customization::CATEGORY_CAROUSEL)

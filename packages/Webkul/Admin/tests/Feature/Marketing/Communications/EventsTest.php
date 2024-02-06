@@ -17,6 +17,17 @@ it('should return the events index page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in events', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.events.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('date')
+        ->assertUnprocessable();
+});
+
 it('should store the newly create event', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -53,6 +64,20 @@ it('should edit the events template', function () {
         ->assertJsonPath('name', $event->name)
         ->assertJsonPath('description', $event->description)
         ->assertJsonPath('date', $event->date);
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in events', function () {
+    // Arrange
+    $event = Event::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.events.store', $event->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('date')
+        ->assertUnprocessable();
 });
 
 it('should update the existing the events', function () {

@@ -8,7 +8,10 @@
 {!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-shipping-method-template">
+    <script
+        type="text/x-template"
+        id="v-shipping-method-template"
+    >
         <div class="mb-7">
             <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->

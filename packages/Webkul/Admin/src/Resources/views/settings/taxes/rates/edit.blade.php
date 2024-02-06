@@ -4,10 +4,13 @@
         @lang('admin::app.settings.taxes.rates.edit.title')
     </x-slot>
 
-    <v-edit-taxrate />
+    <v-edit-taxrate></v-edit-taxrate>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-edit-taxrate-template">
+        <script
+            type="text/x-template"
+            id="v-edit-taxrate-template"
+        >
 
             {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.before') !!}
 

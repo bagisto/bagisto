@@ -1,14 +1,17 @@
 <!-- Stock Threshold Products Vue Component -->
 <v-dashboard-stock-threshold-products>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.stock-threshold-products/>
+    <x-admin::shimmer.dashboard.stock-threshold-products />
 </v-dashboard-stock-threshold-products>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-stock-threshold-products-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-stock-threshold-products-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.stock-threshold-products/>
+            <x-admin::shimmer.dashboard.stock-threshold-products />
         </template>
 
         <!-- Total Sales Section -->

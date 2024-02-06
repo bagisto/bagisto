@@ -26,11 +26,14 @@
         </div>
 
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-tax-categories>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-tax-categories-template">
+        <script
+            type="text/x-template"
+            id="v-tax-categories-template"
+        >
             <div class="flex justify-between items-center">
                 <p class="text-xl text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.taxes.categories.index.title')

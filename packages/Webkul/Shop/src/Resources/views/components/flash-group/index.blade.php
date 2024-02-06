@@ -1,7 +1,10 @@
 <v-flash-group ref='flashes'></v-flash-group>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-flash-group-template">
+    <script
+        type="text/x-template"
+        id="v-flash-group-template"
+    >
         <transition-group
             tag='div'
             name="flash-group"

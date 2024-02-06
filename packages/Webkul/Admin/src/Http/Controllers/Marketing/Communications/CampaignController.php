@@ -55,26 +55,19 @@ class CampaignController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
+        $validatedData = $this->validate(request(), [
             'name'                  => 'required',
             'subject'               => 'required',
             'marketing_template_id' => 'required',
-            'marketing_event_id'    => 'required_if:schedule_type,event',
+            'marketing_event_id'    => 'required',
+            'channel_id'            => 'required',
+            'customer_group_id'     => 'required',
+            'status'                => 'sometimes|required|in:0,1',
         ]);
 
         Event::dispatch('marketing.campaigns.create.before');
 
-        request()['status'] = request()->input('status') ?? 0;
-
-        $campaign = $this->campaignRepository->create(request()->only([
-            'name',
-            'subject',
-            'marketing_event_id',
-            'marketing_template_id',
-            'status',
-            'channel_id',
-            'customer_group_id',
-        ]));
+        $campaign = $this->campaignRepository->create($validatedData);
 
         Event::dispatch('marketing.campaigns.create.after', $campaign);
 
@@ -104,26 +97,19 @@ class CampaignController extends Controller
      */
     public function update(int $id)
     {
-        $this->validate(request(), [
+        $validatedData = $this->validate(request(), [
             'name'                  => 'required',
             'subject'               => 'required',
             'marketing_template_id' => 'required',
-            'marketing_event_id'    => 'required_if:schedule_type,event',
+            'marketing_event_id'    => 'required',
+            'channel_id'            => 'required',
+            'customer_group_id'     => 'required',
+            'status'                => 'sometimes|required|in:0,1',
         ]);
 
         Event::dispatch('marketing.campaigns.update.before', $id);
 
-        request()['status'] = request()->input('status') ?? 0;
-
-        $campaign = $this->campaignRepository->update(request()->only([
-            'name',
-            'subject',
-            'marketing_event_id',
-            'marketing_template_id',
-            'status',
-            'channel_id',
-            'customer_group_id',
-        ]), $id);
+        $campaign = $this->campaignRepository->update($validatedData, $id);
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
 

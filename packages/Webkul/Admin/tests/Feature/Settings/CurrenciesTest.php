@@ -17,6 +17,16 @@ it('should returns the currencies index page', function () {
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the currencies', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.currencies.store'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created currencies', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -50,6 +60,21 @@ it('should return the currencies for edit', function () {
         ->assertJsonPath('id', $currency->id)
         ->assertJsonPath('code', $currency->code)
         ->assertJsonPath('name', $currency->name);
+});
+
+it('should fail the validation with errors when certain field not provided when update the currencies', function () {
+    // Arrange
+    $currency = Currency::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.currencies.update'), [
+        'id'   => $currency->id,
+    ])
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name')
+        ->assertUnprocessable();
 });
 
 it('should update the specified currency', function () {

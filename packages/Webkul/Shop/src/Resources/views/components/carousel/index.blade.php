@@ -1,12 +1,14 @@
 @props(['options'])
 
 <v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
-    <div class="shimmer w-full aspect-[2.743/1]">
-    </div>
+    <div class="shimmer w-full aspect-[2.743/1]"></div>
 </v-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-carousel-template">
+    <script
+        type="text/x-template"
+        id="v-carousel-template"
+    >
         <div class="w-full relative m-auto">
             <a
                 v-for="(image, index) in images"
@@ -79,11 +81,15 @@
 
                     let slides = this.$refs.slides;
 
+                    if (! slides) {
+                        return ; 
+                    }
+
                     for (let i = 0; i < slides.length; i++) {
                         if (i == this.currentIndex - 1) {
                             continue;
                         }
-                        
+
                         slides[i].style.display = 'none';
                     }
 

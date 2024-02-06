@@ -1,14 +1,17 @@
 <!-- Sold Products Quantity Vue Component -->
 <v-reporting-products-total-sold-quantity>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.products.sold-quantities/>
+    <x-admin::shimmer.reporting.products.sold-quantities />
 </v-reporting-products-total-sold-quantity>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-products-total-sold-quantity-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-products-total-sold-quantity-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.products.sold-quantities/>
+            <x-admin::shimmer.reporting.products.sold-quantities />
         </template>
 
         <!-- Sold Products Quantity Section -->

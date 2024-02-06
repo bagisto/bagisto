@@ -1,14 +1,17 @@
 <!-- Abandoned Carts Vue Component -->
 <v-reporting-sales-abandoned-carts>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.sales.abandoned-carts/>
+    <x-admin::shimmer.reporting.sales.abandoned-carts />
 </v-reporting-sales-abandoned-carts>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-abandoned-carts-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-abandoned-carts-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.abandoned-carts/>
+            <x-admin::shimmer.reporting.sales.abandoned-carts />
         </template>
 
         <!-- Abandoned Carts Section -->

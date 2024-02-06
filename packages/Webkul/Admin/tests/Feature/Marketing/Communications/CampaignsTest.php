@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\Marketing\Models\Campaign;
+use Webkul\Marketing\Models\Event;
 use Webkul\Marketing\Models\Template;
 
 use function Pest\Laravel\deleteJson;
@@ -28,9 +29,42 @@ it('should returns the create page of compaign', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.campaigns.create.back-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in campaigns', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.campaigns.store'))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('subject')
+        ->assertJsonValidationErrorFor('marketing_template_id')
+        ->assertJsonValidationErrorFor('marketing_event_id')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('customer_group_id')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when certain inputs are not provided and if provided bad status type when store in campaigns', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.campaigns.store'), [
+        'status' => fake()->word(),
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('subject')
+        ->assertJsonValidationErrorFor('marketing_template_id')
+        ->assertJsonValidationErrorFor('marketing_event_id')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('customer_group_id')
+        ->assertJsonValidationErrorFor('status')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created compaigns', function () {
     // Arrange
     $emailTemplate = Template::factory()->create();
+
+    $event = Event::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -39,6 +73,9 @@ it('should store the newly created compaigns', function () {
         'name'                  => $name = fake()->name(),
         'subject'               => $subject = fake()->title(),
         'marketing_template_id' => $emailTemplate->id,
+        'marketing_event_id'    => $event->id,
+        'channel_id'            => 1,
+        'customer_group_id'     => $customerGroupId = rand(1, 3),
     ])
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
@@ -49,6 +86,9 @@ it('should store the newly created compaigns', function () {
                 'name'                  => $name,
                 'subject'               => $subject,
                 'marketing_template_id' => $emailTemplate->id,
+                'marketing_event_id'    => $event->id,
+                'channel_id'            => 1,
+                'customer_group_id'     => $customerGroupId,
             ],
         ],
     ]);
@@ -67,9 +107,48 @@ it('should show the edit page of compaigns', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.campaigns.edit.back-btn'));
 });
 
+it('should fail the validation with errors when certain inputs are not provided when update in campaigns', function () {
+    // Arrange
+    $campaign = Campaign::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.campaigns.update', $campaign->id))
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('subject')
+        ->assertJsonValidationErrorFor('marketing_template_id')
+        ->assertJsonValidationErrorFor('marketing_event_id')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('customer_group_id')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation with errors when certain inputs are not provided and if provided bad status type when update in campaigns', function () {
+    // Arrange
+    $campaign = Campaign::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.campaigns.update', $campaign->id), [
+        'status' => fake()->word(),
+    ])
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('subject')
+        ->assertJsonValidationErrorFor('marketing_template_id')
+        ->assertJsonValidationErrorFor('marketing_event_id')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('customer_group_id')
+        ->assertJsonValidationErrorFor('status')
+        ->assertUnprocessable();
+});
+
 it('should update specified the compaigns', function () {
     // Arrange
     $campaign = Campaign::factory()->create();
+
+    $event = Event::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -78,6 +157,9 @@ it('should update specified the compaigns', function () {
         'name'                  => $campaign->name,
         'subject'               => $subject = fake()->title(),
         'marketing_template_id' => $campaign->marketing_template_id,
+        'marketing_event_id'    => $event->id,
+        'channel_id'            => 1,
+        'customer_group_id'     => $customerGroupId = rand(1, 3),
     ])
         ->assertRedirect(route('admin.marketing.communications.campaigns.index'))
         ->isRedirect();
@@ -89,6 +171,9 @@ it('should update specified the compaigns', function () {
                 'name'                  => $campaign->name,
                 'subject'               => $subject,
                 'marketing_template_id' => $campaign->marketing_template_id,
+                'marketing_event_id'    => $event->id,
+                'channel_id'            => 1,
+                'customer_group_id'     => $customerGroupId,
             ],
         ],
     ]);

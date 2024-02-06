@@ -17,6 +17,17 @@ it('should show the search terms index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-terms.index.create-btn'));
 });
 
+it('should fail the validation with errors when certain field not provided when store the search term', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.search_seo.search_terms.store'))
+        ->assertJsonValidationErrorFor('term')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('locale')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created search term', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -40,6 +51,20 @@ it('should store the newly created search term', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when certain field not provided when update the search term', function () {
+    // Arrange
+    $searchTerm = SearchTerm::factory()->create();
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.search_seo.search_terms.update', $searchTerm->id))
+        ->assertJsonValidationErrorFor('term')
+        ->assertJsonValidationErrorFor('channel_id')
+        ->assertJsonValidationErrorFor('locale')
+        ->assertUnprocessable();
 });
 
 it('should update the search term', function () {

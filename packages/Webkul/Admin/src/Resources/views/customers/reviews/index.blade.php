@@ -11,12 +11,15 @@
 
     {!! view_render_event('admin.customers.reviews.edit.before') !!}
 
-    <v-review-edit-drawer />
+    <v-review-edit-drawer></v-review-edit-drawer>
 
     {!! view_render_event('admin.customers.groups.edit.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-review-edit-drawer-template">
+        <script
+            type="text/x-template"
+            id="v-review-edit-drawer-template"
+        >
 
             {!! view_render_event('admin.customers.reviews.list.before') !!}
 
@@ -435,7 +438,7 @@
 
                                 this.$refs.review_data.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Review Updated Successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data,message });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {

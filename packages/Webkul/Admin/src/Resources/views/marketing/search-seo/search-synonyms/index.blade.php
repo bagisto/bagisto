@@ -22,7 +22,7 @@
         </div>
 
         <!-- Added For Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-create-sitemaps>
 
     {!! view_render_event('bagisto.admin.marketing.search_seo.search_synonyms.create.after') !!}
@@ -193,11 +193,11 @@
                                     :placeholder="trans('admin::app.marketing.search-seo.search-synonyms.index.create.terms')"
                                 />
 
+                                <x-admin::form.control-group.error control-name="terms" />
+
                                 <p class="mt-2 ltr:ml-1 rtl:mr-1 text-xs text-gray-600 dark:text-gray-300 font-medium">
                                     @lang('admin::app.marketing.search-seo.search-synonyms.index.create.terms-info')
                                 </p>
-
-                                <x-admin::form.control-group.error control-name="terms" />
                             </x-admin::form.control-group>
                         </x-slot>
 

@@ -5,7 +5,10 @@
 </v-media>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-template">
+    <script
+        type="text/x-template"
+        id="v-media-template"
+    >
         <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
             <div :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl': isDragOver }">
                 <div

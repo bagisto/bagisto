@@ -16,7 +16,10 @@
     </v-product-reviews>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-product-reviews-template">
+        <script
+            type="text/x-template"
+            id="v-product-reviews-template"
+        >
             <div>
                 <!-- Reviews Shimmer Effect -->
                 <template v-if="isLoading">

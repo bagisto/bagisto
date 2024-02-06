@@ -5,7 +5,10 @@
 </v-datagrid-table>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-datagrid-table-template">
+    <script
+        type="text/x-template"
+        id="v-datagrid-table-template"
+    >
         <div class="w-full">
             <div class="table-responsive grid w-full box-shadow rounded bg-white dark:bg-gray-900 overflow-hidden">
                 <slot name="header">

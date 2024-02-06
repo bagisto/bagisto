@@ -6,7 +6,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.before') !!}
 
-    <v-cart-rule-create-form />
+    <v-cart-rule-create-form></v-cart-rule-create-form>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.after') !!}
 
@@ -250,8 +250,9 @@
                                     :condition="condition"
                                     :key="index"
                                     :index="index"
-                                    @onRemoveCondition="removeCondition($event)">
-                                />
+                                    @onRemoveCondition="removeCondition($event)"
+                                >
+                                </v-cart-rule-condition-item>
 
                                 <div
                                     class="secondary-button max-w-max mt-4"
@@ -798,7 +799,8 @@
                                     :name="`['conditions[${index}][value]']`"
                                     class="mt-1 text-red-500 text-xs italic"
                                     as="p"
-                                />
+                                >
+                                </v-error-message>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">
@@ -1070,23 +1072,24 @@
 
                 computed: {
                     matchedAttribute() {
-                        if (this.condition.attribute == '')
+                        if (this.condition.attribute == '') {
                             return;
-
+                        }
+                            
                         let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
-                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter((attribute) => {
-                            return attribute.key == this.condition.attribute;
-                        });
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].find((attribute) => attribute.key == this.condition.attribute);
 
-                        if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] ==
-                            'checkbox') {
+                        if (
+                            matchedAttribute['type'] == 'multiselect'
+                            || matchedAttribute['type'] == 'checkbox'
+                        ) {
                             this.condition.operator = '{}';
 
                             this.condition.value = [];
                         }
 
-                        return matchedAttribute[0];
+                        return matchedAttribute;
                     }
                 },
 

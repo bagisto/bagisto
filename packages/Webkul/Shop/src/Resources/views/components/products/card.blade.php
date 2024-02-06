@@ -5,7 +5,10 @@
 </v-product-card>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-card-template">
+    <script
+        type="text/x-template"
+        id="v-product-card-template"
+    >
         <!-- Grid Card -->
         <div
             class='grid gap-2.5 content-start w-full relative'

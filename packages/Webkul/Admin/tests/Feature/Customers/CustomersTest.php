@@ -54,6 +54,18 @@ it('should return the view page of customer', function () {
         ->assertSeeText($customer->name);
 });
 
+it('should fail the validation with errors when certain inputs are not provided when store in customer', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.store'))
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('gender')
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
+});
+
 it('should create a new customer', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -111,6 +123,20 @@ it('should login the customer from the admin panel', function () {
         ->isRedirection();
 });
 
+it('should fail the validation with errors for notes', function () {
+    // Arrange
+    $customer = (new CustomerFaker())->factory()->create([
+        'password' => Hash::make('admin123'),
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customer.note.store', $customer->id))
+        ->assertJsonValidationErrorFor('note')
+        ->assertUnprocessable();
+});
+
 it('should store the notes for the customer', function () {
     // Arrange
     $customer = (new CustomerFaker())->factory()->create([
@@ -133,6 +159,23 @@ it('should store the notes for the customer', function () {
             ],
         ],
     ]);
+});
+
+it('should fail the validation with errors when certain inputs are not provided when update in customer', function () {
+    // Arrange
+    $customer = (new CustomerFaker())->factory()->create([
+        'password' => Hash::make('admin123'),
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.customers.update', $customer->id))
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('gender')
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
 });
 
 it('is should update the the existing customer', function () {

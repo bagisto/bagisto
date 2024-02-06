@@ -40,7 +40,7 @@ class LocaleController extends Controller
         $this->validate(request(), [
             'code'        => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
             'name'        => 'required',
-            'direction'   => 'in:ltr,rtl',
+            'direction'   => 'required|in:ltr,rtl',
             'logo_path'   => 'array',
             'logo_path.*' => 'image',
         ]);
@@ -76,7 +76,7 @@ class LocaleController extends Controller
     {
         $this->validate(request(), [
             'name'        => 'required',
-            'direction'   => 'in:ltr,rtl',
+            'direction'   => 'required|in:ltr,rtl',
             'logo_path'   => 'array',
             'logo_path.*' => 'image',
         ]);

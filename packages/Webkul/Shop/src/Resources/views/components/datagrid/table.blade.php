@@ -5,7 +5,10 @@
 </v-table>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-table-template">
+    <script
+        type="text/x-template"
+        id="v-table-template"
+    >
         <div class="w-full overflow-x-auto border rounded-xl">
             <!-- Main Table -->
             <div class="table-responsive grid w-full box-shadow rounded bg-white overflow-hidden">

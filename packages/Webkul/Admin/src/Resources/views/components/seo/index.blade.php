@@ -2,7 +2,10 @@
 
 @pushOnce('scripts')
     <!-- SEO Vue Component Template -->
-    <script type="text/x-template" id="v-seo-helper-template">
+    <script
+        type="text/x-template"
+        id="v-seo-helper-template"
+    >
         <div class="flex flex-col gap-1 mb-8">
             <p 
                 class="text-[#161B9D] dark:text-white"

@@ -1,5 +1,5 @@
 <template v-if="isLoading">
-    <x-admin::shimmer.datagrid.toolbar/>
+    <x-admin::shimmer.datagrid.toolbar />
 </template>
 
 <template v-else>

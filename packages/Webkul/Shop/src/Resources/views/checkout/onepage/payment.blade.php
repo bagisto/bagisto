@@ -7,7 +7,10 @@
 {!! view_render_event('bagisto.shop.checkout.payment.method.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-payment-method-template">
+    <script
+        type="text/x-template"
+        id="v-payment-method-template"
+    >
         <div class="mb-7">
             <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
                 <!-- Payment Method shimmer Effect -->
