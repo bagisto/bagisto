@@ -6,7 +6,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.before') !!}
 
-    <v-cart-rule-create-form />
+    <v-cart-rule-create-form></v-cart-rule-create-form>
 
     {!! view_render_event('bagisto.admin.marketing.promotions.cart_rules.create.after') !!}
 
@@ -251,7 +251,8 @@
                                     :key="index"
                                     :index="index"
                                     @onRemoveCondition="removeCondition($event)"
-                                />
+                                >
+                                </v-cart-rule-condition-item>
 
                                 <div
                                     class="secondary-button max-w-max mt-4"
@@ -798,7 +799,8 @@
                                     :name="`['conditions[${index}][value]']`"
                                     class="mt-1 text-red-500 text-xs italic"
                                     as="p"
-                                />
+                                >
+                                </v-error-message>
                             </div>
 
                             <div v-if="matchedAttribute.type == 'date'">

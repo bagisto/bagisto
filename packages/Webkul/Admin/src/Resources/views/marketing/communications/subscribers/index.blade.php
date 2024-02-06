@@ -12,11 +12,14 @@
 
     <v-subscribers>
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-subscribers>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-subscribers-template">
+        <script
+            type="text/x-template"
+            id="v-subscribers-template"
+        >
             <div>
                 <!-- DataGrid -->
                 <x-admin::datagrid

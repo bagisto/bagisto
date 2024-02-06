@@ -1,7 +1,10 @@
 <v-button {{ $attributes }}></v-button>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-button-template">
+    <script
+        type="text/x-template"
+        id="v-button-template"
+    >
         <button
             v-if="! isLoading"
             :class="[buttonClass, '']"
@@ -14,7 +17,13 @@
             :class="[buttonClass, '']"
         >
             <!-- Spinner -->
-            <svg class="absolute animate-spin h-5 w-5 text-blue" xmlns="http://www.w3.org/2000/svg" fill="none"  aria-hidden="true" viewBox="0 0 24 24">
+            <svg
+                class="absolute animate-spin h-5 w-5 text-blue"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none" 
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+            >
                 <circle
                     class="opacity-25"
                     cx="12"
@@ -33,7 +42,11 @@
                 </path>
             </svg>
 
-            <span class="opacity-0 realative h-full w-full" v-text="title"></span>
+            <span
+                class="opacity-0 realative h-full w-full"
+                v-text="title"
+            >
+            </span>
         </button>
     </script>
 

@@ -1,4 +1,4 @@
-<v-tinymce {{ $attributes }} />
+<v-tinymce {{ $attributes }}></v-tinymce>
 
 @pushOnce('scripts')
     <!--
@@ -11,7 +11,10 @@
         referrerpolicy="no-referrer"
     ></script>
 
-    <script type="text/x-template" id="v-tinymce-template">
+    <script
+        type="text/x-template"
+        id="v-tinymce-template"
+    >
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
             as="div"

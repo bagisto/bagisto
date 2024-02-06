@@ -14,7 +14,10 @@
 </v-tab-item>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-tab-item-template">
+    <script
+        type="text/x-template"
+        id="v-tab-item-template"
+    >
         <div
             v-if="isActive"
             class="animate-[on-fade_0.5s_ease-in-out]"

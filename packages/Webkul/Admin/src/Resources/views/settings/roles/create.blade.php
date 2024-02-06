@@ -7,12 +7,15 @@
     {!! view_render_event('bagisto.admin.settings.roles.create.before') !!}
 
     <!-- Create Role for -->
-    <v-create-user-role />
+    <v-create-user-role></v-create-user-role>
 
     {!! view_render_event('bagisto.admin.settings.roles.create.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-user-role-template">
+        <script
+            type="text/x-template"
+            id="v-create-user-role-template"
+        >
             <div>
                 <x-admin::form :action="route('admin.settings.roles.store')">
                     {!! view_render_event('admin.settings.roles.create.create_form_controls.before') !!}

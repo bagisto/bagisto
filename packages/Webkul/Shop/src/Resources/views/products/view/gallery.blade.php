@@ -3,8 +3,11 @@
 </v-product-gallery>
 
 @pushOnce('scripts')
-<script type="text/x-template" id="v-product-gallery-template">
-    <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
+    <script
+        type="text/x-template"
+        id="v-product-gallery-template"
+    >
+        <div class="flex gap-8 h-max sticky top-8 max-1180:hidden">
             <!-- Product Image Slider -->
             <div class="flex-24 justify-center place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-2.5 max-w-[100px] min-w-[100px] flex-wrap">
                 <span
@@ -21,8 +24,7 @@
                     ref="swiperContainer"
                     class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
                 >
-
-                                 <img 
+                    <img 
                         :class="`min-w-[100px] max-h-[100px] rounded-xl border transparent cursor-pointer ${activeIndex === `image_${index}` ? 'border border-navyBlue pointer-events-none' : 'border-white'}`"
                         v-for="(image, index) in media.images"
                         :src="image.small_image_url"
@@ -47,15 +49,15 @@
 
                 <span
                     class="icon-arrow-down text-2xl cursor-pointer"
+                    v-if= "lengthOfMedia"
                     role="button"
                     aria-label="@lang('shop::app.components.products.carousel.previous')"
                     tabindex="0"
                     @click="swipeTop"
-                    v-if= "lengthOfMedia"
                 >
                 </span>
             </div>
-            
+
             <!-- Media shimmer Effect -->
             <div
                 class="max-w-[560px] max-h-[610px]"
@@ -107,102 +109,102 @@
         </div>
     </script>
 
-<script type="module">
-    app.component('v-product-gallery', {
-        template: '#v-product-gallery-template',
+    <script type="module">
+        app.component('v-product-gallery', {
+            template: '#v-product-gallery-template',
 
-        data() {
-            return {
-                isMediaLoading: true,
+            data() {
+                return {
+                    isMediaLoading: true,
 
-                media: {
-                    images: @json(product_image()->getGalleryImages($product)),
+                    media: {
+                        images: @json(product_image()->getGalleryImages($product)),
 
-                    videos: @json(product_video()->getVideos($product)),
-                },
+                        videos: @json(product_video()->getVideos($product)),
+                    },
 
-                baseFile: {
-                    type: '',
+                    baseFile: {
+                        type: '',
 
-                    path: ''
-                },
+                        path: ''
+                    },
 
-                activeIndex: 0,
+                    activeIndex: 0,
 
-                containerOffset: 110,
-            }
-        },
+                    containerOffset: 110,
+                }
+            },
 
-        watch: {
-            'media.images': {
-                deep: true,
+            watch: {
+                'media.images': {
+                    deep: true,
 
-                handler(newImages, oldImages) {
-                    let selectedImage = newImages?.[this.activeIndex];
+                    handler(newImages, oldImages) {
+                        let selectedImage = newImages?.[this.activeIndex];
 
-                    if (JSON.stringify(newImages) !== JSON.stringify(oldImages) && selectedImage?.large_image_url) {
-                        this.baseFile.path = selectedImage.large_image_url;
-                    }
+                        if (JSON.stringify(newImages) !== JSON.stringify(oldImages) && selectedImage?.large_image_url) {
+                            this.baseFile.path = selectedImage.large_image_url;
+                        }
+                    },
                 },
             },
-        },
 
-        mounted() {
-            if (this.media.images.length) {
-                this.activeIndex = 'image_0';
-                this.baseFile.type = 'image';
-                this.baseFile.path = this.media.images[0].large_image_url;
-            } else if (this.media.videos.length) {
-                this.activeIndex = 'video_0';
-                this.baseFile.type = 'video';
-                this.baseFile.path = this.media.videos[0].video_url;
-            }
-        },
-
-        computed: {
-            lengthOfMedia() {
+            mounted() {
                 if (this.media.images.length) {
-                    return [...this.media.images, ...this.media.videos].length > 5;
-                }
-            }
-        },
-
-        methods: {
-            onMediaLoad() {
-                this.isMediaLoading = false;
-            },
-
-            change(file, index) {
-                this.isMediaLoading = true;
-
-                if (file.type == 'videos') {
-                    this.baseFile.type = 'video';
-                    this.baseFile.path = file.video_url;
-                    this.onMediaLoad();
-                } else {
+                    this.activeIndex = 'image_0';
                     this.baseFile.type = 'image';
-                    this.baseFile.path = file.large_image_url;
+                    this.baseFile.path = this.media.images[0].large_image_url;
+                } else if (this.media.videos.length) {
+                    this.activeIndex = 'video_0';
+                    this.baseFile.type = 'video';
+                    this.baseFile.path = this.media.videos[0].video_url;
                 }
+            },
 
-                if (index > this.activeIndex) {
-                    this.swipeDown();
-                } else if (index < this.activeIndex) {
-                    this.swipeTop();
+            computed: {
+                lengthOfMedia() {
+                    if (this.media.images.length) {
+                        return [...this.media.images, ...this.media.videos].length > 5;
+                    }
                 }
-
-                this.activeIndex = index;
             },
 
-            swipeTop() {
-                const container = this.$refs.swiperContainer;
-                container.scrollTop -= this.containerOffset;
-            },
+            methods: {
+                onMediaLoad() {
+                    this.isMediaLoading = false;
+                },
 
-            swipeDown() {
-                const container = this.$refs.swiperContainer;
-                container.scrollTop += this.containerOffset;
-            },
-        }
-    })
-</script>
+                change(file, index) {
+                    this.isMediaLoading = true;
+
+                    if (file.type == 'videos') {
+                        this.baseFile.type = 'video';
+                        this.baseFile.path = file.video_url;
+                        this.onMediaLoad();
+                    } else {
+                        this.baseFile.type = 'image';
+                        this.baseFile.path = file.large_image_url;
+                    }
+
+                    if (index > this.activeIndex) {
+                        this.swipeDown();
+                    } else if (index < this.activeIndex) {
+                        this.swipeTop();
+                    }
+
+                    this.activeIndex = index;
+                },
+
+                swipeTop() {
+                    const container = this.$refs.swiperContainer;
+                    container.scrollTop -= this.containerOffset;
+                },
+
+                swipeDown() {
+                    const container = this.$refs.swiperContainer;
+                    container.scrollTop += this.containerOffset;
+                },
+            }
+        })
+    </script>
 @endpushOnce

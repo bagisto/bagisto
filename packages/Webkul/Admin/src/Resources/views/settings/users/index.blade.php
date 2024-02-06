@@ -24,11 +24,14 @@
         </div>
 
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-users>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-users-template">
+        <script
+            type="text/x-template"
+            id="v-users-template"
+        >
             <div class="flex justify-between items-center">
                 <p class="text-xl text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.users.index.title')
