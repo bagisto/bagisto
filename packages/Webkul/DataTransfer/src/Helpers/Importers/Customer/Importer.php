@@ -273,6 +273,8 @@ class Importer extends AbstractImporter
             $idsToDelete[] = $this->customerStorage->get($rowData['email']);
         }
 
+        $idsToDelete = array_unique($idsToDelete);
+
         $this->deletedItemsCount = count($idsToDelete);
 
         $this->customerRepository->deleteWhere([['id', 'IN', $idsToDelete]]);

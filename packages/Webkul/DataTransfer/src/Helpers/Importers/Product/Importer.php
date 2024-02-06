@@ -803,6 +803,8 @@ class Importer extends AbstractImporter
             $idsToDelete[] = $product['id'];
         }
 
+        $idsToDelete = array_unique($idsToDelete);
+
         $this->deletedItemsCount = count($idsToDelete);
 
         $this->productRepository->deleteWhere([['id', 'IN', $idsToDelete]]);

@@ -159,7 +159,7 @@ class ImportController extends Controller
             ]
         );
 
-        Storage::disk('private')->delete($import->error_file_path);
+        Storage::disk('private')->delete($import->error_file_path ?? '');
 
         if (request()->file('file') && request()->file('file')->isValid()) {
             Storage::disk('private')->delete($import->file_path);
@@ -197,7 +197,7 @@ class ImportController extends Controller
         try {
             Storage::disk('private')->delete($import->file_path);
 
-            Storage::disk('private')->delete($import->error_file_path);
+            Storage::disk('private')->delete($import->error_file_path ?? '');
 
             $this->importRepository->delete($id);
 
