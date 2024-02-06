@@ -18,6 +18,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
@@ -31,6 +32,7 @@ use Webkul\Product\Models\Product as ProductModel;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -90,13 +92,19 @@ class Importer extends AbstractImporter
     const ERROR_INVALID_ATTRIBUTE_FAMILY_CODE = 'attribute_family_code_not_found';
 
     /**
+     * Error code for super attribute code not found
+     */
+    const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'attribute_family_code_not_found';
+
+    /**
      * Error message templates
      */
     protected array $messages = [
-        self::ERROR_INVALID_TYPE                  => 'data_transfer::app.importers.products.validation.errors.invalid-type',
-        self::ERROR_SKU_NOT_FOUND_FOR_DELETE      => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
-        self::ERROR_DUPLICATE_URL_KEY             => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
-        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
+        self::ERROR_INVALID_TYPE                   => 'data_transfer::app.importers.products.validation.errors.invalid-type',
+        self::ERROR_SKU_NOT_FOUND_FOR_DELETE       => 'data_transfer::app.importers.products.validation.errors.sku-not-found',
+        self::ERROR_DUPLICATE_URL_KEY              => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
+        self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE  => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
+        self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND => 'data_transfer::app.importers.products.validation.errors.super-attribute-not-found',
     ];
 
     /**
@@ -135,6 +143,11 @@ class Importer extends AbstractImporter
     protected array $categories = [];
 
     /**
+     * Cached categories
+     */
+    protected mixed $customerGroups = [];
+
+    /**
      * Urls keys storage
      */
     protected array $urlKeys = [];
@@ -159,6 +172,7 @@ class Importer extends AbstractImporter
         'parent_sku',
         'categories',
         'images',
+        'customer_group_prices',
         'tax_category_name',
         'inventories',
         'related_skus',
@@ -180,6 +194,7 @@ class Importer extends AbstractImporter
         protected AttributeRepository $attributeRepository,
         protected AttributeOptionRepository $attributeOptionRepository,
         protected CategoryRepository $categoryRepository,
+        protected CustomerGroupRepository $customerGroupRepository,
         protected InventorySourceRepository $inventorySourceRepository,
         protected ProductRepository $productRepository,
         protected ProductFlatRepository $productFlatRepository,
@@ -188,6 +203,7 @@ class Importer extends AbstractImporter
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductBundleOptionRepository $productBundleOptionRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
+        protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected SKUStorage $skuStorage
     ) {
@@ -343,17 +359,12 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * TODO
-         *
-         * Check if configurable super attribute exists in the attribute family
-         */
-
-        /**
-         * Bundle, Grouped and Configurable options validation
+         * Additional Validations
          *
          * 1: Check if bundle option data is valid
          * 2: Check if grouped products data is valid
          * 3: Check if grouped products data is valid
+         * 4: Customer group prices validation for non composite products
          */
         $optionsData = [];
 
@@ -361,13 +372,13 @@ class Importer extends AbstractImporter
 
         if ($rowData['type'] == self::PRODUCT_TYPE_BUNDLE) {
             $validationRules = [
-                'bundle_options.*.name'     => 'required',
-                'bundle_options.*.type'     => 'required|in:select,radio,checkbox,multiselect',
-                'bundle_options.*.required' => 'required|boolean',
-                'bundle_options.*.sku'      => 'required',
-                'bundle_options.*.price'    => ['required', new Decimal],
-                'bundle_options.*.qty'      => 'required|integer',
-                'bundle_options.*.default'  => 'required|boolean',
+                'bundle_options.*.name'     => 'sometimes|required',
+                'bundle_options.*.type'     => 'sometimes|required|in:select,radio,checkbox,multiselect',
+                'bundle_options.*.required' => 'sometimes|required|boolean',
+                'bundle_options.*.sku'      => 'sometimes|required',
+                'bundle_options.*.price'    => ['sometimes', 'required', new Decimal],
+                'bundle_options.*.qty'      => 'sometimes|required|integer',
+                'bundle_options.*.default'  => 'sometimes|required|boolean',
             ];
 
             $options = explode('|', $rowData['bundle_options']);
@@ -379,8 +390,8 @@ class Importer extends AbstractImporter
             }
         } elseif ($rowData['type'] == self::PRODUCT_TYPE_GROUPED) {
             $validationRules = [
-                'associated_skus.*.sku' => 'required',
-                'associated_skus.*.qty' => 'required|integer',
+                'associated_skus.*.sku' => 'sometimes|required',
+                'associated_skus.*.qty' => 'sometimes|required|integer',
             ];
 
             $associatedSkus = explode(',', $rowData['associated_skus']);
@@ -395,7 +406,7 @@ class Importer extends AbstractImporter
             }
         } elseif ($rowData['type'] == self::PRODUCT_TYPE_CONFIGURABLE) {
             $validationRules = [
-                'configurable_variants.*.sku' => 'required',
+                'configurable_variants.*.sku' => 'sometimes|required',
             ];
 
             $options = explode('|', $rowData['configurable_variants']);
@@ -404,6 +415,24 @@ class Importer extends AbstractImporter
                 parse_str(str_replace(',', '&', $option), $attributes);
 
                 $optionsData['configurable_variants'][] = $attributes;
+            }
+        } else {
+            /**
+             * Validate customer group prices
+             */
+            $validationRules = [
+                'customer_group_prices.*.group' => 'sometimes|required',
+                'customer_group_prices.*.qty'   => 'sometimes|required|integer',
+                'customer_group_prices.*.type'  => 'sometimes|required|in:fixed,discount',
+                'customer_group_prices.*.price' => ['sometimes', 'required', new Decimal],
+            ];
+
+            $customerGroupPrices = explode('|', $rowData['customer_group_prices']);
+
+            foreach ($customerGroupPrices as $customerGroupPrice) {
+                parse_str(str_replace(',', '&', $customerGroupPrice), $attributes);
+
+                $optionsData['customer_group_prices'][] = $attributes;
             }
         }
 
@@ -417,6 +446,40 @@ class Importer extends AbstractImporter
                     $errorCode = array_key_first($failedAttributes[$attributeCode] ?? []);
 
                     $this->skipRow($rowNumber, $errorCode, $attributeCode, current($message));
+                }
+            }
+        }
+
+        /**
+         * Check if configurable super attribute exists in the attribute family
+         * 
+         * Below is the example of configurable_variants
+         * 
+         * sku=SP-005,color=Yellow,size=M|sku=SP-006,color=Yellow,size=L|sku=SP-007,color=Green,size=M|sku=SP-008,color=Green,size=L
+         */
+        if ($rowData['type'] == self::PRODUCT_TYPE_CONFIGURABLE) {
+            $variants = explode('|', $rowData['configurable_variants']);
+
+            $familyAttributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
+
+            foreach ($variants as $variant) {
+                parse_str(str_replace(',', '&', $variant), $variantAttributes);
+    
+                $configurableVariants = Arr::except($variantAttributes, 'sku');
+
+                foreach ($configurableVariants as $superAttribute => $optionLabel) {
+                    if (! $familyAttributes->where('code', $superAttribute)->first()) {
+                        $this->skipRow(
+                            $rowNumber,
+                            self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND,
+                            'configurable_variants',
+                            sprintf(
+                                trans($this->messages[self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND]),
+                                $superAttribute,
+                                $rowData['attribute_family_code']
+                            )
+                        );
+                    }
                 }
             }
         }
@@ -839,6 +902,8 @@ class Importer extends AbstractImporter
 
         $products = [];
 
+        $customerGroupPrices = [];
+
         $categories = [];
 
         $attributeValues = [];
@@ -854,6 +919,11 @@ class Importer extends AbstractImporter
              * Prepare products for import
              */
             $this->prepareProducts($rowData, $products);
+
+            /**
+             * Prepare customer group prices
+             */
+            $this->prepareCustomerGroupPrices($rowData, $customerGroupPrices);
 
             /**
              * Prepare product categories to attach with products
@@ -882,6 +952,8 @@ class Importer extends AbstractImporter
         }
 
         $this->saveProducts($products);
+
+        $this->saveCustomerGroupPrices($customerGroupPrices);
 
         $this->saveCategories($categories);
 
@@ -963,6 +1035,57 @@ class Importer extends AbstractImporter
                 ]);
             }
         }
+    }
+
+    /**
+     * Prepare customer group prices from current batch
+     */
+    public function prepareCustomerGroupPrices(array $rowData, array &$customerGroupPrices): void
+    {
+        if (empty($rowData['customer_group_prices'])) {
+            return;
+        }
+
+        $prices = explode('|', $rowData['customer_group_prices']);
+
+        $customerGroups = $this->getCustomerGroups();
+
+        foreach ($prices as $price) {
+            parse_str(str_replace(',', '&', $price), $attributes);
+
+            $customerGroupPrices[$rowData['sku']][] = [
+                'qty'               => $attributes['qty'],
+                'value_type'        => $attributes['type'],
+                'value'             => $attributes['price'],
+                'customer_group_id' => $customerGroups->where('code', $attributes['group'])->first()?->id,
+            ];
+        }
+    }
+
+    /**
+     * Save customer group prices from current batch
+     */
+    public function saveCustomerGroupPrices(array $customerGroupPrices): void
+    {
+        $productCustomerGroupPrices = [];
+
+        foreach ($customerGroupPrices as $sku => $skuCustomerGroupPrices) {
+            foreach ($skuCustomerGroupPrices as $customerGroupPrices) {
+                $product = $this->skuStorage->get($sku);
+
+                $customerGroupPrices['product_id'] = (int) $product['id'];
+
+                $customerGroupPrices['unique_id'] = implode('|', array_filter([
+                    $customerGroupPrices['qty'],
+                    $customerGroupPrices['product_id'],
+                    $customerGroupPrices['customer_group_id'],
+                ]));
+
+                $productCustomerGroupPrices[$customerGroupPrices['unique_id']] = $customerGroupPrices;
+            }
+        }
+
+        $this->productCustomerGroupPriceRepository->upsert($productCustomerGroupPrices, 'unique_id');
     }
 
     /**
@@ -1773,6 +1896,18 @@ class Importer extends AbstractImporter
         ]);
 
         return $this->typeFamilyAttributes[$type][$attributeFamilyCode] = $product->getEditableAttributes();
+    }
+
+    /**
+     * Retrieve customer groups
+     */
+    public function getCustomerGroups(): mixed
+    {
+        if (! empty($this->customerGroups)) {
+            return $this->customerGroups;
+        }
+
+        return $this->customerGroups = $this->customerGroupRepository->all();
     }
 
     /**
