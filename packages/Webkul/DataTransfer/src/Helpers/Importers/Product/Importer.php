@@ -381,7 +381,7 @@ class Importer extends AbstractImporter
                 'bundle_options.*.default'  => 'sometimes|required|boolean',
             ];
 
-            $options = explode('|', $rowData['bundle_options']);
+            $options = explode('|', $rowData['bundle_options'] ?? '');
 
             foreach ($options as $option) {
                 parse_str(str_replace(',', '&', $option), $attributes);
@@ -394,7 +394,7 @@ class Importer extends AbstractImporter
                 'associated_skus.*.qty' => 'sometimes|required|integer',
             ];
 
-            $associatedSkus = explode(',', $rowData['associated_skus']);
+            $associatedSkus = explode(',', $rowData['associated_skus'] ?? '');
 
             foreach ($associatedSkus as $row) {
                 [$sku, $qty] = explode('=', $row);
@@ -409,7 +409,7 @@ class Importer extends AbstractImporter
                 'configurable_variants.*.sku' => 'sometimes|required',
             ];
 
-            $options = explode('|', $rowData['configurable_variants']);
+            $options = explode('|', $rowData['configurable_variants'] ?? '');
 
             foreach ($options as $option) {
                 parse_str(str_replace(',', '&', $option), $attributes);
@@ -458,7 +458,7 @@ class Importer extends AbstractImporter
          * sku=SP-005,color=Yellow,size=M|sku=SP-006,color=Yellow,size=L|sku=SP-007,color=Green,size=M|sku=SP-008,color=Green,size=L
          */
         if ($rowData['type'] == self::PRODUCT_TYPE_CONFIGURABLE) {
-            $variants = explode('|', $rowData['configurable_variants']);
+            $variants = explode('|', $rowData['configurable_variants'] ?? '');
 
             $familyAttributes = $this->getProductTypeFamilyAttributes($rowData['type'], $rowData['attribute_family_code']);
 
