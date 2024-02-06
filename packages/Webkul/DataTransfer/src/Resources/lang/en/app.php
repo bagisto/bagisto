@@ -28,6 +28,17 @@ return [
                 ],
             ],
         ],
+
+        'tax-rates' => [
+            'title'      => 'Tax Rates',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-identifier' => 'Identifier : \'%s\' is found more than once in the import file.',
+                    'identifier-not-found' => 'Identifier : \'%s\' not found in the system.',
+                ],
+            ],
+        ],
     ],
 
     'validation' => [
