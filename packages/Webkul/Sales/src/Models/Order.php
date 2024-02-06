@@ -286,7 +286,10 @@ class Order extends Model implements OrderContract
         foreach ($this->items as $item) {
             if (
                 $item->canShip()
-                && ! in_array($item->order->status, [self::STATUS_CLOSED, self::STATUS_FRAUD])
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
@@ -303,7 +306,10 @@ class Order extends Model implements OrderContract
         foreach ($this->items as $item) {
             if (
                 $item->canInvoice()
-                && ! in_array($item->order->status, [self::STATUS_CLOSED, self::STATUS_FRAUD])
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
@@ -333,14 +339,19 @@ class Order extends Model implements OrderContract
      */
     public function canCancel(): bool
     {
-        if ($this->invoices->where('state', 'pending')->first()) {
+        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
+
+        if ($pendingInvoice) {
             return true;
         }
 
         foreach ($this->items as $item) {
             if (
                 $item->canCancel()
-                && ! in_array($item->order->status, [self::STATUS_CLOSED, self::STATUS_FRAUD])
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
@@ -357,7 +368,10 @@ class Order extends Model implements OrderContract
         foreach ($this->items as $item) {
             if (
                 $item->qty_to_refund > 0
-                && ! in_array($item->order->status, [self::STATUS_CLOSED, self::STATUS_FRAUD])
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
