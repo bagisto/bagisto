@@ -427,7 +427,7 @@ class Importer extends AbstractImporter
                 'customer_group_prices.*.price' => ['sometimes', 'required', new Decimal],
             ];
 
-            $customerGroupPrices = explode('|', $rowData['customer_group_prices']);
+            $customerGroupPrices = explode('|', $rowData['customer_group_prices'] ?? '');
 
             foreach ($customerGroupPrices as $customerGroupPrice) {
                 parse_str(str_replace(',', '&', $customerGroupPrice), $attributes);
