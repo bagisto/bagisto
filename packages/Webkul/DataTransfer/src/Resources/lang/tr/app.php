@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'URL anahtarı: \'%s\' zaten SKU: \'%s\' olan bir öğe için oluşturuldu.',
-                    'invalid-attribute-family' => 'Öznitelik ailesi sütunu için geçersiz değer (öznitelik ailesi mevcut değil mi?)',
-                    'invalid-type'             => 'Ürün türü geçersiz veya desteklenmiyor',
-                    'sku-not-found'            => 'Belirtilen SKU ile ürün bulunamadı',
+                    'duplicate-url-key'         => 'URL anahtarı: \'%s\' zaten SKU: \'%s\' olan bir öğe için oluşturuldu.',
+                    'invalid-attribute-family'  => 'Öznitelik ailesi sütunu için geçersiz değer (öznitelik ailesi mevcut değil mi?)',
+                    'invalid-type'              => 'Ürün türü geçersiz veya desteklenmiyor',
+                    'sku-not-found'             => 'Belirtilen SKU ile ürün bulunamadı',
+                    'super-attribute-not-found' => 'Kod: \'%s\' ile süper öznitelik bulunamadı veya öznitelik ailesine ait değil: \'%s\'',
                 ],
             ],
         ],

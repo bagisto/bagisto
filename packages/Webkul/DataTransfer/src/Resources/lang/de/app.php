@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'URL-Schlüssel: \'%s\' wurde bereits für einen Artikel mit der SKU: \'%s\' generiert.',
-                    'invalid-attribute-family' => 'Ungültiger Wert für Attributfamilien-Spalte (Attributfamilie existiert nicht?)',
-                    'invalid-type'             => 'Produkttyp ist ungültig oder wird nicht unterstützt',
-                    'sku-not-found'            => 'Produkt mit angegebener SKU nicht gefunden',
+                    'duplicate-url-key'         => 'URL-Schlüssel: \'%s\' wurde bereits für einen Artikel mit der SKU: \'%s\' generiert.',
+                    'invalid-attribute-family'  => 'Ungültiger Wert für Attributfamilien-Spalte (Attributfamilie existiert nicht?)',
+                    'invalid-type'              => 'Produkttyp ist ungültig oder wird nicht unterstützt',
+                    'sku-not-found'             => 'Produkt mit angegebener SKU nicht gefunden',
+                    'super-attribute-not-found' => 'Superattribut mit Code: \'%s\' nicht gefunden oder gehört nicht zur Attributfamilie: \'%s\'',
                 ],
             ],
         ],

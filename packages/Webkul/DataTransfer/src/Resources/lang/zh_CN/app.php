@@ -7,10 +7,11 @@ return [
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'        => 'URL 键: \'%s\' 已经为 SKU: \'%s\' 生成。',
-                    'invalid-attribute-family' => '属性家族列中的值无效或不受支持。',
-                    'invalid-type'             => '产品类型无效或不受支持。',
-                    'sku-not-found'            => '未找到具有指定 SKU 的产品。',
+                    'duplicate-url-key'         => 'URL 键: \'%s\' 已经为 SKU: \'%s\' 生成。',
+                    'invalid-attribute-family'  => '属性家族列中的值无效或不受支持。',
+                    'invalid-type'              => '产品类型无效或不受支持。',
+                    'sku-not-found'             => '未找到具有指定 SKU 的产品。',
+                    'super-attribute-not-found' => '未找到代码为\'%s\'的超级属性或不属于属性组: \'%s\'',
                 ],
             ],
         ],
