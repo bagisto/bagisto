@@ -11,7 +11,7 @@
     >
         <template v-if="isLoading">
             <!-- Shimmer -->
-            <x-admin::shimmer.reporting.products.last-search-term />
+            <x-admin::shimmer.reporting.products.last-search-terms />
         </template>
 
         <template v-else>

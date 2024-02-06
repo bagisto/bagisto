@@ -208,7 +208,7 @@
                     </x-slot>
                 </x-admin::drawer>
             </div>
-        </scripttype=>
+        </script>
 
         <script type="module">
             app.component('v-transaction-drawer', {

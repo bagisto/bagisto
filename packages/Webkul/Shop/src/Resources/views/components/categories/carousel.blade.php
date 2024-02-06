@@ -14,7 +14,10 @@
         type="text/x-template"
         id="v-categories-carousel-template"
     >
-        <div class="container mt-14 max-lg:px-8 max-sm:mt-5" v-if="! isLoading && categories?.length">
+        <div
+            class="container mt-14 max-lg:px-8 max-sm:mt-5"
+            v-if="! isLoading && categories?.length"
+        >
             <div class="relative">
                 <div
                     ref="swiperContainer"
