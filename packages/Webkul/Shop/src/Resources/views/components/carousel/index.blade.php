@@ -81,7 +81,6 @@
                     slider: '',
                     slides: [],
                     autoPlayInterval: null,
-                    currentIndex: 1,
                 };
             },
 
