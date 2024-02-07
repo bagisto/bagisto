@@ -326,7 +326,7 @@ class Core
 
         if (! $fallback) {
             $localeCode = $this->localeRepository->findOneByField('code', $localeCode);
-            
+
             return $localeCode?->code;
         }
 
