@@ -1,14 +1,17 @@
 <!-- Product Added to Wishlist Vue Component -->
 <v-reporting-products-wishlist-products>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.products.wishlist-products/>
+    <x-admin::shimmer.reporting.products.wishlist-products />
 </v-reporting-products-wishlist-products>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-products-wishlist-products-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-products-wishlist-products-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.products.wishlist-products/>
+            <x-admin::shimmer.reporting.products.wishlist-products />
         </template>
 
         <!-- Product Added to Wishlist Section -->

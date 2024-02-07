@@ -112,13 +112,13 @@ return [
                 'title'         => 'admin::app.configuration.index.general.design.admin-logo.logo-image',
                 'type'          => 'image',
                 'channel_based' => false,
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ], [
                 'name'          => 'favicon',
                 'title'         => 'admin::app.configuration.index.general.design.admin-logo.favicon',
                 'type'          => 'image',
                 'channel_based' => false,
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
             ],
         ],
     ], [

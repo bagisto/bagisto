@@ -1,11 +1,14 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.links.before', ['product' => $product]) !!}
     
-<v-product-links />
+<v-product-links></v-product-links>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.links.before', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-links-template">
+    <script
+        type="text/x-template"
+        id="v-product-links-template"
+    >
         <div class="grid gap-2.5">
             <!-- Panel -->
             <div

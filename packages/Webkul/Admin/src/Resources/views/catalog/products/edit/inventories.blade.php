@@ -45,7 +45,10 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-inventories-template">
+    <script
+        type="text/x-template"
+        id="v-inventories-template"
+    >
         <div v-show="manageStock">
             <slot></slot>
         </div>

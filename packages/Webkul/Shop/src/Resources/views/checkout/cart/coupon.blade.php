@@ -6,7 +6,10 @@
 </v-coupon>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-coupon-template">
+    <script
+        type="text/x-template"
+        id="v-coupon-template"
+    >
         <div class="flex justify-between text-right">
             <p class="text-base max-sm:text-sm max-sm:font-normal">
                 @{{ isCouponApplied ? "@lang('shop::app.checkout.cart.coupon.applied')" : "@lang('shop::app.checkout.cart.coupon.discount')" }}

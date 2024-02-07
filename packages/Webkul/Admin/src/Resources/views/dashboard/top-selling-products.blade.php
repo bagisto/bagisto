@@ -1,14 +1,17 @@
 <!-- Top Selling Products Vue Component -->
 <v-dashboard-top-selling-products>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.top-selling-products/>
+    <x-admin::shimmer.dashboard.top-selling-products />
 </v-dashboard-top-selling-products>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-top-selling-products-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-top-selling-products-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.top-selling-products/>
+            <x-admin::shimmer.dashboard.top-selling-products />
         </template>
 
         <!-- Total Sales Section -->

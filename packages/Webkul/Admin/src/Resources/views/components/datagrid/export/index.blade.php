@@ -5,7 +5,10 @@
 </v-datagrid-export>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-datagrid-export-template">
+    <script
+        type="text/x-template"
+        id="v-datagrid-export-template"
+    >
         <div>
             <!-- Modal Component -->
             <x-admin::modal ref="exportModal">

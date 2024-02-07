@@ -2157,7 +2157,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Створити Локаль',
                 'locale'     => 'Локаль',
@@ -2199,7 +2199,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Створити Валюту',
                 'currency'   => 'Валюта',
@@ -2242,7 +2242,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create' => [
+                    'action'              => 'Дія',
+                    'allowed-errors'      => 'Дозволені помилки',
+                    'back-btn'            => 'Назад',
+                    'create-update'       => 'Створити/Оновити',
+                    'delete'              => 'Видалити',
+                    'download-sample'     => 'Завантажити приклад',
+                    'field-separator'     => 'Роздільник полів',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/import/app, наприклад product-images, import-images.',
+                    'file'                => 'Файл',
+                    'general'             => 'Загальні',
+                    'images-directory'    => 'Шлях до папки з зображеннями',
+                    'process-in-queue'    => 'Обробка в черзі',
+                    'results'             => 'Результати',
+                    'save-btn'            => 'Зберегти імпорт',
+                    'settings'            => 'Налаштування',
+                    'skip-errors'         => 'Пропустити помилки',
+                    'stop-on-errors'      => 'Зупинити при помилках',
+                    'title'               => 'Створити імпорт',
+                    'type'                => 'Тип',
+                    'validation-strategy' => 'Стратегія перевірки',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Дія',
+                    'allowed-errors'      => 'Дозволені помилки',
+                    'back-btn'            => 'Назад',
+                    'create-update'       => 'Створити/Оновити',
+                    'delete'              => 'Видалити',
+                    'download-sample'     => 'Завантажити приклад',
+                    'field-separator'     => 'Роздільник полів',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/import/app, наприклад product-images, import-images.',
+                    'file'                => 'Файл',
+                    'general'             => 'Загальні',
+                    'images-directory'    => 'Шлях до папки з зображеннями',
+                    'process-in-queue'    => 'Обробка в черзі',
+                    'results'             => 'Результати',
+                    'save-btn'            => 'Зберегти імпорт',
+                    'settings'            => 'Налаштування',
+                    'skip-errors'         => 'Пропустити помилки',
+                    'stop-on-errors'      => 'Зупинити при помилках',
+                    'title'               => 'Редагувати імпорт',
+                    'type'                => 'Тип',
+                    'validation-strategy' => 'Стратегія перевірки',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Створити імпорт',
+                    'title'        => 'Імпорти',
+
+                    'datagrid' => [
+                        'actions'       => 'Дії',
+                        'completed-at'  => 'Завершено',
+                        'created'       => 'Створено',
+                        'delete'        => 'Видалити',
+                        'deleted'       => 'Видалено',
+                        'edit'          => 'Редагувати',
+                        'error-file'    => 'Файл помилок',
+                        'id'            => 'ID',
+                        'started-at'    => 'Розпочато',
+                        'state'         => 'Стан',
+                        'summary'       => 'Огляд',
+                        'updated'       => 'Оновлено',
+                        'uploaded-file' => 'Завантажено файл',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Назад',
+                    'completed-batches'       => 'Всього обробоановано партій:',
+                    'download-error-report'   => 'Завантажити повний звіт',
+                    'edit-btn'                => 'Редагувати',
+                    'imported-info'           => 'Вітаємо! Ваш імпорт успішно виконано.',
+                    'importing-info'          => 'Імпорт у процесі',
+                    'indexing-info'           => 'Індексація ресурсів (ціна, інвентаризація та Elasticsearch) у процесі',
+                    'linking-info'            => 'Зв\'язування ресурсів у процесі',
+                    'progress'                => 'Прогрес:',
+                    'title'                   => 'Імпорт',
+                    'total-batches'           => 'Всього партій:',
+                    'total-created'           => 'Всього створено записів:',
+                    'total-deleted'           => 'Всього видалено записів:',
+                    'total-errors'            => 'Всього помилок:',
+                    'total-invalid-rows'      => 'Всього недійсних рядків:',
+                    'total-rows-processed'    => 'Всього опрацьовано рядків:',
+                    'total-updated'           => 'Всього оновлено записів:',
+                    'validate-info'           => 'Натисніть „Перевірити дані“, щоб перевірити свій імпорт.',
+                    'validate'                => 'Перевірити',
+                    'validating-info'         => 'Дані почали читання та перевірку',
+                    'validation-failed-info'  => 'Ваш імпорт недійсний. Будь ласка, виправте наступні помилки та спробуйте ще раз.',
+                    'validation-success-info' => 'Ваш імпорт дійсний. Натисніть „Імпорт“, щоб розпочати процес імпорту.',
+                ],
+
+                'create-success'    => 'Імпорт успішно створено.',
+                'delete-failed'     => 'Не вдалося видалити імпорт.',
+                'delete-success'    => 'Імпорт успішно видалено.',
+                'not-valid'         => 'Імпорт недійсний',
+                'nothing-to-import' => 'Немає ресурсів для імпорту.',
+                'setup-queue-error' => 'Будь ласка, змініть ваш драйвер черги на „database“ або „redis“, щоб розпочати процес імпорту.',
+                'update-success'    => 'Імпорт успішно оновлено.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Створити Курс Валют',
                 'exchange-rate' => 'Курс Валют',
@@ -2361,7 +2467,7 @@ return [
             'update-success'    => 'Джерела інвентаризації успішно оновлено',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Ви впевнені, що хочете видалити?',
@@ -3486,11 +3592,13 @@ return [
                 'currencies'               => 'Валюти',
                 'customers'                => 'Клієнти',
                 'dashboard'                => 'Панель керування',
+                'data-transfer'            => 'Передача даних',
                 'discount'                 => 'Знижка',
                 'email-templates'          => 'Шаблони електронних листів',
                 'events'                   => 'Події',
                 'exchange-rates'           => 'Обмінні курси',
                 'groups'                   => 'Групи',
+                'imports'                  => 'Імпорт',
                 'inventory-sources'        => 'Джерела інвентаризації',
                 'invoices'                 => 'Рахунки',
                 'locales'                  => 'Локалізації',
@@ -3684,24 +3792,27 @@ return [
         'campaigns'                => 'Кампанії',
         'cancel'                   => 'Скасувати',
         'cart-rules'               => 'Правила кошика',
-        'catalog'                  => 'Каталог',
         'catalog-rules'            => 'Правила каталогу',
+        'catalog'                  => 'Каталог',
         'categories'               => 'Категорії',
         'channels'                 => 'Канали',
         'cms'                      => 'CMS',
         'communications'           => 'Комунікації',
         'configure'                => 'Налаштувати',
         'copy'                     => 'Копіювати',
-        'create'                   => 'Додати',
+        'create'                   => 'Створити',
         'currencies'               => 'Валюти',
         'customers'                => 'Клієнти',
         'dashboard'                => 'Панель управління',
+        'data-transfer'            => 'Передача даних',
         'delete'                   => 'Видалити',
         'edit'                     => 'Редагувати',
         'email-templates'          => 'Шаблони електронних листів',
         'events'                   => 'Події',
         'exchange-rates'           => 'Курси обміну',
         'groups'                   => 'Групи',
+        'import'                   => 'Імпорт',
+        'imports'                  => 'Імпорт',
         'inventory-sources'        => 'Джерела інвентаризації',
         'invoices'                 => 'Рахунки',
         'locales'                  => 'Локалізації',

@@ -1,14 +1,17 @@
 <!-- Customers with Most Orders Vue Component -->
 <v-reporting-customers-with-most-orders>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.customers.most-orders/>
+    <x-admin::shimmer.reporting.customers.most-orders />
 </v-reporting-customers-with-most-orders>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-customers-with-most-orders-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-customers-with-most-orders-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.customers.most-orders/>
+            <x-admin::shimmer.reporting.customers.most-orders />
         </template>
 
         <!-- Customers with Most Orders Section -->

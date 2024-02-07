@@ -72,7 +72,10 @@
     {!! view_render_event('bagisto.shop.checkout.cart.cross_sell_carousel.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-cart-template">
+        <script
+            type="text/x-template"
+            id="v-cart-template"
+        >
             <div>
                 <!-- Cart Shimmer Effect -->
                 <template v-if="isLoading">

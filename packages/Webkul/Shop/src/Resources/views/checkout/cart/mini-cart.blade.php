@@ -8,7 +8,10 @@
 </v-mini-cart>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-mini-cart-template">
+    <script
+        type="text/x-template"
+        id="v-mini-cart-template"
+    >
         {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.before') !!}
 
         <x-shop::drawer>

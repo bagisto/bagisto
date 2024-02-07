@@ -14,7 +14,10 @@
 </v-star-rating>
 
 @pushOnce("scripts")
-    <script type="text/x-template" id="v-star-rating-template">
+    <script
+        type="text/x-template"
+        id="v-star-rating-template"
+    >
         <div class="flex">
             <span
                 class="icon-star-fill text-2xl cursor-pointer"

@@ -1,15 +1,23 @@
 @php
-    $options = $product->bundle_options()->with(['product','bundle_option_products','bundle_option_products.product.inventory_indices','bundle_option_products.product.images'])->get();
+    $options = $product->bundle_options()->with([
+        'product',
+        'bundle_option_products',
+        'bundle_option_products.product.inventory_indices',
+        'bundle_option_products.product.images',
+    ])->get();
 @endphp
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.before', ['product' => $product]) !!}
 
-<v-bundle-options :errors="errors" />
+<v-bundle-options :errors="errors"></v-bundle-options>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-bundle-options-template">
+    <script
+        type="text/x-template"
+        id="v-bundle-options-template"
+    >
         <div class="relative bg-white dark:bg-gray-900  rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
@@ -48,7 +56,8 @@
                     :errors="errors"
                     @onEdit="selectedOption = $event; $refs.updateCreateOptionModal.open()"
                     @onRemove="removeOption($event)"
-                />
+                >
+                </v-bundle-option-item>
             </div>
 
             <!-- For Empty Option -->

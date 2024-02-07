@@ -1,11 +1,14 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.grouped.before', ['product' => $product]) !!}
 
-<v-group-products :errors="errors" />
+<v-group-products :errors="errors"></v-group-products>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.grouped.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-group-products-template">
+    <script
+        type="text/x-template"
+        id="v-group-products-template"
+    >
         <div class="relative bg-white dark:bg-gray-900 rounded box-shadow">
             <!-- Panel Header -->
             <div class="flex gap-5 justify-between mb-2.5 p-4">
@@ -113,7 +116,8 @@
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + index) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                         label="@lang('admin::app.catalog.products.edit.types.grouped.default-qty')"
-                                    ></v-field>
+                                    >
+                                    </v-field>
 
                                     <v-error-message
                                         :name="'links[' + (element.id ? element.id : 'link_' + index) + '][qty]'"

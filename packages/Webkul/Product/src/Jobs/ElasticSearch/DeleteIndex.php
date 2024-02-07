@@ -16,12 +16,12 @@ class DeleteIndex implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  int  $productId
+     * @param  array  $productIds
      * @return void
      */
-    public function __construct(protected $productId)
+    public function __construct(protected $productIds)
     {
-        $this->productId = $productId;
+        $this->productIds = $productIds;
     }
 
     /**
@@ -41,7 +41,7 @@ class DeleteIndex implements ShouldQueue
             foreach ($channel->locales as $locale) {
                 $index = 'products_'.$channel->code.'_'.$locale->code.'_index';
 
-                $removeIndices[$index][] = $this->productId;
+                $removeIndices[$index] = $this->productIds;
             }
         }
 

@@ -35,13 +35,6 @@ class Flat
     protected $channels = [];
 
     /**
-     * Super Attribute Codes
-     *
-     * @var array
-     */
-    protected $superAttributeCodes = [];
-
-    /**
      * Family Attributes
      *
      * @var array
@@ -75,7 +68,7 @@ class Flat
         }
 
         foreach ($product->variants()->get() as $variant) {
-            $this->updateOrCreate($variant, $product);
+            $this->updateOrCreate($variant);
         }
     }
 
@@ -83,16 +76,13 @@ class Flat
      * Creates product flat
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  \Webkul\Product\Contracts\Product  $parentProduct
      * @return void
      */
-    public function updateOrCreate($product, $parentProduct = null)
+    public function updateOrCreate($product)
     {
         $familyAttributes = $this->getCachedFamilyAttributes($product);
 
-        $superAttributes = $this->getCachedSuperAttributeCodes($parentProduct);
-
-        $channelCodes = $product['channels'] ?? ($parentProduct['channels'] ?? []);
+        $channelCodes = $product['channels'] ?? [];
 
         if (! empty($channelCodes)) {
             foreach ($channelCodes as $channel) {
@@ -119,14 +109,7 @@ class Flat
 
                     foreach ($familyAttributes as $attribute) {
                         if (
-                            (
-                                $parentProduct
-                                && ! in_array($attribute->code, array_merge(
-                                    $superAttributes,
-                                    $this->fillableAttributeCodes
-                                ))
-                            )
-                            || ! in_array($attribute->code, $this->flatColumns)
+                            ! in_array($attribute->code, $this->flatColumns)
                             || $attribute->code == 'sku'
                         ) {
                             continue;
@@ -151,16 +134,6 @@ class Flat
                         $productAttributeValue = $productAttributeValues->first();
 
                         $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? null;
-                    }
-
-                    if ($parentProduct) {
-                        $parentProductFlat = $this->productFlatRepository->findOneWhere([
-                            'product_id' => $parentProduct->id,
-                            'channel'    => $channel->code,
-                            'locale'     => $locale->code,
-                        ]);
-
-                        $productFlat->parent_id = $parentProductFlat?->id;
                     }
 
                     $productFlat->save();
@@ -193,23 +166,6 @@ class Flat
         }
 
         return $this->familyAttributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
-    }
-
-    /**
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return mixed
-     */
-    public function getCachedSuperAttributeCodes($product)
-    {
-        if (! $product) {
-            return [];
-        }
-
-        if (array_key_exists($product->id, $this->superAttributeCodes)) {
-            return $this->superAttributeCodes[$product->id];
-        }
-
-        return $this->superAttributeCodes[$product->id] = $product->super_attributes()->pluck('code')->toArray();
     }
 
     /**
