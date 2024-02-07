@@ -110,15 +110,6 @@
                     });
 
                     window.addEventListener('resize', this.setPositionByIndex);
-
-                    window.oncontextmenu = function (event) {
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-                        return false
-                    }
-
                 },
 
                 pointerDown(index) {
