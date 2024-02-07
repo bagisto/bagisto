@@ -2157,7 +2157,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Taal Aanmaken',
                 'locale'     => 'Taal',
@@ -2199,7 +2199,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Valuta Aanmaken',
                 'currency'   => 'Valuta',
@@ -2242,7 +2242,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Actie',
+                    'allowed-errors'      => 'Toegestane Fouten',
+                    'back-btn'            => 'Terug',
+                    'create-update'       => 'Creëren/Bijwerken',
+                    'delete'              => 'Verwijderen',
+                    'download-sample'     => 'Voorbeeld Downloaden',
+                    'field-separator'     => 'Veldscheider',
+                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/import/app, bijv. productafbeeldingen, importafbeeldingen.',
+                    'file'                => 'Bestand',
+                    'general'             => 'Algemeen',
+                    'images-directory'    => 'Pad naar Afbeeldingenmap',
+                    'process-in-queue'    => 'Verwerken In Wachtrij',
+                    'results'             => 'Resultaten',
+                    'save-btn'            => 'Import Opslaan',
+                    'settings'            => 'Instellingen',
+                    'skip-errors'         => 'Fouten Overslaan',
+                    'stop-on-errors'      => 'Stoppen bij Fouten',
+                    'title'               => 'Import Maken',
+                    'type'                => 'Type',
+                    'validation-strategy' => 'Validatiestrategie',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Actie',
+                    'allowed-errors'      => 'Toegestane Fouten',
+                    'back-btn'            => 'Terug',
+                    'create-update'       => 'Creëren/Bijwerken',
+                    'delete'              => 'Verwijderen',
+                    'download-sample'     => 'Voorbeeld Downloaden',
+                    'field-separator'     => 'Veldscheider',
+                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/import/app, bijv. productafbeeldingen, importafbeeldingen.',
+                    'file'                => 'Bestand',
+                    'general'             => 'Algemeen',
+                    'images-directory'    => 'Pad naar Afbeeldingenmap',
+                    'process-in-queue'    => 'Verwerken In Wachtrij',
+                    'results'             => 'Resultaten',
+                    'save-btn'            => 'Import Opslaan',
+                    'settings'            => 'Instellingen',
+                    'skip-errors'         => 'Fouten Overslaan',
+                    'stop-on-errors'      => 'Stoppen bij Fouten',
+                    'title'               => 'Import Bewerken',
+                    'type'                => 'Type',
+                    'validation-strategy' => 'Validatiestrategie',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Import Maken',
+                    'title'        => 'Imports',
+
+                    'datagrid' => [
+                        'actions'       => 'Acties',
+                        'completed-at'  => 'Voltooid op',
+                        'created'       => 'Gemaakt',
+                        'delete'        => 'Verwijderen',
+                        'deleted'       => 'Verwijderd',
+                        'edit'          => 'Bewerking',
+                        'error-file'    => 'Foutbestand',
+                        'id'            => 'ID kaart',
+                        'started-at'    => 'Begon bij',
+                        'state'         => 'Staat',
+                        'summary'       => 'Samenvatting',
+                        'updated'       => 'Bijgewerkt',
+                        'uploaded-file' => 'Geüpload bestand',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Terug',
+                    'completed-batches'       => 'Totaal voltooide batches:',
+                    'download-error-report'   => 'Volledig rapport downloaden',
+                    'edit-btn'                => 'Bewerken',
+                    'imported-info'           => 'Gefeliciteerd! Uw import is succesvol voltooid.',
+                    'importing-info'          => 'Importeren in proces',
+                    'indexing-info'           => 'Bronnen indexeren (Prijs, Voorraad en Elastic Search) bezig',
+                    'linking-info'            => 'Bronnen koppelen bezig',
+                    'progress'                => 'Voortgang:',
+                    'title'                   => 'Importeren',
+                    'total-batches'           => 'Totaal batches:',
+                    'total-created'           => 'Totaal gecreëerde records:',
+                    'total-deleted'           => 'Totaal verwijderde records:',
+                    'total-errors'            => 'Totaal fouten:',
+                    'total-invalid-rows'      => 'Totaal ongeldige rijen:',
+                    'total-rows-processed'    => 'Totaal verwerkte rijen:',
+                    'total-updated'           => 'Totaal bijgewerkte records:',
+                    'validate-info'           => 'Klik op Valideer Gegevens om uw import te controleren.',
+                    'validate'                => 'Valideren',
+                    'validating-info'         => 'Het lezen en valideren van gegevens is gestart',
+                    'validation-failed-info'  => 'Uw import is ongeldig. Los de volgende fouten op en probeer het opnieuw.',
+                    'validation-success-info' => 'Uw import is geldig. Klik op Importeren om het importproces te starten.',
+                ],
+
+                'create-success'    => 'Import succesvol aangemaakt.',
+                'delete-failed'     => 'Het verwijderen van de import is onverwacht mislukt.',
+                'delete-success'    => 'Importeren is succesvol verwijderd.',
+                'not-valid'         => 'Importeren is ongeldig',
+                'nothing-to-import' => 'Er zijn geen bronnen om te importeren.',
+                'setup-queue-error' => 'Wijzig uw wachtrijstuurprogramma in "database" of "redis" om het importproces te starten.',
+                'update-success'    => 'Importeren is succesvol bijgewerkt.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Wisselkoers Aanmaken',
                 'exchange-rate' => 'Wisselkoers',
@@ -2361,7 +2467,7 @@ return [
             'update-success'    => 'Voorraadbronnen succesvol bijgewerkt',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Weet je zeker dat je wilt verwijderen?',
@@ -3486,11 +3592,13 @@ return [
                 'currencies'               => 'Valuta',
                 'customers'                => 'Klanten',
                 'dashboard'                => 'Dashboard',
+                'data-transfer'            => 'Data overdracht',
                 'discount'                 => 'Korting',
                 'email-templates'          => 'E-mail Templates',
                 'events'                   => 'Gebeurtenissen',
                 'exchange-rates'           => 'Wisselkoersen',
                 'groups'                   => 'Groepen',
+                'imports'                  => 'Importeert',
                 'inventory-sources'        => 'Voorraadbronnen',
                 'invoices'                 => 'Facturen',
                 'locales'                  => 'Locaties',
@@ -3684,24 +3792,27 @@ return [
         'campaigns'                => 'Campagnes',
         'cancel'                   => 'Annuleren',
         'cart-rules'               => 'Winkelwagen Regels',
-        'catalog'                  => 'Catalogus',
         'catalog-rules'            => 'Catalogus Regels',
+        'catalog'                  => 'Catalogus',
         'categories'               => 'Categorieën',
         'channels'                 => 'Kanalen',
         'cms'                      => 'CMS',
         'communications'           => 'Communicaties',
         'configure'                => 'Configureren',
         'copy'                     => 'Kopiëren',
-        'create'                   => 'Toevoegen',
+        'create'                   => 'Creëren',
         'currencies'               => 'Valuta\'s',
         'customers'                => 'Klanten',
         'dashboard'                => 'Dashboard',
+        'data-transfer'            => 'Data overdracht',
         'delete'                   => 'Verwijderen',
         'edit'                     => 'Bewerken',
         'email-templates'          => 'E-mail Sjablonen',
         'events'                   => 'Evenementen',
         'exchange-rates'           => 'Wisselkoersen',
         'groups'                   => 'Groepen',
+        'import'                   => 'Importeren',
+        'imports'                  => 'Importeert',
         'inventory-sources'        => 'Voorraadbronnen',
         'invoices'                 => 'Facturen',
         'locales'                  => 'Talen',

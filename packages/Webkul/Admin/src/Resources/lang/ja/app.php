@@ -2157,7 +2157,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'ロケールを作成',
                 'locale'     => 'ロケール',
@@ -2199,7 +2199,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => '通貨を作成',
                 'currency'   => '通貨',
@@ -2242,7 +2242,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'アクション',
+                    'allowed-errors'      => '許可されたエラー',
+                    'back-btn'            => '戻る',
+                    'create-update'       => '作成/更新',
+                    'delete'              => '削除',
+                    'download-sample'     => 'サンプルをダウンロード',
+                    'field-separator'     => 'フィールドセパレータ',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/import/app/product-imagesフォルダーに配置する必要があります。',
+                    'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
+                    'file'                => 'ファイル',
+                    'general'             => '一般',
+                    'images-directory'    => '画像ディレクトリーパス',
+                    'process-in-queue'    => 'キューで処理',
+                    'results'             => '結果',
+                    'save-btn'            => 'インポートを保存',
+                    'settings'            => '設定',
+                    'skip-errors'         => 'エラーをスキップ',
+                    'stop-on-errors'      => 'エラーで停止',
+                    'title'               => 'インポートの作成',
+                    'type'                => 'タイプ',
+                    'validation-strategy' => 'バリデーション戦略',
+                ],
+
+                'edit'              => [
+                    'action'              => 'アクション',
+                    'allowed-errors'      => '許可されたエラー',
+                    'back-btn'            => '戻る',
+                    'create-update'       => '作成/更新',
+                    'delete'              => '削除',
+                    'download-sample'     => 'サンプルをダウンロード',
+                    'field-separator'     => 'フィールドセパレータ',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/import/app/product-imagesフォルダーに配置する必要があります。',
+                    'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
+                    'file'                => 'ファイル',
+                    'general'             => '一般',
+                    'images-directory'    => '画像ディレクトリーパス',
+                    'process-in-queue'    => 'キューで処理',
+                    'results'             => '結果',
+                    'save-btn'            => 'インポートを保存',
+                    'settings'            => '設定',
+                    'skip-errors'         => 'エラーをスキップ',
+                    'stop-on-errors'      => 'エラーで停止',
+                    'title'               => 'インポートの編集',
+                    'type'                => 'タイプ',
+                    'validation-strategy' => '検証戦略',
+                ],
+
+                'index'             => [
+                    'button-title' => 'インポートの作成',
+                    'title'        => '輸入品',
+
+                    'datagrid'     => [
+                        'actions'       => '行動',
+                        'completed-at'  => '完了日',
+                        'created'       => '作成した',
+                        'delete'        => '消去',
+                        'deleted'       => '削除されました',
+                        'edit'          => '編集',
+                        'error-file'    => 'エラーファイル',
+                        'id'            => 'ID',
+                        'started-at'    => '開始日',
+                        'state'         => '州',
+                        'summary'       => 'まとめ',
+                        'updated'       => '更新しました',
+                        'uploaded-file' => 'アップロードされたファイル',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => '戻る',
+                    'completed-batches'       => '完了したバッチの合計:',
+                    'download-error-report'   => '完全なレポートをダウンロード',
+                    'edit-btn'                => '編集',
+                    'imported-info'           => 'おめでとう！インポートは成功しました。',
+                    'importing-info'          => 'インポート中',
+                    'indexing-info'           => 'リソースのインデックス作成 (価格、在庫、エラスティック検索) が進行中です',
+                    'linking-info'            => 'リソースのリンクが進行中です',
+                    'progress'                => '進捗：',
+                    'title'                   => '輸入',
+                    'total-batches'           => '合計バッチ数:',
+                    'total-created'           => '作成された合計レコード数:',
+                    'total-deleted'           => '削除されたレコードの合計:',
+                    'total-errors'            => '合計エラー数:',
+                    'total-invalid-rows'      => '無効な行の合計:',
+                    'total-rows-processed'    => '処理された合計行数:',
+                    'total-updated'           => '更新された合計レコード:',
+                    'validate-info'           => '「データの検証」をクリックしてインポートを確認します。',
+                    'validate'                => '検証',
+                    'validating-info'         => 'データの読み取りと検証が開始されました',
+                    'validation-failed-info'  => 'インポートは無効です。次のエラーを修正して再試行してください。',
+                    'validation-success-info' => 'インポートは有効です。 「インポート」をクリックしてインポートプロセスを開始します。',
+                ],
+
+                'create-success'    => 'インポートが正常に作成されました。',
+                'delete-failed'     => 'インポートの削除が予期せず失敗しました。',
+                'delete-success'    => 'インポートは正常に削除されました。',
+                'not-valid'         => 'インポートが無効です',
+                'nothing-to-import' => 'インポートするリソースがありません。',
+                'setup-queue-error' => 'インポート プロセスを開始するには、キュー ドライバーを「データベース」または「redis」に変更してください。',
+                'update-success'    => 'インポートは正常に更新されました。',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => '為替レートを作成',
                 'exchange-rate' => '為替レート',
@@ -2361,7 +2467,7 @@ return [
             'update-success'    => '在庫ソースが正常に更新されました',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => '本当に削除しますか？',
@@ -3486,11 +3592,13 @@ return [
                 'currencies'               => '通貨',
                 'customers'                => '顧客',
                 'dashboard'                => 'ダッシュボード',
+                'data-transfer'            => 'Data Transfer',
                 'discount'                 => '割引',
                 'email-templates'          => 'メールテンプレート',
                 'events'                   => 'イベント',
                 'exchange-rates'           => '為替レート',
                 'groups'                   => 'グループ',
+                'imports'                  => '輸入品',
                 'inventory-sources'        => '在庫ソース',
                 'invoices'                 => '請求書',
                 'locales'                  => 'ロケール',
@@ -3684,24 +3792,27 @@ return [
         'campaigns'                => 'キャンペーン',
         'cancel'                   => 'キャンセル',
         'cart-rules'               => 'カートルール',
-        'catalog'                  => 'カタログ',
         'catalog-rules'            => 'カタログルール',
+        'catalog'                  => 'カタログ',
         'categories'               => 'カテゴリー',
         'channels'                 => 'チャネル',
         'cms'                      => 'CMS',
         'communications'           => 'コミュニケーション',
         'configure'                => '設定',
         'copy'                     => 'コピー',
-        'create'                   => '追加',
+        'create'                   => '作成する',
         'currencies'               => '通貨',
         'customers'                => '顧客',
         'dashboard'                => 'ダッシュボード',
+        'data-transfer'            => 'データ転送',
         'delete'                   => '削除',
         'edit'                     => '編集',
         'email-templates'          => 'Eメールテンプレート',
         'events'                   => 'イベント',
         'exchange-rates'           => '為替レート',
         'groups'                   => 'グループ',
+        'import'                   => '輸入',
+        'imports'                  => '輸入品',
         'inventory-sources'        => '在庫ソース',
         'invoices'                 => '請求書',
         'locales'                  => 'ロケール',
