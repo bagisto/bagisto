@@ -40,8 +40,8 @@ class CatalogRuleProductPrice
 
         $catalogRuleProducts = $this->catalogRuleProductHelper->getCatalogRuleProducts($product);
 
-        foreach ($catalogRuleProducts as $row) {
-            $productKey = $row->product_id.'-'.$row->channel_id.'-'.$row->customer_group_id;
+        foreach ($catalogRuleProducts as $catalogRuleProduct) {
+            $productKey = $catalogRuleProduct->product_id.'-'.$catalogRuleProduct->channel_id.'-'.$catalogRuleProduct->customer_group_id;
 
             if (
                 $previousKey
@@ -56,15 +56,15 @@ class CatalogRuleProductPrice
                 }
             }
 
-            foreach ($dates as $key => $date) {
+            foreach ($dates as $date) {
                 if (
                     (
-                        ! $row->starts_from
-                        || $date >= $row->starts_from
+                        ! $catalogRuleProduct->starts_from
+                        || $date >= $catalogRuleProduct->starts_from
                     )
                     && (
-                        ! $row->ends_till
-                        || $date <= $row->ends_till
+                        ! $catalogRuleProduct->ends_till
+                        || $date <= $catalogRuleProduct->ends_till
                     )
                 ) {
                     $priceKey = $date->getTimestamp().'-'.$productKey;
@@ -76,23 +76,23 @@ class CatalogRuleProductPrice
                     if (! isset($prices[$priceKey])) {
                         $prices[$priceKey] = [
                             'rule_date'         => $date,
-                            'catalog_rule_id'   => $row->catalog_rule_id,
-                            'channel_id'        => $row->channel_id,
-                            'customer_group_id' => $row->customer_group_id,
-                            'product_id'        => $row->product_id,
-                            'price'             => $this->calculate($row),
-                            'starts_from'       => $row->starts_from,
-                            'ends_till'         => $row->ends_till,
+                            'catalog_rule_id'   => $catalogRuleProduct->catalog_rule_id,
+                            'channel_id'        => $catalogRuleProduct->channel_id,
+                            'customer_group_id' => $catalogRuleProduct->customer_group_id,
+                            'product_id'        => $catalogRuleProduct->product_id,
+                            'price'             => $this->calculate($catalogRuleProduct),
+                            'starts_from'       => $catalogRuleProduct->starts_from,
+                            'ends_till'         => $catalogRuleProduct->ends_till,
                         ];
                     } else {
-                        $prices[$priceKey]['price'] = $this->calculate($row, $prices[$priceKey]);
+                        $prices[$priceKey]['price'] = $this->calculate($catalogRuleProduct, $prices[$priceKey]);
 
-                        $prices[$priceKey]['starts_from'] = max($prices[$priceKey]['starts_from'], $row->starts_from);
+                        $prices[$priceKey]['starts_from'] = max($prices[$priceKey]['starts_from'], $catalogRuleProduct->starts_from);
 
-                        $prices[$priceKey]['ends_till'] = min($prices[$priceKey]['ends_till'], $row->ends_till);
+                        $prices[$priceKey]['ends_till'] = min($prices[$priceKey]['ends_till'], $catalogRuleProduct->ends_till);
                     }
 
-                    if ($row->end_other_rules) {
+                    if ($catalogRuleProduct->end_other_rules) {
                         $endRuleFlags[$priceKey] = true;
                     }
                 }
@@ -107,32 +107,36 @@ class CatalogRuleProductPrice
     /**
      * Calculates product price based on rule
      *
-     * @param  array  $rule
+     * @param  \Webkul\CatalogRule\Models\CatalogRuleProduct  $catalogRuleProduct
      * @param  \Webkul\Product\Contracts\Product|null  $productData
      * @return float
      */
-    public function calculate($rule, $productData = null)
+    public function calculate($catalogRuleProduct, $productData = null)
     {
-        $price = $productData['price'] ?? $rule->price;
+        if (! $catalogRuleProduct->catalog_rule_status) {
+            return $catalogRuleProduct->price;
+        }
 
-        switch ($rule->action_type) {
+        $price = $productData['price'] ?? $catalogRuleProduct->price;
+
+        switch ($catalogRuleProduct->action_type) {
             case 'to_fixed':
-                $price = min($rule->discount_amount, $price);
+                $price = min($catalogRuleProduct->discount_amount, $price);
 
                 break;
 
             case 'to_percent':
-                $price = $price * $rule->discount_amount / 100;
+                $price = $price * $catalogRuleProduct->discount_amount / 100;
 
                 break;
 
             case 'by_fixed':
-                $price = max(0, $price - $rule->discount_amount);
+                $price = max(0, $price - $catalogRuleProduct->discount_amount);
 
                 break;
 
             case 'by_percent':
-                $price = $price * (1 - $rule->discount_amount / 100);
+                $price = $price * (1 - $catalogRuleProduct->discount_amount / 100);
 
                 break;
         }

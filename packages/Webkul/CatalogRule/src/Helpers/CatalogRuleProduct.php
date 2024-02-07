@@ -176,8 +176,9 @@ class CatalogRuleProduct
     {
         $ruleProducts = $this->catalogRuleProductRepository->scopeQuery(function ($query) use ($product) {
             $query = $query->distinct()
-                ->select('catalog_rule_products.*')
+                ->select('catalog_rule_products.*', 'catalog_rules.status as catalog_rule_status')
                 ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
+                ->rightJoin('catalog_rules', 'catalog_rule_products.catalog_rule_id', '=', 'catalog_rules.id')
                 ->orderBy('channel_id', 'asc')
                 ->orderBy('customer_group_id', 'asc')
                 ->orderBy('product_id', 'asc')
