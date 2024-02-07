@@ -134,7 +134,7 @@ class ImportDataGrid extends DataGrid
         if (bouncer()->hasPermission('settings.data_transfer.imports.import')) {
             $this->addAction([
                 'index'  => 'import',
-                'icon'   => 'icon-down-stat',
+                'icon'   => 'icon-import',
                 'title'  => trans('admin::app.settings.data-transfer.imports.index.datagrid.import'),
                 'method' => 'GET',
                 'url'    => function ($row) {
