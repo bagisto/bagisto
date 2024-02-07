@@ -54,6 +54,8 @@
 
                             isEdit: false,
 
+                            tempId: 1,
+
                             isUsedForShipping: true,
                         },
 
@@ -67,6 +69,8 @@
                             isNew: false,
 
                             isEdit: false,
+
+                            tempId: 1,
                         },
                     },
 
@@ -80,8 +84,6 @@
                     states: [],
 
                     isAddressLoading: true,
-
-                    tempId: 1,
 
                     isCustomer: "{{ auth()->guard('customer')->check() }}",
 
@@ -98,12 +100,6 @@
             },
 
             methods: {
-                back() {
-                    this.forms.billing.isNew = false;
-
-                    this.resetBillingAddressForm();
-                },
-
                 resetBillingAddressForm() {
                     this.forms.billing.address = {
                         address1: [''],
@@ -218,31 +214,9 @@
                             this.addresses.billing[foundIndex] = updatedAddress;
                         } else {
                             if (!this.isCustomer) {
-                                updatedAddress.id = 'guest_' + this.tempId++;
+                                updatedAddress.id = 'guest_' + this.forms.billing.tempId++;
                             }
 
-                            this.addresses.billing.push(updatedAddress);
-                        }
-                    }
-
-                    if (! this.forms.billing.address.isSaved) {
-                        this.forms.billing.isEdit = false;
-                        this.forms.billing.isNew = false;
-                        this.isTempAddress = true;
-
-                        let foundIndex = this.addresses.billing.findIndex(item => item.id === this.forms.billing.address.id);
-
-                        let updatedAddress = {
-                            ...this.forms.billing.address,
-                            isSaved: false,
-                        };
-
-                        if (foundIndex !== -1) {
-                            this.addresses.billing[foundIndex] = updatedAddress;
-                        } else {
-                            if (!this.isCustomer) {
-                                updatedAddress.id = 'guest_' + this.tempId++;
-                            }
                             this.addresses.billing.push(updatedAddress);
                         }
                     }
@@ -282,23 +256,50 @@
                     this.resetPaymentAndShippingMethod();
                 },
 
+                editNewShippingAddressForm(params) {
+                    this.resetShippingAddressForm();
+
+                    this.forms.shipping.isNew = true;
+
+                    this.forms.shipping.address = {
+                        ...params,
+                        address1: [params.address1, params.address2]
+                    };
+
+                    delete this.forms.shipping.address.address2;
+
+                    console.log(this.forms.shipping.address);
+
+                    this.resetPaymentAndShippingMethod();
+                },
+
                 handleShippingAddressForm() {
                     if (! this.forms.shipping.address.isSaved) {
+                        this.forms.shipping.isEdit = false;
+
                         this.forms.shipping.isNew = false;
 
                         this.isTempAddress = true;
 
-                        this.addresses.shipping.push({
+                        let foundIndex = this.addresses.shipping.findIndex(item => item.id === this.forms.shipping.address.id);
+
+                        let updatedAddress = {
                             ...this.forms.shipping.address,
                             isSaved: false,
-                        });
+                        };
+
+                        if (foundIndex !== -1) {
+                            this.addresses.shipping[foundIndex] = updatedAddress;
+                        } else {
+                            if (!this.isCustomer) {
+                                updatedAddress.id = 'guest_' + this.forms.shipping.tempId++;
+                            }
+
+                            this.addresses.shipping.push(updatedAddress);
+                        }
                     }
 
-                    this.forms.shipping.address['address1'] = [this.forms.shipping.address.address1];
-
-                    this.forms.shipping.address['address2'] = [this.forms.shipping.address.address2 ?? ''];
-
-                    if (this.forms.shipping.isEdit) {
+                    if (this.forms.shipping.isEdit && this.forms.shipping.address.isSaved) {
                         this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.shipping.address)
                             .then(response => {
                                 this.forms.shipping.isNew = false;
@@ -310,7 +311,7 @@
                             .catch(error => {                 
                                 console.log(error);
                             });
-                    } else {
+                    } else if (this.forms.shipping.isNew && this.forms.shipping.address.isSaved) {
                         this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
                             .then(response => {
                                 this.forms.shipping.isNew = false;
