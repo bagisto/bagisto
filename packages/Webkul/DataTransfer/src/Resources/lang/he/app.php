@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'לקוחות',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'האימייל: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
+                    'duplicate-phone'        => 'הטלפון: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
+                    'invalid-customer-group' => 'קבוצת הלקוחות אינה תקפה או לא נתמכת',
+                    'email-not-found'        => 'האימייל: \'%s\' לא נמצא במערכת.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'מוצרים',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'לקוחות',
+        'tax-rates' => [
+            'title'      => 'שערי מס',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'האימייל: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
-                    'duplicate-phone'        => 'הטלפון: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
-                    'invalid-customer-group' => 'קבוצת הלקוחות אינה תקפה או לא נתמכת',
-                    'email-not-found'        => 'האימייל: \'%s\' לא נמצא במערכת.',
+                    'duplicate-identifier' => 'המזהה: \'%s\' נמצא יותר מפעם אחת בקובץ היבוא.',
+                    'identifier-not-found' => 'המזהה: \'%s\' לא נמצא במערכת.',
                 ],
             ],
         ],

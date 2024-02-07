@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'ग्राहक',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'ईमेल: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
+                    'duplicate-phone'        => 'फ़ोन: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
+                    'invalid-customer-group' => 'ग्राहक समूह अमान्य या समर्थित नहीं है',
+                    'email-not-found'        => 'ईमेल: \'%s\' सिस्टम में नहीं मिला।',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'उत्पाद',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'ग्राहक',
+        'tax-rates' => [
+            'title'      => 'कर दरें',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'ईमेल: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
-                    'duplicate-phone'        => 'फ़ोन: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
-                    'invalid-customer-group' => 'ग्राहक समूह अमान्य या समर्थित नहीं है',
-                    'email-not-found'        => 'ईमेल: \'%s\' सिस्टम में नहीं मिला।',
+                    'duplicate-identifier' => 'पहचानकर्ता: \'%s\' आयात फ़ाइल में एक से अधिक बार पाया गया है।',
+                    'identifier-not-found' => 'पहचानकर्ता: \'%s\' सिस्टम में नहीं मिला।',
                 ],
             ],
         ],

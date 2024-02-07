@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'Klanten',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'E-mail: \'%s\' komt meer dan eens voor in het importbestand.',
+                    'duplicate-phone'        => 'Telefoon: \'%s\' komt meer dan eens voor in het importbestand.',
+                    'invalid-customer-group' => 'Klantgroep is ongeldig of wordt niet ondersteund',
+                    'email-not-found'        => 'E-mail: \'%s\' niet gevonden in het systeem.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'Producten',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'Klanten',
+        'tax-rates' => [
+            'title'      => 'Belastingtarieven',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'E-mail: \'%s\' komt meer dan eens voor in het importbestand.',
-                    'duplicate-phone'        => 'Telefoon: \'%s\' komt meer dan eens voor in het importbestand.',
-                    'invalid-customer-group' => 'Klantgroep is ongeldig of wordt niet ondersteund',
-                    'email-not-found'        => 'E-mail: \'%s\' niet gevonden in het systeem.',
+                    'duplicate-identifier' => 'Identifier: \'%s\' komt meerdere keren voor in het importbestand.',
+                    'identifier-not-found' => 'Identifier: \'%s\' niet gevonden in het systeem.',
                 ],
             ],
         ],

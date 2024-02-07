@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'Clients',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'L\'email: \'%s\' est trouvé plusieurs fois dans le fichier d\'importation.',
+                    'duplicate-phone'        => 'Le téléphone: \'%s\' est trouvé plusieurs fois dans le fichier d\'importation.',
+                    'invalid-customer-group' => 'Le groupe de clients est invalide ou non pris en charge',
+                    'email-not-found'        => 'L\'email: \'%s\' n\'a pas été trouvé dans le système.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'Produits',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'Clients',
+        'tax-rates' => [
+            'title'      => 'Taux de taxe',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'L\'email: \'%s\' est trouvé plusieurs fois dans le fichier d\'importation.',
-                    'duplicate-phone'        => 'Le téléphone: \'%s\' est trouvé plusieurs fois dans le fichier d\'importation.',
-                    'invalid-customer-group' => 'Le groupe de clients est invalide ou non pris en charge',
-                    'email-not-found'        => 'L\'email: \'%s\' n\'a pas été trouvé dans le système.',
+                    'duplicate-identifier' => 'L\'identifiant : \'%s\' a été trouvé plusieurs fois dans le fichier d\'importation.',
+                    'identifier-not-found' => 'L\'identifiant : \'%s\' n\'a pas été trouvé dans le système.',
                 ],
             ],
         ],

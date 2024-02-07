@@ -2,6 +2,19 @@
 
 return [
     'importers' => [
+        'customers' => [
+            'title'  => 'කළමනාකරු',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'Email: \'%s\' එකතු ලැබුණු එක එක පිළිබඳ එකතු ලැබීය ඇත.',
+                    'duplicate-phone'        => 'Phone: \'%s\' එකතු ලැබුණු එක එක පිළිබඳ එකතු ලැබීය ඇත.',
+                    'invalid-customer-group' => 'කළමනාකරු කොටස වැඩි හොඳ හොඳ අත්දැකිම අත්දැකි වේ.',
+                    'email-not-found'        => 'Email: \'%s\' සිස්ටීම පිළිබඳ එකතු ලැබීය නොමැත.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'  => 'පද්ධති',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'  => 'කළමනාකරු',
+        'tax-rates' => [
+            'title'      => 'බදු අනුවාද',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'Email: \'%s\' එකතු ලැබුණු එක එක පිළිබඳ එකතු ලැබීය ඇත.',
-                    'duplicate-phone'        => 'Phone: \'%s\' එකතු ලැබුණු එක එක පිළිබඳ එකතු ලැබීය ඇත.',
-                    'invalid-customer-group' => 'කළමනාකරු කොටස වැඩි හොඳ හොඳ අත්දැකිම අත්දැකි වේ.',
-                    'email-not-found'        => 'Email: \'%s\' සිස්ටීම පිළිබඳ එකතු ලැබීය නොමැත.',
+                    'duplicate-identifier' => 'හඳුන්වාදය: \'%s\' ආයෝජනය ගොනුවෙහි ඊළඟට වෙනස් වී ඇත.',
+                    'identifier-not-found' => 'හඳුන්වාදය: \'%s\' පද්ධතියේ නොපවතී.',
                 ],
             ],
         ],
