@@ -374,6 +374,12 @@
     .icon-play:before {
         content: "\e945";
     }
+
+    .icon-import:before {
+        content: "\e943";
+        transform: rotate(90deg);
+        display: inline-block;
+    }
       
     p {
         @apply text-[14px] !leading-[17px];

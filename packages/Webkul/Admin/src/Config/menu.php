@@ -145,13 +145,13 @@ return [
         'sort'       => 1,
         'icon'       => '',
     ], [
-        'key'        => 'marketing.promotions.catalog-rules',
+        'key'        => 'marketing.promotions.catalog_rules',
         'name'       => 'admin::app.marketing.promotions.index.catalog-rule-title',
         'route'      => 'admin.marketing.promotions.catalog_rules.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
-        'key'        => 'marketing.promotions.cart-rules',
+        'key'        => 'marketing.promotions.cart_rules',
         'name'       => 'admin::app.marketing.promotions.index.cart-rule-title',
         'route'      => 'admin.marketing.promotions.cart_rules.index',
         'sort'       => 2,
@@ -163,7 +163,7 @@ return [
         'sort'       => 2,
         'icon'       => '',
     ], [
-        'key'        => 'marketing.communications.email-templates',
+        'key'        => 'marketing.communications.email_templates',
         'name'       => 'admin::app.components.layouts.sidebar.email-templates',
         'route'      => 'admin.marketing.communications.email_templates.index',
         'sort'       => 1,
@@ -313,16 +313,28 @@ return [
         'sort'       => 9,
         'icon'       => '',
     ], [
-        'key'        => 'settings.taxes.tax-categories',
+        'key'        => 'settings.taxes.tax_categories',
         'name'       => 'admin::app.components.layouts.sidebar.tax-categories',
         'route'      => 'admin.settings.taxes.categories.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
-        'key'        => 'settings.taxes.tax-rates',
+        'key'        => 'settings.taxes.tax_rates',
         'name'       => 'admin::app.components.layouts.sidebar.tax-rates',
         'route'      => 'admin.settings.taxes.rates.index',
         'sort'       => 2,
+        'icon'       => '',
+    ], [
+        'key'        => 'settings.data_transfer',
+        'name'       => 'admin::app.components.layouts.sidebar.data-transfer',
+        'route'      => 'admin.settings.data_transfer.imports.index',
+        'sort'       => 10,
+        'icon'       => '',
+    ], [
+        'key'        => 'settings.data_transfer.imports',
+        'name'       => 'admin::app.components.layouts.sidebar.imports',
+        'route'      => 'admin.settings.data_transfer.imports.index',
+        'sort'       => 1,
         'icon'       => '',
     ],
 
