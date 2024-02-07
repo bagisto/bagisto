@@ -101,7 +101,7 @@ class ImportController extends Controller
 
         session()->flash('success', trans('admin::app.settings.data-transfer.imports.create-success'));
 
-        return redirect()->route('admin.settings.data_transfer.imports.index');
+        return redirect()->route('admin.settings.data_transfer.imports.import', $import->id);
     }
 
     /**
@@ -181,7 +181,7 @@ class ImportController extends Controller
 
         session()->flash('success', trans('admin::app.settings.data-transfer.imports.update-success'));
 
-        return redirect()->route('admin.settings.data_transfer.imports.index');
+        return redirect()->route('admin.settings.data_transfer.imports.import', $import->id);
     }
 
     /**

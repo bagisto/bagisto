@@ -11,7 +11,7 @@ use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
-class TaxRate extends AbstractImporter
+class Importer extends AbstractImporter
 {
     /**
      * Error code for non existing identifier
@@ -28,7 +28,7 @@ class TaxRate extends AbstractImporter
      */
     protected array $validColumnNames = [
         'identifier',
-        'is_zip',
+        'is_zip_range',
         'zip_code',
         'zip_from',
         'zip_to',
@@ -128,13 +128,13 @@ class TaxRate extends AbstractImporter
          * Validate product attributes
          */
         $validator = Validator::make($rowData, [
-            'identifier' => 'required|string',
-            'is_zip'     => 'sometimes',
-            'zip_code'   => 'nullable',
-            'zip_from'   => 'nullable|required_with:is_zip',
-            'zip_to'     => 'nullable|required_with:is_zip,zip_from',
-            'country'    => 'required|string',
-            'tax_rate'   => 'required|numeric|min:0.0001',
+            'identifier'   => 'required|string',
+            'is_zip_range' => 'sometimes|boolean',
+            'zip_code'     => 'nullable|required_if:is_zip_range,0',
+            'zip_from'     => 'nullable|required_if:is_zip_range,1',
+            'zip_to'       => 'nullable|required_if:is_zip_range,1',
+            'country'      => 'required|string',
+            'tax_rate'     => 'required|numeric|min:0.0001',
         ]);
 
         if ($validator->fails()) {
@@ -240,34 +240,16 @@ class TaxRate extends AbstractImporter
             /**
              * Prepare tax rates for import
              */
-            $this->prepareTaxRates($rowData, $taxRates);
+            if ($this->isIdentifierExist($rowData['identifier'])) {
+                $taxRates['update'][$rowData['identifier']] = $rowData;
+            } else {
+                $taxRates['insert'][$rowData['identifier']] = array_merge($rowData, [
+                    'created_at' => $rowData['created_at'] ?? now(),
+                    'updated_at' => $rowData['updated_at'] ?? now(),
+                ]);
+            }
         }
 
-        $this->saveTaxRates($taxRates);
-
-        return true;
-    }
-
-    /**
-     * Prepare tax rates from current batch
-     */
-    public function prepareTaxRates(array $rowData, array &$taxRates): void
-    {
-        if ($this->isIdentifierExist($rowData['identifier'])) {
-            $taxRates['update'][$rowData['identifier']] = $rowData;
-        } else {
-            $taxRates['insert'][$rowData['identifier']] = array_merge($rowData, [
-                'created_at' => $rowData['created_at'] ?? now(),
-                'updated_at' => $rowData['updated_at'] ?? now(),
-            ]);
-        }
-    }
-
-    /**
-     * Save tax rates from current batch
-     */
-    public function saveTaxRates(array $taxRates): void
-    {
         if (! empty($taxRates['update'])) {
             $this->updatedItemsCount += count($taxRates['update']);
 
@@ -282,6 +264,8 @@ class TaxRate extends AbstractImporter
 
             $this->taxRateRepository->insert($taxRates['insert']);
         }
+
+        return true;
     }
 
     /**
@@ -290,5 +274,17 @@ class TaxRate extends AbstractImporter
     public function isIdentifierExist(string $identifier): bool
     {
         return $this->taxRateStorage->has($identifier);
+    }
+
+    /**
+     * Prepare row data to save into the database
+     */
+    protected function prepareRowForDb(array $rowData): array
+    {
+        $rowData = parent::prepareRowForDb($rowData);
+
+        $rowData['is_zip'] = $rowData['is_zip_range'] ?? 0;
+
+        return Arr::except($rowData, 'is_zip_range');
     }
 }
