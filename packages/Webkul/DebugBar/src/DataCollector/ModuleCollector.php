@@ -79,7 +79,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
                     ! is_int($binding)
                     && ! is_float($binding)
                 ) {
-                    $binding = $query->connection->getPdo()->quote($binding);
+                    $binding = $query->connection->getPdo()->quote($binding ?? '');
                 }
 
                 $sql = preg_replace($regex, $binding, $sql, 1);
