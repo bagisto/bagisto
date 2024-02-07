@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'Customers',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'Email : \'%s\' is found more than once in the import file.',
+                    'duplicate-phone'        => 'Phone : \'%s\' is found more than once in the import file.',
+                    'invalid-customer-group' => 'Customer group is invalid or not supported',
+                    'email-not-found'        => 'Email : \'%s\' not found in the system.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'Products',
 
@@ -12,19 +25,6 @@ return [
                     'invalid-type'              => 'Product type is invalid or not supported',
                     'sku-not-found'             => 'Product with specified SKU not found',
                     'super-attribute-not-found' => 'Super attribute with code: \'%s\' not found or does not belong to the attribute family: \'%s\'',
-                ],
-            ],
-        ],
-
-        'customers' => [
-            'title'      => 'Customers',
-
-            'validation' => [
-                'errors' => [
-                    'duplicate-email'        => 'Email : \'%s\' is found more than once in the import file.',
-                    'duplicate-phone'        => 'Phone : \'%s\' is found more than once in the import file.',
-                    'invalid-customer-group' => 'Customer group is invalid or not supported',
-                    'email-not-found'        => 'Email : \'%s\' not found in the system.',
                 ],
             ],
         ],

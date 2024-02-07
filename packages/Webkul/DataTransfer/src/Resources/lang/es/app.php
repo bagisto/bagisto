@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'Clientes',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'El correo electrónico: \'%s\' se encuentra más de una vez en el archivo de importación.',
+                    'duplicate-phone'        => 'El teléfono: \'%s\' se encuentra más de una vez en el archivo de importación.',
+                    'invalid-customer-group' => 'El grupo de clientes no es válido o no está soportado',
+                    'email-not-found'        => 'El correo electrónico: \'%s\' no se encontró en el sistema.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'Productos',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'Clientes',
+        'tax-rates' => [
+            'title'      => 'Tasas de impuestos',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'El correo electrónico: \'%s\' se encuentra más de una vez en el archivo de importación.',
-                    'duplicate-phone'        => 'El teléfono: \'%s\' se encuentra más de una vez en el archivo de importación.',
-                    'invalid-customer-group' => 'El grupo de clientes no es válido o no está soportado',
-                    'email-not-found'        => 'El correo electrónico: \'%s\' no se encontró en el sistema.',
+                    'duplicate-identifier' => 'El identificador: \'%s\' se encuentra más de una vez en el archivo de importación.',
+                    'identifier-not-found' => 'El identificador: \'%s\' no se encontró en el sistema.',
                 ],
             ],
         ],

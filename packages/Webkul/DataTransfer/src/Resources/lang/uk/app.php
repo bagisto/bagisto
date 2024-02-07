@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'Клієнти',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'The email "%s" is duplicated in the import file.',
+                    'duplicate-phone'        => 'Телефон : \'%s\' знайдено більше одного разу в файлі імпорту.',
+                    'invalid-customer-group' => 'Група клієнта недійсна або непідтримується',
+                    'email-not-found'        => 'Email : \'%s\' не знайдено в системі.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'Товари',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'Клієнти',
+        'tax-rates' => [
+            'title'      => 'Ставки податків',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'The email "%s" is duplicated in the import file.',
-                    'duplicate-phone'        => 'Телефон : \'%s\' знайдено більше одного разу в файлі імпорту.',
-                    'invalid-customer-group' => 'Група клієнта недійсна або непідтримується',
-                    'email-not-found'        => 'Email : \'%s\' не знайдено в системі.',
+                    'duplicate-identifier' => 'Ідентифікатор: \'%s\' знайдено більше одного разу в файлі імпорту.',
+                    'identifier-not-found' => 'Ідентифікатор: \'%s\' не знайдено в системі.',
                 ],
             ],
         ],

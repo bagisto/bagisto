@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'مشتریان',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'ایمیل: \'%s\' بیش از یک بار در فایل واردات پیدا شده است.',
+                    'duplicate-phone'        => 'تلفن: \'%s\' بیش از یک بار در فایل واردات پیدا شده است.',
+                    'invalid-customer-group' => 'گروه مشتری نامعتبر یا پشتیبانی نمی‌شود',
+                    'email-not-found'        => 'ایمیل: \'%s\' در سیستم یافت نشد.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'محصولات',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'مشتریان',
+        'tax-rates' => [
+            'title'      => 'نرخ‌های مالیاتی',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'ایمیل: \'%s\' بیش از یک بار در فایل واردات پیدا شده است.',
-                    'duplicate-phone'        => 'تلفن: \'%s\' بیش از یک بار در فایل واردات پیدا شده است.',
-                    'invalid-customer-group' => 'گروه مشتری نامعتبر یا پشتیبانی نمی‌شود',
-                    'email-not-found'        => 'ایمیل: \'%s\' در سیستم یافت نشد.',
+                    'duplicate-identifier' => 'شناسه: \'%s\' بیش از یک بار در فایل ورودی یافت شده است.',
+                    'identifier-not-found' => 'شناسه: \'%s\' در سیستم یافت نشد.',
                 ],
             ],
         ],

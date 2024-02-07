@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => '顾客',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => '电子邮件: \'%s\' 在导入文件中出现了多次。',
+                    'duplicate-phone'        => '电话: \'%s\' 在导入文件中出现了多次。',
+                    'invalid-customer-group' => '客户组无效或不受支持。',
+                    'email-not-found'        => '电子邮件: \'%s\' 在系统中未找到。',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => '产品',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => '顾客',
+        'tax-rates' => [
+            'title'      => '税率',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => '电子邮件: \'%s\' 在导入文件中出现了多次。',
-                    'duplicate-phone'        => '电话: \'%s\' 在导入文件中出现了多次。',
-                    'invalid-customer-group' => '客户组无效或不受支持。',
-                    'email-not-found'        => '电子邮件: \'%s\' 在系统中未找到。',
+                    'duplicate-identifier' => '标识符: \'%s\' 在导入文件中找到多次。',
+                    'identifier-not-found' => '标识符: \'%s\' 在系统中未找到。',
                 ],
             ],
         ],

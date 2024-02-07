@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => '顧客',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'メールアドレス：\'%s\'はインポートファイル内で複数回見つかりました。',
+                    'duplicate-phone'        => '電話番号：\'%s\'はインポートファイル内で複数回見つかりました。',
+                    'invalid-customer-group' => '顧客グループが無効またはサポートされていません',
+                    'email-not-found'        => 'メールアドレス：\'%s\'はシステム内で見つかりませんでした。',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => '製品',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => '顧客',
+        'tax-rates' => [
+            'title'      => '税率',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'メールアドレス：\'%s\'はインポートファイル内で複数回見つかりました。',
-                    'duplicate-phone'        => '電話番号：\'%s\'はインポートファイル内で複数回見つかりました。',
-                    'invalid-customer-group' => '顧客グループが無効またはサポートされていません',
-                    'email-not-found'        => 'メールアドレス：\'%s\'はシステム内で見つかりませんでした。',
+                    'duplicate-identifier' => '識別子: \'%s\' はインポートファイルに複数回見つかりました。',
+                    'identifier-not-found' => '識別子: \'%s\' がシステムに見つかりませんでした。',
                 ],
             ],
         ],

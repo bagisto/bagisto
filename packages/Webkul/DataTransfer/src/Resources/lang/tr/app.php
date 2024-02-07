@@ -2,6 +2,19 @@
 
 return [
     'importers'  => [
+        'customers' => [
+            'title'      => 'Müşteriler',
+
+            'validation' => [
+                'errors' => [
+                    'duplicate-email'        => 'E-posta: \'%s\' içe aktarma dosyasında birden fazla kez bulunuyor.',
+                    'duplicate-phone'        => 'Telefon: \'%s\' içe aktarma dosyasında birden fazla kez bulunuyor.',
+                    'invalid-customer-group' => 'Müşteri grubu geçersiz veya desteklenmiyor',
+                    'email-not-found'        => 'E-posta: \'%s\' sistemde bulunamadı.',
+                ],
+            ],
+        ],
+
         'products'  => [
             'title'      => 'Ürünler',
 
@@ -16,15 +29,13 @@ return [
             ],
         ],
 
-        'customers' => [
-            'title'      => 'Müşteriler',
+        'tax-rates' => [
+            'title'      => 'Vergi Oranları',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'E-posta: \'%s\' içe aktarma dosyasında birden fazla kez bulunuyor.',
-                    'duplicate-phone'        => 'Telefon: \'%s\' içe aktarma dosyasında birden fazla kez bulunuyor.',
-                    'invalid-customer-group' => 'Müşteri grubu geçersiz veya desteklenmiyor',
-                    'email-not-found'        => 'E-posta: \'%s\' sistemde bulunamadı.',
+                    'duplicate-identifier' => 'Tanımlayıcı: \'%s\' ithalat dosyasında birden fazla bulundu.',
+                    'identifier-not-found' => 'Tanımlayıcı: \'%s\' sistemde bulunamadı.',
                 ],
             ],
         ],
