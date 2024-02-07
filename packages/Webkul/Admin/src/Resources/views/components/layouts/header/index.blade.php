@@ -15,7 +15,7 @@
         <a href="{{ route('admin.dashboard.index') }}">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
-                    class="w-[110px] h-10"
+                    class="h-10"
                     src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
