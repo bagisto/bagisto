@@ -325,7 +325,9 @@ class Core
         $localeCode = request()->get($localeKey);
 
         if (! $fallback) {
-            return $localeCode;
+            $localeCode = $this->localeRepository->findOneByField('code', $localeCode);
+            
+            return $localeCode?->code;
         }
 
         return $localeCode ?: app()->getLocale();
