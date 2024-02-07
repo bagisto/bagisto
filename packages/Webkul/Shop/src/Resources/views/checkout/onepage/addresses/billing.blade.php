@@ -115,7 +115,8 @@
                     <v-error-message
                         class="text-red-500 text-xs italic"
                         name="billing[address_id]"
-                    />
+                    >
+                    </v-error-message>
 
                     <div 
                         class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
@@ -209,7 +210,7 @@
                         class="flex justify-end"
                         href="javascript:void(0)" 
                         v-if="addresses.billing.length > 0"
-                        @click="resetBillingAddressForm();forms.billing.isNew = ! forms.billing.isNew"
+                        @click="forms.billing.isNew = ! forms.billing.isNew"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
 

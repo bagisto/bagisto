@@ -3,7 +3,7 @@
 <v-checkout-addresses 
     ref="vCheckoutAddress"
     :have-stockable-items="cart.haveStockableItems"
-/>
+></v-checkout-addresses>
 
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
@@ -185,9 +185,23 @@
 
                     this.forms.billing.isNew = true;
 
-                    this.forms.billing.address = params.address2
-                        ? { ...params, address1: [params.address1, params.address2] }
-                        : { ...params };
+                    if (params.address2) {
+                        params.address1 = [
+                            params.address1,
+                            params.address2
+                        ];
+                    } else if (! Array.isArray(params.address1)) {
+                        let address1Array = params.address1.split("\n");
+
+                        params.address1 = {
+                            0: address1Array[0],
+                            1: address1Array[1]
+                        };
+                    }
+
+                    delete params.address2;
+
+                    this.forms.billing.address = {...params}
 
                     this.resetPaymentAndShippingMethod();
                 },

@@ -58,9 +58,7 @@ class OnepageController extends APIController
 
         unset(
             $data['billing']['id'],
-            $data['billing']['address_id'],
             $data['shipping']['id'],
-            $data['shipping']['address_id']
         );
 
         if (

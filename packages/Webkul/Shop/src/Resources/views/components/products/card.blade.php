@@ -362,7 +362,7 @@
                             if (response.data.data.redirect_uri) {
                                 window.location.href = response.data.data.redirect_uri;
                             }
-                            flex
+
                             if (response.data.message) {
                                 this.$emitter.emit('update-mini-cart', response.data.data );
 
