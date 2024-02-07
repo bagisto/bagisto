@@ -185,12 +185,9 @@
 
                     this.forms.billing.isNew = true;
 
-                    this.forms.billing.address = {
-                        ...params,
-                        address1: [params.address1, params.address2]
-                    };
-
-                    delete this.forms.billing.address.address2;
+                    this.forms.billing.address = params.address2
+                        ? { ...params, address1: [params.address1, params.address2] }
+                        : { ...params };
 
                     this.resetPaymentAndShippingMethod();
                 },
@@ -261,14 +258,9 @@
 
                     this.forms.shipping.isNew = true;
 
-                    this.forms.shipping.address = {
-                        ...params,
-                        address1: [params.address1, params.address2]
-                    };
-
-                    delete this.forms.shipping.address.address2;
-
-                    console.log(this.forms.shipping.address);
+                    this.forms.shipping.address = params.address2
+                        ? { ...params, address1: [params.address1, params.address2] }
+                        : { ...params };
 
                     this.resetPaymentAndShippingMethod();
                 },
