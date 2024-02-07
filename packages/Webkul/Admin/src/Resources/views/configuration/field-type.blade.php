@@ -237,22 +237,22 @@
             </div>
 
             @if ($result)
-                <x-admin::form.control-group class="flex gap-1.5 w-max mt-1.5 cursor-pointer select-none">
+                <x-admin::form.control-group class="flex gap-1.5 items-center w-max mt-1.5 cursor-pointer select-none">
                     <x-admin::form.control-group.control
                         type="checkbox"
-                        class="hidden peer"
+                        class="peer"
                         :id="$name.'[delete]'"
                         :name="$name.'[delete]'"
                         value="1"
                         :for="$name.'[delete]'"
                     />
 
-                    <x-admin::form.control-group.label
-                        :for="$name.'[delete]'"
+                    <label
+                        for="{{ $name }}[delete]"
                         class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                     >
                         @lang('admin::app.configuration.index.delete')
-                    </x-admin::form.control-group.label>
+                    </label>
                 </x-admin::form.control-group>
             @endif
 
@@ -283,18 +283,18 @@
                 <div class="flex gap-2.5 cursor-pointer">
                     <x-admin::form.control-group.control
                         type="checkbox"
-                        class="hidden peer"
+                        class="peer"
                         :id="$name.'[delete]'"
                         :name="$name.'[delete]'"
                         value="1"
                     />
 
-                    <x-admin::form.control-group.label
+                    <label
                         class="cursor-pointer"
-                        :for="$name.'[delete]'"
+                        for="{{ $name }}[delete]'"
                     >
                         @lang('admin::app.configuration.index.delete')
-                    </x-admin::form.control-group.label>
+                    </label>
                 </div>
             @endif
 
