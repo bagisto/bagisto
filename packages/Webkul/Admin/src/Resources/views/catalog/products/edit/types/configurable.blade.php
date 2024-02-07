@@ -793,7 +793,10 @@
                     </template>
 
                     <template v-else>
-                        <img :src="variant.images[0].url">
+                        <img 
+                            class="w-full h-full"
+                            :src="variant.images[0].url"
+                        >
 
                         <span
                             class="absolute bottom-px ltr:left-px rtl:right-px text-xs font-bold text-white leading-normal bg-darkPink rounded-full px-1.5"
