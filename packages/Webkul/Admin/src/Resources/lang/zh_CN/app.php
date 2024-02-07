@@ -2157,7 +2157,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => '创建区域',
                 'locale'     => '区域',
@@ -2199,7 +2199,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => '创建货币',
                 'currency'   => '货币',
@@ -2242,7 +2242,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => '動作',
+                    'allowed-errors'      => '允許的錯誤',
+                    'back-btn'            => '返回',
+                    'create-update'       => '建立/更新',
+                    'delete'              => '刪除',
+                    'download-sample'     => '下載範例',
+                    'field-separator'     => '欄位分隔符',
+                    'file-info-example'   => '例如，在 product-images 的情況下，檔案應放置在 /project-root/storage/import/app/product-images 資料夾中。',
+                    'file-info'           => '使用相對於 /project-root/storage/import/app 的路徑，例如 product-images, import-images。',
+                    'file'                => '檔案',
+                    'general'             => '一般',
+                    'images-directory'    => '圖片目錄路徑',
+                    'process-in-queue'    => '佇列中處理',
+                    'results'             => '結果',
+                    'save-btn'            => '儲存匯入',
+                    'settings'            => '設定',
+                    'skip-errors'         => '跳過錯誤',
+                    'stop-on-errors'      => '在發生錯誤時停止',
+                    'title'               => '建立匯入',
+                    'type'                => '類型',
+                    'validation-strategy' => '驗證策略',
+                ],
+
+                'edit'              => [
+                    'action'              => '動作',
+                    'allowed-errors'      => '允許的錯誤',
+                    'back-btn'            => '返回',
+                    'create-update'       => '建立/更新',
+                    'delete'              => '刪除',
+                    'download-sample'     => '下載範例',
+                    'field-separator'     => '欄位分隔符',
+                    'file-info-example'   => '例如，在 product-images 的情況下，檔案應放置在 /project-root/storage/import/app/product-images 資料夾中。',
+                    'file-info'           => '使用相對於 /project-root/storage/import/app 的路徑，例如 product-images, import-images。',
+                    'file'                => '檔案',
+                    'general'             => '一般',
+                    'images-directory'    => '圖片目錄路徑',
+                    'process-in-queue'    => '佇列中處理',
+                    'results'             => '結果',
+                    'save-btn'            => '儲存匯入',
+                    'settings'            => '設定',
+                    'skip-errors'         => '跳過錯誤',
+                    'stop-on-errors'      => '在發生錯誤時停止',
+                    'title'               => '編輯匯入',
+                    'type'                => '類型',
+                    'validation-strategy' => '驗證策略',
+                ],
+
+                'index'             => [
+                    'button-title' => '建立匯入',
+                    'title'        => '匯入',
+
+                    'datagrid'     => [
+                        'actions'       => '動作',
+                        'completed-at'  => '已完成於',
+                        'created'       => '已建立',
+                        'delete'        => '刪除',
+                        'deleted'       => '已刪除',
+                        'edit'          => '編輯',
+                        'error-file'    => '錯誤檔案',
+                        'id'            => 'ID',
+                        'started-at'    => '已開始於',
+                        'state'         => '狀態',
+                        'summary'       => '摘要',
+                        'updated'       => '已更新',
+                        'uploaded-file' => '已上傳的檔案',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => '返回',
+                    'completed-batches'       => '已完成的批次：',
+                    'download-error-report'   => '下載完整報告',
+                    'edit-btn'                => '編輯',
+                    'imported-info'           => '恭喜！您的匯入已成功完成。',
+                    'importing-info'          => '匯入處理中',
+                    'indexing-info'           => '價格、庫存和 Elasticsearch 索引中的資源處理中',
+                    'linking-info'            => '資源連結中',
+                    'progress'                => '進度：',
+                    'title'                   => '匯入',
+                    'total-batches'           => '總批次：',
+                    'total-created'           => '已建立記錄：',
+                    'total-deleted'           => '已刪除記錄：',
+                    'total-errors'            => '總錯誤：',
+                    'total-invalid-rows'      => '無效的行數：',
+                    'total-rows-processed'    => '處理的行數：',
+                    'total-updated'           => '已更新記錄：',
+                    'validate-info'           => '按一下 „驗證數據“ 以檢查您的匯入。',
+                    'validate'                => '驗證',
+                    'validating-info'         => '數據開始閱讀和驗證',
+                    'validation-failed-info'  => '您的匯入無效。請修正以下錯誤並再試一次。',
+                    'validation-success-info' => '您的匯入有效。按一下 „匯入“ 以開始匯入過程。',
+                ],
+
+                'create-success'    => '已成功建立匯入。',
+                'delete-failed'     => '匯入刪除失敗。',
+                'delete-success'    => '已成功刪除匯入。',
+                'not-valid'         => '匯入無效',
+                'nothing-to-import' => '沒有要匯入的資源。',
+                'setup-queue-error' => '請將您的佇列驅動程序更改為 „database“ 或 „redis“，以開始匯入過程。',
+                'update-success'    => '已成功更新匯入。',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => '创建汇率',
                 'exchange-rate' => '汇率',
@@ -2361,7 +2467,7 @@ return [
             'update-success'    => '库存来源更新成功',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => '您确定要删除吗？',
@@ -3486,11 +3592,13 @@ return [
                 'currencies'               => '货币',
                 'customers'                => '客户',
                 'dashboard'                => '仪表板',
+                'data-transfer'            => '数据传输',
                 'discount'                 => '折扣',
                 'email-templates'          => '电子邮件模板',
                 'events'                   => '事件',
                 'exchange-rates'           => '汇率',
                 'groups'                   => '分组',
+                'imports'                  => '进口',
                 'inventory-sources'        => '库存来源',
                 'invoices'                 => '发票',
                 'locales'                  => '语言环境',
@@ -3684,17 +3792,18 @@ return [
         'campaigns'                => '活动',
         'cancel'                   => '取消',
         'cart-rules'               => '购物车规则',
-        'catalog'                  => '目录',
         'catalog-rules'            => '目录规则',
+        'catalog'                  => '目录',
         'categories'               => '分类',
         'channels'                 => '渠道',
         'cms'                      => 'CMS',
         'communications'           => '通信',
         'configure'                => '配置',
         'copy'                     => '复制',
-        'create'                   => '创建',
+        'create'                   => '创造',
         'currencies'               => '货币',
         'customers'                => '顾客',
+        'data-transfer'            => '数据传输',
         'dashboard'                => '仪表板',
         'delete'                   => '删除',
         'edit'                     => '编辑',
@@ -3702,6 +3811,8 @@ return [
         'events'                   => '事件',
         'exchange-rates'           => '汇率',
         'groups'                   => '群组',
+        'import'                   => '进口',
+        'imports'                  => '进口',
         'inventory-sources'        => '库存来源',
         'invoices'                 => '发票',
         'locales'                  => '区域设置',

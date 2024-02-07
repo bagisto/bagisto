@@ -2158,7 +2158,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn'        => 'Создать локаль',
                 'locale'            => 'Локаль',
@@ -2200,7 +2200,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Создать валюту',
                 'currency'   => 'Валюта',
@@ -2243,7 +2243,111 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Действие',
+                    'back-btn'            => 'Назад',
+                    'create-update'       => 'Создать/Обновить',
+                    'delete'              => 'Удалить',
+                    'download-sample'     => 'Скачать Пример',
+                    'field-separator'     => 'Разделитель Полей',
+                    'file-info-example'   => 'Например, в случае product-images, файлы должны быть помещены в папку /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Используйте относительный путь к /project-root/storage/import/app, например, product-images, import-images.',
+                    'file'                => 'Файл',
+                    'general'             => 'Общие',
+                    'images-directory'    => 'Путь к Папке Изображений',
+                    'process-in-queue'    => 'Обработка в Очереди',
+                    'results'             => 'Результаты',
+                    'save-btn'            => 'Сохранить Импорт',
+                    'settings'            => 'Настройки',
+                    'skip-errors'         => 'Пропустить Ошибки',
+                    'stop-on-errors'      => 'Остановить при Ошибках',
+                    'title'               => 'Создать Импорт',
+                    'type'                => 'Тип',
+                    'validation-strategy' => 'Стратегия Валидации',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Действие',
+                    'back-btn'            => 'Назад',
+                    'create-update'       => 'Создать/Обновить',
+                    'delete'              => 'Удалить',
+                    'download-sample'     => 'Скачать Пример',
+                    'field-separator'     => 'Разделитель Полей',
+                    'file-info-example'   => 'Например, в случае product-images, файлы должны быть помещены в папку /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Используйте относительный путь к /project-root/storage/import/app, например, product-images, import-images.',
+                    'file'                => 'Файл',
+                    'general'             => 'Общие',
+                    'images-directory'    => 'Путь к Папке Изображений',
+                    'process-in-queue'    => 'Обработка в Очереди',
+                    'results'             => 'Результаты',
+                    'save-btn'            => 'Сохранить Импорт',
+                    'settings'            => 'Настройки',
+                    'skip-errors'         => 'Пропустить Ошибки',
+                    'stop-on-errors'      => 'Остановить при Ошибках',
+                    'title'               => 'Редактировать Импорт',
+                    'type'                => 'Тип',
+                    'validation-strategy' => 'Стратегия Валидации',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Создать Импорт',
+                    'title'        => 'Импорты',
+
+                    'datagrid'     => [
+                        'actions'       => 'Действия',
+                        'completed-at'  => 'Завершено В',
+                        'created'       => 'Создано',
+                        'delete'        => 'Удалить',
+                        'deleted'       => 'Удалено',
+                        'edit'          => 'Редактировать',
+                        'error-file'    => 'Файл Ошибок',
+                        'id'            => 'ИД',
+                        'started-at'    => 'Начато В',
+                        'state'         => 'Состояние',
+                        'summary'       => 'Сводка',
+                        'updated'       => 'Обновлено',
+                        'uploaded-file' => 'Загруженный Файл',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Назад',
+                    'completed-batches'       => 'Общее Количество Выполненных Партий:',
+                    'download-error-report'   => 'Скачать Полный Отчет',
+                    'edit-btn'                => 'Редактировать',
+                    'imported-info'           => 'Поздравляем! Ваш импорт прошел успешно.',
+                    'importing-info'          => 'Импорт в процессе',
+                    'indexing-info'           => 'Индексация Ресурсов (Цены, Инвентаризация и Elasticsearch) В процессе',
+                    'linking-info'            => 'Связывание Ресурсов В процессе',
+                    'progress'                => 'Прогресс:',
+                    'title'                   => 'Импорт',
+                    'total-batches'           => 'Общее Количество Партий:',
+                    'total-created'           => 'Общее Количество Созданных Записей:',
+                    'total-deleted'           => 'Общее Количество Удаленных Записей:',
+                    'total-errors'            => 'Общее Количество Ошибок:',
+                    'total-invalid-rows'      => 'Общее Количество Недопустимых Строк:',
+                    'total-rows-processed'    => 'Общее Количество Обработанных Строк:',
+                    'total-updated'           => 'Общее Количество Обновленных Записей:',
+                    'validate-info'           => 'Нажмите на Проверить Данные, чтобы проверить ваш импорт.',
+                    'validate'                => 'Проверить',
+                    'validating-info'         => 'Данные начали чтение и Валидацию',
+                    'validation-failed-info'  => 'Ваш импорт невалиден. Пожалуйста, исправьте следующие ошибки и попробуйте снова.',
+                    'validation-success-info' => 'Ваш импорт валиден. Нажмите на Импорт, чтобы начать процесс импорта.',
+                ],
+
+                'create-success'    => 'Импорт создан успешно.',
+                'delete-failed'     => 'Не удалось удалить импорт неожиданно.',
+                'delete-success'    => 'Импорт удален успешно.',
+                'not-valid'         => 'Импорт невалиден',
+                'nothing-to-import' => 'Нет ресурсов для импорта.',
+                'setup-queue-error' => 'Пожалуйста, измените драйвер очереди на "база данных" или "redis", чтобы начать процесс импорта.',
+                'update-success'    => 'Импорт обновлен успешно.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Создать обменный курс',
                 'exchange-rate' => 'Обменный курс',
@@ -2362,7 +2466,7 @@ return [
             'update-success'    => 'Источники инвентаря успешно обновлены',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Вы уверены, что хотите удалить?',
@@ -3487,11 +3591,13 @@ return [
                 'currencies'               => 'Валюты',
                 'customers'                => 'Клиенты',
                 'dashboard'                => 'Панель управления',
+                'data-transfer'            => 'Обмен данными',
                 'discount'                 => 'Скидка',
                 'email-templates'          => 'Шаблоны электронных писем',
                 'events'                   => 'События',
                 'exchange-rates'           => 'Обменные курсы',
                 'groups'                   => 'Группы',
+                'imports'                  => 'Импорт',
                 'inventory-sources'        => 'Источники инвентаризации',
                 'invoices'                 => 'Счета',
                 'locales'                  => 'Локали',
@@ -3685,24 +3791,27 @@ return [
         'campaigns'                => 'Кампании',
         'cancel'                   => 'Отмена',
         'cart-rules'               => 'Правила корзины',
-        'catalog'                  => 'Каталог',
         'catalog-rules'            => 'Правила каталога',
+        'catalog'                  => 'Каталог',
         'categories'               => 'Категории',
         'channels'                 => 'Каналы',
         'cms'                      => 'CMS',
         'communications'           => 'Коммуникации',
         'configure'                => 'Настроить',
         'copy'                     => 'Копировать',
-        'create'                   => 'Добавить',
+        'create'                   => 'Создавать',
         'currencies'               => 'Валюты',
         'customers'                => 'Клиенты',
         'dashboard'                => 'Панель управления',
+        'data-transfer'            => 'Обмен данными',
         'delete'                   => 'Удалить',
         'edit'                     => 'Изменить',
         'email-templates'          => 'Шаблоны электронных писем',
         'events'                   => 'События',
         'exchange-rates'           => 'Курсы обмена',
         'groups'                   => 'Группы',
+        'import'                   => 'Импортировать',
+        'imports'                  => 'Импорт',
         'inventory-sources'        => 'Источники инвентаря',
         'invoices'                 => 'Счета',
         'locales'                  => 'Локали',

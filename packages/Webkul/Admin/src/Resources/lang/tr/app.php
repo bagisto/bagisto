@@ -986,7 +986,7 @@ return [
                 'add-btn' => 'Kategori Oluştur',
                 'title'   => 'Kategoriler',
 
-                'datagrid'=> [
+                'datagrid' => [
                     'active'            => 'Aktif',
                     'delete'            => 'Sil',
                     'delete-success'    => 'Seçilen :resource başarıyla silindi',
@@ -1001,7 +1001,7 @@ return [
                 ],
             ],
 
-            'create'=> [
+            'create' => [
                 'add-banner'               => 'Banner Ekle',
                 'add-logo'                 => 'Logo Ekle',
                 'back-btn'                 => 'Geri',
@@ -2159,7 +2159,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Yerel Oluştur',
                 'locale'     => 'Yerel',
@@ -2201,7 +2201,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'title'      => 'Para Birimleri',
                 'create-btn' => 'Para Birimi Oluştur',
@@ -2244,7 +2244,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Aksiyon',
+                    'allowed-errors'      => 'İzin Verilen Hatalar',
+                    'back-btn'            => 'Geri',
+                    'create-update'       => 'Oluştur/Güncelle',
+                    'delete'              => 'Sil',
+                    'download-sample'     => 'Örnek İndir',
+                    'field-separator'     => 'Alan Ayracı',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar project-root/storage/import/app/urun-resimleri klasörüne yerleştirilmelidir.',
+                    'file-info'           => 'project-root/storage/import/app klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file'                => 'Dosya',
+                    'general'             => 'Genel',
+                    'images-directory'    => 'Resim Klasör Yolu',
+                    'process-in-queue'    => 'Sıra İşlemesi',
+                    'results'             => 'Sonuçlar',
+                    'save-btn'            => 'Kaydet Import',
+                    'settings'            => 'Ayarlar',
+                    'skip-errors'         => 'Hataları Atla',
+                    'stop-on-errors'      => 'Hatalara Dur',
+                    'title'               => 'Import Oluştur',
+                    'type'                => 'Tür',
+                    'validation-strategy' => 'Doğrulama Yaklaşımı',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Aksiyon',
+                    'allowed-errors'      => 'İzin Verilen Hatalar',
+                    'back-btn'            => 'Geri',
+                    'create-update'       => 'Oluştur/Güncelle',
+                    'delete'              => 'Sil',
+                    'download-sample'     => 'Örnek İndir',
+                    'field-separator'     => 'Alan Ayracı',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar project-root/storage/import/app/urun-resimleri klasörüne yerleştirilmelidir.',
+                    'file-info'           => 'project-root/storage/import/app klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file'                => 'Dosya',
+                    'general'             => 'Genel',
+                    'images-directory'    => 'Resim Klasör Yolu',
+                    'process-in-queue'    => 'Sıra İşlemesi',
+                    'results'             => 'Sonuçlar',
+                    'save-btn'            => 'Kaydet Import',
+                    'settings'            => 'Ayarlar',
+                    'skip-errors'         => 'Hataları Atla',
+                    'stop-on-errors'      => 'Hatalara Dur',
+                    'title'               => 'Import Düzenle',
+                    'type'                => 'Tür',
+                    'validation-strategy' => 'Doğrulama Yaklaşımı',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Import Oluştur',
+                    'title'        => 'Importlar',
+
+                    'datagrid' => [
+                        'actions'       => 'Eylemler',
+                        'completed-at'  => 'Tamamlandı İçin',
+                        'created'       => 'Oluşturuldu',
+                        'delete'        => 'Sil',
+                        'deleted'       => 'Silindi',
+                        'edit'          => 'Düzenle',
+                        'error-file'    => 'Hata Dosyası',
+                        'id'            => 'ID',
+                        'started-at'    => 'Başladı',
+                        'state'         => 'Durum',
+                        'summary'       => 'Özet',
+                        'updated'       => 'Güncellendi',
+                        'uploaded-file' => 'Yüklenen Dosya',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Geri',
+                    'completed-batches'       => 'Toplam Tamamlanan Batches:',
+                    'download-error-report'   => 'Tam Hata Raporu İndir',
+                    'edit-btn'                => 'Düzenle',
+                    'imported-info'           => 'Tebrikler! Import işlemi başarıyla gerçekleşti.',
+                    'importing-info'          => 'Import İşlemi Devam Ediyor',
+                    'indexing-info'           => 'Ürün Fiyatı, Stok ve Elastik Arama İndekslemesi Devam Ediyor',
+                    'linking-info'            => 'Ürün Bağlantısı Devam Ediyor',
+                    'progress'                => 'İlerleme:',
+                    'title'                   => 'Import',
+                    'total-batches'           => 'Toplam Batches:',
+                    'total-created'           => 'Toplam Kayıt Oluşturuldu:',
+                    'total-deleted'           => 'Toplam Kayıt Silindi:',
+                    'total-errors'            => 'Toplam Hatalar:',
+                    'total-invalid-rows'      => 'Toplam Geçersiz Satırlar:',
+                    'total-rows-processed'    => 'Toplam İşlenen Satırlar:',
+                    'total-updated'           => 'Toplam Kayıt Güncellendi:',
+                    'validate-info'           => 'Doğrulama Verilerine Tıklayarak importunuzu kontrol edin.',
+                    'validate'                => 'Doğrula',
+                    'validating-info'         => 'Veriler okundu ve Doğrulanıyor',
+                    'validation-failed-info'  => 'Importunuz geçersiz. Aşağıdaki hataları düzeltin ve tekrar deneyin.',
+                    'validation-success-info' => 'Importunuz geçerli. Import işlemini başlatmak için Tıklayın.',
+                ],
+
+                'create-success'    => 'Import başarıyla oluşturuldu.',
+                'delete-failed'     => 'Import silinirken beklenmedik bir hata oluştu.',
+                'delete-success'    => 'Import başarıyla silindi.',
+                'not-valid'         => 'Import geçersiz',
+                'nothing-to-import' => 'İçe aktarmak için kaynak yok.',
+                'setup-queue-error' => 'Import işlemi için "database" veya "redis" olarak kuyruk sürücünü değiştirin.',
+                'update-success'    => 'Import başarıyla güncellendi.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Döviz Kuru Oluştur',
                 'exchange-rate' => 'Döviz Kuru',
@@ -2363,7 +2469,7 @@ return [
             'update-success'    => 'Envanter Kaynakları Başarıyla Güncellendi',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Silmek istediğinizden emin misiniz?',
@@ -3487,11 +3593,13 @@ return [
                 'currencies'               => 'Para Birimleri',
                 'customers'                => 'Müşteriler',
                 'dashboard'                => 'Kontrol Paneli',
+                'data-transfer'            => 'Veri aktarımı',
                 'discount'                 => 'İndirim',
                 'email-templates'          => 'E-posta Şablonları',
                 'events'                   => 'Etkinlikler',
                 'exchange-rates'           => 'Döviz Kurları',
                 'groups'                   => 'Gruplar',
+                'imports'                  => 'İthalat',
                 'inventory-sources'        => 'Envanter Kaynakları',
                 'invoices'                 => 'Faturalar',
                 'locales'                  => 'Yerel Ayarlar',
@@ -3685,24 +3793,27 @@ return [
         'campaigns'                => 'Kampanyalar',
         'cancel'                   => 'İptal',
         'cart-rules'               => 'Sepet Kuralları',
-        'catalog'                  => 'Katalog',
         'catalog-rules'            => 'Katalog Kuralları',
+        'catalog'                  => 'Katalog',
         'categories'               => 'Kategoriler',
         'channels'                 => 'Kanallar',
         'cms'                      => 'İçerik Yönetim Sistemi',
         'communications'           => 'İletişim',
         'configure'                => 'Yapılandır',
         'copy'                     => 'Kopyala',
-        'create'                   => 'Ekle',
+        'create'                   => 'Yaratmak',
         'currencies'               => 'Para Birimleri',
         'customers'                => 'Müşteriler',
         'dashboard'                => 'Kontrol Paneli',
+        'data-transfer'            => 'Veri aktarımı',
         'delete'                   => 'Sil',
         'edit'                     => 'Düzenle',
         'email-templates'          => 'E-posta Şablonları',
         'events'                   => 'Etkinlikler',
         'exchange-rates'           => 'Döviz Kurları',
         'groups'                   => 'Gruplar',
+        'import'                   => 'İçe aktarmak',
+        'imports'                  => 'İthalat',
         'inventory-sources'        => 'Envanter Kaynakları',
         'invoices'                 => 'Faturalar',
         'locales'                  => 'Yerel Ayarlar',

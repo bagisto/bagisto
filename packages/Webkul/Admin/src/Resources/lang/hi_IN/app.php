@@ -2158,7 +2158,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'स्थान बनाएं (Create Locale)',
                 'locale'     => 'स्थान (Locale)',
@@ -2200,7 +2200,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'मुद्रा बनाएं',
                 'currency'   => 'मुद्रा',
@@ -2243,7 +2243,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Action',
+                    'allowed-errors'      => 'अनुमatiत त्रुटियाँ',
+                    'back-btn'            => 'पिछला',
+                    'create-update'       => 'बनाए�/अपडेट करे',
+                    'delete'              => 'मिटाए',
+                    'download-sample'     => 'उदाहरण डाउनलोड करे',
+                    'field-separator'     => 'फ़ील्ड अलगाव',
+                    'file-info-example'   => 'उदाहरण के लिए, प्रोडक्ट-इमेज्स के लिए फाइलें प्रोजेक्ट-रूट/स्टोरेज/इम्पोर्ट/app/प्रोडक्ट-इमेज्स फोल्डर में रखे जाएं।',
+                    'file-info'           => 'प्रोजेक्ट-रूट/स्टोरेज/इम्पोर्ट/app के साथ साथ रिलेटिव पथ का उपयोग करें, उदाहरण के लिए प्रोडक्ट-इमेज्स, इम्पोर्ट-इमेज्स।',
+                    'file'                => 'फ़ाइल',
+                    'general'             => 'सामान्य',
+                    'images-directory'    => 'छवियों का डायरेक्टरी पथ',
+                    'process-in-queue'    => 'क्वीज में प्रक्रिया करे',
+                    'results'             => 'نति',
+                    'save-btn'            => 'आयात सहेजे',
+                    'settings'            => 'सेटिंग्स',
+                    'skip-errors'         => 'त्रुटियों को छोड़े',
+                    'stop-on-errors'      => 'त्रुटि पर रोके',
+                    'title'               => 'आयात बनाएँ',
+                    'type'                => 'प्रकार',
+                    'validation-strategy' => 'वेरिफाई स्ट्रेटेजी',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Action',
+                    'allowed-errors'      => 'अनुमatiत त्रुटियाँ',
+                    'back-btn'            => 'पिछला',
+                    'create-update'       => 'बनाए�/अपडेट करे',
+                    'delete'              => 'मिटाए',
+                    'download-sample'     => 'उदाहरण डाउनलोड करे',
+                    'field-separator'     => 'फ़ील्ड अलगाव',
+                    'file-info-example'   => 'उदाहरण के लिए, प्रोडक्ट-इमेज्स के लिए फाइलें प्रोजेक्ट-रूट/स्टोरेज/इम्पोर्ट/app/प्रोडक्ट-इमेज्स फोल्डर में रखे जाएं।',
+                    'file-info'           => 'प्रोजेक्ट-रूट/स्टोरेज/इम्पोर्ट/app के साथ साथ रिलेटिव पथ का उपयोग करें, उदाहरण के लिए प्रोडक्ट-इमेज्स, इम्पोर्ट-इमेज्स।',
+                    'file'                => 'फ़ाइल',
+                    'general'             => 'सामान्य',
+                    'images-directory'    => 'छवियों का डायरेक्टरी पथ',
+                    'process-in-queue'    => 'क्वीज में प्रक्रिया करे',
+                    'results'             => 'नति',
+                    'save-btn'            => 'आयात सहेजे',
+                    'settings'            => 'सेटिंग्स',
+                    'skip-errors'         => 'त्रुटियों को छोड़े',
+                    'stop-on-errors'      => 'त्रुटि पर रोके',
+                    'title'               => 'आयात संपादित करें',
+                    'type'                => 'प्रकार',
+                    'validation-strategy' => 'वेरिफाई स्ट्रेटेजी',
+                ],
+
+                'index'             => [
+                    'button-title' => 'आयात बनाएँ',
+                    'title'        => 'आयात',
+
+                    'datagrid' => [
+                        'actions'       => 'कार्रवाई',
+                        'completed-at'  => 'पूरा कर दिया गया है',
+                        'created'       => 'बनाया गया',
+                        'delete'        => 'मिटाए',
+                        'deleted'       => 'मिटाया गया',
+                        'edit'          => 'संपादित करे',
+                        'error-file'    => 'त्रुटि फ़ाइल',
+                        'id'            => 'आईडी',
+                        'started-at'    => ' Shuru किया गया',
+                        'state'         => 'राज्य',
+                        'summary'       => 'सारांश',
+                        'updated'       => 'अपडेट किया गया',
+                        'uploaded-file' => 'अपलोड फ़ाइल',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'वापस',
+                    'completed-batches'       => 'पूरे बैचेस:',
+                    'download-error-report'   => 'पूरा रिपोर्ट डाउनलोड करे',
+                    'edit-btn'                => 'संपादित करे',
+                    'imported-info'           => 'आपका आयात सफलतापूर्वक सफल हुआ है।',
+                    'importing-info'          => 'आयात प्रक्रिया चल रही है',
+                    'indexing-info'           => 'राइस इंडेक्सिंग (Price, Inventory और Elastic Search) चल रहा है',
+                    'linking-info'            => 'राइस लिंकिंग चल रहा है',
+                    'progress'                => 'प्रगति:',
+                    'title'                   => 'आयात',
+                    'total-batches'           => 'कुल बैचेस:',
+                    'total-created'           => 'कुल रिकॉर्ड बनाए गए:',
+                    'total-deleted'           => 'कुल रिकॉर्ड मिटाए गए:',
+                    'total-errors'            => 'कुल त्रुटियाँ:',
+                    'total-invalid-rows'      => 'कुल अमान्य पंक्तियाँ:',
+                    'total-rows-processed'    => 'कुल प्रक्रिया की गई पंक्तियाँ:',
+                    'total-updated'           => 'कुल रिकॉर्ड अपडेट किए गए:',
+                    'validate-info'           => 'अपना आयात जांचने के लिए डेटा वेरिफाई क्लिक करें।',
+                    'validate'                => 'वेरिफाई',
+                    'validating-info'         => 'डेटा पढ़ना और वेरिफाई शुरू कर दिया गया है',
+                    'validation-failed-info'  => 'आपका आयात अमान्य है। कृपया निम्नलिखित त्रुटियों को सुधारें और प्रयास करें।',
+                    'validation-success-info' => 'आपका आयात सही है। आयात प्रक्रिया शुरू करने के लिए आयात क्लिक करें।',
+                ],
+
+                'create-success'    => 'आयात सफलतापूर्वक बनाया गया।',
+                'delete-failed'     => 'आयात हटाने में अनxpectedly विफल रहा।',
+                'delete-success'    => 'आयात सफलतापूर्वक हटा दिया गया।',
+                'not-valid'         => 'आयात अमान्य है',
+                'nothing-to-import' => 'आयात के लिए कोई रिसोर्स नहीं है।',
+                'setup-queue-error' => 'आयात प्रक्रिया शुरू करने के लिए "database" या "redis" के रूप में अपना क्वीज ड्राइवर बदलें।',
+                'update-success'    => 'आयात सफलतापूर्वक अपडेट किया गया।',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'विनिमय दर बनाएं',
                 'exchange-rate' => 'विनिमय दर',
@@ -2362,7 +2468,7 @@ return [
             'update-success'    => 'स्टॉक स्रोत सफलतापूर्वक अपडेट किया गया',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'क्या आप वाकई हटाना चाहते हैं?',
@@ -3487,11 +3593,13 @@ return [
                 'currencies'               => 'मुद्राएँ',
                 'customers'                => 'ग्राहक',
                 'dashboard'                => 'डैशबोर्ड',
+                'data-transfer'            => 'डेटा स्थानांतरण',
                 'discount'                 => 'डिस्काउंट',
                 'email-templates'          => 'ईमेल टेम्पलेट्स',
                 'events'                   => 'इवेंट्स',
                 'exchange-rates'           => 'विनिमय दरें',
                 'groups'                   => 'समूह',
+                'imports'                  => 'आयात',
                 'inventory-sources'        => 'सूची स्रोत',
                 'invoices'                 => 'चालान',
                 'locales'                  => 'स्थान',
@@ -3686,24 +3794,27 @@ return [
         'campaigns'                => 'कैंपेन्स',
         'cancel'                   => 'रद्द करें',
         'cart-rules'               => 'कार्ट नियम',
-        'catalog'                  => 'कैटलॉग',
         'catalog-rules'            => 'कैटलॉग नियम',
+        'catalog'                  => 'कैटलॉग',
         'categories'               => 'श्रेणियाँ',
         'channels'                 => 'चैनल्स',
         'cms'                      => 'सीएमएस',
         'communications'           => 'संचालन',
         'configure'                => 'कॉन्फ़िगर करें',
         'copy'                     => 'कॉपी करें',
-        'create'                   => 'जोड़ें',
+        'create'                   => 'बनाएं',
         'currencies'               => 'मुद्राएँ',
         'customers'                => 'ग्राहकों',
         'dashboard'                => 'डैशबोर्ड',
+        'data-transfer'            => 'डेटा स्थानांतरण',
         'delete'                   => 'हटाएँ',
         'edit'                     => 'संपादित करें',
         'email-templates'          => 'ईमेल टेम्पलेट्स',
         'events'                   => 'घटनाएँ',
         'exchange-rates'           => 'विनिमय दरें',
         'groups'                   => 'समूह',
+        'import'                   => 'आयात',
+        'imports'                  => 'आयात',
         'inventory-sources'        => 'सूची स्रोत',
         'invoices'                 => 'चालान',
         'locales'                  => 'स्थान',

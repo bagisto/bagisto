@@ -3,6 +3,7 @@
 namespace Webkul\Core\Eloquent;
 
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Helpers\Locales;
 
@@ -46,5 +47,16 @@ class TranslatableModel extends Model
     protected function isChannelBased()
     {
         return false;
+    }
+
+    public function scopeWhereTranslationIn(Builder $query, string $translationField, $value, ?string $locale = null, string $method = 'whereHas')
+    {
+        return $query->$method('translations', function (Builder $query) use ($translationField, $value, $locale) {
+            $query->whereIn($this->getTranslationsTable().'.'.$translationField, $value);
+
+            if ($locale) {
+                $query->whereIn($this->getTranslationsTable().'.'.$this->getLocaleKey(), $locale);
+            }
+        });
     }
 }

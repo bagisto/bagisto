@@ -24,6 +24,7 @@ class ProductCustomerGroupPrice extends Model implements ProductCustomerGroupPri
         'value',
         'product_id',
         'customer_group_id',
+        'unique_id',
     ];
 
     /**

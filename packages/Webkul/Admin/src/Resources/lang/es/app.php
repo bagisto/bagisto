@@ -2158,7 +2158,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Crear Idioma',
                 'locale'     => 'Idioma',
@@ -2200,7 +2200,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Crear Moneda',
                 'currency'   => 'Moneda',
@@ -2243,7 +2243,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Acción',
+                    'allowed-errors'      => 'Errores Permitidos',
+                    'back-btn'            => 'Volver',
+                    'create-update'       => 'Crear/Actualizar',
+                    'delete'              => 'Eliminar',
+                    'download-sample'     => 'Descargar Muestra',
+                    'field-separator'     => 'Separador de Campos',
+                    'file-info-example'   => 'Por ejemplo, en caso de imágenes de productos, los archivos deben ubicarse en /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Usar la ruta relativa a /project-root/storage/import/app, por ejemplo, product-images, import-images.',
+                    'file'                => 'Archivo',
+                    'general'             => 'General',
+                    'images-directory'    => 'Ruta del Directorio de Imágenes',
+                    'process-in-queue'    => 'Procesar en Cola',
+                    'results'             => 'Resultados',
+                    'save-btn'            => 'Guardar Importación',
+                    'settings'            => 'Configuraciones',
+                    'skip-errors'         => 'Saltar Errores',
+                    'stop-on-errors'      => 'Detener en Errores',
+                    'title'               => 'Crear Importación',
+                    'type'                => 'Tipo',
+                    'validation-strategy' => 'Estrategia de Validación',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Acción',
+                    'allowed-errors'      => 'Errores Permitidos',
+                    'back-btn'            => 'Volver',
+                    'create-update'       => 'Crear/Actualizar',
+                    'delete'              => 'Eliminar',
+                    'download-sample'     => 'Descargar Muestra',
+                    'field-separator'     => 'Separador de Campos',
+                    'file-info-example'   => 'Por ejemplo, en caso de imágenes de productos, los archivos deben ubicarse en /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Usar la ruta relativa a /project-root/storage/import/app, por ejemplo, product-images, import-images.',
+                    'file'                => 'Archivo',
+                    'general'             => 'General',
+                    'images-directory'    => 'Ruta del Directorio de Imágenes',
+                    'process-in-queue'    => 'Procesar en Cola',
+                    'results'             => 'Resultados',
+                    'save-btn'            => 'Guardar Importación',
+                    'settings'            => 'Configuraciones',
+                    'skip-errors'         => 'Saltar Errores',
+                    'stop-on-errors'      => 'Detener en Errores',
+                    'title'               => 'Editar Importación',
+                    'type'                => 'Tipo',
+                    'validation-strategy' => 'Estrategia de Validación',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Crear Importación',
+                    'title'        => 'Importaciones',
+
+                    'datagrid'     => [
+                        'actions'       => 'Acciones',
+                        'completed-at'  => 'Completado en',
+                        'created'       => 'Creado',
+                        'delete'        => 'Eliminar',
+                        'deleted'       => 'Eliminado',
+                        'edit'          => 'Editar',
+                        'error-file'    => 'Archivo de Error',
+                        'id'            => 'ID',
+                        'started-at'    => 'Iniciado en',
+                        'state'         => 'Estado',
+                        'summary'       => 'Resumen',
+                        'updated'       => 'Actualizado',
+                        'uploaded-file' => 'Archivo Subido',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Volver',
+                    'completed-batches'       => 'Total de Lotes Completados:',
+                    'download-error-report'   => 'Descargar Informe Completo',
+                    'edit-btn'                => 'Editar',
+                    'imported-info'           => '¡Felicidades! Tu importación fue exitosa.',
+                    'importing-info'          => 'Importando en Proceso',
+                    'indexing-info'           => 'Indexación de Recursos (Precio, Inventario y Búsqueda Elástica) en Progreso',
+                    'linking-info'            => 'Vinculación de Recursos en Progreso',
+                    'progress'                => 'Progreso:',
+                    'title'                   => 'Importación',
+                    'total-batches'           => 'Total de Lotes:',
+                    'total-created'           => 'Total de Registros Creados:',
+                    'total-deleted'           => 'Total de Registros Eliminados:',
+                    'total-errors'            => 'Total de Errores:',
+                    'total-invalid-rows'      => 'Total de Filas No Válidas:',
+                    'total-rows-processed'    => 'Total de Filas Procesadas:',
+                    'total-updated'           => 'Total de Registros Actualizados:',
+                    'validate-info'           => 'Haz clic en Validar Datos para verificar tu importación.',
+                    'validate'                => 'Validar',
+                    'validating-info'         => 'Los datos están siendo leídos y validados',
+                    'validation-failed-info'  => 'Tu importación no es válida. Por favor, corrige los siguientes errores e intenta nuevamente.',
+                    'validation-success-info' => 'Tu importación es válida. Haz clic en Importar para comenzar el proceso de importación.',
+                ],
+
+                'create-success'    => 'Importación creada exitosamente.',
+                'delete-failed'     => 'Error inesperado al eliminar la importación.',
+                'delete-success'    => 'Importación eliminada exitosamente.',
+                'not-valid'         => 'La importación no es válida',
+                'nothing-to-import' => 'No hay recursos para importar.',
+                'setup-queue-error' => 'Por favor, cambia tu controlador de cola a "database" o "redis" para iniciar el proceso de importación.',
+                'update-success'    => 'Importación actualizada exitosamente.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Crear Tipo de Cambio',
                 'exchange-rate' => 'Tipo de Cambio',
@@ -2362,7 +2468,7 @@ return [
             'update-success'    => 'Fuentes de Inventario actualizadas exitosamente',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => '¿Estás seguro de que deseas eliminar?',
@@ -3487,11 +3593,13 @@ return [
                 'currencies'               => 'Monedas',
                 'customers'                => 'Clientes',
                 'dashboard'                => 'Panel de Control',
+                'data-transfer'            => 'Transferencia de datos',
                 'discount'                 => 'Descuento',
                 'email-templates'          => 'Plantillas de Correo Electrónico',
                 'events'                   => 'Eventos',
                 'exchange-rates'           => 'Tasas de Cambio',
                 'groups'                   => 'Grupos',
+                'imports'                  => 'Importaciones',
                 'inventory-sources'        => 'Fuentes de Inventario',
                 'invoices'                 => 'Facturas',
                 'locales'                  => 'Localizaciones',
@@ -3685,24 +3793,27 @@ return [
         'campaigns'                => 'Campañas',
         'cancel'                   => 'Cancelar',
         'cart-rules'               => 'Reglas del Carrito',
-        'catalog'                  => 'Catálogo',
         'catalog-rules'            => 'Reglas del Catálogo',
+        'catalog'                  => 'Catálogo',
         'categories'               => 'Categorías',
         'channels'                 => 'Canales',
         'cms'                      => 'CMS',
         'communications'           => 'Comunicaciones',
         'configure'                => 'Configurar',
         'copy'                     => 'Copiar',
-        'create'                   => 'Agregar',
+        'create'                   => 'crear',
         'currencies'               => 'Monedas',
         'customers'                => 'Clientes',
         'dashboard'                => 'Tablero',
+        'data-transfer'            => 'Transferencia de datos',
         'delete'                   => 'Eliminar',
         'edit'                     => 'Editar',
         'email-templates'          => 'Plantillas de Correo Electrónico',
         'events'                   => 'Eventos',
         'exchange-rates'           => 'Tasas de Cambio',
         'groups'                   => 'Grupos',
+        'import'                   => 'Importar',
+        'imports'                  => 'Importaciones',
         'inventory-sources'        => 'Fuentes de Inventario',
         'invoices'                 => 'Facturas',
         'locales'                  => 'Idiomas',
