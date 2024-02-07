@@ -43,6 +43,10 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .icon-checkout-address:before {
+        content: "\e944";
+    }
+
     .icon-edit:before {
         content: "\e943";
     }
@@ -218,7 +222,6 @@
     .icon-minus:before {
         content: "\e92a";
     }
-
     .icon-more:before {
         content: "\e92b";
         color: #7d7d7d;
@@ -272,7 +275,6 @@
         content: "\e937";
         color: #7d7d7d;
     }
-
     .icon-star-fill:before {
         content: "\e938";
     }
@@ -296,7 +298,6 @@
     .icon-toast-error:before {
         content: "\e93d";
     }
-
     .icon-toast-exclamation-mark:before {
         content: "\e93e";
     }

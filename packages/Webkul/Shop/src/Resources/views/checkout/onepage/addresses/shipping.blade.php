@@ -83,16 +83,20 @@
                                 @click="showNewShippingAddressForm"
                             >
                                 <div
-                                    class="flex gap-x-2.5 items-center"
+                                    class="items-center text-center"
                                     role="button"
                                     tabindex="0"
                                 >
-                                    <span
-                                        class="icon-plus p-2.5 text-3xl  border border-black rounded-full"
-                                        role="presentation"
-                                    ></span>
+                                    <div class="py-2.5">
+                                        <span
+                                            class="icon-plus p-2.5 border border-black rounded-full text-3xl"
+                                            role="presentation"
+                                        ></span>
+                                    </div>
 
-                                    <p class="text-base">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
+                                    <p class="text-base font-medium">
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')
+                                    </p>
                                 </div>
                             </div>
                         </div>

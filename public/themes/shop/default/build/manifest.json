@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-0a99a8e0.css",
+    "file": "assets/app-cc7a4a8c.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-shop.woff": {
-    "file": "assets/bagisto-shop-56e72ed0.woff",
+    "file": "assets/bagisto-shop-5afe0d07.woff",
     "src": "src/Resources/assets/fonts/bagisto-shop.woff"
   },
   "src/Resources/assets/images/cash-on-delivery.png": {

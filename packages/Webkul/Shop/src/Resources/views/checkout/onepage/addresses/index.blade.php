@@ -81,6 +81,8 @@
 
                     isAddressLoading: true,
 
+                    tempId: 1,
+
                     isCustomer: "{{ auth()->guard('customer')->check() }}",
 
                     isTempAddress: false,
@@ -194,21 +196,36 @@
 
                 handleBillingAddressForm() {
                     if (! this.forms.billing.address.isSaved) {
+                        this.forms.billing.isEdit = false;
+
                         this.forms.billing.isNew = false;
 
                         this.isTempAddress = true;
 
-                        this.addresses.billing.push({
-                            ...this.forms.billing.address,
-                            isSaved: false,
-                        });
+                        let foundIndex =  this.addresses.billing.findIndex(item => item.id === this.forms.billing.address.id);
+
+                        if (foundIndex !== -1) {
+                            this.addresses.billing[foundIndex] = { 
+                                ...this.forms.billing.address,
+                                isSaved: false,
+                            };  
+                        } else {
+                            if (! this.isCustomer) {
+                                this.forms.billing.address['id'] = 'guest_' + this.tempId++;
+                            }
+
+                            this.addresses.billing.push({
+                                ...this.forms.billing.address,
+                                isSaved: false,
+                            });
+                        }
                     }
 
                     this.forms.billing.address['address1'] = [this.forms.billing.address.address1];
 
                     this.forms.billing.address['address2'] = [this.forms.billing.address.address2 ?? ''];
 
-                    if (this.forms.billing.isEdit) {
+                    if (this.forms.billing.isEdit && this.forms.billing.address.isSaved) {
                         this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.billing.address)
                             .then(response => {
                                 this.forms.billing.isNew = false;
@@ -220,7 +237,7 @@
                             .catch(error => {                 
                                 console.log(error);
                             });
-                    } else {
+                    } else if (this.forms.billing.isNew && this.forms.billing.address.isSaved) {
                         this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
                             .then(response => {
                                 this.forms.billing.isNew = false;

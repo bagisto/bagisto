@@ -57,7 +57,7 @@
                                 :for="'billing_address_id_' + address.id"
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
-                                <span class="icon-flate-rate text-6xl text-navyBlue"></span>
+                                <span class="icon-checkout-address text-6xl text-navyBlue"></span>
 
                                 <div class="flex justify-between items-center">
                                     <p class="text-base font-medium">
@@ -92,16 +92,18 @@
                             @click="showNewBillingAddressForm"
                         >
                             <div
-                                class="flex gap-x-2.5 items-center"
+                                class="items-center text-center"
                                 role="button"
                                 tabindex="0"
                             >
-                                <span
-                                    class="icon-plus p-2.5 border border-black rounded-full text-3xl"
-                                    role="presentation"
-                                ></span>
+                                <div class="py-2.5">
+                                    <span
+                                        class="icon-plus p-2.5 border border-black rounded-full text-3xl"
+                                        role="presentation"
+                                    ></span>
+                                </div>
 
-                                <p class="text-base">
+                                <p class="text-base font-medium">
                                     @lang('shop::app.checkout.onepage.addresses.billing.add-new-address')
                                 </p>
                             </div>
