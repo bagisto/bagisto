@@ -56,6 +56,8 @@ class OnepageController extends APIController
 
         $data['shipping']['address1'] = implode(PHP_EOL, $data['shipping']['address1']);
 
+        unset($data['billing']['id'], $data['billing']['address_id']);
+
         if (
             Cart::hasError()
             || ! Cart::saveCustomerAddress($data)

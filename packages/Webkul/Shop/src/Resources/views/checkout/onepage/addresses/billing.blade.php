@@ -308,7 +308,7 @@
                                 type="text"
                                 name="billing[address1][]"
                                 rules="required|address"
-                                v-model="forms.billing.address.address1"
+                                v-model="forms.billing.address.address1[0]"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                             />
@@ -319,13 +319,15 @@
                             />
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="billing[address2][]"
-                                    v-model="forms.billing.address.address2"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                />
+                                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
+                                    <x-shop::form.control-group.control
+                                        type="text"
+                                        name="billing[address1][{{ $i }}]"
+                                        v-model="forms.billing.address.address1[{{$i}}]"
+                                        :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                    />
+                                @endfor
                             @endif
                         </x-shop::form.control-group>
     

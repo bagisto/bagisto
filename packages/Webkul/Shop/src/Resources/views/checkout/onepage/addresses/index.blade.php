@@ -189,7 +189,12 @@
 
                     this.forms.billing.isNew = true;
 
-                    this.forms.billing.address = params;
+                    this.forms.billing.address = {
+                        ...params,
+                        address1: [params.address1, params.address2]
+                    };
+
+                    delete this.forms.billing.address.address2;
 
                     this.resetPaymentAndShippingMethod();
                 },
@@ -202,28 +207,45 @@
 
                         this.isTempAddress = true;
 
-                        let foundIndex =  this.addresses.billing.findIndex(item => item.id === this.forms.billing.address.id);
+                        let foundIndex = this.addresses.billing.findIndex(item => item.id === this.forms.billing.address.id);
+
+                        let updatedAddress = {
+                            ...this.forms.billing.address,
+                            isSaved: false,
+                        };
 
                         if (foundIndex !== -1) {
-                            this.addresses.billing[foundIndex] = { 
-                                ...this.forms.billing.address,
-                                isSaved: false,
-                            };  
+                            this.addresses.billing[foundIndex] = updatedAddress;
                         } else {
-                            if (! this.isCustomer) {
-                                this.forms.billing.address['id'] = 'guest_' + this.tempId++;
+                            if (!this.isCustomer) {
+                                updatedAddress.id = 'guest_' + this.tempId++;
                             }
 
-                            this.addresses.billing.push({
-                                ...this.forms.billing.address,
-                                isSaved: false,
-                            });
+                            this.addresses.billing.push(updatedAddress);
                         }
                     }
 
-                    this.forms.billing.address['address1'] = [this.forms.billing.address.address1];
+                    if (! this.forms.billing.address.isSaved) {
+                        this.forms.billing.isEdit = false;
+                        this.forms.billing.isNew = false;
+                        this.isTempAddress = true;
 
-                    this.forms.billing.address['address2'] = [this.forms.billing.address.address2 ?? ''];
+                        let foundIndex = this.addresses.billing.findIndex(item => item.id === this.forms.billing.address.id);
+
+                        let updatedAddress = {
+                            ...this.forms.billing.address,
+                            isSaved: false,
+                        };
+
+                        if (foundIndex !== -1) {
+                            this.addresses.billing[foundIndex] = updatedAddress;
+                        } else {
+                            if (!this.isCustomer) {
+                                updatedAddress.id = 'guest_' + this.tempId++;
+                            }
+                            this.addresses.billing.push(updatedAddress);
+                        }
+                    }
 
                     if (this.forms.billing.isEdit && this.forms.billing.address.isSaved) {
                         this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", this.forms.billing.address)
