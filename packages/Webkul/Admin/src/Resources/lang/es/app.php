@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Cliente <b>Notificado</b>',
                 'discount'              => 'Descuento - :discount',
                 'download-pdf'          => 'Descargar PDF',
+                'fraud'                 => 'Fraude',
                 'grand-total'           => 'Total General - :grand_total',
                 'invoice-id'            => 'Factura #:invoice',
                 'invoices'              => 'Facturas',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Pago y Envío',
                 'payment-method'        => 'Método de Pago',
                 'pending'               => 'Pendiente',
+                'pending_payment'       => 'Pago pendiente',
                 'per-unit'              => 'Por Unidad',
                 'price'                 => 'Precio - :price',
                 'processing'            => 'Procesando',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Die :attribute darf nicht größer als :max Kilobyte sein. Bitte wählen Sie eine kleinere Datei aus.',
                     'info'  => 'El tamaño máximo del video debe ser de aproximadamente :size',
                     'title' => 'Videos',
                 ],
@@ -2512,16 +2515,6 @@ return [
                     'button-title' => 'Crear tasa de impuestos',
                     'tax-rate'     => 'Tasa de Impuestos',
                     'title'        => 'Tasas de Impuestos',
-
-                    'import' => [
-                        'duplicate-error'  => 'El identificador debe ser único, identificador duplicado :identifier en la fila :position.',
-                        'enough-row-error' => 'El archivo no tiene suficientes filas',
-                        'import-btn'       => 'Importar',
-                        'title'            => 'Subir',
-                        'upload-error'     => 'El archivo debe ser de tipo: xls, xlsx, csv.',
-                        'upload-success'   => 'Tasa de impuesto cargada con éxito',
-                        'validation'       => 'Tipo permitido: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'País',

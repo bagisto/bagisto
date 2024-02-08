@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Customer <b>Notified</b>',
                 'discount'              => 'Discount - :discount',
                 'download-pdf'          => 'Download PDF',
+                'fraud'                 => 'Fraud',
                 'grand-total'           => 'Grand Total - :grand_total',
                 'invoice-id'            => 'Invoice #:invoice',
                 'invoices'              => 'Invoices',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Payment and Shipping',
                 'payment-method'        => 'Payment method',
                 'pending'               => 'Pending',
+                'pending_payment'       => 'Pending Payment',
                 'per-unit'              => 'Per Unit',
                 'price'                 => 'Price - :price',
                 'processing'            => 'Processing',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'The :attribute may not be greater than :max kilobytes. Please choose a smaller file.',
                     'info'  => 'Maximum video size should be like :size',
                     'title' => 'Videos',
                 ],
@@ -2512,16 +2515,6 @@ return [
                     'button-title' => 'Create Tax Rate',
                     'tax-rate'     => 'Tax Rate',
                     'title'        => 'Tax Rates',
-
-                    'import' => [
-                        'duplicate-error'  => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
-                        'enough-row-error' => 'file has not enough rows',
-                        'import-btn'       => 'Import',
-                        'title'            => 'Upload',
-                        'upload-error'     => 'The file must be a file of type: xls, xlsx, csv.',
-                        'upload-success'   => 'Tax Rate Uploaded successfully',
-                        'validation'       => 'Allowed Type : xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Country',

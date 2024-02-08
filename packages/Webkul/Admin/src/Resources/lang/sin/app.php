@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | පාරිභෝගිකයා <b> කටින් කියාපාදුනා</b>',
                 'discount'              => 'වට්ටම - :discount',
                 'download-pdf'          => 'PDF බාගත කරන්න',
+                'fraud'                 => 'වංචාව',
                 'grand-total'           => 'සාමාජික සාමාජිකය - :grand_total',
                 'invoice-id'            => 'කාර්තු #:invoice',
                 'invoices'              => 'කාර්තු',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'ගෙවීම සහ නාවිකාව',
                 'payment-method'        => 'ගෙවීමේ ක්රමය',
                 'pending'               => 'අපේක්ෂක',
+                'pending_payment'       => 'පොරොත්තු ගෙවීම',
                 'per-unit'              => 'එකට',
                 'price'                 => 'මිල - :price',
                 'processing'            => 'සැකසීම',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute එක :max කිලෝබයිට් ට වඩා වැඩි නොවිය හැක. කරුණාකර කුඩා ගොනුවක් තෝරන්න.',
                     'title' => 'වීඩියෝ',
                     'info'  => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
                 ],
@@ -2512,16 +2515,6 @@ return [
                     'button-title' => 'වර්ගය සාදන්නා ගාණන්',
                     'tax-rate'     => 'බදා අනුපාත',
                     'title'        => 'බදා අනුපාත',
-
-                    'import' => [
-                        'duplicate-error'  => 'හැඳුනුම්කරු විවෘත විය යුතුය, පේළිය:position හි අනුපාත හැඳුනුම්කරු :identifier.',
-                        'enough-row-error' => 'ගොනුවේ සුලු පේළියෙන් පසු සහිත විස්තර නොමැත',
-                        'import-btn'       => 'ආයුක්ත',
-                        'title'            => 'උඩුගත',
-                        'upload-error'     => 'ගොනුවේ වර්ගය: xls, xlsx, csv යෙදී හෝදින් හැකි යැයි විය හැක.',
-                        'upload-success'   => 'බදු අනුවාදය සාර්ථකව උඩුගත වී ඇත',
-                        'validation'       => 'ඉඩ දෙන වර්ගය: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'රට',

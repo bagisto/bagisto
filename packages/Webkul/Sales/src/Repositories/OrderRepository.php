@@ -248,7 +248,7 @@ class OrderRepository extends Repository
      * Is order in cancelled state.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
-     * @return void
+     * @return bool
      */
     public function isInCanceledState($order)
     {
@@ -266,7 +266,7 @@ class OrderRepository extends Repository
      * Is order in closed state.
      *
      * @param  mixed  $order
-     * @return void
+     * @return bool
      */
     public function isInClosedState($order)
     {

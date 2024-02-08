@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | <b>הלקוח התראה</b>',
                 'discount'              => 'הנחה - :discount',
                 'download-pdf'          => 'הורד PDF',
+                'fraud'                 => 'הונאה',
                 'grand-total'           => 'סכום כולל - :grand_total',
                 'invoice-id'            => 'חשבונית #:invoice',
                 'invoices'              => 'חשבוניות',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'תשלום ומשלוח',
                 'payment-method'        => 'אמצעי תשלום',
                 'pending'               => 'ממתין',
+                'pending_payment'       => 'ממתין לתשלום',
                 'per-unit'              => 'ליחידה',
                 'price'                 => 'מחיר - :price',
                 'processing'            => 'בעיבוד',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'שגיאה: גודל :attribute לא יכול להיות גדול מ-:max קילובייטים. בבקשה בחר קובץ קטן יותר.',
                     'info'  => 'גודל הווידאו המרבי צריך להיות כמו :size',
                     'title' => 'וידאו',
                 ],
@@ -2512,16 +2515,6 @@ return [
                     'button-title' => 'צור שיעור מס',
                     'tax-rate'     => 'שער מס',
                     'title'        => 'שערי מס',
-
-                    'import' => [
-                        'duplicate-error'  => 'הזהות חייבת להיות ייחודית, זהות כפולה :identifier בשורה :position.',
-                        'enough-row-error' => 'הקובץ אינו מכיל מספיק שורות',
-                        'import-btn'       => 'ייבא',
-                        'title'            => 'העלאה',
-                        'upload-error'     => 'הקובץ חייב להיות מסוג: xls, xlsx, csv.',
-                        'upload-success'   => 'שיעור המס הועלה בהצלחה',
-                        'validation'       => 'סוגים מותרים: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'מדינה',
