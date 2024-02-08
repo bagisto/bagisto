@@ -49,6 +49,10 @@ class CartController extends APIController
      */
     public function store(): JsonResource
     {
+        $this->validate(request(), [
+            'product_id' => 'required|integer|exists:products,id',
+        ]);
+
         try {
             $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
 
@@ -106,6 +110,10 @@ class CartController extends APIController
      */
     public function destroy(): JsonResource
     {
+        $this->validate(request(), [
+            'cart_item_id' => 'required|exists:cart_items,id',
+        ]);
+
         Cart::removeItem(request()->input('cart_item_id'));
 
         Cart::collectTotals();
@@ -170,11 +178,13 @@ class CartController extends APIController
      */
     public function storeCoupon()
     {
-        $couponCode = request()->input('code');
+        $validatedData = $this->validate(request(), [
+            'code' => 'required',
+        ]);
 
         try {
-            if (strlen($couponCode)) {
-                $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
+            if (strlen($validatedData['code'])) {
+                $coupon = $this->cartRuleCouponRepository->findOneByField('code', $validatedData['code']);
 
                 if (! $coupon) {
                     return (new JsonResource([
@@ -184,16 +194,16 @@ class CartController extends APIController
                 }
 
                 if ($coupon->cart_rule->status) {
-                    if (Cart::getCart()->coupon_code == $couponCode) {
+                    if (Cart::getCart()->coupon_code == $validatedData['code']) {
                         return (new JsonResource([
                             'data'     => new CartResource(Cart::getCart()),
                             'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
                         ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                     }
 
-                    Cart::setCouponCode($couponCode)->collectTotals();
+                    Cart::setCouponCode($validatedData['code'])->collectTotals();
 
-                    if (Cart::getCart()->coupon_code == $couponCode) {
+                    if (Cart::getCart()->coupon_code == $validatedData['code']) {
                         return new JsonResource([
                             'data'     => new CartResource(Cart::getCart()),
                             'message'  => trans('shop::app.checkout.cart.coupon.success-apply'),

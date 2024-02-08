@@ -14,7 +14,7 @@ class LoginRequest extends FormRequest
      */
     private $rules = [
         'email'    => 'required|email',
-        'password' => 'required',
+        'password' => 'required|min:6',
     ];
 
     /**
@@ -29,20 +29,16 @@ class LoginRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return Captcha::getValidations($this->rules);
     }
 
     /**
      * Get custom messages for validator errors.
-     *
-     * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return Captcha::getValidationMessages();
     }

@@ -36,6 +36,18 @@ it('should returns the edit page of the customer', function () {
         ->assertSeeText(trans('shop::app.customers.account.profile.edit-profile'));
 });
 
+it('should fails the validations error when certain inputs are not provided when update the customer', function () {
+    // Act and Assert
+    $this->loginAsCustomer();
+
+    postJson(route('shop.customers.account.profile.store'))
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('gender')
+        ->assertJsonValidationErrorFor('phone')
+        ->assertUnprocessable();
+});
+
 it('should update the customer', function () {
     // Act and Assert
     $customer = $this->loginAsCustomer();
@@ -64,6 +76,15 @@ it('should update the customer', function () {
             ],
         ],
     ]);
+});
+
+it('should fails the validation error when password is not provided when delete the customer account', function () {
+    // Act and Assert
+    $this->loginAsCustomer();
+
+    postJson(route('shop.customers.account.profile.destroy'))
+        ->assertJsonValidationErrorFor('password')
+        ->assertUnprocessable();
 });
 
 it('should delete the customer account', function () {
@@ -164,6 +185,22 @@ it('should returns the create page of address', function () {
         ->assertSeeText(trans('shop::app.customers.account.addresses.company-name'));
 });
 
+it('should fails the validation error when certain inputs not provided when store the customer address', function () {
+    // Act and Assert
+    $this->loginAsCustomer();
+
+    postJson(route('shop.customers.account.addresses.store'))
+        ->assertJsonValidationErrorFor('city')
+        ->assertJsonValidationErrorFor('phone')
+        ->assertJsonValidationErrorFor('state')
+        ->assertJsonValidationErrorFor('country')
+        ->assertJsonValidationErrorFor('address1')
+        ->assertJsonValidationErrorFor('postcode')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertUnprocessable();
+});
+
 it('should store the customer address', function () {
     // Act and Assert
     $customer = $this->loginAsCustomer();
@@ -219,6 +256,28 @@ it('should edit the customer address', function () {
         ->assertSeeText(trans('shop::app.customers.account.addresses.edit'))
         ->assertSeeText(trans('shop::app.customers.account.addresses.title'))
         ->assertSeeText(trans('shop::app.customers.account.addresses.save'));
+});
+
+it('should fails the validation error when certain inputs not provided update the customer address', function () {
+    $customer = Customer::factory()->create();
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+    ]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    putJson(route('shop.customers.account.addresses.update', $customerAddress->id))
+        ->assertJsonValidationErrorFor('city')
+        ->assertJsonValidationErrorFor('phone')
+        ->assertJsonValidationErrorFor('state')
+        ->assertJsonValidationErrorFor('country')
+        ->assertJsonValidationErrorFor('address1')
+        ->assertJsonValidationErrorFor('postcode')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertUnprocessable();
 });
 
 it('should update the customer address', function () {

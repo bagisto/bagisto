@@ -14,7 +14,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
-it('should store the index page customers orders', function () {
+it('should returns the index page customers orders', function () {
     // Act and Assert
     $this->loginAsCustomer();
 
