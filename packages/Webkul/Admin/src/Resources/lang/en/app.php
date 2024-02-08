@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Tax Rate',
                     'title'        => 'Tax Rates',
 
-                    'import' => [
-                        'duplicate-error'  => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
-                        'enough-row-error' => 'file has not enough rows',
-                        'import-btn'       => 'Import',
-                        'title'            => 'Upload',
-                        'upload-error'     => 'The file must be a file of type: xls, xlsx, csv.',
-                        'upload-success'   => 'Tax Rate Uploaded successfully',
-                        'validation'       => 'Allowed Type : xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Country',
                         'delete'     => 'Delete',

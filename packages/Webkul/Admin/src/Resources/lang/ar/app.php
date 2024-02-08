@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'سعر الضريبة',
                     'title'        => 'أسعار الضرائب',
 
-                    'import' => [
-                        'duplicate-error'  => 'يجب أن يكون المعرف فريدًا ، معرف مكرر :identifier في الصف :position.',
-                        'enough-row-error' => 'الملف لا يحتوي على عدد كافٍ من الصفوف',
-                        'import-btn'       => 'استيراد',
-                        'title'            => 'تحميل',
-                        'upload-error'     => 'يجب أن يكون الملف من النوع: xls، xlsx، csv.',
-                        'upload-success'   => 'تم تحميل معدل الضريبة بنجاح',
-                        'validation'       => 'الأنواع المسموح بها: xls، xlsx، csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'البلد',
                         'delete'     => 'حذف',

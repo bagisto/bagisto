@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Belastingtarief',
                     'title'        => 'Belastingtarieven',
 
-                    'import' => [
-                        'duplicate-error'  => 'Identificatie moet uniek zijn, dubbele identificatie :identifier in rij :position.',
-                        'enough-row-error' => 'Bestand heeft niet genoeg rijen',
-                        'import-btn'       => 'Importeren',
-                        'title'            => 'Uploaden',
-                        'upload-error'     => 'Het bestand moet van het type: xls, xlsx, csv zijn.',
-                        'upload-success'   => 'Belastingtarief succesvol geüpload',
-                        'validation'       => 'Toegestane type: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Land',
                         'delete'     => 'Verwijderen',

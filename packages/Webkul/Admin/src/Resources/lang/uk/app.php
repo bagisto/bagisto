@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Податкова ставка',
                     'title'        => 'Податкові ставки',
 
-                    'import' => [
-                        'duplicate-error'  => 'Ідентифікатор повинен бути унікальним, дубльований ідентифікатор :identifier в рядку :position.',
-                        'enough-row-error' => 'Файл не має достатньо рядків',
-                        'import-btn'       => 'Імпорт',
-                        'title'            => 'Завантажити',
-                        'upload-error'     => 'Файл повинен бути файлом типу: xls, xlsx, csv.',
-                        'upload-success'   => 'Ставка податку успішно завантажена',
-                        'validation'       => 'Дозволений тип: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Країна',
                         'delete'     => 'Видалити',

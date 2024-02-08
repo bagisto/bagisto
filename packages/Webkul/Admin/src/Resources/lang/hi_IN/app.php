@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'कर दर',
                     'title'        => 'कर दरें',
 
-                    'import' => [
-                        'duplicate-error'  => 'पहचानकर्ता अद्वितीय होना चाहिए, पंक्ति:position पर दोहरा पहचानकर्ता :identifier।',
-                        'enough-row-error' => 'फ़ाइल में पर्याप्त पंक्तियाँ नहीं हैं',
-                        'import-btn'       => 'आयात करें',
-                        'title'            => 'अपलोड',
-                        'upload-error'     => 'फ़ाइल का प्रकार: xls, xlsx, csv होना चाहिए।',
-                        'upload-success'   => 'कर दर सफलतापूर्वक अपलोड हो गई है',
-                        'validation'       => 'अनुमत टाइप: xls, xlsx, csv।',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'देश',
                         'delete'     => 'हटाएं',

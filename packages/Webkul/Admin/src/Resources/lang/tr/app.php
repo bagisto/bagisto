@@ -2514,16 +2514,6 @@ return [
                     'tax-rate'     => 'Vergi Oranı',
                     'title'        => 'Vergi Oranları',
 
-                    'import' => [
-                        'duplicate-error'  => 'Kimlik benzersiz olmalı, satır :position\'da tekrarlanan kimlik :identifier.',
-                        'enough-row-error' => 'Dosyada yeterli satır yok',
-                        'import-btn'       => 'İçe Aktar',
-                        'title'            => 'Yükle',
-                        'upload-error'     => 'Dosya tipi: xls, xlsx, csv olmalıdır.',
-                        'upload-success'   => 'Vergi Oranı Başarıyla Yüklendi',
-                        'validation'       => 'İzin verilen Tür: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Ülke',
                         'delete'     => 'Sil',

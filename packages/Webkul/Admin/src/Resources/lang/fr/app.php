@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Taux de taxe',
                     'title'        => 'Taux de taxe',
 
-                    'import' => [
-                        'duplicate-error'  => "L'identifiant doit être unique, identifiant en double :identifier à la ligne :position.",
-                        'enough-row-error' => 'Le fichier n\'a pas assez de lignes',
-                        'import-btn'       => 'Importer',
-                        'title'            => 'Télécharger',
-                        'upload-error'     => 'Le fichier doit être de type : xls, xlsx, csv.',
-                        'upload-success'   => 'Taux de taxe téléchargé avec succès',
-                        'validation'       => 'Types autorisés : xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Pays',
                         'delete'     => 'Supprimer',

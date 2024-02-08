@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Aliquota Fiscale',
                     'title'        => 'Aliquote Fiscali',
 
-                    'import' => [
-                        'duplicate-error'  => 'L\'identificatore deve essere unico, identificatore duplicato :identifier alla riga :position.',
-                        'enough-row-error' => 'Il file non ha abbastanza righe',
-                        'import-btn'       => 'Importa',
-                        'title'            => 'Carica',
-                        'upload-error'     => 'Il file deve essere di tipo: xls, xlsx, csv.',
-                        'upload-success'   => 'Tasso di imposta caricato con successo',
-                        'validation'       => 'Tipo consentito: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Paese',
                         'delete'     => 'Elimina',

@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Stawka Podatku',
                     'title'        => 'Stawki Podatków',
 
-                    'import' => [
-                        'duplicate-error'  => 'Identyfikator musi być unikalny, zduplikowany identyfikator :identifier w wierszu :position.',
-                        'enough-row-error' => 'Plik nie ma wystarczającej liczby wierszy',
-                        'import-btn'       => 'Importuj',
-                        'title'            => 'Wgraj',
-                        'upload-error'     => 'Plik musi być plikiem typu: xls, xlsx, csv.',
-                        'upload-success'   => 'Stawka podatku została pomyślnie załadowana',
-                        'validation'       => 'Dozwolony typ: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Kraj',
                         'delete'     => 'Usuń',
