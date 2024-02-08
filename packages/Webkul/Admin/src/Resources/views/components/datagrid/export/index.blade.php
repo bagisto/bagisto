@@ -14,9 +14,11 @@
             <x-admin::modal ref="exportModal">
                 <!-- Modal Toggle -->
                 <x-slot:toggle>
-                    <div class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
+                    <button class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white">
+                        <span class="icon-export text-xl text-gray-600"></span>
+                                        
                         @lang('admin::app.export.export')
-                    </div>
+                    </button>
                 </x-slot>
 
                 <!-- Modal Header -->
@@ -29,7 +31,7 @@
                 <!-- Modal Content -->
                 <x-slot:content>
                     <x-admin::form action="">
-                        <x-admin::form.control-group>
+                        <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="format"

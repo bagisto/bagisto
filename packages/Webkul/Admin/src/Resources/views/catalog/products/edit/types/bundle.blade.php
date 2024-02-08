@@ -1,5 +1,10 @@
 @php
-    $options = $product->bundle_options()->with(['product','bundle_option_products','bundle_option_products.product.inventory_indices','bundle_option_products.product.images'])->get();
+    $options = $product->bundle_options()->with([
+        'product',
+        'bundle_option_products',
+        'bundle_option_products.product.inventory_indices',
+        'bundle_option_products.product.images',
+    ])->get();
 @endphp
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.before', ['product' => $product]) !!}
