@@ -14,7 +14,6 @@ class CustomerGroupController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
      * @return void
      */
     public function __construct(protected CustomerGroupRepository $customerGroupRepository)

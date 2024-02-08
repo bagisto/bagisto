@@ -15,7 +15,6 @@ class ReviewController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
     public function __construct(protected ProductReviewRepository $productReviewRepository)
