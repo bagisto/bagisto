@@ -283,14 +283,13 @@ class Order extends Model implements OrderContract
      */
     public function canShip(): bool
     {
-        if ($this->status === self::STATUS_FRAUD) {
-            return false;
-        }
-
         foreach ($this->items as $item) {
             if (
                 $item->canShip()
-                && $item->order->status !== self::STATUS_CLOSED
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
@@ -304,14 +303,13 @@ class Order extends Model implements OrderContract
      */
     public function canInvoice(): bool
     {
-        if ($this->status === self::STATUS_FRAUD) {
-            return false;
-        }
-
         foreach ($this->items as $item) {
             if (
                 $item->canInvoice()
-                && $item->order->status !== self::STATUS_CLOSED
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
@@ -341,26 +339,7 @@ class Order extends Model implements OrderContract
      */
     public function canCancel(): bool
     {
-        if (
-            $this->payment->method == 'cashondelivery'
-            && core()->getConfigData('sales.payment_methods.cashondelivery.generate_invoice')
-        ) {
-            return false;
-        }
-
-        if (
-            $this->payment->method == 'moneytransfer'
-            && core()->getConfigData('sales.payment_methods.moneytransfer.generate_invoice')
-        ) {
-            return false;
-        }
-
-        if ($this->status === self::STATUS_FRAUD) {
-            return false;
-        }
-
-        $pendingInvoice = $this->invoices->where('state', 'pending')
-            ->first();
+        $pendingInvoice = $this->invoices->where('state', 'pending')->first();
 
         if ($pendingInvoice) {
             return true;
@@ -369,7 +348,10 @@ class Order extends Model implements OrderContract
         foreach ($this->items as $item) {
             if (
                 $item->canCancel()
-                && $item->order->status !== self::STATUS_CLOSED
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
@@ -383,21 +365,13 @@ class Order extends Model implements OrderContract
      */
     public function canRefund(): bool
     {
-        if ($this->status === self::STATUS_FRAUD) {
-            return false;
-        }
-
-        $pendingInvoice = $this->invoices->where('state', 'pending')
-            ->first();
-
-        if ($pendingInvoice) {
-            return false;
-        }
-
         foreach ($this->items as $item) {
             if (
                 $item->qty_to_refund > 0
-                && $item->order->status !== self::STATUS_CLOSED
+                && ! in_array($item->order->status, [
+                    self::STATUS_CLOSED,
+                    self::STATUS_FRAUD,
+                ])
             ) {
                 return true;
             }
