@@ -3,15 +3,22 @@
 namespace Webkul\DataTransfer\Helpers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
+use Webkul\DataTransfer\Helpers\Sources\AbstractSource;
 use Webkul\DataTransfer\Helpers\Sources\CSV as CSVSource;
+use Webkul\DataTransfer\Helpers\Sources\Excel as ExcelSource;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\DataTransfer\Repositories\ImportRepository;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Import
 {
@@ -105,7 +112,7 @@ class Import
     }
 
     /**
-     * Import instance.
+     * Set import instance.
      */
     public function setImport(ImportContract $import): self
     {
@@ -115,7 +122,7 @@ class Import
     }
 
     /**
-     * Import instance.
+     * Returns import instance.
      */
     public function getImport(): ImportContract
     {
@@ -123,7 +130,7 @@ class Import
     }
 
     /**
-     * Import instance.
+     * Returns error helper instance.
      *
      * @return \Webkul\DataTransfer\Helpers\Error
      */
@@ -133,15 +140,32 @@ class Import
     }
 
     /**
+     * Returns source helper instance.
+     */
+    public function getSource(): AbstractSource
+    {
+        if (Str::contains($this->import->file_path, '.csv')) {
+            $source = new CSVSource(
+                $this->import->file_path,
+                $this->import->field_separator,
+            );
+        } else {
+            $source = new ExcelSource(
+                $this->import->file_path,
+                $this->import->field_separator,
+            );
+        }
+
+        return $source;
+    }
+
+    /**
      * Validates import and returns validation result
      */
     public function validate(): bool
     {
         try {
-            $source = new CSVSource(
-                $this->import->file_path,
-                $this->import->field_separator,
-            );
+            $source = $this->getSource();
 
             $typeImporter = $this->getTypeImporter()->setSource($source);
 
@@ -427,21 +451,35 @@ class Import
             return null;
         }
 
-        $errorReportPath = 'imports/'.time().'-error-report.csv';
+        /**
+         * Return null if there are no invalid rows
+         */
+        if (! $this->errorHelper->getInvalidRowsCount()) {
+            return null;
+        }
 
-        $handle = fopen(Storage::disk('private')->path($errorReportPath), 'a');
+        $errors = $this->errorHelper->getAllErrors();
 
         $source = $this->getTypeImporter()->getSource();
 
-        $columns = array_merge($source->getColumnNames(), [
-            'error',
-        ]);
-
-        fputcsv($handle, $columns, $this->import->field_separator);
-
         $source->rewind();
 
-        $errors = $this->errorHelper->getAllErrors();
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        /**
+         * Add headers with extra error column
+         */
+        $sheet->fromArray(
+            [array_merge($source->getColumnNames(), [
+                'error',
+            ])],
+            null,
+            'A1'
+        );
+
+        $rowNumber = 2;
 
         while ($source->valid()) {
             try {
@@ -452,24 +490,46 @@ class Import
                 continue;
             }
 
-            $rowNumber = $source->getCurrentRowNumber();
-
-            $rowErrors = [];
-
-            if (isset($errors[$rowNumber])) {
-                $rowErrors = Arr::pluck($errors[$rowNumber], 'message');
+            $rowErrors = $errors[$source->getCurrentRowNumber()] ?? [];
+            
+            if (! empty($rowErrors)) {
+                $rowErrors = Arr::pluck($rowErrors, 'message');
             }
 
             $rowData[] = implode('|', $rowErrors);
 
-            fputcsv($handle, $rowData, $this->import->field_separator);
+            $sheet->fromArray([$rowData], null, 'A' . $rowNumber++);
 
             $source->next();
         }
 
-        fclose($handle);
+        $fileType = pathinfo($this->import->file_path, PATHINFO_EXTENSION);
 
-        return $errorReportPath;
+        switch ($fileType) {
+            case 'csv':
+                $writer = new Csv($spreadsheet);
+
+                $writer->setDelimiter($this->import->field_separator);
+
+                break;
+
+            case 'xls':
+                $writer = new Xls($spreadsheet);
+
+            case 'xlsx':
+                $writer = new Xlsx($spreadsheet);
+
+                break;
+
+            default:
+                throw new \InvalidArgumentException("Unsupported file type: $fileType");
+        }
+
+        $errorFilePath = 'imports/'.time().'-error-report.'.$fileType;
+
+        $writer->save(Storage::disk('private')->path($errorFilePath));
+
+        return $errorFilePath;
     }
 
     /**

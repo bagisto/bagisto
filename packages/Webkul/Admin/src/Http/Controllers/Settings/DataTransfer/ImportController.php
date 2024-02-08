@@ -62,7 +62,7 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'required|mimes:csv,txt',
+            'file'                => 'required|mimes:csv,xls,xlsx,txt',
         ]);
 
         Event::dispatch('data_transfer.imports.create.before');
@@ -133,7 +133,7 @@ class ImportController extends Controller
             'validation_strategy' => 'required:in:stop-on-errors,skip-errors',
             'allowed_errors'      => 'required|integer|min:0',
             'field_separator'     => 'required',
-            'file'                => 'mimes:csv,txt',
+            'file'                => 'mimes:csv,xls,xlsx,txt',
         ]);
 
         Event::dispatch('data_transfer.imports.update.before');
@@ -282,7 +282,10 @@ class ImportController extends Controller
             ], 400);
         }
 
-        if (config('queue.default') == 'sync') {
+        if (
+            $import->process_in_queue
+            && config('queue.default') == 'sync'
+        ) {
             return new JsonResponse([
                 'message' => trans('admin::app.settings.data-transfer.imports.setup-queue-error'),
             ], 400);
