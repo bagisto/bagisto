@@ -599,6 +599,7 @@ return [
                 ],
 
                 'images' => [
+                    'error' => 'Błąd: :attribute nie może być większy niż :max kilobajtów. Proszę wybrać mniejszy plik.',
                     'info'  => 'A resolução da imagem deve ser de cerca de 560px X 609px',
                     'title' => 'Obrazy',
                 ],

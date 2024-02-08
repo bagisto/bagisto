@@ -20,6 +20,13 @@ class ProductForm extends FormRequest
     protected $rules;
 
     /**
+     * Max video upload size.
+     *
+     * @var int
+     */
+    protected $maxVideoFileSize;
+
+    /**
      * Create a new form request instance.
      *
      * @return void
@@ -28,6 +35,7 @@ class ProductForm extends FormRequest
         protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository
     ) {
+        $this->maxVideoFileSize = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048';
     }
 
     /**
@@ -49,14 +57,12 @@ class ProductForm extends FormRequest
     {
         $product = $this->productRepository->find($this->id);
 
-        $maxVideoFileSize = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?: '2048';
-
         $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku'                  => ['required', 'unique:products,sku,'.$this->id, new Slug],
             'url_key'              => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*'       => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*'   => ['nullable', 'integer'],
-            'videos.files.*'       => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:'.$maxVideoFileSize],
+            'videos.files.*'       => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:'.$this->maxVideoFileSize],
             'videos.positions.*'   => ['nullable', 'integer'],
             'special_price_from'   => ['nullable', 'date'],
             'special_price_to'     => ['nullable', 'date', 'after_or_equal:special_price_from'],
@@ -141,6 +147,7 @@ class ProductForm extends FormRequest
     {
         return [
             'variants.*.sku.unique' => __('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
+            'videos.files.*'        => __('admin::app.catalog.products.edit.videos.error', ['max' => $this->maxVideoFileSize]),
         ];
     }
 

@@ -19,8 +19,9 @@
         name="videos[files]"
         :allow-multiple="true"
         :uploaded-videos="$product->videos"
-    >
-    </x-admin::media.videos>
+    />
+
+    <x-admin::form.control-group.error control-name='videos.files[0]' />
 </div>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.videos.after', ['product' => $product]) !!}

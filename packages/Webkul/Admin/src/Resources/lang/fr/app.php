@@ -604,6 +604,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Erreur : La taille de :attribute ne doit pas dépasser :max kilo-octets. Veuillez choisir un fichier plus petit.',
                     'info'  => 'La taille maximale de la vidéo doit être d\'environ :size',
                     'title' => 'Vidéos',
                 ],
