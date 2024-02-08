@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
-                    'import' => [
-                        'duplicate-error'  => '識別子はユニークでなければなりません、行:positionで重複する識別子 :identifier。',
-                        'enough-row-error' => 'ファイルに十分な行がありません',
-                        'import-btn'       => 'インポート',
-                        'title'            => 'アップロード',
-                        'upload-error'     => 'ファイルの種類は: xls、xlsx、csvでなければなりません。',
-                        'upload-success'   => '税率が正常にアップロードされました',
-                        'validation'       => '許可されたタイプ: xls、xlsx、csv。',
-                    ],
-
                     'datagrid' => [
                         'country'    => '国',
                         'delete'     => '削除',

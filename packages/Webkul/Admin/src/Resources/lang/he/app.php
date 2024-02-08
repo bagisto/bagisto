@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'שער מס',
                     'title'        => 'שערי מס',
 
-                    'import' => [
-                        'duplicate-error'  => 'הזהות חייבת להיות ייחודית, זהות כפולה :identifier בשורה :position.',
-                        'enough-row-error' => 'הקובץ אינו מכיל מספיק שורות',
-                        'import-btn'       => 'ייבא',
-                        'title'            => 'העלאה',
-                        'upload-error'     => 'הקובץ חייב להיות מסוג: xls, xlsx, csv.',
-                        'upload-success'   => 'שיעור המס הועלה בהצלחה',
-                        'validation'       => 'סוגים מותרים: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'מדינה',
                         'delete'     => 'מחק',

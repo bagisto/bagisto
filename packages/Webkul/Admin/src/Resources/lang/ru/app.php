@@ -2511,16 +2511,6 @@ return [
                     'tax-rate'     => 'Налоговая ставка',
                     'title'        => 'Налоговые ставки',
 
-                    'import' => [
-                        'duplicate-error'  => 'Идентификатор должен быть уникальным, дублирующийся идентификатор :identifier в строке :position.',
-                        'enough-row-error' => 'Файл не содержит достаточно строк',
-                        'import-btn'       => 'Импорт',
-                        'title'            => 'Загрузка',
-                        'upload-error'     => 'Файл должен быть файлом типа: xls, xlsx, csv.',
-                        'upload-success'   => 'Ставка налога успешно загружена',
-                        'validation'       => 'Разрешенный тип: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Страна',
                         'delete'     => 'Удалить',

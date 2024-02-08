@@ -2512,16 +2512,6 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
-                    'import' => [
-                        'duplicate-error'  => '标识符必须是唯一的，在行 :position 重复标识符 :identifier。',
-                        'enough-row-error' => '文件没有足够的行',
-                        'import-btn'       => '导入',
-                        'title'            => '上传',
-                        'upload-error'     => '文件必须是类型：xls、xlsx、csv。',
-                        'upload-success'   => '税率成功上传',
-                        'validation'       => '允许的类型：xls、xlsx、csv。',
-                    ],
-
                     'datagrid' => [
                         'country'    => '国家',
                         'delete'     => '删除',

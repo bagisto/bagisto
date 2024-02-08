@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Tasa de Impuestos',
                     'title'        => 'Tasas de Impuestos',
 
-                    'import' => [
-                        'duplicate-error'  => 'El identificador debe ser único, identificador duplicado :identifier en la fila :position.',
-                        'enough-row-error' => 'El archivo no tiene suficientes filas',
-                        'import-btn'       => 'Importar',
-                        'title'            => 'Subir',
-                        'upload-error'     => 'El archivo debe ser de tipo: xls, xlsx, csv.',
-                        'upload-success'   => 'Tasa de impuesto cargada con éxito',
-                        'validation'       => 'Tipo permitido: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'País',
                         'delete'     => 'Eliminar',

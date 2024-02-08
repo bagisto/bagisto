@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'نرخ مالیات',
                     'title'        => 'نرخ‌های مالیاتی',
 
-                    'import' => [
-                        'duplicate-error'  => 'شناسه باید یکتا باشد، شناسه تکراری :identifier در ردیف :position.',
-                        'enough-row-error' => 'تعداد کافی از ردیف‌ها در فایل وجود ندارد',
-                        'import-btn'       => 'وارد کردن',
-                        'title'            => 'آپلود',
-                        'upload-error'     => 'فایل باید از نوع: xls، xlsx، csv باشد.',
-                        'upload-success'   => 'نرخ مالیات با موفقیت آپلود شد',
-                        'validation'       => 'انواع مجاز: xls، xlsx، csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'کشور',
                         'delete'     => 'حذف',

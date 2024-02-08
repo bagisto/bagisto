@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'Steuersatz',
                     'title'        => 'Steuersätze',
 
-                    'import' => [
-                        'duplicate-error'  => 'Kennung muss eindeutig sein, doppelte Kennung :identifier in Zeile :position.',
-                        'enough-row-error' => 'Die Datei enthält nicht genügend Zeilen',
-                        'import-btn'       => 'Importieren',
-                        'title'            => 'Hochladen',
-                        'upload-error'     => 'Die Datei muss vom Typ sein: xls, xlsx, csv.',
-                        'upload-success'   => 'Steuersatz erfolgreich hochgeladen',
-                        'validation'       => 'Erlaubter Typ: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Land',
                         'delete'     => 'Löschen',

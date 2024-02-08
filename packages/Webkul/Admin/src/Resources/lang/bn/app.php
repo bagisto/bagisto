@@ -2513,16 +2513,6 @@ return [
                     'tax-rate'     => 'কর হার',
                     'title'        => 'কর হার',
 
-                    'import' => [
-                        'duplicate-error'  => 'পুনরায় চিহ্নিত অবশ্যই অদ্বিতীয়, সারি: অবস্থানে চিহ্নিত অদ্বিতীয় হতে হবে।',
-                        'enough-row-error' => 'ফাইলে যথেষ্ট সারি নেই',
-                        'import-btn'       => 'আমদানি',
-                        'title'            => 'আপলোড',
-                        'upload-error'     => 'ফাইল একটি ধরন: xls, xlsx, csv হতে হবে।',
-                        'upload-success'   => 'কর হার সফলভাবে আপলোড হয়েছে',
-                        'validation'       => 'অনুমোদিত প্রকার: xls, xlsx, csv।',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'দেশ',
                         'delete'     => 'মুছে ফেলুন',
