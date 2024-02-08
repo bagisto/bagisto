@@ -3,8 +3,8 @@
 namespace Webkul\DataTransfer\Helpers\Sources;
 
 use Illuminate\Support\Facades\Storage;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class Excel extends AbstractSource
 {
@@ -31,7 +31,7 @@ class Excel extends AbstractSource
             $this->reader = $factory->getActiveSheet();
 
             $highestColumn = $this->reader->getHighestColumn();
-            
+
             $this->totalColumns = Coordinate::columnIndexFromString($highestColumn);
 
             $this->columnNames = $this->getNextRow();
@@ -45,7 +45,7 @@ class Excel extends AbstractSource
      */
     protected function getNextRow(): array|bool
     {
-        for ($column = 1; $column <= $this->totalColumns; ++$column) {
+        for ($column = 1; $column <= $this->totalColumns; $column++) {
             $rowData[] = $this->reader->getCellByColumnAndRow($column, $this->currentRowNumber)->getValue();
         }
 

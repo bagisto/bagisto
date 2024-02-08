@@ -3,10 +3,14 @@
 namespace Webkul\DataTransfer\Helpers;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Webkul\DataTransfer\Contracts\Import as ImportContract;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
@@ -15,10 +19,6 @@ use Webkul\DataTransfer\Helpers\Sources\CSV as CSVSource;
 use Webkul\DataTransfer\Helpers\Sources\Excel as ExcelSource;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\DataTransfer\Repositories\ImportRepository;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Csv;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Import
 {
@@ -491,14 +491,14 @@ class Import
             }
 
             $rowErrors = $errors[$source->getCurrentRowNumber()] ?? [];
-            
+
             if (! empty($rowErrors)) {
                 $rowErrors = Arr::pluck($rowErrors, 'message');
             }
 
             $rowData[] = implode('|', $rowErrors);
 
-            $sheet->fromArray([$rowData], null, 'A' . $rowNumber++);
+            $sheet->fromArray([$rowData], null, 'A'.$rowNumber++);
 
             $source->next();
         }
