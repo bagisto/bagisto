@@ -199,8 +199,6 @@
                             this.resetBillingAddressForm();
 
                             this.getCustomerAddresses();
-
-                            this.savedCartAddresses.billing = this.savedCustomerAddress;
                         })
                         .catch(error => {                 
                             console.log(error);
@@ -225,19 +223,23 @@
                             ...this.forms.shipping.address,
                             isSaved: false,
                         });
-                    } else if (this.forms.shipping.isNew && this.forms.shipping.address.isSaved) {
-                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
-                            .then(response => {
-                                this.forms.shipping.isNew = false;
-
-                                this.resetShippingAddressForm();
-                                
-                                this.getCustomerAddresses();
-                            })
-                            .catch(error => {                 
-                                console.log(error);
-                            });
                     }
+
+                    if (! this.isCustomer) {
+                        return ;
+                    }
+
+                    this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
+                        .then(response => {
+                            this.forms.shipping.isNew = false;
+
+                            this.resetShippingAddressForm();
+                            
+                            this.getCustomerAddresses();
+                        })
+                        .catch(error => {                 
+                            console.log(error);
+                        });
                 },
 
                 store() {

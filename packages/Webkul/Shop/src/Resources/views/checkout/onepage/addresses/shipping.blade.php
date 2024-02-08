@@ -19,8 +19,6 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, store)">
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
-
                         <div class="grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
@@ -103,7 +101,6 @@
                         >
                         </v-error-message>
 
-
                         <template v-if="meta.valid">
                             <div v-if="
                                 ! forms.billing.isNew
@@ -111,9 +108,9 @@
                                 && ! forms.billing.isUsedForShipping
                                 && savedCartAddresses.shipping?.length"
                             >
-                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.before') !!}
-
                                 <div class="flex justify-end mt-4">
+                                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.before') !!}
+
                                     <x-shop::button
                                         class="primary-button py-3 px-11 rounded-2xl"
                                         :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
@@ -121,14 +118,18 @@
                                         ref="storeAddress"
                                         @click="store"
                                     />
-                                </div>
 
-                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.after') !!}
+                                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.after') !!}
+                                </div>
                             </div>
                         </template>
     
                         <template v-else>
-                            <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping">
+                            <div v-if="
+                                ! forms.billing.isNew
+                                && ! forms.shipping.isNew
+                                && ! forms.billing.isUsedForShipping"
+                            >
                                 <div class="flex justify-end mt-4">
                                     <button
                                         type="submit"
@@ -139,12 +140,10 @@
                                 </div>
                             </div>
                         </template>
-                        
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!}
                     </form>
                 </x-shop::form>
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!}
             </x-slot>
         </x-shop::accordion>
 
@@ -438,9 +437,9 @@
                                 <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
                                     <input 
                                         type="checkbox"
-                                        name="shipping[is_save_as_address]"
-                                        id="shipping[is_save_as_address]"
                                         class="hidden peer"
+                                        id="shipping[is_save_as_address]"
+                                        name="shipping[is_save_as_address]"
                                         v-model="forms.shipping.address.isSaved"
                                     >
 

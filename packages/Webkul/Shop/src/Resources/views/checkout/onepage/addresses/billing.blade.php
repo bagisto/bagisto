@@ -123,7 +123,6 @@
                         </label>
                     </div>
 
-
                     <template v-if="meta.valid">
                         <div v-if="
                             ! forms.billing.isNew
@@ -148,7 +147,11 @@
                     </template>
 
                     <template v-else>
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
+                        <div v-if="
+                            ! forms.billing.isNew
+                            && ! forms.shipping.isNew
+                            && forms.billing.isUsedForShipping"
+                        >
                             <div class="flex justify-end mt-4">
                                 <button
                                     type="submit"
