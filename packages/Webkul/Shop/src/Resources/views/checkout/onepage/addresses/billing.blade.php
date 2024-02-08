@@ -19,7 +19,7 @@
                     <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
-                            v-for="(address, index) in addresses.billing"
+                            v-for="(address, index) in savedCartAddresses.billing"
                         >
                             <v-field
                                 type="radio"
@@ -74,7 +74,7 @@
 
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                            @click="showNewBillingAddressForm"
+                            @click="addNewBillingAddress"
                         >
                             <div
                                 class="flex gap-x-2.5 items-center"
@@ -99,7 +99,7 @@
 
                     <div 
                         class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
-                        v-if="addresses.billing.length"
+                        v-if="savedCartAddresses.billing.length"
                     >
                         <input
                             type="checkbox"
@@ -125,7 +125,12 @@
 
 
                     <template v-if="meta.valid">
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.billing.length">
+                        <div v-if="
+                            ! forms.billing.isNew
+                            && ! forms.shipping.isNew
+                            && forms.billing.isUsedForShipping
+                            && savedCartAddresses.billing.length"
+                        >
                             <div class="flex justify-end mt-4">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.before') !!}
 
@@ -176,7 +181,7 @@
                     <a 
                         class="flex justify-end"
                         href="javascript:void(0)" 
-                        v-if="addresses.billing.length > 0"
+                        v-if="savedCartAddresses.billing.length > 0"
                         @click="forms.billing.isNew = ! forms.billing.isNew"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
@@ -192,7 +197,7 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, handleBillingAddressForm)">
+                    <form @submit="handleSubmit($event, storeBillingAddress)">
                         {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
 
                         <x-shop::form.control-group>

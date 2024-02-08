@@ -24,7 +24,7 @@
                         <div class="grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div 
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
-                                v-for="(address, index) in addresses.shipping"
+                                v-for="(address, index) in savedCartAddresses.shipping"
                             >
                                 <v-field
                                     type="radio"
@@ -80,7 +80,7 @@
 
                             <div 
                                 class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                @click="showNewShippingAddressForm"
+                                @click="addNewShippingAddress"
                             >
                                 <div
                                     class="flex gap-x-2.5 items-center"
@@ -105,7 +105,12 @@
 
 
                         <template v-if="meta.valid">
-                            <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping && addresses.shipping.length">
+                            <div v-if="
+                                ! forms.billing.isNew
+                                && ! forms.shipping.isNew
+                                && ! forms.billing.isUsedForShipping
+                                && savedCartAddresses.shipping?.length"
+                            >
                                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.confirm_button.before') !!}
 
                                 <div class="flex justify-end mt-4">
@@ -164,12 +169,12 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, handleShippingAddressForm)">
+                    <form @submit="handleSubmit($event, storeShippingAddress)">
                         <div>
                             <a 
                                 class="flex justify-end"
                                 href="javascript:void(0)" 
-                                v-if="addresses.shipping.length > 0"
+                                v-if="savedCartAddresses.shipping?.length > 0"
                                 @click="forms.shipping.isNew = ! forms.shipping.isNew"
                             >
                                 <span class="icon-arrow-left text-2xl"></span>

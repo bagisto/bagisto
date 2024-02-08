@@ -67,9 +67,10 @@
                         },
                     },
 
-                    addresses: {
-                        billing: [],
-                        shipping: [],
+                    savedCartAddresses: {
+                        billing: @json($cart->billing_address) ?? [],
+
+                        shipping: @json($cart->shipping_address) ?? [],
                     },
 
                     countries: [],
@@ -116,37 +117,39 @@
                 },
 
                 getCustomerAddresses() {
-                    if (this.isCustomer) {
-                        this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
-                            .then(response => {
-                                this.addresses.billing = response.data.data.map((address, index, row) => {
-                                    if (! this.forms.billing.address.address_id) {
-                                        let isDefault = address.default_address ? address.default_address : index === 0;
-
-                                        if (isDefault) {
-                                            this.forms.billing.address.address_id = address.id;
-
-                                            this.forms.shipping.address.address_id = address.id;
-                                        }
-                                    }
-
-                                    if (! this.forms.billing.isUsedForShipping) {
-                                        this.forms.shipping.address.address_id = row[row.length - 1].id;
-                                    }
-
-                                    return {
-                                        ...address,
-                                        isSaved: true,
-                                        isDefault: typeof isDefault === 'undefined' ? false : isDefault,
-                                    };
-                                });
-
-                                this.isAddressLoading = false;
-                            })
-                            .catch((error) => {});
-                    } else {
+                    if (! this.isCustomer) { 
                         this.isAddressLoading = false;
+
+                        return;
                     }
+
+                    this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
+                        .then(response => {
+                            this.savedCartAddresses.billing = response.data.data.map((address, index, row) => {
+                                if (! this.forms.billing.address.address_id) {
+                                    let isDefault = address.default_address ? address.default_address : index === 0;
+
+                                    if (isDefault) {
+                                        this.forms.billing.address.address_id = address.id;
+
+                                        this.forms.shipping.address.address_id = address.id;
+                                    }
+                                }
+
+                                if (! this.forms.billing.isUsedForShipping) {
+                                    this.forms.shipping.address.address_id = row[row.length - 1].id;
+                                }
+
+                                return {
+                                    ...address,
+                                    isSaved: true,
+                                    isDefault: typeof isDefault === 'undefined' ? false : isDefault,
+                                };
+                            });
+
+                            this.isAddressLoading = false;
+                        })
+                        .catch((error) => {});
                 },
 
                 getCountries() {
@@ -165,7 +168,7 @@
                         .catch(function (error) {});
                 },
 
-                showNewBillingAddressForm() {
+                addNewBillingAddress() {
                     this.resetBillingAddressForm();
 
                     this.forms.billing.isNew = true;
@@ -173,32 +176,38 @@
                     this.resetPaymentAndShippingMethod();
                 },
 
-                handleBillingAddressForm() {
+                storeBillingAddress() {
                     if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
 
                         this.isTempAddress = true;
 
-                        this.addresses.billing.push({
+                        this.savedCartAddresses.billing.push({
                             ...this.forms.billing.address,
                             isSaved: false,
                         });
-                    } else if (this.forms.billing.isNew && this.forms.billing.address.isSaved) {
-                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
-                            .then(response => {
-                                this.forms.billing.isNew = false;
+                    } 
 
-                                this.resetBillingAddressForm();
-                                
-                                this.getCustomerAddresses();
-                            })
-                            .catch(error => {                 
-                                console.log(error);
-                            });
+                    if (! this.isCustomer) {
+                        return;
                     }
+
+                    this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
+                        .then(response => {
+                            this.forms.billing.isNew = false;
+
+                            this.resetBillingAddressForm();
+
+                            this.getCustomerAddresses();
+
+                            this.savedCartAddresses.billing = this.savedCustomerAddress;
+                        })
+                        .catch(error => {                 
+                            console.log(error);
+                        });
                 },
 
-                showNewShippingAddressForm() {
+                addNewShippingAddress() {
                     this.resetShippingAddressForm();
 
                     this.forms.shipping.isNew = true;
@@ -206,13 +215,13 @@
                     this.resetPaymentAndShippingMethod();
                 },
 
-                handleShippingAddressForm() {
+                storeShippingAddress() {
                     if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
                         this.forms.shipping.isNew = false;
 
                         this.isTempAddress = true;
                         
-                        this.addresses.shipping.push({
+                        this.savedCartAddresses.shipping.push({
                             ...this.forms.shipping.address,
                             isSaved: false,
                         });

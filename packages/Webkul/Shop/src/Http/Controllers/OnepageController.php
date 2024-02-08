@@ -72,7 +72,7 @@ class OnepageController extends Controller
             return redirect()->back();
         }
 
-        return view('shop::checkout.onepage.index');
+        return view('shop::checkout.onepage.index', compact('cart'));
     }
 
     /**
