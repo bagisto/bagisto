@@ -16,10 +16,11 @@ use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\InvoiceProxy;
 use Webkul\Sales\Models\OrderProxy;
 use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
+use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Authenticatable implements CustomerContract
 {
-    use HasFactory, Notifiable, Visitor;
+    use HasFactory, Notifiable, Visitor, HasApiTokens;
 
     /**
      * The table associated with the model.
