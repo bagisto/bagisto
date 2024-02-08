@@ -32,6 +32,20 @@ class CSV extends AbstractSource
     }
 
     /**
+     * Close file handle
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        if (! is_object($this->reader)) {
+            return;
+        }
+
+        $this->reader->close();
+    }
+
+    /**
      * Read next line from csv
      */
     protected function getNextRow(): array
