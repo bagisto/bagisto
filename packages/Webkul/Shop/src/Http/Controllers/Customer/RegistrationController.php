@@ -12,6 +12,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
+use Webkul\Shop\Mail\Customer\RegistrationNotification;
 
 class RegistrationController extends Controller
 {
@@ -112,6 +113,10 @@ class RegistrationController extends Controller
                 'is_verified' => 1,
                 'token'       => null,
             ], $customer->id);
+
+            if ((bool) core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
+                Mail::queue(new RegistrationNotification($customer));
+            }
 
             $this->customerRepository->syncNewRegisteredCustomerInformation($customer);
 
