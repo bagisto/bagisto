@@ -114,7 +114,17 @@ class CategoryController extends Controller
     {
         Event::dispatch('catalog.category.update.before', $id);
 
-        $category = $this->categoryRepository->update($categoryRequest->all(), $id);
+        $category = $this->categoryRepository->update($categoryRequest->only(
+            'locale',
+            'parent_id',
+            'logo_path',
+            'banner_path',
+            'position',
+            'display_mode',
+            'status',
+            'attributes',
+            core()->getCurrentLocale()->code
+        ), $id);
 
         Event::dispatch('catalog.category.update.after', $category);
 
