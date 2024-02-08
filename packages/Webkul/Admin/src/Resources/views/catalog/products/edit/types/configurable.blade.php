@@ -1424,7 +1424,11 @@
                 },
 
                 removeImages() {
-                    this.selectedVariants.forEach((variant) => variant.images = []);
+                    this.selectedVariants.forEach((variant) => {
+                        variant.images = [];
+                        
+                        variant.selected = false;
+                    });
                 },
 
                 removeVariants() {
@@ -1438,9 +1442,7 @@
                 },
 
                 optionName(attribute, optionId) {
-                    return attribute.options.find((option) => {
-                        return option.id == optionId;
-                    })?.admin_name;
+                    return attribute.options.find((option) => option.id == optionId)?.admin_name;
                 },
             },
         });
