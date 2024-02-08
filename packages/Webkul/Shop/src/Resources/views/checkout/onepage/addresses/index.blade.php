@@ -70,7 +70,7 @@
                     savedCartAddresses: {
                         billing: @json($cart->billing_address) ?? [],
 
-                        shipping: @json($cart->shipping_address) ?? [],
+                        shipping: [@json($cart->shipping_address)] ?? [],
                     },
 
                     countries: [],
@@ -177,7 +177,7 @@
                 },
 
                 storeBillingAddress() {
-                    if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
+                    if (! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
 
                         this.isTempAddress = true;
@@ -186,23 +186,15 @@
                             ...this.forms.billing.address,
                             isSaved: false,
                         });
-                    } 
-
-                    if (! this.isCustomer) {
-                        return;
                     }
 
-                    this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
-                        .then(response => {
-                            this.forms.billing.isNew = false;
+                    if (this.isCustomer) {
+                        this.saveAddress(this.forms.billing);
 
-                            this.resetBillingAddressForm();
+                        this.resetBillingAddressForm();
 
-                            this.getCustomerAddresses();
-                        })
-                        .catch(error => {                 
-                            console.log(error);
-                        });
+                        this.getCustomerAddresses();
+                    }
                 },
 
                 addNewShippingAddress() {
@@ -214,7 +206,7 @@
                 },
 
                 storeShippingAddress() {
-                    if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
+                    if (! this.forms.shipping.address.isSaved) {
                         this.forms.shipping.isNew = false;
 
                         this.isTempAddress = true;
@@ -225,34 +217,30 @@
                         });
                     }
 
-                    if (! this.isCustomer) {
-                        return ;
-                    }
-
-                    this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
-                        .then(response => {
-                            this.forms.shipping.isNew = false;
-
-                            this.resetShippingAddressForm();
+                    if (this.isCustomer) {
+                        this.saveAddress(this.forms.shipping);
+    
+                        this.resetShippingAddressForm();
                             
-                            this.getCustomerAddresses();
-                        })
-                        .catch(error => {                 
-                            console.log(error);
-                        });
+                        this.getCustomerAddresses();
+                    }
                 },
 
                 store() {
                     this.$refs.storeAddress.isLoading = true;
 
+                    let shippingMethod = this.$parent.$refs.vShippingMethod;
+
+                    let paymentMethod = this.$parent.$refs.vPaymentMethod;
+
                     if (this.haveStockableItems) {
-                        this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+                        shippingMethod.isShowShippingMethod = false;
                         
-                        this.$parent.$refs.vShippingMethod.isShippingMethodLoading = true;
+                        shippingMethod.isShippingMethodLoading = true;
                     } else {
-                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                        paymentMethod.isShowPaymentMethod = false;
     
-                        this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
+                        paymentMethod.isPaymentMethodLoading = true;
                     }
 
                     this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', {
@@ -267,22 +255,22 @@
                             },
                         })
                         .then(response => {
-                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                            paymentMethod.isShowPaymentMethod = false;
 
                             this.$parent.$refs.vCartSummary.canPlaceOrder = false;
 
                             if (response.data.data.payment_methods) {
-                                this.$parent.$refs.vPaymentMethod.payment_methods = response.data.data.payment_methods;
+                                paymentMethod.payment_methods = response.data.data.payment_methods;
                                 
-                                this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+                                paymentMethod.isShowPaymentMethod = true;
     
-                                this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
+                                paymentMethod.isPaymentMethodLoading = false;
                             } else {
-                                this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
+                                shippingMethod.shippingMethods = response.data.data.shippingMethods;
 
-                                this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
+                                shippingMethod.isShowShippingMethod = true;
 
-                                this.$parent.$refs.vShippingMethod.isShippingMethodLoading = false;
+                                shippingMethod.isShippingMethodLoading = false;
                             }
                             
                             this.$parent.getOrderSummary();
@@ -297,6 +285,16 @@
                         })
                         .catch(error => {
                             this.$refs.storeAddress.isLoading = false;
+                        });
+                },
+
+                saveAddress(params) {
+                    this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', params.address)
+                        .then(response => {
+                            params.isNew = false;
+                        })
+                        .catch(error => {                 
+                            console.log(error);
                         });
                 },
 
