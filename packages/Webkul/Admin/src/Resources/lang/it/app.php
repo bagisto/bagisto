@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Cliente <b>Notificato</b>',
                 'discount'              => 'Sconto - :discount',
                 'download-pdf'          => 'Scarica PDF',
+                'fraud'                 => 'Frode',
                 'grand-total'           => 'Totale Generale - :grand_total',
                 'invoice-id'            => 'Fattura #:invoice',
                 'invoices'              => 'Fatture',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Pagamento e Spedizione',
                 'payment-method'        => 'Metodo di Pagamento',
                 'pending'               => 'In Attesa',
+                'pending_payment'       => 'In attesa di Pagamento',
                 'per-unit'              => 'Per Unità',
                 'price'                 => 'Prezzo - :price',
                 'processing'            => 'In Elaborazione',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Errore: :attribute non può essere maggiore di :max kilobyte. Scegliere un file più piccolo, per favore.',
                     'info'  => 'La dimensione massima del video dovrebbe essere di :size',
                     'title' => 'Video',
                 ],
@@ -2157,7 +2160,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Crea Locale',
                 'locale'     => 'Locale',
@@ -2199,7 +2202,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Crea Valuta',
                 'currency'   => 'Valuta',
@@ -2242,7 +2245,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Azione',
+                    'allowed-errors'      => 'Errori Consentiti',
+                    'back-btn'            => 'Indietro',
+                    'create-update'       => 'Crea/Aggiorna',
+                    'delete'              => 'Elimina',
+                    'download-sample'     => 'Scarica Esempio',
+                    'field-separator'     => 'Separatore di Campi',
+                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/import/app, ad esempio: product-images, import-images.',
+                    'file'                => 'File',
+                    'general'             => 'Generale',
+                    'images-directory'    => 'Percorso Directory Immagini',
+                    'process-in-queue'    => 'Elabora nella Coda',
+                    'results'             => 'Risultati',
+                    'save-btn'            => 'Salva Importazione',
+                    'settings'            => 'Impostazioni',
+                    'skip-errors'         => 'Salta Errori',
+                    'stop-on-errors'      => 'Ferma su Errori',
+                    'title'               => 'Crea Importazione',
+                    'type'                => 'Tipo',
+                    'validation-strategy' => 'Strategia di Validazione',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Azione',
+                    'allowed-errors'      => 'Errori Consentiti',
+                    'back-btn'            => 'Indietro',
+                    'create-update'       => 'Crea/Aggiorna',
+                    'delete'              => 'Elimina',
+                    'download-sample'     => 'Scarica Esempio',
+                    'field-separator'     => 'Separatore di Campi',
+                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/import/app, ad esempio: product-images, import-images.',
+                    'file'                => 'File',
+                    'general'             => 'Generale',
+                    'images-directory'    => 'Percorso Directory Immagini',
+                    'process-in-queue'    => 'Elabora nella Coda',
+                    'results'             => 'Risultati',
+                    'save-btn'            => 'Salva Importazione',
+                    'settings'            => 'Impostazioni',
+                    'skip-errors'         => 'Salta Errori',
+                    'stop-on-errors'      => 'Ferma su Errori',
+                    'title'               => 'Modifica Importazione',
+                    'type'                => 'Tipo',
+                    'validation-strategy' => 'Strategia di Validazione',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Crea Importazione',
+                    'title'        => 'Importazioni',
+
+                    'datagrid' => [
+                        'actions'       => 'Azioni',
+                        'completed-at'  => 'Completato il',
+                        'created'       => 'Creato',
+                        'delete'        => 'Elimina',
+                        'deleted'       => 'Eliminato',
+                        'edit'          => 'Modifica',
+                        'error-file'    => 'File degli Errori',
+                        'id'            => 'ID',
+                        'started-at'    => 'Iniziato il',
+                        'state'         => 'Stato',
+                        'summary'       => 'Riepilogo',
+                        'updated'       => 'Aggiornato',
+                        'uploaded-file' => 'File Caricato',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Indietro',
+                    'completed-batches'       => 'Totale Batch Completati:',
+                    'download-error-report'   => 'Scarica Rapporto Completo degli Errori',
+                    'edit-btn'                => 'Modifica',
+                    'imported-info'           => 'Congratulazioni! La tua importazione è stata completata con successo.',
+                    'importing-info'          => 'Importazione in Corso',
+                    'indexing-info'           => 'Indicizzazione delle Risorse (Prezzo, Inventario e Ricerca Elastica) in Corso',
+                    'linking-info'            => 'Collegamento delle Risorse in Corso',
+                    'progress'                => 'Progresso:',
+                    'title'                   => 'Importazione',
+                    'total-batches'           => 'Totale Batch:',
+                    'total-created'           => 'Totale Record Creati:',
+                    'total-deleted'           => 'Totale Record Eliminati:',
+                    'total-errors'            => 'Totale Errori:',
+                    'total-invalid-rows'      => 'Totale Righe Non Valide:',
+                    'total-rows-processed'    => 'Totale Righe Elaborate:',
+                    'total-updated'           => 'Totale Record Aggiornati:',
+                    'validate-info'           => 'Clicca su "Valida Dati" per verificare la tua importazione.',
+                    'validate'                => 'Valida',
+                    'validating-info'         => 'Lettura e Validazione dei Dati in Corso',
+                    'validation-failed-info'  => 'La tua importazione non è valida. Correggi gli errori seguenti e riprova.',
+                    'validation-success-info' => 'La tua importazione è valida. Clicca su "Importa" per avviare il processo di importazione.',
+                ],
+
+                'create-success'    => 'Importazione creata con successo.',
+                'delete-failed'     => 'Eliminazione Importazione fallita in modo imprevisto.',
+                'delete-success'    => 'Importazione eliminata con successo.',
+                'not-valid'         => 'Importazione non valida',
+                'nothing-to-import' => 'Non ci sono risorse da importare.',
+                'setup-queue-error' => 'Modifica il tuo gestore di code a "database" o "redis" per avviare il processo di importazione.',
+                'update-success'    => 'Importazione aggiornata con successo.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Crea Tasso di Cambio',
                 'exchange-rate' => 'Tasso di Cambio',
@@ -2361,7 +2470,7 @@ return [
             'update-success'    => 'Sorgenti di Inventario Aggiornate con Successo',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Sei sicuro di voler eliminare?',
@@ -2406,16 +2515,6 @@ return [
                     'button-title' => 'Crea aliquota fiscale',
                     'tax-rate'     => 'Aliquota Fiscale',
                     'title'        => 'Aliquote Fiscali',
-
-                    'import' => [
-                        'duplicate-error'  => 'L\'identificatore deve essere unico, identificatore duplicato :identifier alla riga :position.',
-                        'enough-row-error' => 'Il file non ha abbastanza righe',
-                        'import-btn'       => 'Importa',
-                        'title'            => 'Carica',
-                        'upload-error'     => 'Il file deve essere di tipo: xls, xlsx, csv.',
-                        'upload-success'   => 'Tasso di imposta caricato con successo',
-                        'validation'       => 'Tipo consentito: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Paese',
@@ -2943,11 +3042,11 @@ return [
                     'title' => 'Contenuto',
 
                     'impostazioni' => [
-                        'opzione-ricerca-immagini'=> 'Opzione di ricerca immagini',
-                        'opzioni-confronto'       => 'Opzioni di confronto',
-                        'opzioni-lista-desideri'  => 'Opzioni della lista dei desideri',
-                        'title'                   => 'Impostazioni',
-                        'title-info'              => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
+                        'opzione-ricerca-immagini' => 'Opzione di ricerca immagini',
+                        'opzioni-confronto'        => 'Opzioni di confronto',
+                        'opzioni-lista-desideri'   => 'Opzioni della lista dei desideri',
+                        'title'                    => 'Impostazioni',
+                        'title-info'               => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
                     ],
 
                     'script-personalizzati' => [
@@ -3487,11 +3586,13 @@ return [
                 'currencies'               => 'Valute',
                 'customers'                => 'Clienti',
                 'dashboard'                => 'Dashboard',
+                'data-transfer'            => 'Trasferimento dati',
                 'discount'                 => 'Sconto',
                 'email-templates'          => 'Modelli di Email',
                 'events'                   => 'Eventi',
                 'exchange-rates'           => 'Tassi di Cambio',
                 'groups'                   => 'Gruppi',
+                'imports'                  => 'Importazioni',
                 'inventory-sources'        => 'Fonti di Inventario',
                 'invoices'                 => 'Fatture',
                 'locales'                  => 'Localizzazioni',
@@ -3685,24 +3786,27 @@ return [
         'campaigns'                => 'Campagne',
         'cancel'                   => 'Annulla',
         'cart-rules'               => 'Regole del Carrello',
-        'catalog'                  => 'Catalogo',
         'catalog-rules'            => 'Regole del Catalogo',
+        'catalog'                  => 'Catalogo',
         'categories'               => 'Categorie',
         'channels'                 => 'Canali',
         'cms'                      => 'CMS',
         'communications'           => 'Comunicazioni',
         'configure'                => 'Configura',
         'copy'                     => 'Copia',
-        'create'                   => 'Aggiungi',
+        'create'                   => 'Creare',
         'currencies'               => 'Valute',
         'customers'                => 'Clienti',
         'dashboard'                => 'Dashboard',
+        'data-transfer'            => 'Trasferimento dati',
         'delete'                   => 'Elimina',
         'edit'                     => 'Modifica',
         'email-templates'          => 'Modelli di Email',
         'events'                   => 'Eventi',
         'exchange-rates'           => 'Tassi di Cambio',
         'groups'                   => 'Gruppi',
+        'import'                   => 'Importare',
+        'imports'                  => 'Importazioni',
         'inventory-sources'        => 'Fonti di Inventario',
         'invoices'                 => 'Fatture',
         'locales'                  => 'Localizzazioni',

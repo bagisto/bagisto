@@ -45,6 +45,14 @@ class DeleteCatalogRuleIndex implements ShouldQueue
                 ->whereIn('id', $this->productIds)
                 ->cursorPaginate(self::BATCH_SIZE);
 
+            /**
+             * TODO:
+             *
+             * If the 'end_other_rules' flag is set for this catalog rule,
+             * it indicates that this rule might have preempted the
+             * application of other rules on the products. In such a scenario,
+             * it's necessary to reindex the remaining rules for these products.
+             */
             app(PriceIndexer::class)->reindexBatch($paginator->items());
 
             if (! $cursor = $paginator->nextCursor()) {

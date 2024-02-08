@@ -703,10 +703,10 @@
                                     'operator': '<=',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than')"
                                 }, {
-                                    'operator': '<=',
+                                    'operator': '>',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.greater-than')"
                                 }, {
-                                    'operator': '<=',
+                                    'operator': '<',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.edit.less-than')"
                                 }],
                             'decimal': [{

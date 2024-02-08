@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | පාරිභෝගිකයා <b> කටින් කියාපාදුනා</b>',
                 'discount'              => 'වට්ටම - :discount',
                 'download-pdf'          => 'PDF බාගත කරන්න',
+                'fraud'                 => 'වංචාව',
                 'grand-total'           => 'සාමාජික සාමාජිකය - :grand_total',
                 'invoice-id'            => 'කාර්තු #:invoice',
                 'invoices'              => 'කාර්තු',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'ගෙවීම සහ නාවිකාව',
                 'payment-method'        => 'ගෙවීමේ ක්රමය',
                 'pending'               => 'අපේක්ෂක',
+                'pending_payment'       => 'පොරොත්තු ගෙවීම',
                 'per-unit'              => 'එකට',
                 'price'                 => 'මිල - :price',
                 'processing'            => 'සැකසීම',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute එක :max කිලෝබයිට් ට වඩා වැඩි නොවිය හැක. කරුණාකර කුඩා ගොනුවක් තෝරන්න.',
                     'title' => 'වීඩියෝ',
                     'info'  => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
                 ],
@@ -2157,7 +2160,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'මාතෘකාවක් සාදන්න',
                 'locale'     => 'භාෂාව',
@@ -2199,7 +2202,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'මුදල් සාදන්න',
                 'currency'   => 'මුදල',
@@ -2242,7 +2245,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'ක්‍රියාව',
+                    'allowed-errors'      => 'ඉඩ දෙන දෝෂ',
+                    'back-btn'            => 'ආපසු',
+                    'create-update'       => 'සාදන්න/යාවත්කාලීන කරන්න',
+                    'delete'              => 'මකන්න',
+                    'download-sample'     => 'උදව් පිටපත බාගන්න',
+                    'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',
+                    'file-info-example'   => 'උදාහරණයක්, නමුත්, නිෂ්පාදන රූප ලිපි අඩංගු ස්ථානයට ගෙන යාම සහිත නම්, ෆයිල් වාර්තා / අපයෝජනී උපාංග ඩිරෙක්ටරිය්.',
+                    'file-info'           => 'අපයෝජනී උපාංගය සිටින පාරිභෝගි මන්ත්‍රණය වන්නේ / ප්‍රාථමිකයා රූපයට, සියලු නාමාවේදී, නිෂ්පාදන රූප / අපයෝජන රූපයට.',
+                    'file'                => 'ගොනුව',
+                    'general'             => 'සාමාන්‍ය',
+                    'images-directory'    => 'රූප ඩිරෙක්ටරි පාත් මාර්ගය',
+                    'process-in-queue'    => 'කිහිපයෙහි ක්‍රියාකාරී',
+                    'results'             => 'ප්‍රතිඵල',
+                    'save-btn'            => 'අනුරූපනය කරන්න',
+                    'settings'            => 'සැකසුම්',
+                    'skip-errors'         => 'දෝෂ අක් කරන්න',
+                    'stop-on-errors'      => 'දෝෂ අත් කරන්න',
+                    'title'               => 'අලුත්ම ආනයනය',
+                    'type'                => 'වර්ගය',
+                    'validation-strategy' => 'වලාකුළු ක්‍රමය',
+                ],
+
+                'edit'              => [
+                    'action'              => 'ක්‍රියාව',
+                    'allowed-errors'      => 'ඉඩ දෙන දෝෂ',
+                    'back-btn'            => 'ආපසු',
+                    'create-update'       => 'සාදන්න/යාවත්කාලීන කරන්න',
+                    'delete'              => 'මකන්න',
+                    'download-sample'     => 'උදව් පිටපත බාගන්න',
+                    'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',
+                    'file-info-example'   => 'උදාහරණයක්, නමුත්, නිෂ්පාදන රූප ලිපි අඩංගු ස්ථානයට ගෙන යාම සහිත නම්, ෆයිල් වාර්තා / අපයෝජනී උපාංග ඩිරෙක්ටරිය්.',
+                    'file-info'           => 'අපයෝජනී උපාංගය සිටින පාරිභෝගි මන්ත්‍රණය වන්නේ / ප්‍රාථමිකයා රූපයට, සියලු නාමාවේදී, නිෂ්පාදන රූප / අපයෝජන රූපයට.',
+                    'file'                => 'ගොනුව',
+                    'general'             => 'සාමාන්‍ය',
+                    'images-directory'    => 'රූප ඩිරෙක්ටරි පාත් මාර්ගය',
+                    'process-in-queue'    => 'කිහිපයෙහි ක්‍රියාකාරී',
+                    'results'             => 'ප්‍රතිඵල',
+                    'save-btn'            => 'අනුරූපනය කරන්න',
+                    'settings'            => 'සැකසුම්',
+                    'skip-errors'         => 'දෝෂ අක් කරන්න',
+                    'stop-on-errors'      => 'දෝෂ අත් කරන්න',
+                    'title'               => 'සංස්කරණය කරන්න',
+                    'type'                => 'වර්ගය',
+                    'validation-strategy' => 'වලාකුළු ක්‍රමය',
+                ],
+
+                'index'             => [
+                    'button-title' => 'අලුත්ම ආනයනය',
+                    'title'        => 'ආනයනයන්',
+
+                    'datagrid'    => [
+                        'actions'       => 'ක්‍රියාවලිය',
+                        'completed-at'  => 'සම්පූර්ණ කරන ලද දිනය',
+                        'created'       => 'නිර්දේශිය කරන ලද දිනය',
+                        'delete'        => 'මකන්න',
+                        'deleted'       => 'මකා ඇත',
+                        'edit'          => 'සංස්කරණය කරන්න',
+                        'error-file'    => 'දෝෂ ගොනුව',
+                        'id'            => 'අංකය',
+                        'started-at'    => 'සම්පූර්ණ කරන ලද දිනය',
+                        'state'         => 'තර්කරනය',
+                        'summary'       => 'සාරාංශය',
+                        'updated'       => 'යාවත්කාලීන කරන ලද දිනය',
+                        'uploaded-file' => 'උඩුගත කළ ගොනුව',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'ආපසු',
+                    'completed-batches'       => 'මුල් කැඳවීම් සම්පූර්ණ:',
+                    'download-error-report'   => 'සමාලෝචනා පිටුව බාගන්න',
+                    'edit-btn'                => 'සංස්කරණය කරන්න',
+                    'imported-info'           => 'ස්ථිර වූයේ! ඔබගේ ආනයනය සාර්ථකව සම්පූර්ණ විය.',
+                    'importing-info'          => 'ආනයනය ප්‍රතිපල කිරීමෙන්',
+                    'indexing-info'           => 'සම්පූර්ණ කිරීම් (මිල, ප්‍රමාණය සහ ස්වයංක්‍රීය සේල්ස්) කර ඇත',
+                    'linking-info'            => 'සම්පූර්ණ කිරීම් ක්‍රම සම්පූර්ණයේ',
+                    'progress'                => 'ක්‍රියාත්මකය:',
+                    'title'                   => 'ආනයනය',
+                    'total-batches'           => 'මුල් කැඳවීම්:',
+                    'total-created'           => 'මුළු සාදන ලද වාර්තා:',
+                    'total-deleted'           => 'මුළු මකා ඇත්තා:',
+                    'total-errors'            => 'මුළු දෝෂ:',
+                    'total-invalid-rows'      => 'මුළු අවලංගු පේළි:',
+                    'total-rows-processed'    => 'මුළු ප්‍රතිපල කරන ලද පේළි:',
+                    'total-updated'           => 'මුළු යාවත්කාලීන කළ ලද වාර්තා:',
+                    'validate-info'           => 'ඔබගේ ආනයනය පරීක්ෂා කිරීම සඳහා වලංගු කරන්න.',
+                    'validate'                => 'වලංගු කරන්න',
+                    'validating-info'         => 'දත්ත කියවීම සහ වලාකුළු කිරීම ආරම්භය කර ඇත',
+                    'validation-failed-info'  => 'ඔබගේ ආනයනය වලංගු නොවේ. කරුණාකර පහත දෝෂ සදහා අවස්ථාව ලබා ගන්න.',
+                    'validation-success-info' => 'ඔබගේ ආනයනය වලංගු වේ. ආනයනය ආරම්භ කිරීමට ක්ලික් කරන්න.',
+                ],
+
+                'create-success'    => 'ආනයනය සාර්ථකව සෑදීම.',
+                'delete-failed'     => 'ආනයනය අපහසුයි අක්රිය කරන්නේ නැත.',
+                'delete-success'    => 'ආනයනය සාර්ථකව ඉවත් කර ඇත.',
+                'not-valid'         => 'ආනයනය වලංගු නොවේ',
+                'nothing-to-import' => 'ආනයනය සඳහා කිසිදු ඉල්ලීමක් නොමැත.',
+                'setup-queue-error' => 'කරන ලද ආනයනය සැකසුම "දත්තර ගොනුව" හෝ "රීදිස්" දර්ශකයට වෙනස් කරන්න.',
+                'update-success'    => 'ආනයනය සාර්ථකව යාවත්කාලීන කර ඇත.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'වාරික තාක්ෂණය සාදන්න',
                 'exchange-rate' => 'වාරික තාක්ෂණය',
@@ -2361,7 +2470,7 @@ return [
             'update-success'    => 'මානන ගණනයක් සාර්ථකව යාවත්කාලීන කරන ලදි.',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'ඔබට මමත් මකන්න යන්නෙයි නම් නැරඹෙයිද?',
@@ -2406,16 +2515,6 @@ return [
                     'button-title' => 'වර්ගය සාදන්නා ගාණන්',
                     'tax-rate'     => 'බදා අනුපාත',
                     'title'        => 'බදා අනුපාත',
-
-                    'import' => [
-                        'duplicate-error'  => 'හැඳුනුම්කරු විවෘත විය යුතුය, පේළිය:position හි අනුපාත හැඳුනුම්කරු :identifier.',
-                        'enough-row-error' => 'ගොනුවේ සුලු පේළියෙන් පසු සහිත විස්තර නොමැත',
-                        'import-btn'       => 'ආයුක්ත',
-                        'title'            => 'උඩුගත',
-                        'upload-error'     => 'ගොනුවේ වර්ගය: xls, xlsx, csv යෙදී හෝදින් හැකි යැයි විය හැක.',
-                        'upload-success'   => 'බදු අනුවාදය සාර්ථකව උඩුගත වී ඇත',
-                        'validation'       => 'ඉඩ දෙන වර්ගය: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'රට',
@@ -3486,11 +3585,13 @@ return [
                 'currencies'               => 'මුදල්',
                 'customers'                => 'පාරිභාවයෙන්',
                 'dashboard'                => 'මුල් පටුන',
+                'data-transfer'            => 'දත්ත හුවමාරු',
                 'discount'                 => 'අවශ්‍ය',
                 'email-templates'          => 'ඊමේල් අවිස්සාවේ',
                 'events'                   => 'සිහිල්',
                 'exchange-rates'           => 'මුදල් පරිමාණ',
                 'groups'                   => 'සමූහ',
+                'imports'                  => 'ආනයන',
                 'inventory-sources'        => 'උපාංග',
                 'invoices'                 => 'ගොනුව',
                 'locales'                  => 'ස්ථාන',
@@ -3684,24 +3785,27 @@ return [
         'campaigns'                => 'පෙට්ටිය',
         'cancel'                   => 'අවලංගු',
         'cart-rules'               => 'කර්ට් රූල්ස්',
-        'catalog'                  => 'ප්‍රකටක',
         'catalog-rules'            => 'කැටලොග් රූල්ස්',
+        'catalog'                  => 'ප්‍රකටක',
         'categories'               => 'ප්‍රවර්ග',
         'channels'                 => 'චැනල්',
         'cms'                      => 'සිංහල',
         'communications'           => 'සමානන්ද',
         'configure'                => 'සක්‍රීය කරන්න',
         'copy'                     => 'පිටපත්',
-        'create'                   => 'එකතුව',
+        'create'                   => 'නිර්මාණය කරන්න',
         'currencies'               => 'වෙනස්',
         'customers'                => 'කුමුදුද',
         'dashboard'                => 'මූලාන්තරය',
+        'data-transfer'            => 'දත්ත හුවමාරු',
         'delete'                   => 'මකාදමන්න',
         'edit'                     => 'සංස්කරණය',
         'email-templates'          => 'ඉ-තැපෑල අක්ෂර ආකෘති',
         'events'                   => 'සිසුන්',
         'exchange-rates'           => 'වාරික ප්‍රතිලාභ',
         'groups'                   => 'සමූහ',
+        'import'                   => 'ආනයන',
+        'imports'                  => 'ආනයන',
         'inventory-sources'        => 'අබාරාද',
         'invoices'                 => 'ක්‍රියාත්මක',
         'locales'                  => 'ස්ථාන',

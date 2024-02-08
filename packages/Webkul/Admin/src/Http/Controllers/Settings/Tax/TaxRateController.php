@@ -4,11 +4,8 @@ namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Validators\Failure;
 use Webkul\Admin\DataGrids\Settings\TaxRateDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Imports\DataGridImport;
 use Webkul\Tax\Repositories\TaxRateRepository;
 
 class TaxRateController extends Controller

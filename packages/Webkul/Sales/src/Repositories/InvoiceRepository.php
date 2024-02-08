@@ -278,7 +278,7 @@ class InvoiceRepository extends Repository
      * Update state.
      *
      * @param  \Webkul\Sales\Models\Invoice  $invoice
-     * @return void
+     * @return bool
      */
     public function updateState($invoice, $status)
     {

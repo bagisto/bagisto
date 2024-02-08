@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Settings\ChannelController;
 use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
+use Webkul\Admin\Http\Controllers\Settings\DataTransfer\ImportController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
@@ -131,8 +132,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
                 Route::put('edit/{id}', 'update')->name('admin.settings.taxes.rates.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.rates.delete');
-
-                Route::post('import', 'import')->name('admin.settings.taxes.rates.import');
             });
         });
 
@@ -180,6 +179,46 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.themes.delete');
+        });
+
+        /**
+         * Data Transfer routes.
+         */
+        Route::prefix('data-transfer')->group(function () {
+            /**
+             * Import routes.
+             */
+            Route::controller(ImportController::class)->prefix('imports')->group(function () {
+                Route::get('', 'index')->name('admin.settings.data_transfer.imports.index');
+
+                Route::get('create', 'create')->name('admin.settings.data_transfer.imports.create');
+
+                Route::post('create', 'store')->name('admin.settings.data_transfer.imports.store');
+
+                Route::get('edit/{id}', 'edit')->name('admin.settings.data_transfer.imports.edit');
+
+                Route::put('update/{id}', 'update')->name('admin.settings.data_transfer.imports.update');
+
+                Route::delete('destroy/{id}', 'destroy')->name('admin.settings.data_transfer.imports.delete');
+
+                Route::get('import/{id}', 'import')->name('admin.settings.data_transfer.imports.import');
+
+                Route::get('validate/{id}', 'validateImport')->name('admin.settings.data_transfer.imports.validate');
+
+                Route::get('start/{id}', 'start')->name('admin.settings.data_transfer.imports.start');
+
+                Route::get('link/{id}', 'link')->name('admin.settings.data_transfer.imports.link');
+
+                Route::get('index/{id}', 'indexData')->name('admin.settings.data_transfer.imports.index_data');
+
+                Route::get('stats/{id}/{state?}', 'stats')->name('admin.settings.data_transfer.imports.stats');
+
+                Route::get('download-sample/{type?}', 'downloadSample')->name('admin.settings.data_transfer.imports.download_sample');
+
+                Route::get('download/{id}', 'download')->name('admin.settings.data_transfer.imports.download');
+
+                Route::get('download-error-report/{id}', 'downloadErrorReport')->name('admin.settings.data_transfer.imports.download_error_report');
+            });
         });
     });
 });

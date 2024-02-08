@@ -69,7 +69,7 @@ class Product
             return;
         }
 
-        DeleteElasticSearchIndexJob::dispatch($productId);
+        DeleteElasticSearchIndexJob::dispatch([$productId]);
     }
 
     /**

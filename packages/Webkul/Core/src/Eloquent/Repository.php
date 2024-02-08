@@ -16,7 +16,6 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     protected $cacheEnabled = false;
 
     /**
-     * @param  $method
      * @return bool
      */
     public function allowedClean()
