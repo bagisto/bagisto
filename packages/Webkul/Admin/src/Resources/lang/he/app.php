@@ -3874,6 +3874,7 @@ return [
         'export'           => 'ייצוא',
         'no-records'       => 'אין מידע לייצוא',
         'xls'              => 'XLS',
+        'xlsx'             => 'XLSX',
     ],
 
     'validations' => [

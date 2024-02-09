@@ -44,6 +44,10 @@
                                 <option value="csv">
                                     @lang('admin::app.export.csv')
                                 </option>
+
+                                <option value="xlsx">
+                                    @lang('admin::app.export.xlsx')
+                                </option>
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
                     </x-admin::form>

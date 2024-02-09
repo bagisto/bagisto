@@ -3868,11 +3868,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => '下载',
-        'export'           => '导出',
-        'no-records'       => '没有要导出的内容',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => '下载',
+        'export'     => '导出',
+        'no-records' => '没有要导出的内容',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

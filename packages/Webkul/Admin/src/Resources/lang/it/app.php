@@ -3875,6 +3875,7 @@ return [
         'export'           => 'Esporta',
         'no-records'       => 'Niente da esportare',
         'xls'              => 'XLS',
+        'xlsx'             => 'XLSX',
     ],
 
     'validations' => [
