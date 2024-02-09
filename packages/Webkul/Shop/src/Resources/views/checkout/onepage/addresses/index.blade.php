@@ -20,17 +20,18 @@
         
         <template v-else>
             <div class="mt-8 mb-7">
-                {{-- {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.before') !!} --}}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.before') !!} 
 
                 @include('shop::checkout.onepage.addresses.billing')
 
-                {{-- {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.after') !!}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.after') !!}
+
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
 
                 @include('shop::checkout.onepage.addresses.shipping')
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!} --}}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!} 
             </div>
         </template>
     </script>
@@ -46,6 +47,12 @@
                     customerAddresses: [],
 
                     addNewBillingAddress: false,
+
+                    shippingAddress: {
+                        sameAsBilling: true,
+
+                        isShowShippingForm: false,
+                    },
 
                     cartAddresses: {
                         billing: {},
@@ -88,11 +95,13 @@
                     }
 
                     this.customerAddresses.forEach((address) => {
-                        if (address !== this.cartAddresses.billing) {
-                            address.default_address = false;
-
-                            addresses.push(address);
+                        if (address == this.cartAddresses.billing) {
+                            return;
                         }
+
+                        address.default_address = false;
+
+                        addresses.push(address);
                     });
 
                     return addresses;
@@ -110,11 +119,13 @@
                     }
 
                     this.customerAddresses.forEach((address) => {
-                        if (address !== this.cartAddresses.shipping) {
-                            address.default_address = false;
-
-                            addresses.push(address);
+                        if (address == this.cartAddresses.shipping) {
+                            return;
                         }
+
+                        address.default_address = false;
+
+                        addresses.push(address);
                     });
 
                     return addresses;
@@ -138,11 +149,37 @@
                         .catch(() => {});
                 },
 
-                store(params, { resetForm }) {
+                storeBilling(params, { resetForm }) {
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', {
                         ...params,
                         shipping: {
-                            address1: [],
+                            ...params.billing
+                        },
+                    })
+                        .then(() => {
+                            resetForm();
+
+                            this.get();
+
+                            this.addNewBillingAddress = false;
+
+                            this.$emit('update-cart');
+                        })
+                        .catch(() => {});
+                },
+
+
+                storeShipping(params, { resetForm }) {
+                    let selectedAddress = this.customerAddresses.find(address => {
+                        return address.id == this.selectedAddresses.billing_address_id;
+                    });
+
+                    selectedAddress.address1 = [selectedAddress.address1 ?? '', selectedAddress.address2 ?? ''];
+
+                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', {
+                        ...params,
+                        billing: {
+                            ...selectedAddress
                         },
                     })
                         .then(() => {

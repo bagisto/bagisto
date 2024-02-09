@@ -24,11 +24,12 @@
                                 type="radio"
                                 :id="`selectedAddresses.billing_address_id${address.id}`"
                                 name="selectedAddresses.billing_address_id"
-                                :value="address.id"
                                 class="hidden peer"
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 rules="required"
+                                :value="address.id"
                                 :checked="address.default_address"
+                                v-model="selectedAddresses.billing_address_id"
                             />
 
                             <label 
@@ -94,14 +95,17 @@
                     >
                     </v-error-message>
 
-                    <div class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none">
-                        <v-field
+                    <div 
+                        class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none"
+                        v-if="selectedAddresses.billing_address_id"
+                    >
+                        <input
                             type="checkbox"
-                            class="hidden peer"
-                            id="isUsedForShipping"
                             name="is_use_for_shipping"
-                            value="1"
+                            id="isUsedForShipping"
+                            class="hidden peer"
                             label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
+                            v-model="shippingAddress.sameAsBilling"
                         />
                 
                         <label 
@@ -169,7 +173,7 @@
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
-                <form @submit="handleSubmit($event, store)">
+                <form @submit="handleSubmit($event, storeBilling)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
 
                     <x-shop::form.control-group>
