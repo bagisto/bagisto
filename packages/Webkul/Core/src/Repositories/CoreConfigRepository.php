@@ -3,9 +3,9 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\CoreConfigField;
 
@@ -121,7 +121,7 @@ class CoreConfigRepository extends Repository
 
     /**
      * Search configuration.
-     * 
+     *
      * @param  array  $items
      * @param  string  $searchTerm
      * @return array
@@ -166,7 +166,7 @@ class CoreConfigRepository extends Repository
             }
         }
 
-        return $results;        
+        return $results;
     }
 
     /**
