@@ -1,5 +1,5 @@
 <template v-if="! shippingAddress.sameAsBilling && ! shippingAddress.isShowShippingForm">
-    <x-shop::accordion class="!border-b-0">
+    <x-shop::accordion class="!border-b-0 !mt-8">
         <x-slot:header class="!p-0">
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-medium max-sm:text-xl">
@@ -94,19 +94,6 @@
                         name="selectedAddresses.shipping_address_id"
                     >
                     </v-error-message>
-
-                    <div class="flex justify-end mt-4">
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
-
-                        <x-shop::button
-                            type="submit"
-                            class="primary-button py-3 px-11 rounded-2xl"
-                            :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
-                            :loading="false"
-                        />
-
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
-                    </div>
                 </form>
             </x-shop::form>
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.after') !!}
@@ -385,7 +372,7 @@
                             <div class="flex">
                                 <v-field
                                     type="hidden"
-                                    name="shipping.default_address"
+                                    name="shipping.save_as_address"
                                     value="0"
                                 >
                                 </v-field>
@@ -393,19 +380,19 @@
                                 <v-field
                                     type="checkbox"
                                     class="hidden peer"
-                                    id="shipping.default_address"
-                                    name="shipping.default_address"
+                                    id="shipping.save_as_address"
+                                    name="shipping.save_as_address"
                                     value="1"
                                 >
                                 </v-field>
                                 
                                 <label
                                     class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    for="shipping.default_address"
+                                    for="shipping.save_as_address"
                                 ></label>
                                 
                                 <label
-                                    for="shipping.default_address"
+                                    for="shipping.save_as_address"
                                     class="ltr:ml-1 rtl:mr-1 cursor-pointer"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.shipping.save-address')

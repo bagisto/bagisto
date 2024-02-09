@@ -20,15 +20,15 @@
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in savedBillingAddresses"
                         >
-                            <v-field
+                            <input
                                 type="radio"
                                 :id="`selectedAddresses.billing_address_id${address.id}`"
-                                name="selectedAddresses.billing_address_id"
+                                :name="`selectedAddresses.billing_address_id${address.id}`"
                                 class="hidden peer"
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 rules="required"
                                 :value="address.id"
-                                :checked="address.default_address"
+                                :checked="address.cart_id"
                                 v-model="selectedAddresses.billing_address_id"
                             />
 
@@ -120,19 +120,6 @@
                         >
                             @lang('shop::app.checkout.onepage.addresses.billing.same-billing-address')
                         </label>
-                    </div>
-
-                    <div class="flex justify-end mt-4">
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.before') !!}
-
-                        <x-shop::button
-                            type="submit"
-                            class="primary-button py-3 px-11 rounded-2xl"
-                            :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
-                            :loading="false"
-                        />
-
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.after') !!}
                     </div>
                 </form>
             </x-shop::form>

@@ -369,6 +369,8 @@ class Cart
 
         $this->updateOrCreateAddress($cart, $billingAddress, $shippingAddress);
 
+        $this->saveAddressesWhenRequested($data, $billingAddress, $shippingAddress);
+
         if (
             ($user = auth()->guard()->user())
             && (
@@ -391,6 +393,34 @@ class Cart
         $this->collectTotals();
 
         return true;
+    }
+
+      /**
+     * Save addresses when requested.
+     *
+     * @param  array  $data
+     * @param  array  $billingAddress
+     * @param  array  $shippingAddress
+     * @return void
+     */
+    private function saveAddressesWhenRequested(
+        array $data,
+        array $billingAddress,
+        array $shippingAddress
+    ): void {
+        $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
+
+        if (! empty($data['billing']['save_as_address'])) {
+            $billingAddress = Arr::except($billingAddress, ['save_as_address', 'use_for_shipping', 'address_id']);
+
+            $this->customerAddressRepository->updateOrCreate($billingAddress, $billingAddress);
+        }
+
+        if (! empty($data['shipping']['save_as_address'])) {
+            $shippingAddress = Arr::except($shippingAddress, ['save_as_address', 'use_for_shipping', 'address_id']);
+
+            $this->customerAddressRepository->updateOrCreate($shippingAddress);
+        }
     }
 
     /**

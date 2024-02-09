@@ -60,7 +60,7 @@ class OnepageController extends APIController
 
         $data['shipping']['address1'] = implode(PHP_EOL, $data['shipping']['address1']);
 
-        if ($data['billing']['default_address']) {
+        if (! empty($data['billing']['default_address'])) {
             $data['billing']['customer_id'] = $customer->user()?->id;
 
             $this->customerAddressRepository->updateOrCreate($data['billing'], $data['billing']);

@@ -26,12 +26,31 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.after') !!}
 
-
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.before') !!}
 
                 @include('shop::checkout.onepage.addresses.shipping')
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!} 
+            </div>
+
+            <div 
+                class="flex justify-end mt-4"
+                v-if="
+                (selectedAddresses.billing_address_id || selectedAddresses.shipping_address_id)
+                && ! shippingAddress.isShowShippingForm
+                "
+            >
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
+
+                <x-shop::button
+                    type="button"
+                    class="primary-button py-3 px-11 rounded-2xl"
+                    :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                    :loading="false"
+                    @click="proceed"
+                />
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
             </div>
         </template>
     </script>
@@ -68,7 +87,7 @@
 
                     countries: [],
 
-                    isCustomer: {{ auth()->guard('customer')->check() }},
+                    isCustomer: Boolean("{{ auth()->guard('customer')->check() }}"),
 
                     isSameAsBilling: false,
 
@@ -134,11 +153,13 @@
 
             methods: {
                 get() {
+                    this.isAddressLoading = true;
+
                     if (! this.isCustomer) {
+                        this.isAddressLoading = false;
+
                         return;
                     }
-
-                    this.isAddressLoading = true;
 
                     this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
                         .then(response => {
@@ -187,11 +208,15 @@
 
                             this.get();
 
-                            this.addNewBillingAddress = false;
+                            this.shippingAddress.isShowShippingForm = false;
 
                             this.$emit('update-cart');
                         })
                         .catch(() => {});
+                },
+
+                proceed() {
+                    console.log(this.selectedAddresses);
                 },
 
                 updateCartAddress(params) {
