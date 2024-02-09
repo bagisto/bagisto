@@ -120,13 +120,9 @@ class CampaignController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $this->campaignRepository->findOrFail($id);
-
         try {
             Event::dispatch('marketing.campaigns.delete.before', $id);
 
@@ -141,7 +137,9 @@ class CampaignController extends Controller
         }
 
         return new JsonResponse([
-            'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', ['name' => 'admin::app.marketing.communications.campaigns.email-campaign']),
+            'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', [
+                'name' => 'admin::app.marketing.communications.campaigns.email-campaign',
+            ]),
         ], 500);
     }
 }

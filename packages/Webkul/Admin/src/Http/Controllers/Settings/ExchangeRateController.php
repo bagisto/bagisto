@@ -64,10 +64,8 @@ class ExchangeRateController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
      */
-    public function edit($id): JsonResponse
+    public function edit(int $id): JsonResponse
     {
         $currencies = $this->currencyRepository->all();
 
@@ -125,32 +123,27 @@ class ExchangeRateController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
-        $this->exchangeRateRepository->findOrFail($id);
-
         try {
+            $this->exchangeRateRepository->findOrFail($id);
+
             Event::dispatch('core.exchange_rate.delete.before', $id);
 
             $this->exchangeRateRepository->delete($id);
 
             Event::dispatch('core.exchange_rate.delete.after', $id);
 
-            return response()->json([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.exchange-rates.index.delete-success'),
             ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
-            'message' => trans(
-                'admin::app.settings.exchange-rates.index.delete-error'
-            ),
+        return new JsonResponse([
+            'message' => trans('admin::app.settings.exchange-rates.index.delete-error'),
         ], 500);
     }
 }

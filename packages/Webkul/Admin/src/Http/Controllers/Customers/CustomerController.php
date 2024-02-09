@@ -18,6 +18,13 @@ use Webkul\Customer\Repositories\CustomerRepository;
 class CustomerController extends Controller
 {
     /**
+     * Static pagination count.
+     *
+     * @var int
+     */
+    public const COUNT = 10;
+
+    /**
      * Create a new controller instance.
      */
     public function __construct(
@@ -92,10 +99,9 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $customer = $this->customerRepository->findOrFail($id);
 
@@ -107,10 +113,9 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $this->validate(request(), [
             'first_name'    => 'string|required',
@@ -148,10 +153,9 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $customer = $this->customerRepository->findorFail($id);
 
@@ -176,10 +180,9 @@ class CustomerController extends Controller
     /**
      * Login as customer
      *
-     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function loginAsCustomer($id)
+    public function loginAsCustomer(int $id)
     {
         $customer = $this->customerRepository->findOrFail($id);
 
@@ -193,10 +196,9 @@ class CustomerController extends Controller
     /**
      * To store the response of the note.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\View
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function storeNotes($id)
+    public function storeNotes(int $id)
     {
         $this->validate(request(), [
             'note' => 'string|required',
@@ -219,10 +221,8 @@ class CustomerController extends Controller
 
     /**
      * View all details of customer.
-     *
-     * @param  int  $id
      */
-    public function show($id)
+    public function show(int $id)
     {
         $customer = $this->customerRepository->with([
             'orders',
@@ -249,7 +249,7 @@ class CustomerController extends Controller
             return $query->where('email', 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orWhere(DB::raw('CONCAT('.DB::getTablePrefix().'first_name, " ", '.DB::getTablePrefix().'last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
-        })->paginate(10);
+        })->paginate(self::COUNT);
 
         return response()->json($customers);
     }
