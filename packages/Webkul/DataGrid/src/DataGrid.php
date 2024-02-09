@@ -209,7 +209,7 @@ abstract class DataGrid
             'sort'        => ['sometimes', 'required', 'array'],
             'pagination'  => ['sometimes', 'required', 'array'],
             'export'      => ['sometimes', 'required', 'boolean'],
-            'format'      => ['sometimes', 'required', 'in:xls,csv,xlsx'],
+            'format'      => ['sometimes', 'required', 'in:csv,xls,xlsx'],
         ]);
 
         return request()->only(['filters', 'sort', 'pagination', 'export', 'format']);

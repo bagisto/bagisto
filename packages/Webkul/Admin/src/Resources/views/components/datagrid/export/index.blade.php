@@ -37,12 +37,12 @@
                                 name="format"
                                 v-model="format"
                             >
-                                <option value="xls">
-                                    @lang('admin::app.export.xls')
-                                </option>
-
                                 <option value="csv">
                                     @lang('admin::app.export.csv')
+                                </option>
+
+                                <option value="xls">
+                                    @lang('admin::app.export.xls')
                                 </option>
 
                                 <option value="xlsx">
