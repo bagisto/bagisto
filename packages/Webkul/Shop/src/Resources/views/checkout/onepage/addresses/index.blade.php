@@ -216,7 +216,29 @@
                 },
 
                 proceed() {
-                    console.log(this.selectedAddresses);
+                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}',  {
+                        billing: {
+                            address1: [''],
+
+                            address_id: this.selectedAddresses.billing_address_id,
+                        }, 
+
+                        shipping: {
+                            address1: [''],
+
+                            address_id: this.selectedAddresses.shipping_address_id,
+                        }
+                    })
+                        .then(() => {
+                            resetForm();
+
+                            this.get();
+
+                            this.shippingAddress.isShowShippingForm = false;
+
+                            this.$emit('update-cart');
+                        })
+                        .catch(() => {});
                 },
 
                 updateCartAddress(params) {
