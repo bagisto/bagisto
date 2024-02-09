@@ -134,12 +134,18 @@ class CoreConfigRepository extends Repository
             $title = trans($configuration['title'] ?? ($configuration['name'] ?? ''));
 
             if (
-                Str::contains($title, $searchTerm)
-                && count($path) > 1
+                stripos($title, $searchTerm) !== false
+                && count($path)
             ) {
+                if (isset($path[1])) {
+                    $queryParam = $path[1]['key'];
+                } else {
+                    $queryParam = $configuration['key'];
+                }
+
                 $results[] = [
                     'title' => implode(' > ', [...Arr::pluck($path, 'title'), $title]),
-                    'url'   => route('admin.configuration.index', Str::replace('.', '/', $path[1]['key'])),
+                    'url'   => route('admin.configuration.index', Str::replace('.', '/', $queryParam)),
                 ];
             }
 
