@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.shipping.method.before') !!}
 
-<v-shipping-method ref="vShippingMethod">
+<v-shipping-method ref="vShippingMethod" :shipping="shippingMethods">
     <!-- Shipping Method Shimmer Effect -->
     <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-method>
@@ -84,6 +84,8 @@
     <script type="module">
         app.component('v-shipping-method', {
             template: '#v-shipping-method-template',
+
+            props: ['shipping'],
 
             data() {
                 return {

@@ -48,7 +48,10 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
-        <v-checkout @update-cart="getOrderSummary($event)">
+        <v-checkout 
+            @update-cart="getOrderSummary($event)"
+            @shipping-methods="shippingMethods($event)"
+        >
             <!-- Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage />
         </v-checkout>

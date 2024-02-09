@@ -3,6 +3,7 @@
 <v-checkout-addresses 
     :cart="cart"
     @update-cart="getOrderSummary($event)"
+    @shipping-methods="shippingMethods($event)"
 >
 </v-checkout-addresses>
 
@@ -229,14 +230,16 @@
                             address_id: this.selectedAddresses.shipping_address_id,
                         }
                     })
-                        .then(() => {
+                        .then((response) => {
+                            this.$emit('update-cart');
+
+                            this.$emit('shipping-methods', response.data.data.shippingMethods);
+
                             resetForm();
 
                             this.get();
 
                             this.shippingAddress.isShowShippingForm = false;
-
-                            this.$emit('update-cart');
                         })
                         .catch(() => {});
                 },
