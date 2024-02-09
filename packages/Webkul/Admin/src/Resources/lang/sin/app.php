@@ -3869,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'බාගත කරන්න',
-        'export'           => 'අපාරයට පිටවන්න',
-        'no-records'       => 'අපාරයට හවුල් සාර්ථකවීමට හිතන්න',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'බාගත කරන්න',
+        'export'     => 'අපාරයට පිටවන්න',
+        'no-records' => 'අපාරයට හවුල් සාර්ථකවීමට හිතන්න',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [
