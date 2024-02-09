@@ -3869,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'הורדה',
-        'export'           => 'ייצוא',
-        'no-records'       => 'אין מידע לייצוא',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'הורדה',
+        'export'     => 'ייצוא',
+        'no-records' => 'אין מידע לייצוא',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

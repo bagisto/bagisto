@@ -3867,11 +3867,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Скачать',
-        'export'           => 'Экспорт',
-        'no-records'       => 'Нет данных для экспорта',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Скачать',
+        'export'     => 'Экспорт',
+        'no-records' => 'Нет данных для экспорта',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [
