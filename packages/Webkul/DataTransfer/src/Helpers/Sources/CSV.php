@@ -27,7 +27,7 @@ class CSV extends AbstractSource
 
             $this->totalColumns = count($this->columnNames);
         } catch (\Exception $e) {
-            throw new \LogicException("Unable to open file: '{$file}'");
+            throw new \LogicException("Unable to open file: '{$filePath}'");
         }
     }
 

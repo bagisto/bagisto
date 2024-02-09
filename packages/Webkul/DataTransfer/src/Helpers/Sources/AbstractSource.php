@@ -34,7 +34,7 @@ abstract class AbstractSource
     /**
      * Read next line from source
      */
-    abstract protected function getNextRow(): array;
+    abstract protected function getNextRow(): array|bool;
 
     /**
      * Return the key of the current row

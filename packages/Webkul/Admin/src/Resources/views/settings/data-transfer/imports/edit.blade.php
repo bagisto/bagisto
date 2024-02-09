@@ -92,7 +92,6 @@
                         <x-admin::form.control-group.control
                             type="file"
                             name="file"
-                            rules="mimes:text/csv"
                             :label="trans('admin::app.settings.data-transfer.imports.edit.file')"
                         />
 
