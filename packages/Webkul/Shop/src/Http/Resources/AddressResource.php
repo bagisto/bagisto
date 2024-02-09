@@ -34,7 +34,7 @@ class AddressResource extends JsonResource
             'phone'           => $this->phone,
             'vat_id'          => $this->vat_id,
             'default_address' => $this->default_address,
-            'additional'      => $this->additional,
+            'additional'      => ! empty($this->additional) ? $this->additional : null,
         ];
     }
 }

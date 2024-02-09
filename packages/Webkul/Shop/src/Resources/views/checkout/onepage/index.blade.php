@@ -48,7 +48,7 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
-        <v-checkout>
+        <v-checkout @update-cart="getOrderSummary($event)">
             <!-- Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage />
         </v-checkout>
@@ -99,7 +99,7 @@
                     }
                 },
 
-                created() {
+                mounted() {
                     this.getOrderSummary();
                 }, 
 
@@ -120,7 +120,7 @@
                                     });
                                 }
                             })
-                            .catch(error => console.log(error));
+                            .catch(error => {});
                     },
                 },
             });
