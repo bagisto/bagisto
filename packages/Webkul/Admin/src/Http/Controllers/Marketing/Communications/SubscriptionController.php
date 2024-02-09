@@ -34,10 +34,8 @@ class SubscriptionController extends Controller
 
     /**
      * Subscriber Details
-     *
-     * @param  int  $id
      */
-    public function edit($id): JsonResponse
+    public function edit(int $id): JsonResponse
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
@@ -84,13 +82,10 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $subscriber = $this->subscribersListRepository->findOrFail($id);
-
         try {
             $this->subscribersListRepository->delete($id);
 

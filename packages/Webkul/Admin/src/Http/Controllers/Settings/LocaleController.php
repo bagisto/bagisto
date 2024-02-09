@@ -97,16 +97,16 @@ class LocaleController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
-        $this->localeRepository->findOrFail($id);
+        $locale = $this->localeRepository->findOrFail($id);
 
-        if ($this->localeRepository->count() == 1) {
+        if ($locale->count() == 1) {
             return response()->json([
                 'message' => trans('admin::app.settings.locales.index.last-delete-error'),
             ], 400);
         }
 
         try {
-            $this->localeRepository->delete($id);
+            $locale->delete($id);
 
             return new JsonResponse([
                 'message' => trans('admin::app.settings.locales.index.delete-success'),
