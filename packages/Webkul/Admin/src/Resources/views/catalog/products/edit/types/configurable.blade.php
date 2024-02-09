@@ -493,8 +493,8 @@
                                             <v-field
                                                 type="text"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-8 rtl:pr-8 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
-                                                :name="'variants[' + variant.id + ']'"
+                                                :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[variant_' + variant.id + ']'"
                                                 :rules="{required: true, decimal: true, min_value: 0}"
                                                 v-model="variant.price"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.price')"
@@ -503,7 +503,7 @@
                                         </div>
 
                                         <v-error-message
-                                            :name="'variants[' + variant.id + ']'"
+                                            :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
                                             <p
@@ -521,8 +521,8 @@
                                             <v-field
                                                 type="text"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
-                                                :name="'variants[' + variant.id + ']'"
+                                                :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 v-model="variant.weight"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.mass-edit.weight')"
@@ -531,7 +531,7 @@
                                         </div>
 
                                         <v-error-message
-                                            :name="'variants[' + variant.id + ']'"
+                                            :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
                                             <p
@@ -549,8 +549,8 @@
                                             <v-field
                                                 as="select"
                                                 class="custom-select flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900 border dark:border-gray-800 rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
-                                                :name="'variants[' + variant.id + ']'"
+                                                :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 v-model="variant.status"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.enabled')"
@@ -566,7 +566,7 @@
                                         </div>
 
                                         <v-error-message
-                                            :name="'variants[' + variant.id + ']'"
+                                            :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
                                             <p
@@ -590,8 +590,8 @@
                                             <v-field
                                                 type="text"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
-                                                :name="'variants[' + variant.id + ']'"
+                                                :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 v-model="variant.name"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-name')"
@@ -600,7 +600,7 @@
                                         </div>
 
                                         <v-error-message
-                                            :name="'variants[' + variant.id + ']'"
+                                            :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
                                             <p
@@ -626,8 +626,8 @@
                                                 <v-field
                                                     type="text"
                                                     class="flex w-full min-h-[39px] py-1.5 px-3 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                    :class="[errors['variants[' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
-                                                    :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
+                                                    :class="[errors['variants[variant_' + variant.id + '][' + inventorySource.id + ']'] ? 'border border-red-500' : '']"
+                                                    :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
                                                     rules="required|numeric|min:0"
                                                     v-model="variant.inventories[inventorySource.id]"
                                                     :label="inventorySource.name"
@@ -635,7 +635,7 @@
                                                 </v-field>
 
                                                 <v-error-message
-                                                    :name="'variants[' + variant.id + '][' + inventorySource.id + ']'"
+                                                    :name="'variants[variant_' + variant.id + '][' + inventorySource.id + ']'"
                                                     v-slot="{ message }"
                                                 >
                                                     <p
@@ -661,8 +661,8 @@
                                             <v-field
                                                 type="text"
                                                 class="flex w-full min-h-[39px] py-1.5 ltr:pl-2.5 rtl:pr-2.5 bg-white dark:bg-gray-900  border dark:border-gray-800   rounded-md text-sm text-gray-600 dark:text-gray-300 font-normal transition-all hover:border-gray-400"
-                                                :class="[errors['variants[' + variant.id + ']'] ? 'border border-red-500' : '']"
-                                                :name="'variants[' + variant.id + ']'"
+                                                :class="[errors['variants[variant_' + variant.id + ']'] ? 'border border-red-500' : '']"
+                                                :name="'variants[variant_' + variant.id + ']'"
                                                 ::rules="{ required: true, regex: /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/ }"
                                                 v-model="variant.sku"
                                                 label="@lang('admin::app.catalog.products.edit.types.configurable.edit.variant-sku')"
@@ -672,7 +672,7 @@
                                         </div>
 
                                         <v-error-message
-                                            :name="'variants[' + variant.id + ']'"
+                                            :name="'variants[variant_' + variant.id + ']'"
                                             v-slot="{ message }"
                                         >
                                             <p
@@ -1338,7 +1338,7 @@
                             this.tempSelectedVariants.forEach((variant) => {
                                 variant.inventories = {
                                     ...variant?.inventories,
-                                    ...(params?.inventories ?? params.variants[variant.id]),
+                                    ...(params?.inventories ?? params[`variants[variant_${variant.id}]`]),
                                 };
                             });
 
@@ -1348,7 +1348,7 @@
                             this.tempSelectedVariants.forEach((variant) => {
                                 let updateType = this.updateTypes[this.selectedType].value;
 
-                                variant[updateType] = params[updateType] ?? params.variants[variant.id];
+                                variant[updateType] = params[updateType] ?? params[`variants[variant_${variant.id}]`];
                             });
 
                             break;
@@ -1365,7 +1365,7 @@
 
                 editPrices(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.price = params?.price ?? params.variants[variant.id];
+                        variant.price = params?.price ?? params[`variants[variant_${variant.id}]`];
                     });
                 },
 
@@ -1373,32 +1373,32 @@
                     this.selectedVariants.forEach((variant) => {
                         variant.inventories = {
                             ...variant?.inventories,
-                            ...(params?.inventories ?? params.variants[variant.id]),
+                            ...(params?.inventories ?? params[`variants[variant_${variant.id}]`]),
                         };
                     });
                 },
 
                 editWeight(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.weight = params?.weight ?? params.variants[variant.id];
+                        variant.weight = params?.weight ?? params[`variants[variant_${variant.id}]`];
                     });
                 },
 
                 editName(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.name = params?.name ?? params.variants[variant.id];
+                        variant.name = params?.name ?? params[`variants[variant_${variant.id}]`];
                     });
                 },
 
                 editSku(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.sku = params?.sku ?? params.variants[variant.id];
+                        variant.sku = params?.sku ?? params[`variants[variant_${variant.id}]`];
                     });
                 },
 
                 editStatus(params) {
                     this.selectedVariants.forEach((variant) => {
-                        variant.status = params?.status ?? params.variants[variant.id];
+                        variant.status = params?.status ?? params[`variants[variant_${variant.id}]`];
                     });
                 },
                 
@@ -1424,7 +1424,11 @@
                 },
 
                 removeImages() {
-                    this.selectedVariants.forEach((variant) => variant.images = []);
+                    this.selectedVariants.forEach((variant) => {
+                        variant.images = [];
+                        
+                        variant.selected = false;
+                    });
                 },
 
                 removeVariants() {
@@ -1438,9 +1442,7 @@
                 },
 
                 optionName(attribute, optionId) {
-                    return attribute.options.find((option) => {
-                        return option.id == optionId;
-                    })?.admin_name;
+                    return attribute.options.find((option) => option.id == optionId)?.admin_name;
                 },
             },
         });
