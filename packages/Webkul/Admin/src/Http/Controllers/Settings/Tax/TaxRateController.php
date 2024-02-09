@@ -104,7 +104,7 @@ class TaxRateController extends Controller
     public function update(int $id)
     {
         $this->validate(request(), [
-            'identifier' => 'required|string|unique:tax_rates,identifier,' . $id,
+            'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
             'is_zip'     => 'sometimes',
             'zip_code'   => 'nullable',
             'zip_from'   => 'nullable|required_with:is_zip',
