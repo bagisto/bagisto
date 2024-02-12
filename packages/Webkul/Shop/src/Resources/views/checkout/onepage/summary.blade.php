@@ -1,7 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
 <v-cart-summary
-    ref="vCartSummary"
     :cart="cart"
     :is-cart-loading="isCartLoading"
 >
@@ -203,13 +202,19 @@
 
                     selectedPaymentMethod: null,
 
-                    isLoading: false,
+                    isProcessing: false,
                 }
+            },
+
+            mounted() {
+                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = true);
+
+                this.$emitter.on('after-payment-method-selected', (value) => this.selectedPaymentMethod = value);
             },
 
             methods: {
                 placeOrder() {
-                    this.$refs.placeOrder.isLoading = true;
+                    this.$refs.placeOrder.isProcessing = true;
 
                     this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
                         .then(response => {
@@ -219,12 +224,9 @@
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
 
-                            this.$refs.placeOrder.isLoading = false;
-
+                            this.$refs.placeOrder.isProcessing = false;
                         })
-                        .catch(error => {
-                            this.$refs.placeOrder.isLoading = false;
-                        });
+                        .catch(error => this.$refs.placeOrder.isProcessing = false);
                 },
             },
         });

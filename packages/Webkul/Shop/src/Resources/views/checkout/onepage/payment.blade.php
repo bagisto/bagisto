@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.payment.method.before') !!}
 
-<v-payment-method ref="vPaymentMethod">
+<v-payment-method>
     <x-shop::shimmer.checkout.onepage.payment-method />
 </v-payment-method>
 
@@ -12,12 +12,12 @@
         id="v-payment-method-template"
     >
         <div class="mb-7">
-            <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
+            <template v-if="! isShowPaymentMethods && isPaymentMethodLoading">
                 <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method />
             </template>
     
-            <template v-if="isShowPaymentMethod">
+            <template v-if="isShowPaymentMethods">
                 <div>
                     {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.accordion.before') !!}
 
@@ -34,9 +34,8 @@
                             <div class="flex flex-wrap gap-7">
                                 <div 
                                     class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
-                                    v-for="(payment, index) in payment_methods"
+                                    v-for="(payment, index) in paymentMethods"
                                 >
-
                                     {!! view_render_event('bagisto.shop.checkout.payment-method.before') !!}
 
                                     <input 
@@ -112,10 +111,18 @@
                 return {
                     paymentMethods: [],
 
-                    isShowPaymentMethod: false,
+                    isShowPaymentMethods: false,
 
                     isPaymentMethodLoading: false,
                 }
+            },
+
+            mounted() {
+                this.$emitter.on('is-payment-loading', (value) => this.isPaymentMethodLoading = value);
+
+                this.$emitter.on('is-show-payment-methods', (value) => this.isShowPaymentMethods = value);
+                
+                this.$emitter.on('payment-methods', (methods) => this.paymentMethods = methods);
             },
 
             methods: {
@@ -124,12 +131,10 @@
                             payment: selectedPaymentMethod
                         })
                         .then(response => {
-                            this.$parent.$refs.vCartSummary.selectedPaymentMethod = selectedPaymentMethod;
-
                             this.$emitter.emit('after-payment-method-selected', selectedPaymentMethod);
 
                             if (response.data.cart) {
-                                this.$parent.$refs.vCartSummary.canPlaceOrder = true;
+                                this.$emitter.emit('can-place-order', true);
                             }
                         })
                         .catch(error => console.log(error));
