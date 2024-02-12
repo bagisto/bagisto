@@ -60,9 +60,15 @@ Key Benefits:
 
 2. Enhanced User Experience: Offer expanded search results through synonyms, ensuring users find relevant content easily.
 
-* #8811 [feature] - While clicking on the view all it should be opened the separate page for new/feature products
+* #8811 [feature] - While clicking on the view all it should be opened the separate page for new/feature products.
 
-* #8900 [feature] - data-grid start and end date filter
+* #8900 [feature] - data-grid start and end date filter.
+
+* #9428 [feature] - Added excel support for import.
+.
+* #9431 [feature] - Added XLSX file support in export.
+
+* #9432 [feature] - Create a search bar for settings to be searched.
 
 * #8444 [improvements] - In the theme customization, In the image carousel there should be shown image preview.
 
@@ -72,7 +78,7 @@ Key Benefits:
 
 * #8908 [improvements] - In the channel page setting should be Maintenance mode.
 
-* #8945 [improvements] - Condition type check in rule validator
+* #8945 [improvements] - Condition type check in rule validator.
 
 * #8955 [improvements] - There should be a product redirection on the mini/main cart page.
 
@@ -286,6 +292,15 @@ Key Benefits:
 * #9076 [fixed] - Inventory Sources once Inactive done, we are unable to active that. 
 
 * #9077 [fixed] - Magic AI Configuration is disable, still we are able to see the Magic AI details in Categories.
+
+* #9399 [fixed] - Error in Inserting Products with Video in the Bagisto Administrator Panel
+
+* #9414 [fixed] - Catalog issue when select condition fixed.
+
+* #9415 [fixed] - Unable to mass update inventory in configurable Product, Console errors are appearing.
+
+* #8896 [fixed] - If the email verification option is enabled so Customer/Admin both are not getting successful registration messages.
+
 
 ## **v2.0.0 (21st of October 2023)** - *Release*
 
