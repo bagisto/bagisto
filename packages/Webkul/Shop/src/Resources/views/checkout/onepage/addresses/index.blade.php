@@ -180,7 +180,7 @@
                         },
                     })
                         .then(() => {
-                            this.$emitter.emit('update-cart');
+                            this.$emitter.emit('update-cart-summary');
 
                             resetForm();
 
@@ -203,7 +203,7 @@
                         },
                     })
                         .then(() => {
-                            this.$emitter.emit('update-cart');
+                            this.$emitter.emit('update-cart-summary');
 
                             resetForm();
 
@@ -243,7 +243,7 @@
                                 this.$emitter.emit('is-payment-loading', false);
                             }
 
-                            this.$emitter.emit('update-cart');
+                            this.$emitter.emit('update-cart-summary');
 
                             resetForm();
                         })
