@@ -114,7 +114,18 @@
                     }
 
                     this.customerAddresses.forEach((address) => {
-                        if (address == this.cartAddresses.billing) {
+                        if (
+                            address.first_name == this.cartAddresses.billing?.first_name
+                            && address.last_name == this.cartAddresses.billing?.last_name
+                            && address.city == this.cartAddresses.billing?.city
+                            && address.state == this.cartAddresses.billing?.state
+                            && address.country == this.cartAddresses.billing?.country
+                            && address.postcode == this.cartAddresses.billing?.postcode
+                            && address.email == this.cartAddresses.billing?.email
+                            && address.phone == this.cartAddresses.billing?.phone
+                            && address?.company_name == this.cartAddresses.billing?.company_name
+                            && address?.address1 == this.cartAddresses.billing?.address1
+                        ) {
                             return;
                         }
 
@@ -138,7 +149,18 @@
                     }
 
                     this.customerAddresses.forEach((address) => {
-                        if (address == this.cartAddresses.shipping) {
+                        if (
+                            address.first_name == this.cartAddresses.shipping?.first_name
+                            && address.last_name == this.cartAddresses.shipping?.last_name
+                            && address.city == this.cartAddresses.shipping?.city
+                            && address.state == this.cartAddresses.shipping?.state
+                            && address.country == this.cartAddresses.shipping?.country
+                            && address.postcode == this.cartAddresses.shipping?.postcode
+                            && address.email == this.cartAddresses.shipping?.email
+                            && address.phone == this.cartAddresses.shipping?.phone
+                            && address?.company_name == this.cartAddresses.shipping?.company_name
+                            && address?.address1 == this.cartAddresses.shipping?.address1
+                        ) {
                             return;
                         }
 
