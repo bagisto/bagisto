@@ -409,7 +409,6 @@ class Cart
         array $shippingAddress
     ): void {
         $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
-
         if (! empty($data['billing']['save_as_address'])) {
             $billingAddress = Arr::except($billingAddress, ['save_as_address', 'use_for_shipping', 'address_id']);
 

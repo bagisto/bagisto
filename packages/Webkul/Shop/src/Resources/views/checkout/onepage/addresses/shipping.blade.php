@@ -29,7 +29,7 @@
                                 label="@lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')"
                                 rules="required"
                                 :checked="address.default_address"
-                                v-model="selectedAddresses.shipping_address_id"
+                                v-model="selectedAddresses.shipping.id"
                             />
 
                             <label 
@@ -133,9 +133,8 @@
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
-                <form @submit="handleSubmit($event, storeShipping)">
+                <form @submit="handleSubmit($event, store)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.before') !!}
-
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
                             @lang('shop::app.checkout.onepage.addresses.shipping.company-name')

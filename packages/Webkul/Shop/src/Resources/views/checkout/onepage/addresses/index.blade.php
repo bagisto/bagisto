@@ -32,7 +32,7 @@
             <div 
                 class="flex justify-end mt-4"
                 v-if="
-                (selectedAddresses.billing_address_id || selectedAddresses.shipping_address_id)
+                (selectedAddresses.billing.id || selectedAddresses.shipping.id)
                 && ! shippingAddress.isShowShippingForm
                 "
             >
@@ -76,9 +76,13 @@
                     },
 
                     selectedAddresses: {
-                        billing_address_id: null,
+                        billing: {
+                            id: null,
+                        },
 
-                        shipping_address_id: null,
+                        shipping: {
+                            id: null,
+                        }
                     },
 
                     countries: [],
@@ -99,9 +103,9 @@
 
             computed: {
                 savedBillingAddresses() {
-                    this.cartAddresses.billing = this.cart.billing_address;
-                    
                     const addresses = [];
+
+                    this.cartAddresses.billing = this.cart.billing_address;
 
                     if (this.cartAddresses.billing) {
                         this.cartAddresses.billing.default_address = true;
@@ -126,9 +130,9 @@
                 },
 
                 savedShippingAddresses() {
-                    this.cartAddresses.shipping = this.cart.shipping_address;
-
                     const addresses = [];
+
+                    this.cartAddresses.shipping = this.cart.shipping_address;
 
                     if (this.cartAddresses.shipping) {
                         this.cartAddresses.shipping.default_address = true;
@@ -137,15 +141,6 @@
                     }
 
                     this.customerAddresses.forEach((address) => {
-                        if (
-                            this.customer.id
-                            && this.cartAddresses?.shipping?.cart_id
-                        ) {
-                            return;
-                        }
-
-                        address.default_address = false;
-
                         addresses.push(address);
                     });
 
@@ -172,38 +167,48 @@
                         .catch(() => {});
                 },
 
-                storeBilling(params, { resetForm }) {
-                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', {
-                        ...params,
-                        shipping: {
-                            ...params.billing
-                        },
-                    })
-                        .then(() => {
-                            this.$emitter.emit('update-cart-summary');
+                store(params, { resetForm }) {
+                    this.customerAddresses.forEach((address) => {
+                        const propertiesToCopy = ['email', 'first_name', 'last_name', 'country', 'phone', 'city', 'state', 'postcode', 'company_name'];
 
-                            resetForm();
+                        if (address.id == this.selectedAddresses.billing.id) {
+                            if (! params.billing) {
+                                params.billing = {};
+                            }
 
-                            this.get();
-                        })
-                        .catch(() => {});
-                },
+                            params.billing.address1 = [address.address1];
 
-                storeShipping(params, { resetForm }) {
-                    let selectedAddress = this.customerAddresses.find(address => {
-                        return address.id == this.selectedAddresses.billing_address_id;
+                            propertiesToCopy['use_for_shipping'] = true;
+
+                            propertiesToCopy.forEach((property) => {
+                                if (address[property]) {
+                                    params.billing[property] = address[property];
+                                }
+                            });
+                        }
+
+                        if (address.id == this.selectedAddresses.shipping.id) {
+                            if (! params.shipping) {
+                                params.shipping = {};
+                            }
+
+                            params.shipping.address1 = [address.address1];
+
+                            propertiesToCopy.forEach((property) => {
+                                if (address[property]) {
+                                    params.billing[property] = address[property];
+                                }
+                            });
+                        }
                     });
 
-                    selectedAddress.address1 = [selectedAddress.address1 ?? '', selectedAddress.address2 ?? ''];
-
-                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', {
-                        ...params,
-                        billing: {
-                            ...selectedAddress
-                        },
-                    })
-                        .then(() => {
+                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
+                        .then((_) => {
                             this.$emitter.emit('update-cart-summary');
+
+                            this.addNewBillingAddress = false;
+
+                            this.shippingAddress.isShowShippingForm = false;
 
                             resetForm();
 
@@ -217,13 +222,13 @@
                         billing: {
                             address1: [''],
 
-                            address_id: this.selectedAddresses.billing_address_id,
+                            address_id: this.selectedAddresses.billing.id,
                         }, 
 
                         shipping: {
                             address1: [''],
 
-                            address_id: this.selectedAddresses.shipping_address_id,
+                            address_id: this.selectedAddresses.shipping.id,
                         }
                     })
                         .then((response) => {
