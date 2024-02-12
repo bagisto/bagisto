@@ -105,8 +105,6 @@
 
             methods: {
                 store(selectedShippingMethod) {
-                    this.$emitter.emit('is-payment-loading', true);
-
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
                             shipping_method: selectedShippingMethod,
                         })

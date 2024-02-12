@@ -62,7 +62,7 @@
             <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
                 <div    
                     class="overflow-y-auto"
-                    ref="scrollBottom"
+                    id="scrollBottom"
                 >
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
 
@@ -103,7 +103,7 @@
                     this.getOrderSummary();
 
                     // update cart when emit the update-cart event.
-                    this.$emitter.emit('update-cart', this.getOrderSummary());
+                    this.$emitter.emit('update-cart-summary', this.getOrderSummary());
                 }, 
 
                 methods: {
