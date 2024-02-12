@@ -3874,6 +3874,7 @@ return [
         'export'           => 'تصدير',
         'no-records'       => 'لا يوجد شيء للتصدير',
         'xls'              => 'XLS',
+        'xlsx'             => 'إكس إل إس إكس',
     ],
 
     'validations' => [

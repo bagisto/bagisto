@@ -3870,11 +3870,13 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'डाउनलोड करें',
-        'export'           => 'निर्यात',
-        'no-records'       => 'निर्यात के लिए कुछ नहीं है',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'डाउनलोड करें',
+        'export'     => 'निर्यात',
+        'no-records' => 'निर्यात के लिए कुछ नहीं है',
+        'xls'        => 'XLS',
+        'xlsx'       => 'एक्सएलएसएक्स',
+
     ],
 
     'validations' => [

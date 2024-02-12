@@ -318,7 +318,7 @@ class Bundle extends AbstractType
      *
      * @param  array  $options1
      * @param  array  $options2
-     * @return bool|void
+     * @return bool
      */
     public function compareOptions($options1, $options2)
     {

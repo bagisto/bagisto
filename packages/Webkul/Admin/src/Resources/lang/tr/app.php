@@ -3869,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'İndir',
-        'export'           => 'Dışa Aktar',
-        'no-records'       => 'Dışa aktarılacak hiçbir şey yok',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'İndir',
+        'export'     => 'Dışa Aktar',
+        'no-records' => 'Dışa aktarılacak hiçbir şey yok',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

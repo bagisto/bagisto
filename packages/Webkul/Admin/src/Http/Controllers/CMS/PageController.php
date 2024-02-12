@@ -60,7 +60,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.page.create.before');
 
-        $data = request()->only([
+        $page = $this->pageRepository->create(request()->only([
             'page_title',
             'channels',
             'html_content',
@@ -68,9 +68,7 @@ class PageController extends Controller
             'url_key',
             'meta_keywords',
             'meta_description',
-        ]);
-
-        $page = $this->pageRepository->create($data);
+        ]));
 
         Event::dispatch('cms.page.create.after', $page);
 
@@ -82,10 +80,9 @@ class PageController extends Controller
     /**
      * To edit a previously created CMS page.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $page = $this->pageRepository->findOrFail($id);
 
@@ -95,10 +92,9 @@ class PageController extends Controller
     /**
      * To update the previously created CMS page in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $locale = core()->getRequestedLocaleCode();
 
@@ -115,13 +111,11 @@ class PageController extends Controller
 
         Event::dispatch('cms.page.update.before', $id);
 
-        $data = [
+        $page = $this->pageRepository->update([
             $locale    => request()->input($locale),
             'channels' => request()->input('channels'),
             'locale'   => $locale,
-        ];
-
-        $page = $this->pageRepository->update($data, $id);
+        ], $id);
 
         Event::dispatch('cms.page.update.after', $page);
 
@@ -132,18 +126,20 @@ class PageController extends Controller
 
     /**
      * To delete the previously create CMS page.
-     *
-     * @param  int  $id
      */
-    public function delete($id): JsonResponse
+    public function delete(int $id): JsonResponse
     {
-        Event::dispatch('cms.page.delete.before', $id);
+        try {
+            Event::dispatch('cms.page.delete.before', $id);
 
-        $this->pageRepository->delete($id);
+            $this->pageRepository->delete($id);
 
-        Event::dispatch('cms.page.delete.after', $id);
+            Event::dispatch('cms.page.delete.after', $id);
 
-        return new JsonResponse(['message' => trans('admin::app.cms.delete-success')]);
+            return new JsonResponse(['message' => trans('admin::app.cms.delete-success')]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => trans('admin::app.cms.no-resource')]);
+        }
     }
 
     /**

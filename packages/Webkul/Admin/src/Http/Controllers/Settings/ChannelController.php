@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Settings\ChannelDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -96,10 +97,9 @@ class ChannelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $channel = $this->channelRepository->with(['locales', 'currencies'])->findOrFail($id);
 
@@ -109,10 +109,9 @@ class ChannelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $locale = core()->getRequestedLocaleCode();
 
@@ -168,19 +167,15 @@ class ChannelController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $channel = $this->channelRepository->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            return response()->json([
+            return new JsonResponse([
                 'message'    => trans('admin::app.settings.channels.index.last-delete-error'),
-                'statusCode' => 400,
-            ]);
+            ], 400);
         }
 
         try {
@@ -190,17 +185,15 @@ class ChannelController extends Controller
 
             Event::dispatch('core.channel.delete.after', $id);
 
-            return response()->json([
+            return new JsonResponse([
                 'message'    => trans('admin::app.settings.channels.index.delete-success'),
-                'statusCode' => 200,
-            ]);
+            ], 200);
         } catch (\Exception $e) {
         }
 
-        return response()->json([
+        return new JsonResponse([
             'message'    => trans('admin::app.settings.channels.index.delete-failed'),
-            'statusCode' => 500,
-        ]);
+        ], 500);
     }
 
     /**

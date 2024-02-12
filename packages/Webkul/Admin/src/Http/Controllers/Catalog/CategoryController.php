@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {
         Event::dispatch('catalog.category.create.before');
 
-        $data = request()->only([
+        $category = $this->categoryRepository->create($categoryRequest->only([
             'locale',
             'name',
             'parent_id',
@@ -80,9 +80,7 @@ class CategoryController extends Controller
             'attributes',
             'logo_path',
             'banner_path',
-        ]);
-
-        $category = $this->categoryRepository->create($data);
+        ]));
 
         Event::dispatch('catalog.category.create.after', $category);
 
@@ -94,10 +92,9 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $category = $this->categoryRepository->findOrFail($id);
 
@@ -111,14 +108,23 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $categoryRequest, $id)
+    public function update(CategoryRequest $categoryRequest, int $id)
     {
         Event::dispatch('catalog.category.update.before', $id);
 
-        $category = $this->categoryRepository->update($categoryRequest->all(), $id);
+        $category = $this->categoryRepository->update($categoryRequest->only(
+            'locale',
+            'parent_id',
+            'logo_path',
+            'banner_path',
+            'position',
+            'display_mode',
+            'status',
+            'attributes',
+            core()->getCurrentLocale()->code
+        ), $id);
 
         Event::dispatch('catalog.category.update.after', $category);
 
@@ -129,21 +135,21 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $category = $this->categoryRepository->findOrFail($id);
 
         if (! $this->isCategoryDeletable($category)) {
-            return new JsonResponse(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.categories.delete-category-root'),
+            ], 400);
         }
 
         try {
             Event::dispatch('catalog.category.delete.before', $id);
 
-            $this->categoryRepository->delete($id);
+            $category->delete($id);
 
             Event::dispatch('catalog.category.delete.after', $id);
 

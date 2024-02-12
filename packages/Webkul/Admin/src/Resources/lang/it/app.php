@@ -3870,11 +3870,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Scarica',
-        'export'           => 'Esporta',
-        'no-records'       => 'Niente da esportare',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Scarica',
+        'export'     => 'Esporta',
+        'no-records' => 'Niente da esportare',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [
