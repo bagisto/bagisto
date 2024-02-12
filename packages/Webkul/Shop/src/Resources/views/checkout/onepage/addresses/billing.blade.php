@@ -29,7 +29,7 @@
                                 rules="required"
                                 :value="address.id"
                                 :checked="address.id"
-                                v-model="selectedAddresses.billing_address_id"
+                                v-model="selectedAddresses.billing.id"
                             />
 
                             <label 
@@ -97,7 +97,7 @@
 
                     <div 
                         class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none"
-                        v-if="selectedAddresses.billing_address_id"
+                        v-if="selectedAddresses.billing.id"
                     >
                         <input
                             type="checkbox"
@@ -160,8 +160,23 @@
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
-                <form @submit="handleSubmit($event, storeBilling)">
+                <form @submit="handleSubmit($event, store)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
+
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="billing.use_for_shipping"
+                            :value="true"
+                        />
+                    </x-shop::form.control-group>
+
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="shipping.address1.[0]"
+                        />
+                    </x-shop::form.control-group>
 
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
@@ -399,7 +414,7 @@
                             <div class="flex">
                                 <v-field
                                     type="hidden"
-                                    name="billing.default_address"
+                                    name="billing.save_as_address"
                                     value="0"
                                 >
                                 </v-field>
@@ -407,19 +422,19 @@
                                 <v-field
                                     type="checkbox"
                                     class="hidden peer"
-                                    id="billing.default_address"
-                                    name="billing.default_address"
+                                    id="billing.save_as_address"
+                                    name="billing.save_as_address"
                                     value="1"
                                 >
                                 </v-field>
                                 
                                 <label
                                     class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    for="billing.default_address"
+                                    for="billing.save_as_address"
                                 ></label>
                                 
                                 <label
-                                    for="billing.default_address"
+                                    for="billing.save_as_address"
                                     class="ltr:ml-1 rtl:mr-1 cursor-pointer"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.save-address')
