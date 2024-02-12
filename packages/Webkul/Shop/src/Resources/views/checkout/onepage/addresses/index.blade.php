@@ -32,8 +32,8 @@
             <div 
                 class="flex justify-end mt-4"
                 v-if="
-                (selectedAddresses.billing.id || selectedAddresses.shipping.id)
-                && ! shippingAddress.isShowShippingForm
+                (selectedBillingAddressId || selectedShippingAddressId)
+                && ! toggleShippingForm
                 "
             >
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
@@ -58,42 +58,28 @@
             props: ['cart'],
 
             data() {
-                return {
-                    customerAddresses: [],
-
+                return {        
                     addNewBillingAddress: false,
-
-                    shippingAddress: {
-                        sameAsBilling: true,
-
-                        isShowShippingForm: false,
-                    },
-
-                    cartAddresses: {
-                        billing: {},
-
-                        shipping: {},
-                    },
-
-                    selectedAddresses: {
-                        billing: {
-                            id: null,
-                        },
-
-                        shipping: {
-                            id: null,
-                        }
-                    },
 
                     countries: [],
 
                     customer: @json(auth()->guard('customer')->user()),
 
-                    isSameAsBilling: false,
+                    customerAddresses: [],
 
                     isAddressLoading: true,
-                    
+
+                    isSameAsBilling: false,
+
+                    selectedBillingAddressId: null,
+
+                    selectedShippingAddressId: null,
+
+                    shippingIsSameAsBilling: true,
+
                     tempAddressId: 1,
+
+                    toggleShippingForm: false,
                 };
             },
 
@@ -174,7 +160,7 @@
 
                         this.addNewBillingAddress = false;
 
-                        this.shippingAddress.isShowShippingForm = false;
+                        this.toggleShippingForm = false;
 
                         return;
                     }
@@ -189,7 +175,7 @@
 
                             this.addNewBillingAddress = false;
 
-                            this.shippingAddress.isShowShippingForm = false;
+                            this.toggleShippingForm = false;
 
                             resetForm();
 
@@ -205,20 +191,20 @@
                         billing: {
                             address1: [''],
 
-                            address_id: this.selectedAddresses.billing.id,
+                            address_id: this.selectedBillingAddressId,
                         }, 
 
                         shipping: {
                             address1: [''],
 
-                            address_id: this.selectedAddresses.shipping.id,
+                            address_id: this.selectedShippingAddressId,
                         }
                     };
 
                     if (! this.customer) {
-                        params.billing = this.customerAddresses.find((value) => this.selectedAddresses.billing.id = value.id);
+                        params.billing = this.customerAddresses.find((value) => this.selectedBillingAddressId = value.id);
 
-                        params.shipping = this.customerAddresses.find((value) => this.selectedAddresses.shipping.id = value.id);
+                        params.shipping = this.customerAddresses.find((value) => this.selectedShippingAddressId = value.id);
                     }
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)

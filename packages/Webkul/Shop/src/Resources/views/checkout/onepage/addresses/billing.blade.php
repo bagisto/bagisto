@@ -26,10 +26,10 @@
                                 :id="`selectedAddresses.billing_address_id${address.id}`"
                                 name="selectedAddresses.billing_address_id"
                                 rules="required"
-                                v-model="selectedAddresses.billing.id"
+                                v-model="selectedBillingAddressId"
                                 :value="address.id"
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
-                                :checked="selectedAddresses.billing.id"
+                                :checked="selectedBillingAddressId"
                             />
 
                             <label 
@@ -97,14 +97,14 @@
 
                     <div 
                         class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none"
-                        v-if="selectedAddresses.billing.id"
+                        v-if="selectedBillingAddressId"
                     >
                         <input
                             type="checkbox"
                             class="hidden peer"
                             id="isUsedForShipping"
                             name="is_use_for_shipping"
-                            v-model="shippingAddress.sameAsBilling"
+                            v-model="shippingIsSameAsBilling"
                             label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                         />
                 
