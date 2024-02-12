@@ -1,10 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
 
-<v-checkout-addresses 
-    :cart="cart"
-    @update-cart="getOrderSummary($event)"
->
-</v-checkout-addresses>
+<v-checkout-addresses :cart="cart"></v-checkout-addresses>
 
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
@@ -87,7 +83,7 @@
 
                     countries: [],
 
-                    isCustomer: Boolean("{{ auth()->guard('customer')->check() }}"),
+                    customer: @json(auth()->guard('customer')->user()),
 
                     isSameAsBilling: false,
 
@@ -115,16 +111,8 @@
 
                     this.customerAddresses.forEach((address) => {
                         if (
-                            address.first_name == this.cartAddresses.billing?.first_name
-                            && address.last_name == this.cartAddresses.billing?.last_name
-                            && address.city == this.cartAddresses.billing?.city
-                            && address.state == this.cartAddresses.billing?.state
-                            && address.country == this.cartAddresses.billing?.country
-                            && address.postcode == this.cartAddresses.billing?.postcode
-                            && address.email == this.cartAddresses.billing?.email
-                            && address.phone == this.cartAddresses.billing?.phone
-                            && address?.company_name == this.cartAddresses.billing?.company_name
-                            && address?.address1 == this.cartAddresses.billing?.address1
+                            this.customer.id
+                            && this.cartAddresses?.billing?.cart_id
                         ) {
                             return;
                         }
@@ -150,16 +138,8 @@
 
                     this.customerAddresses.forEach((address) => {
                         if (
-                            address.first_name == this.cartAddresses.shipping?.first_name
-                            && address.last_name == this.cartAddresses.shipping?.last_name
-                            && address.city == this.cartAddresses.shipping?.city
-                            && address.state == this.cartAddresses.shipping?.state
-                            && address.country == this.cartAddresses.shipping?.country
-                            && address.postcode == this.cartAddresses.shipping?.postcode
-                            && address.email == this.cartAddresses.shipping?.email
-                            && address.phone == this.cartAddresses.shipping?.phone
-                            && address?.company_name == this.cartAddresses.shipping?.company_name
-                            && address?.address1 == this.cartAddresses.shipping?.address1
+                            this.customer.id
+                            && this.cartAddresses?.shipping?.cart_id
                         ) {
                             return;
                         }
@@ -177,7 +157,7 @@
                 get() {
                     this.isAddressLoading = true;
 
-                    if (! this.isCustomer) {
+                    if (! this.customer) {
                         this.isAddressLoading = false;
 
                         return;
@@ -200,17 +180,14 @@
                         },
                     })
                         .then(() => {
+                            this.$emitter.emit('update-cart');
+
                             resetForm();
 
                             this.get();
-
-                            this.addNewBillingAddress = false;
-
-                            this.$emit('update-cart');
                         })
                         .catch(() => {});
                 },
-
 
                 storeShipping(params, { resetForm }) {
                     let selectedAddress = this.customerAddresses.find(address => {
@@ -226,13 +203,11 @@
                         },
                     })
                         .then(() => {
+                            this.$emitter.emit('update-cart');
+
                             resetForm();
 
                             this.get();
-
-                            this.shippingAddress.isShowShippingForm = false;
-
-                            this.$emit('update-cart');
                         })
                         .catch(() => {});
                 },
@@ -251,20 +226,28 @@
                             address_id: this.selectedAddresses.shipping_address_id,
                         }
                     })
-                        .then(() => {
+                        .then((response) => {
+                            if (response.data.data.shippingMethods) {
+                                this.$emitter.emit('shipping-methods', response.data.data.shippingMethods);
+
+                                this.$emitter.emit('is-show-shipping-methods', true);
+
+                                this.$emitter.emit('is-shipping-loading', false);
+                            }
+
+                            if (response.data.data.payment_methods) {
+                                this.$emitter.emit('payment-methods', response.data.data.payment_methods);
+
+                                this.$emitter.emit('is-show-payment-methods', true);
+
+                                this.$emitter.emit('is-payment-loading', false);
+                            }
+
+                            this.$emitter.emit('update-cart');
+
                             resetForm();
-
-                            this.get();
-
-                            this.shippingAddress.isShowShippingForm = false;
-
-                            this.$emit('update-cart');
                         })
                         .catch(() => {});
-                },
-
-                updateCartAddress(params) {
-                    console.log(params);
                 },
 
                 haveStates(addressType) {

@@ -28,7 +28,7 @@
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 rules="required"
                                 :value="address.id"
-                                :checked="address.cart_id"
+                                :checked="address.id"
                                 v-model="selectedAddresses.billing_address_id"
                             />
 

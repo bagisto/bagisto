@@ -48,7 +48,7 @@
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
-        <v-checkout @update-cart="getOrderSummary($event)">
+        <v-checkout>
             <!-- Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage />
         </v-checkout>
@@ -101,6 +101,9 @@
 
                 mounted() {
                     this.getOrderSummary();
+
+                    // update cart when emit the update-cart event.
+                    this.$emitter.emit('update-cart', this.getOrderSummary());
                 }, 
 
                 methods: {

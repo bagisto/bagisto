@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.shipping.method.before') !!}
 
-<v-shipping-method ref="vShippingMethod">
+<v-shipping-method>
     <!-- Shipping Method Shimmer Effect -->
     <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-method>
@@ -13,12 +13,12 @@
         id="v-shipping-method-template"
     >
         <div class="mb-7">
-            <template v-if="! isShowShippingMethod && isShippingMethodLoading">
+            <template v-if="! isShowShippingMethods && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.shipping-method />
             </template>
 
-            <template v-if="isShowShippingMethod">
+            <template v-if="isShowShippingMethods">
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.before') !!}
 
                 <x-shop::accordion class="!border-b-0">
@@ -89,33 +89,35 @@
                 return {
                     shippingMethods: [],
 
-                    isShowShippingMethod: false,
+                    isShowShippingMethods: false,
 
                     isShippingMethodLoading: false,
                 }
             },
 
+            mounted() {
+                this.$emitter.on('is-shipping-loading', (value) => this.isShippingMethodLoading = value);
+
+                this.$emitter.on('is-show-shipping-methods', (value) => this.isShowShippingMethods = value);
+                
+                this.$emitter.on('shipping-methods', (methods) => this.shippingMethods = methods);
+            },
+
             methods: {
                 store(selectedShippingMethod) {
-                    this.$parent.$refs.vCartSummary.canPlaceOrder = false;
-
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-
-                    this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
+                    this.$emitter.emit('is-payment-loading', true);
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
                             shipping_method: selectedShippingMethod,
                         })
                         .then(response => {
-                            this.$parent.getOrderSummary();
-                            
-                            this.$emitter.emit('after-shipping-method-selected', selectedShippingMethod);
+                            if (response.data.payment_methods) {
+                                this.$emitter.emit('payment-methods', response.data.payment_methods);
 
-                            this.$parent.$refs.vPaymentMethod.payment_methods = response.data.payment_methods;
-                                
-                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+                                this.$emitter.emit('is-show-payment-methods', true);
 
-                            this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
+                                this.$emitter.emit('is-payment-loading', false);
+                            }
                         })
                         .catch(error => {});
                 },
