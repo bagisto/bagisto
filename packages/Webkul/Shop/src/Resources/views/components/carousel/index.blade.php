@@ -87,7 +87,12 @@
             mounted() {
                 this.slider = this.$refs.sliderContainer;
 
-                this.slides = Array.from(this.$refs.slide);
+                if (
+                    this.$refs.slide
+                    && typeof this.$refs.slide[Symbol.iterator] === 'function'
+                ) {
+                    this.slides = Array.from(this.$refs.slide);
+                }
 
                 this.init();
 
