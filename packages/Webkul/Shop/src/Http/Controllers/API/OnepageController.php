@@ -11,7 +11,6 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Requests\Customer\CustomerAddressForm;
 use Webkul\Shop\Http\Resources\CartResource;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class OnepageController extends APIController
 {
@@ -22,8 +21,7 @@ class OnepageController extends APIController
      */
     public function __construct(
         protected OrderRepository $orderRepository,
-        protected CustomerRepository $customerRepository,
-        protected CustomerAddressRepository $customerAddressRepository
+        protected CustomerRepository $customerRepository
     ) {
     }
 
@@ -44,10 +42,8 @@ class OnepageController extends APIController
     {
         $data = $request->all();
 
-        $customer = auth()->guard('customer');
-
         if (
-            ! $customer->check()
+            ! auth()->guard('customer')->check()
             && ! Cart::getCart()->hasGuestCheckoutItems()
         ) {
             return new JsonResource([

@@ -92,39 +92,34 @@
                     isSameAsBilling: false,
 
                     isAddressLoading: true,
+                    
+                    tempAddressId: 1,
                 };
             },
 
             mounted() {
+                this.init();
+
                 this.get();
 
                 this.getCountries();
             },
 
+            watch: {
+                selectedAddresses: {
+                    handler(newQuestion) {
+                        this.resetState();
+                    },
+                    
+                    deep: true
+                }
+            },
+            
             computed: {
                 savedBillingAddresses() {
                     const addresses = [];
 
-                    this.cartAddresses.billing = this.cart.billing_address;
-
-                    if (this.cartAddresses.billing) {
-                        this.cartAddresses.billing.default_address = true;
-
-                        addresses.push(this.cartAddresses.billing);
-                    }
-
-                    this.customerAddresses.forEach((address) => {
-                        if (
-                            this.customer.id
-                            && this.cartAddresses?.billing?.cart_id
-                        ) {
-                            return;
-                        }
-
-                        address.default_address = false;
-
-                        addresses.push(address);
-                    });
+                    this.customerAddresses.forEach((address) => addresses.push(address));
 
                     return addresses;
                 },
@@ -132,23 +127,23 @@
                 savedShippingAddresses() {
                     const addresses = [];
 
-                    this.cartAddresses.shipping = this.cart.shipping_address;
-
-                    if (this.cartAddresses.shipping) {
-                        this.cartAddresses.shipping.default_address = true;
-
-                        addresses.push(this.cartAddresses.shipping);
-                    }
-
-                    this.customerAddresses.forEach((address) => {
-                        addresses.push(address);
-                    });
+                    this.customerAddresses.forEach((address) => addresses.push(address));
 
                     return addresses;
                 },
             },
 
             methods: {
+                init() {
+                    const storedAddresses = localStorage.getItem('customerAddresses');
+
+                    if (storedAddresses) {
+                        this.customerAddresses = JSON.parse(storedAddresses);
+
+                        this.tempAddressId = this.customerAddresses.length + 1;
+                    }
+                },
+
                 get() {
                     this.isAddressLoading = true;
 
@@ -168,41 +163,27 @@
                 },
 
                 store(params, { resetForm }) {
-                    this.customerAddresses.forEach((address) => {
-                        const propertiesToCopy = ['email', 'first_name', 'last_name', 'country', 'phone', 'city', 'state', 'postcode', 'company_name'];
+                    if (! this.customer) {
+                        params[params.type].id = this.tempAddressId;
 
-                        if (address.id == this.selectedAddresses.billing.id) {
-                            if (! params.billing) {
-                                params.billing = {};
-                            }
+                        this.customerAddresses.push(params[params.type]);
 
-                            params.billing.address1 = [address.address1];
+                        localStorage.setItem('customerAddresses', JSON.stringify(this.customerAddresses));
 
-                            propertiesToCopy['use_for_shipping'] = true;
+                        this.tempAddressId++;
 
-                            propertiesToCopy.forEach((property) => {
-                                if (address[property]) {
-                                    params.billing[property] = address[property];
-                                }
-                            });
-                        }
+                        this.addNewBillingAddress = false;
 
-                        if (address.id == this.selectedAddresses.shipping.id) {
-                            if (! params.shipping) {
-                                params.shipping = {};
-                            }
+                        this.shippingAddress.isShowShippingForm = false;
 
-                            params.shipping.address1 = [address.address1];
+                        return;
+                    }
 
-                            propertiesToCopy.forEach((property) => {
-                                if (address[property]) {
-                                    params.billing[property] = address[property];
-                                }
-                            });
-                        }
-                    });
+                    if (localStorage.getItem('customerAddresses')) {
+                        localStorage.removeItem('customerAddresses');
+                    }
 
-                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
+                    this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params[params.type])
                         .then((_) => {
                             this.$emitter.emit('update-cart-summary');
 
@@ -218,7 +199,9 @@
                 },
 
                 proceed() {
-                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}',  {
+                    this.$emitter.emit('is-shipping-loading', true);
+
+                    let params = {
                         billing: {
                             address1: [''],
 
@@ -230,7 +213,15 @@
 
                             address_id: this.selectedAddresses.shipping.id,
                         }
-                    })
+                    };
+
+                    if (! this.customer) {
+                        params.billing = this.customerAddresses.find((value) => this.selectedAddresses.billing.id = value.id);
+
+                        params.shipping = this.customerAddresses.find((value) => this.selectedAddresses.shipping.id = value.id);
+                    }
+
+                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
                         .then((response) => {
                             if (response.data.data.shippingMethods) {
                                 this.$emitter.emit('shipping-methods', response.data.data.shippingMethods);
@@ -266,6 +257,12 @@
                         })
                         .catch(() => {});
                 },
+
+                resetState() {
+                    this.$emitter.emit('is-show-shipping-methods', false);
+
+                    this.$emitter.emit('is-show-payment-methods', false);
+                }
             },
         });
     </script>

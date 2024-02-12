@@ -23,12 +23,12 @@
                             <v-field
                                 type="radio"
                                 :id="`selectedAddresses.billing_address_id${address.id}`"
-                                :name="`selectedAddresses.billing_address_id${address.id}`"
+                                name="selectedAddresses.billing_address_id"
+                                :value="address.id"
                                 class="hidden peer"
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 rules="required"
-                                :checked="address.default_address"
-                                v-model="selectedAddresses.billing.id"
+                                :checked="selectedAddresses.billing.id"
                             />
 
                             <label 
@@ -161,6 +161,14 @@
             >
                 <form @submit="handleSubmit($event, store)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
+
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="type"
+                            value="billing"
+                        />
+                    </x-shop::form.control-group>
 
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.control
@@ -407,40 +415,6 @@
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
-
-                    <div class="grid gap-2.5 pb-4">
-                        @auth('customer')
-                            <div class="flex">
-                                <v-field
-                                    type="hidden"
-                                    name="billing.save_as_address"
-                                    value="0"
-                                >
-                                </v-field>
-
-                                <v-field
-                                    type="checkbox"
-                                    class="hidden peer"
-                                    id="billing.save_as_address"
-                                    name="billing.save_as_address"
-                                    value="1"
-                                >
-                                </v-field>
-                                
-                                <label
-                                    class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    for="billing.save_as_address"
-                                ></label>
-                                
-                                <label
-                                    for="billing.save_as_address"
-                                    class="ltr:ml-1 rtl:mr-1 cursor-pointer"
-                                >
-                                    @lang('shop::app.checkout.onepage.addresses.billing.save-address')
-                                </label>
-                            </div>
-                        @endauth
-                    </div>
 
                     <div class="flex justify-end mt-4">
                         <button

@@ -28,7 +28,7 @@
                                 class="hidden peer"
                                 label="@lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')"
                                 rules="required"
-                                :checked="address.default_address"
+                                :checked="selectedAddresses.shipping.id"
                                 v-model="selectedAddresses.shipping.id"
                             />
 
@@ -135,6 +135,14 @@
             >
                 <form @submit="handleSubmit($event, store)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.before') !!}
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="type"
+                            value="shipping"
+                        />
+                    </x-shop::form.control-group>
+
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
                             @lang('shop::app.checkout.onepage.addresses.shipping.company-name')
@@ -365,40 +373,6 @@
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.phone.after') !!}
-
-                    <div class="grid gap-2.5 pb-4">
-                        @auth('customer')
-                            <div class="flex">
-                                <v-field
-                                    type="hidden"
-                                    name="shipping.save_as_address"
-                                    value="0"
-                                >
-                                </v-field>
-
-                                <v-field
-                                    type="checkbox"
-                                    class="hidden peer"
-                                    id="shipping.save_as_address"
-                                    name="shipping.save_as_address"
-                                    value="1"
-                                >
-                                </v-field>
-                                
-                                <label
-                                    class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    for="shipping.save_as_address"
-                                ></label>
-                                
-                                <label
-                                    for="shipping.save_as_address"
-                                    class="ltr:ml-1 rtl:mr-1 cursor-pointer"
-                                >
-                                    @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
-                                </label>
-                            </div>
-                        @endauth
-                    </div>
 
                     <div class="flex justify-end mt-4">
                         <button
