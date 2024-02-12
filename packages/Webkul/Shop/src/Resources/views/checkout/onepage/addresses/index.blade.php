@@ -105,13 +105,13 @@
                 savedBillingAddresses() {
                     const addresses = [];
 
-                    // this.cartAddresses.billing = this.cart.billing_address;
+                    this.cartAddresses.billing = this.cart.billing_address;
 
-                    // if (this.cartAddresses.billing) {
-                    //     this.cartAddresses.billing.default_address = true;
+                    if (this.cartAddresses.billing) {
+                        this.cartAddresses.billing.default_address = true;
 
-                    //     addresses.push(this.cartAddresses.billing);
-                    // }
+                        addresses.push(this.cartAddresses.billing);
+                    }
 
                     this.customerAddresses.forEach((address) => {
                         if (
@@ -132,24 +132,15 @@
                 savedShippingAddresses() {
                     const addresses = [];
 
-                    // this.cartAddresses.shipping = this.cart.shipping_address;
+                    this.cartAddresses.shipping = this.cart.shipping_address;
 
-                    // if (this.cartAddresses.shipping) {
-                    //     this.cartAddresses.shipping.default_address = true;
+                    if (this.cartAddresses.shipping) {
+                        this.cartAddresses.shipping.default_address = true;
 
-                    //     addresses.push(this.cartAddresses.shipping);
-                    // }
+                        addresses.push(this.cartAddresses.shipping);
+                    }
 
                     this.customerAddresses.forEach((address) => {
-                        if (
-                            this.customer.id
-                            && this.cartAddresses?.shipping?.cart_id
-                        ) {
-                            return;
-                        }
-
-                        address.default_address = false;
-
                         addresses.push(address);
                     });
 

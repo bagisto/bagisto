@@ -27,8 +27,7 @@
                                 class="hidden peer"
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 rules="required"
-                                :value="address.id"
-                                :checked="address.id"
+                                :checked="address.default_address"
                                 v-model="selectedAddresses.billing.id"
                             />
 

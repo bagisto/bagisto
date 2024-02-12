@@ -29,7 +29,7 @@
                                 label="@lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')"
                                 rules="required"
                                 :checked="address.default_address"
-                                v-model="selectedAddresses.shipping_address_id"
+                                v-model="selectedAddresses.shipping.id"
                             />
 
                             <label 
