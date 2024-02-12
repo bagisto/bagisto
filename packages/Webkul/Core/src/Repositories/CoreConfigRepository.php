@@ -2,8 +2,10 @@
 
 namespace Webkul\Core\Repositories;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\CoreConfigField;
 
@@ -115,6 +117,56 @@ class CoreConfigRepository extends Repository
         }
 
         Event::dispatch('core.configuration.save.after');
+    }
+
+    /**
+     * Search configuration.
+     *
+     * @param  array  $items
+     * @param  string  $searchTerm
+     * @return array
+     */
+    public function search($items, $searchTerm, $path = [])
+    {
+        $results = [];
+
+        foreach ($items as $configuration) {
+            $title = trans($configuration['title'] ?? ($configuration['name'] ?? ''));
+
+            if (
+                stripos($title, $searchTerm) !== false
+                && count($path)
+            ) {
+                if (isset($path[1])) {
+                    $queryParam = $path[1]['key'];
+                } else {
+                    $queryParam = $configuration['key'];
+                }
+
+                $results[] = [
+                    'title' => implode(' > ', [...Arr::pluck($path, 'title'), $title]),
+                    'url'   => route('admin.configuration.index', Str::replace('.', '/', $queryParam)),
+                ];
+            }
+
+            if (
+                ! empty($configuration['children'])
+                || ! empty($configuration['fields'])
+            ) {
+                $children = ! empty($configuration['children'])
+                    ? $configuration['children']
+                    : $configuration['fields'];
+
+                $tempPath = array_merge($path, [[
+                    'key'   => $configuration['key'] ?? null,
+                    'title' => trans($configuration['name'] ?? ''),
+                ]]);
+
+                $results = array_merge($results, $this->search($children, $searchTerm, $tempPath));
+            }
+        }
+
+        return $results;
     }
 
     /**
