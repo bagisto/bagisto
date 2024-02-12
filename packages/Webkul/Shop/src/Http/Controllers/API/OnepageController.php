@@ -5,13 +5,13 @@ namespace Webkul\Shop\Http\Controllers\API;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Requests\Customer\CustomerAddressForm;
 use Webkul\Shop\Http\Resources\CartResource;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 class OnepageController extends APIController
 {

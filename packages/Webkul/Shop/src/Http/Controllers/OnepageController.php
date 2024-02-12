@@ -67,7 +67,7 @@ class OnepageController extends Controller
         if (! $cart->checkMinimumOrder()) {
             session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', [
                 'amount' => core()->currency($minimumOrderAmount),
-            ]));    
+            ]));
 
             return redirect()->back();
         }

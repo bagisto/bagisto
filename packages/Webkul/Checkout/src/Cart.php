@@ -395,13 +395,8 @@ class Cart
         return true;
     }
 
-      /**
+    /**
      * Save addresses when requested.
-     *
-     * @param  array  $data
-     * @param  array  $billingAddress
-     * @param  array  $shippingAddress
-     * @return void
      */
     private function saveAddressesWhenRequested(
         array $data,
