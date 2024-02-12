@@ -20,7 +20,7 @@
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in savedBillingAddresses"
                         >
-                            <input
+                            <v-field
                                 type="radio"
                                 :id="`selectedAddresses.billing_address_id${address.id}`"
                                 :name="`selectedAddresses.billing_address_id${address.id}`"
