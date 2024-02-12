@@ -22,12 +22,13 @@
                         >
                             <v-field
                                 type="radio"
+                                class="hidden peer"
                                 :id="`selectedAddresses.billing_address_id${address.id}`"
                                 name="selectedAddresses.billing_address_id"
-                                :value="address.id"
-                                class="hidden peer"
-                                label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 rules="required"
+                                v-model="selectedAddresses.billing.id"
+                                :value="address.id"
+                                label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                                 :checked="selectedAddresses.billing.id"
                             />
 
@@ -100,11 +101,11 @@
                     >
                         <input
                             type="checkbox"
-                            name="is_use_for_shipping"
-                            id="isUsedForShipping"
                             class="hidden peer"
-                            label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
+                            id="isUsedForShipping"
+                            name="is_use_for_shipping"
                             v-model="shippingAddress.sameAsBilling"
+                            label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                         />
                 
                         <label 
