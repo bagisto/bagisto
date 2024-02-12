@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Remboursement d’ajustement',
                 'amount-per-unit'             => ':amount par unité x :qty quantité',
                 'create-success'              => 'Remboursement créé avec succès',
+                'creation-error'              => 'La création de remboursement n\'est pas autorisée.',
                 'discount-amount'             => 'Montant de réduction',
                 'grand-total'                 => 'Total général',
                 'invalid-qty'                 => 'Nous avons trouvé une quantité invalide pour facturer des articles.',

@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Rimborso di Adeguamento',
                 'amount-per-unit'             => ':amount Per Unità x :qty Quantità',
                 'create-success'              => 'Rimborso creato con successo',
+                'creation-error'              => 'La creazione di rimborsi non è consentita.',
                 'discount-amount'             => 'Importo Sconto',
                 'grand-total'                 => 'Totale Generale',
                 'invalid-qty'                 => 'Abbiamo riscontrato una quantità non valida per la fatturazione degli articoli.',
