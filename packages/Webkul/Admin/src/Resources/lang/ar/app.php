@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | العميل <b>تم إعلامه</b>',
                 'discount'              => 'الخصم - :discount',
                 'download-pdf'          => 'تحميل PDF',
+                'fraud'                 => 'احتيال',
                 'grand-total'           => 'الإجمالي الكبير - :grand-total ',
                 'invoice-id'            => 'الفاتورة #:invoice',
                 'invoices'              => 'الفواتير',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'الدفع والشحن',
                 'payment-method'        => 'طريقة الدفع',
                 'pending'               => 'قيد الانتظار',
+                'pending_payment'       => 'في انتظار الدفع',
                 'per-unit'              => 'للوحدة',
                 'price'                 => 'السعر - :price',
                 'processing'            => 'جارٍ المعالجة',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'لا يجوز أن يكون حجم :attribute أكبر من :max كيلوبايت. الرجاء اختيار ملف أصغر.',
                     'info'  => 'يجب أن يكون حجم الفيديو الأقصى مثل :size',
                     'title' => 'مقاطع الفيديو',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'سعر الضريبة',
                     'title'        => 'أسعار الضرائب',
 
-                    'import' => [
-                        'duplicate-error'  => 'يجب أن يكون المعرف فريدًا ، معرف مكرر :identifier في الصف :position.',
-                        'enough-row-error' => 'الملف لا يحتوي على عدد كافٍ من الصفوف',
-                        'import-btn'       => 'استيراد',
-                        'title'            => 'تحميل',
-                        'upload-error'     => 'يجب أن يكون الملف من النوع: xls، xlsx، csv.',
-                        'upload-success'   => 'تم تحميل معدل الضريبة بنجاح',
-                        'validation'       => 'الأنواع المسموح بها: xls، xlsx، csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'البلد',
                         'delete'     => 'حذف',
@@ -3881,6 +3874,7 @@ return [
         'export'           => 'تصدير',
         'no-records'       => 'لا يوجد شيء للتصدير',
         'xls'              => 'XLS',
+        'xlsx'             => 'إكس إل إس إكس',
     ],
 
     'validations' => [

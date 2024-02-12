@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Клієнт <b>повідомлений</b>',
                 'discount'              => 'Знижка - :discount',
                 'download-pdf'          => 'Завантажити PDF',
+                'fraud'                 => 'Шахрайство',
                 'grand-total'           => 'Загальний підсумок - :grand_total',
                 'invoice-id'            => 'Рахунок #:invoice',
                 'invoices'              => 'Рахунки',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Оплата та доставка',
                 'payment-method'        => 'Метод оплати',
                 'pending'               => 'В очікуванні',
+                'pending_payment'       => 'Очікування платежу',
                 'per-unit'              => 'За одиницю',
                 'price'                 => 'Ціна - :price',
                 'processing'            => 'Обробка',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Параметр :attribute не може перевищувати :max кілобайт. Виберіть менший файл.',
                     'title' => 'Відео',
                     'info'  => 'Максимальний розмір відео повинен бути приблизно :size',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'Податкова ставка',
                     'title'        => 'Податкові ставки',
 
-                    'import' => [
-                        'duplicate-error'  => 'Ідентифікатор повинен бути унікальним, дубльований ідентифікатор :identifier в рядку :position.',
-                        'enough-row-error' => 'Файл не має достатньо рядків',
-                        'import-btn'       => 'Імпорт',
-                        'title'            => 'Завантажити',
-                        'upload-error'     => 'Файл повинен бути файлом типу: xls, xlsx, csv.',
-                        'upload-success'   => 'Ставка податку успішно завантажена',
-                        'validation'       => 'Дозволений тип: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Країна',
                         'delete'     => 'Видалити',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Завантажити',
-        'export'           => 'Експорт',
-        'no-records'       => 'Нічого експортувати',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Завантажити',
+        'export'     => 'Експорт',
+        'no-records' => 'Нічого експортувати',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Client <b>notifié</b>',
                 'discount'              => 'Réduction - :discount',
                 'download-pdf'          => 'Télécharger le PDF',
+                'fraud'                 => 'Fraude',
                 'grand-total'           => 'Total général - :grand_total',
                 'invoice-id'            => 'Facture n°:invoice',
                 'invoices'              => 'Factures',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Paiement et expédition',
                 'payment-method'        => 'Méthode de paiement',
                 'pending'               => 'En attente',
+                'pending_payment'       => 'En attente de paiement',
                 'per-unit'              => 'Par unité',
                 'price'                 => 'Prix - :price',
                 'processing'            => 'En cours de traitement',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Erreur : La taille de :attribute ne doit pas dépasser :max kilo-octets. Veuillez choisir un fichier plus petit.',
                     'info'  => 'La taille maximale de la vidéo doit être d\'environ :size',
                     'title' => 'Vidéos',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'Taux de taxe',
                     'title'        => 'Taux de taxe',
 
-                    'import' => [
-                        'duplicate-error'  => "L'identifiant doit être unique, identifiant en double :identifier à la ligne :position.",
-                        'enough-row-error' => 'Le fichier n\'a pas assez de lignes',
-                        'import-btn'       => 'Importer',
-                        'title'            => 'Télécharger',
-                        'upload-error'     => 'Le fichier doit être de type : xls, xlsx, csv.',
-                        'upload-success'   => 'Taux de taxe téléchargé avec succès',
-                        'validation'       => 'Types autorisés : xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Pays',
                         'delete'     => 'Supprimer',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Télécharger',
-        'export'           => 'Exporter',
-        'no-records'       => 'Rien à exporter',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Télécharger',
+        'export'     => 'Exporter',
+        'no-records' => 'Rien à exporter',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

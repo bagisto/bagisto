@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Klant <b>Geïnformeerd</b>',
                 'discount'              => 'Korting - :discount',
                 'download-pdf'          => 'PDF Downloaden',
+                'fraud'                 => 'Fraude',
                 'grand-total'           => 'Totaalbedrag - :grand_total',
                 'invoice-id'            => 'Factuur #:invoice',
                 'invoices'              => 'Facturen',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Betaling en Verzending',
                 'payment-method'        => 'Betaalmethode',
                 'pending'               => 'In behandeling',
+                'pending_payment'       => 'In afwachting van betaling',
                 'per-unit'              => 'Per Eenheid',
                 'price'                 => 'Prijs - :price',
                 'processing'            => 'Verwerking',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Fout: :attribute mag niet groter zijn dan :max kilobytes. Kies alstublieft een kleiner bestand.',
                     'info'  => 'De maximale grootte van de video moet zijn zoals :size',
                     'title' => 'Video\'s',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'Belastingtarief',
                     'title'        => 'Belastingtarieven',
 
-                    'import' => [
-                        'duplicate-error'  => 'Identificatie moet uniek zijn, dubbele identificatie :identifier in rij :position.',
-                        'enough-row-error' => 'Bestand heeft niet genoeg rijen',
-                        'import-btn'       => 'Importeren',
-                        'title'            => 'Uploaden',
-                        'upload-error'     => 'Het bestand moet van het type: xls, xlsx, csv zijn.',
-                        'upload-success'   => 'Belastingtarief succesvol geüpload',
-                        'validation'       => 'Toegestane type: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Land',
                         'delete'     => 'Verwijderen',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Downloaden',
-        'export'           => 'Exporteer',
-        'no-records'       => 'Niets te exporteren',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Downloaden',
+        'export'     => 'Exporteer',
+        'no-records' => 'Niets te exporteren',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

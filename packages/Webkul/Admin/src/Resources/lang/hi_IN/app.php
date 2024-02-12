@@ -1,4 +1,4 @@
-<?php
+hindi<?php
 
 return [
     'users' => [
@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | ग्राहक <b>सूचित</b>',
                 'discount'              => 'डिस्काउंट - :discount',
                 'download-pdf'          => 'पीडीएफ डाउनलोड करें',
+                'fraud'                 => 'धोखा',
                 'grand-total'           => 'कुल योग - :grand_total',
                 'invoice-id'            => 'चालान #:invoice',
                 'invoices'              => 'चालान',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'भुगतान और शिपिंग',
                 'payment-method'        => 'भुगतान विधि',
                 'pending'               => 'बकाया',
+                'pending_payment'       => 'लंबित भुगतान',
                 'per-unit'              => 'प्रति इकाई',
                 'price'                 => 'मूल्य - :price',
                 'processing'            => 'प्रसंस्करण',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'त्रुटि: :attribute :max किलोबाइट से अधिक नहीं हो सकता। कृपया एक छोटा फ़ाइल चुनें।',
                     'info'  => 'अधिकतम वीडियो आकार का होना चाहिए :size की तरह',
                     'title' => 'वीडियो',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'कर दर',
                     'title'        => 'कर दरें',
 
-                    'import' => [
-                        'duplicate-error'  => 'पहचानकर्ता अद्वितीय होना चाहिए, पंक्ति:position पर दोहरा पहचानकर्ता :identifier।',
-                        'enough-row-error' => 'फ़ाइल में पर्याप्त पंक्तियाँ नहीं हैं',
-                        'import-btn'       => 'आयात करें',
-                        'title'            => 'अपलोड',
-                        'upload-error'     => 'फ़ाइल का प्रकार: xls, xlsx, csv होना चाहिए।',
-                        'upload-success'   => 'कर दर सफलतापूर्वक अपलोड हो गई है',
-                        'validation'       => 'अनुमत टाइप: xls, xlsx, csv।',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'देश',
                         'delete'     => 'हटाएं',
@@ -3877,11 +3870,13 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'डाउनलोड करें',
-        'export'           => 'निर्यात',
-        'no-records'       => 'निर्यात के लिए कुछ नहीं है',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'डाउनलोड करें',
+        'export'     => 'निर्यात',
+        'no-records' => 'निर्यात के लिए कुछ नहीं है',
+        'xls'        => 'XLS',
+        'xlsx'       => 'एक्सएलएसएक्स',
+
     ],
 
     'validations' => [

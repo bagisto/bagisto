@@ -93,7 +93,17 @@ class ThemeController extends Controller
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
         ]);
 
-        $data = request()->all();
+        $locale = request('locale');
+
+        $data = request()->only(
+            'locale',
+            'type',
+            'name',
+            'sort_order',
+            'channel_id',
+            'status',
+            $locale
+        );
 
         Event::dispatch('theme_customization.update.before', $id);
 

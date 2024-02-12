@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | مشتری <b>آگاه شد</b>',
                 'discount'              => 'تخفیف - :discount',
                 'download-pdf'          => 'دانلود PDF',
+                'fraud'                 => 'تقلب',
                 'grand-total'           => 'مجموع کل - :grand_total',
                 'invoice-id'            => 'شماره فاکتور #:invoice',
                 'invoices'              => 'فاکتورها',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'پرداخت و ارسال',
                 'payment-method'        => 'روش پرداخت',
                 'pending'               => 'در انتظار',
+                'pending_payment'       => 'در انتظار پرداخت',
                 'per-unit'              => 'در واحد',
                 'price'                 => 'قیمت - :price',
                 'processing'            => 'در حال پردازش',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'خطا: اندازه :attribute نباید بیشتر از :max کیلوبایت باشد. لطفاً یک فایل کوچکتر انتخاب کنید.',
                     'info'  => 'حداکثر اندازه ویدیو باید مانند :size باشد.',
                     'title' => 'ویدیوها',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'نرخ مالیات',
                     'title'        => 'نرخ‌های مالیاتی',
 
-                    'import' => [
-                        'duplicate-error'  => 'شناسه باید یکتا باشد، شناسه تکراری :identifier در ردیف :position.',
-                        'enough-row-error' => 'تعداد کافی از ردیف‌ها در فایل وجود ندارد',
-                        'import-btn'       => 'وارد کردن',
-                        'title'            => 'آپلود',
-                        'upload-error'     => 'فایل باید از نوع: xls، xlsx، csv باشد.',
-                        'upload-success'   => 'نرخ مالیات با موفقیت آپلود شد',
-                        'validation'       => 'انواع مجاز: xls، xlsx، csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'کشور',
                         'delete'     => 'حذف',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'دانلود',
-        'export'           => 'خروجی گرفتن',
-        'no-records'       => 'چیزی برای خروجی گرفتن وجود ندارد',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'دانلود',
+        'export'     => 'خروجی گرفتن',
+        'no-records' => 'چیزی برای خروجی گرفتن وجود ندارد',
+        'xls'        => 'XLS',
+        'xlsx'       => 'اکس ال اس ایکس',
     ],
 
     'validations' => [

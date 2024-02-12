@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | 客户 <b>已通知</b>',
                 'discount'              => '折扣 - :discount',
                 'download-pdf'          => '下载PDF',
+                'fraud'                 => '欺诈罪',
                 'grand-total'           => '总计 - :grand_total',
                 'invoice-id'            => '发票 #:invoice',
                 'invoices'              => '发票',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => '付款和送货',
                 'payment-method'        => '付款方式',
                 'pending'               => '待处理',
+                'pending_payment'       => '待付款',
                 'per-unit'              => '每单位',
                 'price'                 => '价格 - :price',
                 'processing'            => '处理中',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute 不能大于:max KB。请选择较小的文件。',
                     'title' => '视频',
                     'info'  => '最大视频尺寸应为 :size',
                 ],
@@ -2512,16 +2515,6 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
-                    'import' => [
-                        'duplicate-error'  => '标识符必须是唯一的，在行 :position 重复标识符 :identifier。',
-                        'enough-row-error' => '文件没有足够的行',
-                        'import-btn'       => '导入',
-                        'title'            => '上传',
-                        'upload-error'     => '文件必须是类型：xls、xlsx、csv。',
-                        'upload-success'   => '税率成功上传',
-                        'validation'       => '允许的类型：xls、xlsx、csv。',
-                    ],
-
                     'datagrid' => [
                         'country'    => '国家',
                         'delete'     => '删除',
@@ -3875,11 +3868,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => '下载',
-        'export'           => '导出',
-        'no-records'       => '没有要导出的内容',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => '下载',
+        'export'     => '导出',
+        'no-records' => '没有要导出的内容',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

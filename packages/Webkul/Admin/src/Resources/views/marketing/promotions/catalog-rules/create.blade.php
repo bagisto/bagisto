@@ -687,10 +687,10 @@
                                     'operator': '<=',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.create.equals-or-less-than')"
                                 }, {
-                                    'operator': '<=',
+                                    'operator': '>',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.create.greater-than')"
                                 }, {
-                                    'operator': '<=',
+                                    'operator': '<',
                                     'label': "@lang('admin::app.marketing.promotions.catalog-rules.create.less-than')"
                                 }],
                             'decimal': [{

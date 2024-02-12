@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | 顧客 <b>通知済み</b>',
                 'discount'              => '割引 - :discount',
                 'download-pdf'          => 'PDFをダウンロード',
+                'fraud'                 => '詐欺',
                 'grand-total'           => '合計金額 - :grand_total',
                 'invoice-id'            => '請求書 #:invoice',
                 'invoices'              => '請求書',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => '支払いと発送',
                 'payment-method'        => '支払い方法',
                 'pending'               => '保留中',
+                'pending_payment'       => '保留中のお支払い',
                 'per-unit'              => '単位あたり',
                 'price'                 => '価格 - :price',
                 'processing'            => '処理中',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'エラー：:attribute は :max キロバイトを超えてはいけません。小さいファイルを選択してください。',
                     'info'  => '最大ビデオサイズは :size となります',
                     'title' => 'ビデオ',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => '税率',
                     'title'        => '税率',
 
-                    'import' => [
-                        'duplicate-error'  => '識別子はユニークでなければなりません、行:positionで重複する識別子 :identifier。',
-                        'enough-row-error' => 'ファイルに十分な行がありません',
-                        'import-btn'       => 'インポート',
-                        'title'            => 'アップロード',
-                        'upload-error'     => 'ファイルの種類は: xls、xlsx、csvでなければなりません。',
-                        'upload-success'   => '税率が正常にアップロードされました',
-                        'validation'       => '許可されたタイプ: xls、xlsx、csv。',
-                    ],
-
                     'datagrid' => [
                         'country'    => '国',
                         'delete'     => '削除',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'ダウンロード',
-        'export'           => 'エクスポート',
-        'no-records'       => 'エクスポート対象がありません',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'ダウンロード',
+        'export'     => 'エクスポート',
+        'no-records' => 'エクスポート対象がありません',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

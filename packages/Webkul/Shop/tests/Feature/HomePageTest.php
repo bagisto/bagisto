@@ -120,6 +120,13 @@ it('should returns the search page of the products', function () {
         ->assertSeeText(trans('shop::app.search.title', ['query' => $query]));
 });
 
+it('should fails the validation error when provided wrong email address when subscribe to the shop', function () {
+    // Act and Assert
+    postJson(route('shop.subscription.store'))
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
+});
+
 it('should store the subscription of the shop', function () {
     // Act and Assert
     postJson(route('shop.subscription.store'), [
@@ -185,6 +192,15 @@ it('should store the products to the compare list', function () {
     ])
         ->assertOk()
         ->assertSeeText(trans('shop::app.compare.item-add-success'));
+});
+
+it('should fails the validation error when not provided product id when move the compare list item', function () {
+    // Act and Assert
+    $this->loginAsCustomer();
+
+    postJson(route('shop.api.compare.store'))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should remove product from compare list', function () {

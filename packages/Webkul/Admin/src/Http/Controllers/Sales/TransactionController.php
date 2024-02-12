@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -110,13 +111,13 @@ class TransactionController extends Controller
         if ($transactionTotal >= $invoice->base_grand_total) {
             $shipments = $this->shipmentRepository->where('order_id', $invoice->order_id)->first();
 
-            if (isset($shipments)) {
-                $this->orderRepository->updateOrderStatus($order, Order::STATUS_COMPLETED);
-            } else {
-                $this->orderRepository->updateOrderStatus($order, Order::STATUS_PROCESSING);
-            }
+            $status = isset($shipments)
+                ? Order::STATUS_COMPLETED
+                : Order::STATUS_PROCESSING;
 
-            $this->invoiceRepository->updateState($invoice, 'paid');
+            $this->orderRepository->updateOrderStatus($order, $status);
+
+            $this->invoiceRepository->updateState($invoice, Invoice::STATUS_PAID);
         }
 
         session()->flash('success', trans('admin::app.sales.transactions.index.create.transaction-saved'));
@@ -127,10 +128,9 @@ class TransactionController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function view($id)
+    public function view(int $id)
     {
         $transaction = $this->orderTransactionRepository->findOrFail($id);
 

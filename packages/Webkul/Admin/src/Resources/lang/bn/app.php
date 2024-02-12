@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | গ্রাহক <b> অবগত করেছেন </b>',
                 'discount'              => 'ছাড় - :discount',
                 'download-pdf'          => 'PDF ডাউনলোড করুন',
+                'fraud'                 => 'প্রতারণা',
                 'grand-total'           => 'মোট টোটাল - :grand_total',
                 'invoice-id'            => 'চালান #:invoice',
                 'invoices'              => 'চালান',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'পেমেন্ট এবং শিপিং',
                 'payment-method'        => 'পেমেন্ট পদ্ধতি',
                 'pending'               => 'মুলতবি',
+                'pending_payment'       => 'অপেক্ষারত পেমেন্ট',
                 'per-unit'              => 'প্রতি ইউনিট',
                 'price'                 => 'মূল্য - :price',
                 'processing'            => 'প্রসেসিং',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute এর আকার :max কিলোবাইটের বেশি হতে পারে না। দয়া করে একটি ছোট ফাইল চয়ন করুন।',
                     'info'  => 'সর্বাধিক ভিডিও আকার হওয়া উচিত :size মধ্যে',
                     'title' => 'ভিডিও',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'কর হার',
                     'title'        => 'কর হার',
 
-                    'import' => [
-                        'duplicate-error'  => 'পুনরায় চিহ্নিত অবশ্যই অদ্বিতীয়, সারি: অবস্থানে চিহ্নিত অদ্বিতীয় হতে হবে।',
-                        'enough-row-error' => 'ফাইলে যথেষ্ট সারি নেই',
-                        'import-btn'       => 'আমদানি',
-                        'title'            => 'আপলোড',
-                        'upload-error'     => 'ফাইল একটি ধরন: xls, xlsx, csv হতে হবে।',
-                        'upload-success'   => 'কর হার সফলভাবে আপলোড হয়েছে',
-                        'validation'       => 'অনুমোদিত প্রকার: xls, xlsx, csv।',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'দেশ',
                         'delete'     => 'মুছে ফেলুন',
@@ -3881,6 +3874,7 @@ return [
         'export'           => 'পর্যাপন্ন করুন',
         'no-records'       => 'পর্যাপন্ন কিছু নেই',
         'xls'              => 'XLS',
+        'xlsx'             => 'এক্সএলএসএক্স',
     ],
 
     'validations' => [

@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Müşteri <b>Bilgilendirildi</b>',
                 'discount'              => 'İndirim - :discount',
                 'download-pdf'          => 'PDF İndir',
+                'fraud'                 => 'Sahtekar',
                 'grand-total'           => 'Genel Toplam - :grand_total',
                 'invoice-id'            => 'Fatura #:invoice',
                 'invoices'              => 'Faturalar',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Ödeme ve Gönderim',
                 'payment-method'        => 'Ödeme Yöntemi',
                 'pending'               => 'Beklemede',
+                'pending_payment'       => 'bekleyen ödeme',
                 'per-unit'              => 'Birim Başı',
                 'price'                 => 'Fiyat - :price',
                 'processing'            => 'İşleniyor',
@@ -604,6 +606,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute :max kilobayttan büyük olamaz. Lütfen daha küçük bir dosya seçin.',
                     'title' => 'Videolar',
                     'info'  => 'Maksimum video boyutu :size gibi olmalıdır',
                 ],
@@ -2514,16 +2517,6 @@ return [
                     'tax-rate'     => 'Vergi Oranı',
                     'title'        => 'Vergi Oranları',
 
-                    'import' => [
-                        'duplicate-error'  => 'Kimlik benzersiz olmalı, satır :position\'da tekrarlanan kimlik :identifier.',
-                        'enough-row-error' => 'Dosyada yeterli satır yok',
-                        'import-btn'       => 'İçe Aktar',
-                        'title'            => 'Yükle',
-                        'upload-error'     => 'Dosya tipi: xls, xlsx, csv olmalıdır.',
-                        'upload-success'   => 'Vergi Oranı Başarıyla Yüklendi',
-                        'validation'       => 'İzin verilen Tür: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Ülke',
                         'delete'     => 'Sil',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'İndir',
-        'export'           => 'Dışa Aktar',
-        'no-records'       => 'Dışa aktarılacak hiçbir şey yok',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'İndir',
+        'export'     => 'Dışa Aktar',
+        'no-records' => 'Dışa aktarılacak hiçbir şey yok',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

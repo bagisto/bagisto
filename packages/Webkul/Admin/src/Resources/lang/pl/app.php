@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Klient <b>powiadomiony</b>',
                 'discount'              => 'Rabat - :discount',
                 'download-pdf'          => 'Pobierz PDF',
+                'fraud'                 => 'Oszustwo',
                 'grand-total'           => 'Suma ogólna - :grand_total',
                 'invoice-id'            => 'Faktura #:invoice',
                 'invoices'              => 'Faktury',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Płatność i dostawa',
                 'payment-method'        => 'Metoda płatności',
                 'pending'               => 'Oczekujący',
+                'pending_payment'       => 'Oczekująca płatność',
                 'per-unit'              => 'Za jednostkę',
                 'price'                 => 'Cena - :price',
                 'processing'            => 'Przetwarzanie',
@@ -599,6 +601,7 @@ return [
                 ],
 
                 'images' => [
+                    'error' => 'Błąd: :attribute nie może być większy niż :max kilobajtów. Proszę wybrać mniejszy plik.',
                     'info'  => 'A resolução da imagem deve ser de cerca de 560px X 609px',
                     'title' => 'Obrazy',
                 ],
@@ -2513,16 +2516,6 @@ return [
                     'tax-rate'     => 'Stawka Podatku',
                     'title'        => 'Stawki Podatków',
 
-                    'import' => [
-                        'duplicate-error'  => 'Identyfikator musi być unikalny, zduplikowany identyfikator :identifier w wierszu :position.',
-                        'enough-row-error' => 'Plik nie ma wystarczającej liczby wierszy',
-                        'import-btn'       => 'Importuj',
-                        'title'            => 'Wgraj',
-                        'upload-error'     => 'Plik musi być plikiem typu: xls, xlsx, csv.',
-                        'upload-success'   => 'Stawka podatku została pomyślnie załadowana',
-                        'validation'       => 'Dozwolony typ: xls, xlsx, csv.',
-                    ],
-
                     'datagrid' => [
                         'country'    => 'Kraj',
                         'delete'     => 'Usuń',
@@ -3876,11 +3869,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Pobierz',
-        'export'           => 'Eksport',
-        'no-records'       => 'Nic do wyeksportowania',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Pobierz',
+        'export'     => 'Eksport',
+        'no-records' => 'Nic do wyeksportowania',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

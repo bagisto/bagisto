@@ -129,7 +129,7 @@ class OrderRepository extends Repository
      * Cancel order. This method should be independent as admin also can cancel the order.
      *
      * @param  \Webkul\Sales\Models\Order|int  $orderOrId
-     * @return \Webkul\Sales\Contracts\Order
+     * @return bool
      */
     public function cancel($orderOrId)
     {
@@ -202,7 +202,7 @@ class OrderRepository extends Repository
      * Is order in completed state.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
-     * @return void
+     * @return bool
      */
     public function isInCompletedState($order)
     {
@@ -248,7 +248,7 @@ class OrderRepository extends Repository
      * Is order in cancelled state.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
-     * @return void
+     * @return bool
      */
     public function isInCanceledState($order)
     {
@@ -266,7 +266,7 @@ class OrderRepository extends Repository
      * Is order in closed state.
      *
      * @param  mixed  $order
-     * @return void
+     * @return bool
      */
     public function isInClosedState($order)
     {
