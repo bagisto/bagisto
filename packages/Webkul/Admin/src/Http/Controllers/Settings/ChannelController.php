@@ -67,8 +67,10 @@ class ChannelController extends Controller
 
             /* design */
             'theme'                 => 'nullable',
-            'logo.*'                => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
-            'favicon.*'             => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
+            'logo'                  => 'array',
+            'logo.*'                => 'image|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon'               => 'array',
+            'favicon.*'             => 'image|mimes:bmp,jpeg,jpg,png,webp,ico',
 
             /* seo */
             'seo_title'             => 'required|string',

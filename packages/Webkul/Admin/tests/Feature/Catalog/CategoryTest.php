@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
@@ -60,6 +61,12 @@ it('should create a category', function () {
         'position'    => rand(1, 5),
         'description' => $description = substr(fake()->paragraph(), 0, 50),
         'attributes'  => $attributes,
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo_path.jpg'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner_path.jpg'),
+        ],
     ])
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();
@@ -186,9 +193,15 @@ it('should update a category', function () {
             'description' => $description = substr(fake()->paragraph(), 0, 50),
         ],
 
-        'locale'     => config('app.locale'),
-        'attributes' => $attributes,
-        'position'   => rand(1, 5),
+        'locale'      => config('app.locale'),
+        'attributes'  => $attributes,
+        'position'    => rand(1, 5),
+        'logo_path'   => [
+            UploadedFile::fake()->image('logo_path.jpg'),
+        ],
+        'banner_path' => [
+            UploadedFile::fake()->image('banner_path.jpg'),
+        ],
     ])
         ->assertRedirect(route('admin.catalog.categories.index'))
         ->isRedirection();

@@ -27,24 +27,42 @@ class ThemeCustomizationRepository extends Repository
      */
     public function update($data, $id): ThemeCustomization
     {
+        $tempData = $data;
+
         $locale = core()->getRequestedLocaleCode();
 
-        if ($data['type'] == 'static_content') {
-            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['html']);
-            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
-        }
+        $this->sanitizeHtmlAndCss($data, $locale);
+
+        $theme = parent::find($id);
 
         if (in_array($data['type'], ['image_carousel', 'services_content'])) {
             unset($data[$locale]['options']);
+
+            $this->uploadImage($tempData, $theme);
         }
 
-        $theme = parent::update($data, $id);
-
-        if (in_array($data['type'], ['image_carousel', 'services_content'])) {
-            $this->uploadImage(request()->all(), $theme);
-        }
+        $theme->update($data);
 
         return $theme;
+    }
+
+    /**
+     * Sanitize the html and css.
+     */
+    public function sanitizeHtmlAndCss(array &$data, string $locale): void
+    {
+        if ($data['type'] == 'static_content') {
+            $data[$locale]['options']['html'] = $this->removeScripts($data[$locale]['options']['html']);
+            $data[$locale]['options']['css'] = $this->removeScripts($data[$locale]['options']['css']);
+        }
+    }
+
+    /**
+     * Remove scripts.
+     */
+    public function removeScripts(string $content): string
+    {
+        return preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $content);
     }
 
     /**
@@ -96,8 +114,11 @@ class ThemeCustomizationRepository extends Repository
         }
 
         $translatedModel = $theme->translate($locale);
+
         $translatedModel->options = $options ?? [];
+
         $translatedModel->theme_customization_id = $theme->id;
+
         $translatedModel->save();
     }
 }

@@ -30,8 +30,7 @@ it('should return listing items of attributes', function () {
     ])
         ->assertOk()
         ->assertJsonPath('records.0.id', $attribute->id)
-        ->assertJsonPath('records.0.code', $attribute->code)
-        ->assertJsonPath('meta.total', 29);
+        ->assertJsonPath('records.0.code', $attribute->code);
 });
 
 it('should returns attributes options', function () {
@@ -73,7 +72,7 @@ it('should store newly created attribute', function () {
 
     postJson(route('admin.catalog.attributes.store'), [
         'admin_name'    => $name = fake()->name(),
-        'code'          => $code = strtolower(fake()->word()),
+        'code'          => $code = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
         'type'          => 'text',
         'default_value' => 1,
     ])

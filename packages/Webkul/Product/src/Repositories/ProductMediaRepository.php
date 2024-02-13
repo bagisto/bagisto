@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
 
 class ProductMediaRepository extends Repository
 {
@@ -28,21 +29,16 @@ class ProductMediaRepository extends Repository
 
     /**
      * Get product directory.
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
      */
-    public function getProductDirectory($product): string
+    public function getProductDirectory(Product $product): string
     {
         return 'product/'.$product->id;
     }
 
     /**
      * Upload.
-     *
-     * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
      */
-    public function upload($data, $product, string $uploadFileType): void
+    public function upload(array $data, Product $product, string $uploadFileType): void
     {
         /**
          * Previous model ids for filtering.
@@ -98,12 +94,9 @@ class ProductMediaRepository extends Repository
     /**
      * Resolve file type query builder.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return mixed
-     *
      * @throws \Exception
      */
-    private function resolveFileTypeQueryBuilder($product, string $uploadFileType)
+    private function resolveFileTypeQueryBuilder(Product $product, string $uploadFileType): mixed
     {
         if ($uploadFileType === 'images') {
             return $product->images();

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
 use Webkul\Core\Models\Channel;
 
 use function Pest\Laravel\deleteJson;
@@ -46,6 +47,38 @@ it('should fail the validation with errors when certain field not provided when 
         ->assertUnprocessable();
 });
 
+it('should not store the new channel if the file has been tampered with', function () {
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.channels.store'), [
+        'code'              => $code = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
+        'theme'             => $code,
+        'hostname'          => 'http://'.fake()->ipv4(),
+        'root_category_id'  => 1,
+        'default_locale_id' => 1,
+        'base_currency_id'  => 1,
+        'name'              => fake()->name(),
+        'description'       => substr(fake()->paragraph, 0, 50),
+        'inventory_sources' => [1],
+        'locales'           => [1],
+        'currencies'        => [1],
+        'seo_title'         => fake()->title(),
+        'seo_description'   => substr(fake()->paragraph(), 0, 50),
+        'seo_keywords'      => fake()->name(),
+        'is_maintenance_on' => fake()->boolean(),
+        'logo'              => [
+            UploadedFile::fake()->image('tampered1.php'),
+        ],
+        'favicon'           => [
+            UploadedFile::fake()->image('tampered2.php'),
+        ],
+    ])
+        ->assertJsonValidationErrorFor('logo.0')
+        ->assertJsonValidationErrorFor('favicon.0')
+        ->assertUnprocessable();
+});
+
 it('should store the newly created channels', function () {
     // Act and Assert
     $this->loginAsAdmin();
@@ -66,6 +99,12 @@ it('should store the newly created channels', function () {
         'seo_description'   => substr(fake()->paragraph(), 0, 50),
         'seo_keywords'      => fake()->name(),
         'is_maintenance_on' => fake()->boolean(),
+        'logo'              => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'favicon'           => [
+            UploadedFile::fake()->image('favicon.png'),
+        ],
     ])
         ->assertRedirect(route('admin.settings.channels.index'))
         ->isRedirection();
@@ -142,6 +181,12 @@ it('should update the existing channel', function () {
         'locales'           => [1],
         'currencies'        => [1],
         'is_maintenance_on' => fake()->boolean(),
+        'logo'              => [
+            UploadedFile::fake()->image('logo.png'),
+        ],
+        'favicon'           => [
+            UploadedFile::fake()->image('favicon.png'),
+        ],
     ])
         ->assertRedirect(route('admin.settings.channels.index'))
         ->isRedirection();

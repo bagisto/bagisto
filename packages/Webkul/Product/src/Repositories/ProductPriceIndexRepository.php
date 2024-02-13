@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductPriceIndex;
 
 class ProductPriceIndexRepository extends Repository
 {
@@ -11,6 +12,6 @@ class ProductPriceIndexRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductPriceIndex';
+        return ProductPriceIndex::class;
     }
 }

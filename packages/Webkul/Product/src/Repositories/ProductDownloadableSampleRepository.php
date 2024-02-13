@@ -2,43 +2,46 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductDownloadableSample;
 
 class ProductDownloadableSampleRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductDownloadableSample';
+        return ProductDownloadableSample::class;
     }
 
     /**
-     * @param  array  $data
-     * @param  int  $productId
-     * @return mixed
+     * Upload files related to downloadable products
      */
-    public function upload($data, $productId)
+    public function upload(array $data, int $productId): array
     {
-        if (! request()->hasFile('file')) {
+        if (
+            ! empty($data['file'])
+            && ! $data['file'] instanceof UploadedFile
+        ) {
             return [];
         }
 
         return [
-            'file'      => $path = request()->file('file')->store('product_downloadable_links/'.$productId),
-            'file_name' => request()->file('file')->getClientOriginalName(),
+            'file'      => $path = $data['file']->store('product_downloadable_links/'.$productId),
+            'file_name' => $data['file']->getClientOriginalName(),
             'file_url'  => Storage::url($path),
         ];
     }
 
     /**
-     * @param  Webkul\Product\Contracts\Product  $product
-     * @return void
+     * Save samples.
      */
-    public function saveSamples(array $data, $product)
+    public function saveSamples(array $data, Product $product): void
     {
         $previousSampleIds = $product->downloadable_samples()->pluck('id');
 

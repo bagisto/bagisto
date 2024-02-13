@@ -2,9 +2,11 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
 
 class ProductDownloadableLinkRepository extends Repository
 {
@@ -17,23 +19,19 @@ class ProductDownloadableLinkRepository extends Repository
     }
 
     /**
-     * Upload.
-     *
-     * @param  array  $data
-     * @param  int  $productId
-     * @return array
+     * Upload files related to downloadable products
      */
-    public function upload($data, $productId)
+    public function upload(array $data, int $productId): array
     {
         foreach ($data as $type => $file) {
-            if (! request()->hasFile($type)) {
+            if (! $file instanceof UploadedFile) {
                 continue;
             }
 
             return [
-                $type           => $path = request()->file($type)->store('product_downloadable_links/'.$productId, 'private'),
-                $type.'_name'   => $file->getClientOriginalName(),
-                $type.'_url'    => Storage::url($path),
+                $type         => $path = $file->store('product_downloadable_links/'.$productId, 'private'),
+                $type.'_name' => $file->getClientOriginalName(),
+                $type.'_url'  => Storage::url($path),
             ];
         }
 
@@ -42,11 +40,8 @@ class ProductDownloadableLinkRepository extends Repository
 
     /**
      * Save links.
-     *
-     * @param  \Webkul\Product\Models\Product  $product
-     * @return void
      */
-    public function saveLinks(array $data, $product)
+    public function saveLinks(array $data, Product $product): void
     {
         $previousLinkIds = $product->downloadable_links()->pluck('id');
 

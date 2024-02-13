@@ -3,7 +3,10 @@
 namespace Webkul\Customer\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Models\Order;
 
@@ -71,28 +74,30 @@ class CustomerRepository extends Repository
      */
     public function uploadImages($data, $customer, $type = 'image')
     {
-        if (isset($data[$type])) {
-            $request = request();
-
-            foreach ($data[$type] as $imageId => $image) {
-                $file = $type.'.'.$imageId;
-                $dir = 'customer/'.$customer->id;
-
-                if ($request->hasFile($file)) {
-                    if ($customer->{$type}) {
-                        Storage::delete($customer->{$type});
-                    }
-
-                    $customer->{$type} = $request->file($file)->store($dir);
-                    $customer->save();
-                }
-            }
-        } else {
+        if (empty($data[$type])) {
             if ($customer->{$type}) {
                 Storage::delete($customer->{$type});
             }
 
             $customer->{$type} = null;
+            $customer->save();
+        }
+
+        foreach ($data[$type] as $image) {
+            if (! $image instanceof UploadedFile) {
+                continue;
+            }
+
+            if ($customer->{$type}) {
+                Storage::delete($customer->{$type});
+            }
+
+            $image = (new ImageManager())->make($image)->encode('webp');
+
+            $customer->{$type} = 'customer/'.$customer->id.'/'.Str::uuid()->toString().'.webp';
+
+            Storage::put($customer->{$type}, $image);
+
             $customer->save();
         }
     }

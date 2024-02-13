@@ -3,6 +3,8 @@
 namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductInventory;
 
 class ProductInventoryRepository extends Repository
 {
@@ -11,14 +13,13 @@ class ProductInventoryRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductInventory';
+        return ProductInventory::class;
     }
 
     /**
-     * @param  Webkul\Product\Contracts\Product  $product
-     * @return void
+     * Save inventories.
      */
-    public function saveInventories(array $data, $product)
+    public function saveInventories(array $data, Product $product): void
     {
         if (! isset($data['inventories'])) {
             return;

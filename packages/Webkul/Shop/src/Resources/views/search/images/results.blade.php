@@ -68,7 +68,10 @@
             },
 
             created() {
-                if (localStorage.searchedTerms && localStorage.searchedTerms != '') {
+                if (
+                    localStorage.searchedTerms 
+                    && localStorage.searchedTerms != ''
+                ) {
                     this.searchedTerms = localStorage.searchedTerms.split('_');
 
                     this.searchedTerms = this.searchedTerms.map(term => {

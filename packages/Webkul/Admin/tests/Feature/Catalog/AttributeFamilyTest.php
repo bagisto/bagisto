@@ -49,7 +49,7 @@ it('should store newly created attribute family', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.catalog.families.store'), [
-        'code'             => $code = strtolower(fake()->words(1, true)),
+        'code'             => $code = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
         'name'             => $name = fake()->name(),
         'attribute_groups' => [
             [
@@ -116,7 +116,7 @@ it('should update the existing attribute families', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.families.update', $attributeFamily->id), [
-        'code' => $updatedCode = strtolower(fake()->words(1, true)),
+        'code' => $updatedCode = fake()->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
         'name' => $attributeFamily->name,
     ])
         ->assertRedirectToRoute('admin.catalog.families.index')

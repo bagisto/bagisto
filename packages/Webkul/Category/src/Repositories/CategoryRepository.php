@@ -2,6 +2,9 @@
 
 namespace Webkul\Category\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -22,10 +25,8 @@ class CategoryRepository extends Repository
 
     /**
      * Get categories.
-     *
-     * @return void
      */
-    public function getAll(array $params = [])
+    public function getAll(array $params = []): LengthAwarePaginator
     {
         $queryBuilder = $this->query()
             ->leftJoin('category_translations', 'category_translations.category_id', '=', 'categories.id');
@@ -64,19 +65,15 @@ class CategoryRepository extends Repository
 
     /**
      * Create category.
-     *
-     * @return \Webkul\Category\Contracts\Category
      */
-    public function create(array $data)
+    public function create(array $data): Category
     {
         if (
             isset($data['locale'])
             && $data['locale'] == 'all'
         ) {
-            $model = app()->make($this->model());
-
             foreach (core()->getAllLocales() as $locale) {
-                foreach ($model->translatedAttributes as $attribute) {
+                foreach ($this->getModel()->translatedAttributes as $attribute) {
                     if (isset($data[$attribute])) {
                         $data[$locale->code][$attribute] = $data[$attribute];
 
@@ -86,7 +83,7 @@ class CategoryRepository extends Repository
             }
         }
 
-        $category = $this->model->create($data);
+        $category = $this->getModel()->create($data);
 
         $this->uploadImages($data, $category);
 
@@ -127,71 +124,54 @@ class CategoryRepository extends Repository
 
     /**
      * Specify category tree.
-     *
-     * @param  int  $id
-     * @return \Webkul\Category\Contracts\Category
      */
-    public function getCategoryTree($id = null)
+    public function getCategoryTree(?int $id = null): Collection
     {
         return $id
-            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
-            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+            ? $this->getModel()::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
+            : $this->getModel()::orderBy('position', 'ASC')->get()->toTree();
     }
 
     /**
      * Specify category tree.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Support\Collection
      */
-    public function getCategoryTreeWithoutDescendant($id = null)
+    public function getCategoryTreeWithoutDescendant(?int $id = null): Collection
     {
         return $id
-            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
-            : $this->model::orderBy('position', 'ASC')->get()->toTree();
+            ? $this->getModel()::orderBy('position', 'ASC')->where('id', '!=', $id)->whereNotDescendantOf($id)->get()->toTree()
+            : $this->getModel()::orderBy('position', 'ASC')->get()->toTree();
     }
 
     /**
      * Get root categories.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    public function getRootCategories()
+    public function getRootCategories(): Collection
     {
         return $this->getModel()->where('parent_id', null)->get();
     }
 
     /**
      * Get child categories.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    public function getChildCategories($parentId)
+    public function getChildCategories($parentId): Collection
     {
         return $this->getModel()->where('parent_id', $parentId)->get();
     }
 
     /**
      * get visible category tree.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Support\Collection
      */
-    public function getVisibleCategoryTree($id = null)
+    public function getVisibleCategoryTree(?int $id = null): Collection
     {
         return $id
-            ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
-            : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+            ? $this->getModel()::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
+            : $this->getModel()::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
 
     /**
      * Checks slug is unique or not based on locale.
-     *
-     * @param  int  $id
-     * @param  string  $slug
-     * @return bool
      */
-    public function isSlugUnique($id, $slug)
+    public function isSlugUnique(int $id, string $slug): bool
     {
         $exists = CategoryTranslationProxy::modelClass()::where('category_id', '<>', $id)
             ->where('slug', $slug)
@@ -205,65 +185,54 @@ class CategoryRepository extends Repository
     /**
      * Retrieve category from slug.
      *
-     * @param  string  $slug
-     * @return \Webkul\Category\Contracts\Category
+     * @return \Webkul\Category\Contracts\Category|void
      */
-    public function findBySlug($slug)
+    public function findBySlug(string $slug)
     {
-        if ($category = $this->model->whereTranslation('slug', $slug)->first()) {
+        if ($category = $this->getModel()->whereTranslation('slug', $slug)->first()) {
             return $category;
         }
     }
 
     /**
      * Retrieve category from slug.
-     *
-     * @param  string  $slug
-     * @return \Webkul\Category\Contracts\Category
      */
-    public function findBySlugOrFail($slug)
+    public function findBySlugOrFail(string $slug): Category
     {
-        return $this->model->whereTranslation('slug', $slug)->firstOrFail();
+        return $this->getModel()->whereTranslation('slug', $slug)->firstOrFail();
     }
 
     /**
      * Upload category's images.
-     *
-     * @param  array  $data
-     * @param  \Webkul\Category\Contracts\Category  $category
-     * @param  string  $type
-     * @return void
      */
-    public function uploadImages($data, $category, $type = 'logo_path')
+    public function uploadImages(array $data, Category $category, string $type = 'logo_path'): void
     {
-        if (isset($data[$type])) {
-            foreach ($data[$type] as $imageId => $image) {
-                $file = $type.'.'.$imageId;
-
-                $dir = 'category/'.$category->id;
-
-                if (request()->hasFile($file)) {
-                    if ($category->{$type}) {
-                        Storage::delete($category->{$type});
-                    }
-
-                    $manager = new ImageManager();
-
-                    $image = $manager->make(request()->file($file))->encode('webp');
-
-                    $category->{$type} = 'category/'.$category->id.'/'.Str::random(40).'.webp';
-
-                    Storage::put($category->{$type}, $image);
-
-                    $category->save();
-                }
-            }
-        } else {
+        if (empty($data[$type])) {
             if ($category->{$type}) {
                 Storage::delete($category->{$type});
             }
 
             $category->{$type} = null;
+
+            $category->save();
+
+            return;
+        }
+
+        foreach ($data[$type] as $image) {
+            if (! $image instanceof UploadedFile) {
+                continue;
+            }
+
+            if ($category->{$type}) {
+                Storage::delete($category->{$type});
+            }
+
+            $image = (new ImageManager())->make($image)->encode('webp');
+
+            $category->{$type} = 'category/'.$category->id.'/'.Str::uuid()->toString().'.webp';
+
+            Storage::put($category->{$type}, $image);
 
             $category->save();
         }
@@ -277,7 +246,7 @@ class CategoryRepository extends Repository
      */
     public function getPartial($columns = null)
     {
-        $categories = $this->model->all();
+        $categories = $this->getModel()->all();
 
         $trimmed = [];
 
@@ -307,12 +276,10 @@ class CategoryRepository extends Repository
     {
         $requestedLocale = core()->getRequestedLocaleCode();
 
-        $model = app()->make($this->model());
-
         foreach ($attributeNames as $attributeName) {
             foreach (core()->getAllLocales() as $locale) {
                 if ($requestedLocale == $locale->code) {
-                    foreach ($model->translatedAttributes as $attribute) {
+                    foreach ($this->getModel()->translatedAttributes as $attribute) {
                         if ($attribute === $attributeName) {
                             $data[$locale->code][$attribute] = $data[$requestedLocale][$attribute] ?? $data[$data['locale']][$attribute];
                         }

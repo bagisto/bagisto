@@ -2,6 +2,9 @@
 
 namespace Webkul\Product\Repositories;
 
+use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductVideo;
+
 class ProductVideoRepository extends ProductMediaRepository
 {
     /**
@@ -9,17 +12,13 @@ class ProductVideoRepository extends ProductMediaRepository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductVideo';
+        return ProductVideo::class;
     }
 
     /**
      * Upload videos.
-     *
-     * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return void
      */
-    public function uploadVideos($data, $product)
+    public function uploadVideos(array $data, Product $product): void
     {
         $this->upload($data, $product, 'videos');
     }

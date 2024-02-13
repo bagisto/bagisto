@@ -2,10 +2,12 @@
 
 namespace Webkul\Core\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\CoreConfigField;
 
@@ -18,15 +20,13 @@ class CoreConfigRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\CoreConfig';
+        return CoreConfig::class;
     }
 
     /**
-     * Create.
-     *
-     * @return \Webkul\Core\Contracts\CoreConfig
+     * Create the core configuration.
      */
-    public function create(array $data)
+    public function create(array $data): void
     {
         Event::dispatch('core.configuration.save.before');
 
@@ -84,8 +84,8 @@ class CoreConfigRepository extends Repository
                     }
                 }
 
-                if (request()->hasFile($fieldName)) {
-                    $value = request()->file($fieldName)->store('configuration');
+                if ($hasFile = $value instanceof UploadedFile) {
+                    $value = $value->store('configuration');
                 }
 
                 if (! count($coreConfigValue)) {
@@ -97,12 +97,12 @@ class CoreConfigRepository extends Repository
                     ]);
                 } else {
                     foreach ($coreConfigValue as $coreConfig) {
-                        if (request()->hasFile($fieldName)) {
-                            Storage::delete($coreConfig['value']);
+                        if ($hasFile) {
+                            Storage::delete($coreConfig->value);
                         }
 
                         if (isset($value['delete'])) {
-                            parent::delete($coreConfig['id']);
+                            parent::delete($coreConfig->id);
                         } else {
                             parent::update([
                                 'code'         => $fieldName,
