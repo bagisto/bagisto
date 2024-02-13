@@ -112,6 +112,8 @@
                         })
                         .then(response => {
                             if (response.data.payment_methods) {
+                                this.$emitter.emit('update-cart-summary');
+
                                 this.$emitter.emit('payment-methods', response.data.payment_methods);
 
                                 this.$emitter.emit('is-show-payment-methods', true);

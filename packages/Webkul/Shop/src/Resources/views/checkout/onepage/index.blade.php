@@ -103,7 +103,7 @@
                     this.getOrderSummary();
 
                     // update cart when emit the update-cart event.
-                    this.$emitter.emit('update-cart-summary', this.getOrderSummary());
+                    this.$emitter.on('update-cart-summary', this.getOrderSummary);
                 }, 
 
                 methods: {
@@ -114,7 +114,7 @@
 
                                 this.isCartLoading = false;
 
-                                let container = this.$refs.scrollBottom;
+                                let container = document.getElementById('scrollBottom');
 
                                 if (container) {
                                     container.scrollIntoView({
