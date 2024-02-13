@@ -1,5 +1,7 @@
 <div class="mt-8">
     <template v-if="! shippingIsSameAsBilling && ! toggleShippingForm">
+        {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
+
         <x-shop::accordion class="!border-b-0">
             <x-slot:header class="!p-0">
                 <div class="flex justify-between items-center">
@@ -8,9 +10,10 @@
                     </h2>
                 </div>
             </x-slot>
-        
+
             <x-slot:content class="!p-0 mt-8">
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.before') !!}
+
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -38,11 +41,26 @@
                                     :for="`selectedAddresses.shipping_address_id${address.id}`"
                                 >
                                 </label>
+
+                                <label
+                                    class="absolute ltr:right-24 rtl:left-24 top-5 label-pending block w-max px-1.5 py-1 cursor-pointer"
+                                    v-if="address.default_address"
+                                >
+                                    Default Address
+                                </label>
+
+                                <span
+                                    class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
+                                    @click="toggleShippingForm=true;tempShippingAddress=address;"
+                                >
+                                </span>
     
                                 <label 
                                     :for="`selectedAddresses.shipping_address_id${address.id}`"
                                     class="block p-5 rounded-xl cursor-pointer"
                                 >
+                                    <span class="icon-checkout-address text-6xl text-navyBlue"></span>
+
                                     <div class="flex justify-between items-center">
                                         <p class="text-base font-medium">
                                             @{{ address.first_name }} @{{ address.last_name }}
@@ -73,7 +91,7 @@
     
                             <div 
                                 class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                @click="toggleShippingForm=true;"
+                                @click="toggleShippingForm=true;tempShippingAddress={}"
                             >
                                 <div
                                     class="flex gap-x-2.5 items-center"
@@ -97,9 +115,13 @@
                         </v-error-message>
                     </form>
                 </x-shop::form>
+
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.after') !!}
+
             </x-slot>
         </x-shop::accordion>
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.after') !!}
     </template>
     
     <!-- shipping Address Form -->
@@ -119,7 +141,7 @@
                     <a 
                         class="flex justify-end"
                         href="javascript:void(0)" 
-                        @click="toggleShippingForm = false;"
+                        @click="toggleShippingForm=false;tempShippingAddress={}"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
     
@@ -143,7 +165,16 @@
                                 value="shipping"
                             />
                         </x-shop::form.control-group>
+
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.control
+                                type="hidden"
+                                name="shipping.id"
+                                ::value="tempShippingAddress.id"
+                            />
+                        </x-shop::form.control-group>    
     
+                        <!-- Company Name -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label>
                                 @lang('shop::app.checkout.onepage.addresses.shipping.company-name')
@@ -152,6 +183,7 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping.company_name"
+                                ::value="tempShippingAddress.company_name"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                             />
@@ -162,6 +194,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.company_name.after') !!}
     
                         <div class="grid grid-cols-2 gap-x-5">
+                            <!-- First Name -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
@@ -171,6 +204,7 @@
                                     type="text"
                                     name="shipping.first_name"
                                     rules="required"
+                                    ::value="tempShippingAddress.first_name"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
                                 />
@@ -179,7 +213,8 @@
                             </x-shop::form.control-group>
     
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.first_name.after') !!}
-    
+
+                            <!-- Last Name -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.last-name')
@@ -189,6 +224,7 @@
                                     type="text"
                                     name="shipping.last_name"
                                     rules="required"
+                                    ::value="tempShippingAddress.last_name"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
                                 />
@@ -198,7 +234,8 @@
     
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.last_name.after') !!}
                         </div>
-    
+
+                        <!-- Email -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.email')
@@ -208,6 +245,7 @@
                                 type="email"
                                 name="shipping.email"
                                 rules="required|email"
+                                ::value="tempShippingAddress.email"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.email')"
                                 placeholder="email@example.com"
                             />
@@ -216,7 +254,8 @@
                         </x-shop::form.control-group>
     
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.email.after') !!}
-    
+
+                        <!-- Street Address -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.street-address')
@@ -226,6 +265,7 @@
                                 type="text"
                                 name="shipping.address1.[0]"
                                 rules="required|address"
+                                ::value="Array.isArray(tempShippingAddress.address1) ? tempShippingAddress.address1[0] : tempShippingAddress.address1?.split('\n')[0]"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                             />
@@ -240,6 +280,7 @@
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="shipping.address1.[{{ $i }}]"
+                                        ::value="Array.isArray(tempShippingAddress.address1) ? tempShippingAddress.address1[{{ $i }}] : tempShippingAddress.address1?.split('\n')[{{$i}}]"
                                         :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                         :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                     />
@@ -248,8 +289,9 @@
                         </x-shop::form.control-group>
     
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.address1.after') !!}
-    
+
                         <div class="grid grid-cols-2 gap-x-5">
+                            <!-- Country -->
                             <x-shop::form.control-group class="!mb-4">
                                 <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.country')
@@ -259,6 +301,7 @@
                                     type="select"
                                     name="shipping.country"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                                    ::value="tempShippingAddress.country"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                 >
@@ -278,7 +321,8 @@
                             </x-shop::form.control-group>
     
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.country.after') !!}
-    
+
+                            <!-- State -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
@@ -289,6 +333,7 @@
                                     name="shipping.state"
                                     rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                     v-if="! haveStates('shipping')"
+                                    ::value="tempShippingAddress.state"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                 />
@@ -298,6 +343,7 @@
                                     name="shipping.state"
                                     rules="required"
                                     v-if="haveStates('shipping')"
+                                    ::value="tempShippingAddress.state"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                 >
@@ -320,6 +366,7 @@
                         </div>
     
                         <div class="grid grid-cols-2 gap-x-5">
+                            <!-- City -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.city')
@@ -329,6 +376,7 @@
                                     type="text"
                                     name="shipping.city"
                                     rules="required"
+                                    ::value="tempShippingAddress.city"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.city')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.city')"
                                 />
@@ -337,7 +385,8 @@
                             </x-shop::form.control-group>
     
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.city.after') !!}
-        
+
+                            <!-- Postcode -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.postcode')
@@ -347,6 +396,7 @@
                                     type="text"
                                     name="shipping.postcode"
                                     rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                                    ::value="tempShippingAddress.postcode"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                 />
@@ -356,7 +406,8 @@
     
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.postcode.after') !!}
                         </div>
-    
+
+                        <!-- Phone Number -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
@@ -366,6 +417,7 @@
                                 type="text"
                                 name="shipping.phone"
                                 rules="required|numeric"
+                                ::value="tempShippingAddress.phone"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
                             />

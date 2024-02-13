@@ -1,4 +1,7 @@
 <template v-if="! addNewBillingAddress">
+
+    {!! view_render_event('bagisto.shop.checkout.onepage.billing.accordion.before') !!}
+
     <x-shop::accordion class="!border-b-0">
         <x-slot:header class="!p-0">
             <div class="flex justify-between items-center">
@@ -9,7 +12,9 @@
         </x-slot>
     
         <x-slot:content class="!p-0 mt-8">
+
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
+
             <x-shop::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
@@ -38,10 +43,24 @@
                             >
                             </label>
 
+                            <label
+                                class="absolute ltr:right-24 rtl:left-24 top-7 label-pending block w-max px-1.5 py-1 cursor-pointer"
+                                v-if="address.default_address"
+                            >
+                                Default Address
+                            </label>
+
+                            <span
+                                class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
+                                @click="addNewBillingAddress=true;tempBillingAddress=address;"
+                            ></span>
+
                             <label 
                                 :for="`selectedAddresses.billing_address_id${address.id}`"
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
+                                <span class="icon-checkout-address text-6xl text-navyBlue"></span>
+
                                 <div class="flex justify-between items-center">
                                     <p class="text-base font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
@@ -72,7 +91,7 @@
 
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                            @click="addNewBillingAddress=true;"
+                            @click="addNewBillingAddress=true;tempBillingAddress={}"
                         >
                             <div
                                 class="flex gap-x-2.5 items-center"
@@ -123,9 +142,14 @@
                     </div>
                 </form>
             </x-shop::form>
+
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
-        </x-slot>
+
+        </x-slot>   
     </x-shop::accordion>
+
+    {!! view_render_event('bagisto.shop.checkout.onepage.billing.accordion.after') !!}
+
 </template>
 
 <!-- Billing Address Form -->
@@ -145,7 +169,7 @@
                 <a 
                     class="flex justify-end"
                     href="javascript:void(0)" 
-                    @click="addNewBillingAddress = false;"
+                    @click="addNewBillingAddress=false;tempBillingAddress={}"
                 >
                     <span class="icon-arrow-left text-2xl"></span>
 
@@ -159,6 +183,7 @@
             <x-shop::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
+                id="modalForm"
             >
                 <form @submit="handleSubmit($event, store)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
@@ -182,6 +207,14 @@
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.control
                             type="hidden"
+                            name="billing.id"
+                            ::value="tempBillingAddress.id"
+                        />
+                    </x-shop::form.control-group>
+
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
                             name="shipping.address1.[0]"
                         />
                     </x-shop::form.control-group>
@@ -194,6 +227,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="billing.company_name"
+                            ::value="tempBillingAddress.company_name"
                             :label="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
                             :placeholder="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
                         />
@@ -203,6 +237,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.company_name.after') !!}
 
+                    <!-- First Name -->
                     <div class="grid grid-cols-2 gap-x-5">
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
@@ -213,6 +248,7 @@
                                 type="text"
                                 name="billing.first_name"
                                 rules="required"
+                                ::value="tempBillingAddress.first_name"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
                             />
@@ -222,6 +258,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.first_name.after') !!}
 
+                        <!-- Last Name -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.last-name')
@@ -231,6 +268,7 @@
                                 type="text"
                                 name="billing.last_name"
                                 rules="required"
+                                ::value="tempBillingAddress.last_name"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
                             />
@@ -241,6 +279,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.last_name.after') !!}
                     </div>
 
+                    <!-- Email -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="!mt-0 required">
                             @lang('shop::app.checkout.onepage.addresses.billing.email')
@@ -250,6 +289,7 @@
                             type="email"
                             name="billing.email"
                             rules="required|email"
+                            ::value="tempBillingAddress.email"
                             :label="trans('shop::app.checkout.onepage.addresses.billing.email')"
                             placeholder="email@example.com"
                         />
@@ -259,6 +299,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.email.after') !!}
 
+                    <!-- Street Address -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="!mt-0 required">
                             @lang('shop::app.checkout.onepage.addresses.billing.street-address')
@@ -268,6 +309,7 @@
                             type="text"
                             name="billing.address1.[0]"
                             rules="required|address"
+                            ::value="Array.isArray(tempBillingAddress.address1) ? tempBillingAddress.address1[0] : tempBillingAddress.address1?.split('\n')[0]"
                             :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                             :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                         />
@@ -282,6 +324,7 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing.address1.[{{ $i }}]"
+                                    ::value="Array.isArray(tempBillingAddress.address1) ? tempBillingAddress.address1[{{ $i }}] : tempBillingAddress.address1?.split('\n')[{{$i}}]"
                                     :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 />
@@ -292,6 +335,7 @@
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.address1.after') !!}
 
                     <div class="grid grid-cols-2 gap-x-5">
+                        <!--Country -->
                         <x-shop::form.control-group class="!mb-4">
                             <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                                 @lang('shop::app.checkout.onepage.addresses.billing.country')
@@ -301,6 +345,7 @@
                                 type="select"
                                 name="billing.country"
                                 rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                                ::value="tempBillingAddress.country"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
                             >
@@ -321,6 +366,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.country.after') !!}
 
+                        <!--State -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                                 @lang('shop::app.checkout.onepage.addresses.billing.state')
@@ -330,6 +376,7 @@
                                 type="text"
                                 name="billing.state"
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                ::value="tempBillingAddress.state"
                                 v-if="! haveStates('billing')"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
@@ -339,6 +386,7 @@
                                 type="select"
                                 name="billing.state"
                                 rules="required"
+                                ::value="tempBillingAddress.state"
                                 v-if="haveStates('billing')"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
@@ -362,6 +410,7 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-x-5">
+                        <!-- City -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.billing.city')
@@ -371,6 +420,7 @@
                                 type="text"
                                 name="billing.city"
                                 rules="required"
+                                ::value="tempBillingAddress.city"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.city')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.city')"
                             />
@@ -380,6 +430,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.city.after') !!}
     
+                        <!-- Postcode -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
                                 @lang('shop::app.checkout.onepage.addresses.billing.postcode')
@@ -389,6 +440,7 @@
                                 type="text"
                                 name="billing.postcode"
                                 rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                                ::value="tempBillingAddress.postcode"
                                 :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                             />
@@ -399,6 +451,7 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.postcode.after') !!}
                     </div>
 
+                    <!-- Phone Number -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="!mt-0 required">
                             @lang('shop::app.checkout.onepage.addresses.billing.telephone')
@@ -408,6 +461,7 @@
                             type="text"
                             name="billing.phone"
                             rules="required|numeric"
+                            ::value="tempBillingAddress.phone"
                             :label="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
                             :placeholder="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
                         />

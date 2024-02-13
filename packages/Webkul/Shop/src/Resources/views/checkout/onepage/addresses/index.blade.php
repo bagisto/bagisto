@@ -29,11 +29,12 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!} 
             </div>
 
-            <div 
+            <div
                 class="flex justify-end mt-4"
                 v-if="
                 (selectedBillingAddressId || selectedShippingAddressId)
                 && ! toggleShippingForm
+                && ! addNewBillingAddress
                 "
             >
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
@@ -80,6 +81,10 @@
                     tempAddressId: 1,
 
                     toggleShippingForm: false,
+
+                    tempBillingAddress: {},
+
+                    tempShippingAddress: {},
                 };
             },
 
@@ -149,6 +154,10 @@
                 },
 
                 store(params, { resetForm }) {
+                    if (params[params.type].id) {
+                        return this.update(params[params.type]);
+                    }
+                    
                     if (! this.customer) {
                         params[params.type].id = this.tempAddressId;
 
@@ -170,7 +179,7 @@
                     }
 
                     this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params[params.type])
-                        .then((_) => {
+                        .then(() => {
                             this.$emitter.emit('update-cart-summary');
 
                             this.addNewBillingAddress = false;
@@ -184,6 +193,52 @@
                         .catch(() => {});
                 },
 
+                update(params) {
+                    if (! this.customer) {
+                        const existingAddressIndex = this.customerAddresses.findIndex(address => address.id === params.id);
+
+                        if (existingAddressIndex !== -1) {
+                            this.customerAddresses[existingAddressIndex] = {
+                                ...this.customerAddresses[existingAddressIndex],
+                                ...params
+                            };
+                        }
+
+                        const storedAddresses = JSON.parse(localStorage.getItem('customerAddresses')) || [];
+
+                        const storedAddressIndex = storedAddresses.findIndex(address => address.id === params.id);
+
+                        if (storedAddressIndex !== -1) {
+                            storedAddresses[storedAddressIndex] = {
+                                ...storedAddresses[storedAddressIndex],
+                                ...params
+                            };
+
+                            localStorage.setItem('customerAddresses', JSON.stringify(storedAddresses));
+                        }
+
+                        this.addNewBillingAddress = false;
+
+                        this.toggleShippingForm = false;
+
+                        return;
+                    }
+
+                    this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", params)
+                        .then(response => {
+                            this.$emitter.emit('update-cart-summary');
+
+                            this.addNewBillingAddress = false;
+
+                            this.toggleShippingForm = false;
+
+                            this.get();
+
+                            resetForm();
+                        })
+                        .catch(() => {});
+                },
+
                 proceed() {
                     this.$emitter.emit('is-shipping-loading', true);
 
@@ -192,7 +247,7 @@
                             address1: [''],
 
                             address_id: this.selectedBillingAddressId,
-                        }, 
+                        },
 
                         shipping: {
                             address1: [''],
