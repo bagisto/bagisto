@@ -97,20 +97,6 @@ class CustomerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(int $id)
-    {
-        $customer = $this->customerRepository->findOrFail($id);
-
-        $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
-
-        return view('admin::customers.customers.edit', compact('customer', 'groups'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -128,7 +114,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.before', $id);
 
-        $data = array_merge(request()->only([
+        $customer = $this->customerRepository->update(request()->only([
             'first_name',
             'last_name',
             'gender',
@@ -136,18 +122,15 @@ class CustomerController extends Controller
             'date_of_birth',
             'phone',
             'customer_group_id',
-        ]), [
-            'status'       => request()->has('status'),
-            'is_suspended' => request()->has('is_suspended'),
-        ]);
-
-        $customer = $this->customerRepository->update($data, $id);
+            'status',
+            'is_suspended',
+        ]), $id);
 
         Event::dispatch('customer.update.after', $customer);
 
-        session()->flash('success', trans('admin::app.customers.customers.update-success'));
-
-        return redirect()->route('admin.customers.customers.view', $id);
+        return new JsonResponse([
+            'message' => trans('admin::app.customers.customers.update-success'),
+        ]);
     }
 
     /**
@@ -232,6 +215,13 @@ class CustomerController extends Controller
             'notes',
             'addresses',
         ])->findOrFail($id);
+
+        if (request()->ajax()) {
+            return new JsonResponse([
+                'customer' => $customer,
+                'groups'   => $customer->group,
+            ]);
+        }
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
