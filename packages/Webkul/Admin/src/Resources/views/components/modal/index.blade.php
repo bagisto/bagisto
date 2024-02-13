@@ -123,6 +123,8 @@
 
                     if (this.isOpen) {
                         document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow ='scroll';
                     }
 
                     this.$emit('toggle', { isActive: this.isOpen });
