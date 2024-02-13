@@ -3017,8 +3017,10 @@ return [
             'delete'                       => 'Delete',
             'enable-at-least-one-payment'  => 'Enable at least one payment method.',
             'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
+            'no-result-found'              => 'No result found',
             'save-btn'                     => 'Save Configuration',
             'save-message'                 => 'Configuration saved successfully',
+            'search'                       => 'Search',
             'title'                        => 'Configuration',
 
             'general' => [

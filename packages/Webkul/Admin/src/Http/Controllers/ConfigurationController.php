@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
@@ -65,6 +66,20 @@ class ConfigurationController extends Controller
         }
 
         return view('admin::configuration.index', ['config' => $this->configTree]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = $this->coreConfigRepository->search($this->configTree->items, request()->query('query'));
+
+        return new JsonResponse([
+            'data' => $results,
+        ]);
     }
 
     /**
