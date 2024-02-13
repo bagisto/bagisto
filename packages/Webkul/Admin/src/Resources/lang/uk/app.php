@@ -488,11 +488,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Вже сплачено',
-                    'invoice-missing'            => 'Відсутній рахунок',
+                    'already-paid'               => 'Вже оплачено',
+                    'amount'                     => 'Сума',
+                    'create-transaction'         => 'Створити транзакцію',
+                    'invoice-id'                 => 'Номер рахунку-фактури',
+                    'invoice-missing'            => 'Рахунок-фактура відсутня',
+                    'payment-method'             => 'Спосіб оплати',
+                    'save-transaction'           => 'Зберегти транзакцію',
                     'transaction-amount-exceeds' => 'Сума транзакції перевищує',
-                    'transaction-amount-zero'    => 'Сума транзакції дорівнює нулю',
-                    'transaction-saved'          => 'Транзакція успішно збережена',
+                    'transaction-amount-zero'    => 'Сума транзакції нульова',
+                    'transaction-saved'          => 'Транзакцію успішно збережено.',
                 ],
 
                 'view' => [

@@ -489,10 +489,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'כבר שולם',
+                    'amount'                     => 'סכום',
+                    'create-transaction'         => 'צור עסקה',
+                    'invoice-id'                 => 'מזהה חשבונית',
                     'invoice-missing'            => 'חשבונית חסרה',
-                    'transaction-amount-exceeds' => 'סכום העסקה גבוה מדי',
+                    'payment-method'             => 'אמצעי תשלום',
+                    'save-transaction'           => 'שמור עסקה',
+                    'transaction-amount-exceeds' => 'סכום העסקה חורג מהמותר',
                     'transaction-amount-zero'    => 'סכום העסקה אפס',
-                    'transaction-saved'          => 'העסקה נשמרה בהצלחה',
+                    'transaction-saved'          => 'עסקה נשמרה בהצלחה.',
                 ],
 
                 'view' => [

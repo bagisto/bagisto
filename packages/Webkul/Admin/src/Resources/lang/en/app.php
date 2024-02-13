@@ -490,9 +490,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Already paid',
+                    'amount'                     => 'Amount',
+                    'create-transaction'         => 'Create Transaction',
+                    'invoice-id'                 => 'Invoice ID',
                     'invoice-missing'            => 'Invoice Missing',
+                    'payment-method'             => 'Payment Method',
+                    'save-transaction'           => 'Save Transaction',
                     'transaction-amount-exceeds' => 'Transaction Amount exceeds',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
+                    'transaction-saved'          => 'Transaction saved successfully.',
                 ],
 
                 'view' => [

@@ -488,11 +488,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Al betaald',
+                    'already-paid'               => 'Reeds betaald',
+                    'amount'                     => 'Bedrag',
+                    'create-transaction'         => 'Transactie aanmaken',
+                    'invoice-id'                 => 'Factuur ID',
                     'invoice-missing'            => 'Factuur ontbreekt',
+                    'payment-method'             => 'Betaalmethode',
+                    'save-transaction'           => 'Transactie opslaan',
                     'transaction-amount-exceeds' => 'Transactiebedrag overschrijdt',
                     'transaction-amount-zero'    => 'Transactiebedrag is nul',
-                    'transaction-saved'          => 'Transactie succesvol opgeslagen',
+                    'transaction-saved'          => 'Transactie succesvol opgeslagen.',
                 ],
 
                 'view' => [

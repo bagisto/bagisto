@@ -489,10 +489,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Ya pagado',
-                    'invoice-missing'            => 'Factura no encontrada',
-                    'transaction-amount-exceeds' => 'Monto de Transacción excede',
-                    'transaction-amount-zero'    => 'Monto de Transacción en cero',
-                    'transaction-saved'          => 'Transacción guardada exitosamente',
+                    'amount'                     => 'Monto',
+                    'create-transaction'         => 'Crear Transacción',
+                    'invoice-id'                 => 'ID de Factura',
+                    'invoice-missing'            => 'Factura Ausente',
+                    'payment-method'             => 'Método de Pago',
+                    'save-transaction'           => 'Guardar Transacción',
+                    'transaction-amount-exceeds' => 'El monto de la transacción excede',
+                    'transaction-amount-zero'    => 'Monto de la transacción cero',
+                    'transaction-saved'          => 'Transacción guardada exitosamente.',
                 ],
 
                 'view' => [

@@ -489,10 +489,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Уже оплачено',
-                    'invoice-missing'            => 'Счет отсутствует',
+                    'amount'                     => 'Сумма',
+                    'create-transaction'         => 'Создать транзакцию',
+                    'invoice-id'                 => 'Идентификатор счета',
+                    'invoice-missing'            => 'Отсутствует счет',
+                    'payment-method'             => 'Метод оплаты',
+                    'save-transaction'           => 'Сохранить транзакцию',
                     'transaction-amount-exceeds' => 'Сумма транзакции превышает',
                     'transaction-amount-zero'    => 'Сумма транзакции равна нулю',
-                    'transaction-saved'          => 'Транзакция успешно сохранена',
+                    'transaction-saved'          => 'Транзакция успешно сохранена.',
                 ],
 
                 'view' => [

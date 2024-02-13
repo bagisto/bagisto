@@ -488,11 +488,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => '既に支払済み',
-                    'invoice-missing'            => '請求書が不足しています',
+                    'already-paid'               => 'すでに支払い済み',
+                    'amount'                     => '金額',
+                    'create-transaction'         => '取引を作成',
+                    'invoice-id'                 => '請求書ID',
+                    'invoice-missing'            => '請求書が見つかりません',
+                    'payment-method'             => '支払い方法',
+                    'save-transaction'           => '取引を保存',
                     'transaction-amount-exceeds' => '取引金額が超過しています',
                     'transaction-amount-zero'    => '取引金額がゼロです',
-                    'transaction-saved'          => '取引が正常に保存されました',
+                    'transaction-saved'          => '取引が正常に保存されました。',
                 ],
 
                 'view' => [

@@ -489,10 +489,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'ইতিমধ্যে পেইড',
+                    'amount'                     => 'মোট পরিমাণ',
+                    'create-transaction'         => 'লেনদেন তৈরি করুন',
+                    'invoice-id'                 => 'চালান আইডি',
                     'invoice-missing'            => 'চালান অনুপস্থিত',
+                    'payment-method'             => 'পরিশোধের পদ্ধতি',
+                    'save-transaction'           => 'লেনদেন সংরক্ষণ করুন',
                     'transaction-amount-exceeds' => 'লেনদেন পরিমাণ অধিক',
                     'transaction-amount-zero'    => 'লেনদেন পরিমাণ শূন্য',
-                    'transaction-saved'          => 'লেনদেন সফলভাবে সংরক্ষিত',
+                    'transaction-saved'          => 'লেনদেন সফলভাবে সংরক্ষিত হয়েছে।',
                 ],
 
                 'view' => [

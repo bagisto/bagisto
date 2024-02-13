@@ -489,10 +489,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Bereits bezahlt',
+                    'amount'                     => 'Betrag',
+                    'create-transaction'         => 'Transaktion erstellen',
+                    'invoice-id'                 => 'Rechnungs-ID',
                     'invoice-missing'            => 'Rechnung fehlt',
-                    'transaction-amount-exceeds' => 'Transaktionsbetrag überschreitet den Betrag',
+                    'payment-method'             => 'Zahlungsmethode',
+                    'save-transaction'           => 'Transaktion speichern',
+                    'transaction-amount-exceeds' => 'Transaktionsbetrag überschreitet',
                     'transaction-amount-zero'    => 'Transaktionsbetrag ist null',
-                    'transaction-saved'          => 'Transaktion erfolgreich gespeichert',
+                    'transaction-saved'          => 'Transaktion erfolgreich gespeichert.',
                 ],
 
                 'view' => [

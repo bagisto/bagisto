@@ -487,12 +487,17 @@ return [
                     'transaction-id'     => 'شناسه تراکنش',
                 ],
 
-                'create'  => [
+                'create' => [
                     'already-paid'               => 'قبلاً پرداخت شده',
-                    'invoice-missing'            => 'صورتحساب موجود نیست',
-                    'transaction-amount-exceeds' => 'مقدار تراکنش بیشتر از حد مجاز است',
-                    'transaction-amount-zero'    => 'مقدار تراکنش صفر است',
-                    'transaction-saved'          => 'تراکنش با موفقیت ذخیره شد',
+                    'amount'                     => 'مبلغ',
+                    'create-transaction'         => 'ایجاد تراکنش',
+                    'invoice-id'                 => 'شناسه فاکتور',
+                    'invoice-missing'            => 'فاکتور یافت نشد',
+                    'payment-method'             => 'روش پرداخت',
+                    'save-transaction'           => 'ذخیره تراکنش',
+                    'transaction-amount-exceeds' => 'مبلغ تراکنش بیش از حد مجاز است',
+                    'transaction-amount-zero'    => 'مبلغ تراکنش صفر است',
+                    'transaction-saved'          => 'تراکنش با موفقیت ذخیره شد.',
                 ],
 
                 'view' => [

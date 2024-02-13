@@ -489,10 +489,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Già Pagato',
-                    'invoice-missing'            => 'Fattura Mancante',
-                    'transaction-amount-exceeds' => 'Importo Transazione supera',
-                    'transaction-amount-zero'    => 'Importo Transazione zero',
+                    'already-paid'               => 'Già pagato',
+                    'amount'                     => 'Importo',
+                    'create-transaction'         => 'Crea Transazione',
+                    'invoice-id'                 => 'ID Fattura',
+                    'invoice-missing'            => 'Fattura mancante',
+                    'payment-method'             => 'Metodo di Pagamento',
+                    'save-transaction'           => 'Salva Transazione',
+                    'transaction-amount-exceeds' => 'Importo transazione supera',
+                    'transaction-amount-zero'    => 'Importo transazione zero',
+                    'transaction-saved'          => 'Transazione salvata con successo.',
                 ],
 
                 'view' => [

@@ -488,11 +488,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'पहले ही भुगतान किया गया',
-                    'invoice-missing'            => 'चालान गायब है',
-                    'transaction-amount-exceeds' => 'लेन-देन राशि की सीमा पार हो गई है',
+                    'already-paid'               => 'पहले से ही भुगतान किया गया है',
+                    'amount'                     => 'राशि',
+                    'create-transaction'         => 'लेन-देन बनाएं',
+                    'invoice-id'                 => 'चालान आईडी',
+                    'invoice-missing'            => 'चालान अनुपस्थित है',
+                    'payment-method'             => 'भुगतान का तरीका',
+                    'save-transaction'           => 'लेन-देन सहेजें',
+                    'transaction-amount-exceeds' => 'लेन-देन राशि सीमा से अधिक है',
                     'transaction-amount-zero'    => 'लेन-देन राशि शून्य है',
-                    'transaction-saved'          => 'लेन-देन सफलतापूर्वक सहेजा गया है',
+                    'transaction-saved'          => 'लेन-देन सफलतापूर्वक सहेजा गया है।',
                 ],
 
                 'view' => [
