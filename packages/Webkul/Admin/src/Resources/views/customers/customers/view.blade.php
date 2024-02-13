@@ -819,8 +819,6 @@
                             .then((response) => {
                                 this.customer = response.data.customer;
 
-                                this.group = response.data.groups;
-
                                 this.$emitter.emit('customer-update', this.customer);
                             })
                             .catch((error) => {
