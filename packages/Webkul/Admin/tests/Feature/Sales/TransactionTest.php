@@ -195,8 +195,8 @@ it('should store the order transaction', function () {
         'payment_method' => $payment->method,
         'amount'         => $order->grand_total,
     ])
-        ->assertRedirect(route('admin.sales.transactions.index'))
-        ->isRedirection();
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.sales.transactions.index.create.transaction-saved'));
 
     $this->assertModelWise([
         OrderTransaction::class => [
