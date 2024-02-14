@@ -449,6 +449,10 @@ abstract class DataGrid
         $tempRow = json_decode(json_encode($row), true);
 
         foreach ($tempRow as $column => $value) {
+            if (! is_string($tempRow[$column])) {
+                continue;
+            }
+
             if (is_array($value)) {
                 return $this->sanitizeRow($tempRow[$column]);
             } else {
