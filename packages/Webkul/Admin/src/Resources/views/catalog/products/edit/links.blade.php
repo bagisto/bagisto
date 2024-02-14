@@ -2,7 +2,7 @@
     
 <v-product-links></v-product-links>
 
-{!! view_render_event('bagisto.admin.catalog.product.edit.form.links.before', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.links.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
     <script

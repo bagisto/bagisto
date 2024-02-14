@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'החזר התאמה',
                 'adjustment-fee'              => 'עמלת התאמה',
                 'create-success'              => 'ההחזר נוצר בהצלחה',
+                'creation-error'              => 'יצירת החזרים אינה מותרת.',
                 'discount-amount'             => 'סכום הנחה',
                 'grand-total'                 => 'סכום כולל',
                 'item-ordered'                => 'הוזמן (:qty_ordered)',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length של',
+                'of'        => 'של',
+                'per-page'  => 'לעמוד',
+                'results'   => ':total תוצאות',
+                'selected'  => ':total נבחרו',
+
                 'mass-actions' => [
                     'select-action' => 'בחר פעולה',
                     'select-option' => 'בחר אפשרות',

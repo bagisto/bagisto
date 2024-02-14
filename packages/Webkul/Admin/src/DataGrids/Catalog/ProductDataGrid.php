@@ -206,7 +206,7 @@ class ProductDataGrid extends DataGrid
 
                 'params' => [
                     'options' => collect(config('product_types'))
-                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.'.$type['key'])])
+                        ->map(fn ($type) => ['label' => trans($type['name']), 'value' => trans('admin::app.catalog.products.index.create.'.$type['key'])])
                         ->values()
                         ->toArray(),
                 ],

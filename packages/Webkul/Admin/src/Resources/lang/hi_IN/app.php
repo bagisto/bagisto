@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'समायोजन वापसी',
                 'amount-per-unit'             => ':amount प्रति इकाई x :qty मात्रा',
                 'create-success'              => 'वापसी सफलतापूर्वक बनाई गई',
+                'creation-error'              => 'रिफंड निर्माण अनुमति नहीं है।',
                 'discount-amount'             => 'डिस्काउंट राशि',
                 'grand-total'                 => 'कुल योग',
                 'invalid-qty'                 => 'हमने चालानित आइटम्स के लिए एक अवैध मात्रा पाई है।',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length का',
+                'of'        => 'का',
+                'per-page'  => 'प्रति पृष्ठ',
+                'results'   => ':total परिणाम',
+                'selected'  => ':total चयनित',
+
                 'mass-actions' => [
                     'select-action' => 'कार्रवाई चुनें',
                     'select-option' => 'विकल्प चुनें',

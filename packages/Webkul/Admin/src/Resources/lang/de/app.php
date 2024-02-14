@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Anpassung Rückerstattung',
                 'amount-per-unit'             => ':amount pro Einheit x :qty Menge',
                 'create-success'              => 'Rückerstattung erfolgreich erstellt',
+                'creation-error'              => 'Erstellung einer Rückerstattung ist nicht erlaubt.',
                 'discount-amount'             => 'Rabattbetrag',
                 'grand-total'                 => 'Gesamtsumme',
                 'invalid-qty'                 => 'Wir haben eine ungültige Menge zum Rechnungsstellen gefunden.',
@@ -3624,6 +3625,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length von',
+                'of'        => 'von',
+                'per-page'  => 'Pro Seite',
+                'results'   => ':total Ergebnisse',
+                'selected'  => ':total Ausgewählt',
+
                 'index' => [
                     'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
                     'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',

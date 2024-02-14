@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Düzeltme İadesi',
                 'amount-per-unit'             => ':amount Birim Başına x :qty Miktar',
                 'create-success'              => 'İade başarıyla oluşturuldu',
+                'creation-error'              => 'İade oluşturma izin verilmiyor.',
                 'discount-amount'             => 'İndirim Tutarı',
                 'grand-total'                 => 'Genel Toplam',
                 'invalid-qty'                 => 'Faturalanacak ürünlerde geçersiz miktar bulduk.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length nin',
+                'of'        => 'nin',
+                'per-page'  => 'Sayfa başına',
+                'results'   => ':total Sonuçlar',
+                'selected'  => ':total Seçilen',
+
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',
                     'select-option' => 'Seçenek Seç',
