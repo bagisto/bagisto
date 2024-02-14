@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'استرداد التعديل',
                 'amount-per-unit'             => ':amount لكل وحدة x :qty الكمية',
                 'create-success'              => 'تم إنشاء الاسترداد بنجاح',
+                'creation-error'              => 'إنشاء المبلغ المسترد غير مسموح به.',
                 'discount-amount'             => 'مبلغ الخصم',
                 'grand-total'                 => 'الإجمالي الكلي',
                 'invalid-qty'                 => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length من',
+                'of'        => 'من',
+                'per-page'  => 'لكل صفحة',
+                'results'   => ':total النتائج',
+                'selected'  => ':total محدد',
+
                 'mass-actions' => [
                     'select-action' => 'اختر الإجراء',
                     'select-option' => 'اختر الخيار',

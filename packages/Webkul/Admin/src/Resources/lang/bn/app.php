@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'সমন্বয় ফেরত',
                 'amount-per-unit'             => ':amount প্রতি ইউনিট x :qty পরিমাণ',
                 'create-success'              => 'ফেরত সফলভাবে তৈরি হয়েছে',
+                'creation-error'              => 'রিফান্ড তৈরি করা অনুমোদিত নয়।',
                 'discount-amount'             => 'ডিসকাউন্ট পরিমাণ',
                 'grand-total'                 => 'মোট টোটাল',
                 'invalid-qty'                 => 'আমরা অবৈধ পরিমাণ চেনে পেয়েছি।',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length এর',
+                'of'        => 'এর',
+                'per-page'  => 'প্রতি পৃষ্ঠা',
+                'results'   => ':total ফলাফল',
+                'selected'  => ':total নির্বাচিত',
+
                 'mass-actions' => [
                     'submit'        => 'জমা দিন',
                     'select-option' => 'বিকল্প নির্ধারণ করুন',

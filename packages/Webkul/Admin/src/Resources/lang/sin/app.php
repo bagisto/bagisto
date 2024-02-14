@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'අභ්‍යාවශ්‍ය ආදානය',
                 'amount-per-unit'             => ':amount ප්රමාණය අනු :qty ප්‍රමාණයක්',
                 'create-success'              => 'ආදානය සාර්ථකයි',
+                'creation-error'              => 'හරියට ආරාධනා නොවිය යුතුය.',
                 'discount-amount'             => 'මුදලේ වටිනාකම',
                 'grand-total'                 => 'මහේ මුලු මුදල',
                 'invalid-qty'                 => 'අමුදල අසාර්ථකයි.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length යාවත්කාලීන',
+                'of'        => 'යාවත්කාලීන',
+                'per-page'  => 'පිටුවක පිටුවක',
+                'results'   => ':total ප්‍රතිඵල',
+                'selected'  => ':total තෝරාගත්',
+
                 'mass-actions' => [
                     'select-action' => 'ක්‍රියාකාරකම තෝරන්න',
                     'select-option' => 'විකල්ප තෝරන්න',

@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Виправлення повернення',
                 'amount-per-unit'             => ':amount за одиницю x :qty Кількість',
                 'create-success'              => 'Повернення створено успішно',
+                'creation-error'              => 'Створення повернення не дозволяється.',
                 'discount-amount'             => 'Сума знижки',
                 'grand-total'                 => 'Загальна сума',
                 'invalid-qty'                 => 'Ми виявили недійсну кількість для виставлення рахунків за товари.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length з',
+                'of'        => 'з',
+                'per-page'  => 'На сторінку',
+                'results'   => ':total Результати',
+                'selected'  => ':total Обрані',
+
                 'mass-actions' => [
                     'select-action' => 'Вибрати дію',
                     'select-option' => 'Вибрати опцію',

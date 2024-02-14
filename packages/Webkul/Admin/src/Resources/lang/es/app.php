@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Reembolso de Ajuste',
                 'amount-per-unit'             => ':amount Por Unidad x :qty Cantidad',
                 'create-success'              => 'Reembolso creado exitosamente',
+                'creation-error'              => 'La creación de reembolsos no está permitida.',
                 'discount-amount'             => 'Monto de Descuento',
                 'grand-total'                 => 'Total General',
                 'invalid-qty'                 => 'Se encontró una cantidad no válida para facturar ítems.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length de',
+                'of'        => 'de',
+                'per-page'  => 'Por página',
+                'results'   => ':total Resultados',
+                'selected'  => ':total Seleccionado',
+
                 'mass-actions' => [
                     'select-action' => 'Seleccionar Acción',
                     'select-option' => 'Seleccionar Opción',
