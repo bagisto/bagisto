@@ -240,8 +240,6 @@
                 },
 
                 proceed() {
-                    this.$emitter.emit('is-shipping-loading', true);
-
                     let params = {
                         billing: {
                             address1: [''],
@@ -308,8 +306,8 @@
                         .catch(() => {});
                 },
 
-                resetState() {
-                    this.$emitter.emit('is-show-shipping-methods', false);
+                resetState(state = false) {
+                    this.$emitter.emit('is-show-shipping-methods', state);
 
                     this.$emitter.emit('is-show-payment-methods', false);
                 }
