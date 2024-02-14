@@ -469,6 +469,8 @@
                         <x-shop::form.control-group.error control-name="billing.phone" />
                     </x-shop::form.control-group>
 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
+
                     <div
                         class="grid gap-2.5 pb-4"
                         v-if="! isAddressEtitable"
@@ -499,9 +501,6 @@
                             </div>
                         @endauth
                     </div>
-                    
-
-                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
 
                     <div class="flex justify-end mt-4">
                         <button

@@ -139,7 +139,7 @@
 
                         this.customerAddresses.shipping = JSON.parse(storedAddresses).shipping;
 
-                        this.tempAddressId = this.customerAddresses.billing.length + 1;
+                        this.tempAddressId = (this.customerAddresses.billing.length > this.customerAddresses.shipping.length ? this.customerAddresses.billing.length + 1 : this.customerAddresses.shipping.length) + 1;
                     }
                 },
 
@@ -154,7 +154,7 @@
 
                     this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
                         .then(response => {
-                            this.customerAddresses = response.data.data;
+                            this.customerAddresses.billing = this.customerAddresses.shipping = response.data.data;
 
                             this.isAddressLoading = false;
                         })
@@ -172,7 +172,7 @@
                             && ! params[params.type].save_address
                         )
                     ) {
-                        params[params.type].id = this.tempAddressId;
+                        params[params.type].id = this.tempAddressId + 1;
 
                         this.customerAddresses[params.type].push(params[params.type]);
 
@@ -284,7 +284,6 @@
                         
                         this.selectedShippingAddressId = shippingId;
                     }
-
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
                         .then((response) => {
