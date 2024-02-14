@@ -178,7 +178,7 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
-it('is should update the the existing customer', function () {
+it('should update the the existing customer', function () {
     // Arrange
     $customer = (new CustomerFaker())->factory()->create([
         'password' => Hash::make('admin123'),
@@ -193,8 +193,8 @@ it('is should update the the existing customer', function () {
         'gender'     => $customer->gender,
         'email'      => $email = fake()->email(),
     ])
-        ->assertRedirect(route('admin.customers.customers.view', $customer->id))
-        ->isRedirection();
+        ->assertOk()
+        ->assertJsonPath('message', trans('admin::app.customers.customers.update-success'));
 
     $this->assertModelWise([
         Customer::class => [
