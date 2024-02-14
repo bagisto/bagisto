@@ -66,7 +66,11 @@
 
                     customer: @json(auth()->guard('customer')->user()),
 
-                    customerAddresses: [],
+                    customerAddresses: {
+                        billing: [],
+
+                        shipping: [],
+                    },
 
                     isAddressLoading: true,
 
@@ -91,9 +95,9 @@
             },
 
             mounted() {
-                this.get();
-
                 this.init();
+                
+                this.get();
 
                 this.getCountries();
             },
@@ -112,7 +116,7 @@
                 savedBillingAddresses() {
                     const addresses = [];
 
-                    this.customerAddresses.forEach((address) => addresses.push(address));
+                    this.customerAddresses.billing.forEach((address) => addresses.push(address));
 
                     return addresses;
                 },
@@ -120,20 +124,22 @@
                 savedShippingAddresses() {
                     const addresses = [];
 
-                    this.customerAddresses.forEach((address) => addresses.push(address));
+                    this.customerAddresses.shipping.forEach((address) => addresses.push(address));
 
                     return addresses;
                 },
             },
 
             methods: {
-                init    () {
+                init() {
                     const storedAddresses = localStorage.getItem('customerAddresses');
 
                     if (storedAddresses) {
-                        this.customerAddresses = JSON.parse(storedAddresses);
+                        this.customerAddresses.billing = JSON.parse(storedAddresses).billing;
 
-                        this.tempAddressId = this.customerAddresses.length + 1;
+                        this.customerAddresses.shipping = JSON.parse(storedAddresses).shipping;
+
+                        this.tempAddressId = this.customerAddresses.billing.length + 1;
                     }
                 },
 
@@ -148,19 +154,7 @@
 
                     this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
                         .then(response => {
-                            const storedAddresses = localStorage.getItem('customerAddresses');
-
-                            if (storedAddresses) {
-                                const storedAddressesArray = JSON.parse(storedAddresses);
-
-                                const newAddresses = response.data.data.filter(address => {
-                                    return !storedAddressesArray.some(storedAddress => JSON.stringify(storedAddress) === JSON.stringify(address));
-                                });
-
-                                this.customerAddresses.push(...newAddresses);
-                            } else {
-                                this.customerAddresses = response.data.data;
-                            }
+                            this.customerAddresses = response.data.data;
 
                             this.isAddressLoading = false;
                         })
@@ -180,7 +174,7 @@
                     ) {
                         params[params.type].id = this.tempAddressId;
 
-                        this.customerAddresses.push(params[params.type]);
+                        this.customerAddresses[params.type].push(params[params.type]);
 
                         localStorage.setItem('customerAddresses', JSON.stringify(this.customerAddresses));
 
@@ -191,6 +185,10 @@
                         this.toggleShippingForm = false;
 
                         return;
+                    }
+
+                    if (localStorage.getItem('customerAddresses')) {
+                        localStorage.removeItem('customerAddresses');
                     }
 
                     this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params[params.type])
@@ -204,49 +202,42 @@
                             resetForm();
 
                             this.get();
-
-                            console.log(this.customerAddresses);
                         })
                         .catch(() => {});
                 },
 
                 update(params) {
-                    // console.log(params);
-                    // return;
-                    // if (! this.customer) {
-                    //     const existingAddressIndex = this.customerAddresses.findIndex(address => address.id === params[params.type].id);
+                    if (! this.customer) {
+                        const existingAddressIndex = this.customerAddresses[params.type].findIndex(address => address.id === params[params.type].id);
 
-                    //     if (existingAddressIndex !== -1) {
-                    //         this.customerAddresses[existingAddressIndex] = {
-                    //             ...this.customerAddresses[existingAddressIndex],
-                    //             ...params
-                    //         };
-                    //     }
+                        if (existingAddressIndex !== -1) {
+                            this.customerAddresses[params.type][existingAddressIndex] = {
+                                ...this.customerAddresses[params.type][existingAddressIndex],
+                                ...params[params.type]
+                            };
+                        }
 
-                    //     const storedAddresses = JSON.parse(localStorage.getItem('customerAddresses')) || [];
+                        const storedAddresses = JSON.parse(localStorage.getItem('customerAddresses')) || [];
 
-                    //     const storedAddressIndex = storedAddresses.findIndex(address => address.id === params.id);
+                        const storedAddressIndex = storedAddresses[params.type].findIndex(address => address.id === params[params.type].id);
 
-                    //     if (storedAddressIndex !== -1) {
-                    //         storedAddresses[storedAddressIndex] = {
-                    //             ...storedAddresses[storedAddressIndex],
-                    //             ...params
-                    //         };
+                        if (storedAddressIndex !== -1) {
+                            storedAddresses[storedAddressIndex] = {
+                                ...storedAddresses[storedAddressIndex],
+                                ...params[params.type]
+                            };
 
-                    //         localStorage.setItem('customerAddresses', JSON.stringify(storedAddresses));
-                    //     }
+                            localStorage.setItem('customerAddresses', JSON.stringify(storedAddresses));
+                        }
 
-                    //     this.addNewBillingAddress = false;
+                        this.addNewBillingAddress = false;
 
-                    //     this.toggleShippingForm = false;
+                        this.toggleShippingForm = false;
 
-                    //     this.isAddressEtitable = false;
+                        this.isAddressEtitable = false;
 
-                    //     return;
-                    // }
-
-                    console.log(params[params.type]);
-                    // return;
+                        return;
+                    }
 
                     this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", params[params.type])
                         .then(response => {
@@ -259,7 +250,6 @@
                             this.toggleShippingForm = false;
 
                             this.isAddressEtitable = false;
-
 
                             resetForm();
                         })
@@ -286,9 +276,9 @@
 
                         const shippingId = this.selectedShippingAddressId;
 
-                        params.billing = this.customerAddresses.find((value) =>  this.selectedBillingAddressId = value.id);
+                        params.billing = this.customerAddresses.billing.find((value) =>  this.selectedBillingAddressId = value.id);
                         
-                        params.shipping = this.customerAddresses.find((value) => this.selectedShippingAddressId = value.id);
+                        params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId = value.id);
                         
                         this.selectedBillingAddressId = billingId;
                         
