@@ -12,23 +12,7 @@
                 </p>
                 
                 <div>
-                    <!-- Customer Status -->
-                    @if ($customer->status == 1)
-                        <span class="label-active text-sm mx-1.5">
-                            @lang('admin::app.customers.customers.view.active')
-                        </span>
-                    @else    
-                        <span class="label-canceled text-sm mx-1.5">
-                            @lang('admin::app.customers.customers.view.inactive')
-                        </span>
-                    @endif
-
-                    <!-- Customer Suspended Status -->
-                    @if ($customer->is_suspended == 1)
-                        <span class="label-canceled text-sm">
-                            @lang('admin::app.customers.customers.view.suspended')
-                        </span>
-                    @endif
+                    <v-customer-status />
                 </div>
             </div>    
 
@@ -583,48 +567,9 @@
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
 
             <!-- Information -->
-            <x-admin::accordion>
-                <x-slot:header>
-                    <div class="flex w-full">
-                        <p class="w-full p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
-                            @lang('admin::app.customers.customers.view.customer')
-                        </p>
-    
-                        <!--Customer Edit Component -->
-                       @include('admin::customers.customers.edit', ['groups' => $groups])
-                    </div>
-                </x-slot>
-
-                <x-slot:content>
-                    <div class="grid gap-y-2.5">
-                        <p class="text-gray-800 font-semibold dark:text-white">
-                            {{ $customer->first_name . " " . $customer->last_name }}
-                        </p>
-
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.customers.customers.view.email', ['email' => $customer->email])
-                        </p>
-
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.customers.customers.view.phone', ['phone' => $customer->phone ?? 'N/A'])
-                        </p>
-
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.customers.customers.view.gender', ['gender' => $customer->gender ?? 'N/A'])
-                        </p>
-
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.customers.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
-                        </p>
-                        
-                        <p class="text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.customers.customers.view.group', ['group_code' => $customer->group->name ?? 'N/A'])
-                        </p>
-                    </div>
-                </x-slot>
-            </x-admin::accordion> 
-
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
+
+            <v-customer-details ref="customerDetails"></v-customer-details>
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
@@ -758,4 +703,129 @@
 
         </div>
     </div>
+
+    @pushOnce('scripts')
+        <script 
+            type="text/x-template" 
+            id="v-customer-details-template"
+        >
+           <div>
+                <x-admin::accordion ref="customerData">
+                    <x-slot:header>
+                        <div class="flex w-full">
+                            <p class="w-full p-2.5 text-gray-800 dark:text-white text-base  font-semibold">
+                                @lang('admin::app.customers.customers.view.customer')
+                            </p>
+        
+                            <!--Customer Edit Component -->
+                            @include('admin::customers.customers.edit')
+                        </div>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <div class="grid gap-y-2.5">
+                            <p class="text-gray-800 font-semibold dark:text-white">
+                                @{{ customer.first_name + ' ' + customer.last_name }}
+                            </p>
+
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ "@lang('admin::app.customers.customers.view.email')".replace(':email', customer.email) }}
+                            </p>
+
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ "@lang('admin::app.customers.customers.view.phone')".replace(':phone', customer.phone) }}
+                            </p>
+
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ "@lang('admin::app.customers.customers.view.gender')".replace(':gender', customer.gender ?? 'N/A') }}
+                            </p>
+
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ "@lang('admin::app.customers.customers.view.date-of-birth')".replace(':dob', customer.date_of_birth ?? 'N/A') }}
+                            </p>
+                            
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ "@lang('admin::app.customers.customers.view.group')".replace(':group_code', customer.group?.name ?? 'N/A') }}
+                            </p>
+                        </div>
+                    </x-slot:content>
+                </x-admin::accordion> 
+           </div>
+        </script>
+
+        <script
+            type="text/x-template"
+            id="v-customer-status-template"
+        >
+            <!-- Customer Status -->
+            <template v-if="customer">
+                <span 
+                    v-if="customer.status == 1"
+                    class="label-active text-sm mx-1.5"
+                >
+                    @lang('admin::app.customers.customers.view.active')
+                </span>
+
+                <span
+                    v-else
+                    class="label-canceled text-sm mx-1.5"
+                >
+                    @lang('admin::app.customers.customers.view.inactive')
+                </span>
+
+                <!-- Customer Suspended Status -->
+                <span
+                    v-if="customer.is_suspended"
+                    class="label-canceled text-sm"
+                >
+                    @lang('admin::app.customers.customers.view.suspended')
+                </span>
+            </template>
+        </script>
+
+        <script type="module">
+            app.component('v-customer-status', {
+                template: '#v-customer-status-template',
+
+                data() {
+                    return {
+                        customer: null,
+                    };
+                },
+
+                created() {
+                    this.$emitter.on('customer-update', (customer) => this.customer = customer);
+                },
+            })
+        </script>
+
+        <script type="module">
+            app.component('v-customer-details', {
+                template: '#v-customer-details-template',
+
+                data() {
+                    return {
+                        customer: {},
+                    };
+                },
+
+                mounted() {
+                    this.get();
+                }, 
+
+                methods: {
+                    get() {
+                        this.$axios.get('{{ route('admin.customers.customers.view', $customer->id) }}')
+                            .then((response) => {
+                                this.customer = response.data.customer;
+
+                                this.$emitter.emit('customer-update', this.customer);
+                            })
+                            .catch((error) => {
+                            });
+                    }
+                }
+            })
+        </script>
+    @endPushOnce
 </x-admin::layouts>
