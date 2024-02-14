@@ -257,10 +257,19 @@
                     };
 
                     if (! this.customer) {
-                        params.billing = this.customerAddresses.find((value) => value.id === this.selectedBillingAddressId);
+                        const billingId = this.selectedBillingAddressId;
 
-                        params.shipping = this.customerAddresses.find((value) => value.id === this.selectedShippingAddressId);
+                        const shippingId = this.selectedShippingAddressId;
+
+                        params.billing = this.customerAddresses.find((value) =>  this.selectedBillingAddressId = value.id);
+                        
+                        params.shipping = this.customerAddresses.find((value) => this.selectedShippingAddressId = value.id);
+                        
+                        this.selectedBillingAddressId = billingId;
+                        
+                        this.selectedShippingAddressId = shippingId;
                     }
+
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
                         .then((response) => {
