@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'حذف',
             'enable-at-least-one-payment'  => 'تمكين طريقة دفع واحدة على الأقل.',
             'enable-at-least-one-shipping' => 'تمكين طريقة شحن واحدة على الأقل.',
+            'no-result-found'              => 'لم يتم العثور على نتائج',
             'save-btn'                     => 'حفظ الإعدادات',
             'save-message'                 => 'تم حفظ الإعدادات بنجاح',
+            'search'                       => 'يبحث',
             'title'                        => 'الإعدادات',
 
             'general' => [

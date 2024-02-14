@@ -682,6 +682,7 @@ return [
                             'apply-to-all-name'   => '将名称应用于所有变体。',
                             'apply-to-all-sku'    => '将价格应用于所有 SKU。',
                             'apply-to-all-status' => '将状态应用于所有变体。',
+                            'apply-to-all-weight' => '对所有变体应用权重。',
                             'edit-inventories'    => '编辑库存',
                             'edit-names'          => '编辑名称',
                             'edit-prices'         => '编辑价格',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => '删除',
             'enable-at-least-one-payment'  => '至少启用一种支付方式。',
             'enable-at-least-one-shipping' => '至少启用一种配送方式。',
+            'no-result-found'              => '没有找到结果',
             'save-btn'                     => '保存配置',
             'save-message'                 => '配置保存成功',
+            'search'                       => '搜索',
             'title'                        => '配置',
 
             'general' => [

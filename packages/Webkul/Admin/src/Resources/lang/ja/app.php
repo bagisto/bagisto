@@ -3018,8 +3018,10 @@ return [
             'delete'                       => '削除',
             'enable-at-least-one-payment'  => '少なくとも1つの支払い方法を有効にしてください。',
             'enable-at-least-one-shipping' => '少なくとも1つの配送方法を有効にしてください。',
+            'no-result-found'              => '結果が見つかりません',
             'save-btn'                     => '設定を保存',
             'save-message'                 => '設定が正常に保存されました',
+            'search'                       => '検索',
             'title'                        => '設定',
 
             'general' => [

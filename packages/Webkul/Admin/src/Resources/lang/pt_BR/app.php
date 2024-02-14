@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'Apagar',
             'enable-at-least-one-payment'  => 'Ativar pelo menos um método de pagamento.',
             'enable-at-least-one-shipping' => 'Ativar pelo menos um método de envio.',
+            'no-result-found'              => 'nenhum resultado encontrado',
             'save-btn'                     => 'Salvar Configuração',
             'save-message'                 => 'Configuração salva com sucesso',
+            'search'                       => 'Procurar',
             'title'                        => 'Configuração',
 
             'general' => [

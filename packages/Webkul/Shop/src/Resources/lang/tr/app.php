@@ -521,7 +521,6 @@ return [
                 'translate'         => 'Çevir',
                 'translating'       => 'Çevriliyor...',
                 'write-a-review'    => 'Yorum Yazın',
-
             ],
 
             'add-to-cart'            => 'Sepete Ekle',

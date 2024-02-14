@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'Elimina',
             'enable-at-least-one-payment'  => 'Abilita almeno un metodo di pagamento.',
             'enable-at-least-one-shipping' => 'Abilita almeno un metodo di spedizione.',
+            'no-result-found'              => 'nessun risultato trovato',
             'save-btn'                     => 'Salva Configurazione',
             'save-message'                 => 'Configurazione salvata con successo',
+            'search'                       => 'Ricerca',
             'title'                        => 'Configurazione',
 
             'general' => [
@@ -3031,10 +3033,10 @@ return [
                     'title' => 'Generale',
 
                     'opzioni-unita' => [
-                        'info'          => 'Imposta le opzioni delle unità.',
-                        'title'         => 'Opzioni dell\'unità',
-                        'title-info'    => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
-                        'unita-peso'    => 'Unità di peso',
+                        'info'           => 'Imposta le opzioni delle unità.',
+                        'title'          => 'Opzioni dell\'unità',
+                        'title-info'     => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
+                        'weight-unit'    => 'Unità di peso',
                     ],
                 ],
 
@@ -3043,16 +3045,16 @@ return [
                     'title' => 'Contenuto',
 
                     'impostazioni' => [
-                        'opzione-ricerca-immagini' => 'Opzione di ricerca immagini',
-                        'opzioni-confronto'        => 'Opzioni di confronto',
-                        'opzioni-lista-desideri'   => 'Opzioni della lista dei desideri',
+                        'compare-options'          => 'Opzioni di confronto',
+                        'image-search-option'      => 'Opzione di ricerca immagini',
                         'title'                    => 'Impostazioni',
                         'title-info'               => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
+                        'wishlist-options'         => 'Opzioni della lista dei desideri',
                     ],
 
                     'script-personalizzati' => [
-                        'css-personalizzato'        => 'CSS personalizzato',
-                        'javascript-personalizzato' => 'Javascript personalizzato',
+                        'custom-css'                => 'CSS personalizzato',
+                        'custom-javascript'         => 'Javascript personalizzato',
                         'title'                     => 'Script personalizzati',
                         'title-info'                => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone unicità.',
                     ],

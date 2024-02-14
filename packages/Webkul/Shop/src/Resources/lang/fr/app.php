@@ -155,9 +155,6 @@ return [
                     ],
                 ],
 
-                'action'      => 'Action',
-                'empty-order' => 'Vous n\'avez encore commandé aucun produit',
-
                 'view' => [
                     'billing-address'    => 'Adresse de facturation',
                     'cancel-btn-title'   => 'Annuler',
