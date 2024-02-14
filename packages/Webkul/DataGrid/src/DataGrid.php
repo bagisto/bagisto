@@ -378,6 +378,8 @@ abstract class DataGrid
         }
 
         foreach ($paginator['data'] as $record) {
+            $record = $this->sanitizeRow($record);
+
             foreach ($this->columns as $column) {
                 if ($closure = $column->closure) {
                     $record->{$column->index} = $closure($record);
@@ -434,6 +436,27 @@ abstract class DataGrid
         $this->setQueryBuilder();
 
         $this->processRequest();
+    }
+
+    /**
+     * Prepare all the setup for datagrid.
+     */
+    public function sanitizeRow($row): \stdClass
+    {
+        /**
+         * Convert stdClass to array.
+         */
+        $tempRow = json_decode(json_encode($row), true);
+
+        foreach ($tempRow as $column => $value) {
+            if (is_array($value)) {
+                return $this->sanitizeRow($tempRow[$column]);
+            } else {
+                $row->{$column} = htmlspecialchars($value);
+            }
+        }
+
+        return $row;
     }
 
     /**
