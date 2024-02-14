@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Возврат корректировки',
                 'amount-per-unit'             => ':amount за единицу x :qty Количество',
                 'create-success'              => 'Возврат успешно создан',
+                'creation-error'              => 'Создание возврата не разрешено.',
                 'discount-amount'             => 'Сумма скидки',
                 'grand-total'                 => 'Общая сумма',
                 'invalid-qty'                 => 'Обнаружено недействительное количество товаров для выставления счета.',
@@ -3628,6 +3629,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length из',
+                'of'        => 'из',
+                'per-page'  => 'На страницу',
+                'results'   => ':total Результаты',
+                'selected'  => ':total Выбрано',
+
                 'mass-actions' => [
                     'select-action' => 'Выбрать действие',
                     'select-option' => 'Выбрать опцию',

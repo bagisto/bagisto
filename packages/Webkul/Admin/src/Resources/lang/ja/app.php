@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => '調整返金',
                 'amount-per-unit'             => ':amount 単位あたり x :qty 個数',
                 'create-success'              => '返金が正常に作成されました',
+                'creation-error'              => '払い戻しの作成は許可されていません。',
                 'discount-amount'             => '割引額',
                 'grand-total'                 => '総合計',
                 'invalid-qty'                 => '請求アイテムの無効な数量が見つかりました。',
@@ -3624,6 +3625,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length の',
+                'of'        => 'の',
+                'per-page'  => 'ページあたり',
+                'results'   => ':total 結果',
+                'selected'  => ':total 選択されました',
+
                 'index' => [
                     'no-records-selected'              => 'レコードは選択されていません。',
                     'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',

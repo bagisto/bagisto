@@ -29,6 +29,8 @@
     <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
         <!-- Left Section -->
         <div class="flex flex-col gap-8 flex-1 max-xl:flex-auto">
+            {!! view_render_event('bagisto.admin.dashboard.overall_detailes.before') !!}
+
             <!-- Overall Detailes -->
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
@@ -38,6 +40,10 @@
                 <!-- Over All Details Section -->
                 @include('admin::dashboard.over-all-details')
             </div>
+
+            {!! view_render_event('bagisto.admin.dashboard.overall_detailes.after') !!}
+
+            {!! view_render_event('bagisto.admin.dashboard.todays_detailes.before') !!}
 
             <!-- Todays Details -->
             <div class="flex flex-col gap-2">
@@ -49,6 +55,9 @@
                 @include('admin::dashboard.todays-details')
             </div>
 
+            {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
+
+            {!! view_render_event('bagisto.admin.dashboard.stock_thereshold.before') !!}
             <!-- Stock Thereshold -->
             <div class="flex flex-col gap-2">
                 <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
@@ -58,6 +67,7 @@
                 <!-- Products List -->  
                 @include('admin::dashboard.stock-threshold-products')
             </div>
+            {!! view_render_event('bagisto.admin.dashboard.stock_thereshold.after') !!}
         </div>
 
         <!-- Right Section -->
@@ -66,6 +76,8 @@
             <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
             </p>
+
+            {!! view_render_event('bagisto.admin.dashboard.store_stats.before') !!}
 
             <!-- Store Stats -->
             <div class="rounded bg-white dark:bg-gray-900 box-shadow">
@@ -81,6 +93,8 @@
                 <!-- Top Customers -->
                 @include('admin::dashboard.top-customers')
             </div>
+
+            {!! view_render_event('bagisto.admin.dashboard.store_stats.after') !!}
         </div>
     </div>
     

@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'بازپرداخت تنظیمی',
                 'amount-per-unit'             => ':amount در هر واحد x :qty تعداد',
                 'create-success'              => 'بازپرداخت با موفقیت ایجاد شد',
+                'creation-error'              => 'ایجاد بازپرداخت مجاز نیست.',
                 'discount-amount'             => 'مقدار تخفیف',
                 'grand-total'                 => 'جمع کل',
                 'invalid-qty'                 => 'ما تعداد نامعتبری برای موارد صورتحسابی پیدا کردیم.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length از',
+                'of'        => 'از',
+                'per-page'  => 'برای هر صفحه',
+                'results'   => ':total نتایج',
+                'selected'  => ':total انتخاب شده',
+
                 'mass-actions' => [
                     'select-action' => 'انتخاب عملیات',
                     'select-option' => 'انتخاب گزینه',

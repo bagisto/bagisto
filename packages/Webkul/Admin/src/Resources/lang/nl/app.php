@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Aanpassing Terugbetaling',
                 'amount-per-unit'             => ':amount Per Eenheid x :qty Hoeveelheid',
                 'create-success'              => 'Terugbetaling succesvol aangemaakt',
+                'creation-error'              => 'Het maken van restituties is niet toegestaan.',
                 'discount-amount'             => 'Kortingsbedrag',
                 'grand-total'                 => 'Totaalbedrag',
                 'invalid-qty'                 => 'We hebben een ongeldige hoeveelheid gevonden om items te factureren.',
@@ -3630,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length van',
+                'of'        => 'van',
+                'per-page'  => 'Per Pagina',
+                'results'   => ':total Resultaten',
+                'selected'  => ':total Geselecteerd',
+
                 'mass-actions' => [
                     'select-action' => 'Selecteer Actie',
                     'select-option' => 'Selecteer Optie',

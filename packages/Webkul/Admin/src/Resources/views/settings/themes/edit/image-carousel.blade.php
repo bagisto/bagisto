@@ -299,7 +299,8 @@
                                     type="text"
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
-                                    :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.image-title')"
+                                    :label="trans('admin::app.settings.themes.edit.image-title')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[title]" />
