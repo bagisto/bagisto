@@ -8,6 +8,7 @@
     <div class="grid">
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
+            
             <div class="flex gap-2.5 items-center">
                 <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
                     @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
@@ -100,6 +101,8 @@
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Component -->
             <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
+                {!! view_render_event('sales.order.left_component.before', ['order' => $order]) !!}
+
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex justify-between p-4">
                         <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
@@ -114,6 +117,8 @@
                     <!-- Order items -->
                     <div class="grid">
                         @foreach ($order->items as $item)
+                            {!! view_render_event('sales.order.list.before', ['order' => $order]) !!}
+
                             <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
                                 <div class="flex gap-2.5">
                                     @if($item?->product?->base_image_url)
@@ -200,6 +205,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {!! view_render_event('sales.order.list.after', ['order' => $order]) !!}
                         @endforeach
                     </div>
 
@@ -274,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-            
+                
                 <!-- Customer's comment form -->
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <p class="p-4 pb-0 text-base text-gray-800 dark:text-white font-semibold">
@@ -361,12 +368,14 @@
                         <span class="block w-full border-b dark:border-gray-800"></span>
                     @endforeach
                 </div>
-            </div>
 
-            {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
+                {!! view_render_event('sales.order.left_component.after', ['order' => $order]) !!}
+            </div>
 
             <!-- Right Component -->
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
+                {!! view_render_event('sales.order.right_component.before', ['order' => $order]) !!}
+
                 <!-- Customer and address information -->
                 <x-admin::accordion>
                     <x-slot:header>
@@ -701,10 +710,10 @@
                             </p>
                         @endforelse
                     </x-slot>
-                </x-admin::accordion> 
+                </x-admin::accordion>
+                
+                {!! view_render_event('sales.order.right_component.after', ['order' => $order]) !!}
             </div>
-
-            {!! view_render_event('sales.order.tabs.after', ['order' => $order]) !!}
         </div>
     </div>
 </x-admin::layouts>
