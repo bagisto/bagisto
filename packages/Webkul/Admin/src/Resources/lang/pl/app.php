@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Korekta zwrotu',
                 'amount-per-unit'             => ':amount na jednostkę x :qty Ilość',
                 'create-success'              => 'Zwrot został pomyślnie utworzony',
+                'creation-error'              => 'Tworzenie zwrotów nie jest dozwolone.',
                 'discount-amount'             => 'Kwota zniżki',
                 'grand-total'                 => 'Suma ogólna',
                 'invalid-qty'                 => 'Znaleziono nieprawidłową ilość przedmiotów do fakturacji.',

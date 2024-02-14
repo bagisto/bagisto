@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => '调整退款',
                 'amount-per-unit'             => ':amount 每单位 x :qty 数量',
                 'create-success'              => '退款创建成功',
+                'creation-error'              => '退款创建不允许。',
                 'discount-amount'             => '折扣金额',
                 'grand-total'                 => '总计',
                 'invalid-qty'                 => '我们发现有无效的数量要开票。',

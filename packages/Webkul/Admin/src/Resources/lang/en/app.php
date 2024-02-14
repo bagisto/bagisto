@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Adjustment Refund',
                 'amount-per-unit'             => ':amount Per Unit x :qty Quantity',
                 'create-success'              => 'Refund created successfully',
+                'creation-error'              => 'Refund creation is not allowed.',
                 'discount-amount'             => 'Discount Amount',
                 'grand-total'                 => 'Grand Total',
                 'invalid-qty'                 => 'We found an invalid quantity to invoice items.',

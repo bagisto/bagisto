@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => '調整返金',
                 'amount-per-unit'             => ':amount 単位あたり x :qty 個数',
                 'create-success'              => '返金が正常に作成されました',
+                'creation-error'              => '払い戻しの作成は許可されていません。',
                 'discount-amount'             => '割引額',
                 'grand-total'                 => '総合計',
                 'invalid-qty'                 => '請求アイテムの無効な数量が見つかりました。',

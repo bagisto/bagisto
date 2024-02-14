@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Düzeltme İadesi',
                 'amount-per-unit'             => ':amount Birim Başına x :qty Miktar',
                 'create-success'              => 'İade başarıyla oluşturuldu',
+                'creation-error'              => 'İade oluşturma izin verilmiyor.',
                 'discount-amount'             => 'İndirim Tutarı',
                 'grand-total'                 => 'Genel Toplam',
                 'invalid-qty'                 => 'Faturalanacak ürünlerde geçersiz miktar bulduk.',

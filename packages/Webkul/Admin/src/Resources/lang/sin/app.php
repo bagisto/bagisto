@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'අභ්‍යාවශ්‍ය ආදානය',
                 'amount-per-unit'             => ':amount ප්රමාණය අනු :qty ප්‍රමාණයක්',
                 'create-success'              => 'ආදානය සාර්ථකයි',
+                'creation-error'              => 'හරියට ආරාධනා නොවිය යුතුය.',
                 'discount-amount'             => 'මුදලේ වටිනාකම',
                 'grand-total'                 => 'මහේ මුලු මුදල',
                 'invalid-qty'                 => 'අමුදල අසාර්ථකයි.',
