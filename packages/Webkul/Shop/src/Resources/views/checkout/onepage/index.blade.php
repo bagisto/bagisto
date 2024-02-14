@@ -62,7 +62,7 @@
             <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
                 <div    
                     class="overflow-y-auto"
-                    ref="scrollBottom"
+                    id="scrollBottom"
                 >
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
 
@@ -99,8 +99,11 @@
                     }
                 },
 
-                created() {
+                mounted() {
                     this.getOrderSummary();
+
+                    // update cart when emit the update-cart event.
+                    this.$emitter.on('update-cart-summary', this.getOrderSummary);
                 }, 
 
                 methods: {
@@ -111,7 +114,7 @@
 
                                 this.isCartLoading = false;
 
-                                let container = this.$refs.scrollBottom;
+                                let container = document.getElementById('scrollBottom');
 
                                 if (container) {
                                     container.scrollIntoView({
@@ -120,7 +123,7 @@
                                     });
                                 }
                             })
-                            .catch(error => console.log(error));
+                            .catch(error => {});
                     },
                 },
             });

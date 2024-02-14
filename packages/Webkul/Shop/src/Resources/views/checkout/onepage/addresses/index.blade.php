@@ -1,10 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
 
-<v-checkout-addresses 
-    ref="vCheckoutAddress"
-    :have-stockable-items="cart.haveStockableItems"
->
-</v-checkout-addresses>
+<v-checkout-addresses :cart="cart"></v-checkout-addresses>
 
 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
@@ -14,13 +10,13 @@
         id="v-checkout-addresses-template"
     >
         <template v-if="isAddressLoading">
-            <!-- Onepage Shimmer Effect -->
+            <!-- Onepage Shimmer Effect --> 
             <x-shop::shimmer.checkout.onepage.address />
         </template>
         
         <template v-else>
             <div class="mt-8 mb-7">
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.before') !!}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing.before') !!} 
 
                 @include('shop::checkout.onepage.addresses.billing')
 
@@ -30,7 +26,28 @@
 
                 @include('shop::checkout.onepage.addresses.shipping')
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!}
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!} 
+            </div>
+
+            <div
+                class="flex justify-end mt-4"
+                v-if="
+                (selectedBillingAddressId || selectedShippingAddressId)
+                && ! toggleShippingForm
+                && ! addNewBillingAddress
+                "
+            >
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
+
+                <x-shop::button
+                    type="button"
+                    class="primary-button py-3 px-11 rounded-2xl"
+                    :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                    :loading="false"
+                    @click="proceed"
+                />
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
             </div>
         </template>
     </script>
@@ -39,114 +56,246 @@
         app.component('v-checkout-addresses', {
             template: '#v-checkout-addresses-template',
 
-            props: ['haveStockableItems'],
+            props: ['cart'],
 
             data() {
-                return  {
-                    forms: {
-                        billing: {
-                            address: {
-                                address1: [''],
-
-                                isSaved: false,
-                            },
-
-                            isNew: false,
-
-                            isUsedForShipping: true,
-                        },
-
-                        shipping: {
-                            address: {
-                                address1: [''],
-
-                                isSaved: false,
-                            },
-
-                            isNew: false,
-                        },
-                    },
-
-                    addresses: {
-                        billing: [],
-                        shipping: [],
-                    },
+                return {        
+                    addNewBillingAddress: false,
 
                     countries: [],
 
-                    states: [],
+                    customer: @json(auth()->guard('customer')->user()),
+
+                    customerAddresses: [],
 
                     isAddressLoading: true,
 
-                    isCustomer: "{{ auth()->guard('customer')->check() }}",
+                    isSameAsBilling: false,
 
-                    isTempAddress: false,
+                    selectedBillingAddressId: null,
+
+                    selectedShippingAddressId: null,
+
+                    shippingIsSameAsBilling: true,
+
+                    tempAddressId: 1,
+
+                    toggleShippingForm: false,
+
+                    tempBillingAddress: {},
+
+                    tempShippingAddress: {},
                 };
-            }, 
-            
-            created() {
-                this.getCustomerAddresses();
+            },
 
-                this.getCountryStates();
+            mounted() {
+                this.init();
+
+                this.get();
 
                 this.getCountries();
             },
 
+            watch: {
+                selectedAddresses: {
+                    handler(newQuestion) {
+                        this.resetState();
+                    },
+                    
+                    deep: true
+                }
+            },
+            
+            computed: {
+                savedBillingAddresses() {
+                    const addresses = [];
+
+                    this.customerAddresses.forEach((address) => addresses.push(address));
+
+                    return addresses;
+                },
+
+                savedShippingAddresses() {
+                    const addresses = [];
+
+                    this.customerAddresses.forEach((address) => addresses.push(address));
+
+                    return addresses;
+                },
+            },
+
             methods: {
-                resetBillingAddressForm() {
-                    this.forms.billing.address = {
-                        address1: [''],
+                init() {
+                    const storedAddresses = localStorage.getItem('customerAddresses');
 
-                        isSaved: false,
-                    };
-                },
+                    if (storedAddresses) {
+                        this.customerAddresses = JSON.parse(storedAddresses);
 
-                resetShippingAddressForm() {
-                    this.forms.shipping.address = {
-                        address1: [''],
-
-                        isSaved: false,
-                    };
-                },
-
-                resetPaymentAndShippingMethod() {
-                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
-
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-                },
-
-                getCustomerAddresses() {
-                    if (this.isCustomer) {
-                        this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
-                            .then(response => {
-                                this.addresses.billing = response.data.data.map((address, index, row) => {
-                                    if (! this.forms.billing.address.address_id) {
-                                        let isDefault = address.default_address ? address.default_address : index === 0;
-
-                                        if (isDefault) {
-                                            this.forms.billing.address.address_id = address.id;
-
-                                            this.forms.shipping.address.address_id = address.id;
-                                        }
-                                    }
-
-                                    if (! this.forms.billing.isUsedForShipping) {
-                                        this.forms.shipping.address.address_id = row[row.length - 1].id;
-                                    }
-
-                                    return {
-                                        ...address,
-                                        isSaved: true,
-                                        isDefault: typeof isDefault === 'undefined' ? false : isDefault,
-                                    };
-                                });
-
-                                this.isAddressLoading = false;
-                            })
-                            .catch((error) => {});
-                    } else {
-                        this.isAddressLoading = false;
+                        this.tempAddressId = this.customerAddresses.length + 1;
                     }
+                },
+
+                get() {
+                    this.isAddressLoading = true;
+
+                    if (! this.customer) {
+                        this.isAddressLoading = false;
+
+                        return;
+                    }
+
+                    this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
+                        .then(response => {
+                            this.customerAddresses = response.data.data;
+
+                            this.isAddressLoading = false;
+                        })
+                        .catch(() => {});
+                },
+
+                store(params, { resetForm }) {
+                    if (params[params.type].id) {
+                        return this.update(params[params.type]);
+                    }
+                    
+                    if (! this.customer) {
+                        params[params.type].id = this.tempAddressId;
+
+                        this.customerAddresses.push(params[params.type]);
+
+                        localStorage.setItem('customerAddresses', JSON.stringify(this.customerAddresses));
+
+                        this.tempAddressId++;
+
+                        this.addNewBillingAddress = false;
+
+                        this.toggleShippingForm = false;
+
+                        return;
+                    }
+
+                    if (localStorage.getItem('customerAddresses')) {
+                        localStorage.removeItem('customerAddresses');
+                    }
+
+                    this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params[params.type])
+                        .then(() => {
+                            this.$emitter.emit('update-cart-summary');
+
+                            this.addNewBillingAddress = false;
+
+                            this.toggleShippingForm = false;
+
+                            resetForm();
+
+                            this.get();
+                        })
+                        .catch(() => {});
+                },
+
+                update(params) {
+                    if (! this.customer) {
+                        const existingAddressIndex = this.customerAddresses.findIndex(address => address.id === params.id);
+
+                        if (existingAddressIndex !== -1) {
+                            this.customerAddresses[existingAddressIndex] = {
+                                ...this.customerAddresses[existingAddressIndex],
+                                ...params
+                            };
+                        }
+
+                        const storedAddresses = JSON.parse(localStorage.getItem('customerAddresses')) || [];
+
+                        const storedAddressIndex = storedAddresses.findIndex(address => address.id === params.id);
+
+                        if (storedAddressIndex !== -1) {
+                            storedAddresses[storedAddressIndex] = {
+                                ...storedAddresses[storedAddressIndex],
+                                ...params
+                            };
+
+                            localStorage.setItem('customerAddresses', JSON.stringify(storedAddresses));
+                        }
+
+                        this.addNewBillingAddress = false;
+
+                        this.toggleShippingForm = false;
+
+                        return;
+                    }
+
+                    this.$axios.post("{{ route('api.shop.customers.account.addresses.update') }}", params)
+                        .then(response => {
+                            this.$emitter.emit('update-cart-summary');
+
+                            this.addNewBillingAddress = false;
+
+                            this.toggleShippingForm = false;
+
+                            this.get();
+
+                            resetForm();
+                        })
+                        .catch(() => {});
+                },
+
+                proceed() {
+                    let params = {
+                        billing: {
+                            address1: [''],
+
+                            address_id: this.selectedBillingAddressId,
+                        },
+
+                        shipping: {
+                            address1: [''],
+
+                            address_id: this.selectedShippingAddressId,
+                        }
+                    };
+
+                    if (! this.customer) {
+                        const billingId = this.selectedBillingAddressId;
+
+                        const shippingId = this.selectedShippingAddressId;
+
+                        params.billing = this.customerAddresses.find((value) =>  this.selectedBillingAddressId = value.id);
+                        
+                        params.shipping = this.customerAddresses.find((value) => this.selectedShippingAddressId = value.id);
+                        
+                        this.selectedBillingAddressId = billingId;
+                        
+                        this.selectedShippingAddressId = shippingId;
+                    }
+
+
+                    this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
+                        .then((response) => {
+                            if (response.data.data.shippingMethods) {
+                                this.$emitter.emit('shipping-methods', response.data.data.shippingMethods);
+
+                                this.$emitter.emit('is-show-shipping-methods', true);
+
+                                this.$emitter.emit('is-shipping-loading', false);
+                            }
+
+                            if (response.data.data.payment_methods) {
+                                this.$emitter.emit('payment-methods', response.data.data.payment_methods);
+
+                                this.$emitter.emit('is-show-payment-methods', true);
+
+                                this.$emitter.emit('is-payment-loading', false);
+                            }
+
+                            this.$emitter.emit('update-cart-summary');
+
+                            resetForm();
+                        })
+                        .catch(() => {});
+                },
+
+                haveStates(addressType) {
+                    return false;
                 },
 
                 getCountries() {
@@ -154,151 +303,14 @@
                         .then(response => {
                             this.countries = response.data.data;
                         })
-                        .catch(function (error) {});
+                        .catch(() => {});
                 },
 
-                getCountryStates() {
-                    this.$axios.get("{{ route('shop.api.core.states') }}")
-                        .then(response => {
-                            this.states = response.data.data;
-                        })
-                        .catch(function (error) {});
-                },
+                resetState(state = false) {
+                    this.$emitter.emit('is-show-shipping-methods', state);
 
-                showNewBillingAddressForm() {
-                    this.resetBillingAddressForm();
-
-                    this.forms.billing.isNew = true;
-
-                    this.resetPaymentAndShippingMethod();
-                },
-
-                handleBillingAddressForm() {
-                    if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
-                        this.forms.billing.isNew = false;
-
-                        this.isTempAddress = true;
-
-                        this.addresses.billing.push({
-                            ...this.forms.billing.address,
-                            isSaved: false,
-                        });
-                    } else if (this.forms.billing.isNew && this.forms.billing.address.isSaved) {
-                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
-                            .then(response => {
-                                this.forms.billing.isNew = false;
-
-                                this.resetBillingAddressForm();
-                                
-                                this.getCustomerAddresses();
-                            })
-                            .catch(error => {                 
-                                console.log(error);
-                            });
-                    }
-                },
-
-                showNewShippingAddressForm() {
-                    this.resetShippingAddressForm();
-
-                    this.forms.shipping.isNew = true;
-
-                    this.resetPaymentAndShippingMethod();
-                },
-
-                handleShippingAddressForm() {
-                    if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
-                        this.forms.shipping.isNew = false;
-
-                        this.isTempAddress = true;
-                        
-                        this.addresses.shipping.push({
-                            ...this.forms.shipping.address,
-                            isSaved: false,
-                        });
-                    } else if (this.forms.shipping.isNew && this.forms.shipping.address.isSaved) {
-                        this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
-                            .then(response => {
-                                this.forms.shipping.isNew = false;
-
-                                this.resetShippingAddressForm();
-                                
-                                this.getCustomerAddresses();
-                            })
-                            .catch(error => {                 
-                                console.log(error);
-                            });
-                    }
-                },
-
-                store() {
-                    this.$refs.storeAddress.isLoading = true;
-
-                    if (this.haveStockableItems) {
-                        this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
-                        
-                        this.$parent.$refs.vShippingMethod.isShippingMethodLoading = true;
-                    } else {
-                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-    
-                        this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
-                    }
-
-                    this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', {
-                            billing: {
-                                ...this.forms.billing.address,
-
-                                use_for_shipping: this.forms.billing.isUsedForShipping,
-                            },
-
-                            shipping: {
-                                ...this.forms.shipping.address,
-                            },
-                        })
-                        .then(response => {
-                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-
-                            this.$parent.$refs.vCartSummary.canPlaceOrder = false;
-
-                            if (response.data.data.payment_methods) {
-                                this.$parent.$refs.vPaymentMethod.payment_methods = response.data.data.payment_methods;
-                                
-                                this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
-    
-                                this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
-                            } else {
-                                this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
-
-                                this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
-
-                                this.$parent.$refs.vShippingMethod.isShippingMethodLoading = false;
-                            }
-                            
-                            this.$parent.getOrderSummary();
-                            
-                            if (this.forms.billing.isUsedForShipping
-                                && this.forms.billing.address_id
-                            ) {
-                                this.getCustomerAddresses();
-                            }
-
-                            this.$refs.storeAddress.isLoading = false;
-                        })
-                        .catch(error => {
-                            this.$refs.storeAddress.isLoading = false;
-                        });
-                },
-
-                haveStates(addressType) {
-                    if (
-                        this.states[this.forms[addressType].address.country]
-                        && this.states[this.forms[addressType].address.country].length
-                    ) {
-                        return true;
-                    }
-
-                    return false;
-                },
+                    this.$emitter.emit('is-show-payment-methods', false);
+                }
             },
         });
     </script>
