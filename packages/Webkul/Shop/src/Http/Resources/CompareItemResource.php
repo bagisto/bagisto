@@ -56,7 +56,11 @@ class CompareItemResource extends JsonResource
 
                 $data[$attribute->code] = implode(', ', $labels);
             } else {
-                $data[$attribute->code] = $this->{$attribute->code};
+                if ($attribute->enable_wysiwyg) {
+                    $data[$attribute->code] = $this->{$attribute->code};
+                } else {
+                    $data[$attribute->code] = strip_tags($this->{$attribute->code});
+                }
             }
         }
 
