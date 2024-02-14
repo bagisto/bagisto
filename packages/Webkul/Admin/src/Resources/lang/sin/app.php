@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'මකනවා',
             'enable-at-least-one-payment'  => 'අවශ්‍යයින් එකක් ගෙවා කරන්න.',
             'enable-at-least-one-shipping' => 'අවශ්‍යයින් එකක් ප්‍රවේශ කරන්න.',
+            'no-result-found'              => 'ප්‍රතිඵලයක් හමු නොවීය',
             'save-btn'                     => 'සුරක්ෂිතය සුරන්න',
             'save-message'                 => 'සුරක්ෂිතය සුරක්ෂිතව සුරක්ෂිත කරන ලදි',
+            'search'                       => 'සෙවීම',
             'title'                        => 'සැකසුම්',
 
             'general' => [

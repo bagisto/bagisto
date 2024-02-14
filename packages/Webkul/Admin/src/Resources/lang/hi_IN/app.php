@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'हटाएं',
             'enable-at-least-one-payment'  => 'कम से कम एक भुगतान मेथड सक्षम करें।',
             'enable-at-least-one-shipping' => 'कम से कम एक शिपिंग मेथड सक्षम करें।',
+            'no-result-found'              => 'कोई परिणाम नहीं मिला',
             'save-btn'                     => 'कॉन्फ़िगरेशन सहेजें',
             'save-message'                 => 'कॉन्फ़िगरेशन सफलतापूर्वक सहेजा गया',
+            'search'                       => 'खोज',
             'title'                        => 'कॉन्फ़िगरेशन',
 
             'general' => [

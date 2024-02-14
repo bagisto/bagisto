@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'حذف',
             'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
             'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+            'no-result-found'              => 'هیچ نتیجه ای یافت نشد',
             'save-btn'                     => 'ذخیره پیکربندی',
             'save-message'                 => 'پیکربندی با موفقیت ذخیره شد',
+            'search'                       => 'جستجو کردن',
             'title'                        => 'پیکربندی',
 
             'general' => [

@@ -2250,6 +2250,7 @@ return [
             'imports' => [
                 'create'            => [
                     'action'              => 'Действие',
+                    'allowed-errors'      => 'Разрешенные ошибки',
                     'back-btn'            => 'Назад',
                     'create-update'       => 'Создать/Обновить',
                     'delete'              => 'Удалить',
@@ -2273,6 +2274,7 @@ return [
 
                 'edit'              => [
                     'action'              => 'Действие',
+                    'allowed-errors'      => 'Разрешенные ошибки',
                     'back-btn'            => 'Назад',
                     'create-update'       => 'Создать/Обновить',
                     'delete'              => 'Удалить',
@@ -3016,8 +3018,10 @@ return [
             'delete'                       => 'Удалить',
             'enable-at-least-one-payment'  => 'Включите хотя бы один метод оплаты.',
             'enable-at-least-one-shipping' => 'Включите хотя бы один метод доставки.',
+            'no-result-found'              => 'Результатов не найдено',
             'save-btn'                     => 'Сохранить настройки',
             'save-message'                 => 'Настройки успешно сохранены',
+            'search'                       => 'Поиск',
             'title'                        => 'Настройки',
 
             'general' => [

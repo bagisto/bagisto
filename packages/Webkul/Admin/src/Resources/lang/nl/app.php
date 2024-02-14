@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'Verwijderen',
             'enable-at-least-one-payment'  => 'Schakel ten minste één betaalmethode in.',
             'enable-at-least-one-shipping' => 'Schakel ten minste één verzendmethode in.',
+            'no-result-found'              => 'geen resultaat gevonden',
             'save-btn'                     => 'Instellingen Opslaan',
             'save-message'                 => 'Instellingen succesvol opgeslagen',
+            'search'                       => 'Zoekopdracht',
             'title'                        => 'Instellingen',
 
             'general' => [

@@ -3018,8 +3018,10 @@ return [
             'delete'                       => 'מחק',
             'enable-at-least-one-shipping' => 'הפעל לפחות אחת משיטות המשלוח.',
             'enable-at-least-one-payment'  => 'הפעל לפחות אחת משיטות התשלום.',
+            'no-result-found'              => 'לא נמצאו תוצאות',
             'save-btn'                     => 'שמור הגדרות',
             'save-message'                 => 'ההגדרות נשמרו בהצלחה',
+            'search'                       => 'לחפש',
             'title'                        => 'הגדרות',
 
             'general' => [

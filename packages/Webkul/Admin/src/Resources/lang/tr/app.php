@@ -3019,8 +3019,10 @@ return [
             'delete'                       => 'Sil',
             'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',
             'enable-at-least-one-shipping' => 'En az bir nakliye yöntemi etkinleştirin.',
+            'no-result-found'              => 'sonuç bulunamadı',
             'save-btn'                     => 'Yapılandırmayı Kaydet',
             'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
+            'search'                       => 'Aramak',
             'title'                        => 'Yapılandırma',
 
             'general' => [
