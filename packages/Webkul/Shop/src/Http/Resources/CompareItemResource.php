@@ -50,7 +50,7 @@ class CompareItemResource extends JsonResource
 
                 foreach ($attributeOptions as $attributeOption) {
                     if ($label = $attributeOption->label) {
-                        $labels[] = $label;
+                        $labels[] = strip_tags($label);
                     }
                 }
 
