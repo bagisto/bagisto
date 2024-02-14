@@ -2863,6 +2863,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Valore: :value',
                 'value-input'                   => 'Valore',
+
                 'services-content'              => [
                     'add-btn'            => 'Aggiungi Servizio',
                     'channels'           => 'Canali',
@@ -3143,137 +3144,137 @@ return [
                 ],
             ],
 
-            'catalogo' => [
+            'catalog' => [
                 'info'  => 'Catalogo',
                 'title' => 'Catalogo',
 
-                'inventario' => [
-                    'info'  => 'Imposta i back order',
+                'inventory' => [
+                    'info'  => 'Imposta gli ordini differiti',
                     'title' => 'Inventario',
 
-                    'opzioni-stock' => [
-                        'allow-back-orders'  => 'Consenti Back orders',
-                        'title'              => 'Opzioni di stock',
-                        'title-info'         => 'Le opzioni di stock sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di un\'azienda a un prezzo predeterminato, influenzando i potenziali profitti.',
+                    'stock-options' => [
+                        'allow-back-orders'  => 'Consenti ordini differiti',
+                        'title'              => 'Opzioni di Magazzino',
+                        'title-info'         => 'Le opzioni di magazzino sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di una società a un prezzo predeterminato, influenzando i profitti potenziali.',
                     ],
                 ],
 
-                'prodotti' => [
-                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il fronte del negozio, la recensione e la condivisione sociale degli attributi.',
+                'products' => [
+                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il front-end del negozio, la revisione e la condivisione sociale degli attributi.',
                     'title' => 'Prodotti',
 
-                    'checkout-ospiti' => [
-                        'allow-guest-checkout'      => 'Consenti Checkout per gli Ospiti',
-                        'allow-guest-checkout-hint' => 'Suggerimento: se attivato, questa opzione può essere configurata per ciascun prodotto in modo specifico.',
+                    'guest-checkout' => [
+                        'allow-guest-checkout'      => 'Consenti il checkout per gli ospiti',
+                        'allow-guest-checkout-hint' => 'Suggerimento: Se attivato, questa opzione può essere configurata per ciascun prodotto specificamente.',
                         'title'                     => 'Checkout per gli Ospiti',
                         'title-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per la comodità e transazioni più veloci.',
                     ],
 
-                    'pagina-visualizzazione-prodotto' => [
-                        'allow-no-of-related-products'  => 'Numero consentito di prodotti correlati',
-                        'allow-no-of-up-sells-products' => 'Numero consentito di prodotti Up-Sell',
-                        'title'                         => 'Configurazione della pagina di visualizzazione del prodotto',
-                        'title-info'                    => 'La configurazione della pagina di visualizzazione del prodotto comporta l\'adattamento del layout e degli elementi sulla pagina di visualizzazione di un prodotto, migliorando l\'esperienza utente e la presentazione delle informazioni.',
+                    'product-view-page' => [
+                        'allow-no-of-related-products'  => 'Numero consentito di Prodotti Correlati',
+                        'allow-no-of-up-sells-products' => 'Numero consentito di Prodotti in Vendita Aggiunti',
+                        'title'                         => 'Configurazione Pagina di Visualizzazione del Prodotto',
+                        'title-info'                    => 'La configurazione della pagina di visualizzazione del prodotto implica l\'adattamento della disposizione e degli elementi sulla pagina di visualizzazione di un prodotto, migliorando l\'esperienza dell\'utente e la presentazione delle informazioni.',
                     ],
 
-                    'pagina-carrello' => [
-                        'allow-no-of-cross-sells-products' => 'Numero consentito di prodotti Cross-Sell',
-                        'title'                            => 'Configurazione della pagina del carrello',
-                        'title-info'                       => 'La configurazione della pagina del carrello comporta la disposizione degli articoli, dei dettagli e delle opzioni sulla pagina del carrello, migliorando l\'interazione dell\'utente e il flusso di acquisto.',
+                    'cart-view-page' => [
+                        'allow-no-of-cross-sells-products' => 'Numero consentito di Prodotti Consigliati',
+                        'title'                            => 'Configurazione Pagina del Carrello',
+                        'title-info'                       => 'La configurazione della pagina del carrello coinvolge il disporre degli articoli, dei dettagli e delle opzioni sulla pagina del carrello degli acquisti, migliorando l\'interazione dell\'utente e il flusso di acquisto.',
                     ],
 
                     'storefront' => [
-                        'da-a-z'                        => 'Da A-Z',
-                        'da-z-a'                        => 'Da Z-A',
-                        'database'                      => 'Database',
-                        'display-pulsante-acquista-ora' => 'Consenti ai clienti di acquistare direttamente i prodotti',
-                        'elastico'                      => 'Ricerca elastica',
-                        'griglia'                       => 'Griglia',
-                        'lista'                         => 'Lista',
-                        'modalita-lista-predefinita'    => 'Modalità lista predefinita',
-                        'modalita-ricerca'              => 'Modalità di ricerca',
-                        'ordinato-per'                  => 'Ordinato per',
-                        'piu-costoso-prima'             => 'Più costoso prima',
-                        'piu-economico-prima'           => 'Più economico prima',
-                        'piu-recenti-prima'             => 'I più recenti prima',
-                        'piu-vecchi-prima'              => 'I più vecchi prima',
-                        'prodotti-per-pagina'           => 'Prodotti per pagina',
-                        'separati-da-virgola'           => 'Separati da virgola',
-                        'title'                         => 'Vetrina',
-                        'title-info'                    => 'La vetrina è l\'interfaccia rivolta ai clienti di un negozio online, che mostra prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                        'buy-now-button-display' => 'Consenti ai clienti di acquistare direttamente i prodotti',
+                        'cheapest-first'         => 'Più Economico Prima',
+                        'comma-separated'        => 'Separati da virgola',
+                        'database'               => 'Database',
+                        'default-list-mode'      => 'Modalità di Elenco Predefinita',
+                        'elastic'                => 'Ricerca Elastica',
+                        'expensive-first'        => 'Più Costoso Prima',
+                        'from-a-z'               => 'Da A-Z',
+                        'from-z-a'               => 'Da Z-A',
+                        'grid'                   => 'Griglia',
+                        'latest-first'           => 'Più Recente Prima',
+                        'list'                   => 'Elenco',
+                        'oldest-first'           => 'Più Vecchio Prima',
+                        'products-per-page'      => 'Prodotti Per Pagina',
+                        'search-mode'            => 'Modalità di Ricerca',
+                        'sort-by'                => 'Ordina Per',
+                        'title'                  => 'Vetrina',
+                        'title-info'             => 'La vetrina è l\'interfaccia rivolta al cliente di un negozio online, mostrando prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
                     ],
 
-                    'immagine-piccola' => [
-                        'altezza'        => 'Altezza',
-                        'larghezza'      => 'Larghezza',
-                        'title'          => 'Immagine piccola',
-                        'title-info'     => 'La vetrina è l\'interfaccia rivolta ai clienti di un negozio online, che mostra prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                    'small-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Piccola',
+                        'title-info' => 'La vetrina è l\'interfaccia rivolta al cliente di un negozio online, mostrando prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                        'width'      => 'Larghezza',
                     ],
 
-                    'immagine-media' => [
-                        'altezza'        => 'Altezza',
-                        'larghezza'      => 'Larghezza',
-                        'title'          => 'Immagine media',
-                        'title-info'     => 'L\'immagine media si riferisce a un\'immagine di dimensioni moderate che offre un equilibrio tra dettaglio e spazio dello schermo, comunemente utilizzata per le visualizzazioni.',
+                    'medium-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Media',
+                        'title-info' => 'Un\'immagine di dimensioni medie si riferisce a un\'immagine di dimensioni moderate che offre un equilibrio tra dettaglio e spazio sullo schermo, comunemente utilizzata per le immagini.',
+                        'width'      => 'Larghezza',
                     ],
 
-                    'immagine-grande' => [
-                        'altezza'        => 'Altezza',
-                        'larghezza'      => 'Larghezza',
-                        'title'          => 'Immagine grande',
-                        'title-info'     => 'L\'immagine grande rappresenta un\'immagine ad alta risoluzione che fornisce dettagli e impatto visivo migliorati, spesso utilizzata per mostrare prodotti o grafiche.',
+                    'large-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Grande',
+                        'title-info' => 'Un\'immagine grande rappresenta un\'immagine ad alta risoluzione che fornisce un dettaglio migliorato e un impatto visivo, spesso utilizzata per mostrare prodotti o grafica.',
+                        'width'      => 'Larghezza',
                     ],
 
-                    'recensione' => [
-                        'allow-guest-review' => 'Consenti recensioni degli ospiti',
+                    'review' => [
+                        'allow-guest-review' => 'Consenti Recensioni degli Ospiti',
                         'title'              => 'Recensione',
-                        'title-info'         => 'Valutazione o valutazione di qualcosa, spesso coinvolgente opinioni e feedback.',
+                        'title-info'         => 'Valutazione o valutazione di qualcosa, spesso coinvolgendo opinioni e feedback.',
                     ],
 
-                    'attributo' => [
-                        'dimensione-upload-file'     => 'Dimensione consentita per il caricamento del file (in Kb)',
-                        'dimensione-upload-immagine' => 'Dimensione consentita per il caricamento dell\'immagine (in Kb)',
-                        'title'                      => 'Attributo',
-                        'title-info'                 => 'Caratteristica o proprietà che definisce un oggetto, influenzandone il comportamento, l\'aspetto o la funzione.',
+                    'attribute' => [
+                        'file-upload-size'  => 'Dimensione di Upload File Consentita (in Kb)',
+                        'image-upload-size' => 'Dimensione di Upload Immagine Consentita (in Kb)',
+                        'title'             => 'Attributo',
+                        'title-info'        => 'Caratteristica o proprietà che definisce un oggetto, influenzando il suo comportamento, aspetto o funzione.',
                     ],
 
-                    'condivisione-sociale' => [
-                        'abilita-condivisione-email'     => 'Abilita la condivisione via email?',
-                        'abilita-condivisione-facebook'  => 'Abilita la condivisione su Facebook?',
-                        'abilita-condivisione-linkedin'  => 'Abilita la condivisione su Linkedin?',
-                        'abilita-condivisione-pinterest' => 'Abilita la condivisione su Pinterest?',
-                        'abilita-condivisione-sociale'   => 'Abilita la condivisione sociale?',
-                        'abilita-condivisione-twitter'   => 'Abilita la condivisione su Twitter?',
-                        'abilita-condivisione-whatsapp'  => 'Abilita la condivisione su WhatsApp?',
-                        'condividi'                      => 'Condividi',
-                        'messaggio-condivisione'         => 'Messaggio di condivisione',
-                        'title'                          => 'Condivisione sociale',
-                        'title-info'                     => 'Condivisione di cose da un sito web con amici su piattaforme di social media come Facebook, Twitter o Instagram.',
+                    'social-share' => [
+                        'enable-share-email'     => 'Abilita Condivisione via Email?',
+                        'enable-share-facebook'  => 'Abilita Condivisione su Facebook?',
+                        'enable-share-linkedin'  => 'Abilita Condivisione su Linkedin?',
+                        'enable-share-pinterest' => 'Abilita Condivisione su Pinterest?',
+                        'enable-share-twitter'   => 'Abilita Condivisione su Twitter?',
+                        'enable-share-whatsapp'  => 'Abilita Condivisione su WhatsApp?',
+                        'enable-social-share'    => 'Abilita Condivisione Sociale?',
+                        'share'                  => 'Condividi',
+                        'share-message'          => 'Messaggio di Condivisione',
+                        'title'                  => 'Condivisione Sociale',
+                        'title-info'             => 'Condividere cose da un sito web con amici su piattaforme di social media come Facebook, Twitter o Instagram.',
                     ],
                 ],
 
-                'snippet-ricchi' => [
+                'rich-snippets' => [
                     'info'  => 'Imposta prodotti e categorie.',
                     'title' => 'Snippet Ricchi',
 
-                    'prodotti' => [
-                        'abilita'               => 'Abilita',
-                        'mostra-categorie'      => 'Mostra Categorie',
-                        'mostra-immagini'       => 'Mostra Immagini',
-                        'mostra-offerte'        => 'Mostra Offerte',
-                        'mostra-peso'           => 'Mostra Peso',
-                        'mostra-recensioni'     => 'Mostra Recensioni',
-                        'mostra-sku'            => 'Mostra SKU',
-                        'mostra-valutazioni'    => 'Mostra Valutazioni',
-                        'title'                 => 'Prodotti',
-                        'title-info'            => 'Articoli disponibili per l\'acquisto o l\'uso, offerti da un\'azienda o un venditore.',
+                    'products' => [
+                        'enable'          => 'Abilita',
+                        'show-categories' => 'Mostra Categorie',
+                        'show-images'     => 'Mostra Immagini',
+                        'show-offers'     => 'Mostra Offerte',
+                        'show-ratings'    => 'Mostra Valutazioni',
+                        'show-reviews'    => 'Mostra Recensioni',
+                        'show-sku'        => 'Mostra SKU',
+                        'show-weight'     => 'Mostra Peso',
+                        'title'           => 'Prodotti',
+                        'title-info'      => 'Articoli disponibili per l\'acquisto o l\'uso, offerti da un\'attività commerciale o da un venditore.',
                     ],
 
-                    'categorie' => [
-                        'abilita'                    => 'Abilita',
-                        'mostra-campo-input-ricerca' => 'Mostra campo di input di ricerca',
-                        'title'                      => 'Categorie',
-                        'title-info'                 => 'Le "Categorie" si riferiscono a gruppi o classificazioni che aiutano a organizzare e raggruppare prodotti o articoli simili per una navigazione e consultazione più semplice.',
+                    'categories' => [
+                        'enable'                  => 'Abilita',
+                        'show-search-input-field' => 'Mostra Campo di Input di Ricerca',
+                        'title'                   => 'Categorie',
+                        'title-info'              => 'Le "Categorie" si riferiscono a gruppi o classificazioni che aiutano a organizzare e raggruppare prodotti o articoli simili insieme per una navigazione più semplice.',
                     ],
                 ],
             ],
