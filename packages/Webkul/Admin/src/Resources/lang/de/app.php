@@ -3625,6 +3625,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length von',
+                'of'        => 'von',
+                'per-page'  => 'Pro Seite',
+                'results'   => ':total Ergebnisse',
+                'selected'  => ':total Ausgewählt',
+
                 'index' => [
                     'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
                     'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',

@@ -88,7 +88,9 @@
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
                     <p class="text-sm font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
-                        @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
+                        @{{ "@lang('admin::app.components.datagrid.toolbar.length-of')".replace(':length', applied.massActions.indices.length) }}
+
+                        @{{ "@lang('admin::app.components.datagrid.toolbar.selected')".replace(':total', available.meta.total) }}
                     </p>
                 </div>
             </div>
@@ -120,7 +122,7 @@
                 <div class="ltr:pl-2.5 rtl:pr-2.5">
                     <p class="text-sm font-light text-gray-800 dark:text-white">
                         <!-- Need to manage this translation. -->
-                        @{{ available.meta.total }} Results
+                        @{{ "@lang('admin::app.components.datagrid.toolbar.results')".replace(':total', available.meta.total) }}
                     </p>
                 </div>
             </div>
@@ -193,7 +195,9 @@
                     </x-slot>
                 </x-admin::dropdown>
 
-                <p class="whitespace-nowrap text-gray-600 dark:text-gray-300 max-sm:hidden">per page</p>
+                <p class="whitespace-nowrap text-gray-600 dark:text-gray-300 max-sm:hidden">
+                    @lang('admin::app.components.datagrid.toolbar.per-page')
+                </p>
 
                 <input
                     type="text"
@@ -203,7 +207,7 @@
                 >
 
                 <div class="whitespace-nowrap text-gray-600 dark:text-gray-300">
-                    <span>of </span>
+                    <span> @lang('admin::app.components.datagrid.toolbar.of') </span>
 
                     <span v-text="available.meta.last_page"></span>
                 </div>

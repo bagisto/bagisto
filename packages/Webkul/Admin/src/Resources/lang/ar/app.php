@@ -3631,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length من',
+                'of'        => 'من',
+                'per-page'  => 'لكل صفحة',
+                'results'   => ':total النتائج',
+                'selected'  => ':total محدد',
+
                 'mass-actions' => [
                     'select-action' => 'اختر الإجراء',
                     'select-option' => 'اختر الخيار',

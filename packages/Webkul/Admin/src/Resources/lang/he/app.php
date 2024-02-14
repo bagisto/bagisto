@@ -3631,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length של',
+                'of'        => 'של',
+                'per-page'  => 'לעמוד',
+                'results'   => ':total תוצאות',
+                'selected'  => ':total נבחרו',
+
                 'mass-actions' => [
                     'select-action' => 'בחר פעולה',
                     'select-option' => 'בחר אפשרות',

@@ -3629,6 +3629,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length из',
+                'of'        => 'из',
+                'per-page'  => 'На страницу',
+                'results'   => ':total Результаты',
+                'selected'  => ':total Выбрано',
+
                 'mass-actions' => [
                     'select-action' => 'Выбрать действие',
                     'select-option' => 'Выбрать опцию',

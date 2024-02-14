@@ -3631,6 +3631,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length nin',
+                'of'        => 'nin',
+                'per-page'  => 'Sayfa başına',
+                'results'   => ':total Sonuçlar',
+                'selected'  => ':total Seçilen',
+
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',
                     'select-option' => 'Seçenek Seç',

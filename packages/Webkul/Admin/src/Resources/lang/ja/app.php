@@ -3625,6 +3625,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length の',
+                'of'        => 'の',
+                'per-page'  => 'ページあたり',
+                'results'   => ':total 結果',
+                'selected'  => ':total 選択されました',
+
                 'index' => [
                     'no-records-selected'              => 'レコードは選択されていません。',
                     'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',

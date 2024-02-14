@@ -3633,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length of',
+                'of'        => 'of',
+                'per-page'  => 'Per Page',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
+
                 'mass-actions' => [
                     'submit'        => 'Submit',
                     'select-option' => 'Select Option',

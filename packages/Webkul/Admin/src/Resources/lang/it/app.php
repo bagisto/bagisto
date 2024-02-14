@@ -3632,6 +3632,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length di',
+                'of'        => 'di',
+                'per-page'  => 'Per Pagina',
+                'results'   => ':total Risultati',
+                'selected'  => ':total Selezionati',
+
                 'mass-actions' => [
                     'select-action' => 'Seleziona Azione',
                     'select-option' => 'Seleziona Opzione',
