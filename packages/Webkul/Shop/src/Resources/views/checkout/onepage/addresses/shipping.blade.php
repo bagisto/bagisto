@@ -51,7 +51,7 @@
 
                                 <span
                                     class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                    @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEtitable=true;"
+                                    @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEditable=true;"
                                 >
                                 </span>
     
@@ -91,7 +91,7 @@
     
                             <div 
                                 class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                @click="toggleShippingForm=true;tempShippingAddress={};isAddressEtitable=false;"
+                                @click="toggleShippingForm=true;tempShippingAddress={};isAddressEditable=false;"
                             >
                                 <div
                                     class="flex gap-x-2.5 items-center"
@@ -141,7 +141,7 @@
                     <a 
                         class="flex justify-end"
                         href="javascript:void(0)" 
-                        @click="toggleShippingForm=false;tempShippingAddress={};isAddressEtitable=false"
+                        @click="toggleShippingForm=false;tempShippingAddress={};isAddressEditable=false"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
     
@@ -429,7 +429,7 @@
 
                         <div
                             class="grid gap-2.5 pb-4"
-                            v-if="! isAddressEtitable"
+                            v-if="! isAddressEditable"
                         >
                             @auth('customer')
                                 <div class="flex gap-x-4 select-none">

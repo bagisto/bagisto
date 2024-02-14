@@ -52,7 +52,7 @@
 
                             <span
                                 class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                @click="addNewBillingAddress=true;tempBillingAddress=address;isAddressEtitable=true;"
+                                @click="addNewBillingAddress=true;tempBillingAddress=address;isAddressEditable=true;"
                             ></span>
 
                             <label 
@@ -91,7 +91,7 @@
 
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                            @click="addNewBillingAddress=true;tempBillingAddress={};isAddressEtitable=false;"
+                            @click="addNewBillingAddress=true;tempBillingAddress={};isAddressEditable=false;"
                         >
                             <div
                                 class="flex gap-x-2.5 items-center"
@@ -169,7 +169,7 @@
                 <a 
                     class="flex justify-end"
                     href="javascript:void(0)" 
-                    @click="addNewBillingAddress=false;tempBillingAddress={};isAddressEtitable=false;"
+                    @click="addNewBillingAddress=false;tempBillingAddress={};isAddressEditable=false;"
                 >
                     <span class="icon-arrow-left text-2xl"></span>
 
@@ -473,7 +473,7 @@
 
                     <div
                         class="grid gap-2.5 pb-4"
-                        v-if="! isAddressEtitable"
+                        v-if="! isAddressEditable"
                     >
                         @auth('customer')
                             <div class="flex gap-x-4 select-none">

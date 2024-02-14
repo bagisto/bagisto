@@ -90,7 +90,7 @@
 
                     tempShippingAddress: {},
 
-                    isAddressEtitable: false,
+                    isAddressEditable: false,
                 };
             },
 
@@ -234,7 +234,7 @@
 
                         this.toggleShippingForm = false;
 
-                        this.isAddressEtitable = false;
+                        this.isAddressEditable = false;
 
                         return;
                     }
@@ -249,7 +249,7 @@
 
                             this.toggleShippingForm = false;
 
-                            this.isAddressEtitable = false;
+                            this.isAddressEditable = false;
 
                             resetForm();
                         })
