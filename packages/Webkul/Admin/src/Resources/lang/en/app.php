@@ -3637,7 +3637,7 @@ return [
                 'per-page'  => 'Per Page',
                 'results'   => ':total Results',
                 'selected'  => ':total Selected',
-                
+
                 'mass-actions' => [
                     'submit'        => 'Submit',
                     'select-option' => 'Select Option',
