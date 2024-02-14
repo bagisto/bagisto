@@ -42,7 +42,7 @@ class LocaleController extends Controller
             'name'        => 'required',
             'direction'   => 'required|in:ltr,rtl',
             'logo_path'   => 'array',
-            'logo_path.*' => 'image',
+            'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
         ]);
 
         $this->localeRepository->create(request()->only([
@@ -78,7 +78,7 @@ class LocaleController extends Controller
             'name'        => 'required',
             'direction'   => 'required|in:ltr,rtl',
             'logo_path'   => 'array',
-            'logo_path.*' => 'image',
+            'logo_path.*' => 'image|extensions:jpeg,jpg,png,svg,webp',
         ]);
 
         $this->localeRepository->update(request()->only([
