@@ -452,7 +452,7 @@ abstract class DataGrid
             if (is_array($value)) {
                 return $this->sanitizeRow($tempRow[$column]);
             } else {
-                $row->{$column} = htmlspecialchars($value);
+                $row->{$column} = strip_tags($value);
             }
         }
 
