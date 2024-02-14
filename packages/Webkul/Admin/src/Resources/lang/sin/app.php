@@ -3630,6 +3630,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length යාවත්කාලීන',
+                'of'        => 'යාවත්කාලීන',
+                'per-page'  => 'පිටුවක පිටුවක',
+                'results'   => ':total ප්‍රතිඵල',
+                'selected'  => ':total තෝරාගත්',
+
                 'mass-actions' => [
                     'select-action' => 'ක්‍රියාකාරකම තෝරන්න',
                     'select-option' => 'විකල්ප තෝරන්න',

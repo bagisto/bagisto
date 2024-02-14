@@ -3630,6 +3630,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length এর',
+                'of'        => 'এর',
+                'per-page'  => 'প্রতি পৃষ্ঠা',
+                'results'   => ':total ফলাফল',
+                'selected'  => ':total নির্বাচিত',
+
                 'mass-actions' => [
                     'submit'        => 'জমা দিন',
                     'select-option' => 'বিকল্প নির্ধারণ করুন',

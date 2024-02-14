@@ -3630,6 +3630,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length de',
+                'of'        => 'de',
+                'per-page'  => 'Por página',
+                'results'   => ':total Resultados',
+                'selected'  => ':total Selecionados',
+
                 'mass-actions' => [
                     'submit'        => 'Soumettre',
                     'select-option' => 'Sélectionner une option',

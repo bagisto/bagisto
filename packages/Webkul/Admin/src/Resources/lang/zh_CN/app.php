@@ -3629,6 +3629,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length 的',
+                'of'        => '的',
+                'per-page'  => '每页',
+                'results'   => ':total 结果',
+                'selected'  => ':total 已选择',
+
                 'mass-actions' => [
                     'select-action' => '选择操作',
                     'select-option' => '选择选项',

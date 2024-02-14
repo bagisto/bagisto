@@ -3630,6 +3630,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length از',
+                'of'        => 'از',
+                'per-page'  => 'برای هر صفحه',
+                'results'   => ':total نتایج',
+                'selected'  => ':total انتخاب شده',
+
                 'mass-actions' => [
                     'select-action' => 'انتخاب عملیات',
                     'select-option' => 'انتخاب گزینه',

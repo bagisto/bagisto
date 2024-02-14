@@ -3630,6 +3630,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length з',
+                'of'        => 'з',
+                'per-page'  => 'На сторінку',
+                'results'   => ':total Результати',
+                'selected'  => ':total Обрані',
+
                 'mass-actions' => [
                     'select-action' => 'Вибрати дію',
                     'select-option' => 'Вибрати опцію',

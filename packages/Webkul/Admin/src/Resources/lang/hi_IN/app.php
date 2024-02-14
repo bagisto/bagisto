@@ -3630,6 +3630,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length का',
+                'of'        => 'का',
+                'per-page'  => 'प्रति पृष्ठ',
+                'results'   => ':total परिणाम',
+                'selected'  => ':total चयनित',
+
                 'mass-actions' => [
                     'select-action' => 'कार्रवाई चुनें',
                     'select-option' => 'विकल्प चुनें',
