@@ -257,9 +257,9 @@
                     };
 
                     if (! this.customer) {
-                        params.billing = this.customerAddresses.find((value) => this.selectedBillingAddressId = value.id);
+                        params.billing = this.customerAddresses.find((value) => value.id === this.selectedBillingAddressId);
 
-                        params.shipping = this.customerAddresses.find((value) => this.selectedShippingAddressId = value.id);
+                        params.shipping = this.customerAddresses.find((value) => value.id === this.selectedShippingAddressId);
                     }
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
