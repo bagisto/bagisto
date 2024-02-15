@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'بازپرداخت تنظیمی',
                 'amount-per-unit'             => ':amount در هر واحد x :qty تعداد',
                 'create-success'              => 'بازپرداخت با موفقیت ایجاد شد',
+                'creation-error'              => 'ایجاد بازپرداخت مجاز نیست.',
                 'discount-amount'             => 'مقدار تخفیف',
                 'grand-total'                 => 'جمع کل',
                 'invalid-qty'                 => 'ما تعداد نامعتبری برای موارد صورتحسابی پیدا کردیم.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'حذف',
                     'download-sample'     => 'دانلود نمونه',
                     'field-separator'     => 'جداکننده فیلد',
-                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/import/app/product-images قرار گیرند.',
-                    'file-info'           => 'از مسیر نسبی به /project-root/storage/import/app استفاده کنید، به عنوان مثال product-images، import-images.',
+                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
+                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
                     'file'                => 'فایل',
                     'general'             => 'عمومی',
                     'images-directory'    => 'مسیر پوشه تصاویر',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'حذف',
                     'download-sample'     => 'دانلود نمونه',
                     'field-separator'     => 'جداکننده فیلد',
-                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/import/app/product-images قرار گیرند.',
-                    'file-info'           => 'از مسیر نسبی به /project-root/storage/import/app استفاده کنید، به عنوان مثال product-images، import-images.',
+                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
+                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
                     'file'                => 'فایل',
                     'general'             => 'عمومی',
                     'images-directory'    => 'مسیر پوشه تصاویر',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'حذف',
             'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
             'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+            'no-result-found'              => 'هیچ نتیجه ای یافت نشد',
             'save-btn'                     => 'ذخیره پیکربندی',
             'save-message'                 => 'پیکربندی با موفقیت ذخیره شد',
+            'search'                       => 'جستجو کردن',
             'title'                        => 'پیکربندی',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length از',
+                'of'        => 'از',
+                'per-page'  => 'برای هر صفحه',
+                'results'   => ':total نتایج',
+                'selected'  => ':total انتخاب شده',
+
                 'mass-actions' => [
                     'select-action' => 'انتخاب عملیات',
                     'select-option' => 'انتخاب گزینه',

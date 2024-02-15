@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Возврат корректировки',
                 'amount-per-unit'             => ':amount за единицу x :qty Количество',
                 'create-success'              => 'Возврат успешно создан',
+                'creation-error'              => 'Создание возврата не разрешено.',
                 'discount-amount'             => 'Сумма скидки',
                 'grand-total'                 => 'Общая сумма',
                 'invalid-qty'                 => 'Обнаружено недействительное количество товаров для выставления счета.',
@@ -2249,13 +2250,14 @@ return [
             'imports' => [
                 'create'            => [
                     'action'              => 'Действие',
+                    'allowed-errors'      => 'Разрешенные ошибки',
                     'back-btn'            => 'Назад',
                     'create-update'       => 'Создать/Обновить',
                     'delete'              => 'Удалить',
                     'download-sample'     => 'Скачать Пример',
                     'field-separator'     => 'Разделитель Полей',
-                    'file-info-example'   => 'Например, в случае product-images, файлы должны быть помещены в папку /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Используйте относительный путь к /project-root/storage/import/app, например, product-images, import-images.',
+                    'file-info-example'   => 'Например, в случае product-images, файлы должны быть помещены в папку /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Используйте относительный путь к /project-root/storage/app/import, например, product-images, import-images.',
                     'file'                => 'Файл',
                     'general'             => 'Общие',
                     'images-directory'    => 'Путь к Папке Изображений',
@@ -2272,13 +2274,14 @@ return [
 
                 'edit'              => [
                     'action'              => 'Действие',
+                    'allowed-errors'      => 'Разрешенные ошибки',
                     'back-btn'            => 'Назад',
                     'create-update'       => 'Создать/Обновить',
                     'delete'              => 'Удалить',
                     'download-sample'     => 'Скачать Пример',
                     'field-separator'     => 'Разделитель Полей',
-                    'file-info-example'   => 'Например, в случае product-images, файлы должны быть помещены в папку /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Используйте относительный путь к /project-root/storage/import/app, например, product-images, import-images.',
+                    'file-info-example'   => 'Например, в случае product-images, файлы должны быть помещены в папку /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Используйте относительный путь к /project-root/storage/app/import, например, product-images, import-images.',
                     'file'                => 'Файл',
                     'general'             => 'Общие',
                     'images-directory'    => 'Путь к Папке Изображений',
@@ -3015,8 +3018,10 @@ return [
             'delete'                       => 'Удалить',
             'enable-at-least-one-payment'  => 'Включите хотя бы один метод оплаты.',
             'enable-at-least-one-shipping' => 'Включите хотя бы один метод доставки.',
+            'no-result-found'              => 'Результатов не найдено',
             'save-btn'                     => 'Сохранить настройки',
             'save-message'                 => 'Настройки успешно сохранены',
+            'search'                       => 'Поиск',
             'title'                        => 'Настройки',
 
             'general' => [
@@ -3628,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length из',
+                'of'        => 'из',
+                'per-page'  => 'На страницу',
+                'results'   => ':total Результаты',
+                'selected'  => ':total Выбрано',
+
                 'mass-actions' => [
                     'select-action' => 'Выбрать действие',
                     'select-option' => 'Выбрать опцию',

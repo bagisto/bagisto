@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Adjustment Refund',
                 'amount-per-unit'             => ':amount Per Unit x :qty Quantity',
                 'create-success'              => 'Refund created successfully',
+                'creation-error'              => 'Refund creation is not allowed.',
                 'discount-amount'             => 'Discount Amount',
                 'grand-total'                 => 'Grand Total',
                 'invalid-qty'                 => 'We found an invalid quantity to invoice items.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Delete',
                     'download-sample'     => 'Download Sample',
                     'field-separator'     => 'Field Separator',
-                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/import/app/product-images folder.',
-                    'file-info'           => 'Use relative path to /project-root/storage/import/app, e.g. product-images, import-images.',
+                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
+                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
                     'file'                => 'File',
                     'general'             => 'General',
                     'images-directory'    => 'Images Directory Path',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'Delete',
                     'download-sample'     => 'Download Sample',
                     'field-separator'     => 'Field Separator',
-                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/import/app/product-images folder.',
-                    'file-info'           => 'Use relative path to /project-root/storage/import/app, e.g. product-images, import-images.',
+                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
+                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
                     'file'                => 'File',
                     'general'             => 'General',
                     'images-directory'    => 'Images Directory Path',
@@ -3632,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length of',
+                'of'        => 'of',
+                'per-page'  => 'Per Page',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
+
                 'mass-actions' => [
                     'submit'        => 'Submit',
                     'select-option' => 'Select Option',

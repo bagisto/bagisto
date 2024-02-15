@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Aanpassing Terugbetaling',
                 'amount-per-unit'             => ':amount Per Eenheid x :qty Hoeveelheid',
                 'create-success'              => 'Terugbetaling succesvol aangemaakt',
+                'creation-error'              => 'Het maken van restituties is niet toegestaan.',
                 'discount-amount'             => 'Kortingsbedrag',
                 'grand-total'                 => 'Totaalbedrag',
                 'invalid-qty'                 => 'We hebben een ongeldige hoeveelheid gevonden om items te factureren.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Verwijderen',
                     'download-sample'     => 'Voorbeeld Downloaden',
                     'field-separator'     => 'Veldscheider',
-                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/import/app, bijv. productafbeeldingen, importafbeeldingen.',
+                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/app/import, bijv. productafbeeldingen, importafbeeldingen.',
                     'file'                => 'Bestand',
                     'general'             => 'Algemeen',
                     'images-directory'    => 'Pad naar Afbeeldingenmap',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'Verwijderen',
                     'download-sample'     => 'Voorbeeld Downloaden',
                     'field-separator'     => 'Veldscheider',
-                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/import/app, bijv. productafbeeldingen, importafbeeldingen.',
+                    'file-info-example'   => 'Bijvoorbeeld, in het geval van productafbeeldingen moeten bestanden worden geplaatst in de map /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Gebruik het relatieve pad naar /project-root/storage/app/import, bijv. productafbeeldingen, importafbeeldingen.',
                     'file'                => 'Bestand',
                     'general'             => 'Algemeen',
                     'images-directory'    => 'Pad naar Afbeeldingenmap',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'Verwijderen',
             'enable-at-least-one-payment'  => 'Schakel ten minste één betaalmethode in.',
             'enable-at-least-one-shipping' => 'Schakel ten minste één verzendmethode in.',
+            'no-result-found'              => 'geen resultaat gevonden',
             'save-btn'                     => 'Instellingen Opslaan',
             'save-message'                 => 'Instellingen succesvol opgeslagen',
+            'search'                       => 'Zoekopdracht',
             'title'                        => 'Instellingen',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length van',
+                'of'        => 'van',
+                'per-page'  => 'Per Pagina',
+                'results'   => ':total Resultaten',
+                'selected'  => ':total Geselecteerd',
+
                 'mass-actions' => [
                     'select-action' => 'Selecteer Actie',
                     'select-option' => 'Selecteer Optie',

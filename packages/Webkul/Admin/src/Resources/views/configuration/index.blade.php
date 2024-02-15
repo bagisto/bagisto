@@ -118,7 +118,8 @@
         <script type="module">
             app.component('v-configuration-search', {
                 template: '#v-configuration-search-template',
-                data: function() {
+                
+                data() {
                     return {
                         isDropdownOpen: false,
 
@@ -127,17 +128,16 @@
                         searchTerm: '',
 
                         searchedResults: [],
-                    }
+                    };
                 },
 
                 watch: {
-                    searchTerm: function(newVal, oldVal) {
-                        this.search()
-                    }
+                    searchTerm(newVal, oldVal) {
+                        this.search();
+                    },
                 },
 
                 created() {
-                    console.log(1111)
                     window.addEventListener('click', this.handleFocusOut);
                 },
 
@@ -157,20 +157,17 @@
 
                         this.isDropdownOpen = true;
 
-                        let self = this;
-
                         this.isLoading = true;
                         
                         this.$axios.get("{{ route('admin.configuration.search') }}", {
                                 params: {query: this.searchTerm}
                             })
-                            .then(function(response) {
-                                self.searchedResults = response.data;
+                            .then((response) => {
+                                this.searchedResults = response.data;
 
-                                self.isLoading = false;
+                                this.isLoading = false;
                             })
-                            .catch(function (error) {
-                            })
+                            .catch((error) => {});
                     },
 
                     handleFocusOut(e) {
@@ -178,7 +175,7 @@
                             this.isDropdownOpen = false;
                         }
                     },
-                }
+                },
             });
         </script>
     @endpushOnce

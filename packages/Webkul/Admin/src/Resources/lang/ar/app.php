@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'استرداد التعديل',
                 'amount-per-unit'             => ':amount لكل وحدة x :qty الكمية',
                 'create-success'              => 'تم إنشاء الاسترداد بنجاح',
+                'creation-error'              => 'إنشاء المبلغ المسترد غير مسموح به.',
                 'discount-amount'             => 'مبلغ الخصم',
                 'grand-total'                 => 'الإجمالي الكلي',
                 'invalid-qty'                 => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'حذف',
                     'download-sample'     => 'تحميل النموذج',
                     'field-separator'     => 'فاصل الحقل',
-                    'file-info-example'   => 'على سبيل المثال، في حالة صور المنتجات، يجب وضع الملفات في مجلد /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'استخدم المسار النسبي إلى /project-root/storage/import/app، على سبيل المثال، product-images، import-images.',
+                    'file-info-example'   => 'على سبيل المثال، في حالة صور المنتجات، يجب وضع الملفات في مجلد /project-root/storage/app/import/product-images',
+                    'file-info'           => 'استخدم المسار النسبي إلى /project-root/storage/app/import، على سبيل المثال، product-images، import-images.',
                     'file'                => 'الملف',
                     'general'             => 'عام',
                     'images-directory'    => 'مسار مجلد الصور',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'حذف',
                     'download-sample'     => 'تحميل النموذج',
                     'field-separator'     => 'فاصل الحقل',
-                    'file-info-example'   => 'على سبيل المثال، في حالة صور المنتجات، يجب وضع الملفات في مجلد /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'استخدم المسار النسبي إلى /project-root/storage/import/app، على سبيل المثال، product-images، import-images.',
+                    'file-info-example'   => 'على سبيل المثال، في حالة صور المنتجات، يجب وضع الملفات في مجلد /project-root/storage/app/import/product-images',
+                    'file-info'           => 'استخدم المسار النسبي إلى /project-root/storage/app/import، على سبيل المثال، product-images، import-images.',
                     'file'                => 'الملف',
                     'general'             => 'عام',
                     'images-directory'    => 'مسار مجلد الصور',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'حذف',
             'enable-at-least-one-payment'  => 'تمكين طريقة دفع واحدة على الأقل.',
             'enable-at-least-one-shipping' => 'تمكين طريقة شحن واحدة على الأقل.',
+            'no-result-found'              => 'لم يتم العثور على نتائج',
             'save-btn'                     => 'حفظ الإعدادات',
             'save-message'                 => 'تم حفظ الإعدادات بنجاح',
+            'search'                       => 'يبحث',
             'title'                        => 'الإعدادات',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length من',
+                'of'        => 'من',
+                'per-page'  => 'لكل صفحة',
+                'results'   => ':total النتائج',
+                'selected'  => ':total محدد',
+
                 'mass-actions' => [
                     'select-action' => 'اختر الإجراء',
                     'select-option' => 'اختر الخيار',

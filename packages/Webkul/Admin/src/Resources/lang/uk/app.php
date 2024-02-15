@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Виправлення повернення',
                 'amount-per-unit'             => ':amount за одиницю x :qty Кількість',
                 'create-success'              => 'Повернення створено успішно',
+                'creation-error'              => 'Створення повернення не дозволяється.',
                 'discount-amount'             => 'Сума знижки',
                 'grand-total'                 => 'Загальна сума',
                 'invalid-qty'                 => 'Ми виявили недійсну кількість для виставлення рахунків за товари.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Видалити',
                     'download-sample'     => 'Завантажити приклад',
                     'field-separator'     => 'Роздільник полів',
-                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/import/app, наприклад product-images, import-images.',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
                     'file'                => 'Файл',
                     'general'             => 'Загальні',
                     'images-directory'    => 'Шлях до папки з зображеннями',
@@ -2280,7 +2281,7 @@ return [
                     'download-sample'     => 'Завантажити приклад',
                     'field-separator'     => 'Роздільник полів',
                     'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/import/app, наприклад product-images, import-images.',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
                     'file'                => 'Файл',
                     'general'             => 'Загальні',
                     'images-directory'    => 'Шлях до папки з зображеннями',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'Видалити',
             'enable-at-least-one-payment'  => 'Включіть принаймні один метод оплати.',
             'enable-at-least-one-shipping' => 'Включіть принаймні один метод доставки.',
+            'no-result-found'              => 'Результатів не знайдено',
             'save-btn'                     => 'Зберегти налаштування',
             'save-message'                 => 'Налаштування успішно збережено',
+            'search'                       => 'Пошук',
             'title'                        => 'Налаштування',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length з',
+                'of'        => 'з',
+                'per-page'  => 'На сторінку',
+                'results'   => ':total Результати',
+                'selected'  => ':total Обрані',
+
                 'mass-actions' => [
                     'select-action' => 'Вибрати дію',
                     'select-option' => 'Вибрати опцію',

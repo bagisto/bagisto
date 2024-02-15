@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Korekta zwrotu',
                 'amount-per-unit'             => ':amount na jednostkę x :qty Ilość',
                 'create-success'              => 'Zwrot został pomyślnie utworzony',
+                'creation-error'              => 'Tworzenie zwrotów nie jest dozwolone.',
                 'discount-amount'             => 'Kwota zniżki',
                 'grand-total'                 => 'Suma ogólna',
                 'invalid-qty'                 => 'Znaleziono nieprawidłową ilość przedmiotów do fakturacji.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Usuń',
                     'download-sample'     => 'Pobierz przykład',
                     'field-separator'     => 'Separator pól',
-                    'file-info-example'   => 'Na przykład, jeśli to produkt-obrazy, pliki powinny być umieszczone w folderze /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Użyj ścieżki względnej do /project-root/storage/import/app, np. product-images, import-images.',
+                    'file-info-example'   => 'Na przykład, jeśli to produkt-obrazy, pliki powinny być umieszczone w folderze /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Użyj ścieżki względnej do /project-root/storage/app/import, np. product-images, import-images.',
                     'file'                => 'Plik',
                     'general'             => 'Ogólne',
                     'images-directory'    => 'Ścieżka katalogu obrazów',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'Usuń',
                     'download-sample'     => 'Pobierz Przykład',
                     'field-separator'     => 'Separator pól',
-                    'file-info-example'   => 'Na przykład, w przypadku obrazów produktów, pliki powinny być umieszczone w folderze /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Użyj ścieżki względnej do /project-root/storage/import/app, np. product-images, import-images.',
+                    'file-info-example'   => 'Na przykład, w przypadku obrazów produktów, pliki powinny być umieszczone w folderze /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Użyj ścieżki względnej do /project-root/storage/app/import, np. product-images, import-images.',
                     'file'                => 'Plik',
                     'general'             => 'Ogólne',
                     'images-directory'    => 'Ścieżka do katalogu obrazów',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'Usuń',
             'enable-at-least-one-payment'  => 'Włącz co najmniej jedną metodę płatności.',
             'enable-at-least-one-shipping' => 'Włącz co najmniej jeden sposób dostawy.',
+            'no-result-found'              => 'nie znaleziono żadnych wyników',
             'save-btn'                     => 'Zapisz Konfigurację',
             'save-message'                 => 'Konfiguracja została pomyślnie zapisana',
+            'search'                       => 'Szukaj',
             'title'                        => 'Konfiguracja',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length z',
+                'of'        => 'z',
+                'per-page'  => 'Na stronę',
+                'results'   => ':total Wyniki',
+                'selected'  => ':total Wybrane',
+
                 'mass-actions' => [
                     'select-action' => 'Wybierz Akcję',
                     'select-option' => 'Wybierz Opcję',

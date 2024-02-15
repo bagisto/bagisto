@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Remboursement d’ajustement',
                 'amount-per-unit'             => ':amount par unité x :qty quantité',
                 'create-success'              => 'Remboursement créé avec succès',
+                'creation-error'              => 'La création de remboursement n\'est pas autorisée.',
                 'discount-amount'             => 'Montant de réduction',
                 'grand-total'                 => 'Total général',
                 'invalid-qty'                 => 'Nous avons trouvé une quantité invalide pour facturer des articles.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Supprimer',
                     'download-sample'     => 'Télécharger un Exemple',
                     'field-separator'     => 'Séparateur de Champ',
-                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/import/app, par exemple, product-images, import-images.',
+                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/app/import, par exemple, product-images, import-images.',
                     'file'                => 'Fichier',
                     'general'             => 'Général',
                     'images-directory'    => 'Chemin du Répertoire d\'Images',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'Supprimer',
                     'download-sample'     => 'Télécharger un Exemple',
                     'field-separator'     => 'Séparateur de Champ',
-                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/import/app, par exemple, product-images, import-images.',
+                    'file-info-example'   => 'Par exemple, en cas d\'images de produits, les fichiers doivent être placés dans /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Utiliser le chemin relatif à /project-root/storage/app/import, par exemple, product-images, import-images.',
                     'file'                => 'Fichier',
                     'general'             => 'Général',
                     'images-directory'    => 'Chemin du Répertoire d\'Images',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'Supprimer',
             'enable-at-least-one-payment'  => 'Activer au moins une méthode de paiement.',
             'enable-at-least-one-shipping' => 'Activer au moins une méthode d\'expédition.',
+            'no-result-found'              => 'Aucun résultat trouvé',
             'save-btn'                     => 'Enregistrer la configuration',
             'save-message'                 => 'Configuration enregistrée avec succès',
+            'search'                       => 'Recherche',
             'title'                        => 'Configuration',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length de',
+                'of'        => 'de',
+                'per-page'  => 'Par page',
+                'results'   => ':total Résultats',
+                'selected'  => ':total Sélectionnés',
+
                 'mass-actions' => [
                     'select-action' => 'Sélectionner l\'action',
                     'select-option' => 'Sélectionner une option',

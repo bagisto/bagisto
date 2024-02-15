@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => '调整退款',
                 'amount-per-unit'             => ':amount 每单位 x :qty 数量',
                 'create-success'              => '退款创建成功',
+                'creation-error'              => '退款创建不允许。',
                 'discount-amount'             => '折扣金额',
                 'grand-total'                 => '总计',
                 'invalid-qty'                 => '我们发现有无效的数量要开票。',
@@ -681,6 +682,7 @@ return [
                             'apply-to-all-name'   => '将名称应用于所有变体。',
                             'apply-to-all-sku'    => '将价格应用于所有 SKU。',
                             'apply-to-all-status' => '将状态应用于所有变体。',
+                            'apply-to-all-weight' => '对所有变体应用权重。',
                             'edit-inventories'    => '编辑库存',
                             'edit-names'          => '编辑名称',
                             'edit-prices'         => '编辑价格',
@@ -2254,8 +2256,8 @@ return [
                     'delete'              => '刪除',
                     'download-sample'     => '下載範例',
                     'field-separator'     => '欄位分隔符',
-                    'file-info-example'   => '例如，在 product-images 的情況下，檔案應放置在 /project-root/storage/import/app/product-images 資料夾中。',
-                    'file-info'           => '使用相對於 /project-root/storage/import/app 的路徑，例如 product-images, import-images。',
+                    'file-info-example'   => '例如，在 product-images 的情況下，檔案應放置在 /project-root/storage/app/import/product-images 資料夾中。',
+                    'file-info'           => '使用相對於 /project-root/storage/app/import 的路徑，例如 product-images, import-images。',
                     'file'                => '檔案',
                     'general'             => '一般',
                     'images-directory'    => '圖片目錄路徑',
@@ -2278,8 +2280,8 @@ return [
                     'delete'              => '刪除',
                     'download-sample'     => '下載範例',
                     'field-separator'     => '欄位分隔符',
-                    'file-info-example'   => '例如，在 product-images 的情況下，檔案應放置在 /project-root/storage/import/app/product-images 資料夾中。',
-                    'file-info'           => '使用相對於 /project-root/storage/import/app 的路徑，例如 product-images, import-images。',
+                    'file-info-example'   => '例如，在 product-images 的情況下，檔案應放置在 /project-root/storage/app/import/product-images 資料夾中。',
+                    'file-info'           => '使用相對於 /project-root/storage/app/import 的路徑，例如 product-images, import-images。',
                     'file'                => '檔案',
                     'general'             => '一般',
                     'images-directory'    => '圖片目錄路徑',
@@ -3016,8 +3018,10 @@ return [
             'delete'                       => '删除',
             'enable-at-least-one-payment'  => '至少启用一种支付方式。',
             'enable-at-least-one-shipping' => '至少启用一种配送方式。',
+            'no-result-found'              => '没有找到结果',
             'save-btn'                     => '保存配置',
             'save-message'                 => '配置保存成功',
+            'search'                       => '搜索',
             'title'                        => '配置',
 
             'general' => [
@@ -3629,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length 的',
+                'of'        => '的',
+                'per-page'  => '每页',
+                'results'   => ':total 结果',
+                'selected'  => ':total 已选择',
+
                 'mass-actions' => [
                     'select-action' => '选择操作',
                     'select-option' => '选择选项',

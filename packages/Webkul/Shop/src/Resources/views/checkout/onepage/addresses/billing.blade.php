@@ -1,49 +1,66 @@
-<div>
-    <template v-if="! forms.billing.isNew">
-        <x-shop::accordion class="!border-b-0">
-            <x-slot:header class="!p-0">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-2xl font-medium max-sm:text-xl">
-                        @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
-                    </h2>
-                </div>
-            </x-slot>
-        
-            <x-slot:content class="!p-0 mt-8">
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
+<template v-if="! addNewBillingAddress">
 
-                <v-form 
-                    @submit.preventDefault 
-                    v-slot="{ meta, errors }"
-                >
+    {!! view_render_event('bagisto.shop.checkout.onepage.billing.accordion.before') !!}
+
+    <x-shop::accordion class="!border-b-0">
+        <x-slot:header class="!p-0">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-medium max-sm:text-xl">
+                    @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
+                </h2>
+            </div>
+        </x-slot>
+    
+        <x-slot:content class="!p-0 mt-8">
+
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
+
+            <x-shop::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, updateCartAddress)">
                     <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <div 
                             class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
-                            v-for="(address, index) in addresses.billing"
+                            v-for="(address, index) in savedBillingAddresses"
                         >
                             <v-field
                                 type="radio"
                                 class="hidden peer"
-                                :id="'billing_address_id_' + address.id"
-                                name="billing[address_id]"
-                                :rules="{ required: ! isTempAddress }"
+                                :id="`selectedAddresses.billing_address_id${address.id}`"
+                                name="selectedAddresses.billing_address_id"
+                                rules="required"
+                                v-model="selectedBillingAddressId"
                                 :value="address.id"
-                                v-model="forms.billing.address.address_id"
                                 label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
-                                :checked="address.isDefault"
-                                @change="resetPaymentAndShippingMethod"
+                                :checked="selectedBillingAddressId"
                             />
 
                             <label 
                                 class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
-                                :for="'billing_address_id_' + address.id"
+                                :for="`selectedAddresses.billing_address_id${address.id}`"
                             >
                             </label>
 
+                            <label
+                                class="absolute ltr:right-24 rtl:left-24 top-7 label-pending block w-max px-1.5 py-1 cursor-pointer"
+                                v-if="address.default_address"
+                            >
+                                Default Address
+                            </label>
+
+                            <span
+                                class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
+                                @click="addNewBillingAddress=true;tempBillingAddress=address;"
+                            ></span>
+
                             <label 
-                                :for="'billing_address_id_' + address.id"
+                                :for="`selectedAddresses.billing_address_id${address.id}`"
                                 class="block p-5 rounded-xl cursor-pointer"
                             >
+                                <span class="icon-checkout-address text-6xl text-navyBlue"></span>
+
                                 <div class="flex justify-between items-center">
                                     <p class="text-base font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
@@ -74,7 +91,7 @@
 
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                            @click="showNewBillingAddressForm"
+                            @click="addNewBillingAddress=true;tempBillingAddress={}"
                         >
                             <div
                                 class="flex gap-x-2.5 items-center"
@@ -93,20 +110,21 @@
 
                     <v-error-message
                         class="text-red-500 text-xs italic"
-                        name="billing[address_id]"
+                        name="selectedAddresses.billing_address_id"
                     >
                     </v-error-message>
 
                     <div 
-                        class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
-                        v-if="addresses.billing.length"
+                        class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none"
+                        v-if="selectedBillingAddressId"
                     >
                         <input
                             type="checkbox"
                             class="hidden peer"
                             id="isUsedForShipping"
                             name="is_use_for_shipping"
-                            v-model="forms.billing.isUsedForShipping"
+                            v-model="shippingIsSameAsBilling"
+                            label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
                         />
                 
                         <label 
@@ -122,361 +140,351 @@
                             @lang('shop::app.checkout.onepage.addresses.billing.same-billing-address')
                         </label>
                     </div>
+                </form>
+            </x-shop::form>
 
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
 
-                    <template v-if="meta.valid">
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping && addresses.billing.length">
-                            <div class="flex justify-end mt-4">
-                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.before') !!}
+        </x-slot>   
+    </x-shop::accordion>
 
-                                <x-shop::button
-                                    class="primary-button py-3 px-11 rounded-2xl"
-                                    :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
-                                    :loading="false"
-                                    ref="storeAddress"
-                                    @click="store"
-                                />
+    {!! view_render_event('bagisto.shop.checkout.onepage.billing.accordion.after') !!}
 
-                                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.confirm_button.after') !!}
-                            </div>
-                        </div>
-                    </template>
+</template>
 
-                    <template v-else>
-                        <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
-                            <div class="flex justify-end mt-4">
-                                <button
-                                    type="submit"
-                                    class="block py-3 px-11 bg-navyBlue rounded-2xl text-white text-base w-max font-medium text-center cursor-pointer"
-                                >
-                                    @lang('shop::app.checkout.onepage.addresses.billing.confirm')
-                                </button>
-                            </div>
-                        </div>
-                    </template> 
-                </v-form>
-
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
-            </x-slot>
-        </x-shop::accordion>
-    </template>
-
-    <template v-else>
-        <x-shop::accordion class="!border-b-0">
-            <x-slot:header class="!p-0">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-2xl font-medium max-sm:text-xl">
-                        @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
-                    </h2>
-                </div>
-            </x-slot>
-        
-            <x-slot:content class="!p-0 mt-8">
-                <div>
-                    <a 
-                        class="flex justify-end"
-                        href="javascript:void(0)" 
-                        v-if="addresses.billing.length > 0"
-                        @click="forms.billing.isNew = ! forms.billing.isNew"
-                    >
-                        <span class="icon-arrow-left text-2xl"></span>
-
-                        <span>@lang('shop::app.checkout.onepage.addresses.billing.back')</span>
-                    </a>
-                </div>
-
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
-
-                <!-- Billing address form -->
-                <x-shop::form
-                    v-slot="{ meta, errors, handleSubmit }"
-                    as="div"
+<!-- Billing Address Form -->
+<template v-else>
+    <x-shop::accordion class="!border-b-0">
+        <x-slot:header class="!p-0">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-medium max-sm:text-xl">
+                    @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
+                </h2>
+            </div>
+        </x-slot>
+    
+        <x-slot:content class="!p-0 mt-8">
+            <!-- Back Button -->
+            <div>
+                <a 
+                    class="flex justify-end"
+                    href="javascript:void(0)" 
+                    @click="addNewBillingAddress=false;tempBillingAddress={}"
                 >
-                    <form @submit="handleSubmit($event, handleBillingAddressForm)">
-                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
+                    <span class="icon-arrow-left text-2xl"></span>
 
-                        <x-shop::form.control-group>
-                            <x-shop::form.control-group.label>
-                                @lang('shop::app.checkout.onepage.addresses.billing.company-name')
-                            </x-shop::form.control-group.label>
-                
-                            <x-shop::form.control-group.control
-                                type="text"
-                                name="billing[company_name]"
-                                v-model="forms.billing.address.company_name"
-                                :label="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
-                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
-                            />
-    
-                            <x-shop::form.control-group.error control-name="billing[company_name]" />
-                        </x-shop::form.control-group>
+                    <span>@lang('shop::app.checkout.onepage.addresses.billing.back')</span>
+                </a>
+            </div>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.company_name.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
 
-                        <div class="grid grid-cols-2 gap-x-5">
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-0 required">
-                                    @lang('shop::app.checkout.onepage.addresses.billing.first-name')
-                                </x-shop::form.control-group.label>
-        
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="billing[first_name]"
-                                    rules="required"
-                                    v-model="forms.billing.address.first_name"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
-                                />
-        
-                                <x-shop::form.control-group.error control-name="billing[first_name]" />
-                            </x-shop::form.control-group>
+            <!-- Billing address form -->
+            <x-shop::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+                id="modalForm"
+            >
+                <form @submit="handleSubmit($event, store)">
+                    {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.first_name.after') !!}
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="type"
+                            value="billing"
+                        />
+                    </x-shop::form.control-group>
 
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-0 required">
-                                    @lang('shop::app.checkout.onepage.addresses.billing.last-name')
-                                </x-shop::form.control-group.label>
-        
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="billing[last_name]"
-                                    rules="required"
-                                    v-model="forms.billing.address.last_name"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
-                                />
-        
-                                <x-shop::form.control-group.error control-name="billing[last_name]" />
-                            </x-shop::form.control-group>
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="billing.use_for_shipping"
+                            :value="true"
+                        />
+                    </x-shop::form.control-group>
 
-                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.last_name.after') !!}
-                        </div>
-    
-                        <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-0 required">
-                                @lang('shop::app.checkout.onepage.addresses.billing.email')
-                            </x-shop::form.control-group.label>
-    
-                            <x-shop::form.control-group.control
-                                type="email"
-                                name="billing[email]"
-                                rules="required|email"
-                                v-model="forms.billing.address.email"
-                                :label="trans('shop::app.checkout.onepage.addresses.billing.email')"
-                                placeholder="email@example.com"
-                            />
-    
-                            <x-shop::form.control-group.error control-name="billing[email]" />
-                        </x-shop::form.control-group>
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="billing.id"
+                            ::value="tempBillingAddress.id"
+                        />
+                    </x-shop::form.control-group>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.email.after') !!}
-    
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="shipping.address1.[0]"
+                        />
+                    </x-shop::form.control-group>
+
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label>
+                            @lang('shop::app.checkout.onepage.addresses.billing.company-name')
+                        </x-shop::form.control-group.label>
+            
+                        <x-shop::form.control-group.control
+                            type="text"
+                            name="billing.company_name"
+                            ::value="tempBillingAddress.company_name"
+                            :label="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
+                            :placeholder="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
+                        />
+
+                        <x-shop::form.control-group.error control-name="billing.company_name" />
+                    </x-shop::form.control-group>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.company_name.after') !!}
+
+                    <!-- First Name -->
+                    <div class="grid grid-cols-2 gap-x-5">
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
-                                @lang('shop::app.checkout.onepage.addresses.billing.street-address')
+                                @lang('shop::app.checkout.onepage.addresses.billing.first-name')
                             </x-shop::form.control-group.label>
     
                             <x-shop::form.control-group.control
                                 type="text"
-                                name="billing[address1][]"
-                                rules="required|address"
-                                v-model="forms.billing.address.address1[0]"
-                                :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                name="billing.first_name"
+                                rules="required"
+                                ::value="tempBillingAddress.first_name"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
                             />
-
-                            <x-shop::form.control-group.error
-                                class="mb-2"
-                                control-name="billing[address1][]"
-                            />
-
-                            @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                    <x-shop::form.control-group.control
-                                        type="text"
-                                        name="billing[address1][{{ $i }}]"
-                                        v-model="forms.billing.address.address1[{{$i}}]"
-                                        :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
-                                    />
-                                @endfor
-                            @endif
+    
+                            <x-shop::form.control-group.error control-name="billing.first_name" />
                         </x-shop::form.control-group>
-    
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.address1.after') !!}
 
-                        <div class="grid grid-cols-2 gap-x-5">
-                            <x-shop::form.control-group class="!mb-4">
-                                <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
-                                    @lang('shop::app.checkout.onepage.addresses.billing.country')
-                                </x-shop::form.control-group.label>
-        
-                                <x-shop::form.control-group.control
-                                    type="select"
-                                    name="billing[country]"
-                                    rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
-                                    v-model="forms.billing.address.country"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
-                                >
-                                    <option value="">
-                                        @lang('shop::app.checkout.onepage.addresses.billing.select-country')
-                                    </option>
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.first_name.after') !!}
 
-                                    <option
-                                        v-for="country in countries"
-                                        :value="country.code"
-                                        v-text="country.name"
-                                    >
-                                    </option>
-                                </x-shop::form.control-group.control>
-        
-                                <x-shop::form.control-group.error control-name="billing[country]" />
-                            </x-shop::form.control-group>
-
-                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.country.after') !!}
-    
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
-                                    @lang('shop::app.checkout.onepage.addresses.billing.state')
-                                </x-shop::form.control-group.label>
-        
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="billing[state]"
-                                    rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                    v-model="forms.billing.address.state"
-                                    v-if="! haveStates('billing')"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                                />
-
-                                <x-shop::form.control-group.control
-                                    type="select"
-                                    name="billing[state]"
-                                    rules="required"
-                                    v-model="forms.billing.address.state"
-                                    v-if="haveStates('billing')"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                                >
-                                    <option value="">
-                                        @lang('shop::app.checkout.onepage.addresses.billing.select-state')
-                                    </option>
-
-                                    <option 
-                                        v-for='(state, index) in states[forms.billing.address.country]' 
-                                        :value="state.code" 
-                                    >
-                                        @{{ state.default_name }}
-                                    </option>
-                                </x-shop::form.control-group.control>
-        
-                                <x-shop::form.control-group.error control-name="billing[state]" />
-                            </x-shop::form.control-group>
-
-                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.state.after') !!}
-                        </div>
-    
-                        <div class="grid grid-cols-2 gap-x-5">
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-0 required">
-                                    @lang('shop::app.checkout.onepage.addresses.billing.city')
-                                </x-shop::form.control-group.label>
-    
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="billing[city]"
-                                    rules="required"
-                                    v-model="forms.billing.address.city"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.city')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.city')"
-                                />
-    
-                                <x-shop::form.control-group.error control-name="billing[city]" />
-                            </x-shop::form.control-group>
-
-                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.city.after') !!}
-        
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
-                                    @lang('shop::app.checkout.onepage.addresses.billing.postcode')
-                                </x-shop::form.control-group.label>
-        
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="billing[postcode]"
-                                    rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
-                                    v-model="forms.billing.address.postcode"
-                                    :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
-                                />
-
-                                <x-shop::form.control-group.error control-name="billing[postcode]" />
-                            </x-shop::form.control-group>
-
-                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.postcode.after') !!}
-                        </div>
-
+                        <!-- Last Name -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-0 required">
-                                @lang('shop::app.checkout.onepage.addresses.billing.telephone')
+                                @lang('shop::app.checkout.onepage.addresses.billing.last-name')
                             </x-shop::form.control-group.label>
-                            
+    
                             <x-shop::form.control-group.control
                                 type="text"
-                                name="billing[phone]"
-                                rules="required|numeric"
-                                v-model="forms.billing.address.phone"
-                                :label="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
-                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
+                                name="billing.last_name"
+                                rules="required"
+                                ::value="tempBillingAddress.last_name"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
                             />
     
-                            <x-shop::form.control-group.error control-name="billing[phone]" />
+                            <x-shop::form.control-group.error control-name="billing.last_name" />
                         </x-shop::form.control-group>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.last_name.after') !!}
+                    </div>
 
-                        <div class="grid gap-2.5 pb-4">
-                            @auth('customer')
-                                <div class="flex gap-x-1.5 items-center text-md text-[#6E6E6E] select-none">
-                                    <input 
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="billing[default_address]"
-                                        name="billing[default_address]"
-                                        v-model="forms.billing.address.isSaved"
-                                    >
+                    <!-- Email -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label class="!mt-0 required">
+                            @lang('shop::app.checkout.onepage.addresses.billing.email')
+                        </x-shop::form.control-group.label>
 
-                                    <label
-                                        class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                        for="billing[default_address]"
-                                    >
-                                    </label>
+                        <x-shop::form.control-group.control
+                            type="email"
+                            name="billing.email"
+                            rules="required|email"
+                            ::value="tempBillingAddress.email"
+                            :label="trans('shop::app.checkout.onepage.addresses.billing.email')"
+                            placeholder="email@example.com"
+                        />
 
-                                    <label for="billing[default_address]">
-                                        @lang('shop::app.checkout.onepage.addresses.billing.save-address')
-                                    </label>
-                                </div>
-                            @endauth
-                        </div>
+                        <x-shop::form.control-group.error control-name="billing.email" />
+                    </x-shop::form.control-group>
 
-                        <div class="flex justify-end mt-4">
-                            <button
-                                type="submit"
-                                class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.email.after') !!}
+
+                    <!-- Street Address -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label class="!mt-0 required">
+                            @lang('shop::app.checkout.onepage.addresses.billing.street-address')
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="text"
+                            name="billing.address1.[0]"
+                            rules="required|address"
+                            ::value="Array.isArray(tempBillingAddress.address1) ? tempBillingAddress.address1[0] : tempBillingAddress.address1?.split('\n')[0]"
+                            :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                            :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                        />
+
+                        <x-shop::form.control-group.error
+                            class="mb-2"
+                            control-name="billing.address1.[0]"
+                        />
+
+                        @if (core()->getConfigData('customer.address.information.street_lines') > 1)
+                            @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
+                                <x-shop::form.control-group.control
+                                    type="text"
+                                    name="billing.address1.[{{ $i }}]"
+                                    ::value="Array.isArray(tempBillingAddress.address1) ? tempBillingAddress.address1[{{ $i }}] : tempBillingAddress.address1?.split('\n')[{{$i}}]"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                />
+                            @endfor
+                        @endif
+                    </x-shop::form.control-group>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.address1.after') !!}
+
+                    <div class="grid grid-cols-2 gap-x-5">
+                        <!--Country -->
+                        <x-shop::form.control-group class="!mb-4">
+                            <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
+                                @lang('shop::app.checkout.onepage.addresses.billing.country')
+                            </x-shop::form.control-group.label>
+    
+                            <x-shop::form.control-group.control
+                                type="select"
+                                name="billing.country"
+                                rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                                ::value="tempBillingAddress.country"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
                             >
-                                @lang('shop::app.checkout.onepage.addresses.billing.confirm')
-                            </button>
-                        </div>
+                                <option value="">
+                                    @lang('shop::app.checkout.onepage.addresses.billing.select-country')
+                                </option>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.after') !!}
-                    </form>
-                </x-shop::form>
+                                <option
+                                    v-for="country in countries"
+                                    :value="country.code"
+                                    v-text="country.name"
+                                >
+                                </option>
+                            </x-shop::form.control-group.control>
+    
+                            <x-shop::form.control-group.error control-name="billing.country" />
+                        </x-shop::form.control-group>
 
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
-            </x-slot>
-        </x-shop::accordion>
-    </template>
-</div>
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.country.after') !!}
+
+                        <!--State -->
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
+                                @lang('shop::app.checkout.onepage.addresses.billing.state')
+                            </x-shop::form.control-group.label>
+    
+                            <x-shop::form.control-group.control
+                                type="text"
+                                name="billing.state"
+                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                ::value="tempBillingAddress.state"
+                                v-if="! haveStates('billing')"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                            />
+
+                            <x-shop::form.control-group.control
+                                type="select"
+                                name="billing.state"
+                                rules="required"
+                                ::value="tempBillingAddress.state"
+                                v-if="haveStates('billing')"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                            >
+                                <option value="">
+                                    @lang('shop::app.checkout.onepage.addresses.billing.select-state')
+                                </option>
+
+                                <option 
+                                    v-for='(state, index) in states[forms.billing.address.country]' 
+                                    :value="state.code" 
+                                >
+                                    @{{ state.default_name }}
+                                </option>
+                            </x-shop::form.control-group.control>
+    
+                            <x-shop::form.control-group.error control-name="billing.state" />
+                        </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.state.after') !!}
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-x-5">
+                        <!-- City -->
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="!mt-0 required">
+                                @lang('shop::app.checkout.onepage.addresses.billing.city')
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="text"
+                                name="billing.city"
+                                rules="required"
+                                ::value="tempBillingAddress.city"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.city')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.city')"
+                            />
+
+                            <x-shop::form.control-group.error control-name="billing.city" />
+                        </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.city.after') !!}
+    
+                        <!-- Postcode -->
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
+                                @lang('shop::app.checkout.onepage.addresses.billing.postcode')
+                            </x-shop::form.control-group.label>
+    
+                            <x-shop::form.control-group.control
+                                type="text"
+                                name="billing.postcode"
+                                rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
+                                ::value="tempBillingAddress.postcode"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
+                            />
+
+                            <x-shop::form.control-group.error control-name="billing.postcode" />
+                        </x-shop::form.control-group>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.postcode.after') !!}
+                    </div>
+
+                    <!-- Phone Number -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label class="!mt-0 required">
+                            @lang('shop::app.checkout.onepage.addresses.billing.telephone')
+                        </x-shop::form.control-group.label>
+                        
+                        <x-shop::form.control-group.control
+                            type="text"
+                            name="billing.phone"
+                            rules="required|numeric"
+                            ::value="tempBillingAddress.phone"
+                            :label="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
+                            :placeholder="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
+                        />
+
+                        <x-shop::form.control-group.error control-name="billing.phone" />
+                    </x-shop::form.control-group>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
+
+                    <div class="flex justify-end mt-4">
+                        <button
+                            type="submit"
+                            class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                        >
+                            @lang('shop::app.checkout.onepage.addresses.billing.confirm')
+                        </button>
+                    </div>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.after') !!}
+                </form>
+            </x-shop::form>
+
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
+        </x-slot>
+    </x-shop::accordion>
+</template>

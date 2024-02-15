@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Anpassung Rückerstattung',
                 'amount-per-unit'             => ':amount pro Einheit x :qty Menge',
                 'create-success'              => 'Rückerstattung erfolgreich erstellt',
+                'creation-error'              => 'Erstellung einer Rückerstattung ist nicht erlaubt.',
                 'discount-amount'             => 'Rabattbetrag',
                 'grand-total'                 => 'Gesamtsumme',
                 'invalid-qty'                 => 'Wir haben eine ungültige Menge zum Rechnungsstellen gefunden.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Löschen',
                     'download-sample'     => 'Beispiel herunterladen',
                     'field-separator'     => 'Feldtrennzeichen',
-                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /Projekt-Wurzelverzeichnis/Storage/Import/App/Produktbilder platziert werden.',
-                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /Projekt-Wurzelverzeichnis/Storage/Import/App, z. B. Produktbilder, Import-Bilder.',
+                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
+                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
                     'file'                => 'Datei',
                     'general'             => 'Allgemein',
                     'images-directory'    => 'Bilder-Verzeichnispfad',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => 'Löschen',
                     'download-sample'     => 'Beispiel herunterladen',
                     'field-separator'     => 'Feldtrennzeichen',
-                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /Projekt-Wurzelverzeichnis/Storage/Import/App/Produktbilder platziert werden.',
-                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /Projekt-Wurzelverzeichnis/Storage/Import/App, z. B. Produktbilder, Import-Bilder.',
+                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
+                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
                     'file'                => 'Datei',
                     'general'             => 'Allgemein',
                     'images-directory'    => 'Bilder-Verzeichnispfad',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'Löschen',
             'enable-at-least-one-payment'  => 'Mindestens eine Zahlungsmethode aktivieren.',
             'enable-at-least-one-shipping' => 'Mindestens eine Versandmethode aktivieren.',
+            'no-result-found'              => 'Keine Einträge gefunden',
             'save-btn'                     => 'Konfiguration speichern',
             'save-message'                 => 'Konfiguration erfolgreich gespeichert',
+            'search'                       => 'Suchen',
             'title'                        => 'Konfiguration',
 
             'general' => [
@@ -3624,6 +3627,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length von',
+                'of'        => 'von',
+                'per-page'  => 'Pro Seite',
+                'results'   => ':total Ergebnisse',
+                'selected'  => ':total Ausgewählt',
+
                 'index' => [
                     'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
                     'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',

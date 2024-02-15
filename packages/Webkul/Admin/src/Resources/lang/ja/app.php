@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => '調整返金',
                 'amount-per-unit'             => ':amount 単位あたり x :qty 個数',
                 'create-success'              => '返金が正常に作成されました',
+                'creation-error'              => '払い戻しの作成は許可されていません。',
                 'discount-amount'             => '割引額',
                 'grand-total'                 => '総合計',
                 'invalid-qty'                 => '請求アイテムの無効な数量が見つかりました。',
@@ -2255,7 +2256,7 @@ return [
                     'delete'              => '削除',
                     'download-sample'     => 'サンプルをダウンロード',
                     'field-separator'     => 'フィールドセパレータ',
-                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/import/app/product-imagesフォルダーに配置する必要があります。',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
                     'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
                     'file'                => 'ファイル',
                     'general'             => '一般',
@@ -2279,8 +2280,8 @@ return [
                     'delete'              => '削除',
                     'download-sample'     => 'サンプルをダウンロード',
                     'field-separator'     => 'フィールドセパレータ',
-                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/import/app/product-imagesフォルダーに配置する必要があります。',
-                    'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
+                    'file-info'           => '/project-root/storage/app/importへの相対パスを使用してください、例: product-images, import-images.',
                     'file'                => 'ファイル',
                     'general'             => '一般',
                     'images-directory'    => '画像ディレクトリーパス',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => '削除',
             'enable-at-least-one-payment'  => '少なくとも1つの支払い方法を有効にしてください。',
             'enable-at-least-one-shipping' => '少なくとも1つの配送方法を有効にしてください。',
+            'no-result-found'              => '結果が見つかりません',
             'save-btn'                     => '設定を保存',
             'save-message'                 => '設定が正常に保存されました',
+            'search'                       => '検索',
             'title'                        => '設定',
 
             'general' => [
@@ -3624,6 +3627,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length の',
+                'of'        => 'の',
+                'per-page'  => 'ページあたり',
+                'results'   => ':total 結果',
+                'selected'  => ':total 選択されました',
+
                 'index' => [
                     'no-records-selected'              => 'レコードは選択されていません。',
                     'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',

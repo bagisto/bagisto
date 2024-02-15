@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Reembolso de Ajuste',
                 'amount-per-unit'             => ':amount Por Unidad x :qty Cantidad',
                 'create-success'              => 'Reembolso creado exitosamente',
+                'creation-error'              => 'La creación de reembolsos no está permitida.',
                 'discount-amount'             => 'Monto de Descuento',
                 'grand-total'                 => 'Total General',
                 'invalid-qty'                 => 'Se encontró una cantidad no válida para facturar ítems.',
@@ -2255,8 +2256,8 @@ return [
                     'delete'              => 'Eliminar',
                     'download-sample'     => 'Descargar Muestra',
                     'field-separator'     => 'Separador de Campos',
-                    'file-info-example'   => 'Por ejemplo, en caso de imágenes de productos, los archivos deben ubicarse en /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Usar la ruta relativa a /project-root/storage/import/app, por ejemplo, product-images, import-images.',
+                    'file-info-example'   => 'Por ejemplo, en caso de imágenes de productos, los archivos deben ubicarse en /project-root/storage/app/import/product-images',
+                    'file-info'           => 'Usar la ruta relativa a /project-root/storage/app/import, por ejemplo, product-images, import-images.',
                     'file'                => 'Archivo',
                     'general'             => 'General',
                     'images-directory'    => 'Ruta del Directorio de Imágenes',
@@ -2280,7 +2281,7 @@ return [
                     'download-sample'     => 'Descargar Muestra',
                     'field-separator'     => 'Separador de Campos',
                     'file-info-example'   => 'Por ejemplo, en caso de imágenes de productos, los archivos deben ubicarse en /project-root/storage/import/app/product-images.',
-                    'file-info'           => 'Usar la ruta relativa a /project-root/storage/import/app, por ejemplo, product-images, import-images.',
+                    'file-info'           => 'Usar la ruta relativa a /project-root/storage/app/import, por ejemplo, product-images, import-images.',
                     'file'                => 'Archivo',
                     'general'             => 'General',
                     'images-directory'    => 'Ruta del Directorio de Imágenes',
@@ -3017,8 +3018,10 @@ return [
             'delete'                       => 'Eliminar',
             'enable-at-least-one-payment'  => 'Habilitar al menos un método de pago.',
             'enable-at-least-one-shipping' => 'Habilitar al menos un método de envío.',
+            'no-result-found'              => 'No se han encontrado resultados',
             'save-btn'                     => 'Guardar configuración',
             'save-message'                 => 'Configuración guardada exitosamente',
+            'search'                       => 'Buscar',
             'title'                        => 'Configuración',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length de',
+                'of'        => 'de',
+                'per-page'  => 'Por página',
+                'results'   => ':total Resultados',
+                'selected'  => ':total Seleccionado',
+
                 'mass-actions' => [
                     'select-action' => 'Seleccionar Acción',
                     'select-option' => 'Seleccionar Opción',

@@ -351,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Düzeltme İadesi',
                 'amount-per-unit'             => ':amount Birim Başına x :qty Miktar',
                 'create-success'              => 'İade başarıyla oluşturuldu',
+                'creation-error'              => 'İade oluşturma izin verilmiyor.',
                 'discount-amount'             => 'İndirim Tutarı',
                 'grand-total'                 => 'Genel Toplam',
                 'invalid-qty'                 => 'Faturalanacak ürünlerde geçersiz miktar bulduk.',
@@ -2256,8 +2257,8 @@ return [
                     'delete'              => 'Sil',
                     'download-sample'     => 'Örnek İndir',
                     'field-separator'     => 'Alan Ayracı',
-                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar project-root/storage/import/app/urun-resimleri klasörüne yerleştirilmelidir.',
-                    'file-info'           => 'project-root/storage/import/app klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
+                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
                     'file'                => 'Dosya',
                     'general'             => 'Genel',
                     'images-directory'    => 'Resim Klasör Yolu',
@@ -2280,8 +2281,8 @@ return [
                     'delete'              => 'Sil',
                     'download-sample'     => 'Örnek İndir',
                     'field-separator'     => 'Alan Ayracı',
-                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar project-root/storage/import/app/urun-resimleri klasörüne yerleştirilmelidir.',
-                    'file-info'           => 'project-root/storage/import/app klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
+                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
                     'file'                => 'Dosya',
                     'general'             => 'Genel',
                     'images-directory'    => 'Resim Klasör Yolu',
@@ -3018,8 +3019,10 @@ return [
             'delete'                       => 'Sil',
             'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',
             'enable-at-least-one-shipping' => 'En az bir nakliye yöntemi etkinleştirin.',
+            'no-result-found'              => 'sonuç bulunamadı',
             'save-btn'                     => 'Yapılandırmayı Kaydet',
             'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
+            'search'                       => 'Aramak',
             'title'                        => 'Yapılandırma',
 
             'general' => [
@@ -3630,6 +3633,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length nin',
+                'of'        => 'nin',
+                'per-page'  => 'Sayfa başına',
+                'results'   => ':total Sonuçlar',
+                'selected'  => ':total Seçilen',
+
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',
                     'select-option' => 'Seçenek Seç',
