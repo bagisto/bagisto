@@ -39,6 +39,7 @@
                                 class="hidden"
                                 accept="image/*"
                                 ref="static_image"
+                                label="Image"
                                 @change="storeImage($event)"
                             >
                         </div>
@@ -380,7 +381,11 @@
                                 line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
                             });
                         })
-                        .catch((error) => {});
+                        .catch((error) => {
+                            if (error.response.status == 422) {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                            }
+                        });
                 },
             },
         });
