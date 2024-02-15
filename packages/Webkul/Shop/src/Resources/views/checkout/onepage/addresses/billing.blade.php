@@ -1,9 +1,8 @@
 <template v-if="! addNewBillingAddress">
-
     {!! view_render_event('bagisto.shop.checkout.onepage.billing.accordion.before') !!}
 
     <x-shop::accordion class="!border-b-0">
-        <x-slot:header class="!p-0">
+        <x-slot:header class="! py-4 !px-0">
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-medium max-sm:text-xl">
                     @lang('shop::app.checkout.onepage.addresses.billing.billing-address')
@@ -52,7 +51,7 @@
 
                             <span
                                 class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                @click="addNewBillingAddress=true;tempBillingAddress=address;isAddressEditable=true;"
+                                @click="addNewBillingAddress=true;tempBillingAddress=address;isAddressEditable=true;isLoading=false;"
                             ></span>
 
                             <label 
@@ -115,8 +114,9 @@
                     </v-error-message>
 
                     <div 
-                        class="flex gap-x-1.5 mt-5 text-sm text-[#6E6E6E] select-none"
+                        class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
                         v-if="selectedBillingAddressId"
+                        @click="isLoading=false;"
                     >
                         <input
                             type="checkbox"
@@ -145,6 +145,27 @@
 
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
 
+            <div
+                class="flex justify-end mt-4"
+                v-if="
+                (selectedBillingAddressId || selectedShippingAddressId)
+                && ! toggleShippingForm
+                && ! addNewBillingAddress
+                && shippingIsSameAsBilling
+                "
+            >
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
+
+                <x-shop::button
+                    type="button"
+                    class="primary-button py-3 px-11 rounded-2xl"
+                    :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                    ::loading="isLoading"
+                    @click="proceed"
+                />
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
+            </div>
         </x-slot>   
     </x-shop::accordion>
 
@@ -169,7 +190,7 @@
                 <a 
                     class="flex justify-end"
                     href="javascript:void(0)" 
-                    @click="addNewBillingAddress=false;tempBillingAddress={};isAddressEditable=false;"
+                    @click="addNewBillingAddress=false;tempBillingAddress={};isAddressEditable=false;isLoading=false;"
                 >
                     <span class="icon-arrow-left text-2xl"></span>
 
@@ -471,36 +492,40 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
 
-                    <div
-                        class="grid gap-2.5 pb-4"
-                        v-if="! isAddressEditable"
-                    >
-                        @auth('customer')
-                            <div class="flex gap-x-4 select-none">
-                                <v-field
+                    @auth('customer')
+                        <div
+                            class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
+                            v-if="! isAddressEditable"
+                        >
+                            <v-field
+                                type="checkbox"
+                                name="billing.save_address"
+                                v-slot="{ field }"
+                                value="1"
+                            >
+                                <input
                                     type="checkbox"
                                     name="billing.save_address"
-                                    v-slot="{ field }"
-                                    value="1"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        name="billing.save_address"
-                                        v-bind="field"
-                                        id="billing.save_address"
-                                        class="sr-only peer"
-                                    />
-                                </v-field>
+                                    v-bind="field"
+                                    id="billing.save_address"
+                                    class="sr-only peer"
+                                />
+                            </v-field>
 
-                                <label
-                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer"
-                                    for="billing.save_address"
-                                >
-                                    @lang('shop::app.checkout.onepage.addresses.billing.save-address')
-                                </label>
-                            </div>
-                        @endauth
-                    </div>
+                            <label 
+                                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                for="billing.save_address"
+                            >
+                            </label>
+                            
+                            <label 
+                                for="billing.save_address"
+                                class="cursor-pointer"
+                            >
+                                @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                            </label>
+                        </div>
+                    @endauth
 
                     <div class="flex justify-end mt-4">
                         <button
