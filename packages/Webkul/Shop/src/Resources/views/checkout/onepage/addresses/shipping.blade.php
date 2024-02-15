@@ -185,6 +185,8 @@
                 >
                     <form @submit="handleSubmit($event, store)">
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.before') !!}
+
+                        <!-- Hidden Fields -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.control
                                 type="hidden"
