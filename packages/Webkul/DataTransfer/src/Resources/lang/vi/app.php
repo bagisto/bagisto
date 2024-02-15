@@ -3,39 +3,39 @@
 return [
     'importers'  => [
         'customers' => [
-            'title'      => 'Customers',
+            'title'      => 'Khách hàng',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-email'        => 'Email : \'%s\' is found more than once in the import file.',
-                    'duplicate-phone'        => 'Phone : \'%s\' is found more than once in the import file.',
-                    'invalid-customer-group' => 'Customer group is invalid or not supported',
-                    'email-not-found'        => 'Email : \'%s\' not found in the system.',
+                    'duplicate-email'        => 'Email : \'%s\' được tìm thấy nhiều hơn một lần trong tệp nhập.',
+                    'duplicate-phone'        => 'Số điện thoại : \'%s\' được tìm thấy nhiều hơn một lần trong tệp nhập.',
+                    'invalid-customer-group' => 'Nhóm khách hàng không hợp lệ hoặc không được hỗ trợ',
+                    'email-not-found'        => 'Email : \'%s\' không được tìm thấy trong hệ thống.',
                 ],
             ],
         ],
 
         'products'  => [
-            'title'      => 'Products',
+            'title'      => 'Sản phẩm',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-url-key'         => 'URL key: \'%s\' was already generated for an item with the SKU: \'%s\'.',
-                    'invalid-attribute-family'  => 'Invalid value for attribute family column (attribute family doesn\'t exist?)',
-                    'invalid-type'              => 'Product type is invalid or not supported',
-                    'sku-not-found'             => 'Product with specified SKU not found',
-                    'super-attribute-not-found' => 'Super attribute with code: \'%s\' not found or does not belong to the attribute family: \'%s\'',
+                    'duplicate-url-key'         => 'Khóa URL: \'%s\' đã được tạo trước đó cho một mục có SKU: \'%s\'.',
+                    'invalid-attribute-family'  => 'Giá trị không hợp lệ cho cột gia đình thuộc tính (gia đình thuộc tính không tồn tại?)',
+                    'invalid-type'              => 'Loại sản phẩm không hợp lệ hoặc không được hỗ trợ',
+                    'sku-not-found'             => 'Không tìm thấy sản phẩm với SKU được chỉ định',
+                    'super-attribute-not-found' => 'Thuộc tính siêu với mã: \'%s\' không được tìm thấy hoặc không thuộc về gia đình thuộc tính: \'%s\'',
                 ],
             ],
         ],
 
         'tax-rates' => [
-            'title'      => 'Tax Rates',
+            'title'      => 'Thuế',
 
             'validation' => [
                 'errors' => [
-                    'duplicate-identifier' => 'Identifier : \'%s\' is found more than once in the import file.',
-                    'identifier-not-found' => 'Identifier : \'%s\' not found in the system.',
+                    'duplicate-identifier' => 'Bộ nhận dạng : \'%s\' được tìm thấy nhiều hơn một lần trong tệp nhập.',
+                    'identifier-not-found' => 'Bộ nhận dạng : \'%s\' không được tìm thấy trong hệ thống.',
                 ],
             ],
         ],
@@ -43,13 +43,13 @@ return [
 
     'validation' => [
         'errors' => [
-            'column-empty-headers' => 'Columns number "%s" have empty headers.',
-            'column-name-invalid'  => 'Invalid column names: "%s".',
-            'column-not-found'     => 'Required columns not found: %s.',
-            'column-numbers'       => 'Number of columns does not correspond to the number of rows in the header.',
-            'invalid-attribute'    => 'Header contains invalid attribute(s): "%s".',
-            'system'               => 'An unexpected system error occurred.',
-            'wrong-quotes'         => 'Curly quotes used instead of straight quotes.',
+            'column-empty-headers' => 'Các cột số "%s" có tiêu đề trống.',
+            'column-name-invalid'  => 'Tên cột không hợp lệ: "%s".',
+            'column-not-found'     => 'Không tìm thấy các cột được yêu cầu: %s.',
+            'column-numbers'       => 'Số lượng cột không tương ứng với số hàng trong tiêu đề.',
+            'invalid-attribute'    => 'Tiêu đề chứa thuộc tính không hợp lệ: "%s".',
+            'system'               => 'Đã xảy ra một lỗi hệ thống không mong muốn.',
+            'wrong-quotes'         => 'Dấu ngoặc kép được sử dụng thay vì dấu ngoặc thẳng.',
         ],
     ],
 ];

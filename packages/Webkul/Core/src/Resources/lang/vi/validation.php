@@ -1,11 +1,12 @@
 <?php
 
 return [
-    'address'                 => 'The :attribute can only accept alpha, numeric, spaces, comma and dashes.',
-    'alpha-numeric-space'     => 'The :attribute can only accept alpha, numeric and spaces.',
-    'code'                    => 'The :attribute must be valid.',
-    'decimal'                 => 'The :attribute must be valid.',
-    'phone-number'            => 'The :attribute must be valid phone number.',
-    'slug'                    => 'The :attribute must be valid slug.',
-    'comma-separated-integer' => 'The :attribute field must be numeric and may contain comma.',
+    'address'                 => 'Trường :attribute chỉ có thể chấp nhận ký tự chữ cái, số, khoảng trắng, dấu phẩy và dấu gạch ngang.',
+    'alpha-numeric-space'     => 'Trường :attribute chỉ có thể chấp nhận ký tự chữ cái, số và khoảng trắng.',
+    'code'                    => 'Trường :attribute phải là mã hợp lệ.',
+    'decimal'                 => 'Trường :attribute phải là số thập phân hợp lệ.',
+    'phone-number'            => 'Trường :attribute phải là số điện thoại hợp lệ.',
+    'slug'                    => 'Trường :attribute phải là slug hợp lệ.',
+    'comma-separated-integer' => 'Trường :attribute phải là số và có thể chứa dấu phẩy.',
 ];
+

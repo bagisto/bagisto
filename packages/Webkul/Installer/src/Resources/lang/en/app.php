@@ -148,6 +148,7 @@ return [
                 'SAR' => 'Saudi Riyal',
                 'TRY' => 'Turkish Lira',
                 'UAH' => 'Ukrainian Hryvnia',
+                'VND' => 'Vietnamese Dong',
                 'USD' => 'US Dollar',
             ],
 
@@ -170,6 +171,7 @@ return [
                 'sin'   => 'Sinhala',
                 'tr'    => 'Turkish',
                 'uk'    => 'Ukrainian',
+                'vi'    => 'Vietnamese',
                 'zh_CN' => 'Chinese',
             ],
         ],
@@ -365,6 +367,7 @@ return [
                 'turkish-lira'        => 'Turkish Lira (TRY)',
                 'ukrainian-hryvnia'   => 'Ukrainian Hryvnia (UAH)',
                 'usd'                 => 'US Dollar (USD)',
+                'vietnamese-dong'     => 'Vietnamese Dong (VND)',
                 'warning-message'     => 'Beware! The settings for your default system languages as well as the default currency are permanent and cannot be changed ever again.',
             ],
 

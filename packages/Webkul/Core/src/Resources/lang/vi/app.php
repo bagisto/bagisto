@@ -2,7 +2,7 @@
 
 return [
     'path-hint' => [
-        'template' => 'Template',
-        'parents'  => 'Parents',
+        'template' => 'Mẫu',
+        'parents'  => 'Mẫu/Gốc',
     ],
 ];
