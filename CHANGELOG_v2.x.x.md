@@ -309,7 +309,7 @@ Key Benefits:
 
 * #9409 [fixed] - Getting Exceptional Error in Product Preview in Admin End.
 
-* #9407 [fixed] - GUnable to mass update inventory in configurable Product, Console errors are appearing.
+* #9407 [fixed] - Unable to mass update inventory in configurable Product, Console errors are appearing.
 
 ## **v2.0.0 (21st of October 2023)** - *Release*
 
