@@ -76,11 +76,17 @@ class ThemeCustomizationRepository extends Repository
                     'title'        => $image['title'],
                 ];
             } elseif ($image['image'] instanceof UploadedFile) {
-                $manager = new ImageManager();
+                try {
+                    $manager = new ImageManager();
 
-                $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
+                    $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
 
-                Storage::put($path, $manager->make($image['image'])->encode('webp'));
+                    Storage::put($path, $manager->make($image['image'])->encode('webp'));
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
+
+                    return redirect()->back();
+                }
 
                 if (($data['type'] ?? '') == 'static_content') {
                     return Storage::url($path);

@@ -2,7 +2,7 @@
     <x-slot:title>
         @lang('admin::app.settings.themes.edit.title')
     </x-slot>
-   
+
     @php
         $channels = core()->getAllChannels();
 
@@ -11,7 +11,7 @@
         $currentLocale = core()->getRequestedLocale();
     @endphp
 
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.settings.themes.update', $theme->id)"
         enctype="multipart/form-data"
         v-slot="{ errors }"
@@ -20,18 +20,18 @@
             <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('admin::app.settings.themes.edit.title')
             </p>
-            
+
             <div class="flex gap-x-2.5 items-center">
                 <div class="flex gap-x-2.5 items-center">
-                    <a 
+                    <a
                         href="{{ route('admin.settings.themes.index') }}"
                         class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
-                    > 
+                    >
                         @lang('admin::app.settings.themes.edit.back')
                     </a>
                 </div>
-                
-                <button 
+
+                <button
                     type="submit"
                     class="primary-button"
                 >
@@ -54,7 +54,7 @@
                             <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
-                            
+
                             <input
                                 type="hidden"
                                 name="locale"
@@ -98,7 +98,7 @@
                 </component>
             </div>
         </script>
-        
+
         <!-- Image-Carousel Template -->
         @includeWhen($theme->type === 'image_carousel', 'admin::settings.themes.edit.image-carousel')
 
@@ -136,7 +136,7 @@
                             image_carousel: 'v-image-carousel',
                             footer_links: 'v-footer-links',
                             services_content: 'v-services-content'
-                        } 
+                        }
                     };
                 },
 
@@ -147,4 +147,3 @@
         </script>
     @endPushOnce
 </x-admin::layouts>
-                            
