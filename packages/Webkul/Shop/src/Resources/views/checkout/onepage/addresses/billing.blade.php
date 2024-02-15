@@ -226,7 +226,7 @@
                         <x-shop::form.control-group.control
                             type="hidden"
                             name="billing.use_for_shipping"
-                            :value="true"
+                            ::value="false"
                         />
 
                         <x-shop::form.control-group.control
