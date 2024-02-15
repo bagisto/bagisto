@@ -337,7 +337,14 @@ abstract class AbstractType
 
             $value = $copyAttributes[$attribute->code] ?? null;
 
-            $newAttributeValue = $attributeValue->replicate();
+            $newAttributeValue = $attributeValue->replicate()->fill([
+                'unique_id' => implode('|', array_filter([
+                    $attributeValue->channel,
+                    $attributeValue->locale,
+                    $product->id,
+                    $attribute->id,
+                ])),
+            ]);
 
             if (! is_null($value)) {
                 $newAttributeValue->{$attribute->column_name} = $value;

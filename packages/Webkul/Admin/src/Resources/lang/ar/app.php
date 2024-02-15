@@ -424,18 +424,19 @@ return [
                 'title'                  => 'الفاتورة #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount للوحدة x :qty الكمية',
-                'create-invoice'  => 'إنشاء فاتورة',
-                'create-success'  => 'تم إنشاء الفاتورة بنجاح',
-                'creation-error'  => 'غير مسموح بإنشاء فاتورة الطلب.',
-                'invalid-qty'     => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
-                'invoice'         => 'فاتورة',
-                'new-invoice'     => 'فاتورة جديدة',
-                'product-error'   => 'لا يمكن إنشاء فاتورة بدون منتجات.',
-                'product-image'   => 'صورة المنتج',
-                'qty-to-invoiced' => 'الكمية المراد فوترتها',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount لكل وحدة × :qty الكمية',
+                'create-invoice'     => 'إنشاء فاتورة',
+                'create-success'     => 'تم إنشاء الفاتورة بنجاح',
+                'create-transaction' => 'إنشاء معاملة',
+                'creation-error'     => 'عملية إنشاء فاتورة الطلب غير مسموح بها.',
+                'invalid-qty'        => 'وجدنا كمية غير صالحة لفواتير العناصر.',
+                'invoice'            => 'فاتورة',
+                'new-invoice'        => 'فاتورة جديدة',
+                'product-error'      => 'لا يمكن إنشاء فاتورة بدون منتجات.',
+                'product-image'      => 'صورة المنتج',
+                'qty-to-invoiced'    => 'الكمية للفوترة',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
