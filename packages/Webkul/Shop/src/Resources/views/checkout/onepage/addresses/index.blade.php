@@ -81,6 +81,8 @@
                 this.get();
 
                 this.getCountries();
+
+                this.selectedBillingAddressId = true;
             },
 
             watch: {
@@ -94,9 +96,7 @@
 
                 selectedBillingAddressId: {
                     handler() {
-                        this.$emitter.emit('is-show-shipping-methods', false);
-
-                        this.$emitter.emit('is-show-payment-methods', false);
+                        this.resetState();
                     },
 
                     deep: true,
@@ -104,9 +104,7 @@
 
                 selectedShippingAddressId: {
                     handler() {
-                        this.$emitter.emit('is-show-shipping-methods', false);
-
-                        this.$emitter.emit('is-show-payment-methods', false);
+                        this.resetState();
                     },
 
                     deep: true,
@@ -215,6 +213,8 @@
 
                         this.isLoading = false;
 
+                        this.resetState();
+
                         return;
                     }
 
@@ -224,6 +224,8 @@
 
                     this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params[params.type])
                         .then(() => {
+                            this.get();
+
                             this.$emitter.emit('update-cart-summary');
 
                             this.addNewBillingAddress = false;
@@ -232,9 +234,9 @@
 
                             this.isLoading = false;
 
-                            resetForm();
+                            this.resetState();
 
-                            this.get();
+                            resetForm();
                         })
                         .catch(() => {});
                 },
@@ -290,6 +292,8 @@
 
                             this.isLoading = false;
 
+                            resetState();
+
                             resetForm();
                         })
                         .catch(() => {});
@@ -316,9 +320,9 @@
 
                     const shippingId = this.selectedShippingAddressId;
 
-                    params.billing = this.customerAddresses.billing.find((value) =>  this.selectedBillingAddressId = value.id);
+                    params.billing = this.customerAddresses.billing.find((value) =>  this.selectedBillingAddressId === value.id);
                     
-                    params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId = value.id);
+                    params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId === value.id);
 
                     this.selectedBillingAddressId = billingId;
                     
@@ -355,6 +359,8 @@
 
                                 this.isLoading = false;
                             }
+
+                            this.isLoading = false;
 
                             this.$emitter.emit('update-cart-summary');
 

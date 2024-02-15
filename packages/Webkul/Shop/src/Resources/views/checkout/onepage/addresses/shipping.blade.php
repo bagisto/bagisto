@@ -91,7 +91,7 @@
     
                             <div 
                                 class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                @click="toggleShippingForm=true;tempShippingAddress={};isAddressEditable=false;"
+                                @click="toggleShippingForm=true;tempShippingAddress={};isAddressEditable=false;isLoading=false;"
                             >
                                 <div
                                     class="flex gap-x-2.5 items-center"
@@ -131,9 +131,19 @@
                     <x-shop::button
                         type="button"
                         class="primary-button py-3 px-11 rounded-2xl"
+                        v-if="!isLoading"
                         :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
-                        ::loading="isLoading"
+                        :loading="false"
                         @click="proceed"
+                    />
+
+                    <x-shop::button
+                        type="button"
+                        class="primary-button py-3 px-11 rounded-2xl"
+                        v-else
+                        :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                        :loading="true"
+                        :disabled="true"
                     />
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
@@ -488,8 +498,9 @@
                             </button>
 
                             <x-shop::button
-                                v-else
+                                type="button"
                                 class="primary-button py-3 px-11 rounded-2xl"
+                                v-else
                                 :title="trans('shop::app.checkout.onepage.addresses.shipping.save')"
                                 :loading="true"
                             />

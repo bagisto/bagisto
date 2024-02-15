@@ -43,7 +43,7 @@
                             </label>
 
                             <label
-                                class="absolute ltr:right-24 rtl:left-24 top-7 label-pending block w-max px-1.5 py-1 cursor-pointer"
+                                class="absolute ltr:right-24 rtl:left-24 top-5 label-pending block w-max px-1.5 py-1 cursor-pointer"
                                 v-if="address.default_address"
                             >
                                 Default Address
@@ -90,7 +90,7 @@
 
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                            @click="addNewBillingAddress=true;tempBillingAddress={};isAddressEditable=false;"
+                            @click="addNewBillingAddress=true;tempBillingAddress={};isAddressEditable=false;isLoading=false;"
                         >
                             <div
                                 class="flex gap-x-2.5 items-center"
@@ -157,11 +157,21 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
 
                 <x-shop::button
+                    v-if="!isLoading"
                     type="button"
                     class="primary-button py-3 px-11 rounded-2xl"
-                    :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
-                    ::loading="isLoading"
+                    :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
+                    :loading="false"
                     @click="proceed"
+                />
+
+                <x-shop::button
+                    type="button"
+                    class="primary-button py-3 px-11 rounded-2xl"
+                    v-else
+                    :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
+                    :loading="true"
+                    :disabled="true"
                 />
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
@@ -537,8 +547,9 @@
                         </button>
 
                         <x-shop::button
-                            v-else
+                            type="button"
                             class="primary-button py-3 px-11 rounded-2xl"
+                            v-else
                             :title="trans('shop::app.checkout.onepage.addresses.billing.save')"
                             :loading="true"
                         />
