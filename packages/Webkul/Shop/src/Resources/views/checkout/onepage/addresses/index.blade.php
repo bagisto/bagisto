@@ -321,20 +321,24 @@
                     const shippingId = this.selectedShippingAddressId;
 
                     params.billing = this.customerAddresses.billing.find((value) =>  this.selectedBillingAddressId === value.id);
-                    
-                    params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId === value.id);
+
+                    if (this.selectedShippingAddressId) {
+                        params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId === value.id);
+                    } else {
+                        params.shipping = this.customerAddresses.shipping.find((value) => this.selectedBillingAddressId === value.id);
+                    }
 
                     this.selectedBillingAddressId = billingId;
                     
                     this.selectedShippingAddressId = shippingId;
 
-                    if (! Array.isArray(params.billing.address1)) {
+                    if (! Array.isArray(params.billing?.address1)) {
                         params.billing = Object.assign({}, params.billing);
 
                         params.billing.address1 = params.billing.address1.split('\n');
                     }
 
-                    if (! Array.isArray(params.shipping.address1)) {
+                    if (! Array.isArray(params.shipping?.address1)) {
                         params.shipping = Object.assign({}, params.shipping);
 
                         params.shipping.address1 = params.shipping.address1.split('\n');

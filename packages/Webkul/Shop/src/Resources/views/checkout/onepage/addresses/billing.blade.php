@@ -241,6 +241,12 @@
                             name="billing.id"
                             ::value="tempBillingAddress.id"
                         />
+
+                        <x-shop::form.control-group.control
+                            type="hidden"
+                            name="billing.default_address"
+                            value="0"
+                        />
                     </x-shop::form.control-group>
 
                     <x-shop::form.control-group>
