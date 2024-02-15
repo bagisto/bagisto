@@ -490,10 +490,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Déjà payé',
+                    'amount'                     => 'Montant',
+                    'create-transaction'         => 'Créer une transaction',
+                    'invoice-id'                 => 'ID de la facture',
                     'invoice-missing'            => 'Facture manquante',
+                    'payment-method'             => 'Méthode de paiement',
+                    'save-transaction'           => 'Enregistrer la transaction',
                     'transaction-amount-exceeds' => 'Le montant de la transaction dépasse',
                     'transaction-amount-zero'    => 'Montant de la transaction nul',
-                    'transaction-saved'          => 'Transaction enregistrée avec succès',
+                    'transaction-saved'          => 'Transaction enregistrée avec succès.',
                 ],
 
                 'view' => [

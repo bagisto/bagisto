@@ -490,10 +490,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'تم الدفع بالفعل',
-                    'invoice-missing'            => 'الفاتورة مفقودة',
-                    'transaction-amount-exceeds' => 'مبلغ العملية يتجاوز الحد المسموح به',
-                    'transaction-amount-zero'    => 'مبلغ العملية صفر',
-                    'transaction-saved'          => 'تم حفظ العملية بنجاح',
+                    'amount'                     => 'المبلغ',
+                    'create-transaction'         => 'إنشاء عملية',
+                    'invoice-id'                 => 'رقم الفاتورة',
+                    'invoice-missing'            => 'الفاتورة غير موجودة',
+                    'payment-method'             => 'طريقة الدفع',
+                    'save-transaction'           => 'حفظ العملية',
+                    'transaction-amount-exceeds' => 'تجاوز المبلغ المسموح به',
+                    'transaction-amount-zero'    => 'صفر المبلغ في العملية',
+                    'transaction-saved'          => 'تم حفظ العملية بنجاح.',
                 ],
 
                 'view' => [

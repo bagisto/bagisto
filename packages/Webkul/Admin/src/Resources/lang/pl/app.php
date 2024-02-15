@@ -489,11 +489,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Już opłacone',
+                    'already-paid'               => 'Już zapłacone',
+                    'amount'                     => 'Kwota',
+                    'create-transaction'         => 'Utwórz transakcję',
+                    'invoice-id'                 => 'Numer faktury',
                     'invoice-missing'            => 'Brak faktury',
+                    'payment-method'             => 'Metoda płatności',
+                    'save-transaction'           => 'Zapisz transakcję',
                     'transaction-amount-exceeds' => 'Kwota transakcji przekracza',
                     'transaction-amount-zero'    => 'Kwota transakcji wynosi zero',
-                    'transaction-saved'          => 'Transakcja zapisana pomyślnie',
+                    'transaction-saved'          => 'Transakcja została pomyślnie zapisana.',
                 ],
 
                 'view' => [

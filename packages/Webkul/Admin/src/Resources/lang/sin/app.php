@@ -489,11 +489,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'දැක්කාක් ගෙවිය යුතුය',
-                    'invoice-missing'            => 'ක්රෙඩිට් නොපවතියි',
-                    'transaction-amount-exceeds' => 'ක්රෙඩිට් මුදල වඩාත් විය',
-                    'transaction-amount-zero'    => 'ක්රෙඩිට් මුදල වෙනස් විය',
-                    'transaction-saved'          => 'ක්රෙඩිට් සුරකින්න සාර්ථකව',
+                    'already-paid'               => 'දැනටම් ගෙවිය යුතු ලැබී ඇත',
+                    'amount'                     => 'මුදල',
+                    'create-transaction'         => 'සාදන්න ගිවිසුම',
+                    'invoice-id'                 => 'පිවිසුම් අංකය',
+                    'invoice-missing'            => 'පිවිසුම් නොමැත',
+                    'payment-method'             => 'ගෙවීමේ ක්‍රමය',
+                    'save-transaction'           => 'සාදන්නවාද සුරක්ෂිත කරන්න',
+                    'transaction-amount-exceeds' => 'සාදන්නවාද මුදල ඉක්මවූ',
+                    'transaction-amount-zero'    => 'සාදන්නවාද මුදල සිහිකැඳවලි',
+                    'transaction-saved'          => 'සාදන්නවාද සුරක්ෂිතව සුරක්ෂිත විය.',
                 ],
 
                 'view' => [

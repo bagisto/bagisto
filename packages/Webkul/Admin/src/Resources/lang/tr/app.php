@@ -490,10 +490,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Zaten ödendi',
-                    'invoice-missing'            => 'Fatura eksik',
-                    'transaction-amount-exceeds' => 'İşlem tutarı aşılıyor',
-                    'transaction-amount-zero'    => 'İşlem tutarı sıfır',
-                    'transaction-saved'          => 'İşlem başarıyla kaydedildi',
+                    'amount'                     => 'Miktar',
+                    'create-transaction'         => 'İşlem Oluştur',
+                    'invoice-id'                 => 'Fatura Kimliği',
+                    'invoice-missing'            => 'Fatura Bulunamadı',
+                    'payment-method'             => 'Ödeme Yöntemi',
+                    'save-transaction'           => 'İşlemi Kaydet',
+                    'transaction-amount-exceeds' => 'İşlem Miktarı aşılıyor',
+                    'transaction-amount-zero'    => 'İşlem Miktarı sıfır',
+                    'transaction-saved'          => 'İşlem başarıyla kaydedildi.',
                 ],
 
                 'view' => [

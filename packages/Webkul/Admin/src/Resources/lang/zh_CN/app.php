@@ -490,10 +490,15 @@ return [
 
                 'create' => [
                     'already-paid'               => '已支付',
-                    'invoice-missing'            => '缺少发票',
-                    'transaction-amount-exceeds' => '交易金额超过限制',
+                    'amount'                     => '金额',
+                    'create-transaction'         => '创建交易',
+                    'invoice-id'                 => '发票号',
+                    'invoice-missing'            => '发票丢失',
+                    'payment-method'             => '付款方式',
+                    'save-transaction'           => '保存交易',
+                    'transaction-amount-exceeds' => '交易金额超过',
                     'transaction-amount-zero'    => '交易金额为零',
-                    'transaction-saved'          => '交易保存成功',
+                    'transaction-saved'          => '交易已成功保存。',
                 ],
 
                 'view' => [

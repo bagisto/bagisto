@@ -47,12 +47,9 @@ class TransactionController extends Controller
 
     /**
      * Save the transaction.
-     *
-     * @return \Illuminate\View\View
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-
         $this->validate(request(), [
             'invoice_id'     => 'required',
             'payment_method' => 'required',
@@ -62,9 +59,9 @@ class TransactionController extends Controller
         $invoice = $this->invoiceRepository->where('id', $request->invoice_id)->first();
 
         if (! $invoice) {
-            session()->flash('error', trans('admin::app.sales.transactions.index.create.invoice-missing'));
-
-            return redirect()->route('admin.sales.transactions.index');
+            return new JsonResponse([
+                'message' => trans('admin::app.sales.transactions.index.create.invoice-missing'),
+            ], 400);
         }
 
         $transactionAmtBefore = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
@@ -72,21 +69,21 @@ class TransactionController extends Controller
         $transactionAmtFinal = $request->amount + $transactionAmtBefore;
 
         if ($invoice->state == 'paid') {
-            session()->flash('info', trans('admin::app.sales.transactions.index.create.already-paid'));
-
-            return redirect()->route('admin.sales.transactions.index');
+            return new JsonResponse([
+                'message' => trans('admin::app.sales.transactions.index.create.already-paid'),
+            ], 400);
         }
 
         if ($transactionAmtFinal > $invoice->base_grand_total) {
-            session()->flash('info', trans('admin::app.sales.transactions.index.create.transaction-amount-exceeds'));
-
-            return redirect()->route('admin.sales.transactions.index');
+            return new JsonResponse([
+                'message' => trans('admin::app.sales.transactions.index.create.transaction-amount-exceeds'),
+            ], 400);
         }
 
         if ($request->amount <= 0) {
-            session()->flash('info', trans('admin::app.sales.transactions.index.create.transaction-amount-zero'));
-
-            return redirect()->route('admin.sales.transactions.index');
+            return new JsonResponse([
+                'message' => trans('admin::app.sales.transactions.index.create.transaction-amount-zero'),
+            ], 400);
         }
 
         $order = $this->orderRepository->find($invoice->order_id);
@@ -120,9 +117,9 @@ class TransactionController extends Controller
             $this->invoiceRepository->updateState($invoice, Invoice::STATUS_PAID);
         }
 
-        session()->flash('success', trans('admin::app.sales.transactions.index.create.transaction-saved'));
-
-        return redirect()->route('admin.sales.transactions.index');
+        return new JsonResponse([
+            'message' => trans('admin::app.sales.transactions.index.create.transaction-saved'),
+        ]);
     }
 
     /**
