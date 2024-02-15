@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.0.1 (7th of February 2023)** - *Release*
+## **v2.0.1 (15th of February 2023)** - *Release*
 
 ## New Feature: Data Transfer/Import
 An enhanced import implementation now facilitates the rapid importation of ten thousand products in just 1-2 minutes. This improved efficiency streamlines data integration, offering businesses a quicker and more effective solution for managing extensive product catalogs and boosting operational agility.
@@ -69,6 +69,8 @@ Key Benefits:
 * #9431 [feature] - Added XLSX file support in export.
 
 * #9432 [feature] - Create a search bar for settings to be searched.
+
+* #9144 [feature] - Checkout Experience.
 
 * #8444 [improvements] - In the theme customization, In the image carousel there should be shown image preview.
 
@@ -179,7 +181,7 @@ Key Benefits:
 
 * #8892 [fixed] - Today's total order and order count are not appearing on the Admin dashboard.
 
-* #8921 [fixed] - Admin end -> Configure -> Shipping Methods and Payment Methods, Shipping and Payment Method Status and Mandatory field response is not appropriate. 
+* #8921 [fixed] - Admin end -> Configure -> Shipping Methods and Payment Methods, Shipping and Payment Method Status and Mandatory field response is not appropriate.
 
 * #8927 [fixed] - Duplicate Invoice mail is not sent to the customer or guest user even mail details are added.
 
@@ -301,6 +303,13 @@ Key Benefits:
 
 * #8896 [fixed] - If the email verification option is enabled so Customer/Admin both are not getting successful registration messages.
 
+* #9448 [fixed] - Image uploading issue.
+
+* #9442 [fixed] - Mobile view should be responsive -Front end.
+
+* #9409 [fixed] - Getting Exceptional Error in Product Preview in Admin End.
+
+* #9407 [fixed] - GUnable to mass update inventory in configurable Product, Console errors are appearing.
 
 ## **v2.0.0 (21st of October 2023)** - *Release*
 
