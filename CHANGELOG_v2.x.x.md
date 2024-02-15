@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.0.1 (15th of February 2023)** - *Release*
+## **v2.1.0 (15th of February 2023)** - *Release*
 
 ## New Feature: Data Transfer/Import
 An enhanced import implementation now facilitates the rapid importation of ten thousand products in just 1-2 minutes. This improved efficiency streamlines data integration, offering businesses a quicker and more effective solution for managing extensive product catalogs and boosting operational agility.
