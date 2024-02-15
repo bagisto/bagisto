@@ -424,18 +424,19 @@ return [
                 'title'                  => 'Rechnung #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount pro Einheit x :qty Menge',
-                'create-invoice'  => 'Rechnung erstellen',
-                'create-success'  => 'Rechnung erfolgreich erstellt',
-                'creation-error'  => 'Die Erstellung der Auftragsrechnung ist nicht erlaubt.',
-                'invalid-qty'     => 'Ungültige Menge für Rechnungspositionen gefunden.',
-                'invoice'         => 'Rechnung',
-                'new-invoice'     => 'Neue Rechnung',
-                'product-error'   => 'Rechnung kann nicht ohne Produkte erstellt werden.',
-                'product-image'   => 'Produktbild',
-                'qty-to-invoiced' => 'Menge zur Rechnungsstellung',
-                'sku'             => 'Artikelnummer - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Pro Einheit x :qty Menge',
+                'create-invoice'     => 'Rechnung erstellen',
+                'create-success'     => 'Rechnung erfolgreich erstellt',
+                'create-transaction' => 'Transaktion erstellen',
+                'creation-error'     => 'Bestellrechnungserstellung ist nicht erlaubt.',
+                'invalid-qty'        => 'Wir haben eine ungültige Menge zum Rechnen von Artikeln gefunden.',
+                'invoice'            => 'Rechnung',
+                'new-invoice'        => 'Neue Rechnung',
+                'product-error'      => 'Rechnung kann nicht ohne Produkte erstellt werden.',
+                'product-image'      => 'Produktbild',
+                'qty-to-invoiced'    => 'Menge zu verrechnen',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
