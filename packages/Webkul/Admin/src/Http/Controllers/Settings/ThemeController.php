@@ -5,7 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
@@ -43,13 +42,9 @@ class ThemeController extends Controller
     public function store()
     {
         if (request()->has('id')) {
-            $validator = Validator::make(request()->all(), [
-                core()->getRequestedLocaleCode().'options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
+            $this->validate(request(), [
+                core()->getRequestedLocaleCode().'.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
             ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
 
             $theme = $this->themeCustomizationRepository->find(request()->input('id'));
 

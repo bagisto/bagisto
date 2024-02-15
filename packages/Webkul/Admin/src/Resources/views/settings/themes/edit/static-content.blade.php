@@ -39,6 +39,7 @@
                                 class="hidden"
                                 accept="image/*"
                                 ref="static_image"
+                                label="Image"
                                 @change="storeImage($event)"
                             >
                         </div>
@@ -381,7 +382,9 @@
                             });
                         })
                         .catch((error) => {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                            if (error.response.status == 422) {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                            }
                         });
                 },
             },
