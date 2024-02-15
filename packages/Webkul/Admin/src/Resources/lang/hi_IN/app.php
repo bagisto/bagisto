@@ -424,18 +424,19 @@ return [
                 'title'                  => 'चालान #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount प्रति इकाई x :qty मात्रा',
-                'create-invoice'  => 'चालान बनाएं',
-                'create-success'  => 'चालान सफलतापूर्वक बनाया गया',
-                'creation-error'  => 'आदेश चालान निर्माण अनुमति नहीं है।',
-                'invalid-qty'     => 'हमने चालान करने के लिए अमान्य मात्रा पाई है।',
-                'invoice'         => 'चालान',
-                'new-invoice'     => 'नया चालान',
-                'product-error'   => 'माल बिना चालान नहीं बना सकता।',
-                'product-image'   => 'उत्पाद छवि',
-                'qty-to-invoiced' => 'चालान करने की मात्रा',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount प्रति इकाई x :qty मात्रा',
+                'create-invoice'     => 'चालान बनाएं',
+                'create-success'     => 'चालान सफलतापूर्वक बनाया गया',
+                'create-transaction' => 'लेन-देन बनाएं',
+                'creation-error'     => 'आदेश चालान बनाना अनुमति नहीं है।',
+                'invalid-qty'        => 'हमें मात्रा को चालान करने के लिए अमान्य माना गया। आइटम।',
+                'invoice'            => 'चालान',
+                'new-invoice'        => 'नया चालान',
+                'product-error'      => 'उत्पादों के बिना चालान नहीं बनाया जा सकता।',
+                'product-image'      => 'उत्पाद छवि',
+                'qty-to-invoiced'    => 'चालान करने की मात्रा',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [

@@ -424,18 +424,19 @@ return [
                 'title'                  => 'Factura #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount Por Unidad x :qty Cantidad',
-                'create-invoice'  => 'Crear Factura',
-                'create-success'  => 'Factura creada con éxito',
-                'creation-error'  => 'No se permite la creación de la factura del pedido.',
-                'invalid-qty'     => 'Encontramos una cantidad inválida para los elementos a facturar.',
-                'invoice'         => 'Factura',
-                'new-invoice'     => 'Nueva Factura',
-                'product-error'   => 'No se puede crear una factura sin productos.',
-                'product-image'   => 'Imagen del Producto',
-                'qty-to-invoiced' => 'Cantidad a Facturar',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Por Unidad x :qty Cantidad',
+                'create-invoice'     => 'Crear Factura',
+                'create-success'     => 'Factura creada exitosamente',
+                'create-transaction' => 'Crear Transacción',
+                'creation-error'     => 'No se permite la creación de la factura del pedido.',
+                'invalid-qty'        => 'Hemos encontrado una cantidad inválida para facturar los artículos.',
+                'invoice'            => 'Factura',
+                'new-invoice'        => 'Nueva Factura',
+                'product-error'      => 'No se puede crear una factura sin productos.',
+                'product-image'      => 'Imagen del Producto',
+                'qty-to-invoiced'    => 'Cantidad a facturar',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [

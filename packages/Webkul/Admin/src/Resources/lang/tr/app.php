@@ -424,18 +424,19 @@ return [
                 'title'                  => 'Fatura #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount Birim Başına x :qty Miktar',
-                'create-invoice'  => 'Fatura Oluştur',
-                'create-success'  => 'Fatura başarıyla oluşturuldu',
-                'creation-error'  => 'Sipariş faturası oluşturulamaz.',
-                'invalid-qty'     => 'Faturalanacak öğeler için geçersiz miktar bulduk.',
-                'invoice'         => 'Fatura',
-                'new-invoice'     => 'Yeni Fatura',
-                'product-error'   => 'Ürün olmadan fatura oluşturulamaz.',
-                'product-image'   => 'Ürün Resmi',
-                'qty-to-invoiced' => 'Faturalanacak Miktar',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Birim Başına x :qty Miktar',
+                'create-invoice'     => 'Fatura Oluştur',
+                'create-success'     => 'Fatura başarıyla oluşturuldu',
+                'create-transaction' => 'İşlem Oluştur',
+                'creation-error'     => 'Sipariş faturası oluşturma izni verilmiyor.',
+                'invalid-qty'        => 'Faturalandırılacak ürünler için geçersiz bir miktar bulduk.',
+                'invoice'            => 'Fatura',
+                'new-invoice'        => 'Yeni Fatura',
+                'product-error'      => 'Ürünler olmadan fatura oluşturulamaz.',
+                'product-image'      => 'Ürün Resmi',
+                'qty-to-invoiced'    => 'Faturalandırılacak Miktar',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
