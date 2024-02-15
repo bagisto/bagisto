@@ -464,19 +464,22 @@
 		@apply bg-yellow-500;
 	}
 
-	.label-processing,
+	.label-processing{
+		@apply bg-cyan-600;
+    }
+
 	.label-completed,
     .label-active {
-		@apply bg-darkGreen;
+		@apply bg-green-600;
 	}
 
 	.label-closed {
-		@apply bg-darkBlue;
+		@apply bg-indigo-600;
 	}
 
     .label-canceled,
     .label-fraud {
-        @apply bg-darkPink;
+        @apply bg-rose-600;
     }
 
     .label-info {
