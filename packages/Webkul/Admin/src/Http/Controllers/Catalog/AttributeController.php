@@ -174,7 +174,9 @@ class AttributeController extends Controller
             $attribute = $this->attributeRepository->find($index);
 
             if (! $attribute->is_user_defined) {
-                return response()->json([], 422);
+                return response()->json([
+                    'message' => trans('admin::app.catalog.attributes.delete-failed'),
+                ], 422);
             }
         }
 
