@@ -158,6 +158,7 @@ class ImportController extends Controller
                 'error_file_path'      => null,
                 'started_at'           => null,
                 'completed_at'         => null,
+                'summary'              => null,
             ]
         );
 
