@@ -11,7 +11,6 @@
         </x-slot>
     
         <x-slot:content class="!p-0 mt-8">
-
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.before') !!}
 
             <x-shop::form
@@ -42,11 +41,13 @@
                             >
                             </label>
 
+                            <!-- Edit Icon -->
                             <span
                                 class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
                                 @click="addNewBillingAddress=true;tempBillingAddress=address;isAddressEditable=true;isLoading=false;"
                             ></span>
 
+                            <!-- Deatils -->
                             <label 
                                 :for="`selectedAddresses.billing_address_id${address.id}`"
                                 class="block p-5 rounded-xl cursor-pointer"
@@ -81,6 +82,7 @@
                             </label>
                         </div>
 
+                        <!-- New Address Add Button -->
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
                             @click="addNewBillingAddress=true;tempBillingAddress={};isAddressEditable=false;isLoading=false;"
@@ -106,6 +108,7 @@
                     >
                     </v-error-message>
 
+                    <!-- Checkbox for enabling the same address for shipping also. -->
                     <div 
                         class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
                         v-if="selectedBillingAddressId"
@@ -138,6 +141,7 @@
 
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.after') !!}
 
+            <!-- Confirm Button -->
             <div
                 class="flex justify-end mt-4"
                 v-if="
@@ -173,7 +177,6 @@
     </x-shop::accordion>
 
     {!! view_render_event('bagisto.shop.checkout.onepage.billing.accordion.after') !!}
-
 </template>
 
 <!-- Billing Address Form -->
@@ -212,23 +215,20 @@
                 <form @submit="handleSubmit($event, store)">
                     {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.before') !!}
 
+                    <!-- Hidden Fields -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.control
                             type="hidden"
                             name="type"
                             value="billing"
                         />
-                    </x-shop::form.control-group>
 
-                    <x-shop::form.control-group>
                         <x-shop::form.control-group.control
                             type="hidden"
                             name="billing.use_for_shipping"
                             :value="true"
                         />
-                    </x-shop::form.control-group>
 
-                    <x-shop::form.control-group>
                         <x-shop::form.control-group.control
                             type="hidden"
                             name="billing.id"
@@ -240,15 +240,14 @@
                             name="billing.default_address"
                             value="0"
                         />
-                    </x-shop::form.control-group>
 
-                    <x-shop::form.control-group>
                         <x-shop::form.control-group.control
                             type="hidden"
                             name="shipping.address1.[0]"
                         />
                     </x-shop::form.control-group>
 
+                    <!-- Company name -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
                             @lang('shop::app.checkout.onepage.addresses.billing.company-name')
@@ -501,6 +500,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
 
+                    <!-- Checkbox for save address -->
                     @auth('customer')
                         <div
                             class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
@@ -536,6 +536,7 @@
                         </div>
                     @endauth
 
+                    <!-- Save Button -->
                     <div class="flex justify-end mt-4">
                         <button
                             type="submit"
