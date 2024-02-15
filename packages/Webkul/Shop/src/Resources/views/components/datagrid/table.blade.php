@@ -34,15 +34,16 @@
                                         @change="$parent.selectAllRecords"
                                     >
 
-                                    <span
-                                        class="icon-uncheckbox cursor-pointer rounded-md text-2xl"
+                                    <label
+                                        for="mass_action_select_all_records"
+                                        class="icon-uncheck cursor-pointer rounded-md text-2xl"
                                         :class="[
-                                            $parent.applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
-                                                $parent.applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
+                                            $parent.applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-check-box' : (
+                                                $parent.applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial' : ''
                                             ),
                                         ]"
                                     >
-                                    </span>
+                                    </label>
                                 </label>
                             </p>
 
@@ -97,7 +98,7 @@
                                                 @change="$parent.setCurrentSelectionMode"
                                             >
 
-                                            <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
+                                            <span class="icon-uncheck cursor-pointer rounded-md text-2xl peer-checked:icon-check-box">
                                             </span>
                                         </label>
                                     </p>
@@ -149,7 +150,7 @@
                     <template v-if="$parent.isLoading">
                         <x-shop::shimmer.datagrid.table.footer/>
                     </template>
-                    
+
                     <template v-else>
                         <!-- Information Panel -->
                         <div v-if="$parent.available.records.length" class="flex justify-between items-center p-6">
