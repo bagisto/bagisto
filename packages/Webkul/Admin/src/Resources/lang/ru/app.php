@@ -424,18 +424,19 @@ return [
                 'title'                  => 'Счет #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount За единицу x :qty Количество',
-                'create-invoice'  => 'Создать счет-фактуру',
-                'create-success'  => 'Счет-фактура успешно создана',
-                'creation-error'  => 'Создание счета-фактуры заказа не разрешено.',
-                'invalid-qty'     => 'Мы обнаружили недопустимое количество для выставления счета по товарам.',
-                'invoice'         => 'Счет-фактура',
-                'new-invoice'     => 'Новый счет-фактура',
-                'product-error'   => 'Счет-фактуру нельзя создать без товаров.',
-                'product-image'   => 'Изображение товара',
-                'qty-to-invoiced' => 'Количество для выставления счета',
-                'sku'             => 'Артикул - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount За единицу x :qty Количество',
+                'create-invoice'     => 'Создать Счет',
+                'create-success'     => 'Счет успешно создан',
+                'create-transaction' => 'Создать Транзакцию',
+                'creation-error'     => 'Создание счета заказа не разрешено.',
+                'invalid-qty'        => 'Мы обнаружили недопустимое количество для выставления счетов за товары.',
+                'invoice'            => 'Счет',
+                'new-invoice'        => 'Новый Счет',
+                'product-error'      => 'Невозможно создать счет без товаров.',
+                'product-image'      => 'Изображение Товара',
+                'qty-to-invoiced'    => 'Количество для выставления счетов',
+                'sku'                => 'Артикул - :sku',
             ],
 
             'invoice-pdf' => [
@@ -490,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Уже оплачено',
-                    'invoice-missing'            => 'Счет отсутствует',
+                    'amount'                     => 'Сумма',
+                    'create-transaction'         => 'Создать транзакцию',
+                    'invoice-id'                 => 'Идентификатор счета',
+                    'invoice-missing'            => 'Отсутствует счет',
+                    'payment-method'             => 'Метод оплаты',
+                    'save-transaction'           => 'Сохранить транзакцию',
                     'transaction-amount-exceeds' => 'Сумма транзакции превышает',
                     'transaction-amount-zero'    => 'Сумма транзакции равна нулю',
-                    'transaction-saved'          => 'Транзакция успешно сохранена',
+                    'transaction-saved'          => 'Транзакция успешно сохранена.',
                 ],
 
                 'view' => [

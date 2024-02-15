@@ -12,11 +12,20 @@
         <div class="flex gap-x-2.5 items-center">
 
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.sales.transactions.index') }}" />
+            <x-admin::datagrid.export  src="{{ route('admin.sales.transactions.index') }}" />
+
+            <v-create-transaction-form>
+                <button
+                    type="button"
+                    class="primary-button"
+                >
+                    @lang('admin::app.sales.transactions.index.create.create-transaction')
+                </button>
+            </v-create-transaction-form>
         </div>
     </div>
 
-    <v-transaction-drawer />
+    <v-transaction-drawer ref="transactionDrawer"/>
 
     <!-- Transaction View Component -->
     @pushOnce('scripts')
@@ -210,6 +219,116 @@
             </div>
         </script>
 
+        <script 
+            type="text/x-template"
+            id="v-create-transaction-form-template"
+        >
+            <div>
+                <button
+                    type="button"
+                    class="primary-button"
+                    @click="$refs.transactionModel.toggle()"
+                >
+                    @lang('admin::app.sales.transactions.index.create.create-transaction')
+                </button>
+
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form @submit="handleSubmit($event, store)">
+                        <!-- Customer Create Modal -->
+                        <x-admin::modal ref="transactionModel">
+                            <!-- Modal Header -->
+                            <x-slot:header>
+                                <p class="text-lg text-gray-800 dark:text-white font-bold">
+                                    @lang('admin::app.sales.transactions.index.create.create-transaction')
+                                </p>
+                            </x-slot>
+
+                            <!-- Modal Content -->
+                            <x-slot:content>
+                                <!-- Invoice Id -->
+                                <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.transactions.index.create.invoice-id')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        id="invoice_id"
+                                        name="invoice_id"
+                                        rules="required"
+                                        :label="trans('admin::app.sales.transactions.index.create.invoice-id')"
+                                        :placeholder="trans('admin::app.sales.transactions.index.create.invoice-id')"
+                                    />
+
+                                    <x-admin::form.control-group.error control-name="invoice_id" />
+                                </x-admin::form.control-group>
+
+                                <!-- Payment Method -->
+                                <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.transactions.index.create.payment-method')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        id="payment_method"
+                                        name="payment_method"
+                                        rules="required"
+                                        :label="trans('admin::app.sales.transactions.index.create.payment-method')"
+                                        :placeholder="trans('admin::app.sales.transactions.index.create.payment-method')"
+                                    >
+                                        <option 
+                                            v-for="paymentMethod in paymentMethods"
+                                            :value="paymentMethod.method"
+                                            v-text="paymentMethod.method_title"
+                                        >
+                                        </option>
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error control-name="payment_method" />
+                                </x-admin::form.control-group>
+
+                                <!-- Amount -->
+                                <x-admin::form.control-group class="w-full mb-2.5">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.transactions.index.create.amount')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        id="amount"
+                                        name="amount"
+                                        rules="required"
+                                        :label="trans('admin::app.sales.transactions.index.create.amount')"
+                                        :placeholder="trans('admin::app.sales.transactions.index.create.amount')"
+                                    />
+
+                                    <x-admin::form.control-group.error control-name="amount" />
+                                </x-admin::form.control-group>
+                            </x-slot>
+
+                            <!-- Modal Footer -->
+                            <x-slot:footer>
+                                <!-- Modal Submission -->
+                                <div class="flex gap-x-2.5 items-center">
+                                    <!-- Save Button -->
+                                    <button
+                                        type="submit"
+                                        class="primary-button"
+                                    >
+                                        @lang('admin::app.sales.transactions.index.create.save-transaction')
+                                    </button>
+                                </div>
+                            </x-slot>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
+            </div>
+        </script>
+
         <script type="module">
             app.component('v-transaction-drawer', {
                 template: '#v-transaction-drawer-template',
@@ -253,6 +372,40 @@
                     },
                 }
             })
+        </script>
+
+        <script type="module">
+            app.component('v-create-transaction-form', {
+                template: '#v-create-transaction-form-template',
+
+                data() {
+                    return {
+                        paymentMethods: @json(payment()->getSupportedPaymentMethods()['payment_methods']),
+                    };
+                },
+
+                methods: {
+                    store(params, { setErrors, resetForm }) {
+                        this.$axios.post('{{ route('admin.sales.transactions.store') }}', params)
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                this.$refs.transactionModel.toggle();
+
+                                this.$parent.$refs.transactionDrawer.$refs.datagrid.get()
+
+                                resetForm();
+                            })
+                            .catch((error) => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                }
+                            });
+                    },
+                },
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>

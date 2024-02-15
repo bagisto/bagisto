@@ -424,18 +424,19 @@ return [
                 'title'                  => 'الفاتورة #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount للوحدة x :qty الكمية',
-                'create-invoice'  => 'إنشاء فاتورة',
-                'create-success'  => 'تم إنشاء الفاتورة بنجاح',
-                'creation-error'  => 'غير مسموح بإنشاء فاتورة الطلب.',
-                'invalid-qty'     => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
-                'invoice'         => 'فاتورة',
-                'new-invoice'     => 'فاتورة جديدة',
-                'product-error'   => 'لا يمكن إنشاء فاتورة بدون منتجات.',
-                'product-image'   => 'صورة المنتج',
-                'qty-to-invoiced' => 'الكمية المراد فوترتها',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount لكل وحدة × :qty الكمية',
+                'create-invoice'     => 'إنشاء فاتورة',
+                'create-success'     => 'تم إنشاء الفاتورة بنجاح',
+                'create-transaction' => 'إنشاء معاملة',
+                'creation-error'     => 'عملية إنشاء فاتورة الطلب غير مسموح بها.',
+                'invalid-qty'        => 'وجدنا كمية غير صالحة لفواتير العناصر.',
+                'invoice'            => 'فاتورة',
+                'new-invoice'        => 'فاتورة جديدة',
+                'product-error'      => 'لا يمكن إنشاء فاتورة بدون منتجات.',
+                'product-image'      => 'صورة المنتج',
+                'qty-to-invoiced'    => 'الكمية للفوترة',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -490,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'تم الدفع بالفعل',
-                    'invoice-missing'            => 'الفاتورة مفقودة',
-                    'transaction-amount-exceeds' => 'مبلغ العملية يتجاوز الحد المسموح به',
-                    'transaction-amount-zero'    => 'مبلغ العملية صفر',
-                    'transaction-saved'          => 'تم حفظ العملية بنجاح',
+                    'amount'                     => 'المبلغ',
+                    'create-transaction'         => 'إنشاء عملية',
+                    'invoice-id'                 => 'رقم الفاتورة',
+                    'invoice-missing'            => 'الفاتورة غير موجودة',
+                    'payment-method'             => 'طريقة الدفع',
+                    'save-transaction'           => 'حفظ العملية',
+                    'transaction-amount-exceeds' => 'تجاوز المبلغ المسموح به',
+                    'transaction-amount-zero'    => 'صفر المبلغ في العملية',
+                    'transaction-saved'          => 'تم حفظ العملية بنجاح.',
                 ],
 
                 'view' => [

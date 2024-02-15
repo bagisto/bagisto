@@ -425,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount ליחידה x :qty כמות',
-                'create-invoice'  => 'צור חשבונית',
-                'create-success'  => 'חשבונית נוצרה בהצלחה',
-                'creation-error'  => 'אין תרשום ליצירת חשבונית הזמנה.',
-                'invalid-qty'     => 'גילינו כמות לא תקנית לחיוב מוצרים.',
-                'invoice'         => 'חשבונית',
-                'new-invoice'     => 'חשבונית חדשה',
-                'product-error'   => 'לא ניתן ליצור חשבונית בלעדי מוצרים.',
-                'product-image'   => 'תמונת המוצר',
-                'qty-to-invoiced' => 'כמות לחיוב',
-                'sku'             => 'SKU - :sku',
+                'amount-per-unit'    => ':amount לכל יחידה x :qty כמות',
+                'create-invoice'     => 'צור חשבונית',
+                'create-success'     => 'חשבונית נוצרה בהצלחה',
+                'create-transaction' => 'צור עסקה',
+                'creation-error'     => 'יצירת חשבונית הזמנה אינה מורשית.',
+                'invalid-qty'        => 'מצאנו כמות לא חוקית לחשבונית מוצרים.',
+                'invoice'            => 'חשבונית',
+                'new-invoice'        => 'חשבונית חדשה',
+                'product-error'      => 'לא ניתן ליצור חשבונית בלי מוצרים.',
+                'product-image'      => 'תמונת המוצר',
+                'qty-to-invoiced'    => 'כמות לחשבונית',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -490,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'כבר שולם',
+                    'amount'                     => 'סכום',
+                    'create-transaction'         => 'צור עסקה',
+                    'invoice-id'                 => 'מזהה חשבונית',
                     'invoice-missing'            => 'חשבונית חסרה',
-                    'transaction-amount-exceeds' => 'סכום העסקה גבוה מדי',
+                    'payment-method'             => 'אמצעי תשלום',
+                    'save-transaction'           => 'שמור עסקה',
+                    'transaction-amount-exceeds' => 'סכום העסקה חורג מהמותר',
                     'transaction-amount-zero'    => 'סכום העסקה אפס',
-                    'transaction-saved'          => 'העסקה נשמרה בהצלחה',
+                    'transaction-saved'          => 'עסקה נשמרה בהצלחה.',
                 ],
 
                 'view' => [

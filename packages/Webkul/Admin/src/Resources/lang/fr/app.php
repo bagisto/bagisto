@@ -425,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount Par Unité x :qty Quantité',
-                'create-invoice'  => 'Créer une facture',
-                'create-success'  => 'Facture créée avec succès',
-                'creation-error'  => 'La création de la facture de commande n\'est pas autorisée.',
-                'invalid-qty'     => 'Nous avons trouvé une quantité invalide pour facturer des articles.',
-                'invoice'         => 'Facture',
-                'new-invoice'     => 'Nouvelle facture',
-                'product-error'   => 'Impossible de créer une facture sans produits.',
-                'product-image'   => 'Image du produit',
-                'qty-to-invoiced' => 'Qté à facturer',
-                'sku'             => 'SKU - :sku',
+                'amount-per-unit'    => ':amount Par Unité x :qty Quantité',
+                'create-invoice'     => 'Créer une Facture',
+                'create-success'     => 'Facture créée avec succès',
+                'create-transaction' => 'Créer une Transaction',
+                'creation-error'     => 'La création de la facture de commande n\'est pas autorisée.',
+                'invalid-qty'        => 'Nous avons trouvé une quantité invalide pour facturer les articles.',
+                'invoice'            => 'Facture',
+                'new-invoice'        => 'Nouvelle Facture',
+                'product-error'      => 'Impossible de créer une facture sans produits.',
+                'product-image'      => 'Image du Produit',
+                'qty-to-invoiced'    => 'Quantité à facturer',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -490,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Déjà payé',
+                    'amount'                     => 'Montant',
+                    'create-transaction'         => 'Créer une transaction',
+                    'invoice-id'                 => 'ID de la facture',
                     'invoice-missing'            => 'Facture manquante',
+                    'payment-method'             => 'Méthode de paiement',
+                    'save-transaction'           => 'Enregistrer la transaction',
                     'transaction-amount-exceeds' => 'Le montant de la transaction dépasse',
                     'transaction-amount-zero'    => 'Montant de la transaction nul',
-                    'transaction-saved'          => 'Transaction enregistrée avec succès',
+                    'transaction-saved'          => 'Transaction enregistrée avec succès.',
                 ],
 
                 'view' => [

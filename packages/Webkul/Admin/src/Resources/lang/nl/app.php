@@ -424,18 +424,19 @@ return [
                 'title'                  => 'Factuur #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount Per Eenheid x :qty Hoeveelheid',
-                'create-invoice'  => 'Factuur aanmaken',
-                'create-success'  => 'Factuur succesvol aangemaakt',
-                'creation-error'  => 'Het aanmaken van een orderfactuur is niet toegestaan.',
-                'invalid-qty'     => 'We hebben een ongeldige hoeveelheid voor te factureren items gevonden.',
-                'invoice'         => 'Factuur',
-                'new-invoice'     => 'Nieuwe Factuur',
-                'product-error'   => 'Een factuur kan niet worden aangemaakt zonder producten.',
-                'product-image'   => 'Productafbeelding',
-                'qty-to-invoiced' => 'Te factureren hoeveelheid',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Per Eenheid x :qty Hoeveelheid',
+                'create-invoice'     => 'Factuur Maken',
+                'create-success'     => 'Factuur succesvol aangemaakt',
+                'create-transaction' => 'Transactie Maken',
+                'creation-error'     => 'Het maken van de bestelfactuur is niet toegestaan.',
+                'invalid-qty'        => 'We hebben een ongeldige hoeveelheid gevonden om items te factureren.',
+                'invoice'            => 'Factuur',
+                'new-invoice'        => 'Nieuwe Factuur',
+                'product-error'      => 'Kan geen factuur maken zonder producten.',
+                'product-image'      => 'Productafbeelding',
+                'qty-to-invoiced'    => 'Hoeveelheid te factureren',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -489,11 +490,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Al betaald',
+                    'already-paid'               => 'Reeds betaald',
+                    'amount'                     => 'Bedrag',
+                    'create-transaction'         => 'Transactie aanmaken',
+                    'invoice-id'                 => 'Factuur ID',
                     'invoice-missing'            => 'Factuur ontbreekt',
+                    'payment-method'             => 'Betaalmethode',
+                    'save-transaction'           => 'Transactie opslaan',
                     'transaction-amount-exceeds' => 'Transactiebedrag overschrijdt',
                     'transaction-amount-zero'    => 'Transactiebedrag is nul',
-                    'transaction-saved'          => 'Transactie succesvol opgeslagen',
+                    'transaction-saved'          => 'Transactie succesvol opgeslagen.',
                 ],
 
                 'view' => [

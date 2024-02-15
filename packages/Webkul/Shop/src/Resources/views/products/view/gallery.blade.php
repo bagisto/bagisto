@@ -141,7 +141,7 @@
                     deep: true,
 
                     handler(newImages, oldImages) {
-                        let selectedImage = newImages?.[this.activeIndex];
+                        let selectedImage = newImages?.[this.activeIndex.split('_').pop()];
 
                         if (JSON.stringify(newImages) !== JSON.stringify(oldImages) && selectedImage?.large_image_url) {
                             this.baseFile.path = selectedImage.large_image_url;
@@ -153,11 +153,15 @@
             mounted() {
                 if (this.media.images.length) {
                     this.activeIndex = 'image_0';
+
                     this.baseFile.type = 'image';
+
                     this.baseFile.path = this.media.images[0].large_image_url;
                 } else if (this.media.videos.length) {
                     this.activeIndex = 'video_0';
+
                     this.baseFile.type = 'video';
+
                     this.baseFile.path = this.media.videos[0].video_url;
                 }
             },
@@ -180,10 +184,13 @@
 
                     if (file.type == 'videos') {
                         this.baseFile.type = 'video';
+
                         this.baseFile.path = file.video_url;
+
                         this.onMediaLoad();
                     } else {
                         this.baseFile.type = 'image';
+
                         this.baseFile.path = file.large_image_url;
                     }
 
@@ -198,11 +205,13 @@
 
                 swipeTop() {
                     const container = this.$refs.swiperContainer;
+
                     container.scrollTop -= this.containerOffset;
                 },
 
                 swipeDown() {
                     const container = this.$refs.swiperContainer;
+                    
                     container.scrollTop += this.containerOffset;
                 },
             }

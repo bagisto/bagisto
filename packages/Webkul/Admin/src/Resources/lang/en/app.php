@@ -425,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount Per Unit x :qty Quantity',
-                'create-invoice'  => 'Create Invoice',
-                'create-success'  => 'Invoice created successfully',
-                'creation-error'  => 'Order invoice creation is not allowed.',
-                'invalid-qty'     => 'We found an invalid quantity to invoice items.',
-                'invoice'         => 'Invoice',
-                'new-invoice'     => 'New Invoice',
-                'product-error'   => 'Invoice can not be created without products.',
-                'product-image'   => 'Product Image',
-                'qty-to-invoiced' => 'Qty. to invoiced',
-                'sku'             => 'SKU - :sku',
+                'amount-per-unit'    => ':amount Per Unit x :qty Quantity',
+                'create-invoice'     => 'Create Invoice',
+                'create-success'     => 'Invoice created successfully',
+                'create-transaction' => 'Create Transaction',
+                'creation-error'     => 'Order invoice creation is not allowed.',
+                'invalid-qty'        => 'We found an invalid quantity to invoice items.',
+                'invoice'            => 'Invoice',
+                'new-invoice'        => 'New Invoice',
+                'product-error'      => 'Invoice can not be created without products.',
+                'product-image'      => 'Product Image',
+                'qty-to-invoiced'    => 'Qty to invoiced',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -491,9 +492,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Already paid',
+                    'amount'                     => 'Amount',
+                    'create-transaction'         => 'Create Transaction',
+                    'invoice-id'                 => 'Invoice ID',
                     'invoice-missing'            => 'Invoice Missing',
+                    'payment-method'             => 'Payment Method',
+                    'save-transaction'           => 'Save Transaction',
                     'transaction-amount-exceeds' => 'Transaction Amount exceeds',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
+                    'transaction-saved'          => 'Transaction saved successfully.',
                 ],
 
                 'view' => [

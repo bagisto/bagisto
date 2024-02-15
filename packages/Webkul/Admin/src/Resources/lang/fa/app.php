@@ -425,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount در هر واحد x :qty تعداد',
-                'create-invoice'  => 'ایجاد فاکتور',
-                'create-success'  => 'فاکتور با موفقیت ایجاد شد',
-                'creation-error'  => 'ایجاد فاکتور سفارش مجاز نمی‌باشد.',
-                'invalid-qty'     => 'ما تعداد نامعتبری برای موارد فاکتوری یافتیم.',
-                'invoice'         => 'فاکتور',
-                'new-invoice'     => 'فاکتور جدید',
-                'product-error'   => 'فاکتور بدون محصول ایجاد نمی‌شود.',
-                'product-image'   => 'تصویر محصول',
-                'qty-to-invoiced' => 'تعداد برای صدور فاکتور',
-                'sku'             => 'شناسه SKU - :sku',
+                'amount-per-unit'    => ':amount در هر واحد x :qty مقدار',
+                'create-invoice'     => 'ایجاد فاکتور',
+                'create-success'     => 'فاکتور با موفقیت ایجاد شد',
+                'create-transaction' => 'ایجاد تراکنش',
+                'creation-error'     => 'ایجاد فاکتور سفارش مجاز نیست.',
+                'invalid-qty'        => 'ما مقدار نامعتبری برای صورتحساب کردن موارد پیدا کردیم.',
+                'invoice'            => 'فاکتور',
+                'new-invoice'        => 'فاکتور جدید',
+                'product-error'      => 'فاکتور بدون محصولات قابل ایجاد نیست.',
+                'product-image'      => 'تصویر محصول',
+                'qty-to-invoiced'    => 'مقدار برای فاکتور',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -488,12 +489,17 @@ return [
                     'transaction-id'     => 'شناسه تراکنش',
                 ],
 
-                'create'  => [
+                'create' => [
                     'already-paid'               => 'قبلاً پرداخت شده',
-                    'invoice-missing'            => 'صورتحساب موجود نیست',
-                    'transaction-amount-exceeds' => 'مقدار تراکنش بیشتر از حد مجاز است',
-                    'transaction-amount-zero'    => 'مقدار تراکنش صفر است',
-                    'transaction-saved'          => 'تراکنش با موفقیت ذخیره شد',
+                    'amount'                     => 'مبلغ',
+                    'create-transaction'         => 'ایجاد تراکنش',
+                    'invoice-id'                 => 'شناسه فاکتور',
+                    'invoice-missing'            => 'فاکتور یافت نشد',
+                    'payment-method'             => 'روش پرداخت',
+                    'save-transaction'           => 'ذخیره تراکنش',
+                    'transaction-amount-exceeds' => 'مبلغ تراکنش بیش از حد مجاز است',
+                    'transaction-amount-zero'    => 'مبلغ تراکنش صفر است',
+                    'transaction-saved'          => 'تراکنش با موفقیت ذخیره شد.',
                 ],
 
                 'view' => [

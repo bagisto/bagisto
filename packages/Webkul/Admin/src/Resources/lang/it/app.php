@@ -425,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount Per Unità x :qty Quantità',
-                'create-invoice'  => 'Crea Fattura',
-                'create-success'  => 'Fattura creata con successo',
-                'creation-error'  => 'La creazione della fattura dell\'ordine non è consentita.',
-                'invalid-qty'     => 'Abbiamo trovato una quantità non valida per la fatturazione degli articoli.',
-                'invoice'         => 'Fattura',
-                'new-invoice'     => 'Nuova Fattura',
-                'product-error'   => 'La fattura non può essere creata senza prodotti.',
-                'product-image'   => 'Immagine Prodotto',
-                'qty-to-invoiced' => 'Qtà. da fatturare',
-                'sku'             => 'SKU - :sku',
+                'amount-per-unit'    => ':amount Per Unità x :qty Quantità',
+                'create-invoice'     => 'Crea Fattura',
+                'create-success'     => 'Fattura creata con successo',
+                'create-transaction' => 'Crea Transazione',
+                'creation-error'     => 'La creazione della fattura dell\'ordine non è consentita.',
+                'invalid-qty'        => 'Abbiamo trovato una quantità non valida per fatturare gli articoli.',
+                'invoice'            => 'Fattura',
+                'new-invoice'        => 'Nuova Fattura',
+                'product-error'      => 'Impossibile creare una fattura senza prodotti.',
+                'product-image'      => 'Immagine del Prodotto',
+                'qty-to-invoiced'    => 'Quantità da fatturare',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -490,10 +491,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Già Pagato',
-                    'invoice-missing'            => 'Fattura Mancante',
-                    'transaction-amount-exceeds' => 'Importo Transazione supera',
-                    'transaction-amount-zero'    => 'Importo Transazione zero',
+                    'already-paid'               => 'Già pagato',
+                    'amount'                     => 'Importo',
+                    'create-transaction'         => 'Crea Transazione',
+                    'invoice-id'                 => 'ID Fattura',
+                    'invoice-missing'            => 'Fattura mancante',
+                    'payment-method'             => 'Metodo di Pagamento',
+                    'save-transaction'           => 'Salva Transazione',
+                    'transaction-amount-exceeds' => 'Importo transazione supera',
+                    'transaction-amount-zero'    => 'Importo transazione zero',
+                    'transaction-saved'          => 'Transazione salvata con successo.',
                 ],
 
                 'view' => [

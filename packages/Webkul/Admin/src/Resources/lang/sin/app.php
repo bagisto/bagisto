@@ -424,18 +424,19 @@ return [
                 'title'                  => 'අනුවා #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount ප්‍රත්ත්‍රයක් x :qty ප්‍රමාණයක්',
-                'create-invoice'  => 'ඉලෙක්ෂනය තනන්න',
-                'create-success'  => 'ඉලෙක්ෂන සාර්ථකයෙන් සෑදීම',
-                'creation-error'  => 'ඇණවුම් ඉලෙක්ෂනය හුවමාරු කිරීම සඳහා ඉඩ හැකියි.',
-                'invalid-qty'     => 'අපි ඉලෙක්ෂනයක් සඳහා අවලංගු ප්‍රමාණයක් සොයාගෙන ඇත.',
-                'invoice'         => 'ඉලෙක්ෂන',
-                'new-invoice'     => 'නව ඉලෙක්ෂන',
-                'product-error'   => 'නිෂ්පාදනය නොමැතිව ඉලෙක්ෂනය සෑදීමට හෝඳයේ නොහැක.',
-                'product-image'   => 'නිෂ්පාදන පින්තූරය',
-                'qty-to-invoiced' => 'ඉලෙක්ෂන කිරීමට අයදුම්පත',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount ප්‍රයෝජනයට x :qty ප්‍රමාණය',
+                'create-invoice'     => 'ඉල්ලීම් නිර්මාණය කරන්න',
+                'create-success'     => 'ඉල්ලීම් සාර්ථකව නිර්මාණය කරන ලදි',
+                'create-transaction' => 'ගනුදෙනු නිර්මාණය කරන්න',
+                'creation-error'     => 'ඇනවුම් ඉල්ලීම් නිර්මාණය කළ නොහැක.',
+                'invalid-qty'        => 'අයිතමයන් දක්වා නිවැරදි ප්‍රමාණය ලබා ගත යුතුයි.',
+                'invoice'            => 'ඉල්ලීම්',
+                'new-invoice'        => 'නව ඉල්ලීම්',
+                'product-error'      => 'නිෂ්පාදන විකල්පයන් නොමැති විකාශනය කළ නොහැක.',
+                'product-image'      => 'නිෂ්පාදන පින්තූරය',
+                'qty-to-invoiced'    => 'ඉල්ලීම් කිරීම සඳහා ප්‍රමාණය',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -489,11 +490,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'දැක්කාක් ගෙවිය යුතුය',
-                    'invoice-missing'            => 'ක්රෙඩිට් නොපවතියි',
-                    'transaction-amount-exceeds' => 'ක්රෙඩිට් මුදල වඩාත් විය',
-                    'transaction-amount-zero'    => 'ක්රෙඩිට් මුදල වෙනස් විය',
-                    'transaction-saved'          => 'ක්රෙඩිට් සුරකින්න සාර්ථකව',
+                    'already-paid'               => 'දැනටම් ගෙවිය යුතු ලැබී ඇත',
+                    'amount'                     => 'මුදල',
+                    'create-transaction'         => 'සාදන්න ගිවිසුම',
+                    'invoice-id'                 => 'පිවිසුම් අංකය',
+                    'invoice-missing'            => 'පිවිසුම් නොමැත',
+                    'payment-method'             => 'ගෙවීමේ ක්‍රමය',
+                    'save-transaction'           => 'සාදන්නවාද සුරක්ෂිත කරන්න',
+                    'transaction-amount-exceeds' => 'සාදන්නවාද මුදල ඉක්මවූ',
+                    'transaction-amount-zero'    => 'සාදන්නවාද මුදල සිහිකැඳවලි',
+                    'transaction-saved'          => 'සාදන්නවාද සුරක්ෂිතව සුරක්ෂිත විය.',
                 ],
 
                 'view' => [

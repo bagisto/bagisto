@@ -42,6 +42,10 @@ class ThemeController extends Controller
     public function store()
     {
         if (request()->has('id')) {
+            $this->validate(request(), [
+                core()->getRequestedLocaleCode().'.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
+            ]);
+
             $theme = $this->themeCustomizationRepository->find(request()->input('id'));
 
             return $this->themeCustomizationRepository->uploadImage(request()->all(), $theme);

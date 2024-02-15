@@ -628,7 +628,7 @@
                                         type="checkbox"
                                         id="value_per_locale"
                                         name="value_per_locale"
-                                        :value="$valuePerLocale"
+                                        value="1"
                                         :checked="(boolean) $valuePerLocale"
                                         :disabled="(boolean) $valuePerLocale"
                                     />
@@ -656,7 +656,7 @@
                                         type="checkbox"
                                         id="value_per_channel"
                                         name="value_per_channel"
-                                        :value="$valuePerChannel"
+                                        value="1"
                                         :checked="(boolean) $valuePerChannel"
                                         :disabled="(boolean) $valuePerChannel"
                                     />
@@ -684,7 +684,7 @@
                                         type="checkbox"
                                         id="is_filterable"
                                         name="is_filterable"
-                                        :value="$isFilterable"
+                                        value="1"
                                         for="is_filterable"
                                         :checked="(boolean) $isFilterable"
                                     />
@@ -713,7 +713,7 @@
                                         type="checkbox"
                                         id="is_configurable"
                                         name="is_configurable"
-                                        :value="$isConfigurable"
+                                        value="1"
                                         for="is_configurable"
                                         :checked="(boolean) $isConfigurable"
                                     />
@@ -743,7 +743,7 @@
                                         id="is_visible_on_front"
                                         name="is_visible_on_front"
                                         for="is_visible_on_front"
-                                        :value="$isVisibleOnFront"
+                                        value="1"
                                         :checked="(boolean) $isVisibleOnFront"
                                     />
 
@@ -771,7 +771,7 @@
                                         type="checkbox"
                                         id="is_comparable"
                                         name="is_comparable"
-                                        :value="$isComparable"
+                                        value="1"
                                         for="is_comparable"
                                         :checked="(boolean) $isComparable"
                                     />

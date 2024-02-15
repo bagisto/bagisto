@@ -424,18 +424,19 @@ return [
                 'title'                  => '发票 #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount 每单位 x :qty 数量',
-                'create-invoice'  => '创建发票',
-                'create-success'  => '发票创建成功',
-                'creation-error'  => '不允许创建订单发票。',
-                'invalid-qty'     => '我们发现了无效的数量以开具发票。',
-                'invoice'         => '发票',
-                'new-invoice'     => '新发票',
-                'product-error'   => '没有产品无法创建发票。',
-                'product-image'   => '产品图片',
-                'qty-to-invoiced' => '要开具发票的数量',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount 每单位 x :qty 数量',
+                'create-invoice'     => '创建发票',
+                'create-success'     => '发票创建成功',
+                'create-transaction' => '创建交易',
+                'creation-error'     => '不允许创建订单发票。',
+                'invalid-qty'        => '我们发现无效的数量来开发票商品。',
+                'invoice'            => '发票',
+                'new-invoice'        => '新发票',
+                'product-error'      => '无法没有产品创建发票。',
+                'product-image'      => '产品图片',
+                'qty-to-invoiced'    => '要开发票的数量',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -490,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => '已支付',
-                    'invoice-missing'            => '缺少发票',
-                    'transaction-amount-exceeds' => '交易金额超过限制',
+                    'amount'                     => '金额',
+                    'create-transaction'         => '创建交易',
+                    'invoice-id'                 => '发票号',
+                    'invoice-missing'            => '发票丢失',
+                    'payment-method'             => '付款方式',
+                    'save-transaction'           => '保存交易',
+                    'transaction-amount-exceeds' => '交易金额超过',
                     'transaction-amount-zero'    => '交易金额为零',
-                    'transaction-saved'          => '交易保存成功',
+                    'transaction-saved'          => '交易已成功保存。',
                 ],
 
                 'view' => [

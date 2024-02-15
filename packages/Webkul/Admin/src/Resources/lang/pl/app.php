@@ -424,18 +424,19 @@ return [
                 'title'                  => 'Faktura #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount Na jednostkę x :qty Ilość',
-                'create-invoice'  => 'Utwórz fakturę',
-                'create-success'  => 'Faktura utworzona pomyślnie',
-                'creation-error'  => 'Nie wolno tworzyć faktury zamówienia.',
-                'invalid-qty'     => 'Znaleziono nieprawidłową ilość pozycji do faktury.',
-                'invoice'         => 'Faktura',
-                'new-invoice'     => 'Nowa faktura',
-                'product-error'   => 'Nie można tworzyć faktury bez produktów.',
-                'product-image'   => 'Zdjęcie produktu',
-                'qty-to-invoiced' => 'Ilość do faktury',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Za Jednostkę x :qty Ilość',
+                'create-invoice'     => 'Utwórz Fakturę',
+                'create-success'     => 'Faktura została pomyślnie utworzona',
+                'create-transaction' => 'Utwórz Transakcję',
+                'creation-error'     => 'Tworzenie faktury zamówienia jest niedozwolone.',
+                'invalid-qty'        => 'Znaleziono nieprawidłową ilość do fakturowania przedmiotów.',
+                'invoice'            => 'Faktura',
+                'new-invoice'        => 'Nowa Faktura',
+                'product-error'      => 'Nie można utworzyć faktury bez produktów.',
+                'product-image'      => 'Zdjęcie Produktu',
+                'qty-to-invoiced'    => 'Ilość do faktury',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -489,11 +490,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Już opłacone',
+                    'already-paid'               => 'Już zapłacone',
+                    'amount'                     => 'Kwota',
+                    'create-transaction'         => 'Utwórz transakcję',
+                    'invoice-id'                 => 'Numer faktury',
                     'invoice-missing'            => 'Brak faktury',
+                    'payment-method'             => 'Metoda płatności',
+                    'save-transaction'           => 'Zapisz transakcję',
                     'transaction-amount-exceeds' => 'Kwota transakcji przekracza',
                     'transaction-amount-zero'    => 'Kwota transakcji wynosi zero',
-                    'transaction-saved'          => 'Transakcja zapisana pomyślnie',
+                    'transaction-saved'          => 'Transakcja została pomyślnie zapisana.',
                 ],
 
                 'view' => [
