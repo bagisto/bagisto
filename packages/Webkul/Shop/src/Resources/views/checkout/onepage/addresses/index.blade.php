@@ -146,6 +146,8 @@
                     if (! this.customer) {
                         this.isAddressLoading = false;
 
+                        this.autoSelectedAddress();
+
                         return;
                     }
 
@@ -177,13 +179,7 @@
                                 });
                             }
 
-                            const billingAddressIds = this.customerAddresses.billing.map(address => address.id);
-
-                            this.selectedBillingAddressId = billingAddressIds.length > 0 ? billingAddressIds[0] : null;
-
-                            const shippingAddressIds = this.customerAddresses.shipping.map(address => address.id);
-
-                            this.selectedShippingAddressId = shippingAddressIds.length > 0 ? shippingAddressIds[0] : null;
+                            this.autoSelectedAddress();
 
                             this.isAddressLoading = false;
                         })
@@ -407,6 +403,16 @@
                         address1.country === address2.country &&
                         address1.postcode === address2.postcode
                     );
+                },
+
+                autoSelectedAddress() {
+                    const billingAddressIds = this.customerAddresses.billing.map(address => address.id);
+
+                    this.selectedBillingAddressId = billingAddressIds.length > 0 ? billingAddressIds[0] : null;
+
+                    const shippingAddressIds = this.customerAddresses.shipping.map(address => address.id);
+
+                    this.selectedShippingAddressId = shippingAddressIds.length > 0 ? shippingAddressIds[0] : null;
                 },
             },
         });
