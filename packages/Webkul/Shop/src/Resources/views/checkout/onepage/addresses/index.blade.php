@@ -177,9 +177,13 @@
                                 });
                             }
 
-                            const addressIds = this.customerAddresses.billing.map(address => address.id);
+                            const billingAddressIds = this.customerAddresses.billing.map(address => address.id);
 
-                            this.selectedBillingAddressId = addressIds.length > 0 ? addressIds[0] : null;
+                            this.selectedBillingAddressId = billingAddressIds.length > 0 ? billingAddressIds[0] : null;
+
+                            const shippingAddressIds = this.customerAddresses.shipping.map(address => address.id);
+
+                            this.selectedShippingAddressId = shippingAddressIds.length > 0 ? shippingAddressIds[0] : null;
 
                             this.isAddressLoading = false;
                         })
