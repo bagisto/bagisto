@@ -462,9 +462,17 @@
                             <button
                                 type="submit"
                                 class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                                v-if="!isLoading"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                             </button>
+
+                            <x-shop::button
+                                v-else
+                                class="primary-button py-3 px-11 rounded-2xl"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                                :loading="true"
+                            />
                         </div>
     
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.after') !!}
