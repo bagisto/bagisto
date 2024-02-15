@@ -154,7 +154,19 @@
 
                     this.$axios.get('{{ route('api.shop.customers.account.addresses.index') }}')
                         .then(response => {
+                            const storedAddresses = JSON.parse(localStorage.getItem('customerAddresses'));
+
                             this.customerAddresses.billing = this.customerAddresses.shipping = response.data.data;
+
+                            if (storedAddresses) {
+                                storedAddresses.billing.forEach(element => {
+                                    this.customerAddresses.billing.push(element);
+                                });
+    
+                                storedAddresses.shipping.forEach(element => {
+                                    this.customerAddresses.shipping.push(element);
+                                });
+                            }
 
                             this.isAddressLoading = false;
                         })
@@ -222,8 +234,8 @@
                         const storedAddressIndex = storedAddresses[params.type].findIndex(address => address.id === params[params.type].id);
 
                         if (storedAddressIndex !== -1) {
-                            storedAddresses[storedAddressIndex] = {
-                                ...storedAddresses[storedAddressIndex],
+                            storedAddresses[params.type][storedAddressIndex] = {
+                                ...storedAddresses[params.type][storedAddressIndex],
                                 ...params[params.type]
                             };
 
@@ -283,6 +295,18 @@
                         this.selectedBillingAddressId = billingId;
                         
                         this.selectedShippingAddressId = shippingId;
+                    }
+
+                    if (! Array.isArray(params.billing.address1)) {
+                        params.billing = Object.assign({}, params.billing);
+
+                        params.billing.address1 = params.billing.address1.split('\n');
+                    }
+
+                    if (! Array.isArray(params.shipping.address1)) {
+                        params.shipping = Object.assign({}, params.shipping);
+
+                        params.shipping.address1 = params.shipping.address1.split('\n');
                     }
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
