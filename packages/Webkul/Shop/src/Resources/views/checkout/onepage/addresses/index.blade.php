@@ -28,27 +28,6 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping.after') !!} 
             </div>
-
-            <div
-                class="flex justify-end mt-4"
-                v-if="
-                (selectedBillingAddressId || selectedShippingAddressId)
-                && ! toggleShippingForm
-                && ! addNewBillingAddress
-                "
-            >
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
-
-                <x-shop::button
-                    type="button"
-                    class="primary-button py-3 px-11 rounded-2xl"
-                    :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
-                    ::loading="isLoading"
-                    @click="proceed"
-                />
-
-                {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
-            </div>
         </template>
     </script>
 

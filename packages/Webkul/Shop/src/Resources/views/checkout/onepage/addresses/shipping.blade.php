@@ -3,7 +3,7 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
 
         <x-shop::accordion class="!border-b-0">
-            <x-slot:header class="!p-0">
+            <x-slot:header class="! py-4 !px-0">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-medium max-sm:text-xl">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
@@ -51,7 +51,7 @@
 
                                 <span
                                     class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                    @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEditable=true;"
+                                    @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEditable=true;isLoading=false;"
                                 >
                                 </span>
     
@@ -118,6 +118,26 @@
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.after') !!}
 
+                <div
+                    class="flex justify-end mt-4"
+                    v-if="
+                    (selectedBillingAddressId || selectedShippingAddressId)
+                    && ! toggleShippingForm
+                    && ! addNewBillingAddress
+                    "
+                >
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
+
+                    <x-shop::button
+                        type="button"
+                        class="primary-button py-3 px-11 rounded-2xl"
+                        :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                        ::loading="isLoading"
+                        @click="proceed"
+                    />
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
+                </div>
             </x-slot>
         </x-shop::accordion>
 
@@ -141,7 +161,7 @@
                     <a 
                         class="flex justify-end"
                         href="javascript:void(0)" 
-                        @click="toggleShippingForm=false;tempShippingAddress={};isAddressEditable=false"
+                        @click="toggleShippingForm=false;tempShippingAddress={};isAddressEditable=false;isLoading=false;"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
     
@@ -464,13 +484,13 @@
                                 class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
                                 v-if="!isLoading"
                             >
-                                @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
+                                @lang('shop::app.checkout.onepage.addresses.shipping.save')
                             </button>
 
                             <x-shop::button
                                 v-else
                                 class="primary-button py-3 px-11 rounded-2xl"
-                                :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.save')"
                                 :loading="true"
                             />
                         </div>

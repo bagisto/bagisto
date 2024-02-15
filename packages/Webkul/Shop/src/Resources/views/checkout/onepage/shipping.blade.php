@@ -22,7 +22,7 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.before') !!}
 
                 <x-shop::accordion class="!border-b-0">
-                    <x-slot:header class="!p-0">
+                    <x-slot:header class="!py-4 !px-0">
                         <div class="flex justify-between items-center">
                             <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
