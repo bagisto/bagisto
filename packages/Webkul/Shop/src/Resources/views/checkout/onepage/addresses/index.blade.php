@@ -94,9 +94,7 @@
 
                 selectedBillingAddressId: {
                     handler() {
-                        this.$emitter.emit('is-show-shipping-methods', false);
-
-                        this.$emitter.emit('is-show-payment-methods', false);
+                        this.resetState();
                     },
 
                     deep: true,
@@ -104,9 +102,7 @@
 
                 selectedShippingAddressId: {
                     handler() {
-                        this.$emitter.emit('is-show-shipping-methods', false);
-
-                        this.$emitter.emit('is-show-payment-methods', false);
+                        this.resetState();
                     },
 
                     deep: true,
@@ -150,6 +146,8 @@
                     if (! this.customer) {
                         this.isAddressLoading = false;
 
+                        this.autoSelectedAddress();
+
                         return;
                     }
 
@@ -180,6 +178,8 @@
                                     }
                                 });
                             }
+
+                            this.autoSelectedAddress();
 
                             this.isAddressLoading = false;
                         })
@@ -215,6 +215,8 @@
 
                         this.isLoading = false;
 
+                        this.resetState();
+
                         return;
                     }
 
@@ -224,6 +226,8 @@
 
                     this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params[params.type])
                         .then(() => {
+                            this.get();
+
                             this.$emitter.emit('update-cart-summary');
 
                             this.addNewBillingAddress = false;
@@ -232,9 +236,9 @@
 
                             this.isLoading = false;
 
-                            resetForm();
+                            this.resetState();
 
-                            this.get();
+                            resetForm();
                         })
                         .catch(() => {});
                 },
@@ -290,6 +294,8 @@
 
                             this.isLoading = false;
 
+                            resetState();
+
                             resetForm();
                         })
                         .catch(() => {});
@@ -316,21 +322,25 @@
 
                     const shippingId = this.selectedShippingAddressId;
 
-                    params.billing = this.customerAddresses.billing.find((value) =>  this.selectedBillingAddressId = value.id);
-                    
-                    params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId = value.id);
+                    params.billing = this.customerAddresses.billing.find((value) =>  this.selectedBillingAddressId === value.id);
+
+                    if (this.selectedShippingAddressId) {
+                        params.shipping = this.customerAddresses.shipping.find((value) => this.selectedShippingAddressId === value.id);
+                    } else {
+                        params.shipping = this.customerAddresses.shipping.find((value) => this.selectedBillingAddressId === value.id);
+                    }
 
                     this.selectedBillingAddressId = billingId;
                     
                     this.selectedShippingAddressId = shippingId;
 
-                    if (! Array.isArray(params.billing.address1)) {
+                    if (! Array.isArray(params.billing?.address1)) {
                         params.billing = Object.assign({}, params.billing);
 
                         params.billing.address1 = params.billing.address1.split('\n');
                     }
 
-                    if (! Array.isArray(params.shipping.address1)) {
+                    if (! Array.isArray(params.shipping?.address1)) {
                         params.shipping = Object.assign({}, params.shipping);
 
                         params.shipping.address1 = params.shipping.address1.split('\n');
@@ -355,6 +365,8 @@
 
                                 this.isLoading = false;
                             }
+
+                            this.isLoading = false;
 
                             this.$emitter.emit('update-cart-summary');
 
@@ -391,6 +403,16 @@
                         address1.country === address2.country &&
                         address1.postcode === address2.postcode
                     );
+                },
+
+                autoSelectedAddress() {
+                    const billingAddressIds = this.customerAddresses.billing.map(address => address.id);
+
+                    this.selectedBillingAddressId = billingAddressIds.length > 0 ? billingAddressIds[0] : null;
+
+                    const shippingAddressIds = this.customerAddresses.shipping.map(address => address.id);
+
+                    this.selectedShippingAddressId = shippingAddressIds.length > 0 ? shippingAddressIds[0] : null;
                 },
             },
         });
