@@ -234,6 +234,10 @@
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
 
+                            if (localStorage.getItem('customerAddresses')) {
+                                localStorage.removeItem('customerAddresses');
+                            }
+
                             this.isLoading = false;
                         })
                         .catch(error => this.isProcessing = false);
