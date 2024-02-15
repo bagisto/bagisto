@@ -380,7 +380,9 @@
                                 line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
                             });
                         })
-                        .catch((error) => {});
+                        .catch((error) => {
+                            this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                        });
                 },
             },
         });
