@@ -81,8 +81,6 @@
                 this.get();
 
                 this.getCountries();
-
-                this.selectedBillingAddressId = true;
             },
 
             watch: {
@@ -178,6 +176,10 @@
                                     }
                                 });
                             }
+
+                            const addressIds = this.customerAddresses.billing.map(address => address.id);
+
+                            this.selectedBillingAddressId = addressIds.length > 0 ? addressIds[0] : null;
 
                             this.isAddressLoading = false;
                         })

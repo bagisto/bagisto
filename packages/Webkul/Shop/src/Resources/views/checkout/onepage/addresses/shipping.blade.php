@@ -42,13 +42,6 @@
                                 >
                                 </label>
 
-                                <label
-                                    class="absolute ltr:right-24 rtl:left-24 top-5 label-pending block w-max px-1.5 py-1 cursor-pointer"
-                                    v-if="address.default_address"
-                                >
-                                    Default Address
-                                </label>
-
                                 <span
                                     class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
                                     @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEditable=true;isLoading=false;"
