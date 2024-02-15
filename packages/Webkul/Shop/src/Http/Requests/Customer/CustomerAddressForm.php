@@ -28,7 +28,10 @@ class CustomerAddressForm extends FormRequest
      */
     public function rules(): array
     {
-        if (isset($this->get('billing')['address_id'])) {
+        if (
+            isset($this->get('billing')['address_id'])
+            && ! isset($this->get('billing')['is_temp'])
+        ) {
             $this->mergeExistingAddressRules('billing');
         } else {
             $this->mergeNewAddressRules('billing');

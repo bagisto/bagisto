@@ -178,7 +178,6 @@
                         <x-shop::button
                             class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
                             :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                            :loading="false"
                             ref="placeOrder"
                             @click="placeOrder"
                         />
@@ -214,7 +213,7 @@
 
             methods: {
                 placeOrder() {
-                    this.$refs.placeOrder.isProcessing = true;
+                    this.$refs.placeOrder.isLoading = true;
 
                     this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
                         .then(response => {
@@ -224,7 +223,7 @@
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
 
-                            this.$refs.placeOrder.isProcessing = false;
+                            this.$refs.placeOrder.isLoading = false;
                         })
                         .catch(error => this.$refs.placeOrder.isProcessing = false);
                 },

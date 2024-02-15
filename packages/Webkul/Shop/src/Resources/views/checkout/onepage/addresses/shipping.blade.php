@@ -51,7 +51,7 @@
 
                                 <span
                                     class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                    @click="toggleShippingForm=true;tempShippingAddress=address;"
+                                    @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEditable=true;"
                                 >
                                 </span>
     
@@ -91,7 +91,7 @@
     
                             <div 
                                 class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                @click="toggleShippingForm=true;tempShippingAddress={}"
+                                @click="toggleShippingForm=true;tempShippingAddress={};isAddressEditable=false;"
                             >
                                 <div
                                     class="flex gap-x-2.5 items-center"
@@ -141,7 +141,7 @@
                     <a 
                         class="flex justify-end"
                         href="javascript:void(0)" 
-                        @click="toggleShippingForm=false;tempShippingAddress={}"
+                        @click="toggleShippingForm=false;tempShippingAddress={};isAddressEditable=false"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
     
@@ -426,14 +426,53 @@
                         </x-shop::form.control-group>
     
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.phone.after') !!}
+
+                        <div
+                            class="grid gap-2.5 pb-4"
+                            v-if="! isAddressEditable"
+                        >
+                            @auth('customer')
+                                <div class="flex gap-x-4 select-none">
+                                    <v-field
+                                        type="checkbox"
+                                        name="shipping.save_address"
+                                        v-slot="{ field }"
+                                        value="1"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            name="shipping.save_address"
+                                            v-bind="field"
+                                            id="shipping.save_address"
+                                            class="sr-only peer"
+                                        />
+                                    </v-field>
+
+                                    <label
+                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer"
+                                        for="shipping.save_address"
+                                    >
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
+                                    </label>
+                                </div>
+                            @endauth
+                        </div>
     
                         <div class="flex justify-end mt-4">
                             <button
                                 type="submit"
                                 class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                                v-if="!isLoading"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                             </button>
+
+                            <x-shop::button
+                                v-else
+                                class="primary-button py-3 px-11 rounded-2xl"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
+                                :loading="true"
+                            />
                         </div>
     
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.after') !!}

@@ -52,7 +52,7 @@
 
                             <span
                                 class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                @click="addNewBillingAddress=true;tempBillingAddress=address;"
+                                @click="addNewBillingAddress=true;tempBillingAddress=address;isAddressEditable=true;"
                             ></span>
 
                             <label 
@@ -91,7 +91,7 @@
 
                         <div 
                             class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                            @click="addNewBillingAddress=true;tempBillingAddress={}"
+                            @click="addNewBillingAddress=true;tempBillingAddress={};isAddressEditable=false;"
                         >
                             <div
                                 class="flex gap-x-2.5 items-center"
@@ -169,7 +169,7 @@
                 <a 
                     class="flex justify-end"
                     href="javascript:void(0)" 
-                    @click="addNewBillingAddress=false;tempBillingAddress={}"
+                    @click="addNewBillingAddress=false;tempBillingAddress={};isAddressEditable=false;"
                 >
                     <span class="icon-arrow-left text-2xl"></span>
 
@@ -471,13 +471,52 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.billing_address.phone.after') !!}
 
+                    <div
+                        class="grid gap-2.5 pb-4"
+                        v-if="! isAddressEditable"
+                    >
+                        @auth('customer')
+                            <div class="flex gap-x-4 select-none">
+                                <v-field
+                                    type="checkbox"
+                                    name="billing.save_address"
+                                    v-slot="{ field }"
+                                    value="1"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        name="billing.save_address"
+                                        v-bind="field"
+                                        id="billing.save_address"
+                                        class="sr-only peer"
+                                    />
+                                </v-field>
+
+                                <label
+                                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer"
+                                    for="billing.save_address"
+                                >
+                                    @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                                </label>
+                            </div>
+                        @endauth
+                    </div>
+
                     <div class="flex justify-end mt-4">
                         <button
                             type="submit"
                             class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
+                            v-if="!isLoading"
                         >
                             @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                         </button>
+
+                        <x-shop::button
+                            v-else
+                            class="primary-button py-3 px-11 rounded-2xl"
+                            :title="trans('shop::app.checkout.onepage.addresses.billing.confirm')"
+                            :loading="true"
+                        />
                     </div>
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.billing_address_form.after') !!}
