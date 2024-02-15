@@ -234,6 +234,8 @@
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
 
+                            localStorage.removeItem('customerAddresses');
+
                             this.isLoading = false;
                         })
                         .catch(error => this.isProcessing = false);
