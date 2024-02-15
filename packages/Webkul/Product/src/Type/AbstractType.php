@@ -343,7 +343,7 @@ abstract class AbstractType
                     $attributeValue->locale,
                     $product->id,
                     $attribute->id,
-                ]))
+                ])),
             ]);
 
             if (! is_null($value)) {
