@@ -117,8 +117,8 @@
                                                 :name="'invoice[items][' . $item->id . ']'"
                                                 rules="required|numeric|min:0" 
                                                 :value="$item->qty_to_invoice"
-                                                label="Qty to invoiced"
-                                                placeholder="Qty to invoiced"
+                                                :label="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
+                                                :placeholder="trans('admin::app.sales.invoices.create.qty-to-invoiced')"
                                             />
         
                                             <x-admin::form.control-group.error :control-name="'invoice[items][' . $item->id . ']'" />
@@ -128,21 +128,21 @@
                             @endforeach
 
                             <!-- Create Transaction Button -->
-                            <x-admin::form.control-group class="flex gap-2.5 w-max !mb-0 p-1.5 cursor-pointer select-none">
+                            <x-admin::form.control-group class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
-                                    id="can_create_transaction"
                                     name="can_create_transaction"
+                                    id="can_create_transaction"
                                     value="1"
                                     for="can_create_transaction"
                                 />
 
-                                <x-admin::form.control-group.label
+                                <label
                                     for="can_create_transaction"
                                     class="!text-sm !font-semibold !text-gray-600 dark:!text-gray-300 cursor-pointer"
                                 >
-                                    @lang('Create Transaction')
-                                </x-admin::form.control-group.label>
+                                    @lang('admin::app.sales.invoices.create.create-transaction')
+                                </label>
                             </x-admin::form.control-group>
                         </div>
                     </x-slot>

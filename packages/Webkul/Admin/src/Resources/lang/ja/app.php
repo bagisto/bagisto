@@ -424,18 +424,19 @@ return [
                 'title'                  => '請求書 #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount 1単位あたり x :qty 数量',
-                'create-invoice'  => '請求書を作成',
-                'create-success'  => '請求書が正常に作成されました',
-                'creation-error'  => '注文請求書の作成は許可されていません。',
-                'invalid-qty'     => '無効な数量の請求アイテムが見つかりました。',
-                'invoice'         => '請求書',
-                'new-invoice'     => '新しい請求書',
-                'product-error'   => '製品なしでは請求書を作成できません。',
-                'product-image'   => '製品画像',
-                'qty-to-invoiced' => '請求数量',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => '1単位あたりの:amount × :qty 個数',
+                'create-invoice'     => '請求書を作成する',
+                'create-success'     => '請求書が正常に作成されました',
+                'create-transaction' => '取引を作成する',
+                'creation-error'     => '注文請求書の作成は許可されていません。',
+                'invalid-qty'        => '請求書アイテムの数量が無効です。',
+                'invoice'            => '請求書',
+                'new-invoice'        => '新しい請求書',
+                'product-error'      => '製品なしでは請求書を作成できません。',
+                'product-image'      => '製品画像',
+                'qty-to-invoiced'    => '請求数',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [

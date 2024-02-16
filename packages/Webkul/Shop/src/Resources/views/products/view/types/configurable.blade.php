@@ -221,6 +221,20 @@
                     }
                 },
 
+                watch: {
+                    simpleProduct: {
+                        deep: true,
+
+                        handler(selectedProduct) {
+                            if (selectedProduct) {
+                                return;
+                            }
+
+                            this.$parent.$parent.$refs.gallery.media.images = @json(product_image()->getGalleryImages($product));
+                        },
+                    },
+                },
+
                 mounted() {
                     this.prepareAttributes();
 

@@ -424,18 +424,19 @@ return [
                 'title'                  => '发票 #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount 每单位 x :qty 数量',
-                'create-invoice'  => '创建发票',
-                'create-success'  => '发票创建成功',
-                'creation-error'  => '不允许创建订单发票。',
-                'invalid-qty'     => '我们发现了无效的数量以开具发票。',
-                'invoice'         => '发票',
-                'new-invoice'     => '新发票',
-                'product-error'   => '没有产品无法创建发票。',
-                'product-image'   => '产品图片',
-                'qty-to-invoiced' => '要开具发票的数量',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount 每单位 x :qty 数量',
+                'create-invoice'     => '创建发票',
+                'create-success'     => '发票创建成功',
+                'create-transaction' => '创建交易',
+                'creation-error'     => '不允许创建订单发票。',
+                'invalid-qty'        => '我们发现无效的数量来开发票商品。',
+                'invoice'            => '发票',
+                'new-invoice'        => '新发票',
+                'product-error'      => '无法没有产品创建发票。',
+                'product-image'      => '产品图片',
+                'qty-to-invoiced'    => '要开发票的数量',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [

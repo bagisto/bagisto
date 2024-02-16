@@ -424,18 +424,19 @@ return [
                 'title'                  => 'চালান #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount প্রতি একক x :qty পরিমাণ',
-                'create-invoice'  => 'চালান তৈরি করুন',
-                'create-success'  => 'চালান সফলভাবে তৈরি হয়েছে',
-                'creation-error'  => 'অর্ডার চালান তৈরি করা যাবে না।',
-                'invalid-qty'     => 'আমরা অবৈধ পরিমাণ চালান আইটেম পেয়েছি।',
-                'invoice'         => 'চালান',
-                'new-invoice'     => 'নতুন চালান',
-                'product-error'   => 'পণ্য ছাড়া চালান তৈরি করা যাবে না।',
-                'product-image'   => 'পণ্যের চিত্র',
-                'qty-to-invoiced' => 'চালান করার পরিমাণ',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount প্রতি একক × :qty পরিমাণ',
+                'create-invoice'     => 'চালান তৈরি করুন',
+                'create-success'     => 'চালান সফলভাবে তৈরি হয়েছে',
+                'create-transaction' => 'লেনদেন তৈরি করুন',
+                'creation-error'     => 'অর্ডার চালান তৈরি করা অনুমোদিত নয়।',
+                'invalid-qty'        => 'আমরা অকার্যকর পরিমাণ পাওয়া গেছে আইটেম চালানের জন্য।',
+                'invoice'            => 'চালান',
+                'new-invoice'        => 'নতুন চালান',
+                'product-error'      => 'পণ্য ছাড়া চালান তৈরি করা যাবে না।',
+                'product-image'      => 'পণ্যের চিত্র',
+                'qty-to-invoiced'    => 'চালানে পরিমাণ',
+                'sku'                => 'এসকেও - :sku',
             ],
 
             'invoice-pdf' => [
