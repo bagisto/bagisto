@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'کاروسل دسته‌بندی',
                     'footer-links'      => 'لینک‌های پاورقی',
-                    'image-carousel'    => 'کاروسل تصاویر',
+                    'image-carousel'    => 'کروسل تصاویر',
                     'product-carousel'  => 'کاروسل محصولات',
                     'services-content'  => 'محتوای خدمات',
                     'static-content'    => 'محتوای استاتیک',

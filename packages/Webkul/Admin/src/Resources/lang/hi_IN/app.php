@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'श्रेणी कैरोसल',
                     'footer-links'      => 'फ़ुटर लिंक्स',
-                    'image-carousel'    => 'छवि कैरोसल',
+                    'image-carousel'    => 'इमेज कैरोसेल',
                     'product-carousel'  => 'उत्पाद कैरोसल',
                     'services-content'  => 'सेवाएँ सामग्री',
                     'static-content'    => 'स्थिर सामग्री',
