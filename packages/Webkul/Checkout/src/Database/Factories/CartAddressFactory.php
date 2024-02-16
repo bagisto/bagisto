@@ -15,8 +15,8 @@ class CartAddressFactory extends Factory
     protected $model = CartAddress::class;
 
     /**
-    * Define the model's default state.
-    */
+     * Define the model's default state.
+     */
     public function definition(): array
     {
         return [
