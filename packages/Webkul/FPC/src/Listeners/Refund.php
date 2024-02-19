@@ -15,6 +15,10 @@ class Refund extends Product
     public function afterCreate($refund)
     {
         foreach ($refund->items as $item) {
+            if (! $item->product) {
+                continue;
+            }
+
             $urls = $this->getForgettableUrls($item->product);
 
             ResponseCache::forget($urls);
