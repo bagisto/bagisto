@@ -127,7 +127,7 @@ it('should fails the validation error when store the transaction when certain in
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -151,7 +151,7 @@ it('should fails the validation error when store the transaction when certain in
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    Invoice::factory([
+    $invoice = Invoice::factory([
         'order_id'         => $order->id,
         'sub_total'        => $order->grand_total,
         'base_sub_total'   => $order->grand_total,
@@ -159,6 +159,25 @@ it('should fails the validation error when store the transaction when certain in
         'base_grand_total' => $order->grand_total,
         'increment_id'     => app(InvoiceSequencer::class)->resolveGeneratorClass(),
     ])->create();
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
+    ]);
 
     // Act and Assert
     $this->loginAsAdmin();

@@ -22,7 +22,7 @@ class ProductBundleOptionProductFactory extends Factory
         return [
             'qty'             => 1,
             'is_user_defined' => 1,
-            'is_default'	     => 0,
+            'is_default'      => 0,
             'sort_order'      => 0,
         ];
     }

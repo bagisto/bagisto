@@ -9,6 +9,7 @@ use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\InvoiceItem;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
@@ -127,7 +128,7 @@ it('should show the dashboard over all stats', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -151,9 +152,28 @@ it('should show the dashboard over all stats', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    Invoice::factory()->create([
+    $invoice = Invoice::factory()->create([
         'order_id'      => $order->id,
         'state'         => 'paid',
+    ]);
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
     ]);
 
     // Act and Assert
@@ -266,7 +286,7 @@ it('should show the dashboard today stats', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -290,9 +310,28 @@ it('should show the dashboard today stats', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    Invoice::factory()->create([
+    $invoice = Invoice::factory()->create([
         'order_id' => $order->id,
         'state'    => 'paid',
+    ]);
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
     ]);
 
     // Act and Assert
@@ -408,7 +447,7 @@ it('should show the dashboard stock threshold products stats', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -432,9 +471,28 @@ it('should show the dashboard stock threshold products stats', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    Invoice::factory()->create([
+    $invoice = Invoice::factory()->create([
         'order_id' => $order->id,
         'state'    => 'paid',
+    ]);
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
     ]);
 
     // Act and Assert
@@ -546,7 +604,7 @@ it('should show the dashboard total sales stats', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -570,9 +628,28 @@ it('should show the dashboard total sales stats', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    Invoice::factory()->create([
+    $invoice = Invoice::factory()->create([
         'order_id' => $order->id,
         'state'    => 'paid',
+    ]);
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
     ]);
 
     // Act and Assert
@@ -730,7 +807,7 @@ it('should show the dashboard top selling products stats', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id'          => $product->id,
         'order_id'            => $order->id,
         'base_total_invoiced' => $order->base_sub_total_invoiced,
@@ -759,10 +836,29 @@ it('should show the dashboard top selling products stats', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
     ]);
 
-    Invoice::factory([
+    $invoice = Invoice::factory([
         'order_id' => $order->id,
         'state'    => 'paid',
     ])->create();
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
+    ]);
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -872,7 +968,7 @@ it('should show the dashboard top customers stats', function () {
         'customer_last_name'  => $customer->last_name,
     ]);
 
-    OrderItem::factory()->create([
+    $orderItem = OrderItem::factory()->create([
         'product_id' => $product->id,
         'order_id'   => $order->id,
         'sku'        => $product->sku,
@@ -896,9 +992,28 @@ it('should show the dashboard top customers stats', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    Invoice::factory()->create([
+    $invoice = Invoice::factory()->create([
         'order_id' => $order->id,
         'state'    => 'paid',
+    ]);
+
+    InvoiceItem::factory()->create([
+        'invoice_id'           => $invoice->id,
+        'order_item_id'        => $orderItem->id,
+        'name'                 => $orderItem->name,
+        'sku'                  => $orderItem->sku,
+        'qty'                  => 1,
+        'price'                => $orderItem->price,
+        'base_price'           => $orderItem->base_price,
+        'total'                => $orderItem->price,
+        'base_total'           => $orderItem->base_price,
+        'tax_amount'           => (($orderItem->tax_amount / $orderItem->qty_ordered)),
+        'base_tax_amount'      => (($orderItem->base_tax_amount / $orderItem->qty_ordered)),
+        'discount_amount'      => (($orderItem->discount_amount / $orderItem->qty_ordered)),
+        'base_discount_amount' => (($orderItem->base_discount_amount / $orderItem->qty_ordered)),
+        'product_id'           => $orderItem->product_id,
+        'product_type'         => $orderItem->product_type,
+        'additional'           => $orderItem->additional,
     ]);
 
     // Act and Assert

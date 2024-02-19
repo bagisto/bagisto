@@ -217,9 +217,9 @@ it('should fails the validation error when shipping method not providing when st
         ])->id,
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cartId;

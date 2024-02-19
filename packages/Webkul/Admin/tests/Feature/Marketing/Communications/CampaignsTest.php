@@ -146,7 +146,7 @@ it('should fail the validation with errors when certain inputs are not provided 
 
 it('should update specified the campaigns', function () {
     // Arrange
-    $campaign = Campaign::factory()->create();
+    $campaign = Campaign::factory()->create(['marketing_template_id' => Template::factory()->create()->id]);
 
     $event = Event::factory()->create();
 

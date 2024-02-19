@@ -180,7 +180,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 
     // Act and Assert
     deleteJson(route('shop.api.checkout.cart.destroy'), [
-        'cart_item_id' => rand(1000, 2000),
+        'cart_item_id' => 'WRONG_ID',
     ])
         ->assertJsonValidationErrorFor('cart_item_id')
         ->assertUnprocessable();

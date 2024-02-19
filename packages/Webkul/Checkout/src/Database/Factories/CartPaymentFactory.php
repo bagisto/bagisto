@@ -19,11 +19,9 @@ class CartPaymentFactory extends Factory
      */
     public function definition(): array
     {
-        $now = date('Y-m-d H:i:s');
-
         return [
-            'created_at' => $now,
-            'updated_at' => $now,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

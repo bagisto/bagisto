@@ -3,7 +3,6 @@
 namespace Webkul\Sales\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 
 class OrderAddressFactory extends Factory
@@ -29,7 +28,6 @@ class OrderAddressFactory extends Factory
     {
         return [
             'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-            'order_id'     => Order::factory(),
         ];
     }
 
