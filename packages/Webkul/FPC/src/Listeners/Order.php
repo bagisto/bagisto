@@ -15,6 +15,10 @@ class Order extends Product
     public function afterCancelOrCreate($order)
     {
         foreach ($order->all_items as $item) {
+            if (! $item->product) {
+                continue;
+            }
+
             $urls = $this->getForgettableUrls($item->product);
 
             ResponseCache::forget($urls);
