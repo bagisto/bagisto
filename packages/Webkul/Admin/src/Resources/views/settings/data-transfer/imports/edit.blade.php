@@ -11,7 +11,7 @@
         method="PUT"
         enctype="multipart/form-data"
     >
-        {!! view_render_event('admin.settings.roles.create.create_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.create_form_controls.before') !!}
 
         <!-- Page Header -->
         <div class="flex justify-between items-center">
@@ -239,6 +239,6 @@
             </div>
         </div>
 
-        {!! view_render_event('admin.settings.roles.create.create_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.create_form_controls.after') !!}
     </x-admin::form>
 </x-admin::layouts>
