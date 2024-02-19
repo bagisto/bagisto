@@ -150,13 +150,9 @@ it('should fails the validation error when the invoice item quantity not provide
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    foreach ($order->items as $item) {
-        $items[$item->id] = $item->qty_to_invoice;
-    }
-
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     // Act and Assert
@@ -288,10 +284,6 @@ it('should fails the validation error when the invoice item quantity is string',
         'cart_id'      => $cart->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
-
-    foreach ($order->items as $item) {
-        $items[$item->id] = $item->qty_to_invoice;
-    }
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -426,6 +418,7 @@ it('should store the invoice', function () {
     foreach ($order->items as $item) {
         $items[$item->id] = $item->qty_to_invoice;
     }
+
     // Act and Assert
     $this->loginAsAdmin();
 
@@ -560,13 +553,9 @@ it('should return the view page of the invoice', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    foreach ($order->items as $item) {
-        $items[$item->id] = $item->qty_to_invoice;
-    }
-
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     InvoiceItem::factory()->create([
@@ -729,8 +718,8 @@ it('should send duplicate mail to provided email address', function () {
     }
 
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     InvoiceItem::factory()->create([
@@ -897,13 +886,9 @@ it('should print/download the invoice', function () {
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
-    foreach ($order->items as $item) {
-        $items[$item->id] = $item->qty_to_invoice;
-    }
-
     $invoice = Invoice::factory([
-        'order_id'      => $order->id,
-        'state'         => 'paid',
+        'order_id' => $order->id,
+        'state'    => 'paid',
     ])->create();
 
     InvoiceItem::factory()->create([

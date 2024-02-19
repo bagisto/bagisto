@@ -15,12 +15,22 @@ class Refund extends Model implements RefundContract
 {
     use HasFactory;
 
+    /**
+     * Define the guarded property to the model.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
     ];
 
+    /**
+     * Define the status label.
+     *
+     * @var array
+     */
     protected $statusLabel = [];
 
     /**
