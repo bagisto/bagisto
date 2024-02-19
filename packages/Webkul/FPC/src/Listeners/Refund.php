@@ -18,7 +18,7 @@ class Refund extends Product
             if (! $item->product) {
                 continue;
             }
-            
+
             $urls = $this->getForgettableUrls($item->product);
 
             ResponseCache::forget($urls);
