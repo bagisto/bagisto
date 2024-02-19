@@ -98,7 +98,7 @@ it('should show the dashboard over all stats', function () {
         'state'    => 'paid',
     ])->create();
 
-    // Act and Assertd
+    // Act and Assert
     $this->loginAsAdmin();
 
     get(route('admin.dashboard.stats', [

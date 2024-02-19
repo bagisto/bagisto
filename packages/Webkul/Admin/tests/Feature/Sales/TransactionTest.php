@@ -25,7 +25,7 @@ it('should return the index page of transactions', function () {
         ->assertSeeText(trans('admin::app.sales.transactions.index.title'));
 });
 
-it('should faild the validation error when store the transaction when certain inputs not provided', function () {
+it('should fails the validation error when store the transaction when certain inputs not provided', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [

@@ -17,37 +17,37 @@ it('returns a successful response', function () {
 
 it('displays the current currency code and channel code', function () {
     // Act
-    $resonse = get(route('shop.home.index'));
+    $response = get(route('shop.home.index'));
 
     // Assert
-    $resonse->assertOk();
+    $response->assertOk();
 
     /**
      * We avoid using the `assertSeeText` method of the response because it may sometimes
      * produce false positive results when dealing with large DOM sizes.
      */
-    expect(Str::contains($resonse->content(), core()->getCurrentChannelCode()))
+    expect(Str::contains($response->content(), core()->getCurrentChannelCode()))
         ->toBeTruthy();
 
-    expect(Str::contains($resonse->content(), core()->getCurrentCurrencyCode()))
+    expect(Str::contains($response->content(), core()->getCurrentCurrencyCode()))
         ->toBeTruthy();
 });
 
 it('displays the "Sign In" and "Sign Up" buttons when the customer is not logged in', function () {
     // Act
-    $resonse = get(route('shop.home.index'));
+    $response = get(route('shop.home.index'));
 
     // Assert
-    $resonse->assertOk();
+    $response->assertOk();
 
     /**
      * We avoid using the `assertSeeText` method of the response because it may sometimes
      * produce false positive results when dealing with large DOM sizes.
      */
-    expect(Str::contains($resonse->content(), trans('shop::app.components.layouts.header.sign-in')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.sign-in')))
         ->toBeTruthy();
 
-    expect(Str::contains($resonse->content(), trans('shop::app.components.layouts.header.sign-up')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.sign-up')))
         ->toBeTruthy();
 });
 
@@ -55,25 +55,25 @@ it('displays navigation buttons when the customer is logged in', function () {
     // Act
     $this->loginAsCustomer();
 
-    $resonse = get(route('shop.home.index'));
+    $response = get(route('shop.home.index'));
 
     // Assert
-    $resonse->assertOk();
+    $response->assertOk();
 
     /**
      * We avoid using the `assertSeeText` method of the response because it may sometimes
      * produce false positive results when dealing with large DOM sizes.
      */
-    expect(Str::contains($resonse->content(), trans('shop::app.components.layouts.header.profile')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.profile')))
         ->toBeTruthy();
 
-    expect(Str::contains($resonse->content(), trans('shop::app.components.layouts.header.orders')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.orders')))
         ->toBeTruthy();
 
-    expect(Str::contains($resonse->content(), trans('shop::app.components.layouts.header.wishlist')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.wishlist')))
         ->toBeTruthy();
 
-    expect(Str::contains($resonse->content(), trans('shop::app.components.layouts.header.logout')))
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.logout')))
         ->toBeTruthy();
 });
 

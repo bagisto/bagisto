@@ -23,7 +23,7 @@ it('should returns the shipment page', function () {
         ->assertSeeText(trans('admin::app.sales.shipments.index.title'));
 });
 
-it('should faild the validation error when store the the shipment to the order', function () {
+it('should fails the validation error when store the the shipment to the order', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -104,7 +104,7 @@ it('should faild the validation error when store the the shipment to the order',
         ->assertUnprocessable();
 });
 
-it('should store the shimpment to the order', function () {
+it('should store the shipment to the order', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [

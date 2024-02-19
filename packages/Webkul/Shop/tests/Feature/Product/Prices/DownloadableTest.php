@@ -558,7 +558,7 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
     $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
-it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -613,7 +613,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
+        'code'         => fake()->numerify('bagisto-########'),
         'type'         => 0,
         'is_primary'   => 1,
     ]);
@@ -650,7 +650,7 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1304,7 +1304,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
-it('should check tax is appling for the downloadable product into the cart for downloadable product', function () {
+it('should check tax is applying for the downloadable product into the cart for downloadable product', function () {
     // Arrange
     $taxCategory = TaxCategory::factory()->create();
 

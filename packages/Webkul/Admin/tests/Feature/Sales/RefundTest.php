@@ -21,7 +21,7 @@ it('should return the refund index page', function () {
         ->assertSeeText(trans('admin::app.sales.refunds.index.title'));
 });
 
-it('should faild the validation error when refund items data not provided', function () {
+it('should fails the validation error when refund items data not provided', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -86,7 +86,7 @@ it('should faild the validation error when refund items data not provided', func
         ->assertUnprocessable();
 });
 
-it('should faild the validation error when refund items data provided with wrong way', function () {
+it('should fails the validation error when refund items data provided with wrong way', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [

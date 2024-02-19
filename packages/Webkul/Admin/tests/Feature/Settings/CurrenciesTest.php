@@ -102,7 +102,7 @@ it('should update the specified currency', function () {
     ]);
 });
 
-it('should delete the currencie', function () {
+it('should delete the currencies', function () {
     // Arrange
     $currency = Currency::factory()->create();
 

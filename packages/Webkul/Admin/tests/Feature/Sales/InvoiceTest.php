@@ -23,7 +23,7 @@ it('should returns the invoice index page', function () {
         ->assertSeeText(trans('admin::app.sales.invoices.index.title'));
 });
 
-it('should faild the validation error when the invoice item quantity not provided', function () {
+it('should fails the validation error when the invoice item quantity not provided', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -97,7 +97,7 @@ it('should faild the validation error when the invoice item quantity not provide
         ->assertUnprocessable();
 });
 
-it('should faild the validation error when the invoice item quantity is string', function () {
+it('should fails the validation error when the invoice item quantity is string', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [

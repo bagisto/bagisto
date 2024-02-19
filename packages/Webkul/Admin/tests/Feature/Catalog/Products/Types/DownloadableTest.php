@@ -106,7 +106,7 @@ it('should fail the validation with errors when certain inputs are not provided 
     // Arrange
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -123,7 +123,7 @@ it('should fail the validation with errors if certain data is not provided corre
     // Arrange
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -185,11 +185,11 @@ it('should download the product which is downloadable', function () {
 
     $fileName = $file->store('product/'.$product->id);
 
-    $atttributeValues = ProductAttributeValue::where('product_id', $product->id)
+    $attributeValues = ProductAttributeValue::where('product_id', $product->id)
         ->where('attribute_id', $attribute->id)->first();
 
-    $atttributeValues->text_value = $fileName;
-    $atttributeValues->save();
+    $attributeValues->text_value = $fileName;
+    $attributeValues->save();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -219,7 +219,7 @@ it('should update the downloadable product', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [

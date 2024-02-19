@@ -627,7 +627,7 @@ it('should add a configurable product to the cart with a cart rule of the no cou
     $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
 });
 
-it('should fails the validation error when the certain inputs not provided wehn add a configurable product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should fails the validation error when the certain inputs not provided when add a configurable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -713,7 +713,7 @@ it('should fails the validation error when the certain inputs not provided wehn 
         ->assertUnprocessable();
 });
 
-it('should add a configurable product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should add a configurable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -991,7 +991,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
     $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
 });
 
-it('should fails the validation error when the certain inputs not provided when  add a configurable product to the cart with a cart rule of the specific coupon type for generel customer', function () {
+it('should fails the validation error when the certain inputs not provided when  add a configurable product to the cart with a cart rule of the specific coupon type for general customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1081,7 +1081,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertUnprocessable();
 });
 
-it('should add a configurable product to the cart with a cart rule of the specific coupon type for generel customer', function () {
+it('should add a configurable product to the cart with a cart rule of the specific coupon type for general customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1371,7 +1371,7 @@ it('should add a configurable product to the cart with a cart rule of the specif
     $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
 });
 
-it('should check tax is appling for the configurable product into the cart for configurable product', function () {
+it('should check tax is applying for the configurable product into the cart for configurable product', function () {
     // Arrange
     $taxCategory = TaxCategory::factory()->create();
 
