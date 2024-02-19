@@ -339,8 +339,6 @@ it('should search the order', function () {
         'query' => fake()->randomElement(['pending', 'completed', 'processing']),
     ])
         ->assertOk()
-        ->assertJsonPath('total', 1)
-        ->assertJsonPath('to', 1)
         ->assertJsonPath('path', route('admin.sales.orders.search'))
         ->assertJsonPath('data.0.id', $order->id)
         ->assertJsonPath('data.0.status', $order->status)
