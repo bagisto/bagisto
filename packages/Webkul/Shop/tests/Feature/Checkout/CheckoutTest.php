@@ -616,7 +616,7 @@ it('should place a simple product order for a guest user', function () {
                 'city'         => $cartBillingAddress->city,
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         OrderAddress::class => [
@@ -633,7 +633,7 @@ it('should place a simple product order for a guest user', function () {
                 'city'         => $cartShippingAddress->city,
                 'postcode'     => $cartShippingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         OrderPayment::class => [
@@ -853,7 +853,7 @@ it('should place a simple product order for a customer', function () {
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
                 'customer_id'  => $customer->id,
-            ]
+            ],
         ],
 
         OrderAddress::class => [
@@ -871,7 +871,7 @@ it('should place a simple product order for a customer', function () {
                 'postcode'     => $cartShippingAddress->postcode,
                 'cart_id'      => $cart->id,
                 'customer_id'  => $customer->id,
-            ]
+            ],
         ],
 
         OrderPayment::class => [
@@ -1108,7 +1108,7 @@ it('should place a configurable product order for a guest user', function () {
                 'city'         => $cartBillingAddress->city,
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         OrderAddress::class => [
@@ -1125,7 +1125,7 @@ it('should place a configurable product order for a guest user', function () {
                 'city'         => $cartShippingAddress->city,
                 'postcode'     => $cartShippingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         OrderPayment::class => [
@@ -1148,7 +1148,7 @@ it('should place a configurable product order for a guest user', function () {
                 'city'         => $cartBillingAddress->city,
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         OrderAddress::class => [
@@ -1165,7 +1165,7 @@ it('should place a configurable product order for a guest user', function () {
                 'city'         => $cartShippingAddress->city,
                 'postcode'     => $cartShippingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         ProductOrderedInventory::class => [
@@ -1395,8 +1395,7 @@ it('should place a configurable product order for a customer', function () {
                 'city'         => $cartBillingAddress->city,
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
-                'customer_id'  => $customer->id,
-            ]
+            ],
         ],
 
         OrderAddress::class => [
@@ -1413,8 +1412,7 @@ it('should place a configurable product order for a customer', function () {
                 'city'         => $cartShippingAddress->city,
                 'postcode'     => $cartShippingAddress->postcode,
                 'cart_id'      => $cart->id,
-                'customer_id'  => $customer->id,
-            ]
+            ],
         ],
 
         ProductOrderedInventory::class => [
@@ -1577,7 +1575,7 @@ it('should place a virtual product order for a guest user', function () {
                 'city'         => $cartBillingAddress->city,
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         ProductOrderedInventory::class => [
@@ -1648,9 +1646,17 @@ it('should place a virtual product order for a customer', function () {
         ]),
     ]);
 
-    $customerAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
 
-    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+        'customer_id'  => $cart->customer_id,
+    ]);
 
     CartPayment::factory()->create([
         'cart_id'      => $cart->id,
@@ -1680,16 +1686,16 @@ it('should place a virtual product order for a customer', function () {
 
         CustomerAddress::class => [
             [
-                'address_type' => $cartBillingAddress->address_type,
-                'customer_id'  =>  $customer->id,
-            ]
+                'address_type' => $customerAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
         ],
 
         CartAddress::class => [
             [
                 'address_type' => $cartBillingAddress->address_type,
-                'cart_id'      => $cart->id,
-            ]
+                'customer_id'  => $customer->id,
+            ],
         ],
 
         CartPayment::class => [
@@ -1740,7 +1746,7 @@ it('should place a virtual product order for a customer', function () {
                 'city'         => $cartBillingAddress->city,
                 'postcode'     => $cartBillingAddress->postcode,
                 'cart_id'      => $cart->id,
-            ]
+            ],
         ],
 
         ProductOrderedInventory::class => [
@@ -2553,7 +2559,7 @@ it('should place order with two products with simple and configurable product ty
                 'total_weight'      => 1,
                 'base_total_weight' => 1,
                 'cart_id'           => $cart->id,
-            ]
+            ],
         ],
 
         CartPayment::class => [
