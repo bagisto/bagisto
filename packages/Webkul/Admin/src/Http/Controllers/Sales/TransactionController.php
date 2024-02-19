@@ -88,10 +88,8 @@ class TransactionController extends Controller
 
         $order = $this->orderRepository->find($invoice->order_id);
 
-        $randomId = random_bytes(20);
-
         $this->orderTransactionRepository->create([
-            'transaction_id' => bin2hex($randomId),
+            'transaction_id' => bin2hex(random_bytes(20)),
             'type'           => $request->payment_method,
             'payment_method' => $request->payment_method,
             'invoice_id'     => $invoice->id,

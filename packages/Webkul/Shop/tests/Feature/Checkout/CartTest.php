@@ -127,7 +127,7 @@ it('should fails the validation error when the cart item id not provided when re
         ->assertUnprocessable();
 });
 
-it('should fails the validation error when the wrong cart item id not provided when remove product items to the cart', function () {
+it('should fails the validation error when the wrong cart item id provided when remove product items to the cart', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -180,7 +180,7 @@ it('should fails the validation error when the wrong cart item id not provided w
 
     // Act and Assert
     deleteJson(route('shop.api.checkout.cart.destroy'), [
-        'cart_item_id' => rand(10, 50),
+        'cart_item_id' => rand(1000, 2000),
     ])
         ->assertJsonValidationErrorFor('cart_item_id')
         ->assertUnprocessable();

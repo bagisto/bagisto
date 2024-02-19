@@ -1344,13 +1344,14 @@ it('should check tax is applying for the virtual product into the cart for virtu
 
     $cart->refresh();
 
-    getJson(route('shop.checkout.onepage.summary'))
+    $response = getJson(route('shop.checkout.onepage.summary'))
         ->assertOk()
-        ->assertJsonPath('data.id', $cart->id)
-        ->assertJsonPath('data.sub_total', round($product->price, 2))
-        ->assertJsonPath('data.tax_total', round($cart->tax_total, 2))
-        ->assertJsonPath('data.base_tax_total', round($cart->base_tax_total, 2))
-        ->assertJsonPath('data.grand_total', round($cart->grand_total, 2), '', 0.00000001);
+        ->assertJsonPath('data.id', $cart->id);
+
+    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->tax_total, 2), round($response['data']['tax_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->base_tax_total, 2), round($response['data']['base_tax_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->grand_total, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
 it('should check customer group price for guest customer with fixed price type for virtual product', function () {
