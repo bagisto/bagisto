@@ -134,10 +134,6 @@ it('should fails the validation error when the invoice item quantity not provide
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
@@ -148,6 +144,10 @@ it('should fails the validation error when the invoice item quantity not provide
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     $invoice = Invoice::factory([
@@ -269,10 +269,6 @@ it('should fails the validation error when the invoice item quantity is string',
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
@@ -283,6 +279,10 @@ it('should fails the validation error when the invoice item quantity is string',
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     // Act and Assert
@@ -405,14 +405,14 @@ it('should store the invoice', function () {
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     foreach ($order->items as $item) {
@@ -537,10 +537,6 @@ it('should return the view page of the invoice', function () {
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
@@ -551,6 +547,10 @@ it('should return the view page of the invoice', function () {
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     $invoice = Invoice::factory([
@@ -697,10 +697,6 @@ it('should send duplicate mail to provided email address', function () {
         'name'       => $product->name,
     ]);
 
-    OrderPayment::factory()->create([
-        'order_id' => $order->id,
-    ]);
-
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
@@ -711,6 +707,10 @@ it('should send duplicate mail to provided email address', function () {
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
         'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    OrderPayment::factory()->create([
+        'order_id' => $order->id,
     ]);
 
     foreach ($order->items as $item) {
