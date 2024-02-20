@@ -2809,7 +2809,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Kategori Karuseli',
                     'footer-links'      => 'Alt Bağlantıları',
-                    'image-carousel'    => 'Resim Karuseli',
+                    'image-carousel'    => 'Görüntü Karuseli',
                     'product-carousel'  => 'Ürün Karuseli',
                     'services-content'  => 'Hizmetlerin İçeriği',
                     'static-content'    => 'Statik İçerik',

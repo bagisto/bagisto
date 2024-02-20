@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'شريط الفئات',
                     'footer-links'      => 'روابط التذييل',
-                    'image-carousel'    => 'شريط الصور',
+                    'image-carousel'    => 'عرض الصور',
                     'product-carousel'  => 'شريط المنتجات',
                     'services-content'  => 'محتوى الخدمات',
                     'static-content'    => 'المحتوى الثابت',

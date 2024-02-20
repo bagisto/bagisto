@@ -2807,7 +2807,7 @@ return [
                 'type' => [
                     'category-carousel' => 'ප්‍රවේශ කැරූසල්',
                     'footer-links'      => 'පිටු සල්ලි',
-                    'image-carousel'    => 'පින්තූර කැරූසල්',
+                    'image-carousel'    => 'රූප කැරැසල්',
                     'product-carousel'  => 'නිෂ්පාදන කැරූසල්',
                     'services-content'  => 'සේවා අන්තර්ගතය',
                     'static-content'    => 'ස්ථිර අන්තරජනනය',
