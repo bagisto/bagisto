@@ -476,6 +476,9 @@ it('should place a simple product order for a guest user', function () {
         'base_sub_total'        => $price,
         'is_guest'              => 1,
         'shipping_method'       => 'free_free',
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
     ]);
 
     $cartItem = CartItem::factory()->create([
@@ -942,6 +945,9 @@ it('should place a configurable product order for a guest user', function () {
         'base_sub_total'        => $price,
         'is_guest'              => 1,
         'shipping_method'       => 'free_free',
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
@@ -1479,6 +1485,9 @@ it('should place a virtual product order for a guest user', function () {
             'grand_total'           => $price,
             'sub_total'	            => $price,
             'is_guest'              => 1,
+            'customer_email'        => fake()->email(),
+            'customer_first_name'   => fake()->firstName(),
+            'customer_last_name'    => fake()->lastName(),
         ]),
     ]);
 
@@ -1799,6 +1808,9 @@ it('should place a downloadable product order for a customer', function () {
         'sub_total'	            => $price,
         'base_sub_total'        => $price,
         'is_guest'              => 1,
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
