@@ -3,7 +3,6 @@
 namespace Webkul\Sales\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\InvoiceItem;
 
 class InvoiceItemFactory extends Factory
@@ -34,7 +33,6 @@ class InvoiceItemFactory extends Factory
             'base_total'      => $quantity * $basePrice,
             'tax_amount'      => 0,
             'base_tax_amount' => 0,
-            'invoice_id'      => Invoice::factory(),
         ];
     }
 }

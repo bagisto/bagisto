@@ -536,7 +536,7 @@ it('should add a virtual product to the cart with a cart rule of the no coupon t
     $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
-it('should fails the validation error when certain inputs not provided when add a virtual product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should fails the validation error when certain inputs not provided when add a virtual product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -591,7 +591,7 @@ it('should fails the validation error when certain inputs not provided when add 
 
     CartRuleCoupon::factory()->create([
         'cart_rule_id' => $cartRule->id,
-        'code'         => $couponCode = fake()->numerify('bagisto-########'),
+        'code'         => fake()->numerify('bagisto-########'),
         'type'         => 0,
         'is_primary'   => 1,
     ]);
@@ -625,7 +625,7 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a virtual product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should add a virtual product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1262,7 +1262,7 @@ it('should add a virtual product to the cart with a cart rule of the specific co
     $this->assertEquals(round($discountAmount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
 });
 
-it('should check tax is appling for the virtual product into the cart for virtual product', function () {
+it('should check tax is applying for the virtual product into the cart for virtual product', function () {
     // Arrange
     $taxCategory = TaxCategory::factory()->create();
 
@@ -1344,13 +1344,14 @@ it('should check tax is appling for the virtual product into the cart for virtua
 
     $cart->refresh();
 
-    getJson(route('shop.checkout.onepage.summary'))
+    $response = getJson(route('shop.checkout.onepage.summary'))
         ->assertOk()
-        ->assertJsonPath('data.id', $cart->id)
-        ->assertJsonPath('data.sub_total', round($product->price, 2))
-        ->assertJsonPath('data.tax_total', round($cart->tax_total, 2))
-        ->assertJsonPath('data.base_tax_total', round($cart->base_tax_total, 2))
-        ->assertJsonPath('data.grand_total', round($cart->grand_total, 2), '', 0.00000001);
+        ->assertJsonPath('data.id', $cart->id);
+
+    $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->tax_total, 2), round($response['data']['tax_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->base_tax_total, 2), round($response['data']['base_tax_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->grand_total, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
 it('should check customer group price for guest customer with fixed price type for virtual product', function () {
@@ -2481,7 +2482,7 @@ it('should check discount price if catalog rule applied for percentage price for
     ]);
 });
 
-it('should check discount price if catalog rule applied for precentage price for virtual product for general customer', function () {
+it('should check discount price if catalog rule applied for percentage price for virtual product for general customer', function () {
     // Arrange
     $customer = Customer::factory()->create();
 

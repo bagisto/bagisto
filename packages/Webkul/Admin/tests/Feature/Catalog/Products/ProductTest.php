@@ -37,7 +37,7 @@ it('should copy the existing product', function () {
     ]);
 });
 
-it('should perform the mass action forn update status for products', function () {
+it('should perform the mass action from update status for products', function () {
     // Arrange
     $products = (new ProductFaker())->getSimpleProductFactory()->count(2)->create();
 

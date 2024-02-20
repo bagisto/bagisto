@@ -38,7 +38,7 @@ it('should store the newly created url', function () {
         'entity_type'   => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
         'request_path'  => $requestPath = fake()->url(),
         'target_path'   => $targetPath = fake()->url(),
-        'redirect_type' => $redirecType = fake()->randomElement([302, 301]),
+        'redirect_type' => $redirectType = fake()->randomElement([302, 301]),
         'locale'        => $localeCode = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
@@ -50,7 +50,7 @@ it('should store the newly created url', function () {
                 'entity_type'   => $entityType,
                 'request_path'  => $requestPath,
                 'target_path'   => $targetPath,
-                'redirect_type' => $redirecType,
+                'redirect_type' => $redirectType,
                 'locale'        => $localeCode,
             ],
         ],
@@ -85,7 +85,7 @@ it('should update the existing url rewrite', function () {
         'entity_type'   => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
         'request_path'  => $requestPath = fake()->url(),
         'target_path'   => $targetPath = fake()->url(),
-        'redirect_type' => $redirecType = fake()->randomElement([302, 301]),
+        'redirect_type' => $redirectType = fake()->randomElement([302, 301]),
         'locale'        => $localeCode = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
@@ -98,7 +98,7 @@ it('should update the existing url rewrite', function () {
                 'entity_type'   => $entityType,
                 'request_path'  => $requestPath,
                 'target_path'   => $targetPath,
-                'redirect_type' => $redirecType,
+                'redirect_type' => $redirectType,
                 'locale'        => $localeCode,
             ],
         ],
@@ -121,7 +121,7 @@ it('should delete the existing url rewrite', function () {
     ]);
 });
 
-it('should mass delete the exising url rewrites', function () {
+it('should mass delete the existing url rewrites', function () {
     // Arrange
     $urlRewrites = URLRewrite::factory()->count(2)->create();
 

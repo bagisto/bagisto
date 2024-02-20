@@ -35,15 +35,15 @@ it('should return the create page of configurable product', function () {
     ])
         ->assertOk();
 
-    foreach ($attributes as $attributekey => $value) {
+    foreach ($attributes as $attributeKey => $value) {
         $response
-            ->assertJsonPath('data.attributes.'.$attributekey.'.id', $value->id)
-            ->assertJsonPath('data.attributes.'.$attributekey.'.code', $value->code);
+            ->assertJsonPath('data.attributes.'.$attributeKey.'.id', $value->id)
+            ->assertJsonPath('data.attributes.'.$attributeKey.'.code', $value->code);
 
         foreach ($value->options as $optionKey => $option) {
             $response
-                ->assertJsonPath('data.attributes.'.$attributekey.'.options.'.$optionKey.'.id', $option->id)
-                ->assertJsonPath('data.attributes.'.$attributekey.'.options.'.$optionKey.'.name', $option->admin_name);
+                ->assertJsonPath('data.attributes.'.$attributeKey.'.options.'.$optionKey.'.id', $option->id)
+                ->assertJsonPath('data.attributes.'.$attributeKey.'.options.'.$optionKey.'.name', $option->admin_name);
         }
     }
 });
@@ -52,7 +52,7 @@ it('should return the edit page of configurable product', function () {
     // Arrange
     $product = (new ProductFaker())->getConfigurableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id))
@@ -69,7 +69,7 @@ it('should fail the validation with errors when certain inputs are not provided 
     // Arrange
     $product = (new ProductFaker())->getConfigurableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -85,7 +85,7 @@ it('should fail the validation with errors if certain data is not provided corre
     // Arrange
     $product = (new ProductFaker())->getConfigurableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -112,7 +112,7 @@ it('should update the configurable product', function () {
     // Arrange
     $product = (new ProductFaker())->getConfigurableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -184,7 +184,7 @@ it('should update the configurable product variants', function () {
         ];
     }
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [

@@ -19,8 +19,6 @@ class CartFactory extends Factory
      */
     public function definition(): array
     {
-        $now = date('Y-m-d H:i:s');
-
         return [
             'is_guest'              => 0,
             'is_active'             => 1,
@@ -32,8 +30,8 @@ class CartFactory extends Factory
             'sub_total'             => 0.0000,
             'base_sub_total'        => 0.0000,
             'channel_id'            => 1,
-            'created_at'            => $now,
-            'updated_at'            => $now,
+            'created_at'            => now(),
+            'updated_at'            => now(),
         ];
     }
 }

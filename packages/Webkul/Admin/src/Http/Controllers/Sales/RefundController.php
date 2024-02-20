@@ -79,7 +79,7 @@ class RefundController extends Controller
         if (! $totals) {
             session()->flash('error', trans('admin::app.sales.refunds.create.invalid-qty'));
 
-            return redirect()->back();
+            return redirect()->route('admin.sales.refunds.index');
         }
 
         $maxRefundAmount = $totals['grand_total']['price'] - $order->refunds()->sum('base_adjustment_refund');

@@ -277,7 +277,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
     $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
-it('should fails the validaion error when the product id not provided add a simple product to the cart with a cart rule of the no coupon type for general customer', function () {
+it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the no coupon type for general customer', function () {
     // Arrange
     (new ProductFaker([
         'attributes' => [
@@ -536,7 +536,7 @@ it('should add a simple product to the cart with a cart rule of the no coupon ty
     $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
-it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -625,7 +625,7 @@ it('should fails the validation error when the product id not provided add a sim
         ->assertUnprocessable();
 });
 
-it('should add a simple product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should add a simple product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1088,7 +1088,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
-it('should fails the validation error when the proudct id not provided add a simple product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
+it('should fails the validation error when the product id not provided add a simple product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1269,7 +1269,7 @@ it('should add a simple product to the cart with a cart rule of the specific cou
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
-it('should check tax is appling for the simple product into the cart for simple product', function () {
+it('should check tax is applying for the simple product into the cart for simple product', function () {
     // Arrange
     $taxCategory = TaxCategory::factory()->create();
 
@@ -2539,7 +2539,7 @@ it('should check discount price if catalog rule applied for percentage price for
     ]);
 });
 
-it('should check discount price if catalog rule applied for precentage price for simple product for general customer', function () {
+it('should check discount price if catalog rule applied for percentage price for simple product for general customer', function () {
     // Arrange
     $customer = Customer::factory()->create();
 

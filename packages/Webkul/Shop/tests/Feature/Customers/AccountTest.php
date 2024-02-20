@@ -350,7 +350,7 @@ it('should set default address for the customer', function () {
     ]);
 });
 
-it('should delete the cusomter address', function () {
+it('should delete the customer address', function () {
     $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
