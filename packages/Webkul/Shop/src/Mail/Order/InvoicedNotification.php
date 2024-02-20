@@ -27,7 +27,7 @@ class InvoicedNotification extends BaseMailable
         return new Envelope(
             to: [
                 new Address(
-                    $this->invoice->order->customer->email,
+                    $this->invoice->order->customer_email,
                     $this->invoice->order->customer_full_name
                 ),
             ],

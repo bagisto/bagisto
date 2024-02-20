@@ -2,18 +2,14 @@
 
 namespace Webkul\Shop\Mail\Order;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Queue\SerializesModels;
 use Webkul\Sales\Contracts\Refund;
 use Webkul\Shop\Mail\BaseMailable;
 
 class RefundedNotification extends BaseMailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *

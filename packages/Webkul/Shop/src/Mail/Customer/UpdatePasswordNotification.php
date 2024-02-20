@@ -13,7 +13,6 @@ class UpdatePasswordNotification extends BaseMailable
     /**
      * Create a new message instance.
      *
-     * @param  \  $customer
      * @return void
      */
     public function __construct(public Customer $customer)
