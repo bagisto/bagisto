@@ -157,7 +157,7 @@ class CustomerController extends Controller
 
         session()->flash('error', trans('admin::app.customers.customers.view.order-pending'));
 
-        return redirect()->back();
+        return redirect()->route('admin.customers.customers.index');
     }
 
     /**
@@ -277,12 +277,12 @@ class CustomerController extends Controller
             /**
              * Ensure that customers do not have any active orders before performing deletion.
              */
-            foreach ($customers as $customer) {                
+            foreach ($customers as $customer) {
                 if ($this->customerRepository->haveActiveOrders($customer)) {
                     throw new \Exception(trans('admin::app.customers.customers.index.datagrid.order-pending'));
                 }
             }
-            
+
             /**
              * After ensuring that they have no active orders delete the corresponding customer.
              */
