@@ -146,7 +146,7 @@ class CustomerController extends Controller
             return response()->json(['message' => trans('admin::app.customers.customers.delete-failed')], 400);
         }
 
-        if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+        if (! $this->customerRepository->haveActiveOrders($customer)) {
 
             $this->customerRepository->delete($id);
 
@@ -155,9 +155,9 @@ class CustomerController extends Controller
             return redirect()->route('admin.customers.customers.index');
         }
 
-        session()->flash('success', trans('admin::app.customers.customers.view.order-pending'));
+        session()->flash('error', trans('admin::app.customers.customers.view.order-pending'));
 
-        return redirect()->route('admin.customers.customers.index');
+        return redirect()->back();
     }
 
     /**
@@ -271,28 +271,36 @@ class CustomerController extends Controller
      */
     public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResponse
     {
-        $customerIds = $massDestroyRequest->input('indices');
+        $customers = $this->customerRepository->findWhereIn('id', $massDestroyRequest->input('indices'));
 
-        if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
-            try {
-                foreach ($customerIds as $customerId) {
-                    Event::dispatch('customer.delete.before', $customerId);
-
-                    $this->customerRepository->delete($customerId);
-
-                    Event::dispatch('customer.delete.after', $customerId);
+        try {
+            /**
+             * Ensure that customers do not have any active orders before performing deletion.
+             */
+            foreach ($customers as $customer) {                
+                if ($this->customerRepository->haveActiveOrders($customer)) {
+                    throw new \Exception(trans('admin::app.customers.customers.index.datagrid.order-pending'));
                 }
-
-                return new JsonResponse([
-                    'message' => trans('admin::app.customers.customers.index.datagrid.delete-success'),
-                ]);
-            } catch (\Exception $e) {
-                return new JsonResponse([
-                    'message' => $e->getMessage(),
-                ]);
             }
-        }
+            
+            /**
+             * After ensuring that they have no active orders delete the corresponding customer.
+             */
+            foreach ($customers as $customer) {
+                Event::dispatch('customer.delete.before', $customer);
 
-        throw new \Exception(trans('admin::app.customers.customers.index.datagrid.order-pending'));
+                $this->customerRepository->delete($customer->id);
+
+                Event::dispatch('customer.delete.after', $customer);
+            }
+
+            return new JsonResponse([
+                'message' => trans('admin::app.customers.customers.index.datagrid.delete-success'),
+            ]);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'message' => $exception->getMessage(),
+            ], 500);
+        }
     }
 }
