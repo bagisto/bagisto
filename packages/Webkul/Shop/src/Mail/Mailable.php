@@ -1,12 +1,12 @@
 <?php
 
-namespace Webkul\Admin\Mail;
+namespace Webkul\Shop\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailable as BaseMailable;
 use Illuminate\Queue\SerializesModels;
 
-class BaseMailable extends Mailable
+class Mailable extends BaseMailable
 {
     use Queueable, SerializesModels;
 
@@ -15,7 +15,7 @@ class BaseMailable extends Mailable
      *
      * @param  \Illuminate\Mail\Message  $message
      */
-    protected function buildFrom($message): BaseMailable
+    protected function buildFrom($message): Mailable
     {
         ! empty($this->from)
             ? $message->from($this->from[0]['address'], $this->from[0]['name'])

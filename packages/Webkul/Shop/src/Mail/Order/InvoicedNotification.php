@@ -6,9 +6,9 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Sales\Contracts\Invoice;
-use Webkul\Shop\Mail\BaseMailable;
+use Webkul\Shop\Mail\Mailable;
 
-class InvoicedNotification extends BaseMailable
+class InvoicedNotification extends Mailable
 {
     /**
      * Create a new message instance.

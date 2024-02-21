@@ -5,10 +5,9 @@ namespace Webkul\Marketing\Mail;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Webkul\Admin\Mail\BaseMailable;
 use Webkul\Marketing\Contracts\Campaign;
 
-class NewsletterMail extends BaseMailable
+class NewsletterMail extends Mailable
 {
     /**
      * Create a new message instance.

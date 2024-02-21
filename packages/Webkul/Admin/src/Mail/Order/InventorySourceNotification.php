@@ -5,10 +5,10 @@ namespace Webkul\Admin\Mail\Order;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Webkul\Admin\Mail\BaseMailable;
+use Webkul\Admin\Mail\Mailable;
 use Webkul\Sales\Contracts\Shipment;
 
-class InventorySourceNotification extends BaseMailable
+class InventorySourceNotification extends Mailable
 {
     /**
      * Create a new message instance.

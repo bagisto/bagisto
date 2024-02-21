@@ -6,9 +6,9 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Sales\Contracts\Shipment;
-use Webkul\Shop\Mail\BaseMailable;
+use Webkul\Shop\Mail\Mailable;
 
-class ShippedNotification extends BaseMailable
+class ShippedNotification extends Mailable
 {
     /**
      * Create a new message instance.

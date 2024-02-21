@@ -6,9 +6,9 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Core\Contracts\SubscribersList;
-use Webkul\Shop\Mail\BaseMailable;
+use Webkul\Shop\Mail\Mailable;
 
-class SubscriptionNotification extends BaseMailable
+class SubscriptionNotification extends Mailable
 {
     /**
      * Create a mailable instance

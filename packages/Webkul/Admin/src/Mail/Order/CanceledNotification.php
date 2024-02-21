@@ -5,13 +5,13 @@ namespace Webkul\Admin\Mail\Order;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Webkul\Admin\Mail\BaseMailable;
+use Webkul\Admin\Mail\Mailable;
 use Webkul\Sales\Contracts\Order;
 
-class CanceledNotification extends BaseMailable
+class CanceledNotification extends Mailable
 {
     /**
-     * Create a new CanceledNotification instance.
+     * Create a new message instance.
      *
      * @return void
      */

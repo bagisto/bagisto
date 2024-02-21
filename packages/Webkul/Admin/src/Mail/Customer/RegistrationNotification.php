@@ -2,10 +2,10 @@
 
 namespace Webkul\Admin\Mail\Customer;
 
-use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Admin\Mail\Mailable;
 use Webkul\Customer\Contracts\Customer;
 
 class RegistrationNotification extends Mailable

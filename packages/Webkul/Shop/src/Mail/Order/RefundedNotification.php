@@ -6,9 +6,9 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Sales\Contracts\Refund;
-use Webkul\Shop\Mail\BaseMailable;
+use Webkul\Shop\Mail\Mailable;
 
-class RefundedNotification extends BaseMailable
+class RefundedNotification extends Mailable
 {
     /**
      * Create a new message instance.

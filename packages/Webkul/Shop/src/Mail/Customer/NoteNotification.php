@@ -6,9 +6,9 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Customer\Models\CustomerNote;
-use Webkul\Shop\Mail\BaseMailable;
+use Webkul\Shop\Mail\Mailable;
 
-class NoteNotification extends BaseMailable
+class NoteNotification extends Mailable
 {
     /**
      * Create a new message instance.

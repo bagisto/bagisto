@@ -6,9 +6,9 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Webkul\Customer\Contracts\Customer;
-use Webkul\Shop\Mail\BaseMailable;
+use Webkul\Shop\Mail\Mailable;
 
-class RegistrationNotification extends BaseMailable
+class RegistrationNotification extends Mailable
 {
     /**
      * Create a new mailable instance.

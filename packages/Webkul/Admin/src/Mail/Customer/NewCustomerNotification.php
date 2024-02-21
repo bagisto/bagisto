@@ -5,10 +5,10 @@ namespace Webkul\Admin\Mail\Customer;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Webkul\Admin\Mail\BaseMailable;
+use Webkul\Admin\Mail\Mailable;
 use Webkul\Customer\Contracts\Customer;
 
-class NewCustomerNotification extends BaseMailable
+class NewCustomerNotification extends Mailable
 {
     /**
      * Create a new message instance.
