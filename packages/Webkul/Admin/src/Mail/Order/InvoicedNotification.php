@@ -2,38 +2,48 @@
 
 namespace Webkul\Admin\Mail\Order;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Admin\Mail\Mailable;
+use Webkul\Sales\Contracts\Invoice;
 
 class InvoicedNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
-     * @param  string  $email
      * @return void
      */
-    public function __construct(
-        public $invoice
-    ) {
+    public function __construct(public Invoice $invoice)
+    {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
         $order = $this->invoice->order;
 
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($order->customer_email, $order->customer_full_name)
-            ->subject(trans('admin::app.emails.orders.invoiced.subject'))
-            ->view('shop::emails.orders.invoiced');
+        return new Envelope(
+            to: [
+                new Address(
+                    $order->customer_email,
+                    $order->customer_full_name
+                ),
+            ],
+            subject: trans('admin::app.emails.orders.invoiced.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'shop::emails.orders.invoiced',
+        );
     }
 }
