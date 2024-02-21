@@ -2,7 +2,11 @@
 
 namespace Webkul\Core\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Webkul\Core\Contracts\Channel;
 use Webkul\Core\Eloquent\Repository;
 
 class ChannelRepository extends Repository
@@ -12,21 +16,16 @@ class ChannelRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\Channel';
+        return Channel::class;
     }
 
     /**
-     * Create.
-     *
-     * @return \Webkul\Core\Contracts\Channel
+     * Create channel.
      */
-    public function create(array $data)
+    public function create(array $data): Channel
     {
-
-        $model = $this->getModel();
-
         foreach (core()->getAllLocales() as $locale) {
-            foreach ($model->translatedAttributes as $attribute) {
+            foreach ($this->getModel()->translatedAttributes as $attribute) {
                 if (isset($data[$attribute])) {
                     $data[$locale->code][$attribute] = $data[$attribute];
                 }
@@ -49,13 +48,12 @@ class ChannelRepository extends Repository
     }
 
     /**
-     * Update.
+     * Update the channel.
      *
      * @param  int  $id
      * @param  string  $attribute
-     * @return \Webkul\Core\Contracts\Channel
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attribute = 'id'): Channel
     {
         $channel = parent::update($data, $id, $attribute);
 
@@ -74,28 +72,37 @@ class ChannelRepository extends Repository
 
     /**
      * Upload images.
-     *
-     * @param  array  $data
-     * @param  \Webkul\Core\Contracts\Channel  $channel
-     * @param  string  $type
-     * @return void
      */
-    public function uploadImages($data, $channel, $type = 'logo')
+    public function uploadImages(array $data, Channel $channel, string $type = 'logo'): void
     {
-        if (request()->hasFile($type)) {
-            $channel->{$type} = current(request()->file($type))->store('channel/'.$channel->id);
+        if (empty($data[$type])) {
+            if ($channel->{$type}) {
+                Storage::delete($channel->{$type});
+            }
+
+            $channel->{$type} = null;
 
             $channel->save();
-        } else {
-            if (! isset($data[$type])) {
-                if (! empty($data[$type])) {
-                    Storage::delete($channel->{$type});
-                }
 
-                $channel->{$type} = null;
+            return;
+        }
 
-                $channel->save();
+        foreach ($data[$type] as $image) {
+            if (! $image instanceof UploadedFile) {
+                continue;
             }
+
+            if ($channel->{$type}) {
+                Storage::delete($channel->{$type});
+            }
+
+            $image = (new ImageManager())->make($image)->encode('webp');
+
+            $channel->{$type} = 'channel/'.$channel->id.'/'.Str::uuid()->toString().'.webp';
+
+            Storage::put($channel->{$type}, $image);
+
+            $channel->save();
         }
     }
 }

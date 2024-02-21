@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\SocialLogin\Contracts\CustomerSocialAccount;
 
 class CustomerSocialAccountRepository extends Repository
 {
@@ -19,8 +20,6 @@ class CustomerSocialAccountRepository extends Repository
         protected CustomerGroupRepository $customerGroupRepository,
         Container $container
     ) {
-        $this->_config = request('_config');
-
         parent::__construct($container);
     }
 
@@ -29,7 +28,7 @@ class CustomerSocialAccountRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\SocialLogin\Contracts\CustomerSocialAccount';
+        return CustomerSocialAccount::class;
     }
 
     /**
@@ -74,11 +73,8 @@ class CustomerSocialAccountRepository extends Repository
 
     /**
      * Returns first and last name from name
-     *
-     * @param  string  $name
-     * @return string
      */
-    public function getFirstLastName($name)
+    public function getFirstLastName(string $name): array
     {
         $name = trim($name);
 

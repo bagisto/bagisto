@@ -19,14 +19,12 @@ class ThemeFactory extends Factory
      */
     public function definition()
     {
-        $lastTheme = ThemeCustomizationModel::query()->orderBy('id', 'desc')->limit(1)->first();
-
-        $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content'];
+        $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content', 'static_content'];
 
         return [
             'type'       => $this->faker->randomElement($types),
             'name'       => $this->faker->name,
-            'sort_order' => ($lastTheme ? $lastTheme->id : 0) + 1,
+            'sort_order' => 1,
             'channel_id' => core()->getCurrentChannel()->id,
         ];
     }

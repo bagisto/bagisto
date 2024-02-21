@@ -169,37 +169,29 @@ class ProductRepository extends Repository
     /**
      * Get all products.
      *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
-     *
      * @return \Illuminate\Support\Collection
      */
-    public function getAll()
+    public function getAll(array $data)
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            return $this->searchFromElastic();
+            return $this->searchFromElastic($data);
         }
 
-        return $this->searchFromDatabase();
+        return $this->searchFromDatabase($data);
     }
 
     /**
      * Search product from database.
      *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
-     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromDatabase()
+    public function searchFromDatabase($data)
     {
         $params = array_merge([
             'status'               => 1,
             'visible_individually' => 1,
             'url_key'              => null,
-        ], request()->input());
+        ], $data);
 
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
@@ -272,7 +264,7 @@ class ProductRepository extends Repository
                     ->where($alias.'.attribute_id', $attribute->id);
 
                 if ($attribute->code == 'name') {
-                    $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['name']));
+                    $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['query']));
 
                     $qb->where(function ($subQuery) use ($alias, $synonyms) {
                         foreach ($synonyms as $synonym) {
@@ -374,16 +366,10 @@ class ProductRepository extends Repository
     /**
      * Search product from elastic search.
      *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
-     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromElastic()
+    public function searchFromElastic(array $params)
     {
-        $params = request()->input();
-
         $currentPage = Paginator::resolveCurrentPage('page');
 
         $limit = $this->getPerPageLimit($params);
@@ -396,7 +382,7 @@ class ProductRepository extends Repository
             'limit' => $limit,
             'sort'  => $sortOptions['sort'],
             'order' => $sortOptions['order'],
-        ]);
+        ], $params);
 
         $query = $this->with([
             'attribute_family',

@@ -3,6 +3,8 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container;
+use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductImage;
 
 class ProductImageRepository extends ProductMediaRepository
 {
@@ -23,16 +25,13 @@ class ProductImageRepository extends ProductMediaRepository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductImage';
+        return ProductImage::class;
     }
 
     /**
      * Upload images.
-     *
-     * @param  array  $data
-     * @param  \Webkul\Product\Models\Product  $product
      */
-    public function uploadImages($data, $product): void
+    public function uploadImages($data, Product $product): void
     {
         $this->upload($data, $product, 'images');
 
@@ -43,10 +42,8 @@ class ProductImageRepository extends ProductMediaRepository
 
     /**
      * Upload variant images.
-     *
-     * @param  array  $variants
      */
-    public function uploadVariantImages($variants): void
+    public function uploadVariantImages(array $variants): void
     {
         foreach ($variants as $variantsId => $variantData) {
             $product = $this->productRepository->find($variantsId);

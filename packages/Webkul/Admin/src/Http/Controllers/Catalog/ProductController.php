@@ -331,9 +331,11 @@ class ProductController extends Controller
             'name'                 => request('query'),
             'sort'                 => 'created_at',
             'order'                => 'desc',
+            'path'                 => request()->url(),
+            'query_data'           => request()->query(),
         ]);
 
-        $products = $this->productRepository->searchFromDatabase();
+        $products = $this->productRepository->searchFromDatabase(request()->input());
 
         foreach ($products as $product) {
             $results[] = [

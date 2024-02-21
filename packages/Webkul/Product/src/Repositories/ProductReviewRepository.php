@@ -2,30 +2,28 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductReview;
 
 class ProductReviewRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductReview';
+        return ProductReview::class;
     }
 
     /**
-     * Retrieve review for customerId
-     *
-     * @return \Illuminate\Support\Collection
+     * Retrieve review for customer.
      */
-    public function getCustomerReview()
+    public function getCustomerReview(): LengthAwarePaginator
     {
-        $reviews = $this->model
+        return $this->getModel()
             ->where(['customer_id' => auth()->guard('customer')->user()->id])
             ->with('product')
             ->paginate(5);
-
-        return $reviews;
     }
 }

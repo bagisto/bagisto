@@ -26,7 +26,12 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        $products = $this->productRepository->getAll();
+        $data = array_merge(request()->input(), [
+            'path'        => request()->url(),
+            'query_data'  => request()->query(),
+        ]);
+
+        $products = $this->productRepository->getAll($data);
 
         if (! empty(request()->query('query'))) {
             /**

@@ -4,6 +4,8 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
+use Webkul\Product\Contracts\ProductGroupedProduct;
 
 class ProductGroupedProductRepository extends Repository
 {
@@ -12,15 +14,13 @@ class ProductGroupedProductRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductGroupedProduct';
+        return ProductGroupedProduct::class;
     }
 
     /**
-     * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return void
+     * Save grouped products.
      */
-    public function saveGroupedProducts($data, $product)
+    public function saveGroupedProducts(array $data, Product $product): void
     {
         $previousGroupedProductIds = $product->grouped_products()->pluck('id');
 

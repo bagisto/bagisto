@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductInventoryIndex;
 
 class ProductInventoryIndexRepository extends Repository
 {
@@ -11,6 +12,6 @@ class ProductInventoryIndexRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductInventoryIndex';
+        return ProductInventoryIndex::class;
     }
 }

@@ -38,9 +38,9 @@ class ElasticSearchRepository
      * @param  array  $options
      * @return array
      */
-    public function search($categoryId, $options)
+    public function search($categoryId, $options, $params)
     {
-        $filters = $this->getFilters();
+        $filters = $this->getFilters($params);
 
         if ($categoryId) {
             $filters['filter'][]['term']['category_ids'] = $categoryId;
@@ -74,10 +74,8 @@ class ElasticSearchRepository
      *
      * @return void
      */
-    public function getFilters()
+    public function getFilters(array $params)
     {
-        $params = request()->input();
-
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
         }
@@ -176,6 +174,12 @@ class ElasticSearchRepository
         }
 
         $sort = $options['sort'];
+
+        if ($options['sort'] == 'price') {
+            $customerGroup = $this->customerRepository->getCurrentGroup();
+
+            $sort = 'price_'.$customerGroup->id;
+        }
 
         if ($options['sort'] == 'price') {
             $customerGroup = $this->customerRepository->getCurrentGroup();

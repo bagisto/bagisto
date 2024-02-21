@@ -29,6 +29,13 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
     protected $with = ['translations'];
 
     /**
+     * Translation model foreign key column
+     *
+     * @var string
+     */
+    protected $translationForeignKey = 'theme_customization_id';
+
+    /**
      * Image carousel precision.
      *
      * @var string

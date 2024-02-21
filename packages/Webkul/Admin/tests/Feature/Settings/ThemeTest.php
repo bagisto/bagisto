@@ -159,6 +159,16 @@ it('should update the theme customizations', function () {
             ];
 
             break;
+
+        case ThemeCustomization::STATIC_CONTENT:
+            $data[app()->getLocale()] = [
+                'options' => [
+                    'html' => fake()->randomHtml(),
+                    'css'  => '<style>body{color:red;}</style>',
+                ],
+            ];
+
+            break;
     }
 
     $data['locale'] = app()->getLocale();
