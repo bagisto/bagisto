@@ -90,7 +90,7 @@ class OrderDataGrid extends DataGrid
                         ],
                         [
                             'label'  => trans('admin::app.sales.orders.index.datagrid.pending'),
-                            'value'  => Order::STATUS_PENDING, 
+                            'value'  => Order::STATUS_PENDING,
                         ],
                         [
                             'label'  => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
