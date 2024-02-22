@@ -90,16 +90,16 @@ class ReviewDataGrid extends DataGrid
                 'params' => [
                     'options' => [
                         [
-                            'label'  => trans('admin::app.customers.reviews.index.datagrid.approved'),
-                            'value'  => self::STATUS_APPROVED,
+                            'label' => trans('admin::app.customers.reviews.index.datagrid.approved'),
+                            'value' => self::STATUS_APPROVED,
                         ],
                         [
-                            'label'  => trans('admin::app.customers.reviews.index.datagrid.pending'),
-                            'value'  => self::STATUS_PENDING,
+                            'label' => trans('admin::app.customers.reviews.index.datagrid.pending'),
+                            'value' => self::STATUS_PENDING,
                         ],
                         [
-                            'label'  => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
-                            'value'  => self::STATUS_DISAPPROVED,
+                            'label' => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
+                            'value' => self::STATUS_DISAPPROVED,
                         ],
                     ],
                 ],
