@@ -52,7 +52,7 @@ it('should return the edit page of virtual product', function () {
     // Arrange
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     get(route('admin.catalog.products.edit', $product->id))
@@ -69,7 +69,7 @@ it('should fail the validation with errors when certain inputs are not provided 
     // Arrange
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -86,7 +86,7 @@ it('should fail the validation with errors if certain data is not provided corre
     // Arrange
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -114,7 +114,7 @@ it('should update the virtual product', function () {
     // Arrange
     $product = (new ProductFaker())->getVirtualProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [

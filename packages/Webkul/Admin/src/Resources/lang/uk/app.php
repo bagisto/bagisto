@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Категорійний Карусель',
                     'footer-links'      => 'Посилання У Підвалі',
-                    'image-carousel'    => 'Карусель Зображень',
+                    'image-carousel'    => 'Карусель зображень',
                     'product-carousel'  => 'Карусель Товарів',
                     'services-content'  => 'Контент послуг',
                     'static-content'    => 'Статичний Контент',

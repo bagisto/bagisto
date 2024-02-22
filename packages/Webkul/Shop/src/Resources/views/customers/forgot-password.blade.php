@@ -59,7 +59,7 @@
                             @lang('shop::app.customers.login-form.email')
                         </x-shop::form.control-group.label>
 
-                        <x-shop::form.-group.control
+                        <x-shop::form.control-group.control
                             type="email"
                             class="!p-[20px_25px] rounded-lg"
                             name="email"

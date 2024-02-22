@@ -20,7 +20,7 @@ class CurrencyExchangeRateFactory extends Factory
     public function definition()
     {
         return [
-            'rate'            => rand(1, 100),
+            'rate' => rand(1, 100),
         ];
     }
 }

@@ -366,36 +366,9 @@ class ProductRepository extends Repository
             return $qb->groupBy('products.id');
         });
 
-        /**
-         * Apply scope query so we can fetch the raw sql and perform a count.
-         */
-        $query->applyScope();
-
-        $countQuery = clone $query->model;
-
-        $count = collect(
-            DB::select("select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
-                $countQuery->getBindings())
-        )->pluck('aggregate')->first();
-
-        $items = [];
-
         $limit = $this->getPerPageLimit($params);
 
-        $currentPage = Paginator::resolveCurrentPage('page');
-
-        if ($count > 0) {
-            $query->scopeQuery(function ($query) use ($currentPage, $limit) {
-                return $query->forPage($currentPage, $limit);
-            });
-
-            $items = $query->get();
-        }
-
-        return new LengthAwarePaginator($items, $count, $limit, $currentPage, [
-            'path'  => request()->url(),
-            'query' => request()->query(),
-        ]);
+        return $query->paginate($limit);
     }
 
     /**
@@ -448,8 +421,7 @@ class ProductRepository extends Repository
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
             'path'  => request()->url(),
             'query' => request()->query(),
-        ]
-        );
+        ]);
 
         return $results;
     }

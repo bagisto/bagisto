@@ -2,44 +2,46 @@
 
 namespace Webkul\Shop\Mail\Order;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Sales\Contracts\Invoice;
+use Webkul\Shop\Mail\Mailable;
 
 class InvoicedNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Sales\Contracts\Invoice  $invoice
-     * @param  string  $receiverEmail
      * @return void
      */
-    public function __construct(
-        public $invoice,
-        public $receiverEmail = ''
-    ) {
-        /**
-         * Model extra properties are lost in the build method so using extra optional
-         * properties. If provided second argument then priorty will be given to second argument.
-         */
-        if (! $receiverEmail) {
-            $this->receiverEmail = $invoice->email;
-        }
+    public function __construct(public Invoice $invoice)
+    {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->receiverEmail, $this->invoice->order->customer_full_name)
-            ->subject(trans('shop::app.emails.orders.invoiced.subject'))
-            ->view('shop::emails.orders.invoiced');
+        return new Envelope(
+            to: [
+                new Address(
+                    $this->invoice->order->customer_email,
+                    $this->invoice->order->customer_full_name
+                ),
+            ],
+            subject: trans('shop::app.emails.orders.invoiced.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'shop::emails.orders.invoiced',
+        );
     }
 }

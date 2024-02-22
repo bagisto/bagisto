@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Categorie Carrousel',
                     'footer-links'      => 'Voetteksten',
-                    'image-carousel'    => 'Afbeelding Carrousel',
+                    'image-carousel'    => 'Afbeeldingen carrousel',
                     'product-carousel'  => 'Product Carrousel',
                     'services-content'  => 'Diensten Inhoud',
                     'static-content'    => 'Statische Inhoud',

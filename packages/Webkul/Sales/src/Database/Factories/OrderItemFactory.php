@@ -20,8 +20,6 @@ class OrderItemFactory extends Factory
      */
     public function definition(): array
     {
-        $now = date('Y-m-d H:i:s');
-
         $fallbackPrice = $this->faker->randomFloat(4, 0, 1000);
 
         return [
@@ -35,8 +33,8 @@ class OrderItemFactory extends Factory
             'qty_canceled' => 0,
             'qty_refunded' => 0,
             'additional'   => [],
-            'created_at'   => $now,
-            'updated_at'   => $now,
+            'created_at'   => now(),
+            'updated_at'   => now(),
             'product_type' => Product::class,
         ];
     }

@@ -9,6 +9,8 @@
         </p>
 
         <div class="flex gap-x-2.5 items-center">
+            {!! view_render_event('bagisto.admin.catalog.categories.index.create-button.before') !!}
+
             @if (bouncer()->hasPermission('catalog.categories.create'))
                 <a href="{{ route('admin.catalog.categories.create') }}">
                     <div class="primary-button">
@@ -16,6 +18,8 @@
                     </div>
                 </a>
             @endif
+
+            {!! view_render_event('bagisto.admin.catalog.categories.index.create-button.after') !!}
         </div>        
     </div>
 

@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'বিভাগ ক্যারোসেল',
                     'footer-links'      => 'ফুটার লিংক',
-                    'image-carousel'    => 'স্লাইডার ক্যারোসেল',
+                    'image-carousel'    => 'চিত্র ক্যারাসেল',
                     'product-carousel'  => 'পণ্য ক্যারোসেল',
                     'services-content'  => 'পরিষেবা সামগ্রী',
                     'static-content'    => 'স্থির কন্টেন্ট',

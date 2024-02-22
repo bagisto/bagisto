@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Carrossel de Categoria',
                     'footer-links'      => 'Links do Rodapé',
-                    'image-carousel'    => 'Carrossel de Imagens',
+                    'image-carousel'    => 'Carrossel de imagens',
                     'product-carousel'  => 'Carrossel de Produtos',
                     'services-content'  => 'Conteúdo de serviços',
                     'static-content'    => 'Conteúdo Estático',

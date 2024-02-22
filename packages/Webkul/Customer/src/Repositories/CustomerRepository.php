@@ -23,7 +23,7 @@ class CustomerRepository extends Repository
      * @param  \Webkul\Customer\Models\Customer
      * @return bool
      */
-    public function checkIfCustomerHasOrderPendingOrProcessing($customer)
+    public function haveActiveOrders($customer)
     {
         return $customer->orders->pluck('status')->contains(function ($val) {
             return $val === 'pending' || $val === 'processing';
@@ -40,25 +40,6 @@ class CustomerRepository extends Repository
         $customer = auth()->guard()->user();
 
         return $customer->group ?? core()->getGuestCustomerGroup();
-    }
-
-    /**
-     * Check if bulk customers, if they have order pending or processing.
-     *
-     * @param  array
-     * @return bool
-     */
-    public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
-    {
-        foreach ($customerIds as $customerId) {
-            $customer = $this->findOrFail($customerId);
-
-            if ($this->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

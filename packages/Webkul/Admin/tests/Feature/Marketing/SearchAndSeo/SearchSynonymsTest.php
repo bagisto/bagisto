@@ -50,12 +50,12 @@ it('should store the newly created search synonyms', function () {
 
 it('should fail the validation with errors when certain field not provided when update the search synonyms', function () {
     // Arrange
-    $searchsynonym = SearchSynonym::factory()->create();
+    $searchSynonym = SearchSynonym::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    putJson(route('admin.marketing.search_seo.search_synonyms.update', $searchsynonym->id))
+    putJson(route('admin.marketing.search_seo.search_synonyms.update', $searchSynonym->id))
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('terms')
         ->assertUnprocessable();
@@ -63,15 +63,15 @@ it('should fail the validation with errors when certain field not provided when 
 
 it('should update the search synonyms', function () {
     // Arrange
-    $searchsynonym = SearchSynonym::factory()->create();
+    $searchSynonym = SearchSynonym::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update'), [
-        'id'    => $searchsynonym->id,
+        'id'    => $searchSynonym->id,
         'terms' => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
-        'name'  => $searchsynonym->name,
+        'name'  => $searchSynonym->name,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.edit.success'));
@@ -79,9 +79,9 @@ it('should update the search synonyms', function () {
     $this->assertModelWise([
         SearchSynonym::class => [
             [
-                'id'    => $searchsynonym->id,
+                'id'    => $searchSynonym->id,
                 'terms' => $term,
-                'name'  => $searchsynonym->name,
+                'name'  => $searchSynonym->name,
             ],
         ],
     ]);
@@ -89,36 +89,36 @@ it('should update the search synonyms', function () {
 
 it('should delete the search synonyms', function () {
     // Arrange
-    $searchsynonym = SearchSynonym::factory()->create();
+    $searchSynonym = SearchSynonym::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.marketing.search_seo.search_synonyms.delete', $searchsynonym->id))
+    deleteJson(route('admin.marketing.search_seo.search_synonyms.delete', $searchSynonym->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.edit.delete-success'));
 
     $this->assertDatabaseMissing('search_synonyms', [
-        'id' => $searchsynonym->id,
+        'id' => $searchSynonym->id,
     ]);
 });
 
 it('should mass delete the search synonyms', function () {
     // Arrange
-    $searchsynonyms = SearchSynonym::factory()->count(2)->create();
+    $searchSynonyms = SearchSynonym::factory()->count(2)->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.mass_delete'), [
-        'indices' => $searchsynonyms->pluck('id')->toArray(),
+        'indices' => $searchSynonyms->pluck('id')->toArray(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.mass-delete-success'));
 
-    foreach ($searchsynonyms as $searchsynonym) {
+    foreach ($searchSynonyms as $searchSynonym) {
         $this->assertDatabaseMissing('search_synonyms', [
-            'id' => $searchsynonym->id,
+            'id' => $searchSynonym->id,
         ]);
     }
 });
