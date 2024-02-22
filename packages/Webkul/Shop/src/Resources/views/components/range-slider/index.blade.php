@@ -72,7 +72,7 @@
 
             data() {
                 return {
-                    gap: this.defaultMaxRange * 0.10,
+                    gap: this.defaultAllowedMaxRange * 0.10,
 
                     supportedTypes: ['integer', 'float', 'price'],
 
