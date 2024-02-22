@@ -1,4 +1,4 @@
-hindi<?php
+<?php
 
 return [
     'users' => [
