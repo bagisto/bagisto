@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'accepted'             => 'Trường :attribute phải được chấp nhận.',
     'accepted_if'          => 'Trường :attribute phải được chấp nhận khi :other là :value.',

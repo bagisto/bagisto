@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'reset'     => 'Mật khẩu mới đã được cập nhật!',
     'sent'      => 'Hướng dẫn cấp lại mật khẩu đã được gửi!',
