@@ -72,7 +72,7 @@
 
             data() {
                 return {
-                    gap: 0.1,
+                    gap: this.defaultMaxRange * 0.10,
 
                     supportedTypes: ['integer', 'float', 'price'],
 
@@ -166,6 +166,7 @@
                         this.handleProgressBar();
                     }
                 },
+
                 handleProgressBar() {
                     const direction = document.dir == 'ltr' ? 'left' : 'right';
 
