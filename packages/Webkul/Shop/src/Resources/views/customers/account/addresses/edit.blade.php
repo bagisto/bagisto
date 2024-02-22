@@ -23,7 +23,7 @@
     <!-- Customer Address edit Component-->
     <v-edit-customer-address>
         <!-- Address Shimmer -->
-        <x-shop::shimmer.customers.account.address :count="10" />
+        <x-shop::shimmer.form.control-group :count="10" />
     </v-edit-customer-address>
 
     @push('scripts')
