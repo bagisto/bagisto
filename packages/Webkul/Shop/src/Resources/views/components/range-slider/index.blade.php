@@ -166,11 +166,12 @@
                         this.handleProgressBar();
                     }
                 },
-
                 handleProgressBar() {
-                    this.$refs.progress.style.left = (this.minRange / this.allowedMaxRange) * 100 + '%';
+                    const direction = document.dir == 'ltr' ? 'left' : 'right';
 
-                    this.$refs.progress.style.right = 100 - (this.maxRange / this.allowedMaxRange) * 100 + '%';
+                    this.$refs.progress.style[direction] = (this.minRange / this.allowedMaxRange) * 100 + '%';
+
+                    this.$refs.progress.style[direction == 'left' ? 'right' : 'left'] = 100 - (this.maxRange / this.allowedMaxRange) * 100 + '%';
                 },
 
                 change() {
