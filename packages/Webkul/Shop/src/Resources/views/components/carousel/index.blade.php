@@ -153,6 +153,8 @@
                 },
 
                 pointerUp(event) {
+                    clearInterval(this.autoPlayInterval);
+
                     cancelAnimationFrame(this.animationID);
 
                     this.isDragging = false;
@@ -174,10 +176,26 @@
                             this.currentIndex -= 1;
                         }
                     } else {
+                        if (
+                            movedBy > 100
+                            && this.currentIndex < this.slides.length - 1
+                        ) {
+                            if (Math.abs(this.currentIndex) != this.slides.length - 1) {
+                                this.currentIndex -= 1;
+                            }
+                        }
 
+                        if (
+                            movedBy < -100
+                            && this.currentIndex < 0
+                        ) {
+                            this.currentIndex += 1;
+                        }
                     }
 
-                    this.setPositionByIndex()
+                    this.setPositionByIndex();
+
+                    this.play();
                 },
 
                 animation() {
