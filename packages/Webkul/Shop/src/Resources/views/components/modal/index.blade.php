@@ -65,7 +65,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-10"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -85,21 +85,19 @@
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div class="w-full max-w-[595px] z-[999] absolute left-1/2 top-1/2 bg-[#F5F5F5] max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
+                            <!-- Header Slot-->
                             <slot
                                 name="header"
                                 :toggle="toggle"
                                 :isOpen="isOpen"
                             >
-                                @lang('admin::app.components.modal.default-header')
                             </slot>
 
-                            <slot name="content">
-                                Default Content
-                            </slot>
+                            <!-- Content Slot-->
+                            <slot name="content"></slot>
 
-                            <slot name="footer">
-                                Default Content
-                            </slot>
+                            <!-- Footer Slot-->
+                            <slot name="footer"></slot>
                         </div>
                     </div>
                 </div>
