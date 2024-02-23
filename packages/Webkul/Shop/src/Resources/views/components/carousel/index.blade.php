@@ -33,9 +33,9 @@
             <!-- Navigation -->
             <span
                 class="icon-arrow-left text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 left-2.5 bg-black/80 transition-all opacity-30 rounded-full"
-                :class="{ 
-                    'cursor-not-allowed': ! currentIndex,
-                    'cursor-pointer hover:opacity-100': currentIndex > 0 
+                :class="{
+                    'cursor-not-allowed': direction == 'ltr' && currentIndex == 0,
+                    'cursor-pointer hover:opacity-100': direction == 'ltr' ? currentIndex > 0 : currentIndex <= 0
                 }"
                 role="button"
                 aria-label="@lang('shop::components.carousel.previous')"
@@ -46,7 +46,11 @@
             </span>
 
             <span
-                class="icon-arrow-right text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-2.5 bg-black/80 transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
+                class="icon-arrow-right text-2xl font-bold text-white w-auto -mt-[22px] p-3 absolute top-1/2 right-2.5 bg-black/80 transition-all opacity-30 rounded-full"
+                :class="{
+                    'cursor-not-allowed': direction == 'rtl' && currentIndex == 0,
+                    'cursor-pointer hover:opacity-100': direction == 'rtl' ? currentIndex < 0 : currentIndex >= 0
+                }"
                 role="button"
                 aria-label="@lang('shop::components.carousel.next')"
                 tabindex="0"
@@ -57,10 +61,10 @@
 
             <!-- Pagination -->
             <div class="absolute bottom-5 left-0 flex justify-center w-full">
-                <div    
+                <div
                     v-for="(image, index) in images"
                     class="w-3 h-3 rounded-full mx-1 cursor-pointer"
-                    :class="{ 'bg-navyBlue': index === currentIndex, 'opacity-30 bg-gray-500': index !== currentIndex }"
+                    :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
                     @click="navigateByPagination(index)"
                 >
                 </div>
@@ -85,6 +89,8 @@
                     slider: '',
                     slides: [],
                     autoPlayInterval: null,
+                    direction: 'ltr',
+                    startFrom: 1,
                 };
             },
 
@@ -105,6 +111,12 @@
 
             methods: {
                 init() {
+                    this.direction = document.dir;
+
+                    if (this.direction == 'rtl') {
+                        this.startFrom = -1;
+                    }
+
                     this.slides.forEach((slide, index) => {
                         slide.querySelector('img')?.addEventListener('dragstart', (e) => e.preventDefault());
 
@@ -122,8 +134,6 @@
 
                 pointerDown(index) {
                     return (event) => {
-                        this.currentIndex = index;
-
                         this.startPos = event.clientX;
 
                         this.isDragging = true;
@@ -143,27 +153,49 @@
                 },
 
                 pointerUp(event) {
+                    clearInterval(this.autoPlayInterval);
+
                     cancelAnimationFrame(this.animationID);
 
                     this.isDragging = false;
 
                     const movedBy = this.currentTranslate - this.prevTranslate;
 
-                    if (
-                        movedBy < -100
-                        && this.currentIndex < this.slides.length - 1
-                    ) {
-                        this.currentIndex += 1;
+                    if (this.direction == 'ltr') {
+                        if (
+                            movedBy < -100
+                            && this.currentIndex < this.slides.length - 1
+                        ) {
+                            this.currentIndex += 1;
+                        }
+
+                        if (
+                            movedBy > 100
+                            && this.currentIndex > 0
+                        ) {
+                            this.currentIndex -= 1;
+                        }
+                    } else {
+                        if (
+                            movedBy > 100
+                            && this.currentIndex < this.slides.length - 1
+                        ) {
+                            if (Math.abs(this.currentIndex) != this.slides.length - 1) {
+                                this.currentIndex -= 1;
+                            }
+                        }
+
+                        if (
+                            movedBy < -100
+                            && this.currentIndex < 0
+                        ) {
+                            this.currentIndex += 1;
+                        }
                     }
 
-                    if (
-                        movedBy > 100
-                        && this.currentIndex > 0
-                    ) {
-                        this.currentIndex -= 1;
-                    }
+                    this.setPositionByIndex();
 
-                    this.setPositionByIndex()
+                    this.play();
                 },
 
                 animation() {
@@ -187,18 +219,20 @@
                 },
 
                 visitLink(image) {
-                    if (image.link) {
-                        window.location.href = image.link;
+                    if (! image.link) {
+                        return;
                     }
+
+                    window.location.href = image.link;
                 },
 
                 navigate(type) {
                     clearInterval(this.autoPlayInterval);
 
-                    if (type == 'next') {
-                        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                    if (this.direction === 'rtl') {
+                        type === 'next' ? this.prev() : this.next();
                     } else {
-                        this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : 0;
+                        type === 'next' ? this.next() : this.prev();
                     }
 
                     this.setPositionByIndex();
@@ -206,7 +240,19 @@
                     this.play();
                 },
 
+                next() {
+                    this.currentIndex = (this.currentIndex + this.startFrom) % this.images.length;
+                },
+
+                prev() {
+                    this.currentIndex = this.direction == 'ltr'
+                        ? this.currentIndex > 0 ? this.currentIndex - 1 : 0
+                        : this.currentIndex < 0 ? this.currentIndex + 1 : 0;
+                },
+
                 navigateByPagination(index) {
+                    this.direction == 'rtl' ? index = -index : '';
+
                     clearInterval(this.autoPlayInterval);
 
                     this.currentIndex = index;
@@ -220,7 +266,7 @@
                     clearInterval(this.autoPlayInterval);
 
                     this.autoPlayInterval = setInterval(() => {
-                        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                        this.currentIndex = (this.currentIndex + this.startFrom) % this.images.length;
 
                         this.setPositionByIndex();
                     }, 5000);
