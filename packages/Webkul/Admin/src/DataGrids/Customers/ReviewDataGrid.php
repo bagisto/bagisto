@@ -15,12 +15,18 @@ class ReviewDataGrid extends DataGrid
     protected $primaryColumn = 'product_review_id';
 
     /**
-     * Using const variable for status
+     * Review status "approved".
      */
     const STATUS_APPROVED = 'approved';
 
+    /**
+     * Review status "pending", indicating awaiting approval or processing.
+     */
     const STATUS_PENDING = 'pending';
 
+    /**
+     * Review status "disapproved", indicating rejection or denial.
+     */
     const STATUS_DISAPPROVED = 'disapproved';
 
     /**
