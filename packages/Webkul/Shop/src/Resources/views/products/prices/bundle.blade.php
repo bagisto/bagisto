@@ -20,7 +20,7 @@
         $prices['from']['regular']['price'] != $prices['to']['regular']['price']
         || $prices['from']['final']['price'] != $prices['to']['final']['price']
     )
-        <p class="text-lg max-sm:text-base">To</p>
+        <p class="text-base font-normal">To</p>
         
         @if ($prices['to']['regular']['price'] != $prices['to']['final']['price'])
             <p class="flex gap-4 items-center max-sm:text-lg">
