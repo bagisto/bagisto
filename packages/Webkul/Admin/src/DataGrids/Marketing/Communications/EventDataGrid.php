@@ -42,7 +42,7 @@ class EventDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'date',
             'label'      => trans('admin::app.marketing.communications.events.index.datagrid.date'),
-            'type'       => 'datetime',
+            'type'       => 'date_range',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
