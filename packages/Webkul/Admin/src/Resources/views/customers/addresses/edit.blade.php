@@ -281,6 +281,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="state"
+                                            v-model="addressData.state"
                                             rules="required"
                                             :label="trans('admin::app.customers.addresses.create.state')"
                                             :placeholder="trans('admin::app.customers.addresses.create.state')"

@@ -1,6 +1,7 @@
 <?php
 
 use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartShippingRate;
@@ -10,6 +11,7 @@ use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductInventoryIndex;
 use Webkul\Product\Models\ProductOrderedInventory;
 use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 
@@ -215,8 +217,9 @@ it('should fails the validation error when shipping method not providing when st
         ])->id,
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_billing']);
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_shipping']);
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cartId;
@@ -275,8 +278,9 @@ it('should store the shipping method', function () {
         ])->id,
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_billing']);
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_shipping']);
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cartId;
@@ -341,8 +345,9 @@ it('should fails the validation error when store the payment method for guest us
         ])->id,
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_billing']);
-    CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_shipping']);
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cartId;
@@ -402,10 +407,12 @@ it('should store the payment method for guest user', function () {
         ])->id,
     ]);
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cartId, 'address_type' => 'cart_shipping']);
+    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -426,10 +433,10 @@ it('should store the payment method for guest user', function () {
         ->assertJsonPath('cart.items.0.type', $product->type)
         ->assertJsonPath('cart.haveStockableItems', true)
         ->assertJsonPath('cart.payment_method', 'Cash On Delivery')
-        ->assertJsonPath('cart.billing_address.id', $billingAddress->id)
+        ->assertJsonPath('cart.billing_address.id', $cartBillingAddress->id)
         ->assertJsonPath('cart.billing_address.address_type', 'cart_billing')
         ->assertJsonPath('cart.billing_address.cart_id', $cartId)
-        ->assertJsonPath('cart.shipping_address.id', $shippingAddress->id)
+        ->assertJsonPath('cart.shipping_address.id', $cartShippingAddress->id)
         ->assertJsonPath('cart.shipping_address.address_type', 'cart_shipping')
         ->assertJsonPath('cart.shipping_address.cart_id', $cartId);
 });
@@ -469,37 +476,55 @@ it('should place a simple product order for a guest user', function () {
         'base_sub_total'        => $price,
         'is_guest'              => 1,
         'shipping_method'       => 'free_free',
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
     ]);
 
     $cartItem = CartItem::factory()->create([
-        'quantity'          => 1,
+        'quantity'          => $quantity = 1,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
         'cart_id'           => $cart->id,
+        'price'             => $convertedPrice = core()->convertPrice($price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $quantity,
+        'base_total'        => $price * $quantity,
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $quantity,
+        'base_total_weight' => ($product->weight ?? 0) * $quantity,
+        'additional'        => [
+            'quantity'   => $quantity,
+            'product_id' => $product->id,
+        ],
     ]);
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     CartShippingRate::factory()->create([
-        'carrier'               => 'free',
-        'carrier_title'         => 'Free shipping',
-        'method'                => 'free_free',
-        'method_title'          => 'Free Shipping',
-        'method_description'    => 'Free Shipping',
-        'cart_address_id'       => $shippingAddress->id,
+        'carrier'            => 'free',
+        'carrier_title'      => 'Free shipping',
+        'method'             => 'free_free',
+        'method_title'       => 'Free Shipping',
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
-
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cart->id;
@@ -513,32 +538,57 @@ it('should place a simple product order for a guest user', function () {
         ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
 
     $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartItem::class => [
+            [
+                'quantity'          => $quantity,
+                'product_id'        => $product->id,
+                'sku'               => $product->sku,
+                'name'              => $product->name,
+                'type'              => $product->type,
+                'cart_id'           => $cart->id,
+                'price'             => $convertedPrice,
+                'base_price'        => $price,
+                'total'             => $convertedPrice * $quantity,
+                'base_total'        => $price * $quantity,
+                'weight'            => $product->weight ?? 0,
+                'total_weight'      => ($product->weight ?? 0) * $quantity,
+                'base_total_weight' => ($product->weight ?? 0) * $quantity,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
         Order::class => [
             [
                 'status'          => Order::STATUS_PENDING,
                 'shipping_method' => 'free_free',
                 'grand_total'     => $price,
                 'cart_id'         => $cart->id,
-            ],
-        ],
-
-        CustomerAddress::class => [
-            [
-                'address_type' => $billingAddress->address_type,
-                'cart_id'      => $cart->id,
-            ],
-        ],
-
-        CustomerAddress::class => [
-            [
-                'address_type' => $shippingAddress->address_type,
-                'cart_id'      => $cart->id,
-            ],
-        ],
-
-        Cart::class => [
-            [
-                'is_active' => 0,
             ],
         ],
 
@@ -555,10 +605,37 @@ it('should place a simple product order for a guest user', function () {
             ],
         ],
 
-        CartPayment::class => [
+        OrderAddress::class => [
             [
-                'method'  => $paymentMethod,
-                'cart_id' => $cart->id,
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
             ],
         ],
 
@@ -623,19 +700,47 @@ it('should place a simple product order for a customer', function () {
     ]);
 
     $cartItem = CartItem::factory()->create([
-        'quantity'          => 1,
+        'quantity'          => $quantity = 1,
         'product_id'        => $product->id,
         'sku'               => $product->sku,
         'name'              => $product->name,
         'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
         'cart_id'           => $cart->id,
+        'price'             => $convertedPrice = core()->convertPrice($price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $quantity,
+        'base_total'        => $price * $quantity,
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $quantity,
+        'base_total_weight' => ($product->weight ?? 0) * $quantity,
+        'additional'        => [
+            'quantity'   => $quantity,
+            'product_id' => $product->id,
+        ],
     ]);
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id'  => $customer->id,
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartPayment::factory()->create([
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'cart_id'      => $cart->id,
+    ]);
 
     CartShippingRate::factory()->create([
         'carrier'            => 'free',
@@ -643,14 +748,8 @@ it('should place a simple product order for a customer', function () {
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $shippingAddress->id,
+        'cart_address_id'    => $cartBillingAddress->id,
     ]);
-
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cart->id;
@@ -672,17 +771,51 @@ it('should place a simple product order for a customer', function () {
             ],
         ],
 
-        CustomerAddress::class => [
+        CartItem::class => [
             [
-                'address_type' => $billingAddress->address_type,
-                'cart_id'      => $cart->id,
+                'quantity'          => $quantity,
+                'product_id'        => $product->id,
+                'sku'               => $product->sku,
+                'name'              => $product->name,
+                'type'              => $product->type,
+                'cart_id'           => $cart->id,
+                'price'             => $convertedPrice,
+                'base_price'        => $price,
+                'total'             => $convertedPrice * $quantity,
+                'base_total'        => $price * $quantity,
+                'weight'            => $product->weight ?? 0,
+                'total_weight'      => ($product->weight ?? 0) * $quantity,
+                'base_total_weight' => ($product->weight ?? 0) * $quantity,
             ],
         ],
 
         CustomerAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $customerAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
             ],
         ],
 
@@ -708,10 +841,39 @@ it('should place a simple product order for a customer', function () {
             ],
         ],
 
-        CartPayment::class => [
+        OrderAddress::class => [
             [
-                'method'  => $paymentMethod,
-                'cart_id' => $cart->id,
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
             ],
         ],
 
@@ -783,9 +945,13 @@ it('should place a configurable product order for a guest user', function () {
         'base_sub_total'        => $price,
         'is_guest'              => 1,
         'shipping_method'       => 'free_free',
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -831,23 +997,35 @@ it('should place a configurable product order for a guest user', function () {
         }
     }
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
 
     CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $shippingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
     ]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     // Act and Assert
     postJson(route('shop.checkout.onepage.orders.store'))
@@ -862,17 +1040,42 @@ it('should place a configurable product order for a guest user', function () {
             ],
         ],
 
-        CustomerAddress::class => [
+        CartItem::class => [
             [
-                'address_type' => $billingAddress->address_type,
-                'cart_id'      => $cart->id,
+                'quantity'   => $data['quantity'],
+                'product_id' => $childProduct->id,
+                'sku'        => $childProduct->sku,
+                'name'       => $childProduct->name,
+                'type'       => $childProduct->type,
+                'cart_id'    => $cart->id,
             ],
         ],
 
         CustomerAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $customerAddress->address_type,
                 'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'cart_id' => $cart->id,
+                'method'  => $paymentMethod,
             ],
         ],
 
@@ -897,17 +1100,77 @@ it('should place a configurable product order for a guest user', function () {
                 'type'         => $product->type,
             ],
         ],
-
-        CartPayment::class => [
+        OrderAddress::class => [
             [
-                'cart_id' => $cart->id,
-                'method'  => $paymentMethod,
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
             ],
         ],
 
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
             ],
         ],
 
@@ -977,6 +1240,7 @@ it('should place a configurable product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -1022,23 +1286,35 @@ it('should place a configurable product order for a customer', function () {
         }
     }
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
 
     CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $shippingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
     ]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    CartPayment::factory()->create([
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'cart_id'      => $cart->id,
+    ]);
 
     // Assert
     $this->loginAsCustomer($customer);
@@ -1055,16 +1331,30 @@ it('should place a configurable product order for a customer', function () {
             ],
         ],
 
+        CartPayment::class => [
+            [
+                'cart_id' => $cart->id,
+                'method'  => $paymentMethod,
+            ],
+        ],
+
         CustomerAddress::class => [
             [
-                'address_type' => $billingAddress->address_type,
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
 
         CustomerAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $customerAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
@@ -1091,16 +1381,43 @@ it('should place a configurable product order for a customer', function () {
             ],
         ],
 
-        CartPayment::class => [
-            [
-                'cart_id' => $cart->id,
-                'method'  => $paymentMethod,
-            ],
-        ],
-
         OrderPayment::class => [
             [
                 'method' => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
             ],
         ],
 
@@ -1168,16 +1485,31 @@ it('should place a virtual product order for a guest user', function () {
             'grand_total'           => $price,
             'sub_total'	            => $price,
             'is_guest'              => 1,
+            'customer_email'        => fake()->email(),
+            'customer_first_name'   => fake()->firstName(),
+            'customer_last_name'    => fake()->lastName(),
         ]),
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    CartShippingRate::factory()->create([
+        'carrier'            => 'free',
+        'carrier_title'      => 'Free shipping',
+        'method'             => 'free_free',
+        'method_title'       => 'Free Shipping',
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartBillingAddress->id,
+    ]);
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cart->id;
@@ -1197,10 +1529,17 @@ it('should place a virtual product order for a guest user', function () {
             ],
         ],
 
-        CustomerAddress::class => [
+        CartAddress::class => [
             [
-                'address_type' => 'cart_billing',
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
             ],
         ],
 
@@ -1225,16 +1564,26 @@ it('should place a virtual product order for a guest user', function () {
             ],
         ],
 
-        CartPayment::class => [
-            [
-                'method'  => $paymentMethod,
-                'cart_id' => $cart->id,
-            ],
-        ],
-
         OrderPayment::class => [
             [
                 'method' => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
             ],
         ],
 
@@ -1306,13 +1655,23 @@ it('should place a virtual product order for a customer', function () {
         ]),
     ]);
 
-    CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+        'customer_id'  => $cart->customer_id,
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     $cartTemp = new \stdClass();
     $cartTemp->id = $cart->id;
@@ -1336,8 +1695,22 @@ it('should place a virtual product order for a customer', function () {
 
         CustomerAddress::class => [
             [
-                'address_type' => 'cart_billing',
-                'cart_id'      => $cart->id,
+                'address_type' => $customerAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
             ],
         ],
 
@@ -1362,16 +1735,26 @@ it('should place a virtual product order for a customer', function () {
             ],
         ],
 
-        CartPayment::class => [
+        OrderPayment::class => [
             [
-                'method'  => $paymentMethod,
-                'cart_id' => $cart->id,
+                'method' => $paymentMethod,
             ],
         ],
 
-        OrderPayment::class => [
+        OrderAddress::class => [
             [
-                'method'  => $paymentMethod,
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
             ],
         ],
 
@@ -1425,6 +1808,9 @@ it('should place a downloadable product order for a customer', function () {
         'sub_total'	            => $price,
         'base_sub_total'        => $price,
         'is_guest'              => 1,
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
     ]);
 
     $cartTemp = new \stdClass();
@@ -1472,14 +1858,15 @@ it('should place a downloadable product order for a customer', function () {
         }
     }
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'moneytransfer';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     // Act and Assert
     $this->loginAsCustomer();
@@ -1496,17 +1883,24 @@ it('should place a downloadable product order for a customer', function () {
             ],
         ],
 
-        CustomerAddress::class => [
+        CartAddress::class => [
             [
-                'address_type' => $billingAddress->address_type,
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
 
-        CustomerAddress::class => [
+        CartAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $cartShippingAddress->address_type,
                 'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
             ],
         ],
 
@@ -1531,13 +1925,6 @@ it('should place a downloadable product order for a customer', function () {
             ],
         ],
 
-        CartPayment::class => [
-            [
-                'method'  => $paymentMethod,
-                'cart_id' => $cart->id,
-            ],
-        ],
-
         OrderPayment::class => [
             [
                 'method'  => $paymentMethod,
@@ -1553,7 +1940,7 @@ it('should place a downloadable product order for a customer', function () {
     ]);
 });
 
-it('should not return the cash on delivery payment mehthod if product is downloadable', function () {
+it('should not return the cash on delivery payment method if product is downloadable', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1576,11 +1963,6 @@ it('should not return the cash on delivery payment mehthod if product is downloa
 
     $customer = Customer::factory()->create();
 
-    $customerAddress = CustomerAddress::factory()->create([
-        'address_type' => 'customer',
-        'customer_id'  => $customer->id,
-    ]);
-
     $cart = Cart::factory()->create([
         'channel_id'            => core()->getCurrentChannel()->id,
         'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
@@ -1597,6 +1979,11 @@ it('should not return the cash on delivery payment mehthod if product is downloa
         'customer_email'        => $customer->email,
         'customer_first_name'   => $customer->first_name,
         'customer_last_name'    => $customer->last_name,
+    ]);
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'customer_id'  => $customer->id,
     ]);
 
     $cartTemp = new \stdClass();
@@ -1693,7 +2080,7 @@ it('should not return the shipping methods if product is downloadable', function
     $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
-        'address_type' => 'customer',
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
     ]);
 
@@ -1784,7 +2171,7 @@ it('should not return the shipping methods if product is downloadable', function
         ->assertJsonMissingPath('data.shippingMethods');
 });
 
-it('should not return the cash on delivery payment mehthod if product is virtual', function () {
+it('should not return the cash on delivery payment method if product is virtual', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1808,7 +2195,7 @@ it('should not return the cash on delivery payment mehthod if product is virtual
     $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
-        'address_type' => 'customer',
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
     ]);
 
@@ -1925,7 +2312,7 @@ it('should not return the shipping methods if product is virtual', function () {
     $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
-        'address_type' => 'customer',
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
     ]);
 
@@ -2142,23 +2529,24 @@ it('should place order with two products with simple and configurable product ty
         'cart_id'           => $cart->id,
     ]);
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $shippingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
     ]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     postJson(route('shop.checkout.onepage.orders.store'))
         ->assertOk()
@@ -2172,16 +2560,37 @@ it('should place order with two products with simple and configurable product ty
             ],
         ],
 
+        CartItem::class => [
+            [
+                'quantity'          => 1,
+                'product_id'        => $simpleProduct->id,
+                'sku'               => $simpleProduct->sku,
+                'name'              => $simpleProduct->name,
+                'type'              => $simpleProduct->type,
+                'weight'            => 1,
+                'total_weight'      => 1,
+                'base_total_weight' => 1,
+                'cart_id'           => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'cart_id' => $cart->id,
+                'method'  => $paymentMethod,
+            ],
+        ],
+
         CustomerAddress::class => [
             [
-                'address_type' => $billingAddress->address_type,
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
 
         CustomerAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $cartShippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
@@ -2222,13 +2631,6 @@ it('should place order with two products with simple and configurable product ty
                 'product_id'   => $simpleProduct->id,
                 'price'        => $simpleProduct->price,
                 'type'         => $simpleProduct->type,
-            ],
-        ],
-
-        CartPayment::class => [
-            [
-                'cart_id' => $cart->id,
-                'method'  => $paymentMethod,
             ],
         ],
 
@@ -2313,7 +2715,7 @@ it('should place order with two products with simple and grouped product type', 
     $data = [
         'prices'      => [],
         'qty'         => [],
-        'grand_tatal' => [],
+        'grand_total' => [],
     ];
 
     $bundleProducts = $groupedProduct->grouped_products(['associated_product'])->get();
@@ -2379,23 +2781,24 @@ it('should place order with two products with simple and grouped product type', 
         'cart_id'           => $cart->id,
     ]);
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     CartShippingRate::factory()->create([
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $shippingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
         'carrier_title'      => 'Free shipping',
         'method_title'       => 'Free Shipping',
         'carrier'            => 'free',
         'method'             => 'free_free',
     ]);
-
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'cashondelivery';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
 
     $this->loginAsCustomer($customer);
 
@@ -2413,14 +2816,14 @@ it('should place order with two products with simple and grouped product type', 
 
         CustomerAddress::class => [
             [
-                'address_type' => $billingAddress->address_type,
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
 
         CustomerAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $cartShippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
@@ -2632,8 +3035,9 @@ it('should place order with two products with simple and downloadable product ty
         'cart_id'           => $cart->id,
     ]);
 
-    $billingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_billing']);
-    $shippingAddress = CustomerAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => 'cart_shipping']);
+    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     CartShippingRate::factory()->create([
         'carrier'            => 'free',
@@ -2641,14 +3045,14 @@ it('should place order with two products with simple and downloadable product ty
         'method'             => 'free_free',
         'method_title'       => 'Free Shipping',
         'method_description' => 'Free Shipping',
-        'cart_address_id'    => $shippingAddress->id,
+        'cart_address_id'    => $cartShippingAddress->id,
     ]);
 
-    $cartPayment = new CartPayment;
-    $cartPayment->method = $paymentMethod = 'moneytransfer';
-    $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title');
-    $cartPayment->cart_id = $cart->id;
-    $cartPayment->save();
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
@@ -2667,14 +3071,14 @@ it('should place order with two products with simple and downloadable product ty
 
         CustomerAddress::class => [
             [
-                'address_type' => $billingAddress->address_type,
+                'address_type' => $cartBillingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],
 
         CustomerAddress::class => [
             [
-                'address_type' => $shippingAddress->address_type,
+                'address_type' => $cartShippingAddress->address_type,
                 'cart_id'      => $cart->id,
             ],
         ],

@@ -11,7 +11,7 @@ it('returns a successful response', function () {
         ->assertSeeText(trans('shop::app.customers.signup-form.page-title'));
 });
 
-it('should faild validation error when certain inputs are invalid when register', function () {
+it('should fails validation error when certain inputs are invalid when register', function () {
     // Act & Assert
     postJson(route('shop.customers.register.store'))
         ->assertJsonValidationErrorFor('first_name')
@@ -21,7 +21,7 @@ it('should faild validation error when certain inputs are invalid when register'
         ->assertUnprocessable();
 });
 
-it('should faild validation error when email is not valid when register', function () {
+it('should fails validation error when email is not valid when register', function () {
     // Act & Assert
     postJson(route('shop.customers.register.store'), [
         'email' => 'invalid.email.com',
@@ -33,7 +33,7 @@ it('should faild validation error when email is not valid when register', functi
         ->assertUnprocessable();
 });
 
-it('should faild validation error when password length is not valid when register', function () {
+it('should fails validation error when password length is not valid when register', function () {
     // Act & Assert
     postJson(route('shop.customers.register.store'), [
         'password' => 'shop',

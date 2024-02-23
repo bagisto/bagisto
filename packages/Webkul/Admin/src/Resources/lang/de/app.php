@@ -2808,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Kategorie Karussell',
                     'footer-links'      => 'Fußzeilen-Links',
-                    'image-carousel'    => 'Bild Karussell',
+                    'image-carousel'    => 'Bildkarussell',
                     'product-carousel'  => 'Produkt Karussell',
                     'services-content'  => 'Inhalt der Dienste',
                     'static-content'    => 'Statischer Inhalt',

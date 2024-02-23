@@ -2,34 +2,43 @@
 
 namespace Webkul\Shop\Mail\Order;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Sales\Contracts\OrderComment;
+use Webkul\Shop\Mail\Mailable;
 
 class CommentedNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Sales\Contracts\OrderComment  $comment
      * @return void
      */
-    public function __construct(public $comment)
+    public function __construct(public OrderComment $comment)
     {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->comment->order->customer_email, $this->comment->order->customer_full_name)
-            ->subject(trans('shop::app.emails.orders.commented.subject'))
-            ->view('shop::emails.orders.commented');
+        return new Envelope(
+            to: [
+                new Address($this->comment->order->customer_email, $this->comment->order->customer_full_name),
+            ],
+            subject: trans('shop::app.emails.orders.commented.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'shop::emails.orders.commented',
+        );
     }
 }

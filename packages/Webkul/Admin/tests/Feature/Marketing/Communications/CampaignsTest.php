@@ -9,7 +9,7 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should return the compaign index page', function () {
+it('should return the campaign index page', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
@@ -19,7 +19,7 @@ it('should return the compaign index page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.campaigns.index.create-btn'));
 });
 
-it('should returns the create page of compaign', function () {
+it('should returns the create page of campaigns', function () {
     // Act and Assert
     $this->loginAsAdmin();
 
@@ -60,7 +60,7 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
-it('should store the newly created compaigns', function () {
+it('should store the newly created campaigns', function () {
     // Arrange
     $emailTemplate = Template::factory()->create();
 
@@ -94,14 +94,14 @@ it('should store the newly created compaigns', function () {
     ]);
 });
 
-it('should show the edit page of compaigns', function () {
+it('should show the edit page of campaigns', function () {
     // Arrange
-    $compaign = Campaign::factory()->create();
+    $campaign = Campaign::factory()->create();
 
     // Act and Assert
     $this->loginAsAdmin();
 
-    get(route('admin.marketing.communications.campaigns.edit', $compaign->id))
+    get(route('admin.marketing.communications.campaigns.edit', $campaign->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.campaigns.edit.title'))
         ->assertSeeText(trans('admin::app.marketing.communications.campaigns.edit.back-btn'));
@@ -144,9 +144,9 @@ it('should fail the validation with errors when certain inputs are not provided 
         ->assertUnprocessable();
 });
 
-it('should update specified the compaigns', function () {
+it('should update specified the campaigns', function () {
     // Arrange
-    $campaign = Campaign::factory()->create();
+    $campaign = Campaign::factory()->create(['marketing_template_id' => Template::factory()->create()->id]);
 
     $event = Event::factory()->create();
 

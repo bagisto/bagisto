@@ -87,7 +87,7 @@ it('should update the existing customers group', function () {
     ]);
 });
 
-it('should delete the existing cutomers groups', function () {
+it('should delete the existing customers groups', function () {
     // Arrange
     $customerGroup = CustomerGroup::factory()->create([
         'is_user_defined' => true,

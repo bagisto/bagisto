@@ -72,10 +72,9 @@ class ThemeController extends Controller
     /**
      * Edit the theme
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $theme = $this->themeCustomizationRepository->find($id);
 
@@ -85,10 +84,9 @@ class ThemeController extends Controller
     /**
      * Update the specified resource
      *
-     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update(int $id)
     {
         $this->validate(request(), [
             'name'       => 'required',
@@ -125,18 +123,15 @@ class ThemeController extends Controller
     /**
      * Delete a specified theme.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         Event::dispatch('theme_customization.delete.before', $id);
 
-        $theme = $this->themeCustomizationRepository->find($id);
+        $this->themeCustomizationRepository->delete($id);
 
-        $theme?->delete();
-
-        Storage::deleteDirectory('theme/'.$theme->id);
+        Storage::deleteDirectory('theme/'.$id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 

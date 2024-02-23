@@ -2,40 +2,45 @@
 
 namespace Webkul\Admin\Mail\Customer;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Admin\Mail\Mailable;
+use Webkul\Customer\Contracts\Customer;
 
 class NewCustomerNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Customer\Contracts\Customer  $order
-     * @param  string  $password
      * @return void
      */
     public function __construct(
-        public $customer,
-        public $password
+        public Customer $customer,
+        public string $password
     ) {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->customer->email)
-            ->subject(trans('shop::app.emails.customers.registration.subject'))
-            ->view('shop::emails.customers.new-customer')->with([
-                'customer' => $this->customer,
-                'password' => $this->password,
-            ]);
+        return new Envelope(
+            to: [
+                new Address($this->customer->email),
+            ],
+            subject: trans('shop::app.emails.customers.registration.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'shop::emails.customers.new-customer',
+        );
     }
 }

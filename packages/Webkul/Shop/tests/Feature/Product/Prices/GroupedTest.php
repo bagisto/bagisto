@@ -667,7 +667,7 @@ it('should add a grouped product to the cart with a cart rule of the no coupon t
     $this->assertEquals(round($cartRule->discount_amount * 4, 2), $response['data']['discount_amount']);
 });
 
-it('should fails the validation error when certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should fails the validation error when certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -760,7 +760,7 @@ it('should fails the validation error when certain inputs not provided when add 
         ->assertUnprocessable();
 });
 
-it('should add a grouped product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should add a grouped product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1059,7 +1059,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
     $this->assertEquals(round($cartRule->discount_amount * 4, 2), $response['data']['discount_amount']);
 });
 
-it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for generel customer', function () {
+it('should fails the validation error when the certain inputs not provided when add a grouped product to the cart with a cart rule of the specific coupon type for general customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1156,7 +1156,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ->assertUnprocessable();
 });
 
-it('should add a grouped product to the cart with a cart rule of the specific coupon type for generel customer', function () {
+it('should add a grouped product to the cart with a cart rule of the specific coupon type for general customer', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -1467,7 +1467,7 @@ it('should add a grouped product to the cart with a cart rule of the specific co
     $this->assertEquals(round($cartRule->discount_amount * 4, 2), $response['data']['discount_amount']);
 });
 
-it('should check tax is appling for the grouped product into the cart for grouped product', function () {
+it('should check tax is applying for the grouped product into the cart for grouped product', function () {
     // Arrange
     $taxCategory = TaxCategory::factory()->create();
 
@@ -1562,7 +1562,7 @@ it('should check tax is appling for the grouped product into the cart for groupe
         ->assertJsonPath('data.grand_total', $cart->grand_total);
 });
 
-it('should fails the validation error when the certian inputs not provided when check customer group price for guest customer with fixed price type for grouped product', function () {
+it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with fixed price type for grouped product', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -2397,7 +2397,7 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->assertEquals(round(array_sum($data['prices']), 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
-it('should fails the validaiton error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for general customer into cart', function () {
+it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for grouped product for general customer into cart', function () {
     // Arrange
     $customer = Customer::factory()->create();
 
@@ -3159,7 +3159,7 @@ it('should check discount price if catalog rule applied for fixed price for grou
     }
 });
 
-it('should check discount price if catalog rule applied for precentage price for grouped product for guest customer', function () {
+it('should check discount price if catalog rule applied for percentage price for grouped product for guest customer', function () {
     // Arrange
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
         $catalogRule->channels()->sync([1]);

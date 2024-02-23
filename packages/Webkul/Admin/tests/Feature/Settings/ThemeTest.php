@@ -133,7 +133,6 @@ it('should update the theme customizations', function () {
 
             break;
         case ThemeCustomization::FOOTER_LINKS:
-
             $data[app()->getLocale()] = [
                 'options' => [
                     'column_1' => [

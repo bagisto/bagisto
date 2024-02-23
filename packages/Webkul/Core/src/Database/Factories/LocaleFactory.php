@@ -15,7 +15,7 @@ class LocaleFactory extends Factory
     protected $model = Locale::class;
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $states = [
         'rtl',

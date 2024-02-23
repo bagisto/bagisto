@@ -2809,7 +2809,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Carosello Categoria',
                     'footer-links'      => 'Link Piè di Pagina',
-                    'image-carousel'    => 'Carosello Immagini',
+                    'image-carousel'    => 'Carosello di immagini',
                     'product-carousel'  => 'Carosello Prodotti',
                     'services-content'  => 'Contenuto Servizi',
                     'static-content'    => 'Contenuto Statico',
