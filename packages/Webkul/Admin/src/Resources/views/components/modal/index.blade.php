@@ -83,21 +83,19 @@
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
                         <div class="w-full max-w-[568px] z-[999] absolute ltr:left-1/2 rtl:right-1/2 top-1/2 rounded-lg bg-white dark:bg-gray-900 box-shadow max-md:w-[90%] ltr:-translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2">
+                            <!-- Header Slot -->
                             <slot
                                 name="header"
                                 :toggle="toggle"
                                 :isOpen="isOpen"
                             >
-                                Default Header
                             </slot>
 
-                            <slot name="content">
-                                Default Content
-                            </slot>
+                            <!-- Content Slot -->
+                            <slot name="content"></slot>
                             
-                            <slot name="footer">
-                                Default footer
-                            </slot>
+                            <!-- Footer Slot -->
+                            <slot name="footer"></slot>
                         </div>
                     </div>
                 </div>

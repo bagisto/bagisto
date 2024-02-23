@@ -104,11 +104,11 @@
                         <div class="flex flex-col h-full w-full">
                             <div class="flex-1 min-h-0 min-w-0 overflow-auto">
                                 <div class="flex flex-col h-full">
+                                    <!-- Header Slot-->
                                     <slot
                                         name="header"
                                         :close="close"
                                     >
-                                        Default Header
                                     </slot>
 
                                     <!-- Content Slot -->
