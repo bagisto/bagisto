@@ -56,7 +56,7 @@
 
                         @if (core()->getConfigData('general.content.shop.wishlist_option'))
                             <span
-                                class="flex justify-center items-center absolute top-5 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl"
+                                class="flex justify-center items-center absolute top-5 ltr:right-5 rtl:left-5 w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-2xl max-sm:text-xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-wishlist')"
                                 tabindex="0"
@@ -72,7 +72,7 @@
 
                         @if (core()->getConfigData('general.content.shop.compare_option'))
                             <span
-                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 ltr:right-5 rtl:left-5 bg-white rounded-md cursor-pointer text-2xl"
+                                class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-16 ltr:right-5 rtl:left-5 bg-white rounded-md cursor-pointer text-2xl max-sm:text-xl"
                                 role="button"
                                 aria-label="@lang('shop::app.components.products.card.add-to-compare')"
                                 tabindex="0"
@@ -86,7 +86,7 @@
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
                         <button
-                            class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl max-sm:rounded-lg text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-14 group-hover:translate-y-0 transition-all duration-300 max-sm:translate-y-2.5 max-lg:translate-y-2.5 max-sm:px-3 max-sm:py-2 "
+                            class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-14 group-hover:translate-y-0 transition-all duration-300 max-sm:translate-y-2.5 max-sm:group-hover:translate-y-2.5 max-lg:translate-y-2.5 max-sm:px-7 max-sm:py-2"
                             :disabled="! product.is_saleable"
                             @click="addToCart()"
                             ref="addToCartButton"
