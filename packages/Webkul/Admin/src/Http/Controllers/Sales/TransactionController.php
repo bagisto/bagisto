@@ -127,7 +127,11 @@ class TransactionController extends Controller
      */
     public function view(int $id)
     {
-        $transaction = $this->orderTransactionRepository->findOrFail($id);
+        $transaction = $this->orderTransactionRepository->findOrFail($id)->toArray();
+
+        $transaction['created_at'] = date('d-m-Y', strtotime($transaction['created_at']));
+
+        $transaction['amount'] = core()->formatPrice($transaction['amount']);
 
         return new JsonResponse([
             'data' => [
