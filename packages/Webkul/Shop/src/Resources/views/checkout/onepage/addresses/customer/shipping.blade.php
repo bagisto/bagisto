@@ -1,5 +1,9 @@
-<div class="mt-8">
-    <template v-if="! shippingIsSameAsBilling && ! toggleShippingForm">
+<div
+    class="mt-8"
+    v-if="customer.cart.billingAddress?.useDifferentAddressForShipping"
+>
+    <!-- Addresses Cards -->
+    <template v-if="! customer.updateOrCreateShippingAddress.isEnabled">
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.before') !!}
 
         <x-shop::accordion class="!border-b-0">
@@ -15,79 +19,97 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.before') !!}
 
                 <x-shop::form
-                    v-slot="{ meta, errors, handleSubmit }"
+                    v-slot="{ meta, errors, handleSubmit, values }"
                     as="div"
+                    ref="customerShippingAddressForm"
                 >
-                    <form @submit="handleSubmit($event, updateCartAddress)">
+                    <form @submit="handleSubmit($event, storeCustomerShippingAddressToCart)">
                         <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
-                            <div 
+                            @{{ values }}
+
+                            <!-- Shipping Address ID -->
+                            <template v-if="! isAddressEmpty(customer.cart.shippingAddress)">
+                                <x-shop::form.control-group.control
+                                    type="hidden"
+                                    name="shipping_address_id"
+                                    ::value="customer.applied.selectedShippingAddressId"
+                                />
+                            </template>
+
+                            <!-- Existing Addresses -->
+                            <div
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
-                                v-for="(address, index) in savedShippingAddresses"
+                                v-for="(address, index) in customerShippingAddresses"
                             >
                                 <v-field
                                     type="radio"
-                                    class="hidden peer"
-                                    :id="`selectedAddresses.shipping_address_id${address.id}`"
-                                    name="selectedAddresses.shipping_address_id"
-                                    rules="required"
-                                    v-model="selectedShippingAddressId"
+                                    name="shipping_address_id"
                                     :value="address.id"
+                                    :id="`shipping_address_id_${address.id}`"
+                                    class="hidden peer"
+                                    rules="required"
                                     label="@lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')"
-                                    :checked="selectedShippingAddressId"
-                                />
-    
-                                <label 
+                                    v-slot="{ field }"
+                                >
+                                    <input
+                                        type="radio"
+                                        name="shipping_address_id"
+                                        :value="address.id"
+                                        :id="`shipping_address_id_${address.id}`"
+                                        class="hidden peer"
+                                        v-bind="field"
+                                        :checked="address.id === customer.applied.selectedShippingAddressId"
+                                    />
+                                </v-field>
+
+                                <label
                                     class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
-                                    :for="`selectedAddresses.shipping_address_id${address.id}`"
+                                    :for="`shipping_address_id_${address.id}`"
                                 >
                                 </label>
 
                                 <!-- Edit Address Button -->
                                 <span
                                     class="icon-edit absolute ltr:right-14 rtl:left-14 top-5 text-2xl cursor-pointer"
-                                    @click="toggleShippingForm=true;tempShippingAddress=address;isAddressEditable=true;isLoading=false;"
+                                    @click="openUpdateOrCreateCustomerAddressForm(address, 'shipping')"
                                 >
                                 </span>
 
-                                <!-- Detailes -->
-                                <label 
-                                    :for="`selectedAddresses.shipping_address_id${address.id}`"
+                                <!-- Details -->
+                                <label
+                                    :for="`shipping_address_id_${address.id}`"
                                     class="block p-5 rounded-xl cursor-pointer"
                                 >
                                     <span class="icon-checkout-address text-6xl text-navyBlue"></span>
 
                                     <div class="flex justify-between items-center">
                                         <p class="text-base font-medium">
-                                            @{{ address.first_name }} @{{ address.last_name }}
-                                            
-                                            <span v-if="address.company_name">(@{{ address.company_name }})</span>
+                                            @{{ address.firstName }} @{{ address.lastName }}
+
+                                            <span v-if="address.companyName">(@{{ address.companyName }})</span>
                                         </p>
                                     </div>
-    
+
                                     <p class="mt-6 text-sm text-[#6E6E6E]">
-                                        <template v-if="typeof address.address1 === 'string'">
+                                        <template v-if="address.address1">
                                             @{{ address.address1 }},
                                         </template>
-    
-                                        <template v-else>
-                                            @{{ address.address1.join(', ') }}
-                                        </template>
-    
+
                                         <template v-if="address.address2">
                                             @{{ address.address2 }},
                                         </template>
-    
-                                        @{{ address.city }}, 
-                                        @{{ address.state }}, @{{ address.country }}, 
+
+                                        @{{ address.city }},
+                                        @{{ address.state }}, @{{ address.country }},
                                         @{{ address.postcode }}
                                     </p>
                                 </label>
                             </div>
 
-                            <!-- Add new Address Button -->
-                            <div 
+                            <!-- Add New Address Button -->
+                            <div
                                 class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                @click="toggleShippingForm=true;tempShippingAddress={};isAddressEditable=false;isLoading=false;"
+                                @click="openUpdateOrCreateCustomerAddressForm({}, 'shipping')"
                             >
                                 <div
                                     class="flex gap-x-2.5 items-center"
@@ -98,61 +120,42 @@
                                         class="icon-plus p-2.5 border border-black rounded-full text-3xl"
                                         role="presentation"
                                     ></span>
-    
+
                                     <p class="text-base">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
                                 </div>
                             </div>
                         </div>
-    
+
+                        <!-- Error Message Block -->
                         <v-error-message
                             class="text-red-500 text-xs italic"
-                            name="selectedAddresses.shipping_address_id"
+                            name="shipping_address_id"
                         >
                         </v-error-message>
+
+                        <!-- Proceed Button -->
+                        <div class="flex justify-end mt-4">
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.proceed_button.before') !!}
+
+                            <x-shop::button
+                                class="primary-button py-3 px-11 rounded-2xl"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.proceed')"
+                            />
+
+                            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.proceed_button.after') !!}
+                        </div>
                     </form>
                 </x-shop::form>
 
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.after') !!}
-
-                <!-- Confirm Button -->
-                <div
-                    class="flex justify-end mt-4"
-                    v-if="
-                    (selectedBillingAddressId || selectedShippingAddressId)
-                    && ! toggleShippingForm
-                    && ! addNewBillingAddress
-                    "
-                >
-                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.before') !!}
-
-                    <x-shop::button
-                        type="button"
-                        class="primary-button py-3 px-11 rounded-2xl"
-                        v-if="!isLoading"
-                        :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
-                        :loading="false"
-                        @click="proceed"
-                    />
-
-                    <x-shop::button
-                        type="button"
-                        class="primary-button py-3 px-11 rounded-2xl"
-                        v-else
-                        :title="trans('shop::app.checkout.onepage.addresses.shipping.confirm')"
-                        :loading="true"
-                        :disabled="true"
-                    />
-
-                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.confirm_button.after') !!}
-                </div>
             </x-slot>
         </x-shop::accordion>
 
         {!! view_render_event('bagisto.shop.checkout.onepage.shipping.accordion.after') !!}
     </template>
-    
-    <!-- shipping Address Form -->
-    <template v-if="! shippingIsSameAsBilling && toggleShippingForm">
+
+    <!-- Shipping Address Form -->
+    <template v-else>
         <x-shop::accordion class="!border-b-0">
             <x-slot:header class="!p-0">
                 <div class="flex justify-between items-center">
@@ -161,32 +164,31 @@
                     </h2>
                 </div>
             </x-slot>
-        
+
             <x-slot:content class="!p-0 mt-8">
                 <!-- Back Button -->
                 <div>
-                    <a 
+                    <a
                         class="flex justify-end"
-                        href="javascript:void(0)" 
-                        @click="toggleShippingForm=false;tempShippingAddress={};isAddressEditable=false;isLoading=false;"
+                        href="javascript:void(0)"
+                        @click="closeUpdateOrCreateCustomerAddressForm('shipping')"
                     >
                         <span class="icon-arrow-left text-2xl"></span>
-    
+
                         <span>@lang('shop::app.checkout.onepage.addresses.shipping.back')</span>
                     </a>
                 </div>
-    
+
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.before') !!}
-    
-                <!-- shipping address form -->
+
+                <!-- Shipping Address Form -->
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, store)">
+                    <form @submit="handleSubmit($event, updateOrCreateCustomerAddress)">
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.before') !!}
-
-                        <!-- Hidden Fields -->
+                        <!-- Address ID -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.control
                                 type="hidden"
@@ -197,48 +199,48 @@
                             <x-shop::form.control-group.control
                                 type="hidden"
                                 name="shipping.id"
-                                ::value="tempShippingAddress.id"
+                                ::value="customer.updateOrCreateShippingAddress.params?.id"
                             />
-                        </x-shop::form.control-group>    
-    
+                        </x-shop::form.control-group>
+
                         <!-- Company Name -->
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label>
                                 @lang('shop::app.checkout.onepage.addresses.shipping.company-name')
                             </x-shop::form.control-group.label>
-                
+
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping.company_name"
-                                ::value="tempShippingAddress.company_name"
+                                ::value="customer.updateOrCreateShippingAddress.params?.companyName"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                             />
-    
+
                             <x-shop::form.control-group.error control-name="shipping.company_name" />
                         </x-shop::form.control-group>
-    
+
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.company_name.after') !!}
-    
+
                         <div class="grid grid-cols-2 gap-x-5">
                             <!-- First Name -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping.first_name"
+                                    ::value="customer.updateOrCreateShippingAddress.params?.firstName"
                                     rules="required"
-                                    ::value="tempShippingAddress.first_name"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
                                 />
-        
+
                                 <x-shop::form.control-group.error control-name="shipping.first_name" />
                             </x-shop::form.control-group>
-    
+
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.first_name.after') !!}
 
                             <!-- Last Name -->
@@ -246,19 +248,19 @@
                                 <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.last-name')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping.last_name"
+                                    ::value="customer.updateOrCreateShippingAddress.params?.lastName"
                                     rules="required"
-                                    ::value="tempShippingAddress.last_name"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
                                 />
-        
+
                                 <x-shop::form.control-group.error control-name="shipping.last_name" />
                             </x-shop::form.control-group>
-    
+
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.last_name.after') !!}
                         </div>
 
@@ -267,19 +269,19 @@
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.email')
                             </x-shop::form.control-group.label>
-    
+
                             <x-shop::form.control-group.control
                                 type="email"
                                 name="shipping.email"
+                                ::value="customer.updateOrCreateShippingAddress.params?.email"
                                 rules="required|email"
-                                ::value="tempShippingAddress.email"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.email')"
                                 placeholder="email@example.com"
                             />
-    
+
                             <x-shop::form.control-group.error control-name="shipping.email" />
                         </x-shop::form.control-group>
-    
+
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.email.after') !!}
 
                         <!-- Street Address -->
@@ -287,34 +289,33 @@
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.street-address')
                             </x-shop::form.control-group.label>
-    
+
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping.address1.[0]"
+                                ::value="customer.updateOrCreateShippingAddress.params?.address1"
                                 rules="required|address"
-                                ::value="Array.isArray(tempShippingAddress.address1) ? tempShippingAddress.address1[0] : tempShippingAddress.address1?.split('\n')[0]"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                             />
-    
+
                             <x-shop::form.control-group.error
                                 class="mb-2"
                                 control-name="shipping.address1.[0]"
                             />
-    
+
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                                 @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="shipping.address1.[{{ $i }}]"
-                                        ::value="Array.isArray(tempShippingAddress.address1) ? tempShippingAddress.address1[{{ $i }}] : tempShippingAddress.address1?.split('\n')[{{$i}}]"
                                         :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                         :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                     />
                                 @endfor
                             @endif
                         </x-shop::form.control-group>
-    
+
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.address1.after') !!}
 
                         <div class="grid grid-cols-2 gap-x-5">
@@ -323,19 +324,19 @@
                                 <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.country')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping.country"
+                                    ::value="customer.updateOrCreateShippingAddress.params?.country"
                                     rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
-                                    ::value="tempShippingAddress.country"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                 >
                                     <option value="">
                                         @lang('shop::app.checkout.onepage.addresses.shipping.select-country')
                                     </option>
-    
+
                                     <option
                                         v-for="country in countries"
                                         :value="country.code"
@@ -343,10 +344,10 @@
                                     >
                                     </option>
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error control-name="shipping.country" />
                             </x-shop::form.control-group>
-    
+
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.country.after') !!}
 
                             <!-- State -->
@@ -354,63 +355,62 @@
                                 <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping.state"
+                                    ::value="customer.updateOrCreateShippingAddress.params?.state"
                                     rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                    v-if="! haveStates('shipping')"
-                                    ::value="tempShippingAddress.state"
+                                    v-if="! false"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                 />
-    
+
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping.state"
                                     rules="required"
-                                    v-if="haveStates('shipping')"
-                                    ::value="tempShippingAddress.state"
+                                    v-if="false"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                 >
                                     <option value="">
                                         @lang('shop::app.checkout.onepage.addresses.shipping.select-state')
                                     </option>
-    
-                                    <option 
-                                        v-for='(state, index) in states[forms.shipping.address.country]' 
-                                        :value="state.code" 
+
+                                    <option
+                                        v-for='(state, index) in states[forms.shipping.address.country]'
+                                        :value="state.code"
                                     >
                                         @{{ state.default_name }}
                                     </option>
                                 </x-shop::form.control-group.control>
-        
+
                                 <x-shop::form.control-group.error control-name="shipping.state" />
                             </x-shop::form.control-group>
-    
+
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.state.after') !!}
                         </div>
-    
+
                         <div class="grid grid-cols-2 gap-x-5">
                             <!-- City -->
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-0 required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.city')
                                 </x-shop::form.control-group.label>
-    
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping.city"
+                                    ::value="customer.updateOrCreateShippingAddress.params?.city"
                                     rules="required"
-                                    ::value="tempShippingAddress.city"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.city')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.city')"
                                 />
-    
+
                                 <x-shop::form.control-group.error control-name="shipping.city" />
                             </x-shop::form.control-group>
-    
+
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.city.after') !!}
 
                             <!-- Postcode -->
@@ -418,19 +418,19 @@
                                 <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.postcode')
                                 </x-shop::form.control-group.label>
-        
+
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping.postcode"
+                                    ::value="customer.updateOrCreateShippingAddress.params?.postcode"
                                     rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}"
-                                    ::value="tempShippingAddress.postcode"
                                     :label="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                 />
-    
+
                                 <x-shop::form.control-group.error control-name="shipping.postcode" />
                             </x-shop::form.control-group>
-    
+
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.postcode.after') !!}
                         </div>
 
@@ -439,80 +439,69 @@
                             <x-shop::form.control-group.label class="!mt-0 required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
                             </x-shop::form.control-group.label>
-                            
+
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping.phone"
+                                ::value="customer.updateOrCreateShippingAddress.params?.phone"
                                 rules="required|numeric"
-                                ::value="tempShippingAddress.phone"
                                 :label="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
                                 :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
                             />
-    
+
                             <x-shop::form.control-group.error control-name="shipping.phone" />
                         </x-shop::form.control-group>
-    
+
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.phone.after') !!}
 
-                        <!-- Checkbox for save address -->
-                        @auth('customer')
-                            <div
-                                class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
-                                v-if="! isAddressEditable"
+                        <!-- Checkbox For Save Address -->
+                        <div
+                            class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
+                            v-if="! (customer.updateOrCreateShippingAddress.params.id > -1)"
+                        >
+                            <v-field
+                                type="checkbox"
+                                name="shipping.save_address"
+                                v-slot="{ field }"
+                                value="1"
                             >
-                                <v-field
+                                <input
                                     type="checkbox"
                                     name="shipping.save_address"
-                                    v-slot="{ field }"
-                                    value="1"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        name="shipping.save_address"
-                                        v-bind="field"
-                                        id="shipping.save_address"
-                                        class="sr-only peer"
-                                    />
-                                </v-field>
+                                    v-bind="field"
+                                    id="shipping.save_address"
+                                    class="sr-only peer"
+                                />
+                            </v-field>
 
-                                <label 
-                                    class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    for="shipping.save_address"
-                                >
-                                </label>
-                                
-                                <label 
-                                    for="shipping.save_address"
-                                    class="cursor-pointer"
-                                >
-                                    @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
-                                </label>
-                            </div>
-                        @endauth
+                            <label
+                                class="icon-uncheck text-2xl text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                for="shipping.save_address"
+                            >
+                            </label>
+
+                            <label
+                                for="shipping.save_address"
+                                class="cursor-pointer"
+                            >
+                                @lang('shop::app.checkout.onepage.addresses.shipping.save-address')
+                            </label>
+                        </div>
 
                         <!-- Save Button -->
                         <div class="flex justify-end mt-4">
                             <button
                                 type="submit"
                                 class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
-                                v-if="!isLoading"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.shipping.save')
                             </button>
-
-                            <x-shop::button
-                                type="button"
-                                class="primary-button py-3 px-11 rounded-2xl"
-                                v-else
-                                :title="trans('shop::app.checkout.onepage.addresses.shipping.save')"
-                                :loading="true"
-                            />
                         </div>
-    
+
                         {!! view_render_event('bagisto.shop.checkout.onepage.shipping_address_form.after') !!}
                     </form>
                 </x-shop::form>
-    
+
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.after') !!}
             </x-slot>
         </x-shop::accordion>
