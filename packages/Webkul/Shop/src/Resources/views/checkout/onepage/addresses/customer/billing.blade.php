@@ -15,7 +15,7 @@
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.billing.form.before') !!}
 
             <x-shop::form
-                v-slot="{ meta, errors, handleSubmit }"
+                v-slot="{ meta, errors, values, handleSubmit }"
                 as="div"
                 ref="customerBillingAddressForm"
             >
@@ -127,7 +127,10 @@
                     </v-error-message>
 
                     <!-- Checkbox For Different Address -->
-                    <div class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none">
+                    <div
+                        class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none"
+                        v-if="cart.have_stockable_items"
+                    >
                         <div v-if="customer.applied.useDifferentAddressForShipping">
                             <x-shop::form.control-group.control
                                 type="hidden"
