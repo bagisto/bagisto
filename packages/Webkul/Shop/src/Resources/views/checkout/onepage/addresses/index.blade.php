@@ -29,7 +29,7 @@
                     </x-slot>
 
                     <x-slot:content class="!p-0 mt-8">
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.addresses.before') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.form.before') !!}
 
                         <!-- Address Form -->
                         <x-shop::form
@@ -52,7 +52,7 @@
                             </form>
                         </x-shop::form>
 
-                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.addresses.after') !!}
+                        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.form.after') !!}
                     </x-slot>
                 </x-shop::accordion>
             </div>
@@ -86,6 +86,10 @@
             data() {
                 return {
                     guest: {
+                        applied: {
+                            useDifferentAddressForShipping: false,
+                        },
+
                         cart: {},
                     },
 
@@ -214,9 +218,13 @@
                     };
 
                     if (this.cart.billing_address) {
-                        this.customer.applied.selectedBillingAddressId = this.cart.billing_address.parent_address_id ?? 0;
+                        if (this.cart.is_guest) {
+                            this.guest.applied.useDifferentAddressForShipping = ! (this.cart.billing_address?.use_for_shipping ?? false);
+                        } else {
+                            this.customer.applied.selectedBillingAddressId = this.cart.billing_address.parent_address_id ?? 0;
 
-                        this.customer.applied.useDifferentAddressForShipping = ! (this.cart.billing_address?.use_for_shipping ?? false);
+                            this.customer.applied.useDifferentAddressForShipping = ! (this.cart.billing_address?.use_for_shipping ?? false);
+                        }
 
                         cart.billingAddress = {
                             id: 0,
@@ -234,7 +242,9 @@
                     }
 
                     if (this.cart.shipping_address) {
-                        this.customer.applied.selectedShippingAddressId = this.cart.shipping_address.parent_address_id ?? 0;
+                        if (! this.cart.is_guest) {
+                            this.customer.applied.selectedShippingAddressId = this.cart.shipping_address.parent_address_id ?? 0;
+                        }
 
                         cart.shippingAddress = {
                             id: 0,

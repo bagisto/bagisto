@@ -1,6 +1,6 @@
 <div
     class="mt-4"
-    v-if="customer.applied.useDifferentAddressForShipping"
+    v-if="guest.applied.useDifferentAddressForShipping"
 >
     <div class="flex justify-between items-center">
         <h2 class="text-xl font-medium max-sm:text-xl">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="mt-2">
-        {!! view_render_event('bagisto.shop.checkout.onepage.guest.shipping_address.before') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.form.before') !!}
 
         <!-- Company Name -->
         <x-shop::form.control-group>
@@ -28,7 +28,7 @@
             <x-shop::form.control-group.error control-name="shipping.company_name" />
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.company_name.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.company_name.after') !!}
 
         <div class="grid grid-cols-2 gap-x-5">
             <!-- First Name -->
@@ -49,7 +49,7 @@
                 <x-shop::form.control-group.error control-name="shipping.first_name" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.first_name.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.first_name.after') !!}
 
             <!-- Last Name -->
             <x-shop::form.control-group>
@@ -69,7 +69,7 @@
                 <x-shop::form.control-group.error control-name="shipping.last_name" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.last_name.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.last_name.after') !!}
         </div>
 
         <!-- Email -->
@@ -90,7 +90,7 @@
             <x-shop::form.control-group.error control-name="shipping.email" />
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.email.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.email.after') !!}
 
         <!-- Street Address -->
         <x-shop::form.control-group>
@@ -124,7 +124,7 @@
             @endif
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.address1.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.address1.after') !!}
 
         <div class="grid grid-cols-2 gap-x-5">
             <!-- Country -->
@@ -156,7 +156,7 @@
                 <x-shop::form.control-group.error control-name="shipping.country" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.country.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.country.after') !!}
 
             <!-- State -->
             <x-shop::form.control-group>
@@ -197,7 +197,7 @@
                 <x-shop::form.control-group.error control-name="shipping.state" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.state.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.state.after') !!}
         </div>
 
         <div class="grid grid-cols-2 gap-x-5">
@@ -219,7 +219,7 @@
                 <x-shop::form.control-group.error control-name="shipping.city" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.city.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.city.after') !!}
 
             <!-- Postcode -->
             <x-shop::form.control-group>
@@ -239,7 +239,7 @@
                 <x-shop::form.control-group.error control-name="shipping.postcode" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.postcode.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.postcode.after') !!}
         </div>
 
         <!-- Phone Number -->
@@ -260,7 +260,7 @@
             <x-shop::form.control-group.error control-name="shipping.phone" />
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping_address.phone.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.phone.after') !!}
 
         <!-- Proceed Button -->
         <div class="flex justify-end mt-4">
@@ -272,6 +272,6 @@
             </button>
         </div>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.guest.shipping_address.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.shipping.form.after') !!}
     </div>
 </div>

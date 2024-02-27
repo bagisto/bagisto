@@ -6,7 +6,7 @@
     </div>
 
     <div class="mt-2">
-        {!! view_render_event('bagisto.shop.checkout.onepage.guest.billing_address.before') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.form.before') !!}
 
         <!-- Company Name -->
         <x-shop::form.control-group>
@@ -25,7 +25,7 @@
             <x-shop::form.control-group.error control-name="billing.company_name" />
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.company_name.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.company_name.after') !!}
 
         <!-- First Name -->
         <div class="grid grid-cols-2 gap-x-5">
@@ -46,7 +46,7 @@
                 <x-shop::form.control-group.error control-name="billing.first_name" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.first_name.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.first_name.after') !!}
 
             <!-- Last Name -->
             <x-shop::form.control-group>
@@ -66,7 +66,7 @@
                 <x-shop::form.control-group.error control-name="billing.last_name" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.last_name.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.last_name.after') !!}
         </div>
 
         <!-- Email -->
@@ -87,7 +87,7 @@
             <x-shop::form.control-group.error control-name="billing.email" />
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.email.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.email.after') !!}
 
         <!-- Street Address -->
         <x-shop::form.control-group>
@@ -121,7 +121,7 @@
             @endif
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.address1.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.address1.after') !!}
 
         <div class="grid grid-cols-2 gap-x-5">
             <!-- Country -->
@@ -153,7 +153,7 @@
                 <x-shop::form.control-group.error control-name="billing.country" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.country.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.country.after') !!}
 
             <!-- State -->
             <x-shop::form.control-group>
@@ -194,7 +194,7 @@
                 <x-shop::form.control-group.error control-name="billing.state" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.state.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.state.after') !!}
         </div>
 
         <div class="grid grid-cols-2 gap-x-5">
@@ -216,7 +216,7 @@
                 <x-shop::form.control-group.error control-name="billing.city" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.city.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.city.after') !!}
 
             <!-- Postcode -->
             <x-shop::form.control-group>
@@ -236,7 +236,7 @@
                 <x-shop::form.control-group.error control-name="billing.postcode" />
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.postcode.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.postcode.after') !!}
         </div>
 
         <!-- Phone Number -->
@@ -257,15 +257,15 @@
             <x-shop::form.control-group.error control-name="billing.phone" />
         </x-shop::form.control-group>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing_address.phone.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.phone.after') !!}
 
         <!-- Checkbox For Different Address -->
         <div class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none">
-            <div v-if="customer.applied.useDifferentAddressForShipping">
+            <div v-if="guest.applied.useDifferentAddressForShipping">
                 <x-shop::form.control-group.control
                     type="hidden"
                     name="billing.use_different_address_for_shipping"
-                    ::value="!! customer.applied.useDifferentAddressForShipping"
+                    ::value="!! guest.applied.useDifferentAddressForShipping"
                 />
             </div>
 
@@ -281,8 +281,8 @@
                     id="billing.use_different_address_for_shipping"
                     class="sr-only peer"
                     v-bind="field"
-                    :checked="!! customer.applied.useDifferentAddressForShipping"
-                    @click="customer.applied.useDifferentAddressForShipping = ! customer.applied.useDifferentAddressForShipping;"
+                    :checked="!! guest.applied.useDifferentAddressForShipping"
+                    @click="guest.applied.useDifferentAddressForShipping = ! guest.applied.useDifferentAddressForShipping;"
                 />
             </v-field>
 
@@ -303,7 +303,7 @@
         <!-- Proceed Button -->
         <div
             class="flex justify-end mt-4"
-            v-if="! customer.applied.useDifferentAddressForShipping"
+            v-if="! guest.applied.useDifferentAddressForShipping"
         >
             <button
                 type="submit"
@@ -313,6 +313,6 @@
             </button>
         </div>
 
-        {!! view_render_event('bagisto.shop.checkout.onepage.guest.billing_address.after') !!}
+        {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.form.after') !!}
     </div>
 </div>
