@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'Vorname',
                     'last-name'                          => 'Nachname',
                     'postcode'                           => 'PLZ/Postleitzahl',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'Fortfahren',
                     'save'                               => 'speichern',
                     'use-different-address-for-shipping' => 'Adresse entspricht meiner Rechnungsadresse',
                     'save-address'                       => 'Diese Adresse speichern',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'Vorname',
                     'last-name'        => 'Nachname',
                     'postcode'         => 'PLZ/Postleitzahl',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'Fortfahren',
                     'save'             => 'speichern',
                     'save-address'     => 'Diese Adresse speichern',
                     'select-country'   => 'Land auswählen',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'Telefon',
                 ],
 
-                'title' => 'Address',
+                'title' => 'Adresse',
             ],
 
             'index' => [

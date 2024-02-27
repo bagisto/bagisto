@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'මුල් නම',
                     'last-name'                          => 'අවසාන නම',
                     'postcode'                           => 'අංකය/තැපැල් අංකය',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'අගයනවා',
                     'save'                               => 'සුරකින්න',
                     'use-different-address-for-shipping' => 'මම මමයි කෙයික්',
                     'save-address'                       => 'මෙම ලිපිනය සුරක්ෂිත කරන්න',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'මුල් නම',
                     'last-name'        => 'අවසාන නම',
                     'postcode'         => 'අංකය/තැපැල් අංකය',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'අගයනවා',
                     'save'             => 'සුරකින්න',
                     'save-address'     => 'මෙම ලිපිනය සුරක්ෂිත කරන්න',
                     'select-country'   => 'රට තෝරන්න',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'දුරකථන',
                 ],
 
-                'title' => 'Address',
+                'title' => 'ලිපිනය',
             ],
 
             'index' => [

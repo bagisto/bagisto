@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'שם פרטי',
                     'last-name'                          => 'שם משפחה',
                     'postcode'                           => 'מיקוד',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'לְהַמְשִׁיך',
                     'save'                               => 'להציל',
                     'use-different-address-for-shipping' => 'הכתובת זהה לכתובת החיוב שלי',
                     'save-address'                       => 'שמור כתובת זו',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'שם פרטי',
                     'last-name'        => 'שם משפחה',
                     'postcode'         => 'מיקוד',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'לְהַמְשִׁיך',
                     'save'             => 'להציל',
                     'save-address'     => 'שמור כתובת זו',
                     'select-country'   => 'בחר מדינה',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'טלפון',
                 ],
 
-                'title' => 'Address',
+                'title' => 'כתובת',
             ],
 
             'index' => [

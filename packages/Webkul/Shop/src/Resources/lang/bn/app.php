@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'প্রথম নাম',
                     'last-name'                          => 'শেষ নাম',
                     'postcode'                           => 'জিপ/পোস্টকোড',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'চলতি রাখা',
                     'save'                               => 'সংরক্ষণ',
                     'use-different-address-for-shipping' => 'ঠিকানা আমার বিলিং ঠিকানা সমান',
                     'save-address'                       => 'এই ঠিকানা সংরক্ষণ করুন',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'প্রথম নাম',
                     'last-name'        => 'শেষ নাম',
                     'postcode'         => 'জিপ/পোস্টকোড',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'চলতি রাখা',
                     'save'             => 'সংরক্ষণ',
                     'save-address'     => 'এই ঠিকানা সংরক্ষণ করুন',
                     'select-country'   => 'দেশ নির্বাচন করুন',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'টেলিফোন',
                 ],
 
-                'title' => 'Address',
+                'title' => 'ঠিকানা',
             ],
 
             'index' => [

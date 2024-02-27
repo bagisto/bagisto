@@ -700,7 +700,7 @@ return [
                     'first-name'                         => '名字',
                     'last-name'                          => '姓氏',
                     'postcode'                           => '邮政编码',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => '继续',
                     'save'                               => '节省',
                     'use-different-address-for-shipping' => '地址与我的账单地址相同',
                     'save-address'                       => '保存此地址',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => '名字',
                     'last-name'        => '姓氏',
                     'postcode'         => '邮政编码',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => '继续',
                     'save'             => '节省',
                     'save-address'     => '保存此地址',
                     'select-country'   => '选择国家',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => '电话',
                 ],
 
-                'title' => 'Address',
+                'title' => '地址',
             ],
 
             'index' => [

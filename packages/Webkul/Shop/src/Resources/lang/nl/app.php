@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'Voornaam',
                     'last-name'                          => 'Achternaam',
                     'postcode'                           => 'Postcode',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'Doorgaan',
                     'save'                               => 'redden',
                     'use-different-address-for-shipping' => 'Adres is hetzelfde als mijn factuuradres',
                     'save-address'                       => 'Dit adres opslaan',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'Voornaam',
                     'last-name'        => 'Achternaam',
                     'postcode'         => 'Postcode',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'Doorgaan',
                     'save'             => 'redden',
                     'save-address'     => 'Dit adres opslaan',
                     'select-country'   => 'Selecteer land',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'Telefoonnummer',
                 ],
 
-                'title' => 'Address',
+                'title' => 'Adres',
             ],
 
             'index' => [

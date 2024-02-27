@@ -700,7 +700,7 @@ return [
                     'first-name'                         => '名',
                     'last-name'                          => '姓',
                     'postcode'                           => '郵便番号',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => '進む',
                     'save'                               => '保存',
                     'use-different-address-for-shipping' => '住所は請求先住所と同じです',
                     'save-address'                       => 'この住所を保存',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => '名',
                     'last-name'        => '姓',
                     'postcode'         => '郵便番号',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => '進む',
                     'save'             => '保存',
                     'save-address'     => 'この住所を保存',
                     'select-country'   => '国を選択',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => '電話番号',
                 ],
 
-                'title' => 'Address',
+                'title' => '住所',
             ],
 
             'index' => [

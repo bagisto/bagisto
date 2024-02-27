@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'Имя',
                     'last-name'                          => 'Фамилия',
                     'postcode'                           => 'Индекс',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'Продолжить',
                     'save'                               => 'сохранять',
                     'use-different-address-for-shipping' => 'Адрес совпадает с адресом для выставления счетов',
                     'save-address'                       => 'Сохранить этот адрес',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'Имя',
                     'last-name'        => 'Фамилия',
                     'postcode'         => 'Индекс',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'Продолжить',
                     'save'             => 'сохранять',
                     'save-address'     => 'Сохранить этот адрес',
                     'select-country'   => 'Выберите страну',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'Телефон',
                 ],
 
-                'title' => 'Address',
+                'title' => 'Адрес',
             ],
 
             'index' => [

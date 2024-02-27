@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'Ім\'я',
                     'last-name'                          => 'Прізвище',
                     'postcode'                           => 'Поштовий індекс',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'Продовжуйте',
                     'save'                               => 'зберегти',
                     'use-different-address-for-shipping' => 'Адреса співпадає з адресою платника',
                     'save-address'                       => 'Зберегти цю адресу',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'Ім\'я',
                     'last-name'        => 'Прізвище',
                     'postcode'         => 'Поштовий індекс',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'Продовжуйте',
                     'save'             => 'зберегти',
                     'save-address'     => 'Зберегти цю адресу',
                     'select-country'   => 'Виберіть країну',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'Телефон',
                 ],
 
-                'title' => 'Address',
+                'title' => 'Адреса',
             ],
 
             'index' => [

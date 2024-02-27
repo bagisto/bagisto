@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'نام',
                     'last-name'                          => 'نام خانوادگی',
                     'postcode'                           => 'کد پستی',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => ' ادامه دادن',
                     'save'                               => 'صرفه جویی',
                     'use-different-address-for-shipping' => 'آدرس مشابه آدرس صورتحساب من است',
                     'save-address'                       => 'ذخیره این آدرس',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'نام',
                     'last-name'        => 'نام خانوادگی',
                     'postcode'         => 'کد پستی',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'ادامه دادن',
                     'save'             => 'صرفه جویی',
                     'save-address'     => 'ذخیره این آدرس',
                     'select-country'   => 'انتخاب کشور',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'تلفن',
                 ],
 
-                'title' => 'Address',
+                'title' => 'آدرس',
             ],
 
             'index' => [
