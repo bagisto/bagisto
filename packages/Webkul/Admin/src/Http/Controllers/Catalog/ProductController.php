@@ -325,15 +325,13 @@ class ProductController extends Controller
     {
         $results = [];
 
-        request()->query->add([
+        $products = $this->productRepository->searchFromDatabase([
             'status'               => null,
             'visible_individually' => null,
             'name'                 => request('query'),
             'sort'                 => 'created_at',
             'order'                => 'desc',
         ]);
-
-        $products = $this->productRepository->searchFromDatabase();
 
         foreach ($products as $product) {
             $results[] = [
