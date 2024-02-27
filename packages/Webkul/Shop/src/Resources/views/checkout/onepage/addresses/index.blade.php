@@ -157,12 +157,6 @@
                 this.init();
             },
 
-            watch: {
-                cart: function(newCart, oldCart) {
-                    this.getCartAddresses();
-                }
-            },
-
             computed: {
                 customerBillingAddresses() {
                     let addresses = this.customer.addresses.map((address) => {
@@ -482,7 +476,9 @@
 
                             this.isLoading = false;
                         })
-                        .catch(() => {});
+                        .catch(() => {
+                            this.isLoading = false;
+                        });
                 },
 
                 storeCustomerShippingAddressToCart(params) {
@@ -497,6 +493,8 @@
                             let billingAddress = this.customerBillingAddresses.find((address) => address.id == customerBillingAddressFormValues.billing_address_id);
 
                             if (! billingAddress) {
+                                this.isLoading = false;
+
                                 return;
                             }
 
@@ -518,6 +516,8 @@
                             let shippingAddress = this.customerShippingAddresses.find((address) => address.id == params['shipping_address_id']);
 
                             if (! shippingAddress) {
+                                this.isLoading = false;
+
                                 return;
                             }
 
@@ -555,7 +555,9 @@
 
                                     this.isLoading = false;
                                 })
-                                .catch(() => {});
+                                .catch(() => {
+                                    this.isLoading = false;
+                                });
                         }
                     });
                 },
@@ -587,7 +589,9 @@
 
                             this.isLoading = false;
                         })
-                        .catch(() => {});
+                        .catch(() => {
+                            this.isLoading = false;
+                        });
                 },
             },
         });
