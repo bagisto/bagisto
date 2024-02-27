@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-use Webkul\Product\Contracts\Product;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
+use Webkul\Product\Contracts\Product;
 
 class ProductRepository extends Repository
 {
@@ -144,7 +144,7 @@ class ProductRepository extends Repository
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
             $indices = $this->elasticSearchRepository->search([
-                'url_key' => $slug
+                'url_key' => $slug,
             ], [
                 'type'  => '',
                 'from'  => 0,
