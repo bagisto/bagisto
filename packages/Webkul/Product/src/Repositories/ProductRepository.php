@@ -144,6 +144,20 @@ class ProductRepository extends Repository
      */
     public function findBySlug($slug)
     {
+        if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+            request()->query->add(['url_key' => $slug]);
+
+            $indices = $this->elasticSearchRepository->search(null, [
+                'type'  => '',
+                'from'  => 0,
+                'limit' => 1,
+                'sort'  => 'id',
+                'order' => 'desc',
+            ]);
+
+            return $this->find(current($indices['ids']));
+        }
+
         return $this->findByAttributeCode('url_key', $slug);
     }
 
@@ -155,7 +169,7 @@ class ProductRepository extends Repository
      */
     public function findBySlugOrFail($slug)
     {
-        $product = $this->findByAttributeCode('url_key', $slug);
+        $product = $this->findBySlug($slug);
 
         if (! $product) {
             throw (new ModelNotFoundException)->setModel(
