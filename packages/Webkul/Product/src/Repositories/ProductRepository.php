@@ -145,6 +145,8 @@ class ProductRepository extends Repository
     public function findBySlug($slug)
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
+            request()->query->add(['url_key' => $slug]);
+
             $indices = $this->elasticSearchRepository->search(null, [
                 'type'  => '',
                 'from'  => 0,
