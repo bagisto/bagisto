@@ -69,7 +69,10 @@ it('should fails the certain validation error when store the guest user address 
     session()->put('cart', $cartTemp);
 
     // Act and Assert
-    postJson(route('shop.checkout.onepage.addresses.store'))
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing'  => [],
+        'shipping' => [],
+    ])
         ->assertJsonValidationErrorFor('billing.first_name')
         ->assertJsonValidationErrorFor('billing.last_name')
         ->assertJsonValidationErrorFor('billing.email')
@@ -431,7 +434,7 @@ it('should store the payment method for guest user', function () {
         ->assertJsonPath('cart.items_count', 1)
         ->assertJsonPath('cart.items.0.id', $cartItem->id)
         ->assertJsonPath('cart.items.0.type', $product->type)
-        ->assertJsonPath('cart.haveStockableItems', true)
+        ->assertJsonPath('cart.have_stockable_items', true)
         ->assertJsonPath('cart.payment_method', 'Cash On Delivery')
         ->assertJsonPath('cart.billing_address.id', $cartBillingAddress->id)
         ->assertJsonPath('cart.billing_address.address_type', 'cart_billing')
@@ -2035,19 +2038,35 @@ it('should not return the cash on delivery payment method if product is download
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1' => [
-                0 => '',
-            ],
+            'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'isSaved'          => false,
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
+            'use_for_shipping' => fake()->boolean(),
+        ],
+
+        'shipping' => [
             'isSaved'          => false,
             'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => true,
-        ],
-        'shipping' => [
-            'address1' => [
-                0 => '',
-            ],
-            'isSaved'    => false,
-            'address_id' => $customerAddress->id,
         ],
     ])
         ->assertOk()
@@ -2151,19 +2170,35 @@ it('should not return the shipping methods if product is downloadable', function
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1' => [
-                0 => '',
-            ],
+            'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'isSaved'          => false,
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
+            'use_for_shipping' => fake()->boolean(),
+        ],
+
+        'shipping' => [
             'isSaved'          => false,
             'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => true,
-        ],
-        'shipping' => [
-            'address1' => [
-                0 => '',
-            ],
-            'isSaved'    => false,
-            'address_id' => $customerAddress->id,
         ],
     ])
         ->assertOk()
@@ -2267,19 +2302,35 @@ it('should not return the cash on delivery payment method if product is virtual'
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1' => [
-                0 => '',
-            ],
+            'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'isSaved'          => false,
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
+            'use_for_shipping' => fake()->boolean(),
+        ],
+
+        'shipping' => [
             'isSaved'          => false,
             'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => true,
-        ],
-        'shipping' => [
-            'address1' => [
-                0 => '',
-            ],
-            'isSaved'    => false,
-            'address_id' => $customerAddress->id,
         ],
     ])
         ->assertOk()
@@ -2383,19 +2434,35 @@ it('should not return the shipping methods if product is virtual', function () {
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1' => [
-                0 => '',
-            ],
+            'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'isSaved'          => false,
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
+            'use_for_shipping' => fake()->boolean(),
+        ],
+
+        'shipping' => [
             'isSaved'          => false,
             'address_id'       => $customerAddress->id,
+            'address1'         => [fake()->address()],
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
             'use_for_shipping' => true,
-        ],
-        'shipping' => [
-            'address1' => [
-                0 => '',
-            ],
-            'isSaved'    => false,
-            'address_id' => $customerAddress->id,
         ],
     ])
         ->assertOk()
