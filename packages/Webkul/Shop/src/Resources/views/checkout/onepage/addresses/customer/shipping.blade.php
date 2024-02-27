@@ -1,6 +1,6 @@
 <div
     class="mt-8"
-    v-if="customer.applied.useDifferentAddressForShipping"
+    v-if="cart.have_stockable_items && customer.applied.useDifferentAddressForShipping"
 >
     <!-- Addresses Cards -->
     <template v-if="! customer.updateOrCreateShippingAddress.isEnabled">

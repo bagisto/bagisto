@@ -443,11 +443,17 @@
                 storeCustomerBillingAddressToCart(params) {
                     this.isLoading = true;
 
-                    this.$emitter.emit('is-show-shipping-methods', false);
+                    if (this.cart.have_stockable_items) {
+                        this.$emitter.emit('is-show-shipping-methods', false);
 
-                    this.$emitter.emit('is-show-payment-methods', false);
+                        this.$emitter.emit('is-shipping-loading', true);
 
-                    this.$emitter.emit('is-shipping-loading', true);
+                        this.$emitter.emit('is-show-payment-methods', false);
+                    } else {
+                        this.$emitter.emit('is-show-payment-methods', false);
+
+                        this.$emitter.emit('is-payment-loading', true);
+                    }
 
                     this.$emitter.emit('can-place-order', false);
 
@@ -508,11 +514,17 @@
                         if (customerBillingAddressForm.valid) {
                             this.isLoading = true;
 
-                            this.$emitter.emit('is-show-shipping-methods', false);
+                            if (this.cart.have_stockable_items) {
+                                this.$emitter.emit('is-show-shipping-methods', false);
 
-                            this.$emitter.emit('is-show-payment-methods', false);
+                                this.$emitter.emit('is-shipping-loading', true);
 
-                            this.$emitter.emit('is-shipping-loading', true);
+                                this.$emitter.emit('is-show-payment-methods', false);
+                            } else {
+                                this.$emitter.emit('is-show-payment-methods', false);
+
+                                this.$emitter.emit('is-payment-loading', true);
+                            }
 
                             this.$emitter.emit('can-place-order', false);
 
@@ -595,11 +607,17 @@
                 storeGuestAddressToCart(params) {
                     this.isLoading = true;
 
-                    this.$emitter.emit('is-show-shipping-methods', false);
+                    if (this.cart.have_stockable_items) {
+                        this.$emitter.emit('is-show-shipping-methods', false);
 
-                    this.$emitter.emit('is-show-payment-methods', false);
+                        this.$emitter.emit('is-shipping-loading', true);
 
-                    this.$emitter.emit('is-shipping-loading', true);
+                        this.$emitter.emit('is-show-payment-methods', false);
+                    } else {
+                        this.$emitter.emit('is-show-payment-methods', false);
+
+                        this.$emitter.emit('is-payment-loading', true);
+                    }
 
                     this.$emitter.emit('can-place-order', false);
 
