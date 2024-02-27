@@ -7,7 +7,7 @@
     <!-- Header -->
     <div class="grid">
         <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
-            {!! view_render_event('sales.order.title.before', ['order' => $order]) !!}
+            {!! view_render_event('bagisto.admin.sales.order.title.before', ['order' => $order]) !!}
             
             <div class="flex gap-2.5 items-center">
                 <p class="text-xl text-gray-800 dark:text-white font-bold leading-6">
@@ -20,7 +20,7 @@
                 </span>
             </div>
 
-            {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
+            {!! view_render_event('bagisto.admin.sales.order.title.after', ['order' => $order]) !!}
 
             <!-- Back Button -->
             <a
@@ -34,7 +34,7 @@
 
     <div class="justify-between gap-x-1 gap-y-2 items-center flex-wrap mt-5">
         <div class="flex gap-1.5">
-            {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
+            {!! view_render_event('bagisto.admin.sales.order.page_action.before', ['order' => $order]) !!}
 
             @if (
                 $order->canCancel()
@@ -94,14 +94,14 @@
                 @include('admin::sales.refunds.create')
             @endif
 
-            {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
+            {!! view_render_event('bagisto.admin.sales.order.page_action.after', ['order' => $order]) !!}
         </div>
 
         <!-- Order details -->
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <!-- Left Component -->
             <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
-                {!! view_render_event('sales.order.left_component.before', ['order' => $order]) !!}
+                {!! view_render_event('bagisto.admin.sales.order.left_component.before', ['order' => $order]) !!}
 
                 <div class="bg-white dark:bg-gray-900 rounded box-shadow">
                     <div class="flex justify-between p-4">
@@ -117,7 +117,7 @@
                     <!-- Order items -->
                     <div class="grid">
                         @foreach ($order->items as $item)
-                            {!! view_render_event('sales.order.list.before', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.admin.sales.order.list.before', ['order' => $order]) !!}
 
                             <div class="flex gap-2.5 justify-between px-4 py-6 border-b border-slate-300 dark:border-gray-800">
                                 <div class="flex gap-2.5">
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
 
-                            {!! view_render_event('sales.order.list.after', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.admin.sales.order.list.after', ['order' => $order]) !!}
                         @endforeach
                     </div>
 
@@ -369,12 +369,12 @@
                     @endforeach
                 </div>
 
-                {!! view_render_event('sales.order.left_component.after', ['order' => $order]) !!}
+                {!! view_render_event('bagisto.admin.sales.order.left_component.after', ['order' => $order]) !!}
             </div>
 
             <!-- Right Component -->
             <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
-                {!! view_render_event('sales.order.right_component.before', ['order' => $order]) !!}
+                {!! view_render_event('bagisto.admin.sales.order.right_component.before', ['order' => $order]) !!}
 
                 <!-- Customer and address information -->
                 <x-admin::accordion>
@@ -391,19 +391,19 @@
                                     {{ $order->customer_full_name }}
                                 </p>
 
-                                {!! view_render_event('sales.order.customer_full_name.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.customer_full_name.after', ['order' => $order]) !!}
 
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{ $order->customer_email }}
                                 </p>
 
-                                {!! view_render_event('sales.order.customer_email.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.customer_email.after', ['order' => $order]) !!}
 
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.sales.orders.view.customer-group') : {{ $order->is_guest ? core()->getGuestCustomerGroup()?->name : ($order->customer->group->name ?? '') }}
                                 </p>
 
-                                {!! view_render_event('sales.order.customer_group.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.customer_group.after', ['order' => $order]) !!}
                             </div>
                         </div>
                         
@@ -421,7 +421,7 @@
 
                                 @include ('admin::sales.address', ['address' => $order->billing_address])
 
-                                {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.billing_address.after', ['order' => $order]) !!}
                             </div>
                         @endif
 
@@ -437,7 +437,7 @@
 
                             @include ('admin::sales.address', ['address' => $order->shipping_address])
 
-                            {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.admin.sales.order.shipping_address.after', ['order' => $order]) !!}
                         @endif
                     </x-slot>
                 </x-admin::accordion> 
@@ -467,28 +467,28 @@
                             </div>
                     
                             <div class="flex flex-col gap-y-1.5">
-                                {!! view_render_event('sales.order.created_at.before', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.created_at.before', ['order' => $order]) !!}
 
                                 <!-- Order Date -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{core()->formatDate($order->created_at) }}
                                 </p>
 
-                                {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.created_at.after', ['order' => $order]) !!}
                             
                                 <!-- Order Status -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->status_label}}
                                 </p>
                             
-                                {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.status_label.after', ['order' => $order]) !!}
 
                                 <!-- Order Channel -->
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{$order->channel_name}}
                                 </p>
 
-                                {!! view_render_event('sales.order.channel_name.after', ['order' => $order]) !!}
+                                {!! view_render_event('bagisto.admin.sales.order.channel_name.after', ['order' => $order]) !!}
                             </div>
                         </div>
                     </x-slot>
@@ -535,7 +535,7 @@
                                 </p>
                             @endif
 
-                            {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.admin.sales.order.payment-method.after', ['order' => $order]) !!}
                         </div>
 
                         <!-- Shipping Method and Price Details -->
@@ -560,7 +560,7 @@
                                 </p>
                             </div>
 
-                            {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.admin.sales.order.shipping-method.after', ['order' => $order]) !!}
                         @endif
                     </x-slot>
                 </x-admin::accordion> 
@@ -712,7 +712,7 @@
                     </x-slot>
                 </x-admin::accordion>
                 
-                {!! view_render_event('sales.order.right_component.after', ['order' => $order]) !!}
+                {!! view_render_event('bagisto.admin.sales.order.right_component.after', ['order' => $order]) !!}
             </div>
         </div>
     </div>

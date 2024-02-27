@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        {!! view_render_event('admin.customers.customers.edit.edit_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.customers.customers.edit.edit_form_controls.before') !!}
 
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
@@ -254,7 +254,7 @@
             </form>
         </x-admin::form>
 
-        {!! view_render_event('admin.customers.customers.edit.edit_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.customers.customers.edit.edit_form_controls.after') !!}
     </script>
 
     <script type="module">

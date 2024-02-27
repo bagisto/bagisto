@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        {!! view_render_event('admin.customers.addresses.create.before') !!}
+        {!! view_render_event('bagisto.admin.customers.addresses.create.before') !!}
 
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
@@ -33,7 +33,7 @@
         >
             <form @submit="handleSubmit($event, create)">
 
-                {!! view_render_event('admin.customers.addresses.create.create_form_controls.before') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.create.create_form_controls.before') !!}
 
                 <!-- Address Create Modal -->
                 <x-admin::modal ref="CustomerAddress">
@@ -46,7 +46,7 @@
     
                     <!-- Modal Content -->
                     <x-slot:content>
-                        {!! view_render_event('admin.customers.addresses.create.before') !!}
+                        {!! view_render_event('bagisto.admin.customers.addresses.create.before') !!}
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.control
@@ -326,12 +326,12 @@
                     </x-slot>
                 </x-admin::modal>
 
-                {!! view_render_event('admin.customers.addresses.create.create_form_controls.after') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.create.create_form_controls.after') !!}
 
             </form>
         </x-admin::form>
 
-        {!! view_render_event('admin.customers.addresses.create.after') !!}
+        {!! view_render_event('bagisto.admin.customers.addresses.create.after') !!}
 
     </script>
 

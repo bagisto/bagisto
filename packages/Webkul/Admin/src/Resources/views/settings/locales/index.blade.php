@@ -109,7 +109,7 @@
                     ref="createLocaleForm"
                 >
 
-                    {!! view_render_event('admin.settings.locales.create_form_controls.before') !!}
+                    {!! view_render_event('bagisto.admin.settings.locales.create_form_controls.before') !!}
 
                     <x-admin::modal ref="localeUpdateOrCreateModal">
                         <!-- Modal Header -->
@@ -249,7 +249,7 @@
                         </x-slot>
                     </x-admin::modal>
 
-                    {!! view_render_event('admin.settings.locales.create_form_controls.after') !!}
+                    {!! view_render_event('bagisto.admin.settings.locales.create_form_controls.after') !!}
 
                 </form>
             </x-admin::form>

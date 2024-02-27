@@ -4,11 +4,11 @@
         @lang('admin::app.customers.groups.index.title')
     </x-slot>
 
-    {!! view_render_event('admin.customers.groups.create.before') !!}
+    {!! view_render_event('bagisto.admin.customers.groups.create.before') !!}
 
     <v-create-group />
 
-    {!! view_render_event('admin.customers.groups.create.after') !!}
+    {!! view_render_event('bagisto.admin.customers.groups.create.after') !!}
 
     @pushOnce('scripts')
         <script
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                {!! view_render_event('admin.customers.groups.list.before') !!}
+                {!! view_render_event('bagisto.admin.customers.groups.list.before') !!}
 
                 <!-- DataGrid -->
                 <x-admin::datagrid src="{{ route('admin.customers.groups.index') }}" ref="datagrid">
@@ -85,7 +85,7 @@
                     </template>
                 </x-admin::datagrid>
 
-                {!! view_render_event('admin.customers.groups.list.after') !!}
+                {!! view_render_event('bagisto.admin.customers.groups.list.after') !!}
 
                 <!-- Modal Form -->
                 <x-admin::form

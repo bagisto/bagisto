@@ -16,7 +16,7 @@
 
             <x-admin::form :action="route('admin.settings.taxes.rates.store')">
 
-                {!! view_render_event('admin.settings.taxes.rates.create.create_form_controls.before') !!}
+                {!! view_render_event('bagisto.admin.settings.taxes.rates.create.create_form_controls.before') !!}
 
                 <div class="flex justify-between items-center">
                     <p class="text-xl text-gray-800 dark:text-white font-bold">
@@ -256,7 +256,7 @@
                     </div>
                 </div>
 
-                {!! view_render_event('admin.settings.taxes.rates.create.create_form_controls.after') !!}
+                {!! view_render_event('bagisto.admin.settings.taxes.rates.create.create_form_controls.after') !!}
 
             </x-admin::form>
 

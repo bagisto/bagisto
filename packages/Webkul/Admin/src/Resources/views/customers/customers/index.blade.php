@@ -16,7 +16,7 @@
             <div class="flex gap-x-2.5 items-center">
                 <!-- Customer Create Vue Component -->
 
-                {!! view_render_event('admin.customers.customers.create.before') !!}
+                {!! view_render_event('bagisto.admin.customers.customers.create.before') !!}
 
                 <v-create-customer-form>
                     <button
@@ -27,7 +27,7 @@
                     </button>
                 </v-create-customer-form>
 
-                {!! view_render_event('admin.customers.customers.create.after') !!}
+                {!! view_render_event('bagisto.admin.customers.customers.create.after') !!}
 
             </div>
         </div>
