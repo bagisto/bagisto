@@ -161,35 +161,37 @@
                     @lang('shop::app.checkout.onepage.addresses.billing.state')
                 </x-shop::form.control-group.label>
 
-                <x-shop::form.control-group.control
-                    type="text"
-                    name="billing.state"
-                    ::value="guest.cart.billingAddress.state"
-                    rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                    v-if="! false"
-                    :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                />
-
-                <x-shop::form.control-group.control
-                    type="select"
-                    name="billing.state"
-                    rules="required"
-                    v-if="false"
-                    :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
-                >
-                    <option value="">
-                        @lang('shop::app.checkout.onepage.addresses.billing.select-state')
-                    </option>
-
-                    <option
-                        v-for='(state, index) in states[forms.billing.address.country]'
-                        :value="state.code"
+                <template v-if="haveStates(values.billing?.country)">
+                    <x-shop::form.control-group.control
+                        type="select"
+                        name="billing.state"
+                        rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                        :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
                     >
-                        @{{ state.default_name }}
-                    </option>
-                </x-shop::form.control-group.control>
+                        <option value="">
+                            @lang('shop::app.checkout.onepage.addresses.billing.select-state')
+                        </option>
+
+                        <option
+                            v-for='(state, index) in states[values.billing?.country]'
+                            :value="state.code"
+                        >
+                            @{{ state.default_name }}
+                        </option>
+                    </x-shop::form.control-group.control>
+                </template>
+
+                <template v-else>
+                    <x-shop::form.control-group.control
+                        type="text"
+                        name="billing.state"
+                        ::value="guest.cart.billingAddress.state"
+                        rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                        :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                    />
+                </template>
 
                 <x-shop::form.control-group.error control-name="billing.state" />
             </x-shop::form.control-group>

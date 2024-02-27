@@ -29,7 +29,7 @@
 
                         <!-- Address Form -->
                         <x-shop::form
-                            v-slot="{ meta, errors, handleSubmit }"
+                            v-slot="{ meta, errors, values, handleSubmit }"
                             as="div"
                             id="modalForm"
                         >
@@ -147,6 +147,8 @@
 
                     countries: [],
 
+                    states: [],
+
                     isLoading: false,
                 };
             },
@@ -215,6 +217,8 @@
                 init() {
                     this.getCountries();
 
+                    this.getStates();
+
                     this.getCartAddresses();
 
                     if (! this.cart.is_guest) {
@@ -232,6 +236,18 @@
                             this.countries = response.data.data;
                         })
                         .catch(() => {});
+                },
+
+                getStates() {
+                    this.$axios.get("{{ route('shop.api.core.states') }}")
+                        .then(response => {
+                            this.states = response.data.data;
+                        })
+                        .catch(() => {});
+                },
+
+                haveStates(countryCode) {
+                    return !!this.states[countryCode]?.length;
                 },
 
                 getCartAddresses() {

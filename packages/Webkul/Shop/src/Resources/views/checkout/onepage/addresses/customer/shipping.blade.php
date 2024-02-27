@@ -19,7 +19,7 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.shipping.form.before') !!}
 
                 <x-shop::form
-                    v-slot="{ meta, errors, handleSubmit, values }"
+                    v-slot="{ meta, errors, values, handleSubmit }"
                     as="div"
                     ref="customerShippingAddressForm"
                 >
@@ -193,7 +193,7 @@
 
                 <!-- Shipping Address Form -->
                 <x-shop::form
-                    v-slot="{ meta, errors, handleSubmit }"
+                    v-slot="{ meta, errors, values, handleSubmit }"
                     as="div"
                 >
                     <form @submit="handleSubmit($event, updateOrCreateCustomerAddress)">
@@ -367,35 +367,37 @@
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
 
-                                <x-shop::form.control-group.control
-                                    type="text"
-                                    name="shipping.state"
-                                    ::value="customer.updateOrCreateShippingAddress.params?.state"
-                                    rules="{{ core()->isStateRequired() ? 'required' : '' }}"
-                                    v-if="! false"
-                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
-                                />
-
-                                <x-shop::form.control-group.control
-                                    type="select"
-                                    name="shipping.state"
-                                    rules="required"
-                                    v-if="false"
-                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
-                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
-                                >
-                                    <option value="">
-                                        @lang('shop::app.checkout.onepage.addresses.shipping.select-state')
-                                    </option>
-
-                                    <option
-                                        v-for='(state, index) in states[forms.shipping.address.country]'
-                                        :value="state.code"
+                                <template v-if="haveStates(values.shipping?.country)">
+                                    <x-shop::form.control-group.control
+                                        type="select"
+                                        name="shipping.state"
+                                        rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                        :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                        :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     >
-                                        @{{ state.default_name }}
-                                    </option>
-                                </x-shop::form.control-group.control>
+                                        <option value="">
+                                            @lang('shop::app.checkout.onepage.addresses.shipping.select-state')
+                                        </option>
+
+                                        <option
+                                            v-for='(state, index) in states[values.shipping?.country]'
+                                            :value="state.code"
+                                        >
+                                            @{{ state.default_name }}
+                                        </option>
+                                    </x-shop::form.control-group.control>
+                                </template>
+
+                                <template v-else>
+                                    <x-shop::form.control-group.control
+                                        type="text"
+                                        name="shipping.state"
+                                        ::value="customer.updateOrCreateShippingAddress.params?.state"
+                                        rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                        :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                        :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                    />
+                                </template>
 
                                 <x-shop::form.control-group.error control-name="shipping.state" />
                             </x-shop::form.control-group>
