@@ -443,9 +443,19 @@
                 storeCustomerBillingAddressToCart(params) {
                     this.isLoading = true;
 
+                    this.$emitter.emit('is-show-shipping-methods', false);
+
+                    this.$emitter.emit('is-show-payment-methods', false);
+
+                    this.$emitter.emit('is-shipping-loading', true);
+
+                    this.$emitter.emit('can-place-order', false);
+
                     let address = this.customerBillingAddresses.find((address) => address.id == params['billing_address_id']);
 
                     if (! address) {
+                        this.isLoading = false;
+
                         return;
                     }
 
@@ -466,6 +476,8 @@
                             }
                         })
                         .then((response) => {
+                            this.$emitter.emit('update-cart-summary');
+
                             if (response.data.data.shippingMethods) {
                                 this.$emitter.emit('shipping-methods', response.data.data.shippingMethods);
 
@@ -495,6 +507,14 @@
 
                         if (customerBillingAddressForm.valid) {
                             this.isLoading = true;
+
+                            this.$emitter.emit('is-show-shipping-methods', false);
+
+                            this.$emitter.emit('is-show-payment-methods', false);
+
+                            this.$emitter.emit('is-shipping-loading', true);
+
+                            this.$emitter.emit('can-place-order', false);
 
                             let customerBillingAddressFormValues = this.$refs.customerBillingAddressForm.getValues();
 
@@ -545,6 +565,8 @@
 
                             this.storeCustomerAddressToCart(payload)
                                 .then((response) => {
+                                    this.$emitter.emit('update-cart-summary');
+
                                     if (response.data.data.shippingMethods) {
                                         this.$emitter.emit('shipping-methods', response.data.data.shippingMethods);
 
@@ -573,12 +595,22 @@
                 storeGuestAddressToCart(params) {
                     this.isLoading = true;
 
+                    this.$emitter.emit('is-show-shipping-methods', false);
+
+                    this.$emitter.emit('is-show-payment-methods', false);
+
+                    this.$emitter.emit('is-shipping-loading', true);
+
+                    this.$emitter.emit('can-place-order', false);
+
                     params['billing']['use_for_shipping'] = ! params.billing.use_different_address_for_shipping;
 
                     delete params.billing.use_different_address_for_shipping;
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
                         .then((response) => {
+                            this.$emitter.emit('update-cart-summary');
+
                             if (response.data.data.shippingMethods) {
                                 this.$emitter.emit('shipping-methods', response.data.data.shippingMethods);
 
