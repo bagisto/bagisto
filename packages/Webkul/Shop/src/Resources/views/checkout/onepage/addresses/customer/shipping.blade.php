@@ -132,7 +132,10 @@
                         </v-error-message>
 
                         <!-- Proceed Button -->
-                        <div class="flex justify-end mt-4">
+                        <div
+                            class="flex justify-end mt-4"
+                            v-if="customerBillingAddresses.length && customerShippingAddresses.length"
+                        >
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.shipping.proceed_button.before') !!}
 
                             <x-shop::button

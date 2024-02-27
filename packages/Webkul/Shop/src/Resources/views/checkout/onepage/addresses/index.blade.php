@@ -157,12 +157,6 @@
                 this.init();
             },
 
-            watch: {
-                cart: function(newCart, oldCart) {
-                    this.getCartAddresses();
-                }
-            },
-
             computed: {
                 customerBillingAddresses() {
                     let addresses = this.customer.addresses.map((address) => {
@@ -181,7 +175,10 @@
                         };
                     });
 
-                    if (! this.isAddressEmpty(this.customer.cart.billingAddress)) {
+                    if (
+                        ! this.isAddressEmpty(this.customer.cart.billingAddress)
+                        && ! this.customer.cart.billingAddress.parentAddressId
+                    ) {
                         addresses.unshift(this.customer.cart.billingAddress);
                     }
 
@@ -205,7 +202,10 @@
                         };
                     });
 
-                    if (! this.isAddressEmpty(this.customer.cart.shippingAddress)) {
+                    if (
+                        ! this.isAddressEmpty(this.customer.cart.shippingAddress)
+                        && ! this.customer.cart.shippingAddress.parentAddressId
+                    ) {
                         addresses.unshift(this.customer.cart.shippingAddress);
                     }
 
@@ -268,6 +268,7 @@
 
                         cart.billingAddress = {
                             id: 0,
+                            parentAddressId: this.cart.billing_address?.parent_address_id,
                             companyName: this.cart.billing_address?.company_name,
                             firstName: this.cart.billing_address?.first_name,
                             lastName: this.cart.billing_address?.last_name,
@@ -288,6 +289,7 @@
 
                         cart.shippingAddress = {
                             id: 0,
+                            parentAddressId: this.cart.shipping_address?.parent_address_id,
                             companyName: this.cart.shipping_address?.company_name,
                             firstName: this.cart.shipping_address?.first_name,
                             lastName: this.cart.shipping_address?.last_name,
@@ -482,7 +484,9 @@
 
                             this.isLoading = false;
                         })
-                        .catch(() => {});
+                        .catch(() => {
+                            this.isLoading = false;
+                        });
                 },
 
                 storeCustomerShippingAddressToCart(params) {
@@ -497,6 +501,8 @@
                             let billingAddress = this.customerBillingAddresses.find((address) => address.id == customerBillingAddressFormValues.billing_address_id);
 
                             if (! billingAddress) {
+                                this.isLoading = false;
+
                                 return;
                             }
 
@@ -518,6 +524,8 @@
                             let shippingAddress = this.customerShippingAddresses.find((address) => address.id == params['shipping_address_id']);
 
                             if (! shippingAddress) {
+                                this.isLoading = false;
+
                                 return;
                             }
 
@@ -555,7 +563,9 @@
 
                                     this.isLoading = false;
                                 })
-                                .catch(() => {});
+                                .catch(() => {
+                                    this.isLoading = false;
+                                });
                         }
                     });
                 },
@@ -587,7 +597,9 @@
 
                             this.isLoading = false;
                         })
-                        .catch(() => {});
+                        .catch(() => {
+                            this.isLoading = false;
+                        });
                 },
             },
         });
