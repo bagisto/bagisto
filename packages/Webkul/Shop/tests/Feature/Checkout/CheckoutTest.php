@@ -137,22 +137,6 @@ it('should store the guest user address for cart billing/shipping for guest user
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
             'address1'         => [fake()->address()],
-            'isSaved'          => false,
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => fake()->boolean(),
-        ],
-
-        'shipping' => [
-            'address1'         => [fake()->address()],
-            'isSaved'          => false,
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -2038,9 +2022,7 @@ it('should not return the cash on delivery payment method if product is download
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
-            'isSaved'          => false,
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -2050,12 +2032,10 @@ it('should not return the cash on delivery payment method if product is download
             'city'             => fake()->city(),
             'postcode'         => rand(111111, 999999),
             'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => fake()->boolean(),
+            'use_for_shipping' => false,
         ],
 
         'shipping' => [
-            'isSaved'          => false,
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
@@ -2170,9 +2150,7 @@ it('should not return the shipping methods if product is downloadable', function
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
-            'isSaved'          => false,
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -2182,12 +2160,10 @@ it('should not return the shipping methods if product is downloadable', function
             'city'             => fake()->city(),
             'postcode'         => rand(111111, 999999),
             'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => fake()->boolean(),
+            'use_for_shipping' => false,
         ],
 
         'shipping' => [
-            'isSaved'          => false,
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
@@ -2302,9 +2278,7 @@ it('should not return the cash on delivery payment method if product is virtual'
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
-            'isSaved'          => false,
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -2318,8 +2292,6 @@ it('should not return the cash on delivery payment method if product is virtual'
         ],
 
         'shipping' => [
-            'isSaved'          => false,
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
@@ -2434,9 +2406,7 @@ it('should not return the shipping methods if product is virtual', function () {
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
-            'isSaved'          => false,
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -2450,8 +2420,6 @@ it('should not return the shipping methods if product is virtual', function () {
         ],
 
         'shipping' => [
-            'isSaved'          => false,
-            'address_id'       => $customerAddress->id,
             'address1'         => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
