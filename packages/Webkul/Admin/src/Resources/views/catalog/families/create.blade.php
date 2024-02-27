@@ -169,27 +169,27 @@
                                     <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-xl rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800"
+                                            class="icon-sort-down text-xl rounded-md cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950 group-hover:text-gray-800 dark:group-hover:text-white"
                                             @click="element.hide = ! element.hide"
                                         >
                                         </i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group cursor-pointer transition-all group-hover:text-gray-800"
+                                            class="group_node flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group cursor-pointer transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
-                                            <i class="icon-drag text-xl text-inherit transition-all group-hover:text-gray-800 cursor-grab"></i>
+                                            <i class="icon-drag text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
 
                                             <i
-                                                class="text-xl text-inherit transition-all group-hover:text-gray-800"
+                                                class="text-xl text-inherit transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                                 :class="[element.is_user_defined ? 'icon-folder' : 'icon-folder-block']"
                                             >
                                             </i>
 
                                             <span
-                                                class="text-sm text-inherit font-regular transition-all group-hover:text-gray-800"
+                                                class="text-sm text-inherit font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                                 v-show="editableGroup.id != element.id"
                                                 v-text="element.name"
                                             >
@@ -238,17 +238,17 @@
                                     >
                                         <template #item="{ element, index }">
                                             <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
-                                                <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
+                                                <i class="icon-drag text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
 
                                                 <i
-                                                    class="text-xl transition-all group-hover:text-gray-700"
+                                                    class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"
                                                     :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
                                                 >
                                                 </i>
                                                 
 
                                                 <span 
-                                                    class="text-sm font-regular transition-all group-hover:text-gray-800 max-xl:text-xs"
+                                                    class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
                                                     v-text="element.admin_name"
                                                 >
                                                 </span>
@@ -298,12 +298,12 @@
                         >
                             <template #item="{ element }">
                                 <div class="flex gap-1.5 max-w-max py-1.5 ltr:pr-1.5 rtl:pl-1.5 rounded text-gray-600 dark:text-gray-300 group">
-                                    <i class="icon-drag text-xl transition-all group-hover:text-gray-700 cursor-grab"></i>
+                                    <i class="icon-drag text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white cursor-grab"></i>
 
-                                    <i class="text-xl transition-all group-hover:text-gray-700"></i>
+                                    <i class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
                                     <span 
-                                        class="text-sm font-regular transition-all group-hover:text-gray-800 max-xl:text-xs"
+                                        class="text-sm font-regular transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs"
                                         v-text="element.admin_name"    
                                     >
                                     </span>
