@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'पहला नाम',
                     'last-name'                          => 'अंतिम नाम',
                     'postcode'                           => 'ज़िप/पिन कोड',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'आगे बढ़ें',
                     'save'                               => 'बचाना',
                     'use-different-address-for-shipping' => 'पता मेरे बिलिंग पते का है',
                     'save-address'                       => 'इस पते को सहेजें',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'पहला नाम',
                     'last-name'        => 'अंतिम नाम',
                     'postcode'         => 'ज़िप/पिन कोड',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'आगे बढ़ें',
                     'save'             => 'बचाना',
                     'save-address'     => 'इस पते को सहेजें',
                     'select-country'   => 'देश चुनें',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'टेलीफोन',
                 ],
 
-                'title' => 'Address',
+                'title' => 'पता',
             ],
 
             'index' => [

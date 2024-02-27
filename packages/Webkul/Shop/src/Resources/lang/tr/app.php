@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'Ad',
                     'last-name'                          => 'Soyad',
                     'postcode'                           => 'Posta Kodu',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'Devam etmek',
                     'save'                               => 'kaydetmek',
                     'use-different-address-for-shipping' => 'Adresim, fatura adresimle aynı',
                     'save-address'                       => 'Bu adresi kaydet',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'Ad',
                     'last-name'        => 'Soyad',
                     'postcode'         => 'Posta Kodu',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'Devam etmek',
                     'save'             => 'kaydetmek',
                     'save-address'     => 'Bu adresi kaydet',
                     'select-country'   => 'Ülke Seçin',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'Telefon',
                 ],
 
-                'title' => 'Address',
+                'title' => 'Adres',
             ],
 
             'index' => [

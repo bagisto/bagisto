@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'Nome',
                     'last-name'                          => 'Sobrenome',
                     'postcode'                           => 'CEP',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'Proceder',
                     'save'                               => 'salvar',
                     'use-different-address-for-shipping' => 'O endereço é o mesmo do endereço de cobrança',
                     'save-address'                       => 'Salvar este endereço',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'Nome',
                     'last-name'        => 'Sobrenome',
                     'postcode'         => 'CEP',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'Proceder',
                     'save'             => 'salvar',
                     'save-address'     => 'Salvar este endereço',
                     'select-country'   => 'Selecione o País',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'Telefone',
                 ],
 
-                'title' => 'Address',
+                'title' => 'Endereço',
             ],
 
             'index' => [

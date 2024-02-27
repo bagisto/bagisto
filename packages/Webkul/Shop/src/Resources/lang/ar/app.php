@@ -700,7 +700,7 @@ return [
                     'first-name'                         => 'الاسم الأول',
                     'last-name'                          => 'اسم العائلة',
                     'postcode'                           => 'الرمز البريدي',
-                    'proceed'                            => 'Proceed',
+                    'proceed'                            => 'استمر',
                     'save'                               => 'يحفظ',
                     'use-different-address-for-shipping' => 'العنوان هو نفس عنوان الفواتير',
                     'save-address'                       => 'حفظ هذا العنوان',
@@ -727,7 +727,7 @@ return [
                     'first-name'       => 'الاسم الأول',
                     'last-name'        => 'اسم العائلة',
                     'postcode'         => 'الرمز البريدي',
-                    'proceed'          => 'Proceed',
+                    'proceed'          => 'استمر',
                     'save'             => 'يحفظ',
                     'save-address'     => 'حفظ هذا العنوان',
                     'select-country'   => 'اختر البلد',
@@ -738,7 +738,7 @@ return [
                     'telephone'        => 'رقم الهاتف',
                 ],
 
-                'title' => 'Address',
+                'title' => 'عنوان',
             ],
 
             'index' => [
