@@ -217,7 +217,7 @@
             },
 
             mounted() {
-                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = true);
+                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = value);
 
                 this.$emitter.on('after-payment-method-selected', (value) => this.selectedPaymentMethod = value);
             },

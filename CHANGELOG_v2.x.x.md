@@ -2,7 +2,21 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.1.0 (15th of February 2023)** - *Release*
+## **v2.1.1 (27th of February 2024)** - *Release*
+
+* #9501 [fixed] - Can't Checkout
+
+* #9442 [fixed] - Mobile view should be responsive -Front end.
+
+* #9462 [fixed] - Logged In User Address, when address is being deleted Header is Highlighted.
+
+* #9489 [fixed] - Type filter in product catalog not working.
+
+* #9500 [fixed] - Price Filter is not responsive in Category Page both RTL and LTR view.
+
+* #9514 [fixed] - Allow Image and File Upload Size is accepting any values which are entered.
+
+## **v2.1.0 (15th of February 2024)** - *Release*
 
 ## New Feature: Data Transfer/Import
 An enhanced import implementation now facilitates the rapid importation of ten thousand products in just 1-2 minutes. This improved efficiency streamlines data integration, offering businesses a quicker and more effective solution for managing extensive product catalogs and boosting operational agility.
