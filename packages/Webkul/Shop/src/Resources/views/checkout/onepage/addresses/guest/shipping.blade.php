@@ -1,6 +1,6 @@
 <div
     class="mt-4"
-    v-if="guest.cart.billingAddress.useDifferentAddressForShipping"
+    v-if="customer.applied.useDifferentAddressForShipping"
 >
     <div class="flex justify-between items-center">
         <h2 class="text-xl font-medium max-sm:text-xl">

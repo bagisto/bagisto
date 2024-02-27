@@ -1,6 +1,6 @@
 <div
     class="mt-8"
-    v-if="customer.cart.billingAddress?.useDifferentAddressForShipping"
+    v-if="customer.applied.useDifferentAddressForShipping"
 >
     <!-- Addresses Cards -->
     <template v-if="! customer.updateOrCreateShippingAddress.isEnabled">
@@ -25,8 +25,6 @@
                 >
                     <form @submit="handleSubmit($event, storeCustomerShippingAddressToCart)">
                         <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
-                            @{{ values }}
-
                             <!-- Shipping Address ID -->
                             <template v-if="! isAddressEmpty(customer.cart.shippingAddress)">
                                 <x-shop::form.control-group.control

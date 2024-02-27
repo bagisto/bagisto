@@ -20,8 +20,6 @@
                 ref="customerBillingAddressForm"
             >
                 <form @submit="handleSubmit($event, storeCustomerBillingAddressToCart)">
-                    @{{ values }}
-
                     <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                         <!-- Billing Address ID -->
                         <template v-if="! isAddressEmpty(customer.cart.billingAddress)">
@@ -130,11 +128,11 @@
 
                     <!-- Checkbox For Different Address -->
                     <div class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none">
-                        <div v-if="customer.cart.billingAddress?.useDifferentAddressForShipping">
+                        <div v-if="customer.applied.useDifferentAddressForShipping">
                             <x-shop::form.control-group.control
                                 type="hidden"
                                 name="use_different_address_for_shipping"
-                                ::value="!! customer.cart.billingAddress?.useDifferentAddressForShipping"
+                                ::value="!! customer.applied.useDifferentAddressForShipping"
                             />
                         </div>
 
@@ -150,8 +148,8 @@
                                 id="use_different_address_for_shipping"
                                 class="sr-only peer"
                                 v-bind="field"
-                                :checked="!! customer.cart.billingAddress?.useDifferentAddressForShipping"
-                                @click="customer.cart.billingAddress.useDifferentAddressForShipping = ! customer.cart.billingAddress.useDifferentAddressForShipping;"
+                                :checked="!! customer.applied.useDifferentAddressForShipping"
+                                @click="customer.applied.useDifferentAddressForShipping = ! customer.applied.useDifferentAddressForShipping;"
                             />
                         </v-field>
 
@@ -172,7 +170,7 @@
                     <!-- Proceed Button -->
                     <div
                         class="flex justify-end mt-4"
-                        v-if="customerBillingAddresses.length && ! customer.cart.billingAddress?.useDifferentAddressForShipping"
+                        v-if="customerBillingAddresses.length && ! customer.applied.useDifferentAddressForShipping"
                     >
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.shipping_address.proceed_button.before') !!}
 

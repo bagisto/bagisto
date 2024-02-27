@@ -91,6 +91,8 @@
 
                     customer: {
                         applied: {
+                            useDifferentAddressForShipping: false,
+
                             selectedBillingAddressId: -1,
 
                             selectedShippingAddressId: -1,
@@ -149,11 +151,8 @@
                         };
                     });
 
-                    if (
-                        ! this.isAddressEmpty(this.customer.cart.billingAddress)
-                        && this.customer.applied.selectedBillingAddressId === 0
-                    ) {
-                        addresses.push(this.customer.cart.billingAddress);
+                    if (! this.isAddressEmpty(this.customer.cart.billingAddress)) {
+                        addresses.unshift(this.customer.cart.billingAddress);
                     }
 
                     return addresses;
@@ -176,11 +175,8 @@
                         };
                     });
 
-                    if (
-                        ! this.isAddressEmpty(this.customer.cart.shippingAddress)
-                        && this.customer.applied.selectedShippingAddressId === 0
-                    ) {
-                        addresses.push(this.customer.cart.shippingAddress);
+                    if (! this.isAddressEmpty(this.customer.cart.shippingAddress)) {
+                        addresses.unshift(this.customer.cart.shippingAddress);
                     }
 
                     return addresses;
@@ -220,6 +216,8 @@
                     if (this.cart.billing_address) {
                         this.customer.applied.selectedBillingAddressId = this.cart.billing_address.parent_address_id ?? 0;
 
+                        this.customer.applied.useDifferentAddressForShipping = ! (this.cart.billing_address?.use_for_shipping ?? false);
+
                         cart.billingAddress = {
                             id: 0,
                             companyName: this.cart.billing_address?.company_name,
@@ -232,7 +230,6 @@
                             city: this.cart.billing_address?.city,
                             postcode: this.cart.billing_address?.postcode,
                             phone: this.cart.billing_address?.phone,
-                            useDifferentAddressForShipping: ! (this.cart.billing_address?.use_for_shipping ?? false),
                         };
                     }
 
@@ -301,46 +298,79 @@
 
                 storeCustomerAddress(params, type = 'billing') {
                     return this.$axios.post('{{ route('api.shop.customers.account.addresses.store') }}', params)
-                        .then(() => {
+                        .then((response) => {
                             this.getCustomerAddresses();
 
                             this.closeUpdateOrCreateCustomerAddressForm(type);
+
+                            return response;
                         });
                 },
 
                 updateCustomerAddress(params, type = 'billing') {
                     return this.$axios.post('{{ route('api.shop.customers.account.addresses.update') }}', params)
-                        .then(() => {
+                        .then((response) => {
                             this.getCustomerAddresses();
 
                             this.closeUpdateOrCreateCustomerAddressForm(type);
+
+                            return response;
                         });
                 },
 
                 updateOrCreateCustomerAddress(params) {
-                    let addressType = params.type;
-
-                    if (params[addressType]['save_address']) {
-                        this.storeCustomerAddress(params[addressType], addressType);
-
-                        return;
-                    }
-
-                    if (params[addressType]['id']) {
-                        this.updateCustomerAddress(params[addressType], addressType);
-
-                        return;
-                    }
-
                     const selectedAddressIdType = {
                         billing: 'selectedBillingAddressId',
 
                         shipping: 'selectedShippingAddressId',
                     };
 
-                    this.customer.cart[`${addressType}Address`] = {
-                        ...this.customer.cart[`${addressType}Address`],
+                    let addressType = params.type;
 
+                    if (params[addressType]['save_address']) {
+                        this.storeCustomerAddress(params[addressType], addressType)
+                            .then((response) => {
+                                const { id } = response.data.data;
+
+                                this.customer.applied[selectedAddressIdType[addressType]] = id;
+
+                                if (addressType === 'billing') {
+                                    this.$refs.customerBillingAddressForm.setValues({
+                                        billing_address_id: id,
+                                    });
+                                } else {
+                                    this.$refs.customerShippingAddressForm.setValues({
+                                        shipping_address_id: id,
+                                    });
+                                }
+                            });
+
+                        return;
+                    }
+
+                    if (params[addressType]['id']) {
+                        this.updateCustomerAddress(params[addressType], addressType)
+                            .then((response) => {
+                                const { id } = response.data.data;
+
+                                this.customer.applied[selectedAddressIdType[addressType]] = id;
+
+                                if (addressType === 'billing') {
+                                    this.$refs.customerBillingAddressForm.setValues({
+                                        billing_address_id: id,
+                                    });
+                                } else {
+                                    this.$refs.customerShippingAddressForm.setValues({
+                                        shipping_address_id: id,
+                                    });
+                                }
+                            });
+
+                        return;
+                    }
+
+                    this.customer.cart[`${addressType}Address`] = {
+                        id: 0,
                         companyName: params[addressType].company_name,
                         firstName: params[addressType].first_name,
                         lastName: params[addressType].last_name,
@@ -353,9 +383,20 @@
                         phone: params[addressType].phone,
                     };
 
+                    this.closeUpdateOrCreateCustomerAddressForm(addressType);
+
                     this.customer.applied[selectedAddressIdType[addressType]] = 0;
 
-                    this.closeUpdateOrCreateCustomerAddressForm(addressType);
+                    if (addressType === 'billing') {
+                        console.log(this.$refs)
+                        this.$refs.customerBillingAddressForm.setValues({
+                            billing_address_id: 0,
+                        });
+                    } else {
+                        this.$refs.customerShippingAddressForm.setValues({
+                            shipping_address_id: 0,
+                        });
+                    }
                 },
 
                 storeCustomerAddressToCart(params) {

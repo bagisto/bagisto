@@ -261,11 +261,11 @@
 
         <!-- Checkbox For Different Address -->
         <div class="flex gap-x-1.5 items-center mt-5 text-sm text-[#6E6E6E] select-none">
-            <div v-if="guest.cart.billingAddress?.useDifferentAddressForShipping">
+            <div v-if="customer.applied.useDifferentAddressForShipping">
                 <x-shop::form.control-group.control
                     type="hidden"
                     name="billing.use_different_address_for_shipping"
-                    ::value="!! guest.cart.billingAddress?.useDifferentAddressForShipping"
+                    ::value="!! customer.applied.useDifferentAddressForShipping"
                 />
             </div>
 
@@ -281,8 +281,8 @@
                     id="billing.use_different_address_for_shipping"
                     class="sr-only peer"
                     v-bind="field"
-                    :checked="!! guest.cart.billingAddress?.useDifferentAddressForShipping"
-                    @click="guest.cart.billingAddress.useDifferentAddressForShipping = ! guest.cart.billingAddress.useDifferentAddressForShipping;"
+                    :checked="!! customer.applied.useDifferentAddressForShipping"
+                    @click="customer.applied.useDifferentAddressForShipping = ! customer.applied.useDifferentAddressForShipping;"
                 />
             </v-field>
 
@@ -303,7 +303,7 @@
         <!-- Proceed Button -->
         <div
             class="flex justify-end mt-4"
-            v-if="! guest.cart.billingAddress.useDifferentAddressForShipping"
+            v-if="! customer.applied.useDifferentAddressForShipping"
         >
             <button
                 type="submit"
