@@ -21,6 +21,8 @@ class CartResource extends JsonResource
 
         return [
             'id'                             => $this->id,
+            'is_guest'                       => $this->is_guest,
+            'customer_id'                    => $this->customer_id,
             'items_count'                    => $this->items_count,
             'items_qty'                      => $this->items_qty,
             'grand_total'                    => $this->grand_total,
@@ -43,7 +45,7 @@ class CartResource extends JsonResource
             'items'                          => CartItemResource::collection($this->items),
             'billing_address'                => $this->billing_address,
             'shipping_address'               => $this->shipping_address,
-            'haveStockableItems'             => $this->haveStockableItems(),
+            'have_stockable_items'           => $this->haveStockableItems(),
             'payment_method'                 => $this->payment ? core()->getConfigData('sales.payment_methods.'.$this->payment->method.'.title') : '',
         ];
     }
