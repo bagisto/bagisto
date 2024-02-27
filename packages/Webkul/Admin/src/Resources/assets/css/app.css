@@ -374,6 +374,18 @@
     .icon-play:before {
         content: "\e945";
     }
+
+    .icon-import:before {
+        content: "\e943";
+        transform: rotate(90deg);
+        display: inline-block;
+    }
+
+    .icon-export:before {
+        content: "\e943";
+        transform: rotate(270deg);
+        display: inline-block;
+    }
       
     p {
         @apply text-[14px] !leading-[17px];
@@ -440,27 +452,34 @@
     .label-closed,
     .label-canceled,
     .label-info,
+    .label-fraud,
+    .label-pending_payment,
     .label-completed,
     .label-active {
         @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
-	.label-pending {
+	.label-pending,
+    .label-pending_payment {
 		@apply bg-yellow-500;
 	}
 
-	.label-processing,
+	.label-processing{
+		@apply bg-cyan-600;
+    }
+
 	.label-completed,
     .label-active {
-		@apply bg-darkGreen;
+		@apply bg-green-600;
 	}
 
 	.label-closed {
-		@apply bg-darkBlue;
+		@apply bg-indigo-600;
 	}
 
-    .label-canceled {
-        @apply bg-darkPink;
+    .label-canceled,
+    .label-fraud {
+        @apply bg-rose-600;
     }
 
     .label-info {

@@ -59,7 +59,6 @@ class ProductDataGrid extends DataGrid
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
-            ->distinct()
             ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
             ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('pc.category_id', '=', 'ct.category_id')
@@ -82,16 +81,15 @@ class ProductDataGrid extends DataGrid
                 'af.name as attribute_family',
                 DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity')
             )
-            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'));
-
-        $queryBuilder->groupBy(
-            'product_flat.product_id',
-            'product_flat.locale',
-            'product_flat.channel'
-        );
-
-        $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
-        $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
+            ->distinct()
+            ->whereIn('product_flat.locale', $whereInLocales)
+            ->whereIn('product_flat.channel', $whereInChannels)
+            ->groupBy(
+                'product_flat.product_id',
+                'product_flat.locale',
+                'product_flat.channel'
+            );
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('name', 'product_flat.name');
@@ -206,7 +204,7 @@ class ProductDataGrid extends DataGrid
 
                 'params' => [
                     'options' => collect(config('product_types'))
-                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.'.$type['key'])])
+                        ->map(fn ($type) => ['label' => trans($type['name']), 'value' => $type['key']])
                         ->values()
                         ->toArray(),
                 ],
@@ -231,10 +229,6 @@ class ProductDataGrid extends DataGrid
                 'method' => 'GET',
                 'url'    => function ($row) {
                     return route('admin.catalog.products.edit', $row->product_id);
-                },
-
-                'condition' => function () {
-                    return true;
                 },
             ]);
         }

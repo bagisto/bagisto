@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | গ্রাহক <b> অবগত করেছেন </b>',
                 'discount'              => 'ছাড় - :discount',
                 'download-pdf'          => 'PDF ডাউনলোড করুন',
+                'fraud'                 => 'প্রতারণা',
                 'grand-total'           => 'মোট টোটাল - :grand_total',
                 'invoice-id'            => 'চালান #:invoice',
                 'invoices'              => 'চালান',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'পেমেন্ট এবং শিপিং',
                 'payment-method'        => 'পেমেন্ট পদ্ধতি',
                 'pending'               => 'মুলতবি',
+                'pending_payment'       => 'অপেক্ষারত পেমেন্ট',
                 'per-unit'              => 'প্রতি ইউনিট',
                 'price'                 => 'মূল্য - :price',
                 'processing'            => 'প্রসেসিং',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'সমন্বয় ফেরত',
                 'amount-per-unit'             => ':amount প্রতি ইউনিট x :qty পরিমাণ',
                 'create-success'              => 'ফেরত সফলভাবে তৈরি হয়েছে',
+                'creation-error'              => 'রিফান্ড তৈরি করা অনুমোদিত নয়।',
                 'discount-amount'             => 'ডিসকাউন্ট পরিমাণ',
                 'grand-total'                 => 'মোট টোটাল',
                 'invalid-qty'                 => 'আমরা অবৈধ পরিমাণ চেনে পেয়েছি।',
@@ -421,18 +424,19 @@ return [
                 'title'                  => 'চালান #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount প্রতি একক x :qty পরিমাণ',
-                'create-invoice'  => 'চালান তৈরি করুন',
-                'create-success'  => 'চালান সফলভাবে তৈরি হয়েছে',
-                'creation-error'  => 'অর্ডার চালান তৈরি করা যাবে না।',
-                'invalid-qty'     => 'আমরা অবৈধ পরিমাণ চালান আইটেম পেয়েছি।',
-                'invoice'         => 'চালান',
-                'new-invoice'     => 'নতুন চালান',
-                'product-error'   => 'পণ্য ছাড়া চালান তৈরি করা যাবে না।',
-                'product-image'   => 'পণ্যের চিত্র',
-                'qty-to-invoiced' => 'চালান করার পরিমাণ',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount প্রতি একক × :qty পরিমাণ',
+                'create-invoice'     => 'চালান তৈরি করুন',
+                'create-success'     => 'চালান সফলভাবে তৈরি হয়েছে',
+                'create-transaction' => 'লেনদেন তৈরি করুন',
+                'creation-error'     => 'অর্ডার চালান তৈরি করা অনুমোদিত নয়।',
+                'invalid-qty'        => 'আমরা অকার্যকর পরিমাণ পাওয়া গেছে আইটেম চালানের জন্য।',
+                'invoice'            => 'চালান',
+                'new-invoice'        => 'নতুন চালান',
+                'product-error'      => 'পণ্য ছাড়া চালান তৈরি করা যাবে না।',
+                'product-image'      => 'পণ্যের চিত্র',
+                'qty-to-invoiced'    => 'চালানে পরিমাণ',
+                'sku'                => 'এসকেও - :sku',
             ],
 
             'invoice-pdf' => [
@@ -487,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'ইতিমধ্যে পেইড',
+                    'amount'                     => 'মোট পরিমাণ',
+                    'create-transaction'         => 'লেনদেন তৈরি করুন',
+                    'invoice-id'                 => 'চালান আইডি',
                     'invoice-missing'            => 'চালান অনুপস্থিত',
+                    'payment-method'             => 'পরিশোধের পদ্ধতি',
+                    'save-transaction'           => 'লেনদেন সংরক্ষণ করুন',
                     'transaction-amount-exceeds' => 'লেনদেন পরিমাণ অধিক',
                     'transaction-amount-zero'    => 'লেনদেন পরিমাণ শূন্য',
-                    'transaction-saved'          => 'লেনদেন সফলভাবে সংরক্ষিত',
+                    'transaction-saved'          => 'লেনদেন সফলভাবে সংরক্ষিত হয়েছে।',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute এর আকার :max কিলোবাইটের বেশি হতে পারে না। দয়া করে একটি ছোট ফাইল চয়ন করুন।',
                     'info'  => 'সর্বাধিক ভিডিও আকার হওয়া উচিত :size মধ্যে',
                     'title' => 'ভিডিও',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'নতুন লোকাল তৈরি করুন',
                 'locale'     => 'লোকেল',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'মুদ্রা তৈরি করুন',
                 'currency'   => 'মুদ্রা',
@@ -2242,7 +2252,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'অ্যাকশন',
+                    'allowed-errors'      => 'অনুমোদিত ত্রুটিগুলি',
+                    'back-btn'            => 'পুনরায় যান',
+                    'create-update'       => 'তৈরি/আপডেট',
+                    'delete'              => 'মুছুন',
+                    'download-sample'     => 'নমুনা ডাউনলোড করুন',
+                    'field-separator'     => 'ক্ষেত্র পৃথককরণকারী',
+                    'file-info-example'   => 'উদাহরণস্বরূপ, পণ্য চিত্রে, ফাইলগুলি অবস্থান করতে হবে /project-root/storage/app/import/product-images',
+                    'file-info'           => 'ব্যবহার করুন /project-root/storage/app/import এর সাথে সম্পর্কিত পথ, উদাহরণস্বরূপ, পণ্য-চিত্র, ইম্পোর্ট-ইমেজ।',
+                    'file'                => 'ফাইল',
+                    'general'             => 'সাধারিত',
+                    'images-directory'    => 'চিত্র ডিরেক্টরি পথ',
+                    'process-in-queue'    => 'কিউতে প্রসেস',
+                    'results'             => 'ফলাফল',
+                    'save-btn'            => 'ইম্পোর্ট সংরক্ষণ করুন',
+                    'settings'            => 'সেটিংস',
+                    'skip-errors'         => 'ত্রুটি অবগত হতে দিন',
+                    'stop-on-errors'      => 'ত্রুটি হতে দিন',
+                    'title'               => 'ইম্পোর্ট তৈরি করুন',
+                    'type'                => 'প্রকার',
+                    'validation-strategy' => 'যাচাইর পদক্ষেপ',
+                ],
+
+                'edit'              => [
+                    'action'              => 'অ্যাকশন',
+                    'allowed-errors'      => 'অনুমোদিত ত্রুটিগুলি',
+                    'back-btn'            => 'পুনরায় যান',
+                    'create-update'       => 'তৈরি/আপডেট',
+                    'delete'              => 'মুছুন',
+                    'download-sample'     => 'নমুনা ডাউনলোড করুন',
+                    'field-separator'     => 'ক্ষেত্র পৃথককরণকারী',
+                    'file-info-example'   => 'উদাহরণস্বরূপ, পণ্য চিত্রে, ফাইলগুলি অবস্থান করতে হবে /project-root/storage/app/import/product-images',
+                    'file-info'           => 'ব্যবহার করুন /project-root/storage/app/import এর সাথে সম্পর্কিত পথ, উদাহরণস্বরূপ, পণ্য-চিত্র, ইম্পোর্ট-ইমেজ।',
+                    'file'                => 'ফাইল',
+                    'general'             => 'সাধারিত',
+                    'images-directory'    => 'চিত্র ডিরেক্টরি পথ',
+                    'process-in-queue'    => 'কিউতে প্রসেস',
+                    'results'             => 'ফলাফল',
+                    'save-btn'            => 'ইম্পোর্ট সংরক্ষণ করুন',
+                    'settings'            => 'সেটিংস',
+                    'skip-errors'         => 'ত্রুটি অবগত হতে দিন',
+                    'stop-on-errors'      => 'ত্রুটি হতে দিন',
+                    'title'               => 'ইম্পোর্ট সম্পাদনা করুন',
+                    'type'                => 'প্রকার',
+                    'validation-strategy' => 'যাচাইর পদক্ষেপ',
+                ],
+
+                'index'             => [
+                    'button-title' => 'ইম্পোর্ট তৈরি করুন',
+                    'title'        => 'ইম্পোর্ট',
+
+                    'datagrid'     => [
+                        'actions'       => 'অ্যাকশন',
+                        'completed-at'  => 'সম্পন্ন হয়েছে',
+                        'created'       => 'তৈরি হয়েছে',
+                        'delete'        => 'মুছুন',
+                        'deleted'       => 'মুছে ফেলা হয়েছে',
+                        'edit'          => 'সম্পাদনা',
+                        'error-file'    => 'ত্রুটি সংক্রান্ত ফাইল',
+                        'id'            => 'আইডি',
+                        'started-at'    => 'শুরু হয়েছে',
+                        'state'         => 'অবস্থা',
+                        'summary'       => 'সংক্ষেপ',
+                        'updated'       => 'হালনাগাদ হয়েছে',
+                        'uploaded-file' => 'আপলোড করা ফাইল',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'পুনরায় যান',
+                    'completed-batches'       => 'মোট ব্যাচ সম্পন্ন:',
+                    'download-error-report'   => 'পূর্ণ রিপোর্ট ডাউনলোড করুন',
+                    'edit-btn'                => 'সম্পাদনা',
+                    'imported-info'           => 'অভিনন্দন! আপনার ইম্পোর্ট সফল হয়েছে।',
+                    'importing-info'          => 'ইম্পোর্ট চলছে',
+                    'indexing-info'           => 'সম্পদের ইনডেক্সিং (মূল্য, মজুত এবং ইলাস্টিক সার্চ) চলছে',
+                    'linking-info'            => 'সম্পদ লিঙ্ক চলছে',
+                    'progress'                => 'অগ্রগতি:',
+                    'title'                   => 'ইম্পোর্ট',
+                    'total-batches'           => 'মোট ব্যাচ:',
+                    'total-created'           => 'মোট রেকর্ড তৈরি হয়েছে:',
+                    'total-deleted'           => 'মোট রেকর্ড মুছে ফেলা হয়েছে:',
+                    'total-errors'            => 'মোট ত্রুটি:',
+                    'total-invalid-rows'      => 'মোট অবৈধ সারি:',
+                    'total-rows-processed'    => 'মোট সারি প্রক্রিয়াজাত:',
+                    'total-updated'           => 'মোট রেকর্ড হালনাগাদ হয়েছে:',
+                    'validate-info'           => 'আপনার ইম্পোর্ট চেক করতে একবার ভ্যালিডেট ডেটা ক্লিক করুন।',
+                    'validate'                => 'যাচাই করুন',
+                    'validating-info'         => 'ডেটা পড়া এবং যাচাই করা শুরু হয়েছে',
+                    'validation-failed-info'  => 'আপনার ইম্পোর্ট অবৈধ। দয়া করে নিম্নলিখিত ত্রুটিগুলি ঠিক করুন এবং আবার চেষ্টা করুন।',
+                    'validation-success-info' => 'আপনার ইম্পোর্ট বৈধ। ইম্পোর্ট করতে ইম্পোর্টে ক্লিক করুন।',
+                ],
+
+                'create-success'    => 'ইম্পোর্ট সফলভাবে তৈরি হয়েছে।',
+                'delete-failed'     => 'ইম্পোর্ট মুছতে বিফল হয়েছে অপ্রত্যাশিতভাবে।',
+                'delete-success'    => 'ইম্পোর্ট সফলভাবে মোছা হয়েছে।',
+                'not-valid'         => 'ইম্পোর্ট অবৈধ',
+                'nothing-to-import' => 'ইম্পোর্ট করার জন্য কোনও সম্পদ নেই।',
+                'setup-queue-error' => 'আপনার ইম্পোর্ট প্রক্রিয়া শুরু করতে "ডাটাবেস" বা "রেডিস" কিউ ড্রাইভার পরিবর্তন করুন।',
+                'update-success'    => 'ইম্পোর্ট সফলভাবে হালনাগাদ হয়েছে।',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'বিনিময় হার তৈরি করুন',
                 'exchange-rate' => 'বিনিময় হার',
@@ -2361,7 +2477,7 @@ return [
             'update-success'    => 'ইনভেন্টরি উৎস সফলভাবে আপডেট হয়েছে',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'আপনি কি নিশ্চিত, আপনি ডিলিট করতে চান?',
@@ -2406,16 +2522,6 @@ return [
                     'button-title' => 'করেট ট্যাক্স রেট',
                     'tax-rate'     => 'কর হার',
                     'title'        => 'কর হার',
-
-                    'import' => [
-                        'duplicate-error'  => 'পুনরায় চিহ্নিত অবশ্যই অদ্বিতীয়, সারি: অবস্থানে চিহ্নিত অদ্বিতীয় হতে হবে।',
-                        'enough-row-error' => 'ফাইলে যথেষ্ট সারি নেই',
-                        'import-btn'       => 'আমদানি',
-                        'title'            => 'আপলোড',
-                        'upload-error'     => 'ফাইল একটি ধরন: xls, xlsx, csv হতে হবে।',
-                        'upload-success'   => 'কর হার সফলভাবে আপলোড হয়েছে',
-                        'validation'       => 'অনুমোদিত প্রকার: xls, xlsx, csv।',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'দেশ',
@@ -2702,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'বিভাগ ক্যারোসেল',
                     'footer-links'      => 'ফুটার লিংক',
-                    'image-carousel'    => 'স্লাইডার ক্যারোসেল',
+                    'image-carousel'    => 'চিত্র ক্যারাসেল',
                     'product-carousel'  => 'পণ্য ক্যারোসেল',
                     'services-content'  => 'পরিষেবা সামগ্রী',
                     'static-content'    => 'স্থির কন্টেন্ট',
@@ -2918,8 +3024,10 @@ return [
             'delete'                       => 'মুছে ফেলুন',
             'enable-at-least-one-payment'  => 'অন্তত একটি পেমেন্ট মেথড সক্রিয় করুন।',
             'enable-at-least-one-shipping' => 'অন্তত একটি শিপিং মেথড সক্রিয় করুন।',
+            'no-result-found'              => 'কোন ফলাফল পাওয়া যায়নি',
             'save-btn'                     => 'কনফিগারেশন সংরক্ষণ করুন',
             'save-message'                 => 'কনফিগারেশনটি সফলভাবে সংরক্ষিত হয়েছে',
+            'search'                       => 'অনুসন্ধান করুন',
             'title'                        => 'কনফিগারেশন',
 
             'general' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => 'মুদ্রা',
                 'customers'                => 'গ্রাহকগণ',
                 'dashboard'                => 'ড্যাশবোর্ড',
+                'data-transfer'            => 'তথ্য স্থানান্তর',
                 'discount'                 => 'ডিসকাউন্ট',
                 'email-templates'          => 'ইমেইল টেমপ্লেটগুলি',
                 'events'                   => 'ইভেন্টগুলি',
                 'exchange-rates'           => 'এক্সচেঞ্জ হার',
                 'groups'                   => 'গোষ্ঠীগণ',
+                'imports'                  => 'আমদানি',
                 'inventory-sources'        => 'মূল মদ',
                 'invoices'                 => 'চালান',
                 'locales'                  => 'লোকেল',
@@ -3529,6 +3639,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length এর',
+                'of'        => 'এর',
+                'per-page'  => 'প্রতি পৃষ্ঠা',
+                'results'   => ':total ফলাফল',
+                'selected'  => ':total নির্বাচিত',
+
                 'mass-actions' => [
                     'submit'        => 'জমা দিন',
                     'select-option' => 'বিকল্প নির্ধারণ করুন',
@@ -3684,8 +3800,8 @@ return [
         'campaigns'                => 'প্রচারণা',
         'cancel'                   => 'বাতিল',
         'cart-rules'               => 'কার্ট নিয়মাবলি',
-        'catalog'                  => 'ক্যাটালগ',
         'catalog-rules'            => 'ক্যাটালগ নিয়মাবলি',
+        'catalog'                  => 'ক্যাটালগ',
         'categories'               => 'বিভাগসমূহ',
         'channels'                 => 'চ্যানেলসমূহ',
         'cms'                      => 'সিএমএস',
@@ -3696,12 +3812,15 @@ return [
         'currencies'               => 'মুদ্রা',
         'customers'                => 'গ্রাহকবৃন্দ',
         'dashboard'                => 'ড্যাশবোর্ড',
+        'data-transfer'            => 'তথ্য স্থানান্তর',
         'delete'                   => 'মুছে ফেলুন',
         'edit'                     => 'সম্পাদনা',
         'email-templates'          => 'ইমেইল টেমপ্লেট',
         'events'                   => 'ইভেন্ট',
         'exchange-rates'           => 'মুদ্রা বিনিময় হার',
         'groups'                   => 'গ্রুপ',
+        'import'                   => 'আমদানি',
+        'imports'                  => 'আমদানি',
         'inventory-sources'        => 'মূল্যবান পণ্যের উৎস',
         'invoices'                 => 'চালান',
         'locales'                  => 'লোকেল',
@@ -3770,6 +3889,7 @@ return [
         'export'           => 'পর্যাপন্ন করুন',
         'no-records'       => 'পর্যাপন্ন কিছু নেই',
         'xls'              => 'XLS',
+        'xlsx'             => 'এক্সএলএসএক্স',
     ],
 
     'validations' => [

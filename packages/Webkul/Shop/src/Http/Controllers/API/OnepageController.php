@@ -97,12 +97,14 @@ class OnepageController extends APIController
      */
     public function storeShippingMethod()
     {
-        $shippingMethod = request()->get('shipping_method');
+        $validatedData = $this->validate(request(), [
+            'shipping_method' => 'required',
+        ]);
 
         if (
             Cart::hasError()
-            || ! $shippingMethod
-            || ! Cart::saveShippingMethod($shippingMethod)
+            || ! $validatedData['shipping_method']
+            || ! Cart::saveShippingMethod($validatedData['shipping_method'])
         ) {
             return response()->json([
                 'redirect_url' => route('shop.checkout.cart.index'),
@@ -121,12 +123,14 @@ class OnepageController extends APIController
      */
     public function storePaymentMethod()
     {
-        $payment = request()->get('payment');
+        $validatedData = $this->validate(request(), [
+            'payment' => 'required',
+        ]);
 
         if (
             Cart::hasError()
-            || ! $payment
-            || ! Cart::savePaymentMethod($payment)
+            || ! $validatedData['payment']
+            || ! Cart::savePaymentMethod($validatedData['payment'])
         ) {
             return response()->json([
                 'redirect_url' => route('shop.checkout.cart.index'),

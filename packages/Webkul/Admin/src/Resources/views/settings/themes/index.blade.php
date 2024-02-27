@@ -34,7 +34,10 @@
     {!! view_render_event('bagisto.admin.settings.themes.list.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-theme-form-template">
+        <script
+            type="text/x-template"
+            id="v-create-theme-form-template"
+        >
             <div>
                 <!-- Theme Create Button -->
                 @if (bouncer()->hasPermission('settings.themes.create'))

@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Müşteri <b>Bilgilendirildi</b>',
                 'discount'              => 'İndirim - :discount',
                 'download-pdf'          => 'PDF İndir',
+                'fraud'                 => 'Sahtekar',
                 'grand-total'           => 'Genel Toplam - :grand_total',
                 'invoice-id'            => 'Fatura #:invoice',
                 'invoices'              => 'Faturalar',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Ödeme ve Gönderim',
                 'payment-method'        => 'Ödeme Yöntemi',
                 'pending'               => 'Beklemede',
+                'pending_payment'       => 'bekleyen ödeme',
                 'per-unit'              => 'Birim Başı',
                 'price'                 => 'Fiyat - :price',
                 'processing'            => 'İşleniyor',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Düzeltme İadesi',
                 'amount-per-unit'             => ':amount Birim Başına x :qty Miktar',
                 'create-success'              => 'İade başarıyla oluşturuldu',
+                'creation-error'              => 'İade oluşturma izin verilmiyor.',
                 'discount-amount'             => 'İndirim Tutarı',
                 'grand-total'                 => 'Genel Toplam',
                 'invalid-qty'                 => 'Faturalanacak ürünlerde geçersiz miktar bulduk.',
@@ -421,18 +424,19 @@ return [
                 'title'                  => 'Fatura #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount Birim Başına x :qty Miktar',
-                'create-invoice'  => 'Fatura Oluştur',
-                'create-success'  => 'Fatura başarıyla oluşturuldu',
-                'creation-error'  => 'Sipariş faturası oluşturulamaz.',
-                'invalid-qty'     => 'Faturalanacak öğeler için geçersiz miktar bulduk.',
-                'invoice'         => 'Fatura',
-                'new-invoice'     => 'Yeni Fatura',
-                'product-error'   => 'Ürün olmadan fatura oluşturulamaz.',
-                'product-image'   => 'Ürün Resmi',
-                'qty-to-invoiced' => 'Faturalanacak Miktar',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Birim Başına x :qty Miktar',
+                'create-invoice'     => 'Fatura Oluştur',
+                'create-success'     => 'Fatura başarıyla oluşturuldu',
+                'create-transaction' => 'İşlem Oluştur',
+                'creation-error'     => 'Sipariş faturası oluşturma izni verilmiyor.',
+                'invalid-qty'        => 'Faturalandırılacak ürünler için geçersiz bir miktar bulduk.',
+                'invoice'            => 'Fatura',
+                'new-invoice'        => 'Yeni Fatura',
+                'product-error'      => 'Ürünler olmadan fatura oluşturulamaz.',
+                'product-image'      => 'Ürün Resmi',
+                'qty-to-invoiced'    => 'Faturalandırılacak Miktar',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -487,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Zaten ödendi',
-                    'invoice-missing'            => 'Fatura eksik',
-                    'transaction-amount-exceeds' => 'İşlem tutarı aşılıyor',
-                    'transaction-amount-zero'    => 'İşlem tutarı sıfır',
-                    'transaction-saved'          => 'İşlem başarıyla kaydedildi',
+                    'amount'                     => 'Miktar',
+                    'create-transaction'         => 'İşlem Oluştur',
+                    'invoice-id'                 => 'Fatura Kimliği',
+                    'invoice-missing'            => 'Fatura Bulunamadı',
+                    'payment-method'             => 'Ödeme Yöntemi',
+                    'save-transaction'           => 'İşlemi Kaydet',
+                    'transaction-amount-exceeds' => 'İşlem Miktarı aşılıyor',
+                    'transaction-amount-zero'    => 'İşlem Miktarı sıfır',
+                    'transaction-saved'          => 'İşlem başarıyla kaydedildi.',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute :max kilobayttan büyük olamaz. Lütfen daha küçük bir dosya seçin.',
                     'title' => 'Videolar',
                     'info'  => 'Maksimum video boyutu :size gibi olmalıdır',
                 ],
@@ -985,7 +995,7 @@ return [
                 'add-btn' => 'Kategori Oluştur',
                 'title'   => 'Kategoriler',
 
-                'datagrid'=> [
+                'datagrid' => [
                     'active'            => 'Aktif',
                     'delete'            => 'Sil',
                     'delete-success'    => 'Seçilen :resource başarıyla silindi',
@@ -1000,7 +1010,7 @@ return [
                 ],
             ],
 
-            'create'=> [
+            'create' => [
                 'add-banner'               => 'Banner Ekle',
                 'add-logo'                 => 'Logo Ekle',
                 'back-btn'                 => 'Geri',
@@ -2158,7 +2168,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Yerel Oluştur',
                 'locale'     => 'Yerel',
@@ -2200,7 +2210,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'title'      => 'Para Birimleri',
                 'create-btn' => 'Para Birimi Oluştur',
@@ -2243,7 +2253,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Aksiyon',
+                    'allowed-errors'      => 'İzin Verilen Hatalar',
+                    'back-btn'            => 'Geri',
+                    'create-update'       => 'Oluştur/Güncelle',
+                    'delete'              => 'Sil',
+                    'download-sample'     => 'Örnek İndir',
+                    'field-separator'     => 'Alan Ayracı',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
+                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file'                => 'Dosya',
+                    'general'             => 'Genel',
+                    'images-directory'    => 'Resim Klasör Yolu',
+                    'process-in-queue'    => 'Sıra İşlemesi',
+                    'results'             => 'Sonuçlar',
+                    'save-btn'            => 'Kaydet Import',
+                    'settings'            => 'Ayarlar',
+                    'skip-errors'         => 'Hataları Atla',
+                    'stop-on-errors'      => 'Hatalara Dur',
+                    'title'               => 'Import Oluştur',
+                    'type'                => 'Tür',
+                    'validation-strategy' => 'Doğrulama Yaklaşımı',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Aksiyon',
+                    'allowed-errors'      => 'İzin Verilen Hatalar',
+                    'back-btn'            => 'Geri',
+                    'create-update'       => 'Oluştur/Güncelle',
+                    'delete'              => 'Sil',
+                    'download-sample'     => 'Örnek İndir',
+                    'field-separator'     => 'Alan Ayracı',
+                    'file-info-example'   => 'Örneğin, urun-resimleri için dosyalar /project-root/storage/app/import/product-images klasörüne yerleştirilmelidir.',
+                    'file-info'           => '/project-root/storage/app/import klasörüne göre mutlak yol kullanın, Örnek: urun-resimleri, import-resimler.',
+                    'file'                => 'Dosya',
+                    'general'             => 'Genel',
+                    'images-directory'    => 'Resim Klasör Yolu',
+                    'process-in-queue'    => 'Sıra İşlemesi',
+                    'results'             => 'Sonuçlar',
+                    'save-btn'            => 'Kaydet Import',
+                    'settings'            => 'Ayarlar',
+                    'skip-errors'         => 'Hataları Atla',
+                    'stop-on-errors'      => 'Hatalara Dur',
+                    'title'               => 'Import Düzenle',
+                    'type'                => 'Tür',
+                    'validation-strategy' => 'Doğrulama Yaklaşımı',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Import Oluştur',
+                    'title'        => 'Importlar',
+
+                    'datagrid' => [
+                        'actions'       => 'Eylemler',
+                        'completed-at'  => 'Tamamlandı İçin',
+                        'created'       => 'Oluşturuldu',
+                        'delete'        => 'Sil',
+                        'deleted'       => 'Silindi',
+                        'edit'          => 'Düzenle',
+                        'error-file'    => 'Hata Dosyası',
+                        'id'            => 'ID',
+                        'started-at'    => 'Başladı',
+                        'state'         => 'Durum',
+                        'summary'       => 'Özet',
+                        'updated'       => 'Güncellendi',
+                        'uploaded-file' => 'Yüklenen Dosya',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Geri',
+                    'completed-batches'       => 'Toplam Tamamlanan Batches:',
+                    'download-error-report'   => 'Tam Hata Raporu İndir',
+                    'edit-btn'                => 'Düzenle',
+                    'imported-info'           => 'Tebrikler! Import işlemi başarıyla gerçekleşti.',
+                    'importing-info'          => 'Import İşlemi Devam Ediyor',
+                    'indexing-info'           => 'Ürün Fiyatı, Stok ve Elastik Arama İndekslemesi Devam Ediyor',
+                    'linking-info'            => 'Ürün Bağlantısı Devam Ediyor',
+                    'progress'                => 'İlerleme:',
+                    'title'                   => 'Import',
+                    'total-batches'           => 'Toplam Batches:',
+                    'total-created'           => 'Toplam Kayıt Oluşturuldu:',
+                    'total-deleted'           => 'Toplam Kayıt Silindi:',
+                    'total-errors'            => 'Toplam Hatalar:',
+                    'total-invalid-rows'      => 'Toplam Geçersiz Satırlar:',
+                    'total-rows-processed'    => 'Toplam İşlenen Satırlar:',
+                    'total-updated'           => 'Toplam Kayıt Güncellendi:',
+                    'validate-info'           => 'Doğrulama Verilerine Tıklayarak importunuzu kontrol edin.',
+                    'validate'                => 'Doğrula',
+                    'validating-info'         => 'Veriler okundu ve Doğrulanıyor',
+                    'validation-failed-info'  => 'Importunuz geçersiz. Aşağıdaki hataları düzeltin ve tekrar deneyin.',
+                    'validation-success-info' => 'Importunuz geçerli. Import işlemini başlatmak için Tıklayın.',
+                ],
+
+                'create-success'    => 'Import başarıyla oluşturuldu.',
+                'delete-failed'     => 'Import silinirken beklenmedik bir hata oluştu.',
+                'delete-success'    => 'Import başarıyla silindi.',
+                'not-valid'         => 'Import geçersiz',
+                'nothing-to-import' => 'İçe aktarmak için kaynak yok.',
+                'setup-queue-error' => 'Import işlemi için "database" veya "redis" olarak kuyruk sürücünü değiştirin.',
+                'update-success'    => 'Import başarıyla güncellendi.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Döviz Kuru Oluştur',
                 'exchange-rate' => 'Döviz Kuru',
@@ -2362,7 +2478,7 @@ return [
             'update-success'    => 'Envanter Kaynakları Başarıyla Güncellendi',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Silmek istediğinizden emin misiniz?',
@@ -2407,16 +2523,6 @@ return [
                     'button-title' => 'Vergi Oranı Oluştur',
                     'tax-rate'     => 'Vergi Oranı',
                     'title'        => 'Vergi Oranları',
-
-                    'import' => [
-                        'duplicate-error'  => 'Kimlik benzersiz olmalı, satır :position\'da tekrarlanan kimlik :identifier.',
-                        'enough-row-error' => 'Dosyada yeterli satır yok',
-                        'import-btn'       => 'İçe Aktar',
-                        'title'            => 'Yükle',
-                        'upload-error'     => 'Dosya tipi: xls, xlsx, csv olmalıdır.',
-                        'upload-success'   => 'Vergi Oranı Başarıyla Yüklendi',
-                        'validation'       => 'İzin verilen Tür: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Ülke',
@@ -2703,7 +2809,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Kategori Karuseli',
                     'footer-links'      => 'Alt Bağlantıları',
-                    'image-carousel'    => 'Resim Karuseli',
+                    'image-carousel'    => 'Görüntü Karuseli',
                     'product-carousel'  => 'Ürün Karuseli',
                     'services-content'  => 'Hizmetlerin İçeriği',
                     'static-content'    => 'Statik İçerik',
@@ -2919,8 +3025,10 @@ return [
             'delete'                       => 'Sil',
             'enable-at-least-one-payment'  => 'En az bir ödeme yöntemi etkinleştirin.',
             'enable-at-least-one-shipping' => 'En az bir nakliye yöntemi etkinleştirin.',
+            'no-result-found'              => 'sonuç bulunamadı',
             'save-btn'                     => 'Yapılandırmayı Kaydet',
             'save-message'                 => 'Yapılandırma başarıyla kaydedildi',
+            'search'                       => 'Aramak',
             'title'                        => 'Yapılandırma',
 
             'general' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => 'Para Birimleri',
                 'customers'                => 'Müşteriler',
                 'dashboard'                => 'Kontrol Paneli',
+                'data-transfer'            => 'Veri aktarımı',
                 'discount'                 => 'İndirim',
                 'email-templates'          => 'E-posta Şablonları',
                 'events'                   => 'Etkinlikler',
                 'exchange-rates'           => 'Döviz Kurları',
                 'groups'                   => 'Gruplar',
+                'imports'                  => 'İthalat',
                 'inventory-sources'        => 'Envanter Kaynakları',
                 'invoices'                 => 'Faturalar',
                 'locales'                  => 'Yerel Ayarlar',
@@ -3529,6 +3639,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length nin',
+                'of'        => 'nin',
+                'per-page'  => 'Sayfa başına',
+                'results'   => ':total Sonuçlar',
+                'selected'  => ':total Seçilen',
+
                 'mass-actions' => [
                     'select-action' => 'Eylem Seç',
                     'select-option' => 'Seçenek Seç',
@@ -3684,24 +3800,27 @@ return [
         'campaigns'                => 'Kampanyalar',
         'cancel'                   => 'İptal',
         'cart-rules'               => 'Sepet Kuralları',
-        'catalog'                  => 'Katalog',
         'catalog-rules'            => 'Katalog Kuralları',
+        'catalog'                  => 'Katalog',
         'categories'               => 'Kategoriler',
         'channels'                 => 'Kanallar',
         'cms'                      => 'İçerik Yönetim Sistemi',
         'communications'           => 'İletişim',
         'configure'                => 'Yapılandır',
         'copy'                     => 'Kopyala',
-        'create'                   => 'Ekle',
+        'create'                   => 'Yaratmak',
         'currencies'               => 'Para Birimleri',
         'customers'                => 'Müşteriler',
         'dashboard'                => 'Kontrol Paneli',
+        'data-transfer'            => 'Veri aktarımı',
         'delete'                   => 'Sil',
         'edit'                     => 'Düzenle',
         'email-templates'          => 'E-posta Şablonları',
         'events'                   => 'Etkinlikler',
         'exchange-rates'           => 'Döviz Kurları',
         'groups'                   => 'Gruplar',
+        'import'                   => 'İçe aktarmak',
+        'imports'                  => 'İthalat',
         'inventory-sources'        => 'Envanter Kaynakları',
         'invoices'                 => 'Faturalar',
         'locales'                  => 'Yerel Ayarlar',
@@ -3765,11 +3884,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'İndir',
-        'export'           => 'Dışa Aktar',
-        'no-records'       => 'Dışa aktarılacak hiçbir şey yok',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'İndir',
+        'export'     => 'Dışa Aktar',
+        'no-records' => 'Dışa aktarılacak hiçbir şey yok',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

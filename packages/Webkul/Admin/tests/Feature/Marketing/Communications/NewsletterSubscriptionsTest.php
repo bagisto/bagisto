@@ -15,7 +15,7 @@ it('should return the subscription index page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.title'));
 });
 
-it('should show the edit page of compaign', function () {
+it('should show the edit page of campaign', function () {
     // Arrange
     $subscriber = SubscribersList::factory()->create();
 

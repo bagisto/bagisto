@@ -62,44 +62,48 @@ class ThemeCustomizationRepository extends Repository
             }
         }
 
-        if (isset($data[$locale]['options'])) {
-            $options = [];
+        if (! isset($data[$locale]['options'])) {
+            return;
+        }
 
-            foreach ($data[$locale]['options'] as $image) {
-                if (isset($image['service_icon'])) {
-                    $options['services'][] = [
-                        'service_icon' => $image['service_icon'],
-                        'description'  => $image['description'],
-                        'title'        => $image['title'],
-                    ];
+        $options = [];
 
-                } elseif ($image['image'] instanceof UploadedFile) {
+        foreach ($data[$locale]['options'] as $image) {
+            if (isset($image['service_icon'])) {
+                $options['services'][] = [
+                    'service_icon' => $image['service_icon'],
+                    'description'  => $image['description'],
+                    'title'        => $image['title'],
+                ];
+            } elseif ($image['image'] instanceof UploadedFile) {
+                try {
                     $manager = new ImageManager();
 
                     $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
 
                     Storage::put($path, $manager->make($image['image'])->encode('webp'));
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
 
-                    if (
-                        isset($data['type'])
-                        && $data['type'] == 'static_content'
-                    ) {
-                        return Storage::url($path);
-                    }
-
-                    $options['images'][] = [
-                        'image' => 'storage/'.$path,
-                        'link'  => $image['link'],
-                    ];
-                } else {
-                    $options['images'][] = $image;
+                    return redirect()->back();
                 }
-            }
 
-            $translatedModel = $theme->translate($locale);
-            $translatedModel->options = $options ?? [];
-            $translatedModel->theme_customization_id = $theme->id;
-            $translatedModel->save();
+                if (($data['type'] ?? '') == 'static_content') {
+                    return Storage::url($path);
+                }
+
+                $options['images'][] = [
+                    'image' => 'storage/'.$path,
+                    'link'  => $image['link'],
+                ];
+            } else {
+                $options['images'][] = $image;
+            }
         }
+
+        $translatedModel = $theme->translate($locale);
+        $translatedModel->options = $options ?? [];
+        $translatedModel->theme_customization_id = $theme->id;
+        $translatedModel->save();
     }
 }

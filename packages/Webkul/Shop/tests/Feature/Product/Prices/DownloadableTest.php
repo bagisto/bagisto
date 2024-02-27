@@ -17,6 +17,70 @@ use Webkul\Tax\Models\TaxRate;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
+it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 0,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for all customer group type', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -86,6 +150,70 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
     $this->assertEquals(round($cartRule->discount_amount, 2), round($response['data']['discount_amount'], 2), '', 0.00000001);
 
     $this->assertEquals(round($product->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for guest customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 0,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for guest customer', function () {
@@ -160,6 +288,70 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
     $this->assertEquals(round($product->price - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for general customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([2]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 0,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    $customer = Customer::factory()->create(['customer_group_id' => 2]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for general customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -229,6 +421,70 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
     $this->assertEquals(round($product->price, 2), round($response['data']['items'][0]['price'], 2), '', 0.00000001);
 
     $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([3]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 0,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should add a downloadable product to the cart with a cart rule of the no coupon type for wholesaler customer', function () {
@@ -302,7 +558,99 @@ it('should add a downloadable product to the cart with a cart rule of the no cou
     $this->assertEquals(round(($product->price * $quantity) - $cartRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
-it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer groupd types', function () {
+it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => $discountAmount = rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 1,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    CartRuleCoupon::factory()->create([
+        'cart_rule_id' => $cartRule->id,
+        'code'         => fake()->numerify('bagisto-########'),
+        'type'         => 0,
+        'is_primary'   => 1,
+    ]);
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    $link = $product->downloadable_links()->first();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cart->id,
+        'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.coupon.apply'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
+});
+
+it('should add a downloadable product to the cart with a cart rule of the specific coupon type for all customer grouped types', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -400,6 +748,95 @@ it('should add a downloadable product to the cart with a cart rule of the specif
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([1]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => $discountAmount = rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 1,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    CartRuleCoupon::factory()->create([
+        'cart_rule_id' => $cartRule->id,
+        'code'         => $couponCode = fake()->numerify('bagisto-########'),
+        'type'         => 0,
+        'is_primary'   => 1,
+    ]);
+
+    $cart = Cart::factory()->create([
+        'customer_email'      => fake()->email(),
+        'customer_first_name' => fake()->firstName(),
+        'customer_last_name'  => fake()->lastName(),
+    ]);
+
+    $link = $product->downloadable_links()->first();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cart->id,
+        'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.coupon.apply'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
+});
+
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for guest customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -493,6 +930,96 @@ it('should add a downloadable product to the cart with a cart rule of the specif
         ->assertJsonPath('data.discount_amount', $discountAmount);
 
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for general customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([2]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => $discountAmount = rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 1,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    CartRuleCoupon::factory()->create([
+        'cart_rule_id' => $cartRule->id,
+        'code'         => $couponCode = fake()->numerify('bagisto-########'),
+        'type'         => 0,
+        'is_primary'   => 1,
+    ]);
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    $link = $product->downloadable_links()->first();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cart->id,
+        'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.coupon.apply'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
 });
 
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for general customer', function () {
@@ -591,6 +1118,96 @@ it('should add a downloadable product to the cart with a cart rule of the specif
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when add a downloadable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
+        $cartRule->cart_rule_customer_groups()->sync([3]);
+
+        $cartRule->cart_rule_channels()->sync([1]);
+    })->create([
+        'name'                      => fake()->uuid(),
+        'description'               => fake()->sentence(),
+        'action_type'               => 'by_fixed',
+        'discount_amount'           => $discountAmount = rand(1, 50),
+        'usage_per_customer'        => rand(1, 50),
+        'uses_per_coupon'           => rand(1, 50),
+        'condition_type'            => 2,
+        'status'                    => 1,
+        'discount_quantity'         => 1,
+        'apply_to_shipping'         => 1,
+        'use_auto_generation'       => 0,
+        'times_used'                => 0,
+        'coupon_type'               => 1,
+        'end_other_rules'           => 0,
+        'uses_attribute_conditions' => 0,
+        'discount_step'             => 0,
+        'free_shipping'             => 0,
+        'sort_order'                => 0,
+        'conditions'                => json_decode('[{"value": "20000", "operator": "<=", "attribute": "cart_item|base_price", "attribute_type": "price"}]'),
+        'starts_from'               => null,
+        'ends_till'                 => null,
+    ]);
+
+    CartRuleCoupon::factory()->create([
+        'cart_rule_id' => $cartRule->id,
+        'code'         => $couponCode = fake()->numerify('bagisto-########'),
+        'type'         => 0,
+        'is_primary'   => 1,
+    ]);
+
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    $cart = Cart::factory()->create([
+        'customer_id'         => $customer->id,
+        'customer_email'      => $customer->email,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name'  => $customer->last_name,
+    ]);
+
+    $link = $product->downloadable_links()->first();
+
+    CartItem::factory()->create([
+        'product_id' => $product->id,
+        'sku'        => $product->sku,
+        'type'       => $product->type,
+        'name'       => $product->name,
+        'cart_id'    => $cart->id,
+        'additional' => json_decode('{"links": ["'.$link->id.'"], "rating": "0", "quantity": 1, "attributes": [{"option_id": 0, "option_label": "'.$link->name.'", "attribute_name": "Downloads"}], "is_buy_now": "0", "product_id": "453"}'),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.coupon.apply'))
+        ->assertJsonValidationErrorFor('code')
+        ->assertUnprocessable();
+});
+
 it('should add a downloadable product to the cart with a cart rule of the specific coupon type for wholesaler customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -687,7 +1304,7 @@ it('should add a downloadable product to the cart with a cart rule of the specif
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
-it('should check tax is appling for the downloadable product into the cart for downloadable product', function () {
+it('should check tax is applying for the downloadable product into the cart for downloadable product', function () {
     // Arrange
     $taxCategory = TaxCategory::factory()->create();
 
@@ -785,6 +1402,50 @@ it('should check tax is appling for the downloadable product into the cart for d
     $this->assertEquals(round($cart->tax_total, 2), round($response['data']['tax_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with fixed price type for downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        'qty'               => rand(2, 5),
+        'value_type'        => 'fixed',
+        'value'             => rand(20, 50),
+        'product_id'        => $product->id,
+        'customer_group_id' => 1,
+    ]);
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => $customerGroupPrice->qty,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should check customer group price for guest customer with fixed price type for downloadable product', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -832,6 +1493,54 @@ it('should check customer group price for guest customer with fixed price type f
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
     $this->assertEquals(round($customerGroupPrice->value * $customerGroupPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when check customer group price for guest customer with discount price type for downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        'qty'               => rand(2, 5),
+        'value_type'        => 'discount',
+        'value'             => rand(20, 50),
+        'product_id'        => $product->id,
+        'customer_group_id' => 1,
+    ]);
+
+    $totalAmount = $product->price * $customerGroupPrice->qty;
+
+    $grandTotal = ($totalAmount - ($totalAmount * ($customerGroupPrice->value / 100)));
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => $customerGroupPrice->qty,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should check customer group price for guest customer with discount price type for downloadable product', function () {
@@ -886,6 +1595,50 @@ it('should check customer group price for guest customer with discount price typ
     $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with fixed price type for downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        'qty'               => rand(2, 5),
+        'value_type'        => 'fixed',
+        'value'             => rand(20, 50),
+        'product_id'        => $product->id,
+        'customer_group_id' => 2,
+    ]);
+
+    $customer = Customer::factory()->create();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => $customerGroupPrice->qty,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should check customer group price for general customer with fixed price type for downloadable product', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -933,6 +1686,50 @@ it('should check customer group price for general customer with fixed price type
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
     $this->assertEquals(round($customerGroupPrice->value * $customerGroupPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when check customer group price for general customer with discount price type for downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        'qty'               => rand(2, 5),
+        'value_type'        => 'discount',
+        'value'             => rand(20, 50),
+        'product_id'        => $product->id,
+        'customer_group_id' => 2,
+    ]);
+
+    $customer = Customer::factory()->create();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => $customerGroupPrice->qty,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should check customer group price for general customer with discount price type for downloadable product', function () {
@@ -987,6 +1784,50 @@ it('should check customer group price for general customer with discount price t
     $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when check customer group price for wholesale customer with fixed price type for downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        'qty'               => rand(2, 5),
+        'value_type'        => 'fixed',
+        'value'             => rand(20, 50),
+        'product_id'        => $product->id,
+        'customer_group_id' => 3,
+    ]);
+
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => $customerGroupPrice->qty,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should check customer group price for wholesale customer with fixed price type for downloadable product', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -1034,6 +1875,50 @@ it('should check customer group price for wholesale customer with fixed price ty
         ->assertJsonPath('data.items_qty', $customerGroupPrice->qty);
 
     $this->assertEquals(round($customerGroupPrice->value * $customerGroupPrice->qty, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when check customer group price for wholesale customer with discount price type for downloadable product', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $customerGroupPrice = ProductCustomerGroupPrice::factory()->create([
+        'qty'               => rand(2, 5),
+        'value_type'        => 'discount',
+        'value'             => rand(20, 50),
+        'product_id'        => $product->id,
+        'customer_group_id' => 3,
+    ]);
+
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => $customerGroupPrice->qty,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should check customer group price for wholesale customer with discount price type for downloadable product', function () {
@@ -1088,6 +1973,53 @@ it('should check customer group price for wholesale customer with discount price
     $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for guest customer into cart', function () {
+    // Arrange
+    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([1]);
+    })->create([
+        'status'     => 1,
+        'sort_order' => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    $grandTotal = $product->price - ($product->price * ($catalogRule->discount_amount / 100));
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should check discount price if catalog rule applied for percentage price for downloadable product for guest customer into cart', function () {
     // Arrange
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -1138,6 +2070,51 @@ it('should check discount price if catalog rule applied for percentage price for
 
     $this->assertEquals(round($grandTotal, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
     $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for general customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([2]);
+    })->create([
+        'status'     => 1,
+        'sort_order' => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should check discount price if catalog rule applied for percentage price for downloadable product for general customer into cart', function () {
@@ -1192,6 +2169,51 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([3]);
+    })->create([
+        'status'     => 1,
+        'sort_order' => 1,
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should check discount price if catalog rule applied for percentage price for downloadable product for wholesaler customer into cart', function () {
     // Arrange
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
@@ -1244,6 +2266,52 @@ it('should check discount price if catalog rule applied for percentage price for
     $this->assertEquals(round($grandTotal, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
 });
 
+it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for downloadable product for guest customer into cart', function () {
+    // Arrange
+    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([1]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act and Assert
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
+});
+
 it('should check discount price if catalog rule applied for fixed price for downloadable product for guest customer into cart', function () {
     // Arrange
     $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
@@ -1293,6 +2361,56 @@ it('should check discount price if catalog rule applied for fixed price for down
 
     $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
     $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not defined when check discount price if catalog rule applied for fixed price for downloadable product for general customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 2]);
+
+    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([2]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for general customer into cart', function () {
@@ -1348,6 +2466,56 @@ it('should check discount price if catalog rule applied for fixed price for down
 
     $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
     $this->assertEquals(round($product->price - $catalogRule->discount_amount, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
+});
+
+it('should fails the validation error when the certain inputs not provided when check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer into cart', function () {
+    // Arrange
+    $customer = Customer::factory()->create(['customer_group_id' => 3]);
+
+    CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
+        $catalogRule->channels()->sync([1]);
+
+        $catalogRule->customer_groups()->sync([3]);
+    })->create([
+        'status'      => 1,
+        'sort_order'  => 1,
+        'action_type' => 'by_fixed',
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            11 => 'price',
+            26 => 'guest_checkout',
+        ],
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+            'featured' => [
+                'boolean_value' => true,
+            ],
+            'price' => [
+                'float_value' => rand(1000, 5000),
+            ],
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))->getDownloadableProductFactory()->create();
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.api.checkout.cart.store', [
+        'quantity'   => 1,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'links'      => $product->downloadable_links()->pluck('id')->toArray(),
+    ]))
+        ->assertJsonValidationErrorFor('product_id')
+        ->assertUnprocessable();
 });
 
 it('should check discount price if catalog rule applied for fixed price for downloadable product for wholesaler customer into cart', function () {

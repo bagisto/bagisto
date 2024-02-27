@@ -1,7 +1,10 @@
 <v-modal-confirm ref="confirmModal"></v-modal-confirm>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-modal-confirm-template">
+    <script
+        type="text/x-template"
+        id="v-modal-confirm-template"
+    >
         <div>
             <transition
                 tag="div"
@@ -42,14 +45,14 @@
                             <div class="px-4 py-3 text-gray-600 dark:text-gray-300 text-left">
                                 @{{ message }}
                             </div>
-                            
+
                             <div class="flex gap-2.5 justify-end px-4 py-2.5">
                                 <button type="button" class="transparent-button" @click="disagree">
                                     @{{ options.btnDisagree }}
                                 </button>
 
                                 <button type="button" class="primary-button" @click="agree">
-                                    @{{ options.btnAgree }} 
+                                    @{{ options.btnAgree }}
                                 </button>
                             </div>
                         </div>
@@ -108,7 +111,7 @@
                     this.options = options;
 
                     this.agreeCallback = agree;
-                    
+
                     this.disagreeCallback = disagree;
                 },
 

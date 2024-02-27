@@ -2,11 +2,16 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\OrderTransaction as OrderTransactionContract;
+use Webkul\Sales\Database\Factories\OrderTransactionFactory;
 
 class OrderTransaction extends Model implements OrderTransactionContract
 {
+    use HasFactory;
+
     /**
      * The table associated with the model.
      *
@@ -24,4 +29,12 @@ class OrderTransaction extends Model implements OrderTransactionContract
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * Create a new factory instance for the model
+     */
+    protected static function newFactory(): Factory
+    {
+        return OrderTransactionFactory::new();
+    }
 }

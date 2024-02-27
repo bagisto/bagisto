@@ -204,6 +204,7 @@ return [
         Webkul\Core\Providers\EnvValidatorServiceProvider::class,
         Webkul\Customer\Providers\CustomerServiceProvider::class,
         Webkul\DataGrid\Providers\DataGridServiceProvider::class,
+        Webkul\DataTransfer\Providers\DataTransferServiceProvider::class,
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\FPC\Providers\FPCServiceProvider::class,
         Webkul\Installer\Providers\InstallerServiceProvider::class,

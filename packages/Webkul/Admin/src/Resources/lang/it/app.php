@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Cliente <b>Notificato</b>',
                 'discount'              => 'Sconto - :discount',
                 'download-pdf'          => 'Scarica PDF',
+                'fraud'                 => 'Frode',
                 'grand-total'           => 'Totale Generale - :grand_total',
                 'invoice-id'            => 'Fattura #:invoice',
                 'invoices'              => 'Fatture',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Pagamento e Spedizione',
                 'payment-method'        => 'Metodo di Pagamento',
                 'pending'               => 'In Attesa',
+                'pending_payment'       => 'In attesa di Pagamento',
                 'per-unit'              => 'Per Unità',
                 'price'                 => 'Prezzo - :price',
                 'processing'            => 'In Elaborazione',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Rimborso di Adeguamento',
                 'amount-per-unit'             => ':amount Per Unità x :qty Quantità',
                 'create-success'              => 'Rimborso creato con successo',
+                'creation-error'              => 'La creazione di rimborsi non è consentita.',
                 'discount-amount'             => 'Importo Sconto',
                 'grand-total'                 => 'Totale Generale',
                 'invalid-qty'                 => 'Abbiamo riscontrato una quantità non valida per la fatturazione degli articoli.',
@@ -422,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount Per Unità x :qty Quantità',
-                'create-invoice'  => 'Crea Fattura',
-                'create-success'  => 'Fattura creata con successo',
-                'creation-error'  => 'La creazione della fattura dell\'ordine non è consentita.',
-                'invalid-qty'     => 'Abbiamo trovato una quantità non valida per la fatturazione degli articoli.',
-                'invoice'         => 'Fattura',
-                'new-invoice'     => 'Nuova Fattura',
-                'product-error'   => 'La fattura non può essere creata senza prodotti.',
-                'product-image'   => 'Immagine Prodotto',
-                'qty-to-invoiced' => 'Qtà. da fatturare',
-                'sku'             => 'SKU - :sku',
+                'amount-per-unit'    => ':amount Per Unità x :qty Quantità',
+                'create-invoice'     => 'Crea Fattura',
+                'create-success'     => 'Fattura creata con successo',
+                'create-transaction' => 'Crea Transazione',
+                'creation-error'     => 'La creazione della fattura dell\'ordine non è consentita.',
+                'invalid-qty'        => 'Abbiamo trovato una quantità non valida per fatturare gli articoli.',
+                'invoice'            => 'Fattura',
+                'new-invoice'        => 'Nuova Fattura',
+                'product-error'      => 'Impossibile creare una fattura senza prodotti.',
+                'product-image'      => 'Immagine del Prodotto',
+                'qty-to-invoiced'    => 'Quantità da fatturare',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -487,10 +491,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Già Pagato',
-                    'invoice-missing'            => 'Fattura Mancante',
-                    'transaction-amount-exceeds' => 'Importo Transazione supera',
-                    'transaction-amount-zero'    => 'Importo Transazione zero',
+                    'already-paid'               => 'Già pagato',
+                    'amount'                     => 'Importo',
+                    'create-transaction'         => 'Crea Transazione',
+                    'invoice-id'                 => 'ID Fattura',
+                    'invoice-missing'            => 'Fattura mancante',
+                    'payment-method'             => 'Metodo di Pagamento',
+                    'save-transaction'           => 'Salva Transazione',
+                    'transaction-amount-exceeds' => 'Importo transazione supera',
+                    'transaction-amount-zero'    => 'Importo transazione zero',
+                    'transaction-saved'          => 'Transazione salvata con successo.',
                 ],
 
                 'view' => [
@@ -604,6 +614,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Errore: :attribute non può essere maggiore di :max kilobyte. Scegliere un file più piccolo, per favore.',
                     'info'  => 'La dimensione massima del video dovrebbe essere di :size',
                     'title' => 'Video',
                 ],
@@ -2157,7 +2168,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Crea Locale',
                 'locale'     => 'Locale',
@@ -2199,7 +2210,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Crea Valuta',
                 'currency'   => 'Valuta',
@@ -2242,7 +2253,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Azione',
+                    'allowed-errors'      => 'Errori Consentiti',
+                    'back-btn'            => 'Indietro',
+                    'create-update'       => 'Crea/Aggiorna',
+                    'delete'              => 'Elimina',
+                    'download-sample'     => 'Scarica Esempio',
+                    'field-separator'     => 'Separatore di Campi',
+                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/app/import, ad esempio: product-images, import-images.',
+                    'file'                => 'File',
+                    'general'             => 'Generale',
+                    'images-directory'    => 'Percorso Directory Immagini',
+                    'process-in-queue'    => 'Elabora nella Coda',
+                    'results'             => 'Risultati',
+                    'save-btn'            => 'Salva Importazione',
+                    'settings'            => 'Impostazioni',
+                    'skip-errors'         => 'Salta Errori',
+                    'stop-on-errors'      => 'Ferma su Errori',
+                    'title'               => 'Crea Importazione',
+                    'type'                => 'Tipo',
+                    'validation-strategy' => 'Strategia di Validazione',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Azione',
+                    'allowed-errors'      => 'Errori Consentiti',
+                    'back-btn'            => 'Indietro',
+                    'create-update'       => 'Crea/Aggiorna',
+                    'delete'              => 'Elimina',
+                    'download-sample'     => 'Scarica Esempio',
+                    'field-separator'     => 'Separatore di Campi',
+                    'file-info-example'   => 'Ad esempio, nel caso delle immagini del prodotto, i file dovrebbero essere collocati nella cartella /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Usa il percorso relativo a /project-root/storage/app/import, ad esempio: product-images, import-images.',
+                    'file'                => 'File',
+                    'general'             => 'Generale',
+                    'images-directory'    => 'Percorso Directory Immagini',
+                    'process-in-queue'    => 'Elabora nella Coda',
+                    'results'             => 'Risultati',
+                    'save-btn'            => 'Salva Importazione',
+                    'settings'            => 'Impostazioni',
+                    'skip-errors'         => 'Salta Errori',
+                    'stop-on-errors'      => 'Ferma su Errori',
+                    'title'               => 'Modifica Importazione',
+                    'type'                => 'Tipo',
+                    'validation-strategy' => 'Strategia di Validazione',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Crea Importazione',
+                    'title'        => 'Importazioni',
+
+                    'datagrid' => [
+                        'actions'       => 'Azioni',
+                        'completed-at'  => 'Completato il',
+                        'created'       => 'Creato',
+                        'delete'        => 'Elimina',
+                        'deleted'       => 'Eliminato',
+                        'edit'          => 'Modifica',
+                        'error-file'    => 'File degli Errori',
+                        'id'            => 'ID',
+                        'started-at'    => 'Iniziato il',
+                        'state'         => 'Stato',
+                        'summary'       => 'Riepilogo',
+                        'updated'       => 'Aggiornato',
+                        'uploaded-file' => 'File Caricato',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Indietro',
+                    'completed-batches'       => 'Totale Batch Completati:',
+                    'download-error-report'   => 'Scarica Rapporto Completo degli Errori',
+                    'edit-btn'                => 'Modifica',
+                    'imported-info'           => 'Congratulazioni! La tua importazione è stata completata con successo.',
+                    'importing-info'          => 'Importazione in Corso',
+                    'indexing-info'           => 'Indicizzazione delle Risorse (Prezzo, Inventario e Ricerca Elastica) in Corso',
+                    'linking-info'            => 'Collegamento delle Risorse in Corso',
+                    'progress'                => 'Progresso:',
+                    'title'                   => 'Importazione',
+                    'total-batches'           => 'Totale Batch:',
+                    'total-created'           => 'Totale Record Creati:',
+                    'total-deleted'           => 'Totale Record Eliminati:',
+                    'total-errors'            => 'Totale Errori:',
+                    'total-invalid-rows'      => 'Totale Righe Non Valide:',
+                    'total-rows-processed'    => 'Totale Righe Elaborate:',
+                    'total-updated'           => 'Totale Record Aggiornati:',
+                    'validate-info'           => 'Clicca su "Valida Dati" per verificare la tua importazione.',
+                    'validate'                => 'Valida',
+                    'validating-info'         => 'Lettura e Validazione dei Dati in Corso',
+                    'validation-failed-info'  => 'La tua importazione non è valida. Correggi gli errori seguenti e riprova.',
+                    'validation-success-info' => 'La tua importazione è valida. Clicca su "Importa" per avviare il processo di importazione.',
+                ],
+
+                'create-success'    => 'Importazione creata con successo.',
+                'delete-failed'     => 'Eliminazione Importazione fallita in modo imprevisto.',
+                'delete-success'    => 'Importazione eliminata con successo.',
+                'not-valid'         => 'Importazione non valida',
+                'nothing-to-import' => 'Non ci sono risorse da importare.',
+                'setup-queue-error' => 'Modifica il tuo gestore di code a "database" o "redis" per avviare il processo di importazione.',
+                'update-success'    => 'Importazione aggiornata con successo.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Crea Tasso di Cambio',
                 'exchange-rate' => 'Tasso di Cambio',
@@ -2361,7 +2478,7 @@ return [
             'update-success'    => 'Sorgenti di Inventario Aggiornate con Successo',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Sei sicuro di voler eliminare?',
@@ -2406,16 +2523,6 @@ return [
                     'button-title' => 'Crea aliquota fiscale',
                     'tax-rate'     => 'Aliquota Fiscale',
                     'title'        => 'Aliquote Fiscali',
-
-                    'import' => [
-                        'duplicate-error'  => 'L\'identificatore deve essere unico, identificatore duplicato :identifier alla riga :position.',
-                        'enough-row-error' => 'Il file non ha abbastanza righe',
-                        'import-btn'       => 'Importa',
-                        'title'            => 'Carica',
-                        'upload-error'     => 'Il file deve essere di tipo: xls, xlsx, csv.',
-                        'upload-success'   => 'Tasso di imposta caricato con successo',
-                        'validation'       => 'Tipo consentito: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Paese',
@@ -2702,7 +2809,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Carosello Categoria',
                     'footer-links'      => 'Link Piè di Pagina',
-                    'image-carousel'    => 'Carosello Immagini',
+                    'image-carousel'    => 'Carosello di immagini',
                     'product-carousel'  => 'Carosello Prodotti',
                     'services-content'  => 'Contenuto Servizi',
                     'static-content'    => 'Contenuto Statico',
@@ -2763,6 +2870,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Valore: :value',
                 'value-input'                   => 'Valore',
+
                 'services-content'              => [
                     'add-btn'            => 'Aggiungi Servizio',
                     'channels'           => 'Canali',
@@ -2918,8 +3026,10 @@ return [
             'delete'                       => 'Elimina',
             'enable-at-least-one-payment'  => 'Abilita almeno un metodo di pagamento.',
             'enable-at-least-one-shipping' => 'Abilita almeno un metodo di spedizione.',
+            'no-result-found'              => 'nessun risultato trovato',
             'save-btn'                     => 'Salva Configurazione',
             'save-message'                 => 'Configurazione salvata con successo',
+            'search'                       => 'Ricerca',
             'title'                        => 'Configurazione',
 
             'general' => [
@@ -2931,10 +3041,10 @@ return [
                     'title' => 'Generale',
 
                     'opzioni-unita' => [
-                        'info'          => 'Imposta le opzioni delle unità.',
-                        'title'         => 'Opzioni dell\'unità',
-                        'title-info'    => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
-                        'unita-peso'    => 'Unità di peso',
+                        'info'           => 'Imposta le opzioni delle unità.',
+                        'title'          => 'Opzioni dell\'unità',
+                        'title-info'     => 'Dimensioni, colore, materiale, personalizzazione, miglioramento della soddisfazione del cliente e adattamento degli acquisti.',
+                        'weight-unit'    => 'Unità di peso',
                     ],
                 ],
 
@@ -2943,16 +3053,16 @@ return [
                     'title' => 'Contenuto',
 
                     'impostazioni' => [
-                        'opzione-ricerca-immagini'=> 'Opzione di ricerca immagini',
-                        'opzioni-confronto'       => 'Opzioni di confronto',
-                        'opzioni-lista-desideri'  => 'Opzioni della lista dei desideri',
-                        'title'                   => 'Impostazioni',
-                        'title-info'              => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
+                        'compare-options'          => 'Opzioni di confronto',
+                        'image-search-option'      => 'Opzione di ricerca immagini',
+                        'title'                    => 'Impostazioni',
+                        'title-info'               => 'Le impostazioni si riferiscono a scelte configurabili che controllano il comportamento di un sistema, di un\'applicazione o di un dispositivo, personalizzate secondo le preferenze e le esigenze dell\'utente.',
+                        'wishlist-options'         => 'Opzioni della lista dei desideri',
                     ],
 
                     'script-personalizzati' => [
-                        'css-personalizzato'        => 'CSS personalizzato',
-                        'javascript-personalizzato' => 'Javascript personalizzato',
+                        'custom-css'                => 'CSS personalizzato',
+                        'custom-javascript'         => 'Javascript personalizzato',
                         'title'                     => 'Script personalizzati',
                         'title-info'                => 'Gli script personalizzati sono pezzi di codice personalizzati creati per aggiungere funzioni o caratteristiche specifiche al software, migliorandone unicità.',
                     ],
@@ -3041,137 +3151,137 @@ return [
                 ],
             ],
 
-            'catalogo' => [
+            'catalog' => [
                 'info'  => 'Catalogo',
                 'title' => 'Catalogo',
 
-                'inventario' => [
-                    'info'  => 'Imposta i back order',
+                'inventory' => [
+                    'info'  => 'Imposta gli ordini differiti',
                     'title' => 'Inventario',
 
-                    'opzioni-stock' => [
-                        'allow-back-orders'  => 'Consenti Back orders',
-                        'title'              => 'Opzioni di stock',
-                        'title-info'         => 'Le opzioni di stock sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di un\'azienda a un prezzo predeterminato, influenzando i potenziali profitti.',
+                    'stock-options' => [
+                        'allow-back-orders'  => 'Consenti ordini differiti',
+                        'title'              => 'Opzioni di Magazzino',
+                        'title-info'         => 'Le opzioni di magazzino sono contratti di investimento che concedono il diritto di acquistare o vendere azioni di una società a un prezzo predeterminato, influenzando i profitti potenziali.',
                     ],
                 ],
 
-                'prodotti' => [
-                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il fronte del negozio, la recensione e la condivisione sociale degli attributi.',
+                'products' => [
+                    'info'  => 'Imposta il checkout per gli ospiti, la pagina di visualizzazione del prodotto, la pagina del carrello, il front-end del negozio, la revisione e la condivisione sociale degli attributi.',
                     'title' => 'Prodotti',
 
-                    'checkout-ospiti' => [
-                        'allow-guest-checkout'      => 'Consenti Checkout per gli Ospiti',
-                        'allow-guest-checkout-hint' => 'Suggerimento: se attivato, questa opzione può essere configurata per ciascun prodotto in modo specifico.',
+                    'guest-checkout' => [
+                        'allow-guest-checkout'      => 'Consenti il checkout per gli ospiti',
+                        'allow-guest-checkout-hint' => 'Suggerimento: Se attivato, questa opzione può essere configurata per ciascun prodotto specificamente.',
                         'title'                     => 'Checkout per gli Ospiti',
                         'title-info'                => 'Il checkout per gli ospiti consente ai clienti di acquistare prodotti senza creare un account, semplificando il processo di acquisto per la comodità e transazioni più veloci.',
                     ],
 
-                    'pagina-visualizzazione-prodotto' => [
-                        'allow-no-of-related-products'  => 'Numero consentito di prodotti correlati',
-                        'allow-no-of-up-sells-products' => 'Numero consentito di prodotti Up-Sell',
-                        'title'                         => 'Configurazione della pagina di visualizzazione del prodotto',
-                        'title-info'                    => 'La configurazione della pagina di visualizzazione del prodotto comporta l\'adattamento del layout e degli elementi sulla pagina di visualizzazione di un prodotto, migliorando l\'esperienza utente e la presentazione delle informazioni.',
+                    'product-view-page' => [
+                        'allow-no-of-related-products'  => 'Numero consentito di Prodotti Correlati',
+                        'allow-no-of-up-sells-products' => 'Numero consentito di Prodotti in Vendita Aggiunti',
+                        'title'                         => 'Configurazione Pagina di Visualizzazione del Prodotto',
+                        'title-info'                    => 'La configurazione della pagina di visualizzazione del prodotto implica l\'adattamento della disposizione e degli elementi sulla pagina di visualizzazione di un prodotto, migliorando l\'esperienza dell\'utente e la presentazione delle informazioni.',
                     ],
 
-                    'pagina-carrello' => [
-                        'allow-no-of-cross-sells-products' => 'Numero consentito di prodotti Cross-Sell',
-                        'title'                            => 'Configurazione della pagina del carrello',
-                        'title-info'                       => 'La configurazione della pagina del carrello comporta la disposizione degli articoli, dei dettagli e delle opzioni sulla pagina del carrello, migliorando l\'interazione dell\'utente e il flusso di acquisto.',
+                    'cart-view-page' => [
+                        'allow-no-of-cross-sells-products' => 'Numero consentito di Prodotti Consigliati',
+                        'title'                            => 'Configurazione Pagina del Carrello',
+                        'title-info'                       => 'La configurazione della pagina del carrello coinvolge il disporre degli articoli, dei dettagli e delle opzioni sulla pagina del carrello degli acquisti, migliorando l\'interazione dell\'utente e il flusso di acquisto.',
                     ],
 
                     'storefront' => [
-                        'da-a-z'                        => 'Da A-Z',
-                        'da-z-a'                        => 'Da Z-A',
-                        'database'                      => 'Database',
-                        'display-pulsante-acquista-ora' => 'Consenti ai clienti di acquistare direttamente i prodotti',
-                        'elastico'                      => 'Ricerca elastica',
-                        'griglia'                       => 'Griglia',
-                        'lista'                         => 'Lista',
-                        'modalita-lista-predefinita'    => 'Modalità lista predefinita',
-                        'modalita-ricerca'              => 'Modalità di ricerca',
-                        'ordinato-per'                  => 'Ordinato per',
-                        'piu-costoso-prima'             => 'Più costoso prima',
-                        'piu-economico-prima'           => 'Più economico prima',
-                        'piu-recenti-prima'             => 'I più recenti prima',
-                        'piu-vecchi-prima'              => 'I più vecchi prima',
-                        'prodotti-per-pagina'           => 'Prodotti per pagina',
-                        'separati-da-virgola'           => 'Separati da virgola',
-                        'title'                         => 'Vetrina',
-                        'title-info'                    => 'La vetrina è l\'interfaccia rivolta ai clienti di un negozio online, che mostra prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                        'buy-now-button-display' => 'Consenti ai clienti di acquistare direttamente i prodotti',
+                        'cheapest-first'         => 'Più Economico Prima',
+                        'comma-separated'        => 'Separati da virgola',
+                        'database'               => 'Database',
+                        'default-list-mode'      => 'Modalità di Elenco Predefinita',
+                        'elastic'                => 'Ricerca Elastica',
+                        'expensive-first'        => 'Più Costoso Prima',
+                        'from-a-z'               => 'Da A-Z',
+                        'from-z-a'               => 'Da Z-A',
+                        'grid'                   => 'Griglia',
+                        'latest-first'           => 'Più Recente Prima',
+                        'list'                   => 'Elenco',
+                        'oldest-first'           => 'Più Vecchio Prima',
+                        'products-per-page'      => 'Prodotti Per Pagina',
+                        'search-mode'            => 'Modalità di Ricerca',
+                        'sort-by'                => 'Ordina Per',
+                        'title'                  => 'Vetrina',
+                        'title-info'             => 'La vetrina è l\'interfaccia rivolta al cliente di un negozio online, mostrando prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
                     ],
 
-                    'immagine-piccola' => [
-                        'altezza'        => 'Altezza',
-                        'larghezza'      => 'Larghezza',
-                        'title'          => 'Immagine piccola',
-                        'title-info'     => 'La vetrina è l\'interfaccia rivolta ai clienti di un negozio online, che mostra prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                    'small-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Piccola',
+                        'title-info' => 'La vetrina è l\'interfaccia rivolta al cliente di un negozio online, mostrando prodotti, categorie e navigazione per un\'esperienza di acquisto senza soluzione di continuità.',
+                        'width'      => 'Larghezza',
                     ],
 
-                    'immagine-media' => [
-                        'altezza'        => 'Altezza',
-                        'larghezza'      => 'Larghezza',
-                        'title'          => 'Immagine media',
-                        'title-info'     => 'L\'immagine media si riferisce a un\'immagine di dimensioni moderate che offre un equilibrio tra dettaglio e spazio dello schermo, comunemente utilizzata per le visualizzazioni.',
+                    'medium-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Media',
+                        'title-info' => 'Un\'immagine di dimensioni medie si riferisce a un\'immagine di dimensioni moderate che offre un equilibrio tra dettaglio e spazio sullo schermo, comunemente utilizzata per le immagini.',
+                        'width'      => 'Larghezza',
                     ],
 
-                    'immagine-grande' => [
-                        'altezza'        => 'Altezza',
-                        'larghezza'      => 'Larghezza',
-                        'title'          => 'Immagine grande',
-                        'title-info'     => 'L\'immagine grande rappresenta un\'immagine ad alta risoluzione che fornisce dettagli e impatto visivo migliorati, spesso utilizzata per mostrare prodotti o grafiche.',
+                    'large-image' => [
+                        'height'     => 'Altezza',
+                        'title'      => 'Immagine Grande',
+                        'title-info' => 'Un\'immagine grande rappresenta un\'immagine ad alta risoluzione che fornisce un dettaglio migliorato e un impatto visivo, spesso utilizzata per mostrare prodotti o grafica.',
+                        'width'      => 'Larghezza',
                     ],
 
-                    'recensione' => [
-                        'allow-guest-review' => 'Consenti recensioni degli ospiti',
+                    'review' => [
+                        'allow-guest-review' => 'Consenti Recensioni degli Ospiti',
                         'title'              => 'Recensione',
-                        'title-info'         => 'Valutazione o valutazione di qualcosa, spesso coinvolgente opinioni e feedback.',
+                        'title-info'         => 'Valutazione o valutazione di qualcosa, spesso coinvolgendo opinioni e feedback.',
                     ],
 
-                    'attributo' => [
-                        'dimensione-upload-file'     => 'Dimensione consentita per il caricamento del file (in Kb)',
-                        'dimensione-upload-immagine' => 'Dimensione consentita per il caricamento dell\'immagine (in Kb)',
-                        'title'                      => 'Attributo',
-                        'title-info'                 => 'Caratteristica o proprietà che definisce un oggetto, influenzandone il comportamento, l\'aspetto o la funzione.',
+                    'attribute' => [
+                        'file-upload-size'  => 'Dimensione di Upload File Consentita (in Kb)',
+                        'image-upload-size' => 'Dimensione di Upload Immagine Consentita (in Kb)',
+                        'title'             => 'Attributo',
+                        'title-info'        => 'Caratteristica o proprietà che definisce un oggetto, influenzando il suo comportamento, aspetto o funzione.',
                     ],
 
-                    'condivisione-sociale' => [
-                        'abilita-condivisione-email'     => 'Abilita la condivisione via email?',
-                        'abilita-condivisione-facebook'  => 'Abilita la condivisione su Facebook?',
-                        'abilita-condivisione-linkedin'  => 'Abilita la condivisione su Linkedin?',
-                        'abilita-condivisione-pinterest' => 'Abilita la condivisione su Pinterest?',
-                        'abilita-condivisione-sociale'   => 'Abilita la condivisione sociale?',
-                        'abilita-condivisione-twitter'   => 'Abilita la condivisione su Twitter?',
-                        'abilita-condivisione-whatsapp'  => 'Abilita la condivisione su WhatsApp?',
-                        'condividi'                      => 'Condividi',
-                        'messaggio-condivisione'         => 'Messaggio di condivisione',
-                        'title'                          => 'Condivisione sociale',
-                        'title-info'                     => 'Condivisione di cose da un sito web con amici su piattaforme di social media come Facebook, Twitter o Instagram.',
+                    'social-share' => [
+                        'enable-share-email'     => 'Abilita Condivisione via Email?',
+                        'enable-share-facebook'  => 'Abilita Condivisione su Facebook?',
+                        'enable-share-linkedin'  => 'Abilita Condivisione su Linkedin?',
+                        'enable-share-pinterest' => 'Abilita Condivisione su Pinterest?',
+                        'enable-share-twitter'   => 'Abilita Condivisione su Twitter?',
+                        'enable-share-whatsapp'  => 'Abilita Condivisione su WhatsApp?',
+                        'enable-social-share'    => 'Abilita Condivisione Sociale?',
+                        'share'                  => 'Condividi',
+                        'share-message'          => 'Messaggio di Condivisione',
+                        'title'                  => 'Condivisione Sociale',
+                        'title-info'             => 'Condividere cose da un sito web con amici su piattaforme di social media come Facebook, Twitter o Instagram.',
                     ],
                 ],
 
-                'snippet-ricchi' => [
+                'rich-snippets' => [
                     'info'  => 'Imposta prodotti e categorie.',
                     'title' => 'Snippet Ricchi',
 
-                    'prodotti' => [
-                        'abilita'               => 'Abilita',
-                        'mostra-categorie'      => 'Mostra Categorie',
-                        'mostra-immagini'       => 'Mostra Immagini',
-                        'mostra-offerte'        => 'Mostra Offerte',
-                        'mostra-peso'           => 'Mostra Peso',
-                        'mostra-recensioni'     => 'Mostra Recensioni',
-                        'mostra-sku'            => 'Mostra SKU',
-                        'mostra-valutazioni'    => 'Mostra Valutazioni',
-                        'title'                 => 'Prodotti',
-                        'title-info'            => 'Articoli disponibili per l\'acquisto o l\'uso, offerti da un\'azienda o un venditore.',
+                    'products' => [
+                        'enable'          => 'Abilita',
+                        'show-categories' => 'Mostra Categorie',
+                        'show-images'     => 'Mostra Immagini',
+                        'show-offers'     => 'Mostra Offerte',
+                        'show-ratings'    => 'Mostra Valutazioni',
+                        'show-reviews'    => 'Mostra Recensioni',
+                        'show-sku'        => 'Mostra SKU',
+                        'show-weight'     => 'Mostra Peso',
+                        'title'           => 'Prodotti',
+                        'title-info'      => 'Articoli disponibili per l\'acquisto o l\'uso, offerti da un\'attività commerciale o da un venditore.',
                     ],
 
-                    'categorie' => [
-                        'abilita'                    => 'Abilita',
-                        'mostra-campo-input-ricerca' => 'Mostra campo di input di ricerca',
-                        'title'                      => 'Categorie',
-                        'title-info'                 => 'Le "Categorie" si riferiscono a gruppi o classificazioni che aiutano a organizzare e raggruppare prodotti o articoli simili per una navigazione e consultazione più semplice.',
+                    'categories' => [
+                        'enable'                  => 'Abilita',
+                        'show-search-input-field' => 'Mostra Campo di Input di Ricerca',
+                        'title'                   => 'Categorie',
+                        'title-info'              => 'Le "Categorie" si riferiscono a gruppi o classificazioni che aiutano a organizzare e raggruppare prodotti o articoli simili insieme per una navigazione più semplice.',
                     ],
                 ],
             ],
@@ -3487,11 +3597,13 @@ return [
                 'currencies'               => 'Valute',
                 'customers'                => 'Clienti',
                 'dashboard'                => 'Dashboard',
+                'data-transfer'            => 'Trasferimento dati',
                 'discount'                 => 'Sconto',
                 'email-templates'          => 'Modelli di Email',
                 'events'                   => 'Eventi',
                 'exchange-rates'           => 'Tassi di Cambio',
                 'groups'                   => 'Gruppi',
+                'imports'                  => 'Importazioni',
                 'inventory-sources'        => 'Fonti di Inventario',
                 'invoices'                 => 'Fatture',
                 'locales'                  => 'Localizzazioni',
@@ -3530,6 +3642,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length di',
+                'of'        => 'di',
+                'per-page'  => 'Per Pagina',
+                'results'   => ':total Risultati',
+                'selected'  => ':total Selezionati',
+
                 'mass-actions' => [
                     'select-action' => 'Seleziona Azione',
                     'select-option' => 'Seleziona Opzione',
@@ -3685,24 +3803,27 @@ return [
         'campaigns'                => 'Campagne',
         'cancel'                   => 'Annulla',
         'cart-rules'               => 'Regole del Carrello',
-        'catalog'                  => 'Catalogo',
         'catalog-rules'            => 'Regole del Catalogo',
+        'catalog'                  => 'Catalogo',
         'categories'               => 'Categorie',
         'channels'                 => 'Canali',
         'cms'                      => 'CMS',
         'communications'           => 'Comunicazioni',
         'configure'                => 'Configura',
         'copy'                     => 'Copia',
-        'create'                   => 'Aggiungi',
+        'create'                   => 'Creare',
         'currencies'               => 'Valute',
         'customers'                => 'Clienti',
         'dashboard'                => 'Dashboard',
+        'data-transfer'            => 'Trasferimento dati',
         'delete'                   => 'Elimina',
         'edit'                     => 'Modifica',
         'email-templates'          => 'Modelli di Email',
         'events'                   => 'Eventi',
         'exchange-rates'           => 'Tassi di Cambio',
         'groups'                   => 'Gruppi',
+        'import'                   => 'Importare',
+        'imports'                  => 'Importazioni',
         'inventory-sources'        => 'Fonti di Inventario',
         'invoices'                 => 'Fatture',
         'locales'                  => 'Localizzazioni',
@@ -3766,11 +3887,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Scarica',
-        'export'           => 'Esporta',
-        'no-records'       => 'Niente da esportare',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Scarica',
+        'export'     => 'Esporta',
+        'no-records' => 'Niente da esportare',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

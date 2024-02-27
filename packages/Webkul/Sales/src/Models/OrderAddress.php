@@ -22,8 +22,14 @@ class OrderAddress extends Address implements OrderAddressContract
 {
     use HasFactory;
 
+    /**
+     * Define the shipping address.
+     */
     public const ADDRESS_TYPE_SHIPPING = 'order_shipping';
 
+    /**
+     * Define the billing address
+     */
     public const ADDRESS_TYPE_BILLING = 'order_billing';
 
     /**

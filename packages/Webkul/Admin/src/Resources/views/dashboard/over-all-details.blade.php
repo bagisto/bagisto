@@ -1,14 +1,17 @@
 <!-- Over Details Vue Component -->
 <v-dashboard-overall-details>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.over-all-details/>
+    <x-admin::shimmer.dashboard.over-all-details />
 </v-dashboard-overall-details>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-overall-details-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-overall-details-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.over-all-details/>
+            <x-admin::shimmer.dashboard.over-all-details />
         </template>
 
         <!-- Total Sales Section -->

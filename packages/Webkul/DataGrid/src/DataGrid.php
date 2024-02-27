@@ -209,7 +209,7 @@ abstract class DataGrid
             'sort'        => ['sometimes', 'required', 'array'],
             'pagination'  => ['sometimes', 'required', 'array'],
             'export'      => ['sometimes', 'required', 'boolean'],
-            'format'      => ['sometimes', 'required', 'in:xls,csv'],
+            'format'      => ['sometimes', 'required', 'in:csv,xls,xlsx'],
         ]);
 
         return request()->only(['filters', 'sort', 'pagination', 'export', 'format']);
@@ -235,6 +235,20 @@ abstract class DataGrid
                 $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
 
                 switch ($column->type) {
+                    case ColumnTypeEnum::STRING->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
+                            }
+                        });
+
+                    case ColumnTypeEnum::INTEGER->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
+                            }
+                        });
+
                     case ColumnTypeEnum::DROPDOWN->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
@@ -364,6 +378,8 @@ abstract class DataGrid
         }
 
         foreach ($paginator['data'] as $record) {
+            $record = $this->sanitizeRow($record);
+
             foreach ($this->columns as $column) {
                 if ($closure = $column->closure) {
                     $record->{$column->index} = $closure($record);
@@ -420,6 +436,31 @@ abstract class DataGrid
         $this->setQueryBuilder();
 
         $this->processRequest();
+    }
+
+    /**
+     * Prepare all the setup for datagrid.
+     */
+    public function sanitizeRow($row): \stdClass
+    {
+        /**
+         * Convert stdClass to array.
+         */
+        $tempRow = json_decode(json_encode($row), true);
+
+        foreach ($tempRow as $column => $value) {
+            if (! is_string($tempRow[$column])) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                return $this->sanitizeRow($tempRow[$column]);
+            } else {
+                $row->{$column} = strip_tags($value);
+            }
+        }
+
+        return $row;
     }
 
     /**

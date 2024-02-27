@@ -106,7 +106,7 @@ it('should fail the validation with errors when certain inputs are not provided 
     // Arrange
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id))
@@ -123,7 +123,7 @@ it('should fail the validation with errors if certain data is not provided corre
     // Arrange
     $product = (new ProductFaker())->getDownloadableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -185,11 +185,11 @@ it('should download the product which is downloadable', function () {
 
     $fileName = $file->store('product/'.$product->id);
 
-    $atttributeValues = ProductAttributeValue::where('product_id', $product->id)
+    $attributeValues = ProductAttributeValue::where('product_id', $product->id)
         ->where('attribute_id', $attribute->id)->first();
 
-    $atttributeValues->text_value = $fileName;
-    $atttributeValues->save();
+    $attributeValues->text_value = $fileName;
+    $attributeValues->save();
 
     // Act and Assert
     $this->loginAsAdmin();
@@ -219,7 +219,7 @@ it('should update the downloadable product', function () {
         ],
     ]))->getDownloadableProductFactory()->create();
 
-    // Act and Asssert
+    // Act and Assert
     $this->loginAsAdmin();
 
     putJson(route('admin.catalog.products.update', $product->id), [
@@ -241,7 +241,7 @@ it('should update the downloadable product', function () {
                 'downloads'   => '1',
                 'sort_order'  => '0',
                 'type'        => 'file',
-                'file'        => $file1 = UploadedFile::fake()->create('ProductImageExampleForUpload1.jpg'),
+                'file'        => $file1 = UploadedFile::fake()->image('ProductImageExampleForUpload1.jpg'),
                 'file_name'   => $file1->getClientOriginalName(),
                 'sample_type' => 'url',
                 'sample_url'  => fake()->url(),
@@ -255,10 +255,10 @@ it('should update the downloadable product', function () {
                 'downloads'        => '1',
                 'sort_order'       => '1',
                 'type'             => 'file',
-                'file'             => $file2 = UploadedFile::fake()->create('ProductImageExampleForUpload2.jpg'),
+                'file'             => $file2 = UploadedFile::fake()->image('ProductImageExampleForUpload2.jpg'),
                 'file_name'        => $file2->getClientOriginalName(),
                 'sample_type'      => 'file',
-                'sample_file'      => $file3 = UploadedFile::fake()->create('ProductImageExampleForUpload3.jpg'),
+                'sample_file'      => $file3 = UploadedFile::fake()->image('ProductImageExampleForUpload3.jpg'),
                 'sample_file_name' => $file3->getClientOriginalName(),
             ],
         ],
@@ -268,7 +268,7 @@ it('should update the downloadable product', function () {
                 'title'      => fake()->title(),
                 'sort_order' => '0',
                 'type'       => 'file',
-                'file'       => $file4 = UploadedFile::fake()->create('ProductImageExampleForUpload4.jpg'),
+                'file'       => $file4 = UploadedFile::fake()->image('ProductImageExampleForUpload4.jpg'),
                 'file_name'  => $file4->getClientOriginalName(),
             ],
 

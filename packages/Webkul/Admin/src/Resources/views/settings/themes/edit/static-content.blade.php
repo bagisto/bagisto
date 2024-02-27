@@ -1,8 +1,11 @@
 <!-- Static-Content Component -->
-<v-static-content />
+<v-static-content></v-static-content>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-static-content-template">
+    <script
+        type="text/x-template"
+        id="v-static-content-template"
+    >
         <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
             <div class="flex flex-col gap-2 flex-1 min-w-[931px] max-xl:flex-auto">
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
@@ -36,6 +39,7 @@
                                 class="hidden"
                                 accept="image/*"
                                 ref="static_image"
+                                label="Image"
                                 @change="storeImage($event)"
                             >
                         </div>
@@ -377,7 +381,11 @@
                                 line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
                             });
                         })
-                        .catch((error) => {});
+                        .catch((error) => {
+                            if (error.response.status == 422) {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                            }
+                        });
                 },
             },
         });

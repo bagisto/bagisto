@@ -24,13 +24,16 @@
         </div>
 
         <!-- DataGrid Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-locales>
 
     {!! view_render_event('bagisto.admin.settings.locales.create.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-locales-template">
+        <script
+            type="text/x-template"
+            id="v-locales-template"
+        >
             <div class="flex  gap-4 justify-between items-center max-sm:flex-wrap">
                 <p class="text-xl text-gray-800 dark:text-white font-bold">
                     @lang('admin::app.settings.locales.index.title')
@@ -220,7 +223,8 @@
                                 <v-media-images
                                     name="logo_path"
                                     :uploaded-images='locale.image'
-                                />
+                                >
+                                </v-media-images>
 
                                 <x-admin::form.control-group.error control-name="logo_path" />
                             </x-admin::form.control-group>

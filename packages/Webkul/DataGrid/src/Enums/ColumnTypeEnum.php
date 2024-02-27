@@ -5,6 +5,16 @@ namespace Webkul\DataGrid\Enums;
 enum ColumnTypeEnum: string
 {
     /**
+     * String.
+     */
+    case STRING = 'string';
+
+    /**
+     * Integer.
+     */
+    case INTEGER = 'integer';
+
+    /**
      * Boolean.
      */
     case BOOLEAN = 'boolean';

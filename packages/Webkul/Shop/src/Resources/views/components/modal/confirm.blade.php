@@ -1,7 +1,10 @@
 <v-modal-confirm ref="confirmModal"></v-modal-confirm>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-modal-confirm-template">
+    <script
+        type="text/x-template"
+        id="v-modal-confirm-template"
+    >
         <div>
             <transition
                 tag="div"
@@ -14,7 +17,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-20"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -30,7 +33,7 @@
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
+                    class="fixed inset-0 z-20 transform transition overflow-y-auto" v-show="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div class="w-full max-w-[475px] z-[999] absolute left-1/2 top-1/2 p-5 rounded-xl bg-white overflow-hidden max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
@@ -40,7 +43,7 @@
                                         <i class="icon-error text-3xl"></i>
                                     </span>
                                 </div>
-                            
+
                                 <div>
                                     <div class="flex gap-5 justify-between items-center text-xl">
                                         @{{ title }}
@@ -49,7 +52,7 @@
                                     <div class="pt-1.5 pb-5 text-sm text-[#727272] text-left">
                                         @{{ message }}
                                     </div>
-                                    
+
                                     <div class="flex gap-2.5 justify-end">
                                         <button type="button" class="secondary-button" @click="disagree">
                                             @{{ options.btnDisagree }}
@@ -117,7 +120,7 @@
                     this.options = options;
 
                     this.agreeCallback = agree;
-                    
+
                     this.disagreeCallback = disagree;
                 },
 

@@ -112,13 +112,13 @@ return [
                 'title'         => 'admin::app.configuration.index.general.design.admin-logo.logo-image',
                 'type'          => 'image',
                 'channel_based' => false,
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ], [
                 'name'          => 'favicon',
                 'title'         => 'admin::app.configuration.index.general.design.admin-logo.favicon',
                 'type'          => 'image',
                 'channel_based' => false,
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
             ],
         ],
     ], [
@@ -545,13 +545,15 @@ return [
         'sort'   => 8,
         'fields' => [
             [
-                'name'  => 'image_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
-                'type'  => 'text',
+                'name'       => 'image_attribute_upload_size',
+                'title'      => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
+                'type'       => 'text',
+                'validation' => 'numeric',
             ], [
-                'name'  => 'file_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
-                'type'  => 'text',
+                'name'       => 'file_attribute_upload_size',
+                'title'      => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
+                'type'       => 'text',
+                'validation' => 'numeric',
             ],
         ],
     ], [

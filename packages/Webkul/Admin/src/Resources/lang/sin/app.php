@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | පාරිභෝගිකයා <b> කටින් කියාපාදුනා</b>',
                 'discount'              => 'වට්ටම - :discount',
                 'download-pdf'          => 'PDF බාගත කරන්න',
+                'fraud'                 => 'වංචාව',
                 'grand-total'           => 'සාමාජික සාමාජිකය - :grand_total',
                 'invoice-id'            => 'කාර්තු #:invoice',
                 'invoices'              => 'කාර්තු',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'ගෙවීම සහ නාවිකාව',
                 'payment-method'        => 'ගෙවීමේ ක්රමය',
                 'pending'               => 'අපේක්ෂක',
+                'pending_payment'       => 'පොරොත්තු ගෙවීම',
                 'per-unit'              => 'එකට',
                 'price'                 => 'මිල - :price',
                 'processing'            => 'සැකසීම',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'අභ්‍යාවශ්‍ය ආදානය',
                 'amount-per-unit'             => ':amount ප්රමාණය අනු :qty ප්‍රමාණයක්',
                 'create-success'              => 'ආදානය සාර්ථකයි',
+                'creation-error'              => 'හරියට ආරාධනා නොවිය යුතුය.',
                 'discount-amount'             => 'මුදලේ වටිනාකම',
                 'grand-total'                 => 'මහේ මුලු මුදල',
                 'invalid-qty'                 => 'අමුදල අසාර්ථකයි.',
@@ -421,18 +424,19 @@ return [
                 'title'                  => 'අනුවා #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount ප්‍රත්ත්‍රයක් x :qty ප්‍රමාණයක්',
-                'create-invoice'  => 'ඉලෙක්ෂනය තනන්න',
-                'create-success'  => 'ඉලෙක්ෂන සාර්ථකයෙන් සෑදීම',
-                'creation-error'  => 'ඇණවුම් ඉලෙක්ෂනය හුවමාරු කිරීම සඳහා ඉඩ හැකියි.',
-                'invalid-qty'     => 'අපි ඉලෙක්ෂනයක් සඳහා අවලංගු ප්‍රමාණයක් සොයාගෙන ඇත.',
-                'invoice'         => 'ඉලෙක්ෂන',
-                'new-invoice'     => 'නව ඉලෙක්ෂන',
-                'product-error'   => 'නිෂ්පාදනය නොමැතිව ඉලෙක්ෂනය සෑදීමට හෝඳයේ නොහැක.',
-                'product-image'   => 'නිෂ්පාදන පින්තූරය',
-                'qty-to-invoiced' => 'ඉලෙක්ෂන කිරීමට අයදුම්පත',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount ප්‍රයෝජනයට x :qty ප්‍රමාණය',
+                'create-invoice'     => 'ඉල්ලීම් නිර්මාණය කරන්න',
+                'create-success'     => 'ඉල්ලීම් සාර්ථකව නිර්මාණය කරන ලදි',
+                'create-transaction' => 'ගනුදෙනු නිර්මාණය කරන්න',
+                'creation-error'     => 'ඇනවුම් ඉල්ලීම් නිර්මාණය කළ නොහැක.',
+                'invalid-qty'        => 'අයිතමයන් දක්වා නිවැරදි ප්‍රමාණය ලබා ගත යුතුයි.',
+                'invoice'            => 'ඉල්ලීම්',
+                'new-invoice'        => 'නව ඉල්ලීම්',
+                'product-error'      => 'නිෂ්පාදන විකල්පයන් නොමැති විකාශනය කළ නොහැක.',
+                'product-image'      => 'නිෂ්පාදන පින්තූරය',
+                'qty-to-invoiced'    => 'ඉල්ලීම් කිරීම සඳහා ප්‍රමාණය',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -486,11 +490,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'දැක්කාක් ගෙවිය යුතුය',
-                    'invoice-missing'            => 'ක්රෙඩිට් නොපවතියි',
-                    'transaction-amount-exceeds' => 'ක්රෙඩිට් මුදල වඩාත් විය',
-                    'transaction-amount-zero'    => 'ක්රෙඩිට් මුදල වෙනස් විය',
-                    'transaction-saved'          => 'ක්රෙඩිට් සුරකින්න සාර්ථකව',
+                    'already-paid'               => 'දැනටම් ගෙවිය යුතු ලැබී ඇත',
+                    'amount'                     => 'මුදල',
+                    'create-transaction'         => 'සාදන්න ගිවිසුම',
+                    'invoice-id'                 => 'පිවිසුම් අංකය',
+                    'invoice-missing'            => 'පිවිසුම් නොමැත',
+                    'payment-method'             => 'ගෙවීමේ ක්‍රමය',
+                    'save-transaction'           => 'සාදන්නවාද සුරක්ෂිත කරන්න',
+                    'transaction-amount-exceeds' => 'සාදන්නවාද මුදල ඉක්මවූ',
+                    'transaction-amount-zero'    => 'සාදන්නවාද මුදල සිහිකැඳවලි',
+                    'transaction-saved'          => 'සාදන්නවාද සුරක්ෂිතව සුරක්ෂිත විය.',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => ':attribute එක :max කිලෝබයිට් ට වඩා වැඩි නොවිය හැක. කරුණාකර කුඩා ගොනුවක් තෝරන්න.',
                     'title' => 'වීඩියෝ',
                     'info'  => 'උපරිම වීඩියෝ ප්‍රමාණය :size වේ',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'මාතෘකාවක් සාදන්න',
                 'locale'     => 'භාෂාව',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'මුදල් සාදන්න',
                 'currency'   => 'මුදල',
@@ -2242,7 +2252,112 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'ක්‍රියාව',
+                    'allowed-errors'      => 'ඉඩ දෙන දෝෂ',
+                    'back-btn'            => 'ආපසු',
+                    'create-update'       => 'සාදන්න/යාවත්කාලීන කරන්න',
+                    'delete'              => 'මකන්න',
+                    'download-sample'     => 'උදව් පිටපත බාගන්න',
+                    'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',
+                    'file-info-example'   => 'සින්හල භාවිතා කිරීමට එක් උදාහරණය, උදාහරණයේ උපාංග පින්තූරේ සින්හල අරමුණ බහුල නොවනු ඇත. උදාහරණයේ /project-root/storage/app/import/product-images ෆෝල්ඩරයට ගෙන යන්න.',
+                    'file-info'           => '/project-root/storage/app/import වෙත ස්ථානය හැඳින්වීමෙන් පහත පෙන්වන අතර, product-images, import-images සින්හල භාවිතා කරන්න.',
+                    'file'                => 'ගොනුව',
+                    'general'             => 'සාමාන්‍ය',
+                    'images-directory'    => 'රූප ඩිරෙක්ටරි පාත් මාර්ගය',
+                    'process-in-queue'    => 'කිහිපයෙහි ක්‍රියාකාරී',
+                    'results'             => 'ප්‍රතිඵල',
+                    'save-btn'            => 'අනුරූපනය කරන්න',
+                    'settings'            => 'සැකසුම්',
+                    'skip-errors'         => 'දෝෂ අක් කරන්න',
+                    'stop-on-errors'      => 'දෝෂ අත් කරන්න',
+                    'title'               => 'අලුත්ම ආනයනය',
+                    'type'                => 'වර්ගය',
+                    'validation-strategy' => 'වලාකුළු ක්‍රමය',
+                ],
+
+                'edit'              => [
+                    'action'              => 'ක්‍රියාව',
+                    'allowed-errors'      => 'ඉඩ දෙන දෝෂ',
+                    'back-btn'            => 'ආපසු',
+                    'create-update'       => 'සාදන්න/යාවත්කාලීන කරන්න',
+                    'delete'              => 'මකන්න',
+                    'download-sample'     => 'උදව් පිටපත බාගන්න',
+                    'field-separator'     => 'ක්ෂේත්‍ර වෙක්වීමක්',
+                    'file-info-example'   => 'සින්හල භාවිතා කිරීමට එක් උදාහරණය, උදාහරණයේ උපාංග පින්තූරේ සින්හල අරමුණ බහුල නොවනු ඇත. උදාහරණයේ /project-root/storage/app/import/product-images ෆෝල්ඩරයට ගෙන යන්න.',
+                    'file'                => 'ගොනුව',
+                    'general'             => 'සාමාන්‍ය',
+                    'images-directory'    => 'රූප ඩිරෙක්ටරි පාත් මාර්ගය',
+                    'process-in-queue'    => 'කිහිපයෙහි ක්‍රියාකාරී',
+                    'results'             => 'ප්‍රතිඵල',
+                    'save-btn'            => 'අනුරූපනය කරන්න',
+                    'settings'            => 'සැකසුම්',
+                    'skip-errors'         => 'දෝෂ අක් කරන්න',
+                    'stop-on-errors'      => 'දෝෂ අත් කරන්න',
+                    'title'               => 'සංස්කරණය කරන්න',
+                    'type'                => 'වර්ගය',
+                    'validation-strategy' => 'වලාකුළු ක්‍රමය',
+                ],
+
+                'index'             => [
+                    'button-title' => 'අලුත්ම ආනයනය',
+                    'title'        => 'ආනයනයන්',
+
+                    'datagrid'    => [
+                        'actions'       => 'ක්‍රියාවලිය',
+                        'completed-at'  => 'සම්පූර්ණ කරන ලද දිනය',
+                        'created'       => 'නිර්දේශිය කරන ලද දිනය',
+                        'delete'        => 'මකන්න',
+                        'deleted'       => 'මකා ඇත',
+                        'edit'          => 'සංස්කරණය කරන්න',
+                        'error-file'    => 'දෝෂ ගොනුව',
+                        'id'            => 'අංකය',
+                        'started-at'    => 'සම්පූර්ණ කරන ලද දිනය',
+                        'state'         => 'තර්කරනය',
+                        'summary'       => 'සාරාංශය',
+                        'updated'       => 'යාවත්කාලීන කරන ලද දිනය',
+                        'uploaded-file' => 'උඩුගත කළ ගොනුව',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'ආපසු',
+                    'completed-batches'       => 'මුල් කැඳවීම් සම්පූර්ණ:',
+                    'download-error-report'   => 'සමාලෝචනා පිටුව බාගන්න',
+                    'edit-btn'                => 'සංස්කරණය කරන්න',
+                    'imported-info'           => 'ස්ථිර වූයේ! ඔබගේ ආනයනය සාර්ථකව සම්පූර්ණ විය.',
+                    'importing-info'          => 'ආනයනය ප්‍රතිපල කිරීමෙන්',
+                    'indexing-info'           => 'සම්පූර්ණ කිරීම් (මිල, ප්‍රමාණය සහ ස්වයංක්‍රීය සේල්ස්) කර ඇත',
+                    'linking-info'            => 'සම්පූර්ණ කිරීම් ක්‍රම සම්පූර්ණයේ',
+                    'progress'                => 'ක්‍රියාත්මකය:',
+                    'title'                   => 'ආනයනය',
+                    'total-batches'           => 'මුල් කැඳවීම්:',
+                    'total-created'           => 'මුළු සාදන ලද වාර්තා:',
+                    'total-deleted'           => 'මුළු මකා ඇත්තා:',
+                    'total-errors'            => 'මුළු දෝෂ:',
+                    'total-invalid-rows'      => 'මුළු අවලංගු පේළි:',
+                    'total-rows-processed'    => 'මුළු ප්‍රතිපල කරන ලද පේළි:',
+                    'total-updated'           => 'මුළු යාවත්කාලීන කළ ලද වාර්තා:',
+                    'validate-info'           => 'ඔබගේ ආනයනය පරීක්ෂා කිරීම සඳහා වලංගු කරන්න.',
+                    'validate'                => 'වලංගු කරන්න',
+                    'validating-info'         => 'දත්ත කියවීම සහ වලාකුළු කිරීම ආරම්භය කර ඇත',
+                    'validation-failed-info'  => 'ඔබගේ ආනයනය වලංගු නොවේ. කරුණාකර පහත දෝෂ සදහා අවස්ථාව ලබා ගන්න.',
+                    'validation-success-info' => 'ඔබගේ ආනයනය වලංගු වේ. ආනයනය ආරම්භ කිරීමට ක්ලික් කරන්න.',
+                ],
+
+                'create-success'    => 'ආනයනය සාර්ථකව සෑදීම.',
+                'delete-failed'     => 'ආනයනය අපහසුයි අක්රිය කරන්නේ නැත.',
+                'delete-success'    => 'ආනයනය සාර්ථකව ඉවත් කර ඇත.',
+                'not-valid'         => 'ආනයනය වලංගු නොවේ',
+                'nothing-to-import' => 'ආනයනය සඳහා කිසිදු ඉල්ලීමක් නොමැත.',
+                'setup-queue-error' => 'කරන ලද ආනයනය සැකසුම "දත්තර ගොනුව" හෝ "රීදිස්" දර්ශකයට වෙනස් කරන්න.',
+                'update-success'    => 'ආනයනය සාර්ථකව යාවත්කාලීන කර ඇත.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'වාරික තාක්ෂණය සාදන්න',
                 'exchange-rate' => 'වාරික තාක්ෂණය',
@@ -2361,7 +2476,7 @@ return [
             'update-success'    => 'මානන ගණනයක් සාර්ථකව යාවත්කාලීන කරන ලදි.',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'ඔබට මමත් මකන්න යන්නෙයි නම් නැරඹෙයිද?',
@@ -2406,16 +2521,6 @@ return [
                     'button-title' => 'වර්ගය සාදන්නා ගාණන්',
                     'tax-rate'     => 'බදා අනුපාත',
                     'title'        => 'බදා අනුපාත',
-
-                    'import' => [
-                        'duplicate-error'  => 'හැඳුනුම්කරු විවෘත විය යුතුය, පේළිය:position හි අනුපාත හැඳුනුම්කරු :identifier.',
-                        'enough-row-error' => 'ගොනුවේ සුලු පේළියෙන් පසු සහිත විස්තර නොමැත',
-                        'import-btn'       => 'ආයුක්ත',
-                        'title'            => 'උඩුගත',
-                        'upload-error'     => 'ගොනුවේ වර්ගය: xls, xlsx, csv යෙදී හෝදින් හැකි යැයි විය හැක.',
-                        'upload-success'   => 'බදු අනුවාදය සාර්ථකව උඩුගත වී ඇත',
-                        'validation'       => 'ඉඩ දෙන වර්ගය: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'රට',
@@ -2702,7 +2807,7 @@ return [
                 'type' => [
                     'category-carousel' => 'ප්‍රවේශ කැරූසල්',
                     'footer-links'      => 'පිටු සල්ලි',
-                    'image-carousel'    => 'පින්තූර කැරූසල්',
+                    'image-carousel'    => 'රූප කැරැසල්',
                     'product-carousel'  => 'නිෂ්පාදන කැරූසල්',
                     'services-content'  => 'සේවා අන්තර්ගතය',
                     'static-content'    => 'ස්ථිර අන්තරජනනය',
@@ -2918,8 +3023,10 @@ return [
             'delete'                       => 'මකනවා',
             'enable-at-least-one-payment'  => 'අවශ්‍යයින් එකක් ගෙවා කරන්න.',
             'enable-at-least-one-shipping' => 'අවශ්‍යයින් එකක් ප්‍රවේශ කරන්න.',
+            'no-result-found'              => 'ප්‍රතිඵලයක් හමු නොවීය',
             'save-btn'                     => 'සුරක්ෂිතය සුරන්න',
             'save-message'                 => 'සුරක්ෂිතය සුරක්ෂිතව සුරක්ෂිත කරන ලදි',
+            'search'                       => 'සෙවීම',
             'title'                        => 'සැකසුම්',
 
             'general' => [
@@ -3486,11 +3593,13 @@ return [
                 'currencies'               => 'මුදල්',
                 'customers'                => 'පාරිභාවයෙන්',
                 'dashboard'                => 'මුල් පටුන',
+                'data-transfer'            => 'දත්ත හුවමාරු',
                 'discount'                 => 'අවශ්‍ය',
                 'email-templates'          => 'ඊමේල් අවිස්සාවේ',
                 'events'                   => 'සිහිල්',
                 'exchange-rates'           => 'මුදල් පරිමාණ',
                 'groups'                   => 'සමූහ',
+                'imports'                  => 'ආනයන',
                 'inventory-sources'        => 'උපාංග',
                 'invoices'                 => 'ගොනුව',
                 'locales'                  => 'ස්ථාන',
@@ -3529,6 +3638,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length යාවත්කාලීන',
+                'of'        => 'යාවත්කාලීන',
+                'per-page'  => 'පිටුවක පිටුවක',
+                'results'   => ':total ප්‍රතිඵල',
+                'selected'  => ':total තෝරාගත්',
+
                 'mass-actions' => [
                     'select-action' => 'ක්‍රියාකාරකම තෝරන්න',
                     'select-option' => 'විකල්ප තෝරන්න',
@@ -3684,24 +3799,27 @@ return [
         'campaigns'                => 'පෙට්ටිය',
         'cancel'                   => 'අවලංගු',
         'cart-rules'               => 'කර්ට් රූල්ස්',
-        'catalog'                  => 'ප්‍රකටක',
         'catalog-rules'            => 'කැටලොග් රූල්ස්',
+        'catalog'                  => 'ප්‍රකටක',
         'categories'               => 'ප්‍රවර්ග',
         'channels'                 => 'චැනල්',
         'cms'                      => 'සිංහල',
         'communications'           => 'සමානන්ද',
         'configure'                => 'සක්‍රීය කරන්න',
         'copy'                     => 'පිටපත්',
-        'create'                   => 'එකතුව',
+        'create'                   => 'නිර්මාණය කරන්න',
         'currencies'               => 'වෙනස්',
         'customers'                => 'කුමුදුද',
         'dashboard'                => 'මූලාන්තරය',
+        'data-transfer'            => 'දත්ත හුවමාරු',
         'delete'                   => 'මකාදමන්න',
         'edit'                     => 'සංස්කරණය',
         'email-templates'          => 'ඉ-තැපෑල අක්ෂර ආකෘති',
         'events'                   => 'සිසුන්',
         'exchange-rates'           => 'වාරික ප්‍රතිලාභ',
         'groups'                   => 'සමූහ',
+        'import'                   => 'ආනයන',
+        'imports'                  => 'ආනයන',
         'inventory-sources'        => 'අබාරාද',
         'invoices'                 => 'ක්‍රියාත්මක',
         'locales'                  => 'ස්ථාන',
@@ -3765,11 +3883,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'බාගත කරන්න',
-        'export'           => 'අපාරයට පිටවන්න',
-        'no-records'       => 'අපාරයට හවුල් සාර්ථකවීමට හිතන්න',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'බාගත කරන්න',
+        'export'     => 'අපාරයට පිටවන්න',
+        'no-records' => 'අපාරයට හවුල් සාර්ථකවීමට හිතන්න',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

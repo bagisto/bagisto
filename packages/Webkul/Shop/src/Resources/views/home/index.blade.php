@@ -19,7 +19,7 @@
     
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
-        @php ($data = $customization->options)
+        @php ($data = $customization->options) @endphp
 
         <!-- Static content -->
         @switch ($customization->type)

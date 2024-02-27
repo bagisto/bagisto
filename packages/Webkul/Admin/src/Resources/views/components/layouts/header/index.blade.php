@@ -15,7 +15,7 @@
         <a href="{{ route('admin.dashboard.index') }}">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
-                    class="w-[110px] h-10"
+                    class="h-10"
                     src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
@@ -147,7 +147,7 @@
         <div class="flex justify-between items-center">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
-                    class="w-[110px] h-10"
+                    class="h-10"
                     src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
@@ -232,7 +232,7 @@
                 <!-- Searched Results -->
                 <template v-if="activeTab == 'products'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.products/>
+                        <x-admin::shimmer.header.mega-search.products />
                     </template>
 
                     <template v-else>
@@ -309,7 +309,7 @@
 
                 <template v-if="activeTab == 'orders'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.orders/>
+                        <x-admin::shimmer.header.mega-search.orders />
                     </template>
 
                     <template v-else>
@@ -351,7 +351,7 @@
 
                 <template v-if="activeTab == 'categories'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.categories/>
+                        <x-admin::shimmer.header.mega-search.categories />
                     </template>
 
                     <template v-else>
@@ -387,7 +387,7 @@
 
                 <template v-if="activeTab == 'customers'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.customers/>
+                        <x-admin::shimmer.header.mega-search.customers />
                     </template>
 
                     <template v-else>

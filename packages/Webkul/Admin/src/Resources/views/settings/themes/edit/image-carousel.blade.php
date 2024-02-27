@@ -1,8 +1,11 @@
 <!-- Image-Carousel Component -->
-<v-image-carousel />
+<v-image-carousel></v-image-carousel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-image-carousel-template">
+    <script
+        type="text/x-template"
+        id="v-image-carousel-template"
+    >
         <div>
             <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                 <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
@@ -296,7 +299,8 @@
                                     type="text"
                                     name="{{ $currentLocale->code }}[title]"
                                     rules="required"
-                                    :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.image-title')"
+                                    :label="trans('admin::app.settings.themes.edit.image-title')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[title]" />

@@ -407,12 +407,20 @@ class Configurable extends AbstractType
             }
 
             if (! $productAttributeValue) {
+                $uniqueId = implode('|', array_filter([
+                    $data['channel'],
+                    $data['locale'],
+                    $variant->id,
+                    $attribute->id,
+                ]));
+
                 $this->attributeValueRepository->create([
                     'product_id'            => $variant->id,
                     'attribute_id'          => $attribute->id,
                     $attribute->column_name => $data[$attribute->code],
                     'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
+                    'unique_id'             => $uniqueId,
                 ]);
             } else {
                 $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);

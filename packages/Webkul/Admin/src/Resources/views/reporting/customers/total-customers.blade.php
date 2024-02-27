@@ -1,14 +1,17 @@
 <!-- Total Customer Vue Component -->
 <v-reporting-customers-total-customers>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.customers.total-customers/> 
+    <x-admin::shimmer.reporting.customers.total-customers /> 
 </v-reporting-customers-total-customers>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-customers-total-customers-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-customers-total-customers-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.customers.total-customers/>
+            <x-admin::shimmer.reporting.customers.total-customers />
         </template>
 
         <!-- Total Customer Section -->

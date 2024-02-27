@@ -2,29 +2,46 @@
 
 namespace Webkul\Admin\Mail\Customer;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Admin\Mail\Mailable;
+use Webkul\Customer\Contracts\Customer;
 
 class RegistrationNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new mailable instance.
      *
-     * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @return void
      */
-    public function __construct(public $customer)
+    public function __construct(public Customer $customer)
     {
     }
 
-    public function build()
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to(core()->getAdminEmailDetails()['email'], core()->getAdminEmailDetails()['name'])
-            ->subject(trans('admin::app.emails.customers.registration.subject'))
-            ->view('admin::emails.customers.registration');
+        return new Envelope(
+            to: [
+                new Address(
+                    core()->getAdminEmailDetails()['email'],
+                    core()->getAdminEmailDetails()['name']
+                ),
+            ],
+            subject: trans('admin::app.emails.customers.registration.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'admin::emails.customers.registration',
+        );
     }
 }

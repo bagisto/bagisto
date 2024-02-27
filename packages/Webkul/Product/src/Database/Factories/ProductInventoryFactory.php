@@ -3,8 +3,6 @@
 namespace Webkul\Product\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Inventory\Models\InventorySource;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductInventory;
 
 class ProductInventoryFactory extends Factory
@@ -22,9 +20,7 @@ class ProductInventoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'qty'                 => $this->faker->numberBetween(100, 200),
-            'product_id'          => Product::factory(),
-            'inventory_source_id' => InventorySource::factory(),
+            'qty' => $this->faker->numberBetween(100, 200),
         ];
     }
 }

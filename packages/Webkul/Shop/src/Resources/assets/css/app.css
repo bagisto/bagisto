@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "velicon";
-    src: url("../fonts/velicon.woff?hhi7p1") format("woff");
+    font-family: "bagisto-shop";
+    src: url("../fonts/bagisto-shop.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -30,7 +30,7 @@
     [class^="icon-"],
     [class*=" icon-"] {
         /* use !important to prevent issues with browser extensions that change fonts */
-        font-family: "velicon" !important;
+        font-family: "bagisto-shop" !important;
         speak: never;
         font-style: normal;
         font-weight: normal;
@@ -41,6 +41,14 @@
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-checkout-address:before {
+        content: "\e944";
+    }
+
+    .icon-edit:before {
+        content: "\e943";
     }
 
     .icon-add-new:before {
@@ -265,7 +273,7 @@
 
     .icon-sort:before {
         content: "\e937";
-    color: #7d7d7d;
+        color: #7d7d7d;
     }
 
     .icon-star-fill:before {
@@ -385,18 +393,21 @@
 		@apply bg-yellow-500;
 	}
 
-	.label-processing,
+	.label-processing{
+		@apply bg-cyan-600;
+    }
+
 	.label-completed,
     .label-active {
-		@apply bg-darkGreen;
+		@apply bg-green-600;
 	}
 
 	.label-closed {
-		@apply bg-darkBlue;
+		@apply bg-indigo-600;
 	}
 
     .label-canceled {
-        @apply bg-darkPink;
+        @apply bg-rose-600;
     }
 
     .label-info {

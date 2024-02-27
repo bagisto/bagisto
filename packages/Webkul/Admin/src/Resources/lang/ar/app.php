@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | العميل <b>تم إعلامه</b>',
                 'discount'              => 'الخصم - :discount',
                 'download-pdf'          => 'تحميل PDF',
+                'fraud'                 => 'احتيال',
                 'grand-total'           => 'الإجمالي الكبير - :grand-total ',
                 'invoice-id'            => 'الفاتورة #:invoice',
                 'invoices'              => 'الفواتير',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'الدفع والشحن',
                 'payment-method'        => 'طريقة الدفع',
                 'pending'               => 'قيد الانتظار',
+                'pending_payment'       => 'في انتظار الدفع',
                 'per-unit'              => 'للوحدة',
                 'price'                 => 'السعر - :price',
                 'processing'            => 'جارٍ المعالجة',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'استرداد التعديل',
                 'amount-per-unit'             => ':amount لكل وحدة x :qty الكمية',
                 'create-success'              => 'تم إنشاء الاسترداد بنجاح',
+                'creation-error'              => 'إنشاء المبلغ المسترد غير مسموح به.',
                 'discount-amount'             => 'مبلغ الخصم',
                 'grand-total'                 => 'الإجمالي الكلي',
                 'invalid-qty'                 => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
@@ -421,18 +424,19 @@ return [
                 'title'                  => 'الفاتورة #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount للوحدة x :qty الكمية',
-                'create-invoice'  => 'إنشاء فاتورة',
-                'create-success'  => 'تم إنشاء الفاتورة بنجاح',
-                'creation-error'  => 'غير مسموح بإنشاء فاتورة الطلب.',
-                'invalid-qty'     => 'تم العثور على كمية غير صالحة لفوترة العناصر.',
-                'invoice'         => 'فاتورة',
-                'new-invoice'     => 'فاتورة جديدة',
-                'product-error'   => 'لا يمكن إنشاء فاتورة بدون منتجات.',
-                'product-image'   => 'صورة المنتج',
-                'qty-to-invoiced' => 'الكمية المراد فوترتها',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount لكل وحدة × :qty الكمية',
+                'create-invoice'     => 'إنشاء فاتورة',
+                'create-success'     => 'تم إنشاء الفاتورة بنجاح',
+                'create-transaction' => 'إنشاء معاملة',
+                'creation-error'     => 'عملية إنشاء فاتورة الطلب غير مسموح بها.',
+                'invalid-qty'        => 'وجدنا كمية غير صالحة لفواتير العناصر.',
+                'invoice'            => 'فاتورة',
+                'new-invoice'        => 'فاتورة جديدة',
+                'product-error'      => 'لا يمكن إنشاء فاتورة بدون منتجات.',
+                'product-image'      => 'صورة المنتج',
+                'qty-to-invoiced'    => 'الكمية للفوترة',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -487,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'تم الدفع بالفعل',
-                    'invoice-missing'            => 'الفاتورة مفقودة',
-                    'transaction-amount-exceeds' => 'مبلغ العملية يتجاوز الحد المسموح به',
-                    'transaction-amount-zero'    => 'مبلغ العملية صفر',
-                    'transaction-saved'          => 'تم حفظ العملية بنجاح',
+                    'amount'                     => 'المبلغ',
+                    'create-transaction'         => 'إنشاء عملية',
+                    'invoice-id'                 => 'رقم الفاتورة',
+                    'invoice-missing'            => 'الفاتورة غير موجودة',
+                    'payment-method'             => 'طريقة الدفع',
+                    'save-transaction'           => 'حفظ العملية',
+                    'transaction-amount-exceeds' => 'تجاوز المبلغ المسموح به',
+                    'transaction-amount-zero'    => 'صفر المبلغ في العملية',
+                    'transaction-saved'          => 'تم حفظ العملية بنجاح.',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'لا يجوز أن يكون حجم :attribute أكبر من :max كيلوبايت. الرجاء اختيار ملف أصغر.',
                     'info'  => 'يجب أن يكون حجم الفيديو الأقصى مثل :size',
                     'title' => 'مقاطع الفيديو',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn'    => 'إنشاء لغة',
                 'locale'        => 'اللغة',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'إنشاء عملة',
                 'currency'   => 'العملة',
@@ -2242,7 +2252,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'الإجراء',
+                    'allowed-errors'      => 'الأخطاء المسموح بها',
+                    'back-btn'            => 'رجوع',
+                    'create-update'       => 'إنشاء/تحديث',
+                    'delete'              => 'حذف',
+                    'download-sample'     => 'تحميل النموذج',
+                    'field-separator'     => 'فاصل الحقل',
+                    'file-info-example'   => 'على سبيل المثال، في حالة صور المنتجات، يجب وضع الملفات في مجلد /project-root/storage/app/import/product-images',
+                    'file-info'           => 'استخدم المسار النسبي إلى /project-root/storage/app/import، على سبيل المثال، product-images، import-images.',
+                    'file'                => 'الملف',
+                    'general'             => 'عام',
+                    'images-directory'    => 'مسار مجلد الصور',
+                    'process-in-queue'    => 'معالجة في الطابور',
+                    'results'             => 'النتائج',
+                    'save-btn'            => 'حفظ الاستيراد',
+                    'settings'            => 'الإعدادات',
+                    'skip-errors'         => 'تخطي الأخطاء',
+                    'stop-on-errors'      => 'التوقف عند الأخطاء',
+                    'title'               => 'إنشاء استيراد',
+                    'type'                => 'النوع',
+                    'validation-strategy' => 'استراتيجية التحقق',
+                ],
+
+                'edit'              => [
+                    'action'              => 'الإجراء',
+                    'allowed-errors'      => 'الأخطاء المسموح بها',
+                    'back-btn'            => 'رجوع',
+                    'create-update'       => 'إنشاء/تحديث',
+                    'delete'              => 'حذف',
+                    'download-sample'     => 'تحميل النموذج',
+                    'field-separator'     => 'فاصل الحقل',
+                    'file-info-example'   => 'على سبيل المثال، في حالة صور المنتجات، يجب وضع الملفات في مجلد /project-root/storage/app/import/product-images',
+                    'file-info'           => 'استخدم المسار النسبي إلى /project-root/storage/app/import، على سبيل المثال، product-images، import-images.',
+                    'file'                => 'الملف',
+                    'general'             => 'عام',
+                    'images-directory'    => 'مسار مجلد الصور',
+                    'process-in-queue'    => 'معالجة في الطابور',
+                    'results'             => 'النتائج',
+                    'save-btn'            => 'حفظ الاستيراد',
+                    'settings'            => 'الإعدادات',
+                    'skip-errors'         => 'تخطي الأخطاء',
+                    'stop-on-errors'      => 'التوقف عند الأخطاء',
+                    'title'               => 'تحرير الاستيراد',
+                    'type'                => 'النوع',
+                    'validation-strategy' => 'استراتيجية التحقق',
+                ],
+
+                'index'             => [
+                    'button-title' => 'إنشاء استيراد',
+                    'title'        => 'الاستيرادات',
+
+                    'datagrid'     => [
+                        'actions'       => 'الإجراءات',
+                        'completed-at'  => 'انتهى في',
+                        'created'       => 'تم الإنشاء',
+                        'delete'        => 'حذف',
+                        'deleted'       => 'تم الحذف',
+                        'edit'          => 'تحرير',
+                        'error-file'    => 'ملف الخطأ',
+                        'id'            => 'الرقم',
+                        'started-at'    => 'بدأ في',
+                        'state'         => 'الحالة',
+                        'summary'       => 'ملخص',
+                        'updated'       => 'تم التحديث',
+                        'uploaded-file' => 'الملف المرفوع',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'العودة',
+                    'completed-batches'       => 'إجمالي الدُفعات المكتملة:',
+                    'download-error-report'   => 'تحميل التقرير الكامل',
+                    'edit-btn'                => 'تحرير',
+                    'imported-info'           => 'تهانينا! تمت عملية الاستيراد بنجاح.',
+                    'importing-info'          => 'جاري الاستيراد',
+                    'indexing-info'           => 'جاري فهرسة الموارد (الأسعار، المخزون، والبحث المرن)',
+                    'linking-info'            => 'جاري ربط الموارد',
+                    'progress'                => 'التقدم:',
+                    'title'                   => 'الاستيراد',
+                    'total-batches'           => 'إجمالي الدُفعات:',
+                    'total-created'           => 'إجمالي السجلات التي تم إنشاؤها:',
+                    'total-deleted'           => 'إجمالي السجلات التي تم حذفها:',
+                    'total-errors'            => 'إجمالي الأخطاء:',
+                    'total-invalid-rows'      => 'إجمالي الصفوف غير الصالحة:',
+                    'total-rows-processed'    => 'إجمالي الصفوف المعالجة:',
+                    'total-updated'           => 'إجمالي السجلات التي تم تحديثها:',
+                    'validate-info'           => 'انقر على التحقق من البيانات لفحص عملية الاستيراد الخاصة بك.',
+                    'validate'                => 'التحقق',
+                    'validating-info'         => 'بدأت البيانات في القراءة والتحقق',
+                    'validation-failed-info'  => 'الاستيراد الخاص بك غير صالح. يرجى إصلاح الأخطاء التالية والمحاولة مرة أخرى.',
+                    'validation-success-info' => 'الاستيراد الخاص بك صالح. انقر على الاستيراد لبدء عملية الاستيراد.',
+                ],
+
+                'create-success'    => 'Import created successfully.',
+                'delete-failed'     => 'Import deletion failed unexpectedly.',
+                'delete-success'    => 'Import deleted successfully.',
+                'not-valid'         => 'Import is invalid',
+                'nothing-to-import' => 'There are no resources to import.',
+                'setup-queue-error' => 'Please change your queue driver to "database" or "redis" to start the import process.',
+                'update-success'    => 'Import updated successfully.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'إنشاء سعر صرف',
                 'exchange-rate' => 'سعر الصرف',
@@ -2406,16 +2522,6 @@ return [
                     'button-title' => 'إنشاء معدل الضريبة',
                     'tax-rate'     => 'سعر الضريبة',
                     'title'        => 'أسعار الضرائب',
-
-                    'import' => [
-                        'duplicate-error'  => 'يجب أن يكون المعرف فريدًا ، معرف مكرر :identifier في الصف :position.',
-                        'enough-row-error' => 'الملف لا يحتوي على عدد كافٍ من الصفوف',
-                        'import-btn'       => 'استيراد',
-                        'title'            => 'تحميل',
-                        'upload-error'     => 'يجب أن يكون الملف من النوع: xls، xlsx، csv.',
-                        'upload-success'   => 'تم تحميل معدل الضريبة بنجاح',
-                        'validation'       => 'الأنواع المسموح بها: xls، xlsx، csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'البلد',
@@ -2702,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'شريط الفئات',
                     'footer-links'      => 'روابط التذييل',
-                    'image-carousel'    => 'شريط الصور',
+                    'image-carousel'    => 'عرض الصور',
                     'product-carousel'  => 'شريط المنتجات',
                     'services-content'  => 'محتوى الخدمات',
                     'static-content'    => 'المحتوى الثابت',
@@ -2918,8 +3024,10 @@ return [
             'delete'                       => 'حذف',
             'enable-at-least-one-payment'  => 'تمكين طريقة دفع واحدة على الأقل.',
             'enable-at-least-one-shipping' => 'تمكين طريقة شحن واحدة على الأقل.',
+            'no-result-found'              => 'لم يتم العثور على نتائج',
             'save-btn'                     => 'حفظ الإعدادات',
             'save-message'                 => 'تم حفظ الإعدادات بنجاح',
+            'search'                       => 'يبحث',
             'title'                        => 'الإعدادات',
 
             'general' => [
@@ -3368,12 +3476,12 @@ return [
                     'title' => 'إعدادات الطلبات',
 
                     'order-number' => [
-                        'generator' => 'مصفر رقم الطلب',
-                        'length'    => 'طول رقم الطلب',
-                        'prefix'    => 'بادئة رقم الطلب',
-                        'suffix'    => 'لاحقة رقم الطلب',
-                        'title'     => 'إعدادات رقم الطلب',
-                        'title-info'=> 'معرِّف فريد يُخصَّص لطلب العميل الخاص، مما يساعد في تتبع الطلب والاتصال والإشارة إليه طوال عملية الشراء.',
+                        'generator'  => 'مصفر رقم الطلب',
+                        'length'     => 'طول رقم الطلب',
+                        'prefix'     => 'بادئة رقم الطلب',
+                        'suffix'     => 'لاحقة رقم الطلب',
+                        'title'      => 'إعدادات رقم الطلب',
+                        'title-info' => 'معرِّف فريد يُخصَّص لطلب العميل الخاص، مما يساعد في تتبع الطلب والاتصال والإشارة إليه طوال عملية الشراء.',
                     ],
 
                     'minimum-order' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => 'العملات',
                 'customers'                => 'العملاء',
                 'dashboard'                => 'لوحة التحكم',
+                'data-transfer'            => 'نقل البيانات',
                 'discount'                 => 'الخصم',
                 'email-templates'          => 'قوالب البريد الإلكتروني',
                 'events'                   => 'الأحداث',
                 'exchange-rates'           => 'أسعار الصرف',
                 'groups'                   => 'المجموعات',
+                'imports'                  => 'الواردات',
                 'inventory-sources'        => 'مصادر المخزون',
                 'invoices'                 => 'الفواتير',
                 'locales'                  => 'الإعدادات المحلية',
@@ -3529,6 +3639,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length من',
+                'of'        => 'من',
+                'per-page'  => 'لكل صفحة',
+                'results'   => ':total النتائج',
+                'selected'  => ':total محدد',
+
                 'mass-actions' => [
                     'select-action' => 'اختر الإجراء',
                     'select-option' => 'اختر الخيار',
@@ -3684,24 +3800,27 @@ return [
         'campaigns'                => 'الحملات',
         'cancel'                   => 'إلغاء',
         'cart-rules'               => 'قواعد العربة',
-        'catalog'                  => 'المُنتجات',
         'catalog-rules'            => 'قواعد الكتالوج',
+        'catalog'                  => 'المُنتجات',
         'categories'               => 'التصنيفات',
         'channels'                 => 'القنوات',
         'cms'                      => 'إدارة المحتوى',
         'communications'           => 'الاتصالات',
         'configure'                => 'تكوين',
         'copy'                     => 'نسخ',
-        'create'                   => 'إضافة',
+        'create'                   => 'يخلق',
         'currencies'               => 'العملات',
         'customers'                => 'العملاء',
         'dashboard'                => 'لوحة التحكم',
+        'data-transfer'            => 'نقل البيانات',
         'delete'                   => 'حذف',
         'edit'                     => 'تعديل',
         'email-templates'          => 'قوالب البريد الإلكتروني',
         'events'                   => 'الأحداث',
         'exchange-rates'           => 'أسعار الصرف',
         'groups'                   => 'المجموعات',
+        'import'                   => 'يستورد',
+        'imports'                  => 'الواردات',
         'inventory-sources'        => 'مصادر المخزون',
         'invoices'                 => 'الفواتير',
         'locales'                  => 'اللغات',
@@ -3770,6 +3889,7 @@ return [
         'export'           => 'تصدير',
         'no-records'       => 'لا يوجد شيء للتصدير',
         'xls'              => 'XLS',
+        'xlsx'             => 'إكس إل إس إكس',
     ],
 
     'validations' => [

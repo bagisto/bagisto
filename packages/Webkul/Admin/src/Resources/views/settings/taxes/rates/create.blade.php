@@ -4,7 +4,7 @@
         @lang('admin::app.settings.taxes.rates.create.title')
     </x-slot>
 
-    <v-create-taxrate />
+    <v-create-taxrate></v-create-taxrate>
 
     @pushOnce('scripts')
         <script

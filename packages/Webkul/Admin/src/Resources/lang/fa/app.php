@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | مشتری <b>آگاه شد</b>',
                 'discount'              => 'تخفیف - :discount',
                 'download-pdf'          => 'دانلود PDF',
+                'fraud'                 => 'تقلب',
                 'grand-total'           => 'مجموع کل - :grand_total',
                 'invoice-id'            => 'شماره فاکتور #:invoice',
                 'invoices'              => 'فاکتورها',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'پرداخت و ارسال',
                 'payment-method'        => 'روش پرداخت',
                 'pending'               => 'در انتظار',
+                'pending_payment'       => 'در انتظار پرداخت',
                 'per-unit'              => 'در واحد',
                 'price'                 => 'قیمت - :price',
                 'processing'            => 'در حال پردازش',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'بازپرداخت تنظیمی',
                 'amount-per-unit'             => ':amount در هر واحد x :qty تعداد',
                 'create-success'              => 'بازپرداخت با موفقیت ایجاد شد',
+                'creation-error'              => 'ایجاد بازپرداخت مجاز نیست.',
                 'discount-amount'             => 'مقدار تخفیف',
                 'grand-total'                 => 'جمع کل',
                 'invalid-qty'                 => 'ما تعداد نامعتبری برای موارد صورتحسابی پیدا کردیم.',
@@ -422,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount در هر واحد x :qty تعداد',
-                'create-invoice'  => 'ایجاد فاکتور',
-                'create-success'  => 'فاکتور با موفقیت ایجاد شد',
-                'creation-error'  => 'ایجاد فاکتور سفارش مجاز نمی‌باشد.',
-                'invalid-qty'     => 'ما تعداد نامعتبری برای موارد فاکتوری یافتیم.',
-                'invoice'         => 'فاکتور',
-                'new-invoice'     => 'فاکتور جدید',
-                'product-error'   => 'فاکتور بدون محصول ایجاد نمی‌شود.',
-                'product-image'   => 'تصویر محصول',
-                'qty-to-invoiced' => 'تعداد برای صدور فاکتور',
-                'sku'             => 'شناسه SKU - :sku',
+                'amount-per-unit'    => ':amount در هر واحد x :qty مقدار',
+                'create-invoice'     => 'ایجاد فاکتور',
+                'create-success'     => 'فاکتور با موفقیت ایجاد شد',
+                'create-transaction' => 'ایجاد تراکنش',
+                'creation-error'     => 'ایجاد فاکتور سفارش مجاز نیست.',
+                'invalid-qty'        => 'ما مقدار نامعتبری برای صورتحساب کردن موارد پیدا کردیم.',
+                'invoice'            => 'فاکتور',
+                'new-invoice'        => 'فاکتور جدید',
+                'product-error'      => 'فاکتور بدون محصولات قابل ایجاد نیست.',
+                'product-image'      => 'تصویر محصول',
+                'qty-to-invoiced'    => 'مقدار برای فاکتور',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -485,12 +489,17 @@ return [
                     'transaction-id'     => 'شناسه تراکنش',
                 ],
 
-                'create'  => [
+                'create' => [
                     'already-paid'               => 'قبلاً پرداخت شده',
-                    'invoice-missing'            => 'صورتحساب موجود نیست',
-                    'transaction-amount-exceeds' => 'مقدار تراکنش بیشتر از حد مجاز است',
-                    'transaction-amount-zero'    => 'مقدار تراکنش صفر است',
-                    'transaction-saved'          => 'تراکنش با موفقیت ذخیره شد',
+                    'amount'                     => 'مبلغ',
+                    'create-transaction'         => 'ایجاد تراکنش',
+                    'invoice-id'                 => 'شناسه فاکتور',
+                    'invoice-missing'            => 'فاکتور یافت نشد',
+                    'payment-method'             => 'روش پرداخت',
+                    'save-transaction'           => 'ذخیره تراکنش',
+                    'transaction-amount-exceeds' => 'مبلغ تراکنش بیش از حد مجاز است',
+                    'transaction-amount-zero'    => 'مبلغ تراکنش صفر است',
+                    'transaction-saved'          => 'تراکنش با موفقیت ذخیره شد.',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'خطا: اندازه :attribute نباید بیشتر از :max کیلوبایت باشد. لطفاً یک فایل کوچکتر انتخاب کنید.',
                     'info'  => 'حداکثر اندازه ویدیو باید مانند :size باشد.',
                     'title' => 'ویدیوها',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'ایجاد زبان',
                 'locale'     => 'زبان',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'ساخت ارز',
                 'currency'   => 'ارز',
@@ -2242,7 +2252,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'اقدام',
+                    'allowed-errors'      => 'خطاهای مجاز',
+                    'back-btn'            => 'بازگشت',
+                    'create-update'       => 'ایجاد/به‌روزرسانی',
+                    'delete'              => 'حذف',
+                    'download-sample'     => 'دانلود نمونه',
+                    'field-separator'     => 'جداکننده فیلد',
+                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
+                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
+                    'file'                => 'فایل',
+                    'general'             => 'عمومی',
+                    'images-directory'    => 'مسیر پوشه تصاویر',
+                    'process-in-queue'    => 'پردازش در صف',
+                    'results'             => 'نتایج',
+                    'save-btn'            => 'ذخیره ورودی',
+                    'settings'            => 'تنظیمات',
+                    'skip-errors'         => 'پرش خطاها',
+                    'stop-on-errors'      => 'توقف در خطاها',
+                    'title'               => 'ایجاد ورودی',
+                    'type'                => 'نوع',
+                    'validation-strategy' => 'استراتژی اعتبارسنجی',
+                ],
+
+                'edit'              => [
+                    'action'              => 'اقدام',
+                    'allowed-errors'      => 'خطاهای مجاز',
+                    'back-btn'            => 'بازگشت',
+                    'create-update'       => 'ایجاد/به‌روزرسانی',
+                    'delete'              => 'حذف',
+                    'download-sample'     => 'دانلود نمونه',
+                    'field-separator'     => 'جداکننده فیلد',
+                    'file-info-example'   => 'برای مثال، در صورت تصاویر محصول، فایل‌ها باید در /project-root/storage/app/import/product-images قرار گیرند.',
+                    'file-info'           => 'از مسیر نسبی به /project-root/storage/app/import استفاده کنید، به عنوان مثال product-images، import-images.',
+                    'file'                => 'فایل',
+                    'general'             => 'عمومی',
+                    'images-directory'    => 'مسیر پوشه تصاویر',
+                    'process-in-queue'    => 'پردازش در صف',
+                    'results'             => 'نتایج',
+                    'save-btn'            => 'ذخیره ورودی',
+                    'settings'            => 'تنظیمات',
+                    'skip-errors'         => 'پرش خطاها',
+                    'stop-on-errors'      => 'توقف در خطاها',
+                    'title'               => 'ویرایش ورودی',
+                    'type'                => 'نوع',
+                    'validation-strategy' => 'استراتژی اعتبارسنجی',
+                ],
+
+                'index'             => [
+                    'button-title' => 'ایجاد ورودی',
+                    'title'        => 'ورودی‌ها',
+
+                    'datagrid'     => [
+                        'actions'       => 'اقدامات',
+                        'completed-at'  => 'اتمام یافته در',
+                        'created'       => 'ایجاد شده',
+                        'delete'        => 'حذف',
+                        'deleted'       => 'حذف شده',
+                        'edit'          => 'ویرایش',
+                        'error-file'    => 'فایل خطا',
+                        'id'            => 'شناسه',
+                        'started-at'    => 'شروع شده در',
+                        'state'         => 'وضعیت',
+                        'summary'       => 'خلاصه',
+                        'updated'       => 'به‌روزرسانی شده',
+                        'uploaded-file' => 'فایل آپلود شده',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'بازگشت',
+                    'completed-batches'       => 'کل دسته‌های انجام شده:',
+                    'download-error-report'   => 'دانلود گزارش کامل',
+                    'edit-btn'                => 'ویرایش',
+                    'imported-info'           => 'تبریک! ورودی شما با موفقیت انجام شد.',
+                    'importing-info'          => 'در حال ورود',
+                    'indexing-info'           => 'شاخص‌گذاری منابع (قیمت، موجودی و جستجوی الاستیک) در حال پیشرفت است',
+                    'linking-info'            => 'پیوند منابع در حال پیشرفت است',
+                    'progress'                => 'پیشرفت:',
+                    'title'                   => 'ورود',
+                    'total-batches'           => 'کل دسته‌ها:',
+                    'total-created'           => 'کل رکوردهای ایجاد شده:',
+                    'total-deleted'           => 'کل رکوردهای حذف شده:',
+                    'total-errors'            => 'کل خطاها:',
+                    'total-invalid-rows'      => 'کل ردیف‌های نامعتبر:',
+                    'total-rows-processed'    => 'کل ردیف‌های پردازش شده:',
+                    'total-updated'           => 'کل رکوردهای به‌روزرسانی شده:',
+                    'validate-info'           => 'روی داده‌ها کلیک کنید تا ورودی خود را بررسی کنید.',
+                    'validate'                => 'اعتبارسنجی',
+                    'validating-info'         => 'داده‌ها خوانده شده و در حال اعتبارسنجی هستند',
+                    'validation-failed-info'  => 'ورودی شما نامعتبر است. لطفاً خطاهای زیر را اصلاح کرده و دوباره تلاش کنید.',
+                    'validation-success-info' => 'ورودی شما معتبر است. برای شروع فرآیند ورود، بر روی وارد کردن کلیک کنید.',
+                ],
+
+                'create-success'    => 'ورودی با موفقیت ایجاد شد.',
+                'delete-failed'     => 'حذف ورودی به طور غیرمنتظره شکست خورد.',
+                'delete-success'    => 'ورودی با موفقیت حذف شد.',
+                'not-valid'         => 'ورودی نامعتبر است',
+                'nothing-to-import' => 'هیچ منبعی برای ورود وجود ندارد.',
+                'setup-queue-error' => 'لطفاً صف خود را به "دیتابیس" یا "ردیس" تغییر دهید تا فرآیند ورود را شروع کنید.',
+                'update-success'    => 'ورودی با موفقیت به‌روزرسانی شد.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'ساخت نرخ ارز',
                 'exchange-rate' => 'نرخ ارز',
@@ -2361,7 +2477,7 @@ return [
             'update-success'    => 'منابع موجودی با موفقیت به‌روزرسانی شدند.',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',
@@ -2406,16 +2522,6 @@ return [
                     'button-title' => 'ایجاد نرخ مالیات',
                     'tax-rate'     => 'نرخ مالیات',
                     'title'        => 'نرخ‌های مالیاتی',
-
-                    'import' => [
-                        'duplicate-error'  => 'شناسه باید یکتا باشد، شناسه تکراری :identifier در ردیف :position.',
-                        'enough-row-error' => 'تعداد کافی از ردیف‌ها در فایل وجود ندارد',
-                        'import-btn'       => 'وارد کردن',
-                        'title'            => 'آپلود',
-                        'upload-error'     => 'فایل باید از نوع: xls، xlsx، csv باشد.',
-                        'upload-success'   => 'نرخ مالیات با موفقیت آپلود شد',
-                        'validation'       => 'انواع مجاز: xls، xlsx، csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'کشور',
@@ -2702,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'کاروسل دسته‌بندی',
                     'footer-links'      => 'لینک‌های پاورقی',
-                    'image-carousel'    => 'کاروسل تصاویر',
+                    'image-carousel'    => 'کروسل تصاویر',
                     'product-carousel'  => 'کاروسل محصولات',
                     'services-content'  => 'محتوای خدمات',
                     'static-content'    => 'محتوای استاتیک',
@@ -2918,8 +3024,10 @@ return [
             'delete'                       => 'حذف',
             'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
             'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+            'no-result-found'              => 'هیچ نتیجه ای یافت نشد',
             'save-btn'                     => 'ذخیره پیکربندی',
             'save-message'                 => 'پیکربندی با موفقیت ذخیره شد',
+            'search'                       => 'جستجو کردن',
             'title'                        => 'پیکربندی',
 
             'general' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => 'ارزها',
                 'customers'                => 'مشتریان',
                 'dashboard'                => 'پیشخوان',
+                'data-transfer'            => 'انتقال اطلاعات',
                 'discount'                 => 'تخفیف',
                 'email-templates'          => 'قالب‌های ایمیل',
                 'events'                   => 'رویدادها',
                 'exchange-rates'           => 'نرخ‌های تبادل',
                 'groups'                   => 'گروه‌ها',
+                'imports'                  => 'واردات',
                 'inventory-sources'        => 'منابع موجودی',
                 'invoices'                 => 'فاکتورها',
                 'locales'                  => 'محلی‌ها',
@@ -3529,6 +3639,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length از',
+                'of'        => 'از',
+                'per-page'  => 'برای هر صفحه',
+                'results'   => ':total نتایج',
+                'selected'  => ':total انتخاب شده',
+
                 'mass-actions' => [
                     'select-action' => 'انتخاب عملیات',
                     'select-option' => 'انتخاب گزینه',
@@ -3684,24 +3800,27 @@ return [
         'campaigns'                => 'کمپین‌ها',
         'cancel'                   => 'لغو',
         'cart-rules'               => 'قوانین سبد خرید',
-        'catalog'                  => 'کاتالوگ',
         'catalog-rules'            => 'قوانین کاتالوگ',
+        'catalog'                  => 'کاتالوگ',
         'categories'               => 'دسته‌بندی‌ها',
         'channels'                 => 'کانال‌ها',
         'cms'                      => 'مدیریت محتوا',
         'communications'           => 'ارتباطات',
         'configure'                => 'پیکربندی',
         'copy'                     => 'کپی',
-        'create'                   => 'افزودن',
+        'create'                   => 'ايجاد كردن',
         'currencies'               => 'ارزها',
         'customers'                => 'مشتریان',
         'dashboard'                => 'داشبورد',
+        'data-transfer'            => 'انتقال اطلاعات',
         'delete'                   => 'حذف',
         'edit'                     => 'ویرایش',
         'email-templates'          => 'قالب‌های ایمیل',
         'events'                   => 'رویدادها',
         'exchange-rates'           => 'نرخ‌های ارزی',
         'groups'                   => 'گروه‌ها',
+        'import'                   => 'وارد كردن',
+        'imports'                  => 'واردات',
         'inventory-sources'        => 'منابع موجودی',
         'invoices'                 => 'فاکتورها',
         'locales'                  => 'منطقه‌ها',
@@ -3765,11 +3884,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'دانلود',
-        'export'           => 'خروجی گرفتن',
-        'no-records'       => 'چیزی برای خروجی گرفتن وجود ندارد',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'دانلود',
+        'export'     => 'خروجی گرفتن',
+        'no-records' => 'چیزی برای خروجی گرفتن وجود ندارد',
+        'xls'        => 'XLS',
+        'xlsx'       => 'اکس ال اس ایکس',
     ],
 
     'validations' => [

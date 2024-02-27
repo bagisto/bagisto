@@ -1,12 +1,15 @@
 @if (Webkul\Product\Helpers\ProductType::hasVariants($product->type))
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
 
-    <v-product-configurable-options :errors="errors" />
+    <v-product-configurable-options :errors="errors"></v-product-configurable-options>
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.after', ['product' => $product]) !!}
 
     @push('scripts')
-        <script type="text/x-template" id="v-product-configurable-options-template">
+        <script
+            type="text/x-template"
+            id="v-product-configurable-options-template"
+        >
             <div class="w-[455px] max-w-full">
                 <input
                     type="hidden"
@@ -216,6 +219,20 @@
 
                         galleryImages: [],
                     }
+                },
+
+                watch: {
+                    simpleProduct: {
+                        deep: true,
+
+                        handler(selectedProduct) {
+                            if (selectedProduct) {
+                                return;
+                            }
+
+                            this.$parent.$parent.$refs.gallery.media.images = @json(product_image()->getGalleryImages($product));
+                        },
+                    },
                 },
 
                 mounted() {

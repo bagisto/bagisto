@@ -525,3 +525,5 @@
     :value="$savedValue"
     :fallback-locale="config('app.fallback_locale')"
 />
+
+<div class="label-processing"></div>

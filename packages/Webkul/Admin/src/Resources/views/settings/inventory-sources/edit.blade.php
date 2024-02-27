@@ -7,12 +7,15 @@
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}
 
     <!-- Create Inventory -->
-    <v-inventory-edit-form />
+    <v-inventory-edit-form></v-inventory-edit-form>
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-inventory-edit-form-template">
+        <script
+            type="text/x-template"
+            id="v-inventory-edit-form-template"
+        >
             <div>
 
                 {!! view_render_event('bagisto.admin.settings.inventory_sources.edit.before') !!}

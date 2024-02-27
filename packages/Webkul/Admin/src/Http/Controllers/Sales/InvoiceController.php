@@ -42,10 +42,9 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  int  $orderId
      * @return \Illuminate\View\View
      */
-    public function create($orderId)
+    public function create(int $orderId)
     {
         $order = $this->orderRepository->findOrFail($orderId);
 
@@ -59,10 +58,9 @@ class InvoiceController extends Controller
     /**
      * (Store) a newly created resource in storage.
      *
-     * @param  int  $orderId
      * @return \Illuminate\Http\Response
      */
-    public function store($orderId)
+    public function store(int $orderId)
     {
         $order = $this->orderRepository->findOrFail($orderId);
 
@@ -101,10 +99,9 @@ class InvoiceController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function view($id)
+    public function view(int $id)
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
@@ -114,10 +111,9 @@ class InvoiceController extends Controller
     /**
      * Send duplicate invoice.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function sendDuplicateEmail(Request $request, $id)
+    public function sendDuplicateEmail(Request $request, int $id)
     {
         $request->validate([
             'email' => 'required|email',
@@ -137,10 +133,9 @@ class InvoiceController extends Controller
     /**
      * Print and download the for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function printInvoice($id)
+    public function printInvoice(int $id)
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 

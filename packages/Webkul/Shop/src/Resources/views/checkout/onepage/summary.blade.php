@@ -1,7 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
 <v-cart-summary
-    ref="vCartSummary"
     :cart="cart"
     :is-cart-loading="isCartLoading"
 >
@@ -10,7 +9,10 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-summary-template">
+    <script
+        type="text/x-template"
+        id="v-cart-summary-template"
+    >
         <template v-if="isCartLoading">
             <!-- onepage Summary Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage.cart-summary />
@@ -162,7 +164,7 @@
                     <div v-if="selectedPaymentMethod?.method == 'paypal_smart_button'">
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
 
-                        <v-paypal-smart-button />
+                        <v-paypal-smart-button></v-paypal-smart-button>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
                     </div>
@@ -174,11 +176,21 @@
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.before') !!}
 
                         <x-shop::button
+                            v-if="!isLoading"
+                            type="button"
                             class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
                             :title="trans('shop::app.checkout.onepage.summary.place-order')"
                             :loading="false"
-                            ref="placeOrder"
                             @click="placeOrder"
+                        />
+
+                        <x-shop::button
+                            type="button"
+                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                            v-else
+                            :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                            :loading="true"
+                            :disabled="true"
                         />
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.after') !!}
@@ -204,9 +216,15 @@
                 }
             },
 
+            mounted() {
+                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = true);
+
+                this.$emitter.on('after-payment-method-selected', (value) => this.selectedPaymentMethod = value);
+            },
+
             methods: {
                 placeOrder() {
-                    this.$refs.placeOrder.isLoading = true;
+                    this.isLoading = true;
 
                     this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
                         .then(response => {
@@ -216,12 +234,13 @@
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
 
-                            this.$refs.placeOrder.isLoading = false;
+                            if (localStorage.getItem('customerAddresses')) {
+                                localStorage.removeItem('customerAddresses');
+                            }
 
+                            this.isLoading = false;
                         })
-                        .catch(error => {
-                            this.$refs.placeOrder.isLoading = false;
-                        });
+                        .catch(error => this.isProcessing = false);
                 },
             },
         });

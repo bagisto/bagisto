@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Клієнт <b>повідомлений</b>',
                 'discount'              => 'Знижка - :discount',
                 'download-pdf'          => 'Завантажити PDF',
+                'fraud'                 => 'Шахрайство',
                 'grand-total'           => 'Загальний підсумок - :grand_total',
                 'invoice-id'            => 'Рахунок #:invoice',
                 'invoices'              => 'Рахунки',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Оплата та доставка',
                 'payment-method'        => 'Метод оплати',
                 'pending'               => 'В очікуванні',
+                'pending_payment'       => 'Очікування платежу',
                 'per-unit'              => 'За одиницю',
                 'price'                 => 'Ціна - :price',
                 'processing'            => 'Обробка',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Виправлення повернення',
                 'amount-per-unit'             => ':amount за одиницю x :qty Кількість',
                 'create-success'              => 'Повернення створено успішно',
+                'creation-error'              => 'Створення повернення не дозволяється.',
                 'discount-amount'             => 'Сума знижки',
                 'grand-total'                 => 'Загальна сума',
                 'invalid-qty'                 => 'Ми виявили недійсну кількість для виставлення рахунків за товари.',
@@ -421,18 +424,19 @@ return [
                 'title'                  => 'Рахунок #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount За одиницю x :qty Кількість',
-                'create-invoice'  => 'Створити рахунок-фактуру',
-                'create-success'  => 'Рахунок-фактура успішно створена',
-                'creation-error'  => 'Створення рахунку-фактури замовлення не дозволяється.',
-                'invalid-qty'     => 'Ми знайшли недійсну кількість для елементів, які необхідно виставити на рахунок.',
-                'invoice'         => 'Рахунок-фактура',
-                'new-invoice'     => 'Новий рахунок-фактура',
-                'product-error'   => 'Рахунок-фактуру неможливо створити без продуктів.',
-                'product-image'   => 'Зображення продукту',
-                'qty-to-invoiced' => 'Кількість для виставлення рахунку',
-                'sku'             => 'Артикул - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount За Одиницю x :qty Кількість',
+                'create-invoice'     => 'Створити Рахунок-фактуру',
+                'create-success'     => 'Рахунок-фактура успішно створена',
+                'create-transaction' => 'Створити Транзакцію',
+                'creation-error'     => 'Створення рахунку-фактури замовлення не дозволено.',
+                'invalid-qty'        => 'Ми знайшли недійсну кількість для виставлення рахунків за товари.',
+                'invoice'            => 'Рахунок-фактура',
+                'new-invoice'        => 'Нова Рахунок-фактура',
+                'product-error'      => 'Рахунок-фактура не може бути створена без товарів.',
+                'product-image'      => 'Зображення Продукту',
+                'qty-to-invoiced'    => 'Кількість для рахунків',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -486,11 +490,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => 'Вже сплачено',
-                    'invoice-missing'            => 'Відсутній рахунок',
+                    'already-paid'               => 'Вже оплачено',
+                    'amount'                     => 'Сума',
+                    'create-transaction'         => 'Створити транзакцію',
+                    'invoice-id'                 => 'Номер рахунку-фактури',
+                    'invoice-missing'            => 'Рахунок-фактура відсутня',
+                    'payment-method'             => 'Спосіб оплати',
+                    'save-transaction'           => 'Зберегти транзакцію',
                     'transaction-amount-exceeds' => 'Сума транзакції перевищує',
-                    'transaction-amount-zero'    => 'Сума транзакції дорівнює нулю',
-                    'transaction-saved'          => 'Транзакція успішно збережена',
+                    'transaction-amount-zero'    => 'Сума транзакції нульова',
+                    'transaction-saved'          => 'Транзакцію успішно збережено.',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Параметр :attribute не може перевищувати :max кілобайт. Виберіть менший файл.',
                     'title' => 'Відео',
                     'info'  => 'Максимальний розмір відео повинен бути приблизно :size',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Створити Локаль',
                 'locale'     => 'Локаль',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Створити Валюту',
                 'currency'   => 'Валюта',
@@ -2242,7 +2252,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create' => [
+                    'action'              => 'Дія',
+                    'allowed-errors'      => 'Дозволені помилки',
+                    'back-btn'            => 'Назад',
+                    'create-update'       => 'Створити/Оновити',
+                    'delete'              => 'Видалити',
+                    'download-sample'     => 'Завантажити приклад',
+                    'field-separator'     => 'Роздільник полів',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/app/import/product-images.',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
+                    'file'                => 'Файл',
+                    'general'             => 'Загальні',
+                    'images-directory'    => 'Шлях до папки з зображеннями',
+                    'process-in-queue'    => 'Обробка в черзі',
+                    'results'             => 'Результати',
+                    'save-btn'            => 'Зберегти імпорт',
+                    'settings'            => 'Налаштування',
+                    'skip-errors'         => 'Пропустити помилки',
+                    'stop-on-errors'      => 'Зупинити при помилках',
+                    'title'               => 'Створити імпорт',
+                    'type'                => 'Тип',
+                    'validation-strategy' => 'Стратегія перевірки',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Дія',
+                    'allowed-errors'      => 'Дозволені помилки',
+                    'back-btn'            => 'Назад',
+                    'create-update'       => 'Створити/Оновити',
+                    'delete'              => 'Видалити',
+                    'download-sample'     => 'Завантажити приклад',
+                    'field-separator'     => 'Роздільник полів',
+                    'file-info-example'   => 'Наприклад, у випадку з зображеннями продуктів, файли слід розміщувати в папку /project-root/storage/import/app/product-images.',
+                    'file-info'           => 'Вкажіть відносний шлях до /project-root/storage/app/import, наприклад product-images, import-images.',
+                    'file'                => 'Файл',
+                    'general'             => 'Загальні',
+                    'images-directory'    => 'Шлях до папки з зображеннями',
+                    'process-in-queue'    => 'Обробка в черзі',
+                    'results'             => 'Результати',
+                    'save-btn'            => 'Зберегти імпорт',
+                    'settings'            => 'Налаштування',
+                    'skip-errors'         => 'Пропустити помилки',
+                    'stop-on-errors'      => 'Зупинити при помилках',
+                    'title'               => 'Редагувати імпорт',
+                    'type'                => 'Тип',
+                    'validation-strategy' => 'Стратегія перевірки',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Створити імпорт',
+                    'title'        => 'Імпорти',
+
+                    'datagrid' => [
+                        'actions'       => 'Дії',
+                        'completed-at'  => 'Завершено',
+                        'created'       => 'Створено',
+                        'delete'        => 'Видалити',
+                        'deleted'       => 'Видалено',
+                        'edit'          => 'Редагувати',
+                        'error-file'    => 'Файл помилок',
+                        'id'            => 'ID',
+                        'started-at'    => 'Розпочато',
+                        'state'         => 'Стан',
+                        'summary'       => 'Огляд',
+                        'updated'       => 'Оновлено',
+                        'uploaded-file' => 'Завантажено файл',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Назад',
+                    'completed-batches'       => 'Всього обробоановано партій:',
+                    'download-error-report'   => 'Завантажити повний звіт',
+                    'edit-btn'                => 'Редагувати',
+                    'imported-info'           => 'Вітаємо! Ваш імпорт успішно виконано.',
+                    'importing-info'          => 'Імпорт у процесі',
+                    'indexing-info'           => 'Індексація ресурсів (ціна, інвентаризація та Elasticsearch) у процесі',
+                    'linking-info'            => 'Зв\'язування ресурсів у процесі',
+                    'progress'                => 'Прогрес:',
+                    'title'                   => 'Імпорт',
+                    'total-batches'           => 'Всього партій:',
+                    'total-created'           => 'Всього створено записів:',
+                    'total-deleted'           => 'Всього видалено записів:',
+                    'total-errors'            => 'Всього помилок:',
+                    'total-invalid-rows'      => 'Всього недійсних рядків:',
+                    'total-rows-processed'    => 'Всього опрацьовано рядків:',
+                    'total-updated'           => 'Всього оновлено записів:',
+                    'validate-info'           => 'Натисніть „Перевірити дані“, щоб перевірити свій імпорт.',
+                    'validate'                => 'Перевірити',
+                    'validating-info'         => 'Дані почали читання та перевірку',
+                    'validation-failed-info'  => 'Ваш імпорт недійсний. Будь ласка, виправте наступні помилки та спробуйте ще раз.',
+                    'validation-success-info' => 'Ваш імпорт дійсний. Натисніть „Імпорт“, щоб розпочати процес імпорту.',
+                ],
+
+                'create-success'    => 'Імпорт успішно створено.',
+                'delete-failed'     => 'Не вдалося видалити імпорт.',
+                'delete-success'    => 'Імпорт успішно видалено.',
+                'not-valid'         => 'Імпорт недійсний',
+                'nothing-to-import' => 'Немає ресурсів для імпорту.',
+                'setup-queue-error' => 'Будь ласка, змініть ваш драйвер черги на „database“ або „redis“, щоб розпочати процес імпорту.',
+                'update-success'    => 'Імпорт успішно оновлено.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Створити Курс Валют',
                 'exchange-rate' => 'Курс Валют',
@@ -2361,7 +2477,7 @@ return [
             'update-success'    => 'Джерела інвентаризації успішно оновлено',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Ви впевнені, що хочете видалити?',
@@ -2406,16 +2522,6 @@ return [
                     'button-title' => 'Створити податкову ставку',
                     'tax-rate'     => 'Податкова ставка',
                     'title'        => 'Податкові ставки',
-
-                    'import' => [
-                        'duplicate-error'  => 'Ідентифікатор повинен бути унікальним, дубльований ідентифікатор :identifier в рядку :position.',
-                        'enough-row-error' => 'Файл не має достатньо рядків',
-                        'import-btn'       => 'Імпорт',
-                        'title'            => 'Завантажити',
-                        'upload-error'     => 'Файл повинен бути файлом типу: xls, xlsx, csv.',
-                        'upload-success'   => 'Ставка податку успішно завантажена',
-                        'validation'       => 'Дозволений тип: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Країна',
@@ -2702,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Категорійний Карусель',
                     'footer-links'      => 'Посилання У Підвалі',
-                    'image-carousel'    => 'Карусель Зображень',
+                    'image-carousel'    => 'Карусель зображень',
                     'product-carousel'  => 'Карусель Товарів',
                     'services-content'  => 'Контент послуг',
                     'static-content'    => 'Статичний Контент',
@@ -2918,8 +3024,10 @@ return [
             'delete'                       => 'Видалити',
             'enable-at-least-one-payment'  => 'Включіть принаймні один метод оплати.',
             'enable-at-least-one-shipping' => 'Включіть принаймні один метод доставки.',
+            'no-result-found'              => 'Результатів не знайдено',
             'save-btn'                     => 'Зберегти налаштування',
             'save-message'                 => 'Налаштування успішно збережено',
+            'search'                       => 'Пошук',
             'title'                        => 'Налаштування',
 
             'general' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => 'Валюти',
                 'customers'                => 'Клієнти',
                 'dashboard'                => 'Панель керування',
+                'data-transfer'            => 'Передача даних',
                 'discount'                 => 'Знижка',
                 'email-templates'          => 'Шаблони електронних листів',
                 'events'                   => 'Події',
                 'exchange-rates'           => 'Обмінні курси',
                 'groups'                   => 'Групи',
+                'imports'                  => 'Імпорт',
                 'inventory-sources'        => 'Джерела інвентаризації',
                 'invoices'                 => 'Рахунки',
                 'locales'                  => 'Локалізації',
@@ -3529,6 +3639,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length з',
+                'of'        => 'з',
+                'per-page'  => 'На сторінку',
+                'results'   => ':total Результати',
+                'selected'  => ':total Обрані',
+
                 'mass-actions' => [
                     'select-action' => 'Вибрати дію',
                     'select-option' => 'Вибрати опцію',
@@ -3684,24 +3800,27 @@ return [
         'campaigns'                => 'Кампанії',
         'cancel'                   => 'Скасувати',
         'cart-rules'               => 'Правила кошика',
-        'catalog'                  => 'Каталог',
         'catalog-rules'            => 'Правила каталогу',
+        'catalog'                  => 'Каталог',
         'categories'               => 'Категорії',
         'channels'                 => 'Канали',
         'cms'                      => 'CMS',
         'communications'           => 'Комунікації',
         'configure'                => 'Налаштувати',
         'copy'                     => 'Копіювати',
-        'create'                   => 'Додати',
+        'create'                   => 'Створити',
         'currencies'               => 'Валюти',
         'customers'                => 'Клієнти',
         'dashboard'                => 'Панель управління',
+        'data-transfer'            => 'Передача даних',
         'delete'                   => 'Видалити',
         'edit'                     => 'Редагувати',
         'email-templates'          => 'Шаблони електронних листів',
         'events'                   => 'Події',
         'exchange-rates'           => 'Курси обміну',
         'groups'                   => 'Групи',
+        'import'                   => 'Імпорт',
+        'imports'                  => 'Імпорт',
         'inventory-sources'        => 'Джерела інвентаризації',
         'invoices'                 => 'Рахунки',
         'locales'                  => 'Локалізації',
@@ -3765,11 +3884,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Завантажити',
-        'export'           => 'Експорт',
-        'no-records'       => 'Нічого експортувати',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Завантажити',
+        'export'     => 'Експорт',
+        'no-records' => 'Нічого експортувати',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

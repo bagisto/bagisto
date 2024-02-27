@@ -1,14 +1,17 @@
 <!-- Top Selling Products By Revenue Vue Component -->
 <v-reporting-product-top-selling-by-revenue>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.products.top-selling-by-revenue/>
+    <x-admin::shimmer.reporting.products.top-selling-by-revenue />
 </v-reporting-product-top-selling-by-revenue>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-product-top-selling-by-revenue-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-product-top-selling-by-revenue-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.products.top-selling-by-revenue/>
+            <x-admin::shimmer.reporting.products.top-selling-by-revenue />
         </template>
 
         <!-- Top Selling Products By Revenue Section -->

@@ -1,14 +1,17 @@
 <!-- Customers with Most Reviews Vue Component -->
 <v-reporting-customers-with-most-reviews>
     <!-- Shimmer -->
-    <x-admin::shimmer.reporting.customers.most-reviews/>
+    <x-admin::shimmer.reporting.customers.most-reviews />
 </v-reporting-customers-with-most-reviews>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-customers-with-most-reviews-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-customers-with-most-reviews-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.customers.most-reviews/>
+            <x-admin::shimmer.reporting.customers.most-reviews />
         </template>
 
         <!-- Customers with Most Reviews Section -->

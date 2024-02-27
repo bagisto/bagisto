@@ -22,7 +22,7 @@
         </div>
 
         <!-- Added For Shimmer -->
-        <x-admin::shimmer.datagrid/>
+        <x-admin::shimmer.datagrid />
     </v-create-sitemaps>
 
     {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.create.after') !!}

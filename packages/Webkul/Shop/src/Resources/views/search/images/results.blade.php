@@ -19,7 +19,10 @@
 </v-image-search-result-component>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-image-search-result-component-template">
+    <script
+        type="text/x-template"
+        id="v-image-search-result-component-template"
+    >
         <div class="mt-8 p-5 bg-gray-100 border border-gray-200 rounded-lg">
             <div class="flex gap-12">
                 <img 

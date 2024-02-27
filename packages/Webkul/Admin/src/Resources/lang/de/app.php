@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Kunde <b>benachrichtigt</b>',
                 'discount'              => 'Rabatt - :discount',
                 'download-pdf'          => 'PDF herunterladen',
+                'fraud'                 => 'Betrug',
                 'grand-total'           => 'Gesamtsumme - :grand_total',
                 'invoice-id'            => 'Rechnung #:invoice',
                 'invoices'              => 'Rechnungen',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Zahlung und Versand',
                 'payment-method'        => 'Zahlungsmethode',
                 'pending'               => 'Ausstehend',
+                'pending_payment'       => 'Ausstehende Zahlung',
                 'per-unit'              => 'Pro Einheit',
                 'price'                 => 'Preis - :price',
                 'processing'            => 'Verarbeitung',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Anpassung Rückerstattung',
                 'amount-per-unit'             => ':amount pro Einheit x :qty Menge',
                 'create-success'              => 'Rückerstattung erfolgreich erstellt',
+                'creation-error'              => 'Erstellung einer Rückerstattung ist nicht erlaubt.',
                 'discount-amount'             => 'Rabattbetrag',
                 'grand-total'                 => 'Gesamtsumme',
                 'invalid-qty'                 => 'Wir haben eine ungültige Menge zum Rechnungsstellen gefunden.',
@@ -421,18 +424,19 @@ return [
                 'title'                  => 'Rechnung #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount pro Einheit x :qty Menge',
-                'create-invoice'  => 'Rechnung erstellen',
-                'create-success'  => 'Rechnung erfolgreich erstellt',
-                'creation-error'  => 'Die Erstellung der Auftragsrechnung ist nicht erlaubt.',
-                'invalid-qty'     => 'Ungültige Menge für Rechnungspositionen gefunden.',
-                'invoice'         => 'Rechnung',
-                'new-invoice'     => 'Neue Rechnung',
-                'product-error'   => 'Rechnung kann nicht ohne Produkte erstellt werden.',
-                'product-image'   => 'Produktbild',
-                'qty-to-invoiced' => 'Menge zur Rechnungsstellung',
-                'sku'             => 'Artikelnummer - :sku',
+            'create'   => [
+                'amount-per-unit'    => ':amount Pro Einheit x :qty Menge',
+                'create-invoice'     => 'Rechnung erstellen',
+                'create-success'     => 'Rechnung erfolgreich erstellt',
+                'create-transaction' => 'Transaktion erstellen',
+                'creation-error'     => 'Bestellrechnungserstellung ist nicht erlaubt.',
+                'invalid-qty'        => 'Wir haben eine ungültige Menge zum Rechnen von Artikeln gefunden.',
+                'invoice'            => 'Rechnung',
+                'new-invoice'        => 'Neue Rechnung',
+                'product-error'      => 'Rechnung kann nicht ohne Produkte erstellt werden.',
+                'product-image'      => 'Produktbild',
+                'qty-to-invoiced'    => 'Menge zu verrechnen',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -487,10 +491,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Bereits bezahlt',
+                    'amount'                     => 'Betrag',
+                    'create-transaction'         => 'Transaktion erstellen',
+                    'invoice-id'                 => 'Rechnungs-ID',
                     'invoice-missing'            => 'Rechnung fehlt',
-                    'transaction-amount-exceeds' => 'Transaktionsbetrag überschreitet den Betrag',
+                    'payment-method'             => 'Zahlungsmethode',
+                    'save-transaction'           => 'Transaktion speichern',
+                    'transaction-amount-exceeds' => 'Transaktionsbetrag überschreitet',
                     'transaction-amount-zero'    => 'Transaktionsbetrag ist null',
-                    'transaction-saved'          => 'Transaktion erfolgreich gespeichert',
+                    'transaction-saved'          => 'Transaktion erfolgreich gespeichert.',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'Das :attribute darf nicht größer als :max Kilobyte sein. Bitte wählen Sie eine kleinere Datei aus.',
                     'info'  => 'Die maximale Video-Größe sollte etwa :size betragen',
                     'title' => 'Videos',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Sprachversion erstellen',
                 'locale'     => 'Sprachversion',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Währung erstellen',
                 'currency'   => 'Währung',
@@ -2242,7 +2252,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Aktion',
+                    'allowed-errors'      => 'Zulässige Fehler',
+                    'back-btn'            => 'Zurück',
+                    'create-update'       => 'Erstellen/Aktualisieren',
+                    'delete'              => 'Löschen',
+                    'download-sample'     => 'Beispiel herunterladen',
+                    'field-separator'     => 'Feldtrennzeichen',
+                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
+                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
+                    'file'                => 'Datei',
+                    'general'             => 'Allgemein',
+                    'images-directory'    => 'Bilder-Verzeichnispfad',
+                    'process-in-queue'    => 'In der Warteschlange verarbeiten',
+                    'results'             => 'Ergebnisse',
+                    'save-btn'            => 'Import speichern',
+                    'settings'            => 'Einstellungen',
+                    'skip-errors'         => 'Fehler überspringen',
+                    'stop-on-errors'      => 'Bei Fehlern anhalten',
+                    'title'               => 'Import erstellen',
+                    'type'                => 'Typ',
+                    'validation-strategy' => 'Validierungsstrategie',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Aktion',
+                    'allowed-errors'      => 'Zulässige Fehler',
+                    'back-btn'            => 'Zurück',
+                    'create-update'       => 'Erstellen/Aktualisieren',
+                    'delete'              => 'Löschen',
+                    'download-sample'     => 'Beispiel herunterladen',
+                    'field-separator'     => 'Feldtrennzeichen',
+                    'file-info-example'   => 'Beispiel: Bei Produktbildern sollten die Dateien im Ordner /project-root/storage/app/import/product-images platziert werden.',
+                    'file-info'           => 'Verwenden Sie den relativen Pfad zu /project-root/storage/app/import, z. B. Produktbilder, Import-Bilder.',
+                    'file'                => 'Datei',
+                    'general'             => 'Allgemein',
+                    'images-directory'    => 'Bilder-Verzeichnispfad',
+                    'process-in-queue'    => 'In der Warteschlange verarbeiten',
+                    'results'             => 'Ergebnisse',
+                    'save-btn'            => 'Import speichern',
+                    'settings'            => 'Einstellungen',
+                    'skip-errors'         => 'Fehler überspringen',
+                    'stop-on-errors'      => 'Bei Fehlern anhalten',
+                    'title'               => 'Import bearbeiten',
+                    'type'                => 'Typ',
+                    'validation-strategy' => 'Validierungsstrategie',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Import erstellen',
+                    'title'        => 'Importe',
+
+                    'datagrid'     => [
+                        'actions'       => 'Aktionen',
+                        'completed-at'  => 'Abgeschlossen am',
+                        'created'       => 'Erstellt',
+                        'delete'        => 'Löschen',
+                        'deleted'       => 'Gelöscht',
+                        'edit'          => 'Bearbeiten',
+                        'error-file'    => 'Fehlerhafte Datei',
+                        'id'            => 'ID',
+                        'started-at'    => 'Gestartet am',
+                        'state'         => 'Status',
+                        'summary'       => 'Zusammenfassung',
+                        'updated'       => 'Aktualisiert',
+                        'uploaded-file' => 'Hochgeladene Datei',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Zurück',
+                    'completed-batches'       => 'Insgesamt abgeschlossene Chargen:',
+                    'download-error-report'   => 'Vollständigen Bericht herunterladen',
+                    'edit-btn'                => 'Bearbeiten',
+                    'imported-info'           => 'Herzlichen Glückwunsch! Ihr Import war erfolgreich.',
+                    'importing-info'          => 'Import läuft',
+                    'indexing-info'           => 'Ressourcenindexierung (Preis, Inventar und Elastic Search) läuft',
+                    'linking-info'            => 'Verknüpfung von Ressourcen läuft',
+                    'progress'                => 'Fortschritt:',
+                    'title'                   => 'Import',
+                    'total-batches'           => 'Insgesamt Chargen:',
+                    'total-created'           => 'Insgesamt erstellte Datensätze:',
+                    'total-deleted'           => 'Insgesamt gelöschte Datensätze:',
+                    'total-errors'            => 'Insgesamt Fehler:',
+                    'total-invalid-rows'      => 'Insgesamt ungültige Zeilen:',
+                    'total-rows-processed'    => 'Insgesamt verarbeitete Zeilen:',
+                    'total-updated'           => 'Insgesamt aktualisierte Datensätze:',
+                    'validate-info'           => 'Klicken Sie auf "Daten validieren", um Ihren Import zu überprüfen.',
+                    'validate'                => 'Validieren',
+                    'validating-info'         => 'Die Daten werden gelesen und validiert',
+                    'validation-failed-info'  => 'Ihr Import ist ungültig. Bitte beheben Sie die folgenden Fehler und versuchen Sie es erneut.',
+                    'validation-success-info' => 'Ihr Import ist gültig. Klicken Sie auf "Importieren", um den Importvorgang zu starten.',
+                ],
+
+                'create-success'    => 'Import erfolgreich erstellt.',
+                'delete-failed'     => 'Löschen des Imports fehlgeschlagen.',
+                'delete-success'    => 'Import erfolgreich gelöscht.',
+                'not-valid'         => 'Import ist ungültig',
+                'nothing-to-import' => 'Es gibt keine Ressourcen zum Importieren.',
+                'setup-queue-error' => 'Bitte ändern Sie Ihren Warteschlangentreiber auf "Datenbank" oder "Redis", um den Importprozess zu starten.',
+                'update-success'    => 'Import erfolgreich aktualisiert.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Wechselkurs erstellen',
                 'exchange-rate' => 'Wechselkurs',
@@ -2361,7 +2477,7 @@ return [
             'update-success'    => 'Lagerorte erfolgreich aktualisiert',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Möchten Sie wirklich löschen?',
@@ -2406,16 +2522,6 @@ return [
                     'button-title' => 'Steuerquote erstellen',
                     'tax-rate'     => 'Steuersatz',
                     'title'        => 'Steuersätze',
-
-                    'import' => [
-                        'duplicate-error'  => 'Kennung muss eindeutig sein, doppelte Kennung :identifier in Zeile :position.',
-                        'enough-row-error' => 'Die Datei enthält nicht genügend Zeilen',
-                        'import-btn'       => 'Importieren',
-                        'title'            => 'Hochladen',
-                        'upload-error'     => 'Die Datei muss vom Typ sein: xls, xlsx, csv.',
-                        'upload-success'   => 'Steuersatz erfolgreich hochgeladen',
-                        'validation'       => 'Erlaubter Typ: xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Land',
@@ -2702,7 +2808,7 @@ return [
                 'type' => [
                     'category-carousel' => 'Kategorie Karussell',
                     'footer-links'      => 'Fußzeilen-Links',
-                    'image-carousel'    => 'Bild Karussell',
+                    'image-carousel'    => 'Bildkarussell',
                     'product-carousel'  => 'Produkt Karussell',
                     'services-content'  => 'Inhalt der Dienste',
                     'static-content'    => 'Statischer Inhalt',
@@ -2918,8 +3024,10 @@ return [
             'delete'                       => 'Löschen',
             'enable-at-least-one-payment'  => 'Mindestens eine Zahlungsmethode aktivieren.',
             'enable-at-least-one-shipping' => 'Mindestens eine Versandmethode aktivieren.',
+            'no-result-found'              => 'Keine Einträge gefunden',
             'save-btn'                     => 'Konfiguration speichern',
             'save-message'                 => 'Konfiguration erfolgreich gespeichert',
+            'search'                       => 'Suchen',
             'title'                        => 'Konfiguration',
 
             'general' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => 'Währungen',
                 'customers'                => 'Kunden',
                 'dashboard'                => 'Dashboard',
+                'data-transfer'            => 'Datentransfer',
                 'discount'                 => 'Rabatt',
                 'email-templates'          => 'E-Mail-Vorlagen',
                 'events'                   => 'Ereignisse',
                 'exchange-rates'           => 'Wechselkurse',
                 'groups'                   => 'Gruppen',
+                'imports'                  => 'Importe',
                 'inventory-sources'        => 'Inventarquellen',
                 'invoices'                 => 'Rechnungen',
                 'locales'                  => 'Standorte',
@@ -3523,6 +3633,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length von',
+                'of'        => 'von',
+                'per-page'  => 'Pro Seite',
+                'results'   => ':total Ergebnisse',
+                'selected'  => ':total Ausgewählt',
+
                 'index' => [
                     'no-records-selected'              => 'Es wurden keine Datensätze ausgewählt.',
                     'must-select-a-mass-action-option' => 'Sie müssen eine Option für die Massenaktion auswählen.',
@@ -3684,24 +3800,27 @@ return [
         'campaigns'                => 'Kampagnen',
         'cancel'                   => 'Abbrechen',
         'cart-rules'               => 'Warenkorbregeln',
-        'catalog'                  => 'Katalog',
         'catalog-rules'            => 'Katalogregeln',
+        'catalog'                  => 'Katalog',
         'categories'               => 'Kategorien',
         'channels'                 => 'Kanäle',
         'cms'                      => 'CMS',
         'communications'           => 'Kommunikationen',
         'configure'                => 'Konfigurieren',
         'copy'                     => 'Kopieren',
-        'create'                   => 'Hinzufügen',
+        'create'                   => 'erstellen',
         'currencies'               => 'Währungen',
         'customers'                => 'Kunden',
         'dashboard'                => 'Dashboard',
+        'data-transfer'            => 'Datentransfer',
         'delete'                   => 'Löschen',
         'edit'                     => 'Bearbeiten',
         'email-templates'          => 'E-Mail-Vorlagen',
         'events'                   => 'Ereignisse',
         'exchange-rates'           => 'Wechselkurse',
         'groups'                   => 'Gruppen',
+        'import'                   => 'Importieren',
+        'imports'                  => 'Importe',
         'inventory-sources'        => 'Inventarquellen',
         'invoices'                 => 'Rechnungen',
         'locales'                  => 'Sprachen',
@@ -3765,11 +3884,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'Herunterladen',
-        'export'           => 'Exportieren',
-        'no-records'       => 'Nichts zu exportieren',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'Herunterladen',
+        'export'     => 'Exportieren',
+        'no-records' => 'Nichts zu exportieren',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

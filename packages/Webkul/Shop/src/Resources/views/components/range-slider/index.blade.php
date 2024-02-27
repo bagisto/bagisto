@@ -1,7 +1,10 @@
 <v-range-slider {{ $attributes }}></v-range-slider>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-range-slider-template">
+    <script
+        type="text/x-template"
+        id="v-range-slider-template"
+    >
         <div>
             <div class="flex items-center gap-4">
                 <p class="text-sm">
@@ -69,7 +72,7 @@
 
             data() {
                 return {
-                    gap: 0.1,
+                    gap: this.defaultAllowedMaxRange * 0.10,
 
                     supportedTypes: ['integer', 'float', 'price'],
 
@@ -165,9 +168,11 @@
                 },
 
                 handleProgressBar() {
-                    this.$refs.progress.style.left = (this.minRange / this.allowedMaxRange) * 100 + '%';
+                    const direction = document.dir == 'ltr' ? 'left' : 'right';
 
-                    this.$refs.progress.style.right = 100 - (this.maxRange / this.allowedMaxRange) * 100 + '%';
+                    this.$refs.progress.style[direction] = (this.minRange / this.allowedMaxRange) * 100 + '%';
+
+                    this.$refs.progress.style[direction == 'left' ? 'right' : 'left'] = 100 - (this.maxRange / this.allowedMaxRange) * 100 + '%';
                 },
 
                 change() {

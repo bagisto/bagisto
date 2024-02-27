@@ -18,13 +18,18 @@
 </v-media-videos>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-videos-template">
+    <script
+        type="text/x-template"
+        id="v-media-videos-template"
+    >
         <!-- Panel Content -->
         <div class="grid">
             <div class="flex gap-1">
                 <!-- Upload Video Button -->
+
                 <label
-                    class="grid justify-items-center items-center w-full h-[120px] max-w-[210px] max-h-[120px] border border-dashed border-gray-300 dark:border-gray-800 rounded cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
+                    class="grid justify-items-center items-center w-full h-[120px] max-w-[210px] max-h-[120px] border border-dashed dark:border-gray-800 rounded cursor-pointer transition-all hover:border-gray-400 dark:invert dark:mix-blend-exclusion"
+                    :class="[errors['videos.files[0]'] ? 'border border-red-500' : 'border-gray-300']"
                     :for="$.uid + '_videoInput'"
                     v-if="allowMultiple || videos.length == 0"
                 >
@@ -67,7 +72,8 @@
                             :width="width"
                             :height="height"
                             @onRemove="remove($event)"
-                        />
+                        >
+                        </v-media-video-item>
                     </template>
                 </draggable>
             </div>

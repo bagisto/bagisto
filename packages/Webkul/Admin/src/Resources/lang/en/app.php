@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | Customer <b>Notified</b>',
                 'discount'              => 'Discount - :discount',
                 'download-pdf'          => 'Download PDF',
+                'fraud'                 => 'Fraud',
                 'grand-total'           => 'Grand Total - :grand_total',
                 'invoice-id'            => 'Invoice #:invoice',
                 'invoices'              => 'Invoices',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => 'Payment and Shipping',
                 'payment-method'        => 'Payment method',
                 'pending'               => 'Pending',
+                'pending_payment'       => 'Pending Payment',
                 'per-unit'              => 'Per Unit',
                 'price'                 => 'Price - :price',
                 'processing'            => 'Processing',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => 'Adjustment Refund',
                 'amount-per-unit'             => ':amount Per Unit x :qty Quantity',
                 'create-success'              => 'Refund created successfully',
+                'creation-error'              => 'Refund creation is not allowed.',
                 'discount-amount'             => 'Discount Amount',
                 'grand-total'                 => 'Grand Total',
                 'invalid-qty'                 => 'We found an invalid quantity to invoice items.',
@@ -422,17 +425,18 @@ return [
             ],
 
             'create'   => [
-                'amount-per-unit' => ':amount Per Unit x :qty Quantity',
-                'create-invoice'  => 'Create Invoice',
-                'create-success'  => 'Invoice created successfully',
-                'creation-error'  => 'Order invoice creation is not allowed.',
-                'invalid-qty'     => 'We found an invalid quantity to invoice items.',
-                'invoice'         => 'Invoice',
-                'new-invoice'     => 'New Invoice',
-                'product-error'   => 'Invoice can not be created without products.',
-                'product-image'   => 'Product Image',
-                'qty-to-invoiced' => 'Qty. to invoiced',
-                'sku'             => 'SKU - :sku',
+                'amount-per-unit'    => ':amount Per Unit x :qty Quantity',
+                'create-invoice'     => 'Create Invoice',
+                'create-success'     => 'Invoice created successfully',
+                'create-transaction' => 'Create Transaction',
+                'creation-error'     => 'Order invoice creation is not allowed.',
+                'invalid-qty'        => 'We found an invalid quantity to invoice items.',
+                'invoice'            => 'Invoice',
+                'new-invoice'        => 'New Invoice',
+                'product-error'      => 'Invoice can not be created without products.',
+                'product-image'      => 'Product Image',
+                'qty-to-invoiced'    => 'Qty to invoiced',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -488,9 +492,15 @@ return [
 
                 'create' => [
                     'already-paid'               => 'Already paid',
+                    'amount'                     => 'Amount',
+                    'create-transaction'         => 'Create Transaction',
+                    'invoice-id'                 => 'Invoice ID',
                     'invoice-missing'            => 'Invoice Missing',
+                    'payment-method'             => 'Payment Method',
+                    'save-transaction'           => 'Save Transaction',
                     'transaction-amount-exceeds' => 'Transaction Amount exceeds',
                     'transaction-amount-zero'    => 'Transaction Amount zero',
+                    'transaction-saved'          => 'Transaction saved successfully.',
                 ],
 
                 'view' => [
@@ -604,6 +614,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'The :attribute may not be greater than :max kilobytes. Please choose a smaller file.',
                     'info'  => 'Maximum video size should be like :size',
                     'title' => 'Videos',
                 ],
@@ -2157,7 +2168,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'Create Locale',
                 'locale'     => 'Locale',
@@ -2199,7 +2210,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => 'Create Currency',
                 'currency'   => 'Currency',
@@ -2242,7 +2253,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'Action',
+                    'allowed-errors'      => 'Allowed Errors',
+                    'back-btn'            => 'Back',
+                    'create-update'       => 'Create/Update',
+                    'delete'              => 'Delete',
+                    'download-sample'     => 'Download Sample',
+                    'field-separator'     => 'Field Separator',
+                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
+                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
+                    'file'                => 'File',
+                    'general'             => 'General',
+                    'images-directory'    => 'Images Directory Path',
+                    'process-in-queue'    => 'Process In Queue',
+                    'results'             => 'Results',
+                    'save-btn'            => 'Save Import',
+                    'settings'            => 'Settings',
+                    'skip-errors'         => 'Skip Errors',
+                    'stop-on-errors'      => 'Stop on Errors',
+                    'title'               => 'Create Import',
+                    'type'                => 'Type',
+                    'validation-strategy' => 'Validation Strategy',
+                ],
+
+                'edit'              => [
+                    'action'              => 'Action',
+                    'allowed-errors'      => 'Allowed Errors',
+                    'back-btn'            => 'Back',
+                    'create-update'       => 'Create/Update',
+                    'delete'              => 'Delete',
+                    'download-sample'     => 'Download Sample',
+                    'field-separator'     => 'Field Separator',
+                    'file-info-example'   => 'For example, in case product-images, files should be placed into /project-root/storage/app/import/product-images folder.',
+                    'file-info'           => 'Use relative path to /project-root/storage/app/import, e.g. product-images, import-images.',
+                    'file'                => 'File',
+                    'general'             => 'General',
+                    'images-directory'    => 'Images Directory Path',
+                    'process-in-queue'    => 'Process In Queue',
+                    'results'             => 'Results',
+                    'save-btn'            => 'Save Import',
+                    'settings'            => 'Settings',
+                    'skip-errors'         => 'Skip Errors',
+                    'stop-on-errors'      => 'Stop on Errors',
+                    'title'               => 'Edit Import',
+                    'type'                => 'Type',
+                    'validation-strategy' => 'Validation Strategy',
+                ],
+
+                'index'             => [
+                    'button-title' => 'Create Import',
+                    'title'        => 'Imports',
+
+                    'datagrid' => [
+                        'actions'       => 'Actions',
+                        'completed-at'  => 'Completed At',
+                        'created'       => 'Created',
+                        'delete'        => 'Delete',
+                        'deleted'       => 'Deleted',
+                        'edit'          => 'Edit',
+                        'error-file'    => 'Error File',
+                        'id'            => 'ID',
+                        'started-at'    => 'Started At',
+                        'state'         => 'State',
+                        'summary'       => 'Summary',
+                        'updated'       => 'Updated',
+                        'uploaded-file' => 'Uploaded File',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => 'Back',
+                    'completed-batches'       => 'Total Batches Completed:',
+                    'download-error-report'   => 'Download Full Report',
+                    'edit-btn'                => 'Edit',
+                    'imported-info'           => 'Congratulations! Your import was successful.',
+                    'importing-info'          => 'Import In Process',
+                    'indexing-info'           => 'Resources Indexing (Price, Inventory and Elastic Search) In Progress',
+                    'linking-info'            => 'Resources Linking In Progress',
+                    'progress'                => 'Progress:',
+                    'title'                   => 'Import',
+                    'total-batches'           => 'Total Batches:',
+                    'total-created'           => 'Total Records Created:',
+                    'total-deleted'           => 'Total Records Deleted:',
+                    'total-errors'            => 'Total Errors:',
+                    'total-invalid-rows'      => 'Total Invalid Rows:',
+                    'total-rows-processed'    => 'Total Rows Processed:',
+                    'total-updated'           => 'Total Records Updated:',
+                    'validate-info'           => 'Click on Validate Data to check your import.',
+                    'validate'                => 'Validate',
+                    'validating-info'         => 'The data started reading and Validating',
+                    'validation-failed-info'  => 'Your import is invalid. Please fix the following errors and try again.',
+                    'validation-success-info' => 'Your import is valid. Click on Import to start the import process.',
+                ],
+
+                'create-success'    => 'Import created successfully.',
+                'delete-failed'     => 'Import deletion failed unexpectedly.',
+                'delete-success'    => 'Import deleted successfully.',
+                'not-valid'         => 'Import is invalid',
+                'nothing-to-import' => 'There are no resources to import.',
+                'setup-queue-error' => 'Please change your queue driver to "database" or "redis" to start the import process.',
+                'update-success'    => 'Import updated successfully.',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => 'Create Exchange Rate',
                 'exchange-rate' => 'Exchange Rate',
@@ -2361,7 +2478,7 @@ return [
             'update-success'    => 'Inventory Sources Updated Successfully',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => 'Are You sure you want to delete ?',
@@ -2406,16 +2523,6 @@ return [
                     'button-title' => 'Create Tax Rate',
                     'tax-rate'     => 'Tax Rate',
                     'title'        => 'Tax Rates',
-
-                    'import' => [
-                        'duplicate-error'  => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
-                        'enough-row-error' => 'file has not enough rows',
-                        'import-btn'       => 'Import',
-                        'title'            => 'Upload',
-                        'upload-error'     => 'The file must be a file of type: xls, xlsx, csv.',
-                        'upload-success'   => 'Tax Rate Uploaded successfully',
-                        'validation'       => 'Allowed Type : xls, xlsx, csv.',
-                    ],
 
                     'datagrid' => [
                         'country'    => 'Country',
@@ -2702,7 +2809,7 @@ return [
                 'type'       => [
                     'category-carousel' => 'Category Carousel',
                     'footer-links'      => 'Footer Links',
-                    'image-carousel'    => 'Slider Carousel',
+                    'image-carousel'    => 'Image Carousel',
                     'product-carousel'  => 'Product Carousel',
                     'services-content'  => 'Services Content',
                     'static-content'    => 'Static Content',
@@ -2918,8 +3025,10 @@ return [
             'delete'                       => 'Delete',
             'enable-at-least-one-payment'  => 'Enable at least one payment method.',
             'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
+            'no-result-found'              => 'No result found',
             'save-btn'                     => 'Save Configuration',
             'save-message'                 => 'Configuration saved successfully',
+            'search'                       => 'Search',
             'title'                        => 'Configuration',
 
             'general' => [
@@ -3486,11 +3595,13 @@ return [
                 'currencies'               => 'Currencies',
                 'customers'                => 'Customers',
                 'dashboard'                => 'Dashboard',
+                'data-transfer'            => 'Data Transfer',
                 'discount'                 => 'Discount',
                 'email-templates'          => 'Email Templates',
                 'events'                   => 'Events',
                 'exchange-rates'           => 'Exchange Rates',
                 'groups'                   => 'Groups',
+                'imports'                  => 'Imports',
                 'inventory-sources'        => 'Inventory Sources',
                 'invoices'                 => 'Invoices',
                 'locales'                  => 'Locales',
@@ -3529,6 +3640,12 @@ return [
             ],
 
             'toolbar' => [
+                'length-of' => ':length of',
+                'of'        => 'of',
+                'per-page'  => 'Per Page',
+                'results'   => ':total Results',
+                'selected'  => ':total Selected',
+
                 'mass-actions' => [
                     'submit'        => 'Submit',
                     'select-option' => 'Select Option',
@@ -3684,24 +3801,27 @@ return [
         'campaigns'                => 'Campaigns',
         'cancel'                   => 'Cancel',
         'cart-rules'               => 'Cart Rules',
-        'catalog'                  => 'Catalog',
         'catalog-rules'            => 'Catalog Rules',
+        'catalog'                  => 'Catalog',
         'categories'               => 'Categories',
         'channels'                 => 'Channels',
         'cms'                      => 'CMS',
         'communications'           => 'Communications',
         'configure'                => 'Configure',
         'copy'                     => 'Copy',
-        'create'                   => 'Add',
+        'create'                   => 'Create',
         'currencies'               => 'Currencies',
         'customers'                => 'Customers',
         'dashboard'                => 'Dashboard',
+        'data-transfer'            => 'Data Transfer',
         'delete'                   => 'Delete',
         'edit'                     => 'Edit',
         'email-templates'          => 'Email Templates',
         'events'                   => 'Events',
         'exchange-rates'           => 'Exchange Rates',
         'groups'                   => 'Groups',
+        'import'                   => 'Import',
+        'imports'                  => 'Imports',
         'inventory-sources'        => 'Inventory Sources',
         'invoices'                 => 'Invoices',
         'locales'                  => 'Locales',
@@ -3770,6 +3890,7 @@ return [
         'export'     => 'Export',
         'no-records' => 'Nothing to export',
         'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

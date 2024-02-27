@@ -80,10 +80,9 @@ class AttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
@@ -93,10 +92,9 @@ class AttributeController extends Controller
     /**
      * Get attribute options associated with attribute.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function getAttributeOptions($id)
+    public function getAttributeOptions(int $id)
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
@@ -106,10 +104,9 @@ class AttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $this->validate(request(), [
             'code'          => ['required', 'unique:attributes,code,'.$id, new Code],
@@ -137,10 +134,8 @@ class AttributeController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
@@ -179,7 +174,9 @@ class AttributeController extends Controller
             $attribute = $this->attributeRepository->find($index);
 
             if (! $attribute->is_user_defined) {
-                return response()->json([], 422);
+                return response()->json([
+                    'message' => trans('admin::app.catalog.attributes.delete-failed'),
+                ], 422);
             }
         }
 
@@ -199,10 +196,9 @@ class AttributeController extends Controller
     /**
      * Get super attributes of product.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function productSuperAttributes($id)
+    public function productSuperAttributes(int $id)
     {
         $product = $this->productRepository->findOrFail($id);
 

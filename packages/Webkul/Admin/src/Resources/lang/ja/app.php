@@ -183,6 +183,7 @@ return [
                 'customer-notified'     => ':date | 顧客 <b>通知済み</b>',
                 'discount'              => '割引 - :discount',
                 'download-pdf'          => 'PDFをダウンロード',
+                'fraud'                 => '詐欺',
                 'grand-total'           => '合計金額 - :grand_total',
                 'invoice-id'            => '請求書 #:invoice',
                 'invoices'              => '請求書',
@@ -202,6 +203,7 @@ return [
                 'payment-and-shipping'  => '支払いと発送',
                 'payment-method'        => '支払い方法',
                 'pending'               => '保留中',
+                'pending_payment'       => '保留中のお支払い',
                 'per-unit'              => '単位あたり',
                 'price'                 => '価格 - :price',
                 'processing'            => '処理中',
@@ -349,6 +351,7 @@ return [
                 'adjustment-refund'           => '調整返金',
                 'amount-per-unit'             => ':amount 単位あたり x :qty 個数',
                 'create-success'              => '返金が正常に作成されました',
+                'creation-error'              => '払い戻しの作成は許可されていません。',
                 'discount-amount'             => '割引額',
                 'grand-total'                 => '総合計',
                 'invalid-qty'                 => '請求アイテムの無効な数量が見つかりました。',
@@ -421,18 +424,19 @@ return [
                 'title'                  => '請求書 #:invoice_id',
             ],
 
-            'create' => [
-                'amount-per-unit' => ':amount 1単位あたり x :qty 数量',
-                'create-invoice'  => '請求書を作成',
-                'create-success'  => '請求書が正常に作成されました',
-                'creation-error'  => '注文請求書の作成は許可されていません。',
-                'invalid-qty'     => '無効な数量の請求アイテムが見つかりました。',
-                'invoice'         => '請求書',
-                'new-invoice'     => '新しい請求書',
-                'product-error'   => '製品なしでは請求書を作成できません。',
-                'product-image'   => '製品画像',
-                'qty-to-invoiced' => '請求数量',
-                'sku'             => 'SKU - :sku',
+            'create'   => [
+                'amount-per-unit'    => '1単位あたりの:amount × :qty 個数',
+                'create-invoice'     => '請求書を作成する',
+                'create-success'     => '請求書が正常に作成されました',
+                'create-transaction' => '取引を作成する',
+                'creation-error'     => '注文請求書の作成は許可されていません。',
+                'invalid-qty'        => '請求書アイテムの数量が無効です。',
+                'invoice'            => '請求書',
+                'new-invoice'        => '新しい請求書',
+                'product-error'      => '製品なしでは請求書を作成できません。',
+                'product-image'      => '製品画像',
+                'qty-to-invoiced'    => '請求数',
+                'sku'                => 'SKU - :sku',
             ],
 
             'invoice-pdf' => [
@@ -486,11 +490,16 @@ return [
                 ],
 
                 'create' => [
-                    'already-paid'               => '既に支払済み',
-                    'invoice-missing'            => '請求書が不足しています',
+                    'already-paid'               => 'すでに支払い済み',
+                    'amount'                     => '金額',
+                    'create-transaction'         => '取引を作成',
+                    'invoice-id'                 => '請求書ID',
+                    'invoice-missing'            => '請求書が見つかりません',
+                    'payment-method'             => '支払い方法',
+                    'save-transaction'           => '取引を保存',
                     'transaction-amount-exceeds' => '取引金額が超過しています',
                     'transaction-amount-zero'    => '取引金額がゼロです',
-                    'transaction-saved'          => '取引が正常に保存されました',
+                    'transaction-saved'          => '取引が正常に保存されました。',
                 ],
 
                 'view' => [
@@ -604,6 +613,7 @@ return [
                 ],
 
                 'videos' => [
+                    'error' => 'エラー：:attribute は :max キロバイトを超えてはいけません。小さいファイルを選択してください。',
                     'info'  => '最大ビデオサイズは :size となります',
                     'title' => 'ビデオ',
                 ],
@@ -2157,7 +2167,7 @@ return [
     ],
 
     'settings' => [
-        'locales' => [
+        'locales'           => [
             'index' => [
                 'create-btn' => 'ロケールを作成',
                 'locale'     => 'ロケール',
@@ -2199,7 +2209,7 @@ return [
             ],
         ],
 
-        'currencies' => [
+        'currencies'        => [
             'index' => [
                 'create-btn' => '通貨を作成',
                 'currency'   => '通貨',
@@ -2242,7 +2252,113 @@ return [
             ],
         ],
 
-        'exchange-rates' => [
+        'data-transfer'     => [
+            'imports' => [
+                'create'            => [
+                    'action'              => 'アクション',
+                    'allowed-errors'      => '許可されたエラー',
+                    'back-btn'            => '戻る',
+                    'create-update'       => '作成/更新',
+                    'delete'              => '削除',
+                    'download-sample'     => 'サンプルをダウンロード',
+                    'field-separator'     => 'フィールドセパレータ',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
+                    'file-info'           => '/project-root/storage/import/appへの相対パスを使用してください、例: product-images, import-images.',
+                    'file'                => 'ファイル',
+                    'general'             => '一般',
+                    'images-directory'    => '画像ディレクトリーパス',
+                    'process-in-queue'    => 'キューで処理',
+                    'results'             => '結果',
+                    'save-btn'            => 'インポートを保存',
+                    'settings'            => '設定',
+                    'skip-errors'         => 'エラーをスキップ',
+                    'stop-on-errors'      => 'エラーで停止',
+                    'title'               => 'インポートの作成',
+                    'type'                => 'タイプ',
+                    'validation-strategy' => 'バリデーション戦略',
+                ],
+
+                'edit'              => [
+                    'action'              => 'アクション',
+                    'allowed-errors'      => '許可されたエラー',
+                    'back-btn'            => '戻る',
+                    'create-update'       => '作成/更新',
+                    'delete'              => '削除',
+                    'download-sample'     => 'サンプルをダウンロード',
+                    'field-separator'     => 'フィールドセパレータ',
+                    'file-info-example'   => '例: 製品イメージの場合、ファイルは/project-root/storage/app/import/product-imagesフォルダーに配置する必要があります。',
+                    'file-info'           => '/project-root/storage/app/importへの相対パスを使用してください、例: product-images, import-images.',
+                    'file'                => 'ファイル',
+                    'general'             => '一般',
+                    'images-directory'    => '画像ディレクトリーパス',
+                    'process-in-queue'    => 'キューで処理',
+                    'results'             => '結果',
+                    'save-btn'            => 'インポートを保存',
+                    'settings'            => '設定',
+                    'skip-errors'         => 'エラーをスキップ',
+                    'stop-on-errors'      => 'エラーで停止',
+                    'title'               => 'インポートの編集',
+                    'type'                => 'タイプ',
+                    'validation-strategy' => '検証戦略',
+                ],
+
+                'index'             => [
+                    'button-title' => 'インポートの作成',
+                    'title'        => '輸入品',
+
+                    'datagrid'     => [
+                        'actions'       => '行動',
+                        'completed-at'  => '完了日',
+                        'created'       => '作成した',
+                        'delete'        => '消去',
+                        'deleted'       => '削除されました',
+                        'edit'          => '編集',
+                        'error-file'    => 'エラーファイル',
+                        'id'            => 'ID',
+                        'started-at'    => '開始日',
+                        'state'         => '州',
+                        'summary'       => 'まとめ',
+                        'updated'       => '更新しました',
+                        'uploaded-file' => 'アップロードされたファイル',
+                    ],
+                ],
+
+                'import'            => [
+                    'back-btn'                => '戻る',
+                    'completed-batches'       => '完了したバッチの合計:',
+                    'download-error-report'   => '完全なレポートをダウンロード',
+                    'edit-btn'                => '編集',
+                    'imported-info'           => 'おめでとう！インポートは成功しました。',
+                    'importing-info'          => 'インポート中',
+                    'indexing-info'           => 'リソースのインデックス作成 (価格、在庫、エラスティック検索) が進行中です',
+                    'linking-info'            => 'リソースのリンクが進行中です',
+                    'progress'                => '進捗：',
+                    'title'                   => '輸入',
+                    'total-batches'           => '合計バッチ数:',
+                    'total-created'           => '作成された合計レコード数:',
+                    'total-deleted'           => '削除されたレコードの合計:',
+                    'total-errors'            => '合計エラー数:',
+                    'total-invalid-rows'      => '無効な行の合計:',
+                    'total-rows-processed'    => '処理された合計行数:',
+                    'total-updated'           => '更新された合計レコード:',
+                    'validate-info'           => '「データの検証」をクリックしてインポートを確認します。',
+                    'validate'                => '検証',
+                    'validating-info'         => 'データの読み取りと検証が開始されました',
+                    'validation-failed-info'  => 'インポートは無効です。次のエラーを修正して再試行してください。',
+                    'validation-success-info' => 'インポートは有効です。 「インポート」をクリックしてインポートプロセスを開始します。',
+                ],
+
+                'create-success'    => 'インポートが正常に作成されました。',
+                'delete-failed'     => 'インポートの削除が予期せず失敗しました。',
+                'delete-success'    => 'インポートは正常に削除されました。',
+                'not-valid'         => 'インポートが無効です',
+                'nothing-to-import' => 'インポートするリソースがありません。',
+                'setup-queue-error' => 'インポート プロセスを開始するには、キュー ドライバーを「データベース」または「redis」に変更してください。',
+                'update-success'    => 'インポートは正常に更新されました。',
+            ],
+        ],
+
+        'exchange-rates'    => [
             'index' => [
                 'create-btn'    => '為替レートを作成',
                 'exchange-rate' => '為替レート',
@@ -2361,7 +2477,7 @@ return [
             'update-success'    => '在庫ソースが正常に更新されました',
         ],
 
-        'taxes' => [
+        'taxes'             => [
             'categories' => [
                 'index' => [
                     'delete-warning' => '本当に削除しますか？',
@@ -2406,16 +2522,6 @@ return [
                     'button-title' => '税率を作成する',
                     'tax-rate'     => '税率',
                     'title'        => '税率',
-
-                    'import' => [
-                        'duplicate-error'  => '識別子はユニークでなければなりません、行:positionで重複する識別子 :identifier。',
-                        'enough-row-error' => 'ファイルに十分な行がありません',
-                        'import-btn'       => 'インポート',
-                        'title'            => 'アップロード',
-                        'upload-error'     => 'ファイルの種類は: xls、xlsx、csvでなければなりません。',
-                        'upload-success'   => '税率が正常にアップロードされました',
-                        'validation'       => '許可されたタイプ: xls、xlsx、csv。',
-                    ],
 
                     'datagrid' => [
                         'country'    => '国',
@@ -2918,8 +3024,10 @@ return [
             'delete'                       => '削除',
             'enable-at-least-one-payment'  => '少なくとも1つの支払い方法を有効にしてください。',
             'enable-at-least-one-shipping' => '少なくとも1つの配送方法を有効にしてください。',
+            'no-result-found'              => '結果が見つかりません',
             'save-btn'                     => '設定を保存',
             'save-message'                 => '設定が正常に保存されました',
+            'search'                       => '検索',
             'title'                        => '設定',
 
             'general' => [
@@ -3486,11 +3594,13 @@ return [
                 'currencies'               => '通貨',
                 'customers'                => '顧客',
                 'dashboard'                => 'ダッシュボード',
+                'data-transfer'            => 'Data Transfer',
                 'discount'                 => '割引',
                 'email-templates'          => 'メールテンプレート',
                 'events'                   => 'イベント',
                 'exchange-rates'           => '為替レート',
                 'groups'                   => 'グループ',
+                'imports'                  => '輸入品',
                 'inventory-sources'        => '在庫ソース',
                 'invoices'                 => '請求書',
                 'locales'                  => 'ロケール',
@@ -3523,6 +3633,12 @@ return [
 
         'datagrid' => [
             'toolbar' => [
+                'length-of' => ':length の',
+                'of'        => 'の',
+                'per-page'  => 'ページあたり',
+                'results'   => ':total 結果',
+                'selected'  => ':total 選択されました',
+
                 'index' => [
                     'no-records-selected'              => 'レコードは選択されていません。',
                     'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
@@ -3684,24 +3800,27 @@ return [
         'campaigns'                => 'キャンペーン',
         'cancel'                   => 'キャンセル',
         'cart-rules'               => 'カートルール',
-        'catalog'                  => 'カタログ',
         'catalog-rules'            => 'カタログルール',
+        'catalog'                  => 'カタログ',
         'categories'               => 'カテゴリー',
         'channels'                 => 'チャネル',
         'cms'                      => 'CMS',
         'communications'           => 'コミュニケーション',
         'configure'                => '設定',
         'copy'                     => 'コピー',
-        'create'                   => '追加',
+        'create'                   => '作成する',
         'currencies'               => '通貨',
         'customers'                => '顧客',
         'dashboard'                => 'ダッシュボード',
+        'data-transfer'            => 'データ転送',
         'delete'                   => '削除',
         'edit'                     => '編集',
         'email-templates'          => 'Eメールテンプレート',
         'events'                   => 'イベント',
         'exchange-rates'           => '為替レート',
         'groups'                   => 'グループ',
+        'import'                   => '輸入',
+        'imports'                  => '輸入品',
         'inventory-sources'        => '在庫ソース',
         'invoices'                 => '請求書',
         'locales'                  => 'ロケール',
@@ -3765,11 +3884,12 @@ return [
     ],
 
     'export' => [
-        'csv'              => 'CSV',
-        'download'         => 'ダウンロード',
-        'export'           => 'エクスポート',
-        'no-records'       => 'エクスポート対象がありません',
-        'xls'              => 'XLS',
+        'csv'        => 'CSV',
+        'download'   => 'ダウンロード',
+        'export'     => 'エクスポート',
+        'no-records' => 'エクスポート対象がありません',
+        'xls'        => 'XLS',
+        'xlsx'       => 'XLSX',
     ],
 
     'validations' => [

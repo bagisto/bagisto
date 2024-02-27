@@ -39,10 +39,9 @@ class OrderController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function view($id)
+    public function view(int $id)
     {
         $order = $this->orderRepository->findOrFail($id);
 
@@ -52,10 +51,9 @@ class OrderController extends Controller
     /**
      * Cancel action for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function cancel($id)
+    public function cancel(int $id)
     {
         $result = $this->orderRepository->cancel($id);
 
@@ -71,10 +69,9 @@ class OrderController extends Controller
     /**
      * Add comment to the order
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function comment($id)
+    public function comment(int $id)
     {
         $validatedData = $this->validate(request(), [
             'comment'           => 'required',
@@ -101,8 +98,6 @@ class OrderController extends Controller
      */
     public function search()
     {
-        $results = [];
-
         $orders = $this->orderRepository->scopeQuery(function ($query) {
             return $query->where('customer_email', 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('status', 'like', '%'.urldecode(request()->input('query')).'%')
