@@ -23,25 +23,31 @@ class ElasticSearchRepository
 
     /**
      * Return elastic search index name
+     *
+     * @return void
      */
-    public function getIndexName(): string
+    public function getIndexName()
     {
         return 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCode().'_index';
     }
 
     /**
      * Returns product ids from Elasticsearch
+     *
+     * @param  int  $categoryId
+     * @param  array  $options
+     * @return array
      */
-    public function search(array $params, array $options): array
+    public function search($categoryId, $options)
     {
-        $filters = $this->getFilters($params);
+        $filters = $this->getFilters();
 
-        if (! empty($params['category_id'])) {
-            $filters['filter'][]['term']['category_ids'] = $params['category_id'];
+        if ($categoryId) {
+            $filters['filter'][]['term']['category_ids'] = $categoryId;
         }
 
-        if (! empty($params['type'])) {
-            $filters['filter'][]['term']['type'] = $params['type'];
+        if (! empty($options['type'])) {
+            $filters['filter'][]['term']['type'] = $options['type'];
         }
 
         $results = Elasticsearch::search([
@@ -64,10 +70,14 @@ class ElasticSearchRepository
     }
 
     /**
-     * Prepare filters for search results
+     * Return filters
+     *
+     * @return void
      */
-    public function getFilters(array $params): array
+    public function getFilters()
     {
+        $params = request()->input();
+
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
         }
@@ -95,8 +105,10 @@ class ElasticSearchRepository
 
     /**
      * Return applied filters
+     *
+     * @return void
      */
-    public function getFilterValue(mixed $attribute, array $params): array
+    public function getFilterValue($attribute, $params)
     {
         switch ($attribute->type) {
             case 'boolean':
@@ -147,8 +159,11 @@ class ElasticSearchRepository
 
     /**
      * Returns sort options
+     *
+     * @param  array  $options
+     * @return array
      */
-    public function getSortOptions(array $options): array
+    public function getSortOptions($options)
     {
         if ($options['order'] == 'rand') {
             return [

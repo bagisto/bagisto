@@ -11,7 +11,6 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
-use Webkul\Product\Contracts\Product;
 
 class ProductRepository extends Repository
 {
@@ -36,7 +35,7 @@ class ProductRepository extends Repository
      */
     public function model(): string
     {
-        return Product::class;
+        return 'Webkul\Product\Contracts\Product';
     }
 
     /**
@@ -139,13 +138,16 @@ class ProductRepository extends Repository
 
     /**
      * Retrieve product from slug without throwing an exception.
+     *
+     * @param  string  $slug
+     * @return \Webkul\Product\Contracts\Product
      */
-    public function findBySlug(string $slug): ?Product
+    public function findBySlug($slug)
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            $indices = $this->elasticSearchRepository->search([
-                'url_key' => $slug,
-            ], [
+            request()->query->add(['url_key' => $slug]);
+
+            $indices = $this->elasticSearchRepository->search(null, [
                 'type'  => '',
                 'from'  => 0,
                 'limit' => 1,
@@ -161,8 +163,11 @@ class ProductRepository extends Repository
 
     /**
      * Retrieve product from slug.
+     *
+     * @param  string  $slug
+     * @return \Webkul\Product\Contracts\Product
      */
-    public function findBySlugOrFail(string $slug): ?Product
+    public function findBySlugOrFail($slug)
     {
         $product = $this->findBySlug($slug);
 
@@ -184,13 +189,13 @@ class ProductRepository extends Repository
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getAll(array $params = [])
+    public function getAll()
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            return $this->searchFromElastic($params);
+            return $this->searchFromElastic();
         }
 
-        return $this->searchFromDatabase($params);
+        return $this->searchFromDatabase();
     }
 
     /**
@@ -202,13 +207,13 @@ class ProductRepository extends Repository
      *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromDatabase(array $params = [])
+    public function searchFromDatabase()
     {
         $params = array_merge([
             'status'               => 1,
             'visible_individually' => 1,
             'url_key'              => null,
-        ], $params);
+        ], request()->input());
 
         if (! empty($params['query'])) {
             $params['name'] = $params['query'];
@@ -389,15 +394,18 @@ class ProductRepository extends Repository
      *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromElastic(array $params = [])
+    public function searchFromElastic()
     {
+        $params = request()->input();
+
         $currentPage = Paginator::resolveCurrentPage('page');
 
         $limit = $this->getPerPageLimit($params);
 
         $sortOptions = $this->getSortOptions($params);
 
-        $indices = $this->elasticSearchRepository->search($params, [
+        $indices = $this->elasticSearchRepository->search($params['category_id'] ?? null, [
+            'type'  => $params['type'] ?? '',
             'from'  => ($currentPage * $limit) - $limit,
             'limit' => $limit,
             'sort'  => $sortOptions['sort'],
@@ -426,7 +434,7 @@ class ProductRepository extends Repository
 
         $results = new LengthAwarePaginator($items, $indices['total'], $limit, $currentPage, [
             'path'  => request()->url(),
-            'query' => $params,
+            'query' => request()->query(),
         ]);
 
         return $results;

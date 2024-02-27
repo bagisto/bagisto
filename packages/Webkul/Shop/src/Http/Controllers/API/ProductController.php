@@ -26,7 +26,7 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        $products = $this->productRepository->getAll(request()->query());
+        $products = $this->productRepository->getAll();
 
         if (! empty(request()->query('query'))) {
             /**
