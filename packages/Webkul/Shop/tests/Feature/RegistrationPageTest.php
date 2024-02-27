@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+use Webkul\Core\Models\CoreConfig;
+use Webkul\Shop\Mail\Customer\RegistrationNotification;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
@@ -59,4 +62,29 @@ it('successfully registers a customer', function () {
     post(route('shop.customers.register.store'), $requestedCustomer)
         ->assertRedirectToRoute('shop.customer.session.index')
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
+});
+
+it('successfully registers a customer and send mail to the customer that you have successfully registered', function () {
+    // Arrange
+    Mail::fake();
+
+    $requestedCustomer = [
+        'first_name'            => fake()->firstName(),
+        'last_name'             => fake()->lastName(),
+        'email'                 => fake()->email(),
+        'password'              => 'admin123',
+        'password_confirmation' => 'admin123',
+    ];
+
+    CoreConfig::factory()->create([
+        'code'  => 'emails.general.notifications.emails.general.notifications.registration',
+        'value' => 1,
+    ]);
+
+    // Act & Assert
+    post(route('shop.customers.register.store'), $requestedCustomer)
+        ->assertRedirectToRoute('shop.customer.session.index')
+        ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
+
+    Mail::assertQueued(RegistrationNotification::class);
 });
