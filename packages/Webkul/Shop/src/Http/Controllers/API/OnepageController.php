@@ -9,6 +9,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
+use Webkul\Shop\Http\Requests\CartAddressRequest;
 use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends APIController
@@ -37,9 +38,9 @@ class OnepageController extends APIController
     /**
      * Store address.
      */
-    public function storeAddress(): JsonResource
+    public function storeAddress(CartAddressRequest $cartAddressRequest): JsonResource
     {
-        $address = request()->all();
+        $address = $cartAddressRequest->all();
 
         if (
             ! auth()->guard('customer')->check()

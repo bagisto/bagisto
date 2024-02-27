@@ -5,6 +5,7 @@ namespace Webkul\Checkout;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
+use Webkul\Checkout\Exceptions\BillingAddressNotFoundException;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartAddressRepository;
@@ -388,7 +389,7 @@ class Cart
     public function updateOrCreateShippingAddress(array $address): ?CartAddressContract
     {
         if (! $this->cart->billing_address) {
-            throw new \Exception('Billing Address Not Found. Please add a billing address first.');
+            throw new BillingAddressNotFoundException;
         }
 
         $fillableFields = [
