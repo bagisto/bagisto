@@ -173,7 +173,7 @@
                     <!-- Proceed Button -->
                     <div
                         class="flex justify-end mt-4"
-                        v-if="customerBillingAddresses.length && ! customer.applied.useDifferentAddressForShipping"
+                        v-if="customerBillingAddresses.length && ! customer.applied.useDifferentAddressForShipping || ! cart.have_stockable_items"
                     >
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.billing.proceed_button.before') !!}
 
