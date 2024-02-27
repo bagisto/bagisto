@@ -15,7 +15,7 @@
             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.billing.form.before') !!}
 
             <x-shop::form
-                v-slot="{ meta, errors, handleSubmit, values }"
+                v-slot="{ meta, errors, handleSubmit }"
                 as="div"
                 ref="customerBillingAddressForm"
             >
@@ -177,6 +177,16 @@
                         <x-shop::button
                             class="primary-button py-3 px-11 rounded-2xl"
                             :title="trans('shop::app.checkout.onepage.addresses.billing.proceed')"
+                            :loading="false"
+                            v-if="! isLoading"
+                        />
+
+                        <x-shop::button
+                            class="primary-button py-3 px-11 rounded-2xl"
+                            :title="trans('shop::app.checkout.onepage.addresses.billing.proceed')"
+                            :loading="true"
+                            :disabled="true"
+                            v-else
                         />
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.billing.proceed_button.after') !!}
@@ -531,12 +541,20 @@
 
                     <!-- Save Button -->
                     <div class="flex justify-end mt-4">
-                        <button
-                            type="submit"
-                            class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
-                        >
-                            @lang('shop::app.checkout.onepage.addresses.billing.save')
-                        </button>
+                        <x-shop::button
+                            class="primary-button py-3 px-11 rounded-2xl"
+                            :title="trans('shop::app.checkout.onepage.addresses.billing.save')"
+                            :loading="false"
+                            v-if="! isLoading"
+                        />
+
+                        <x-shop::button
+                            class="primary-button py-3 px-11 rounded-2xl"
+                            :title="trans('shop::app.checkout.onepage.addresses.billing.save')"
+                            :loading="true"
+                            :disabled="true"
+                            v-else
+                        />
                     </div>
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.billing.update_or_create.form.after') !!}

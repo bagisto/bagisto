@@ -138,6 +138,16 @@
                             <x-shop::button
                                 class="primary-button py-3 px-11 rounded-2xl"
                                 :title="trans('shop::app.checkout.onepage.addresses.shipping.proceed')"
+                                :loading="false"
+                                v-if="! isLoading"
+                            />
+
+                            <x-shop::button
+                                class="primary-button py-3 px-11 rounded-2xl"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.proceed')"
+                                :loading="true"
+                                :disabled="true"
+                                v-else
                             />
 
                             {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.shipping.proceed_button.after') !!}
@@ -491,12 +501,20 @@
 
                         <!-- Save Button -->
                         <div class="flex justify-end mt-4">
-                            <button
-                                type="submit"
-                                class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
-                            >
-                                @lang('shop::app.checkout.onepage.addresses.shipping.save')
-                            </button>
+                            <x-shop::button
+                                class="primary-button py-3 px-11 rounded-2xl"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.save')"
+                                :loading="false"
+                                v-if="! isLoading"
+                            />
+
+                            <x-shop::button
+                                class="primary-button py-3 px-11 rounded-2xl"
+                                :title="trans('shop::app.checkout.onepage.addresses.shipping.save')"
+                                :loading="true"
+                                :disabled="true"
+                                v-else
+                            />
                         </div>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.customer.shipping.update_or_create.form.after') !!}

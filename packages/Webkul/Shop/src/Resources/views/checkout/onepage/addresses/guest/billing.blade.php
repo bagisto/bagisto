@@ -305,12 +305,20 @@
             class="flex justify-end mt-4"
             v-if="! guest.applied.useDifferentAddressForShipping"
         >
-            <button
-                type="submit"
-                class="block py-3 px-11 bg-navyBlue text-white text-base w-max font-medium rounded-2xl text-center cursor-pointer"
-            >
-                @lang('shop::app.checkout.onepage.addresses.billing.proceed')
-            </button>
+            <x-shop::button
+                class="primary-button py-3 px-11 rounded-2xl"
+                :title="trans('shop::app.checkout.onepage.addresses.billing.proceed')"
+                :loading="false"
+                v-if="! isLoading"
+            />
+
+            <x-shop::button
+                class="primary-button py-3 px-11 rounded-2xl"
+                :title="trans('shop::app.checkout.onepage.addresses.billing.proceed')"
+                :loading="true"
+                :disabled="true"
+                v-else
+            />
         </div>
 
         {!! view_render_event('bagisto.shop.checkout.onepage.addresses.guest.billing.form.after') !!}

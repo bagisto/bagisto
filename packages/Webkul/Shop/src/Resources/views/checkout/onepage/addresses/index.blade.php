@@ -1,12 +1,8 @@
-{!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
-
 <v-checkout-addresses
     :cart="cart"
     v-if="cart"
 >
 </v-checkout-addresses>
-
-{!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
 @pushOnce('scripts')
     <script
@@ -94,6 +90,34 @@
                     },
 
                     customer: {
+                        available: {
+                            types: {
+                                id: {
+                                    billing: 'billing_address_id',
+
+                                    shipping: 'shipping_address_id',
+                                },
+
+                                selectedAddressId: {
+                                    billing: 'selectedBillingAddressId',
+
+                                    shipping: 'selectedShippingAddressId',
+                                },
+
+                                addressForm: {
+                                    billing: 'customerBillingAddressForm',
+
+                                    shipping: 'customerShippingAddressForm',
+                                },
+
+                                updateOrCreate: {
+                                    billing: 'updateOrCreateBillingAddress',
+
+                                    shipping: 'updateOrCreateShippingAddress',
+                                },
+                            },
+                        },
+
                         applied: {
                             useDifferentAddressForShipping: false,
 
@@ -283,27 +307,15 @@
                 },
 
                 openUpdateOrCreateCustomerAddressForm(address, type = 'billing') {
-                    const updateOrCreateType = {
-                        billing: 'updateOrCreateBillingAddress',
+                    this.customer[this.customer.available.types.updateOrCreate[type]].params = address;
 
-                        shipping: 'updateOrCreateShippingAddress',
-                    };
-
-                    this.customer[updateOrCreateType[type]].params = address;
-
-                    this.customer[updateOrCreateType[type]].isEnabled = true;
+                    this.customer[this.customer.available.types.updateOrCreate[type]].isEnabled = true;
                 },
 
                 closeUpdateOrCreateCustomerAddressForm(type = 'billing') {
-                    const updateOrCreateType = {
-                        billing: 'updateOrCreateBillingAddress',
+                    this.customer[this.customer.available.types.updateOrCreate[type]].params = {};
 
-                        shipping: 'updateOrCreateShippingAddress',
-                    };
-
-                    this.customer[updateOrCreateType[type]].params = {};
-
-                    this.customer[updateOrCreateType[type]].isEnabled = false;
+                    this.customer[this.customer.available.types.updateOrCreate[type]].isEnabled = false;
                 },
 
                 storeCustomerAddress(params, type = 'billing') {
@@ -318,23 +330,21 @@
                 },
 
                 updateCustomerAddress(params, type = 'billing') {
+                    this.isLoading = true;
+
                     return this.$axios.post('{{ route('api.shop.customers.account.addresses.update') }}', params)
                         .then((response) => {
                             this.getCustomerAddresses();
 
                             this.closeUpdateOrCreateCustomerAddressForm(type);
 
+                            this.isLoading = false;
+
                             return response;
                         });
                 },
 
                 updateOrCreateCustomerAddress(params) {
-                    const selectedAddressIdType = {
-                        billing: 'selectedBillingAddressId',
-
-                        shipping: 'selectedShippingAddressId',
-                    };
-
                     let addressType = params.type;
 
                     if (params[addressType]['save_address']) {
@@ -342,7 +352,7 @@
                             .then((response) => {
                                 const { id } = response.data.data;
 
-                                this.customer.applied[selectedAddressIdType[addressType]] = id;
+                                this.customer.applied[this.customer.available.types.selectedAddressId[addressType]] = id;
 
                                 if (addressType === 'billing') {
                                     this.$refs.customerBillingAddressForm.setValues({
@@ -363,7 +373,7 @@
                             .then((response) => {
                                 const { id } = response.data.data;
 
-                                this.customer.applied[selectedAddressIdType[addressType]] = id;
+                                this.customer.applied[this.customer.available.types.selectedAddressId[addressType]] = id;
 
                                 if (addressType === 'billing') {
                                     this.$refs.customerBillingAddressForm.setValues({
@@ -395,10 +405,9 @@
 
                     this.closeUpdateOrCreateCustomerAddressForm(addressType);
 
-                    this.customer.applied[selectedAddressIdType[addressType]] = 0;
+                    this.customer.applied[this.customer.available.types.selectedAddressId[addressType]] = 0;
 
                     if (addressType === 'billing') {
-                        console.log(this.$refs)
                         this.$refs.customerBillingAddressForm.setValues({
                             billing_address_id: 0,
                         });
@@ -414,6 +423,8 @@
                 },
 
                 storeCustomerBillingAddressToCart(params) {
+                    this.isLoading = true;
+
                     let address = this.customerBillingAddresses.find((address) => address.id == params['billing_address_id']);
 
                     if (! address) {
@@ -452,6 +463,8 @@
 
                                 this.$emitter.emit('is-payment-loading', false);
                             }
+
+                            this.isLoading = false;
                         })
                         .catch(() => {});
                 },
@@ -461,6 +474,8 @@
                         let payload = {};
 
                         if (customerBillingAddressForm.valid) {
+                            this.isLoading = true;
+
                             let customerBillingAddressFormValues = this.$refs.customerBillingAddressForm.getValues();
 
                             let billingAddress = this.customerBillingAddresses.find((address) => address.id == customerBillingAddressFormValues.billing_address_id);
@@ -521,6 +536,8 @@
 
                                         this.$emitter.emit('is-payment-loading', false);
                                     }
+
+                                    this.isLoading = false;
                                 })
                                 .catch(() => {});
                         }
@@ -528,6 +545,8 @@
                 },
 
                 storeGuestAddressToCart(params) {
+                    this.isLoading = true;
+
                     params['billing']['use_for_shipping'] = ! params.billing.use_different_address_for_shipping;
 
                     delete params.billing.use_different_address_for_shipping;
@@ -548,9 +567,9 @@
                                 this.$emitter.emit('is-show-payment-methods', true);
 
                                 this.$emitter.emit('is-payment-loading', false);
-
-                                this.isLoading = false;
                             }
+
+                            this.isLoading = false;
                         })
                         .catch(() => {});
                 },
