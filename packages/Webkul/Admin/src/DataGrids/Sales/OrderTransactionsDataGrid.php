@@ -103,7 +103,7 @@ class OrderTransactionsDataGrid extends DataGrid
                     return '<p class="label-cancel">'.trans('admin::app.sales.invoices.index.datagrid.overdue').'</p>';
                 }
 
-                return $value->state;
+                return $value->status;
             },
         ]);
 
