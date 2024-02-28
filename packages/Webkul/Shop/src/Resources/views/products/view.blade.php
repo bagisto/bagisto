@@ -8,9 +8,7 @@
 
     $customAttributeValues = $productViewHelper->getAdditionalData($product);
 
-    $attributeData = collect($customAttributeValues)->filter(function ($item) {
-        return ! empty($item['value']);
-    });
+    $attributeData = collect($customAttributeValues)->filter(fn ($item) => ! empty($item['value']));
 @endphp
 
 <!-- SEO Meta Content -->
