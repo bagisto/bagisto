@@ -291,7 +291,7 @@
                                     @endif
                                 </div>
 
-                                {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
+                                {!! view_render_event('bagisto.shop.products.name.after', ['product' => $product]) !!}
 
                                 <!-- Rating -->
                                 {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
