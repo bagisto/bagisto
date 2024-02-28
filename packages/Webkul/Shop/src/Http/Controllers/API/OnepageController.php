@@ -54,8 +54,8 @@ class OnepageController extends APIController
 
         if (Cart::hasError()) {
             return new JsonResource([
-                'redirect' => true,
-                'data'     => route('shop.checkout.cart.index'),
+                'redirect'     => true,
+                'redirect_url' => route('shop.checkout.cart.index'),
             ]);
         }
 
@@ -74,8 +74,8 @@ class OnepageController extends APIController
         if ($cart->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
-                    'redirect' => true,
-                    'data'     => route('shop.checkout.cart.index'),
+                    'redirect'     => true,
+                    'redirect_url' => route('shop.checkout.cart.index'),
                 ]);
             }
 

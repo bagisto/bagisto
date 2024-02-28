@@ -687,6 +687,31 @@ return [
         ],
 
         'onepage' => [
+            'address' => [
+                'title'            => 'Address',
+                'add-new'          => 'Add new address',
+                'back'             => 'Back',
+                'billing-address'  => 'Billing Address',
+                'shipping-address' => 'Shipping Address',
+                'city'             => 'City',
+                'company-name'     => 'Company Name',
+                'confirm'          => 'Confirm',
+                'country'          => 'Country',
+                'email'            => 'Email',
+                'first-name'       => 'First Name',
+                'last-name'        => 'Last Name',
+                'postcode'         => 'Zip/Postcode',
+                'proceed'          => 'Proceed',
+                'save'             => 'Save',
+                'same-as-billing'  => 'Use different address for shipping?',
+                'save-address'     => 'Save this address',
+                'select-country'   => 'Select Country',
+                'select-state'     => 'Select State',
+                'state'            => 'State',
+                'street-address'   => 'Street Address',
+                'telephone'        => 'Telephone',
+            ],
+
             'addresses' => [
                 'billing' => [
                     'add-new-address'                    => 'Add new address',

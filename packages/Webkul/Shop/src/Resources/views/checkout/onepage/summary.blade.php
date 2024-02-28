@@ -1,4 +1,4 @@
-{!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
+{!! view_render_event('bagisto.shop.checkout.onepage.summary.before') !!}
 
 <v-cart-summary
     :cart="cart"
@@ -6,7 +6,7 @@
 >
 </v-cart-summary>
 
-{!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
+{!! view_render_event('bagisto.shop.checkout.onepage.summary.after') !!}
 
 @pushOnce('scripts')
     <script
@@ -175,23 +175,25 @@
                     >
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.before') !!}
 
-                        <x-shop::button
-                            v-if="!isLoading"
-                            type="button"
-                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
-                            :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                            :loading="false"
-                            @click="placeOrder"
-                        />
+                        <template v-if="! isLoading">
+                            <x-shop::button
+                                type="button"
+                                class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                                :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                                :loading="false"
+                                @click="placeOrder"
+                            />
+                        </template>
 
-                        <x-shop::button
-                            type="button"
-                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
-                            v-else
-                            :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                            :loading="true"
-                            :disabled="true"
-                        />
+                        <template v-else>
+                            <x-shop::button
+                                type="button"
+                                class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                                :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                                :loading="true"
+                                :disabled="true"
+                            />
+                        </template>
 
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.after') !!}
                     </div>

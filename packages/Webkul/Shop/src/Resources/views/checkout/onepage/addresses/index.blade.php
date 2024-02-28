@@ -1,8 +1,12 @@
+{!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
+
 <v-checkout-addresses
     :cart="cart"
     v-if="cart"
 >
 </v-checkout-addresses>
+
+{!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
 
 @pushOnce('scripts')
     <script
