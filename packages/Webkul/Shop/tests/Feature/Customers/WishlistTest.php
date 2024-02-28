@@ -178,17 +178,13 @@ it('should move wishlisted product to the cart', function () {
         'channel_id'  => core()->getCurrentChannel()->id,
         'product_id'  => $product->id,
         'customer_id' => $customer->id,
-        'additional'  => [
-            'product_id' => $product->id,
-            'quantity' => 1,
-        ],
     ]);
 
     // Act and Assert
     $this->loginAsCustomer($customer);
 
     postJson(route('shop.api.customers.account.wishlist.move_to_cart', $wishList->id), [
-        'quantity' => 1
+        'quantity' => 1,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('shop::app.customers.account.wishlist.moved-success'));

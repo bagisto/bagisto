@@ -23,7 +23,7 @@ class CustomerWishlistFactory extends Factory
     {
         return [
             'additional'  => [
-                'quantity' => 1
+                'quantity' => 1,
             ],
         ];
     }
