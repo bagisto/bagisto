@@ -48,7 +48,7 @@
                 @endif
             </div>
 
-            {!! view_render_event('admin.marketing.search_seo.sitemaps.list.before') !!}
+            {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.list.before') !!}
 
             <x-admin::datagrid
                 src="{{ route('admin.marketing.search_seo.sitemaps.index') }}"
@@ -103,7 +103,7 @@
                 </template>
             </x-admin::datagrid>
 
-            {!! view_render_event('admin.marketing.search_seo.sitemaps.list.after') !!}
+            {!! view_render_event('bagisto.admin.marketing.search_seo.sitemaps.list.after') !!}
 
             <!-- Model Form -->
             <x-admin::form

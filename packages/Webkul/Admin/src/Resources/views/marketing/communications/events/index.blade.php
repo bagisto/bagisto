@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            {!! view_render_event('admin.marketing.communications.events.list.before') !!}
+            {!! view_render_event('bagisto.admin.marketing.communications.events.list.before') !!}
 
             <!-- Datagrid -->
             <x-admin::datagrid
@@ -103,9 +103,9 @@
                 </template>
             </x-admin::datagrid>
 
-            {!! view_render_event('admin.marketing.communications.events.list.after') !!}
+            {!! view_render_event('bagisto.admin.marketing.communications.events.list.after') !!}
 
-            {!! view_render_event('admin.marketing.communications.events.create.before') !!}
+            {!! view_render_event('bagisto.admin.marketing.communications.events.create.before') !!}
 
             <!-- Email Events form -->
             <x-admin::form
@@ -220,7 +220,7 @@
                 </form>
             </x-admin::form>
 
-            {!! view_render_event('admin.marketing.communications.events.create.after') !!}
+            {!! view_render_event('bagisto.admin.marketing.communications.events.create.after') !!}
 
         </script>
 

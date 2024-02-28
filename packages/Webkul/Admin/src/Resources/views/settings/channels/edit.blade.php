@@ -19,7 +19,7 @@
     >
         @method('PUT')
 
-        {!! view_render_event('admin.settings.channels.edit.edit_form_controls.before') !!}
+        {!! view_render_event('bagisto.admin.settings.channels.edit.edit_form_controls.before') !!}
 
         <div class="flex justify-between items-center">
             <p class="text-xl text-gray-800 dark:text-white font-bold">
@@ -550,7 +550,7 @@
             </div>
         </div>
 
-        {!! view_render_event('admin.settings.channels.edit.edit_form_controls.after') !!}
+        {!! view_render_event('bagisto.admin.settings.channels.edit.edit_form_controls.after') !!}
 
     </x-admin::form> 
 
