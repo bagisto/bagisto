@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Available',
+                'completed'           => 'Completed',
                 'date'                => 'Date',
                 'download-error'      => 'Download link has been expired.',
                 'empty-product'       => 'You don’t have a product to download',
                 'name'                => 'Downloadable Products',
                 'orderId'             => 'Order Id',
+                'pending'             => 'Pending',
                 'payment-error'       => 'Payment has not been done for this download.',
                 'records-found'       => 'Record(s) found',
                 'remaining-downloads' => 'Remaining Downloads',

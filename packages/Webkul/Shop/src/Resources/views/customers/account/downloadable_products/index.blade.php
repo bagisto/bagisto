@@ -21,7 +21,7 @@
                 <!-- Downloadable Products Information -->
                 <div class="relative overflow-x-auto border border-b-0  rounded-xl mt-8">
                     <table class="w-full text-sm text-left">
-                        <thead class="border-b border-[#E9E9E9] text-sm text-black bg-[#F5F5F5]">
+                        <thead class="border-b border-[#E9E9E9] text-black bg-[#F5F5F5]">
                             <tr>
                                 <th
                                     scope="col"
@@ -62,17 +62,15 @@
 
                         <tbody>
                             @foreach ($downloadableLinkPurchased as $item)
-                                <tr class="bg-white border-b">
-                                    <th 
-                                        scope="row" 
-                                        class="px-6 py-4 whitespace-nowrap text-blackfont-medium  first:rounded-bl-[12px]"
+                                <tr class="bg-white border-b text-base font-medium text-gray-600">
+                                    <th
+                                        scope="row"
+                                        class="px-6 py-4 font-medium first:rounded-bl-[12px]"
                                     >
                                         {{ $item->order_id }}
                                     </th>
 
-                                    <td 
-                                        class="px-6 py-4 text-black font-medium"
-                                    >
+                                    <td class="px-6 py-4">
                                         @if ($item->status == 'available')
                                             <a  
                                                 class="text-blue-600"
@@ -86,39 +84,34 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-black font-medium">
+                                    <td class="px-6 py-4">
                                         {{ $item->created_at }}
                                     </td>
 
-                                    <td 
-                                        class="px-6 py-4 text-black font-medium"
-                                    > 
+                                    <td class="px-6 py-4 text-white text-xs"> 
                                         @switch($item->status)
                                             @case('completed')
-
-                                                <span class="px-2.5 py-1 rounded-xl bg-[#5BA34B] text-white text-xs">
-                                                    {{ $item->status }}
+                                                <span class="px-2.5 py-1 rounded-xl bg-[#5BA34B]">
+                                                    @lang('shop::app.customers.account.downloadable-products.' . $item->status)
                                                 </span>
-                                                @break
 
+                                                @break
                                             @case('pending')
-
-                                                <span class="px-2.5 py-1 rounded-xl bg-[#FDB60C] text-white text-xs">
-                                                    {{ $item->status }}
+                                                <span class="px-2.5 py-1 rounded-xl bg-[#FDB60C]">
+                                                    @lang('shop::app.customers.account.downloadable-products.' . $item->status)
                                                 </span>
+
                                                 @break
-
                                             @case('available')
-                                                <span class=" px-2.5 py-1 rounded-xl bg-[#5BA34B] text-white text-xs">
-                                                    {{ $item->status }}
+                                                <span class=" px-2.5 py-1 rounded-xl bg-[#5BA34B]">
+                                                    @lang('shop::app.customers.account.downloadable-products.' . $item->status)
                                                 </span>
+
                                                 @break
                                         @endswitch
                                     </td>
 
-                                    <td 
-                                        class="px-6 py-4 text-black font-medium last:rounded-br-[12px]"
-                                    > 
+                                    <td class="px-6 py-4 last:rounded-br-[12px]">
                                         {{ $item->download_bought }} - {{ $item->download_used }}
                                     </td>
                                 </tr>

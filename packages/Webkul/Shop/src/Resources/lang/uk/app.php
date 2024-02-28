@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'в наявності',
+                'completed'           => 'Виконано',
                 'date'                => 'Дата',
                 'download-error'      => 'Ссылка для скачивания устарела.',
                 'empty-product'       => 'У вас нет товаров для скачивания',
                 'name'                => 'Товары для скачивания',
                 'orderId'             => 'Идентификатор заказа',
+                'pending'             => 'В очікуванні',
                 'payment-error'       => 'Оплата не была выполнена за это скачивание.',
                 'records-found'       => 'Найдено записей',
                 'remaining-downloads' => 'Оставшиеся загрузки',

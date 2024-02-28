@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'זמין',
+                'completed'           => 'הושלם',
                 'date'                => 'תאריך',
                 'download-error'      => 'קישור הורדה פג תוקף.',
                 'empty-product'       => 'אין לך מוצרים להורדה',
                 'name'                => 'מוצרים להורדה',
                 'orderId'             => 'מספר הזמנה',
+                'pending'             => 'ממתין ל',
                 'payment-error'       => 'לא בוצע תשלום עבור ההורדה הזו.',
                 'records-found'       => 'נמצאו :record_count רשומות',
                 'remaining-downloads' => 'הורדות נותרו',

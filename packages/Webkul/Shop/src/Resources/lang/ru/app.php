@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Доступный',
+                'completed'           => 'Завершенный',
                 'date'                => 'Дата',
                 'download-error'      => 'Срок действия ссылки для скачивания истек.',
                 'empty-product'       => 'У вас нет продукта для загрузки',
                 'name'                => 'Продукты для скачивания',
                 'orderId'             => 'ID заказа',
+                'pending'             => 'В ожидании',
                 'payment-error'       => 'Оплата не была произведена за эту загрузку.',
                 'records-found'       => 'Запись(и) найдены',
                 'remaining-downloads' => 'Оставшиеся загрузки',

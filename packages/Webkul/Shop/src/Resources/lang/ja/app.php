@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => '利用可能',
+                'completed'           => '完了',
                 'date'                => '日付',
                 'download-error'      => 'ダウンロードリンクの有効期限が切れています。',
                 'empty-product'       => 'ダウンロードする製品がありません',
                 'name'                => 'ダウンロード可能な製品',
                 'orderId'             => '注文ID',
+                'pending'             => '保留中',
                 'payment-error'       => 'このダウンロードのための支払いが行われていません。',
                 'records-found'       => 'レコードが見つかりました',
                 'remaining-downloads' => '残りのダウンロード回数',
