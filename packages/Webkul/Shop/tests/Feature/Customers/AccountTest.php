@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductReview;
+use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -351,6 +353,7 @@ it('should set default address for the customer', function () {
 });
 
 it('should delete the customer address', function () {
+    // Arrange
     $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -368,4 +371,45 @@ it('should delete the customer address', function () {
         'customer_id' => $customer->id,
         'id'          => $customerAddress->id,
     ]);
+});
+
+it('should send email for password reset', function () {
+    // Arrange
+    Notification::fake();
+
+    $customer = Customer::factory()->create();
+
+    postJson(route('shop.customers.forgot_password.store'), [
+        'email' => $customer->email,
+    ])
+        ->assertRedirect(route('shop.customers.forgot_password.create'))
+        ->isRedirect();
+
+    $this->assertDatabaseHas('customer_password_resets', [
+        'email' => $customer->email,
+    ]);
+
+    Notification::assertSentTo(
+        $customer,
+        ResetPasswordNotification::class,
+    );
+});
+
+it('should not send email for password reset when email is invalid', function () {
+    // Arrange
+    postJson(route('shop.customers.forgot_password.store'), [
+        'email' => $email = 'WRONG_EMAIL@gmail.com',
+    ])
+        ->assertRedirect(route('shop.customers.forgot_password.create'))
+        ->isRedirect();
+
+    $this->assertDatabaseMissing('customer_password_resets', [
+        'email' => $email,
+    ]);
+});
+
+it('should fails the validation errors certain inputs not provided', function () {
+    // Arrange
+    postJson(route('shop.customers.forgot_password.store'))
+        ->assertJsonValidationErrorFor('email');
 });

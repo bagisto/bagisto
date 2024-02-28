@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Webkul\Admin\Mail\Customer\NewCustomerNotification;
+use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerNote;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
@@ -89,6 +92,41 @@ it('should create a new customer', function () {
             ],
         ],
     ]);
+});
+
+it('should create a new customer and send notification to the customer', function () {
+    // Arrange.
+    Mail::fake();
+
+    CoreConfig::factory()->create([
+        'code'  => 'emails.general.notifications.emails.general.notifications.customer',
+        'value' => 1,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.store'), [
+        'first_name' => $fistName = fake()->firstName(),
+        'last_name'  => $lastName = fake()->lastName(),
+        'gender'     => $gender = fake()->randomElement(['male', 'female', 'other']),
+        'email'      => $email = fake()->email(),
+    ])
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
+
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'first_name' => $fistName,
+                'last_name'  => $lastName,
+                'gender'     => $gender,
+                'email'      => $email,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(NewCustomerNotification::class);
 });
 
 it('should search the customers for mega search', function () {
