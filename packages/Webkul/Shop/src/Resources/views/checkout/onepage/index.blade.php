@@ -89,7 +89,23 @@
                     </div>
 
                     <!-- Included Checkout Summary Blade File -->
-                    @include('shop::checkout.onepage.summary')
+                    <div class="sticky top-8 h-max w-[442px] max-w-full ltr:pl-8 rtl:pr-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:ltr:pl-0 max-lg:rtl:pr-0">
+                        @include('shop::checkout.onepage.summary')
+
+                        <div
+                            class="flex justify-end"
+                            v-if="canPlaceOrder"
+                        >
+                            <x-shop::button
+                                type="button"
+                                class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                                :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                                ::disabled="isPlacingOrder"
+                                ::loading="isPlacingOrder"
+                                @click="placeOrder"
+                            />
+                        </div>
+                    </div>
                 </div>
             </template>
         </script>
@@ -104,11 +120,15 @@
 
                         isCartLoading: true,
 
+                        isPlacingOrder: false,
+
                         currentStep: 'address',
 
                         shippingMethods: null,
 
                         paymentMethods: null,
+
+                        canPlaceOrder: false,
                     }
                 },
 
@@ -130,6 +150,14 @@
                     },
 
                     stepForward(step) {
+                        if (step == 'summary') {
+                            this.canPlaceOrder = true;
+
+                            return;
+                        }
+
+                        this.canPlaceOrder = false;
+
                         this.currentStep = step;
 
                         if (this.currentStep == 'shipping') {
@@ -161,6 +189,22 @@
                             block: 'end'
                         });
                     },
+
+                    placeOrder() {
+                        this.isPlacingOrder = true;
+
+                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
+                            .then(response => {
+                                if (response.data.data.redirect) {
+                                    window.location.href = response.data.data.redirect_url;
+                                } else {
+                                    window.location.href = '{{ route('shop.checkout.onepage.success') }}';
+                                }
+
+                                this.isPlacingOrder = false;
+                            })
+                            .catch(error => this.isPlacingOrder = false);
+                    }
                 },
             });
         </script>

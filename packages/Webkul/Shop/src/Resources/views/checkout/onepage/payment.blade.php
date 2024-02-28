@@ -122,6 +122,8 @@
 
             methods: {
                 store(selectedMethod) {
+                    this.$emit('onStepForward', 'summary');
+
                     this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {
                             payment: selectedMethod
                         })
