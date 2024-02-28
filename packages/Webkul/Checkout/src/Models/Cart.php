@@ -12,8 +12,18 @@ class Cart extends Model implements CartContract
 {
     use HasFactory;
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'cart';
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'created_at',
@@ -21,7 +31,16 @@ class Cart extends Model implements CartContract
     ];
 
     /**
-     * To get relevant associated items with the cart instance
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'additional' => 'json',
+    ];
+
+    /**
+     * To get relevant associated items with the cart instance.
      */
     public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
@@ -30,7 +49,7 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * To get all the associated items with the cart instance even the parent and child items of configurable products
+     * To get all the associated items with the cart instance even the parent and child items of configurable products.
      */
     public function all_items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
@@ -114,7 +133,7 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Checks if cart have stockable items
+     * Checks if cart have stockable items.
      */
     public function haveStockableItems(): bool
     {
@@ -128,7 +147,7 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Checks if cart has downloadable items
+     * Checks if cart has downloadable items.
      */
     public function hasDownloadableItems(): bool
     {
@@ -137,7 +156,8 @@ class Cart extends Model implements CartContract
 
     /**
      * Returns true if cart contains one or many products with quantity box.
-     * (for example: simple, configurable, virtual)
+     *
+     * (For Example: simple, configurable, virtual)
      */
     public function hasProductsWithQuantityBox(): bool
     {
@@ -151,7 +171,7 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Checks if cart has items that allow guest checkout
+     * Checks if cart has items that allow guest checkout.
      */
     public function hasGuestCheckoutItems(): bool
     {
@@ -177,7 +197,7 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Create a new factory instance for the model
+     * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory
     {

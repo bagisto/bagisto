@@ -109,7 +109,7 @@
 
                                             @switch($order->status)
                                                 @case('processing')
-                                                    <p class="label-active">
+                                                    <p class="label-processing">
                                                         @lang('admin::app.customers.customers.view.processing')
                                                     </p>
                                                     @break

@@ -14,7 +14,7 @@
         id="v-cart-summary-template"
     >
         <template v-if="isCartLoading">
-            <!-- onepage Summary Shimmer Effect -->
+            <!-- Onepage Summary Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage.cart-summary />
         </template>
 
@@ -23,13 +23,13 @@
                 <h1 class="text-2xl font-medium max-sm:text-xl">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>
-                
+
                 <div class="grid mt-10 border-b border-[#E9E9E9] max-sm:mt-5">
-                    <div 
+                    <div
                         class="flex gap-x-4 pb-5"
                         v-for="item in cart.items"
                     >
-                    
+
                         {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_image.before') !!}
 
                         <img
@@ -45,8 +45,8 @@
                         <div>
                             {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_name.before') !!}
 
-                            <p 
-                                class="text-base text-navyBlue max-sm:text-sm max-sm:font-medium" 
+                            <p
+                                class="text-base text-navyBlue max-sm:text-sm max-sm:font-medium"
                                 v-text="item.name"
                             >
                             </p>
@@ -69,7 +69,7 @@
                             @lang('shop::app.checkout.onepage.summary.sub-total')
                         </p>
 
-                        <p 
+                        <p
                             class="text-base font-medium max-sm:text-sm"
                             v-text="cart.base_sub_total"
                         >
@@ -81,7 +81,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.before') !!}
 
-                    <div 
+                    <div
                         class="flex text-right justify-between"
                         v-for="(amount, index) in cart.base_tax_amounts"
                         v-if="parseFloat(cart.base_tax_total)"
@@ -90,7 +90,7 @@
                             @lang('shop::app.checkout.onepage.summary.tax') (@{{ index }})%
                         </p>
 
-                        <p 
+                        <p
                             class="text-base font-medium max-sm:text-sm"
                             v-text="amount"
                         >
@@ -101,7 +101,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
 
-                    <div 
+                    <div
                         class="flex text-right justify-between"
                         v-if="cart.selected_shipping_rate"
                     >
@@ -109,7 +109,7 @@
                             @lang('shop::app.checkout.onepage.summary.delivery-charges')
                         </p>
 
-                        <p 
+                        <p
                             class="text-base font-medium"
                             v-text="cart.selected_shipping_rate"
                         >
@@ -120,7 +120,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.summary.discount_amount.before') !!}
 
-                    <div 
+                    <div
                         class="flex text-right justify-between"
                         v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
                     >
@@ -128,7 +128,7 @@
                             @lang('shop::app.checkout.onepage.summary.discount-amount')
                         </p>
 
-                        <p 
+                        <p
                             class="text-base font-medium"
                             v-text="cart.formatted_base_discount_amount"
                         >
@@ -150,7 +150,7 @@
                             @lang('shop::app.checkout.onepage.summary.grand-total')
                         </p>
 
-                        <p 
+                        <p
                             class="text-lg font-semibold"
                             v-text="cart.base_grand_total"
                         >
@@ -203,7 +203,7 @@
     <script type="module">
         app.component('v-cart-summary', {
             template: '#v-cart-summary-template',
-            
+
             props: ['cart', 'isCartLoading'],
 
             data() {
@@ -217,7 +217,7 @@
             },
 
             mounted() {
-                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = true);
+                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = value);
 
                 this.$emitter.on('after-payment-method-selected', (value) => this.selectedPaymentMethod = value);
             },
@@ -232,10 +232,6 @@
                                 window.location.href = response.data.data.redirect_url;
                             } else {
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
-                            }
-
-                            if (localStorage.getItem('customerAddresses')) {
-                                localStorage.removeItem('customerAddresses');
                             }
 
                             this.isLoading = false;
