@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'از قبل بازنشانی رمز عبور ایمیل ارسال شده است.',
             'back'                 => 'بازگشت به صفحه ورود؟',
             'bagisto'              => 'بگیستو',
             'email'                => 'ایمیل',

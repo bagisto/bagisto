@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Ya se envió el correo de restablecimiento de contraseña.',
             'back'                 => 'Volver a iniciar sesión',
             'bagisto'              => 'Bagisto',
             'email'                => 'Correo electrónico',

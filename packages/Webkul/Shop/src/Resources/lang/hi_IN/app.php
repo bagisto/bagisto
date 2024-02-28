@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'पासवर्ड रीसेट मेल पहले ही भेजा जा चुका है।',
             'back'                 => 'साइन इन पर वापस जाएं?',
             'bagisto'              => 'बागिस्तो',
             'email'                => 'ईमेल',

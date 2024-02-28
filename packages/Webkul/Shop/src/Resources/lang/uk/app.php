@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Лист для скидання пароля вже надіслано.',
             'back'                 => 'Повернутися до входу?',
             'bagisto'              => 'Багісто',
             'email'                => 'Електронна пошта',

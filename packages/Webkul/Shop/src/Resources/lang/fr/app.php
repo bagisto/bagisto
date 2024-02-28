@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Mail de réinitialisation de mot de passe déjà envoyé.',
             'back'                 => 'Retour à la connexion ?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-mail',

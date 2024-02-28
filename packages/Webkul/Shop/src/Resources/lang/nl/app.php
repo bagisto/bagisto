@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Wachtwoord al opnieuw ingesteld E-mail verzonden.',
             'back'                 => 'Terug naar Aanmelden?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-mail',

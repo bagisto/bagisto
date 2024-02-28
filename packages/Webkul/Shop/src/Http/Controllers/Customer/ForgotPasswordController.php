@@ -33,28 +33,28 @@ class ForgotPasswordController extends Controller
         try {
             $response = $this->broker()->sendResetLink($request->only(['email']));
 
-            if ($response == Password::RESET_LINK_SENT) {
-                session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
+            $flashMessage = match ($response) {
+                Password::RESET_LINK_SENT => 'success',
+                Password::RESET_THROTTLED => 'warning',
+                default => null,
+            };
 
-                return back();
-            }
-
-            return back()
-                ->withInput($request->only(['email']))
-                ->withErrors([
+            if ($flashMessage) {
+                session()->flash($flashMessage, trans('shop::app.customers.forgot-password.' . ($flashMessage === 'success' ? 'reset-link-sent' : 'already-sent')));
+            } else {
+                return back()->withInput($request->only(['email']))->withErrors([
                     'email' => trans('shop::app.customers.forgot-password.email-not-exist'),
                 ]);
+            }
         } catch (\Swift_RfcComplianceException $e) {
             session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
-
-            return redirect()->back();
         } catch (\Exception $e) {
             report($e);
 
             session()->flash('error', trans($e->getMessage()));
-
-            return redirect()->back();
         }
+
+        return back();
     }
 
     /**
