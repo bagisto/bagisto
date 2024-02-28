@@ -97,7 +97,7 @@ class WishlistController extends APIController
         }
 
         try {
-            $result = Cart::moveToCart($wishlistItem);
+            $result = Cart::moveToCart($wishlistItem, request()->quantity);
 
             if ($result) {
                 return new JsonResource([
@@ -115,7 +115,6 @@ class WishlistController extends APIController
                 'data'     => route('shop.product_or_category.index', $wishlistItem->product->url_key),
                 'message'  => trans('shop::app.checkout.cart.missing-options'),
             ]);
-
         } catch (\Exception $exception) {
             return new JsonResource([
                 'redirect' => true,

@@ -179,43 +179,35 @@ trait CartTools
     /**
      * Move a wishlist item to cart.
      *
-     * @param  \Webkul\Customer\Contracts\WishlistItem  $wishlistItem
-     * @return bool
+     * @param  \Webkul\Customer\Contracts\Wishlist  $wishlistItem
      */
-    public function moveToCart($wishlistItem)
+    public function moveToCart($wishlistItem, int $quantity): bool
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
         }
 
-        if (! $wishlistItem->additional) {
-            $wishlistItem->additional = [
-                'product_id' => $wishlistItem->product_id,
-                'quantity'   => request()->input('quantity'),
-            ];
+        $additionalData = [
+            'product_id' => $wishlistItem->product_id,
+            'quantity'   => $quantity,
+        ];
+
+        $result = $this->addProduct($wishlistItem->product_id, $additionalData);
+
+        if (! $result) {
+            return false;
         }
 
-        request()->merge($wishlistItem->additional);
+        $this->wishlistRepository->delete($wishlistItem->id);
 
-        $result = $this->addProduct($wishlistItem->product_id, $wishlistItem->additional);
-
-        if ($result) {
-            $this->wishlistRepository->delete($wishlistItem->id);
-
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
      * Function to move a already added product to wishlist will run only on customer
      * authentication.
-     *
-     * @param  int  $itemId
-     * @return bool
      */
-    public function moveToWishlist($itemId)
+    public function moveToWishlist(int $itemId, int $quantity): bool
     {
         $cart = $this->getCart();
 
@@ -224,6 +216,11 @@ trait CartTools
         if (! $cartItem) {
             return false;
         }
+
+        $additionalData = [
+            'product_id' => $cartItem->product_id,
+            'quantity'   => $quantity,
+        ];
 
         $wishlistItems = $this->wishlistRepository->findWhere([
             'customer_id' => auth()->guard()->user()->id,
@@ -239,7 +236,7 @@ trait CartTools
                 $options = ['product_id' => $wishlistItem->product_id];
             }
 
-            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+            if ($cartItem->getTypeInstance()->compareOptions($additionalData, $options)) {
                 $found = true;
             }
         }
@@ -249,7 +246,7 @@ trait CartTools
                 'channel_id'  => $cart->channel_id,
                 'customer_id' => auth()->guard()->user()->id,
                 'product_id'  => $cartItem->product_id,
-                'additional'  => $cartItem->additional,
+                'additional'  => $additionalData,
             ]);
         }
 

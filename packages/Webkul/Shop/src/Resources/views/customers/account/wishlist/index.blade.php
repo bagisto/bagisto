@@ -144,6 +144,7 @@
                                                 <x-shop::quantity-changer
                                                     name="quantity"
                                                     class="flex gap-x-2.5 items-center max-h-10 py-1.5 px-3.5 border border-navyBlue  rounded-[54px]"
+                                                    ::value="item?.quantity"
                                                     @change="setItemQuantity($event, item)"
                                                 />
 
@@ -153,7 +154,7 @@
                                                     :title="trans('shop::app.customers.account.wishlist.move-to-cart')"
                                                     :loading="false"
                                                     ref="moveToCart"
-                                                    @click="moveToCart(item.id,index)"
+                                                    @click="moveToCart(item.id,index,item?.quantity)"
                                                 />
                                             </div>
 
@@ -226,7 +227,7 @@
                                 this.isLoading = false;
 
                                 this.wishlist = response.data.data
-                                    .map((wishlist) => ({ ...wishlist, quantity: 1 }));
+                                    .map((wishlist) => ({ ...wishlist, quantity: wishlist.quantity }));
                             })
                             .catch(error => {});
                     },
@@ -258,7 +259,7 @@
                         });
                     },
 
-                    moveToCart(id, index) {
+                    moveToCart(id, index, qty) {
                         this.$refs.moveToCart[index].isLoading = true;
 
                         let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;
@@ -268,8 +269,7 @@
 
                         if (existingItem) {
                             this.$axios.post(url, {
-                                    quantity: existingItem.quantity,
-                                    product_id: id
+                                    quantity: qty,
                                 })
                                 .then(response => {
                                     if (response.data.redirect) {
