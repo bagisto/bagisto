@@ -1,12 +1,12 @@
 <?php
 
-namespace Webkul\Shop\Http\Requests\Customer;
+namespace Webkul\Shop\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
 
-class CustomerAddressForm extends FormRequest
+class CartAddressRequest extends FormRequest
 {
     /**
      * Rules.
@@ -28,47 +28,15 @@ class CustomerAddressForm extends FormRequest
      */
     public function rules(): array
     {
-        if (
-            isset($this->get('billing')['address_id'])
-            && ! isset($this->get('billing')['is_temp'])
-        ) {
-            $this->mergeExistingAddressRules('billing');
-        } else {
-            $this->mergeNewAddressRules('billing');
+        if ($this->has('billing')) {
+            $this->mergeAddressRules('billing');
         }
 
-        if (
-            isset($this->get('billing')['use_for_shipping'])
-            && ! $this->get('billing')['use_for_shipping']
-        ) {
-            if (isset($this->get('shipping')['address_id'])) {
-                $this->mergeExistingAddressRules('shipping');
-            } else {
-                $this->mergeNewAddressRules('shipping');
-            }
+        if ($this->has('shipping')) {
+            $this->mergeAddressRules('shipping');
         }
 
         return $this->rules;
-    }
-
-    /**
-     * Merge existing address rules.
-     *
-     * @return void
-     */
-    private function mergeExistingAddressRules(string $addressType)
-    {
-        $customerAddressIds = $this->getCustomerAddressIds();
-
-        $addressRules = [
-            "{$addressType}.address_id" => ['required'],
-        ];
-
-        if (! empty($customerAddressIds)) {
-            $addressRules["{$addressType}.address_id"][] = "in:{$customerAddressIds}";
-        }
-
-        $this->mergeWithRules($addressRules);
     }
 
     /**
@@ -76,8 +44,16 @@ class CustomerAddressForm extends FormRequest
      *
      * @return void
      */
-    private function mergeNewAddressRules(string $addressType)
+    private function mergeAddressRules(string $addressType)
     {
+        $customerAddressIds = $this->getCustomerAddressIds();
+
+        if (! empty($this->input("{$addressType}.id"))) {
+            $this->mergeWithRules([
+                "{$addressType}.id" => ["in:{$customerAddressIds}"],
+            ]);
+        }
+
         $this->mergeWithRules([
             "{$addressType}.first_name" => ['required', new AlphaNumericSpace],
             "{$addressType}.last_name"  => ['required', new AlphaNumericSpace],

@@ -9,7 +9,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
-use Webkul\Shop\Http\Requests\Customer\CustomerAddressForm;
+use Webkul\Shop\Http\Requests\CartAddressRequest;
 use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends APIController
@@ -26,7 +26,7 @@ class OnepageController extends APIController
     }
 
     /**
-     * Return order short summary.
+     * Return cart summary.
      */
     public function summary(): JsonResource
     {
@@ -36,11 +36,11 @@ class OnepageController extends APIController
     }
 
     /**
-     * Store customer address.
+     * Store address.
      */
-    public function storeAddress(CustomerAddressForm $request): JsonResource
+    public function storeAddress(CartAddressRequest $cartAddressRequest): JsonResource
     {
-        $data = $request->all();
+        $address = $cartAddressRequest->all();
 
         if (
             ! auth()->guard('customer')->check()
@@ -52,19 +52,20 @@ class OnepageController extends APIController
             ]);
         }
 
-        $data['billing']['address1'] = implode(PHP_EOL, $data['billing']['address1']);
-
-        $data['shipping']['address1'] = implode(PHP_EOL, $data['shipping']['address1']);
-
-        if (
-            Cart::hasError()
-            || ! Cart::saveCustomerAddress($data)
-        ) {
+        if (Cart::hasError()) {
             return new JsonResource([
                 'redirect' => true,
                 'data'     => route('shop.checkout.cart.index'),
             ]);
         }
+
+        if (isset($address['billing'])) {
+            Cart::updateOrCreateBillingAddress($address['billing']);
+        }
+
+        Cart::updateOrCreateShippingAddress($address['shipping'] ?? []);
+
+        Cart::saveCustomerDetails();
 
         $cart = Cart::getCart();
 
