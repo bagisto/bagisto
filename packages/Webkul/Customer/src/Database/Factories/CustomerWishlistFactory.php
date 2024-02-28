@@ -21,6 +21,10 @@ class CustomerWishlistFactory extends Factory
      */
     public function definition(): array
     {
-        return [];
+        return [
+            'additional'  => [
+                'quantity' => 1
+            ],
+        ];
     }
 }
