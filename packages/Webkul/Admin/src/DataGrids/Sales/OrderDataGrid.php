@@ -73,32 +73,32 @@ class OrderDataGrid extends DataGrid
                 'params' => [
                     'options' => [
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.processing'),
-                            'value'  => Order::STATUS_PROCESSING,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.processing'),
+                            'value' => Order::STATUS_PROCESSING,
                         ],
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.completed'),
-                            'value'  => Order::STATUS_COMPLETED,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.completed'),
+                            'value' => Order::STATUS_COMPLETED,
                         ],
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.canceled'),
-                            'value'  => Order::STATUS_CANCELED,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.canceled'),
+                            'value' => Order::STATUS_CANCELED,
                         ],
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.closed'),
-                            'value'  => Order::STATUS_CLOSED,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.closed'),
+                            'value' => Order::STATUS_CLOSED,
                         ],
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.pending'),
-                            'value'  => Order::STATUS_PENDING,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.pending'),
+                            'value' => Order::STATUS_PENDING,
                         ],
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
-                            'value'  => Order::STATUS_PENDING_PAYMENT,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
+                            'value' => Order::STATUS_PENDING_PAYMENT,
                         ],
                         [
-                            'label'  => trans('admin::app.sales.orders.index.datagrid.fraud'),
-                            'value'  => Order::STATUS_FRAUD,
+                            'label' => trans('admin::app.sales.orders.index.datagrid.fraud'),
+                            'value' => Order::STATUS_FRAUD,
                         ],
                     ],
                 ],
