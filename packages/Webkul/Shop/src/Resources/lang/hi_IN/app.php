@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'उपलब्ध',
+                'completed'           => 'पुरा होना।',
                 'date'                => 'तारीख',
                 'download-error'      => 'डाउनलोड लिंक समाप्त हो गया है।',
                 'empty-product'       => 'डाउनलोड करने के लिए आपके पास कोई उत्पाद नहीं है',
                 'name'                => 'डाउनलोड योग्य उत्पाद',
                 'orderId'             => 'आर्डर आईडी',
+                'pending'             => 'लंबित',
                 'payment-error'       => 'इस डाउनलोड के लिए भुगतान नहीं किया गया है।',
                 'records-found'       => 'रिकॉर्ड(s) मिले',
                 'remaining-downloads' => 'शेष डाउनलोड',

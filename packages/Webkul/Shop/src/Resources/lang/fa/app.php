@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'در دسترس',
+                'completed'           => 'تکمیل شد',
                 'date'                => 'تاریخ',
                 'download-error'      => 'لینک دانلود منقضی شده است.',
                 'empty-product'       => 'محصولی برای دانلود ندارید',
                 'name'                => 'محصولات قابل دانلود',
                 'orderId'             => 'شناسه سفارش',
+                'pending'             => 'انتظار',
                 'payment-error'       => 'پرداخت برای این دانلود انجام نشده است.',
                 'records-found'       => 'رکورد(های) پیدا شده',
                 'remaining-downloads' => 'دانلودهای باقیمانده',

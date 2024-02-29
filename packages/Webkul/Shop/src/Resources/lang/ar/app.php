@@ -272,12 +272,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'متاح',
+                'completed'           => 'مكتمل',
                 'date'                => 'التاريخ',
                 'download-error'      => 'تم انتهاء صلاحية رابط التنزيل',
                 'empty-product'       => 'ليس لديك منتج لتنزيله',
                 'name'                => 'المنتجات قابلة للتنزيل',
                 'orderId'             => 'رقم الطلب',
                 'payment-error'       => 'لم يتم دفع هذا التنزيل بعد',
+                'pending'             => 'قيد الانتظار',
                 'records-found'       => 'سجل(سجلات) وجد',
                 'remaining-downloads' => 'التنزيلات المتبقية',
                 'status'              => 'الحالة',

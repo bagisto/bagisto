@@ -272,11 +272,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Beschikbaar',
+                'completed'           => 'Voltooid',
                 'date'                => 'Datum',
                 'download-error'      => 'Downloadlink is verlopen.',
                 'empty-product'       => 'U heeft geen product om te downloaden',
                 'name'                => 'Downloadbare Producten',
                 'orderId'             => 'Bestelnummer',
+                'pending'             => 'In behandeling',
                 'payment-error'       => 'Betaling is niet gedaan voor deze download.',
                 'records-found'       => 'Record(s) gevonden',
                 'remaining-downloads' => 'Resterende Downloads',
