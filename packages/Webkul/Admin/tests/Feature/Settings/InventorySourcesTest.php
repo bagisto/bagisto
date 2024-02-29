@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Webkul\Inventory\Models\InventorySource;
 
 use function Pest\Laravel\deleteJson;
@@ -50,7 +51,7 @@ it('should store the newly created inventory sources', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.inventory_sources.store'), [
-        'code'           => $code = strtolower(fake()->word),
+        'code'           => $code = Str::random(10),
         'name'           => $name = fake()->name(),
         'priority'       => $priority = rand(1, 10),
         'contact_number' => $contactNumber = rand(1111111111, 9999999999),

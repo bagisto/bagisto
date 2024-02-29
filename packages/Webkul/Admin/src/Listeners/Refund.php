@@ -10,7 +10,7 @@ class Refund extends Base
     /**
      * After order is created
      *
-     * @param  \Webkul\Sale\Contracts\Refund  $refund
+     * @param  \Webkul\Sales\Contracts\Refund  $refund
      * @return void
      */
     public function afterCreated($refund)

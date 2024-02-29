@@ -15,7 +15,7 @@
         'type'       => 'footer_links',
         'status'     => 1,
         'channel_id' => core()->getCurrentChannel()->id,
-    ]); 
+    ]);
 @endphp
 
 <footer class="mt-9 bg-lightOrange max-sm:mt-8">
@@ -29,7 +29,7 @@
                                 return $a['sort_order'] - $b['sort_order'];
                             });
                         @endphp
-                        
+
                         @foreach ($footerLinkSection as $link)
                             <li>
                                 <a href="{{ $link['url'] }}">
@@ -37,11 +37,11 @@
                                 </a>
                             </li>
                         @endforeach
-                    </ul>    
+                    </ul>
                 @endforeach
             @endif
         </div>
-        
+
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
 
         <!-- News Letter subscription -->
@@ -86,7 +86,7 @@
                 </x-shop::form>
             </div>
         @endif
-        
+
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
     </div>
 

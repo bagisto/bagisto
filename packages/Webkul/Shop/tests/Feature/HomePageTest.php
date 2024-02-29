@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Customer\Models\CompareItem;
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -142,6 +144,29 @@ it('should store the subscription of the shop', function () {
             ],
         ],
     ]);
+});
+
+it('should store the subscription of the shop and send the mail to the admin', function () {
+    // Act and Assert
+    Mail::fake();
+
+    postJson(route('shop.subscription.store'), [
+        'email' => $email = fake()->email(),
+    ])
+        ->assertRedirect();
+
+    $this->assertModelWise([
+        SubscribersList::class => [
+            [
+                'email'         => $email,
+                'is_subscribed' => 1,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(SubscriptionNotification::class);
+
+    Mail::assertQueuedCount(1);
 });
 
 it('should unsubscribe from the shop', function () {
