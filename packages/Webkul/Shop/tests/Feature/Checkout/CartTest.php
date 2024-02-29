@@ -67,7 +67,7 @@ it('should display the cart items from the cart', function () {
         ->assertJsonPath('data.items.0.id', $cartItem->id)
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.haveStockableItems', true);
+        ->assertJsonPath('data.have_stockable_items', true);
 });
 
 it('should fails the validation error when the cart item id not provided when remove product items to the cart', function () {

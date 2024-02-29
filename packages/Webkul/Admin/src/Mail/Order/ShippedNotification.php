@@ -2,34 +2,46 @@
 
 namespace Webkul\Admin\Mail\Order;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Admin\Mail\Mailable;
+use Webkul\Sales\Contracts\Shipment;
 
 class ShippedNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
-    public function __construct(public $shipment)
+    public function __construct(public Shipment $shipment)
     {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to(core()->getAdminEmailDetails()['email'], core()->getAdminEmailDetails()['name'])
-            ->subject(trans('admin::app.emails.orders.shipped.subject'))
-            ->view('admin::emails.orders.shipped');
+        return new Envelope(
+            to: [
+                new Address(
+                    core()->getAdminEmailDetails()['email'],
+                    core()->getAdminEmailDetails()['name']
+                ),
+            ],
+            subject: trans('admin::app.emails.orders.shipped.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'admin::emails.orders.shipped',
+        );
     }
 }

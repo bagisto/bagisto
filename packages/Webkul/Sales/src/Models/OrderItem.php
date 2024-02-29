@@ -17,6 +17,11 @@ class OrderItem extends Model implements OrderItemContract
 {
     use HasFactory;
 
+    /**
+     * Define the guarded property.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'child',
@@ -25,10 +30,20 @@ class OrderItem extends Model implements OrderItemContract
         'updated_at',
     ];
 
+    /**
+     * Casts the additional column to the model.
+     *
+     * @var array
+     */
     protected $casts = [
         'additional' => 'array',
     ];
 
+    /**
+     * Define the type instance
+     *
+     * @var mixed
+     */
     protected $typeInstance;
 
     /**

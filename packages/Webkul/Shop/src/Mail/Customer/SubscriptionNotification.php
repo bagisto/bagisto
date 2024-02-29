@@ -2,36 +2,46 @@
 
 namespace Webkul\Shop\Mail\Customer;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Core\Contracts\SubscribersList;
+use Webkul\Shop\Mail\Mailable;
 
 class SubscriptionNotification extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a mailable instance
      *
-     * @param  \Webkul\Customer\Models\Customer  $customer
      * @return void
      */
-    public function __construct(public $customer)
+    public function __construct(public SubscribersList $subscribersList)
     {
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->customer->email)
-            ->subject(trans('shop::app.emails.customers.subscribed.subject'))
-            ->view('shop::emails.customers.subscribed', [
-                'fullName' => $this->customer->first_name.' '.$this->customer->last_name,
-            ]);
+        return new Envelope(
+            to: [
+                new Address($this->subscribersList->email),
+            ],
+            subject: trans('shop::app.emails.customers.subscribed.subject'),
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'shop::emails.customers.subscribed',
+            with: [
+                'fullName' => trim($this->subscribersList->first_name.' '.$this->subscribersList->last_name),
+            ],
+        );
     }
 }

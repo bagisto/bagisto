@@ -17,14 +17,14 @@
                 </p>
             @endif
 
-            {!! view_render_event('admin.customers.addresses.edit.before') !!}
+            {!! view_render_event('bagisto.admin.customers.addresses.edit.before') !!}
 
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"     
             >
 
-                {!! view_render_event('admin.customers.addresses.edit.edit_form_controls.before') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.edit.edit_form_controls.before') !!}
 
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.control
@@ -58,7 +58,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            {!! view_render_event('admin.customer.addresses.edit.before') !!}
+                            {!! view_render_event('bagisto.admin.customer.addresses.edit.before') !!}
                             <div class="flex gap-4 max-sm:flex-wrap">
                                 <!-- Company Name -->
                                 <x-admin::form.control-group class="w-full">
@@ -281,6 +281,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="state"
+                                            v-model="addressData.state"
                                             rules="required"
                                             :label="trans('admin::app.customers.addresses.create.state')"
                                             :placeholder="trans('admin::app.customers.addresses.create.state')"
@@ -350,11 +351,11 @@
                     </x-admin::modal>
                 </form>
 
-                {!! view_render_event('admin.customers.addresses.edit.edit_form_controls.after') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.edit.edit_form_controls.after') !!}
 
             </x-admin::form>
 
-            {!! view_render_event('admin.customers.addresses.edit.after') !!}
+            {!! view_render_event('bagisto.admin.customers.addresses.edit.after') !!}
 
         </div>
     </script>

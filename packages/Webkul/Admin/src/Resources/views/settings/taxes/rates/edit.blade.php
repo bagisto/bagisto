@@ -20,7 +20,7 @@
                 method="PUT"
             >
 
-                {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
+                {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.before') !!}
 
                 <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
                     <p class="text-xl text-gray-800 dark:text-white font-bold">
@@ -171,7 +171,7 @@
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-2 w-[360px] max-w-full max-sm:w-full">
 
-                        {!! view_render_event('admin.settings.taxes.rates.edit.card.accordion.basic_settings.before') !!}
+                        {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.before') !!}
 
                         <!-- Basic Settings -->
                         <x-admin::accordion>
@@ -253,12 +253,12 @@
                             </x-slot>
                         </x-admin::accordion>
 
-                        {!! view_render_event('admin.settings.taxes.rates.edit.card.accordion.basic_settings.after') !!}
+                        {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.card.accordion.basic_settings.after') !!}
 
                     </div>
                 </div>
 
-                {!! view_render_event('admin.settings.taxes.rates.edit.edit_form_controls.after') !!}
+                {!! view_render_event('bagisto.admin.settings.taxes.rates.edit.edit_form_controls.after') !!}
 
             </x-admin::form>
 

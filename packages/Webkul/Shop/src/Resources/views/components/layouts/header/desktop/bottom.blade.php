@@ -143,6 +143,8 @@
                         <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
                         <div class="flex gap-4 mt-6">
+                            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
+
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
                                 class="primary-button block w-max px-7 mx-auto m-0 ltr:ml-0 rtl:mr-0 rounded-2xl text-base text-center"
@@ -156,6 +158,8 @@
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
+
+                            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up__button.after') !!}
                         </div>
                     </x-slot>
                 @endguest
@@ -177,6 +181,8 @@
                         <p class="w-full mt-3 py-2px border border-[#E9E9E9]"></p>
 
                         <div class="grid gap-1 mt-2.5 pb-2.5">
+                            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile_dropdown.links.before') !!}
+
                             <a
                                 class="px-5 py-2 text-base hover:bg-gray-100 cursor-pointer"
                                 href="{{ route('shop.customers.account.profile.index') }}"
@@ -216,6 +222,8 @@
                                     @lang('shop::app.components.layouts.header.logout')
                                 </a>
                             @endauth
+
+                            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile_dropdown.links.after') !!}
                         </div>
                     </x-slot>
                 @endauth

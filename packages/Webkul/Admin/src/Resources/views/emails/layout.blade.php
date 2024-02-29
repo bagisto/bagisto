@@ -15,7 +15,7 @@
                 <!-- Email Header -->
                 <div style="margin-bottom: 65px;">
                     <a href="{{ route('shop.home.index') }}">
-                        @if ($logo = core()->getCurrentChannel()->logo_url)
+                        @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                             <img
                                 src="{{ $logo }}"
                                 alt="{{ config('app.name') }}"

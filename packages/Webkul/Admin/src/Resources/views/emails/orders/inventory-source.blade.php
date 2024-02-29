@@ -32,11 +32,11 @@
                     {{ $shipment->order->shipping_address->company_name ?? '' }}<br/>
 
                     {{ $shipment->order->shipping_address->name }}<br/>
-                    
+
                     {{ $shipment->order->shipping_address->address1 }}<br/>
-                    
+
                     {{ $shipment->order->shipping_address->postcode . " " . $shipment->order->shipping_address->city }}<br/>
-                    
+
                     {{ $shipment->order->shipping_address->state }}<br/>
 
                     ---<br/>
@@ -58,13 +58,13 @@
                     <div style="font-size: 16px; color: #384860;">
                         <div>
                             <span>{{ __('admin::app.emails.orders.carrier') }} : </span>
-                            
+
                             {{ $shipment->carrier_title }}
                         </div>
 
                         <div>
                             <span>{{ __('admin::app.emails.orders.tracking-number') }} : </span>
-                            
+
                             {{ $shipment->track_number }}
                         </div>
                     </div>
@@ -82,11 +82,11 @@
                     {{ $shipment->order->billing_address->company_name ?? '' }}<br/>
 
                     {{ $shipment->order->billing_address->name }}<br/>
-                    
+
                     {{ $shipment->order->billing_address->address1 }}<br/>
-                    
+
                     {{ $shipment->order->billing_address->postcode . " " . $shipment->order->billing_address->city }}<br/>
-                    
+
                     {{ $shipment->order->billing_address->state }}<br/>
 
                     ---<br/>
