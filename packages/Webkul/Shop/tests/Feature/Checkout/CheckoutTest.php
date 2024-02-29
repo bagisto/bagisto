@@ -20,7 +20,7 @@ use Webkul\Shop\Mail\Order\CreatedNotification as ShopOrderCreatedNotification;
 
 use function Pest\Laravel\postJson;
 
-it('should fails the certain validation error when store the guest user address for cart billing/shipping for guest user', function () {
+it('should fail certain validation error when storing guest user address for cart billing/shipping', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -86,7 +86,7 @@ it('should fails the certain validation error when store the guest user address 
         ->assertUnprocessable();
 });
 
-it('should store the billing address and if use for shipping address is true then the billing and shipping address will be same for guest user', function () {
+it('should store the same billing and shipping address for guest if use for shipping is enabled', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -204,7 +204,7 @@ it('should store the billing address and if use for shipping address is true the
     ]);
 });
 
-it('should store the billing address and if use for shipping address is true then the billing and shipping address will be same for customer', function () {
+it('should store the same billing and shipping address for customer if use for shipping is enabled', function () {
     // Arrange
     $customer = Customer::factory()->create();
 
@@ -322,7 +322,7 @@ it('should store the billing address and if use for shipping address is true the
     ]);
 });
 
-it('should store the billing and shipping address when the use for shipping is false for guest user', function () {
+it('should store the billing and shipping address for guest when the use for shipping is disabled', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -455,7 +455,7 @@ it('should store the billing and shipping address when the use for shipping is f
     ]);
 });
 
-it('should store the billing and shipping address when the use for shipping is false for customer', function () {
+it('should store the billing and shipping address for customer when the use for shipping is disabled', function () {
     // Arrange
     $customer = Customer::factory()->create();
 
@@ -599,7 +599,7 @@ it('should store the billing and shipping address when the use for shipping is f
     ]);
 });
 
-it('should store the billing address, and if the option to use the billing address for shipping is set to false, the shipping address will not be saved only the billing address will be saved for guest user', function () {
+it('it should not save the shipping address for guest when the use for shipping is false and the shipping key is not present', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -713,7 +713,7 @@ it('should store the billing address, and if the option to use the billing addre
     ]);
 });
 
-it('should store the billing address, and if the option to use the billing address for shipping is set to false, the shipping address will not be saved only the billing address will be saved for customer', function () {
+it('it should not save the shipping address for customer when the use for shipping is false and the shipping key is not present', function () {
     // Arrange
     $customer = Customer::factory()->create();
 
