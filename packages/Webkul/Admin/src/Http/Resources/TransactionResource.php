@@ -18,7 +18,7 @@ class TransactionResource extends JsonResource
             'id'              => $this->id,
             'transaction_id'  => $this->transaction_id,
             'order_id'        => $this->order_id,
-            'payment_method'  => $this->payment_method,
+            'payment_method'  => $this->payment_title,
             'amount'          => core()->formatPrice($this->amount),
             'invoice_id'      => $this->invoice_id,
             'status'          => $this->status,

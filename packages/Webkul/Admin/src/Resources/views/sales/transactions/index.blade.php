@@ -60,10 +60,8 @@
                         </p>
 
                         <!-- Amount -->
-                        <p
-                            class="break-words"
-                            v-text="record.amount"
-                        >
+                        <p class="break-words">
+                            @{{ $admin.formatPrice(record.amount) }}
                         </p>
 
                         <!-- Invoice Id -->
