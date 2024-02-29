@@ -16,7 +16,7 @@
             <!-- SEO Meta Title -->
             <p 
                 class="text-[#135F29]"
-                v-text="'{{ URL::to('/') }}/' + (slug ? slug + '/' : '') + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
+                v-text="'{{ URL::to('/') }}/' + (slug ? slug + '/' : '') + (urlKey ? urlKey().replace(/\s+/g, '-') : '')"
             >
             </p>
 
@@ -38,7 +38,7 @@
             data() {
                 return {
                     metaTitle: this.$parent.getValues()['meta_title'],
-
+                    urlKey: this.$parent.getValues()['url_key'],
                     metaDescription: this.$parent.getValues()['meta_description'],
                 }
             },
@@ -52,6 +52,10 @@
 
                 document.getElementById('meta_title').addEventListener('input', function(e) {
                     self.metaTitle = e.target.value;
+                });
+
+                document.getElementById('url_key').addEventListener('input', function(e) {
+                    self.urlKey = e.target.value;
                 });
 
                 document.getElementById('meta_description').addEventListener('input', function(e) {
