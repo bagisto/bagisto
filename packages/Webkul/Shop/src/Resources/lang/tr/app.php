@@ -116,6 +116,7 @@ return [
                 'edit'             => 'Düzenle',
                 'edit-address'     => 'Adresi Düzenle',
                 'edit-success'     => 'Adres başarıyla güncellendi.',
+                'email'            => 'E-posta',
                 'empty-address'    => 'Henüz hesabınıza bir adres eklememişsiniz.',
                 'first-name'       => 'Ad',
                 'last-name'        => 'Soyadı',

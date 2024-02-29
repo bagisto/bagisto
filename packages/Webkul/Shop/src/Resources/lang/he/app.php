@@ -116,6 +116,7 @@ return [
                 'edit'             => 'ערוך',
                 'edit-address'     => 'ערוך כתובת',
                 'edit-success'     => 'הכתובת עודכנה בהצלחה.',
+                'email'            => 'אימייל',
                 'empty-address'    => 'טרם הוספת כתובת לחשבונך.',
                 'first-name'       => 'שם פרטי',
                 'last-name'        => 'שם משפחה',

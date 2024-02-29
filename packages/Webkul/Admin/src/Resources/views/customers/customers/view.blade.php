@@ -617,6 +617,11 @@
                                     @lang('admin::app.customers.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
                                 </p>
 
+                                <!-- E-mail -->
+                                <p class="text-gray-600 dark:text-gray-300">
+                                    @lang('admin::app.customers.customers.view.email', ['email' => $address->email ?? 'N/A'])
+                                </p>
+
                                 <div class="flex gap-2.5">
                                     <!-- Edit Address -->
                                     @include('admin::customers.addresses.edit')

@@ -116,6 +116,7 @@ return [
                 'edit'             => '编辑',
                 'edit-address'     => '编辑地址',
                 'edit-success'     => '地址已成功更新。',
+                'email'            => '电子邮件',
                 'empty-address'    => '您尚未将地址添加到您的帐户。',
                 'first-name'       => '名字',
                 'last-name'        => '姓氏',
