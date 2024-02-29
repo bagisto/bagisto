@@ -457,6 +457,8 @@ it('should cancel the order and send the notification to the customer', function
     Mail::assertQueued(ShopOrderCanceledNotification::class);
 
     Mail::assertQueued(AdminOrderCanceledNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should give validation error when store the comment to the order', function () {
@@ -874,6 +876,8 @@ it('should comment to the order and send mail to the customer', function () {
     ]);
 
     Mail::assertQueued(CommentedNotification::class);
+
+    Mail::assertQueuedCount(1);
 });
 
 it('should search the order', function () {

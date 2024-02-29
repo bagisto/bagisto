@@ -67,6 +67,7 @@ it('should fails the certain validation error when store the guest user address 
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -132,6 +133,7 @@ it('should store the guest user address for cart billing/shipping for guest user
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -212,6 +214,7 @@ it('should fails the validation error when shipping method not providing when st
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -273,6 +276,7 @@ it('should store the shipping method', function () {
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -340,6 +344,7 @@ it('should fails the validation error when store the payment method for guest us
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -517,6 +522,7 @@ it('should place a simple product order for a guest user', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -739,6 +745,7 @@ it('should place a simple product order for a guest user and send email to the g
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -875,6 +882,8 @@ it('should place a simple product order for a guest user and send email to the g
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a simple product order for a customer', function () {
@@ -968,6 +977,7 @@ it('should place a simple product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -1358,6 +1368,8 @@ it('should place a simple product order for a customer and send email to the cus
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a configurable product order for a guest user', function () {
@@ -1946,6 +1958,8 @@ it('should place a configurable product order for a guest user and send email to
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a configurable product order for a customer', function () {
@@ -2446,6 +2460,8 @@ it('should place a configurable product order for a customer and send email to t
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a virtual product order for a guest user', function () {
@@ -2523,6 +2539,7 @@ it('should place a virtual product order for a guest user', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -2785,6 +2802,8 @@ it('should place a virtual product order for a guest user and send email to the 
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a virtual product order for a customer', function () {
@@ -2858,6 +2877,7 @@ it('should place a virtual product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -3134,6 +3154,8 @@ it('should place a virtual product order for a customer and send email to the us
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a downloadable product order for a customer and send email to the user', function () {
@@ -3307,6 +3329,8 @@ it('should place a downloadable product order for a customer and send email to t
     Mail::assertQueued(AdminOrderCreatedNotification::class);
 
     Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should place a downloadable product order for a customer', function () {
@@ -3349,6 +3373,7 @@ it('should place a downloadable product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -3522,6 +3547,7 @@ it('should not return the cash on delivery payment method if product is download
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -3650,6 +3676,7 @@ it('should not return the shipping methods if product is downloadable', function
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -3777,6 +3804,7 @@ it('should not return the cash on delivery payment method if product is virtual'
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -3906,6 +3934,7 @@ it('should not return the shipping methods if product is virtual', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -4055,6 +4084,7 @@ it('should place order with two products with simple and configurable product ty
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -4334,6 +4364,7 @@ it('should place order with two products with simple and grouped product type', 
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -4562,6 +4593,7 @@ it('should place order with two products with simple and downloadable product ty
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);

@@ -7,6 +7,7 @@ use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerNote;
 use Webkul\Faker\Helpers\Customer as CustomerFaker;
+use Webkul\Shop\Mail\Customer\NoteNotification;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
@@ -197,6 +198,37 @@ it('should store the notes for the customer', function () {
             ],
         ],
     ]);
+});
+
+it('should store the notes for the customer and send email to the customer', function () {
+    // Arrange
+    Mail::fake();
+
+    $customer = (new CustomerFaker())->factory()->create([
+        'password' => Hash::make('admin123'),
+    ]);
+
+    // Act and Assert
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customer.note.store', $customer->id), [
+        'note'              => $note = substr(fake()->paragraph(), 0, 50),
+        'customer_notified' => 1,
+    ])
+        ->assertRedirect(route('admin.customers.customers.view', $customer->id))
+        ->isRedirection();
+
+    $this->assertModelWise([
+        CustomerNote::class => [
+            [
+                'note' => $note,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(NoteNotification::class);
+
+    Mail::assertQueuedCount(1);
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in customer', function () {

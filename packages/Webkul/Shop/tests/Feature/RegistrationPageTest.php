@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Mail;
+use Webkul\Admin\Mail\Customer\RegistrationNotification as AdminRegistrationNotification;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
-use Webkul\Shop\Mail\Customer\RegistrationNotification;
+use Webkul\Shop\Mail\Customer\RegistrationNotification as ShopRegistrationNotification;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -81,6 +82,9 @@ it('successfully registers a customer and send mail to the customer that you hav
     CoreConfig::factory()->create([
         'code'  => 'emails.general.notifications.emails.general.notifications.registration',
         'value' => 1,
+    ])->create([
+        'code'  => 'emails.general.notifications.emails.general.notifications.customer_registration_confirmation_mail_to_admin',
+        'value' => 1,
     ]);
 
     // Act & Assert
@@ -88,7 +92,11 @@ it('successfully registers a customer and send mail to the customer that you hav
         ->assertRedirectToRoute('shop.customer.session.index')
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success'));
 
-    Mail::assertQueued(RegistrationNotification::class);
+    Mail::assertQueued(ShopRegistrationNotification::class);
+
+    Mail::assertQueued(AdminRegistrationNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('successfully registers a customer and send mail to the customer that you need to verify the mail', function () {
@@ -114,4 +122,6 @@ it('successfully registers a customer and send mail to the customer that you nee
         ->assertSessionHas('success', trans('shop::app.customers.signup-form.success-verify'));
 
     Mail::assertQueued(EmailVerificationNotification::class);
+
+    Mail::assertQueuedCount(1);
 });

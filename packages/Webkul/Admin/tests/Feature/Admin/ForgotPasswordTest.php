@@ -27,4 +27,6 @@ it('should send the reset password link', function () {
         $admin,
         ResetPasswordNotification::class,
     );
+
+    Notification::assertCount(1);
 });

@@ -488,6 +488,8 @@ it('should store the shipment to the order and send email to the admin', functio
     Mail::assertQueued(ShopShippedNotification::class);
 
     Mail::assertQueued(InventorySourceNotification::class);
+
+    Mail::assertQueuedCount(3);
 });
 
 it('should return the view page of shipments', function () {

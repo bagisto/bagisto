@@ -609,6 +609,8 @@ it('should store the order refund and send email to the customer', function () {
     Mail::assertQueued(AdminRefundedNotification::class);
 
     Mail::assertQueued(ShopRefundedNotification::class);
+
+    Mail::assertQueuedCount(2);
 });
 
 it('should return the order refunded data', function () {
