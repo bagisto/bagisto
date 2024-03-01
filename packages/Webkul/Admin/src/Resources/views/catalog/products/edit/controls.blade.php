@@ -189,11 +189,10 @@
             @endif
 
             <v-field
-                type="text"
+                type="file"
                 class="w-full"
                 name="{{ $attribute->code }}"
                 :rules="{{ $attribute->validations }}"
-                value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
                 v-slot="{ handleChange, handleBlur }"
                 label="{{ $attribute->admin_name }}"
             >
@@ -219,9 +218,12 @@
                     :for="$attribute->code . '_delete'"
                 />
 
-                <p class="text-sm text-gray-600 dark:text-gray-300">
+                <label
+                    for="{{ $attribute->code . '_delete' }}"
+                    class="text-sm text-gray-600 dark:text-gray-300 cursor-pointer select-none"
+                >
                     @lang('admin::app.catalog.products.edit.remove')
-                </p>
+                </label>
             </div>
         @endif
 
