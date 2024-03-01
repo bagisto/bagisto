@@ -116,6 +116,7 @@ return [
                 'edit'             => 'Bewerken',
                 'edit-address'     => 'Adres Bewerken',
                 'edit-success'     => 'Adres succesvol bijgewerkt.',
+                'email'            => 'E-mail',
                 'empty-address'    => 'U heeft nog geen adres aan uw account toegevoegd.',
                 'first-name'       => 'Voornaam',
                 'last-name'        => 'Achternaam',
