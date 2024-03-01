@@ -472,7 +472,7 @@
                         search: $event.target.value,
                     };
 
-                    if (!(params['search'].length > 1)) {
+                    if (! (params['search'].length > 1)) {
                         this.searchedOptions = [];
 
                         this.isMinimumCharacters = false;
