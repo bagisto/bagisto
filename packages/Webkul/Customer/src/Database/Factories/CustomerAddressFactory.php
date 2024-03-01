@@ -32,7 +32,7 @@ class CustomerAddressFactory extends Factory
             'country'         => $this->faker->countryCode,
             'state'           => $this->faker->state,
             'city'            => $this->faker->city,
-            'postcode'        => $this->faker->postcode,
+            'postcode'        => rand(11111, 99999),
             'phone'           => $this->faker->e164PhoneNumber,
             'default_address' => $this->faker->boolean,
             'address_type'    => CustomerAddress::ADDRESS_TYPE,

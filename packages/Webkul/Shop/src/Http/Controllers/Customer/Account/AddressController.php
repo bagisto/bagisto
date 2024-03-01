@@ -60,6 +60,7 @@ class AddressController extends Controller
             'city',
             'postcode',
             'phone',
+            'email',
             'default_address',
         ]), [
             'customer_id' => $customer->id,
@@ -124,6 +125,7 @@ class AddressController extends Controller
             'city',
             'postcode',
             'phone',
+            'email',
         ]), [
             'address1' => implode(PHP_EOL, array_filter($request->input('address1'))),
             'address2' => implode(PHP_EOL, array_filter($request->input('address2', []))),

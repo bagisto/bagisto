@@ -117,6 +117,7 @@ return [
                 'edit'             => '編集',
                 'edit-address'     => '住所を編集',
                 'edit-success'     => '住所が正常に更新されました。',
+                'email'            => '電子メール',
                 'empty-address'    => 'アカウントに住所がまだ追加されていません。',
                 'first-name'       => '名',
                 'last-name'        => '姓',
@@ -273,11 +274,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => '利用可能',
+                'completed'           => '完了',
                 'date'                => '日付',
                 'download-error'      => 'ダウンロードリンクの有効期限が切れています。',
                 'empty-product'       => 'ダウンロードする製品がありません',
                 'name'                => 'ダウンロード可能な製品',
                 'orderId'             => '注文ID',
+                'pending'             => '保留中',
                 'payment-error'       => 'このダウンロードのための支払いが行われていません。',
                 'records-found'       => 'レコードが見つかりました',
                 'remaining-downloads' => '残りのダウンロード回数',

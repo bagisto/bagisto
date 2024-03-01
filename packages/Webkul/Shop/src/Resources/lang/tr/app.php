@@ -117,6 +117,7 @@ return [
                 'edit'             => 'Düzenle',
                 'edit-address'     => 'Adresi Düzenle',
                 'edit-success'     => 'Adres başarıyla güncellendi.',
+                'email'            => 'E-posta',
                 'empty-address'    => 'Henüz hesabınıza bir adres eklememişsiniz.',
                 'first-name'       => 'Ad',
                 'last-name'        => 'Soyadı',
@@ -273,11 +274,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Mevcut',
+                'completed'           => 'Tamamlanmış',
                 'date'                => 'Tarih',
                 'download-error'      => 'İndirme bağlantısı süresi dolmuş.',
                 'empty-product'       => 'İndirilecek ürününüz yok',
                 'name'                => 'İndirilebilir Ürünler',
                 'orderId'             => 'Sipariş ID',
+                'pending'             => 'Askıda olması',
                 'payment-error'       => 'Bu indirme için ödeme yapılmamış.',
                 'records-found'       => 'Kayıt(lar) bulundu',
                 'remaining-downloads' => 'Kalan İndirmeler',

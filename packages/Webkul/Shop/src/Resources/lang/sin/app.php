@@ -117,6 +117,7 @@ return [
                 'edit'             => 'සංස්කරණය කරන්න',
                 'edit-address'     => 'ලිපිනය සංස්කරණය කරන්න',
                 'edit-success'     => 'ලිපිනය සාර්ථකව යාවත්වාය',
+                'email'            => 'ඊමේල්',
                 'empty-address'    => 'ඔබගේ ගිණුමට තවත් ලිපිනයක් එකතු කර නොමැත.',
                 'first-name'       => 'මුල් නම',
                 'last-name'        => 'අවසාන නම',
@@ -273,11 +274,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'ඇත',
+                'completed'           => 'සම්පූර්ණ කළා',
                 'date'                => 'දිනය',
                 'download-error'      => 'බාගත කිරීමේ සංඛ්‍යාව ඉක්මනින් අවලංගු විය.',
                 'empty-product'       => 'ඔබට බාගත කිරීමට නිශ්චල කර නොමැත',
                 'name'                => 'බාගතු නිශ්චල නම',
                 'orderId'             => 'ඇණවුමේ අංකය',
+                'pending'             => 'පොරොත්තුවෙන්',
                 'payment-error'       => 'මුදල ගෙවීමට කියා නොමැත.',
                 'records-found'       => 'ලියාපදිංචි ලද (නිල කියවීම්)',
                 'remaining-downloads' => 'සිංහල බාගතු කිරීම්',

@@ -480,9 +480,12 @@ return [
                 'title'      => 'Transactions',
 
                 'datagrid' => [
+                    'completed'          => 'Completed',
                     'id'                 => 'ID',
                     'invoice-id'         => 'Invoice ID',
                     'order-id'           => 'Order ID',
+                    'paid'               => 'Paid',
+                    'pending'            => 'Pending',
                     'status'             => 'Status',
                     'transaction-amount' => 'Amount',
                     'transaction-date'   => 'Date',
@@ -1400,6 +1403,7 @@ return [
                 'country'            => 'Country',
                 'create-address-btn' => 'Add New Address',
                 'default-address'    => 'Default Address',
+                'email'              => 'Email',
                 'first-name'         => 'First Name',
                 'last-name'          => 'Last Name',
                 'phone'              => 'Phone',
@@ -1419,6 +1423,7 @@ return [
                 'company-name'    => 'Company Name',
                 'country'         => 'Country',
                 'default-address' => 'Default Address',
+                'email'           => 'Email',
                 'first-name'      => 'First Name',
                 'last-name'       => 'Last Name',
                 'phone'           => 'Phone',

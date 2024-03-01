@@ -480,13 +480,17 @@ return [
                 'title'      => 'लेन-देन',
 
                 'datagrid' => [
+                    'completed'          => 'पूर्ण',
                     'id'                 => 'आईडी',
                     'invoice-id'         => 'चालान आईडी',
                     'order-id'           => 'आदेश आईडी',
+                    'paid'               => 'भुगतान किया',
+                    'pending'            => 'अपूर्ण',
                     'status'             => 'स्थिति',
-                    'transaction-id'     => 'लेन-देन आईडी',
-                    'transaction-date'   => 'तिथि',
                     'transaction-amount' => 'राशि',
+                    'transaction-date'   => 'तारीख',
+                    'transaction-id'     => 'लेनदेन आईडी',
+                    'view'               => 'देखें',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'देश',
                 'create-address-btn' => 'नया पता जोड़ें',
                 'default-address'    => 'डिफ़ॉल्ट पता',
+                'email'              => 'ईमेल',
                 'first-name'         => 'पहला नाम',
                 'last-name'          => 'अंतिम नाम',
                 'phone'              => 'फ़ोन',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'     => 'कंपनी का नाम',
                 'country'          => 'देश',
                 'default-address'  => 'डिफ़ॉल्ट पता',
+                'email'            => 'ईमेल',
                 'first-name'       => 'पहला नाम',
                 'last-name'        => 'अंतिम नाम',
                 'phone'            => 'फ़ोन',

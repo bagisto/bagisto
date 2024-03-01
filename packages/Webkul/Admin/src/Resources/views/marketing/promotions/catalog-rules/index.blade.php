@@ -20,10 +20,10 @@
         </div>
     </div>
     
-    {!! view_render_event('admin.marketing.promotions.catalog_rules.list.before') !!}
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.list.before') !!}
 
     <x-admin::datagrid src="{{ route('admin.marketing.promotions.catalog_rules.index') }}" />
 
-    {!! view_render_event('admin.marketing.promotions.catalog_rules.list.after') !!}
+    {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.list.after') !!}
 
 </x-admin::layouts>

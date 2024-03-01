@@ -117,6 +117,7 @@ return [
                 'edit'             => 'تعديل',
                 'edit-address'     => 'تعديل العنوان',
                 'edit-success'     => 'تم تحديث العنوان بنجاح.',
+                'email'            => 'البريد الإلكتروني',
                 'empty-address'    => 'لم تقم بإضافة عنوان إلى حسابك بعد.',
                 'first-name'       => 'الاسم الأول',
                 'last-name'        => 'اسم العائلة',
@@ -273,12 +274,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'متاح',
+                'completed'           => 'مكتمل',
                 'date'                => 'التاريخ',
                 'download-error'      => 'تم انتهاء صلاحية رابط التنزيل',
                 'empty-product'       => 'ليس لديك منتج لتنزيله',
                 'name'                => 'المنتجات قابلة للتنزيل',
                 'orderId'             => 'رقم الطلب',
                 'payment-error'       => 'لم يتم دفع هذا التنزيل بعد',
+                'pending'             => 'قيد الانتظار',
                 'records-found'       => 'سجل(سجلات) وجد',
                 'remaining-downloads' => 'التنزيلات المتبقية',
                 'status'              => 'الحالة',

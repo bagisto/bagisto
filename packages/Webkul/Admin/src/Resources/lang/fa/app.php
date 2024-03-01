@@ -480,13 +480,17 @@ return [
                 'title'      => 'تراکنش‌ها',
 
                 'datagrid' => [
+                    'completed'          => 'تکمیل شده',
                     'id'                 => 'شناسه',
-                    'invoice-id'         => 'شماره صورتحساب',
+                    'invoice-id'         => 'شماره فاکتور',
                     'order-id'           => 'شماره سفارش',
+                    'paid'               => 'پرداخت شده',
+                    'pending'            => 'در انتظار',
                     'status'             => 'وضعیت',
-                    'transaction-amount' => 'مقدار',
+                    'transaction-amount' => 'مبلغ',
                     'transaction-date'   => 'تاریخ',
-                    'transaction-id'     => 'شناسه تراکنش',
+                    'transaction-id'     => 'شماره تراکنش',
+                    'view'               => 'مشاهده',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'کشور',
                 'create-address-btn' => 'افزودن آدرس جدید',
                 'default-address'    => 'آدرس پیش‌فرض',
+                'email'              => 'ایمیل',
                 'first-name'         => 'نام',
                 'last-name'          => 'نام خانوادگی',
                 'phone'              => 'تلفن',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'    => 'نام شرکت',
                 'country'         => 'کشور',
                 'default-address' => 'آدرس پیش‌فرض',
+                'email'           => 'ایمیل',
                 'first-name'      => 'نام',
                 'last-name'       => 'نام خانوادگی',
                 'phone'           => 'تلفن',

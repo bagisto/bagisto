@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        {!! view_render_event('admin.customers.addresses.create.before') !!}
+        {!! view_render_event('bagisto.admin.customers.addresses.create.before') !!}
 
         <x-admin::form
             v-slot="{ meta, errors, handleSubmit }"
@@ -33,7 +33,7 @@
         >
             <form @submit="handleSubmit($event, create)">
 
-                {!! view_render_event('admin.customers.addresses.create.create_form_controls.before') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.create.create_form_controls.before') !!}
 
                 <!-- Address Create Modal -->
                 <x-admin::modal ref="CustomerAddress">
@@ -46,7 +46,7 @@
     
                     <!-- Modal Content -->
                     <x-slot:content>
-                        {!! view_render_event('admin.customers.addresses.create.before') !!}
+                        {!! view_render_event('bagisto.admin.customers.addresses.create.before') !!}
 
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.control
@@ -286,27 +286,44 @@
                                 <x-admin::form.control-group.error control-name="phone" />
                             </x-admin::form.control-group>
 
-                            <!-- Default Address -->
-                            <div class="w-full mt-8">
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
-                                    <x-admin::form.control-group.control
-                                        type="checkbox"
-                                        id="default_address"
-                                        name="default_address"
-                                        :value="1"
-                                        for="default_address"
-                                        :label="trans('admin::app.customers.addresses.create.default-address')"
-                                        :checked="false"
-                                    />
+                            <!-- E-mail -->
+                            <x-admin::form.control-group class="w-full">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.customers.addresses.create.email')
+                                </x-admin::form.control-group.label>
 
-                                    <label
-                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                        for="default_address"
-                                    >
-                                        @lang('admin::app.customers.addresses.create.default-address')
-                                    </label>
-                                </x-admin::form.control-group>
-                            </div>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="email"
+                                    rules="required|email"
+                                    :label="trans('admin::app.customers.addresses.create.email')"
+                                    :placeholder="trans('admin::app.customers.addresses.create.email')"
+                                />
+
+                                <x-admin::form.control-group.error control-name="email" />
+                            </x-admin::form.control-group>
+                        </div>
+
+                        <!-- Default Address -->
+                        <div class="w-full">
+                            <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
+                                <x-admin::form.control-group.control
+                                    type="checkbox"
+                                    id="default_address"
+                                    name="default_address"
+                                    :value="1"
+                                    for="default_address"
+                                    :label="trans('admin::app.customers.addresses.create.default-address')"
+                                    :checked="false"
+                                />
+
+                                <label
+                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                    for="default_address"
+                                >
+                                    @lang('admin::app.customers.addresses.create.default-address')
+                                </label>
+                            </x-admin::form.control-group>
                         </div>
 
                         {!! view_render_event('bagisto.admin.customers.create.after') !!}
@@ -326,12 +343,12 @@
                     </x-slot>
                 </x-admin::modal>
 
-                {!! view_render_event('admin.customers.addresses.create.create_form_controls.after') !!}
+                {!! view_render_event('bagisto.admin.customers.addresses.create.create_form_controls.after') !!}
 
             </form>
         </x-admin::form>
 
-        {!! view_render_event('admin.customers.addresses.create.after') !!}
+        {!! view_render_event('bagisto.admin.customers.addresses.create.after') !!}
 
     </script>
 

@@ -117,6 +117,7 @@ return [
                 'edit'             => '编辑',
                 'edit-address'     => '编辑地址',
                 'edit-success'     => '地址已成功更新。',
+                'email'            => '电子邮件',
                 'empty-address'    => '您尚未将地址添加到您的帐户。',
                 'first-name'       => '名字',
                 'last-name'        => '姓氏',
@@ -273,11 +274,14 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => '可用的',
+                'completed'           => '完全的',
                 'date'                => '日期',
                 'download-error'      => '下载链接已过期。',
                 'empty-product'       => '您没有可下载的商品',
                 'name'                => '可下载商品',
                 'orderId'             => '订单ID',
+                'pending'             => '待办的',
                 'payment-error'       => '该下载商品尚未付款。',
                 'records-found'       => '找到记录',
                 'remaining-downloads' => '剩余下载次数',
