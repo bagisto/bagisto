@@ -480,13 +480,17 @@ return [
                 'title'      => 'लेन-देन',
 
                 'datagrid' => [
+                    'completed'          => 'पूर्ण',
                     'id'                 => 'आईडी',
                     'invoice-id'         => 'चालान आईडी',
                     'order-id'           => 'आदेश आईडी',
+                    'paid'               => 'भुगतान किया',
+                    'pending'            => 'अपूर्ण',
                     'status'             => 'स्थिति',
-                    'transaction-id'     => 'लेन-देन आईडी',
-                    'transaction-date'   => 'तिथि',
                     'transaction-amount' => 'राशि',
+                    'transaction-date'   => 'तारीख',
+                    'transaction-id'     => 'लेनदेन आईडी',
+                    'view'               => 'देखें',
                 ],
 
                 'create' => [

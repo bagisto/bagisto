@@ -480,13 +480,17 @@ return [
                 'title'       => 'Транзакції',
 
                 'datagrid' => [
-                    'id'                 => 'ID',
-                    'invoice-id'         => 'ID рахунку',
-                    'order-id'           => 'ID замовлення',
+                    'completed'          => 'Завершено',
+                    'id'                 => 'ІД',
+                    'invoice-id'         => 'ІД рахунку',
+                    'order-id'           => 'ІД замовлення',
+                    'paid'               => 'Оплачено',
+                    'pending'            => 'Очікується',
                     'status'             => 'Статус',
                     'transaction-amount' => 'Сума',
                     'transaction-date'   => 'Дата',
-                    'transaction-id'     => 'ID транзакції',
+                    'transaction-id'     => 'ІД транзакції',
+                    'view'               => 'Перегляд',
                 ],
 
                 'create' => [

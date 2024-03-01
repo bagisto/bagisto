@@ -480,13 +480,17 @@ return [
                 'title'      => '取引',
 
                 'datagrid' => [
+                    'completed'          => '完了',
                     'id'                 => 'ID',
                     'invoice-id'         => '請求書ID',
                     'order-id'           => '注文ID',
+                    'paid'               => '支払済み',
+                    'pending'            => '保留中',
                     'status'             => 'ステータス',
                     'transaction-amount' => '金額',
                     'transaction-date'   => '日付',
                     'transaction-id'     => '取引ID',
+                    'view'               => '表示',
                 ],
 
                 'create' => [

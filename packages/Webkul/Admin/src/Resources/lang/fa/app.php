@@ -480,13 +480,17 @@ return [
                 'title'      => 'تراکنش‌ها',
 
                 'datagrid' => [
+                    'completed'          => 'تکمیل شده',
                     'id'                 => 'شناسه',
-                    'invoice-id'         => 'شماره صورتحساب',
+                    'invoice-id'         => 'شماره فاکتور',
                     'order-id'           => 'شماره سفارش',
+                    'paid'               => 'پرداخت شده',
+                    'pending'            => 'در انتظار',
                     'status'             => 'وضعیت',
-                    'transaction-amount' => 'مقدار',
+                    'transaction-amount' => 'مبلغ',
                     'transaction-date'   => 'تاریخ',
-                    'transaction-id'     => 'شناسه تراکنش',
+                    'transaction-id'     => 'شماره تراکنش',
+                    'view'               => 'مشاهده',
                 ],
 
                 'create' => [

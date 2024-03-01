@@ -480,13 +480,17 @@ return [
                 'title'      => 'লেনদেন',
 
                 'datagrid' => [
+                    'completed'          => 'সম্পন্ন',
                     'id'                 => 'আইডি',
                     'invoice-id'         => 'চালান আইডি',
                     'order-id'           => 'অর্ডার আইডি',
-                    'status'             => 'স্থিতি',
+                    'paid'               => 'পেইড',
+                    'pending'            => 'অলপেক্ষিত',
+                    'status'             => 'অবস্থা',
                     'transaction-amount' => 'পরিমাণ',
                     'transaction-date'   => 'তারিখ',
                     'transaction-id'     => 'লেনদেন আইডি',
+                    'view'               => 'দেখুন',
                 ],
 
                 'create' => [

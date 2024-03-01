@@ -480,13 +480,17 @@ return [
                 'title'      => 'ක්රෙඩිට්',
 
                 'datagrid' => [
+                    'completed'          => 'සම්පූර්ණ',
                     'id'                 => 'අංකය',
-                    'invoice-id'         => 'ක්රෙඩිට් හැඳුනුම්පත් අංකය',
-                    'order-id'           => 'ඇණවුම් හැඳුනුම්පත් අංකය',
-                    'status'             => 'තත්ත්වය',
-                    'transaction-amount' => 'මුදල',
-                    'transaction-date'   => 'ක්රෙඩිට් කාලය',
-                    'transaction-id'     => 'ක්රෙඩිට් හැඳුනුම්පත් අංකය',
+                    'invoice-id'         => 'ඉන්වොයිස් අංකය',
+                    'order-id'           => 'ඇණවුම් අංකය',
+                    'paid'               => 'ගෙවා ඇත',
+                    'pending'            => 'අපේක්ෂාව',
+                    'status'             => 'ස්ථානය',
+                    'transaction-amount' => 'මුදල් ප්රමාණය',
+                    'transaction-date'   => 'දිනය',
+                    'transaction-id'     => 'සම්භාවීම් අංකය',
+                    'view'               => 'දැක්ම',
                 ],
 
                 'create' => [
