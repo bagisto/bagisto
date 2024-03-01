@@ -75,19 +75,21 @@ class InvoiceController extends Controller
             'invoice.items.*' => 'required|numeric|min:0',
         ]);
 
-        if (! $this->invoiceRepository->haveProductToInvoice(request()->all())) {
+        $request = request()->all();
+
+        if (! $this->invoiceRepository->haveProductToInvoice($request)) {
             session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
 
             return redirect()->back();
         }
 
-        if (! $this->invoiceRepository->isValidQuantity(request()->all())) {
+        if (! $this->invoiceRepository->isValidQuantity($request)) {
             session()->flash('error', trans('admin::app.sales.invoices.create.invalid-qty'));
 
             return redirect()->back();
         }
 
-        $this->invoiceRepository->create(array_merge(request()->all(), [
+        $this->invoiceRepository->create(array_merge($request, [
             'order_id' => $orderId,
         ]));
 
