@@ -1353,10 +1353,10 @@ it('should check tax is applying for the simple product into the cart for simple
 
     $response = getJson(route('shop.checkout.onepage.summary'))
         ->assertOk()
-        ->assertJsonPath('data.id', $cart->id)
-        ->assertJsonPath('data.tax_total', round($cart->tax_total, 2))
-        ->assertJsonPath('data.base_tax_total', round($cart->base_tax_total, 2));
+        ->assertJsonPath('data.id', $cart->id);
 
+    $this->assertEquals(round($cart->base_tax_total, 2), round($response['data']['base_tax_total'], 2), '', 0.00000001);
+    $this->assertEquals(round($cart->tax_total, 2), round($response['data']['tax_total'], 2), '', 0.00000001);
     $this->assertEquals(round($product->price, 2), round($response['data']['sub_total'], 2), '', 0.00000001);
     $this->assertEquals(round($cart->grand_total, 2), round($response['data']['grand_total'], 2), '', 0.00000001);
 });

@@ -3,10 +3,11 @@
 namespace Webkul\Admin\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable as BaseMailable;
 use Illuminate\Queue\SerializesModels;
 
-class Mailable extends BaseMailable
+class Mailable extends BaseMailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

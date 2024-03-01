@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductReview;
+use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
+use Webkul\Shop\Mail\Customer\UpdatePasswordNotification;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -40,7 +44,7 @@ it('should fails the validations error when certain inputs are not provided when
     // Act and Assert
     $this->loginAsCustomer();
 
-    postJson(route('shop.customers.account.profile.store'))
+    postJson(route('shop.customers.account.profile.update'))
         ->assertJsonValidationErrorFor('first_name')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('gender')
@@ -52,7 +56,7 @@ it('should update the customer', function () {
     // Act and Assert
     $customer = $this->loginAsCustomer();
 
-    postJson(route('shop.customers.account.profile.store'), [
+    postJson(route('shop.customers.account.profile.update'), [
         'first_name'        => $firstName = fake()->firstName(),
         'last_name'         => $lastName = fake()->lastName(),
         'gender'            => $gender = fake()->randomElement(['Other', 'Male', 'Female']),
@@ -76,6 +80,49 @@ it('should update the customer', function () {
             ],
         ],
     ]);
+});
+
+it('should update the customer password and send email to the customer', function () {
+    // Act and Assert
+    Mail::fake();
+
+    $customer = Customer::factory()->create([
+        'password' => Hash::make($currentPassword = fake()->password(8, 10)),
+    ]);
+
+    $customer = $this->loginAsCustomer($customer);
+
+    postJson(route('shop.customers.account.profile.store'), [
+        'first_name'                => $firstName = fake()->firstName(),
+        'last_name'                 => $lastName = fake()->lastName(),
+        'gender'                    => $gender = fake()->randomElement(['Other', 'Male', 'Female']),
+        'email'                     => $customer->email,
+        'status'                    => 1,
+        'customer_group_id'         => 2,
+        'phone'                     => $phone = fake()->e164PhoneNumber(),
+        'current_password'          => $currentPassword,
+        'new_password'              => $newPassword = fake()->password(8, 10),
+        'new_password_confirmation' => $newPassword,
+    ])
+        ->assertRedirect(route('shop.customers.account.profile.index'));
+
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'first_name'        => $firstName,
+                'last_name'         => $lastName,
+                'gender'            => $gender,
+                'email'             => $customer->email,
+                'status'            => 1,
+                'customer_group_id' => 2,
+                'phone'             => $phone,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(UpdatePasswordNotification::class);
+
+    Mail::assertQueuedCount(1);
 });
 
 it('should fails the validation error when password is not provided when delete the customer account', function () {
@@ -351,6 +398,7 @@ it('should set default address for the customer', function () {
 });
 
 it('should delete the customer address', function () {
+    // Arrange
     $customer = Customer::factory()->create();
 
     $customerAddress = CustomerAddress::factory()->create([
@@ -368,4 +416,47 @@ it('should delete the customer address', function () {
         'customer_id' => $customer->id,
         'id'          => $customerAddress->id,
     ]);
+});
+
+it('should send email for password reset', function () {
+    // Arrange
+    Notification::fake();
+
+    $customer = Customer::factory()->create();
+
+    postJson(route('shop.customers.forgot_password.store'), [
+        'email' => $customer->email,
+    ])
+        ->assertRedirect(route('shop.customers.forgot_password.create'))
+        ->isRedirect();
+
+    $this->assertDatabaseHas('customer_password_resets', [
+        'email' => $customer->email,
+    ]);
+
+    Notification::assertSentTo(
+        $customer,
+        ResetPasswordNotification::class,
+    );
+
+    Notification::assertCount(1);
+});
+
+it('should not send email for password reset when email is invalid', function () {
+    // Arrange
+    postJson(route('shop.customers.forgot_password.store'), [
+        'email' => $email = 'WRONG_EMAIL@gmail.com',
+    ])
+        ->assertRedirect(route('shop.customers.forgot_password.create'))
+        ->isRedirect();
+
+    $this->assertDatabaseMissing('customer_password_resets', [
+        'email' => $email,
+    ]);
+});
+
+it('should fails the validation errors certain inputs not provided', function () {
+    // Arrange
+    postJson(route('shop.customers.forgot_password.store'))
+        ->assertJsonValidationErrorFor('email');
 });

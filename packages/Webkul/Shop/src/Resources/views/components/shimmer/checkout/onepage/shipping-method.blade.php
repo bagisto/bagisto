@@ -1,5 +1,5 @@
 <div class="mb-7">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center py-4">
         <h2 class="shimmer w-[223px] h-[32px]"></h2>
         <span class="shimmer w-6 h-6"></span>
     </div>

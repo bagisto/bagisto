@@ -60,7 +60,7 @@
             id="v-checkout-template"
         >
             <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
-                <div    
+                <div
                     class="overflow-y-auto"
                     id="scrollBottom"
                 >
@@ -82,7 +82,7 @@
 
                     {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
                 </div>
-                
+
                 @include('shop::checkout.onepage.summary')
             </div>
         </script>
@@ -93,7 +93,7 @@
 
                 data() {
                     return {
-                        cart: {},
+                        cart: null,
 
                         isCartLoading: true,
                     }
@@ -102,9 +102,8 @@
                 mounted() {
                     this.getOrderSummary();
 
-                    // update cart when emit the update-cart event.
                     this.$emitter.on('update-cart-summary', this.getOrderSummary);
-                }, 
+                },
 
                 methods: {
                     getOrderSummary() {

@@ -31,6 +31,18 @@ class OrderTransaction extends Model implements OrderTransactionContract
     ];
 
     /**
+     * Get payment method title
+     */
+    public function getPaymentTitleAttribute()
+    {
+        if (! $this->payment_method) {
+            return;
+        }
+
+        return config('payment_methods')[$this->payment_method]['title'];
+    }
+
+    /**
      * Create a new factory instance for the model
      */
     protected static function newFactory(): Factory

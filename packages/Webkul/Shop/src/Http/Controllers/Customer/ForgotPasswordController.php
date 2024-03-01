@@ -36,10 +36,10 @@ class ForgotPasswordController extends Controller
             if ($response == Password::RESET_LINK_SENT) {
                 session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
 
-                return back();
+                return redirect()->route('shop.customers.forgot_password.create');
             }
 
-            return back()
+            return redirect()->route('shop.customers.forgot_password.create')
                 ->withInput($request->only(['email']))
                 ->withErrors([
                     'email' => trans('shop::app.customers.forgot-password.email-not-exist'),

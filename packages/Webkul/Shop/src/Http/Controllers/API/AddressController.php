@@ -62,6 +62,7 @@ class AddressController extends APIController
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
         return new JsonResource([
+            'data'    => new AddressResource($customerAddress),
             'message' => trans('shop::app.customers.account.addresses.create-success'),
         ]);
     }
@@ -97,6 +98,7 @@ class AddressController extends APIController
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
         return new JsonResource([
+            'data'    => new AddressResource($customerAddress),
             'message' => trans('shop::app.customers.account.addresses.create-success'),
         ]);
     }

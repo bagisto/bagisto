@@ -60,10 +60,8 @@
                         </p>
 
                         <!-- Amount -->
-                        <p
-                            class="break-words"
-                            v-text="record.amount"
-                        >
+                        <p class="break-words">
+                            @{{ $admin.formatPrice(record.amount) }}
                         </p>
 
                         <!-- Invoice Id -->
@@ -144,7 +142,7 @@
                                     </p>
 
                                     <p
-                                        v-if="data.transaction.invoice_id"
+                                        v-if="data.invoice_id"
                                         class="text-gray-600 dark:text-gray-300"
                                     >
                                         @lang('admin::app.sales.transactions.index.view.invoice-id')
@@ -170,45 +168,45 @@
                                 <div class="flex flex-col gap-y-1.5">
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.transaction_id"
+                                        v-text="data.transaction_id"
                                     >
                                     </p>
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.order_id"
+                                        v-text="data.order_id"
                                     >
                                     </p>
 
                                     <p
-                                        v-if="data.transaction.invoice_id"
+                                        v-if="data.invoice_id"
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.invoice_id"
-                                    >
-                                    </p>
-
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.payment_method"
-                                    >
-                                    </p>
-
-
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.status"
+                                        v-text="data.invoice_id"
                                     >
                                     </p>
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.created_at ?? 'N/A'"
+                                        v-text="data.payment_method"
+                                    >
+                                    </p>
+
+
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.status"
                                     >
                                     </p>
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.transaction.amount"
+                                        v-text="data.created_at ?? 'N/A'"
+                                    >
+                                    </p>
+
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-text="data.amount"
                                     >
                                     </p>
                                 </div>
