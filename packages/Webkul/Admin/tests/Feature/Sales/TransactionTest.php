@@ -512,7 +512,7 @@ it('should view the transaction', function () {
     get(route('admin.sales.transactions.view', $transaction->id))
         ->assertOk()
         ->assertJsonPath('data.id', $transaction->id)
-        ->assertJsonPath('data.payment_method', $transaction->payment_method)
+        ->assertJsonPath('data.payment_title', $transaction->payment_title)
         ->assertJsonPath('data.invoice_id', $transaction->invoice_id)
         ->assertJsonPath('data.order_id', $transaction->order_id);
 });

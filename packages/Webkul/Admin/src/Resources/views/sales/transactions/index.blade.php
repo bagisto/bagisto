@@ -187,7 +187,7 @@
 
                                     <p
                                         class="text-gray-600 dark:text-gray-300"
-                                        v-text="data.payment_method"
+                                        v-text="data.payment_title"
                                     >
                                     </p>
 
