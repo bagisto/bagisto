@@ -92,7 +92,7 @@ it('should update the customer password and send email to the customer', functio
 
     $customer = $this->loginAsCustomer($customer);
 
-    postJson(route('shop.customers.account.profile.store'), [
+    postJson(route('shop.customers.account.profile.update'), [
         'first_name'                => $firstName = fake()->firstName(),
         'last_name'                 => $lastName = fake()->lastName(),
         'gender'                    => $gender = fake()->randomElement(['Other', 'Male', 'Female']),
