@@ -95,7 +95,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
                     Route::get('edit', 'edit')->name('shop.customers.account.profile.edit');
 
-                    Route::post('edit', 'update')->name('shop.customers.account.profile.store');
+                    Route::post('edit', 'update')->name('shop.customers.account.profile.update');
 
                     Route::post('destroy', 'destroy')->name('shop.customers.account.profile.destroy');
 
