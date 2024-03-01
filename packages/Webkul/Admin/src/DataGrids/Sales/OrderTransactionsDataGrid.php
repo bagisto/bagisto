@@ -139,7 +139,7 @@ class OrderTransactionsDataGrid extends DataGrid
                         return '<p class="label-pending">'.trans('admin::app.sales.transactions.index.datagrid.pending').'</p>';
 
                     case self::STATUS_COMPLETED:
-                        return '<p class="label-canceled">'.trans('admin::app.sales.transactions.index.datagrid.completed').'</p>';
+                        return '<p class="label-completed">'.trans('admin::app.sales.transactions.index.datagrid.completed').'</p>';
                 }
             },
         ]);
