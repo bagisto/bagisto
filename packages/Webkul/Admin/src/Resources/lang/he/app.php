@@ -480,13 +480,17 @@ return [
                 'title'      => 'עסקאות',
 
                 'datagrid' => [
-                    'id'                 => 'מספר זיהוי',
+                    'completed'          => 'הושלם',
+                    'id'                 => 'מזהה',
                     'invoice-id'         => 'מספר חשבונית',
                     'order-id'           => 'מספר הזמנה',
+                    'paid'               => 'שולם',
+                    'pending'            => 'ממתין',
                     'status'             => 'סטטוס',
                     'transaction-amount' => 'סכום',
                     'transaction-date'   => 'תאריך',
-                    'transaction-id'     => 'מספר העסקה',
+                    'transaction-id'     => 'מספר עסקה',
+                    'view'               => 'צפה',
                 ],
 
                 'create' => [

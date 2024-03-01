@@ -480,13 +480,17 @@ return [
                 'title'      => 'Transações',
 
                 'datagrid' => [
+                    'completed'          => 'Concluído',
                     'id'                 => 'ID',
-                    'invoice-id'         => 'ID da Fatura',
-                    'order-id'           => 'ID do Pedido',
+                    'invoice-id'         => 'ID da fatura',
+                    'order-id'           => 'ID do pedido',
+                    'paid'               => 'Pago',
+                    'pending'            => 'Pendente',
                     'status'             => 'Status',
-                    'transaction-amount' => 'Valor',
-                    'transaction-date'   => 'Data',
-                    'transaction-id'     => 'ID da Transação',
+                    'transaction-amount' => 'Valor da transação',
+                    'transaction-date'   => 'Data da transação',
+                    'transaction-id'     => 'ID da transação',
+                    'view'               => 'Ver',
                 ],
 
                 'create' => [

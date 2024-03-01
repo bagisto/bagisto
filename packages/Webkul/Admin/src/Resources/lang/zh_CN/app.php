@@ -480,13 +480,17 @@ return [
                 'title'      => '交易',
 
                 'datagrid' => [
+                    'completed'          => '已完成',
                     'id'                 => 'ID',
                     'invoice-id'         => '发票ID',
                     'order-id'           => '订单ID',
+                    'paid'               => '已支付',
+                    'pending'            => '待定',
                     'status'             => '状态',
                     'transaction-amount' => '金额',
                     'transaction-date'   => '日期',
                     'transaction-id'     => '交易ID',
+                    'view'               => '查看',
                 ],
 
                 'create' => [

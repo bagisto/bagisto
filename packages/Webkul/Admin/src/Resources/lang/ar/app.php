@@ -480,13 +480,17 @@ return [
                 'title'      => 'العمليات',
 
                 'datagrid' => [
-                    'id'                 => 'المعرف',
+                    'completed'          => 'مكتمل',
+                    'id'                 => 'الهوية',
                     'invoice-id'         => 'رقم الفاتورة',
                     'order-id'           => 'رقم الطلب',
+                    'paid'               => 'مدفوع',
+                    'pending'            => 'قيد الانتظار',
                     'status'             => 'الحالة',
                     'transaction-amount' => 'المبلغ',
                     'transaction-date'   => 'التاريخ',
-                    'transaction-id'     => 'رقم العملية',
+                    'transaction-id'     => 'رقم المعاملة',
+                    'view'               => 'عرض',
                 ],
 
                 'create' => [

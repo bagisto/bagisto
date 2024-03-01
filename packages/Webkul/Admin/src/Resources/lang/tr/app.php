@@ -480,13 +480,17 @@ return [
                 'title'      => 'İşlemler',
 
                 'datagrid' => [
+                    'completed'          => 'Tamamlandı',
                     'id'                 => 'Kimlik',
                     'invoice-id'         => 'Fatura Kimliği',
                     'order-id'           => 'Sipariş Kimliği',
+                    'paid'               => 'Ödenmiş',
+                    'pending'            => 'Beklemede',
                     'status'             => 'Durum',
-                    'transaction-amount' => 'Tutar',
+                    'transaction-amount' => 'Miktar',
                     'transaction-date'   => 'Tarih',
                     'transaction-id'     => 'İşlem Kimliği',
+                    'view'               => 'Görüntüle',
                 ],
 
                 'create' => [
