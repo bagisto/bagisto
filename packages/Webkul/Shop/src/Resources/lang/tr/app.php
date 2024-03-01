@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Tamamlanmış',
                 'date'                => 'Tarih',
                 'download-error'      => 'İndirme bağlantısı süresi dolmuş.',
+                'expired'             => 'Süresi Dolmuş',
                 'empty-product'       => 'İndirilecek ürününüz yok',
                 'name'                => 'İndirilebilir Ürünler',
                 'orderId'             => 'Sipariş ID',
