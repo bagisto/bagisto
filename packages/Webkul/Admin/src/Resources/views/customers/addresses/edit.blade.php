@@ -311,26 +311,44 @@
                                     <x-admin::form.control-group.error control-name="phone" />
                                 </x-admin::form.control-group>
 
-                                <!-- Default Address -->
-                                <div class="w-full mt-8">
-                                    <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
-                                        <x-admin::form.control-group.control
-                                            type="checkbox"
-                                            id="default_address"
-                                            name="default_address"
-                                            v-model="addressData.default_address"
-                                            :label="trans('admin::app.customers.addresses.edit.default-address')"
-                                            ::checked="addressData.default_address"
-                                        />
+                                <!-- E-mail -->
+                                <x-admin::form.control-group class="w-full">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.customers.addresses.edit.email')
+                                    </x-admin::form.control-group.label>
+    
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="email"
+                                        rules="required|email"
+                                        v-model="addressData.email"
+                                        :label="trans('admin::app.customers.addresses.edit.email')"
+                                        :placeholder="trans('admin::app.customers.addresses.edit.email')"
+                                    />
+    
+                                    <x-admin::form.control-group.error control-name="email" />
+                                </x-admin::form.control-group>
+                            </div>
 
-                                        <label
-                                            class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                            for="default_address"
-                                        >
-                                            @lang('admin::app.customers.addresses.create.default-address')
-                                        </label>
-                                    </x-admin::form.control-group>
-                                </div>
+                            <!-- Default Address -->
+                            <div class="w-full">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-0">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        id="default_address"
+                                        name="default_address"
+                                        v-model="addressData.default_address"
+                                        :label="trans('admin::app.customers.addresses.edit.default-address')"
+                                        ::checked="addressData.default_address"
+                                    />
+
+                                    <label
+                                        class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                        for="default_address"
+                                    >
+                                        @lang('admin::app.customers.addresses.create.default-address')
+                                    </label>
+                                </x-admin::form.control-group>
                             </div>
 
                             {!! view_render_event('bagisto.admin.customers.edit.after') !!}

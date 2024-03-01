@@ -116,6 +116,7 @@ return [
                 'edit'             => 'Bearbeiten',
                 'edit-address'     => 'Adresse bearbeiten',
                 'edit-success'     => 'Adresse erfolgreich aktualisiert.',
+                'email'            => 'E-Mail',
                 'empty-address'    => 'Sie haben Ihrem Konto noch keine Adresse hinzugefügt.',
                 'first-name'       => 'Vorname',
                 'last-name'        => 'Nachname',

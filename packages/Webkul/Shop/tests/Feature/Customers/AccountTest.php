@@ -44,7 +44,7 @@ it('should fails the validations error when certain inputs are not provided when
     // Act and Assert
     $this->loginAsCustomer();
 
-    postJson(route('shop.customers.account.profile.store'))
+    postJson(route('shop.customers.account.profile.update'))
         ->assertJsonValidationErrorFor('first_name')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('gender')
@@ -56,7 +56,7 @@ it('should update the customer', function () {
     // Act and Assert
     $customer = $this->loginAsCustomer();
 
-    postJson(route('shop.customers.account.profile.store'), [
+    postJson(route('shop.customers.account.profile.update'), [
         'first_name'        => $firstName = fake()->firstName(),
         'last_name'         => $lastName = fake()->lastName(),
         'gender'            => $gender = fake()->randomElement(['Other', 'Male', 'Female']),
@@ -92,7 +92,7 @@ it('should update the customer password and send email to the customer', functio
 
     $customer = $this->loginAsCustomer($customer);
 
-    postJson(route('shop.customers.account.profile.store'), [
+    postJson(route('shop.customers.account.profile.update'), [
         'first_name'                => $firstName = fake()->firstName(),
         'last_name'                 => $lastName = fake()->lastName(),
         'gender'                    => $gender = fake()->randomElement(['Other', 'Male', 'Female']),

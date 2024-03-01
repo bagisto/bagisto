@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Resources\TransactionResource;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
@@ -122,17 +123,11 @@ class TransactionController extends Controller
 
     /**
      * Show the view for the specified resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function view(int $id)
+    public function view(int $id): TransactionResource
     {
         $transaction = $this->orderTransactionRepository->findOrFail($id);
 
-        return new JsonResponse([
-            'data' => [
-                'transaction' => $transaction,
-            ],
-        ]);
+        return new TransactionResource($transaction);
     }
 }
