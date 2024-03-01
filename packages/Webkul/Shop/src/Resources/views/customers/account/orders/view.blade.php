@@ -128,7 +128,7 @@
 
                         <tbody>
                             @foreach ($order->items as $item)
-                                <tr class="bg-white border-b">
+                                <tr class="bg-white border-b last:border-0">
                                     <td
                                         class="px-6 py-4 text-black font-medium"
                                         data-value="@lang('shop::app.customers.account.orders.view.information.sku')"

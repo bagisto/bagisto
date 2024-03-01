@@ -11,7 +11,7 @@
         <div class="flex gap-10 items-start mt-8 max-lg:gap-5 max-md:grid">
             <x-shop::layouts.account.navigation />
 
-            <div class="flex-auto">
+            <div class="flex-auto overflow-auto journal-scroll">
                 {{ $slot }}
             </div>
         </div>
