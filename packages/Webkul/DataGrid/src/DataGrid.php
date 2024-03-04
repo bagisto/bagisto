@@ -259,6 +259,16 @@ abstract class DataGrid
                         break;
 
                     case ColumnTypeEnum::DATE_RANGE->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [
+                                    ($value[0] ?? '') . ' 00:00:01', 
+                                    ($value[1] ?? '') . ' 23:59:59'
+                                ]);
+                            }
+                        });
+
+                        break;
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
