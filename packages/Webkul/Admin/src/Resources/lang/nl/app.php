@@ -480,13 +480,17 @@ return [
                 'title'      => 'Transacties',
 
                 'datagrid' => [
+                    'completed'          => 'Voltooid',
                     'id'                 => 'ID',
-                    'invoice-id'         => 'Factuurnummer',
-                    'order-id'           => 'Bestelnummer',
+                    'invoice-id'         => 'Factuur ID',
+                    'order-id'           => 'Bestelling ID',
+                    'paid'               => 'Betaald',
+                    'pending'            => 'In afwachting',
                     'status'             => 'Status',
                     'transaction-amount' => 'Bedrag',
                     'transaction-date'   => 'Datum',
-                    'transaction-id'     => 'Transactie-ID',
+                    'transaction-id'     => 'Transactie ID',
+                    'view'               => 'Bekijken',
                 ],
 
                 'create' => [

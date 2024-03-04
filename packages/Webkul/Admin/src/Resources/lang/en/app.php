@@ -480,9 +480,12 @@ return [
                 'title'      => 'Transactions',
 
                 'datagrid' => [
+                    'completed'          => 'Completed',
                     'id'                 => 'ID',
                     'invoice-id'         => 'Invoice ID',
                     'order-id'           => 'Order ID',
+                    'paid'               => 'Paid',
+                    'pending'            => 'Pending',
                     'status'             => 'Status',
                     'transaction-amount' => 'Amount',
                     'transaction-date'   => 'Date',

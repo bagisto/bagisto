@@ -480,13 +480,17 @@ return [
                 'title'      => 'Транзакции',
 
                 'datagrid' => [
+                    'completed'          => 'Завершено',
                     'id'                 => 'ID',
                     'invoice-id'         => 'ID счета',
                     'order-id'           => 'ID заказа',
+                    'paid'               => 'Оплачено',
+                    'pending'            => 'В ожидании',
                     'status'             => 'Статус',
                     'transaction-amount' => 'Сумма',
                     'transaction-date'   => 'Дата',
                     'transaction-id'     => 'ID транзакции',
+                    'view'               => 'Просмотр',
                 ],
 
                 'create' => [
