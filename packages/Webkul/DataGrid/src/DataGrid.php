@@ -262,8 +262,8 @@ abstract class DataGrid
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
                                 $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [
-                                    ($value[0] ?? '') . ' 00:00:01', 
-                                    ($value[1] ?? '') . ' 23:59:59'
+                                    ($value[0] ?? '').' 00:00:01',
+                                    ($value[1] ?? '').' 23:59:59',
                                 ]);
                             }
                         });
