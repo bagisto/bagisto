@@ -480,13 +480,17 @@ return [
                 'title'      => '取引',
 
                 'datagrid' => [
+                    'completed'          => '完了',
                     'id'                 => 'ID',
                     'invoice-id'         => '請求書ID',
                     'order-id'           => '注文ID',
+                    'paid'               => '支払済み',
+                    'pending'            => '保留中',
                     'status'             => 'ステータス',
                     'transaction-amount' => '金額',
                     'transaction-date'   => '日付',
                     'transaction-id'     => '取引ID',
+                    'view'               => '表示',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => '国',
                 'create-address-btn' => '新しい住所を追加',
                 'default-address'    => 'デフォルトの住所',
+                'email'              => '電子メール',
                 'first-name'         => '名',
                 'last-name'          => '姓',
                 'phone'              => '電話',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'    => '会社名',
                 'country'         => '国',
                 'default-address' => 'デフォルトの住所',
+                'email'           => '電子メール',
                 'first-name'      => '名',
                 'last-name'       => '姓',
                 'phone'           => '電話',

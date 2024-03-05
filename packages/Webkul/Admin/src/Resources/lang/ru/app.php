@@ -480,13 +480,17 @@ return [
                 'title'      => 'Транзакции',
 
                 'datagrid' => [
+                    'completed'          => 'Завершено',
                     'id'                 => 'ID',
                     'invoice-id'         => 'ID счета',
                     'order-id'           => 'ID заказа',
+                    'paid'               => 'Оплачено',
+                    'pending'            => 'В ожидании',
                     'status'             => 'Статус',
                     'transaction-amount' => 'Сумма',
                     'transaction-date'   => 'Дата',
                     'transaction-id'     => 'ID транзакции',
+                    'view'               => 'Просмотр',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'Страна',
                 'create-address-btn' => 'Добавить Новый Адрес',
                 'default-address'    => 'Адрес По Умолчанию',
+                'email'              => 'Электронная почта',
                 'first-name'         => 'Имя',
                 'last-name'          => 'Фамилия',
                 'phone'              => 'Телефон',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'     => 'Название Компании',
                 'country'          => 'Страна',
                 'default-address'  => 'Адрес По Умолчанию',
+                'email'            => 'Электронная почта',
                 'first-name'       => 'Имя',
                 'last-name'        => 'Фамилия',
                 'phone'            => 'Телефон',

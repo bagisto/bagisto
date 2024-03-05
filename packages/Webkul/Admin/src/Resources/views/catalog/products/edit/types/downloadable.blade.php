@@ -358,7 +358,7 @@
 
                                             <a
                                                 :href="selectedLink.sample_file_url"
-                                                class="text-blue-600 break-all transition-all hover:underline"
+                                                class="text-blue-600 text-sm break-all transition-all hover:underline"
                                                 target="_blank"
                                                 v-if="selectedLink.file_url"
                                             >
@@ -446,7 +446,7 @@
                                             <a
                                                 :href="selectedLink.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 break-all transition-all hover:underline"
+                                                class="text-blue-600 text-sm break-all transition-all hover:underline"
                                                 v-if="selectedLink.sample_file_url"
                                             >
                                                 @{{ selectedLink.sample_file_name }}
@@ -636,7 +636,6 @@
                 </div>
             </div>
 
-
             <!-- Add Option Form Modal -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -744,7 +743,7 @@
                                             <a
                                                 :href="selectedSample.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 break-all transition-all hover:underline"
+                                                class="text-blue-600 text-sm break-all transition-all hover:underline"
                                                 v-if="selectedSample.file_url"
                                             >
                                                 @{{ selectedSample.file_name }}

@@ -480,13 +480,17 @@ return [
                 'title'      => 'Transactions',
 
                 'datagrid' => [
+                    'completed'          => 'Terminé',
                     'id'                 => 'ID',
                     'invoice-id'         => 'ID de facture',
                     'order-id'           => 'ID de commande',
+                    'paid'               => 'Payé',
+                    'pending'            => 'En attente',
                     'status'             => 'Statut',
                     'transaction-amount' => 'Montant',
                     'transaction-date'   => 'Date',
                     'transaction-id'     => 'ID de transaction',
+                    'view'               => 'Voir',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'Pays',
                 'create-address-btn' => 'Ajouter une nouvelle adresse',
                 'default-address'    => 'Adresse par défaut',
+                'email'              => 'Email',
                 'first-name'         => 'Prénom',
                 'last-name'          => 'Nom de famille',
                 'phone'              => 'Téléphone',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'     => 'Nom de l\'entreprise',
                 'country'          => 'Pays',
                 'default-address'  => 'Adresse par défaut',
+                'email'            => 'Email',
                 'first-name'       => 'Prénom',
                 'last-name'        => 'Nom de famille',
                 'phone'            => 'Téléphone',

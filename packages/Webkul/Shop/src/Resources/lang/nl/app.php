@@ -116,6 +116,7 @@ return [
                 'edit'             => 'Bewerken',
                 'edit-address'     => 'Adres Bewerken',
                 'edit-success'     => 'Adres succesvol bijgewerkt.',
+                'email'            => 'E-mail',
                 'empty-address'    => 'U heeft nog geen adres aan uw account toegevoegd.',
                 'first-name'       => 'Voornaam',
                 'last-name'        => 'Achternaam',
@@ -272,11 +273,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Beschikbaar',
+                'completed'           => 'Voltooid',
                 'date'                => 'Datum',
                 'download-error'      => 'Downloadlink is verlopen.',
+                'expired'             => 'Verlopen',
                 'empty-product'       => 'U heeft geen product om te downloaden',
                 'name'                => 'Downloadbare Producten',
                 'orderId'             => 'Bestelnummer',
+                'pending'             => 'In behandeling',
                 'payment-error'       => 'Betaling is niet gedaan voor deze download.',
                 'records-found'       => 'Record(s) gevonden',
                 'remaining-downloads' => 'Resterende Downloads',

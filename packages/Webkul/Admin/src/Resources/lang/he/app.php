@@ -480,13 +480,17 @@ return [
                 'title'      => 'עסקאות',
 
                 'datagrid' => [
-                    'id'                 => 'מספר זיהוי',
+                    'completed'          => 'הושלם',
+                    'id'                 => 'מזהה',
                     'invoice-id'         => 'מספר חשבונית',
                     'order-id'           => 'מספר הזמנה',
+                    'paid'               => 'שולם',
+                    'pending'            => 'ממתין',
                     'status'             => 'סטטוס',
                     'transaction-amount' => 'סכום',
                     'transaction-date'   => 'תאריך',
-                    'transaction-id'     => 'מספר העסקה',
+                    'transaction-id'     => 'מספר עסקה',
+                    'view'               => 'צפה',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'מדינה',
                 'create-address-btn' => 'הוסף כתובת חדשה',
                 'default-address'    => 'כתובת ברירת מחדל',
+                'email'              => 'אימייל',
                 'first-name'         => 'שם פרטי',
                 'last-name'          => 'שם משפחה',
                 'phone'              => 'טלפון',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'    => 'שם החברה',
                 'country'         => 'מדינה',
                 'default-address' => 'כתובת ברירת מחדל',
+                'email'           => 'אימייל',
                 'first-name'      => 'שם פרטי',
                 'last-name'       => 'שם משפחה',
                 'phone'           => 'טלפון',

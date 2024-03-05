@@ -264,7 +264,27 @@
                         <x-shop::form.control-group.error control-name="phone" />
                     </x-shop::form.control-group>
 
-                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.after') !!}
+                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.phone.after') !!}
+
+                    <!-- E-mail -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label class="required">
+                            @lang('shop::app.customers.account.addresses.email')
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="text"
+                            name="email"
+                            rules="required|email"
+                            :value="old('email')"
+                            :label="trans('shop::app.customers.account.addresses.email')"
+                            :placeholder="trans('shop::app.customers.account.addresses.email')"
+                        />
+
+                        <x-shop::form.control-group.error control-name="email" />
+                    </x-shop::form.control-group>
+
+                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.email.after') !!}
 
                     <!-- Set As Default -->
                     <div class="flex gap-x-1.5 items-center mb-4 text-md text-[#6E6E6E] select-none">

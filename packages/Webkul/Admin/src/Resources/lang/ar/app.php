@@ -480,13 +480,17 @@ return [
                 'title'      => 'العمليات',
 
                 'datagrid' => [
-                    'id'                 => 'المعرف',
+                    'completed'          => 'مكتمل',
+                    'id'                 => 'الهوية',
                     'invoice-id'         => 'رقم الفاتورة',
                     'order-id'           => 'رقم الطلب',
+                    'paid'               => 'مدفوع',
+                    'pending'            => 'قيد الانتظار',
                     'status'             => 'الحالة',
                     'transaction-amount' => 'المبلغ',
                     'transaction-date'   => 'التاريخ',
-                    'transaction-id'     => 'رقم العملية',
+                    'transaction-id'     => 'رقم المعاملة',
+                    'view'               => 'عرض',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'الدولة',
                 'create-address-btn' => 'إضافة عنوان جديد',
                 'default-address'    => 'العنوان الافتراضي',
+                'email'              => 'البريد الإلكتروني',
                 'first-name'         => 'الاسم الأول',
                 'last-name'          => 'اسم العائلة',
                 'phone'              => 'الهاتف',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'    => 'اسم الشركة',
                 'country'         => 'الدولة',
                 'default-address' => 'العنوان الافتراضي',
+                'email'           => 'البريد الإلكتروني',
                 'first-name'      => 'الاسم الأول',
                 'last-name'       => 'اسم العائلة',
                 'phone'           => 'الهاتف',
