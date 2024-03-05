@@ -2855,6 +2855,8 @@ return [
                 'limit'                         => '制限',
                 'link'                          => 'リンク',
                 'name'                          => '名前',
+                'no'                            => 'いいえ',
+                'new'                           => '新しい',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',
@@ -2892,6 +2894,7 @@ return [
                     'title'              => 'タイトル',
                     'update-service'     => 'サービスを更新',
                 ],
+                'yes'                           => 'はい',
             ],
 
             'create-success' => 'テーマが正常に作成されました',

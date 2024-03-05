@@ -2855,6 +2855,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
+                'no'                            => 'No',
+                'new'                           => 'New',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
@@ -2892,6 +2894,7 @@ return [
                     'title'              => 'Title',
                     'update-service'     => 'Update Services',
                 ],
+                'yes'                    => 'Yes',
             ],
 
             'create-success' => 'Theme created successfully',

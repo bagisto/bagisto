@@ -2855,6 +2855,8 @@ return [
                 'limit'                         => '限制',
                 'link'                          => '链接',
                 'name'                          => '名称',
+                'no'                            => '不',
+                'new'                           => '新',
                 'preview'                       => '预览',
                 'product-carousel'              => '产品轮播',
                 'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',
@@ -2892,6 +2894,7 @@ return [
                     'title'              => '标题',
                     'update-service'     => '更新服务',
                 ],
+                'yes'                           => '是',
             ],
 
             'create-success' => '成功创建主题',

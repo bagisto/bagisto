@@ -2855,6 +2855,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Nazwa',
+                'no'                            => 'Nie',
+                'new'                           => 'Nowy',
                 'preview'                       => 'Podgląd',
                 'product-carousel'              => 'Karuzela produktów',
                 'product-carousel-description'  => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',
@@ -2892,6 +2894,7 @@ return [
                     'title'              => 'Tytuł',
                     'update-service'     => 'Aktualizuj usługi',
                 ],
+                'yes'                           => 'Tak',
             ],
 
             'create-success' => 'Motyw został pomyślnie utworzony',

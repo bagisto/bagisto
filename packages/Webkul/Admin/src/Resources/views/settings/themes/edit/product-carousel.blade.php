@@ -115,12 +115,13 @@
                         </div>
         
                         <div class="flex gap-2.5">
-                            <div
+                            <button
+                                type="button"
                                 class="secondary-button"
                                 @click="$refs.productFilterModal.toggle()"
                             >
                                 @lang('admin::app.settings.themes.edit.add-filter-btn')
-                            </div>
+                            </button>
                         </div>
                     </div>
 
@@ -325,12 +326,19 @@
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
-                                    type="text"
+                                    type="select"
                                     name="key"
+                                    ::value="filters.available[0].code"
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.key-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.key-input')"
-                                />
+                                    @change="handleFilter($event)"
+                                >
+                                    <option
+                                        v-for="filter in filters.available"
+                                        :value="filter.code"
+                                        :text="filter.name"
+                                    ></option>
+                                </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error control-name="key" />
                             </x-admin::form.control-group>
@@ -341,13 +349,31 @@
                                     @lang('admin::app.settings.themes.edit.value-input')
                                 </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="value"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.value-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
-                                />
+                                <template v-if="filters.applied.type == 'select'">
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="value"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.themes.edit.value-input')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                    >
+                                        <option
+                                            v-for="option in filters.applied.options"
+                                            :value="option.id"
+                                            :text="option.name"
+                                        ></option>
+                                    </x-admin::form.control-group.control>
+                                </template>
+
+                                <template v-else>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="value"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.themes.edit.value-input')"
+                                        :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                    />
+                                </template>
 
                                 <x-admin::form.control-group.error control-name="value" />
                             </x-admin::form.control-group>
@@ -379,13 +405,19 @@
             data() {
                 return {
                     options: @json($theme->translate($currentLocale->code)['options'] ?? null),
+
+                    filters: {
+                        available: [],
+
+                        applied: [],
+                    },
                 };
             },
 
             created() {
                 if (this.options === null) {
                     this.options = { filters: {} };
-                }   
+                }
                 
                 if (! this.options.filters) {
                     this.options.filters = {};
@@ -397,6 +429,8 @@
                         key: key,
                         value: this.options.filters[key]
                     }));
+
+                this.getFilters();
             },
 
             methods: {
@@ -414,6 +448,36 @@
                             this.options.filters.splice(index, 1);
                         }
                     });
+                },
+
+                getFilters() {
+                    this.$axios.get('{{ route('shop.api.categories.attributes') }}')
+                        .then((response) => {
+                            this.filters.available = [
+                                ...response.data.data,
+                                {
+                                    id: 0,
+                                    code: 'new',
+                                    type: 'select',
+                                    name: '@lang('admin::app.settings.themes.edit.new')',
+                                    options: [
+                                        {
+                                            'id': 0,
+                                            'name': '@lang('admin::app.settings.themes.edit.no')'
+                                        },
+                                        {
+                                            'id': 1,
+                                            'name': '@lang('admin::app.settings.themes.edit.yes')'
+                                        },
+                                    ]
+                                },
+                            ]
+                        })
+                        .catch((error) => {});
+                },
+
+                handleFilter(event) {
+                    this.filters.applied = this.filters.available.find(filter => filter.code == event.target.value);
                 },
             },
         });

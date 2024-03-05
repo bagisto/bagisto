@@ -2855,6 +2855,8 @@ return [
                 'key-input'                     => 'Anahtar',
                 'limit'                         => 'Sınır',
                 'link'                          => 'Bağlantı',
+                'no'                            => 'Hayır',
+                'new'                           => 'Yeni',
                 'name'                          => 'Ad',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
@@ -2893,6 +2895,7 @@ return [
                     'title'              => 'Başlık',
                     'update-service'     => 'Hizmetleri Güncelle',
                 ],
+                'yes'                           => 'Evet',
             ],
 
             'create-success' => 'Tema başarıyla oluşturuldu',

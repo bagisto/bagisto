@@ -2855,6 +2855,8 @@ return [
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
+                'no'                            => 'Nein',
+                'new'                           => 'Neu',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -2892,6 +2894,7 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Dienstleistungen aktualisieren',
                 ],
+                'yes'                           => 'Ja',
             ],
 
             'create-success' => 'Thema erfolgreich erstellt',

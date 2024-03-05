@@ -2855,6 +2855,8 @@ return [
                 'limit'                         => 'Limiet',
                 'link'                          => 'Link',
                 'name'                          => 'Naam',
+                'no'                            => 'Nee',
+                'new'                           => 'Nieuw',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -2892,6 +2894,7 @@ return [
                     'title'              => 'Titel',
                     'update-service'     => 'Diensten bijwerken',
                 ],
+                'yes'                           => 'Ja',
             ],
 
             'create-success' => 'Thema is succesvol aangemaakt',
