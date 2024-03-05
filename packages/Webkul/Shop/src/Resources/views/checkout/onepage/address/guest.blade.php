@@ -55,7 +55,7 @@
                             class="text-base text-[#6E6E6E] max-sm:text-xs ltr:pl-0 rtl:pr-0 select-none cursor-pointer"
                             for="use_for_shipping"
                         >
-                            @lang('shop::app.checkout.onepage.addresses.billing.use-different-address-for-shipping')
+                            @lang('shop::app.checkout.onepage.address.same-as-billing')
                         </label>
                     </x-shop::form.control-group>
 

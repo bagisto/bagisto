@@ -688,6 +688,7 @@ return [
 
         'onepage' => [
             'address' => [
+                'add-new-address'  => 'Add new address',
                 'title'            => 'Address',
                 'add-new'          => 'Add new address',
                 'back'             => 'Back',
