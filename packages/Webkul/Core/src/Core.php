@@ -632,16 +632,16 @@ class Core
 
         switch ($currency->currency_position) {
             case 'left':
-                $formattedCurrency = $symbol . $formattedCurrency;
+                $formattedCurrency = $symbol.$formattedCurrency;
                 break;
             case 'right':
-                $formattedCurrency = $formattedCurrency . $symbol;
+                $formattedCurrency = $formattedCurrency.$symbol;
                 break;
             case 'left_with_space':
-                $formattedCurrency = $symbol . ' ' . $formattedCurrency;
+                $formattedCurrency = $symbol.' '.$formattedCurrency;
                 break;
             case 'right_with_space':
-                $formattedCurrency = $formattedCurrency . ' ' . $symbol;
+                $formattedCurrency = $formattedCurrency.' '.$symbol;
                 break;
         }
 
