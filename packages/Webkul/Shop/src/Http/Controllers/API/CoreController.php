@@ -33,13 +33,14 @@ class CoreController extends APIController
     }
 
     /**
-     * Generates a formatted price string using the provided price, currencyCode and currenct localeCode.
+     * Generates a formatted price string using the provided price and currency code.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getFormattedPrice()
     {
         $price = request()->input('price');
+
         $currencyCode = request()->input('currencyCode');
 
         return response()->json([

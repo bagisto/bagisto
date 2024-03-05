@@ -24,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('currencies', function (Blueprint $table) {
-            //
+            $table->dropColumn('currency_position');
+            $table->dropColumn('decimal_separator');
+            $table->dropColumn('thousand_separator');
         });
     }
 };

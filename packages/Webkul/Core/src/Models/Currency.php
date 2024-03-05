@@ -29,7 +29,7 @@ class Currency extends Model implements CurrencyContract
     ];
 
     /**
-     * Set currency code in capital
+     * Set currency code in capital letter.
      */
     public function setCodeAttribute($code): void
     {

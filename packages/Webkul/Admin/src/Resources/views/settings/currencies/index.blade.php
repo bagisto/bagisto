@@ -318,7 +318,7 @@
                     return {
                         selectedCurrency: {},
 
-                        positions: @json($currencyPosition),
+                        positions: @json($currencyPositions),
 
                         selectedCurrencies: 0,
                     }
