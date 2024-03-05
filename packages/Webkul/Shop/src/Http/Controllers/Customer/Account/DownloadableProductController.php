@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
+use Webkul\Shop\DataGrids\DownloadableProductDataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
 
 class DownloadableProductController extends Controller
@@ -24,11 +25,11 @@ class DownloadableProductController extends Controller
      */
     public function index()
     {
-        $downloadableLinkPurchased = $this->downloadableLinkPurchasedRepository->findWhere([
-            'customer_id' => auth()->guard('customer')->id(),
-        ]);
+        if (request()->ajax()) {
+            return app(DownloadableProductDataGrid::class)->toJson();
+        }
 
-        return view('shop::customers.account.downloadable_products.index')->with('downloadableLinkPurchased', $downloadableLinkPurchased);
+        return view('shop::customers.account.downloadable_products.index');
     }
 
     /**

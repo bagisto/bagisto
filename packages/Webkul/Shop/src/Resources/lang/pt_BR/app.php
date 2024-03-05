@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Concluído',
                 'date'                => 'Data',
                 'download-error'      => 'O link de download expirou.',
+                'expired'             => 'Expirado',
                 'empty-product'       => 'Você não possui um produto para download',
                 'name'                => 'Produtos para Download',
                 'orderId'             => 'ID do Pedido',
