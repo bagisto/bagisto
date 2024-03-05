@@ -48,6 +48,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'price'       => 'float_value',
         'boolean'     => 'boolean_value',
         'select'      => 'integer_value',
+        'select2'     => 'integer_value',
         'multiselect' => 'text_value',
         'datetime'    => 'datetime_value',
         'date'        => 'date_value',
