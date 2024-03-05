@@ -2894,7 +2894,7 @@ return [
                     'title'              => 'Título',
                     'update-service'     => 'Atualizar Serviços',
                 ],
-                'yes'                           =>  'Sim',                        
+                'yes'                           => 'Sim',
             ],
 
             'create-success' => 'Tema criado com sucesso',
