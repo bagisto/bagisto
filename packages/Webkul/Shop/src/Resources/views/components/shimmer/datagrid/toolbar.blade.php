@@ -3,7 +3,7 @@
     <div class="flex gap-x-1">
         <!-- Search Panel -->
         <div class="flex gap-x-1 w-full items-center">
-            <div class="shimmer w-[319px] h-10 rounded-lg"></div>
+            <div class="shimmer w-[362px] h-[42px] rounded-lg"></div>
         </div>
     </div>
 

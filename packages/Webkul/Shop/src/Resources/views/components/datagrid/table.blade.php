@@ -182,10 +182,10 @@
                                     <li @click="$parent.changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-l-lg leading-normal font-medium hover:bg-gray-100"
+                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] ltr:rounded-l-lg rtl:rounded-r-lg leading-normal font-medium hover:bg-gray-100"
                                             aria-label="@lang('shop::app.components.datagrid.table.previous-page')"
                                         >
-                                            <span class="icon-arrow-left text-2xl"></span>
+                                            <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                                         </a>
                                     </li>
 
@@ -202,10 +202,10 @@
                                     <li @click="$parent.changePage('next')">
                                         <a
                                             href="javascript:void(0);"
-                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-r-lg leading-normal font-medium hover:bg-gray-100"
+                                            class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] ltr:rounded-r-lg rtl:rounded-l-lg leading-normal font-medium hover:bg-gray-100"
                                             aria-label="@lang('shop::app.components.datagrid.table.next-page')"
                                         >
-                                            <span class="icon-arrow-right text-2xl"></span>
+                                            <span class="icon-arrow-right rtl:icon-arrow-left text-2xl"></span>
                                         </a>
                                     </li>
                                 </ul>

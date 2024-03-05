@@ -101,7 +101,7 @@
                         <input
                             type="text"
                             name="search"
-                            class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                            class="rounded-lg border border-gray-300 bg-white px-3 py-2 ltr:pr-8 rtl:pl-8 text-base text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             :value="getAppliedColumnValues('all')"
                             placeholder="@lang('shop::app.components.datagrid.toolbar.search.title')"
                             @keyup.enter="filterPage"
