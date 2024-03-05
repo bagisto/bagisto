@@ -12,6 +12,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
+use Webkul\Shop\Mail\Customer\RegistrationNotification;
 
 class RegistrationController extends Controller
 {
@@ -45,7 +46,7 @@ class RegistrationController extends Controller
      */
     public function store(RegistrationRequest $registrationRequest)
     {
-        $data = array_merge(request()->only([
+        $data = array_merge($registrationRequest->only([
             'first_name',
             'last_name',
             'email',
@@ -57,7 +58,7 @@ class RegistrationController extends Controller
             'is_verified'               => ! core()->getConfigData('customer.settings.email.verification'),
             'customer_group_id'         => $this->customerGroupRepository->findOneWhere(['code' => 'general'])->id,
             'token'                     => md5(uniqid(rand(), true)),
-            'subscribed_to_news_letter' => request()->input('is_subscribed') ?? 0,
+            'subscribed_to_news_letter' => (bool) request()->input('is_subscribed'),
         ]);
 
         Event::dispatch('customer.registration.before');
@@ -112,6 +113,10 @@ class RegistrationController extends Controller
                 'is_verified' => 1,
                 'token'       => null,
             ], $customer->id);
+
+            if ((bool) core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
+                Mail::queue(new RegistrationNotification($customer));
+            }
 
             $this->customerRepository->syncNewRegisteredCustomerInformation($customer);
 

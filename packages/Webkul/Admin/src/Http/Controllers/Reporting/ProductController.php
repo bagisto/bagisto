@@ -2,12 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Reporting;
 
-use Webkul\Admin\Helpers\Reporting;
-
 class ProductController extends Controller
 {
     /**
-     * Request param functions
+     * Request param functions.
      *
      * @var array
      */
@@ -18,16 +16,9 @@ class ProductController extends Controller
         'top-selling-products-by-quantity' => 'getTopSellingProductsByQuantity',
         'products-with-most-reviews'       => 'getProductsWithMostReviews',
         'products-with-most-visits'        => 'getProductsWithMostVisits',
+        'last-search-terms'                => 'getLastSearchTerms',
+        'top-search-terms'                 => 'getTopSearchTerms',
     ];
-
-    /**
-     * Create a controller instance.
-     *
-     * @return void
-     */
-    public function __construct(protected Reporting $reportingHelper)
-    {
-    }
 
     /**
      * Display a listing of the resource.

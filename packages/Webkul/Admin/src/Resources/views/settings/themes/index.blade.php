@@ -1,15 +1,15 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.settings.themes.index.title')
-    </x-slot:title>
+    </x-slot>
    
     <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <p class="text-xl text-gray-800 dark:text-white font-bold">
             @lang('admin::app.settings.themes.index.title')
         </p>
         
-        <div class="flex gap-x-[10px] items-center">
-            <div class="flex gap-x-[10px] items-center">
+        <div class="flex gap-x-2.5 items-center">
+            <div class="flex gap-x-2.5 items-center">
                 {!! view_render_event('bagisto.admin.settings.themes.create.before') !!}
 
                 <!-- Create Button -->
@@ -29,12 +29,15 @@
     
     {!! view_render_event('bagisto.admin.settings.themes.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.settings.themes.index')"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.themes.index')" />
 
     {!! view_render_event('bagisto.admin.settings.themes.list.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-theme-form-template">
+        <script
+            type="text/x-template"
+            id="v-create-theme-form-template"
+        >
             <div>
                 <!-- Theme Create Button -->
                 @if (bouncer()->hasPermission('settings.themes.create'))
@@ -55,100 +58,96 @@
                     <form @submit="handleSubmit($event, create)">
                         <!-- Customer Create Modal -->
                         <x-admin::modal ref="themeCreateModal">
+                            <!-- Modal Header -->
                             <x-slot:header>
-                                <!-- Modal Header -->
-                                <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                                <p class="text-lg text-gray-800 dark:text-white font-bold">
                                     @lang('admin::app.settings.themes.create.title')
                                 </p>
-                            </x-slot:header>
+                            </x-slot>
 
+                            <!-- Modal Content -->
                             <x-slot:content>
-                                <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800">
-                                    <!-- Name -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.create.name')
-                                        </x-admin::form.control-group.label>
+                                <!-- Name -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.create.name')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            rules="required"
-                                            :label="trans('admin::app.settings.themes.create.name')"
-                                            :placeholder="trans('admin::app.settings.themes.create.name')"
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.themes.create.name')"
+                                        :placeholder="trans('admin::app.settings.themes.create.name')"
+                                    />
+
+                                    <x-admin::form.control-group.error control-name="name" />
+                                </x-admin::form.control-group>
+
+                                <!-- Sort Order -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.create.sort-order')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="sort_order"
+                                        rules="required|numeric"
+                                        :label="trans('admin::app.settings.themes.create.sort-order')"
+                                        :placeholder="trans('admin::app.settings.themes.create.sort-order')"
+                                    />
+
+                                    <x-admin::form.control-group.error control-name="sort_order" />
+                                </x-admin::form.control-group>
+
+                                <!-- Type -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.create.type.title')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="type"
+                                        rules="required"
+                                        value="product_carousel"
+                                    >
+                                        <option 
+                                            v-for="(type, key) in themeTypes"
+                                            :value="key"
+                                            :text="type"
                                         >
-                                        </x-admin::form.control-group.control>
+                                        </option>
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error control-name="type" />
+                                </x-admin::form.control-group>
 
-                                    <!-- Sort Order -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.create.sort-order')
-                                        </x-admin::form.control-group.label>
+                                <!-- Channels -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.settings.themes.edit.channels')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="sort_order"
-                                            rules="required|numeric"
-                                            :label="trans('admin::app.settings.themes.create.sort-order')"
-                                            :placeholder="trans('admin::app.settings.themes.create.sort-order')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="channel_id"
+                                        rules="required"
+                                        :value="1"
+                                    >
+                                        @foreach (core()->getAllChannels() as $channel)
+                                            <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+                                        @endforeach 
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error control-name="sort_order"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <!-- Type -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.create.type.title')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="type"
-                                            rules="required"
-                                            value="product_carousel"
-                                        >
-                                            <option 
-                                                v-for="(type, key) in themeTypes"
-                                                :value="key"
-                                                :text="type"
-                                            >
-                                            </option>
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <!-- Channels -->
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.settings.themes.edit.channels')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="channel_id"
-                                            rules="required"
-                                            :value="1"
-                                        >
-                                            @foreach (core()->getAllChannels() as $channel)
-                                                <option value="{{ $channel->id }}">{{ $channel->name }}</option>
-                                            @endforeach 
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </x-slot:content>
+                                    <x-admin::form.control-group.error control-name="type" />
+                                </x-admin::form.control-group>
+                            </x-slot>
 
                             <x-slot:footer>
                                 <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
+                                <div class="flex gap-x-2.5 items-center">
                                     <button
                                         type="submit"
                                         class="primary-button"
@@ -156,7 +155,7 @@
                                         @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
-                            </x-slot:footer>
+                            </x-slot>
                         </x-admin::modal>
                     </form>
                 </x-admin::form>
@@ -175,6 +174,7 @@
                             static_content: "@lang('admin::app.settings.themes.create.type.static-content')",
                             image_carousel: "@lang('admin::app.settings.themes.create.type.image-carousel')",
                             footer_links: "@lang('admin::app.settings.themes.create.type.footer-links')",
+                            services_content: "@lang('admin::app.settings.themes.create.type.services-content')",
                         }
                     };
                 },

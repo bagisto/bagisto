@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Sales\Models\Order;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
 
@@ -156,27 +157,30 @@ class CustomerController extends Controller
      */
     public function destroy()
     {
+        $this->validate(request(), [
+            'password' => 'required',
+        ]);
+
         $customerRepository = $this->customerRepository->findorFail(auth()->guard('customer')->user()->id);
 
         try {
             if (Hash::check(request()->input('password'), $customerRepository->password)) {
-
-                if ($customerRepository->orders->whereIn('status', ['pending', 'processing'])->first()) {
+                if ($customerRepository->orders->whereIn('status', [Order::STATUS_PENDING, Order::STATUS_PROCESSING])->first()) {
                     session()->flash('error', trans('shop::app.customers.account.profile.order-pending'));
 
                     return redirect()->route('shop.customers.account.profile.index');
-                } else {
-                    $this->customerRepository->delete(auth()->guard('customer')->user()->id);
-
-                    session()->flash('success', trans('shop::app.customers.account.profile.delete-success'));
-
-                    return redirect()->route('shop.customer.session.index');
                 }
-            } else {
-                session()->flash('error', trans('shop::app.customers.account.profile.wrong-password'));
 
-                return redirect()->back();
+                $this->customerRepository->delete(auth()->guard('customer')->user()->id);
+
+                session()->flash('success', trans('shop::app.customers.account.profile.delete-success'));
+
+                return redirect()->route('shop.customer.session.index');
             }
+
+            session()->flash('error', trans('shop::app.customers.account.profile.wrong-password'));
+
+            return redirect()->back();
         } catch (\Exception $e) {
             session()->flash('error', trans('shop::app.customers.account.profile.delete-failed'));
 

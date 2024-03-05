@@ -26,19 +26,28 @@ class CategoryRequest extends FormRequest
     {
         $locale = core()->getRequestedLocaleCode();
 
-        if ($id = request('id')) {
-            return [
-                $locale . '.slug' => ['required', new ProductCategoryUniqueSlug('category_translations', $id)],
-                $locale . '.name' => 'required',
-                'image.*'         => 'mimes:bmp,jpeg,jpg,png,webp',
-            ];
+        $rules = [
+            'position'      => 'required',
+            'logo_path'     => 'array',
+            'logo_path.*'   => 'mimes:bmp,jpeg,jpg,png,webp',
+            'banner_path'   => 'array',
+            'banner_path.*' => 'mimes:bmp,jpeg,jpg,png,webp',
+            'attributes'    => 'required|array',
+            'attributes.*'  => 'required',
+        ];
+
+        if ($id = $this->id) {
+            $rules[$locale.'.slug'] = ['required', new ProductCategoryUniqueSlug('category_translations', $id)];
+            $rules[$locale.'.name'] = ['required'];
+            $rules[$locale.'.description'] = 'required_if:display_mode,==,description_only,products_and_description';
+
+            return $rules;
         }
 
-        return [
-            'slug'        => ['required', new ProductCategoryUniqueSlug],
-            'name'        => 'required',
-            'image.*'     => 'mimes:bmp,jpeg,jpg,png,webp',
-            'description' => 'required_if:display_mode,==,description_only,products_and_description',
-        ];
+        $rules['slug'] = ['required', new ProductCategoryUniqueSlug];
+        $rules['name'] = 'required';
+        $rules['description'] = 'required_if:display_mode,==,description_only,products_and_description';
+
+        return $rules;
     }
 }

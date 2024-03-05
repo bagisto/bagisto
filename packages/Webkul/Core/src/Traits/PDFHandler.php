@@ -12,7 +12,7 @@ trait PDFHandler
      *
      * @return \Illuminate\Http\Response
      */
-    protected function downloadPDF(string $html, string $fileName = null)
+    protected function downloadPDF(string $html, ?string $fileName = null)
     {
         if (is_null($fileName)) {
             $fileName = Str::random(32);
@@ -22,7 +22,7 @@ trait PDFHandler
 
         return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
             ->setPaper('a4')
-            ->download($fileName . '.pdf');
+            ->download($fileName.'.pdf');
     }
 
     /**

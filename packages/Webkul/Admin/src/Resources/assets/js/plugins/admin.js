@@ -10,20 +10,20 @@ export default {
              * @returns {string} - The formatted price string.
              */
             formatPrice: (price, localeCode = null, currencyCode = null) => {
-                if (!localeCode) {
+                if (! localeCode) {
                     localeCode =
                         document.querySelector(
                             'meta[http-equiv="content-language"]'
                         ).content ?? "en";
                 }
 
-                if (!currencyCode) {
+                if (! currencyCode) {
                     currencyCode =
                         document.querySelector('meta[name="currency-code"]')
                             .content ?? "USD";
                 }
 
-                return new Intl.NumberFormat(localeCode, {
+                return new Intl.NumberFormat(localeCode.replace('_', '-'), {
                     style: "currency",
                     currency: currencyCode,
                 }).format(price);

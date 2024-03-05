@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Models\Order;
 
 class ShipmentRepository extends Repository
 {
@@ -127,7 +128,7 @@ class ShipmentRepository extends Repository
             if (isset($orderState)) {
                 $this->orderRepository->updateOrderStatus($order, $orderState);
             } elseif ($order->hasOpenInvoice()) {
-                $this->orderRepository->updateOrderStatus($order, 'pending_payment');
+                $this->orderRepository->updateOrderStatus($order, Order::STATUS_PENDING_PAYMENT);
             } else {
                 $this->orderRepository->updateOrderStatus($order);
             }

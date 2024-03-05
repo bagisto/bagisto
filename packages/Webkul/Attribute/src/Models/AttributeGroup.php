@@ -10,6 +10,7 @@ class AttributeGroup extends Model implements AttributeGroupContract
     public $timestamps = false;
 
     protected $fillable = [
+        'code',
         'name',
         'column',
         'position',

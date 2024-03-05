@@ -1,38 +1,42 @@
 {!! view_render_event('bagisto.shop.checkout.shipping.method.before') !!}
 
-<v-shipping-method ref="vShippingMethod">
-    {{-- Shipping Method Shimmer Effect --}}
-    <x-shop::shimmer.checkout.onepage.shipping-method/>
+<v-shipping-method>
+    <!-- Shipping Method Shimmer Effect -->
+    <x-shop::shimmer.checkout.onepage.shipping-method />
 </v-shipping-method>
 
 {!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-shipping-method-template">
-        <div class="mt-[30px]">
-            <template v-if="! isShowShippingMethod && isShippingMethodLoading">
+    <script
+        type="text/x-template"
+        id="v-shipping-method-template"
+    >
+        <div class="mb-7">
+            <template v-if="! isShowShippingMethods && isShippingMethodLoading">
                 <!-- Shipping Method Shimmer Effect -->
-                <x-shop::shimmer.checkout.onepage.shipping-method/>
+                <x-shop::shimmer.checkout.onepage.shipping-method />
             </template>
 
-            <template v-if="isShowShippingMethod">
-                <x-shop::accordion>
-                    <x-slot:header>
+            <template v-if="isShowShippingMethods">
+                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.before') !!}
+
+                <x-shop::accordion class="!border-b-0">
+                    <x-slot:header class="!py-4 !px-0">
                         <div class="flex justify-between items-center">
-                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                            <h2 class="text-2xl font-medium max-sm:text-xl">
                                 @lang('shop::app.checkout.onepage.shipping.shipping-method')
                             </h2>
                         </div>
-                    </x-slot:header>
+                    </x-slot>
 
-                    <x-slot:content>
-                        <div class="flex flex-wrap gap-[30px] mt-[30px]">
+                    <x-slot:content class="!p-0 mt-8">
+                        <div class="flex flex-wrap gap-8">
                             <div
                                 class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
                             >
-
-                                {!! view_render_event('bagisto.shop.checkout.shipping-method.before') !!}
+                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.before') !!}
 
                                 <div v-for="rate in shippingMethod.rates">
                                     <input 
@@ -45,33 +49,34 @@
                                     >
 
                                     <label 
-                                        class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                        class="icon-radio-unselect absolute ltr:right-5 rtl:left-5 top-5 text-2xl text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                         :for="rate.method"
                                     >
                                     </label>
 
                                     <label 
-                                        class="block p-[20px] border border-[#E9E9E9] rounded-[12px] cursor-pointer"
+                                        class="block p-5 border border-[#E9E9E9] rounded-xl cursor-pointer"
                                         :for="rate.method"
                                     >
-                                        <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
+                                        <span class="icon-flate-rate text-6xl text-navyBlue"></span>
 
-                                        <p class="text-[25px] mt-[5px] font-semibold max-sm:text-[20px]">
+                                        <p class="text-2xl mt-1.5 font-semibold max-sm:text-xl">
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         
-                                        <p class="text-[12px] mt-[10px] font-medium">
+                                        <p class="text-xs mt-2.5 font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                         </p>
                                     </label>
                                 </div>
 
-                                {!! view_render_event('bagisto.shop.checkout.shipping-method.after') !!}
-
+                                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.after') !!}
                             </div>
                         </div>
-                    </x-slot:content>
+                    </x-slot>
                 </x-shop::accordion>
+
+                {!! view_render_event('bagisto.shop.checkout.onepage.shipping-method.accordion.after') !!}
             </template>
         </div>
     </script>
@@ -84,31 +89,41 @@
                 return {
                     shippingMethods: [],
 
-                    isShowShippingMethod: false,
+                    isShowShippingMethods: false,
 
                     isShippingMethodLoading: false,
                 }
             },
 
+            mounted() {
+                this.$emitter.on('is-shipping-loading', (value) => this.isShippingMethodLoading = value);
+
+                this.$emitter.on('is-show-shipping-methods', (value) => this.isShowShippingMethods = value);
+                
+                this.$emitter.on('shipping-methods', (methods) => this.shippingMethods = methods);
+            },
+
             methods: {
                 store(selectedShippingMethod) {
-                    this.$parent.$refs.vCartSummary.canPlaceOrder = false;
+                    this.$emitter.emit('is-show-payment-methods', false);
 
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                    this.$emitter.emit('is-payment-loading', true);
 
-                    this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
+                    this.$emitter.emit('can-place-order', false);
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
                             shipping_method: selectedShippingMethod,
                         })
                         .then(response => {
-                            this.$parent.getOrderSummary();
+                            if (response.data.payment_methods) {
+                                this.$emitter.emit('update-cart-summary');
 
-                            this.$parent.$refs.vPaymentMethod.payment_methods = response.data.payment_methods;
-                                
-                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+                                this.$emitter.emit('payment-methods', response.data.payment_methods);
 
-                            this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
+                                this.$emitter.emit('is-show-payment-methods', true);
+
+                                this.$emitter.emit('is-payment-loading', false);
+                            }
                         })
                         .catch(error => {});
                 },

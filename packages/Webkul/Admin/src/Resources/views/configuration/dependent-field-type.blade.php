@@ -21,7 +21,7 @@
         validations="{{ $validations }}"
         label="@lang($field['title'])"
         options="{{ json_decode($field['options']) }}"
-        info="{{ json_encode($field['info'] ?? '') }}"
+        info="{{ trans($field['info'] ?? '') }}"
         depend="{{ $dependName }}"
         depend-result="{{ $dependSelectedOption }}"
         channel_locale="{{ $channelLocaleInfo }}"
@@ -50,18 +50,26 @@
         <div>
             <div class="flex justify-between">
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
+                    class="flex gap-1.5 items-center text-xs text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
                     @{{ label }}
-                </label>
 
-                <label
-                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
-                    :for="name"
-                >
-                    @{{ channel_locale }}
+                    @if (
+                        ! empty($field['channel_based'])
+                        && $channels->count() > 1
+                    )
+                        <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                            {{ $currentChannel->name }}
+                        </span>
+                    @endif
+
+                    @if (! empty($field['locale_based']))
+                        <span class="px-1 py-0.5 bg-gray-100 border border-gray-200 rounded text-[10px] text-gray-600 font-semibold leading-normal">
+                            {{ $currentLocale->name }}
+                        </span>
+                    @endif
                 </label>
             </div>
             
@@ -77,7 +85,7 @@
                 <select 
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full py-2 px-3 appearance-none border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                 >
                     <option 
                         v-for='(option, index) in this.options' 
@@ -102,7 +110,7 @@
                     type="text"
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full py-2 px-3 appearance-none border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                 />
             </v-field>
         </div>
@@ -113,9 +121,12 @@
         id="v-required-if-template"
     >
         <div>
-            <div class="flex justify-between">
+            <div
+                v-if="isRequire"
+                class="flex justify-between mt-4"
+            >
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
+                    class="flex gap-1 items-center mb-1.5 text-xs text-gray-800 dark:text-white font-medium"
                     :class="{ 'required' : isRequire }"
                     :for="name"
                 >
@@ -123,7 +134,7 @@
                 </label>
 
                 <label
-                    class="block leading-[24px] text-[12px] text-gray-800 dark:text-white font-medium"
+                    class="flex gap-1 items-center mb-1.5 text-xs text-gray-800 dark:text-white font-medium"
                     :for="name"
                 >
                     @{{ channel_locale }}
@@ -142,18 +153,18 @@
                 <select 
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
+                    class="w-full py-2 px-3 appearance-none border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400"
                 >
                     <option
                         v-for='option in this.options'
                         :value="option.value"
                         :text="option.title"
-                    >
-                    </option>
+                    ></option>
                 </select>
             </v-field>
 
             <v-field 
+                v-if="isRequire"
                 :name="name"
                 v-slot="{ field, errorMessage }"
                 :id="name"
@@ -161,15 +172,32 @@
                 :rules="appliedRules"
                 v-model="value"
                 :label="label"
-                v-else
             >
                 <input 
                     type="text"
                     v-bind="field"
                     :class="{ 'border border-red-500': errorMessage }"
-                    class="w-full appearance-none py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                    class="w-full appearance-none py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                 />
             </v-field>
+
+            <label
+                v-if="isRequire"
+                class="block leading-5 text-xs text-gray-600 dark:text-gray-300 font-medium"
+                :for="`${name}-info`"
+                v-text="info"
+            >
+            </label>
+
+            <v-error-message
+                :name="name"
+                v-slot="{ message }"
+            >
+                <p
+                    class="mt-1 text-red-600 text-xs italic"
+                    v-text="message"
+                ></p>
+            </v-error-message>
         </div>
     </script>
     
@@ -259,38 +287,39 @@
 
                     value: this.result,
 
-                    dependSavedValue: parseInt(this.dependResult)
+                    dependSavedValue: parseInt(this.dependResult),
                 };
             },
 
             mounted() {
-                this.isRequire = this.dependSavedValue ? true : false;
-
                 this.updateValidations();
 
                 const dependElement = document.getElementById(this.depend);
 
                 if (dependElement) {
-                    dependElement.addEventListener('change', (e) => {
-                        this.dependSavedValue = !this.dependSavedValue;
-                        this.dependSavedValue = this.dependSavedValue ? 1 : 0;
-                        this.isRequire = this.dependSavedValue ? true : false;
-
-                        this.updateValidations();
-                    });
+                    dependElement.addEventListener('change', this.handleEvent);
                 }
+
+                dependElement.dispatchEvent(new Event('change'));
             },
 
             methods: {
+                handleEvent(event) {
+                    this.isRequire = 
+                        event.target.type === 'checkbox' 
+                        ? event.target.checked
+                        : this.validations.split(',').slice(1).includes(event.target.value);
+
+                    this.updateValidations();
+                },
+
                 updateValidations() {
                     this.appliedRules = this.validations.split('|').filter(validation => !this.validations.includes('required_if'));
 
                     if (this.isRequire) {
                         this.appliedRules.push('required');
                     } else {
-                        this.appliedRules = this.appliedRules.filter((value) => {
-                            return value !== 'required';
-                        });
+                        this.appliedRules = this.appliedRules.filter(value => value !== 'required');
                     }
 
                     this.appliedRules = this.appliedRules.join('|');

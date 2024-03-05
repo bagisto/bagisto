@@ -1,10 +1,12 @@
 <v-shimmer-image {{ $attributes }}>
-    <div {{ $attributes->merge(['class' => 'shimmer']) }}>
-    </div>
+    <div {{ $attributes->merge(['class' => 'shimmer']) }}></div>
 </v-shimmer-image>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-shimmer-image-template">
+    <script
+        type="text/x-template"
+        id="v-shimmer-image-template"
+    >
         <div
             :id="'image-shimmer-' + $.uid"
             class="shimmer"

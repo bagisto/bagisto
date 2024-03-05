@@ -49,7 +49,7 @@ class AttributeFactory extends Factory
 
         return [
             'admin_name'          => $this->faker->word,
-            'code'                => $this->faker->word,
+            'code'                => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
             'type'                => array_rand($types),
             'validation'          => '',
             'position'            => $this->faker->randomDigit,

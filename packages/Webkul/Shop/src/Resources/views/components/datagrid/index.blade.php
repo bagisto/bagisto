@@ -1,7 +1,7 @@
 @props(['isMultiRow' => false])
 
 <v-datagrid {{ $attributes }}>
-    <x-shop::shimmer.datagrid :isMultiRow="$isMultiRow"></x-shop::shimmer.datagrid>
+    <x-shop::shimmer.datagrid :isMultiRow="$isMultiRow" />
 
     {{ $slot }}
 </v-datagrid>
@@ -12,9 +12,9 @@
         id="v-datagrid-template"
     >
         <div>
-            <x-shop::datagrid.toolbar></x-shop::datagrid.toolbar>
+            <x-shop::datagrid.toolbar />
 
-            <div class="flex mt-[30px]">
+            <div class="flex mt-8">
                 <x-shop::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
@@ -28,6 +28,7 @@
                             :selectAllRecords="selectAllRecords"
                             :applied="applied"
                             :is-loading="isLoading"
+                            :available="available"
                         >
                         </slot>
                     </template>
@@ -43,6 +44,8 @@
                             :setCurrentSelectionMode="setCurrentSelectionMode"
                             :applied="applied"
                             :is-loading="isLoading"
+                            :performAction="performAction"
+                            :available="available"
                         >
                         </slot>
                     </template>
@@ -104,7 +107,7 @@
                             columns: [
                                 {
                                     index: 'all',
-                                    value: @json(request()->has('search') ? [request()->get('search')] : []),
+                                    value: [],
                                 },
                             ],
                         },
@@ -125,6 +128,14 @@
                 boot() {
                     let datagrids = this.getDatagrids();
 
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    if (urlParams.has('search')) {
+                        let searchAppliedColumn = this.findAppliedColumn('all');
+
+                        searchAppliedColumn.value = [urlParams.get('search')];
+                    }
+
                     if (datagrids?.length) {
                         const currentDatagrid = datagrids.find(({
                             src
@@ -136,6 +147,12 @@
                             this.applied.sort = currentDatagrid.applied.sort;
 
                             this.applied.filters = currentDatagrid.applied.filters;
+
+                            if (urlParams.has('search')) {
+                                let searchAppliedColumn = this.findAppliedColumn('all');
+
+                                searchAppliedColumn.value = [urlParams.get('search')];
+                            }
 
                             this.get();
 
@@ -151,7 +168,7 @@
                  *
                  * @returns {void}
                  */
-                get() {
+                get(extraParams = {}) {
                     let params = {
                         pagination: {
                             page: this.applied.pagination.page,
@@ -178,7 +195,7 @@
 
                     this.$axios
                         .get(this.src, {
-                            params
+                            params: { ...params, ...extraParams }
                         })
                         .then((response) => {
                             /**
@@ -361,11 +378,11 @@
                      * activated. In this case, we will search for `all` indices and update the
                      * value accordingly.
                      */
-                    if (!column) {
+                    if (! column) {
                         let appliedColumn = this.findAppliedColumn('all');
 
-                        if (!requestedValue) {
-                            this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== 'all');
+                        if (! requestedValue) {
+                            appliedColumn.value = [];
 
                             return;
                         }
@@ -475,7 +492,7 @@
                     /**
                      * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
                      */
-                    if (!appliedColumn.value.length) {
+                    if (! appliedColumn.value.length) {
                         this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
@@ -495,7 +512,7 @@
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
-                    if (!this.available.records.length) {
+                    if (! this.available.records.length) {
                         return;
                     }
 
@@ -533,7 +550,7 @@
 
                             let found = this.applied.massActions.indices.find(selectedId => selectedId === id);
 
-                            if (!found) {
+                            if (! found) {
                                 this.applied.massActions.indices.push(id);
                             }
                         });
@@ -543,13 +560,13 @@
                 },
 
                 validateMassAction() {
-                    if (!this.applied.massActions.indices.length) {
+                    if (! this.applied.massActions.indices.length) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: 'No records have been selected.' });
 
                         return false;
                     }
 
-                    if (!this.applied.massActions.meta.action) {
+                    if (! this.applied.massActions.meta.action) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: 'You must select a mass action.' });
 
                         return false;
@@ -574,7 +591,7 @@
                         this.applied.massActions.value = currentOption.value;
                     }
 
-                    if (!this.validateMassAction()) {
+                    if (! this.validateMassAction()) {
                         return;
                     }
 
@@ -715,7 +732,12 @@
                                 agree: () => {
                                     this.$axios[method](action.url)
                                         .then(response => {
+                                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                                             this.get();
+                                        })
+                                        .catch((error) => {
+                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                                         });
                                 }
                             });

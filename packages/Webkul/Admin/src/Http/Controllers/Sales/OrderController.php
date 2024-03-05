@@ -39,10 +39,9 @@ class OrderController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function view($id)
+    public function view(int $id)
     {
         $order = $this->orderRepository->findOrFail($id);
 
@@ -52,10 +51,9 @@ class OrderController extends Controller
     /**
      * Cancel action for the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function cancel($id)
+    public function cancel(int $id)
     {
         $result = $this->orderRepository->cancel($id);
 
@@ -65,34 +63,32 @@ class OrderController extends Controller
             session()->flash('error', trans('admin::app.sales.orders.view.create-error'));
         }
 
-        return redirect()->back();
+        return redirect()->route('admin.sales.orders.view', $id);
     }
 
     /**
      * Add comment to the order
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function comment($id)
+    public function comment(int $id)
     {
-        Event::dispatch('sales.order.comment.create.before');
-
-        $data = array_merge(request()->only([
-            'comment',
-            'customer_notified',
-        ]), [
-            'order_id'          => $id,
-            'customer_notified' => request()->has('customer_notified'),
+        $validatedData = $this->validate(request(), [
+            'comment'           => 'required',
+            'customer_notified' => 'sometimes|sometimes',
         ]);
 
-        $comment = $this->orderCommentRepository->create($data);
+        $validatedData['order_id'] = $id;
+
+        Event::dispatch('sales.order.comment.create.before');
+
+        $comment = $this->orderCommentRepository->create($validatedData);
 
         Event::dispatch('sales.order.comment.create.after', $comment);
 
         session()->flash('success', trans('admin::app.sales.orders.view.comment-success'));
 
-        return redirect()->back();
+        return redirect()->route('admin.sales.orders.view', $id);
     }
 
     /**
@@ -102,12 +98,10 @@ class OrderController extends Controller
      */
     public function search()
     {
-        $results = [];
-
         $orders = $this->orderRepository->scopeQuery(function ($query) {
-            return $query->where('customer_email', 'like', '%' . urldecode(request()->input('query')) . '%')
-                ->orWhere('status', 'like', '%' . urldecode(request()->input('query')) . '%')
-                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'customer_first_name, " ", ' . DB::getTablePrefix() . 'customer_last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
+            return $query->where('customer_email', 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('status', 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere(DB::raw('CONCAT('.DB::getTablePrefix().'customer_first_name, " ", '.DB::getTablePrefix().'customer_last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('increment_id', request()->input('query'))
                 ->orderBy('created_at', 'desc');
         })->paginate(10);

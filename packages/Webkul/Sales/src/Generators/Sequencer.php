@@ -108,9 +108,9 @@ class Sequencer implements SequencerContract
      */
     public function generate(): string
     {
-        return $this->prefix . sprintf(
+        return $this->prefix.sprintf(
             "%0{$this->length}d",
             ($this->lastId + 1)
-        ) . ($this->suffix);
+        ).($this->suffix);
     }
 }

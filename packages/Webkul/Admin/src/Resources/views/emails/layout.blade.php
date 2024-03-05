@@ -12,10 +12,10 @@
     <body style="font-family: inter;">
         <div style="max-width: 640px; margin-left: auto; margin-right: auto;">
             <div style="padding: 30px;">
-                {{-- Email Header --}}
+                <!-- Email Header -->
                 <div style="margin-bottom: 65px;">
                     <a href="{{ route('shop.home.index') }}">
-                        @if ($logo = core()->getCurrentChannel()->logo_url)
+                        @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                             <img
                                 src="{{ $logo }}"
                                 alt="{{ config('app.name') }}"
@@ -31,10 +31,10 @@
                     </a>
                 </div>
 
-                {{-- Email Content --}}
+                <!-- Email Content -->
                 {{ $slot }}
 
-                {{-- Email Footer --}}
+                <!-- Email Footer -->
                 <p style="font-size: 16px;color: #202B3C;line-height: 24px;">
                     @lang('admin::app.emails.thanks', [
                         'link' => 'mailto:shop@shop.com',

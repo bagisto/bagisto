@@ -8,7 +8,10 @@
 <v-twitter-share></v-twitter-share>
 
 @push('scripts')
-    <script type="text/x-template" id="v-twitter-share-template">
+    <script
+        type="text/x-template"
+        id="v-twitter-share-template"
+    >
         <li class="transition-all hover:opacity-[0.8]">
             <a 
                 href="#" 

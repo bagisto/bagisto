@@ -23,12 +23,12 @@ class ShopServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         /* loaders */
-        Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
-        Route::middleware('web')->group(__DIR__ . '/../Routes/api.php');
+        Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
+        Route::middleware('web')->group(__DIR__.'/../Routes/api.php');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'shop');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'shop');
 
         /* aliases */
         $router->aliasMiddleware('currency', Currency::class);
@@ -37,7 +37,7 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('theme', Theme::class);
 
         $this->publishes([
-            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
+            dirname(__DIR__).'/Config/imagecache.php' => config_path('imagecache.php'),
         ]);
 
         /* View Composers */
@@ -47,10 +47,10 @@ class ShopServiceProvider extends ServiceProvider
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
 
-        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'shop');
+        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
 
         /* Breadcrumbs */
-        require __DIR__ . '/../Routes/breadcrumbs.php';
+        require __DIR__.'/../Routes/breadcrumbs.php';
 
         $this->app->register(EventServiceProvider::class);
     }
@@ -93,7 +93,7 @@ class ShopServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php',
+            dirname(__DIR__).'/Config/menu.php',
             'menu.customer'
         );
     }

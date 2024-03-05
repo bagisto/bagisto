@@ -156,6 +156,7 @@ class AttributeFamilyRepository extends Repository
     public function getComparableAttributesBelongsToFamily()
     {
         return $this->attributeRepository
+            ->with(['options', 'options.translations'])
             ->join('attribute_group_mappings', 'attribute_group_mappings.attribute_id', '=', 'attributes.id')
             ->select('attributes.*')
             ->where('attributes.is_comparable', 1)

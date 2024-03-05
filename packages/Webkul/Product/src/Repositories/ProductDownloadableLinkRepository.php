@@ -31,9 +31,9 @@ class ProductDownloadableLinkRepository extends Repository
             }
 
             return [
-                $type           => $path = request()->file($type)->store('product_downloadable_links/' . $productId, 'private'),
-                $type . '_name' => $file->getClientOriginalName(),
-                $type . '_url'  => Storage::url($path),
+                $type           => $path = request()->file($type)->store('product_downloadable_links/'.$productId, 'private'),
+                $type.'_name'   => $file->getClientOriginalName(),
+                $type.'_url'    => Storage::url($path),
             ];
         }
 

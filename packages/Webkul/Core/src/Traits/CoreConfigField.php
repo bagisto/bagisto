@@ -5,6 +5,15 @@ namespace Webkul\Core\Traits;
 trait CoreConfigField
 {
     /**
+     * Laravel to Vee Validation mappings.
+     *
+     * @var array
+     */
+    protected $veeValidateMappings = [
+        'min'=> 'min_value',
+    ];
+
+    /**
      * Get name field for forms in configuration page.
      *
      * @param  string  $key
@@ -15,7 +24,7 @@ trait CoreConfigField
         $nameField = '';
 
         foreach (explode('.', $key) as $key => $field) {
-            $nameField .= $key === 0 ? $field : '[' . $field . ']';
+            $nameField .= $key === 0 ? $field : '['.$field.']';
         }
 
         return $nameField;
@@ -29,7 +38,13 @@ trait CoreConfigField
      */
     public function getValidations($field)
     {
-        return $field['validation'] ?? '';
+        $field['validation'] = $field['validation'] ?? '';
+
+        foreach ($this->veeValidateMappings as $laravelRule => $veeValidateRule) {
+            $field['validation'] = str_replace($laravelRule, $veeValidateRule, $field['validation']);
+        }
+
+        return $field['validation'];
     }
 
     /**
@@ -60,7 +75,7 @@ trait CoreConfigField
      */
     public function getDependentFieldOrValue($field, $fieldOrValue = 'field')
     {
-        $depends = explode(':', $field['depend']);
+        $depends = explode(':', $field['depends']);
 
         return $fieldOrValue === 'field'
             ? current($depends) : end($depends);
@@ -115,6 +130,6 @@ trait CoreConfigField
             $info[] = $locale;
         }
 
-        return ! empty($info) ? '[' . implode(' - ', $info) . ']' : '';
+        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
     }
 }

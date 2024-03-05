@@ -16,7 +16,7 @@ class ShippingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__ . '/../Http/helpers.php';
+        include __DIR__.'/../Http/helpers.php';
     }
 
     /**
@@ -54,7 +54,7 @@ class ShippingServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/carriers.php', 'carriers'
+            dirname(__DIR__).'/Config/carriers.php', 'carriers'
         );
     }
 }

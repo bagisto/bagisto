@@ -8,6 +8,21 @@ use Webkul\DataGrid\DataGrid;
 class OrderTransactionsDataGrid extends DataGrid
 {
     /**
+     * Transaction status Paid.
+     */
+    const STATUS_PAID = 'paid';
+
+    /**
+     * Transaction status Pending.
+     */
+    const STATUS_PENDING = 'pending';
+
+    /**
+     * Transaction status Completed
+     */
+    const STATUS_COMPLETED = 'COMPLETED';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -31,6 +46,7 @@ class OrderTransactionsDataGrid extends DataGrid
         $this->addFilter('invoice_id', 'order_transactions.invoice_id');
         $this->addFilter('order_id', 'ors.increment_id');
         $this->addFilter('created_at', 'order_transactions.created_at');
+        $this->addFilter('status', 'order_transactions.status');
 
         return $queryBuilder;
     }
@@ -90,10 +106,42 @@ class OrderTransactionsDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.sales.transactions.index.datagrid.status'),
-            'type'       => 'string',
-            'searchable' => true,
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label' => trans('admin::app.sales.transactions.index.datagrid.paid'),
+                            'value' => self::STATUS_PAID,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.transactions.index.datagrid.pending'),
+                            'value' => self::STATUS_PENDING,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.transactions.index.datagrid.completed'),
+                            'value' => self::STATUS_COMPLETED,
+                        ],
+                    ],
+                ],
+            ],
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($row) {
+                switch ($row->status) {
+                    case self::STATUS_PAID:
+                        return '<p class="label-active">'.trans('admin::app.sales.transactions.index.datagrid.paid').'</p>';
+
+                    case self::STATUS_PENDING:
+                        return '<p class="label-pending">'.trans('admin::app.sales.transactions.index.datagrid.pending').'</p>';
+
+                    case self::STATUS_COMPLETED:
+                        return '<p class="label-completed">'.trans('admin::app.sales.transactions.index.datagrid.completed').'</p>';
+                }
+            },
         ]);
 
         $this->addColumn([

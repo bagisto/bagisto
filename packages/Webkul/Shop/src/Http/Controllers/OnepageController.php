@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\MagicAI\Facades\MagicAI;
 
 class OnepageController extends Controller
 {
@@ -85,6 +86,54 @@ class OnepageController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        if (
+            core()->getConfigData('general.magic_ai.settings.enabled')
+            && core()->getConfigData('general.magic_ai.checkout_message.enabled')
+            && ! empty(core()->getConfigData('general.magic_ai.checkout_message.prompt'))
+        ) {
+
+            try {
+                $model = core()->getConfigData('general.magic_ai.checkout_message.model');
+
+                $response = MagicAI::setModel($model)
+                    ->setTemperature(0)
+                    ->setPrompt($this->getCheckoutPrompt($order))
+                    ->ask();
+
+                $order->checkout_message = $response;
+            } catch (\Exception $e) {
+            }
+        }
+
         return view('shop::checkout.success', compact('order'));
+    }
+
+    /**
+     * Order success page.
+     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @return string
+     */
+    public function getCheckoutPrompt($order)
+    {
+        $prompt = core()->getConfigData('general.magic_ai.checkout_message.prompt');
+
+        $products = '';
+
+        foreach ($order->items as $item) {
+            $products .= "Name: $item->name\n";
+            $products .= "Qty: $item->qty_ordered\n";
+            $products .= 'Price: '.core()->formatPrice($item->total)."\n\n";
+        }
+
+        $prompt .= "\n\nProduct Details:\n $products";
+
+        $prompt .= "Customer Details:\n $order->customer_full_name \n\n";
+
+        $prompt .= "Current Locale:\n ".core()->getCurrentLocale()->name."\n\n";
+
+        $prompt .= "Store Name:\n".core()->getCurrentChannel()->name;
+
+        return $prompt;
     }
 }

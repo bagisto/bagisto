@@ -17,6 +17,11 @@ class OrderItem extends Model implements OrderItemContract
 {
     use HasFactory;
 
+    /**
+     * Define the guarded property.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'child',
@@ -25,10 +30,20 @@ class OrderItem extends Model implements OrderItemContract
         'updated_at',
     ];
 
+    /**
+     * Casts the additional column to the model.
+     *
+     * @var array
+     */
     protected $casts = [
         'additional' => 'array',
     ];
 
+    /**
+     * Define the type instance
+     *
+     * @var mixed
+     */
     protected $typeInstance;
 
     /**
@@ -40,7 +55,7 @@ class OrderItem extends Model implements OrderItemContract
             return $this->typeInstance;
         }
 
-        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+        $this->typeInstance = app(config('product_types.'.$this->type.'.class'));
 
         if ($this->product) {
             $this->typeInstance->setProduct($this->product);
@@ -214,7 +229,9 @@ class OrderItem extends Model implements OrderItemContract
 
         $array['qty_to_refund'] = $this->qty_to_refund;
 
-        $array['downloadable_links'] = $this->downloadable_link_purchased;
+        if ($this->type == 'downloadable') {
+            $array['downloadable_links'] = $this->downloadable_link_purchased;
+        }
 
         return $array;
     }

@@ -84,10 +84,9 @@ class InventorySourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $inventorySource = $this->inventorySourceRepository->findOrFail($id);
 
@@ -97,10 +96,9 @@ class InventorySourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InventorySourceRequest $inventorySourceRequest, $id)
+    public function update(InventorySourceRequest $inventorySourceRequest, int $id)
     {
         Event::dispatch('inventory.inventory_source.update.before', $id);
 
@@ -138,10 +136,8 @@ class InventorySourceController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $this->inventorySourceRepository->findOrFail($id);
 

@@ -12,6 +12,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'customer.registration.after' => [
+            'Webkul\Admin\Listeners\Customer@afterCreated',
+        ],
+
         'admin.password.update.after' => [
             'Webkul\Admin\Listeners\Admin@afterPasswordUpdated',
         ],

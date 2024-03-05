@@ -73,10 +73,8 @@ class TaxCategoryController extends Controller
 
     /**
      * Tax Category Details
-     *
-     * @param  int  $id
      */
-    public function edit($id): TaxCategoryResource
+    public function edit(int $id): TaxCategoryResource
     {
         $taxCategory = $this->taxCategoryRepository->findOrFail($id);
 
@@ -91,7 +89,7 @@ class TaxCategoryController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
-            'code'        => 'required|string|unique:tax_categories,code,' . $id,
+            'code'        => 'required|string|unique:tax_categories,code,'.$id,
             'name'        => 'required|string',
             'description' => 'required|string',
             'taxrates'    => 'array|required',
@@ -119,13 +117,9 @@ class TaxCategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $this->taxCategoryRepository->findOrFail($id);
-
         try {
             Event::dispatch('tax.category.delete.before', $id);
 

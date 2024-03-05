@@ -44,13 +44,6 @@ class Virtual extends AbstractType
             return false;
         }
 
-        if (
-            is_callable(config('products.isSaleable')) &&
-            call_user_func(config('products.isSaleable'), $this->product) === false
-        ) {
-            return false;
-        }
-
         if ($this->haveSufficientQuantity(1)) {
             return true;
         }

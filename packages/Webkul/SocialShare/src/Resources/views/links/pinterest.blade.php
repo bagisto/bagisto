@@ -13,7 +13,10 @@
 <v-pinterest-share></v-pinterest-share>
 
 @push('scripts')
-    <script type="text/x-template" id="v-pinterest-share-template">
+    <script
+        type="text/x-template"
+        id="v-pinterest-share-template"
+    >
         <li class="transition-all hover:opacity-[0.8]">
             <a 
                 href="#" 

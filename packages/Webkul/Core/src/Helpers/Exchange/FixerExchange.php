@@ -49,7 +49,7 @@ class FixerExchange extends ExchangeRate
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint . '/' . date('Y-m-d') . '?access_key=' . $this->apiKey . '&base=' . config('app.currency') . '&symbols=' . $currency->code);
+            $result = $client->request('GET', $this->apiEndPoint.'/'.date('Y-m-d').'?access_key='.$this->apiKey.'&base='.config('app.currency').'&symbols='.$currency->code);
 
             $result = json_decode($result->getBody()->getContents(), true);
 

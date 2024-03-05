@@ -17,14 +17,24 @@
     @endisset
 
     @isset($header)
-        <template v-slot:header>
-            {{ $header }}
+        <template v-slot:header="{ close }">
+            <div {{ $header->attributes->merge(['class' => 'grid gap-y-2.5 p-6 pb-5 max-sm:px-4']) }}>
+                {{ $header }}
+
+                <div class="absolute top-5 ltr:right-5 rtl:left-5">
+                    <span
+                        class="icon-cancel text-3xl cursor-pointer"
+                        @click="close"
+                    >
+                    </span>
+                </div>
+            </div>
         </template>
     @endisset
 
     @isset($content)
         <template v-slot:content>
-            <div class="px-[25px] overflow-auto flex-1 max-sm:px-[15px]">
+            <div class="px-6 overflow-auto flex-1 max-sm:px-4">
                 {{ $content }}
             </div>
         </template>
@@ -32,7 +42,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div class="pb-[30px]">
+            <div class="pb-8">
                 {{ $footer }}
             </div>
         </template>
@@ -61,7 +71,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0  bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-20"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -92,18 +102,12 @@
                         <div class="flex flex-col h-full w-full">
                             <div class="flex-1 min-h-0 min-w-0 overflow-auto">
                                 <div class="flex flex-col h-full">
-                                    <div class="grid gap-y-[10px] p-[25px] pb-[20px] max-sm:px-[15px]">
-                                        <!-- Content Slot -->
-                                        <slot name="header"></slot>
-
-                                        <div class="absolute top-5 ltr:right-5 rtl:left-5">
-                                            <span
-                                                class="icon-cancel text-[30px] cursor-pointer"
-                                                @click="close"
-                                            >
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <slot
+                                        name="header"
+                                        :close="close"
+                                    >
+                                        Default Header
+                                    </slot>
 
                                     <!-- Content Slot -->
                                     <slot name="content"></slot>

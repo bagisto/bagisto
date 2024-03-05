@@ -2,9 +2,11 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -23,6 +25,7 @@ class Product extends AbstractReporting
         protected WishlistRepository $wishlistRepository,
         protected ProductReviewRepository $reviewRepository,
         protected OrderItemRepository $orderItemRepository,
+        protected SearchTermRepository $searchTermRepository
     ) {
         parent::__construct();
     }
@@ -72,8 +75,9 @@ class Product extends AbstractReporting
     public function getTotalSoldQuantities($startDate, $endDate): int
     {
         return $this->orderItemRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->sum('qty_ordered');
+            ->value(DB::raw('SUM(qty_invoiced - qty_refunded)')) ?? 0;
     }
 
     /**
@@ -121,6 +125,7 @@ class Product extends AbstractReporting
     public function getTotalProductsAddedToWishlist($startDate, $endDate): int
     {
         return $this->wishlistRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -146,6 +151,7 @@ class Product extends AbstractReporting
     public function getTotalReviews($startDate, $endDate): int
     {
         return $this->reviewRepository
+            ->resetModel()
             ->where('status', 'approved')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
@@ -156,10 +162,11 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getStockThresholdProducts($limit = null): Collection
+    public function getStockThresholdProducts($limit = null): EloquentCollection
     {
         return $this->productInventoryRepository
-            ->with('product', 'product.attribute_family', 'product.attribute_values', 'product.images')
+            ->resetModel()
+            ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->select('*', DB::raw('SUM(qty) as total_qty'))
             ->groupBy('product_id')
             ->orderBy('total_qty', 'ASC')
@@ -172,25 +179,33 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getTopSellingProductsByRevenue($limit = null): collection
+    public function getTopSellingProductsByRevenue($limit = null): Collection
     {
-        $products = $this->orderItemRepository
-            ->with(['product', 'product.images'])
-            ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_discount_refunded) as revenue'))
+        $items = $this->orderItemRepository
+            ->resetModel()
+            ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
+            ->addSelect('*', DB::raw('SUM(base_total_invoiced - base_amount_refunded) as revenue'))
             ->whereNull('parent_id')
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
+            ->having(DB::raw('SUM(base_total_invoiced - base_amount_refunded)'), '>', 0)
             ->groupBy('product_id')
             ->orderBy('revenue', 'DESC')
             ->limit($limit)
             ->get();
 
-        $products->map(function ($product) {
-            $product->formatted_revenue = core()->formatBasePrice($product->revenue);
-
-            $product->formatted_price = core()->formatBasePrice($product->price);
+        $items = $items->map(function ($item) {
+            return [
+                'id'                => $item->product_id,
+                'name'              => $item->name,
+                'price'             => $item->product?->price,
+                'formatted_price'   => core()->formatBasePrice($item->price),
+                'revenue'           => $item->revenue,
+                'formatted_revenue' => core()->formatBasePrice($item->revenue),
+                'images'            => $item->product?->images,
+            ];
         });
 
-        return $products;
+        return $items;
     }
 
     /**
@@ -198,19 +213,32 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getTopSellingProductsByQuantity($limit = null): collection
+    public function getTopSellingProductsByQuantity($limit = null): Collection
     {
-        $products = $this->orderItemRepository
-            ->with(['product', 'product.images'])
-            ->addSelect('*', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+        $items = $this->orderItemRepository
+            ->resetModel()
+            ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
+            ->addSelect('*', DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_ordered'))
             ->whereNull('parent_id')
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
+            ->having(DB::raw('SUM(qty_invoiced - qty_refunded)'), '>', 0)
             ->groupBy('product_id')
             ->orderBy('total_qty_ordered', 'DESC')
             ->limit($limit)
             ->get();
 
-        return $products;
+        $items = $items->map(function ($item) {
+            return [
+                'id'                => $item->product_id,
+                'name'              => $item->name,
+                'price'             => $item->product?->price,
+                'formatted_price'   => core()->formatBasePrice($item->price),
+                'total_qty_ordered' => $item->total_qty_ordered,
+                'images'            => $item->product?->images,
+            ];
+        });
+
+        return $items;
     }
 
     /**
@@ -218,11 +246,12 @@ class Product extends AbstractReporting
      *
      * @param  int  $limit
      */
-    public function getProductsWithMostReviews($limit = null): Collection
+    public function getProductsWithMostReviews($limit = null): EloquentCollection
     {
         $tablePrefix = DB::getTablePrefix();
 
         $products = $this->reviewRepository
+            ->resetModel()
             ->addSelect(
                 'product_id',
                 DB::raw('COUNT(*) as reviews')
@@ -242,6 +271,35 @@ class Product extends AbstractReporting
     }
 
     /**
+     * Gets last search terms
+     *
+     * @param  int  $limit
+     */
+    public function getLastSearchTerms($limit = null): EloquentCollection
+    {
+        return $this->searchTermRepository
+            ->resetModel()
+            ->whereBetween('updated_at', [$this->startDate, $this->endDate])
+            ->orderByDesc('updated_at')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * Gets top search terms
+     *
+     * @param  int  $limit
+     */
+    public function getTopSearchTerms($limit = null): EloquentCollection
+    {
+        return $this->searchTermRepository
+            ->resetModel()
+            ->orderByDesc('uses')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
      * Returns sold quantities over time
      *
      * @param  \Carbon\Carbon  $startDate
@@ -255,6 +313,7 @@ class Product extends AbstractReporting
         $groupColumn = $config['group_column'];
 
         $results = $this->orderItemRepository
+            ->resetModel()
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')
@@ -291,6 +350,7 @@ class Product extends AbstractReporting
         $groupColumn = $config['group_column'];
 
         $results = $this->wishlistRepository
+            ->resetModel()
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')

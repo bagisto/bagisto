@@ -1,21 +1,24 @@
 <!-- Stock Threshold Products Vue Component -->
 <v-dashboard-stock-threshold-products>
     <!-- Shimmer -->
-    <x-admin::shimmer.dashboard.stock-threshold-products/>
+    <x-admin::shimmer.dashboard.stock-threshold-products />
 </v-dashboard-stock-threshold-products>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dashboard-stock-threshold-products-template">
+    <script
+        type="text/x-template"
+        id="v-dashboard-stock-threshold-products-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.dashboard.stock-threshold-products/>
+            <x-admin::shimmer.dashboard.stock-threshold-products />
         </template>
 
         <!-- Total Sales Section -->
         <template v-else>
             <!-- Stock Threshold Products Detailes -->
             <div
-                class="rounded-[4px] box-shadow"
+                class="rounded box-shadow"
                 v-if="report.statistics.length"
             >
                 <!-- Single Product -->
@@ -23,30 +26,30 @@
                     class="relative"
                     v-for="product in report.statistics"
                 >
-                    <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] bg-white dark:bg-gray-900 border-b-[1px] dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
-                        <div class="flex gap-[10px]">
+                    <div class="row grid grid-cols-2 gap-y-6 p-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950 max-sm:grid-cols-[1fr_auto]">
+                        <div class="flex gap-2.5">
                             <template v-if="product.image">
                                 <div class="">
                                     <img
-                                        class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                        class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded"
                                         :src="product.image"
                                     >
                                 </div>
                             </template>
 
                             <template v-else>
-                                <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] overflow-hidden dark:invert dark:mix-blend-exclusion">
+                                <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 dark:border-gray-800 rounded overflow-hidden dark:invert dark:mix-blend-exclusion">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                    <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                         @lang('admin::app.dashboard.index.product-image')
                                     </p>
                                 </div>
                             </template>
 
-                            <div class="flex flex-col gap-[6px]">
+                            <div class="flex flex-col gap-1.5">
                                 <!-- Product Name -->
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @{{ product.name }}
                                 </p>
 
@@ -57,10 +60,10 @@
                             </div>
                         </div>
 
-                        <div class="flex gap-[6px] items-center justify-between">
-                            <div class="flex flex-col gap-[6px]">
+                        <div class="flex gap-1.5 items-center justify-between">
+                            <div class="flex flex-col gap-1.5">
                                 <!-- Product Price -->
-                                <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                                <p class="text-base text-gray-800 dark:text-white font-semibold">
                                     @{{ product.formatted_price }}
                                 </p>
 
@@ -72,7 +75,7 @@
 
                             <!-- View More Icon -->
                             <a :href="'{{ route('admin.catalog.products.edit', ':replace') }}'.replace(':replace', product.id)">
-                                <span class="icon-sort-right text-[24px] ltr:ml-[4px] rtl:mr-[4px] p-[6px] cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-[6px]"></span>
+                                <span class="icon-sort-right text-2xl ltr:ml-1 rtl:mr-1 p-1.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 hover:rounded-md"></span>
                             </a>
                         </div>
                     </div>
@@ -81,14 +84,14 @@
 
             <!-- Empty Product Design -->
             <div
-                class="rounded-[4px] box-shadow"
+                class="rounded box-shadow"
                 v-else
             >
-                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px] ">
-                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion">
+                <div class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5 ">
+                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-20 h-20 dark:invert dark:mix-blend-exclusion">
                     
                     <div class="flex flex-col items-center">
-                        <p class="text-[16px] text-gray-400 font-semibold">
+                        <p class="text-base text-gray-400 font-semibold">
                             @lang('admin::app.dashboard.index.empty-threshold')
                         </p>
     

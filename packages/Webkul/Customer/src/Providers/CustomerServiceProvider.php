@@ -14,11 +14,11 @@ class CustomerServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'customer');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'customer');
 
         $this->app['validator']->extend('captcha', function ($attribute, $value, $parameters) {
             return $this->app['captcha']->validateResponse($value);

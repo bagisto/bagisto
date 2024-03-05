@@ -24,7 +24,7 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Shop\Listeners\Customer@afterSubscribed',
         ],
 
-        'customer.note-created.after' => [
+        'customer.note.create.after' => [
             'Webkul\Shop\Listeners\Customer@afterNoteCreated',
         ],
 
@@ -41,6 +41,10 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'sales.invoice.save.after' => [
+            'Webkul\Shop\Listeners\Invoice@afterCreated',
+        ],
+
+        'sales.invoice.send_duplicate_email' => [
             'Webkul\Shop\Listeners\Invoice@afterCreated',
         ],
 

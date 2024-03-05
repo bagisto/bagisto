@@ -1,4 +1,4 @@
-<div class="flex gap-[15px]">
+<div class="flex gap-3">
     @foreach(['enable_facebook', 'enable_twitter', 'enable_google', 'enable_linkedin', 'enable_github'] as $social)
         @if (! core()->getConfigData('customer.settings.social_login.' . $social))
             @continue

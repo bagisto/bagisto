@@ -42,8 +42,8 @@ class CustomerFactory extends Factory
             'password'          => Hash::make($this->faker->password),
             'customer_group_id' => 2,
             'is_verified'       => 1,
-            'created_at'        => $now = date('Y-m-d H:i:s'),
-            'updated_at'        => $now,
+            'created_at'        => now(),
+            'updated_at'        => now(),
         ];
     }
 

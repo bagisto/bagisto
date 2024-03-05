@@ -4,8 +4,9 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Marketing\Repositories\URLRewriteRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
@@ -24,7 +25,8 @@ class ProductsCategoriesProxyController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
-        protected ThemeCustomizationRepository $themeCustomizationRepository
+        protected ThemeCustomizationRepository $themeCustomizationRepository,
+        protected URLRewriteRepository $urlRewriteRepository
     ) {
     }
 
@@ -35,12 +37,12 @@ class ProductsCategoriesProxyController extends Controller
      */
     public function index(Request $request)
     {
-        $slugOrPath = urldecode(trim($request->getPathInfo(), '/'));
+        $slugOrURLKey = urldecode(trim($request->getPathInfo(), '/'));
 
         /**
          * Support url for chinese, japanese, arabic and english with numbers.
          */
-        if (! preg_match('/^([\x{0621}-\x{064A}\x{4e00}-\x{9fa5}\x{3402}-\x{FA6D}\x{3041}-\x{30A0}\x{30A0}-\x{31FF}_a-z0-9-]+\/?)+$/u', $slugOrPath)) {
+        if (! preg_match('/^([\x{0621}-\x{064A}\x{4e00}-\x{9fa5}\x{3402}-\x{FA6D}\x{3041}-\x{30A0}\x{30A0}-\x{31FF}_a-z0-9-]+\/?)+$/u', $slugOrURLKey)) {
             visitor()->visit();
 
             $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
@@ -51,7 +53,7 @@ class ProductsCategoriesProxyController extends Controller
             return view('shop::home.index', compact('customizations'));
         }
 
-        $category = $this->categoryRepository->findByPath($slugOrPath);
+        $category = $this->categoryRepository->findBySlug($slugOrURLKey);
 
         if ($category) {
             visitor()->visit($category);
@@ -66,19 +68,61 @@ class ProductsCategoriesProxyController extends Controller
             ]);
         }
 
-        $product = $this->productRepository->findBySlug($slugOrPath);
+        $product = $this->productRepository->findBySlug($slugOrURLKey);
 
-        if (
-            ! $product
-            || ! $product->visible_individually
-            || ! $product->url_key
-            || ! $product->status
-        ) {
-            abort(404);
+        if ($product) {
+            if (
+                ! $product->url_key
+                || ! $product->visible_individually
+                || ! $product->status
+            ) {
+                abort(404);
+            }
+
+            visitor()->visit($product);
+
+            return view('shop::products.view', compact('product'));
         }
 
-        visitor()->visit($product);
+        /**
+         * If category is not found, try to find it by slug.
+         * If category is found by slug, redirect to category path.
+         */
+        $trimmedSlug = last(explode('/', $slugOrURLKey));
 
-        return view('shop::products.view', compact('product'));
+        $category = $this->categoryRepository->findBySlug($trimmedSlug);
+
+        if ($category) {
+            return redirect()->to($trimmedSlug, 301);
+        }
+
+        /**
+         * If neither category nor product matches,
+         * try to find it by url rewrite for category.
+         */
+        $categoryURLRewrite = $this->urlRewriteRepository->findOneWhere([
+            'entity_type'  => 'category',
+            'request_path' => $slugOrURLKey,
+            'locale'       => app()->getLocale(),
+        ]);
+
+        if ($categoryURLRewrite) {
+            return redirect()->to($categoryURLRewrite->target_path, $categoryURLRewrite->redirect_type);
+        }
+
+        /**
+         * If neither category nor product matches,
+         * try to find it by url rewrite for product.
+         */
+        $productURLRewrite = $this->urlRewriteRepository->findOneWhere([
+            'entity_type'  => 'product',
+            'request_path' => $slugOrURLKey,
+        ]);
+
+        if ($productURLRewrite) {
+            return redirect()->to($productURLRewrite->target_path, $productURLRewrite->redirect_type);
+        }
+
+        abort(404);
     }
 }

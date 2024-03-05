@@ -4,6 +4,7 @@ namespace Webkul\Shop\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Order;
 
 class OrderDataGrid extends DataGrid
 {
@@ -76,31 +77,31 @@ class OrderDataGrid extends DataGrid
                     'options' => [
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.processing'),
-                            'value'  => 'processing',
+                            'value'  => Order::STATUS_PROCESSING,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.completed'),
-                            'value'  => 'completed',
+                            'value'  => Order::STATUS_COMPLETED,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.canceled'),
-                            'value'  => 'canceled',
+                            'value'  => Order::STATUS_CANCELED,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.closed'),
-                            'value'  => 'closed',
+                            'value'  => Order::STATUS_CLOSED,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.pending'),
-                            'value'  => 'pending',
+                            'value'  => Order::STATUS_PENDING,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.pending-payment'),
-                            'value'  => 'pending_payment',
+                            'value'  => Order::STATUS_PENDING_PAYMENT,
                         ],
                         [
                             'label'  => trans('shop::app.customers.account.orders.status.options.fraud'),
-                            'value'  => 'fraud',
+                            'value'  => Order::STATUS_FRAUD,
                         ],
                     ],
                 ],
@@ -109,20 +110,27 @@ class OrderDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if ($row->status == 'processing') {
-                    return '<span class="badge badge-md badge-success">' . trans('shop::app.customers.account.orders.status.options.processing') . '</span>';
-                } elseif ($row->status == 'completed') {
-                    return '<span class="badge badge-md badge-success">' . trans('shop::app.customers.account.orders.status.options.completed') . '</span>';
-                } elseif ($row->status == 'canceled') {
-                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customers.account.orders.status.options.canceled') . '</span>';
-                } elseif ($row->status == 'closed') {
-                    return '<span class="badge badge-md badge-info">' . trans('shop::app.customers.account.orders.status.options.closed') . '</span>';
-                } elseif ($row->status == 'pending') {
-                    return '<span class="badge badge-md badge-warning">' . trans('shop::app.customers.account.orders.status.options.pending') . '</span>';
-                } elseif ($row->status == 'pending_payment') {
-                    return '<span class="badge badge-md badge-warning">' . trans('shop::app.customers.account.orders.status.options.pending-payment') . '</span>';
-                } elseif ($row->status == 'fraud') {
-                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customers.account.orders.status.options.fraud') . '</span>';
+                switch ($row->status) {
+                    case Order::STATUS_PROCESSING:
+                        return '<p class="label-processing">'.trans('shop::app.customers.account.orders.status.options.processing').'</p>';
+
+                    case Order::STATUS_COMPLETED:
+                        return '<p class="label-active">'.trans('shop::app.customers.account.orders.status.options.completed').'</p>';
+
+                    case Order::STATUS_CANCELED:
+                        return '<p class="label-canceled">'.trans('shop::app.customers.account.orders.status.options.canceled').'</p>';
+
+                    case Order::STATUS_CLOSED:
+                        return '<p class="label-closed">'.trans('shop::app.customers.account.orders.status.options.closed').'</p>';
+
+                    case Order::STATUS_PENDING:
+                        return '<p class="label-pending">'.trans('shop::app.customers.account.orders.status.options.pending').'</p>';
+
+                    case Order::STATUS_PENDING_PAYMENT:
+                        return '<p class="label-pending">'.trans('shop::app.customers.account.orders.status.options.pending-payment').'</p>';
+
+                    case Order::STATUS_FRAUD:
+                        return '<p class="label-canceled">'.trans('shop::app.customers.account.orders.status.options.fraud').'</p>';
                 }
             },
         ]);
@@ -137,7 +145,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-eye',
-            'title'  => trans('ui::app.datagrid.view'),
+            'title'  => trans('shop::app.customers.account.orders.action-view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('shop.customers.account.orders.view', $row->id);

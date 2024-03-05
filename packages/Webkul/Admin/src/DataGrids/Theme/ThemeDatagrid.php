@@ -19,9 +19,10 @@ class ThemeDatagrid extends DataGrid
             : [core()->getRequestedLocaleCode()];
 
         $queryBuilder = DB::table('theme_customizations')
-            ->join('theme_customization_translations', function ($leftJoin) use ($whereInLocales) {
-                $leftJoin->on('theme_customizations.id', '=', 'theme_customization_translations.theme_customization_id')
-                    ->whereIn('theme_customization_translations.locale', $whereInLocales);
+            ->distinct()
+            ->join('theme_customization_translations as tct', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('theme_customizations.id', '=', 'tct.theme_customization_id')
+                    ->whereIn('tct.locale', $whereInLocales);
             })
             ->join('channel_translations', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('theme_customizations.channel_id', '=', 'channel_translations.channel_id')
@@ -36,9 +37,9 @@ class ThemeDatagrid extends DataGrid
                 'theme_customizations.name as name',
             );
 
-        $this->addFilter('type', 'channel_translations.type');
-        $this->addFilter('name', 'channel_translations.name');
-        $this->addFilter('sort_order', 'channel_translations.sort_order');
+        $this->addFilter('type', 'theme_customizations.type');
+        $this->addFilter('name', 'theme_customizations.name');
+        $this->addFilter('sort_order', 'theme_customizations.sort_order');
         $this->addFilter('status', 'theme_customizations.status');
         $this->addFilter('channel_name', 'channel_name');
 
@@ -101,10 +102,10 @@ class ThemeDatagrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return '<p class="label-processing">' . trans('admin::app.settings.themes.index.datagrid.active') . '</p>';
+                    return '<p class="label-active">'.trans('admin::app.settings.themes.index.datagrid.active').'</p>';
                 }
 
-                return '<p class="label-pending">' . trans('admin::app.settings.themes.index.datagrid.inactive') . '</p>';
+                return '<p class="label-pending">'.trans('admin::app.settings.themes.index.datagrid.inactive').'</p>';
             },
         ]);
     }

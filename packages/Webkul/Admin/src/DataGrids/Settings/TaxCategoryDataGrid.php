@@ -61,8 +61,9 @@ class TaxCategoryDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('settings.taxes.tax-categories.edit')) {
+        if (bouncer()->hasPermission('settings.taxes.tax_categories.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.edit'),
                 'method' => 'GET',
@@ -72,8 +73,9 @@ class TaxCategoryDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('settings.taxes.tax-categories.delete')) {
+        if (bouncer()->hasPermission('settings.taxes.tax_categories.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.delete'),
                 'method' => 'DELETE',

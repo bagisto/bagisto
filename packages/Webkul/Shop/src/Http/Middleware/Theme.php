@@ -24,10 +24,10 @@ class Theme
             if ($themes->exists($channelThemeCode)) {
                 $themes->set($channelThemeCode);
             } else {
-                $themes->set(config('themes.default'));
+                $themes->set(config('themes.shop-default'));
             }
         } else {
-            $themes->set(config('themes.default'));
+            $themes->set(config('themes.shop-default'));
         }
 
         return $next($request);

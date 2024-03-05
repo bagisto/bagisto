@@ -32,7 +32,7 @@ class AccountController extends Controller
 
         $this->validate(request(), [
             'name'             => 'required',
-            'email'            => 'email|unique:admins,email,' . $user->id,
+            'email'            => 'email|unique:admins,email,'.$user->id,
             'password'         => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
             'image.*'          => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
@@ -64,7 +64,7 @@ class AccountController extends Controller
         }
 
         if (request()->hasFile('image')) {
-            $data['image'] = current(request()->file('image'))->store('admins/' . $user->id);
+            $data['image'] = current(request()->file('image'))->store('admins/'.$user->id);
         } else {
             if (! isset($data['image'])) {
                 if (! empty($data['image'])) {

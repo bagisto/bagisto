@@ -1,7 +1,6 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
 <v-cart-summary
-    ref="vCartSummary"
     :cart="cart"
     :is-cart-loading="isCartLoading"
 >
@@ -10,23 +9,29 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-summary-template">
+    <script
+        type="text/x-template"
+        id="v-cart-summary-template"
+    >
         <template v-if="isCartLoading">
-            <!-- onepage Summary Shimmer Effect -->
-            <x-shop::shimmer.checkout.onepage.cart-summary/>
+            <!-- Onepage Summary Shimmer Effect -->
+            <x-shop::shimmer.checkout.onepage.cart-summary />
         </template>
 
         <template v-else>
-            <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
-                <h1 class="text-[26px] font-medium max-sm:text-[20px]">
+            <div class="sticky top-8 h-max w-[442px] max-w-full ltr:pl-8 rtl:pr-8 max-lg:w-auto max-lg:max-w-[442px] max-lg:ltr:pl-0 max-lg:rtl:pr-0">
+                <h1 class="text-2xl font-medium max-sm:text-xl">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h1>
-                
-                <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-[20px]">
-                    <div 
-                        class="flex gap-x-[15px] pb-[20px]"
+
+                <div class="grid mt-10 border-b border-[#E9E9E9] max-sm:mt-5">
+                    <div
+                        class="flex gap-x-4 pb-5"
                         v-for="item in cart.items"
                     >
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_image.before') !!}
+
                         <img
                             class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
                             :src="item.base_image.small_image_url"
@@ -35,137 +40,160 @@
                             height="110"
                         />
 
+                        {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_image.after') !!}
+
                         <div>
-                            <p 
-                                class="text-[16px] text-navyBlue max-sm:text-[14px] max-sm:font-medium" 
+                            {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_name.before') !!}
+
+                            <p
+                                class="text-base text-navyBlue max-sm:text-sm max-sm:font-medium"
                                 v-text="item.name"
                             >
                             </p>
 
-                            <p class="mt-[10px] text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
-                                @{{ item.formatted_price }} X @{{ item.quantity }}
+                            {!! view_render_event('bagisto.shop.checkout.onepage.summary.item_name.after') !!}
+
+                            <p class="mt-2.5 text-lg font-medium max-sm:text-sm max-sm:font-normal">
+                                @lang('shop::app.checkout.onepage.summary.price_&_qty', ['price' => '@{{ item.formatted_price }}', 'qty' => '@{{ item.quantity }}'])
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+                <div class="grid gap-4 mt-6 mb-8">
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.sub_total.before') !!}
+
                     <div class="flex text-right justify-between">
-                        <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+                        <p class="text-base max-sm:text-sm max-sm:font-normal">
                             @lang('shop::app.checkout.onepage.summary.sub-total')
                         </p>
 
-                        <p 
-                            class="text-[16px] font-medium max-sm:text-[14px]"
+                        <p
+                            class="text-base font-medium max-sm:text-sm"
                             v-text="cart.base_sub_total"
                         >
                         </p>
                     </div>
 
-                    <div 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.sub_total.after') !!}
+
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.before') !!}
+
+                    <div
                         class="flex text-right justify-between"
                         v-for="(amount, index) in cart.base_tax_amounts"
                         v-if="parseFloat(cart.base_tax_total)"
                     >
-                        <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+                        <p class="text-base max-sm:text-sm max-sm:font-normal">
                             @lang('shop::app.checkout.onepage.summary.tax') (@{{ index }})%
                         </p>
 
-                        <p 
-                            class="text-[16px] font-medium max-sm:text-[14px]"
+                        <p
+                            class="text-base font-medium max-sm:text-sm"
                             v-text="amount"
                         >
                         </p>
                     </div>
 
-                    <div 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
+
+                    <div
                         class="flex text-right justify-between"
                         v-if="cart.selected_shipping_rate"
                     >
-                        <p class="text-[16px]">
+                        <p class="text-base">
                             @lang('shop::app.checkout.onepage.summary.delivery-charges')
                         </p>
 
-                        <p 
-                            class="text-[16px] font-medium"
+                        <p
+                            class="text-base font-medium"
                             v-text="cart.selected_shipping_rate"
                         >
                         </p>
                     </div>
 
-                    <div 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.discount_amount.before') !!}
+
+                    <div
                         class="flex text-right justify-between"
                         v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
                     >
-                        <p class="text-[16px]">
+                        <p class="text-base">
                             @lang('shop::app.checkout.onepage.summary.discount-amount')
                         </p>
 
-                        <p 
-                            class="text-[16px] font-medium"
+                        <p
+                            class="text-base font-medium"
                             v-text="cart.formatted_base_discount_amount"
                         >
                         </p>
                     </div>
 
-                    @include('shop::checkout.onepage.coupon')
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.discount_amount.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.coupon.before') !!}
+
+                    @include('shop::checkout.cart.coupon')
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.coupon.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.before') !!}
 
                     <div class="flex text-right justify-between">
-                        <p class="text-[18px] font-semibold">
+                        <p class="text-lg font-semibold">
                             @lang('shop::app.checkout.onepage.summary.grand-total')
                         </p>
 
-                        <p 
-                            class="text-[18px] font-semibold"
+                        <p
+                            class="text-lg font-semibold"
                             v-text="cart.base_grand_total"
                         >
                         </p>
                     </div>
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.after') !!}
                 </div>
 
                 <template v-if="canPlaceOrder">
                     <div v-if="selectedPaymentMethod?.method == 'paypal_smart_button'">
+                        {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
+
                         <v-paypal-smart-button></v-paypal-smart-button>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
                     </div>
 
                     <div
                         class="flex justify-end"
                         v-else
                     >
-                        <button
-                            v-if="! isLoading"
-                            class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                        {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.before') !!}
+
+                        <x-shop::button
+                            v-if="!isLoading"
+                            type="button"
+                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                            :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                            :loading="false"
                             @click="placeOrder"
-                        >
-                            @lang('shop::app.checkout.onepage.summary.place-order')    
-                        </button>
+                        />
 
-                        <button
+                        <x-shop::button
+                            type="button"
+                            class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
                             v-else
-                            class="flex gap-[10px] items-center w-max py-[11px] px-[32px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
-                        >
-                            <!-- Spinner -->
-                            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle
-                                    class="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    stroke-width="4"
-                                >
-                                </circle>
+                            :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                            :loading="true"
+                            :disabled="true"
+                        />
 
-                                <path
-                                    class="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                >
-                                </path>
-                            </svg>
-
-                            @lang('shop::app.checkout.onepage.summary.processing')
-                        </button>
+                        {!! view_render_event('bagisto.shop.checkout.onepage.summary.place_order_button.after') !!}
                     </div>
                 </template>
             </div>
@@ -175,7 +203,7 @@
     <script type="module">
         app.component('v-cart-summary', {
             template: '#v-cart-summary-template',
-            
+
             props: ['cart', 'isCartLoading'],
 
             data() {
@@ -186,6 +214,12 @@
 
                     isLoading: false,
                 }
+            },
+
+            mounted() {
+                this.$emitter.on('can-place-order', (value) => this.canPlaceOrder = value);
+
+                this.$emitter.on('after-payment-method-selected', (value) => this.selectedPaymentMethod = value);
             },
 
             methods: {
@@ -199,8 +233,10 @@
                             } else {
                                 window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
+
+                            this.isLoading = false;
                         })
-                        .catch(error => console.log(error));
+                        .catch(error => this.isProcessing = false);
                 },
             },
         });

@@ -2,11 +2,16 @@
 
 namespace Webkul\User\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\User\Contracts\Role as RoleContract;
+use Webkul\User\Database\Factories\RoleFactory;
 
 class Role extends Model implements RoleContract
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,5 +41,13 @@ class Role extends Model implements RoleContract
     public function admins()
     {
         return $this->hasMany(AdminProxy::modelClass());
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return RoleFactory::new();
     }
 }

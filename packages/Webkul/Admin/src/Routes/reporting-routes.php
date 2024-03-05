@@ -11,7 +11,7 @@ use Webkul\Admin\Http\Controllers\Reporting\SaleController;
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('reporting')->group(function () {
         /**
-         * CUstomer routes.
+         * Customer routes.
          */
         Route::controller(CustomerController::class)->prefix('customers')->group(function () {
             Route::get('', 'index')->name('admin.reporting.customers.index');

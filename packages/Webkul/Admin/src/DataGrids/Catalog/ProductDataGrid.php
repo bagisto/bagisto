@@ -59,7 +59,6 @@ class ProductDataGrid extends DataGrid
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
-            ->distinct()
             ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
             ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('pc.category_id', '=', 'ct.category_id')
@@ -80,18 +79,17 @@ class ProductDataGrid extends DataGrid
                 'product_flat.url_key',
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
-                DB::raw('SUM(DISTINCT ' . $tablePrefix . 'product_inventories.qty) as quantity')
+                DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity')
             )
-            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'product_images.id) as images_count'));
-
-        $queryBuilder->groupBy(
-            'product_flat.product_id',
-            'product_flat.locale',
-            'product_flat.channel'
-        );
-
-        $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
-        $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
+            ->distinct()
+            ->whereIn('product_flat.locale', $whereInLocales)
+            ->whereIn('product_flat.channel', $whereInChannels)
+            ->groupBy(
+                'product_flat.product_id',
+                'product_flat.locale',
+                'product_flat.channel'
+            );
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('name', 'product_flat.name');
@@ -122,7 +120,7 @@ class ProductDataGrid extends DataGrid
             'index'      => 'sku',
             'label'      => trans('admin::app.catalog.products.index.datagrid.sku'),
             'type'       => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -206,12 +204,12 @@ class ProductDataGrid extends DataGrid
 
                 'params' => [
                     'options' => collect(config('product_types'))
-                        ->map(fn ($type) => ['label' => $type['name'], 'value' => trans('admin::app.catalog.products.index.create.' . $type['key'])])
+                        ->map(fn ($type) => ['label' => trans($type['name']), 'value' => $type['key']])
                         ->values()
                         ->toArray(),
                 ],
             ],
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -232,10 +230,6 @@ class ProductDataGrid extends DataGrid
                 'url'    => function ($row) {
                     return route('admin.catalog.products.edit', $row->product_id);
                 },
-
-                'condition' => function () {
-                    return true;
-                },
             ]);
         }
     }
@@ -247,7 +241,7 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('catalog.products.mass-delete')) {
+        if (bouncer()->hasPermission('catalog.products.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
                 'url'    => route('admin.catalog.products.mass_delete'),
@@ -255,7 +249,7 @@ class ProductDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.products.mass-update')) {
+        if (bouncer()->hasPermission('catalog.products.edit')) {
             $this->addMassAction([
                 'title'   => trans('admin::app.catalog.products.index.datagrid.update-status'),
                 'url'     => route('admin.catalog.products.mass_update'),

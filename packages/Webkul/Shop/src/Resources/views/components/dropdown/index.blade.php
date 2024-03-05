@@ -11,7 +11,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div {{ $content->attributes->merge(['class' => 'p-[20px]']) }}>
+            <div {{ $content->attributes->merge(['class' => 'p-5']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -19,7 +19,7 @@
 
     @isset($menu)
         <template v-slot:menu>
-            <ul {{ $menu->attributes->merge(['class' => 'py-[15px]']) }}>
+            <ul {{ $menu->attributes->merge(['class' => 'py-4']) }}>
                 {{ $menu }}
             </ul>
         </template>
@@ -27,7 +27,10 @@
 </v-dropdown>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-dropdown-template">
+    <script
+        type="text/x-template"
+        id="v-dropdown-template"
+    >
         <div>
             <div
                 class="select-none"
@@ -48,7 +51,7 @@
                 leave-to-class="transform opacity-0 scale-95"
             >
                 <div
-                    class="absolute w-max z-10 overflow-hidden bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px]"
+                    class="absolute w-max z-20 bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px]"
                     :style="positionStyles"
                     v-show="isActive"
                 >

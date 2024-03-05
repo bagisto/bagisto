@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
 use Webkul\Shop\Http\Controllers\CompareController;
 use Webkul\Shop\Http\Controllers\HomeController;
+use Webkul\Shop\Http\Controllers\PageController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
@@ -13,14 +13,14 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * CMS pages.
      */
-    Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])
+    Route::get('page/{slug}', [PageController::class, 'view'])
         ->name('shop.cms.page')
         ->middleware('cacheResponse');
 
     /**
      * Fallback route.
      */
-    Route::fallback(ProductsCategoriesProxyController::class . '@index')
+    Route::fallback(ProductsCategoriesProxyController::class.'@index')
         ->name('shop.product_or_category.index')
         ->middleware('cacheResponse');
 

@@ -4,17 +4,17 @@
         <div v-if="column.type === 'boolean'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-sm font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -22,16 +22,16 @@
                 </div>
             </div>
 
-            <div class="mb-[8px] mt-[5px]">
+            <div class="mb-2 mt-1.5">
                 <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="flex justify-between items-center gap-[15px] w-full pl-[15px] pr-[12px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <button class="flex justify-between items-center gap-4 w-full ltr:pl-4 rtl:pr-4 ltr:pr-3 rtl:pl-3 py-2 rounded-lg bg-white border border-[#E9E9E9] text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:ltr:pr-2.5 max-md:rtl:pl-2.5 max-md:ltr:pl-2.5 max-md:rtl:pr-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                             <span v-text="'@lang('admin::app.components.datagrid.filters.select')'"></span>
 
-                            <span class="icon-arrow-down text-[24px]"></span>
+                            <span class="icon-arrow-down text-2xl"></span>
                         </button>
-                    </x-slot:toggle>
+                    </x-slot>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
@@ -39,22 +39,21 @@
                             v-for="option in column.options"
                             v-text="option.label"
                             @click="filterPage(option.value, column)"
-                        >
-                        </x-shop::dropdown.menu.item>
-                    </x-slot:menu>
+                        />
+                    </x-slot>
                 </x-shop::dropdown>
             </div>
 
-            <div class="mb-[16px] flex gap-2 flex-wrap">
+            <div class="mb-4 flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <!-- Retrieving the label from the options based on the applied column value. -->
                     <span v-text="column.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                     <span
-                        class="icon-cross cursor-pointer text-[18px] text-white ltr:ml-[5px] rtl:mr-[5px]"
+                        class="icon-cross cursor-pointer text-lg text-white ltr:ltr:ml-1.5 rtl:mr-1.5"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
@@ -68,17 +67,17 @@
             <div v-if="column.options.type === 'basic'">
                 <div class="flex items-center justify-between">
                     <p
-                        class="text-[14px] font-medium leading-[24px] text-gray-800"
+                        class="text-sm font-medium leading-6 text-gray-800"
                         v-text="column.label"
                     >
                     </p>
 
                     <div
-                        class="flex items-center gap-x-[5px]"
+                        class="flex items-center gap-x-1.5"
                         @click="removeAppliedColumnAllValues(column.index)"
                     >
                         <p
-                            class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                            class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
                             v-if="hasAnyAppliedColumnValues(column.index)"
                         >
                             @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -86,40 +85,38 @@
                     </div>
                 </div>
 
-                <div class="mb-[8px] mt-[5px]">
+                <div class="mb-2 mt-1.5">
                     <x-shop::dropdown>
                         <!-- Dropdown Toggler -->
                         <x-slot:toggle>
-                            <button class="flex justify-between items-center gap-[15px] w-full pl-[15px] pr-[12px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                            <button class="flex justify-between items-center gap-4 w-full ltr:pl-4 rtl:pr-4 ltr:pr-3 rtl:pl-3 py-2 rounded-lg bg-white border border-[#E9E9E9] text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:ltr:pr-2.5 max-md:rtl:pl-2.5 max-md:ltr:pl-2.5 max-md:rtl:pr-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                                 <span v-text="'@lang('admin::app.components.datagrid.filters.select')'"></span>
 
-                                <span class="icon-arrow-down text-[24px]"></span>
+                                <span class="icon-arrow-down text-2xl"></span>
                             </button>
-                        </x-slot:toggle>
+                        </x-slot>
 
                         <!-- Dropdown Content -->
                         <x-slot:menu>
                             <x-shop::dropdown.menu.item
-                                {{-- class="w-full" --}}
                                 v-for="option in column.options.params.options"
                                 v-text="option.label"
                                 @click="filterPage(option.value, column)"
-                            >
-                            </x-shop::dropdown.menu.item>
-                        </x-slot:menu>
+                            />
+                        </x-slot>
                     </x-shop::dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <!-- Retrieving the label from the options based on the applied column value. -->
                         <span v-text="column.options.params.options.find((option => option.value == appliedColumnValue)).label"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ltr:ml-1.5 rtl:mr-1.5 cursor-pointer text-lg text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -131,17 +128,17 @@
             <div v-else-if="column.options.type === 'searchable'">
                 <div class="flex items-center justify-between">
                     <p
-                        class="text-[14px] font-medium leading-[24px] text-gray-800"
+                        class="text-sm font-medium leading-6 text-gray-800"
                         v-text="column.label"
                     >
                     </p>
 
                     <div
-                        class="flex items-center gap-x-[5px]"
+                        class="flex items-center gap-x-1.5"
                         @click="removeAppliedColumnAllValues(column.index)"
                     >
                         <p
-                            class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                            class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
                             v-if="hasAnyAppliedColumnValues(column.index)"
                         >
                             @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
@@ -149,7 +146,7 @@
                     </div>
                 </div>
 
-                <div class="mb-[8px] mt-[5px]">
+                <div class="mb-2 mt-1.5">
                     <v-datagrid-searchable-dropdown
                         :datagrid-id="available.id"
                         :column="column"
@@ -158,15 +155,15 @@
                     </v-datagrid-searchable-dropdown>
                 </div>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[4px] bg-gray-600 px-[8px] py-[4px] font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ltr:ml-1.5 rtl:mr-1.5 cursor-pointer text-lg text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -175,21 +172,21 @@
             </div>
         </div>
 
-        {{-- Date Range --}}
+        <!-- Date Range -->
         <div v-else-if="column.type === 'date_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-sm font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
@@ -197,9 +194,9 @@
                 </div>
             </div>
 
-            <div class="mt-[16px] grid grid-cols-2 gap-[5px]">
+            <div class="mt-4 grid grid-cols-2 gap-1.5">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -213,7 +210,7 @@
                 <x-shop::flat-picker.date ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -230,7 +227,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -242,15 +239,15 @@
                     />
                 </x-shop::flat-picker.date>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ltr:ml-1.5 rtl:mr-1.5 cursor-pointer text-lg text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -259,21 +256,21 @@
             </div>
         </div>
 
-        {{-- Date Time Range --}}
+        <!-- Date Time Range -->
         <div v-else-if="column.type === 'datetime_range'">
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-sm font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
@@ -281,9 +278,9 @@
                 </div>
             </div>
 
-            <div class="my-[16px] grid grid-cols-2 gap-[5px]">
+            <div class="my-4 grid grid-cols-2 gap-1.5">
                 <p
-                    class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center font-medium leading-[24px] text-gray-600"
+                    class="cursor-pointer rounded-md border border-gray-300 px-2 py-1.5 text-center font-medium leading-6 text-gray-600"
                     v-for="option in column.options"
                     v-text="option.label"
                     @click="filterPage(
@@ -297,7 +294,7 @@
                 <x-shop::flat-picker.datetime ::allow-input="false">
                     <input
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
                         :type="column.input_type"
                         :name="`${column.index}[from]`"
                         :placeholder="column.label"
@@ -314,7 +311,7 @@
                     <input
                         type="column.input_type"
                         value=""
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400"
                         :name="`${column.index}[to]`"
                         :placeholder="column.label"
                         :ref="`${column.index}[from]`"
@@ -326,15 +323,15 @@
                     />
                 </x-shop::flat-picker.datetime>
 
-                <div class="mb-[16px] flex gap-2 flex-wrap">
+                <div class="mb-4 flex gap-2 flex-wrap">
                     <p
-                        class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                        class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                         v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                     >
                         <span v-text="appliedColumnValue.join(' to ')"></span>
 
                         <span
-                            class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                            class="icon-cancel ltr:ml-1.5 rtl:mr-1.5 cursor-pointer text-lg text-white"
                             @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                         >
                         </span>
@@ -343,21 +340,21 @@
             </div>
         </div>
 
-        {{-- Rest --}}
+        <!-- Rest -->
         <div v-else>
             <div class="flex items-center justify-between">
                 <p
-                    class="text-[14px] font-medium leading-[24px] text-gray-800"
+                    class="text-sm font-medium leading-6 text-gray-800"
                     v-text="column.label"
                 >
                 </p>
 
                 <div
-                    class="flex items-center gap-x-[5px]"
+                    class="flex items-center gap-x-1.5"
                     @click="removeAppliedColumnAllValues(column.index)"
                 >
                     <p
-                        class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
+                        class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
                         v-if="hasAnyAppliedColumnValues(column.index)"
                     >
                         @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
@@ -365,25 +362,25 @@
                 </div>
             </div>
 
-            <div class="mb-[8px] mt-[5px] grid">
+            <div class="mb-2 mt-1.5 grid">
                 <input
                     type="text"
-                    class="mb-3 w-full rounded border px-3 py-2 text-[14px] text-gray-600 shadow transition-all hover:border-gray-400 focus:border-gray-400"
+                    class="mb-3 w-full rounded border px-3 py-2 text-sm text-gray-600 shadow transition-all hover:border-gray-400 focus:border-gray-400"
                     :name="column.index"
                     :placeholder="column.label"
                     @keyup.enter="filterPage($event, column)"
                 />
             </div>
 
-            <div class="mb-[16px] flex gap-2 flex-wrap">
+            <div class="mb-4 flex gap-2 flex-wrap">
                 <p
-                    class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
+                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                 >
                     <span v-text="appliedColumnValue"></span>
 
                     <span
-                        class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
+                        class="icon-cancel ltr:ml-1.5 rtl:mr-1.5 cursor-pointer text-lg text-white"
                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                     >
                     </span>
@@ -398,12 +395,12 @@
         <x-shop::dropdown ::close-on-click="false">
             <!-- Dropdown Toggler -->
             <x-slot:toggle>
-                <button class="flex justify-between items-center gap-[15px] w-full pl-[15px] pr-[12px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                <button class="flex justify-between items-center gap-4 w-full pl-4 pr-3 py-2 rounded-lg bg-white border border-[#E9E9E9] text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-2.5 max-md:pl-2.5 max-md:border-0 max-md:w-[110px] cursor-pointer">
                     <span v-text="'@lang('admin::app.components.datagrid.filters.select')'"></span>
 
-                    <span class="icon-arrow-down text-[24px]"></span>
+                    <span class="icon-arrow-down text-2xl"></span>
                 </button>
-            </x-slot:toggle>
+            </x-slot>
 
             <!-- Dropdown Content -->
             <x-slot:menu>
@@ -412,7 +409,7 @@
                         <ul class="list-reset">
                             <li class="p-2">
                                 <input
-                                    class="block w-full rounded-[6px] border border-gray-300 bg-white px-[8px] py-[6px] text-[14px] leading-[24px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="block w-full rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                     @keyup="lookUp($event)"
                                 >
                             </li>
@@ -449,7 +446,7 @@
                         </ul>
                     </div>
                 </div>
-            </x-slot:menu>
+            </x-slot>
         </x-shop::dropdown>
     </script>
 
@@ -475,7 +472,7 @@
                         search: $event.target.value,
                     };
 
-                    if (!(params['search'].length > 1)) {
+                    if (! (params['search'].length > 1)) {
                         this.searchedOptions = [];
 
                         this.isMinimumCharacters = false;

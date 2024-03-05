@@ -20,7 +20,7 @@ class ThemeViewFinder extends FileViewFinder
         // Extract the $view and the $namespace parts
         [$namespace, $view] = $this->parseNamespaceSegments($name);
 
-        if (! Str::contains(request()->url(), config('app.admin_url') . '/')) {
+        if (! Str::contains(request()->url(), config('app.admin_url').'/')) {
             $paths = $this->addThemeNamespacePaths($namespace);
 
             try {
@@ -28,7 +28,7 @@ class ThemeViewFinder extends FileViewFinder
             } catch (\Exception $e) {
                 if ($namespace !== 'shop') {
                     if (strpos($view, 'shop.') !== false) {
-                        $view = str_replace('shop.', 'shop.' . Themes::current()->code . '.', $view);
+                        $view = str_replace('shop.', 'shop.'.Themes::current()->code.'.', $view);
                     }
                 }
 
@@ -46,7 +46,7 @@ class ThemeViewFinder extends FileViewFinder
             } catch (\Exception $e) {
                 if ($namespace != 'admin') {
                     if (strpos($view, 'admin.') !== false) {
-                        $view = str_replace('admin.', 'admin.' . Themes::current()->code . '.', $view);
+                        $view = str_replace('admin.', 'admin.'.Themes::current()->code.'.', $view);
                     }
                 }
 
@@ -70,7 +70,7 @@ class ThemeViewFinder extends FileViewFinder
         $searchPaths = array_diff($this->paths, Themes::getLaravelViewPaths());
 
         foreach (array_reverse($searchPaths) as $path) {
-            $newPath = base_path() . '/' . $path;
+            $newPath = base_path().'/'.$path;
 
             $paths = Arr::prepend($paths, $newPath);
         }
@@ -97,7 +97,7 @@ class ThemeViewFinder extends FileViewFinder
             $searchPaths = array_diff($this->paths, Themes::getLaravelViewPaths());
 
             $addPaths = array_map(function ($path) use ($namespace) {
-                return base_path() . '/' . "$path/$namespace";
+                return base_path().'/'."$path/$namespace";
             }, $searchPaths);
 
             $this->prependNamespace($namespace, $addPaths);

@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Sales;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Repositories\OrderRepository;
 
@@ -36,11 +37,11 @@ class OrderDataGrid extends DataGrid
                 'status',
                 'customer_email',
                 'orders.cart_id as image',
-                DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name) as full_name'),
-                DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, ", ", ' . DB::getTablePrefix() . 'order_address_billing.state,", ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location')
+                DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name) as full_name'),
+                DB::raw('CONCAT('.DB::getTablePrefix().'order_address_billing.city, ", ", '.DB::getTablePrefix().'order_address_billing.state,", ", '.DB::getTablePrefix().'order_address_billing.country) as location')
             );
 
-        $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name)'));
+        $this->addFilter('full_name', DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name)'));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
@@ -65,41 +66,68 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.sales.orders.index.datagrid.status'),
-            'type'       => 'checkbox',
+            'type'       => 'dropdown',
             'options'    => [
-                'processing'      => trans('admin::app.sales.orders.index.datagrid.processing'),
-                'completed'       => trans('admin::app.sales.orders.index.datagrid.completed'),
-                'canceled'        => trans('admin::app.sales.orders.index.datagrid.canceled'),
-                'closed'          => trans('admin::app.sales.orders.index.datagrid.closed'),
-                'pending'         => trans('admin::app.sales.orders.index.datagrid.pending'),
-                'pending_payment' => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
-                'fraud'           => trans('admin::app.sales.orders.index.datagrid.fraud'),
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.processing'),
+                            'value' => Order::STATUS_PROCESSING,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.completed'),
+                            'value' => Order::STATUS_COMPLETED,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.canceled'),
+                            'value' => Order::STATUS_CANCELED,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.closed'),
+                            'value' => Order::STATUS_CLOSED,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.pending'),
+                            'value' => Order::STATUS_PENDING,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
+                            'value' => Order::STATUS_PENDING_PAYMENT,
+                        ],
+                        [
+                            'label' => trans('admin::app.sales.orders.index.datagrid.fraud'),
+                            'value' => Order::STATUS_FRAUD,
+                        ],
+                    ],
+                ],
             ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
                 switch ($row->status) {
-                    case 'processing':
-                        return '<p class="label-processing">' . trans('admin::app.sales.orders.index.datagrid.processing') . '</p>';
+                    case Order::STATUS_PROCESSING:
+                        return '<p class="label-processing">'.trans('admin::app.sales.orders.index.datagrid.processing').'</p>';
 
-                    case 'completed':
-                        return '<p class="label-active">' . trans('admin::app.sales.orders.index.datagrid.completed') . '</p>';
+                    case Order::STATUS_COMPLETED:
+                        return '<p class="label-active">'.trans('admin::app.sales.orders.index.datagrid.completed').'</p>';
 
-                    case 'canceled':
-                        return '<p class="label-canceled">' . trans('admin::app.sales.orders.index.datagrid.canceled') . '</p>';
+                    case Order::STATUS_CANCELED:
+                        return '<p class="label-canceled">'.trans('admin::app.sales.orders.index.datagrid.canceled').'</p>';
 
-                    case 'closed':
-                        return '<p class="label-closed">' . trans('admin::app.sales.orders.index.datagrid.closed') . '</p>';
+                    case Order::STATUS_CLOSED:
+                        return '<p class="label-closed">'.trans('admin::app.sales.orders.index.datagrid.closed').'</p>';
 
-                    case 'pending':
-                        return '<p class="label-pending">' . trans('admin::app.sales.orders.index.datagrid.pending') . '</p>';
+                    case Order::STATUS_PENDING:
+                        return '<p class="label-pending">'.trans('admin::app.sales.orders.index.datagrid.pending').'</p>';
 
-                    case 'pending_payment':
-                        return '<p class="label-pending">' . trans('admin::app.sales.orders.index.datagrid.pending-payment') . '</p>';
+                    case Order::STATUS_PENDING_PAYMENT:
+                        return '<p class="label-pending">'.trans('admin::app.sales.orders.index.datagrid.pending-payment').'</p>';
 
-                    case 'fraud':
-                        return '<p class="label-canceled">' . trans('admin::app.sales.orders.index.datagrid.fraud') . '</p>';
+                    case Order::STATUS_FRAUD:
+                        return '<p class="label-canceled">'.trans('admin::app.sales.orders.index.datagrid.fraud').'</p>';
                 }
             },
         ]);
@@ -121,7 +149,7 @@ class OrderDataGrid extends DataGrid
             'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
-                return core()->getConfigData('sales.payment_methods.' . $row->method . '.title');
+                return core()->getConfigData('sales.payment_methods.'.$row->method.'.title');
             },
         ]);
 
@@ -162,7 +190,7 @@ class OrderDataGrid extends DataGrid
             ],
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => false,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([

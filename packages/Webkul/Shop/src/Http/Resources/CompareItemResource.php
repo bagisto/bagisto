@@ -43,7 +43,25 @@ class CompareItemResource extends JsonResource
                 continue;
             }
 
-            $data[$attribute->code] = $this->{$attribute->code};
+            if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
+                $labels = [];
+
+                $attributeOptions = $attribute->options->whereIn('id', explode(',', $this->{$attribute->code}));
+
+                foreach ($attributeOptions as $attributeOption) {
+                    if ($label = $attributeOption->label) {
+                        $labels[] = strip_tags($label);
+                    }
+                }
+
+                $data[$attribute->code] = implode(', ', $labels);
+            } else {
+                if ($attribute->enable_wysiwyg) {
+                    $data[$attribute->code] = $this->{$attribute->code};
+                } else {
+                    $data[$attribute->code] = strip_tags($this->{$attribute->code});
+                }
+            }
         }
 
         return $data;

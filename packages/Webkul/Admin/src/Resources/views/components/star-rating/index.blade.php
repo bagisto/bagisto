@@ -13,10 +13,13 @@
 </v-star-rating>
 
 @pushOnce("scripts")
-    <script type="text/x-template" id="v-star-rating-template">
+    <script
+        type="text/x-template"
+        id="v-star-rating-template"
+    >
         <div class="flex">
             <span
-                class="icon-star-fill text-[24px] cursor-pointer"
+                class="icon-star-fill text-2xl cursor-pointer"
                 v-for="rating in availableRatings"
                 v-if="! disabled"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
@@ -24,7 +27,7 @@
             ></span>
 
             <span
-                class="icon-star text-[18px]"
+                class="icon-star text-lg"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 v-else

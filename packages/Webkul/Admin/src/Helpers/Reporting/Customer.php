@@ -101,6 +101,7 @@ class Customer extends AbstractReporting
     public function getTotalReviews($startDate, $endDate): int
     {
         return $this->reviewRepository
+            ->resetModel()
             ->where('status', 'approved')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
@@ -116,10 +117,11 @@ class Customer extends AbstractReporting
         $tablePrefix = DB::getTablePrefix();
 
         return $this->orderRepository
+            ->resetModel()
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT(' . $tablePrefix . 'orders.customer_first_name, " ", ' . $tablePrefix . 'orders.customer_last_name) as full_name'),
+                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
                 DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) as total'),
                 DB::raw('COUNT(*) as orders')
             )
@@ -140,10 +142,11 @@ class Customer extends AbstractReporting
         $tablePrefix = DB::getTablePrefix();
 
         return $this->orderRepository
+            ->resetModel()
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT(' . $tablePrefix . 'orders.customer_first_name, " ", ' . $tablePrefix . 'orders.customer_last_name) as full_name'),
+                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
                 DB::raw('COUNT(*) as orders')
             )
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
@@ -163,17 +166,18 @@ class Customer extends AbstractReporting
         $tablePrefix = DB::getTablePrefix();
 
         return $this->reviewRepository
+            ->resetModel()
             ->leftJoin('customers', 'product_reviews.customer_id', '=', 'customers.id')
             ->addSelect(
                 'customers.id as id',
                 'customers.email as email',
-                DB::raw('CONCAT(' . $tablePrefix . 'customers.first_name, " ", ' . $tablePrefix . 'customers.last_name) as full_name'),
+                DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name'),
                 DB::raw('COUNT(*) as reviews')
             )
             ->whereBetween('product_reviews.created_at', [$this->startDate, $this->endDate])
             ->where('product_reviews.status', 'approved')
             ->whereNotNull('customer_id')
-            ->groupBy(DB::raw('CONCAT(email, "-", customers.id)'))
+            ->groupBy(DB::raw('CONCAT(email, "-", '.$tablePrefix.'customers.id)'))
             ->orderByDesc('reviews')
             ->limit($limit)
             ->get();
@@ -187,6 +191,7 @@ class Customer extends AbstractReporting
     public function getGroupsWithMostCustomers($limit = null): Collection
     {
         return $this->customerRepository
+            ->resetModel()
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->select('customers.id as id', 'customer_groups.name as group_name')
             ->addSelect(DB::raw('COUNT(*) as total'))
@@ -211,6 +216,7 @@ class Customer extends AbstractReporting
         $groupColumn = $config['group_column'];
 
         $results = $this->customerRepository
+            ->resetModel()
             ->select(
                 DB::raw("$groupColumn AS date"),
                 DB::raw('COUNT(*) AS total')

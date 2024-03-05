@@ -2,7 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -80,5 +82,45 @@ class ReviewController extends APIController
         return new JsonResource([
             'message' => trans('shop::app.products.view.reviews.success'),
         ]);
+    }
+
+    /**
+     * Translate the specified resource in storage.
+     *
+     * @param  int  $id
+     * @param  int  $reviewId
+     */
+    public function translate($id, $reviewId): JsonResponse
+    {
+        $review = $this->productReviewRepository->find($reviewId);
+
+        $currentLocale = core()->getCurrentLocale();
+
+        $prompt = "
+        Translate the following product review to $currentLocale->name. Ensure that the translation retains the sentiment and conveys the meaning accurately. If specific product-related terms or expressions are commonly used in the $currentLocale->name, please adapt accordingly.
+        ---
+
+        **Original Product Review:**
+        $review->comment
+
+        ---
+        Translation:
+        ";
+
+        try {
+            $model = core()->getConfigData('general.magic_ai.review_translation.model');
+
+            $response = MagicAI::setModel($model)
+                ->setPrompt($prompt)
+                ->ask();
+
+            return new JsonResponse([
+                'content' => $response,
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

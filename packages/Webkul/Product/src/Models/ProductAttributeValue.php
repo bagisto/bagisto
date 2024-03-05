@@ -50,6 +50,7 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
         'attribute_id',
         'locale',
         'channel',
+        'unique_id',
         'text_value',
         'boolean_value',
         'integer_value',

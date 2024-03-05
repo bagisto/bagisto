@@ -99,6 +99,7 @@ class Cart extends AbstractReporting
     public function getTotalCarts($startDate, $endDate): int
     {
         return $this->cartRepository
+            ->resetModel()
             ->whereBetween('created_at', [$startDate, $endDate])
             ->count();
     }
@@ -112,6 +113,7 @@ class Cart extends AbstractReporting
     public function getTotalAbandonedCarts($startDate, $endDate): int
     {
         return $this->cartRepository
+            ->resetModel()
             ->where('is_active', 1)
             ->whereBetween('created_at', [$startDate, $endDate->subDays(2)])
             ->count();
@@ -143,6 +145,7 @@ class Cart extends AbstractReporting
     public function getTotalAbandonedSales($startDate, $endDate): int
     {
         return $this->cartRepository
+            ->resetModel()
             ->where('is_active', 1)
             ->whereBetween('created_at', [$startDate, $endDate->subDays(2)])
             ->sum('base_grand_total');
@@ -156,6 +159,7 @@ class Cart extends AbstractReporting
     public function getAbandonedCartProducts($limit = null): Collection
     {
         return $this->cartItemRepository
+            ->resetModel()
             ->select('product_id as id', 'name')
             ->addSelect(DB::raw('COUNT(*) as count'))
             ->leftJoin('cart', 'cart_items.cart_id', '=', 'cart.id')
@@ -173,6 +177,7 @@ class Cart extends AbstractReporting
     public function getTotalAbandonedCartProducts(): int
     {
         return $this->cartItemRepository
+            ->resetModel()
             ->distinct('product_id')
             ->leftJoin('cart', 'cart_items.cart_id', '=', 'cart.id')
             ->where('is_active', 1)
@@ -190,6 +195,7 @@ class Cart extends AbstractReporting
     public function getTotalUniqueCartsUsers($startDate, $endDate): int
     {
         return $this->cartRepository
+            ->resetModel()
             ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get()

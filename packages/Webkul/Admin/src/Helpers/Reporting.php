@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Helpers;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Carbon;
 use Webkul\Admin\Helpers\Reporting\Cart;
 use Webkul\Admin\Helpers\Reporting\Customer;
@@ -160,7 +160,7 @@ class Reporting
         return [
             'visitors' => [
                 'total'    => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
-                'progress' => 100,
+                'progress' => $totalVisitors ? 100 : 0,
             ],
 
             'product_visitors' => [
@@ -403,7 +403,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getTopPaymentMethods($type = 'graph'): Collection|array
+    public function getTopPaymentMethods($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = collect($this->saleReporting->getTopPaymentMethods());
@@ -411,7 +411,7 @@ class Reporting
             $records = $records->map(function ($paymentMethod) {
                 $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
-                $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
+                $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.'.$paymentMethod->method.'.title');
 
                 return $paymentMethod;
             });
@@ -447,7 +447,7 @@ class Reporting
 
             $paymentMethod->formatted_total = core()->formatBasePrice($paymentMethod->base_total);
 
-            $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.' . $paymentMethod->method . '.title');
+            $paymentMethod->title = $paymentMethod->title ?? core()->getConfigData('sales.payment_methods.'.$paymentMethod->method.'.title');
         });
 
         return $paymentMethods;
@@ -507,7 +507,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getCustomersWithMostSales($type = 'graph'): Collection|array
+    public function getCustomersWithMostSales($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = collect($this->customerReporting->getCustomersWithMostSales());
@@ -558,7 +558,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getCustomersWithMostOrders($type = 'graph'): Collection|array
+    public function getCustomersWithMostOrders($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = $this->customerReporting->getCustomersWithMostOrders();
@@ -601,7 +601,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getCustomersWithMostReviews($type = 'graph'): Collection|array
+    public function getCustomersWithMostReviews($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = $this->customerReporting->getCustomersWithMostReviews();
@@ -644,7 +644,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getTopCustomerGroups($type = 'graph'): Collection|array
+    public function getTopCustomerGroups($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = $this->customerReporting->getGroupsWithMostCustomers();
@@ -750,16 +750,10 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getTopSellingProductsByRevenue($type = 'graph'): Collection|array
+    public function getTopSellingProductsByRevenue($type = 'graph'): array
     {
         if ($type == 'table') {
             $records = collect($this->productReporting->getTopSellingProductsByRevenue());
-
-            $records = $records->map(function ($record) {
-                $record['formatted_total'] = core()->formatBasePrice($record['total']);
-
-                return $record;
-            });
 
             return [
                 'columns' => [
@@ -782,21 +776,23 @@ class Reporting
             ];
         }
 
-        $totalSales = $this->saleReporting->getTotalSalesProgress();
+        $totalSales = $this->saleReporting->getSubTotalSalesProgress();
 
         $products = $this->productReporting->getTopSellingProductsByRevenue(5);
 
-        $products->map(function ($product) use ($totalSales) {
+        $products = $products->map(function ($product) use ($totalSales) {
             if (! $totalSales['current']) {
-                $product->progress = 0;
+                $product['progress'] = 0;
             } else {
-                $product->progress = ($product->revenue * 100) / $totalSales['current'];
+                $product['progress'] = ($product['revenue'] * 100) / $totalSales['current'];
             }
 
-            $product->formatted_revenue = core()->formatBasePrice($product->revenue);
+            $product['formatted_revenue'] = core()->formatBasePrice($product['revenue']);
+
+            return $product;
         });
 
-        return $products;
+        return $products->toArray();
     }
 
     /**
@@ -804,7 +800,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getTopSellingProductsByQuantity($type = 'graph'): Collection|array
+    public function getTopSellingProductsByQuantity($type = 'graph'): array
     {
         if ($type == 'table') {
             $records = $this->productReporting->getTopSellingProductsByQuantity();
@@ -831,15 +827,17 @@ class Reporting
 
         $products = $this->productReporting->getTopSellingProductsByQuantity(5);
 
-        $products->map(function ($product) use ($totalSoldQuantities) {
+        $products = $products->map(function ($product) use ($totalSoldQuantities) {
             if (! $totalSoldQuantities['current']) {
-                $product->progress = 0;
+                $product['progress'] = 0;
             } else {
-                $product->progress = ($product->total_qty_ordered * 100) / $totalSoldQuantities['current'];
+                $product['progress'] = ($product['total_qty_ordered'] * 100) / $totalSoldQuantities['current'];
             }
+
+            return $product;
         });
 
-        return $products;
+        return $products->toArray();
     }
 
     /**
@@ -847,7 +845,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getProductsWithMostReviews($type = 'graph'): Collection|array
+    public function getProductsWithMostReviews($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = $this->productReporting->getProductsWithMostReviews();
@@ -890,7 +888,7 @@ class Reporting
      *
      * @param  string  $type
      */
-    public function getProductsWithMostVisits($type = 'graph'): Collection|array
+    public function getProductsWithMostVisits($type = 'graph'): EloquentCollection|array
     {
         if ($type == 'table') {
             $records = $this->visitorReporting->getVisitableWithMostVisits(ProductModel::class);
@@ -929,13 +927,63 @@ class Reporting
     }
 
     /**
+     * Returns the last search terms
+     *
+     * @param  string  $type
+     */
+    public function getLastSearchTerms($type = 'graph'): EloquentCollection|array
+    {
+        if ($type == 'table') {
+            $records = $this->productReporting->getLastSearchTerms();
+
+            return [
+                'columns' => [
+                    [
+                        'key'   => 'id',
+                        'label' => trans('admin::app.reporting.products.index.id'),
+                    ], [
+                        'key'   => 'term',
+                        'label' => trans('admin::app.reporting.products.index.search-term'),
+                    ], [
+                        'key'   => 'results',
+                        'label' => trans('admin::app.reporting.products.index.results'),
+                    ], [
+                        'key'   => 'uses',
+                        'label' => trans('admin::app.reporting.products.index.uses'),
+                    ], [
+                        'key'   => 'channel_id',
+                        'label' => trans('admin::app.reporting.products.index.channel'),
+                    ], [
+                        'key'   => 'locale',
+                        'label' => trans('admin::app.reporting.products.index.locale'),
+                    ],
+                ],
+
+                'records'  => $records,
+            ];
+        }
+
+        return $this->productReporting->getLastSearchTerms(5);
+    }
+
+    /**
+     * Returns the top search terms
+     *
+     * @param  string  $type
+     */
+    public function getTopSearchTerms($type = 'graph'): EloquentCollection|array
+    {
+        return $this->productReporting->getTopSearchTerms(5);
+    }
+
+    /**
      * Returns date range
      */
     public function getDateRange(): array
     {
         return [
-            'previous' => $this->saleReporting->getLastStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getLastEndDate()->format('d M Y'),
-            'current'  => $this->saleReporting->getStartDate()->format('d M Y') . ' - ' . $this->saleReporting->getEndDate()->format('d M Y'),
+            'previous' => $this->saleReporting->getLastStartDate()->format('d M Y').' - '.$this->saleReporting->getLastEndDate()->format('d M Y'),
+            'current'  => $this->saleReporting->getStartDate()->format('d M Y').' - '.$this->saleReporting->getEndDate()->format('d M Y'),
         ];
     }
 

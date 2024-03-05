@@ -3,6 +3,7 @@
 namespace Webkul\Core\Console\Commands;
 
 use Illuminate\Foundation\Console\DownCommand as OriginalCommand;
+use Illuminate\Support\Str;
 
 class DownChannelCommand extends OriginalCommand
 {
@@ -33,5 +34,15 @@ class DownChannelCommand extends OriginalCommand
     public function handle()
     {
         parent::handle();
+    }
+
+    /**
+     * Generate the random phrase maintenance mode recover
+     *
+     * @return string
+     */
+    public function getSecret()
+    {
+        return Str::random();
     }
 }

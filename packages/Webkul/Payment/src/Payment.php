@@ -27,15 +27,16 @@ class Payment
     {
         $paymentMethods = [];
 
-        foreach (Config::get('payment_methods') as $paymentMethod) {
-            $object = app($paymentMethod['class']);
+        foreach (Config::get('payment_methods') as $paymentMethodConfig) {
+            $paymentMethod = app($paymentMethodConfig['class']);
 
-            if ($object->isAvailable()) {
+            if ($paymentMethod->isAvailable()) {
                 $paymentMethods[] = [
-                    'method'       => $object->getCode(),
-                    'method_title' => $object->getTitle(),
-                    'description'  => $object->getDescription(),
-                    'sort'         => $object->getSortOrder(),
+                    'method'       => $paymentMethod->getCode(),
+                    'method_title' => $paymentMethod->getTitle(),
+                    'description'  => $paymentMethod->getDescription(),
+                    'sort'         => $paymentMethod->getSortOrder(),
+                    'image'        => $paymentMethod->getImage(),
                 ];
             }
         }
@@ -59,7 +60,7 @@ class Payment
      */
     public function getRedirectUrl($cart)
     {
-        $payment = app(Config::get('payment_methods.' . $cart->payment->method . '.class'));
+        $payment = app(Config::get('payment_methods.'.$cart->payment->method.'.class'));
 
         return $payment->getRedirectUrl();
     }
@@ -72,7 +73,7 @@ class Payment
      */
     public static function getAdditionalDetails($code)
     {
-        $paymentMethodClass = app(Config::get('payment_methods.' . $code . '.class'));
+        $paymentMethodClass = app(Config::get('payment_methods.'.$code.'.class'));
 
         return $paymentMethodClass->getAdditionalDetails();
     }

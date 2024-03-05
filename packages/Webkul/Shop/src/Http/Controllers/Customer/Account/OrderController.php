@@ -50,6 +50,8 @@ class OrderController extends Controller
             'id'          => $id,
         ]);
 
+        abort_if(! $order, 404);
+
         return view('shop::customers.account.orders.view', compact('order'));
     }
 
@@ -69,7 +71,7 @@ class OrderController extends Controller
 
         return $this->downloadPDF(
             view('shop::customers.account.orders.pdf', compact('invoice'))->render(),
-            'invoice-' . $invoice->created_at->format('d-m-Y')
+            'invoice-'.$invoice->created_at->format('d-m-Y')
         );
     }
 

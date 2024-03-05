@@ -1,7 +1,7 @@
 @props(['isMultiRow' => false])
 
 <v-datagrid {{ $attributes }}>
-    <x-admin::shimmer.datagrid :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid>
+    <x-admin::shimmer.datagrid :isMultiRow="$isMultiRow" />
 
     {{ $slot }}
 </v-datagrid>
@@ -12,9 +12,9 @@
         id="v-datagrid-template"
     >
         <div>
-            <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
+            <x-admin::datagrid.toolbar />
 
-            <div class="flex mt-[16px]">
+            <div class="flex mt-4">
                 <x-admin::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
@@ -26,6 +26,7 @@
                             :meta="available.meta"
                             :sort-page="sortPage"
                             :selectAllRecords="selectAllRecords"
+                            :available="available"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
@@ -42,6 +43,7 @@
                             :meta="available.meta"
                             :setCurrentSelectionMode="setCurrentSelectionMode"
                             :performAction="performAction"
+                            :available="available"
                             :applied="applied"
                             :is-loading="isLoading"
                         >
@@ -105,7 +107,7 @@
                             columns: [
                                 {
                                     index: 'all',
-                                    value: @json(request()->has('search') ? [request()->get('search')] : []),
+                                    value: [],
                                 },
                             ],
                         },
@@ -126,6 +128,14 @@
                 boot() {
                     let datagrids = this.getDatagrids();
 
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    if (urlParams.has('search')) {
+                        let searchAppliedColumn = this.findAppliedColumn('all');
+
+                        searchAppliedColumn.value = [urlParams.get('search')];
+                    }
+
                     if (datagrids?.length) {
                         const currentDatagrid = datagrids.find(({ src }) => src === this.src);
 
@@ -135,6 +145,12 @@
                             this.applied.sort = currentDatagrid.applied.sort;
 
                             this.applied.filters = currentDatagrid.applied.filters;
+
+                            if (urlParams.has('search')) {
+                                let searchAppliedColumn = this.findAppliedColumn('all');
+
+                                searchAppliedColumn.value = [urlParams.get('search')];
+                            }
 
                             this.get();
 
@@ -150,7 +166,7 @@
                  *
                  * @returns {void}
                  */
-                get() {
+                get(extraParams = {}) {
                     let params = {
                         pagination: {
                             page: this.applied.pagination.page,
@@ -179,7 +195,7 @@
 
                     this.$axios
                         .get(this.src, {
-                            params
+                            params: { ...params, ...extraParams }
                         })
                         .then((response) => {
                             /**
@@ -378,11 +394,11 @@
                      * activated. In this case, we will search for `all` indices and update the
                      * value accordingly.
                      */
-                    if (!column) {
+                    if (! column) {
                         let appliedColumn = this.findAppliedColumn('all');
 
-                        if (!requestedValue) {
-                            this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== 'all');
+                        if (! requestedValue) {
+                            appliedColumn.value = [];
 
                             return;
                         }
@@ -512,7 +528,7 @@
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
-                    if (!this.available.records.length) {
+                    if (! this.available.records.length) {
                         return;
                     }
 

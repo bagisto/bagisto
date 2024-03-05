@@ -1,5 +1,7 @@
 <?php
 
+use Webkul\Sales\Models\Order;
+
 return [
     /**
      * General.
@@ -25,6 +27,7 @@ return [
                 'name'          => 'weight_unit',
                 'title'         => 'admin::app.configuration.index.general.general.unit-options.weight-unit',
                 'type'          => 'select',
+                'default'       => 'kgs',
                 'options'       => [
                     [
                         'title' => 'lbs',
@@ -108,14 +111,213 @@ return [
                 'name'          => 'logo_image',
                 'title'         => 'admin::app.configuration.index.general.design.admin-logo.logo-image',
                 'type'          => 'image',
-                'channel_based' => true,
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+                'channel_based' => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg',
             ], [
                 'name'          => 'favicon',
                 'title'         => 'admin::app.configuration.index.general.design.admin-logo.favicon',
                 'type'          => 'image',
+                'channel_based' => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
+            ],
+        ],
+    ], [
+        'key'  => 'general.magic_ai',
+        'name' => 'admin::app.configuration.index.general.magic-ai.title',
+        'info' => 'admin::app.configuration.index.general.magic-ai.info',
+        'icon' => 'settings/magic-ai.svg',
+        'sort' => 3,
+    ], [
+        'key'    => 'general.magic_ai.settings',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.settings.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.settings.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
+                'type'          => 'boolean',
                 'channel_based' => true,
-                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name'          => 'api_key',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'type'          => 'password',
+                'channel_based' => true,
+            ], [
+                'name'          => 'organization',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.organization',
+                'type'          => 'text',
+                'channel_based' => true,
+            ], [
+                'name'          => 'api_domain',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.settings.llm-api-domain',
+                'type'          => 'text',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.content_generation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.content-generation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.content-generation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'  => 'enabled',
+                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
+                'type'  => 'boolean',
+            ], [
+                'name'         => 'product_short_description_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name'         => 'product_description_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.product-description-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name'         => 'category_description_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.category-description-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name'         => 'cms_page_content_prompt',
+                'title'        => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
+                'type'         => 'textarea',
+                'locale_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.image_generation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.image-generation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.image-generation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.review_translation',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'          => 'model',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.review-translation.model',
+                'type'          => 'select',
+                'channel_based' => true,
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-3-5-turbo',
+                        'value' => 'gpt-3.5-turbo',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2',
+                        'value' => 'llama2',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral',
+                        'value' => 'mistral',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.dolphin-phi',
+                        'value' => 'dolphin-phi',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi',
+                        'value' => 'phi',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm',
+                        'value' => 'starling-lm',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2-uncensored',
+                        'value' => 'llama2-uncensored',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2:13b',
+                        'value' => 'llama2:13b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama2:70b',
+                        'value' => 'llama2:70b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.orca-mini',
+                        'value' => 'orca-mini',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna',
+                        'value' => 'vicuna',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava',
+                        'value' => 'llava',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key'    => 'general.magic_ai.checkout_message',
+        'name'   => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
+        'info'   => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
+        'sort'   => 1,
+        'fields' => [
+            [
+                'name'          => 'enabled',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
+                'type'          => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name'          => 'model',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.model',
+                'type'          => 'select',
+                'channel_based' => true,
+                'options'       => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-3-5-turbo',
+                        'value' => 'open-ai-gpt-3.5-turbo',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2',
+                        'value' => 'llama2',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral',
+                        'value' => 'mistral',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.dolphin-phi',
+                        'value' => 'dolphin-phi',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi',
+                        'value' => 'phi',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm',
+                        'value' => 'starling-lm',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2-uncensored',
+                        'value' => 'llama2-uncensored',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2:13b',
+                        'value' => 'llama2:13b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama2:70b',
+                        'value' => 'llama2:70b',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
+                        'value' => 'orca-mini',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna',
+                        'value' => 'vicuna',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava',
+                        'value' => 'llava',
+                    ],
+                ],
+            ], [
+                'name'          => 'prompt',
+                'title'         => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
+                'type'          => 'textarea',
+                'channel_based' => true,
+                'locale_based'  => true,
             ],
         ],
     ],
@@ -175,12 +377,12 @@ return [
                 'name'       => 'no_of_related_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-related-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ], [
                 'name'       => 'no_of_up_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.product-view-page.allow-no-of-up-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -193,7 +395,7 @@ return [
                 'name'       => 'no_of_cross_sells_products',
                 'title'      => 'admin::app.configuration.index.catalog.products.cart-view-page.allow-no-of-cross-sells-products',
                 'type'       => 'number',
-                'validation' => 'min:0',
+                'validation' => 'integer|min:0',
             ],
         ],
     ], [
@@ -274,14 +476,16 @@ return [
         'sort'   => 4,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.small-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.small-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -291,14 +495,16 @@ return [
         'sort'   => 5,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.medium-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.medium-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -308,14 +514,16 @@ return [
         'sort'   => 6,
         'fields' => [
             [
-                'name'  => 'width',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.width',
-                'type'  => 'text',
+                'name'       => 'width',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.width',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
             [
-                'name'  => 'height',
-                'title' => 'admin::app.configuration.index.catalog.products.large-image.height',
-                'type'  => 'text',
+                'name'       => 'height',
+                'title'      => 'admin::app.configuration.index.catalog.products.large-image.height',
+                'type'       => 'text',
+                'validation' => 'integer|min:1',
             ],
         ],
     ], [
@@ -337,13 +545,15 @@ return [
         'sort'   => 8,
         'fields' => [
             [
-                'name'  => 'image_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
-                'type'  => 'text',
+                'name'       => 'image_attribute_upload_size',
+                'title'      => 'admin::app.configuration.index.catalog.products.attribute.image-upload-size',
+                'type'       => 'text',
+                'validation' => 'numeric',
             ], [
-                'name'  => 'file_attribute_upload_size',
-                'title' => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
-                'type'  => 'text',
+                'name'       => 'file_attribute_upload_size',
+                'title'      => 'admin::app.configuration.index.catalog.products.attribute.file-upload-size',
+                'type'       => 'text',
+                'validation' => 'numeric',
             ],
         ],
     ], [
@@ -806,8 +1016,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -834,8 +1044,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -848,8 +1058,8 @@ return [
             ], [
                 'name'          => 'default_rate',
                 'title'         => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.rate',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -891,8 +1101,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -902,6 +1112,14 @@ return [
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => true,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name'          => 'instructions',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.instructions',
@@ -939,13 +1157,13 @@ return [
                 'options'       => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
-                        'value' => 'pending',
+                        'value' => Order::STATUS_PENDING,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending-payment',
-                        'value' => 'pending_payment',
+                        'value' => Order::STATUS_PENDING_PAYMENT,
                     ], [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.processing',
-                        'value' => 'processing',
+                        'value' => Order::STATUS_PROCESSING,
                     ],
                 ],
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',
@@ -987,8 +1205,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -998,6 +1216,14 @@ return [
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name'          => 'generate_invoice',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.generate-invoice',
@@ -1082,8 +1308,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1093,11 +1319,19 @@ return [
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
-            ],  [
+            ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
                 'name'          => 'business_account',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.business-account',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1143,8 +1377,8 @@ return [
             [
                 'name'          => 'title',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -1155,11 +1389,19 @@ return [
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
+                'name'          => 'image',
+                'title'         => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type'          => 'image',
+                'info'          => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based'  => false,
+                'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
                 'name'          => 'client_id',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-id',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,true',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1167,8 +1409,8 @@ return [
                 'name'          => 'client_secret',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.client-secret',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1176,8 +1418,8 @@ return [
                 'name'          => 'accepted_currencies',
                 'title'         => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
                 'info'          => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
-                'type'          => 'depends',
-                'depend'        => 'active:1',
+                'type'          => 'text',
+                'depends'       => 'active:1',
                 'validation'    => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based'  => false,
@@ -1266,7 +1508,7 @@ return [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type'          => 'number',
-                'validation'    => 'regex:^-?\d+(\.\d+)?$',
+                'validation'    => 'numeric',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],

@@ -2,9 +2,10 @@
 
 namespace Webkul\Product\Repositories;
 
-use Elasticsearch;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Marketing\Repositories\SearchSynonymRepository;
 
 class ElasticSearchRepository
 {
@@ -15,7 +16,8 @@ class ElasticSearchRepository
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected AttributeRepository $attributeRepository
+        protected AttributeRepository $attributeRepository,
+        protected SearchSynonymRepository $searchSynonymRepository
     ) {
     }
 
@@ -26,7 +28,7 @@ class ElasticSearchRepository
      */
     public function getIndexName()
     {
-        return 'products_' . core()->getRequestedChannelCode() . '_' . core()->getRequestedLocaleCode() . '_index';
+        return 'products_'.core()->getRequestedChannelCode().'_'.core()->getRequestedLocaleCode().'_index';
     }
 
     /**
@@ -76,6 +78,10 @@ class ElasticSearchRepository
     {
         $params = request()->input();
 
+        if (! empty($params['query'])) {
+            $params['name'] = $params['query'];
+        }
+
         $filterableAttributes = $this->attributeRepository
             ->getProductDefaultAttributes(array_keys($params));
 
@@ -111,6 +117,7 @@ class ElasticSearchRepository
                         $attribute->code => intval($params[$attribute->code]),
                     ],
                 ];
+
             case 'price':
                 $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -118,7 +125,7 @@ class ElasticSearchRepository
 
                 return [
                     'range' => [
-                        $attribute->code . '_' . $customerGroup->id => [
+                        $attribute->code.'_'.$customerGroup->id => [
                             'gte' => core()->convertToBasePrice(current($range)),
                             'lte' => core()->convertToBasePrice(end($range)),
                         ],
@@ -126,9 +133,16 @@ class ElasticSearchRepository
                 ];
 
             case 'text':
+                $synonyms = $this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]);
+
+                $synonyms = array_map(function ($synonym) {
+                    return '"'.$synonym.'"';
+                }, $synonyms);
+
                 return [
-                    'match_phrase' => [
-                        $attribute->code => $params[$attribute->code],
+                    'query_string' => [
+                        'query'         => implode(' OR ', $synonyms),
+                        'default_field' => $attribute->code,
                     ],
                 ];
 
@@ -136,7 +150,7 @@ class ElasticSearchRepository
                 $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);
 
                 if ($attribute->is_configurable) {
-                    $filter[]['terms']['ca_' . $attribute->code] = explode(',', $params[$attribute->code]);
+                    $filter[]['terms']['ca_'.$attribute->code] = explode(',', $params[$attribute->code]);
                 }
 
                 return $filter;
@@ -162,6 +176,12 @@ class ElasticSearchRepository
         }
 
         $sort = $options['sort'];
+
+        if ($options['sort'] == 'price') {
+            $customerGroup = $this->customerRepository->getCurrentGroup();
+
+            $sort = 'price_'.$customerGroup->id;
+        }
 
         if ($options['sort'] == 'name') {
             $sort .= '.keyword';

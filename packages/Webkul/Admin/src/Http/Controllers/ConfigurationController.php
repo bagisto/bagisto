@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
@@ -54,7 +55,7 @@ class ConfigurationController extends Controller
     {
         $groups = Arr::get(
             $this->configTree->items,
-            request()->route('slug') . '.children.' . request()->route('slug2') . '.children'
+            request()->route('slug').'.children.'.request()->route('slug2').'.children'
         );
 
         if ($groups) {
@@ -68,13 +69,27 @@ class ConfigurationController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = $this->coreConfigRepository->search($this->configTree->items, request()->query('query'));
+
+        return new JsonResponse([
+            'data' => $results,
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ConfigurationForm $request)
     {
-        $data = $request->request->all();
+        $data = $request->all();
 
         if (isset($data['sales']['carriers'])) {
             $atLeastOneCarrierEnabled = false;
@@ -126,7 +141,7 @@ class ConfigurationController extends Controller
     {
         $path = request()->route()->parameters()['path'];
 
-        $fileName = 'configuration/' . $path;
+        $fileName = 'configuration/'.$path;
 
         $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 

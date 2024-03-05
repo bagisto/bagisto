@@ -181,7 +181,7 @@ class Grouped extends AbstractType
      * Add product. Returns error message if can't prepare product.
      *
      * @param  array  $data
-     * @return array
+     * @return array|string
      */
     public function prepareForCart($data)
     {
@@ -189,7 +189,7 @@ class Grouped extends AbstractType
             ! isset($data['qty'])
             || ! is_array($data['qty'])
         ) {
-            return trans('shop::app.checkout.cart.missing-options');
+            return trans('product::app.checkout.cart.missing-options');
         }
 
         $cartProductsList = [];
@@ -216,7 +216,7 @@ class Grouped extends AbstractType
         $products = array_merge(...$cartProductsList);
 
         if (! count($products)) {
-            return trans('shop::app.checkout.cart.integrity.qty-missing');
+            return trans('product::app.checkout.cart.integrity.qty-missing');
         }
 
         return $products;

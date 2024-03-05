@@ -1,5 +1,10 @@
 @php
-    $options = $product->bundle_options()->with(['product','bundle_option_products','bundle_option_products.product.inventory_indices','bundle_option_products.product.images'])->get();
+    $options = $product->bundle_options()->with([
+        'product',
+        'bundle_option_products',
+        'bundle_option_products.product.inventory_indices',
+        'bundle_option_products.product.images',
+    ])->get();
 @endphp
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.before', ['product' => $product]) !!}
@@ -9,22 +14,25 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.bundle.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-bundle-options-template">
-        <div class="relative bg-white dark:bg-gray-900  rounded-[4px] box-shadow">
+    <script
+        type="text/x-template"
+        id="v-bundle-options-template"
+    >
+        <div class="relative bg-white dark:bg-gray-900  rounded box-shadow">
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
-                <div class="flex flex-col gap-[8px]">
-                    <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+            <div class="flex gap-5 justify-between mb-2.5 p-4">
+                <div class="flex flex-col gap-2">
+                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.title')
                     </p>
 
-                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @lang('admin::app.catalog.products.edit.types.bundle.info')
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[4px] items-center">
+                <div class="flex gap-x-1 items-center">
                     <div
                         class="secondary-button"
                         @click="resetForm(); $refs.updateCreateOptionModal.open()"
@@ -48,23 +56,24 @@
                     :errors="errors"
                     @onEdit="selectedOption = $event; $refs.updateCreateOptionModal.open()"
                     @onRemove="removeOption($event)"
-                ></v-bundle-option-item>
+                >
+                </v-bundle-option-item>
             </div>
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion"
+                    class="w-20 h-20 border border-dashed dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-[5px] items-center">
-                    <p class="text-[16px] text-gray-400 font-semibold">
+                <div class="flex flex-col gap-1.5 items-center">
+                    <p class="text-base text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.empty-title')
                     </p>
 
@@ -74,7 +83,7 @@
                 </div>
 
                 <div
-                    class="secondary-button text-[14px]"
+                    class="secondary-button text-sm"
                     @click="resetForm(); $refs.updateCreateOptionModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.add-btn')
@@ -89,96 +98,94 @@
                 <form @submit="handleSubmit($event, updateOrCreate)">
                     <!-- Customer Create Modal -->
                     <x-admin::modal ref="updateCreateOptionModal">
+                        <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 dark:text-white font-bold">
+                            <p class="text-lg text-gray-800 dark:text-white font-bold">
                                 @lang('admin::app.catalog.products.edit.types.bundle.update-create.title')
                             </p>
-                        </x-slot:header>
+                        </x-slot>
         
+                        <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] dark:border-gray-800  ">
-                                <x-admin::form.control-group>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="label"
+                                    rules="required"
+                                    v-model="selectedOption.label"
+                                    :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.name')"
+                                />
+        
+                                <x-admin::form.control-group.error control-name="label" />
+                            </x-admin::form.control-group>
+
+                            <div class="flex gap-4">
+                                <x-admin::form.control-group class="flex-1">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.name')
+                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
-                                        type="text"
-                                        name="label"
+                                        type="select"
+                                        name="type"
                                         rules="required"
-                                        v-model="selectedOption.label"
-                                        :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.name')"
+                                        v-model="selectedOption.type"
+                                        :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.type')"
                                     >
+                                        <option value="select">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
+                                        </option>
+
+                                        <option value="radio">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.radio')
+                                        </option>
+
+                                        <option value="checkbox">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.checkbox')
+                                        </option>
+
+                                        <option value="multiselect">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.multiselect')
+                                        </option>
                                     </x-admin::form.control-group.control>
-            
-                                    <x-admin::form.control-group.error control-name="label"></x-admin::form.control-group.error>
+        
+                                    <x-admin::form.control-group.error control-name="type" />
                                 </x-admin::form.control-group>
 
-                                <div class="flex gap-[16px]">
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.type')
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="flex-1">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.products.edit.types.bundle.update-create.is-required')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="type"
-                                            rules="required"
-                                            v-model="selectedOption.type"
-                                            :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.type')"
-                                        >
-                                            <option value="select">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.select')
-                                            </option>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="is_required"
+                                        rules="required"
+                                        v-model="selectedOption.is_required"
+                                        :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.is-required')"
+                                    >
+                                        <option value="1">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.yes')
+                                        </option>
 
-                                            <option value="radio">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.radio')
-                                            </option>
-
-                                            <option value="checkbox">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.checkbox')
-                                            </option>
-
-                                            <option value="multiselect">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.multiselect')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group class="flex-1">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.is-required')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="is_required"
-                                            rules="required"
-                                            v-model="selectedOption.is_required"
-                                            :label="trans('admin::app.catalog.products.edit.types.bundle.update-create.is-required')"
-                                        >
-                                            <option value="1">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.yes')
-                                            </option>
-
-                                            <option value="0">
-                                                @lang('admin::app.catalog.products.edit.types.bundle.update-create.no')
-                                            </option>
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="is_required"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </div>
-                        </x-slot:content>
+                                        <option value="0">
+                                            @lang('admin::app.catalog.products.edit.types.bundle.update-create.no')
+                                        </option>
+                                    </x-admin::form.control-group.control>
         
+                                    <x-admin::form.control-group.error control-name="is_required" />
+                                </x-admin::form.control-group>
+                            </div>
+                        </x-slot>
+        
+                        <!-- Modal Footer -->
                         <x-slot:footer>
                             <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
+                            <div class="flex gap-x-2.5 items-center">
                                 <button 
                                     type="submit"
                                     class="primary-button"
@@ -186,7 +193,7 @@
                                     @lang('admin::app.catalog.products.edit.types.bundle.update-create.save-btn')
                                 </button>
                             </div>
-                        </x-slot:footer>
+                        </x-slot>
                     </x-admin::modal>
                 </form>
             </x-admin::form>
@@ -197,31 +204,47 @@
         <!-- Panel -->
         <div>
             <!-- Hidden Inputs -->
-            <input type="hidden" :name="'bundle_options[' + option.id + '][{{$currentLocale->code}}][label]'" :value="option.label"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][{{$currentLocale->code}}][label]'"
+                :value="option.label"
+            />
 
-            <input type="hidden" :name="'bundle_options[' + option.id + '][type]'" :value="option.type"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][type]'"
+                :value="option.type"
+            />
 
-            <input type="hidden" :name="'bundle_options[' + option.id + '][is_required]'" :value="option.is_required"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][is_required]'"
+                :value="option.is_required"
+            />
 
-            <input type="hidden" :name="'bundle_options[' + option.id + '][sort_order]'" :value="index"/>
+            <input
+                type="hidden"
+                :name="'bundle_options[' + option.id + '][sort_order]'"
+                :value="index"
+            />
 
             <!-- Panel Header -->
-            <div class="flex gap-[20px] justify-between mb-[10px] p-[16px]">
-                <div class="flex flex-col gap-[8px]">
+            <div class="flex gap-5 justify-between mb-2.5 p-4">
+                <div class="flex flex-col gap-2">
                     <p
-                        class="text-[16px] text-gray-800 dark:text-white font-semibold"
+                        class="text-base text-gray-800 dark:text-white font-semibold"
                         :class="{'required': option.is_required}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
 
-                    <p class="text-[12px] text-gray-500 dark:text-gray-300 font-medium">
+                    <p class="text-xs text-gray-500 dark:text-gray-300 font-medium">
                         @{{ types[option.type].info }}
                     </p>
                 </div>
                 
                 <!-- Add Button -->
-                <div class="flex gap-x-[20px] items-center">
+                <div class="flex gap-x-5 items-center">
                     <p
                         class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         @click="$refs['productSearch' + option.id].openDrawer()"
@@ -254,30 +277,33 @@
                 <draggable
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
+                    handle=".icon-drag"
                     :list="option.bundle_option_products"
                     item-key="id"
                 >
                     <template #item="{ element, index }">
-                        <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 dark:border-gray-800">
+                        <div class="flex gap-2.5 justify-between p-4 border-b border-slate-300 dark:border-gray-800">
                             <!-- Information -->
-                            <div class="flex gap-[10px]">
+                            <div class="flex gap-2.5">
                                 <!-- Drag Icon -->
-                                <i class="icon-drag text-[20px] text-gray-600 dark:text-gray-300 transition-all pointer-events-none"></i>
+                                <div>
+                                    <i class="icon-drag text-xl dark:text-gray-300 hover:text-gray-700 transition-all cursor-grab"></i>
+                                </div>
 
                                 <!-- Is Default Option -->
                                 <div>
                                     <input
                                         :type="[option.type == 'checkbox' || option.type == 'multiselect' ? 'checkbox' : 'radio']"
-                                        :name="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
-                                        class="sr-only peer"
                                         :id="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
+                                        class="sr-only peer"
+                                        :name="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
                                         :value="element.is_default"
                                         :checked="element.is_default"
                                         @change="updateIsDefault(element)"
                                     />
 
                                     <label
-                                        class="text-[24px] peer-checked:text-blue-600 cursor-pointer"
+                                        class="text-2xl peer-checked:text-blue-600 cursor-pointer"
                                         :class="[option.type == 'checkbox' || option.type == 'multiselect' ? 'icon-uncheckbox  peer-checked:icon-checked' : 'icon-radio-normal peer-checked:icon-radio-selected']"
                                         :for="'bundle_options[' + option.id + '][products][' + element.id + '][is_default]'"
                                     >
@@ -286,13 +312,13 @@
                                 
                                 <!-- Image -->
                                 <div
-                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px] overflow-hidden"
-                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded-[4px] dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
+                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded overflow-hidden"
+                                    :class="{'border border-dashed border-gray-300 dark:border-gray-800 rounded dark:invert dark:mix-blend-exclusion overflow-hidden': ! element.product.images.length}"
                                 >
                                     <template v-if="! element.product.images.length">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     
-                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                        <p class="w-full absolute bottom-1.5 text-[6px] text-gray-400 text-center font-semibold">
                                             @lang('admin::app.catalog.products.edit.types.bundle.image-placeholder')
                                         </p>
                                     </template>
@@ -303,8 +329,8 @@
                                 </div>
 
                                 <!-- Details -->
-                                <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 dark:text-white font-semibold">
+                                <div class="grid gap-1.5 place-content-start">
+                                    <p class="text-base text-gray-800 dark:text-white font-semibold">
                                         @{{ element.product.name }}
                                     </p>
 
@@ -315,7 +341,7 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid gap-[4px] place-content-start text-right">
+                            <div class="grid gap-1 place-content-start text-right">
                                 <p class="text-gray-800 font-semibold dark:text-white">
                                     @{{ $admin.formatPrice(element.product.price) }}    
                                 </p>
@@ -342,7 +368,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                        class="flex w-[86px] min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                     ></v-field>
@@ -362,18 +388,18 @@
 
             <!-- For Empty Option -->
             <div
-                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                class="grid gap-3.5 justify-center justify-items-center py-10 px-2.5"
                 v-else
             >
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px] dark:invert dark:mix-blend-exclusion"
+                    class="w-20 h-20 dark:invert dark:mix-blend-exclusion"
                 />
 
                 <!-- Add Variants Information -->
-                <div class="flex flex-col gap-[5px] items-center">
-                    <p class="text-[16px] text-gray-400 font-semibold">
+                <div class="flex flex-col gap-1.5 items-center">
+                    <p class="text-base text-gray-400 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.bundle.option.empty-title')
                     </p>
 
@@ -383,7 +409,7 @@
                 </div>
 
                 <div
-                    class="secondary-button text-[14px]"
+                    class="secondary-button text-sm"
                     @click="$refs['productSearch' + option.id].openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.option.add-btn')
@@ -396,7 +422,7 @@
                 ::added-product-ids="addedProductIds"
                 ::query-params="{type: 'simple'}"
                 @onProductAdded="addSelected($event)"
-            ></x-admin::products.search>
+            />
         </div>
     </script>
 

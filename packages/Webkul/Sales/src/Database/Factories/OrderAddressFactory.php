@@ -3,9 +3,6 @@
 namespace Webkul\Sales\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Customer\Models\Customer;
-use Webkul\Customer\Models\CustomerAddress;
-use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 
 class OrderAddressFactory extends Factory
@@ -29,28 +26,14 @@ class OrderAddressFactory extends Factory
      */
     public function definition(): array
     {
-        $customer = Customer::factory()->create();
-
-        $customerAddress = CustomerAddress::factory()->make();
-
         return [
-            'first_name'   => $customer->first_name,
-            'last_name'    => $customer->last_name,
-            'email'        => $customer->email,
-            'address1'     => $customerAddress->address1,
-            'country'      => $customerAddress->country,
-            'state'        => $customerAddress->state,
-            'city'         => $customerAddress->city,
-            'postcode'     => $customerAddress->postcode,
-            'phone'        => $customerAddress->phone,
             'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
-            'order_id'     => Order::factory(),
         ];
     }
 
     public function shipping(): void
     {
-        $this->state(function (array $attributes) {
+        $this->state(function () {
             return [
                 'address_type' => OrderAddress::ADDRESS_TYPE_SHIPPING,
             ];

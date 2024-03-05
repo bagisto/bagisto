@@ -37,48 +37,39 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
-	.icon-cross:before {
+	.icon-limited:before {
 		content: "\e900";
 	}
 
-	.icon-arrow-down:before {
+	.icon-cross:before {
 		content: "\e901";
 	}
 
-	.icon-processing:before {
+	.icon-arrow-down:before {
 		content: "\e902";
 	}
 
-	.icon-checkbox:before {
+	.icon-right:before {
 		content: "\e903";
 	}
 
-	.icon-tick:before {
+	.icon-checkbox-active:before {
 		content: "\e904";
 	}
 
-	.icon-view:before {
+	.icon-checkbox-normal:before {
 		content: "\e905";
+	}
+
+	.icon-tick:before {
+		content: "\e906";
+	}
+
+	.icon-view:before {
+		content: "\e907";
 	}
 
 	.required:after {
         @apply content-['*'];
-    }
-
-	progress[value] {
-		/* Reset the default appearance */
-		-webkit-appearance: none;
-		appearance: none;
-		max-width: 342px;
-		width: 100%;
-		height: 6px;
-	}
-
-	progress[value]::-webkit-progress-bar {
-		background-color: #D1D5DB;
-	}
-
-	progress[value]::-webkit-progress-value {
-		background-color: #3B82F6;
 	}
 }

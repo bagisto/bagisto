@@ -29,11 +29,12 @@ class Downloadable extends AbstractType
         'height',
         'weight',
         'depth',
+        'manage_stock',
         'guest_checkout',
     ];
 
     /**
-     * Is a stokable product type.
+     * Is a stockable product type.
      *
      * @var bool
      */
@@ -101,13 +102,6 @@ class Downloadable extends AbstractType
             return false;
         }
 
-        if (
-            is_callable(config('products.isSaleable'))
-            && call_user_func(config('products.isSaleable'), $this->product) === false
-        ) {
-            return false;
-        }
-
         if ($this->product->downloadable_links()->count()) {
             return true;
         }
@@ -141,7 +135,7 @@ class Downloadable extends AbstractType
     public function prepareForCart($data)
     {
         if (empty($data['links'])) {
-            return trans('shop::app.checkout.cart.missing-links');
+            return trans('product::app.checkout.cart.missing-links');
         }
 
         $products = parent::prepareForCart($data);

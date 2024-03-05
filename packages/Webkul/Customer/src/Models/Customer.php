@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Laravel\Sanctum\HasApiTokens;
 use Shetabit\Visitor\Traits\Visitor;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\SubscribersListProxy;
@@ -19,7 +20,7 @@ use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 
 class Customer extends Authenticatable implements CustomerContract
 {
-    use HasFactory, Notifiable, Visitor;
+    use HasApiTokens, HasFactory, Notifiable, Visitor;
 
     /**
      * The table associated with the model.
@@ -78,16 +79,6 @@ class Customer extends Authenticatable implements CustomerContract
     protected $appends = ['image_url'];
 
     /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Webkul\Customer\Database\Factories\CustomerFactory
-     */
-    protected static function newFactory()
-    {
-        return CustomerFactory::new();
-    }
-
-    /**
      * Send the password reset notification.
      *
      * @param  string  $token
@@ -112,7 +103,7 @@ class Customer extends Authenticatable implements CustomerContract
      */
     public function getNameAttribute(): string
     {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return ucfirst($this->first_name).' '.ucfirst($this->last_name);
     }
 
     /**
@@ -286,5 +277,15 @@ class Customer extends Authenticatable implements CustomerContract
     public function subscription()
     {
         return $this->hasOne(SubscribersListProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Webkul\Customer\Database\Factories\CustomerFactory
+     */
+    protected static function newFactory()
+    {
+        return CustomerFactory::new();
     }
 }

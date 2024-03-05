@@ -79,7 +79,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
                     ! is_int($binding)
                     && ! is_float($binding)
                 ) {
-                    $binding = $query->connection->getPdo()->quote($binding);
+                    $binding = $query->connection->getPdo()->quote($binding ?? '');
                 }
 
                 $sql = preg_replace($regex, $binding, $sql, 1);
@@ -168,8 +168,8 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
         $models = [];
 
         foreach ($this->models as $model => $count) {
-            if (strpos($model, $classNamespace . '\\') !== false) {
-                $models[] = $model . ' (' . $count . ')';
+            if (strpos($model, $classNamespace.'\\') !== false) {
+                $models[] = $model.' ('.$count.')';
             }
         }
 
@@ -184,18 +184,18 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
     {
         $viewNamespace = Str::lower(class_basename($classNamespace));
 
-        $classNamespace = str_replace('\\', '/', $classNamespace) . '/';
+        $classNamespace = str_replace('\\', '/', $classNamespace).'/';
 
         $views = [];
 
         foreach ($this->views as $view) {
             if (strpos($view, $classNamespace) !== false) {
                 $views[] = $view;
-            } elseif (strpos($view, 'resources/themes/' . $viewNamespace . '/') !== false) {
+            } elseif (strpos($view, 'resources/themes/'.$viewNamespace.'/') !== false) {
                 $views[] = $view;
-            } elseif (strpos($view, 'resources/admin-themes/' . $viewNamespace . '/') !== false) {
+            } elseif (strpos($view, 'resources/admin-themes/'.$viewNamespace.'/') !== false) {
                 $views[] = $view;
-            } elseif (strpos($view, 'resources/vendor/views/' . $viewNamespace . '/') !== false) {
+            } elseif (strpos($view, 'resources/vendor/views/'.$viewNamespace.'/') !== false) {
                 $views[] = $view;
             }
         }
@@ -235,7 +235,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
         $tables = [];
 
         foreach (Concord::getModelBindings() as $contract => $model) {
-            if (strpos($model, $classNamespace . '\\') !== false) {
+            if (strpos($model, $classNamespace.'\\') !== false) {
                 $tables[] = app($model)->getTable();
             }
         }
@@ -277,8 +277,8 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
     public function getAssets()
     {
         return [
-            'base_path' => __DIR__ . '/../Resources/',
-            'base_url'  => __DIR__ . '/../Resources/',
+            'base_path' => __DIR__.'/../Resources/',
+            'base_url'  => __DIR__.'/../Resources/',
             'css'       => 'widgets/modules/widget.css',
             'js'        => 'widgets/modules/widget.js',
         ];

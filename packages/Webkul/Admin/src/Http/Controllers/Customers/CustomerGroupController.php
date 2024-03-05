@@ -14,7 +14,6 @@ class CustomerGroupController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
      * @return void
      */
     public function __construct(protected CustomerGroupRepository $customerGroupRepository)
@@ -71,18 +70,16 @@ class CustomerGroupController extends Controller
         $id = request()->input('id');
 
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code,' . $id, new Code],
+            'code' => ['required', 'unique:customer_groups,code,'.$id, new Code],
             'name' => 'required',
         ]);
 
         Event::dispatch('customer.customer_group.update.before', $id);
 
-        $data = request()->only([
+        $customerGroup = $this->customerGroupRepository->update(request()->only([
             'code',
             'name',
-        ]);
-
-        $customerGroup = $this->customerGroupRepository->update($data, $id);
+        ]), $id);
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
@@ -93,10 +90,8 @@ class CustomerGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 

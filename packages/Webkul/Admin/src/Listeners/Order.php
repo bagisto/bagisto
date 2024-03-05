@@ -4,16 +4,16 @@ namespace Webkul\Admin\Listeners;
 
 use Webkul\Admin\Mail\Order\CanceledNotification;
 use Webkul\Admin\Mail\Order\CreatedNotification;
+use Webkul\Sales\Contracts\Order as OrderContract;
 
 class Order extends Base
 {
     /**
      * After order is created
      *
-     * @param  \Webkul\Sale\Contracts\Order  $order
      * @return void
      */
-    public function afterCreated($order)
+    public function afterCreated(OrderContract $order)
     {
         try {
             if (! core()->getConfigData('emails.general.notifications.emails.general.notifications.new_order')) {

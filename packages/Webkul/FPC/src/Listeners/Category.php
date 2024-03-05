@@ -26,10 +26,10 @@ class Category
     {
         foreach (core()->getAllLocales() as $locale) {
             if ($categoryTranslation = $category->translate($locale->code)) {
-                ResponseCache::forget($categoryTranslation->url_path);
+                ResponseCache::forget($categoryTranslation->slug);
             }
 
-            ResponseCache::forget($category->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->url_path);
+            ResponseCache::forget($category->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->slug);
         }
     }
 
@@ -45,10 +45,10 @@ class Category
 
         foreach (core()->getAllLocales() as $locale) {
             if ($categoryTranslation = $category->translate($locale->code)) {
-                ResponseCache::forget($categoryTranslation->url_path);
+                ResponseCache::forget($categoryTranslation->slug);
             }
 
-            ResponseCache::forget($category->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->url_path);
+            ResponseCache::forget($category->translate(core()->getDefaultLocaleCodeFromDefaultChannel())->slug);
         }
     }
 }

@@ -227,8 +227,8 @@ class Configurable extends AbstractType
     public function createVariant($product, $permutation, $data = [])
     {
         $data = array_merge([
-            'sku'               => $sku = $product->sku . '-variant-' . implode('-', $permutation),
-            'name'              => 'Variant ' . implode(' ', $permutation),
+            'sku'               => $sku = $product->sku.'-variant-'.implode('-', $permutation),
+            'name'              => 'Variant '.implode(' ', $permutation),
             'inventories'       => [],
             'price'             => 0,
             'weight'            => 0,
@@ -241,7 +241,7 @@ class Configurable extends AbstractType
 
         $typeOfVariants = 'simple';
 
-        $productInstance = app(config('product_types.' . $product->type . '.class'));
+        $productInstance = app(config('product_types.'.$product->type.'.class'));
 
         if (
             isset($productInstance->variantsType)
@@ -407,12 +407,20 @@ class Configurable extends AbstractType
             }
 
             if (! $productAttributeValue) {
+                $uniqueId = implode('|', array_filter([
+                    $data['channel'],
+                    $data['locale'],
+                    $variant->id,
+                    $attribute->id,
+                ]));
+
                 $this->attributeValueRepository->create([
                     'product_id'            => $variant->id,
                     'attribute_id'          => $attribute->id,
                     $attribute->column_name => $data[$attribute->code],
                     'channel'               => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale'                => $attribute->value_per_locale ? $data['locale'] : null,
+                    'unique_id'             => $uniqueId,
                 ]);
             } else {
                 $productAttributeValue->update([$attribute->column_name => $data[$attribute->code]]);
@@ -550,7 +558,7 @@ class Configurable extends AbstractType
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
             } else {
-                return trans('shop::app.checkout.cart.missing-options');
+                return trans('product::app.checkout.cart.missing-options');
             }
         }
 
@@ -559,7 +567,7 @@ class Configurable extends AbstractType
         $childProduct = $this->productRepository->find($data['selected_configurable_option']);
 
         if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.inventory-warning');
+            return trans('product::app.checkout.cart.inventory-warning');
         }
 
         $price = $childProduct->getTypeInstance()->getFinalPrice();

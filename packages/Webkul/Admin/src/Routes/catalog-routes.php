@@ -30,7 +30,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::delete('edit/{id}', 'destroy')->name('admin.catalog.attributes.delete');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.attributes.mass_delete');
-
         });
 
         /**
@@ -66,8 +65,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::delete('edit/{id}', 'destroy')->name('admin.catalog.categories.delete');
 
-            Route::get('products/{id}', 'products')->name('admin.catalog.categories.products');
-
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.categories.mass_delete');
 
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.categories.mass_update');
@@ -88,8 +85,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(ProductController::class)->prefix('products')->group(function () {
             Route::get('', 'index')->name('admin.catalog.products.index');
 
-            Route::get('create', 'create')->name('admin.catalog.products.create');
-
             Route::post('create', 'store')->name('admin.catalog.products.store');
 
             Route::get('copy/{id}', 'copy')->name('admin.catalog.products.copy');
@@ -106,17 +101,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('upload-sample/{id}', 'uploadSample')->name('admin.catalog.products.upload_sample');
 
-            Route::post('mass-action', 'massUpdate')->name('admin.catalog.products.mass_action');
-
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
 
             Route::get('search', 'search')->name('admin.catalog.products.search');
 
-            Route::get('{id}/{attribute_id}', 'download')->defaults('_config', [
-                'view' => 'admin.catalog.products.edit',
-            ])->name('admin.catalog.products.file.download');
+            Route::get('{id}/{attribute_id}', 'download')->name('admin.catalog.products.file.download');
         });
     });
 });

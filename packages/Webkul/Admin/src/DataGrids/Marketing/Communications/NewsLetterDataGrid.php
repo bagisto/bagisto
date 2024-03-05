@@ -77,6 +77,7 @@ class NewsLetterDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('marketing.communications.subscribers.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.communications.subscribers.index.datagrid.edit'),
                 'method' => 'GET',
@@ -88,6 +89,7 @@ class NewsLetterDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('marketing.communications.subscribers.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.communications.subscribers.index.datagrid.delete'),
                 'method' => 'DELETE',

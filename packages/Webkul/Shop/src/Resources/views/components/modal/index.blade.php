@@ -13,20 +13,41 @@
     @endisset
 
     @isset($header)
-        <template v-slot:header>
-            {{ $header }}
+        <template v-slot:header="{ toggle, isOpen }">
+            <div {{ $header->attributes->merge(['class' => 'flex gap-5 justify-between items-center p-8 bg-white border-b border-[#E9E9E9]']) }}>
+                {{ $header }}
+
+                <span
+                    class="icon-cancel text-3xl cursor-pointer"
+                    @click="toggle"
+                >
+                </span>
+            </div>
         </template>
     @endisset
 
     @isset($content)
         <template v-slot:content>
-            {{ $content }}
+            <div {{ $content->attributes->merge(['class' => 'p-8 bg-white']) }}>
+                {{ $content }}
+            </div>
+        </template>
+    @endisset
+
+    @isset($footer)
+        <template v-slot:footer>
+            <div {{ $content->attributes->merge(['class' => 'p-8 bg-white mt-5']) }}>
+                {{ $footer }}
+            </div>
         </template>
     @endisset
 </v-modal>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-modal-template">
+    <script
+        type="text/x-template"
+        id="v-modal-template"
+    >
         <div>
             <div @click="toggle">
                 <slot name="toggle">
@@ -44,7 +65,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-10"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -63,26 +84,20 @@
                     class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div class="w-full max-w-[595px] z-[999] absolute left-[50%] top-[50%] bg-[#F5F5F5] max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
-                            <div>
-                                <div class="flex gap-[20px] justify-between items-center p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
-                                    <slot name="header">
-                                        @lang('admin::app.components.modal.default-header')
-                                    </slot>
+                        <div class="w-full max-w-[595px] z-[999] absolute left-1/2 top-1/2 bg-[#F5F5F5] max-md:w-[90%] -translate-x-1/2 -translate-y-1/2">
+                            <!-- Header Slot-->
+                            <slot
+                                name="header"
+                                :toggle="toggle"
+                                :isOpen="isOpen"
+                            >
+                            </slot>
 
-                                    <span
-                                        class="icon-cancel text-[30px] cursor-pointer"
-                                        @click="toggle"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
+                            <!-- Content Slot-->
+                            <slot name="content"></slot>
 
-                            <div>
-                                <slot name="content">
-                                    @lang('admin::app.components.modal.default-content')
-                                </slot>
-                            </div>
+                            <!-- Footer Slot-->
+                            <slot name="footer"></slot>
                         </div>
                     </div>
                 </div>

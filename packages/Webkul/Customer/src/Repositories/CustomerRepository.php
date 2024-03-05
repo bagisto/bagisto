@@ -23,7 +23,7 @@ class CustomerRepository extends Repository
      * @param  \Webkul\Customer\Models\Customer
      * @return bool
      */
-    public function checkIfCustomerHasOrderPendingOrProcessing($customer)
+    public function haveActiveOrders($customer)
     {
         return $customer->orders->pluck('status')->contains(function ($val) {
             return $val === 'pending' || $val === 'processing';
@@ -37,30 +37,9 @@ class CustomerRepository extends Repository
      */
     public function getCurrentGroup()
     {
-        if ($customer = auth()->guard()->user()) {
-            return $customer->group;
-        }
+        $customer = auth()->guard()->user();
 
-        return core()->getGuestCustomerGroup();
-    }
-
-    /**
-     * Check if bulk customers, if they have order pending or processing.
-     *
-     * @param  array
-     * @return bool
-     */
-    public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
-    {
-        foreach ($customerIds as $customerId) {
-            $customer = $this->findOrFail($customerId);
-
-            if ($this->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $customer->group ?? core()->getGuestCustomerGroup();
     }
 
     /**
@@ -77,8 +56,8 @@ class CustomerRepository extends Repository
             $request = request();
 
             foreach ($data[$type] as $imageId => $image) {
-                $file = $type . '.' . $imageId;
-                $dir = 'customer/' . $customer->id;
+                $file = $type.'.'.$imageId;
+                $dir = 'customer/'.$customer->id;
 
                 if ($request->hasFile($file)) {
                     if ($customer->{$type}) {
@@ -143,7 +122,7 @@ class CustomerRepository extends Repository
     /**
      * Get customers count by date.
      */
-    public function getCustomersCountByDate(Carbon $from = null, Carbon $to = null): ?int
+    public function getCustomersCountByDate(?Carbon $from = null, ?Carbon $to = null): ?int
     {
         if ($from && $to) {
             return $this->count([['created_at', '>=', $from], ['created_at', '<=', $to]]);

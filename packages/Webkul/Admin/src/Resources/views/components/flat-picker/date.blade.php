@@ -3,11 +3,14 @@
 </v-date-picker>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-date-picker-template">
+    <script
+        type="text/x-template"
+        id="v-date-picker-template"
+    >
         <span class="w-full relative inline-block">
             <slot></slot>
 
-            <i class="icon-calendar text-[24px] text-gray-400 absolute ltr:right-[8px] rtl:left-[8px] top-[50%] -translate-y-[50%]"></i>
+            <i class="icon-calendar text-2xl text-gray-400 absolute ltr:right-2 rtl:left-2 top-1/2 -translate-y-1/2 pointer-events-none"></i>
         </span>
     </script>
 

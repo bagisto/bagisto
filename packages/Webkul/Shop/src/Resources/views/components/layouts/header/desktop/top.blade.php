@@ -1,10 +1,15 @@
-<div class="flex justify-between items-center w-full py-[11px] px-16 border border-t-0 border-b-[1px] border-l-0 border-r-0">
-    {{-- Currency Switcher --}}
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.before') !!}
+
+<div class="flex justify-between items-center w-full py-3 px-16 border border-t-0 border-b border-l-0 border-r-0">
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
+
+    <!-- Currency Switcher -->
     <x-shop::dropdown>
         <!-- Dropdown Toggler -->
         <x-slot:toggle>
             <div
-                class="flex gap-[10px] cursor-pointer" role="button"
+                class="flex gap-2.5 cursor-pointer"
+                role="button"
                 tabindex="0"
             >
                 <span>
@@ -12,28 +17,32 @@
                 </span>
 
                 <span
-                    class="text-[24px] icon-arrow-down"
+                    class="text-2xl icon-arrow-down"
                     role="presentation"
                 ></span>
             </div>
-        </x-slot:toggle>
+        </x-slot>
 
         <!-- Dropdown Content -->
-        <x-slot:content class="!p-[0px]">
+        <x-slot:content class="!p-0">
             <v-currency-switcher></v-currency-switcher>
-        </x-slot:content>
+        </x-slot>
     </x-shop::dropdown>
+
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
 
     <p class="text-xs font-medium">
         Get UPTO 40% OFF on your 1st order <a href="{{ route('shop.home.index') }}" class="underline">SHOP NOW</a>
     </p>
 
-    {{-- Locales Switcher --}}
-    <x-shop::dropdown position="bottom-right">
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
+
+    <!-- Locales Switcher -->
+    <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
         <x-slot:toggle>
-            {{-- Dropdown Toggler --}}
+            <!-- Dropdown Toggler -->
             <div
-                class="flex items-center gap-[10px] cursor-pointer"
+                class="flex items-center gap-2.5 cursor-pointer"
                 role="button"
                 tabindex="0"
             >
@@ -53,24 +62,26 @@
                 </span>
 
                 <span
-                    class="icon-arrow-down text-[24px]"
+                    class="icon-arrow-down text-2xl"
                     role="presentation"
                 ></span>
             </div>
-        </x-slot:toggle>
+        </x-slot>
     
         <!-- Dropdown Content -->
-        <x-slot:content class="!p-[0px]">
+        <x-slot:content class="!p-0">
             <v-locale-switcher></v-locale-switcher>
-        </x-slot:content>
+        </x-slot>
     </x-shop::dropdown>
+
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.after') !!}
 </div>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-currency-switcher-template">
-        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+        <div class="grid gap-1 mt-2.5 pb-2.5">
             <span
-                class="px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
+                class="px-5 py-2 text-base cursor-pointer hover:bg-gray-100"
                 v-for="currency in currencies"
                 :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
                 @click="change(currency)"
@@ -81,9 +92,9 @@
     </script>
 
     <script type="text/x-template" id="v-locale-switcher-template">
-        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+        <div class="grid gap-1 mt-2.5 pb-2.5">
             <span
-                class="flex items-center gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
+                class="flex items-center gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100"
                 v-for="locale in locales"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 @click="change(locale)"                  
@@ -141,3 +152,5 @@
         });
     </script>
 @endPushOnce
+
+{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.after') !!}

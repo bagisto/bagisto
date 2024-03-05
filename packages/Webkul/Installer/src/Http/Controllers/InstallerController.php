@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
-use Webkul\Installer\Http\Helpers\EnvironmentManager;
-use Webkul\Installer\Http\Helpers\ServerRequirements;
+use Webkul\Installer\Helpers\DatabaseManager;
+use Webkul\Installer\Helpers\EnvironmentManager;
+use Webkul\Installer\Helpers\ServerRequirements;
 
 class InstallerController extends Controller
 {
@@ -50,6 +50,10 @@ class InstallerController extends Controller
 
         $requirements = $this->serverRequirements->validate();
 
+        if (request()->has('locale')) {
+            return redirect()->route('installer.index');
+        }
+
         return view('installer::installer.index', compact('requirements', 'phpVersion'));
     }
 
@@ -64,16 +68,6 @@ class InstallerController extends Controller
     }
 
     /**
-     * Undocumented function
-     */
-    public function envFileDelete()
-    {
-        $response = File::delete(base_path('.env'));
-
-        return $response;
-    }
-
-    /**
      * Run Migration
      */
     public function runMigration()
@@ -81,6 +75,47 @@ class InstallerController extends Controller
         $migration = $this->databaseManager->migration();
 
         return $migration;
+    }
+
+    /**
+     * Run Seeder
+     *
+     * @return void|string
+     */
+    public function runSeeder()
+    {
+        $selectedParameters = request()->selectedParameters;
+        $allParameters = request()->allParameters;
+
+        $appLocale = $allParameters['app_locale'] ?? null;
+        $appCurrency = $allParameters['app_currency'] ?? null;
+
+        $allowedLocales = array_unique(array_merge(
+            [($appLocale ?? 'en')],
+            $selectedParameters['allowed_locales']
+        ));
+
+        $allowedCurrencies = array_unique(array_merge(
+            [($appCurrency ?? 'USD')],
+            $selectedParameters['allowed_currencies']
+        ));
+
+        $parameter = [
+            'parameter' => [
+                'default_locales'    => $appLocale,
+                'default_currency'   => $appCurrency,
+                'allowed_locales'    => $allowedLocales,
+                'allowed_currencies' => $allowedCurrencies,
+            ],
+        ];
+
+        $response = $this->environmentManager->setEnvConfiguration(request()->allParameters);
+
+        if ($response) {
+            $seeder = $this->databaseManager->seeder($parameter);
+
+            return $seeder;
+        }
     }
 
     /**

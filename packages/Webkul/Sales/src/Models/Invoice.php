@@ -18,6 +18,21 @@ class Invoice extends Model implements InvoiceContract
     use HasFactory, InvoiceReminder, PaymentTerm;
 
     /**
+     * Pending Invoice.
+     */
+    public const STATUS_PENDING = 'pending';
+
+    /**
+     * Paid Invoice.
+     */
+    public const STATUS_PAID = 'paid';
+
+    /**
+     * Refunded invoice.
+     */
+    public const STATUS_REFUNDED = 'refunded';
+
+    /**
      * The attributes that aren't mass assignable.
      *
      * @var string[]
@@ -34,9 +49,9 @@ class Invoice extends Model implements InvoiceContract
      * @var array
      */
     protected $statusLabel = [
-        'pending'  => 'Pending',
-        'paid'     => 'Paid',
-        'refunded' => 'Refunded',
+        self::STATUS_PENDING  => 'Pending',
+        self::STATUS_PAID     => 'Paid',
+        self::STATUS_REFUNDED => 'Refunded',
     ];
 
     /**

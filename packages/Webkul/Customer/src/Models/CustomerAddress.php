@@ -13,9 +13,14 @@ class CustomerAddress extends Address implements CustomerAddressContract
 {
     use HasFactory;
 
+    /**
+     * Define the customer address type.
+     */
     public const ADDRESS_TYPE = 'customer';
 
     /**
+     * Define the attributes of the customer address model.
+     *
      * @var array default values
      */
     protected $attributes = [

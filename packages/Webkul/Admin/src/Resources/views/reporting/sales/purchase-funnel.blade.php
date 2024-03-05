@@ -1,34 +1,37 @@
-{{-- Purchase Funnel Vue Component --}}
+<!-- Purchase Funnel Vue Component -->
 <v-reporting-sales-purchase-funnel>
-    {{-- Shimmer --}}
-    <x-admin::shimmer.reporting.sales.purchase-funnel/>
+    <!-- Shimmer -->
+    <x-admin::shimmer.reporting.sales.purchase-funnel />
 </v-reporting-sales-purchase-funnel>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-sales-purchase-funnel-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-sales-purchase-funnel-template"
+    >
         <!-- Shimmer -->
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.sales.purchase-funnel/>
+            <x-admin::shimmer.reporting.sales.purchase-funnel />
         </template>
 
         <!-- Purchase Funnel Section -->
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
-                <p class="text-[16px] text-gray-600 dark:text-white font-semibold mb-[16px]">
+                <p class="text-base text-gray-600 dark:text-white font-semibold mb-4">
                     @lang('admin::app.reporting.sales.index.purchase-funnel')
                 </p>
                 
                 <!-- Content -->
-                <div class="grid grid-cols-4 gap-[24px]">
+                <div class="grid grid-cols-4 gap-6">
                     <!-- Total Visits -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.visitors.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 leading-none dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.total-visits')
                             </p>
                         </div>
@@ -46,13 +49,13 @@
                     </div>
 
                     <!-- Total Product Visits -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.product_visitors.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.product-views')
                             </p>
                         </div>
@@ -71,13 +74,13 @@
                     </div>
 
                     <!-- Total Added To Cart -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.carts.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.added-to-cart')
                             </p>
                         </div>
@@ -96,13 +99,13 @@
                     </div>
 
                     <!-- Total Purchased -->
-                    <div class="flex flex-col gap-[16px]">
-                        <div class="grid gap-[2px]">
-                            <p class="text-[16px] text-gray-800 dark:text-white font-semibold">
+                    <div class="flex flex-col gap-4">
+                        <div class="grid gap-0.5">
+                            <p class="text-base text-gray-800 leading-none dark:text-white font-semibold">
                                 @{{ report.statistics.orders.total }}
                             </p>
 
-                            <p class="text-[12px] text-gray-600 dark:text-gray-300 font-semibold">
+                            <p class="text-xs text-gray-600 dark:text-gray-300 font-semibold">
                                 @lang('admin::app.reporting.sales.index.purchased')
                             </p>
                         </div>
@@ -122,11 +125,11 @@
                 </div>
 
                 <!-- Date Range Section -->
-                <div class="flex gap-[20px] justify-end mt-[24px]">
-                    <div class="flex gap-[4px] items-center">
-                        <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
+                <div class="flex gap-5 justify-end mt-6">
+                    <div class="flex gap-1 items-center">
+                        <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                        <p class="text-[12px] dark:text-gray-300">
+                        <p class="text-xs dark:text-gray-300">
                             @{{ report.date_range.current }}
                         </p>
                     </div>

@@ -1,18 +1,21 @@
 <x-admin::layouts>
-    {{-- Title of the page --}}
+    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.inventory-sources.create.add-title')
-    </x-slot:title>
+    </x-slot>
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.before') !!}
 
-    {{-- Create Inventory --}}
+    <!-- Create Inventory -->
     <v-inventory-create-form></v-inventory-create-form>
 
     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-inventory-create-form-template">
+        <script
+            type="text/x-template"
+            id="v-inventory-create-form-template"
+        >
             <div>
                 {!! view_render_event('bagisto.admin.settings.inventory_sources.create.before') !!}
 
@@ -22,12 +25,12 @@
                 >
                     {!! view_render_event('bagisto.admin.settings.inventory_sources.create.create_form_controls.before') !!}
 
-                    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                        <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+                    <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+                        <p class="text-xl text-gray-800 dark:text-white font-bold">
                             @lang('admin::app.settings.inventory-sources.create.add-title')
                         </p>
 
-                        <div class="flex gap-x-[10px] items-center">
+                        <div class="flex gap-x-2.5 items-center">
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.inventory_sources.index') }}"
@@ -47,85 +50,73 @@
                     </div>
                 
                     <!-- Full Pannel -->
-                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
                         <!-- Left Section -->
-                        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                        <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.general.before') !!}
 
                             <!-- General -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
-                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.create.general')
                                 </p>
 
                                 <!-- Code -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="code"
-                                        :value="old('code')"
                                         id="code"
+                                        name="code"
                                         rules="required"
+                                        :value="old('code')"
                                         :label="trans('admin::app.settings.inventory-sources.create.code')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.code')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="code"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="code" />
                                 </x-admin::form.control-group>
 
                                 <!-- Name -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="name"
-                                        :value="old('name')"
                                         id="name"
+                                        name="name"
                                         rules="required"
+                                        :value="old('name')"
                                         :label="trans('admin::app.settings.inventory-sources.create.name')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Description -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.inventory-sources.create.description')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="textarea"
+                                        class="text-gray-600 dark:text-gray-300 !mb-0"
+                                        id="description"
                                         name="description"
                                         :value="old('description')"
-                                        id="description"
-                                        class="text-gray-600 dark:text-gray-300 !mb-[0px]"
                                         :label="trans('admin::app.settings.inventory-sources.create.description')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.description')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="description"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="description" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -134,100 +125,84 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.contact_info.before') !!}
 
                             <!-- Contact Information -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 box-shadow rounded-[4px]">
-                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <div class="p-4 bg-white dark:bg-gray-900 box-shadow rounded">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.create.contact-info')
                                 </p>
 
                                 <!-- Contact name -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.contact-name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="contact_name"
-                                        :value="old('contact_name')"
                                         id="contact_name"
+                                        name="contact_name"
                                         rules="required"
+                                        :value="old('contact_name')"
                                         :label="trans('admin::app.settings.inventory-sources.create.contact-name')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.contact-name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_name"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_name" />
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Email -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.contact-email')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="email"
-                                        name="contact_email"
-                                        :value="old('contact_email')"
                                         id="contact_email"
+                                        name="contact_email"
                                         rules="required|email"
+                                        :value="old('contact_email')"
                                         :label="trans('admin::app.settings.inventory-sources.create.contact-email')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.contact-email')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_email"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_email" />
                                 </x-admin::form.control-group>
 
                                 <!-- Contact Number -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.contact-number')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="contact_number"
-                                        :value="old('contact_number')"
                                         id="contact_number"
+                                        name="contact_number"
                                         rules="required"
+                                        :value="old('contact_number')"
                                         :label="trans('admin::app.settings.inventory-sources.create.contact-number')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.contact-number')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_number"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_number" />
                                 </x-admin::form.control-group>
 
                                 <!-- Contact fax -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.inventory-sources.create.contact-fax')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
+                                        id="contact_fax"
                                         name="contact_fax"
                                         :value="old('contact_fax')"
-                                        id="contact_fax"
                                         :label="trans('admin::app.settings.inventory-sources.create.contact-fax')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.contact-fax')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="contact_fax"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="contact_fax" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -236,43 +211,42 @@
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.address.before') !!}
 
                             <!-- Source Address -->
-                            <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                                <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                            <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                                <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                                     @lang('admin::app.settings.inventory-sources.create.address')
                                 </p>
 
                                 <!-- Country -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.country')
                                     </x-admin::form.control-group.label>
                     
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        name="country"
                                         id="country"
+                                        name="country"
                                         rules="required"
+                                        v-model="country"
                                         :label="trans('admin::app.settings.inventory-sources.create.country')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.country')"
-                                        v-model="country"
                                     >
-                                        <option value="">@lang('admin::app.settings.inventory-sources.create.select-country')</option>
+                                        <option value="">
+                                            @lang('admin::app.settings.inventory-sources.create.select-country')
+                                        </option>
                     
                                         @foreach (core()->countries() as $country)
-                    
-                                            <option value="{{ $country->code }}">{{ $country->name }}</option>
-                    
+                                            <option value="{{ $country->code }}">
+                                                {{ $country->name }}
+                                            </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
                     
-                                    <x-admin::form.control-group.error
-                                        control-name="country"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="country" />
                                 </x-admin::form.control-group>
                                         
                                 <!-- State -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.state')
                                     </x-admin::form.control-group.label>
@@ -280,10 +254,10 @@
                                     <template v-if="haveStates()">
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="state"
                                             id="state"
-                                            :value="old('state')"
+                                            name="state"
                                             rules="required"
+                                            :value="old('state')"
                                             :label="trans('admin::app.settings.inventory-sources.create.state')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.state')"
                                         >
@@ -303,90 +277,74 @@
                                     <template v-else>
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="state"
-                                            :value="old('state')"
                                             id="state"
+                                            name="state"
                                             rules="required"
+                                            :value="old('state')"
+                                            v-model="state"
                                             :label="trans('admin::app.settings.inventory-sources.create.state')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.state')"
-                                            v-model="state"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
                                     </template>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="state"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="state" />
                                 </x-admin::form.control-group>
 
                                 <!-- City -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.city')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="city"
-                                        :value="old('city')"
                                         id="city"
+                                        name="city"
                                         rules="required"
+                                        :value="old('city')"
                                         :label="trans('admin::app.settings.inventory-sources.create.city')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.city')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="city"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="city" />
                                 </x-admin::form.control-group>
 
                                 <!-- Street -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.street')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="street"
-                                        :value="old('street')"
                                         id="street"
+                                        name="street"
                                         rules="required"
+                                        :value="old('street')"
                                         :label="trans('admin::app.settings.inventory-sources.create.street')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.street')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="street"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="street" />
                                 </x-admin::form.control-group>
 
                                 <!-- postcode -->
-                                <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group class="!mb-0">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.postcode')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="postcode"
-                                        :value="old('postcode')"
                                         id="postcode"
+                                        name="postcode"
                                         rules="required"
+                                        :value="old('postcode')"
                                         :label="trans('admin::app.settings.inventory-sources.create.postcode')"
                                         :placeholder="trans('admin::app.settings.inventory-sources.create.postcode')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    />
 
-                                    <x-admin::form.control-group.error
-                                        control-name="postcode"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <x-admin::form.control-group.error control-name="postcode" />
                                 </x-admin::form.control-group>
                             </div>
 
@@ -395,89 +353,77 @@
                         </div>
                 
                         <!-- Right Section -->
-                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+                        <div class="flex flex-col gap-2 w-[360px] max-w-full">
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.accordion.settings.before') !!}
 
                             <!-- Settings -->
                             <x-admin::accordion>
                                 <x-slot:header>
-                                    <div class="flex items-center justify-between p-[6px]">
-                                        <p class="text-gray-600 dark:text-gray-300 text-[16px] p-[10px] font-semibold">
+                                    <div class="flex items-center justify-between">
+                                        <p class="p-2.5 text-base text-gray-800 dark:text-white font-semibold">
                                             @lang('admin::app.settings.inventory-sources.create.settings')
                                         </p>
                                     </div>
-                                </x-slot:header>
+                                </x-slot>
                             
                                 <x-slot:content>
                                     <!-- Latitude -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.inventory-sources.create.latitude')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="latitude"
                                             name="latitude"
                                             :value="old('latitude')"
-                                            id="latitude"
                                             :label="trans('admin::app.settings.inventory-sources.create.latitude')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.latitude')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="latitude"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="latitude" />
                                     </x-admin::form.control-group>
 
                                     <!-- Longitude -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.inventory-sources.create.longitude')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="longitude"
                                             name="longitude"
                                             :value="old('longitude')"
-                                            id="longitude"
                                             :label="trans('admin::app.settings.inventory-sources.create.longitude')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.longitude')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="longitude"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="longitude" />
                                     </x-admin::form.control-group>
 
                                     <!-- Priority -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.inventory-sources.create.priority')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
+                                            id="priority"
                                             name="priority"
                                             :value="old('priority')"
-                                            id="priority"
                                             :label="trans('admin::app.settings.inventory-sources.create.priority')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.priority')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="priority"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="priority" />
                                     </x-admin::form.control-group>
 
                                     <!-- Status -->
-                                    <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.inventory-sources.create.status')
                                         </x-admin::form.control-group.label>
@@ -489,15 +435,11 @@
                                             :label="trans('admin::app.settings.inventory-sources.create.status')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.create.status')"
                                             :checked="(bool) old('status')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                        />
 
-                                        <x-admin::form.control-group.error
-                                            control-name="status"
-                                        >
-                                        </x-admin::form.control-group.error>
+                                        <x-admin::form.control-group.error control-name="status" />
                                     </x-admin::form.control-group>
-                                </x-slot:content>
+                                </x-slot>
                             </x-admin::accordion>
 
                             {!! view_render_event('bagisto.admin.settings.inventory_sources.create.card.accordion.settings.after') !!}

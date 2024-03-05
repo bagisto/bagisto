@@ -3,7 +3,6 @@
 namespace Webkul\Product\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Product\Models\ProductDownloadableLink;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
 
 class ProductDownloadableLinkTranslationFactory extends Factory
@@ -21,9 +20,8 @@ class ProductDownloadableLinkTranslationFactory extends Factory
     public function definition(): array
     {
         return [
-            'locale'                       => 'en',
-            'title'                        => $this->faker->word,
-            'product_downloadable_link_id' => ProductDownloadableLink::factory(),
+            'locale' => 'en',
+            'title'  => $this->faker->word,
         ];
     }
 }

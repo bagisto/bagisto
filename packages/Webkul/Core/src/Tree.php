@@ -48,7 +48,7 @@ class Tree
      * Shortcut method for create a Config with a callback.
      * This will allow you to do things like fire an event on creation.
      *
-     * @param  callable  $callback Callback to use after the Config creation
+     * @param  callable  $callback  Callback to use after the Config creation
      * @return object
      */
     public static function create($callback = null)
@@ -104,6 +104,34 @@ class Tree
             || (strpos($this->currentKey, $item['key']) === 0)
         ) {
             return true;
+        }
+    }
+
+    /**
+     * Remove unauthorized urls.
+     */
+    public function removeUnauthorizedUrls(): array
+    {
+        return collect($this->items)->map(function ($item) {
+            $this->removeChildrenUnauthorizedUrls($item);
+
+            return $item;
+        })->toArray();
+    }
+
+    /**
+     * Remove all children unauthorized urls. This will handle all levels.
+     */
+    private function removeChildrenUnauthorizedUrls(array &$item): void
+    {
+        if (! empty($item['children'])) {
+            $firstChildrenItem = collect($item['children'])->first();
+
+            $item['route'] = $firstChildrenItem['route'];
+
+            $item['url'] = route($firstChildrenItem['route'], $firstChildrenItem['params'] ?? []);
+
+            $this->removeChildrenUnauthorizedUrls($firstChildrenItem);
         }
     }
 }

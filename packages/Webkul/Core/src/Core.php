@@ -23,7 +23,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.0.0';
+    const BAGISTO_VERSION = '2.1.1';
 
     /**
      * Current Channel.
@@ -140,7 +140,7 @@ class Core
      *
      * @return \Webkul\Core\Contracts\Channel
      */
-    public function getCurrentChannel(string $hostname = null)
+    public function getCurrentChannel(?string $hostname = null)
     {
         if (! $hostname) {
             $hostname = request()->getHttpHost();
@@ -152,8 +152,8 @@ class Core
 
         $this->currentChannel = $this->channelRepository->findWhereIn('hostname', [
             $hostname,
-            'http://' . $hostname,
-            'https://' . $hostname,
+            'http://'.$hostname,
+            'https://'.$hostname,
         ])->first();
 
         if (! $this->currentChannel) {
@@ -228,7 +228,7 @@ class Core
     /**
      * Get channel code from request.
      *
-     * @return string
+     * @return \Webkul\Core\Contracts\Channel
      */
     public function getRequestedChannel()
     {
@@ -551,7 +551,7 @@ class Core
     {
         $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
 
-        $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
@@ -974,7 +974,7 @@ class Core
             }
 
             foreach ($coreData['fields'] as $field) {
-                $name = $coreData['key'] . '.' . $field['name'];
+                $name = $coreData['key'].'.'.$field['name'];
 
                 if ($name == $fieldName) {
                     return $field;
@@ -1129,19 +1129,19 @@ class Core
     }
 
     /**
-     * Get Shop email sender details.
+     * Get sender email details.
      *
      * @return array
      */
     public function getSenderEmailDetails()
     {
-        $sender_name = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
+        $senderName = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
 
-        $sender_email = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
+        $senderEmail = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
 
         return [
-            'name'  => $sender_name,
-            'email' => $sender_email,
+            'name'  => $senderName,
+            'email' => $senderEmail,
         ];
     }
 

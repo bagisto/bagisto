@@ -3,7 +3,6 @@
 namespace Webkul\Product\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductDownloadableLink;
 
 class ProductDownloadableLinkFactory extends Factory
@@ -26,12 +25,11 @@ class ProductDownloadableLinkFactory extends Factory
 
         return [
             'url'        => '',
-            'file'       => '/tests/_data/' . $filename,
+            'file'       => '/tests/_data/'.$filename,
             'file_name'  => $filename,
             'type'       => 'file',
             'price'      => 0.0000,
             'downloads'  => $this->faker->randomNumber(1),
-            'product_id' => Product::factory(),
             'created_at' => $now,
             'updated_at' => $now,
         ];

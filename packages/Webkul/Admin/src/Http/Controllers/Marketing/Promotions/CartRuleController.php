@@ -105,10 +105,9 @@ class CartRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $cartRule = $this->cartRuleRepository->findOrFail($id);
 
@@ -118,10 +117,9 @@ class CartRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CartRuleRequest $cartRuleRequest, $id)
+    public function update(CartRuleRequest $cartRuleRequest, int $id)
     {
         try {
             $cartRule = $this->cartRuleRepository->findOrFail($id);
@@ -129,7 +127,7 @@ class CartRuleController extends Controller
             if ($cartRule->coupon_type) {
                 if ($cartRule->cart_rule_coupon) {
                     $this->validate(request(), [
-                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,' . $cartRule->cart_rule_coupon->id,
+                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,'.$cartRule->cart_rule_coupon->id,
                     ]);
                 } else {
                     $this->validate(request(), [
@@ -158,10 +156,8 @@ class CartRuleController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $this->cartRuleRepository->findOrFail($id);
 

@@ -64,10 +64,8 @@ class ExchangeRateController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
      */
-    public function edit($id): JsonResponse
+    public function edit(int $id): JsonResponse
     {
         $currencies = $this->currencyRepository->all();
 
@@ -87,7 +85,7 @@ class ExchangeRateController extends Controller
     public function update(): JsonResponse
     {
         $this->validate(request(), [
-            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . request()->id],
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,'.request()->id],
             'rate'            => 'required|numeric',
         ]);
 
@@ -113,44 +111,39 @@ class ExchangeRateController extends Controller
     public function updateRates()
     {
         try {
-            app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
+            app(config('services.exchange_api.'.config('services.exchange_api.default').'.class'))->updateRates();
 
-            session()->flash('success', trans('admin::app.settings.exchange-rates.update-success'));
+            session()->flash('success', trans('admin::app.settings.exchange-rates.index.update-success'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
 
-        return redirect()->back();
+        return redirect()->route('admin.settings.exchange_rates.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
-        $this->exchangeRateRepository->findOrFail($id);
-
         try {
+            $this->exchangeRateRepository->findOrFail($id);
+
             Event::dispatch('core.exchange_rate.delete.before', $id);
 
             $this->exchangeRateRepository->delete($id);
 
             Event::dispatch('core.exchange_rate.delete.after', $id);
 
-            return response()->json([
+            return new JsonResponse([
                 'message' => trans('admin::app.settings.exchange-rates.index.delete-success'),
             ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
-            'message' => trans(
-                'admin::app.settings.exchange-rates.index.delete-error'
-            ),
+        return new JsonResponse([
+            'message' => trans('admin::app.settings.exchange-rates.index.delete-error'),
         ], 500);
     }
 }

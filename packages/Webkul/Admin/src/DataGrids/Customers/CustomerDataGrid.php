@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Customers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderRepository;
 
 class CustomerDataGrid extends DataGrid
@@ -30,14 +31,14 @@ class CustomerDataGrid extends DataGrid
                     ->where('addresses.address_type', '=', 'customer');
             })
             ->addSelect('customers.id as customer_id')
-            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'addresses.id) as address_count'))
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'addresses.id) as address_count'))
             ->groupBy('customers.id')
 
             ->leftJoin('orders', function ($join) {
                 $join->on('customers.id', '=', 'orders.customer_id');
             })
             ->addSelect('customers.id as customer_id')
-            ->addSelect(DB::raw('COUNT(DISTINCT ' . $tablePrefix . 'orders.id) as order_count'))
+            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'orders.id) as order_count'))
             ->groupBy('customers.id')
 
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
@@ -51,12 +52,12 @@ class CustomerDataGrid extends DataGrid
                 'customer_groups.name as group',
             )
             ->addSelect(
-                DB::raw('CONCAT(' . $tablePrefix . 'customers.first_name, " ", ' . $tablePrefix . 'customers.last_name) as full_name')
+                DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name')
             );
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('email', 'customers.email');
-        $this->addFilter('full_name', DB::raw('CONCAT(' . $tablePrefix . 'customers.first_name, " ", ' . $tablePrefix . 'customers.last_name)'));
+        $this->addFilter('full_name', DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name)'));
         $this->addFilter('group', 'customer_groups.name');
         $this->addFilter('phone', 'customers.phone');
         $this->addFilter('status', 'customers.status');
@@ -153,9 +154,9 @@ class CustomerDataGrid extends DataGrid
             'sortable'    => false,
             'closure'     => function ($row) {
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
-                    return $q->whereNotIn('status', ['canceled', 'closed'])
+                    return $q->whereNotIn('status', [Order::STATUS_CANCELED, Order::STATUS_CLOSED])
                         ->where('customer_id', $row->customer_id);
-                })->sum('grand_total_invoiced');
+                })->sum('base_grand_total_invoiced');
             },
         ]);
 
@@ -212,7 +213,7 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('customers.customers.mass-delete')) {
+        if (bouncer()->hasPermission('customers.customers.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.customers.customers.index.datagrid.delete'),
                 'method' => 'POST',
@@ -220,7 +221,7 @@ class CustomerDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('customers.customers.mass-update')) {
+        if (bouncer()->hasPermission('customers.customers.edit')) {
             $this->addMassAction([
                 'title'   => trans('admin::app.customers.customers.index.datagrid.update-status'),
                 'method'  => 'POST',

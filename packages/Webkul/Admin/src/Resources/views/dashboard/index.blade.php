@@ -1,37 +1,39 @@
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.dashboard.index.title')
-    </x-slot:title>
+    </x-slot>
 
-    {{-- User Detailes Section --}}
-    <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
-        <div class="grid gap-[6px]">
-            <p class="pt-[6px] text-[20px] text-gray-800 dark:text-white font-bold leading-[24px]">
+    <!-- User Detailes Section -->
+    <div class="flex gap-4 justify-between items-center mb-5 max-sm:flex-wrap">
+        <div class="grid gap-1.5">
+            <p class="text-xl text-gray-800 dark:text-white font-bold !leading-normal">
                 @lang('admin::app.dashboard.index.user-name', ['user_name' => auth()->guard('admin')->user()->name])
             </p>
 
-            <p class="text-gray-600 dark:text-gray-300">
+            <p class="text-gray-600 !leading-normal dark:text-gray-300">
                 @lang('admin::app.dashboard.index.user-info')
             </p>
         </div>
 
         <!-- Actions -->
         <v-dashboard-filters>
-            {{-- Shimmer --}}
-            <div class="flex gap-[6px]">
-                <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
-                <div class="shimmer w-[140px] h-[39px] rounded-[6px]"></div>
+            <!-- Shimmer -->
+            <div class="flex gap-1.5">
+                <div class="shimmer w-[140px] h-[39px] rounded-md"></div>
+                <div class="shimmer w-[140px] h-[39px] rounded-md"></div>
             </div>
         </v-dashboard-filters>
     </div>
 
-    {{-- Body Component --}}
-    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-        {{-- Left Section --}}
-        <div class=" flex flex-col gap-[30px] flex-1 max-xl:flex-auto">
-            {{-- Overall Detailes --}}
-            <div class="flex flex-col gap-[8px]">
-                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
+    <!-- Body Component -->
+    <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
+        <!-- Left Section -->
+        <div class="flex flex-col gap-8 flex-1 max-xl:flex-auto">
+            {!! view_render_event('bagisto.admin.dashboard.overall_detailes.before') !!}
+
+            <!-- Overall Detailes -->
+            <div class="flex flex-col gap-2">
+                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
@@ -39,9 +41,13 @@
                 @include('admin::dashboard.over-all-details')
             </div>
 
-            {{-- Todays Details --}}
-            <div class="flex flex-col gap-[8px]  ">
-                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
+            {!! view_render_event('bagisto.admin.dashboard.overall_detailes.after') !!}
+
+            {!! view_render_event('bagisto.admin.dashboard.todays_detailes.before') !!}
+
+            <!-- Todays Details -->
+            <div class="flex flex-col gap-2">
+                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
@@ -49,26 +55,32 @@
                 @include('admin::dashboard.todays-details')
             </div>
 
-            {{-- Stock Thereshold --}}
-            <div class="flex flex-col gap-[8px]  ">
-                <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
+            {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
+
+            {!! view_render_event('bagisto.admin.dashboard.stock_thereshold.before') !!}
+            <!-- Stock Thereshold -->
+            <div class="flex flex-col gap-2">
+                <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                     @lang('admin::app.dashboard.index.stock-threshold')
                 </p>
 
-                {{-- Products List --}}  
+                <!-- Products List -->  
                 @include('admin::dashboard.stock-threshold-products')
             </div>
+            {!! view_render_event('bagisto.admin.dashboard.stock_thereshold.after') !!}
         </div>
 
-        {{-- Right Section --}}
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full   max-sm:w-full">
-            {{-- First Component --}}
-            <p class="text-[16px] text-gray-600 dark:text-gray-300 font-semibold">
+        <!-- Right Section -->
+        <div class="flex flex-col gap-2 w-[360px] max-w-full   max-sm:w-full">
+            <!-- First Component -->
+            <p class="text-base text-gray-600 dark:text-gray-300 font-semibold">
                 @lang('admin::app.dashboard.index.store-stats')
             </p>
 
-            {{-- Store Stats --}}
-            <div class="rounded-[4px] bg-white dark:bg-gray-900 box-shadow">
+            {!! view_render_event('bagisto.admin.dashboard.store_stats.before') !!}
+
+            <!-- Store Stats -->
+            <div class="rounded bg-white dark:bg-gray-900 box-shadow">
                 <!-- Total Sales Detailes -->
                 @include('admin::dashboard.total-sales')
 
@@ -81,6 +93,8 @@
                 <!-- Top Customers -->
                 @include('admin::dashboard.top-customers')
             </div>
+
+            {!! view_render_event('bagisto.admin.dashboard.store_stats.after') !!}
         </div>
     </div>
     
@@ -88,10 +102,10 @@
         <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
 
         <script type="text/x-template" id="v-dashboard-filters-template">
-            <div class="flex gap-[6px]">
+            <div class="flex gap-1.5">
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.start"
                         placeholder="@lang('admin::app.dashboard.index.start-date')"
                     />
@@ -99,7 +113,7 @@
 
                 <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
                     <input
-                        class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         v-model="filters.end"
                         placeholder="@lang('admin::app.dashboard.index.end-date')"
                     />

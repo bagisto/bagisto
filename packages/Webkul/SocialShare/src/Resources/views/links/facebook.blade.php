@@ -7,7 +7,10 @@
 <v-facebook-share></v-facebook-share>
 
 @push('scripts')
-    <script type="text/x-template" id="v-facebook-share-template">
+    <script
+        type="text/x-template"
+        id="v-facebook-share-template"
+    >
         <li class="transition-all hover:opacity-[0.8]">
             <a 
                 href="#"

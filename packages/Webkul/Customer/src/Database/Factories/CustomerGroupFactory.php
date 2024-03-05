@@ -21,12 +21,10 @@ class CustomerGroupFactory extends Factory
      */
     public function definition(): array
     {
-        $name = ucfirst($this->faker->word);
-
         return [
-            'name'            => $name,
+            'name'            => ucfirst($this->faker->word),
             'is_user_defined' => $this->faker->boolean,
-            'code'            => lcfirst($name),
+            'code'            => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
         ];
     }
 }

@@ -14,6 +14,7 @@ class ProductReviewResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id'         => $this->id,
             'name'       => $this->name,
@@ -21,6 +22,7 @@ class ProductReviewResource extends JsonResource
             'comment'    => $this->comment,
             'rating'     => $this->rating,
             'images'     => $this->images,
+            'profile'    => $this->customer?->image_url,
             'created_at' => $this->created_at->format('M d, Y'),
         ];
     }

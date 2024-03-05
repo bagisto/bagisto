@@ -15,6 +15,21 @@ class ReviewDataGrid extends DataGrid
     protected $primaryColumn = 'product_review_id';
 
     /**
+     * Review status "approved".
+     */
+    const STATUS_APPROVED = 'approved';
+
+    /**
+     * Review status "pending", indicating awaiting approval or processing.
+     */
+    const STATUS_PENDING = 'pending';
+
+    /**
+     * Review status "disapproved", indicating rejection or denial.
+     */
+    const STATUS_DISAPPROVED = 'disapproved';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -74,17 +89,41 @@ class ReviewDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'product_review_status',
             'label'      => trans('admin::app.customers.reviews.index.datagrid.status'),
-            'type'       => 'boolean',
+            'type'       => 'dropdown',
+            'options'    => [
+                'type' => 'basic',
+
+                'params' => [
+                    'options' => [
+                        [
+                            'label' => trans('admin::app.customers.reviews.index.datagrid.approved'),
+                            'value' => self::STATUS_APPROVED,
+                        ],
+                        [
+                            'label' => trans('admin::app.customers.reviews.index.datagrid.pending'),
+                            'value' => self::STATUS_PENDING,
+                        ],
+                        [
+                            'label' => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
+                            'value' => self::STATUS_DISAPPROVED,
+                        ],
+                    ],
+                ],
+            ],
+
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                if ($value->product_review_status == 'approved') {
-                    return '<p class="label-active">' . trans('admin::app.customers.reviews.index.datagrid.approved') . '</p>';
-                } elseif ($value->product_review_status == 'pending') {
-                    return '<p class="label-pending">' . trans('admin::app.customers.reviews.index.datagrid.pending') . '</p>';
-                } elseif ($value->product_review_status == 'disapproved') {
-                    return '<p class="label-canceled">' . trans('admin::app.customers.reviews.index.datagrid.disapproved') . '</p>';
+            'closure'    => function ($row) {
+                switch ($row->product_review_status) {
+                    case self::STATUS_APPROVED:
+                        return '<p class="label-active">'.trans('admin::app.customers.reviews.index.datagrid.approved').'</p>';
+
+                    case self::STATUS_PENDING:
+                        return '<p class="label-pending">'.trans('admin::app.customers.reviews.index.datagrid.pending').'</p>';
+
+                    case self::STATUS_DISAPPROVED:
+                        return '<p class="label-canceled">'.trans('admin::app.customers.reviews.index.datagrid.disapproved').'</p>';
                 }
             },
         ]);
@@ -144,6 +183,7 @@ class ReviewDataGrid extends DataGrid
     {
         if (bouncer()->hasPermission('customers.reviews.edit')) {
             $this->addAction([
+                'index'  => 'edit',
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.customers.reviews.index.datagrid.edit'),
                 'method' => 'GET',
@@ -155,6 +195,7 @@ class ReviewDataGrid extends DataGrid
 
         if (bouncer()->hasPermission('customers.reviews.delete')) {
             $this->addAction([
+                'index'  => 'delete',
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
                 'method' => 'DELETE',
@@ -172,7 +213,7 @@ class ReviewDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
-        if (bouncer()->hasPermission('customers.reviews.mass-delete')) {
+        if (bouncer()->hasPermission('customers.reviews.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
                 'url'    => route('admin.customers.customers.review.mass_delete'),
@@ -180,7 +221,7 @@ class ReviewDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('customers.reviews.mass-update')) {
+        if (bouncer()->hasPermission('customers.reviews.edit')) {
             $this->addMassAction([
                 'title'   => trans('admin::app.customers.reviews.index.datagrid.update-status'),
                 'method'  => 'POST',

@@ -18,17 +18,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(InvoiceController::class)->prefix('invoices')->group(function () {
             Route::get('', 'index')->name('admin.sales.invoices.index');
 
-            Route::get('create/{order_id}', 'create')->name('admin.sales.invoices.create');
-
             Route::post('create/{order_id}', 'store')->name('admin.sales.invoices.store');
 
             Route::get('view/{id}', 'view')->name('admin.sales.invoices.view');
 
-            Route::post('send-duplicate/{id}', 'sendDuplicate')->name('admin.sales.invoices.send_duplicate');
+            Route::post('send-duplicate-email/{id}', 'sendDuplicateEmail')->name('admin.sales.invoices.send_duplicate_email');
 
             Route::get('print/{id}', 'printInvoice')->name('admin.sales.invoices.print');
-
-            Route::get('{id}transactions', 'invoiceTransactions')->name('admin.sales.invoices.transactions');
         });
 
         /**
@@ -52,8 +48,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(RefundController::class)->prefix('refunds')->group(function () {
             Route::get('', 'index')->name('admin.sales.refunds.index');
 
-            Route::get('create/{order_id}', 'create')->name('admin.sales.refunds.create');
-
             Route::post('create/{order_id}', 'store')->name('admin.sales.refunds.store');
 
             Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
@@ -66,8 +60,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          */
         Route::controller(ShipmentController::class)->prefix('shipments')->group(function () {
             Route::get('', 'index')->name('admin.sales.shipments.index');
-
-            Route::get('create/{order_id}', 'create')->name('admin.sales.shipments.create');
 
             Route::post('create/{order_id}', 'store')->name('admin.sales.shipments.store');
 

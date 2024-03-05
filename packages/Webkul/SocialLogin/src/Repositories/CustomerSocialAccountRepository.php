@@ -84,7 +84,7 @@ class CustomerSocialAccountRepository extends Repository
 
         $lastName = (strpos($name, ' ') === false) ? '' : preg_replace('#.*\s([\w-]*)$#', '$1', $name);
 
-        $firstName = trim(preg_replace('#' . $lastName . '#', '', $name));
+        $firstName = trim(preg_replace('#'.$lastName.'#', '', $name));
 
         return [
             'first_name' => $firstName,

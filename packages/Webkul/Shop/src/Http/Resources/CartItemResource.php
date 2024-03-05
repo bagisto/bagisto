@@ -25,6 +25,7 @@ class CartItemResource extends JsonResource
             'formatted_total' => core()->formatPrice($this->total),
             'options'         => array_values($this->resource->additional['attributes'] ?? []),
             'base_image'      => $this->getTypeInstance()->getBaseImage($this),
+            'product_url_key' => $this->product->url_key,
         ];
     }
 }

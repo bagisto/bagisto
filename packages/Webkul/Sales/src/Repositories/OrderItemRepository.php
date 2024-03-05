@@ -155,7 +155,7 @@ class OrderItemRepository extends Repository
      */
     public function returnQtyToProductInventory($orderItem)
     {
-        if ($orderItem->product) {
+        if (! $orderItem->product) {
             return;
         }
 

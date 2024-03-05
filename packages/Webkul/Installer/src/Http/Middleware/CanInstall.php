@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
-use Webkul\Installer\Http\Helpers\DatabaseManager;
+use Webkul\Installer\Helpers\DatabaseManager;
 
 class CanInstall
 {
@@ -41,7 +41,7 @@ class CanInstall
             return true;
         }
 
-        if (app(DatabaseManager::class)->checkConnection()) {
+        if (app(DatabaseManager::class)->isInstalled()) {
             touch(storage_path('installed'));
 
             Event::dispatch('bagisto.installed');

@@ -13,9 +13,7 @@ class CategoryServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->app->register(EventServiceProvider::class);
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         CategoryProxy::observe(CategoryObserver::class);
     }

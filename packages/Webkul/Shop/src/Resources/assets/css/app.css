@@ -3,14 +3,18 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "velicon";
-    src: url("../fonts/velicon.woff?hhi7p1") format("woff");
+    font-family: "bagisto-shop";
+    src: url("../fonts/bagisto-shop.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: block;
 }
 
 @layer components {
+    ::selection {
+        background-color: rgba(6, 12, 59, .2);
+    }
+
     input {
         @apply outline-none;
     }
@@ -26,17 +30,25 @@
     [class^="icon-"],
     [class*=" icon-"] {
         /* use !important to prevent issues with browser extensions that change fonts */
-        font-family: "velicon" !important;
+        font-family: "bagisto-shop" !important;
         speak: never;
         font-style: normal;
         font-weight: normal;
         font-variant: normal;
         text-transform: none;
-        line-height: 1;
+        line-height: 1 !important;
 
         /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-checkout-address:before {
+        content: "\e944";
+    }
+
+    .icon-edit:before {
+        content: "\e943";
     }
 
     .icon-add-new:before {
@@ -261,7 +273,7 @@
 
     .icon-sort:before {
         content: "\e937";
-    color: #7d7d7d;
+        color: #7d7d7d;
     }
 
     .icon-star-fill:before {
@@ -339,6 +351,10 @@
         background-position-y: 50%;
     }
 
+    [dir="rtl"] .custom-select {
+        background-position-x: calc(100% - (100% - 10px));
+    }
+
     * {
         @apply box-border font-poppins;
     }
@@ -362,13 +378,48 @@
     .direction-rtl {
         direction: rtl;
     }
+    
+    .label-pending,
+    .label-processing,
+    .label-closed,
+    .label-canceled,
+    .label-info,
+    .label-completed,
+    .label-active {
+        @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
+    }
+
+	.label-pending {
+		@apply bg-yellow-500;
+	}
+
+	.label-processing{
+		@apply bg-cyan-600;
+    }
+
+	.label-completed,
+    .label-active {
+		@apply bg-green-600;
+	}
+
+	.label-closed {
+		@apply bg-indigo-600;
+	}
+
+    .label-canceled {
+        @apply bg-rose-600;
+    }
+
+    .label-info {
+        @apply bg-slate-400;
+    }
 
     .primary-button {
-        @apply font-medium rounded-[12px] text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:opacity-[0.9];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl text-white bg-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:opacity-[0.9];
     }
     
     .secondary-button {
-        @apply font-medium rounded-[12px] bg-white text-navyBlue border border-navyBlue  px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
+        @apply flex gap-x-1.5 items-center place-content-center font-medium rounded-xl bg-white text-navyBlue border border-navyBlue px-8 py-4 max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
 
     .shimmer {
@@ -453,10 +504,10 @@
     }
 
     .skip-to-main-content-link {
-        @apply absolute left-[-9999px] z-[999] p-[1em] bg-black text-white opacity-0;
+        @apply absolute ltr:left-[-9999px] rtl:right-[-9999px] z-[999] p-[1em] bg-black text-white opacity-0;
     }
 
     .skip-to-main-content-link:focus {
-        @apply left-[50%] translate-x-[50%] opacity-100;
+        @apply ltr:left-1/2 rtl:right-1/2 ltr:translate-x-1/2 rtl:translate-x-[-50%] opacity-100;
     }
 }

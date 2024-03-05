@@ -44,7 +44,7 @@ class CategoryDataGrid extends DataGrid
                 'cat.position',
                 'cat.status',
                 'ct.locale',
-                DB::raw('COUNT(DISTINCT ' . DB::getTablePrefix() . 'pc.product_id) as count')
+                DB::raw('COUNT(DISTINCT '.DB::getTablePrefix().'pc.product_id) as count')
             )
             ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('cat.id', '=', 'ct.category_id')
@@ -101,10 +101,10 @@ class CategoryDataGrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return '<span class="badge badge-md badge-success">' . trans('admin::app.catalog.categories.index.datagrid.active') . '</span>';
+                    return '<span class="badge badge-md badge-success">'.trans('admin::app.catalog.categories.index.datagrid.active').'</span>';
                 }
 
-                return '<span class="badge badge-md badge-danger">' . trans('admin::app.catalog.categories.index.datagrid.inactive') . '</span>';
+                return '<span class="badge badge-md badge-danger">'.trans('admin::app.catalog.categories.index.datagrid.inactive').'</span>';
             },
         ]);
 
@@ -147,7 +147,7 @@ class CategoryDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.categories.mass-delete')) {
+        if (bouncer()->hasPermission('catalog.categories.delete')) {
             $this->addMassAction([
                 'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
                 'method' => 'POST',
@@ -155,7 +155,7 @@ class CategoryDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.categories.mass-update')) {
+        if (bouncer()->hasPermission('catalog.categories.edit')) {
             $this->addMassAction([
                 'title'   => trans('admin::app.catalog.categories.index.datagrid.update-status'),
                 'method'  => 'POST',

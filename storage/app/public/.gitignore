@@ -1,4 +1,3 @@
 *
-!locales/
-!theme/
+!data-transfer
 !.gitignore

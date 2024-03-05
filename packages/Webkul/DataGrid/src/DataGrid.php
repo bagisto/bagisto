@@ -19,6 +19,13 @@ abstract class DataGrid
     protected $primaryColumn = 'id';
 
     /**
+     * Default sort column of datagrid.
+     *
+     * @var ?string
+     */
+    protected $sortColumn;
+
+    /**
      * Default sort order of datagrid.
      *
      * @var string
@@ -146,6 +153,7 @@ abstract class DataGrid
     public function addAction(array $action): void
     {
         $this->actions[] = new Action(
+            index: $action['index'] ?? '',
             icon: $action['icon'] ?? '',
             title: $action['title'],
             method: $action['method'],
@@ -201,7 +209,7 @@ abstract class DataGrid
             'sort'        => ['sometimes', 'required', 'array'],
             'pagination'  => ['sometimes', 'required', 'array'],
             'export'      => ['sometimes', 'required', 'boolean'],
-            'format'      => ['sometimes', 'required', 'in:xls,csv'],
+            'format'      => ['sometimes', 'required', 'in:csv,xls,xlsx'],
         ]);
 
         return request()->only(['filters', 'sort', 'pagination', 'export', 'format']);
@@ -220,13 +228,27 @@ abstract class DataGrid
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
                             ->filter(fn ($column) => $column->searchable && $column->type !== ColumnTypeEnum::BOOLEAN->value)
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%' . $value . '%'));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%'));
                     }
                 });
             } else {
                 $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
 
                 switch ($column->type) {
+                    case ColumnTypeEnum::STRING->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
+                            }
+                        });
+
+                    case ColumnTypeEnum::INTEGER->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
+                            }
+                        });
+
                     case ColumnTypeEnum::DROPDOWN->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
@@ -237,6 +259,16 @@ abstract class DataGrid
                         break;
 
                     case ColumnTypeEnum::DATE_RANGE->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [
+                                    ($value[0] ?? '').' 00:00:01',
+                                    ($value[1] ?? '').' 23:59:59',
+                                ]);
+                            }
+                        });
+
+                        break;
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
@@ -249,7 +281,7 @@ abstract class DataGrid
                     default:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%' . $value . '%');
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%'.$value.'%');
                             }
                         });
 
@@ -268,7 +300,11 @@ abstract class DataGrid
      */
     public function processRequestedSorting($requestedSort)
     {
-        return $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->primaryColumn, $requestedSort['order'] ?? $this->sortOrder);
+        if (! $this->sortColumn) {
+            $this->sortColumn = $this->primaryColumn;
+        }
+
+        return $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->sortColumn, $requestedSort['order'] ?? $this->sortOrder);
     }
 
     /**
@@ -322,7 +358,7 @@ abstract class DataGrid
      */
     public function setExportFile($records, $format = 'csv')
     {
-        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36) . '.' . $format);
+        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36).'.'.$format);
     }
 
     /**
@@ -352,6 +388,8 @@ abstract class DataGrid
         }
 
         foreach ($paginator['data'] as $record) {
+            $record = $this->sanitizeRow($record);
+
             foreach ($this->columns as $column) {
                 if ($closure = $column->closure) {
                     $record->{$column->index} = $closure($record);
@@ -362,10 +400,11 @@ abstract class DataGrid
 
             $record->actions = [];
 
-            foreach ($this->actions as $action) {
+            foreach ($this->actions as $index => $action) {
                 $getUrl = $action->url;
 
                 $record->actions[] = [
+                    'index'  => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
                     'icon'   => $action->icon,
                     'title'  => $action->title,
                     'method' => $action->method,
@@ -407,6 +446,31 @@ abstract class DataGrid
         $this->setQueryBuilder();
 
         $this->processRequest();
+    }
+
+    /**
+     * Prepare all the setup for datagrid.
+     */
+    public function sanitizeRow($row): \stdClass
+    {
+        /**
+         * Convert stdClass to array.
+         */
+        $tempRow = json_decode(json_encode($row), true);
+
+        foreach ($tempRow as $column => $value) {
+            if (! is_string($tempRow[$column])) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                return $this->sanitizeRow($tempRow[$column]);
+            } else {
+                $row->{$column} = strip_tags($value);
+            }
+        }
+
+        return $row;
     }
 
     /**

@@ -42,4 +42,34 @@ class CartRuleFactory extends Factory
             'conditions'                => null,
         ];
     }
+
+    /**
+     * Indicate that the user is guest.
+     */
+    public function guest(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return 1;
+        });
+    }
+
+    /**
+     * Indicate that the user is general.
+     */
+    public function general(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return 2;
+        });
+    }
+
+    /**
+     * Indicate that the user is wholesaler.
+     */
+    public function wholesale(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return 3;
+        });
+    }
 }

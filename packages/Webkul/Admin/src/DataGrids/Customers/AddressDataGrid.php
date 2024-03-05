@@ -42,7 +42,7 @@ class AddressDataGrid extends DataGrid
                 'ca.company_name',
                 'ca.address1',
                 'ca.country',
-                DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'),
+                DB::raw(''.DB::getTablePrefix().'countries.name as country_name'),
                 'ca.state',
                 'ca.city',
                 'ca.postcode',
@@ -58,7 +58,7 @@ class AddressDataGrid extends DataGrid
         });
 
         $queryBuilder->groupBy('ca.id')
-            ->addSelect(DB::raw(DB::getTablePrefix() . 'country_states.default_name as state_name'));
+            ->addSelect(DB::raw(DB::getTablePrefix().'country_states.default_name as state_name'));
 
         $this->addFilter('company_name', 'ca.company_name');
         $this->addFilter('address1', 'ca.address1');
@@ -149,7 +149,7 @@ class AddressDataGrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($row) {
                 if ($row->default_address) {
-                    return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
+                    return '<span class="badge badge-md badge-success"">'.trans('admin::app.customers.addresses.yes').'</span>';
                 }
 
                 return trans('admin::app.customers.addresses.dash');

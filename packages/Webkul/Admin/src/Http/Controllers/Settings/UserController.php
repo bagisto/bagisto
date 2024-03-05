@@ -67,7 +67,7 @@ class UserController extends Controller
         $admin = $this->adminRepository->create($data);
 
         if (request()->hasFile('image')) {
-            $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
+            $admin->image = current(request()->file('image'))->store('admins/'.$admin->id);
 
             $admin->save();
         }
@@ -106,7 +106,9 @@ class UserController extends Controller
         $data = $this->prepareUserData($request, $id);
 
         if ($data instanceof \Illuminate\Http\RedirectResponse) {
-            return $data;
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.users.update-success'),
+            ]);
         }
 
         Event::dispatch('user.admin.update.before', $id);
@@ -114,7 +116,7 @@ class UserController extends Controller
         $admin = $this->adminRepository->update($data, $id);
 
         if (request()->hasFile('image')) {
-            $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
+            $admin->image = current(request()->file('image'))->store('admins/'.$admin->id);
         } else {
             if (! request()->has('image.image')) {
                 if (! empty(request()->input('image.image'))) {
@@ -246,7 +248,7 @@ class UserController extends Controller
         if (
             $isStatusChangedToInactive
             && (auth()->guard('admin')->user()->id === (int) $id
-                || $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
+                && $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
             )
         ) {
             return $this->cannotChangeRedirectResponse('status');

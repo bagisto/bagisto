@@ -40,7 +40,7 @@ class Base
         try {
             Mail::queue($notification);
         } catch (\Exception $e) {
-            \Log::error('Error in Sending Email' . $e->getMessage());
+            \Log::error('Error in Sending Email'.$e->getMessage());
         }
 
         app()->setLocale($previousLocale);

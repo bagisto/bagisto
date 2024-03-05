@@ -1,54 +1,57 @@
-{{-- Top Selling Products By Quantity Vue Component --}}
+<!-- Top Selling Products By Quantity Vue Component -->
 <v-reporting-product-top-selling-by-quantity>
-    {{-- Shimmer --}}
-    <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
+    <!-- Shimmer -->
+    <x-admin::shimmer.reporting.products.top-selling-by-quantity />
 </v-reporting-product-top-selling-by-quantity>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-reporting-product-top-selling-by-quantity-template">
+    <script
+        type="text/x-template"
+        id="v-reporting-product-top-selling-by-quantity-template"
+    >
         <!-- Shimmer --> 
         <template v-if="isLoading">
-            <x-admin::shimmer.reporting.products.top-selling-by-quantity/>
+            <x-admin::shimmer.reporting.products.top-selling-by-quantity />
         </template>
         
         <!-- Top Selling Products By Quantity Section -->
         <template v-else>
-            <div class="flex-1 relative p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+            <div class="flex-1 relative p-4 bg-white dark:bg-gray-900 rounded box-shadow">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-[16px]">
-                    <p class="text-[16px] text-gray-600 dark:text-white font-semibold">
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-base text-gray-600 dark:text-white font-semibold">
                         @lang('admin::app.reporting.products.index.top-selling-products-by-quantity')
                     </p>
 
                     <a
                         href="{{ route('admin.reporting.products.view', ['type' => 'top-selling-products-by-quantity']) }}"
-                        class="text-[14px] text-blue-600 cursor-pointer transition-all hover:underline"
+                        class="text-sm text-blue-600 cursor-pointer transition-all hover:underline"
                     >
                         @lang('admin::app.reporting.products.index.view-details')
                     </a>
                 </div>
                 
                 <!-- Content -->
-                <div class="grid gap-[16px]">
+                <div class="grid gap-4">
                     <!-- Top Selling Products By Quantity -->
                     <template v-if="report.statistics.length">
                         <!-- Customers -->
-                        <div class="grid gap-[27px]">
+                        <div class="grid gap-7">
                             <div
                                 class="grid"
                                 v-for="product in report.statistics"
                             >
                                 <p class="dark:text-white">@{{ product.name }}</p>
 
-                                <div class="flex gap-[20px] items-center">
-                                    <div class="w-full h-[8px] relative bg-slate-100">
+                                <div class="flex gap-5 items-center">
+                                    <div class="w-full h-2 relative bg-slate-100">
                                         <div
-                                            class="h-[8px] absolute left-0 bg-emerald-500"
+                                            class="h-2 absolute left-0 bg-emerald-500"
                                             :style="{ 'width': product.progress + '%' }"
                                         ></div>
                                     </div>
 
-                                    <p class="text-[14px] text-gray-600 dark:text-gray-300 font-semibold">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 font-semibold">
                                         @{{ product.total_qty_ordered }}
                                     </p>
                                 </div>
@@ -62,11 +65,11 @@
                     </template>
 
                     <!-- Date Range -->
-                    <div class="flex gap-[20px] justify-end">
-                        <div class="flex gap-[4px] items-center">
-                            <span class="w-[14px] h-[14px] rounded-[3px] bg-emerald-400"></span>
+                    <div class="flex gap-5 justify-end">
+                        <div class="flex gap-1 items-center">
+                            <span class="w-3.5 h-3.5 rounded-md bg-emerald-400"></span>
 
-                            <p class="text-[12px] dark:text-gray-300">
+                            <p class="text-xs dark:text-gray-300">
                                 @{{ report.date_range.current }}
                             </p>
                         </div>

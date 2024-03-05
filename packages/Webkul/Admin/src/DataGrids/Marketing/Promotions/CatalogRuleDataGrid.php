@@ -111,7 +111,7 @@ class CatalogRuleDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.promotions.catalog-rules.edit')) {
+        if (bouncer()->hasPermission('marketing.promotions.catalog_rules.edit')) {
             $this->addAction([
                 'icon'   => 'icon-edit',
                 'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.edit'),
@@ -122,7 +122,7 @@ class CatalogRuleDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.promotions.catalog-rules.delete')) {
+        if (bouncer()->hasPermission('marketing.promotions.catalog_rules.delete')) {
             $this->addAction([
                 'icon'   => 'icon-delete',
                 'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.delete'),

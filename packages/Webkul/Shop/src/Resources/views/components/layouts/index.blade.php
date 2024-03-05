@@ -12,7 +12,6 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="base-url" content="{{ url()->to('/') }}">
         <meta name="currency-code" content="{{ core()->getCurrentCurrencyCode() }}">
         <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
@@ -44,36 +43,37 @@
 
     <body>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
-        
+
         <a href="#main" class="skip-to-main-content-link">Skip to main content</a>
 
         <div id="app">
-            {{-- Flash Message Blade Component --}}
+            <!-- Flash Message Blade Component -->
             <x-shop::flash-group />
 
-            {{-- Confirm Modal Blade Component --}}
+            <!-- Confirm Modal Blade Component -->
             <x-shop::modal.confirm />
 
-            {{-- Page Header Blade Component --}}
+            <!-- Page Header Blade Component -->
             @if ($hasHeader)
                 <x-shop::layouts.header />
             @endif
 
             {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
-            {{-- Page Content Blade Component --}}
+            <!-- Page Content Blade Component -->
             <main id="main" class="bg-white">
                 {{ $slot }}
             </main>
 
             {!! view_render_event('bagisto.shop.layout.content.after') !!}
 
-            {{-- Page Features Blade Component --}}
+            
+            <!-- Page Services Blade Component -->
             @if ($hasFeature)
-                <x-shop::layouts.features />
+                <x-shop::layouts.services />
             @endif
 
-            {{-- Page Footer Blade Component --}}
+            <!-- Page Footer Blade Component -->
             @if ($hasFooter)
                 <x-shop::layouts.footer />
             @endif

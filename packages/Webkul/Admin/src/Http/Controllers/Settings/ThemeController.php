@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
 class ThemeController extends Controller
 {
@@ -42,26 +42,25 @@ class ThemeController extends Controller
     public function store()
     {
         if (request()->has('id')) {
+            $this->validate(request(), [
+                core()->getRequestedLocaleCode().'.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
+            ]);
+
             $theme = $this->themeCustomizationRepository->find(request()->input('id'));
 
             return $this->themeCustomizationRepository->uploadImage(request()->all(), $theme);
         }
 
-        $this->validate(request(), [
+        $validated = $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
-            'type'       => 'in:product_carousel,category_carousel,static_content,image_carousel,footer_links',
-            'channel_id' => 'required|in:' . implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
+            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
         ]);
 
         Event::dispatch('theme_customization.create.before');
 
-        $theme = $this->themeCustomizationRepository->create([
-            'name'       => request()->input('name'),
-            'sort_order' => request()->input('sort_order'),
-            'type'       => request()->input('type'),
-            'channel_id' => request()->input('channel_id'),
-        ]);
+        $theme = $this->themeCustomizationRepository->create($validated);
 
         Event::dispatch('theme_customization.create.after', $theme);
 
@@ -73,10 +72,9 @@ class ThemeController extends Controller
     /**
      * Edit the theme
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $theme = $this->themeCustomizationRepository->find($id);
 
@@ -86,37 +84,34 @@ class ThemeController extends Controller
     /**
      * Update the specified resource
      *
-     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update(int $id)
     {
-        $locale = core()->getRequestedLocaleCode();
+        $this->validate(request(), [
+            'name'       => 'required',
+            'sort_order' => 'required|numeric',
+            'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
+            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+        ]);
 
-        $data = request()->all();
+        $locale = request('locale');
 
-        if ($data['type'] == 'static_content') {
-            $data[$locale]['options']['html'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['html']);
-            $data[$locale]['options']['css'] = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $data[$locale]['options']['css']);
-        }
-
-        $data['status'] = request()->input('status') == 'on';
-
-        if ($data['type'] == 'image_carousel') {
-            unset($data['options']);
-        }
+        $data = request()->only(
+            'locale',
+            'type',
+            'name',
+            'sort_order',
+            'channel_id',
+            'status',
+            $locale
+        );
 
         Event::dispatch('theme_customization.update.before', $id);
 
-        $theme = $this->themeCustomizationRepository->update($data, $id);
+        $data['status'] = request()->input('status') == 'on';
 
-        if ($data['type'] == 'image_carousel') {
-            $this->themeCustomizationRepository->uploadImage(
-                request()->all('options'),
-                $theme,
-                request()->input('deleted_sliders', [])
-            );
-        }
+        $theme = $this->themeCustomizationRepository->update($data, $id);
 
         Event::dispatch('theme_customization.update.after', $theme);
 
@@ -128,18 +123,15 @@ class ThemeController extends Controller
     /**
      * Delete a specified theme.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         Event::dispatch('theme_customization.delete.before', $id);
 
-        $theme = $this->themeCustomizationRepository->find($id);
+        $this->themeCustomizationRepository->delete($id);
 
-        $theme?->delete();
-
-        Storage::deleteDirectory('theme/' . $theme->id);
+        Storage::deleteDirectory('theme/'.$id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 

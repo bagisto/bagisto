@@ -27,10 +27,9 @@ class AddressController extends Controller
     /**
      * Fetch address by customer id.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function index($id)
+    public function index(int $id)
     {
         $customer = $this->customerRepository->find($id);
 
@@ -40,10 +39,9 @@ class AddressController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function create($id)
+    public function create(int $id)
     {
         $customer = $this->customerRepository->find($id);
 
@@ -64,6 +62,7 @@ class AddressController extends Controller
             'postcode'     => ['required', 'numeric'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
+            'email'        => ['required'],
         ]);
 
         $data = array_merge(request()->only([
@@ -78,6 +77,7 @@ class AddressController extends Controller
             'state',
             'postcode',
             'phone',
+            'email',
             'default_address',
         ]), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
@@ -98,10 +98,9 @@ class AddressController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $address = $this->customerAddressRepository->find($id);
 
@@ -110,10 +109,8 @@ class AddressController extends Controller
 
     /**
      * Edit's the pre made resource of customer called address.
-     *
-     * @param  int  $id
      */
-    public function update($id): JsonResponse
+    public function update(int $id): JsonResponse
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
@@ -124,6 +121,7 @@ class AddressController extends Controller
             'postcode'     => ['required', 'numeric'],
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
+            'email'        => ['required'],
         ]);
 
         $data = array_merge(request()->only([
@@ -138,6 +136,7 @@ class AddressController extends Controller
             'state',
             'postcode',
             'phone',
+            'email',
             'default_address',
         ]), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
@@ -184,10 +183,9 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         Event::dispatch('customer.addresses.delete.before', $id);
 

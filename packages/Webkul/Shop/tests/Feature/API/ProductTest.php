@@ -2,16 +2,8 @@
 
 use Pest\Expectation;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Product\Models\Product as ProductModel;
 
 use function Pest\Laravel\getJson;
-
-afterEach(function () {
-    /**
-     * Cleaning up rows which are created.
-     */
-    ProductModel::query()->delete();
-});
 
 it('returns a new products listing', function () {
     // Arrange

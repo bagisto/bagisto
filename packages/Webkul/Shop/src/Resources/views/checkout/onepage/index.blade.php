@@ -1,4 +1,4 @@
-{{-- SEO Meta Content --}}
+<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="@lang('shop::app.checkout.onepage.index.checkout')"/>
 
@@ -10,23 +10,25 @@
     :has-feature="false"
     :has-footer="false"
 >
-    {{-- Page Title --}}
+    <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.checkout.onepage.index.checkout')
     </x-slot>
 
-    {{-- Page Header --}}
+    {!! view_render_event('bagisto.shop.checkout.onepage.header.before') !!}
+
+    <!-- Page Header -->
     <div class="lex flex-wrap">
-        <div class="w-full flex justify-between px-[60px] py-[17px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-lg:px-[30px] max-sm:px-[15px]">
-            <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
+        <div class="w-full flex justify-between px-[60px] py-4 border border-t-0 border-b border-l-0 border-r-0 max-lg:px-8 max-sm:px-4">
+            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
                     class="flex min-h-[30px]"
-                    aria-label="Bagisto "
+                    aria-label="@lang('shop::checkout.onepage.index.bagisto')"
                 >
                     <img
-                        src="{{ bagisto_asset('images/logo.svg') }}"
-                        alt="Bagisto "
+                        src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                        alt="{{ config('app.name') }}"
                         width="131"
                         height="29"
                     >
@@ -35,31 +37,52 @@
         </div>
     </div>
 
-    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-        {{-- Breadcrumbs --}}
-        <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
+    {!! view_render_event('bagisto.shop.checkout.onepage.header.after') !!}
+
+    <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
+
+        <!-- Breadcrumbs -->
+        <x-shop::breadcrumbs name="checkout" />
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.after') !!}
 
         <v-checkout>
-            {{-- Shimmer Effect --}}
-            <x-shop::shimmer.checkout.onepage/>
+            <!-- Shimmer Effect -->
+            <x-shop::shimmer.checkout.onepage />
         </v-checkout>
     </div>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-checkout-template">
-            <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-                <div    
+        <script
+            type="text/x-template"
+            id="v-checkout-template"
+        >
+            <div class="grid grid-cols-[1fr_auto] gap-8 max-lg:grid-cols-[1fr]">
+                <div
                     class="overflow-y-auto"
-                    ref="scrollBottom"
+                    id="scrollBottom"
                 >
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.before') !!}
+
                     @include('shop::checkout.onepage.addresses.index')
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.addresses.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.before') !!}
 
                     @include('shop::checkout.onepage.shipping')
 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.shipping_method.after') !!}
+
+                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
+
                     @include('shop::checkout.onepage.payment')
 
+                    {!! view_render_event('bagisto.shop.checkout.onepage.payment_method.before') !!}
                 </div>
-                
+
                 @include('shop::checkout.onepage.summary')
             </div>
         </script>
@@ -70,15 +93,17 @@
 
                 data() {
                     return {
-                        cart: {},
+                        cart: null,
 
                         isCartLoading: true,
                     }
                 },
 
-                created() {
+                mounted() {
                     this.getOrderSummary();
-                }, 
+
+                    this.$emitter.on('update-cart-summary', this.getOrderSummary);
+                },
 
                 methods: {
                     getOrderSummary() {
@@ -88,7 +113,7 @@
 
                                 this.isCartLoading = false;
 
-                                let container = this.$refs.scrollBottom;
+                                let container = document.getElementById('scrollBottom');
 
                                 if (container) {
                                     container.scrollIntoView({
@@ -97,7 +122,7 @@
                                     });
                                 }
                             })
-                            .catch(error => console.log(error));
+                            .catch(error => {});
                     },
                 },
             });

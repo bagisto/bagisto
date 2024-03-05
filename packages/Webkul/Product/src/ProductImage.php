@@ -89,7 +89,7 @@ class ProductImage
      * @param  array
      * @return array
      */
-    public function getProductBaseImage($product, array $galleryImages = null)
+    public function getProductBaseImage($product, ?array $galleryImages = null)
     {
         if (! $product) {
             return;
@@ -132,10 +132,10 @@ class ProductImage
         }
 
         return [
-            'small_image_url'    => url('cache/small/' . $path),
-            'medium_image_url'   => url('cache/medium/' . $path),
-            'large_image_url'    => url('cache/large/' . $path),
-            'original_image_url' => url('cache/original/' . $path),
+            'small_image_url'    => url('cache/small/'.$path),
+            'medium_image_url'   => url('cache/medium/'.$path),
+            'large_image_url'    => url('cache/large/'.$path),
+            'original_image_url' => url('cache/original/'.$path),
         ];
     }
 

@@ -11,6 +11,7 @@ class Action
      * Create a column instance.
      */
     public function __construct(
+        public string $index,
         public string $icon,
         public string $title,
         public string $method,

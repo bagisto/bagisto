@@ -56,6 +56,7 @@ class RoleController extends Controller
         $this->validate(request(), [
             'name'            => 'required',
             'permission_type' => 'required',
+            'description'     => 'required',
         ]);
 
         Event::dispatch('user.role.create.before');
@@ -79,10 +80,9 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $role = $this->roleRepository->findOrFail($id);
 
@@ -92,14 +92,14 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         $this->validate(request(), [
             'name'            => 'required',
-            'permission_type' => 'required',
+            'permission_type' => 'required|in:all,custom',
+            'description'     => 'required',
         ]);
 
         /**
@@ -137,10 +137,8 @@ class RoleController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $role = $this->roleRepository->findOrFail($id);
 

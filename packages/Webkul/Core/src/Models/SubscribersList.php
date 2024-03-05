@@ -21,6 +21,11 @@ class SubscribersList extends Model implements SubscribersListContract
      */
     protected $table = 'subscribers_list';
 
+    /**
+     * Fillable properties of the model.
+     *
+     * @var array
+     */
     protected $fillable = [
         'email',
         'is_subscribed',
@@ -29,6 +34,11 @@ class SubscribersList extends Model implements SubscribersListContract
         'channel_id',
     ];
 
+    /**
+     * Hide the token attribute to the model.
+     *
+     * @var array
+     */
     protected $hidden = ['token'];
 
     /**

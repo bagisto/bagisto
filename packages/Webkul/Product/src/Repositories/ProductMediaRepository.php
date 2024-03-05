@@ -33,7 +33,7 @@ class ProductMediaRepository extends Repository
      */
     public function getProductDirectory($product): string
     {
-        return 'product/' . $product->id;
+        return 'product/'.$product->id;
     }
 
     /**
@@ -59,7 +59,7 @@ class ProductMediaRepository extends Repository
 
                         $image = $manager->make($file)->encode('webp');
 
-                        $path = $this->getProductDirectory($product) . '/' . Str::random(40) . '.webp';
+                        $path = $this->getProductDirectory($product).'/'.Str::random(40).'.webp';
 
                         Storage::put($path, $image);
                     } else {

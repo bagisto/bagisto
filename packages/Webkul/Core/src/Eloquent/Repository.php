@@ -16,7 +16,6 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     protected $cacheEnabled = false;
 
     /**
-     * @param $method
      * @return bool
      */
     public function allowedClean()
@@ -57,6 +56,16 @@ abstract class Repository extends BaseRepository implements CacheableInterface
         }
 
         return false;
+    }
+
+    /**
+     * @throws RepositoryException
+     */
+    public function resetModel()
+    {
+        $this->makeModel();
+
+        return $this;
     }
 
     /**

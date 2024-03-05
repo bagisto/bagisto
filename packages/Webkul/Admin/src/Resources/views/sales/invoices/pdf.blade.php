@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
-        {{-- meta tags --}}
+        <!-- meta tags -->
         <meta http-equiv="Cache-control" content="no-cache">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        {{-- lang supports inclusion --}}
+        <!-- lang supports inclusion -->
         <style type="text/css">
             @font-face {
                 font-family: 'Hind';
@@ -23,7 +23,7 @@
             $mainFontFamily = app()->getLocale() === 'ar' ? 'DejaVu Sans' : 'Noto Sans';
         @endphp
 
-        {{-- main css --}}
+        <!-- main css -->
         <style type="text/css">
             * {
                 font-family: '{{ $mainFontFamily }}';
@@ -159,136 +159,137 @@
 
     <body style="background-image: none; background-color: #fff;">
         <div class="container">
-            <div>
-                <div class="row">
-                    <div class="col-12 header">
-                        @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
-                            <div class="image" style="display:inline-block; vertical-align: middle; padding-top:8px">
-                                <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
-                            </div>
-                        @else
-                            <div class="without_logo" style="display:inline-block; vertical-align: middle; padding-top:8px">
-                            </div>
-                        @endif
-                        <div class="invoice-text">
-                            <span>{{ strtoupper(__('admin::app.sales.invoices.invoice-pdf.invoice')) }}</span>
+            <div class="row">
+                <div class="col-12 header">
+                    @if (core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo'))
+                        <div class="image" style="display:inline-block; vertical-align: middle; padding-top:8px">
+                            <img class="logo" src="{{ Storage::url(core()->getConfigData('sales.invoice_settings.invoice_slip_design.logo')) }}" alt=""/>
                         </div>
+                    @else
+                        <div class="without_logo" style="display:inline-block; vertical-align: middle; padding-top:8px">
+                        </div>
+                    @endif
+                    <div class="invoice-text">
+                        <span>{{ strtoupper(__('admin::app.sales.invoices.invoice-pdf.invoice')) }}</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="row" style="padding: 5px">
-                    <div class="col-12">
-                        <div class="col-6">
-                            <div class="merchant-details">
-                                <div class="row">
-                                    <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.invoice-id'): </span>
-                                    <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
-                                </div>
-
-                                <div class="row">
-                                    <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.date'): </span>
-                                    <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
-                                </div>
-
-                                <div style="padding-top: 20px">
-                                    <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
-                                </div>
-
-                                <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
-
-                                <div>
-                                    <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
-                                    <span>{{ core()->getConfigData('sales.shipping.origin.city') ?? '' }}</span>
-                                </div>
-
-                                <div>{{ core()->getConfigData('sales.shipping.origin.state') ?? '' }}</div>
-
-                                <div>{{ core()->getConfigData('sales.shipping.origin.country') ?? '' }}</div>
+            <div class="row" style="padding: 5px">
+                <div class="col-12">
+                    <div class="col-6">
+                        <div class="merchant-details">
+                            <div class="row">
+                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.invoice-id'): </span>
+                                <span class="value">#{{ $invoice->increment_id ?? $invoice->id }}</span>
                             </div>
-                            <div class="merchant-details">
-                                @if (core()->getConfigData('sales.shipping.origin.contact'))
-                                    <div><span class="merchant-details-title">@lang('admin::app.sales.invoices.invoice-pdf.contact-number'): </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
-                                @endif
 
-                                @if (core()->getConfigData('sales.shipping.origin.vat_number'))
-                                    <div><span class="merchant-details-title">@lang('admin::app.sales.invoices.invoice-pdf.vat-number'): </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
-                                @endif
+                            <div class="row">
+                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.date'): </span>
+                                <span class="value">{{ core()->formatDate($invoice->created_at, 'd-m-Y') }}</span>
                             </div>
+
+                            <div style="padding-top: 20px">
+                                <span class="merchant-details-title">{{ core()->getConfigData('sales.shipping.origin.store_name') ? core()->getConfigData('sales.shipping.origin.store_name') : '' }}</span>
+                            </div>
+
+                            <div>{{ core()->getConfigData('sales.shipping.origin.address1') ?? '' }}</div>
+
+                            <div>
+                                <span>{{ core()->getConfigData('sales.shipping.origin.zipcode') ?? '' }}</span>
+                                <span>{{ core()->getConfigData('sales.shipping.origin.city') ?? '' }}</span>
+                            </div>
+
+                            <div>{{ core()->getConfigData('sales.shipping.origin.state') ?? '' }}</div>
+
+                            <div>{{ core()->getConfigData('sales.shipping.origin.country') ?? '' }}</div>
                         </div>
-
-                        <div class="col-6" style="padding-left: 80px">
-                            <div class="row">
-                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.order-id'): </span>
-                                <span class="value">#{{ $invoice->order->increment_id }}</span>
-                            </div>
-                           
-                            <div class="row">
-                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.order-date'): </span>
-                                <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
-                            </div>
-
-                            @if ($invoice->hasPaymentTerm())
-                                <div class="row">
-                                    <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.payment-terms') -</span>
-                                    <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
-                                </div>
+                        <div class="merchant-details">
+                            @if (core()->getConfigData('sales.shipping.origin.contact'))
+                                <div><span class="merchant-details-title">@lang('admin::app.sales.invoices.invoice-pdf.contact-number'): </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
                             @endif
 
-                            @if (core()->getConfigData('sales.shipping.origin.bank_details'))
-                                <div class="row" style="padding-top: 20px">
-                                    <span class="merchant-details-title">
-                                        @lang('admin::app.sales.invoices.invoice-pdf.bank-details'):
-                                    </span> 
-                                    <div>{{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
-                                </div>
+                            @if (core()->getConfigData('sales.shipping.origin.vat_number'))
+                                <div><span class="merchant-details-title">@lang('admin::app.sales.invoices.invoice-pdf.vat-number'): </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
                             @endif
                         </div>
+                    </div>
+
+                    <div class="col-6" style="padding-left: 80px">
+                        <div class="row">
+                            <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.order-id'): </span>
+                            <span class="value">#{{ $invoice->order->increment_id }}</span>
+                        </div>
+                        
+                        <div class="row">
+                            <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.order-date'): </span>
+                            <span class="value">{{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}</span>
+                        </div>
+
+                        @if ($invoice->hasPaymentTerm())
+                            <div class="row">
+                                <span class="label">@lang('admin::app.sales.invoices.invoice-pdf.payment-terms') -</span>
+                                <span class="value">{{ $invoice->getFormattedPaymentTerm() }}</span>
+                            </div>
+                        @endif
+
+                        @if (core()->getConfigData('sales.shipping.origin.bank_details'))
+                            <div class="row" style="padding-top: 20px">
+                                <span class="merchant-details-title">
+                                    @lang('admin::app.sales.invoices.invoice-pdf.bank-details'):
+                                </span> 
+                                <div>{{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
 
             <div class="invoice-summary">
+                <!-- Billing & Shipping Address Details --> 
                 <div class="table address">
                     <table>
                         <thead>
                             <tr>
-                                <th class="table-header align-left" style="width: 50%;">{{ ucwords(trans('admin::app.sales.invoices.invoice-pdf.bill-to')) }}</th>
+                                <th class="table-header align-left" style="width: 50%;">
+                                    {{ ucwords(trans('admin::app.sales.invoices.invoice-pdf.bill-to')) }}
+                                </th>
+
                                 @if ($invoice->order->shipping_address)
-                                    <th class="table-header align-left">{{ ucwords(trans('admin::app.sales.invoices.invoice-pdf.ship-to')) }}</th>
+                                    <th class="table-header align-left">
+                                        {{ ucwords(trans('admin::app.sales.invoices.invoice-pdf.ship-to')) }}
+                                    </th>
                                 @endif
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                @if ($invoice->order->billing_address)
-                                    <td>
-                                        <p>{{ $invoice->order->billing_address->company_name ?? '' }}</p>
-                                        <p>{{ $invoice->order->billing_address->name }}</p>
-                                        <p>{{ $invoice->order->billing_address->address1 }}</p>
-                                        <p>{{ $invoice->order->billing_address->postcode . ' ' .$invoice->order->billing_address->city }} </p>
-                                        <p>{{ $invoice->order->billing_address->state }}</p>
-                                        <p>{{ core()->country_name($invoice->order->billing_address->country) }}</p>
-                                        @lang('admin::app.sales.invoices.invoice-pdf.contact') : {{ $invoice->order->billing_address->phone }}
-                                    </td>
-                                @endif
+                                @foreach (['billing_address', 'shipping_address'] as $addressType)
+                                    @if ($invoice->order->$addressType)
+                                        <td>
+                                            <p>{{ $invoice->order->$addressType->company_name ?? '' }}</p>
 
-                                @if ($invoice->order->shipping_address)
-                                    <td>
-                                        <p>{{ $invoice->order->shipping_address->company_name ?? '' }}</p>
-                                        <p>{{ $invoice->order->shipping_address->name }}</p>
-                                        <p>{{ $invoice->order->shipping_address->address1 }}</p>
-                                        <p>{{ $invoice->order->shipping_address->postcode . ' ' . $invoice->order->shipping_address->city }}</p>
-                                        <p>{{ $invoice->order->shipping_address->state }}</p>
-                                        <p>{{ core()->country_name($invoice->order->shipping_address->country) }}</p>
-                                        @lang('admin::app.sales.invoices.invoice-pdf.contact') }} : {{ $invoice->order->shipping_address->phone }}
-                                    </td>
-                                @endif
+                                            <p>{{ $invoice->order->$addressType->name }}</p>
+
+                                            <p>{{ $invoice->order->$addressType->address1 }}</p>
+
+                                            <p>{{ $invoice->order->$addressType->postcode . ' ' . $invoice->order->$addressType->city }}</p>
+
+                                            <p>{{ $invoice->order->$addressType->state }}</p>
+
+                                            <p>{{ core()->country_name($invoice->order->$addressType->country) }}</p>
+
+                                            @lang('admin::app.sales.invoices.invoice-pdf.contact') : {{ $invoice->order->$addressType->phone }}
+                                        </td>
+                                    @endif
+                                @endforeach
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
+                <!-- Payment & Shipping Methods -->
                 <div class="table payment-shipment">
                     <table>
                         <thead>
@@ -330,13 +331,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.sku')</th>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.product-name')</th>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.price')</th>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.qty')</th>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.subtotal')</th>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.tax-amount')</th>
-                                <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.grand-total')</th>
+                                @foreach (['sku', 'product-name', 'price', 'qty', 'subtotal', 'tax-amount', 'grand-total'] as $item)
+                                    <th class="text-center table-header">@lang('admin::app.sales.invoices.invoice-pdf.' . $item)</th>
+                                @endforeach
                             </tr>
                         </thead>
 
@@ -374,6 +371,7 @@
                     </table>
                 </div>
 
+                <!-- Sale Summary -->
                 <table class="sale-summary">
                     <tr>
                         <td>@lang('admin::app.sales.invoices.invoice-pdf.subtotal')</td>

@@ -6,7 +6,10 @@
     {!! view_render_event('bagisto.shop.products.view.configurable-options.after', ['product' => $product]) !!}
 
     @push('scripts')
-        <script type="text/x-template" id="v-product-configurable-options-template">
+        <script
+            type="text/x-template"
+            id="v-product-configurable-options-template"
+        >
             <div class="w-[455px] max-w-full">
                 <input
                     type="hidden"
@@ -17,7 +20,7 @@
                 >
 
                 <div
-                    class="mt-[20px]"
+                    class="mt-5"
                     v-for='(attribute, index) in childAttributes'
                 >
                     <!-- Dropdown Options Container -->
@@ -26,7 +29,7 @@
                     >
                         <!-- Dropdown Label -->
                         <h2
-                            class="mb-[15px] text-[20px] max-sm:text-[16px]"
+                            class="mb-4 text-xl max-sm:text-base"
                             v-text="attribute.label"
                         ></h2>
                         
@@ -34,7 +37,7 @@
                         <v-field
                             as="select"
                             :name="'super_attribute[' + attribute.id + ']'"
-                            class="custom-select block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select block w-full mb-3 py-3 px-5 bg-white border border-[#E9E9E9] rounded-lg text-base text-[#6E6E6E] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             :class="[errors['super_attribute[' + attribute.id + ']'] ? 'border border-red-500' : '']"
                             :id="'attribute_' + attribute.id"
                             rules="required"
@@ -57,12 +60,12 @@
                     <template v-else>
                         <!-- Option Label -->
                         <h2
-                            class="mb-[15px] text-[20px] max-sm:text-[16px]"
+                            class="mb-4 text-xl max-sm:text-base"
                             v-text="attribute.label"
                         ></h2>
 
                         <!-- Swatch Options -->
-                        <div class="flex items-center space-x-3">
+                        <div class="flex gap-3 items-center">
                             <template v-for="(option, index) in attribute.options">
                                 <!-- Color Swatch Options -->
                                 <template v-if="option.id">
@@ -162,7 +165,7 @@
                                         </v-field>
 
                                         <span
-                                            class="text-[18px] max-sm:text-[14px]"
+                                            class="text-lg max-sm:text-sm"
                                             v-text="option.label"
                                         ></span>
 
@@ -172,7 +175,7 @@
                             </template>
 
                             <span
-                                class="text-gray-600 text-sm max-sm:text-[12px]"
+                                class="text-gray-600 text-sm max-sm:text-xs"
                                 v-if="! attribute.options.length"
                             >
                                 @lang('shop::app.products.view.type.configurable.select-above-options')
@@ -216,6 +219,20 @@
 
                         galleryImages: [],
                     }
+                },
+
+                watch: {
+                    simpleProduct: {
+                        deep: true,
+
+                        handler(selectedProduct) {
+                            if (selectedProduct) {
+                                return;
+                            }
+
+                            this.$parent.$parent.$refs.gallery.media.images = @json(product_image()->getGalleryImages($product));
+                        },
+                    },
                 },
 
                 mounted() {
@@ -433,10 +450,13 @@
                                 regularPriceElement.style.display = 'inline-block';
                             }
 
+                            this.$emitter.emit('configurable-variant-selected-event',this.simpleProduct);
                         } else {
                             priceLabelElement.style.display = 'inline-block';
 
                             priceElement.innerHTML = this.config.regular.formatted_price;
+
+                            this.$emitter.emit('configurable-variant-selected-event', 0);
                         }
                     },
 
@@ -460,6 +480,8 @@
                         if (galleryImages.length) {
                             this.$parent.$parent.$refs.gallery.media.images =  { ...galleryImages };
                         }
+
+                        this.$emitter.emit('configurable-variant-update-images-event', galleryImages);
                     },
                 }
             });

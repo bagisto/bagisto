@@ -4,6 +4,8 @@ namespace Webkul\Checkout;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
+use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
+use Webkul\Checkout\Exceptions\BillingAddressNotFoundException;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Repositories\CartAddressRepository;
@@ -80,7 +82,7 @@ class Cart
      * Set cart model to the variable for reuse
      *
      * @param \Webkul\Checkout\Contracts\Cart
-     * @return  void
+     * @return void
      */
     public function setCart($cart)
     {
@@ -90,7 +92,7 @@ class Cart
     /**
      * Reset cart
      *
-     * @return  void
+     * @return void
      */
     public function resetCart()
     {
@@ -344,31 +346,110 @@ class Cart
     }
 
     /**
-     * Save customer address.
-     *
-     * @param  array  $data
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * Update or create billing address.
      */
-    public function saveCustomerAddress($data): bool
+    public function updateOrCreateBillingAddress(array $address): CartAddressContract
     {
-        $cart = $this->getCart();
+        $fillableFields = [
+            'use_for_shipping',
+            'default_address',
+            'company_name',
+            'first_name',
+            'last_name',
+            'email',
+            'address1',
+            'address2',
+            'country',
+            'state',
+            'city',
+            'postcode',
+            'phone',
+        ];
 
-        if (! $cart) {
-            return false;
+        $address = collect($address)
+            ->only($fillableFields)
+            ->merge([
+                'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
+                'parent_address_id' => $address['id'] ?? null,
+                'cart_id'           => $this->cart->id,
+                'customer_id'       => $this->cart->customer_id,
+                'address1'          => implode(PHP_EOL, $address['address1']),
+                'use_for_shipping'  => (bool) ($address['use_for_shipping'] ?? false),
+            ])
+            ->toArray();
+
+        return $this->cart->billing_address
+            ? $this->cartAddressRepository->update($address, $this->cart->billing_address->id)
+            : $this->cartAddressRepository->create($address);
+    }
+
+    /**
+     * Update or create shipping address.
+     */
+    public function updateOrCreateShippingAddress(array $address): ?CartAddressContract
+    {
+        if (! $this->cart->billing_address) {
+            throw new BillingAddressNotFoundException;
         }
 
-        $billingAddress = array_merge($this->collectAddress($data['billing']), [
-            'cart_id'          => $cart->id,
-            'use_for_shipping' => $data['billing']['use_for_shipping'] ?? 0,
-        ]);
+        $fillableFields = [
+            'default_address',
+            'company_name',
+            'first_name',
+            'last_name',
+            'email',
+            'address1',
+            'address2',
+            'country',
+            'state',
+            'city',
+            'postcode',
+            'phone',
+        ];
 
-        $shippingAddress = array_merge($this->collectAddress($data['shipping']), [
-            'cart_id' => $cart->id,
-        ]);
+        if ($this->cart->billing_address->use_for_shipping) {
+            $address = $this->cart->billing_address->only($fillableFields);
 
-        $this->updateOrCreateAddress($cart, $billingAddress, $shippingAddress);
+            $address = array_merge($address, [
+                'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'parent_address_id' => $this->cart->billing_address->parent_address_id,
+                'cart_id'           => $this->cart->id,
+                'customer_id'       => $this->cart->customer_id,
+            ]);
+        } else {
+            if (empty($address)) {
+                return null;
+            }
 
+            $address = collect($address)
+                ->only($fillableFields)
+                ->merge([
+                    'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
+                    'parent_address_id' => $address['id'] ?? null,
+                    'cart_id'           => $this->cart->id,
+                    'customer_id'       => $this->cart->customer_id,
+                    'address1'          => implode(PHP_EOL, $address['address1']),
+                ])
+                ->toArray();
+        }
+
+        /**
+         * If cart have stockable items then update or create shipping address.
+         */
+        if ($this->cart->haveStockableItems()) {
+            return $this->cart->shipping_address
+                ? $this->cartAddressRepository->update($address, $this->cart->shipping_address->id)
+                : $this->cartAddressRepository->create($address);
+        }
+
+        return null;
+    }
+
+    /**
+     * Save customer details.
+     */
+    public function saveCustomerDetails(): void
+    {
         if (
             ($user = auth()->guard()->user())
             && (
@@ -377,20 +458,16 @@ class Cart
                 && $user->last_name
             )
         ) {
-            $cart->customer_email = $user->email;
-            $cart->customer_first_name = $user->first_name;
-            $cart->customer_last_name = $user->last_name;
+            $this->cart->customer_email = $user->email;
+            $this->cart->customer_first_name = $user->first_name;
+            $this->cart->customer_last_name = $user->last_name;
         } else {
-            $cart->customer_email = $cart->billing_address->email;
-            $cart->customer_first_name = $cart->billing_address->first_name;
-            $cart->customer_last_name = $cart->billing_address->last_name;
+            $this->cart->customer_email = $this->cart->billing_address->email;
+            $this->cart->customer_first_name = $this->cart->billing_address->first_name;
+            $this->cart->customer_last_name = $this->cart->billing_address->last_name;
         }
 
-        $cart->save();
-
-        $this->collectTotals();
-
-        return true;
+        $this->cart->save();
     }
 
     /**
@@ -437,7 +514,7 @@ class Cart
         $cartPayment = new CartPayment;
 
         $cartPayment->method = $payment['method'];
-        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.' . $payment['method'] . '.title');
+        $cartPayment->method_title = core()->getConfigData('sales.payment_methods.'.$payment['method'].'.title');
         $cartPayment->cart_id = $cart->id;
         $cartPayment->save();
 
@@ -610,7 +687,9 @@ class Cart
 
             $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
 
-            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($item) {
+            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($item, $taxCategoryId) {
+                $item->tax_category_id = $taxCategoryId;
+
                 $item->tax_percent = $rate->tax_rate;
 
                 $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
@@ -798,7 +877,7 @@ class Cart
         if ($this->getCart()->haveStockableItems()) {
             $finalData = array_merge($finalData, [
                 'shipping_method'               => $data['selected_shipping_rate']['method'],
-                'shipping_title'                => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],
+                'shipping_title'                => $data['selected_shipping_rate']['carrier_title'].' - '.$data['selected_shipping_rate']['method_title'],
                 'shipping_description'          => $data['selected_shipping_rate']['method_description'],
                 'shipping_amount'               => $data['selected_shipping_rate']['price'],
                 'base_shipping_amount'          => $data['selected_shipping_rate']['base_price'],
@@ -841,6 +920,7 @@ class Cart
             'tax_percent'          => $data['tax_percent'],
             'tax_amount'           => $data['tax_amount'],
             'base_tax_amount'      => $data['base_tax_amount'],
+            'tax_category_id'      => $data['tax_category_id'],
             'discount_percent'     => $data['discount_percent'],
             'discount_amount'      => $data['discount_amount'],
             'base_discount_amount' => $data['base_discount_amount'],

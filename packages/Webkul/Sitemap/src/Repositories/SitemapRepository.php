@@ -7,7 +7,7 @@ use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sitemap\Models\Category;
-use Webkul\Sitemap\Models\CmsPage;
+use Webkul\Sitemap\Models\Page;
 use Webkul\Sitemap\Models\Product;
 
 class SitemapRepository extends Repository
@@ -43,7 +43,7 @@ class SitemapRepository extends Repository
     {
         $sitemap = $this->find($id);
 
-        Storage::delete($sitemap->path . '/' . $sitemap->file_name);
+        Storage::delete($sitemap->path.'/'.$sitemap->file_name);
 
         $sitemap = parent::update($attributes, $id);
 
@@ -62,7 +62,7 @@ class SitemapRepository extends Repository
             ->add(Url::create('/'))
             ->add(Category::all())
             ->add(Product::all())
-            ->add(CmsPage::all())
-            ->writeToDisk('public', $sitemap->path . '/' . $sitemap->file_name);
+            ->add(Page::all())
+            ->writeToDisk('public', $sitemap->path.'/'.$sitemap->file_name);
     }
 }

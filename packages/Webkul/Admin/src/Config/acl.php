@@ -58,7 +58,7 @@ return [
     ], [
         'key'   => 'sales.invoices.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sales.invoices.create',
+        'route' => 'admin.sales.invoices.store',
         'sort'  => 2,
     ], [
         'key'   => 'sales.shipments',
@@ -73,7 +73,7 @@ return [
     ], [
         'key'   => 'sales.shipments.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sales.shipments.create',
+        'route' => 'admin.sales.shipments.store',
         'sort'  => 2,
     ], [
         'key'   => 'sales.refunds',
@@ -88,7 +88,7 @@ return [
     ], [
         'key'   => 'sales.refunds.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sales.refunds.create',
+        'route' => 'admin.sales.refunds.store',
         'sort'  => 2,
     ], [
         'key'   => 'sales.transactions',
@@ -123,7 +123,7 @@ return [
     ], [
         'key'   => 'catalog.products.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.catalog.products.create',
+        'route' => 'admin.catalog.products.store',
         'sort'  => 1,
     ], [
         'key'   => 'catalog.products.copy',
@@ -140,16 +140,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.products.delete',
         'sort'  => 4,
-    ], [
-        'key'   => 'catalog.products.mass-update',
-        'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.catalog.products.mass_update',
-        'sort'  => 5,
-    ], [
-        'key'   => 'catalog.products.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.catalog.products.mass_delete',
-        'sort'  => 6,
     ], [
         'key'   => 'catalog.categories',
         'name'  => 'admin::app.acl.categories',
@@ -171,16 +161,6 @@ return [
         'route' => 'admin.catalog.categories.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'catalog.categories.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.catalog.categories.mass_delete',
-        'sort'  => 4,
-    ], [
-        'key'   => 'catalog.categories.mass-update',
-        'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.catalog.categories.mass_update',
-        'sort'  => 4,
-    ], [
         'key'   => 'catalog.attributes',
         'name'  => 'admin::app.acl.attributes',
         'route' => 'admin.catalog.attributes.index',
@@ -200,11 +180,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.catalog.attributes.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'catalog.attributes.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.catalog.attributes.mass_delete',
-        'sort'  => 4,
     ], [
         'key'   => 'catalog.families',
         'name'  => 'admin::app.acl.attribute-families',
@@ -260,16 +235,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customers.customers.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'customers.customers.mass-update',
-        'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.customers.customers.mass_update',
-        'sort'  => 4,
-    ], [
-        'key'   => 'customers.customers.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.customers.customers.mass_delete',
-        'sort'  => 5,
     ], [
         'key'   => 'customers.addresses',
         'name'  => 'admin::app.acl.addresses',
@@ -330,21 +295,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.customers.customers.review.delete',
         'sort'  => 2,
-    ], [
-        'key'   => 'customers.reviews.mass-update',
-        'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.customers.customers.review.mass_update',
-        'sort'  => 3,
-    ], [
-        'key'   => 'customers.reviews.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.customers.customers.review.mass_delete',
-        'sort'  => 4,
-    ], [
-        'key'   => 'customers.orders',
-        'name'  => 'admin::app.acl.orders',
-        'route' => 'admin.customers.customers.orders.data',
-        'sort'  => 7,
     ],
 
     /*
@@ -366,47 +316,47 @@ return [
         'route' => 'admin.marketing.promotions.cart_rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.promotions.cart-rules',
+        'key'   => 'marketing.promotions.cart_rules',
         'name'  => 'admin::app.acl.cart-rules',
         'route' => 'admin.marketing.promotions.cart_rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.promotions.cart-rules.create',
+        'key'   => 'marketing.promotions.cart_rules.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.marketing.promotions.cart_rules.create',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.promotions.cart-rules.copy',
+        'key'   => 'marketing.promotions.cart_rules.copy',
         'name'  => 'admin::app.acl.copy',
         'route' => 'admin.marketing.promotions.cart_rules.copy',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.promotions.cart-rules.edit',
+        'key'   => 'marketing.promotions.cart_rules.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.marketing.promotions.cart_rules.edit',
         'sort'  => 2,
     ], [
-        'key'   => 'marketing.promotions.cart-rules.delete',
+        'key'   => 'marketing.promotions.cart_rules.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.marketing.promotions.cart_rules.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'marketing.promotions.catalog-rules',
+        'key'   => 'marketing.promotions.catalog_rules',
         'name'  => 'admin::app.acl.catalog-rules',
         'route' => 'admin.marketing.promotions.catalog_rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.promotions.catalog-rules.create',
+        'key'   => 'marketing.promotions.catalog_rules.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.marketing.promotions.catalog_rules.index',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.promotions.catalog-rules.edit',
+        'key'   => 'marketing.promotions.catalog_rules.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.marketing.promotions.catalog_rules.edit',
         'sort'  => 2,
     ], [
-        'key'   => 'marketing.promotions.catalog-rules.delete',
+        'key'   => 'marketing.promotions.catalog_rules.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.marketing.promotions.catalog_rules.delete',
         'sort'  => 3,
@@ -416,22 +366,22 @@ return [
         'route' => 'admin.marketing.communications.email_templates.index',
         'sort'  => 2,
     ], [
-        'key'   => 'marketing.communications.email-templates',
+        'key'   => 'marketing.communications.email_templates',
         'name'  => 'admin::app.acl.email-templates',
         'route' => 'admin.marketing.communications.email_templates.index',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.communications.email-templates.create',
+        'key'   => 'marketing.communications.email_templates.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.marketing.communications.email_templates.create',
         'sort'  => 2,
     ], [
-        'key'   => 'marketing.communications.email-templates.edit',
+        'key'   => 'marketing.communications.email_templates.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.marketing.communications.email_templates.edit',
         'sort'  => 3,
     ], [
-        'key'   => 'marketing.communications.email-templates.delete',
+        'key'   => 'marketing.communications.email_templates.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.marketing.communications.email_templates.delete',
         'sort'  => 4,
@@ -491,24 +441,89 @@ return [
         'route' => 'admin.marketing.communications.subscribers.delete',
         'sort'  => 2,
     ], [
-        'key'   => 'marketing.sitemaps',
-        'name'  => 'admin::app.acl.sitemaps',
-        'route' => 'admin.marketing.promotions.sitemaps.index',
+        'key'   => 'marketing.search_seo',
+        'name'  => 'admin::app.acl.search-seo',
+        'route' => 'admin.marketing.search_seo.url_rewrites.index',
         'sort'  => 3,
     ], [
-        'key'   => 'marketing.sitemaps.create',
-        'name'  => 'admin::app.acl.create',
-        'route' => 'admin.marketing.promotions.sitemaps.update',
+        'key'   => 'marketing.search_seo.url_rewrites',
+        'name'  => 'admin::app.acl.url-rewrites',
+        'route' => 'admin.marketing.search_seo.url_rewrites.index',
         'sort'  => 1,
     ], [
-        'key'   => 'marketing.sitemaps.edit',
+        'key'   => 'marketing.search_seo.url_rewrites.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.marketing.search_seo.url_rewrites.update',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.search_seo.url_rewrites.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.marketing.promotions.sitemaps.update',
+        'route' => 'admin.marketing.search_seo.url_rewrites.update',
         'sort'  => 2,
     ], [
-        'key'   => 'marketing.sitemaps.delete',
+        'key'   => 'marketing.search_seo.url_rewrites.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.marketing.promotions.sitemaps.delete',
+        'route' => 'admin.marketing.search_seo.url_rewrites.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.search_seo.search_terms',
+        'name'  => 'admin::app.acl.search-terms',
+        'route' => 'admin.marketing.search_seo.search_terms.index',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.search_seo.search_terms.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.marketing.search_seo.search_terms.update',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.search_seo.search_terms.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.marketing.search_seo.search_terms.update',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.search_seo.search_terms.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.marketing.search_seo.search_terms.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms',
+        'name'  => 'admin::app.acl.search-synonyms',
+        'route' => 'admin.marketing.search_seo.search_synonyms.index',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.marketing.search_seo.search_synonyms.update',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.marketing.search_seo.search_synonyms.update',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.search_seo.search_synonyms.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.marketing.search_seo.search_synonyms.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'marketing.search_seo.sitemaps',
+        'name'  => 'admin::app.acl.sitemaps',
+        'route' => 'admin.marketing.search_seo.sitemaps.index',
+        'sort'  => 4,
+    ], [
+        'key'   => 'marketing.search_seo.sitemaps.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.marketing.search_seo.sitemaps.update',
+        'sort'  => 1,
+    ], [
+        'key'   => 'marketing.search_seo.sitemaps.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.marketing.search_seo.sitemaps.update',
+        'sort'  => 2,
+    ], [
+        'key'   => 'marketing.search_seo.sitemaps.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.marketing.search_seo.sitemaps.delete',
         'sort'  => 3,
     ],
 
@@ -570,11 +585,6 @@ return [
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.cms.delete',
         'sort'  => 3,
-    ], [
-        'key'   => 'cms.mass-delete',
-        'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.cms.mass_delete',
-        'sort'  => 4,
     ],
 
     /*
@@ -761,40 +771,70 @@ return [
         'route' => 'admin.settings.taxes.categories.index',
         'sort'  => 9,
     ], [
-        'key'   => 'settings.taxes.tax-categories',
+        'key'   => 'settings.taxes.tax_categories',
         'name'  => 'admin::app.acl.tax-categories',
         'route' => 'admin.settings.taxes.categories.index',
         'sort'  => 1,
     ], [
-        'key'   => 'settings.taxes.tax-categories.create',
+        'key'   => 'settings.taxes.tax_categories.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.settings.taxes.tax_categories.create',
         'sort'  => 1,
     ], [
-        'key'   => 'settings.taxes.tax-categories.edit',
+        'key'   => 'settings.taxes.tax_categories.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.settings.taxes.categories.edit',
         'sort'  => 2,
     ], [
-        'key'   => 'settings.taxes.tax-categories.delete',
+        'key'   => 'settings.taxes.tax_categories.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.settings.taxes.categories.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.taxes.tax-rates',
+        'key'   => 'settings.taxes.tax_rates',
         'name'  => 'admin::app.acl.tax-rates',
         'route' => 'admin.settings.taxes.rates.index',
         'sort'  => 2,
     ], [
-        'key'   => 'settings.taxes.tax-rates.create',
+        'key'   => 'settings.taxes.tax_rates.create',
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.settings.taxes.rates.create',
         'sort'  => 1,
     ], [
-        'key'   => 'settings.taxes.tax-rates.edit',
+        'key'   => 'settings.taxes.tax_rates.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.settings.taxes.rates.edit',
         'sort'  => 2,
+    ], [
+        'key'   => 'settings.data_transfer',
+        'name'  => 'admin::app.acl.data-transfer',
+        'route' => 'admin.settings.data_transfer.imports.index',
+        'sort'  => 10,
+    ], [
+        'key'   => 'settings.data_transfer.imports',
+        'name'  => 'admin::app.acl.imports',
+        'route' => 'admin.settings.data_transfer.imports.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'settings.data_transfer.imports.create',
+        'name'  => 'admin::app.acl.create',
+        'route' => 'admin.settings.data_transfer.imports.create',
+        'sort'  => 1,
+    ], [
+        'key'   => 'settings.data_transfer.imports.edit',
+        'name'  => 'admin::app.acl.edit',
+        'route' => 'admin.settings.data_transfer.imports.edit',
+        'sort'  => 2,
+    ], [
+        'key'   => 'settings.data_transfer.imports.delete',
+        'name'  => 'admin::app.acl.delete',
+        'route' => 'admin.settings.data_transfer.imports.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'settings.data_transfer.imports.import',
+        'name'  => 'admin::app.acl.import',
+        'route' => 'admin.settings.data_transfer.imports.import',
+        'sort'  => 4,
     ],
 
     /*

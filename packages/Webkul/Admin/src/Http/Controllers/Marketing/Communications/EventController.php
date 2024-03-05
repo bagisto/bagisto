@@ -63,10 +63,8 @@ class EventController extends Controller
 
     /**
      * Event Details
-     *
-     * @param  int  $id
      */
-    public function edit($id): JsonResponse
+    public function edit(int $id): JsonResponse
     {
         if ($id == 1) {
             return new JsonResponse([
@@ -112,10 +110,9 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $this->eventRepository->findOrFail($id);
 

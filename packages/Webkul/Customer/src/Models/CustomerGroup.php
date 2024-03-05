@@ -13,8 +13,18 @@ class CustomerGroup extends Model implements CustomerGroupContract
 {
     use HasFactory;
 
+    /**
+     * Deinfine model table name.
+     *
+     * @var string
+     */
     protected $table = 'customer_groups';
 
+    /**
+     * Fillable property for the model.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'code',

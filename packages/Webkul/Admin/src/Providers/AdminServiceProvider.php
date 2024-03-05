@@ -17,13 +17,13 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
+        Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'admin');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'admin');
 
-        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'admin');
+        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'admin');
 
         $this->composeView();
 
@@ -50,17 +50,17 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php',
+            dirname(__DIR__).'/Config/menu.php',
             'menu.admin'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/acl.php',
+            dirname(__DIR__).'/Config/acl.php',
             'acl'
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php',
+            dirname(__DIR__).'/Config/system.php',
             'core'
         );
     }
@@ -79,43 +79,15 @@ class AdminServiceProvider extends ServiceProvider
         ], function ($view) {
             $tree = Tree::create();
 
-            $permissionType = auth()->guard('admin')->user()->role->permission_type;
-
-            $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
-
             foreach (config('menu.admin') as $index => $item) {
                 if (! bouncer()->hasPermission($item['key'])) {
                     continue;
                 }
 
-                if (
-                    $index + 1 < count(config('menu.admin'))
-                    && $permissionType != 'all'
-                ) {
-                    $permission = config('menu.admin')[$index + 1];
-
-                    if (
-                        substr_count($permission['key'], '.') == 2
-                        && substr_count($item['key'], '.') == 1
-                    ) {
-                        foreach ($allowedPermissions as $key => $value) {
-                            if ($item['key'] != $value) {
-                                continue;
-                            }
-
-                            $neededItem = $allowedPermissions[$key + 1];
-
-                            foreach (config('menu.admin') as $key1 => $menu) {
-                                if ($menu['key'] == $neededItem) {
-                                    $item['route'] = $menu['route'];
-                                }
-                            }
-                        }
-                    }
-                }
-
                 $tree->add($item, 'menu');
             }
+
+            $tree->items = $tree->removeUnauthorizedUrls();
 
             $tree->items = core()->sortItems($tree->items);
 
