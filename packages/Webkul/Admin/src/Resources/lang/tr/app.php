@@ -480,13 +480,17 @@ return [
                 'title'      => 'İşlemler',
 
                 'datagrid' => [
+                    'completed'          => 'Tamamlandı',
                     'id'                 => 'Kimlik',
                     'invoice-id'         => 'Fatura Kimliği',
                     'order-id'           => 'Sipariş Kimliği',
+                    'paid'               => 'Ödenmiş',
+                    'pending'            => 'Beklemede',
                     'status'             => 'Durum',
-                    'transaction-amount' => 'Tutar',
+                    'transaction-amount' => 'Miktar',
                     'transaction-date'   => 'Tarih',
                     'transaction-id'     => 'İşlem Kimliği',
+                    'view'               => 'Görüntüle',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'Ülke',
                 'create-address-btn' => 'Yeni Adres Ekle',
                 'default-address'    => 'Varsayılan Adres',
+                'email'              => 'E-posta',
                 'first-name'         => 'Adı',
                 'last-name'          => 'Soyadı',
                 'phone'              => 'Telefon',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'     => 'Şirket Adı',
                 'country'          => 'Ülke',
                 'default-address'  => 'Varsayılan Adres',
+                'email'            => 'E-posta',
                 'first-name'       => 'Adı',
                 'last-name'        => 'Soyadı',
                 'phone'            => 'Telefon',

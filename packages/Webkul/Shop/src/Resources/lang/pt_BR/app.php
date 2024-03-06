@@ -116,6 +116,7 @@ return [
                 'edit'             => 'Editar',
                 'edit-address'     => 'Editar Endereço',
                 'edit-success'     => 'Endereço atualizado com sucesso.',
+                'email'            => 'Электронная почта',
                 'empty-address'    => 'Você ainda não adicionou um endereço à sua conta.',
                 'first-name'       => 'Nome',
                 'last-name'        => 'Sobrenome',
@@ -272,11 +273,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Disponível',
+                'completed'           => 'Concluído',
                 'date'                => 'Data',
                 'download-error'      => 'O link de download expirou.',
+                'expired'             => 'Expirado',
                 'empty-product'       => 'Você não possui um produto para download',
                 'name'                => 'Produtos para Download',
                 'orderId'             => 'ID do Pedido',
+                'pending'             => 'Pendente',
                 'payment-error'       => 'O pagamento não foi feito para este download.',
                 'records-found'       => 'Registro(s) encontrado(s)',
                 'remaining-downloads' => 'Downloads Restantes',

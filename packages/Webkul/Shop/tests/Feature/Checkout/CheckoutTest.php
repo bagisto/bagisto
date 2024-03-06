@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+use Webkul\Admin\Mail\Order\CreatedNotification as AdminOrderCreatedNotification;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
@@ -14,10 +16,11 @@ use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
+use Webkul\Shop\Mail\Order\CreatedNotification as ShopOrderCreatedNotification;
 
 use function Pest\Laravel\postJson;
 
-it('should fails the certain validation error when store the guest user address for cart billing/shipping for guest user', function () {
+it('should fail certain validation error when storing guest user address for cart billing/shipping', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -64,6 +67,7 @@ it('should fails the certain validation error when store the guest user address 
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -80,6 +84,751 @@ it('should fails the certain validation error when store the guest user address 
         ->assertJsonValidationErrorFor('billing.city')
         ->assertJsonValidationErrorFor('billing.phone')
         ->assertUnprocessable();
+});
+
+it('should store the same billing and shipping address for guest if use for shipping is enabled', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ]),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [
+                $address1 = fake()->address(),
+            ],
+            'address2'         => $address2 = fake()->address(),
+            'company_name'     => $companyName = fake()->company(),
+            'first_name'       => $firstName = fake()->firstName(),
+            'last_name'        => $lastName = fake()->lastName(),
+            'email'            => $email = fake()->email(),
+            'country'          => $country = fake()->countryCode(),
+            'state'            => $state = fake()->state(),
+            'city'             => $city = fake()->city(),
+            'postcode'         => $postCode = rand(111111, 999999),
+            'phone'            => $phone = fake()->e164PhoneNumber(),
+            'use_for_shipping' => true,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'address1'     => $address1,
+                'address2'     => $address2,
+                'company_name' => $companyName,
+                'first_name'   => $firstName,
+                'last_name'    => $lastName,
+                'email'        => $email,
+                'country'      => $country,
+                'state'        => $state,
+                'city'         => $city,
+                'postcode'     => $postCode,
+                'phone'        => $phone,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'address1'     => $address1,
+                'address2'     => $address2,
+                'company_name' => $companyName,
+                'first_name'   => $firstName,
+                'last_name'    => $lastName,
+                'email'        => $email,
+                'country'      => $country,
+                'state'        => $state,
+                'city'         => $city,
+                'postcode'     => $postCode,
+                'phone'        => $phone,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+    ]);
+});
+
+it('should store the same billing and shipping address for customer if use for shipping is enabled', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+        'email'       => fake()->email(),
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'customer_id'           => $customer->id,
+        ]),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [$customerAddress->address1],
+            'company_name'     => $customerAddress->company_name,
+            'first_name'       => $customerAddress->first_name,
+            'last_name'        => $customerAddress->last_name,
+            'email'            => $customerAddress->email,
+            'country'          => $customerAddress->country,
+            'state'            => $customerAddress->state,
+            'city'             => $customerAddress->city,
+            'postcode'         => $customerAddress->postcode,
+            'phone'            => $customerAddress->phone,
+            'id'               => $customerAddress->id,
+            'use_for_shipping' => true,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'address1'     => $customerAddress->address1,
+                'company_name' => $customerAddress->company_name,
+                'first_name'   => $customerAddress->first_name,
+                'last_name'    => $customerAddress->last_name,
+                'email'        => $customerAddress->email,
+                'country'      => $customerAddress->country,
+                'state'        => $customerAddress->state,
+                'city'         => $customerAddress->city,
+                'postcode'     => $customerAddress->postcode,
+                'phone'        => $customerAddress->phone,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'address1'     => $customerAddress->address1,
+                'company_name' => $customerAddress->company_name,
+                'first_name'   => $customerAddress->first_name,
+                'last_name'    => $customerAddress->last_name,
+                'email'        => $customerAddress->email,
+                'country'      => $customerAddress->country,
+                'state'        => $customerAddress->state,
+                'city'         => $customerAddress->city,
+                'postcode'     => $customerAddress->postcode,
+                'phone'        => $customerAddress->phone,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+    ]);
+});
+
+it('should store the billing and shipping address for guest when the use for shipping is disabled', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ]),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [
+                $billingAddress1 = fake()->address(),
+            ],
+            'address2'         => $billingAddress2 = fake()->address(),
+            'company_name'     => $billingCompanyName = fake()->company(),
+            'first_name'       => $billingFirstName = fake()->firstName(),
+            'last_name'        => $billingLastName = fake()->lastName(),
+            'email'            => $billingEmail = fake()->email(),
+            'country'          => $billingCountry = fake()->countryCode(),
+            'state'            => $billingState = fake()->state(),
+            'city'             => $billingCity = fake()->city(),
+            'postcode'         => $billingPostCode = rand(111111, 999999),
+            'phone'            => $billingPhone = fake()->e164PhoneNumber(),
+        ],
+
+        'shipping' => [
+            'address1'         => [
+                $shippingAddress1 = fake()->address(),
+            ],
+            'address2'         => $shippingAddress2 = fake()->address(),
+            'company_name'     => $shippingCompanyName = fake()->company(),
+            'first_name'       => $shippingFirstName = fake()->firstName(),
+            'last_name'        => $shippingLastName = fake()->lastName(),
+            'email'            => $shippingEmail = fake()->email(),
+            'country'          => $shippingCountry = fake()->countryCode(),
+            'state'            => $shippingState = fake()->state(),
+            'city'             => $shippingCity = fake()->city(),
+            'postcode'         => $shippingPostCode = rand(111111, 999999),
+            'phone'            => $shippingPhone = fake()->e164PhoneNumber(),
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'address1'     => $billingAddress1,
+                'address2'     => $billingAddress2,
+                'company_name' => $billingCompanyName,
+                'first_name'   => $billingFirstName,
+                'last_name'    => $billingLastName,
+                'email'        => $billingEmail,
+                'country'      => $billingCountry,
+                'state'        => $billingState,
+                'city'         => $billingCity,
+                'postcode'     => $billingPostCode,
+                'phone'        => $billingPhone,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'address1'     => $shippingAddress1,
+                'address2'     => $shippingAddress2,
+                'company_name' => $shippingCompanyName,
+                'first_name'   => $shippingFirstName,
+                'last_name'    => $shippingLastName,
+                'email'        => $shippingEmail,
+                'country'      => $shippingCountry,
+                'state'        => $shippingState,
+                'city'         => $shippingCity,
+                'postcode'     => $shippingPostCode,
+                'phone'        => $shippingPhone,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+    ]);
+});
+
+it('should store the billing and shipping address for customer when the use for shipping is disabled', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $customerAddress1 = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+        'email'       => fake()->email(),
+    ]);
+
+    $customerAddress2 = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+        'email'       => fake()->email(),
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'customer_id'           => $customer->id,
+        ]),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    $this->loginAsCustomer($customer);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [$customerAddress1->address1],
+            'company_name'     => $customerAddress1->company_name,
+            'first_name'       => $customerAddress1->first_name,
+            'last_name'        => $customerAddress1->last_name,
+            'email'            => $customerAddress1->email,
+            'country'          => $customerAddress1->country,
+            'state'            => $customerAddress1->state,
+            'city'             => $customerAddress1->city,
+            'postcode'         => $customerAddress1->postcode,
+            'phone'            => $customerAddress1->phone,
+            'id'               => $customerAddress1->id,
+            'use_for_shipping' => false,
+        ],
+
+        'shipping' => [
+            'address1'         => [$customerAddress2->address1],
+            'company_name'     => $customerAddress2->company_name,
+            'first_name'       => $customerAddress2->first_name,
+            'last_name'        => $customerAddress2->last_name,
+            'email'            => $customerAddress2->email,
+            'country'          => $customerAddress2->country,
+            'state'            => $customerAddress2->state,
+            'city'             => $customerAddress2->city,
+            'postcode'         => $customerAddress2->postcode,
+            'phone'            => $customerAddress2->phone,
+            'id'               => $customerAddress2->id,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'address1'     => $customerAddress1->address1,
+                'company_name' => $customerAddress1->company_name,
+                'first_name'   => $customerAddress1->first_name,
+                'last_name'    => $customerAddress1->last_name,
+                'email'        => $customerAddress1->email,
+                'country'      => $customerAddress1->country,
+                'state'        => $customerAddress1->state,
+                'city'         => $customerAddress1->city,
+                'postcode'     => $customerAddress1->postcode,
+                'phone'        => $customerAddress1->phone,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+                'address1'     => $customerAddress2->address1,
+                'company_name' => $customerAddress2->company_name,
+                'first_name'   => $customerAddress2->first_name,
+                'last_name'    => $customerAddress2->last_name,
+                'email'        => $customerAddress2->email,
+                'country'      => $customerAddress2->country,
+                'state'        => $customerAddress2->state,
+                'city'         => $customerAddress2->city,
+                'postcode'     => $customerAddress2->postcode,
+                'phone'        => $customerAddress2->phone,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+    ]);
+});
+
+it('it should not save the shipping address for guest when the use for shipping is false and the shipping key is not present', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ]),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [
+                $address1 = fake()->address(),
+            ],
+            'address2'         => $address2 = fake()->address(),
+            'company_name'     => $companyName = fake()->company(),
+            'first_name'       => $firstName = fake()->firstName(),
+            'last_name'        => $lastName = fake()->lastName(),
+            'email'            => $email = fake()->email(),
+            'country'          => $country = fake()->countryCode(),
+            'state'            => $state = fake()->state(),
+            'city'             => $city = fake()->city(),
+            'postcode'         => $postCode = rand(111111, 999999),
+            'phone'            => $phone = fake()->e164PhoneNumber(),
+            'use_for_shipping' => false,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'address1'     => $address1,
+                'address2'     => $address2,
+                'company_name' => $companyName,
+                'first_name'   => $firstName,
+                'last_name'    => $lastName,
+                'email'        => $email,
+                'country'      => $country,
+                'state'        => $state,
+                'city'         => $city,
+                'postcode'     => $postCode,
+                'phone'        => $phone,
+            ],
+        ],
+    ]);
+
+    $this->assertDatabaseMissing('addresses', [
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+        'address1'     => $address1,
+        'address2'     => $address2,
+        'company_name' => $companyName,
+        'first_name'   => $firstName,
+        'last_name'    => $lastName,
+        'email'        => $email,
+        'country'      => $country,
+        'state'        => $state,
+        'city'         => $city,
+        'postcode'     => $postCode,
+        'phone'        => $phone,
+    ]);
+});
+
+it('it should not save the shipping address for customer when the use for shipping is false and the shipping key is not present', function () {
+    // Arrange
+    $customer = Customer::factory()->create();
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id' => $customer->id,
+        'email'       => fake()->email(),
+    ]);
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'customer_id'           => $customer->id,
+        ]),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'     => [$customerAddress->address1],
+            'company_name' => $customerAddress->company_name,
+            'first_name'   => $customerAddress->first_name,
+            'last_name'    => $customerAddress->last_name,
+            'email'        => $customerAddress->email,
+            'country'      => $customerAddress->country,
+            'state'        => $customerAddress->state,
+            'city'         => $customerAddress->city,
+            'postcode'     => $customerAddress->postcode,
+            'phone'        => $customerAddress->phone,
+            'id'           => $customerAddress->id,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+
+    $this->assertModelWise([
+        CartAddress::class => [
+            [
+                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+                'address1'     => $customerAddress->address1,
+                'company_name' => $customerAddress->company_name,
+                'first_name'   => $customerAddress->first_name,
+                'last_name'    => $customerAddress->last_name,
+                'email'        => $customerAddress->email,
+                'country'      => $customerAddress->country,
+                'state'        => $customerAddress->state,
+                'city'         => $customerAddress->city,
+                'postcode'     => $customerAddress->postcode,
+                'phone'        => $customerAddress->phone,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+    ]);
+
+    $this->assertDatabaseMissing('addresses', [
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+        'address1'     => $customerAddress->address1,
+        'company_name' => $customerAddress->company_name,
+        'first_name'   => $customerAddress->first_name,
+        'last_name'    => $customerAddress->last_name,
+        'email'        => $customerAddress->email,
+        'country'      => $customerAddress->country,
+        'state'        => $customerAddress->state,
+        'city'         => $customerAddress->city,
+        'postcode'     => $customerAddress->postcode,
+        'phone'        => $customerAddress->phone,
+        'id'           => $customerAddress->id,
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+    ]);
 });
 
 it('should store the guest user address for cart billing/shipping for guest user', function () {
@@ -129,6 +878,161 @@ it('should store the guest user address for cart billing/shipping for guest user
     ]);
 
     $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cartId;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [fake()->address()],
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
+            'use_for_shipping' => true,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+});
+
+it('should use the billing address as for shipping for guest customer/user', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cartId = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ])->id,
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cartId;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.addresses.store'), [
+        'billing' => [
+            'address1'         => [fake()->address()],
+            'company_name'     => fake()->company(),
+            'first_name'       => fake()->firstName(),
+            'last_name'        => fake()->lastName(),
+            'email'            => fake()->email(),
+            'country'          => fake()->countryCode(),
+            'state'            => fake()->state(),
+            'city'             => fake()->city(),
+            'postcode'         => rand(111111, 999999),
+            'phone'            => fake()->e164PhoneNumber(),
+            'use_for_shipping' => false,
+        ],
+    ])
+        ->assertOk()
+        ->assertJsonPath('redirect', false)
+        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
+        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
+        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
+        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+});
+
+it('should gives the validation error if not use for shipping true and not provided shipping address', function () {
+    // Arrange
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    CartItem::factory()->create([
+        'quantity'          => 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'total_weight'      => 1,
+        'base_total_weight' => 1,
+        'cart_id'           => $cartId = Cart::factory()->create([
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price = $product->price,
+            'base_grand_total'      => $price,
+            'sub_total'	            => $price,
+            'base_sub_total'        => $price,
+            'is_guest'              => 1,
+        ])->id,
+    ]);
+
+    $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -209,6 +1113,7 @@ it('should fails the validation error when shipping method not providing when st
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -270,6 +1175,7 @@ it('should store the shipping method', function () {
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -337,6 +1243,7 @@ it('should fails the validation error when store the payment method for guest us
     CartAddress::factory()->create(['cart_id' => $cartId, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cartId;
 
     session()->put('cart', $cartTemp);
@@ -514,6 +1421,7 @@ it('should place a simple product order for a guest user', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -648,6 +1556,235 @@ it('should place a simple product order for a guest user', function () {
     ]);
 });
 
+it('should place a simple product order for a guest user and send email to the guest user', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $cart = Cart::factory()->create([
+        'channel_id'            => core()->getCurrentChannel()->id,
+        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'    => $baseCurrencyCode,
+        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        'items_count'           => 1,
+        'items_qty'             => 1,
+        'grand_total'           => $price = $product->price,
+        'base_grand_total'      => $price,
+        'sub_total'	            => $price,
+        'base_sub_total'        => $price,
+        'is_guest'              => 1,
+        'shipping_method'       => 'free_free',
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
+    ]);
+
+    $cartItem = CartItem::factory()->create([
+        'quantity'          => $quantity = 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'cart_id'           => $cart->id,
+        'price'             => $convertedPrice = core()->convertPrice($price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $quantity,
+        'base_total'        => $price * $quantity,
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $quantity,
+        'base_total_weight' => ($product->weight ?? 0) * $quantity,
+        'additional'        => [
+            'quantity'   => $quantity,
+            'product_id' => $product->id,
+        ],
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    CartShippingRate::factory()->create([
+        'carrier'            => 'free',
+        'carrier_title'      => 'Free shipping',
+        'method'             => 'free_free',
+        'method_title'       => 'Free Shipping',
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartShippingAddress->id,
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartItem::class => [
+            [
+                'quantity'          => $quantity,
+                'product_id'        => $product->id,
+                'sku'               => $product->sku,
+                'name'              => $product->name,
+                'type'              => $product->type,
+                'cart_id'           => $cart->id,
+                'price'             => $convertedPrice,
+                'base_price'        => $price,
+                'total'             => $convertedPrice * $quantity,
+                'base_total'        => $price * $quantity,
+                'weight'            => $product->weight ?? 0,
+                'total_weight'      => ($product->weight ?? 0) * $quantity,
+                'base_total_weight' => ($product->weight ?? 0) * $quantity,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'status'          => Order::STATUS_PENDING,
+                'shipping_method' => 'free_free',
+                'grand_total'     => $price,
+                'cart_id'         => $cart->id,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $quantity = $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'price'        => $price,
+                'type'         => $product->type,
+                'product_id'   => $product->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method'   => $paymentMethod,
+            ],
+        ],
+
+        ProductOrderedInventory::class => [
+            [
+                'qty'        => $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
 it('should place a simple product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -709,6 +1846,7 @@ it('should place a simple product order for a customer', function () {
     $customerAddress = CustomerAddress::factory()->create([
         'customer_id'  => $customer->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'email'        => fake()->email(),
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -739,6 +1877,7 @@ it('should place a simple product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -886,6 +2025,254 @@ it('should place a simple product order for a customer', function () {
     ]);
 });
 
+it('should place a simple product order for a customer and send email to the customer', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getSimpleProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'channel_id'            => core()->getCurrentChannel()->id,
+        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'    => $baseCurrencyCode,
+        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        'items_count'           => 1,
+        'items_qty'             => 1,
+        'grand_total'           => $price = $product->price,
+        'base_grand_total'      => $price,
+        'sub_total'	            => $price,
+        'base_sub_total'        => $price,
+        'shipping_method'       => 'free_free',
+        'customer_id'           => $customer->id,
+        'is_active'             => 1,
+        'customer_email'        => $customer->email,
+        'customer_first_name'   => $customer->first_name,
+        'customer_last_name'    => $customer->last_name,
+    ]);
+
+    $cartItem = CartItem::factory()->create([
+        'quantity'          => $quantity = 1,
+        'product_id'        => $product->id,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'cart_id'           => $cart->id,
+        'price'             => $convertedPrice = core()->convertPrice($price),
+        'base_price'        => $price,
+        'total'             => $convertedPrice * $quantity,
+        'base_total'        => $price * $quantity,
+        'weight'            => $product->weight ?? 0,
+        'total_weight'      => ($product->weight ?? 0) * $quantity,
+        'base_total_weight' => ($product->weight ?? 0) * $quantity,
+        'additional'        => [
+            'quantity'   => $quantity,
+            'product_id' => $product->id,
+        ],
+    ]);
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'customer_id'  => $customer->id,
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'email'        => fake()->email(),
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartPayment::factory()->create([
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'cart_id'      => $cart->id,
+    ]);
+
+    CartShippingRate::factory()->create([
+        'carrier'            => 'free',
+        'carrier_title'      => 'Free shipping',
+        'method'             => 'free_free',
+        'method_title'       => 'Free Shipping',
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartBillingAddress->id,
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartItem::class => [
+            [
+                'quantity'          => $quantity,
+                'product_id'        => $product->id,
+                'sku'               => $product->sku,
+                'name'              => $product->name,
+                'type'              => $product->type,
+                'cart_id'           => $cart->id,
+                'price'             => $convertedPrice,
+                'base_price'        => $price,
+                'total'             => $convertedPrice * $quantity,
+                'base_total'        => $price * $quantity,
+                'weight'            => $product->weight ?? 0,
+                'total_weight'      => ($product->weight ?? 0) * $quantity,
+                'base_total_weight' => ($product->weight ?? 0) * $quantity,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $customerAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'status'          => Order::STATUS_PENDING,
+                'shipping_method' => 'free_free',
+                'grand_total'     => $price,
+                'cart_id'         => $cart->id,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $quantity = $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'price'        => $price,
+                'type'         => $product->type,
+                'product_id'   => $product->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method'  => $paymentMethod,
+            ],
+        ],
+
+        ProductOrderedInventory::class => [
+            [
+                'qty'        => $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
 it('should place a configurable product order for a guest user', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -987,6 +2374,7 @@ it('should place a configurable product order for a guest user', function () {
     $customerAddress = CustomerAddress::factory()->create([
         'cart_id'      => $cart->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'email'        => fake()->email(),
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -1177,6 +2565,306 @@ it('should place a configurable product order for a guest user', function () {
     ]);
 });
 
+it('should place a configurable product order for a guest user and send email to the guest user', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'featured' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getConfigurableProductFactory()
+        ->create();
+
+    foreach ($product->super_attributes as $attribute) {
+        foreach ($attribute->options as $option) {
+            $super_attributes[$option->attribute_id] = $option->id;
+        }
+    }
+
+    $cart = Cart::factory()->create([
+        'channel_id'            => core()->getCurrentChannel()->id,
+        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'    => $baseCurrencyCode,
+        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        'items_count'           => 1,
+        'items_qty'             => 1,
+        'grand_total'           => $price = $product->price,
+        'base_grand_total'      => $price,
+        'sub_total'	            => $price,
+        'base_sub_total'        => $price,
+        'is_guest'              => 1,
+        'shipping_method'       => 'free_free',
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    $childProduct = $product->variants()->first();
+
+    $data = [
+        'selected_configurable_option' => $childProduct->id,
+        'product_id'                   => $product->id,
+        'is_buy_now'                   => '0',
+        'rating'                       => '0',
+        'quantity'                     => '1',
+        'super_attribute'              => $super_attributes ?? [],
+    ];
+
+    $cartProducts = $product->getTypeInstance()->prepareForCart($data);
+
+    $parentCartItem = null;
+
+    foreach ($cartProducts as $cartProduct) {
+        $cartItem = cart()->getItemByProduct($cartProduct, $data);
+
+        if (isset($cartProduct['parent_id'])) {
+            $cartProduct['parent_id'] = $parentCartItem->id;
+        }
+
+        if (! $cartItem) {
+            $cartItem = CartItem::factory()->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+        } else {
+            if (
+                isset($cartProduct['parent_id'])
+                && $cartItem->parent_id !== $parentCartItem->id
+            ) {
+                $cartItem = CartItem::factory()->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+            } else {
+                $cartItem = CartItem::find($cartItem->id);
+                $cartItem->update(array_merge($cartProduct, ['cart_id' => $cart->id]));
+            }
+        }
+
+        if (! $parentCartItem) {
+            $parentCartItem = $cartItem;
+        }
+    }
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'email'        => fake()->email(),
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartShippingRate::factory()->create([
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'carrier_title'      => 'Free shipping',
+        'method_title'       => 'Free Shipping',
+        'carrier'            => 'free',
+        'method'             => 'free_free',
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartItem::class => [
+            [
+                'quantity'   => $data['quantity'],
+                'product_id' => $childProduct->id,
+                'sku'        => $childProduct->sku,
+                'name'       => $childProduct->name,
+                'type'       => $childProduct->type,
+                'cart_id'    => $cart->id,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $customerAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'cart_id' => $cart->id,
+                'method'  => $paymentMethod,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'shipping_method' => 'free_free',
+                'grand_total'     => $childProduct->price,
+                'cart_id'         => $cart->id,
+                'status'          => Order::STATUS_PENDING,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $quantity = $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'product_id'   => $product->id,
+                'price'        => $childProduct->price,
+                'type'         => $product->type,
+            ],
+        ],
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method'  => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        ProductOrderedInventory::class => [
+            [
+                'product_id' => $childProduct->id,
+                'qty'        => $quantity,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $childProduct->inventory_source_qty(1) - $quantity,
+                'product_id' => $childProduct->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
 it('should place a configurable product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -1276,6 +2964,7 @@ it('should place a configurable product order for a customer', function () {
     $customerAddress = CustomerAddress::factory()->create([
         'cart_id'      => $cart->id,
         'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'email'        => fake()->email(),
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -1424,6 +3113,262 @@ it('should place a configurable product order for a customer', function () {
     ]);
 });
 
+it('should place a configurable product order for a customer and send email to the user', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'featured' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getConfigurableProductFactory()
+        ->create();
+
+    foreach ($product->super_attributes as $attribute) {
+        foreach ($attribute->options as $option) {
+            $super_attributes[$option->attribute_id] = $option->id;
+        }
+    }
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'channel_id'            => core()->getCurrentChannel()->id,
+        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'    => $baseCurrencyCode,
+        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        'items_count'           => 1,
+        'items_qty'             => 1,
+        'grand_total'           => $price = $product->price,
+        'base_grand_total'      => $price,
+        'sub_total'	            => $price,
+        'base_sub_total'        => $price,
+        'shipping_method'       => 'free_free',
+        'customer_id'           => $customer->id,
+        'is_active'             => 1,
+        'customer_email'        => $customer->email,
+        'customer_first_name'   => $customer->first_name,
+        'customer_last_name'    => $customer->last_name,
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    $childProduct = $product->variants()->first();
+
+    $data = [
+        'selected_configurable_option' => $childProduct->id,
+        'product_id'                   => $product->id,
+        'is_buy_now'                   => '0',
+        'rating'                       => '0',
+        'quantity'                     => '1',
+        'super_attribute'              => $super_attributes ?? [],
+    ];
+
+    $cartProducts = $product->getTypeInstance()->prepareForCart($data);
+
+    $parentCartItem = null;
+
+    foreach ($cartProducts as $cartProduct) {
+        $cartItem = cart()->getItemByProduct($cartProduct, $data);
+
+        if (isset($cartProduct['parent_id'])) {
+            $cartProduct['parent_id'] = $parentCartItem->id;
+        }
+
+        if (! $cartItem) {
+            $cartItem = CartItem::factory()->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+        } else {
+            if (
+                isset($cartProduct['parent_id'])
+                && $cartItem->parent_id !== $parentCartItem->id
+            ) {
+                $cartItem = CartItem::factory()->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+            } else {
+                $cartItem = CartItem::find($cartItem->id);
+                $cartItem->update(array_merge($cartProduct, ['cart_id' => $cart->id]));
+            }
+        }
+
+        if (! $parentCartItem) {
+            $parentCartItem = $cartItem;
+        }
+    }
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CustomerAddress::ADDRESS_TYPE,
+        'email'        => fake()->email(),
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    $cartShippingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
+    ]);
+
+    CartShippingRate::factory()->create([
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartShippingAddress->id,
+        'carrier_title'      => 'Free shipping',
+        'method_title'       => 'Free Shipping',
+        'carrier'            => 'free',
+        'method'             => 'free_free',
+    ]);
+
+    CartPayment::factory()->create([
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+        'cart_id'      => $cart->id,
+    ]);
+
+    // Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'cart_id' => $cart->id,
+                'method'  => $paymentMethod,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $customerAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'shipping_method' => 'free_free',
+                'grand_total'     => $childProduct->price,
+                'cart_id'         => $cart->id,
+                'status'          => Order::STATUS_PENDING,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $quantity = $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'product_id'   => $product->id,
+                'price'        => $childProduct->price,
+                'type'         => $product->type,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method' => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'first_name'   => $cartShippingAddress->first_name,
+                'first_name'   => $cartShippingAddress->last_name,
+                'first_name'   => $cartShippingAddress->first_name,
+                'last_name'    => $cartShippingAddress->last_name,
+                'phone'        => $cartShippingAddress->phone,
+                'address1'     => $cartShippingAddress->address1,
+                'country'      => $cartShippingAddress->country,
+                'state'        => $cartShippingAddress->state,
+                'city'         => $cartShippingAddress->city,
+                'postcode'     => $cartShippingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        ProductOrderedInventory::class => [
+            [
+                'product_id' => $childProduct->id,
+                'qty'        => $quantity,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $childProduct->inventory_source_qty(1) - $quantity,
+                'product_id' => $childProduct->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
 it('should place a virtual product order for a guest user', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -1499,6 +3444,7 @@ it('should place a virtual product order for a guest user', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -1590,6 +3536,181 @@ it('should place a virtual product order for a guest user', function () {
     ]);
 });
 
+it('should place a virtual product order for a guest user and send email to the guest user', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+            26 => 'guest_checkout',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'featured' => [
+                'boolean_value' => true,
+            ],
+
+            'guest_checkout' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getVirtualProductFactory()
+        ->create();
+
+    $cartItem = CartItem::factory()->create([
+        'base_total_weight' => 1,
+        'total_weight'      => 1,
+        'product_id'        => $product->id,
+        'quantity'          => 1,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'base_grand_total'      => $price = $product->price,
+            'base_sub_total'        => $price,
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price,
+            'sub_total'	            => $price,
+            'is_guest'              => 1,
+            'customer_email'        => fake()->email(),
+            'customer_first_name'   => fake()->firstName(),
+            'customer_last_name'    => fake()->lastName(),
+        ]),
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    CartShippingRate::factory()->create([
+        'carrier'            => 'free',
+        'carrier_title'      => 'Free shipping',
+        'method'             => 'free_free',
+        'method_title'       => 'Free Shipping',
+        'method_description' => 'Free Shipping',
+        'cart_address_id'    => $cartBillingAddress->id,
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Act and Assert
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'status'      => Order::STATUS_PENDING,
+                'grand_total' => $price,
+                'cart_id'     => $cart->id,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $quantity = $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'price'        => $price,
+                'type'         => $product->type,
+                'product_id'   => $product->id,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method' => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        ProductOrderedInventory::class => [
+            [
+                'qty'        => $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
 it('should place a virtual product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -1646,6 +3767,7 @@ it('should place a virtual product order for a customer', function () {
         'cart_id'      => $cart->id,
         'customer_id'  => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+        'email'        => fake()->email(),
     ]);
 
     $cartBillingAddress = CartAddress::factory()->create([
@@ -1661,6 +3783,7 @@ it('should place a virtual product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -1761,6 +3884,362 @@ it('should place a virtual product order for a customer', function () {
     ]);
 });
 
+it('should place a virtual product order for a customer and send email to the user', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'featured' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getVirtualProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    $cartItem = CartItem::factory()->create([
+        'base_total_weight' => 1,
+        'total_weight'      => 1,
+        'product_id'        => $product->id,
+        'quantity'          => 1,
+        'sku'               => $product->sku,
+        'name'              => $product->name,
+        'type'              => $product->type,
+        'weight'            => 1,
+        'cart_id'           => $cart = Cart::factory()->create([
+            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+            'base_currency_code'    => $baseCurrencyCode,
+            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+            'base_grand_total'      => $price = $product->price,
+            'base_sub_total'        => $price,
+            'channel_id'            => core()->getCurrentChannel()->id,
+            'items_count'           => 1,
+            'items_qty'             => 1,
+            'grand_total'           => $price,
+            'sub_total'	            => $price,
+            'customer_id'           => $customer->id,
+            'is_active'             => 1,
+            'customer_email'        => $customer->email,
+            'customer_first_name'   => $customer->first_name,
+            'customer_last_name'    => $customer->last_name,
+        ]),
+    ]);
+
+    $customerAddress = CustomerAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'customer_id'  => $customer->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+        'email'        => fake()->email(),
+    ]);
+
+    $cartBillingAddress = CartAddress::factory()->create([
+        'cart_id'      => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+        'customer_id'  => $cart->customer_id,
+    ]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    // Assert
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CustomerAddress::class => [
+            [
+                'address_type' => $customerAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'customer_id'  => $customer->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'status'      => Order::STATUS_PENDING,
+                'grand_total' => $price,
+                'cart_id'     => $cart->id,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $quantity = $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'price'        => $price,
+                'type'         => $product->type,
+                'product_id'   => $product->id,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method' => $paymentMethod,
+            ],
+        ],
+
+        OrderAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'first_name'   => $cartBillingAddress->first_name,
+                'first_name'   => $cartBillingAddress->last_name,
+                'first_name'   => $cartBillingAddress->first_name,
+                'last_name'    => $cartBillingAddress->last_name,
+                'phone'        => $cartBillingAddress->phone,
+                'address1'     => $cartBillingAddress->address1,
+                'country'      => $cartBillingAddress->country,
+                'state'        => $cartBillingAddress->state,
+                'city'         => $cartBillingAddress->city,
+                'postcode'     => $cartBillingAddress->postcode,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        ProductOrderedInventory::class => [
+            [
+                'qty'        => $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => $product->inventory_source_qty(1) - $quantity,
+                'product_id' => $product->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
+it('should place a downloadable product order for a customer and send email to the user', function () {
+    // Arrange
+    Mail::fake();
+
+    $product = (new ProductFaker([
+        'attributes' => [
+            5  => 'new',
+            6  => 'featured',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+
+            'featured' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getDownloadableProductFactory()
+        ->create();
+
+    $cart = Cart::factory()->create([
+        'channel_id'            => core()->getCurrentChannel()->id,
+        'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
+        'base_currency_code'    => $baseCurrencyCode,
+        'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
+        'cart_currency_code'    => core()->getCurrentCurrencyCode(),
+        'items_count'           => 1,
+        'items_qty'             => 1,
+        'grand_total'           => $price = $product->price,
+        'base_grand_total'      => $price,
+        'sub_total'	            => $price,
+        'base_sub_total'        => $price,
+        'is_guest'              => 1,
+        'customer_email'        => fake()->email(),
+        'customer_first_name'   => fake()->firstName(),
+        'customer_last_name'    => fake()->lastName(),
+    ]);
+
+    $cartTemp = new \stdClass();
+
+    $cartTemp->id = $cart->id;
+
+    session()->put('cart', $cartTemp);
+
+    $data = [
+        'product_id' => $product->id,
+        'is_buy_now' => '0',
+        'rating'     => '0',
+        'quantity'   => '1',
+        'links'      => [
+            '1',
+        ],
+    ];
+
+    $cartProducts = $product->getTypeInstance()->prepareForCart($data);
+
+    $parentCartItem = null;
+
+    foreach ($cartProducts as $cartProduct) {
+        $cartItem = cart()->getItemByProduct($cartProduct, $data);
+
+        if (isset($cartProduct['parent_id'])) {
+            $cartProduct['parent_id'] = $parentCartItem->id;
+        }
+
+        if (! $cartItem) {
+            $cartItem = CartItem::factory()->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+        } else {
+            if (
+                isset($cartProduct['parent_id'])
+                && $cartItem->parent_id !== $parentCartItem->id
+            ) {
+                $cartItem = CartItem::factory()->create(array_merge($cartProduct, ['cart_id' => $cart->id]));
+            } else {
+                $cartItem = CartItem::find($cartItem->id);
+                $cartItem->update(array_merge($cartProduct, ['cart_id' => $cart->id]));
+            }
+        }
+
+        if (! $parentCartItem) {
+            $parentCartItem = $cartItem;
+        }
+    }
+
+    $cartBillingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_BILLING]);
+
+    $cartShippingAddress = CartAddress::factory()->create(['cart_id' => $cart->id, 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING]);
+
+    CartPayment::factory()->create([
+        'cart_id'      => $cart->id,
+        'method'       => $paymentMethod = 'cashondelivery',
+        'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
+    ]);
+
+    // Act and Assert
+    $this->loginAsCustomer();
+
+    postJson(route('shop.checkout.onepage.orders.store'))
+        ->assertOk()
+        ->assertJsonPath('data.redirect', true)
+        ->assertJsonPath('data.redirect_url', route('shop.checkout.onepage.success'));
+
+    $this->assertModelWise([
+        Cart::class => [
+            [
+                'is_active' => 0,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartBillingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartAddress::class => [
+            [
+                'address_type' => $cartShippingAddress->address_type,
+                'cart_id'      => $cart->id,
+            ],
+        ],
+
+        CartPayment::class => [
+            [
+                'method'  => $paymentMethod,
+                'cart_id' => $cart->id,
+            ],
+        ],
+
+        Order::class => [
+            [
+                'status'      => Order::STATUS_PENDING,
+                'grand_total' => $price,
+                'cart_id'     => $cart->id,
+            ],
+        ],
+
+        OrderItem::class => [
+            [
+                'qty_ordered'  => $cartItem->quantity,
+                'qty_shipped'  => 0,
+                'qty_invoiced' => 0,
+                'qty_canceled' => 0,
+                'qty_refunded' => 0,
+                'price'        => $price,
+                'type'         => $product->type,
+                'product_id'   => $product->id,
+            ],
+        ],
+
+        OrderPayment::class => [
+            [
+                'method'  => $paymentMethod,
+            ],
+        ],
+
+        ProductInventoryIndex::class => [
+            [
+                'qty'        => 0,
+                'product_id' => $product->id,
+            ],
+        ],
+    ]);
+
+    Mail::assertQueued(AdminOrderCreatedNotification::class);
+
+    Mail::assertQueued(ShopOrderCreatedNotification::class);
+
+    Mail::assertQueuedCount(2);
+});
+
 it('should place a downloadable product order for a customer', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -1801,6 +4280,7 @@ it('should place a downloadable product order for a customer', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -1971,9 +4451,11 @@ it('should not return the cash on delivery payment method if product is download
     $customerAddress = CustomerAddress::factory()->create([
         'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
+        'email'        => fake()->email(),
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -2078,9 +4560,10 @@ it('should not return the shipping methods if product is downloadable', function
 
     $customer = Customer::factory()->create();
 
-    $customerAddress = CustomerAddress::factory()->create([
+    CustomerAddress::factory()->create([
         'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
+        'email'        => fake()->email(),
     ]);
 
     $cart = Cart::factory()->create([
@@ -2102,6 +4585,7 @@ it('should not return the shipping methods if product is downloadable', function
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -2205,9 +4689,10 @@ it('should not return the cash on delivery payment method if product is virtual'
 
     $customer = Customer::factory()->create();
 
-    $customerAddress = CustomerAddress::factory()->create([
+    CustomerAddress::factory()->create([
         'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
+        'email'        => fake()->email(),
     ]);
 
     $cart = Cart::factory()->create([
@@ -2229,6 +4714,7 @@ it('should not return the cash on delivery payment method if product is virtual'
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -2334,9 +4820,10 @@ it('should not return the shipping methods if product is virtual', function () {
 
     $customer = Customer::factory()->create();
 
-    $customerAddress = CustomerAddress::factory()->create([
+    CustomerAddress::factory()->create([
         'address_type' => CustomerAddress::ADDRESS_TYPE,
         'customer_id'  => $customer->id,
+        'email'        => fake()->email(),
     ]);
 
     $cart = Cart::factory()->create([
@@ -2358,6 +4845,7 @@ it('should not return the shipping methods if product is virtual', function () {
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -2507,6 +4995,7 @@ it('should place order with two products with simple and configurable product ty
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -2786,6 +5275,7 @@ it('should place order with two products with simple and grouped product type', 
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);
@@ -3014,6 +5504,7 @@ it('should place order with two products with simple and downloadable product ty
     ]);
 
     $cartTemp = new \stdClass();
+
     $cartTemp->id = $cart->id;
 
     session()->put('cart', $cartTemp);

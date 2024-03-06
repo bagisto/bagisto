@@ -116,6 +116,7 @@ return [
                 'edit'             => 'Edytuj',
                 'edit-address'     => 'Edytuj adres',
                 'edit-success'     => 'Adres został pomyślnie zaktualizowany.',
+                'email'            => 'Email',
                 'empty-address'    => 'Nie dodałeś jeszcze żadnego adresu do swojego konta.',
                 'first-name'       => 'Imię',
                 'last-name'        => 'Nazwisko',
@@ -272,11 +273,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'Dostępny',
+                'completed'           => 'Zakończony',
                 'date'                => 'Data',
                 'download-error'      => 'Link do pobrania wygasł.',
+                'expired'             => 'Wygasło',
                 'empty-product'       => 'Nie masz produktu do pobrania',
                 'name'                => 'Produkty do pobrania',
                 'orderId'             => 'Identyfikator zamówienia',
+                'pending'             => 'Aż do',
                 'payment-error'       => 'Nie dokonano płatności za to pobranie.',
                 'records-found'       => 'Znaleziono rekord(y)',
                 'remaining-downloads' => 'Pozostałe pobrania',

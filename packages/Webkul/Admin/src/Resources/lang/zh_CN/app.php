@@ -480,13 +480,17 @@ return [
                 'title'      => '交易',
 
                 'datagrid' => [
+                    'completed'          => '已完成',
                     'id'                 => 'ID',
                     'invoice-id'         => '发票ID',
                     'order-id'           => '订单ID',
+                    'paid'               => '已支付',
+                    'pending'            => '待定',
                     'status'             => '状态',
                     'transaction-amount' => '金额',
                     'transaction-date'   => '日期',
                     'transaction-id'     => '交易ID',
+                    'view'               => '查看',
                 ],
 
                 'create' => [
@@ -1398,6 +1402,7 @@ return [
                 'country'            => '国家',
                 'create-address-btn' => '添加新地址',
                 'default-address'    => '默认地址',
+                'email'              => '电子邮件',
                 'first-name'         => '名字',
                 'last-name'          => '姓氏',
                 'phone'              => '电话',
@@ -1417,6 +1422,7 @@ return [
                 'company-name'     => '公司名称',
                 'country'          => '国家',
                 'default-address'  => '默认地址',
+                'email'            => '电子邮件',
                 'first-name'       => '名字',
                 'last-name'        => '姓氏',
                 'phone'            => '电话',

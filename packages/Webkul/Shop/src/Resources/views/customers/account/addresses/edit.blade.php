@@ -270,6 +270,26 @@
 
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.phone.after', ['address' => $address]) !!}
 
+                <!-- E-mail -->
+                <x-shop::form.control-group>
+                    <x-shop::form.control-group.label class="required">
+                        @lang('Email')
+                    </x-shop::form.control-group.label>
+
+                    <x-shop::form.control-group.control
+                        type="text"
+                        name="email"
+                        rules="required|email"
+                        :value="old('email') ?? $address->email"
+                        :label="trans('Email')"
+                        :placeholder="trans('Email')"
+                    />
+
+                    <x-shop::form.control-group.error control-name="email" />
+                </x-shop::form.control-group>
+
+                {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.email.after', ['address' => $address]) !!}
+
                 <button
                     type="submit"
                     class="primary-button m-0 block text-base w-max py-3 px-11 rounded-2xl text-center"

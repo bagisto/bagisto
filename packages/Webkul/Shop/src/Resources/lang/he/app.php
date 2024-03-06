@@ -116,6 +116,7 @@ return [
                 'edit'             => 'ערוך',
                 'edit-address'     => 'ערוך כתובת',
                 'edit-success'     => 'הכתובת עודכנה בהצלחה.',
+                'email'            => 'אימייל',
                 'empty-address'    => 'טרם הוספת כתובת לחשבונך.',
                 'first-name'       => 'שם פרטי',
                 'last-name'        => 'שם משפחה',
@@ -272,11 +273,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'זמין',
+                'completed'           => 'הושלם',
                 'date'                => 'תאריך',
                 'download-error'      => 'קישור הורדה פג תוקף.',
+                'expired'             => 'פג תוקף',
                 'empty-product'       => 'אין לך מוצרים להורדה',
                 'name'                => 'מוצרים להורדה',
                 'orderId'             => 'מספר הזמנה',
+                'pending'             => 'ממתין ל',
                 'payment-error'       => 'לא בוצע תשלום עבור ההורדה הזו.',
                 'records-found'       => 'נמצאו :record_count רשומות',
                 'remaining-downloads' => 'הורדות נותרו',

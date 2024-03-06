@@ -480,13 +480,17 @@ return [
                 'title'      => 'Transacties',
 
                 'datagrid' => [
+                    'completed'          => 'Voltooid',
                     'id'                 => 'ID',
-                    'invoice-id'         => 'Factuurnummer',
-                    'order-id'           => 'Bestelnummer',
+                    'invoice-id'         => 'Factuur ID',
+                    'order-id'           => 'Bestelling ID',
+                    'paid'               => 'Betaald',
+                    'pending'            => 'In afwachting',
                     'status'             => 'Status',
                     'transaction-amount' => 'Bedrag',
                     'transaction-date'   => 'Datum',
-                    'transaction-id'     => 'Transactie-ID',
+                    'transaction-id'     => 'Transactie ID',
+                    'view'               => 'Bekijken',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'Land',
                 'create-address-btn' => 'Nieuw adres toevoegen',
                 'default-address'    => 'Standaardadres',
+                'email'              => 'E-mail',
                 'first-name'         => 'Voornaam',
                 'last-name'          => 'Achternaam',
                 'phone'              => 'Telefoon',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'    => 'Bedrijfsnaam',
                 'country'         => 'Land',
                 'default-address' => 'Standaardadres',
+                'email'           => 'E-mail',
                 'first-name'      => 'Voornaam',
                 'last-name'       => 'Achternaam',
                 'phone'           => 'Telefoon',

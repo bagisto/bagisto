@@ -480,13 +480,17 @@ return [
                 'title'      => 'লেনদেন',
 
                 'datagrid' => [
+                    'completed'          => 'সম্পন্ন',
                     'id'                 => 'আইডি',
                     'invoice-id'         => 'চালান আইডি',
                     'order-id'           => 'অর্ডার আইডি',
-                    'status'             => 'স্থিতি',
+                    'paid'               => 'পেইড',
+                    'pending'            => 'অলপেক্ষিত',
+                    'status'             => 'অবস্থা',
                     'transaction-amount' => 'পরিমাণ',
                     'transaction-date'   => 'তারিখ',
                     'transaction-id'     => 'লেনদেন আইডি',
+                    'view'               => 'দেখুন',
                 ],
 
                 'create' => [
@@ -1399,6 +1403,7 @@ return [
                 'country'            => 'দেশ',
                 'create-address-btn' => 'নতুন ঠিকানা যুক্ত করুন',
                 'default-address'    => 'ডিফল্ট ঠিকানা',
+                'email'              => 'ইমেল',
                 'first-name'         => 'প্রথম নাম',
                 'last-name'          => 'শেষ নাম',
                 'phone'              => 'ফোন',
@@ -1418,6 +1423,7 @@ return [
                 'company-name'    => 'কোম্পানির নাম',
                 'country'         => 'দেশ',
                 'default-address' => 'ডিফল্ট ঠিকানা',
+                'email'           => 'ইমেল',
                 'first-name'      => 'প্রথম নাম',
                 'last-name'       => 'শেষ নাম',
                 'phone'           => 'ফোন',

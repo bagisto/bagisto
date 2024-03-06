@@ -116,6 +116,7 @@ return [
                 'edit'             => 'ویرایش',
                 'edit-address'     => 'ویرایش آدرس',
                 'edit-success'     => 'آدرس با موفقیت به‌روزرسانی شد.',
+                'email'            => 'ایمیل',
                 'empty-address'    => 'هنوز آدرسی به حساب خود اضافه نکرده‌اید.',
                 'first-name'       => 'نام',
                 'last-name'        => 'نام خانوادگی',
@@ -272,11 +273,15 @@ return [
             ],
 
             'downloadable-products' => [
+                'available'           => 'در دسترس',
+                'completed'           => 'تکمیل شد',
                 'date'                => 'تاریخ',
                 'download-error'      => 'لینک دانلود منقضی شده است.',
+                'expired'             => 'منقضی شده',
                 'empty-product'       => 'محصولی برای دانلود ندارید',
                 'name'                => 'محصولات قابل دانلود',
                 'orderId'             => 'شناسه سفارش',
+                'pending'             => 'انتظار',
                 'payment-error'       => 'پرداخت برای این دانلود انجام نشده است.',
                 'records-found'       => 'رکورد(های) پیدا شده',
                 'remaining-downloads' => 'دانلودهای باقیمانده',

@@ -50,6 +50,8 @@ class OrderController extends Controller
             'id'          => $id,
         ]);
 
+        abort_if(! $order, 404);
+
         return view('shop::customers.account.orders.view', compact('order'));
     }
 
