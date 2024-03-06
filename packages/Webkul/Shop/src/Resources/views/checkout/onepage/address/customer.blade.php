@@ -493,6 +493,10 @@
                     });
                 },
 
+                removeAddressFromList(params) {
+                    this.customerSavedAddresses[this.activeAddressForm] = this.customerSavedAddresses[this.activeAddressForm].filter(address => address.id != params.id);
+                },
+
                 createCustomerAddress(params) {
                     this.isStoring = true;
 
@@ -527,10 +531,6 @@
                                 setErrors(error.response.data.errors);
                             }
                         });
-                },
-
-                removeAddressFromList(params) {
-                    this.customerSavedAddresses[this.activeAddressForm] = this.customerSavedAddresses[this.activeAddressForm].filter(address => address.id != params.id);
                 },
 
                 addAddressToCart(params, { setErrors }) {
