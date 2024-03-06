@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'create-btn'         => 'Valuta Aanmaken',
                     'code'               => 'Code',
-                    'currency-position'  => 'Valutapositie',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'Decimalen',
                     'decimal-separator'  => 'Decimaalscheidingsteken',
                     'delete-warning'     => 'Weet je zeker dat je deze actie wilt uitvoeren?',

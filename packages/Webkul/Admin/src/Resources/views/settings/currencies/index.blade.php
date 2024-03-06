@@ -12,7 +12,7 @@
             </p>
 
             <div class="flex gap-x-2.5 items-center">
-                <!-- Create currency Button -->
+                <!-- Create Currency Button -->
                 @if (bouncer()->hasPermission('settings.currencies.create'))
                     <button
                         type="button"
@@ -41,12 +41,12 @@
                 </p>
 
                 <div class="flex gap-x-2.5 items-center">
-                    <!-- Create currency Button -->
+                    <!-- Create Currency Button -->
                     @if (bouncer()->hasPermission('settings.currencies.create'))
                         <button
                             type="button"
                             class="primary-button"
-                            @click="selectedCurrencies=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
+                            @click="isEditable=0; selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle();"
                         >
                             @lang('admin::app.settings.currencies.index.create-btn')
                         </button>
@@ -77,7 +77,7 @@
                         <!-- Actions -->
                         <div class="flex justify-end">
                             @if (bouncer()->hasPermission('settings.currencies.edit'))
-                                <a @click="selectedCurrencies=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                <a @click="isEditable=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.index === 'edit')?.icon"
                                         class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
@@ -115,7 +115,7 @@
                         <x-slot:header>
                             <p
                                 class="text-lg text-gray-800 dark:text-white font-bold"
-                                v-if="selectedCurrencies"
+                                v-if="isEditable"
                             >
                                 @lang('admin::app.settings.currencies.index.edit.title')
                             </p>
@@ -215,7 +215,8 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <!-- Thousand Separator -->
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.currencies.index.create.thousand-separator')
                                 </x-admin::form.control-group.label>
@@ -236,7 +237,8 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="mb-[10px]">
+                            <!-- Decimal Separator -->
+                            <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.settings.currencies.index.create.decimal-separator')
                                 </x-admin::form.control-group.label>
@@ -257,38 +259,30 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group class="flex-1 w-full mb-[10px]">
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.settings.currencies.index.create.currency-position')
+                            <!-- Currency Position -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.currencies.index.create.currency-position.title')
                                 </x-admin::form.control-group.label>
 
-                                <v-field
+                                <x-admin::form.control-group.control
+                                    type="select"
                                     name="currency_position"
-
-                                    label="@lang('admin::app.settings.currencies.index.create.currency-position')"
                                     v-model="selectedCurrency.currency_position"
+                                    :label="trans('admin::app.settings.currencies.index.create.currency-position.title')"
                                 >
-                                    <select
-                                        name="currency_position"
-                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                        :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    <option value="">@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+
+                                    <option
+                                        v-for="(position, key) in positions"
+                                        :value="key"
+                                        :text="position"
+                                        :selected="key == selectedCurrency.currency_position"
                                     >
-                                        <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
+                                    </option>
+                                </x-admin::form.control-group.control>
 
-                                        <option
-                                        v-for="position,key in positions"
-                                            :value="key"
-                                            :text="position"
-                                            :selected="key == selectedCurrency.currency_position">
-
-                                        </option>
-                                    </select>
-                                </v-field>
-
-                                <x-admin::form.control-group.error
-                                    control-name="currency_position"
-                                >
-                                </x-admin::form.control-group.error>
+                                <x-admin::form.control-group.error control-name="currency_position" />
                             </x-admin::form.control-group>
 
                             {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
@@ -316,12 +310,12 @@
 
                 data() {
                     return {
+                        isEditable: 0,
+
                         selectedCurrency: {},
 
                         positions: @json($currencyPositions),
-
-                        selectedCurrencies: 0,
-                    }
+                    };
                 },
 
                 computed: {
@@ -341,7 +335,7 @@
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors  }) {
+                    updateOrCreate(params, { resetForm, setErrors }) {
                         let formData = new FormData(this.$refs.currencyCreateForm);
 
                         if (params.id) {
@@ -349,20 +343,20 @@
                         }
 
                         this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", formData)
-                        .then((response) => {
-                            this.$refs.currencyUpdateOrCreateModal.close();
+                            .then((response) => {
+                                this.$refs.currencyUpdateOrCreateModal.close();
 
-                            this.$refs.datagrid.get();
+                                this.$refs.datagrid.get();
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                            resetForm();
-                        })
-                        .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            }
-                        });
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     editModal(url) {
@@ -373,7 +367,7 @@
                                 this.$refs.currencyUpdateOrCreateModal.toggle();
                             })
                             .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message })
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             });
                     },
                 }

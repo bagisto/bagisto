@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'কোড',
                     'create-btn'         => 'মুদ্রা তৈরি করুন',
-                    'currency-position'  => 'মুদ্রা অবস্থান',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'দশমিক',
                     'decimal-separator'  => 'দশমিক পৃথককরণ',
                     'delete-warning'     => 'আপনি কি নিশ্চিত, এই ক্রিয়াটি সম্পাদনা করতে চান?',

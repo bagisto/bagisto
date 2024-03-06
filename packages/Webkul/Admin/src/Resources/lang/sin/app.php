@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'create-btn'         => 'මුදල් සාදන්න',
                     'code'               => 'කේතය',
-                    'currency-position'  => 'මුදල් තත්ත්වය',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'දශක',
                     'decimal-separator'  => 'දශම බෙදුම්කරු',
                     'delete-warning'     => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',

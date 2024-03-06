@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'कोड',
                     'create-btn'         => 'मुद्रा बनाएं',
-                    'currency-position'  => 'मुद्रा स्थिति',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'दशमलव',
                     'decimal-separator'  => 'दशमलव विभाजक',
                     'delete-warning'     => 'क्या आप वाकई इस क्रिया को करना चाहते हैं?',

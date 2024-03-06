@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'Code',
                     'create-btn'         => 'Créer une devise',
-                    'currency-position'  => 'Position de la devise',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'Décimal',
                     'decimal-separator'  => 'Séparateur décimal',
                     'delete-warning'     => 'Êtes-vous sûr de vouloir effectuer cette action ?',

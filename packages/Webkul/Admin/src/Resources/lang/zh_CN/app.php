@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'create-btn'         => '创建货币',
                     'code'               => '代码',
-                    'currency-position'  => '货币头寸',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => '小数',
                     'decimal-separator'  => '小数点分隔符',
                     'delete-warning'     => '确定要执行此操作吗？',

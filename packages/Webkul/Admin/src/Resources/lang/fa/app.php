@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'کد',
                     'create-btn'         => 'ساخت ارز',
-                    'currency-position'  => 'موقعیت واحد پولی',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'معادله اعشار',
                     'decimal-separator'  => 'جداکننده اعشار',
                     'delete-warning'     => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',

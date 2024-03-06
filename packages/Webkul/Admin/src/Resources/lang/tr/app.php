@@ -2238,7 +2238,18 @@ return [
                 'create' => [
                     'create-btn'         => 'Para Birimi Oluştur',
                     'code'               => 'Kodu',
-                    'currency-position'  => 'Döviz Pozisyonu',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'Ondalık',
                     'decimal-separator'  => 'Ondalık Ayırıcı',
                     'delete-warning'     => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',

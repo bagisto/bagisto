@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'create-btn'         => 'Utwórz Walutę',
                     'code'               => 'Kod',
-                    'currency-position'  => 'Pozycja walutowa',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'Miejsca dziesiętne',
                     'decimal-separator'  => 'Separator liczb dziesiętnych',
                     'delete-warning'     => 'Czy na pewno chcesz wykonać tę operację?',

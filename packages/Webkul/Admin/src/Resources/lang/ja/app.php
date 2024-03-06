@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'create-btn'         => '通貨を作成',
                     'code'               => 'コード',
-                    'currency-position'  => '通貨ポジション',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => '小数点',
                     'decimal-separator'  => '小数点区切り文字',
                     'delete-warning'     => '本当にこのアクションを実行しますか？',

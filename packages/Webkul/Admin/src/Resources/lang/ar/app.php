@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'الكود',
                     'create-btn'         => 'إنشاء عملة',
-                    'currency-position'  => 'موقع العملة',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'الكسور',
                     'decimal-separator'  => 'فاصل الكسور',
                     'delete-warning'     => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',

@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'Code',
                     'create-btn'         => 'Create Currency',
-                    'currency-position'  => 'Currency Position',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'Decimal',
                     'decimal-separator'  => 'Decimal Separator',
                     'delete-warning'     => 'Are you sure you want to perform this action?',

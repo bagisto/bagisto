@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'code'               => 'קוד',
                     'create-btn'         => 'צור מטבע',
-                    'currency-position'  => 'מיקום המטבע',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'עשרוני',
                     'decimal-separator'  => 'מפריד עשרוני',
                     'delete-warning'     => 'האם אתה בטוח שברצונך לבצע פעולה זו?',

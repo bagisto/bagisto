@@ -31,10 +31,10 @@ class CurrencyController extends Controller
         }
 
         $currencyPositions = [
-            'left'             => 'Left',
-            'left_with_space'  => 'Left With Space',
-            'right'            => 'Right',
-            'right_with_space' => 'Right With Space',
+            'left'             => trans('admin::app.settings.currencies.index.create.currency-position.options.left'),
+            'left_with_space'  => trans('admin::app.settings.currencies.index.create.currency-position.options.left-with-space'),
+            'right'            => trans('admin::app.settings.currencies.index.create.currency-position.options.right'),
+            'right_with_space' => trans('admin::app.settings.currencies.index.create.currency-position.options.right-with-space'),
         ];
 
         return view('admin::settings.currencies.index', compact('currencyPositions'));

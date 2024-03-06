@@ -2237,7 +2237,18 @@ return [
                 'create' => [
                     'create-btn'         => 'Создать валюту',
                     'code'               => 'Код',
-                    'currency-position'  => 'Валютная позиция',
+
+                    'currency-position'  => [
+                        'options' => [
+                            'left'             => 'Left',
+                            'left-with-space'  => 'Left With Space',
+                            'right'            => 'Right',
+                            'right-with-space' => 'Right With Space',
+                        ],
+
+                        'title' => 'Currency Position',
+                    ],
+
                     'decimal'            => 'Десятичная часть',
                     'decimal-separator'  => 'Десятичный разделитель',
                     'delete-warning'     => 'Вы уверены, что хотите выполнить это действие?',
