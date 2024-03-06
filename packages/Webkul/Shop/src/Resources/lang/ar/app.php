@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'عرض :firstItem إلى :lastItem من :total مقالات',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'العودة للصفحة الرئيسية',
 

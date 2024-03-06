@@ -1,6 +1,12 @@
 @if ($paginator->hasPages())
     <div class="flex justify-between items-center p-6">
-        <p class="text-xs font-medium"> Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} entries </p>
+        <p class="text-xs font-medium">
+            @lang('shop::app.partials.pagination.pagination-showing', [
+                'firstItem' => $paginator->firstItem(),
+                'lastItem' => $paginator->lastItem(),
+                'total' => $paginator->total(),
+            ])
+        </p>
 
         <nav aria-label="Page Navigation">
             <ul class="inline-flex items-center -space-x-px">

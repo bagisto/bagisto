@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'מציג :firstItem עד :lastItem מתוך :total רשומות',
+        ],
+    ],
+
     'errors' => [
         'go-to-home' => 'עבור לדף הבית',
 

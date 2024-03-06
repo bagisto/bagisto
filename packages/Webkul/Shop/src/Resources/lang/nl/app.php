@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Toont :firstItem tot :lastItem van de :total vermeldingen',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'Ga naar de startpagina',
 
