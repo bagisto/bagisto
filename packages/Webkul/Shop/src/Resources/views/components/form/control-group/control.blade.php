@@ -176,7 +176,7 @@
             type="radio"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             name="{{ $name }}"
         >
             <input
@@ -189,7 +189,7 @@
         </v-field>
 
         <label
-            class="icon-radio-normal text-2xl peer-checked:icon-radio-selected peer-checked:text-navyBlue cursor-pointer"
+            class="icon-radio-unselect text-2xl peer-checked:icon-radio-select peer-checked:text-navyBlue cursor-pointer"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>

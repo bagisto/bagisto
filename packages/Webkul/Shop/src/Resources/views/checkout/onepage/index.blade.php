@@ -73,17 +73,17 @@
                         id="steps-container"
                     >
                         <!-- Included Addresses Blade File -->
-                        <template v-if="['address', 'shipping', 'payment'].includes(currentStep)">
+                        <template v-if="['address', 'shipping', 'payment', 'review'].includes(currentStep)">
                             @include('shop::checkout.onepage.address')
                         </template>
 
                         <!-- Included Shipping Methods Blade File -->
-                        <template v-if="cart.have_stockable_items && ['shipping', 'payment'].includes(currentStep)">
+                        <template v-if="cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
                             @include('shop::checkout.onepage.shipping')
                         </template>
 
                         <!-- Included Payment Methods Blade File -->
-                        <template v-if="currentStep == 'payment'">
+                        <template v-if="['payment', 'review'].includes(currentStep)">
                             @include('shop::checkout.onepage.payment')
                         </template>
                     </div>
@@ -96,14 +96,24 @@
                             class="flex justify-end"
                             v-if="canPlaceOrder"
                         >
-                            <x-shop::button
-                                type="button"
-                                class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
-                                :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                                ::disabled="isPlacingOrder"
-                                ::loading="isPlacingOrder"
-                                @click="placeOrder"
-                            />
+                            <template v-if="cart.payment_method == 'paypal_smart_button'">
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
+
+                                <v-paypal-smart-button></v-paypal-smart-button>
+
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
+                            </template>
+
+                            <template v-else>
+                                <x-shop::button
+                                    type="button"
+                                    class="primary-button w-max py-3 px-11 bg-navyBlue rounded-2xl max-sm:text-sm max-sm:px-6 max-sm:mb-10"
+                                    :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                                    ::disabled="isPlacingOrder"
+                                    ::loading="isPlacingOrder"
+                                    @click="placeOrder"
+                                />
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -150,15 +160,15 @@
                     },
 
                     stepForward(step) {
-                        if (step == 'summary') {
+                        this.currentStep = step;
+
+                        if (step == 'review') {
                             this.canPlaceOrder = true;
 
                             return;
                         }
 
                         this.canPlaceOrder = false;
-
-                        this.currentStep = step;
 
                         if (this.currentStep == 'shipping') {
                             this.shippingMethods = null;
@@ -203,7 +213,11 @@
 
                                 this.isPlacingOrder = false;
                             })
-                            .catch(error => this.isPlacingOrder = false);
+                            .catch(error => {
+                                this.isPlacingOrder = false
+
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                            });
                     }
                 },
             });

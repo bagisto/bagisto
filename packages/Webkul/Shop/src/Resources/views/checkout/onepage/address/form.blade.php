@@ -4,6 +4,14 @@
         id="v-checkout-address-form-template"
     >
         <div class="mt-2">
+            <x-shop::form.control-group class="hidden">
+                <x-shop::form.control-group.control
+                    type="text"
+                    ::name="controlName + '.id'"
+                    ::value="address.id"
+                />
+            </x-shop::form.control-group>
+
             <!-- Company Name -->
             <x-shop::form.control-group>
                 <x-shop::form.control-group.label>
@@ -127,6 +135,7 @@
                         type="select"
                         ::name="controlName + '.country'"
                         ::value="address.country"
+                        v-model="selectedCountry"
                         rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.country')"
                         :placeholder="trans('shop::app.checkout.onepage.address.country')"
@@ -154,7 +163,7 @@
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
-                    <template v-if="haveStates(address.country)">
+                    <template v-if="haveStates(selectedCountry)">
                         <x-shop::form.control-group.control
                             type="select"
                             ::name="controlName + '.state'"
@@ -167,7 +176,7 @@
                             </option>
 
                             <option
-                                v-for='(state, index) in states[address.country]'
+                                v-for='(state, index) in states[selectedCountry]'
                                 :value="state.code"
                             >
                                 @{{ state.default_name }}
@@ -270,6 +279,7 @@
                     type: Object,
 
                     default: () => ({
+                        id: 0,
                         company_name: '',
                         first_name: '',
                         last_name: '',
@@ -286,6 +296,8 @@
 
             data() {
                 return {
+                    selectedCountry: this.address.country,
+
                     countries: [],
 
                     states: [],

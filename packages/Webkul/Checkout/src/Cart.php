@@ -370,7 +370,7 @@ class Cart
             ->only($fillableFields)
             ->merge([
                 'address_type'      => CartAddress::ADDRESS_TYPE_BILLING,
-                'parent_address_id' => $address['id'] ?? null,
+                'parent_address_id' => ($address['address_type'] ?? '') == 'customer' ? $address['id'] : null,
                 'cart_id'           => $this->cart->id,
                 'customer_id'       => $this->cart->customer_id,
                 'address1'          => implode(PHP_EOL, $address['address1']),
@@ -425,7 +425,7 @@ class Cart
                 ->only($fillableFields)
                 ->merge([
                     'address_type'      => CartAddress::ADDRESS_TYPE_SHIPPING,
-                    'parent_address_id' => $address['id'] ?? null,
+                    'parent_address_id' => ($address['address_type'] ?? '') == 'customer' ? $address['id'] : null,
                     'cart_id'           => $this->cart->id,
                     'customer_id'       => $this->cart->customer_id,
                     'address1'          => implode(PHP_EOL, $address['address1']),

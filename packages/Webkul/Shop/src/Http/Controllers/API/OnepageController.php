@@ -150,7 +150,7 @@ class OnepageController extends APIController
     /**
      * Store order
      */
-    public function storeOrder(): JsonResource
+    public function storeOrder()
     {
         if (Cart::hasError()) {
             return new JsonResource([
@@ -161,7 +161,13 @@ class OnepageController extends APIController
 
         Cart::collectTotals();
 
-        $this->validateOrder();
+        try {
+            $this->validateOrder();
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
 
         $cart = Cart::getCart();
 

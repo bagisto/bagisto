@@ -3,8 +3,8 @@
 <!-- Guest Address Vue Component -->
 <v-checkout-address-guest
     :cart="cart"
-    @onStepForward="stepForward"
-    @onStepProcessed="stepProcessed"
+    @processing="stepForward"
+    @processed="stepProcessed"
 ></v-checkout-address-guest>
 
 {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.after') !!}
@@ -90,8 +90,8 @@
                     <x-shop::button
                         class="primary-button py-3 px-11 rounded-2xl"
                         :title="trans('shop::app.checkout.onepage.address.proceed')"
-                        ::loading="isLoading"
-                        ::disabled="isLoading"
+                        ::loading="isStoring"
+                        ::disabled="isStoring"
                     />
                 </div>
             </form>
@@ -104,29 +104,25 @@
 
             props: ['cart'],
 
+            emits: ['processing', 'processed'],
+
             data() {
                 return {
                     useBillingAddressForShipping: true,
 
-                    isLoading: false,
+                    isStoring: false,
                 }
             },
 
             created() {
                 if (this.cart.billing_address) {
                     this.useBillingAddressForShipping = this.cart.billing_address.use_for_shipping;
-
-                    this.cart.billing_address.address1 = this.cart.billing_address.address1.split('\n');
-                }
-
-                if (this.cart.shipping_address) {
-                    this.cart.shipping_address.address1 = this.cart.shipping_address.address1.split('\n');
                 }
             },
 
             methods: {
                 store(params, { setErrors }) {
-                    this.isLoading = true;
+                    this.isStoring = true;
 
                     params['billing']['use_for_shipping'] = this.useBillingAddressForShipping;
 
@@ -134,16 +130,16 @@
 
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', params)
                         .then((response) => {
-                            this.isLoading = false;
+                            this.isStoring = false;
 
                             if (response.data.data.redirect_url) {
                                 window.location.href = response.data.data.redirect_url;
                             } else {
-                                this.$emit('onStepProcessed', response.data.data.shippingMethods);
+                                this.$emit('processed', response.data.data.shippingMethods);
                             }
                         })
                         .catch(error => {
-                            this.isLoading = false;
+                            this.isStoring = false;
 
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
@@ -153,9 +149,9 @@
 
                 moveToNextStep() {
                     if (this.cart.have_stockable_items) {
-                        this.$emit('onStepForward', 'shipping');
+                        this.$emit('processing', 'shipping');
                     } else {
-                        this.$emit('onStepForward', 'payment');
+                        this.$emit('processing', 'payment');
                     }
                 }
             }

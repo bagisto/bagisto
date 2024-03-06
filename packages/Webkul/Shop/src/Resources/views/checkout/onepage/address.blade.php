@@ -13,7 +13,7 @@
 
     <!-- Accordian Content Component Slot -->
     <x-slot:content class="!p-0 mt-8">
-        <!-- I the customer is guest -->
+        <!-- If the customer is guest -->
         <template v-if="cart.is_guest">
             @include('shop::checkout.onepage.address.guest')
         </template>

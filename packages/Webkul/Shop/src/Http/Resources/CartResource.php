@@ -43,10 +43,11 @@ class CartResource extends JsonResource
             'discount_amount'                => $this->discount_amount,
             'formatted_discount_amount'      => core()->formatPrice($this->discount_amount),
             'items'                          => CartItemResource::collection($this->items),
-            'billing_address'                => $this->billing_address,
-            'shipping_address'               => $this->shipping_address,
+            'billing_address'                => new AddressResource($this->billing_address),
+            'shipping_address'               => new AddressResource($this->shipping_address),
             'have_stockable_items'           => $this->haveStockableItems(),
-            'payment_method'                 => $this->payment ? core()->getConfigData('sales.payment_methods.'.$this->payment->method.'.title') : '',
+            'payment_method'                 => $this->payment?->method,
+            'payment_method_title'           => $this->payment ? core()->getConfigData('sales.payment_methods.'.$this->payment->method.'.title') : '',
         ];
     }
 }

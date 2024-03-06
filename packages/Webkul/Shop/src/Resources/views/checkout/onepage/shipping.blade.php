@@ -2,8 +2,8 @@
 
 <v-shipping-methods
     :methods="shippingMethods"
-    @onStepForward="stepForward"
-    @onStepProcessed="stepProcessed"
+    @processing="stepForward"
+    @processed="stepProcessed"
 >
     <!-- Shipping Method Shimmer Effect -->
     <x-shop::shimmer.checkout.onepage.shipping-method />
@@ -96,9 +96,11 @@
                 },
             },
 
+            emits: ['processing', 'processed'],
+
             methods: {
                 store(selectedMethod) {
-                    this.$emit('onStepForward', 'payment');
+                    this.$emit('processing', 'payment');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
                             shipping_method: selectedMethod,
@@ -107,10 +109,16 @@
                             if (response.data.redirect_url) {
                                 window.location.href = response.data.redirect_url;
                             } else {
-                                this.$emit('onStepProcessed', response.data.payment_methods);
+                                this.$emit('processed', response.data.payment_methods);
                             }
                         })
-                        .catch(error => {});
+                        .catch(error => {
+                            this.$emit('processing', 'shipping');
+
+                            if (error.response.data.redirect_url) {
+                                window.location.href = error.response.data.redirect_url;
+                            }
+                        });
                 },
             },
         });

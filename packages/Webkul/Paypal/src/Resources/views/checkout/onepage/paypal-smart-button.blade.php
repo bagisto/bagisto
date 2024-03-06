@@ -41,8 +41,8 @@
                     getOptions() {
                         let options = {
                             style: {
-                                layout:  'vertical',
-                                shape:   'rect',
+                                layout: 'vertical',
+                                shape: 'rect',
                             },
 
                             authorizationFailed: false,

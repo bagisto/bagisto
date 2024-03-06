@@ -2,8 +2,8 @@
 
 <v-payment-methods
     :methods="paymentMethods"
-    @onStepForward="stepForward"
-    @onStepProcessed="stepProcessed"
+    @processing="stepForward"
+    @processed="stepProcessed"
 >
     <x-shop::shimmer.checkout.onepage.payment-method />
 </v-payment-methods>
@@ -63,7 +63,6 @@
                                     :for="payment.method" 
                                     class="w-[190px] p-5 block border border-[#E9E9E9] rounded-xl max-sm:w-full cursor-pointer"
                                 >
-
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 
                                     <img
@@ -120,20 +119,25 @@
                 },
             },
 
+            emits: ['processing', 'processed'],
+
             methods: {
                 store(selectedMethod) {
-                    this.$emit('onStepForward', 'summary');
+                    this.$emit('processing', 'review');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {
                             payment: selectedMethod
                         })
                         .then(response => {
-                            this.$emit('onSaved', {
-                                'next_step': 'payment',
-                                'data': response.data.data
-                            });
+                            this.$emit('processed', response.data.cart);
                         })
-                        .catch(error => console.log(error));
+                        .catch(error => {
+                            this.$emit('processing', 'payment');
+
+                            if (error.response.data.redirect_url) {
+                                window.location.href = error.response.data.redirect_url;
+                            }
+                        });
                 },
             },
         });
