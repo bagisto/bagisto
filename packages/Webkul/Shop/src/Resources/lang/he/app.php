@@ -277,6 +277,7 @@ return [
                 'completed'           => 'הושלם',
                 'date'                => 'תאריך',
                 'download-error'      => 'קישור הורדה פג תוקף.',
+                'expired'             => 'פג תוקף',
                 'empty-product'       => 'אין לך מוצרים להורדה',
                 'name'                => 'מוצרים להורדה',
                 'orderId'             => 'מספר הזמנה',

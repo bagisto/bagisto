@@ -277,6 +277,7 @@ return [
                 'completed'           => '完全的',
                 'date'                => '日期',
                 'download-error'      => '下载链接已过期。',
+                'expired'             => '已过期',
                 'empty-product'       => '您没有可下载的商品',
                 'name'                => '可下载商品',
                 'orderId'             => '订单ID',

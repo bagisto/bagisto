@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Vollendet',
                 'date'                => 'Datum',
                 'download-error'      => 'Der Download-Link ist abgelaufen.',
+                'expired'             => 'Abgelaufen',
                 'empty-product'       => 'Sie haben kein Produkt zum Herunterladen',
                 'name'                => 'Downloadbare Produkte',
                 'orderId'             => 'Bestellnummer',
