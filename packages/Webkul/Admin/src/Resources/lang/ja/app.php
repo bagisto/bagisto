@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => '削除',
                 'desc'                          => '降順',
                 'edit'                          => '編集',
+                'featured'                      => '注目',
                 'filter-title'                  => 'タイトル',
                 'filters'                       => 'フィルター',
                 'footer-link'                   => 'フッターリンク',

@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'हटाएँ',
                 'desc'                          => 'अवरोही',
                 'edit'                          => 'संपादित करें',
+                'featured'                      => 'विशेष',
                 'filter-title'                  => 'शीर्षक',
                 'filters'                       => 'फ़िल्टर्स',
                 'footer-link'                   => 'फ़ुटर लिंक्स',

@@ -2839,6 +2839,7 @@ return [
                 'delete'                        => 'Sil',
                 'desc'                          => 'azalarak',
                 'edit'                          => 'Düzenle',
+                'featured'                      => 'Öne Çıkan',
                 'filter-title'                  => 'Başlık',
                 'filters'                       => 'Filtreler',
                 'footer-link'                   => 'Alt Bağlantıları',

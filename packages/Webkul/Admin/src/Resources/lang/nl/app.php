@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'Verwijderen',
                 'desc'                          => 'aflopend',
                 'edit'                          => 'Bewerken',
+                'featured'                      => 'Uitgelicht',
                 'filter-title'                  => 'Titel',
                 'filters'                       => 'Filters',
                 'footer-link'                   => 'Voetteksten',

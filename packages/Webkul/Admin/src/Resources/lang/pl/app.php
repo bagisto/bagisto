@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'Usuń',
                 'desc'                          => 'malejąco',
                 'edit'                          => 'Edytuj',
+                'featured'                      => 'Wyróżnione',
                 'filter-title'                  => 'Tytuł',
                 'filters'                       => 'Filtry',
                 'footer-link'                   => 'Linki stopki',

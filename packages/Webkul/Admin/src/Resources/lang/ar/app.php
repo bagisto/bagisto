@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'حذف',
                 'desc'                          => 'تنازلي',
                 'edit'                          => 'تعديل',
+                'featured'                      => 'مميز',
                 'filter-title'                  => 'العنوان',
                 'filters'                       => 'المرشحات',
                 'footer-link'                   => 'روابط التذييل',

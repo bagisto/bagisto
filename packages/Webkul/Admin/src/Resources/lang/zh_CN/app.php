@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => '删除',
                 'desc'                          => '降序',
                 'edit'                          => '编辑',
+                'featured'                      => '精选',
                 'filter-title'                  => '标题',
                 'filters'                       => '过滤器',
                 'footer-link'                   => '页脚链接',

@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'Excluir',
                 'desc'                          => 'decrescente',
                 'edit'                          => 'Editar',
+                'featured'                      => 'Destacado',
                 'filter-title'                  => 'Título',
                 'filters'                       => 'Filtros',
                 'footer-link'                   => 'Links do Rodapé',

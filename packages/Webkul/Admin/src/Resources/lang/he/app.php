@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'מחק',
                 'desc'                          => 'יורד',
                 'edit'                          => 'ערוך',
+                'featured'                      => 'מומלץ',
                 'filter-title'                  => 'כותרת',
                 'filters'                       => 'מסננים',
                 'footer-link'                   => 'קישורי תחתית',

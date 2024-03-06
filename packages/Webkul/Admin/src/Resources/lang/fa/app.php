@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'حذف',
                 'desc'                          => 'نزولی',
                 'edit'                          => 'ویرایش',
+                'featured'                      => 'برجسته',
                 'filter-title'                  => 'عنوان',
                 'filters'                       => 'فیلترها',
                 'footer-link'                   => 'لینک‌های پاورقی',

@@ -2837,6 +2837,7 @@ return [
                 'delete'                        => 'මකනවා',
                 'desc'                          => 'අවුරුදු',
                 'edit'                          => 'සංස්කරණය',
+                'featured'                      => 'දැක්ක',
                 'filter-title'                  => 'මාතෘකාව',
                 'filters'                       => 'ශ්‍රිත',
                 'footer-link'                   => 'පිටු සල්ලි',

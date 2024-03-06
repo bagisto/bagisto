@@ -2838,6 +2838,7 @@ return [
                 'delete'                        => 'Löschen',
                 'desc'                          => 'absteigend',
                 'edit'                          => 'Bearbeiten',
+                'featured'                      => 'Hervorgehoben',
                 'filter-title'                  => 'Titel',
                 'filters'                       => 'Filter',
                 'footer-link'                   => 'Fußzeilen-Links',
