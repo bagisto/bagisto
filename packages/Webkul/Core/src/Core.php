@@ -5,6 +5,7 @@ namespace Webkul\Core;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Enums\CurrencyPositionEnum;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
@@ -23,7 +24,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.1.1';
+    const BAGISTO_VERSION = '2.1.x-dev';
 
     /**
      * Current Channel.
@@ -87,15 +88,6 @@ class Core
      * @var array
      */
     protected $singletonInstances = [];
-
-    /**
-     * Register your core config keys here which you don't want to
-     * load in static array. These keys will load from database
-     * every time the `getConfigData` method is called.
-     */
-    private $coreConfigExceptions = [
-        'catalog.products.guest_checkout.allow_guest_checkout',
-    ];
 
     /**
      * Create a new instance.
@@ -560,10 +552,8 @@ class Core
      * Format and convert price with currency symbol.
      *
      * @param  float  $price
-     * @param  string (optional)  $currencyCode
-     * @return string
      */
-    public function formatPrice($price, $currencyCode = null)
+    public function formatPrice($price, ?string $currencyCode = null): string
     {
         if (is_null($price)) {
             $price = 0;
@@ -578,13 +568,11 @@ class Core
         $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
 
         if (! $currency) {
-
             return $formatter->formatCurrency($price, $currencyCode);
         }
 
         if ($symbol = $currency->symbol) {
             if ($this->currencySymbol($currency) == $symbol) {
-
                 return $this->formatPriceWithSymbol($price, $currency, $currency->symbol, $formatter);
             }
 
@@ -595,8 +583,8 @@ class Core
     }
 
     /**
-     * customize the thousand separator and decimal separator.
-     * Additionally, repositioning of the currency symbol and the inclusion of an HTML tag for further styling.
+     * Customize the thousand separator and decimal separator. Additionally, consider repositioning the currency symbol
+     * and include an HTML tag for further styling.
      *
      * @param  float  $price
      * @param  \Webkul\Core\Models\Currency  $currency
@@ -609,9 +597,11 @@ class Core
         $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
 
         $groupingSeparator = $formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+
         $decimalSeparator = $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
 
         $formattedCurrency = $formatter->format($price);
+
         $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formattedCurrency);
 
         $formattedCurrency = str_replace(
@@ -621,31 +611,22 @@ class Core
         );
 
         if ($currency->decimal > 0) {
-            $decimalPointPos = strrpos($formattedCurrency, $decimalSeparator);
+            $decimalPointPosition = strrpos($formattedCurrency, $decimalSeparator);
+
             $formattedCurrency = substr_replace(
                 $formattedCurrency,
                 $currency->decimal_separator == '' ? ' ' : $currency->decimal_separator,
-                $decimalPointPos,
+                $decimalPointPosition,
                 1
             );
         }
 
-        switch ($currency->currency_position) {
-            case 'left':
-                $formattedCurrency = $symbol.$formattedCurrency;
-                break;
-            case 'right':
-                $formattedCurrency = $formattedCurrency.$symbol;
-                break;
-            case 'left_with_space':
-                $formattedCurrency = $symbol.' '.$formattedCurrency;
-                break;
-            case 'right_with_space':
-                $formattedCurrency = $formattedCurrency.' '.$symbol;
-                break;
-        }
-
-        return $formattedCurrency;
+        return match ($currency->currency_position) {
+            CurrencyPositionEnum::LEFT->value             => $symbol.$formattedCurrency,
+            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => $symbol.' '.$formattedCurrency,
+            CurrencyPositionEnum::RIGHT->value            => $formattedCurrency.$symbol,
+            CurrencyPositionEnum::RIGHT_WITH_SPACE->value => $formattedCurrency.' '.$symbol,
+        };
     }
 
     /**
@@ -1154,7 +1135,7 @@ class Core
     {
         $adminName = $this->getConfigData('emails.configure.email_settings.admin_name')
             ?: (config('mail.admin.name')
-                ?: config('mail.from.name'));
+            ?: config('mail.from.name'));
 
         $adminEmail = $this->getConfigData('emails.configure.email_settings.admin_email')
             ?: config('mail.admin.address');

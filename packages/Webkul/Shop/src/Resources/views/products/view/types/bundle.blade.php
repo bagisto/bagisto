@@ -26,7 +26,7 @@
                     </p>
 
                     <p class="text-lg font-medium">
-                        @{{ displayFormattedTotalPrice }}
+                        @{{ formattedTotalPrice }}
                     </p>
                 </div>
 
@@ -269,65 +269,52 @@
                         config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
 
                         options: [],
+
                         formattedTotalAmount: '',
                     }
                 },
 
                 computed: {
-                    displayFormattedTotalPrice() {
-                        this.formattedTotalPrice()
+                    formattedTotalPrice() {
+                        this.formatTotalPrice();
+
                         return this.formattedTotalAmount;
                     },
                 },
 
-                created: function() {
-                    for (var key in this.config.options) {
+                created() {
+                    for (let key in this.config.options) {
                         this.options.push(this.config.options[key]);
                     }
+
+                    this.formatTotalPrice();
                 },
-                mounted() {
-                    this.formattedTotalPrice;
-                },
+
                 methods: {
-                        formattedTotalPrice: async function () {
-                            var total = 0;
+                    formatTotalPrice: async function () {
+                        let total = 0;
 
-                            for (var key in this.options) {
-                                for (var key1 in this.options[key].products) {
-                                    if (! this.options[key].products[key1].is_default){
-                                        continue;
-                                    }
-
-                                    total += this.options[key].products[key1].qty *
-                                                this.options[key].products[key1].price.final.price;
+                        for (let key in this.options) {
+                            for (let key1 in this.options[key].products) {
+                                if (! this.options[key].products[key1].is_default){
+                                    continue;
                                 }
+
+                                total += this.options[key].products[key1].qty * this.options[key].products[key1].price.final.price;
                             }
-                            var currencyCode = document.querySelector('meta[name="currency-code"]').content ?? "USD";
+                        }
 
-                            this.formattedTotalAmount = await this.$axios.get("{{route('shop.api.format_price')}}",{
-                                params: {
-                                    price: total,
-                                    currencyCode: currencyCode
-                                },
-                            })
-                            .then((response)=> {
-                                return response.data.data;
-                            }).catch(error => {
-                                console.log(error);
-                                throw error;
-                            })
-                        },
-
-
+                        this.formattedTotalAmount = await this.$shop.formatPrice(total);
+                    },
 
                     productSelected: function(option, value) {
-                        var selectedProductIds = Array.isArray(value) ? value : [value];
+                        let selectedProductIds = Array.isArray(value) ? value : [value];
 
-                        for (var key in option.products) {
+                        for (let key in option.products) {
                             option.products[key].is_default = selectedProductIds.indexOf(option.products[key].id) > -1 ? 1 : 0;
                         }
-                    }
-                }
+                    },
+                },
             });
 
             app.component('v-product-bundle-option-item', {
@@ -335,7 +322,7 @@
 
                 props: ['option', 'errors'],
 
-                data: function() {
+                data() {
                     return {
                         selectedProduct: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
                     };
@@ -361,27 +348,28 @@
                     }
                 },
 
-                created: function() {
-                    for (var key in this.option.products) {
-                        if (! this.option.products[key].is_default)
+                created() {
+                    for (let key in this.option.products) {
+                        if (! this.option.products[key].is_default) {
                             continue;
+                        }
 
                         if (this.option.type == 'checkbox' || this.option.type == 'multiselect') {
-                            this.selectedProduct.push(this.option.products[key].id)
+                            this.selectedProduct.push(this.option.products[key].id);
                         } else {
-                            this.selectedProduct = this.option.products[key].id
+                            this.selectedProduct = this.option.products[key].id;
                         }
                     }
                 },
 
                 methods: {
-                    qtyUpdated: function(qty) {
+                    qtyUpdated(qty) {
                         if (! this.option.products.find(data => data.id == this.selectedProduct)) {
                             return;
                         }
 
                         this.option.products.find(data => data.id == this.selectedProduct).qty = qty;
-                    }
+                    },
                 }
             });
         </script>

@@ -2,49 +2,50 @@ export default {
     install(app) {
         app.config.globalProperties.$shop = {
             /**
-             * Load the dynamic scripts
-             * 
-             * @param {string} src 
-             * @param {callback} onScriptLoaded 
-             * 
+             * Base url.
+             *
+             * @returns {string}
+             */
+            baseUrl: () => {
+                return document.querySelector('meta[name="base-url"]').content ?? "http://localhost";
+            },
+
+            /**
+             * Load the dynamic scripts.
+             *
+             * @param {string} src
+             * @param {callback} onScriptLoaded
+             *
              * @returns {void}.
              */
             loadDynamicScript: (src, onScriptLoaded) => {
                 let dynamicScript = document.createElement('script');
-            
+
                 dynamicScript.setAttribute('src', src);
 
                 document.body.appendChild(dynamicScript);
-            
+
                 dynamicScript.addEventListener('load', onScriptLoaded, false);
             },
 
             /**
-             * Generates a formatted price string using the provided price, localeCode, and currencyCode.
+             * Generates a formatted price string serves from the backend.
              *
-             * @param {number} price - The price value to be formatted.
-             * @param {string} localeCode - The locale code specifying the desired formatting rules.
-             * @param {string} currencyCode - The currency code specifying the desired currency symbol.
+             * @param {number|array} prices - The price value to be formatted.
              * @returns {string} - The formatted price string.
              */
-            formatPrice: (price, localeCode = null, currencyCode = null) => {
-                if (!localeCode) {
-                    localeCode =
-                        document.querySelector(
-                            'meta[http-equiv="content-language"]'
-                        ).content ?? "en";
-                }
+            formatPrice: (prices) => {
+                const $axios = app.config.globalProperties.$axios;
 
-                if (!currencyCode) {
-                    currencyCode =
-                        document.querySelector('meta[name="currency-code"]')
-                            .content ?? "USD";
-                }
+                const baseUrl = app.config.globalProperties.$shop.baseUrl();
 
-                return new Intl.NumberFormat(localeCode, {
-                    style: "currency",
-                    currency: currencyCode,
-                }).format(price);
+                return $axios.get(`${baseUrl}/api/core/format-price`, {
+                        params: {
+                            prices: prices,
+                            currencyCode: document.querySelector('meta[name="currency-code"]').content ?? "USD",
+                        },
+                    })
+                    .then((response) => response.data.data);
             },
         };
     },

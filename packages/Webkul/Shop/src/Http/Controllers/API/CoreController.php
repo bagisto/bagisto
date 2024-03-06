@@ -39,12 +39,22 @@ class CoreController extends APIController
      */
     public function getFormattedPrice()
     {
-        $price = request()->input('price');
+        $prices = request()->input('prices');
 
         $currencyCode = request()->input('currencyCode');
 
+        if (is_array($prices)) {
+            $formattedPrices = collect($prices)
+                ->map(fn ($price) => core()->formatPrice($price, $currencyCode))
+                ->toArray();
+
+            return response()->json([
+                'data' => $formattedPrices,
+            ]);
+        }
+
         return response()->json([
-            'data' => core()->formatPrice($price, $currencyCode),
+            'data' => core()->formatPrice($prices, $currencyCode),
         ]);
     }
 }

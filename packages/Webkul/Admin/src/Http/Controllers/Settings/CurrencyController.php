@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\JsonResponse;
 use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Enums\CurrencyPositionEnum;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Rules\Code;
 
@@ -30,14 +31,9 @@ class CurrencyController extends Controller
             return app(CurrencyDataGrid::class)->toJson();
         }
 
-        $currencyPositions = [
-            'left'             => trans('admin::app.settings.currencies.index.create.currency-position.options.left'),
-            'left_with_space'  => trans('admin::app.settings.currencies.index.create.currency-position.options.left-with-space'),
-            'right'            => trans('admin::app.settings.currencies.index.create.currency-position.options.right'),
-            'right_with_space' => trans('admin::app.settings.currencies.index.create.currency-position.options.right-with-space'),
-        ];
-
-        return view('admin::settings.currencies.index', compact('currencyPositions'));
+        return view('admin::settings.currencies.index', [
+            'currencyPositions' => CurrencyPositionEnum::options(),
+        ]);
     }
 
     /**

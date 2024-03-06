@@ -17,7 +17,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::get('states', 'getStates')->name('shop.api.core.states');
 
-        Route::get('formatPrice', 'getFormattedPrice')->name('shop.api.format_price');
+        Route::get('format-price', 'getFormattedPrice')->name('shop.api.format_price');
     });
 
     Route::controller(CategoryController::class)->prefix('categories')->group(function () {
