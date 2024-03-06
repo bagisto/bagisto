@@ -1326,7 +1326,7 @@ it('should store the payment method for guest user', function () {
         ->assertJsonPath('cart.items.0.id', $cartItem->id)
         ->assertJsonPath('cart.items.0.type', $product->type)
         ->assertJsonPath('cart.have_stockable_items', true)
-        ->assertJsonPath('cart.payment_method', 'Cash On Delivery')
+        ->assertJsonPath('cart.payment_method', 'cashondelivery')
         ->assertJsonPath('cart.billing_address.id', $cartBillingAddress->id)
         ->assertJsonPath('cart.billing_address.address_type', 'cart_billing')
         ->assertJsonPath('cart.billing_address.cart_id', $cartId)
