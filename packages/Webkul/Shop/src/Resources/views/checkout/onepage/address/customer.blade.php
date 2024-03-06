@@ -61,7 +61,11 @@
                                     <!-- Edit Icon -->
                                     <span
                                         class="icon-edit text-2xl cursor-pointer"
-                                        @click="selectedAddressForEdit = address; activeAddressForm = 'billing'"
+                                        @click="
+                                            selectedAddressForEdit = address;
+                                            activeAddressForm = 'billing';
+                                            saveAddress = address.address_type == 'customer'
+                                        "
                                     ></span>
                                 </div>
 
@@ -183,7 +187,11 @@
                                         <!-- Edit Icon -->
                                         <span
                                             class="icon-edit text-2xl cursor-pointer"
-                                            @click="selectedAddressForEdit = address; activeAddressForm = 'shipping'"
+                                            @click="
+                                                selectedAddressForEdit = address;
+                                                activeAddressForm = 'shipping';
+                                                saveAddress = address.address_type == 'customer'
+                                            "
                                         ></span>
                                     </div>
 
@@ -223,7 +231,7 @@
                                 <!-- New Address Card -->
                                 <div
                                     class="flex justify-center items-center max-w-[414px] p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap cursor-pointer"
-                                    @click="activeAddressForm = 'shipping'"
+                                    @click="selectedAddressForEdit = null; activeAddressForm = 'shipping'"
                                     v-if="! cart.shipping_address"
                                 >
                                     <div
@@ -284,7 +292,7 @@
                             <span
                                 class="flex justify-end cursor-pointer"
                                 v-show="customerSavedAddresses.billing.length && ['billing', 'shipping'].includes(activeAddressForm)"
-                                @click="activeAddressForm = null"
+                                @click="selectedAddressForEdit = null; activeAddressForm = null"
                             >
                                 <span class="icon-arrow-left text-2xl"></span>
 
@@ -306,7 +314,8 @@
                                 id="save_address"
                                 for="save_address"
                                 value="1"
-                                ::checked="selectedAddressForEdit?.address_type == 'customer'"
+                                v-model="saveAddress"
+                                @change="saveAddress = ! saveAddress"
                             />
 
                             <label
@@ -353,6 +362,8 @@
                     activeAddressForm: null,
 
                     selectedAddressForEdit: null,
+
+                    saveAddress: false,
 
                     selectedAddresses: {
                         billing_address_id: null,
@@ -426,6 +437,8 @@
                 },
 
                 updateOrCreateAddress(params, { setErrors }) {
+                    this.$emit('processing', 'address');
+
                     params = params[this.activeAddressForm];
 
                     let address = this.customerSavedAddresses[this.activeAddressForm].find(address => {
@@ -433,21 +446,19 @@
                     });
 
                     if (! address) {
-                        if (params.save_address == undefined) {
-                            this.addAddressToList(params);
-                        } else {
+                        if (params.save_address) {
                             this.createCustomerAddress(params)
                                 .then((response) => {
                                     this.addAddressToList(response.data.data);
                                 });
+                        } else {
+                            this.addAddressToList(params);
                         }
 
                         return;
                     }
 
-                    if (params.save_address == undefined) {
-                        this.updateAddressInList(params);
-                    } else {
+                    if (params.save_address) {
                         if (address.address_type == 'customer') {
                             this.updateCustomerAddress(params.id, params)
                                 .then((response) => {
@@ -461,6 +472,8 @@
                                     this.addAddressToList(response.data.data);
                                 });
                         }
+                    } else {
+                        this.updateAddressInList(params);
                     }
                 },
 

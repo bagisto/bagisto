@@ -21,7 +21,7 @@
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
         >
-            <form @submit="handleSubmit($event, store)">
+            <form @submit="handleSubmit($event, addAddress)">
                 <!-- Guest Billing Address -->
                 <div class="mb-4">
                     {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.billing.before') !!}
@@ -121,7 +121,7 @@
             },
 
             methods: {
-                store(params, { setErrors }) {
+                addAddress(params, { setErrors }) {
                     this.isStoring = true;
 
                     params['billing']['use_for_shipping'] = this.useBillingAddressForShipping;
