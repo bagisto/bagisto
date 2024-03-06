@@ -10,9 +10,9 @@
     <!-- Right Toolbar -->
     <div class="flex gap-x-4">
         <!-- Items Per Page Dropdown -->
-        <div class="shimmer w-[81px] h-10 rounded-lg"></div>
+        <div class="shimmer w-[81px] h-10 max-sm:w-[75px] rounded-lg"></div>
 
         <!-- Filters Activation Button -->
-        <div class="shimmer w-[91px] h-10 rounded-lg"></div>
+        <div class="shimmer w-[91px] h-10 max-sm:w-[110px] rounded-lg"></div>
     </div>
 </div>
