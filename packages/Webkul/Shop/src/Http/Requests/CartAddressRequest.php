@@ -32,7 +32,7 @@ class CartAddressRequest extends FormRequest
             $this->mergeAddressRules('billing');
         }
 
-        if ($this->has('shipping')) {
+        if (! $this->input("billing.use_for_shipping")) {
             $this->mergeAddressRules('shipping');
         }
 
@@ -51,7 +51,6 @@ class CartAddressRequest extends FormRequest
             "{$addressType}.last_name"  => ['required', new AlphaNumericSpace],
             "{$addressType}.email"      => ['required'],
             "{$addressType}.address1"   => ['required', 'array', 'min:1'],
-            // "{$addressType}.address1.*" => ['string'],
             "{$addressType}.city"       => ['required'],
             "{$addressType}.country"    => [new AlphaNumericSpace],
             "{$addressType}.state"      => [new AlphaNumericSpace],
@@ -63,8 +62,8 @@ class CartAddressRequest extends FormRequest
     /**
      * Merge additional rules.
      */
-    private function mergeWithRules($additionalRules): void
+    private function mergeWithRules($rules): void
     {
-        $this->rules = array_merge($this->rules, $additionalRules);
+        $this->rules = array_merge($this->rules, $rules);
     }
 }
