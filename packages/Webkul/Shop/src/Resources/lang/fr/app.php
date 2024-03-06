@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Complété',
                 'date'                => 'Date',
                 'download-error'      => 'Le lien de téléchargement a expiré.',
+                'expired'             => 'Expiré',
                 'empty-product'       => 'Vous n\'avez pas de produit à télécharger',
                 'name'                => 'Produits téléchargeables',
                 'orderId'             => 'ID de commande',

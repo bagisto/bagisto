@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Completato',
                 'date'                => 'Data',
                 'download-error'      => 'Il link per il download è scaduto.',
+                'expired'             => 'Scaduto',
                 'empty-product'       => 'Non hai un prodotto da scaricare',
                 'name'                => 'Prodotti Scaricabili',
                 'orderId'             => 'ID Ordine',

@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Zakończony',
                 'date'                => 'Data',
                 'download-error'      => 'Link do pobrania wygasł.',
+                'expired'             => 'Wygasło',
                 'empty-product'       => 'Nie masz produktu do pobrania',
                 'name'                => 'Produkty do pobrania',
                 'orderId'             => 'Identyfikator zamówienia',

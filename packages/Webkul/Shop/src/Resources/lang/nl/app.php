@@ -277,6 +277,7 @@ return [
                 'completed'           => 'Voltooid',
                 'date'                => 'Datum',
                 'download-error'      => 'Downloadlink is verlopen.',
+                'expired'             => 'Verlopen',
                 'empty-product'       => 'U heeft geen product om te downloaden',
                 'name'                => 'Downloadbare Producten',
                 'orderId'             => 'Bestelnummer',

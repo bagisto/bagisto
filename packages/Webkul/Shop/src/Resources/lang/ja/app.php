@@ -277,6 +277,7 @@ return [
                 'completed'           => '完了',
                 'date'                => '日付',
                 'download-error'      => 'ダウンロードリンクの有効期限が切れています。',
+                'expired'             => '期限切れ',
                 'empty-product'       => 'ダウンロードする製品がありません',
                 'name'                => 'ダウンロード可能な製品',
                 'orderId'             => '注文ID',
