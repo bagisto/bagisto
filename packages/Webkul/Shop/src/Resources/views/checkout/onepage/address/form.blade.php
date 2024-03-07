@@ -98,8 +98,8 @@
 
                 <x-shop::form.control-group.control
                     type="text"
-                    ::name="controlName + '.address1.[0]'"
-                    ::value="address.address1[0]"
+                    ::name="controlName + '.address.[0]'"
+                    ::value="address.address[0]"
                     rules="required|address"
                     :label="trans('shop::app.checkout.onepage.address.street-address')"
                     :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
@@ -107,14 +107,14 @@
 
                 <x-shop::form.control-group.error
                     class="mb-2"
-                    ::name="controlName + '.address1.[0]'"
+                    ::name="controlName + '.address.[0]'"
                 />
 
                 @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                     @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                         <x-shop::form.control-group.control
                             type="text"
-                            ::name="controlName + '.address1.[{{ $i }}]'"
+                            ::name="controlName + '.address.[{{ $i }}]'"
                             :label="trans('shop::app.checkout.onepage.address.street-address')"
                             :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
                         />
@@ -122,7 +122,7 @@
                 @endif
             </x-shop::form.control-group>
 
-            {!! view_render_event('bagisto.shop.checkout.onepage.address.form.address1.after') !!}
+            {!! view_render_event('bagisto.shop.checkout.onepage.address.form.address.after') !!}
 
             <div class="grid grid-cols-2 gap-x-5">
                 <!-- Country -->
@@ -284,7 +284,7 @@
                         first_name: '',
                         last_name: '',
                         email: '',
-                        address1: [],
+                        address: [],
                         country: '',
                         state: '',
                         city: '',

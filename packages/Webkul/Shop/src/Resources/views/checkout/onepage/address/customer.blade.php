@@ -87,8 +87,8 @@
                                     </div>
 
                                     <p class="mt-6 text-sm text-[#6E6E6E]">
-                                        <template v-if="address.address1">
-                                            @{{ address.address1.join(', ') }},
+                                        <template v-if="address.address">
+                                            @{{ address.address.join(', ') }},
                                         </template>
 
                                         @{{ address.city }},
@@ -207,8 +207,8 @@
                                             </div>
 
                                             <p class="mt-6 text-sm text-[#6E6E6E]">
-                                                <template v-if="address.address1">
-                                                    @{{ address.address1.join(', ') }},
+                                                <template v-if="address.address">
+                                                    @{{ address.address.join(', ') }},
                                                 </template>
 
                                                 @{{ address.city }},

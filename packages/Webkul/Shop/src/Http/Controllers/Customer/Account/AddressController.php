@@ -54,7 +54,7 @@ class AddressController extends Controller
             'first_name',
             'last_name',
             'vat_id',
-            'address1',
+            'address',
             'country',
             'state',
             'city',
@@ -64,7 +64,7 @@ class AddressController extends Controller
             'default_address',
         ]), [
             'customer_id' => $customer->id,
-            'address1'    => implode(PHP_EOL, array_filter($request->input('address1'))),
+            'address'    => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
 
         $customerAddress = $this->customerAddressRepository->create($data);
@@ -118,7 +118,7 @@ class AddressController extends Controller
             'first_name',
             'last_name',
             'vat_id',
-            'address1',
+            'address',
             'country',
             'state',
             'city',
@@ -126,7 +126,7 @@ class AddressController extends Controller
             'phone',
             'email',
         ]), [
-            'address1' => implode(PHP_EOL, array_filter($request->input('address1'))),
+            'address' => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
 
         $customerAddress = $this->customerAddressRepository->update($data, $id);

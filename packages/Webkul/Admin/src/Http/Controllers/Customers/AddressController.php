@@ -55,7 +55,7 @@ class AddressController extends Controller
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
-            'address1'     => ['required', 'array'],
+            'address'      => ['required', 'array'],
             'country'      => ['required', new AlphaNumericSpace],
             'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required', 'string'],
@@ -71,7 +71,7 @@ class AddressController extends Controller
             'vat_id',
             'first_name',
             'last_name',
-            'address1',
+            'address',
             'city',
             'country',
             'state',
@@ -80,7 +80,7 @@ class AddressController extends Controller
             'email',
             'default_address',
         ]), [
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+            'address' => implode(PHP_EOL, array_filter(request()->input('address'))),
         ]);
 
         Event::dispatch('customer.addresses.create.before');
@@ -113,7 +113,7 @@ class AddressController extends Controller
     {
         $this->validate(request(), [
             'company_name' => [new AlphaNumericSpace],
-            'address1'     => ['required', 'array'],
+            'address'      => ['required', 'array'],
             'country'      => ['required', new AlphaNumericSpace],
             'state'        => ['required', new AlphaNumericSpace],
             'city'         => ['required', 'string'],
@@ -129,7 +129,7 @@ class AddressController extends Controller
             'vat_id',
             'first_name',
             'last_name',
-            'address1',
+            'address',
             'city',
             'country',
             'state',
@@ -138,7 +138,7 @@ class AddressController extends Controller
             'email',
             'default_address',
         ]), [
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+            'address' => implode(PHP_EOL, array_filter(request()->input('address'))),
         ]);
 
         Event::dispatch('customer.addresses.update.before', $id);

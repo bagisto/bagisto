@@ -80,7 +80,7 @@ it('should fail certain validation error when storing guest user address for car
         ->assertJsonValidationErrorFor('billing.first_name')
         ->assertJsonValidationErrorFor('billing.last_name')
         ->assertJsonValidationErrorFor('billing.email')
-        ->assertJsonValidationErrorFor('billing.address1')
+        ->assertJsonValidationErrorFor('billing.address')
         ->assertJsonValidationErrorFor('billing.city')
         ->assertJsonValidationErrorFor('billing.phone')
         ->assertUnprocessable();
@@ -141,8 +141,8 @@ it('should store the same billing and shipping address for guest if use for ship
     // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [
-                $address1 = fake()->address(),
+            'address'          => [
+                $address = fake()->address(),
             ],
             'company_name'     => $companyName = fake()->company(),
             'first_name'       => $firstName = fake()->firstName(),
@@ -168,7 +168,7 @@ it('should store the same billing and shipping address for guest if use for ship
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-                'address1'     => $address1,
+                'address'      => $address,
                 'company_name' => $companyName,
                 'first_name'   => $firstName,
                 'last_name'    => $lastName,
@@ -185,7 +185,7 @@ it('should store the same billing and shipping address for guest if use for ship
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'address1'     => $address1,
+                'address'      => $address,
                 'company_name' => $companyName,
                 'first_name'   => $firstName,
                 'last_name'    => $lastName,
@@ -260,7 +260,7 @@ it('should store the same billing and shipping address for customer if use for s
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [$customerAddress->address1],
+            'address'          => [$customerAddress->address],
             'company_name'     => $customerAddress->company_name,
             'first_name'       => $customerAddress->first_name,
             'last_name'        => $customerAddress->last_name,
@@ -286,7 +286,7 @@ it('should store the same billing and shipping address for customer if use for s
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-                'address1'     => $customerAddress->address1,
+                'address'      => $customerAddress->address,
                 'company_name' => $customerAddress->company_name,
                 'first_name'   => $customerAddress->first_name,
                 'last_name'    => $customerAddress->last_name,
@@ -303,7 +303,7 @@ it('should store the same billing and shipping address for customer if use for s
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'address1'     => $customerAddress->address1,
+                'address'      => $customerAddress->address,
                 'company_name' => $customerAddress->company_name,
                 'first_name'   => $customerAddress->first_name,
                 'last_name'    => $customerAddress->last_name,
@@ -374,8 +374,8 @@ it('should store the billing and shipping address for guest when the use for shi
     // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [
-                $billingAddress1 = fake()->address(),
+            'address'          => [
+                $billingAddress = fake()->address(),
             ],
             'company_name'     => $billingCompanyName = fake()->company(),
             'first_name'       => $billingFirstName = fake()->firstName(),
@@ -389,8 +389,8 @@ it('should store the billing and shipping address for guest when the use for shi
         ],
 
         'shipping' => [
-            'address1'         => [
-                $shippingAddress1 = fake()->address(),
+            'address'          => [
+                $shippingAddress = fake()->address(),
             ],
             'company_name'     => $shippingCompanyName = fake()->company(),
             'first_name'       => $shippingFirstName = fake()->firstName(),
@@ -415,7 +415,7 @@ it('should store the billing and shipping address for guest when the use for shi
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-                'address1'     => $billingAddress1,
+                'address'      => $billingAddress,
                 'company_name' => $billingCompanyName,
                 'first_name'   => $billingFirstName,
                 'last_name'    => $billingLastName,
@@ -432,7 +432,7 @@ it('should store the billing and shipping address for guest when the use for shi
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'address1'     => $shippingAddress1,
+                'address'      => $shippingAddress,
                 'company_name' => $shippingCompanyName,
                 'first_name'   => $shippingFirstName,
                 'last_name'    => $shippingLastName,
@@ -517,7 +517,7 @@ it('should store the billing and shipping address for customer when the use for 
     // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [$customerAddress1->address1],
+            'address'          => [$customerAddress1->address],
             'company_name'     => $customerAddress1->company_name,
             'first_name'       => $customerAddress1->first_name,
             'last_name'        => $customerAddress1->last_name,
@@ -532,7 +532,7 @@ it('should store the billing and shipping address for customer when the use for 
         ],
 
         'shipping' => [
-            'address1'         => [$customerAddress2->address1],
+            'address'          => [$customerAddress2->address],
             'company_name'     => $customerAddress2->company_name,
             'first_name'       => $customerAddress2->first_name,
             'last_name'        => $customerAddress2->last_name,
@@ -557,7 +557,7 @@ it('should store the billing and shipping address for customer when the use for 
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-                'address1'     => $customerAddress1->address1,
+                'address'      => $customerAddress1->address,
                 'company_name' => $customerAddress1->company_name,
                 'first_name'   => $customerAddress1->first_name,
                 'last_name'    => $customerAddress1->last_name,
@@ -575,7 +575,7 @@ it('should store the billing and shipping address for customer when the use for 
         CartAddress::class => [
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-                'address1'     => $customerAddress2->address1,
+                'address'      => $customerAddress2->address,
                 'company_name' => $customerAddress2->company_name,
                 'first_name'   => $customerAddress2->first_name,
                 'last_name'    => $customerAddress2->last_name,
@@ -647,7 +647,7 @@ it('should store the guest user address for cart billing/shipping for guest user
     // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -724,7 +724,7 @@ it('should fails the validation error when use for shipping is false in billing 
     // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -741,7 +741,7 @@ it('should fails the validation error when use for shipping is false in billing 
         ->assertJsonValidationErrorFor('shipping.first_name')
         ->assertJsonValidationErrorFor('shipping.last_name')
         ->assertJsonValidationErrorFor('shipping.email')
-        ->assertJsonValidationErrorFor('shipping.address1')
+        ->assertJsonValidationErrorFor('shipping.address')
         ->assertJsonValidationErrorFor('shipping.city')
         ->assertJsonValidationErrorFor('shipping.phone');
 });
@@ -801,7 +801,7 @@ it('should gives the validation error if not use for shipping true and not provi
     // Act and Assert
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -1269,7 +1269,7 @@ it('should place a simple product order for a guest user', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -1286,7 +1286,7 @@ it('should place a simple product order for a guest user', function () {
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -1492,7 +1492,7 @@ it('should place a simple product order for a guest user and send email to the g
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -1509,7 +1509,7 @@ it('should place a simple product order for a guest user and send email to the g
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -1736,7 +1736,7 @@ it('should place a simple product order for a customer', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -1754,7 +1754,7 @@ it('should place a simple product order for a customer', function () {
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -1978,7 +1978,7 @@ it('should place a simple product order for a customer and send email to the cus
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -1996,7 +1996,7 @@ it('should place a simple product order for a customer and send email to the cus
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -2244,7 +2244,7 @@ it('should place a configurable product order for a guest user', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -2261,7 +2261,7 @@ it('should place a configurable product order for a guest user', function () {
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -2284,7 +2284,7 @@ it('should place a configurable product order for a guest user', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -2301,7 +2301,7 @@ it('should place a configurable product order for a guest user', function () {
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -2538,7 +2538,7 @@ it('should place a configurable product order for a guest user and send email to
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -2555,7 +2555,7 @@ it('should place a configurable product order for a guest user and send email to
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -2578,7 +2578,7 @@ it('should place a configurable product order for a guest user and send email to
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -2595,7 +2595,7 @@ it('should place a configurable product order for a guest user and send email to
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -2832,7 +2832,7 @@ it('should place a configurable product order for a customer', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -2849,7 +2849,7 @@ it('should place a configurable product order for a customer', function () {
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -3082,7 +3082,7 @@ it('should place a configurable product order for a customer and send email to t
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -3099,7 +3099,7 @@ it('should place a configurable product order for a customer and send email to t
                 'first_name'   => $cartShippingAddress->first_name,
                 'last_name'    => $cartShippingAddress->last_name,
                 'phone'        => $cartShippingAddress->phone,
-                'address1'     => $cartShippingAddress->address1,
+                'address'      => $cartShippingAddress->address,
                 'country'      => $cartShippingAddress->country,
                 'state'        => $cartShippingAddress->state,
                 'city'         => $cartShippingAddress->city,
@@ -3272,7 +3272,7 @@ it('should place a virtual product order for a guest user', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -3441,7 +3441,7 @@ it('should place a virtual product order for a guest user and send email to the 
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -3620,7 +3620,7 @@ it('should place a virtual product order for a customer', function () {
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -3795,7 +3795,7 @@ it('should place a virtual product order for a customer and send email to the us
                 'first_name'   => $cartBillingAddress->first_name,
                 'last_name'    => $cartBillingAddress->last_name,
                 'phone'        => $cartBillingAddress->phone,
-                'address1'     => $cartBillingAddress->address1,
+                'address'      => $cartBillingAddress->address,
                 'country'      => $cartBillingAddress->country,
                 'state'        => $cartBillingAddress->state,
                 'city'         => $cartBillingAddress->city,
@@ -4265,7 +4265,7 @@ it('should not return the cash on delivery payment method if product is download
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -4279,7 +4279,7 @@ it('should not return the cash on delivery payment method if product is download
         ],
 
         'shipping' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -4394,7 +4394,7 @@ it('should not return the shipping methods if product is downloadable', function
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -4408,7 +4408,7 @@ it('should not return the shipping methods if product is downloadable', function
         ],
 
         'shipping' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -4523,7 +4523,7 @@ it('should not return the cash on delivery payment method if product is virtual'
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -4537,16 +4537,16 @@ it('should not return the cash on delivery payment method if product is virtual'
         ],
 
         'shipping' => [
-            'address1'         => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
+            'address'      => [fake()->address()],
+            'company_name' => fake()->company(),
+            'first_name'   => fake()->firstName(),
+            'last_name'    => fake()->lastName(),
+            'email'        => fake()->email(),
+            'country'      => fake()->countryCode(),
+            'state'        => fake()->state(),
+            'city'         => fake()->city(),
+            'postcode'     => rand(111111, 999999),
+            'phone'        => fake()->e164PhoneNumber(),
         ],
     ])
         ->assertOk()
@@ -4652,7 +4652,7 @@ it('should not return the shipping methods if product is virtual', function () {
 
     postJson(route('shop.checkout.onepage.addresses.store'), [
         'billing' => [
-            'address1'         => [fake()->address()],
+            'address'          => [fake()->address()],
             'company_name'     => fake()->company(),
             'first_name'       => fake()->firstName(),
             'last_name'        => fake()->lastName(),
@@ -4666,16 +4666,16 @@ it('should not return the shipping methods if product is virtual', function () {
         ],
 
         'shipping' => [
-            'address1'         => [fake()->address()],
-            'company_name'     => fake()->company(),
-            'first_name'       => fake()->firstName(),
-            'last_name'        => fake()->lastName(),
-            'email'            => fake()->email(),
-            'country'          => fake()->countryCode(),
-            'state'            => fake()->state(),
-            'city'             => fake()->city(),
-            'postcode'         => rand(111111, 999999),
-            'phone'            => fake()->e164PhoneNumber(),
+            'address'      => [fake()->address()],
+            'company_name' => fake()->company(),
+            'first_name'   => fake()->firstName(),
+            'last_name'    => fake()->lastName(),
+            'email'        => fake()->email(),
+            'country'      => fake()->countryCode(),
+            'state'        => fake()->state(),
+            'city'         => fake()->city(),
+            'postcode'     => rand(111111, 999999),
+            'phone'        => fake()->e164PhoneNumber(),
         ],
     ])
         ->assertOk()

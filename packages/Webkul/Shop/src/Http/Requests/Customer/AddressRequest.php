@@ -30,8 +30,7 @@ class AddressRequest extends FormRequest
             'company_name' => [new AlphaNumericSpace],
             'first_name'   => ['required', new AlphaNumericSpace],
             'last_name'    => ['required', new AlphaNumericSpace],
-            'address1'     => ['required', 'array', 'min:1'],
-            // 'address1.*'   => 'string',
+            'address'      => ['required', 'array', 'min:1'],
             'country'      => core()->isCountryRequired() ? ['required', new AlphaNumericSpace] : [new AlphaNumericSpace],
             'state'        => core()->isStateRequired() ? ['required', new AlphaNumericSpace] : [new AlphaNumericSpace],
             'city'         => ['required', 'string'],
@@ -50,7 +49,7 @@ class AddressRequest extends FormRequest
     public function attributes()
     {
         return [
-            'address1.*' => 'address',
+            'address.*' => 'address',
         ];
     }
 }

@@ -134,14 +134,14 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                id="address1[]"
-                                name="address1[]"
+                                id="address[]"
+                                name="address[]"
                                 rules="required"
                                 :label="trans('admin::app.customers.addresses.create.street-address')"
                                 :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                             />
 
-                            <x-admin::form.control-group.error control-name="address1[]" />
+                            <x-admin::form.control-group.error control-name="address[]" />
                         </x-admin::form.control-group>
 
                         @if (core()->getConfigData('customer.address.information.street_lines') > 1)
@@ -162,12 +162,12 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     ::id="'address_' + index"
-                                    ::name="'address1[' + index + ']'"
+                                    ::name="'address[' + index + ']'"
                                     :label="trans('admin::app.customers.addresses.create.street-address')"
                                     :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                                 />
                         
-                                <x-admin::form.control-group.error ::control-name="'address1[' + index + ']'" />
+                                <x-admin::form.control-group.error ::control-name="'address[' + index + ']'" />
                             </x-admin::form.control-group>
                         </div>
 

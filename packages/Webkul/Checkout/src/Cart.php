@@ -372,7 +372,7 @@ class Cart
                 'first_name',
                 'last_name',
                 'email',
-                'address1',
+                'address',
                 'country',
                 'state',
                 'city',
@@ -384,7 +384,7 @@ class Cart
                 'parent_address_id' => ($params['address_type'] ?? '') == 'customer' ? $params['id'] : null,
                 'cart_id'           => $this->cart->id,
                 'customer_id'       => $this->cart->customer_id,
-                'address1'          => implode(PHP_EOL, $params['address1']),
+                'address'          => implode(PHP_EOL, $params['address']),
                 'use_for_shipping'  => (bool) ($params['use_for_shipping'] ?? false),
             ])
             ->toArray();
@@ -409,7 +409,7 @@ class Cart
             'first_name',
             'last_name',
             'email',
-            'address1',
+            'address',
             'country',
             'state',
             'city',
@@ -438,7 +438,7 @@ class Cart
                     'parent_address_id' => ($params['address_type'] ?? '') == 'customer' ? $params['id'] : null,
                     'cart_id'           => $this->cart->id,
                     'customer_id'       => $this->cart->customer_id,
-                    'address1'          => implode(PHP_EOL, $params['address1']),
+                    'address'          => implode(PHP_EOL, $params['address']),
                 ])
                 ->toArray();
         }

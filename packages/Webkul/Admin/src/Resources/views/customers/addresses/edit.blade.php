@@ -142,14 +142,14 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     id="address_0"
-                                    name="address1[]"
+                                    name="address[]"
                                     rules="required"
-                                    v-model="addressData.address1"
+                                    v-model="addressData.address"
                                     :label="trans('admin::app.customers.addresses.edit.street-address')"
                                     :placeholder="trans('admin::app.customers.addresses.edit.street-address')"
                                 />
 
-                                <x-admin::form.control-group.error control-name="address1[]" />
+                                <x-admin::form.control-group.error control-name="address[]" />
                             </x-admin::form.control-group>
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
@@ -174,13 +174,13 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         ::id="'address_' + index"
-                                        ::name="'address1[' + index + ']'"
-                                        v-model="addressData.address1[' + index + ']"
+                                        ::name="'address[' + index + ']'"
+                                        v-model="addressData.address[' + index + ']"
                                         :label="trans('admin::app.customers.addresses.edit.street-address')"
                                         :placeholder="trans('admin::app.customers.addresses.edit.street-address')"
                                     />
                             
-                                    <x-admin::form.control-group.error ::control-name="'address1[' + index + ']'" />
+                                    <x-admin::form.control-group.error ::control-name="'address[' + index + ']'" />
                                 </x-admin::form.control-group>
                             </div>
 

@@ -130,14 +130,14 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            name="address1[]"
+                            name="address[]"
                             rules="required|address"
-                            :value="collect(old('address1'))->first()"
+                            :value="collect(old('address'))->first()"
                             :label="trans('shop::app.customers.account.addresses.street-address')"
                             :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                         />
 
-                        <x-shop::form.control-group.error control-name="address1[]" />
+                        <x-shop::form.control-group.error control-name="address[]" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.street_address.after') !!}
@@ -149,8 +149,8 @@
                         @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                             <x-shop::form.control-group.control
                                 type="text"
-                                name="address1[{{ $i }}]"
-                                :value="old('address1[{{ $i }}]')"
+                                name="address[{{ $i }}]"
+                                :value="old('address[{{ $i }}]')"
                                 :label="trans('shop::app.customers.account.addresses.street-address')"
                                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                             />

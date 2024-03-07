@@ -173,7 +173,7 @@
                                             <p class="text-gray-600 dark:text-gray-300">
                                                 {{
                                                     collect([
-                                                        $order->billingAddress->address1,
+                                                        $order->billingAddress->address,
                                                         $order->billingAddress->city,
                                                         $order->billingAddress->state,
                                                     ])
@@ -598,7 +598,7 @@
                                 </p>
 
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    {{ $address->address1 }},
+                                    {{ $address->address }},
 
                                     {{ $address->city }},
                                     {{ $address->state }},

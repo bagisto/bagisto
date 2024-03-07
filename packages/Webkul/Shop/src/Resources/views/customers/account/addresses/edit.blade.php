@@ -131,7 +131,7 @@
                 {!! view_render_event('bagisto.shop.customers.account.addresses.edit_form_controls.vat_id.after', ['address' => $address]) !!}
 
                 @php
-                    $addresses = explode(PHP_EOL, $address->address1);
+                    $addresses = explode(PHP_EOL, $address->address);
                 @endphp
 
                 <x-shop::form.control-group>
@@ -141,14 +141,14 @@
 
                     <x-shop::form.control-group.control
                         type="text"
-                        name="address1[]"
+                        name="address[]"
                         rules="required|address"
-                        :value="collect(old('address1'))->first() ?? $addresses[0]"
+                        :value="collect(old('address'))->first() ?? $addresses[0]"
                         :label="trans('shop::app.customers.account.addresses.street-address')"
                         :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                     />
 
-                    <x-shop::form.control-group.error control-name="address1[]" />
+                    <x-shop::form.control-group.error control-name="address[]" />
                 </x-shop::form.control-group>
 
                 @if (
@@ -158,8 +158,8 @@
                     @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                         <x-shop::form.control-group.control
                             type="text"
-                            name="address1[{{ $i }}]"
-                            :value="old('address1[{{$i}}]', $addresses[$i] ?? '')"
+                            name="address[{{ $i }}]"
+                            :value="old('address[{{$i}}]', $addresses[$i] ?? '')"
                             :label="trans('shop::app.customers.account.addresses.street-address')"
                             :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                         />
