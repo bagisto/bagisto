@@ -38,7 +38,7 @@
                         </div>
 
                         <!-- Saved Customer Addresses Cards -->
-                        <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                        <div class="grid gap-5 grid-cols-2 mb-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                             <div
                                 class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                                 v-for="address in customerSavedAddresses.billing"
@@ -124,11 +124,7 @@
                         </div>
 
                         <!-- Error Message Block -->
-                        <v-error-message
-                            class="text-red-500 text-xs italic"
-                            name="billing.id"
-                        >
-                        </v-error-message>
+                        <x-shop::form.control-group.error name="billing.id" />
 
                         <!-- Shipping Address Block if have stockable items -->
                         <template v-if="cart.have_stockable_items">
@@ -166,7 +162,7 @@
                                 </div>
 
                                 <!-- Saved Customer Addresses Cards -->
-                                <div class="grid gap-5 grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
+                                <div class="grid gap-5 grid-cols-2 mb-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-4">
                                     <div
                                         class="relative max-w-[414px] p-0 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap select-none cursor-pointer"
                                         v-for="address in customerSavedAddresses.shipping"
@@ -251,12 +247,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Error Message Block -->
-                                <v-error-message
-                                    class="text-red-500 text-xs italic"
-                                    name="shipping.id"
-                                >
-                                </v-error-message>
+                                <x-shop::form.control-group.error name="shipping.id" />
                             </div>
                         </template>
 
