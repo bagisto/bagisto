@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => ':total ඇතුල් :firstItem සිට :lastItem දක්වා පෙන්වයි',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'මුල් පිටතට පටන්න',
 

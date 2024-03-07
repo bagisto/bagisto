@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Visualizzazione da :firstItem a :lastItem di :total voci',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'Vai alla Home',
 

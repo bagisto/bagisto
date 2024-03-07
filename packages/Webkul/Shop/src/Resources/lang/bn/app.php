@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => ':firstItem থেকে :lastItem পর্যন্ত মোট :total নির্দেশিকা দেখানো হচ্ছে',
+        ],
+    ],
+
     'errors' => [
         'go-to-home' => 'হোমে যান',
 

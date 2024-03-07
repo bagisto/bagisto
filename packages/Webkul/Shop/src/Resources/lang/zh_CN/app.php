@@ -780,6 +780,11 @@ return [
             'verify-email'        => '验证您的电子邮件帐户',
         ],
     ],
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
+        ],
+    ],
 
     'errors' => [
         'go-to-home'   => '转到主页',
