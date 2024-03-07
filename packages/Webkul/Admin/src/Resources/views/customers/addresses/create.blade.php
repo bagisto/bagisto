@@ -141,35 +141,21 @@
                                 :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                             />
 
+                            @if (core()->getConfigData('customer.address.information.street_lines') > 1)
+                                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        id="address[{{ $i }}]"
+                                        name="address[{{ $i }}]"
+                                        class="mt-2"
+                                        :label="trans('admin::app.customers.addresses.create.street-address')"
+                                        :placeholder="trans('admin::app.customers.addresses.create.street-address')"
+                                    />
+                                @endfor
+                            @endif
+
                             <x-admin::form.control-group.error control-name="address[]" />
                         </x-admin::form.control-group>
-
-                        @if (core()->getConfigData('customer.address.information.street_lines') > 1)
-                            @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    id="address{{ $i }}[]"
-                                    name="address{{ $i }}[]"
-                                    :label="trans('admin::app.customers.addresses.create.street-address')"
-                                    :placeholder="trans('admin::app.customers.addresses.create.street-address')"
-                                />
-                            @endfor
-                        @endif
-
-                        <!--need to check this -->
-                        <div v-if="streetLineCount && streetLineCount > 1" v-for="index in streetLineCount">
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    ::id="'address_' + index"
-                                    ::name="'address[' + index + ']'"
-                                    :label="trans('admin::app.customers.addresses.create.street-address')"
-                                    :placeholder="trans('admin::app.customers.addresses.create.street-address')"
-                                />
-                        
-                                <x-admin::form.control-group.error ::control-name="'address[' + index + ']'" />
-                            </x-admin::form.control-group>
-                        </div>
 
                         <div class="flex gap-4 max-sm:flex-wrap">
                             <!-- City -->
@@ -363,8 +349,6 @@
                     state: "",
 
                     countryStates: @json(core()->groupedStatesByCountries()),
-                    
-                    streetLineCount: 0,
                 }
             },
 
