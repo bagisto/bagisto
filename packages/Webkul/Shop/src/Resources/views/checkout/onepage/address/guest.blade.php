@@ -40,7 +40,10 @@
                     ></v-checkout-address-form>
 
                     <!-- Use for Shipping Checkbox -->
-                    <x-shop::form.control-group class="flex items-center gap-2.5 !mb-0">
+                    <x-shop::form.control-group
+                        class="flex items-center gap-2.5 !mb-0"
+                        v-if="cart.have_stockable_items"
+                    >
                         <x-shop::form.control-group.control
                             type="checkbox"
                             name="billing.use_for_shipping"
@@ -63,27 +66,29 @@
                 </div>
 
                 <!-- Guest Shipping Address -->
-                <div
-                    class="mt-8"
-                    v-if="! useBillingAddressForShipping"
-                >
-                    {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.shipping.before') !!}
+                <template v-if="cart.have_stockable_items">
+                    <div
+                        class="mt-8"
+                        v-if="! useBillingAddressForShipping"
+                    >
+                        {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.shipping.before') !!}
 
-                    <!-- Shipping Address Header -->
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-xl font-medium max-sm:text-xl">
-                            @lang('shop::app.checkout.onepage.address.shipping-address')
-                        </h2>
+                        <!-- Shipping Address Header -->
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-medium max-sm:text-xl">
+                                @lang('shop::app.checkout.onepage.address.shipping-address')
+                            </h2>
+                        </div>
+                    
+                        <!-- Shipping Address Form -->
+                        <v-checkout-address-form
+                            control-name="shipping"
+                            :address="cart.shipping_address || undefined"
+                        ></v-checkout-address-form>
+
+                        {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.shipping.after') !!}
                     </div>
-                
-                    <!-- Shipping Address Form -->
-                    <v-checkout-address-form
-                        control-name="shipping"
-                        :address="cart.shipping_address || undefined"
-                    ></v-checkout-address-form>
-
-                    {!! view_render_event('bagisto.shop.checkout.onepage.address.guest.shipping.after') !!}
-                </div>
+                </template>
 
                 <!-- Proceed Button -->
                 <div class="flex justify-end mt-4">
@@ -135,7 +140,11 @@
                             if (response.data.data.redirect_url) {
                                 window.location.href = response.data.data.redirect_url;
                             } else {
-                                this.$emit('processed', response.data.data.shippingMethods);
+                                if (this.cart.have_stockable_items) {
+                                    this.$emit('processed', response.data.data.shippingMethods);
+                                } else {
+                                    this.$emit('processed', response.data.data.payment_methods);
+                                }
                             }
                         })
                         .catch(error => {
