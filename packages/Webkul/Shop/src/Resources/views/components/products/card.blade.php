@@ -87,9 +87,8 @@
 
                         <button
                             class="absolute bottom-4 left-1/2 py-3 px-11 bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-1/2 translate-y-14 group-hover:translate-y-0 transition-all duration-300 max-sm:translate-y-2.5 max-sm:group-hover:translate-y-2.5 max-lg:translate-y-2.5 max-sm:px-7 max-sm:py-2"
-                            :disabled="! product.is_saleable"
+                            :disabled="! product.is_saleable || isAddingToCart"
                             @click="addToCart()"
-                            ref="addToCartButton"
                         >
                             @lang('shop::app.components.products.card.add-to-cart')
                         </button>
@@ -253,9 +252,8 @@
                 <x-shop::button
                     class="primary-button px-8 py-2.5 whitespace-nowrap"
                     :title="trans('shop::app.components.products.card.add-to-cart')"
-                    :loading="false"
-                    ::disabled="! product.is_saleable"
-                    ref="addToCartButton"
+                    ::loading="isAddingToCart"
+                    ::disabled="! product.is_saleable || isAddingToCart"
                     @click="addToCart()"
                 />
 
@@ -273,6 +271,8 @@
             data() {
                 return {
                     isCustomer: '{{ auth()->guard('customer')->check() }}',
+
+                    isAddingToCart: false,
                 }
             },
 
@@ -352,7 +352,7 @@
 
                 addToCart() {
 
-                    this.$refs.addToCartButton.isLoading = true;
+                    this.isAddingToCart = true;
 
                     this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
                             'quantity': 1,
@@ -371,10 +371,10 @@
                                 this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                             }
 
-                            this.$refs.addToCartButton.isLoading = false;
+                            this.isAddingToCart = false;
                         })
                         .catch(error => {
-                            this.$refs.addToCartButton.isLoading = false;
+                            this.isAddingToCart = false;
 
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                         });
