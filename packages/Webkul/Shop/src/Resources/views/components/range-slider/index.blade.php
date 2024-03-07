@@ -115,12 +115,11 @@
                      if (this.isTypeSupported()) {
                         switch (this.defaultType) {
                             case 'price':
-                                // To Do: Need to handle this case.
                                 return {
-                                    formattedAllowedMinRange: this.allowedMinRange,
-                                    formattedAllowedMaxRange: this.allowedMaxRange,
-                                    formattedMinRange: this.minRange,
-                                    formattedMaxRange: this.maxRange,
+                                    formattedAllowedMinRange: this.$shop.formatPrice(this.allowedMinRange),
+                                    formattedAllowedMaxRange: this.$shop.formatPrice(this.allowedMaxRange),
+                                    formattedMinRange: this.$shop.formatPrice(this.minRange),
+                                    formattedMaxRange: this.$shop.formatPrice(this.maxRange),
                                 };
 
                             case 'float':

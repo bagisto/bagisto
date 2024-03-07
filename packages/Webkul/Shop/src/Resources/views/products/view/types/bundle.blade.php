@@ -186,8 +186,8 @@
                                 >
                                 </label>
 
-                                <label
-                                    class="text-[#6E6E6E] cursor-pointer"
+                                <label 
+                                    class="text-[#6E6E6E] cursor-pointer" 
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 >
                                     @{{ product.name }}
@@ -270,51 +270,41 @@
 
                         options: [],
 
-                        formattedTotalAmount: '',
                     }
                 },
 
                 computed: {
-                    formattedTotalPrice() {
-                        this.formatTotalPrice();
+                    formattedTotalPrice: function() {
+                        var total = 0;
 
-                        return this.formattedTotalAmount;
-                    },
-                },
-
-                created() {
-                    for (let key in this.config.options) {
-                        this.options.push(this.config.options[key]);
-                    }
-
-                    this.formatTotalPrice();
-                },
-
-                methods: {
-                    formatTotalPrice: async function () {
-                        let total = 0;
-
-                        for (let key in this.options) {
-                            for (let key1 in this.options[key].products) {
-                                if (! this.options[key].products[key1].is_default){
+                        for (var key in this.options) {
+                            for (var key1 in this.options[key].products) {
+                                if (! this.options[key].products[key1].is_default)
                                     continue;
-                                }
 
                                 total += this.options[key].products[key1].qty * this.options[key].products[key1].price.final.price;
                             }
                         }
 
-                        this.formattedTotalAmount = await this.$shop.formatPrice(total);
-                    },
+                        return this.$shop.formatPrice(total);
+                    }
+                },
 
+                created: function() {
+                    for (var key in this.config.options) {
+                        this.options.push(this.config.options[key]);
+                    }
+                },
+
+                methods: {
                     productSelected: function(option, value) {
-                        let selectedProductIds = Array.isArray(value) ? value : [value];
+                        var selectedProductIds = Array.isArray(value) ? value : [value];
 
-                        for (let key in option.products) {
+                        for (var key in option.products) {
                             option.products[key].is_default = selectedProductIds.indexOf(option.products[key].id) > -1 ? 1 : 0;
                         }
-                    },
-                },
+                    }
+                }
             });
 
             app.component('v-product-bundle-option-item', {
@@ -322,7 +312,7 @@
 
                 props: ['option', 'errors'],
 
-                data() {
+                data: function() {
                     return {
                         selectedProduct: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
                     };
@@ -348,28 +338,27 @@
                     }
                 },
 
-                created() {
-                    for (let key in this.option.products) {
-                        if (! this.option.products[key].is_default) {
+                created: function() {
+                    for (var key in this.option.products) {
+                        if (! this.option.products[key].is_default)
                             continue;
-                        }
 
                         if (this.option.type == 'checkbox' || this.option.type == 'multiselect') {
-                            this.selectedProduct.push(this.option.products[key].id);
+                            this.selectedProduct.push(this.option.products[key].id)
                         } else {
-                            this.selectedProduct = this.option.products[key].id;
+                            this.selectedProduct = this.option.products[key].id
                         }
                     }
                 },
 
                 methods: {
-                    qtyUpdated(qty) {
+                    qtyUpdated: function(qty) {
                         if (! this.option.products.find(data => data.id == this.selectedProduct)) {
                             return;
                         }
 
                         this.option.products.find(data => data.id == this.selectedProduct).qty = qty;
-                    },
+                    }
                 }
             });
         </script>
