@@ -182,22 +182,24 @@ trait CartTools
      * @param  \Webkul\Customer\Contracts\WishlistItem  $wishlistItem
      * @return bool
      */
-    public function moveToCart($wishlistItem)
+    public function moveToCart($wishlistItem, $quantity = 1)
     {
         if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
         }
 
         if (! $wishlistItem->additional) {
-            $wishlistItem->additional = [
-                'product_id' => $wishlistItem->product_id,
-                'quantity'   => request()->input('quantity'),
-            ];
+            $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
         }
+        
+        $additional = [
+            ...$wishlistItem->additional,
+            'quantity' => $quantity,
+        ];
 
-        request()->merge($wishlistItem->additional);
+        request()->merge($additional);
 
-        $result = $this->addProduct($wishlistItem->product_id, $wishlistItem->additional);
+        $result = $this->addProduct($wishlistItem->product_id, $additional);
 
         if ($result) {
             $this->wishlistRepository->delete($wishlistItem->id);
