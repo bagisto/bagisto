@@ -143,11 +143,11 @@
                 },
 
                 mounted() {
-                    this.getCartSummary();
+                    this.getCart();
                 },
 
                 methods: {
-                    getCartSummary() {
+                    getCart() {
                         this.$axios.get("{{ route('shop.checkout.onepage.summary') }}")
                             .then(response => {
                                 this.cart = response.data.data;
@@ -184,7 +184,7 @@
                             this.paymentMethods = data;
                         }
 
-                        this.getCartSummary();
+                        this.getCart();
                     },
 
                     scrollToCurrentStep() {

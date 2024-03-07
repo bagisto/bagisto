@@ -18,10 +18,8 @@
                 @lang('shop::app.checkout.cart.summary.sub-total')
             </p>
 
-            <p 
-                class="text-base font-medium"
-                v-text="cart.formatted_sub_total"
-            >
+            <p class="text-base font-medium">
+                @{{ cart.formatted_sub_total }}
             </p>
         </div>
 
@@ -38,10 +36,8 @@
                 @lang('shop::app.checkout.cart.summary.tax') (@{{ index }})%
             </p>
 
-            <p 
-                class="text-base font-medium max-sm:text-sm max-sm:font-medium"
-                v-text="amount"
-            >
+            <p class="text-base font-medium max-sm:text-sm max-sm:font-medium">
+                @{{ amount }}
             </p>
         </div>
 
@@ -57,10 +53,8 @@
                 @lang('shop::app.checkout.cart.summary.discount-amount')
             </p>
 
-            <p 
-                class="text-base font-medium"
-                v-text="cart.formatted_base_discount_amount"
-            >
+            <p class="text-base font-medium">
+                @{{ cart.formatted_base_discount_amount }}
             </p>
         </div>
 
@@ -79,10 +73,8 @@
                 @lang('shop::app.checkout.cart.summary.grand-total')
             </p>
 
-            <p 
-                class="text-lg font-semibold" 
-                v-text="cart.formatted_grand_total"
-            >
+            <p class="text-lg font-semibold">
+                @{{ cart.formatted_grand_total }}
             </p>
         </div>
 
@@ -90,9 +82,9 @@
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.proceed_to_checkout.before') !!}
 
-        <a 
-            href="{{ route('shop.checkout.onepage.index') }}" 
-            class="block w-max place-self-end py-3 mt-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
+        <a
+            href="{{ route('shop.checkout.onepage.index') }}"
+            class="primary-button place-self-end py-3 mt-4 px-11 rounded-2xl"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

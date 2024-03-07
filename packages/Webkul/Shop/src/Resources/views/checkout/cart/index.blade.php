@@ -390,7 +390,7 @@
                 },
 
                 mounted() {
-                    this.get();
+                    this.getCart();
                 },
 
                 computed: {
@@ -400,7 +400,7 @@
                 },
 
                 methods: {
-                    get() {
+                    getCart() {
                         this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                             .then(response => {
                                 this.cart = response.data.data;
