@@ -3,9 +3,11 @@
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
 ## **v2.1.2 (7th of March 2024)** - *Release*
-* #9544 [fixed] - 500 Internal Server error in console as Transaction Datagrid Not working.
+* #9547 [improvements] - Revamped completed checkout flow.
 
 * #9537 [fixed] - Unable to Checkout Product when Address is created from user profile and then proceed for checkout. Email is a mandatory field at checkout.
+
+* #9544 [fixed] - 500 Internal Server error in console as Transaction Datagrid Not working.
 
 * #9551 [fixed] - Admin End -> Sales -> Transactions Datagrid is having status row status entries UI is not appropriate and also translations is missing for Payment Method.
 
