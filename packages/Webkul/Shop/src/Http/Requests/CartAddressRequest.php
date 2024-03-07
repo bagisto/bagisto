@@ -32,7 +32,7 @@ class CartAddressRequest extends FormRequest
             $this->mergeAddressRules('billing');
         }
 
-        if (! $this->input("billing.use_for_shipping")) {
+        if (! $this->input('billing.use_for_shipping')) {
             $this->mergeAddressRules('shipping');
         }
 
