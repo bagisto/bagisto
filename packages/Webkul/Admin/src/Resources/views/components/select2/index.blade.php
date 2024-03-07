@@ -18,6 +18,7 @@
     selected="{{ $selected }}"
     :errors="errors"
 >
+    <x-admin::form.control-group.control type="select"/>
 </v-searchable-dropdown>
 
 @pushOnce('scripts')
@@ -29,8 +30,8 @@
             <v-field
                 type="hidden"
                 :name="name"
-                :rules="rules"
                 v-model="selectedOption.id"
+                :rules="rules"
             ></v-field>
 
             <x-admin::dropdown
@@ -64,12 +65,12 @@
                                 <li class="p-2">
                                     <input
                                         class="block w-full rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2 py-1.5 text-sm leading-6 text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
-                                        @keyup="lookUp($event)"
+                                        v-model="searchQuery"
                                     >
                                 </li>
 
                                 <ul class="p-2 max-h-40 overflow-y-auto">
-                                    <li v-if="! getOptions.length">
+                                    <li v-if="! items.length">
                                         <p
                                             class="block p-2 text-gray-600 dark:text-gray-300"
                                             v-text="'@lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')'"
@@ -78,13 +79,14 @@
                                     </li>
 
                                     <li
-                                        v-for="option in getOptions"
+                                        v-for="item in items"
                                         v-else
                                     >
                                         <p
                                             class="text-sm text-gray-600 dark:text-gray-300 p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950"
-                                            v-text="option.label"
-                                            @click="selectOption(option)"
+                                            :class="{ 'bg-gray-100': item.id == selectedOption.id }"
+                                            v-text="item.label"
+                                            @click="select(item)"
                                         >
                                         </p>
                                     </li>
@@ -101,69 +103,48 @@
         app.component('v-searchable-dropdown',  {
             template: '#v-searchable-dropdown-template',
 
-            props: {
-                id: {
-                    type: String,
-                    required: true,
-                },
-                name: {
-                    type: String,
-                    required: true,
-                },
-                rules: {
-                    type: String,
-                    required: true,
-                },
-                value: {
-                    type: String,
-                    required: true,
-                },
-                label: {
-                    type: String,
-                    required: true,
-                },
-                options: {
-                    type: String,
-                    required: true,
-                },
-                selected: {
-                    type: String,
-                    required: true,
-                },
-                errors: {
-                    type: Object,
-                }
-            },
+            props: [
+                'id',
+                'name',
+                'rules',
+                'value',
+                'label',
+                'options',
+                'selected',
+                'errors',
+            ],
 
             data() {
                 return {
-                    selectedOption: this.value,
+                    selectedOption: {},
 
-                    originalOptions: JSON.parse(this.options),
-
-                    getOptions: [],
+                    searchQuery: '',
                 };
             },
 
             mounted() {
-                this.getOptions = this.originalOptions;
+                let selected = this.parsedOptions.find(item => this.value == item.id);
+
+                this.selectedOption = selected ? selected : this.parsedOptions[0];
+            },
+
+            computed: {
+                parsedOptions() {
+                    return JSON.parse(this.options);
+                },
+
+                items() {
+                    const query = this.searchQuery.toLowerCase();
+
+                    return this.parsedOptions.filter(item => item.label.toLowerCase().includes(query));
+                },
             },
 
             methods: {
-                lookUp(event) {
-                    const query = event.target.value.toLowerCase();
+                select(item) {
+                    this.selectedOption = item;
 
-                    if (query === "") {
-                        this.getOptions = this.originalOptions;
-
-                        return;
-                    }
-
-                    this.getOptions = this.originalOptions.filter(item => item.label.toLowerCase().includes(query));
-                },
-
-                selectOption(option) {
-                    this.selectedOption = option;
+                    this.searchQuery = '';
 
                     this.$refs.dropdown.toggle();
                 },
