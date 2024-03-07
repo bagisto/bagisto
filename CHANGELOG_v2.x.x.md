@@ -19,6 +19,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #9567 [fixed] - After applying a filter on the orders page , Sidebar Scroller should be working -Customer end.
 
+* #9579 [Fixed] - Fix issue related to moving items between the wishlist and cart with quantities.
+
 ## **v2.1.1 (27th of February 2024)** - *Release*
 
 * #9501 [fixed] - Can't Checkout
