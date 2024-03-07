@@ -67,6 +67,8 @@ class OnepageController extends APIController
 
         Cart::saveCustomerDetails();
 
+        Cart::resetShippingMethod();
+
         $cart = Cart::getCart();
 
         Cart::collectTotals();

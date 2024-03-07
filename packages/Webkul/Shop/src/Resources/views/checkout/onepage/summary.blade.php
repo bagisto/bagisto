@@ -39,6 +39,7 @@
 
 <!-- Cart Totals -->
 <div class="grid gap-4 mt-6 mb-8">
+    <!-- Sub Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.sub_total.before') !!}
 
     <div class="flex text-right justify-between">

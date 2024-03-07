@@ -494,6 +494,25 @@ class Cart
     }
 
     /**
+     * Save shipping method for cart.
+     */
+    public function resetShippingMethod(): bool
+    {
+        $cart = $this->getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        Shipping::removeAllShippingRates();
+
+        $cart->shipping_method = null;
+        $cart->save();
+
+        return true;
+    }
+
+    /**
      * Save payment method for cart.
      *
      * @param  string  $payment

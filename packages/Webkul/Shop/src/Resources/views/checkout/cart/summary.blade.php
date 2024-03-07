@@ -10,7 +10,9 @@
 
     {!! view_render_event('bagisto.shop.checkout.cart.summary.title.after') !!}
 
+    <!-- Cart Totals -->
     <div class="grid gap-4 mt-6">
+        <!-- Sub Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.before') !!}
 
         <div class="flex justify-between text-right">
@@ -25,6 +27,7 @@
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.after') !!}
 
+        <!-- Taxes -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.before') !!}
 
         <div 
@@ -43,6 +46,7 @@
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.after') !!}
 
+        <!-- Discount -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.before') !!}
 
         <div 
@@ -60,12 +64,32 @@
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.after') !!}
 
+        <!-- Shipping Rates -->
+        {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
+
+        <div
+            class="flex text-right justify-between"
+            v-if="cart.selected_shipping_rate"
+        >
+            <p class="text-base">
+                @lang('shop::app.checkout.onepage.summary.delivery-charges')
+            </p>
+
+            <p class="text-base font-medium">
+                @{{ cart.selected_shipping_rate }}
+            </p>
+        </div>
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.after') !!}
+
+        <!-- Apply Coupon -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.before') !!}
         
         @include('shop::checkout.cart.coupon')
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.after') !!}
    
+        <!-- Cart Grand Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.grand_total.before') !!}
 
         <div class="flex justify-between text-right">
