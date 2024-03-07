@@ -490,8 +490,11 @@
                             agree: () => {
                                 const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
+                                const selectedItemsQty = this.cart.items.filter(item => item.selected).map(item => this.applied.quantity[item.id] ?? item.quantity);
+
                                 this.$axios.post('{{ route('shop.api.checkout.cart.move_to_wishlist') }}', {
                                         'ids': selectedItemsIds,
+                                        'qty': selectedItemsQty
                                     })
                                     .then(response => {
                                         this.cart = response.data.data;
