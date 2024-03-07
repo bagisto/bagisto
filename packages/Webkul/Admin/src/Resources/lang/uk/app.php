@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'         => 'Створити Валюту',
-                    'code'               => 'Код',
+                    'create-btn' => 'Створити Валюту',
+                    'code'       => 'Код',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'Десятковий роздільник',
-                    'decimal-separator'  => 'Десятковий роздільник',
-                    'delete-warning'     => 'Ви впевнені, що хочете виконати цю дію?',
-                    'general'            => 'Загальне',
-                    'name'               => 'Назва',
-                    'save-btn'           => 'Зберегти Валюту',
-                    'symbol'             => 'Символ',
-                    'thousand-separator' => 'Роздільник тисяч',
-                    'title'              => 'Створити Нову Валюту',
+                    'decimal'           => 'Десятковий роздільник',
+                    'decimal-separator' => 'Десятковий роздільник',
+                    'delete-warning'    => 'Ви впевнені, що хочете виконати цю дію?',
+                    'general'           => 'Загальне',
+                    'name'              => 'Назва',
+                    'save-btn'          => 'Зберегти Валюту',
+                    'symbol'            => 'Символ',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'Створити Нову Валюту',
                 ],
 
                 'edit' => [

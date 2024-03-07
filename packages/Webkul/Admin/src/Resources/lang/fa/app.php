@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'code'               => 'کد',
-                    'create-btn'         => 'ساخت ارز',
+                    'code'       => 'کد',
+                    'create-btn' => 'ساخت ارز',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'معادله اعشار',
-                    'decimal-separator'  => 'جداکننده اعشار',
-                    'delete-warning'     => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
-                    'general'            => 'عمومی',
-                    'name'               => 'نام',
-                    'save-btn'           => 'ذخیره ارز',
-                    'symbol'             => 'نماد',
-                    'thousand-separator' => 'جداکننده هزارگان',
-                    'title'              => 'ساخت ارز جدید',
+                    'decimal'           => 'معادله اعشار',
+                    'decimal-separator' => 'جداکننده اعشار',
+                    'delete-warning'    => 'آیا مطمئن هستید که می‌خواهید این عملیات را انجام دهید؟',
+                    'general'           => 'عمومی',
+                    'name'              => 'نام',
+                    'save-btn'          => 'ذخیره ارز',
+                    'symbol'            => 'نماد',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'ساخت ارز جدید',
                 ],
 
                 'edit' => [

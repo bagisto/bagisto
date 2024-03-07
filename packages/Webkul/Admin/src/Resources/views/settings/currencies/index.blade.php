@@ -218,21 +218,21 @@
                             <!-- Thousand Separator -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.currencies.index.create.thousand-separator')
+                                    @lang('admin::app.settings.currencies.index.create.group-separator')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
-                                    name="thousand_separator"
-                                    :value="old('thousand_separator')"
-                                    v-model="selectedCurrency.thousand_separator"
-                                    :label="trans('admin::app.settings.currencies.index.create.thousand-separator')"
-                                    :placeholder="trans('admin::app.settings.currencies.index.create.thousand-separator')"
+                                    name="group_separator"
+                                    :value="old('group_separator')"
+                                    v-model="selectedCurrency.group_separator"
+                                    :label="trans('admin::app.settings.currencies.index.create.group-separator')"
+                                    :placeholder="trans('admin::app.settings.currencies.index.create.group-separator')"
                                 >
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="thousand_separator"
+                                    control-name="group_separator"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>

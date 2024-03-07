@@ -51,7 +51,7 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'decimal',
-            'thousand_separator',
+            'group_separator',
             'decimal_separator',
             'currency_position',
         ]));
@@ -88,7 +88,7 @@ class CurrencyController extends Controller
             'name',
             'symbol',
             'decimal',
-            'thousand_separator',
+            'group_separator',
             'decimal_separator',
             'currency_position',
         ]), $id);

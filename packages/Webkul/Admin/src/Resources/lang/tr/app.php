@@ -2236,8 +2236,8 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'         => 'Para Birimi Oluştur',
-                    'code'               => 'Kodu',
+                    'create-btn' => 'Para Birimi Oluştur',
+                    'code'       => 'Kodu',
 
                     'currency-position'  => [
                         'options' => [
@@ -2250,15 +2250,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'Ondalık',
-                    'decimal-separator'  => 'Ondalık Ayırıcı',
-                    'delete-warning'     => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
-                    'general'            => 'Genel',
-                    'name'               => 'Adı',
-                    'save-btn'           => 'Para Birimini Kaydet',
-                    'symbol'             => 'Sembol',
-                    'thousand-separator' => 'Binlik Ayırıcı',
-                    'title'              => 'Yeni Para Birimi Oluştur',
+                    'decimal'           => 'Ondalık',
+                    'decimal-separator' => 'Ondalık Ayırıcı',
+                    'delete-warning'    => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
+                    'general'           => 'Genel',
+                    'name'              => 'Adı',
+                    'save-btn'          => 'Para Birimini Kaydet',
+                    'symbol'            => 'Sembol',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'Yeni Para Birimi Oluştur',
                 ],
 
                 'edit' => [

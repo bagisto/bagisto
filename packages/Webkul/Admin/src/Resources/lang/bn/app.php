@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'code'               => 'কোড',
-                    'create-btn'         => 'মুদ্রা তৈরি করুন',
+                    'code'       => 'কোড',
+                    'create-btn' => 'মুদ্রা তৈরি করুন',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'দশমিক',
-                    'decimal-separator'  => 'দশমিক পৃথককরণ',
-                    'delete-warning'     => 'আপনি কি নিশ্চিত, এই ক্রিয়াটি সম্পাদনা করতে চান?',
-                    'general'            => 'সাধারণ',
-                    'name'               => 'নাম',
-                    'save-btn'           => 'মুদ্রা সংরক্ষণ করুন',
-                    'symbol'             => 'প্রতীক',
-                    'thousand-separator' => 'হাজার পৃথককরণ',
-                    'title'              => 'নতুন মুদ্রা তৈরি করুন',
+                    'decimal'           => 'দশমিক',
+                    'decimal-separator' => 'দশমিক পৃথককরণ',
+                    'delete-warning'    => 'আপনি কি নিশ্চিত, এই ক্রিয়াটি সম্পাদনা করতে চান?',
+                    'general'           => 'সাধারণ',
+                    'name'              => 'নাম',
+                    'save-btn'          => 'মুদ্রা সংরক্ষণ করুন',
+                    'symbol'            => 'প্রতীক',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'নতুন মুদ্রা তৈরি করুন',
                 ],
 
                 'edit' => [

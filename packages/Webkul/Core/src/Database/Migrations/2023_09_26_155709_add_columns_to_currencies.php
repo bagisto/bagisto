@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('currencies', function (Blueprint $table) {
-            $table->string('thousand_separator')->default(',')->after('decimal');
-            $table->string('decimal_separator')->default('.')->after('thousand_separator');
+            $table->string('group_separator')->default(',')->after('decimal');
+            $table->string('decimal_separator')->default('.')->after('group_separator');
             $table->string('currency_position')->default('left')->after('decimal_separator');
         });
     }
@@ -26,7 +26,7 @@ return new class extends Migration
         Schema::table('currencies', function (Blueprint $table) {
             $table->dropColumn('currency_position');
             $table->dropColumn('decimal_separator');
-            $table->dropColumn('thousand_separator');
+            $table->dropColumn('group_separator');
         });
     }
 };

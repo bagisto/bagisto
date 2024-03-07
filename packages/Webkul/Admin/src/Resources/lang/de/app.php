@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'code'               => 'Code',
-                    'create-btn'         => 'Währung erstellen',
+                    'code'       => 'Code',
+                    'create-btn' => 'Währung erstellen',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'Dezimalstellen',
-                    'decimal-separator'  => 'Dezimaltrennzeichen',
-                    'delete-warning'     => 'Sind Sie sicher, dass Sie diese Aktion durchführen möchten?',
-                    'general'            => 'Allgemein',
-                    'name'               => 'Name',
-                    'save-btn'           => 'Währung speichern',
-                    'symbol'             => 'Symbol',
-                    'thousand-separator' => 'Tausendtrennzeichen',
-                    'title'              => 'Neue Währung erstellen',
+                    'decimal'           => 'Dezimalstellen',
+                    'decimal-separator' => 'Dezimaltrennzeichen',
+                    'delete-warning'    => 'Sind Sie sicher, dass Sie diese Aktion durchführen möchten?',
+                    'general'           => 'Allgemein',
+                    'name'              => 'Name',
+                    'save-btn'          => 'Währung speichern',
+                    'symbol'            => 'Symbol',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'Neue Währung erstellen',
                 ],
 
                 'edit' => [

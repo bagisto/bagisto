@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'         => 'මුදල් සාදන්න',
-                    'code'               => 'කේතය',
+                    'create-btn' => 'මුදල් සාදන්න',
+                    'code'       => 'කේතය',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'දශක',
-                    'decimal-separator'  => 'දශම බෙදුම්කරු',
-                    'delete-warning'     => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
-                    'general'            => 'සාමාන්ය',
-                    'name'               => 'නම',
-                    'save-btn'           => 'මුදල් සුරකින්න',
-                    'symbol'             => 'සංක්‍රීයය',
-                    'thousand-separator' => 'දහස් ගණනක් බෙදුම්කරු',
-                    'title'              => 'නව මුදල් සාදන්න',
+                    'decimal'           => 'දශක',
+                    'decimal-separator' => 'දශම බෙදුම්කරු',
+                    'delete-warning'    => 'ඔබට මෙම ක්‍රියාකාරකම කිරීමට යන අවිස්සාවක් සුදුසුදක්ද?',
+                    'general'           => 'සාමාන්ය',
+                    'name'              => 'නම',
+                    'save-btn'          => 'මුදල් සුරකින්න',
+                    'symbol'            => 'සංක්‍රීයය',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'නව මුදල් සාදන්න',
                 ],
 
                 'edit' => [

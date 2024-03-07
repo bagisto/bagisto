@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'code'               => 'الكود',
-                    'create-btn'         => 'إنشاء عملة',
+                    'code'       => 'الكود',
+                    'create-btn' => 'إنشاء عملة',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'الكسور',
-                    'decimal-separator'  => 'فاصل الكسور',
-                    'delete-warning'     => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
-                    'general'            => 'عام',
-                    'name'               => 'الاسم',
-                    'save-btn'           => 'حفظ العملة',
-                    'symbol'             => 'الرمز',
-                    'thousand-separator' => 'فاصل الآلاف',
-                    'title'              => 'إنشاء عملة جديدة',
+                    'decimal'           => 'الكسور',
+                    'decimal-separator' => 'فاصل الكسور',
+                    'delete-warning'    => 'هل أنت متأكد أنك تريد أداء هذا الإجراء؟',
+                    'general'           => 'عام',
+                    'name'              => 'الاسم',
+                    'save-btn'          => 'حفظ العملة',
+                    'symbol'            => 'الرمز',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'إنشاء عملة جديدة',
                 ],
 
                 'edit' => [

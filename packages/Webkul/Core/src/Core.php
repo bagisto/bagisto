@@ -5,6 +5,7 @@ namespace Webkul\Core;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Contracts\Currency;
 use Webkul\Core\Enums\CurrencyPositionEnum;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -550,10 +551,8 @@ class Core
 
     /**
      * Format and convert price with currency symbol.
-     *
-     * @param  float  $price
      */
-    public function formatPrice($price, ?string $currencyCode = null): string
+    public function formatPrice(?float $price, ?string $currencyCode = null): string
     {
         if (is_null($price)) {
             $price = 0;
@@ -563,63 +562,48 @@ class Core
             ? $this->getAllCurrencies()->where('code', $currencyCode)->first()
             : $this->getCurrentCurrency();
 
-        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-
-        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
-
-        if (! $currency) {
-            return $formatter->formatCurrency($price, $currencyCode);
-        }
-
-        if ($symbol = $currency->symbol) {
-            if ($this->currencySymbol($currency) == $symbol) {
-                return $this->formatPriceWithSymbol($price, $currency, $currency->symbol, $formatter);
-            }
-
-            return $this->formatPriceWithSymbol($price, $currency, $currency->symbol, $formatter);
-        }
-
-        return $this->formatPriceWithSymbol($price, $currency, $currency->code, $formatter);
+        return $this->formatPriceWithSymbol($price, $currency);
     }
 
     /**
-     * Customize the thousand separator and decimal separator. Additionally, consider repositioning the currency symbol
-     * and include an HTML tag for further styling.
-     *
-     * @param  float  $price
-     * @param  \Webkul\Core\Models\Currency  $currency
-     * @param  string  $symbol
-     * @param  \NumberFormatter  $formatter
-     * @return string
+     * Customize the group separator and decimal separator.
      */
-    public function formatPriceWithSymbol($price, $currency, $symbol, $formatter)
+    public function formatPriceWithSymbol(?float $price, Currency $currency): string
     {
+        $formatter = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
+
         $formatter->setSymbol(\NumberFormatter::CURRENCY_SYMBOL, '');
+
+        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $currency->decimal ?? 2);
 
         $groupingSeparator = $formatter->getSymbol(\NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
 
         $decimalSeparator = $formatter->getSymbol(\NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
 
-        $formattedCurrency = $formatter->format($price);
+        $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formatter->format($price));
 
-        $formattedCurrency = preg_replace('/^\s+|\s+$/u', '', $formattedCurrency);
-
-        $formattedCurrency = str_replace(
-            $groupingSeparator,
-            $currency->thousand_separator == '' ? ' ' : $currency->thousand_separator,
-            $formattedCurrency
-        );
-
-        if ($currency->decimal > 0) {
-            $decimalPointPosition = strrpos($formattedCurrency, $decimalSeparator);
-
-            $formattedCurrency = substr_replace(
-                $formattedCurrency,
-                $currency->decimal_separator == '' ? ' ' : $currency->decimal_separator,
-                $decimalPointPosition,
-                1
+        if (! empty($currency->group_separator)) {
+            $formattedCurrency = str_replace(
+                $groupingSeparator,
+                $currency->group_separator,
+                $formattedCurrency
             );
         }
+
+        if (
+            $currency->decimal > 0
+            && ! empty($currency->decimal_separator)
+        ) {
+            $formattedCurrency = str_replace(
+                $decimalSeparator,
+                $currency->decimal_separator,
+                $formattedCurrency
+            );
+        }
+
+        $symbol = ! empty($currency->symbol)
+            ? $currency->symbol
+            : $currency->code;
 
         return match ($currency->currency_position) {
             CurrencyPositionEnum::LEFT->value             => $symbol.$formattedCurrency,

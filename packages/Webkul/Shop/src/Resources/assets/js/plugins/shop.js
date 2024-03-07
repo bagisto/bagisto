@@ -72,10 +72,14 @@ export default {
                             return '';
 
                         case 'group':
-                            return currency.thousand_separator === '' ? ' ' : currency.thousand_separator;
+                            return currency.group_separator === ''
+                                ? part.value
+                                : currency.group_separator;
 
                         case 'decimal':
-                            return currency.decimal_separator === '' ? ' ' : currency.decimal_separator;
+                            return currency.decimal_separator === ''
+                                ? part.value
+                                : currency.decimal_separator;
 
                         default:
                             return part.value;

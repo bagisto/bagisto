@@ -2235,8 +2235,8 @@ return [
                 ],
 
                 'create' => [
-                    'create-btn'         => 'Создать валюту',
-                    'code'               => 'Код',
+                    'create-btn' => 'Создать валюту',
+                    'code'       => 'Код',
 
                     'currency-position'  => [
                         'options' => [
@@ -2249,15 +2249,15 @@ return [
                         'title' => 'Currency Position',
                     ],
 
-                    'decimal'            => 'Десятичная часть',
-                    'decimal-separator'  => 'Десятичный разделитель',
-                    'delete-warning'     => 'Вы уверены, что хотите выполнить это действие?',
-                    'general'            => 'Общие',
-                    'name'               => 'Название',
-                    'save-btn'           => 'Сохранить валюту',
-                    'symbol'             => 'Символ',
-                    'thousand-separator' => 'Разделитель тысяч',
-                    'title'              => 'Создать новую валюту',
+                    'decimal'           => 'Десятичная часть',
+                    'decimal-separator' => 'Десятичный разделитель',
+                    'delete-warning'    => 'Вы уверены, что хотите выполнить это действие?',
+                    'general'           => 'Общие',
+                    'name'              => 'Название',
+                    'save-btn'          => 'Сохранить валюту',
+                    'symbol'            => 'Символ',
+                    'group-separator'   => 'Group Separator',
+                    'title'             => 'Создать новую валюту',
                 ],
 
                 'edit' => [
