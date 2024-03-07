@@ -83,7 +83,7 @@
                                             <!--Wishlist Item attributes -->
                                             <div 
                                                 class="flex gap-x-2.5 gap-y-1.5 flex-wrap"
-                                                v-if="item.options.length"
+                                                v-if="item.options?.attributes"
                                             >
                                                 <div class="grid gap-2">
                                                     <div class="">
@@ -105,7 +105,7 @@
                                                         class="grid gap-2" 
                                                         v-show="item.option_show"
                                                     >
-                                                        <div v-for="option in item.options">
+                                                        <div v-for="option in item.options?.attributes">
                                                             <p class="text-sm font-medium">
                                                                 @{{ option.attribute_name + ':' }}
                                                             </p>
@@ -143,6 +143,7 @@
                                             <div class="flex gap-5 flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
+                                                    ::value="item.options.quantity ?? 1"
                                                     class="flex gap-x-2.5 items-center max-h-10 py-1.5 px-3.5 border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
                                                 />
@@ -225,8 +226,7 @@
                             .then(response => {
                                 this.isLoading = false;
 
-                                this.wishlist = response.data.data
-                                    .map((wishlist) => ({ ...wishlist, quantity: 1 }));
+                                this.wishlist = response.data.data;
                             })
                             .catch(error => {});
                     },

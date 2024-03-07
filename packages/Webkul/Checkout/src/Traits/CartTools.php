@@ -209,13 +209,12 @@ trait CartTools
     }
 
     /**
-     * Function to move a already added product to wishlist will run only on customer
-     * authentication.
+     * Move to wishlist items.
      *
      * @param  int  $itemId
-     * @return bool
+     * @param  int  $quantity
      */
-    public function moveToWishlist($itemId)
+    public function moveToWishlist($itemId, $quantity = 1): bool
     {
         $cart = $this->getCart();
 
@@ -249,7 +248,10 @@ trait CartTools
                 'channel_id'  => $cart->channel_id,
                 'customer_id' => auth()->guard()->user()->id,
                 'product_id'  => $cartItem->product_id,
-                'additional'  => $cartItem->additional,
+                'additional'  => [
+                    ...$cartItem->additional,
+                    'quantity' => $quantity,
+                ],
             ]);
         }
 
