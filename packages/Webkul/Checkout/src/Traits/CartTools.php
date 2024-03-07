@@ -191,7 +191,7 @@ trait CartTools
         if (! $wishlistItem->additional) {
             $wishlistItem->additional = ['product_id' => $wishlistItem->product_id];
         }
-        
+
         $additional = [
             ...$wishlistItem->additional,
             'quantity' => $quantity,
