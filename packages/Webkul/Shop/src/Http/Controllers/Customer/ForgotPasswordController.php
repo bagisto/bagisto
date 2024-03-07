@@ -33,28 +33,34 @@ class ForgotPasswordController extends Controller
         try {
             $response = $this->broker()->sendResetLink($request->only(['email']));
 
-            $flashMessage = match ($response) {
-                Password::RESET_LINK_SENT => 'success',
-                Password::RESET_THROTTLED => 'warning',
-                default                   => null,
-            };
+            if ($response == Password::RESET_LINK_SENT) {
+                session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
 
-            if ($flashMessage) {
-                session()->flash($flashMessage, trans('shop::app.customers.forgot-password.'.($flashMessage === 'success' ? 'reset-link-sent' : 'already-sent')));
-            } else {
-                return back()->withInput($request->only(['email']))->withErrors([
+                return redirect()->route('shop.customers.forgot_password.create');
+            }
+
+            if ($response == Password::RESET_THROTTLED) {
+                session()->flash('warning', trans('shop::app.customers.forgot-password.already-sent'));
+
+                return redirect()->route('shop.customers.forgot_password.create');
+            }
+
+            return redirect()->route('shop.customers.forgot_password.create')
+                ->withInput($request->only(['email']))
+                ->withErrors([
                     'email' => trans('shop::app.customers.forgot-password.email-not-exist'),
                 ]);
-            }
         } catch (\Swift_RfcComplianceException $e) {
             session()->flash('success', trans('shop::app.customers.forgot-password.reset-link-sent'));
+
+            return redirect()->route('shop.customers.forgot_password.create');
         } catch (\Exception $e) {
             report($e);
 
-            session()->flash('error', trans($e->getMessage()));
-        }
+            session()->flash('error', $e->getMessage());
 
-        return back();
+            return redirect()->route('shop.customers.forgot_password.create');
+        }
     }
 
     /**
