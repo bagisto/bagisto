@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Показаны записи с :firstItem по :lastItem из :total',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'Перейти на главную',
 

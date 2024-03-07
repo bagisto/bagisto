@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'कुल :total आइटमों में :firstItem से :lastItem तक दिखा रहा है',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'होम पेज पर जाएं',
 
