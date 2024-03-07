@@ -694,11 +694,9 @@ return [
         'onepage' => [
             'address' => [
                 'add-new-address'  => 'Add new address',
-                'title'            => 'Address',
                 'add-new'          => 'Add new address',
                 'back'             => 'Back',
                 'billing-address'  => 'Billing Address',
-                'shipping-address' => 'Shipping Address',
                 'city'             => 'City',
                 'company-name'     => 'Company Name',
                 'confirm'          => 'Confirm',
@@ -708,14 +706,16 @@ return [
                 'last-name'        => 'Last Name',
                 'postcode'         => 'Zip/Postcode',
                 'proceed'          => 'Proceed',
-                'save'             => 'Save',
-                'same-as-billing'  => 'Use different address for shipping?',
+                'same-as-billing'  => 'Use same address for shipping?',
                 'save-address'     => 'Save this to address book',
+                'save'             => 'Save',
                 'select-country'   => 'Select Country',
                 'select-state'     => 'Select State',
+                'shipping-address' => 'Shipping Address',
                 'state'            => 'State',
                 'street-address'   => 'Street Address',
                 'telephone'        => 'Telephone',
+                'title'            => 'Address',
             ],
 
             'index' => [
