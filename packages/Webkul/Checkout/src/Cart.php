@@ -384,7 +384,7 @@ class Cart
                 'parent_address_id' => ($params['address_type'] ?? '') == 'customer' ? $params['id'] : null,
                 'cart_id'           => $this->cart->id,
                 'customer_id'       => $this->cart->customer_id,
-                'address'          => implode(PHP_EOL, $params['address']),
+                'address'           => implode(PHP_EOL, $params['address']),
                 'use_for_shipping'  => (bool) ($params['use_for_shipping'] ?? false),
             ])
             ->toArray();
@@ -438,7 +438,7 @@ class Cart
                     'parent_address_id' => ($params['address_type'] ?? '') == 'customer' ? $params['id'] : null,
                     'cart_id'           => $this->cart->id,
                     'customer_id'       => $this->cart->customer_id,
-                    'address'          => implode(PHP_EOL, $params['address']),
+                    'address'           => implode(PHP_EOL, $params['address']),
                 ])
                 ->toArray();
         }

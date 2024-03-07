@@ -53,7 +53,7 @@ class AddressController extends APIController
             'email',
         ]), [
             'customer_id' => $customer->id,
-            'address'    => implode(PHP_EOL, array_filter($request->input('address'))),
+            'address'     => implode(PHP_EOL, array_filter($request->input('address'))),
         ]);
 
         $customerAddress = $this->customerAddressRepository->create($data);
@@ -90,7 +90,7 @@ class AddressController extends APIController
             'email',
         ]), [
             'customer_id'     => $customer->id,
-            'address'        => implode(PHP_EOL, array_filter(request()->input('address'))),
+            'address'         => implode(PHP_EOL, array_filter(request()->input('address'))),
         ]), request('id'));
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);

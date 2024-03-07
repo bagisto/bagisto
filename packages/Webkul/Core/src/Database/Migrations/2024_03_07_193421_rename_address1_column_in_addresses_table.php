@@ -25,7 +25,7 @@ return new class extends Migration
     {
         Schema::table('addresses', function (Blueprint $table) {
             $table->renameColumn('address', 'address1');
-            
+
             $table->string('address2')->nullable();
         });
     }
