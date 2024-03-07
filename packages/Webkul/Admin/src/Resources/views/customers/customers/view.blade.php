@@ -600,10 +600,6 @@
                                 <p class="text-gray-600 dark:text-gray-300">
                                     {{ $address->address1 }},
 
-                                    @if ($address->address2)
-                                        {{ $address->address2 }},
-                                    @endif
-
                                     {{ $address->city }},
                                     {{ $address->state }},
                                     {{ core()->country_name($address->country) }}

@@ -144,7 +144,6 @@ it('should store the same billing and shipping address for guest if use for ship
             'address1'         => [
                 $address1 = fake()->address(),
             ],
-            'address2'         => $address2 = fake()->address(),
             'company_name'     => $companyName = fake()->company(),
             'first_name'       => $firstName = fake()->firstName(),
             'last_name'        => $lastName = fake()->lastName(),
@@ -170,7 +169,6 @@ it('should store the same billing and shipping address for guest if use for ship
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
                 'address1'     => $address1,
-                'address2'     => $address2,
                 'company_name' => $companyName,
                 'first_name'   => $firstName,
                 'last_name'    => $lastName,
@@ -188,7 +186,6 @@ it('should store the same billing and shipping address for guest if use for ship
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
                 'address1'     => $address1,
-                'address2'     => $address2,
                 'company_name' => $companyName,
                 'first_name'   => $firstName,
                 'last_name'    => $lastName,
@@ -380,7 +377,6 @@ it('should store the billing and shipping address for guest when the use for shi
             'address1'         => [
                 $billingAddress1 = fake()->address(),
             ],
-            'address2'         => $billingAddress2 = fake()->address(),
             'company_name'     => $billingCompanyName = fake()->company(),
             'first_name'       => $billingFirstName = fake()->firstName(),
             'last_name'        => $billingLastName = fake()->lastName(),
@@ -396,7 +392,6 @@ it('should store the billing and shipping address for guest when the use for shi
             'address1'         => [
                 $shippingAddress1 = fake()->address(),
             ],
-            'address2'         => $shippingAddress2 = fake()->address(),
             'company_name'     => $shippingCompanyName = fake()->company(),
             'first_name'       => $shippingFirstName = fake()->firstName(),
             'last_name'        => $shippingLastName = fake()->lastName(),
@@ -421,7 +416,6 @@ it('should store the billing and shipping address for guest when the use for shi
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
                 'address1'     => $billingAddress1,
-                'address2'     => $billingAddress2,
                 'company_name' => $billingCompanyName,
                 'first_name'   => $billingFirstName,
                 'last_name'    => $billingLastName,
@@ -439,7 +433,6 @@ it('should store the billing and shipping address for guest when the use for shi
             [
                 'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
                 'address1'     => $shippingAddress1,
-                'address2'     => $shippingAddress2,
                 'company_name' => $shippingCompanyName,
                 'first_name'   => $shippingFirstName,
                 'last_name'    => $shippingLastName,

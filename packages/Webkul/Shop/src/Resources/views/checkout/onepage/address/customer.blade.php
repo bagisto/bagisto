@@ -91,10 +91,6 @@
                                             @{{ address.address1.join(', ') }},
                                         </template>
 
-                                        <template v-if="address.address2">
-                                            @{{ address.address2 }},
-                                        </template>
-
                                         @{{ address.city }},
                                         @{{ address.state }}, @{{ address.country }},
                                         @{{ address.postcode }}
@@ -213,10 +209,6 @@
                                             <p class="mt-6 text-sm text-[#6E6E6E]">
                                                 <template v-if="address.address1">
                                                     @{{ address.address1.join(', ') }},
-                                                </template>
-
-                                                <template v-if="address.address2">
-                                                    @{{ address.address2 }},
                                                 </template>
 
                                                 @{{ address.city }},

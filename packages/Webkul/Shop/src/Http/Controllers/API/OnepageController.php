@@ -40,7 +40,7 @@ class OnepageController extends APIController
      */
     public function storeAddress(CartAddressRequest $cartAddressRequest): JsonResource
     {
-        $address = $cartAddressRequest->all();
+        $params = $cartAddressRequest->all();
 
         if (
             ! auth()->guard('customer')->check()
@@ -59,15 +59,7 @@ class OnepageController extends APIController
             ]);
         }
 
-        if (isset($address['billing'])) {
-            Cart::updateOrCreateBillingAddress($address['billing']);
-        }
-
-        Cart::updateOrCreateShippingAddress($address['shipping'] ?? []);
-
-        Cart::saveCustomerDetails();
-
-        Cart::resetShippingMethod();
+        Cart::saveAddresses($params);
 
         $cart = Cart::getCart();
 

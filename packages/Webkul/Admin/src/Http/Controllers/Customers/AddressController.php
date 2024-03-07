@@ -81,7 +81,6 @@ class AddressController extends Controller
             'default_address',
         ]), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'address2' => implode(PHP_EOL, array_filter(request()->input('address2', []))),
         ]);
 
         Event::dispatch('customer.addresses.create.before');
@@ -140,7 +139,6 @@ class AddressController extends Controller
             'default_address',
         ]), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'address2' => implode(PHP_EOL, array_filter(request()->input('address2', []))),
         ]);
 
         Event::dispatch('customer.addresses.update.before', $id);

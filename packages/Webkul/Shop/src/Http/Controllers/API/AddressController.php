@@ -52,9 +52,8 @@ class AddressController extends APIController
             'default_address',
             'email',
         ]), [
-            'customer_id'     => $customer->id,
-            'address1'        => implode(PHP_EOL, array_filter($request->input('address1'))),
-            'address2'        => implode(PHP_EOL, array_filter($request->input('address2', []))),
+            'customer_id' => $customer->id,
+            'address1'    => implode(PHP_EOL, array_filter($request->input('address1'))),
         ]);
 
         $customerAddress = $this->customerAddressRepository->create($data);
@@ -92,7 +91,6 @@ class AddressController extends APIController
         ]), [
             'customer_id'     => $customer->id,
             'address1'        => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'address2'        => implode(PHP_EOL, array_filter([request()->input('address2', [])])),
         ]), request('id'));
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);

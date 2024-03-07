@@ -146,11 +146,11 @@
                         core()->getConfigData('customer.address.information.street_lines')
                         && core()->getConfigData('customer.address.information.street_lines') > 1
                     )
-                        @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
+                        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                             <x-shop::form.control-group.control
                                 type="text"
-                                name="address{{ $i }}[]"
-                                :value="old('address{{ $i }}[]')"
+                                name="address1[{{ $i }}]"
+                                :value="old('address1[{{ $i }}]')"
                                 :label="trans('shop::app.customers.account.addresses.street-address')"
                                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                             />
