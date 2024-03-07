@@ -35,56 +35,39 @@ export default {
              * @returns {string} - The formatted price as a string.
              */
             formatPrice(price) {
-                const $shop = app.config.globalProperties.$shop;
-
                 const locale = document.querySelector('meta[http-equiv="content-language"]').content;
 
                 const currency = JSON.parse(document.querySelector('meta[name="currency-code"]').content);
 
-                let formatter = new Intl.NumberFormat(locale, {
+                const symbol = currency.symbol !== '' ? currency.symbol : currency.code;
+
+                const formatter = new Intl.NumberFormat(locale, {
                     style: 'currency',
                     currency: currency.code,
                     minimumFractionDigits: currency.decimal ?? 2
                 });
 
-                if (currency.symbol) {
-                    return $shop.formatPriceWithSymbol(price, currency, currency.symbol, formatter);
-                }
+                const formattedCurrency = formatter.formatToParts(price)
+                    .map(part => {
+                        switch (part.type) {
+                            case 'currency':
+                                return '';
 
-                return $shop.formatPriceWithSymbol(price, currency, currency.code, formatter);
-            },
+                            case 'group':
+                                return currency.group_separator === ''
+                                    ? part.value
+                                    : currency.group_separator;
 
-            /**
-             * Format the given price with the specified currency symbol and position.
-             *
-             * @param {number} price - The price to be formatted.
-             * @param {object} currency - The currency information.
-             * @param {string} symbol - The currency symbol.
-             * @param {object} formatter - The number formatter.
-             * @returns {string} - The formatted price as a string.
-             */
-            formatPriceWithSymbol(price, currency, symbol, formatter) {
-                let parts = formatter.formatToParts(price);
+                            case 'decimal':
+                                return currency.decimal_separator === ''
+                                    ? part.value
+                                    : currency.decimal_separator;
 
-                let formattedCurrency = parts.map(part => {
-                    switch (part.type) {
-                        case 'currency':
-                            return '';
-
-                        case 'group':
-                            return currency.group_separator === ''
-                                ? part.value
-                                : currency.group_separator;
-
-                        case 'decimal':
-                            return currency.decimal_separator === ''
-                                ? part.value
-                                : currency.decimal_separator;
-
-                        default:
-                            return part.value;
-                    }
-                }).join('');
+                            default:
+                                return part.value;
+                        }
+                    })
+                    .join('');
 
                 switch (currency.currency_position) {
                     case 'left':
