@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Показано від :firstItem до :lastItem з :total записів',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'На головну',
 

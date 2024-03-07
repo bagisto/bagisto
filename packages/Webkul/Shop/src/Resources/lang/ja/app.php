@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => '合計 :total エントリのうち :firstItem から :lastItem を表示',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'ホームに戻る',
 

@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Toplam :total girdinin :firstItem ile :lastItem arası gösteriliyor',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'Anasayfaya Git',
 
