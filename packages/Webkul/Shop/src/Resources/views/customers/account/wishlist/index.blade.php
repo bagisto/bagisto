@@ -268,7 +268,7 @@
 
                         if (existingItem) {
                             this.$axios.post(url, {
-                                    quantity: existingItem.quantity,
+                                    quantity: existingItem.quantity ?? existingItem.options.quantity,
                                     product_id: id
                                 })
                                 .then(response => {
