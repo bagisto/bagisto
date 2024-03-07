@@ -5,6 +5,7 @@ namespace Webkul\Core\Exceptions;
 use App\Exceptions\Handler as BaseHandler;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -22,6 +23,8 @@ class Handler extends BaseHandler
         $this->handleAuthenticationException();
 
         $this->handleHttpException();
+
+        $this->handleValidationException();
 
         $this->handleServerException();
     }
@@ -87,6 +90,16 @@ class Handler extends BaseHandler
             }
 
             return response()->view("{$path}::errors.index", compact('errorCode'));
+        });
+    }
+
+    /**
+     * Handle validation exceptions.
+     */
+    private function handleValidationException(): void
+    {
+        $this->renderable(function (ValidationException $exception, Request $request) {
+            return parent::convertValidationExceptionToResponse($exception, $request);
         });
     }
 }

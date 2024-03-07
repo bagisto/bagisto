@@ -599,238 +599,6 @@ it('should store the billing and shipping address for customer when the use for 
     ]);
 });
 
-it('it should not save the shipping address for guest when the use for shipping is false and the shipping key is not present', function () {
-    // Arrange
-    $product = (new ProductFaker([
-        'attributes' => [
-            5  => 'new',
-            26 => 'guest_checkout',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    CartItem::factory()->create([
-        'quantity'          => 1,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'name'              => $product->name,
-        'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
-        'cart_id'           => $cart = Cart::factory()->create([
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price = $product->price,
-            'base_grand_total'      => $price,
-            'sub_total'	            => $price,
-            'base_sub_total'        => $price,
-            'is_guest'              => 1,
-        ]),
-    ]);
-
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
-    postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address1'         => [
-                $address1 = fake()->address(),
-            ],
-            'address2'         => $address2 = fake()->address(),
-            'company_name'     => $companyName = fake()->company(),
-            'first_name'       => $firstName = fake()->firstName(),
-            'last_name'        => $lastName = fake()->lastName(),
-            'email'            => $email = fake()->email(),
-            'country'          => $country = fake()->countryCode(),
-            'state'            => $state = fake()->state(),
-            'city'             => $city = fake()->city(),
-            'postcode'         => $postCode = rand(111111, 999999),
-            'phone'            => $phone = fake()->e164PhoneNumber(),
-            'use_for_shipping' => false,
-        ],
-    ])
-        ->assertOk()
-        ->assertJsonPath('redirect', false)
-        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
-        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
-        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
-        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
-        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
-
-    $this->assertModelWise([
-        CartAddress::class => [
-            [
-                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-                'address1'     => $address1,
-                'address2'     => $address2,
-                'company_name' => $companyName,
-                'first_name'   => $firstName,
-                'last_name'    => $lastName,
-                'email'        => $email,
-                'country'      => $country,
-                'state'        => $state,
-                'city'         => $city,
-                'postcode'     => $postCode,
-                'phone'        => $phone,
-            ],
-        ],
-    ]);
-
-    $this->assertDatabaseMissing('addresses', [
-        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-        'address1'     => $address1,
-        'address2'     => $address2,
-        'company_name' => $companyName,
-        'first_name'   => $firstName,
-        'last_name'    => $lastName,
-        'email'        => $email,
-        'country'      => $country,
-        'state'        => $state,
-        'city'         => $city,
-        'postcode'     => $postCode,
-        'phone'        => $phone,
-    ]);
-});
-
-it('it should not save the shipping address for customer when the use for shipping is false and the shipping key is not present', function () {
-    // Arrange
-    $customer = Customer::factory()->create();
-
-    $customerAddress = CustomerAddress::factory()->create([
-        'customer_id' => $customer->id,
-        'email'       => fake()->email(),
-    ]);
-
-    $product = (new ProductFaker([
-        'attributes' => [
-            5  => 'new',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    CartItem::factory()->create([
-        'quantity'          => 1,
-        'product_id'        => $product->id,
-        'sku'               => $product->sku,
-        'name'              => $product->name,
-        'type'              => $product->type,
-        'weight'            => 1,
-        'total_weight'      => 1,
-        'base_total_weight' => 1,
-        'cart_id'           => $cart = Cart::factory()->create([
-            'channel_id'            => core()->getCurrentChannel()->id,
-            'global_currency_code'  => $baseCurrencyCode = core()->getBaseCurrencyCode(),
-            'base_currency_code'    => $baseCurrencyCode,
-            'channel_currency_code' => core()->getChannelBaseCurrencyCode(),
-            'cart_currency_code'    => core()->getCurrentCurrencyCode(),
-            'items_count'           => 1,
-            'items_qty'             => 1,
-            'grand_total'           => $price = $product->price,
-            'base_grand_total'      => $price,
-            'sub_total'	            => $price,
-            'base_sub_total'        => $price,
-            'customer_id'           => $customer->id,
-        ]),
-    ]);
-
-    $cartTemp = new \stdClass();
-
-    $cartTemp->id = $cart->id;
-
-    session()->put('cart', $cartTemp);
-
-    // Act and Assert
-    $this->loginAsCustomer($customer);
-
-    postJson(route('shop.checkout.onepage.addresses.store'), [
-        'billing' => [
-            'address1'     => [$customerAddress->address1],
-            'company_name' => $customerAddress->company_name,
-            'first_name'   => $customerAddress->first_name,
-            'last_name'    => $customerAddress->last_name,
-            'email'        => $customerAddress->email,
-            'country'      => $customerAddress->country,
-            'state'        => $customerAddress->state,
-            'city'         => $customerAddress->city,
-            'postcode'     => $customerAddress->postcode,
-            'phone'        => $customerAddress->phone,
-            'id'           => $customerAddress->id,
-        ],
-    ])
-        ->assertOk()
-        ->assertJsonPath('redirect', false)
-        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
-        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
-        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
-        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
-        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
-
-    $this->assertModelWise([
-        CartAddress::class => [
-            [
-                'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
-                'address1'     => $customerAddress->address1,
-                'company_name' => $customerAddress->company_name,
-                'first_name'   => $customerAddress->first_name,
-                'last_name'    => $customerAddress->last_name,
-                'email'        => $customerAddress->email,
-                'country'      => $customerAddress->country,
-                'state'        => $customerAddress->state,
-                'city'         => $customerAddress->city,
-                'postcode'     => $customerAddress->postcode,
-                'phone'        => $customerAddress->phone,
-                'cart_id'      => $cart->id,
-                'customer_id'  => $customer->id,
-            ],
-        ],
-    ]);
-
-    $this->assertDatabaseMissing('addresses', [
-        'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
-        'address1'     => $customerAddress->address1,
-        'company_name' => $customerAddress->company_name,
-        'first_name'   => $customerAddress->first_name,
-        'last_name'    => $customerAddress->last_name,
-        'email'        => $customerAddress->email,
-        'country'      => $customerAddress->country,
-        'state'        => $customerAddress->state,
-        'city'         => $customerAddress->city,
-        'postcode'     => $customerAddress->postcode,
-        'phone'        => $customerAddress->phone,
-        'id'           => $customerAddress->id,
-        'cart_id'      => $cart->id,
-        'customer_id'  => $customer->id,
-    ]);
-});
-
 it('should store the guest user address for cart billing/shipping for guest user', function () {
     // Arrange
     $product = (new ProductFaker([
@@ -908,7 +676,7 @@ it('should store the guest user address for cart billing/shipping for guest user
         ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
 });
 
-it('should use the billing address as for shipping for guest customer/user', function () {
+it('should fails the validation error when use for shipping is false in billing and shipping address not provided', function () {
     // Arrange
     $product = (new ProductFaker([
         'attributes' => [
@@ -976,13 +744,13 @@ it('should use the billing address as for shipping for guest customer/user', fun
             'use_for_shipping' => false,
         ],
     ])
-        ->assertOk()
-        ->assertJsonPath('redirect', false)
-        ->assertJsonPath('data.shippingMethods.flatrate.carrier_title', 'Flat Rate')
-        ->assertJsonPath('data.shippingMethods.flatrate.rates.0.carrier', 'flatrate')
-        ->assertJsonPath('data.shippingMethods.free.carrier_title', 'Free Shipping')
-        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier', 'free')
-        ->assertJsonPath('data.shippingMethods.free.rates.0.carrier_title', 'Free Shipping');
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('shipping.first_name')
+        ->assertJsonValidationErrorFor('shipping.last_name')
+        ->assertJsonValidationErrorFor('shipping.email')
+        ->assertJsonValidationErrorFor('shipping.address1')
+        ->assertJsonValidationErrorFor('shipping.city')
+        ->assertJsonValidationErrorFor('shipping.phone');
 });
 
 it('should gives the validation error if not use for shipping true and not provided shipping address', function () {
@@ -4528,7 +4296,6 @@ it('should not return the cash on delivery payment method if product is download
             'city'             => fake()->city(),
             'postcode'         => rand(111111, 999999),
             'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
         ],
     ])
         ->assertOk()
@@ -4658,7 +4425,6 @@ it('should not return the shipping methods if product is downloadable', function
             'city'             => fake()->city(),
             'postcode'         => rand(111111, 999999),
             'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
         ],
     ])
         ->assertOk()
@@ -4788,7 +4554,6 @@ it('should not return the cash on delivery payment method if product is virtual'
             'city'             => fake()->city(),
             'postcode'         => rand(111111, 999999),
             'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
         ],
     ])
         ->assertOk()
@@ -4918,7 +4683,6 @@ it('should not return the shipping methods if product is virtual', function () {
             'city'             => fake()->city(),
             'postcode'         => rand(111111, 999999),
             'phone'            => fake()->e164PhoneNumber(),
-            'use_for_shipping' => true,
         ],
     ])
         ->assertOk()

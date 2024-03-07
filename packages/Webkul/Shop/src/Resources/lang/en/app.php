@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Showing :firstItem to :lastItem of :total entries',
+        ],
+    ],
+
     'errors' => [
         'go-to-home'   => 'Go To Home',
 

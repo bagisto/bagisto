@@ -781,6 +781,12 @@ return [
         ],
     ],
 
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'نمایش :firstItem تا :lastItem از مجموع :total مورد',
+        ],
+    ],
+
     'errors' => [
         'go-to-home' => 'به صفحه اصلی بروید',
 
