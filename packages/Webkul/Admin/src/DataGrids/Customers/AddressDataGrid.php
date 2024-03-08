@@ -40,7 +40,7 @@ class AddressDataGrid extends DataGrid
             ->addSelect(
                 'ca.id as address_id',
                 'ca.company_name',
-                'ca.',
+                'ca.address',
                 'ca.country',
                 DB::raw(''.DB::getTablePrefix().'countries.name as country_name'),
                 'ca.state',

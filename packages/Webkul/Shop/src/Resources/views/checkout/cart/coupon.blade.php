@@ -76,10 +76,8 @@
                                             @lang('shop::app.checkout.cart.coupon.subtotal')
                                         </p>
 
-                                        <p 
-                                            class="text-3xl font-semibold max-sm:text-xl"
-                                            v-text="cart.formatted_sub_total"
-                                        >
+                                        <p class="text-3xl font-semibold max-sm:text-xl">
+                                            @{{ cart.formatted_sub_total }}
                                         </p>
                                     </div>
 
