@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'קוד',
                     'create-btn' => 'צור מטבע',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'שמאל',
+                            'left-with-space'  => 'שמאל עם רווח',
+                            'right'            => 'ימין',
+                            'right-with-space' => 'ימין עם רווח',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'מיקום המטבע',
                     ],
 
                     'decimal'           => 'עשרוני',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'שם',
                     'save-btn'          => 'שמור מטבע',
                     'symbol'            => 'סמל',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'מפריד קבוצה',
                     'title'             => 'צור מטבע חדש',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'קישור',
                 'value'                         => 'ערך: :value',
                 'value-input'                   => 'ערך',
+                
                 'services-content'              => [
                     'add-btn'            => 'הוסף שירותים',
                     'channels'           => 'ערוצים',

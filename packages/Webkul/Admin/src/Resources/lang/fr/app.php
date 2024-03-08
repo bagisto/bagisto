@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'Code',
                     'create-btn' => 'Créer une devise',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'Gauche',
+                            'left-with-space'  => 'Gauche avec espace',
+                            'right'            => 'Droite',
+                            'right-with-space' => 'Droite avec espace',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'Position de la devise',
                     ],
 
                     'decimal'           => 'Décimal',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'Nom',
                     'save-btn'          => 'Enregistrer la devise',
                     'symbol'            => 'Symbole',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'Séparateur de Groupe',
                     'title'             => 'Créer une nouvelle devise',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Valeur : :value',
                 'value-input'                   => 'Valeur',
+                
                 'services-content'              => [
                     'add-btn'               => 'Ajouter des services',
                     'channels'              => 'Canaux',

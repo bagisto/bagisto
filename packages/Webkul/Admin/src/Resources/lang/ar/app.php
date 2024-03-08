@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'الكود',
                     'create-btn' => 'إنشاء عملة',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'اليسار',
+                            'left-with-space'  => 'اليسار مع فراغ',
+                            'right'            => 'اليمين',
+                            'right-with-space' => 'اليمين مع فراغ',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'موقع العملة',
                     ],
 
                     'decimal'           => 'الكسور',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'الاسم',
                     'save-btn'          => 'حفظ العملة',
                     'symbol'            => 'الرمز',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'فاصل المجموعة',
                     'title'             => 'إنشاء عملة جديدة',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'رابط الإنترنت',
                 'value'                         => 'القيمة: :value',
                 'value-input'                   => 'القيمة',
+                
                 'services-content'              => [
                     'add-btn'            => 'أضف الخدمات',
                     'channels'           => 'القنوات',

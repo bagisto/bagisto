@@ -2238,15 +2238,15 @@ return [
                     'create-btn' => '创建货币',
                     'code'       => '代码',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => '左侧',
+                            'left-with-space'  => '左侧带空格',
+                            'right'            => '右侧',
+                            'right-with-space' => '右侧带空格',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => '货币位置',
                     ],
 
                     'decimal'           => '小数',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => '名称',
                     'save-btn'          => '保存货币',
                     'symbol'            => '符号',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => '分组分隔符',
                     'title'             => '创建新货币',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => '网址',
                 'value'                         => '值：:value',
                 'value-input'                   => '值',
+                
                 'services-content'              => [
                     'add-btn'            => '添加服务',
                     'channels'           => '渠道',

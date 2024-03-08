@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'کد',
                     'create-btn' => 'ساخت ارز',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'چپ',
+                            'left-with-space'  => 'چپ با فاصله',
+                            'right'            => 'راست',
+                            'right-with-space' => 'راست با فاصله',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'موقعیت ارز',
                     ],
 
                     'decimal'           => 'معادله اعشار',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'نام',
                     'save-btn'          => 'ذخیره ارز',
                     'symbol'            => 'نماد',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'جداکننده گروه',
                     'title'             => 'ساخت ارز جدید',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'آدرس اینترنتی',
                 'value'                         => 'مقدار: :value',
                 'value-input'                   => 'مقدار',
+
                 'services-content'              => [
                     'add-btn'               => 'افزودن خدمات',
                     'channels'              => 'کانال ها',

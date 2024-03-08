@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'Código',
                     'create-btn' => 'Crear Moneda',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'Izquierda',
+                            'left-with-space'  => 'Izquierda con Espacio',
+                            'right'            => 'Derecha',
+                            'right-with-space' => 'Derecha con Espacio',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'Posición de la Moneda',
                     ],
 
                     'decimal'           => 'Decimal',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'Nombre',
                     'save-btn'          => 'Guardar Moneda',
                     'symbol'            => 'Símbolo',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'Separador de Grupos',
                     'title'             => 'Crear Nueva Moneda',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Valor: :value',
                 'value-input'                   => 'Valor',
+                
                 'services-content'              => [
                     'add-btn'            => 'Agregar servicios',
                     'channels'           => 'Canales',

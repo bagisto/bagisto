@@ -2238,15 +2238,15 @@ return [
                     'create-btn' => 'Создать валюту',
                     'code'       => 'Код',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'Слева',
+                            'left-with-space'  => 'Слева с пробелом',
+                            'right'            => 'Справа',
+                            'right-with-space' => 'Справа с пробелом',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'Положение валюты',
                     ],
 
                     'decimal'           => 'Десятичная часть',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'Название',
                     'save-btn'          => 'Сохранить валюту',
                     'symbol'            => 'Символ',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'Разделитель групп',
                     'title'             => 'Создать новую валюту',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Значение: :value',
                 'value-input'                   => 'Значение',
+
                 'services-content'              => [
                     'add-btn'            => 'Добавить услуги',
                     'channels'           => 'Каналы',

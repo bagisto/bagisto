@@ -2238,15 +2238,15 @@ return [
                     'create-btn' => '通貨を作成',
                     'code'       => 'コード',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => '左',
+                            'left-with-space'  => 'スペース付き左',
+                            'right'            => '右',
+                            'right-with-space' => 'スペース付き右',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => '通貨位置',
                     ],
 
                     'decimal'           => '小数点',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => '名前',
                     'save-btn'          => '通貨を保存',
                     'symbol'            => '記号',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'グループ区切り',
                     'title'             => '新しい通貨を作成',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => '値：:value',
                 'value-input'                   => '値',
+                
                 'services-content'              => [
                     'add-btn'            => 'サービスを追加',
                     'channels'           => 'チャンネル',

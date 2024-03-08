@@ -2238,15 +2238,15 @@ return [
                     'create-btn' => 'Valuta Aanmaken',
                     'code'       => 'Code',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'Links',
+                            'left-with-space'  => 'Links met spatie',
+                            'right'            => 'Rechts',
+                            'right-with-space' => 'Rechts met spatie',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'Valutapositie',
                     ],
 
                     'decimal'           => 'Decimalen',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'Naam',
                     'save-btn'          => 'Valuta Opslaan',
                     'symbol'            => 'Symbool',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'Groepsscheidingsteken',
                     'title'             => 'Nieuwe Valuta Aanmaken',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Waarde: :value',
                 'value-input'                   => 'Waarde',
+                
                 'services-content'              => [
                     'add-btn'            => 'Diensten toevoegen',
                     'channels'           => 'Kanalen',

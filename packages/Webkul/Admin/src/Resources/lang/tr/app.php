@@ -2239,15 +2239,15 @@ return [
                     'create-btn' => 'Para Birimi Oluştur',
                     'code'       => 'Kodu',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'Sol',
+                            'left-with-space'  => 'Sol Boşluklu',
+                            'right'            => 'Sağ',
+                            'right-with-space' => 'Sağ Boşluklu',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'Para Birimi Pozisyonu',
                     ],
 
                     'decimal'           => 'Ondalık',
@@ -2257,7 +2257,7 @@ return [
                     'name'              => 'Adı',
                     'save-btn'          => 'Para Birimini Kaydet',
                     'symbol'            => 'Sembol',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'Grup Ayırıcı',
                     'title'             => 'Yeni Para Birimi Oluştur',
                 ],
 
@@ -2890,6 +2890,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Değer: :value',
                 'value-input'                   => 'Değer',
+                
                 'services-content'              => [
                     'add-btn'            => 'Hizmetler Ekle',
                     'channels'           => 'Kanallar',

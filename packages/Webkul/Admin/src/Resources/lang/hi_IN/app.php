@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'कोड',
                     'create-btn' => 'मुद्रा बनाएं',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'बाएं',
+                            'left-with-space'  => 'बाएं स्थान के साथ',
+                            'right'            => 'दाएं',
+                            'right-with-space' => 'दाएं स्थान के साथ',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'मुद्रा स्थिति',
                     ],
 
                     'decimal'           => 'दशमलव',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'नाम',
                     'save-btn'          => 'मुद्रा सहेजें',
                     'symbol'            => 'प्रतीक',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'समूह विभाजक',
                     'title'             => 'नई मुद्रा बनाएं',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'यूआरएल',
                 'value'                         => 'मूल्य: :value',
                 'value-input'                   => 'मूल्य',
+                
                 'services-content'              => [
                     'add-btn'            => 'सेवाएं जोड़ें',
                     'channels'           => 'चैनल',
@@ -3810,7 +3811,6 @@ return [
                 'title'                  => 'ए.आई. सहायता',
                 'vicuna'                 => 'विकूना',
             ],
-
         ],
     ],
 
@@ -3911,7 +3911,6 @@ return [
         'no-records' => 'निर्यात के लिए कुछ नहीं है',
         'xls'        => 'XLS',
         'xlsx'       => 'एक्सएलएसएक्स',
-
     ],
 
     'validations' => [

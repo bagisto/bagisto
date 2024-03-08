@@ -1562,6 +1562,7 @@ return [
             'events' => [
                 'index' => [
                     'create-btn' => 'සළායකයන් සාදන්න',
+                    'event'      => 'සිද්ධිය',
                     'title'      => 'සළාය',
 
                     'datagrid' => [
@@ -2238,15 +2239,15 @@ return [
                     'create-btn' => 'මුදල් සාදන්න',
                     'code'       => 'කේතය',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'වම',
+                            'left-with-space'  => 'වම සහිත ස්පේස්',
+                            'right'            => 'දකුණ',
+                            'right-with-space' => 'දකුණ සහිත ස්පේස්',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'වම් ස්ථානය',
                     ],
 
                     'decimal'           => 'දශක',
@@ -2256,7 +2257,7 @@ return [
                     'name'              => 'නම',
                     'save-btn'          => 'මුදල් සුරකින්න',
                     'symbol'            => 'සංක්‍රීයය',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'කණ්ඩායම් බවට වෙනස්වීමක්',
                     'title'             => 'නව මුදල් සාදන්න',
                 ],
 
@@ -2888,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'අගය: :value',
                 'value-input'                   => 'අගය',
+
                 'services-content'              => [
                     'add-btn'            => 'සේවාවන් එක් කරන්න',
                     'channels'           => 'චැනල්ස්',

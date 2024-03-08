@@ -2238,15 +2238,15 @@ return [
                     'code'       => 'কোড',
                     'create-btn' => 'মুদ্রা তৈরি করুন',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'বাম',
+                            'left-with-space'  => 'বাম স্থানে স্পেস সহ',
+                            'right'            => 'ডান',
+                            'right-with-space' => 'ডান স্থানে স্পেস সহ',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'মুদ্রা অবস্থান',
                     ],
 
                     'decimal'           => 'দশমিক',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'নাম',
                     'save-btn'          => 'মুদ্রা সংরক্ষণ করুন',
                     'symbol'            => 'প্রতীক',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'গ্রুপ বিভাজক',
                     'title'             => 'নতুন মুদ্রা তৈরি করুন',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'ইউআরএল',
                 'value'                         => 'মান: :value',
                 'value-input'                   => 'মান',
+                
                 'services-content'              => [
                     'add-btn'            => 'সেবা যোগ করুন',
                     'channels'           => 'চ্যানেল',

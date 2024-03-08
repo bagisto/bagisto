@@ -2238,15 +2238,15 @@ return [
                     'create-btn' => 'Створити Валюту',
                     'code'       => 'Код',
 
-                    'currency-position'  => [
+                    'currency-position' => [
                         'options' => [
-                            'left'             => 'Left',
-                            'left-with-space'  => 'Left With Space',
-                            'right'            => 'Right',
-                            'right-with-space' => 'Right With Space',
+                            'left'             => 'Ліворуч',
+                            'left-with-space'  => 'Ліворуч із пробілом',
+                            'right'            => 'Праворуч',
+                            'right-with-space' => 'Праворуч із пробілом',
                         ],
 
-                        'title' => 'Currency Position',
+                        'title' => 'Позиція Валюти',
                     ],
 
                     'decimal'           => 'Десятковий роздільник',
@@ -2256,7 +2256,7 @@ return [
                     'name'              => 'Назва',
                     'save-btn'          => 'Зберегти Валюту',
                     'symbol'            => 'Символ',
-                    'group-separator'   => 'Group Separator',
+                    'group-separator'   => 'Роздільник груп',
                     'title'             => 'Створити Нову Валюту',
                 ],
 
@@ -2889,6 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Значення: :value',
                 'value-input'                   => 'Значення',
+
                 'services-content'              => [
                     'add-btn'            => 'Додати послуги',
                     'channels'           => 'Канали',
