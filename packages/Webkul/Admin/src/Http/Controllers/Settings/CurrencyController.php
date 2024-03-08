@@ -42,8 +42,8 @@ class CurrencyController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
-            'code' => ['required', 'min:3', 'max:3', 'unique:currencies,code'],
-            'name' => ['required'],
+            'code' => ['required', 'min:3', 'max:3', 'unique:currencies,code', new Code],
+            'name' => 'required',
         ]);
 
         $this->currencyRepository->create(request()->only([
@@ -80,7 +80,7 @@ class CurrencyController extends Controller
 
         $this->validate(request(), [
             'code' => ['required', 'unique:currencies,code,'.$id, new Code],
-            'name' => ['required'],
+            'name' => 'required',
         ]);
 
         $this->currencyRepository->update(request()->only([
