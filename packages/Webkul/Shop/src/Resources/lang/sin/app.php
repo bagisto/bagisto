@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'දැනටමත් මුරපදය යළි පිහිටුවීමේ තැපැල් යවා ඇත.',
             'back'                 => 'ආපසු සන්නියට ආරයැකිනන්න ?',
             'bagisto'              => 'බගිස්ටෝ',
             'email'                => 'ඊමේල්',

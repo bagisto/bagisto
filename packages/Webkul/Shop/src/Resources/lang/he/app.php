@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'כבר איפוס סיסמה נשלח דואר.',
             'back'                 => 'חזרה להתחברות?',
             'bagisto'              => 'בַּגִּיסְטוֹ',
             'email'                => 'אימייל',

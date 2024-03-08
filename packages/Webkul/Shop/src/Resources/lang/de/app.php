@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'E-Mail zum Zurücksetzen des Passworts wurde bereits gesendet.',
             'back'                 => 'Zurück zur Anmeldung?',
             'bagisto'              => 'Bagisto',
             'email'                => 'E-Mail',

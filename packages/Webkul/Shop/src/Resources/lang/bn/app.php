@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'ইতিমধ্যেই পাসওয়ার্ড রিসেট মেল পাঠানো হয়েছে।',
             'back'                 => 'সাইন ইনে ফিরে যেতে?',
             'bagisto'              => 'বাগিস্তো',
             'email'                => 'ইমেইল',

@@ -3,6 +3,7 @@
 return [
     'customers' => [
         'forgot-password' => [
+            'already-sent'         => 'Already Password Reset Mail Sent.',
             'back'                 => 'Back to sign In ?',
             'bagisto'              => 'Bagisto',
             'email'                => 'Email',
