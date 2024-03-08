@@ -10,9 +10,9 @@
     @case('password')
     @case('number')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <input
                 type="{{ $type }}"
@@ -27,9 +27,9 @@
 
     @case('file')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <input
                 type="{{ $type }}"
@@ -43,9 +43,9 @@
 
     @case('color')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
             {{ $attributes->except('class') }}
+            name="{{ $name }}"
         >
             <input
                 type="{{ $type }}"
@@ -58,9 +58,9 @@
 
     @case('textarea')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <textarea
                 type="{{ $type }}"
@@ -80,9 +80,9 @@
 
     @case('date')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <x-shop::flat-picker.date>
                 <input
@@ -99,9 +99,9 @@
 
     @case('datetime')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <x-shop::flat-picker.datetime>
                 <input
@@ -117,9 +117,9 @@
 
     @case('select')
         <v-field
-            name="{{ $name }}"
             v-slot="{ field, errors }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <select
                 name="{{ $name }}"
@@ -136,9 +136,9 @@
     @case('multiselect')
         <v-field
             as="select"
-            name="{{ $name }}"
             :class="[errors && errors['{{ $name }}']  ? 'border !border-red-500' : '']"
             {{ $attributes->except([])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-3 px-5 bg-white border border-[#E9E9E9] rounded-lg-md text-sm text-gray-600 font-normal transition-all hover:border-gray-400']) }}
+            name="{{ $name }}"
             multiple
         >
             {{ $slot }}
@@ -149,22 +149,22 @@
     @case('checkbox')
         <v-field
             type="checkbox"
-            name="{{ $name }}"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <input
                 type="checkbox"
-                name="{{ $name }}"
                 v-bind="field"
                 class="sr-only peer"
                 {{ $attributes->except(['rules', 'label', ':label']) }}
+                name="{{ $name }}"
             />
         </v-field>
 
         <label
-            class="icon-uncheckbox text-2xl peer-checked:icon-checked peer-checked:text-navyBlue cursor-pointer"
+            class="icon-uncheck text-2xl peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>
@@ -174,10 +174,10 @@
     @case('radio')
         <v-field
             type="radio"
-            name="{{ $name }}"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $name }}"
         >
             <input
                 type="radio"
@@ -189,7 +189,7 @@
         </v-field>
 
         <label
-            class="icon-radio-normal text-2xl peer-checked:icon-radio-selected peer-checked:text-navyBlue cursor-pointer"
+            class="icon-radio-unselect text-2xl peer-checked:icon-radio-select peer-checked:text-navyBlue cursor-pointer"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>
@@ -200,10 +200,10 @@
         <label class="relative inline-flex items-center cursor-pointer">
             <v-field
                 type="checkbox"
-                name="{{ $name }}"
                 class="hidden"
                 v-slot="{ field }"
-                {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+                {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+                name="{{ $name }}"
             >
                 <input
                     type="checkbox"
@@ -225,9 +225,9 @@
 
     @case('image')
         <x-shop::media
-            name="{{ $name }}"
             ::class="[errors && errors['{{ $name }}'] ? 'border !border-red-500' : '']"
             {{ $attributes }}
+            name="{{ $name }}"
         />
 
         @break

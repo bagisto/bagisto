@@ -389,7 +389,7 @@
                                         :loading="false"
                                         :title="trans('shop::app.products.view.add-to-cart')"
                                         :disabled="! $product->isSaleable(1)"
-                                        ref="addToCartButton"
+                                        ::loading="isStoring.addToCart"
                                     />
 
                                     {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
@@ -405,8 +405,7 @@
                                         button-type="secondary-button"
                                         :title="trans('shop::app.products.view.buy-now')"
                                         :disabled="! $product->isSaleable(1)"
-                                        :loading="false"
-                                        ref="buyNowButton"
+                                        ::loading="isStoring.buyNow"
                                         @click="is_buy_now=1;"
                                     />
                                 @endif
@@ -459,14 +458,20 @@
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
                         is_buy_now: 0,
+
+                        isStoring: {
+                            addToCart: false,
+
+                            buyNow: false,
+                        },
                     }
                 },
 
                 methods: {
                     addToCart(params) {
-                        const operation = this.is_buy_now ? 'buyNowButton' : 'addToCartButton';
+                        const operation = this.is_buy_now ? 'buyNow' : 'addToCart';
 
-                        this.$refs[operation].isLoading = true;
+                        this.isStoring[operation] = true;
 
                         let formData = new FormData(this.$refs.formData);
 
@@ -488,10 +493,10 @@
                                     this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                                 }
 
-                                this.$refs[operation].isLoading = false;
+                                this.isStoring[operation] = false;
                             })
                             .catch(error => {
-                                this.$refs[operation].isLoading=false;
+                                this.isStoring[operation] = false;
                             });
                     },
 

@@ -83,6 +83,26 @@
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.last_name.after') !!}
 
+                    <!-- E-mail -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label class="required">
+                            @lang('shop::app.customers.account.addresses.email')
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="text"
+                            name="email"
+                            rules="required|email"
+                            :value="old('email')"
+                            :label="trans('shop::app.customers.account.addresses.email')"
+                            :placeholder="trans('shop::app.customers.account.addresses.email')"
+                        />
+
+                        <x-shop::form.control-group.error control-name="email" />
+                    </x-shop::form.control-group>
+
+                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.email.after') !!}
+
                     <!-- Vat Id -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label>
@@ -110,14 +130,14 @@
 
                         <x-shop::form.control-group.control
                             type="text"
-                            name="address1[]"
+                            name="address[]"
                             rules="required|address"
-                            :value="collect(old('address1'))->first()"
+                            :value="collect(old('address'))->first()"
                             :label="trans('shop::app.customers.account.addresses.street-address')"
                             :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                         />
 
-                        <x-shop::form.control-group.error control-name="address1[]" />
+                        <x-shop::form.control-group.error control-name="address[]" />
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.street_address.after') !!}
@@ -126,11 +146,11 @@
                         core()->getConfigData('customer.address.information.street_lines')
                         && core()->getConfigData('customer.address.information.street_lines') > 1
                     )
-                        @for ($i = 2; $i <= core()->getConfigData('customer.address.information.street_lines'); $i++)
+                        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                             <x-shop::form.control-group.control
                                 type="text"
-                                name="address{{ $i }}[]"
-                                :value="old('address{{ $i }}[]')"
+                                name="address[{{ $i }}]"
+                                :value="old('address[{{ $i }}]')"
                                 :label="trans('shop::app.customers.account.addresses.street-address')"
                                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                             />
@@ -265,26 +285,6 @@
                     </x-shop::form.control-group>
 
                     {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.phone.after') !!}
-
-                    <!-- E-mail -->
-                    <x-shop::form.control-group>
-                        <x-shop::form.control-group.label class="required">
-                            @lang('shop::app.customers.account.addresses.email')
-                        </x-shop::form.control-group.label>
-
-                        <x-shop::form.control-group.control
-                            type="text"
-                            name="email"
-                            rules="required|email"
-                            :value="old('email')"
-                            :label="trans('shop::app.customers.account.addresses.email')"
-                            :placeholder="trans('shop::app.customers.account.addresses.email')"
-                        />
-
-                        <x-shop::form.control-group.error control-name="email" />
-                    </x-shop::form.control-group>
-
-                    {!! view_render_event('bagisto.shop.customers.account.addresses.create_form_controls.email.after') !!}
 
                     <!-- Set As Default -->
                     <div class="flex gap-x-1.5 items-center mb-4 text-md text-[#6E6E6E] select-none">

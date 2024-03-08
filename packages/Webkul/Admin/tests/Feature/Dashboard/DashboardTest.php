@@ -827,7 +827,7 @@ it('should show the dashboard top selling products stats', function () {
     OrderAddress::factory()->create([
         'order_id'     => $order->id,
         'cart_id'      => $cart->id,
-        'address1'     => $customerAddress->address1,
+        'address'      => $customerAddress->address,
         'country'      => $customerAddress->country,
         'state'        => $customerAddress->state,
         'city'         => $customerAddress->city,

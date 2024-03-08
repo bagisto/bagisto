@@ -10,7 +10,9 @@
 
     {!! view_render_event('bagisto.shop.checkout.cart.summary.title.after') !!}
 
+    <!-- Cart Totals -->
     <div class="grid gap-4 mt-6">
+        <!-- Sub Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.before') !!}
 
         <div class="flex justify-between text-right">
@@ -18,15 +20,14 @@
                 @lang('shop::app.checkout.cart.summary.sub-total')
             </p>
 
-            <p 
-                class="text-base font-medium"
-                v-text="cart.formatted_sub_total"
-            >
+            <p class="text-base font-medium">
+                @{{ cart.formatted_sub_total }}
             </p>
         </div>
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.after') !!}
 
+        <!-- Taxes -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.before') !!}
 
         <div 
@@ -38,15 +39,14 @@
                 @lang('shop::app.checkout.cart.summary.tax') (@{{ index }})%
             </p>
 
-            <p 
-                class="text-base font-medium max-sm:text-sm max-sm:font-medium"
-                v-text="amount"
-            >
+            <p class="text-base font-medium max-sm:text-sm max-sm:font-medium">
+                @{{ amount }}
             </p>
         </div>
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.after') !!}
 
+        <!-- Discount -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.before') !!}
 
         <div 
@@ -57,21 +57,39 @@
                 @lang('shop::app.checkout.cart.summary.discount-amount')
             </p>
 
-            <p 
-                class="text-base font-medium"
-                v-text="cart.formatted_base_discount_amount"
-            >
+            <p class="text-base font-medium">
+                @{{ cart.formatted_base_discount_amount }}
             </p>
         </div>
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.after') !!}
 
+        <!-- Shipping Rates -->
+        {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
+
+        <div
+            class="flex text-right justify-between"
+            v-if="cart.selected_shipping_rate"
+        >
+            <p class="text-base">
+                @lang('shop::app.checkout.onepage.summary.delivery-charges')
+            </p>
+
+            <p class="text-base font-medium">
+                @{{ cart.selected_shipping_rate }}
+            </p>
+        </div>
+
+        {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.after') !!}
+
+        <!-- Apply Coupon -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.before') !!}
         
         @include('shop::checkout.cart.coupon')
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.after') !!}
    
+        <!-- Cart Grand Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.grand_total.before') !!}
 
         <div class="flex justify-between text-right">
@@ -79,10 +97,8 @@
                 @lang('shop::app.checkout.cart.summary.grand-total')
             </p>
 
-            <p 
-                class="text-lg font-semibold" 
-                v-text="cart.formatted_grand_total"
-            >
+            <p class="text-lg font-semibold">
+                @{{ cart.formatted_grand_total }}
             </p>
         </div>
 
@@ -90,9 +106,9 @@
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.proceed_to_checkout.before') !!}
 
-        <a 
-            href="{{ route('shop.checkout.onepage.index') }}" 
-            class="block w-max place-self-end py-3 mt-4 px-11 bg-navyBlue rounded-2xl text-white text-base font-medium text-center cursor-pointer"
+        <a
+            href="{{ route('shop.checkout.onepage.index') }}"
+            class="primary-button place-self-end py-3 mt-4 px-11 rounded-2xl"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

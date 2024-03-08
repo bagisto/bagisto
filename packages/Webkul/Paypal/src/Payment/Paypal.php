@@ -61,7 +61,7 @@ abstract class Paypal extends Payment
             'last_name'        => $billingAddress->last_name,
             'zip'              => $billingAddress->postcode,
             'state'            => $billingAddress->state,
-            'address1'         => $billingAddress->address1,
+            'address'          => $billingAddress->address,
             'address_override' => 1,
         ]);
     }
