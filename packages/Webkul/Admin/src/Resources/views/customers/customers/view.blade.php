@@ -569,7 +569,10 @@
             <!-- Information -->
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
 
-            <v-customer-details ref="customerDetails"></v-customer-details>
+            <v-customer-details ref="customerDetails">
+                <!-- Shimmer Effect -->
+                <x-admin::shimmer.accordion class="w-[360px] h-[271px]" />
+            </v-customer-details>
 
             {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
