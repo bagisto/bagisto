@@ -21,6 +21,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #9579 [fixed] - Fix issue related to moving items between the wishlist and cart with quantities.
 
+* #9543 [fixed] - Once the user has requested for password reset, then again if user raises the request there validation message appears "We cannot find a user with that email address."
+
 ## **v2.1.1 (27th of February 2024)** - *Release*
 
 * #9501 [fixed] - Can't Checkout
