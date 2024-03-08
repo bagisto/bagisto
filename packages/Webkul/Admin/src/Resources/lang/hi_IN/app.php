@@ -2889,7 +2889,7 @@ return [
                 'url'                           => 'यूआरएल',
                 'value'                         => 'मूल्य: :value',
                 'value-input'                   => 'मूल्य',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'सेवाएं जोड़ें',
                     'channels'           => 'चैनल',

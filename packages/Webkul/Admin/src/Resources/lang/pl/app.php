@@ -2889,7 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Wartość: :value',
                 'value-input'                   => 'Wartość',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'Dodaj usługi',
                     'channels'           => 'Kanały',

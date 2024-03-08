@@ -2889,7 +2889,7 @@ return [
                 'url'                           => 'קישור',
                 'value'                         => 'ערך: :value',
                 'value-input'                   => 'ערך',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'הוסף שירותים',
                     'channels'           => 'ערוצים',

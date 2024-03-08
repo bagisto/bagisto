@@ -2889,7 +2889,7 @@ return [
                 'url'                           => 'ইউআরএল',
                 'value'                         => 'মান: :value',
                 'value-input'                   => 'মান',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'সেবা যোগ করুন',
                     'channels'           => 'চ্যানেল',

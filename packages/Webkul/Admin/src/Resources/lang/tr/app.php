@@ -2890,7 +2890,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Değer: :value',
                 'value-input'                   => 'Değer',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'Hizmetler Ekle',
                     'channels'           => 'Kanallar',

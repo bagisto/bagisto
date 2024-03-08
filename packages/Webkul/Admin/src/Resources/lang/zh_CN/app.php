@@ -2889,7 +2889,7 @@ return [
                 'url'                           => '网址',
                 'value'                         => '值：:value',
                 'value-input'                   => '值',
-                
+
                 'services-content'              => [
                     'add-btn'            => '添加服务',
                     'channels'           => '渠道',

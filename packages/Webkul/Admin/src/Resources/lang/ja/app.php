@@ -2889,7 +2889,7 @@ return [
                 'url'                           => 'URL',
                 'value'                         => '値：:value',
                 'value-input'                   => '値',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'サービスを追加',
                     'channels'           => 'チャンネル',

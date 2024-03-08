@@ -2889,7 +2889,7 @@ return [
                 'url'                           => 'رابط الإنترنت',
                 'value'                         => 'القيمة: :value',
                 'value-input'                   => 'القيمة',
-                
+
                 'services-content'              => [
                     'add-btn'            => 'أضف الخدمات',
                     'channels'           => 'القنوات',
