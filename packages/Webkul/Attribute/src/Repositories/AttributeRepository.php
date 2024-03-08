@@ -45,7 +45,7 @@ class AttributeRepository extends Repository
 
         $attribute = $this->model->create($data);
 
-        if (in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
+        if (in_array($attribute->type, ['select', 'select2',  'multiselect', 'checkbox'])) {
             foreach ($options as $optionInputs) {
                 $this->attributeOptionRepository->create(array_merge([
                     'attribute_id' => $attribute->id,
@@ -71,7 +71,7 @@ class AttributeRepository extends Repository
 
         $attribute->update($data);
 
-        if (! in_array($attribute->type, ['select', 'multiselect', 'checkbox'])) {
+        if (! in_array($attribute->type, ['select', 'select2',  'multiselect', 'checkbox'])) {
             return $attribute;
         }
 
@@ -112,11 +112,11 @@ class AttributeRepository extends Repository
             $data['value_per_channel'] = $data['value_per_locale'] = 0;
         }
 
-        if (! in_array($data['type'], ['select', 'multiselect', 'price', 'checkbox'])) {
+        if (! in_array($data['type'], ['select', 'select2', 'multiselect', 'price', 'checkbox'])) {
             $data['is_filterable'] = 0;
         }
 
-        if (in_array($data['type'], ['select', 'multiselect', 'boolean'])) {
+        if (in_array($data['type'], ['select', 'select2', 'multiselect', 'boolean'])) {
             unset($data['value_per_locale']);
         }
 
@@ -205,7 +205,7 @@ class AttributeRepository extends Repository
             if (
                 $attribute->code != 'tax_category_id'
                 && (
-                    in_array($attribute->type, ['select', 'multiselect'])
+                    in_array($attribute->type, ['select', 'select2', 'multiselect'])
                     || $attribute->code == 'sku'
                 )
             ) {
