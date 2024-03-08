@@ -136,10 +136,12 @@
                                 type="text"
                                 id="address[]"
                                 name="address[]"
-                                rules="required"
+                                rules="required|address"
                                 :label="trans('admin::app.customers.customers.view.addresses.create.street-address')"
                                 :placeholder="trans('admin::app.customers.customers.view.addresses.create.street-address')"
                             />
+
+                            <x-admin::form.control-group.error control-name="address[]" />
 
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                                 @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
@@ -148,13 +150,14 @@
                                         id="address[{{ $i }}]"
                                         name="address[{{ $i }}]"
                                         class="mt-2"
+                                        rules="address"
                                         :label="trans('admin::app.customers.customers.view.addresses.create.street-address')"
                                         :placeholder="trans('admin::app.customers.customers.view.addresses.create.street-address')"
                                     />
+
+                                    <x-admin::form.control-group.error control-name="address[{{ $i }}]" />
                                 @endfor
                             @endif
-
-                            <x-admin::form.control-group.error control-name="address[]" />
                         </x-admin::form.control-group>
 
                         <div class="flex gap-4 max-sm:flex-wrap">

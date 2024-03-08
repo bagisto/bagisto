@@ -142,8 +142,8 @@
                     <x-shop::form.control-group.control
                         type="text"
                         name="address[]"
-                        rules="required|address"
                         :value="collect(old('address'))->first() ?? $addresses[0]"
+                        rules="required|address"
                         :label="trans('shop::app.customers.account.addresses.street-address')"
                         :placeholder="trans('shop::app.customers.account.addresses.street-address')"
                     />
@@ -160,8 +160,14 @@
                             type="text"
                             name="address[{{ $i }}]"
                             :value="old('address[{{$i}}]', $addresses[$i] ?? '')"
+                            rules="address"
                             :label="trans('shop::app.customers.account.addresses.street-address')"
                             :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                        />
+
+                        <x-shop::form.control-group.error
+                            class="mb-2"
+                            name="address[{{ $i }}]"
                         />
                     @endfor
                 @endif

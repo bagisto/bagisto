@@ -151,8 +151,14 @@
                                 type="text"
                                 name="address[{{ $i }}]"
                                 :value="old('address[{{ $i }}]')"
+                                rules="address"
                                 :label="trans('shop::app.customers.account.addresses.street-address')"
                                 :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                            />
+
+                            <x-shop::form.control-group.error
+                                class="mb-2"
+                                name="address[{{ $i }}]"
                             />
                         @endfor
                     @endif
