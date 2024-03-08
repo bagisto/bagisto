@@ -31,7 +31,7 @@
     <!-- Filters -->
     <div class="flex gap-x-1 gap-y-2 items-center flex-wrap mt-7">
         <!-- Address Create component -->
-        @include('admin::customers.addresses.create')
+        @include('admin::customers.customers.view.addresses.create')
 
         <!-- Account Delete button -->
         @if (bouncer()->hasPermission('customers.customers.delete'))
@@ -623,7 +623,7 @@
 
                                 <div class="flex gap-2.5">
                                     <!-- Edit Address -->
-                                    @include('admin::customers.addresses.edit')
+                                    @include('admin::customers.customers.view.addresses.edit')
 
                                     <!-- Delete Address -->
                                     @if (bouncer()->hasPermission('customers.addresses.delete'))
@@ -722,7 +722,7 @@
                             </p>
 
                             <!--Customer Edit Component -->
-                            @include('admin::customers.customers.edit')
+                            @include('admin::customers.customers.view.edit')
                         </div>
                     </x-slot:header>
 
