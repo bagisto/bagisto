@@ -48,6 +48,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'price'       => 'float_value',
         'boolean'     => 'boolean_value',
         'select'      => 'integer_value',
+        'select2'     => 'integer_value',
         'multiselect' => 'text_value',
         'datetime'    => 'datetime_value',
         'date'        => 'date_value',
@@ -94,18 +95,18 @@ class Attribute extends TranslatableModel implements AttributeContract
         $validations = [];
 
         if ($this->is_required) {
-            $validations[] = 'required: true';
+            $validations[] = '"required": true';
         }
 
         if ($this->type == 'price') {
-            $validations[] = 'decimal: true';
+            $validations[] = '"decimal": true';
         }
 
         if ($this->type == 'file') {
             $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
 
             if ($retVal) {
-                $validations[] = 'size:'.$retVal;
+                $validations[] = '"size":'.$retVal;
             }
         }
 
@@ -113,12 +114,12 @@ class Attribute extends TranslatableModel implements AttributeContract
             $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
 
             if ($retVal) {
-                $validations[] = 'size:'.$retVal.', mimes: ["image/bmp", "image/jpeg", "image/jpg", "image/png", "image/webp"]';
+                $validations[] = '"size":'.$retVal.', mimes: ["image/bmp", "image/jpeg", "image/jpg", "image/png", "image/webp"]';
             }
         }
 
         if ($this->validation == 'regex') {
-            $validations[] = 'regex: '.$this->regex;
+            $validations[] = '"regex": '.$this->regex;
         } elseif ($this->validation) {
             $validations[] = $this->validation.': true';
         }

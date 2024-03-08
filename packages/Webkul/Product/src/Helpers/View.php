@@ -26,7 +26,10 @@ class View
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';
             } elseif ($value) {
-                if ($attribute->type == 'select') {
+                if (
+                    $attribute->type == 'select'
+                    || $attribute->type == 'select2'
+                ) {
                     $attributeOption = $attributeOptionRepository->find($value);
 
                     if ($attributeOption) {

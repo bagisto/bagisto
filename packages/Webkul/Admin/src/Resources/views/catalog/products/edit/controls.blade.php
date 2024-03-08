@@ -71,6 +71,30 @@
         />
 
         @break
+
+    @case('select2')
+        @php
+            $selectedOption = old($attribute->code) ?: $product[$attribute->code];
+
+            if ($attribute->code != 'tax_category_id') {
+                $options = $attribute->options()->orderBy('sort_order')->get();
+            } else {
+                $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
+            }
+        @endphp
+
+        <x-admin::select2
+            :id="$attribute->code"
+            :name="$attribute->code"
+            :rules="$attribute->validations"
+            :value="old($attribute->code) ?: $product[$attribute->code]"
+            :label="$attribute->admin_name"
+            :options="$options"
+            :selected="$selectedOption"
+        />
+
+        @break
+
     @case('select')
         <x-admin::form.control-group.control
             type="select"

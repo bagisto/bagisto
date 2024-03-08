@@ -103,7 +103,7 @@
 
                         <!-- Options -->
                         <div
-                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
+                            class="p-4 bg-white dark:bg-gray-900 box-shadow rounded {{ in_array($attribute->type, ['select', 'select2', 'multiselect', 'checkbox', 'price']) ?: 'hidden' }}"
                             v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
@@ -151,36 +151,39 @@
 
                                     <!-- checkbox -->
                                     <div class="w-full">
-                                        <div class="flex gap-2.5 items-center w-max !mb-0 cursor-pointer select-none">
-                                            <input
-                                                type="checkbox"
-                                                name="empty_option"
-                                                id="empty_option"
-                                                for="empty_option"
-                                                class="hidden peer"
-                                                v-model="isNullOptionChecked"
-                                                @click="$refs.addOptionsRow.toggle()"
-                                            >
+                                        @if ($attribute->type != 'select2')
+                                            <div class="flex gap-2.5 items-center w-max !mb-0 cursor-pointer select-none">
+                                                <input
+                                                    type="checkbox"
+                                                    name="empty_option"
+                                                    id="empty_option"
+                                                    for="empty_option"
+                                                    class="hidden peer"
+                                                    v-model="isNullOptionChecked"
+                                                    @click="$refs.addOptionsRow.toggle()"
+                                                >
 
-                                            <label
-                                                for="empty_option"
-                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
-                                            >
-                                            </label>
+                                                <label
+                                                    for="empty_option"
+                                                    class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                                >
+                                                </label>
 
-                                            <label
-                                                for="empty_option"
-                                                class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
-                                            >
-                                                @lang('admin::app.catalog.attributes.edit.create-empty-option')
-                                            </label>
-                                        </div>
+                                                <label
+                                                    for="empty_option"
+                                                    class="text-xs text-gray-600 dark:text-gray-300 font-medium cursor-pointer"
+                                                >
+                                                    @lang('admin::app.catalog.attributes.edit.create-empty-option')
+                                                </label>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <template v-if="optionsData?.length">
                                     @if (
                                         $attribute->type == 'select'
+                                        || $attribute->type == 'select2'
                                         || $attribute->type == 'multiselect'
                                         || $attribute->type == 'checkbox'
                                         || $attribute->type == 'price'
@@ -434,7 +437,7 @@
                                         :label="trans('admin::app.catalog.attributes.edit.type')"
                                     >
                                         <!-- Here! All Needed types are defined -->
-                                        @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
+                                        @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'select2', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
                                             <option
                                                 value="{{ $type }}"
                                                 {{ $selectedOption == $type ? 'selected' : '' }}
@@ -944,7 +947,7 @@
 
                 data: function() {
                     return {
-                        showSwatch: {{ in_array($attribute->type, ['select', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
+                        showSwatch: {{ in_array($attribute->type, ['select', 'select2', 'checkbox', 'price', 'multiselect']) ? 'true' : 'false' }},
 
                         swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
