@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.1.2 (7th of March 2024)** - *Release*
+## **v2.1.2 (8th of March 2024)** - *Release*
 * #9547 [improvements] - Revamped completed checkout flow.
 
 * #9537 [fixed] - Unable to Checkout Product when Address is created from user profile and then proceed for checkout. Email is a mandatory field at checkout.
@@ -17,9 +17,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #9568 [fixed] - In Customer Profile Reviews -> there we are able to see only 5 reviews in total, but I have approved more reviews for the same user. 
 
-* #9567 [fixed] - After applying a filter on the orders page , Sidebar Scroller should be working -Customer end.
+* #9567 [fixed] - After applying a filter on the orders page , Sidebar Scroller should be working - Customer end.
 
-* #9579 [Fixed] - Fix issue related to moving items between the wishlist and cart with quantities.
+* #9579 [fixed] - Fix issue related to moving items between the wishlist and cart with quantities.
 
 ## **v2.1.1 (27th of February 2024)** - *Release*
 
