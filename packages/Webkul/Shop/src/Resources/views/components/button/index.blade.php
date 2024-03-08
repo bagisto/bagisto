@@ -6,7 +6,7 @@
         id="v-button-template"
     >
         <button
-            v-if="! isLoading"
+            v-if="! loading"
             :class="[buttonClass, '']"
         >
             @{{ title }}
@@ -58,13 +58,7 @@
                 loading: Boolean,
                 buttonType: String,
                 title: String,
-                buttonClass: String, // Added prop for dynamic class
-            },
-
-            data() {
-                return {
-                    isLoading: this.loading,
-                };
+                buttonClass: String,
             },
         });
     </script>
