@@ -105,6 +105,7 @@
                             class="p-4 bg-white dark:bg-gray-900 box-shadow rounded"
                             v-if="swatchAttribute && (
                                     attributeType == 'select'
+                                    || attributeType == 'select2'
                                     || attributeType == 'multiselect'
                                     || attributeType == 'price'
                                     || attributeType == 'checkbox'
@@ -155,35 +156,37 @@
                                     </x-admin::form.control-group>
 
                                     <div class="w-full mb-2.5">
-                                        <!-- checkbox -->
-                                        <x-admin::form.control-group.label class="invisible">
-                                            @lang('admin::app.catalog.attributes.create.input-options')
-                                        </x-admin::form.control-group.label>
+                                        <template v-if="attributeType != 'select2'">
+                                            <!-- checkbox -->
+                                            <x-admin::form.control-group.label class="invisible">
+                                                @lang('admin::app.catalog.attributes.create.input-options')
+                                            </x-admin::form.control-group.label>
 
-                                        <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
-                                            <input
-                                                type="checkbox"
-                                                class="hidden peer"
-                                                id="empty_option"
-                                                name="empty_option"
-                                                v-model="isNullOptionChecked"
-                                                for="empty_option"
-                                                @click="$refs.addOptionsRow.toggle()"
-                                            />
+                                            <div class="flex gap-2.5 items-center w-max !mb-0 p-1.5 cursor-pointer select-none">
+                                                <input
+                                                    type="checkbox"
+                                                    class="hidden peer"
+                                                    id="empty_option"
+                                                    name="empty_option"
+                                                    v-model="isNullOptionChecked"
+                                                    for="empty_option"
+                                                    @click="$refs.addOptionsRow.toggle()"
+                                                />
 
-                                            <label
-                                                for="empty_option"
-                                                class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
-                                            >
-                                            </label>
+                                                <label
+                                                    for="empty_option"
+                                                    class="icon-uncheckbox text-2xl rounded-md cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                                >
+                                                </label>
 
-                                            <label
-                                                for="empty_option"
-                                                class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
-                                            >
-                                                @lang('admin::app.catalog.attributes.create.create-empty-option')
-                                            </label>
-                                        </div>
+                                                <label
+                                                    for="empty_option"
+                                                    class="text-sm text-gray-600 dark:text-gray-300 font-semibold cursor-pointer"
+                                                >
+                                                    @lang('admin::app.catalog.attributes.create.create-empty-option')
+                                                </label>
+                                            </div>
+                                        </template>
                                     </div>
                                 </div>
 
@@ -409,7 +412,7 @@
                                         @change="swatchAttribute=true"
                                     >
                                         <!-- Here! All Needed types are defined -->
-                                        @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
+                                        @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'select2', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
                                             <option
                                                 value="{{ $type }}"
                                                 {{ $type === 'text' ? "selected" : '' }}
@@ -650,7 +653,7 @@
                                         name="is_filterable"
                                         value="1"
                                         :disabled="attributeType == 'price' ||  attributeType == 'checkbox'
-                                            || attributeType == 'select' || attributeType == 'multiselect'
+                                            || attributeType == 'select' || attributeType == 'select2' || attributeType == 'multiselect'
                                             ? false : true
                                         "
                                     />
@@ -825,7 +828,7 @@
 
                         inputValidation: false,
 
-                        swatchType: '',
+                        swatchType: 'dropdown',
 
                         swatchAttribute: false,
 
@@ -886,8 +889,8 @@
                         values.params.id = values.id;
 
                         this.swatchValue = {
-                            image: value.swatch_value_url
-                            ? [{ id: value.id, url: value.swatch_value_url }]
+                            image: values.swatch_value_url
+                            ? [{ id: values.id, url: values.swatch_value_url }]
                             : [],
                         };
 

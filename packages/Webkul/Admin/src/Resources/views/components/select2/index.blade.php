@@ -31,7 +31,7 @@
                 type="hidden"
                 :name="name"
                 v-model="selectedOption.id"
-                :rules="rules"
+                :rules="validation"
             ></v-field>
 
             <x-admin::dropdown
@@ -43,7 +43,7 @@
                     <div class="flex flex-col w-full">
                         <button
                             type="button"
-                            class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
+                            class="inline-flex w-full cursor-pointer appearance-none items-center justify-between gap-x-2 h-10 rounded-md border dark:border-gray-800 bg-white dark:bg-gray-900 px-2.5 py-1.5 text-center leading-6 text-gray-600 dark:text-gray-300 transition-all marker:shadow hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400"
                             :class="[errors[name] ? 'border !border-red-600 hover:border-red-600' : '']"
                         >
                             <span
@@ -137,6 +137,14 @@
                     const query = this.searchQuery.toLowerCase();
 
                     return this.parsedOptions.filter(item => item.label.toLowerCase().includes(query));
+                },
+
+                validation() {
+                    if (this.rules == '') {
+                        return;
+                    }
+
+                    return JSON.parse(this.rules);
                 },
             },
 
